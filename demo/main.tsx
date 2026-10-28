@@ -12,6 +12,10 @@ import './styles.css';
 import { hasGameFont, runeAtlasUrl } from 'virtual:mcbeui-game-font';
 import { GrassBlock, VoxelIsland } from './art';
 import { ItemSprite } from './materials';
+import componentCatalog from '../docs/component-catalog.json';
+import { ProcessingExamples } from './processing-examples';
+
+const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
 
 const navigation: { id: string; name: string; icon: PixelIconName; count?: string }[] = [
   { id: 'overview', name: 'Overview', icon: 'grid' },
@@ -23,6 +27,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'surfaces', name: 'Panels & dialogs', icon: 'chevron', count: '02' },
   { id: 'inventory', name: 'Inventory & slots', icon: 'chevron', count: '03' },
   { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
+  { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '07' },
   { id: 'typography', name: 'Typography & icons', icon: 'chevron', count: '02' },
 ];
 const snippets: Record<string, string> = {
@@ -37,6 +42,7 @@ const snippets: Record<string, string> = {
   'input-states': `<TextField label="World name" error="This name is taken." />\n<TextField label="World seed" defaultValue="8675309" disabled />\n<TextField label="World ID" defaultValue="MC-0420" readOnly />`,
   'inventory-states': `<ItemSlot item={{ name: 'Diamond sword', icon: <YourSword />,\n  durability: 0.42, lore: ['Sharpness IV'] }} selected />\n<InventoryGrid label="Inventory" items={items} size={27}\n  onSlotAction={(index, action) => handleSlot(index, action)} />`,
   workstations: `<Grindstone inputs={[first, second]} result={result}\n  inventory={items} onTakeResult={handleTake} />\n<EnchantingTable item={sword} lapis={lapis}\n  options={enchantments} onEnchant={handleEnchant} />`,
+  processing: `<CraftingTable inputs={recipeInputs} result={result}\n  onInputAction={handleInput} onTakeResult={handleTake} />\n<Furnace input={rawBeef} fuel={coal} result={steak}\n  progress={0.5} fuelRemaining={0.75}\n  inventory={items} onTakeResult={handleTake} />\n// BlastFurnace and Smoker use the same controlled API.`,
 };
 
 function Example({ id, title, detail, children, className = '' }: { id: string; title: string; detail: string; children: ReactNode; className?: string }) {
@@ -130,7 +136,7 @@ function App() {
       <div className="nav-group-label">GETTING STARTED</div>
       <nav aria-label="Component navigation">
         {navigation.filter(item => item.name.toLowerCase().includes(query.toLowerCase())).map((item, index) => <div key={item.id}>
-          {item.id === 'buttons' && <div className="nav-group-label components-label">COMPONENTS <span>28</span></div>}
+          {item.id === 'buttons' && <div className="nav-group-label components-label">COMPONENTS <span>{componentCount}</span></div>}
           <a className={`sidebar-link ${active === item.id ? 'is-active' : ''}`} href={`#${item.id}`} aria-current={active === item.id ? 'location' : undefined} onClick={() => setActive(item.id)}>
             <PixelIcon name={index === 0 && item.id === 'overview' ? 'grid' : item.icon} size={14}/><span>{item.name}</span>{item.count && <small>{item.count}</small>}
           </a>
@@ -152,7 +158,7 @@ function App() {
       </section>
 
       <div className="install-strip"><span className="install-prompt" aria-hidden="true">$</span><code>npm install ./mcbeui-0.1.0.tgz</code><span className="local-tag">local package</span><button type="button" onClick={copyInstall} aria-label={copied ? 'Copy: install command copied' : 'Copy install command'}><PixelIcon name={copied ? 'check' : 'copy'} size={16}/>{copied ? 'Copied' : 'Copy'}</button></div>
-      <div className="section-intro"><div><span className="eyebrow">THE BUILDING BLOCKS</span><h2>Familiar pixels. Real components.</h2></div><span className="section-counter">28 COMPONENTS <span>↓</span></span></div>
+      <div className="section-intro"><div><span className="eyebrow">THE BUILDING BLOCKS</span><h2>Familiar pixels. Real components.</h2></div><span className="section-counter">{componentCount} COMPONENTS <span>↓</span></span></div>
 
       <Example id="buttons" title="Buttons" detail="That satisfying click. Every single time.">
         <div className="button-showcase"><div className="button-samples">
@@ -244,6 +250,10 @@ function App() {
             options={[{id:'unbreaking',label:'Unbreaking I',level:3,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="elder light"/> : undefined},{id:'sharpness',label:'Sharpness III',level:15,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="bless creature"/> : undefined},{id:'fortune',label:'Fortune III',level:30,disabled:true,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="enchant scroll"/> : undefined}]}
             onEnchant={id=>notify(`Enchantment requested: ${id}`)} onInputAction={slot=>notify(`Selected enchanting ${slot} slot.`)}/> : <Button onClick={()=>setEnchantOpen(true)}>Open enchanting table</Button>}</div>
         </div><p className="workstation-note">Original game materials. Item movement and crafting rules are supplied by your app. The book uses a textured renderer reconstruction; its native camera and mesh are still being calibrated.</p>
+      </Example>
+
+      <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
+        <ProcessingExamples notify={notify}/>
       </Example>
 
       <Example id="typography" title="Typography & icons" detail="The details that make it feel like home.">

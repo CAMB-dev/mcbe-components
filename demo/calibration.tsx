@@ -6,6 +6,10 @@ import '../src/styles.css';
 import { hasGameFont, runeAtlasUrl } from 'virtual:mcbeui-game-font';
 import './calibration.css';
 import type { ReactNode } from 'react';
+import { EnchantmentOptionFixture } from './enchantment-option-fixture';
+import { ProcessingFixture } from './processing-fixture';
+import { InventoryPartsFixture } from './inventory-parts-fixture';
+import { EnchantingRendererFixture } from './enchanting-renderer-fixture';
 
 function Sample({ id, children }: { id: string; children: ReactNode }) {
   return <section className="calibration-case"><h2>{id}</h2><div className="calibration-stage" data-case={id}>{children}</div></section>;
@@ -86,6 +90,10 @@ function Calibration() {
       <Sample id="enchanting"><EnchantingTable className="calibration-enchanting" options={[{id:'first',label:'First',level:3},{id:'second',label:'Second',level:15},{id:'locked',label:'Locked',level:30,disabled:true}]}/></Sample>
       <Sample id="enchanting-runes">{runeAtlasUrl && <EnchantingRunes atlasUrl={runeAtlasUrl} text="AIZ" style={{background:'#28292a'}}/>}</Sample>
     </div>
+    <EnchantmentOptionFixture/>
+    <ProcessingFixture/>
+    <InventoryPartsFixture/>
+    <EnchantingRendererFixture/>
     <p>These samples isolate component surfaces. The test runner renders original reference PNGs independently, applies their nine-slice rules, and compares every output pixel. Text is validated separately.</p>
     <Dialog open={dialog} onOpenChange={setDialog} title="Settings dialog" className="calibration-close-dialog"><Combobox label="Dialog difficulty" defaultValue="normal" options={difficulties}/><ItemSlot label="Dialog item" item={{name:'Dialog item',icon:'D',lore:['Inside the dialog']}}/></Dialog>
     <Dialog open={surfaceDialog} onOpenChange={setSurfaceDialog} title="Surface dialog" className="calibration-surface-dialog"/>

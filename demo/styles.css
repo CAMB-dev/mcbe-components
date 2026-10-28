@@ -138,6 +138,8 @@ h1 > span { color: #a0d774; }
 .workstation-examples { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,364px),1fr)); gap: 24px; padding: 16px; }
 .workstation-examples h3 { font-size: 16px; margin: 8px 6px 16px; }
 .workstation-note { padding: 0 24px 16px; }
+.processing-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 24px; padding: 20px; }
+.processing-controls > .mc-field { flex: 1 1 220px; min-width: 0; }
 .type-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 28px; }
 .font-specimen { font-family: var(--mc-font); margin: 12px 0 8px; font-size: var(--mc-font-size-lg); color: #ffffff; }
 .font-shadow-comparison { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; }

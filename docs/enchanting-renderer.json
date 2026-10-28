@@ -13,27 +13,239 @@
       "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/entity/enchanting_table_book.png",
       "matchesInstalledGame": true
     },
-    "implementation": "WebGL 1, NEAREST atlas sampling, antialias=false, orthographic projection; no runtime dependency beyond React.",
-    "geometry": "Book surfaces and UV rectangles are an explicit reconstruction from the source texture, not an extracted native mesh.",
+    "implementation": "WebGL 1, NEAREST atlas sampling, antialias=false, depth-tested full box surfaces, orthographic projection; no runtime dependency beyond React.",
+    "geometry": "Seven-part reconstruction using dimensions, part transforms, page-opening equations and standard box UV layout observed in Mojang Java 1.21.5 client BookModel. The atlas is byte-identical to Bedrock, but this does not establish native Bedrock geometry, lighting or camera fidelity.",
     "missingEvidence": [
       "Native enchanting_book_renderer mesh, projection, lighting, page-turn equations and camera transform",
       "Same-size real-game screenshots for a fixed open/closed state"
     ],
     "defaultPose": {
       "open": 1,
-      "yawDegrees": -15,
-      "pitchDegrees": -25,
-      "rollDegrees": -18,
+      "pageFlip": 0,
+      "yawDegrees": -90,
+      "pitchDegrees": 25,
+      "rollDegrees": 0,
       "canvasPixels": [
         80,
         80
-      ]
+      ],
+      "nativeBedrockVerified": false
     },
     "validation": {
-      "browser": "Chromium DPR=1 at dedicated local port 5177",
+      "browser": "Chromium DPR=1 at isolated Vite port 5187",
       "pageErrors": [],
       "webglErrors": [],
-      "evidence": ".cache/enchanting-qa/preview.png"
+      "observedImprovement": "Default book visibly opens into two broad pages, with a central fold and page-block lower edges. Original five-plane slanted paper silhouette is removed. Orthographic, without native Bedrock camera or same-frame pixel comparison.",
+      "evidence": [
+        ".cache/enchanting-qa/book-before.png",
+        ".cache/enchanting-qa/book-after.png",
+        ".cache/enchanting-qa/workstations-before.png",
+        ".cache/enchanting-qa/workstations-after.png",
+        ".cache/enchanting-qa/book-in-gui-after.png",
+        ".cache/enchanting-qa/after-result.json"
+      ],
+      "acceptance": "Renderer smoke and visual reconstruction review only; native Bedrock pixel acceptance remains outstanding.",
+      "controlledStateSmoke": {
+        "pageErrors": [],
+        "rendererErrors": [],
+        "glError": 0,
+        "canvasCssPixels": [
+          80,
+          80
+        ],
+        "nonBackgroundBounds": {
+          "closed": {
+            "x": 24,
+            "y": 14,
+            "width": 30,
+            "height": 50
+          },
+          "halfOpen": {
+            "x": 28,
+            "y": 5,
+            "width": 37,
+            "height": 59
+          },
+          "open": {
+            "x": 6,
+            "y": 13,
+            "width": 67,
+            "height": 50
+          },
+          "turning": {
+            "x": 6,
+            "y": 10,
+            "width": 67,
+            "height": 53
+          }
+        },
+        "method": "Actual Chromium screenshots at DPR=1 on #c6c6c6, PNG pixel scan excluding background; this measures this implementation, not native Bedrock agreement.",
+        "evidence": [
+          ".cache/enchanting-qa/book-closed.png",
+          ".cache/enchanting-qa/book-half-open.png",
+          ".cache/enchanting-qa/book-open.png",
+          ".cache/enchanting-qa/book-turning.png",
+          ".cache/enchanting-qa/control-result.json"
+        ]
+      }
+    },
+    "primaryGeometryReference": {
+      "edition": "Java Edition 1.21.5, used only as a reconstruction reference",
+      "clientJar": "https://piston-data.mojang.com/v1/objects/b88808bbb3da8d9f453694b5d8f74a3396f1a533/client.jar",
+      "clientSha1": "b88808bbb3da8d9f453694b5d8f74a3396f1a533",
+      "officialMappings": "https://piston-data.mojang.com/v1/objects/57669731d542f98646772e91a0d68628f9827a5c/client.txt",
+      "mappingSha1": "57669731d542f98646772e91a0d68628f9827a5c",
+      "classes": {
+        "net.minecraft.client.model.BookModel": "ggs",
+        "net.minecraft.client.model.geom.ModelPart$Cube": "gkr$a",
+        "net.minecraft.client.gui.screens.inventory.EnchantmentScreen": "gba"
+      },
+      "inspectionMethod": "Read-only javap -c -p, with Mojang-provided official class mappings. Inspection artifacts stay in ignored .cache/enchanting-java-source; no client code or bytecode is bundled.",
+      "parts": [
+        {
+          "name": "left_lid",
+          "origin": [
+            -6,
+            -5,
+            -0.005
+          ],
+          "size": [
+            6,
+            10,
+            0.005
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "pivot": [
+            0,
+            0,
+            -1
+          ],
+          "yRotation": "pi + angle"
+        },
+        {
+          "name": "right_lid",
+          "origin": [
+            0,
+            -5,
+            -0.005
+          ],
+          "size": [
+            6,
+            10,
+            0.005
+          ],
+          "uv": [
+            16,
+            0
+          ],
+          "pivot": [
+            0,
+            0,
+            1
+          ],
+          "yRotation": "-angle"
+        },
+        {
+          "name": "seam",
+          "origin": [
+            -1,
+            -5,
+            0
+          ],
+          "size": [
+            2,
+            10,
+            0.005
+          ],
+          "uv": [
+            12,
+            0
+          ],
+          "yRotation": "pi / 2"
+        },
+        {
+          "name": "left_pages",
+          "origin": [
+            0,
+            -4,
+            -0.99
+          ],
+          "size": [
+            5,
+            8,
+            1
+          ],
+          "uv": [
+            0,
+            10
+          ],
+          "pivotX": "sin(angle)",
+          "yRotation": "angle"
+        },
+        {
+          "name": "right_pages",
+          "origin": [
+            0,
+            -4,
+            -0.01
+          ],
+          "size": [
+            5,
+            8,
+            1
+          ],
+          "uv": [
+            12,
+            10
+          ],
+          "pivotX": "sin(angle)",
+          "yRotation": "-angle"
+        },
+        {
+          "name": "flip_page1",
+          "origin": [
+            0,
+            -4,
+            0
+          ],
+          "size": [
+            5,
+            8,
+            0.005
+          ],
+          "uv": [
+            24,
+            10
+          ],
+          "pivotX": "sin(angle)",
+          "yRotation": "angle * (1 - 2 * clamp(fract(pageFlip + 0.25) * 1.6 - 0.3, 0, 1))"
+        },
+        {
+          "name": "flip_page2",
+          "origin": [
+            0,
+            -4,
+            0
+          ],
+          "size": [
+            5,
+            8,
+            0.005
+          ],
+          "uv": [
+            24,
+            10
+          ],
+          "pivotX": "sin(angle)",
+          "yRotation": "angle * (1 - 2 * clamp(fract(pageFlip + 0.75) * 1.6 - 0.3, 0, 1))"
+        }
+      ],
+      "angle": "1.25 * clamp(open, 0, 1), radians; fixed time=0 for controlled rendering",
+      "guiPose": "Scale [-40,40,40]/16 model units at GUI scale 1; X(180), Y(-90 - 90*(1-open)), translate (1-open)*[0.2,0.1,0.25] model units, X(25). Caller yaw/pitch/roll remain adjustable.",
+      "applicabilityLimit": "These facts are observed in Java Edition and must not be described as extracted Bedrock renderer parameters."
     }
   },
   "runes": {
@@ -92,5 +304,55 @@
     "texture": "Original Mojang sample asset; retain upstream LICENSE.md and source attribution. Not relicensed as original MIT artwork.",
     "upstreamLicense": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/LICENSE.md",
     "gameFont": "Separately owned user-provided game font atlas, excluded from distributable package."
+  },
+  "cost": {
+    "source": {
+      "json": "ui/enchanting_screen.json: enchant_cost, success_cost, fail_cost; ui/_global_variables.json: enchanting_cost_success_color, enchanting_cost_fail_color",
+      "foregroundSuccess": [
+        0.5,
+        1,
+        0.125
+      ],
+      "foregroundFail": [
+        0.54,
+        0.37,
+        0.36
+      ],
+      "shadow": true,
+      "anchor": "bottom_right",
+      "offsetGamePixels": [
+        -2,
+        -2
+      ]
+    },
+    "implementation": {
+      "successForeground": "#80ff20",
+      "failForeground": "#8a5e5c",
+      "successShadow": "#203f08",
+      "failShadow": "#221717",
+      "shadowOffsetCssPixels": [
+        2,
+        2
+      ],
+      "hostOverride": "--mc-enchantment-cost-shadow"
+    },
+    "confidence": {
+      "foregroundAndAnchor": "verified against installed Bedrock source JSON",
+      "shadowEnabled": "verified against installed Bedrock source JSON",
+      "shadowColor": "Color-derived 0.25 darkening approximation; exact Bedrock multiplier and quantization require a native-frame comparison."
+    },
+    "validation": {
+      "computedStyles": ".cache/enchanting-qa/after-result.json",
+      "before": "Both success and disabled text used the same fixed gray #3f3f3f shadow.",
+      "after": "Success shadow is dark green; failed shadow is dark red, with the original per-state foreground preserved."
+    }
+  },
+  "visualSanityReference": {
+    "url": "https://minecraft.wiki/w/File:Enchanting_Table_GUI_BE.png",
+    "observedThrough": "Browser media viewer",
+    "uploaded": "2024-06-16",
+    "state": "Classic Bedrock, empty input, closed book",
+    "use": "Closed brown cover silhouette only; different and unspecified game version, not a current native pixel oracle",
+    "distributedWithPackage": false
   }
 }

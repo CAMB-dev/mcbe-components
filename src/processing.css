@@ -1,0 +1,26 @@
+/* GUI 2, source right panes in furnace_screen / inventory_screen. All progress
+   layers keep their full texture bounds; ratios crop them rather than resize. */
+.mc-processing-arrow { position: relative; width: 44px; height: 30px; image-rendering: pixelated; }
+.mc-processing-arrow__empty, .mc-processing-arrow__full { position: absolute; inset: 0; background: var(--mc-skin-processing-arrow-inactive) 0 0 / 44px 30px no-repeat; }
+.mc-processing-arrow__full { background-image: var(--mc-skin-processing-arrow-active); clip-path: inset(0 calc(100% - var(--mc-processing-progress, 0%)) 0 0); }
+.mc-processing-arrow--crafting .mc-processing-arrow__empty { background-image: var(--mc-skin-workstation-arrow); }
+.mc-fuel-indicator { position: relative; width: 26px; height: 26px; image-rendering: pixelated; }
+.mc-fuel-indicator__empty, .mc-fuel-indicator__full { position: absolute; inset: 0; background: var(--mc-skin-processing-flame-empty) 0 0 / 26px 26px no-repeat; }
+.mc-fuel-indicator__full { background-image: var(--mc-skin-processing-flame-full); clip-path: inset(calc(100% - var(--mc-processing-progress, 0%)) 0 0 0); }
+.mc-furnace > .mc-workstation__title { left: 50%; top: 8px; transform: translateX(-50%); text-align: center; }
+.mc-furnace__input, .mc-furnace__fuel, .mc-furnace__result, .mc-furnace__flame, .mc-furnace__arrow { position: absolute; }
+.mc-furnace__input { left: 100px; top: 29px; }
+.mc-furnace__fuel { left: 100px; top: 105px; }
+.mc-furnace__result { left: 216px; top: 59px; }
+.mc-furnace__flame { left: 105px; top: 72px; }
+.mc-furnace__arrow { left: 154px; top: 70px; }
+.mc-crafting > .mc-workstation__title { left: 28px; top: 10px; width: 168px; height: 20px; text-align: center; }
+.mc-crafting__grid { position: absolute; left: 58px; top: 32px; width: 108px; height: 108px; }
+.mc-crafting__grid .mc-inventory-scroll { padding: 0; overflow: visible; line-height: 0; }
+.mc-crafting__grid .mc-recipe-grid { display: grid; }
+.mc-crafting__arrow { position: absolute; left: 180px; top: 71px; }
+.mc-crafting__result { position: absolute; left: 246px; top: 60px; }
+.mc-crafting > .mc-workstation__inventory > .mc-player-inventory__label { position: absolute; left: 2px; top: -8px; width: 324px; }
+/* The crafting title label is supplied by work_bench_panel_3x3, not by the
+   common inventory-with-label variant. Keep input cells at y=172 unchanged. */
+.mc-crafting > .mc-workstation__inventory { padding-top: 20px; }

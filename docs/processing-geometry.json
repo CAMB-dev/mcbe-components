@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "source": {
+    "release": "v1.26.60.5",
+    "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "localUiArchive": "data/resource_packs/vanilla/__brarchive/ui.brarchive",
+    "entries": [
+      {
+        "path": "resource_pack/ui/furnace_screen.json",
+        "releaseRawSha256": "ca690949189fc27f1b9169c21ea3757bfd16526ff0908ddac3a89741270fe038",
+        "localRawSha256": "a57f6fbcefe13fd29105626186afa591df4ba581f49110fa0cef98189b4f285a",
+        "parsedJsonEqual": true
+      },
+      {
+        "path": "resource_pack/ui/blast_furnace_screen.json",
+        "releaseRawSha256": "a3459bf5e6da1ca256b30abb570dca9e4116b897c839f43c665f7efc846f170f",
+        "localRawSha256": "418cc546d0d263877cca11ce9f4a649d448570cc4ee8dfb822f46792803749a4",
+        "parsedJsonEqual": true
+      },
+      {
+        "path": "resource_pack/ui/smoker_screen.json",
+        "releaseRawSha256": "1cf9ec6cb8b9fb8479fa3430c4b6c373f30828438b52ad0210f9b3c8203c9089",
+        "localRawSha256": "205b01bf355cfff8dbed3a6c82016d177ea71087c11e31822e74e54ffd373510",
+        "parsedJsonEqual": true
+      },
+      {
+        "path": "resource_pack/ui/inventory_screen.json",
+        "releaseRawSha256": "10e72254bac2a95801b61cb229ad43ab793ec585a52aee7e27791e79ab6d9f80",
+        "localRawSha256": "8c3a6a756bc47500d237ebceea389d1f08d9e0dcdb02ab806ab3a03a51a22a6b",
+        "parsedJsonEqual": true
+      }
+    ],
+    "comparison": "Public JSONC parsed without comments/trailing commas compared against a fresh read of the local brarchive entry, not a cache derived from the public file.",
+    "textures": [
+      {
+        "path": "resource_pack/textures/ui/arrow_inactive.png",
+        "skin": "processing-arrow-inactive",
+        "sourceSize": [
+          22,
+          15
+        ],
+        "sha256": "9c549ac5595bc65cbc5ca9bacfc8486b0a2961118152460878c4926ffc3c2457",
+        "publicAndLocalBytesEqual": true
+      },
+      {
+        "path": "resource_pack/textures/ui/arrow_active.png",
+        "skin": "processing-arrow-active",
+        "sourceSize": [
+          22,
+          15
+        ],
+        "sha256": "37c7da283f77fc1c175696c7a479aa4afaad17d7e68d4f114b54b7ba439aedee",
+        "publicAndLocalBytesEqual": true
+      },
+      {
+        "path": "resource_pack/textures/ui/flame_empty_image.png",
+        "skin": "processing-flame-empty",
+        "sourceSize": [
+          13,
+          13
+        ],
+        "sha256": "9b04056628f93cfba11f4d4de35370d903dadd4f9f77c71dcd2137f4b1c9cecc",
+        "publicAndLocalBytesEqual": true
+      },
+      {
+        "path": "resource_pack/textures/ui/flame_full_image.png",
+        "skin": "processing-flame-full",
+        "sourceSize": [
+          13,
+          13
+        ],
+        "sha256": "2cf0471cb2a0aa060c209f3a0dfd866caf795135dbd594ac1768273725aee196",
+        "publicAndLocalBytesEqual": true
+      },
+      {
+        "path": "resource_pack/textures/ui/arrow_large.png",
+        "skin": "workstation-arrow",
+        "sourceSize": [
+          22,
+          15
+        ],
+        "sha256": "c0b27d51e084d0018365a94905e53e8661cf0f05448145c71402ff16844fe1b6",
+        "publicAndLocalBytesEqual": true
+      }
+    ]
+  },
+  "profile": {
+    "name": "Classic desktop right pane",
+    "rootGameRect": [
+      0,
+      0,
+      176,
+      166
+    ],
+    "rootCssRect": [
+      0,
+      0,
+      352,
+      332
+    ],
+    "recipeBook": "Recipe book and external toolbar are sibling controls of this right pane. They are not faked inside these components.",
+    "closeButton": "Both furnace.right_panel and crafting.player_inventory set common_panel.$show_close_button=false. Processing components exclude onClose/closeLabel and do not render an internal X."
+  },
+  "furnace": {
+    "source": "furnace_screen.json furnace_panel_top_half / furnace_input_panel / furnace_output_panel",
+    "topHalfGameRect": [
+      0,
+      7,
+      176,
+      71
+    ],
+    "title": {
+      "source": "furnace_label top_middle offset[0,-3]",
+      "cssTopMiddleAnchor": [
+        176,
+        8
+      ]
+    },
+    "input": {
+      "gameRect": [
+        50,
+        14.5,
+        18,
+        18
+      ],
+      "cssRect": [
+        100,
+        29,
+        36,
+        36
+      ],
+      "derivation": [
+        "input half is [0,7,88,71]",
+        "16x16 panel right_middle => [72,34.5,16,16]",
+        "ingredient18x18 right_middle offset[-20,-19] => [50,14.5,18,18]"
+      ]
+    },
+    "fuel": {
+      "gameRect": [
+        50,
+        52.5,
+        18,
+        18
+      ],
+      "cssRect": [
+        100,
+        105,
+        36,
+        36
+      ],
+      "derivation": "Same nested 16x16 panel; fuel18x18 right_middle offset[-20,19]."
+    },
+    "flame": {
+      "gameRect": [
+        52.5,
+        36,
+        13,
+        13
+      ],
+      "cssRect": [
+        105,
+        72,
+        26,
+        26
+      ],
+      "derivation": "flame_panel13x13 default center in nested16x16, offset[-21,0]."
+    },
+    "arrow": {
+      "gameRect": [
+        77,
+        35,
+        22,
+        15
+      ],
+      "cssRect": [
+        154,
+        70,
+        44,
+        30
+      ],
+      "derivation": "22x15 image center in [0,7,176,71]."
+    },
+    "result": {
+      "gameRect": [
+        108,
+        29.5,
+        26,
+        26
+      ],
+      "cssRect": [
+        216,
+        59,
+        52,
+        52
+      ],
+      "derivation": "output half [88,7,88,71], item26x26 left_middle offset[20,0].",
+      "itemRendererCssSize": [
+        32,
+        32
+      ],
+      "count": "Uses the existing 18x18 game item panel centered in the 26x26 cell. ResultSlot.large therefore insets count right by8 CSS px and moves durability to [14,35]."
+    },
+    "inventory": {
+      "labelCssOffset": [
+        14,
+        152
+      ],
+      "gridCssRect": [
+        14,
+        172,
+        324,
+        108
+      ],
+      "hotbarCssRect": [
+        14,
+        286,
+        324,
+        36
+      ]
+    },
+    "explicitFocus": {
+      "ingredient.ArrowUp": "STOP",
+      "fuel.ArrowRight": "result",
+      "result.ArrowRight": "STOP",
+      "result.ArrowLeft": "fuel"
+    },
+    "webSpatialNavigationInference": {
+      "ingredient.ArrowDown": "fuel",
+      "ingredient.ArrowRight": "result",
+      "fuel.ArrowUp": "ingredient"
+    },
+    "aliases": {
+      "BlastFurnace": "blast_furnace_screen@furnace.furnace_screen: {}",
+      "Smoker": "smoker_screen@furnace.furnace_screen: {}"
+    }
+  },
+  "craftingTable": {
+    "source": "inventory_screen.json crafting_panel_top_half / work_bench_panel_3x3 / crafting_grid_3x3_with_label / output_grid_3x3",
+    "workBenchPanelGameOffset": [
+      29,
+      0
+    ],
+    "title": {
+      "gameRect": [
+        14,
+        5,
+        84,
+        10
+      ],
+      "cssRect": [
+        28,
+        10,
+        168,
+        20
+      ],
+      "textAlignment": "center",
+      "derivation": "workbench29 + crafting_grid_3x3_with_label offset[0,5] + label offset[-15,0]."
+    },
+    "inputGrid": {
+      "gameRect": [
+        29,
+        16,
+        54,
+        54
+      ],
+      "cssRect": [
+        58,
+        32,
+        108,
+        108
+      ],
+      "dimensions": [
+        3,
+        3
+      ],
+      "derivation": "workbench [29,0] + labeled grid panel[0,5] + crafting_grid_3x3[0,11]."
+    },
+    "arrow": {
+      "gameRect": [
+        90,
+        35.5,
+        22,
+        15
+      ],
+      "cssRect": [
+        180,
+        71,
+        44,
+        30
+      ],
+      "derivation": "workbench[29,0] + crafting_arrow_large offset[61,35.5]."
+    },
+    "result": {
+      "gameRect": [
+        123,
+        30,
+        26,
+        26
+      ],
+      "cssRect": [
+        246,
+        60,
+        52,
+        52
+      ],
+      "derivation": "workbench[29,0] + output_grid_3x3 offset[94,30].",
+      "itemRendererCssSize": [
+        32,
+        32
+      ]
+    },
+    "inventory": {
+      "labelCssOffset": [
+        16,
+        144
+      ],
+      "gridCssRect": [
+        14,
+        172,
+        324,
+        108
+      ],
+      "hotbarCssRect": [
+        14,
+        286,
+        324,
+        36
+      ],
+      "derivation": "workbench inventory_label offset[-21,72] + parent[29,0] =>[8,72]; the actual grid still comes from common.inventory_panel_bottom_half at root y83."
+    },
+    "explicitFocus": {
+      "input[8].ArrowRight": "result",
+      "result.ArrowRight": "STOP"
+    },
+    "webSpatialNavigationInference": {
+      "result.ArrowLeft": "input[5], the closest input-cell center to result center in this source geometry"
+    }
+  },
+  "progress": {
+    "nativeSource": {
+      "arrow": {
+        "clip_direction": "left",
+        "binding": "#furnace_arrow_ratio -> #clip_ratio"
+      },
+      "flame": {
+        "clip_direction": "down",
+        "binding": "#furnace_flame_ratio -> #clip_ratio"
+      }
+    },
+    "publicApi": {
+      "ProcessingArrow.progress": "0..1 completion; 0 empty, 1 full; reveal full-size active PNG from left to right.",
+      "FuelIndicator.progress": "0..1 remaining; 0 empty, 1 full; reveal full-size full-flame PNG from bottom upward."
+    },
+    "geometry": "All source pixels remain nearest-neighbor at GUI2; active layers always retain44x30 or26x26 bounds. CSS clip paths crop the layer; they never resize it to the ratio.",
+    "rounding": "No extra custom 2-CSS-pixel floor is imposed. At .5 the26px flame reveal is13 CSS px. This is the public Web API convention, not a proof of native #clip_ratio direction or pixel rounding.",
+    "finiteHandling": "NaN=>0; below0=>0; above1=>1."
+  },
+  "behavior": {
+    "items": "All input/fuel/result arrays are controlled data; components do not calculate recipes, burn durations, smelting speeds or item transfers.",
+    "callbacks": "Primary and secondary actions are forwarded. ResultSlot prevents result taking when empty/unavailable while retaining focus/hover.",
+    "closeButton": "Furnace and CraftingTable exclude onClose/closeLabel from their public props and explicitly override onClose to undefined after forwarded props at runtime, matching the source right-pane $show_close_button:false.",
+    "keyboard": "RecipeGrid reuses InventoryGrid roving focus/disabled-cell navigation. Explicit game focus overrides are implemented, and extra nearest-neighbor Web choices are distinguished above."
+  },
+  "evidenceLimits": [
+    "Source box mathematics and original PNG equality are proved separately from a whole-frame native screenshot.",
+    "Native default panel sizing, text baseline, pixel snapping and clip_ratio backend semantics still need same-state game capture.",
+    "The recipe-book pane and toolbar are outside the implemented right-pane profile.",
+    "Current local game launch is blocked by Xbox Live0x80004005; no complete native screenshot acceptance is claimed."
+  ],
+  "verification": {
+    "coreTypeScript": "npx tsc -p tsconfig.json --noEmit passed",
+    "integratedTypeScript": "npm run typecheck passed after the runtime close-button guard; includes core and demo TypeScript.",
+    "independentQa": "processing-fidelity agent reported 12/12 PASS in12.3s: all four GUI boxes, inventory/hotbar cells, large result with32px item, explicit focus paths and six original-PNG crop composites. Six crop screenshots matched an independent image-overflow renderer with zero differing pixels. Native game GPU output remains unverified."
+  }
+}

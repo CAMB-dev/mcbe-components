@@ -62,5 +62,9 @@
   "enchanting-dust-3": { "file": "dust_selectable_3" },
   "enchanting-dust-disabled-1": { "file": "dust_unselectable_1" },
   "enchanting-dust-disabled-2": { "file": "dust_unselectable_2" },
-  "enchanting-dust-disabled-3": { "file": "dust_unselectable_3" }
+  "enchanting-dust-disabled-3": { "file": "dust_unselectable_3" },
+  "processing-arrow-active": { "file": "arrow_active" },
+  "processing-arrow-inactive": { "file": "arrow_inactive" },
+  "processing-flame-full": { "file": "flame_full_image" },
+  "processing-flame-empty": { "file": "flame_empty_image" }
 }

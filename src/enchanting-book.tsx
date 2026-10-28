@@ -33,6 +33,9 @@ export interface EnchantingBookProps extends CanvasHTMLAttributes<HTMLCanvasElem
   textureUrl?: string;
   /** 0 is closed, 1 is open. Controlled; no invented gameplay animation. */
   open?: number;
+  /** Position within a page-turn cycle. Controlled, 0–1; no animation timer. */
+  pageFlip?: number;
+  /** Camera adjustments in degrees; defaults use the documented Java GUI pose. */
   yaw?: number;
   pitch?: number;
   roll?: number;
@@ -44,11 +47,13 @@ type Uv = readonly [number, number, number, number];
 
 /**
  * Optional textured reconstruction, NOT the native enchanting_book_renderer.
- * The source atlas is exact; the native hardcoded mesh/camera remains unverified.
+ * Full page blocks, covers and turning leaves use Mojang's Java BookModel
+ * dimensions and box UV layout. This is NOT evidence of Bedrock's native mesh
+ * or camera: those remain unverified. See docs/enchanting-renderer.json.
  */
 export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>(function EnchantingBook({
   textureUrl = new URL('./assets/enchanting/enchanting_table_book.png', import.meta.url).href,
-  open = 1, yaw = -15, pitch = -25, roll = -18, width = 80, height = 80,
+  open = 1, pageFlip = 0, yaw = -90, pitch = 25, roll = 0, width = 80, height = 80,
   onRendererError, className, 'aria-label': label = 'Enchanting book', ...props
 }, forwardedRef) {
   const canvas = useRef<HTMLCanvasElement | null>(null);
@@ -81,27 +86,51 @@ export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>
           const c = Math.cos(angle), s = Math.sin(angle);
           return axis === 'x' ? [x, y*c-z*s, y*s+z*c] : axis === 'y' ? [x*c+z*s,y,-x*s+z*c] : [x*c-y*s,x*s+y*c,z];
         };
-        const transform = (point: Point, fold: number): Point => {
+        const transform = (point: Point, fold: number, pivot: Point): Point => {
           let p = rotate(point,'y',fold);
-          p = rotate(p,'y',yaw*degrees); p = rotate(p,'x',pitch*degrees); p = rotate(p,'z',roll*degrees);
-          return [p[0]/9,p[1]/9,-p[2]/20];
+          p = [p[0]+pivot[0], p[1]+pivot[1], p[2]+pivot[2]];
+          // Java's GUI applies X(180), then Y(yaw), then X(pitch), and a
+          // mirrored X scale. Keep that order rather than inventing a flat icon.
+          p = rotate(p,'x',Math.PI);
+          p = rotate(p,'y',(yaw-(1-bounded)*90)*degrees);
+          p = [p[0]+(1-bounded)*3.2,p[1]+(1-bounded)*1.6,p[2]+(1-bounded)*4];
+          p = rotate(p,'x',pitch*degrees); p = rotate(p,'z',roll*degrees);
+          // 40 GUI pixels / 16 model units, at GUI scale 2, in an 80px panel.
+          return [-p[0]/8,-p[1]/8,-p[2]/20];
         };
-        const quad = (points: readonly Point[], uv: Uv, fold: number) => {
+        const quad = (points: readonly Point[], uv: Uv, fold: number, pivot: Point) => {
           const [u,v,w,h] = uv;
-          const corners = [[u,v+h],[u+w,v+h],[u+w,v],[u,v]];
+          const corners = [[u+w,v],[u,v],[u,v+h],[u+w,v+h]];
           for (const index of [0,1,2,0,2,3]) {
-            coordinates.push(...transform(points[index]!,fold));
+            coordinates.push(...transform(points[index]!,fold,pivot));
             uvs.push(corners[index]![0]!/64,corners[index]![1]!/32);
           }
         };
-        // UV rectangles are in the real 64×32 book atlas. Geometry is an
-        // explicit reconstruction and must not be used as an exact-match oracle.
-        const angle = (90 - bounded * 55) * degrees;
-        quad([[-6,-5,0], [0,-5,0], [0,5,0], [-6,5,0]], [0,0,6,10], angle);
-        quad([[0,-5,0], [6,-5,0], [6,5,0], [0,5,0]], [16,0,6,10], -angle);
-        quad([[-5.4,-4,.16], [-.2,-4,.16], [-.2,4,.16], [-5.4,4,.16]], [1,11,5,8], angle);
-        quad([[.2,-4,.16], [5.4,-4,.16], [5.4,4,.16], [.2,4,.16]], [7,11,5,8], -angle);
-        quad([[-.25,-5,.18],[.25,-5,.18],[.25,5,.18],[-.25,5,.18]],[12,0,2,10],0);
+        // Standard unfolded box UVs, verified against the official Java
+        // client's ModelPart.Cube. Thin covers still have distinct front/back
+        // faces; the page blocks have real one-model-unit edges.
+        const box = (origin: Point, size: Point, uv: readonly [number,number], fold: number, pivot: Point = [0,0,0]) => {
+          const [x,y,z]=origin, [w,h,d]=size, [u,v]=uv;
+          const p: Point[] = [[x,y,z],[x+w,y,z],[x+w,y+h,z],[x,y+h,z],
+            [x,y,z+d],[x+w,y,z+d],[x+w,y+h,z+d],[x,y+h,z+d]];
+          const face = (indices: number[], rect: Uv) => quad(indices.map(index=>p[index]!),rect,fold,pivot);
+          face([5,4,0,1],[u+d,v,w,d]);
+          face([2,3,7,6],[u+d+w,v+d,w,-d]);
+          face([0,4,7,3],[u,v+d,d,h]);
+          face([1,0,3,2],[u+d,v+d,w,h]);
+          face([5,1,2,6],[u+d+w,v+d,d,h]);
+          face([4,5,6,7],[u+2*d+w,v+d,w,h]);
+        };
+        const angle = 1.25 * bounded;
+        const pagePivot: Point = [Math.sin(angle),0,0];
+        const flip = (offset: number) => Math.max(0,Math.min(1,((pageFlip+offset)%1+1)%1*1.6-.3));
+        box([-6,-5,-.005],[6,10,.005],[0,0],Math.PI+angle,[0,0,-1]);
+        box([0,-5,-.005],[6,10,.005],[16,0],-angle,[0,0,1]);
+        box([-1,-5,0],[2,10,.005],[12,0],Math.PI/2);
+        box([0,-4,-.99],[5,8,1],[0,10],angle,pagePivot);
+        box([0,-4,-.01],[5,8,1],[12,10],-angle,pagePivot);
+        box([0,-4,0],[5,8,.005],[24,10],angle*(1-2*flip(.25)),pagePivot);
+        box([0,-4,0],[5,8,.005],[24,10],angle*(1-2*flip(.75)),pagePivot);
         const attribute = (name: string, data: number[], size: number) => {
           const buffer = gl.createBuffer(); if (!buffer) throw new Error('Cannot allocate book buffer');
           buffers.push(buffer); gl.bindBuffer(gl.ARRAY_BUFFER,buffer); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);
@@ -120,8 +149,8 @@ export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>
     image.onerror = () => { if (!disposed) onRendererError?.('Cannot load the book atlas.'); };
     image.src = textureUrl;
     return () => { disposed=true; image.onload=null; image.onerror=null; cleanup(); };
-  },[textureUrl,open,yaw,pitch,roll,width,height,onRendererError]);
+  },[textureUrl,open,pageFlip,yaw,pitch,roll,width,height,onRendererError]);
   return <canvas {...props} ref={element => { canvas.current=element; if (typeof forwardedRef === 'function') forwardedRef(element); else if (forwardedRef) forwardedRef.current=element; }}
-    role="img" aria-label={label} width={width} height={height} data-fidelity="renderer-reconstruction"
+    role="img" aria-label={label} width={width} height={height} data-fidelity="renderer-reconstruction" data-geometry-source="java-1.21.5-book-model"
     className={['mc-enchanting-book',className].filter(Boolean).join(' ')}/>;
 });

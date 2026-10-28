@@ -8,6 +8,12 @@ export const gameItemTextures = {
   apple: { src: new URL('./assets/minecraft/apple.png', import.meta.url).href, width: 16, height: 16 },
   gem: { src: new URL('./assets/minecraft/emerald.png', import.meta.url).href, width: 16, height: 16 },
   lapis: { src: new URL('./assets/minecraft/dye_powder_blue.png', import.meta.url).href, width: 16, height: 16 },
+  coal: { src: new URL('./assets/minecraft/coal.png', import.meta.url).href, width: 16, height: 16 },
+  stick: { src: new URL('./assets/minecraft/stick.png', import.meta.url).href, width: 16, height: 16 },
+  rawBeef: { src: new URL('./assets/minecraft/beef_raw.png', import.meta.url).href, width: 16, height: 16 },
+  steak: { src: new URL('./assets/minecraft/beef_cooked.png', import.meta.url).href, width: 16, height: 16 },
+  ironSword: { src: new URL('./assets/minecraft/iron_sword.png', import.meta.url).href, width: 16, height: 16 },
+  ironNugget: { src: new URL('./assets/minecraft/iron_nugget.png', import.meta.url).href, width: 16, height: 16 },
   // This official GUI category image is already rendered, not a hand-built cube.
   // Preserve its 17×17 pixels at integer scale; do not squeeze it to 16×16.
   grass: { src: new URL('./assets/minecraft/icon_recipe_nature.png', import.meta.url).href, width: 17, height: 17 },

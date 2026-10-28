@@ -1,5 +1,5 @@
 import { forwardRef, useId, useRef, useState } from 'react';
-import type { CSSProperties, HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
 import { InventoryGrid, ItemSlot } from './inventory';
 import type { InventoryItem, InventorySlotAction } from './inventory';
 
@@ -89,6 +89,29 @@ export interface EnchantmentOption {
   runes?: ReactNode;
   disabled?: boolean;
 }
+export interface EnchantmentOptionProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'id' | 'children'>, EnchantmentOption {
+  /** Dust sprite row in the original three-option GUI. Independent of level. */
+  tier?: 1 | 2 | 3;
+  /** Optional DOM id; `id` is the logical option identifier sent to onEnchant. */
+  buttonId?: string;
+  onEnchant?: (id: string) => void;
+}
+/** A reusable original-texture option; game eligibility is supplied via disabled. */
+export const EnchantmentOption = forwardRef<HTMLButtonElement, EnchantmentOptionProps>(function EnchantmentOption({
+  id, label, level, runes, disabled, tier = 1, buttonId, onEnchant, onClick,
+  type = 'button', className, style, 'aria-label': ariaLabel, 'aria-description': ariaDescription, ...props
+}, ref) {
+  return <button {...props} ref={ref} id={buttonId} type={type}
+    className={['mc-enchanting__option',className].filter(Boolean).join(' ')} disabled={disabled}
+    data-enchantment-id={id} data-enchantment-tier={tier}
+    aria-label={ariaLabel ?? `${label} ${level}`} aria-description={ariaDescription ?? `Requires level ${level}`}
+    onClick={event=>{onClick?.(event); if(!event.defaultPrevented && !disabled) onEnchant?.(id);}}
+    style={{'--mc-enchantment-dust':`var(--mc-skin-enchanting-dust-${tier})`,'--mc-enchantment-dust-disabled':`var(--mc-skin-enchanting-dust-disabled-${tier})`,...style} as CSSProperties}>
+    <span className="mc-enchanting__dust" aria-hidden="true"/>
+    <span className="mc-enchanting__runes" data-runes={runes !== undefined || undefined} aria-hidden="true">{runes}</span>{' '}
+    <span className="mc-enchanting__cost">{level}</span>
+  </button>;
+});
 export interface EnchantingTableProps extends Omit<WorkstationFrameProps,'children'|'title'> {
   title?: string;
   item?: InventoryItem | null;
@@ -104,13 +127,10 @@ export const EnchantingTable = forwardRef<HTMLElement, EnchantingTableProps>(fun
   return <WorkstationFrame {...props} ref={ref} title={title} className={['mc-enchanting',className].filter(Boolean).join(' ')}>
     <div className="mc-enchanting__book" aria-hidden="true">{book}</div>
     <ItemSlot className="mc-enchanting__item" label="Item to enchant" item={item} onClick={()=>onInputAction?.('item','primary')} onSecondaryAction={()=>onInputAction?.('item','secondary')}/>
-    <ItemSlot className="mc-enchanting__lapis" label="Lapis lazuli" item={lapis} placeholder={<span className="mc-enchanting__lapis-placeholder"/>}
+    <ItemSlot className="mc-enchanting__lapis" label="Lapis lazuli" item={lapis} underlay={<span className="mc-enchanting__lapis-placeholder"/>}
       onClick={()=>onInputAction?.('lapis','primary')} onSecondaryAction={()=>onInputAction?.('lapis','secondary')}/>
-    <div className="mc-enchanting__options" role="group" aria-label="Enchantments">{options.slice(0,3).map((option,index)=><button
-      key={option.id} type="button" className="mc-enchanting__option" disabled={option.disabled} aria-label={`${option.label} ${option.level}`} aria-description={`Requires level ${option.level}`}
-      onClick={()=>onEnchant?.(option.id)} style={{'--mc-enchantment-dust':`var(--mc-skin-enchanting-dust-${index+1})`,'--mc-enchantment-dust-disabled':`var(--mc-skin-enchanting-dust-disabled-${index+1})`} as CSSProperties}>
-      <span className="mc-enchanting__dust" aria-hidden="true"/><span className="mc-enchanting__runes" data-runes={option.runes !== undefined || undefined} aria-hidden="true">{option.runes}</span>{' '}
-      <span className="mc-enchanting__cost">{option.level}</span>
-    </button>)}</div>
+    <div className="mc-enchanting__options" role="group" aria-label="Enchantments">{options.slice(0,3).map((option,index)=><EnchantmentOption
+      key={option.id} id={option.id} label={option.label} level={option.level} runes={option.runes} disabled={option.disabled}
+      tier={([1,2,3] as const)[index]} onEnchant={onEnchant}/>)}</div>
   </WorkstationFrame>;
 });

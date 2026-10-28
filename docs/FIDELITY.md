@@ -4,9 +4,9 @@
 
 ## 参考与版本
 
-固定 Mojang 官方 [bedrock-samples commit 46ba6ea](https://github.com/Mojang/bedrock-samples/tree/46ba6ea985fb5a92d79a9419198f10dda14c199d)，资源版本 `1.26.50.4`。另只读解析本机 Bedrock `1.26.6005.0` 的 JSON UI 与纹理归档：94 个相关 UI PNG / JSON 条目与固定参考一致，差异 0。安装版本、归档 SHA256、原版布局事实见 [local-reference.json](local-reference.json)。另将官方 v1.26.60.5 full release 的 4 份工作站相关 UI JSON 与本机逐份核对，解析后完全相同；原始 SHA 见 workstation-geometry.json。这只证明所比较的条目一致，不代表全部资源或整套游戏 UI 一致。
+固定 Mojang 官方 [bedrock-samples commit 46ba6ea](https://github.com/Mojang/bedrock-samples/tree/46ba6ea985fb5a92d79a9419198f10dda14c199d)，资源版本 `1.26.50.4`。另只读解析本机 Bedrock `1.26.6005.0` 的 JSON UI 与纹理归档：98 个相关 UI PNG / JSON 条目与固定参考一致，差异 0。安装版本、归档 SHA256、原版布局事实见 [local-reference.json](local-reference.json)。另将官方 v1.26.60.5 full release 的 4 份工作站相关 UI JSON 与本机逐份核对，解析后完全相同；原始 SHA 见 workstation-geometry.json。这只证明所比较的条目一致，不代表全部资源或整套游戏 UI 一致。
 
-UI 原始对照图缓存于忽略目录 `.cache`。64 个重建皮肤的来源、尺寸、九宫格参数和 SHA256 见 [classic-skins.json](classic-skins.json)，嵌入式 PNG 由 `scripts/prepare-classic.py` 生成。展示物品与可选书本另用真实 PNG，来源权利说明见 THIRD_PARTY_NOTICES.md。
+UI 原始对照图缓存于忽略目录 `.cache`。68 个重建皮肤的来源、尺寸、九宫格参数和 SHA256 见 [classic-skins.json](classic-skins.json)，嵌入式 PNG 由 `scripts/prepare-classic.py` 生成。展示物品与可选书本另用真实 PNG，来源权利说明见 THIRD_PARTY_NOTICES.md。
 
 ## 已校准细节
 
@@ -34,7 +34,11 @@ UI 原始对照图缓存于忽略目录 `.cache`。64 个重建皮肤的来源�
 
 砂轮箭头、附魔选项默认 / hover / disabled 表面已有原始 PNG 独立对比。附魔表面 fixture 使用规范整数尺寸 216×38，仅证明皮肤解码 / 九宫格；它不替代 main 中浮点放置的未遮罩组合。另有 9 项独立源几何 / 材质 / 字距 / 导航检查，不以生产 CSS 或皮肤 manifest 反推期望。两类证据都不证明游戏 renderer 的最终像素取整。完整工作站仍待同版本 / 状态的游戏截图对比。
 
-已删除手绘物品、假 glint 和默认书图。展示页采用真实物品 PNG，其中钻石剑与公开 sample 相差 22 像素，已使用本机真实图并在 item-materials.json 明确来源。SGA 原图字形 AIZ 与独立图集栅格比较 0 差异；图集不随 npm 分发。EnchantingBook 使用真材质，但 native mesh / 相机仍未获取，明确属于重建，不列入 native pixel-perfect 结论。ItemTooltip、数量基线、耐久 / disabled renderer 仍待原游戏校准。
+已删除手绘物品、假 glint 和默认书图。展示页采用真实物品 PNG，其中钻石剑与公开 sample 相差 22 像素，已使用本机真实图并在 item-materials.json 明确来源。SGA 原图字形 AIZ 与独立图集栅格比较 0 差异；图集不随 npm 分发。EnchantingBook 使用真材质，已修正厚页块与 UV，并参考官方 Java BookModel 的七部件结构重建；Bedrock native mesh / 相机仍未获取，明确属于重建，不列入 native pixel-perfect 结论。ItemTooltip、数量基线、耐久 / disabled renderer 仍待原游戏校准。
+
+工作台从 inventory_screen.json 的 work_bench_panel_3x3 推导，熔炉 / 高炉 / 烟熏炉从炉子源面板及其继承推导。已拆出 RecipeGrid / ProcessingArrow / FuelIndicator / ResultSlot；52×52 结果槽中的物品保持 32×32。炉子输入 y=29、燃料 y=105、结果 y=59 CSS px，保留源半游戏像素位置；配方书和外部 toolbar 尚未实现。源推导及 12 项独立检查见 [PROCESSING_QA.md](PROCESSING_QA.md)。其中 6 个箭头 / 火焰裁切状态与原始 PNG 独立浏览器控制样本 RGBA 零差，只证明 Chromium 合成，不替代引擎 ratio 与裁切量化验收。
+
+附魔经验主色与右下偏移来自原 JSON；成功 / 失败文字已分别配深绿 / 深红阴影，0.25 暗化系数仍属待原生实拍校准的近似。青金石槽使用不额外淡化的原始 lapis_image，在空槽与有物品时都保留于物品图下层。书本由无厚度平面改为完整封面、书脊、厚页块和翻页结构；目前开合 / 翻页控制、WebGL 正常工作检查与原生 Bedrock 像素验收仍是不同证据层级。
 
 ## 字体与 shadow
 
@@ -52,6 +56,6 @@ Alert、Badge、部分扩展状态以及 Panel / Dialog 的任意内容排版仍
 
 ## 复验
 
-`npm test` 会缓存固定参考并运行交互、51 项皮肤、5 项进度合成、3 项原版字形、1 项中文边缘、1 项 SGA 原图字形检查，以及 9 项源布局 / 材质 / 导航检查。原版字形、SGA 与原版 advance 检查需要用户自有字体资源；缺少时相应项目跳过。字体准备步骤见 README。
+`npm test` 会缓存固定参考并运行交互、51 项皮肤、5 项进度合成、3 项原版字形、1 项中文边缘、1 项 SGA 原图字形检查，以及 9 项工作站源布局 / 材质 / 导航检查、12 项熔炼 / 合成 QA 和 5 项附魔渲染 QA。原版字形、SGA 与原版 advance 检查需要用户自有字体资源；缺少时相应项目跳过。字体准备步骤见 README。
 
 可选工具：`python scripts/prepare-classic.py` 重建皮肤，`python scripts/read-local-ui.py` 读取已安装游戏布局事实，`python scripts/prepare-pixel-font.py` 生成 COLR 字体，`python scripts/prepare-font-oracle.py` 生成原始轮廓期望图。普通消费和构建无需 Python 或本机游戏。

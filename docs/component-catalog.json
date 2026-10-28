@@ -142,15 +142,15 @@
       },
       {
         "name": "ItemImage",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "ItemCount",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "DurabilityBar",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "ItemTooltip",
@@ -170,7 +170,7 @@
       },
       {
         "name": "RecipeGrid",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "RecipeSearch",
@@ -182,15 +182,15 @@
       },
       {
         "name": "ProcessingArrow",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "FuelIndicator",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "EnchantmentOption",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "EnchantingRunes",
@@ -211,11 +211,11 @@
       },
       {
         "name": "ResultSlot",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "SlotPlaceholder",
-        "status": "planned"
+        "status": "implemented"
       }
     ],
     "workstation_and_container_guis": [
@@ -229,19 +229,19 @@
       },
       {
         "name": "CraftingTable",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Furnace",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "BlastFurnace",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Smoker",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "BrewingStand",

@@ -48,7 +48,7 @@ No Mojangles font, Minecraft logo or game screenshot is bundled in the npm libra
 
 ## Actual game materials and renderer resources
 
-The demonstration now uses actual raster item resources rather than original item illustrations. The original voxel island and branding block remain project illustrations. The six demonstration item/GUI images and their installed-game SHA256, sample comparison, and provenance are recorded in `docs/item-materials.json`. Those images are demo-only and excluded from the npm package. The installed diamond sword differs by 22 pixels from the public sample; this distinction is recorded rather than presented as a byte match.
+The demonstration now uses actual raster item resources rather than original item illustrations. The original voxel island and branding block remain project illustrations. The twelve demonstration item/GUI images and their installed-game SHA256, sample comparison, and provenance are recorded in `docs/item-materials.json`. Those images are demo-only and excluded from the npm package. The installed diamond sword differs by 22 pixels from the public sample; this distinction is recorded rather than presented as a byte match.
 
 The optional `EnchantingBook` component includes Mojang's unchanged `resource_pack/textures/entity/enchanting_table_book.png`, SHA256 `e8d23533b48976b578098db767e2c8161a31fa5d7b22bf576bf531b1bc7f000f`, from the pinned sample commit above. The upstream notice is retained in `dist/assets/Minecraft-Sample-LICENSE.md`. It remains a Mojang asset subject to its upstream terms, not original MIT artwork. Its WebGL mesh/camera is a project reconstruction and is not claimed to match the native renderer.
 

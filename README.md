@@ -77,15 +77,26 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `Progress` | **必填** `label`；`value`、`max`、`showValue` | Classic common.progress_bar 纹理，高 10 CSS px，完整填充图按进度裁切；省略 value 为不确定进度，数值限制在 0…max；reduced motion 下静止 |
 | `Alert` | `title`；`variant`: info / success / warning / danger | danger 使用 role=alert，其余 role=status；可覆盖 role |
 | `Separator` | 原生 hr 属性 | 双层硬边分割线 |
-| `ItemSlot` | `item`、`label`、`image`、`count`、`selected`、`durability`、`placeholder`、`showTooltip`、`onSecondaryAction`；原生 button 属性 | 真实 container cell，36×36 槽位 / 32×32 物品；蓝色选中、绿色悬停、白色键盘焦点；0 为空、1 隐藏角标；数量 / 耐久 / 提示 / 原生事件 |
+| `ItemSlot` | `item`、`label`、`image`、`count`、`selected`、`durability`、`placeholder`、`underlay`、`showTooltip`、`onSecondaryAction`；原生 button 属性 | 真实 container cell，36×36 槽位 / 32×32 物品；蓝色选中、绿色悬停、白色键盘焦点；0 为空、1 隐藏角标；underlay 在物品下方常驻，placeholder 仅空槽显示 |
 | `ItemTooltip` | **必填** `item`；div 属性 | 名称、lore、耐久说明；ItemSlot 自动处理焦点 / hover / Escape，并在 Dialog 内挂载提示 |
 | `InventoryGrid` | **必填** `label`、`items`；`size`、`columns`、`selectedIndex` / `defaultSelectedIndex`、`onSelectionChange`、`onSlotAction` | 单一 Tab 入口，方向键 / Home / End / Ctrl+Home/End，跳过禁用项；primary / secondary 操作事件 |
+| `ItemImage` | `src`、`alt`、`imageProps`、children；span 属性 | 独立 32×32 物品区域，最近邻渲染；缺图不生成替代图案 |
+| `ItemCount` | `count`、`hideSingle`；span 属性 | 共享槽位数量角标；默认隐藏 0 / 1，拒绝非有限数量 |
+| `DurabilityBar` | **必填** `value`；`max`、`hideWhenFull`、`label`、`color` | 独立 meter，12 游戏像素宽；原生颜色 renderer 仍待验证，可提供自定义颜色 |
+| `SlotPlaceholder` | `src`、`alt`、children；span 属性 | 共享空槽占位图层；由调用方提供原始资源 |
+| `ResultSlot` | ItemSlot 属性；`available`、`size`: normal / large、`onTake` | 大结果槽 52×52，物品仍 32×32；空结果保留焦点并阻止取出操作 |
 | `PlayerInventory` | `items`、`hotbar`、`label`、`hotbarLabel`、`selectedIndex`、`onSelectionChange`、`onSlotAction` | 27 格背包与 9 格快捷栏，共享 0…35 的选中索引 |
 | `WorkstationFrame` | **必填** `title`；`inventory`、`hotbar`、`inventoryLabel`、`onClose`、`closeLabel`、`onInventoryAction` | 176×166 游戏像素 Classic 容器外框，以 GUI 2 显示；窄屏局部滚动 |
 | `Grindstone` | `inputs`: readonly [item, item]；`result`、`invalid`、`onInputAction`、`onTakeResult`；Frame 属性 | 砂轮双输入、结果、原始箭头 / 无效标记和玩家背包；结果由调用方提供 |
 | `EnchantingTable` | **必填** `options`；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`；Frame 属性 | 附魔台输入、青金石、三档选择、级别消耗与禁用态；book 支持自定义渲染 |
+| `EnchantmentOption` | **必填** `id`、`label`、`level`；`tier`: 1 / 2 / 3、`runes`、`disabled`、`buttonId`、`onEnchant`；button 属性 | 可独立使用的附魔选项；id 是业务 ID，buttonId 是可选 DOM id；onClick.preventDefault() 取消选择回调 |
 | `EnchantingRunes` | **必填** `text`、`atlasUrl`；`scale`: 1…4、`color` | 按原始 SGA 图集采样字形与字距；图集由调用方提供，不随 npm 捆绑 |
-| `EnchantingBook` | `textureUrl`、`open`、`yaw`、`pitch`、`roll`、`onRendererError`；canvas 属性 | 真实原版材质的可选 WebGL 书本；mesh / 相机为待校准重建，不作为原生 renderer 的精确替代 |
+| `EnchantingBook` | `textureUrl`、`open`、`pageFlip`、`yaw`、`pitch`、`roll`、`onRendererError`；canvas 属性 | 真实材质、封面 / 书脊 / 厚页块 / 翻页的可选 WebGL 书本；模型参考 Mojang Java BookModel 重建，Bedrock 相机与 renderer 仍待原生对照 |
+| `ProcessingArrow` | `progress`: 0…1、`label`、`variant`: smelting / crafting；div 属性 | 原始箭头纹理，smelting 从左向右裁切完整填充图；crafting 使用静态箭头 |
+| `FuelIndicator` | `progress`: 0…1、`label`；div 属性 | 原始火焰纹理，自底部显示剩余比例，保留 full 图原尺寸 |
+| `RecipeGrid` | InventoryGrid 属性；`columns`、`rows`: 2 / 3 | 共用合成网格；尺寸决定槽位数，支持 2×2 和 3×3 |
+| `CraftingTable` | `inputs`、`result`、`selectedInputIndex`、`onInputAction`、`onTakeResult`；容器库存属性 | 源 3×3 工作台右面板，大结果槽与共享库存；配方书及外部 toolbar 尚未实现 |
+| `Furnace` / `BlastFurnace` / `Smoker` | `input`、`fuel`、`result`、`progress`、`fuelRemaining`、`onInputAction`、`onTakeResult`；容器库存属性 | 共用原版熔炼右面板，原始浮点槽位布局、火焰与进度裁切；游戏规则由使用方提供 |
 | `PixelIcon` | **必填** `name`；`size`，默认 20 | 16×16 原创 SVG 图标，默认装饰性 aria-hidden，图标按钮须提供标签 |
 
 ### 受控与非受控
@@ -191,7 +202,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **28 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[component-catalog.json](docs/component-catalog.json) 首轮整理 101 项，逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
+当前 **41 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 首轮整理 101 项，逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类、燃料、处理箭头、附魔选项、交易条目。
@@ -268,7 +279,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、28 个导出、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、41 个导出、类型、CSS、皮肤、字体及许可路径。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

@@ -30,6 +30,7 @@
     "./inventory.css": "./dist/inventory.css",
     "./workstations.css": "./dist/workstations.css",
     "./enchanting-book.css": "./dist/enchanting-book.css",
+    "./processing.css": "./dist/processing.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./fonts/*": "./dist/fonts/*",

@@ -657,6 +657,46 @@
       ],
       "slice": null,
       "encoding": "png"
+    },
+    "processing-arrow-active": {
+      "source": "resource_pack/textures/ui/arrow_active.png",
+      "sha256": "37c7da283f77fc1c175696c7a479aa4afaad17d7e68d4f114b54b7ba439aedee",
+      "size": [
+        22,
+        15
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "processing-arrow-inactive": {
+      "source": "resource_pack/textures/ui/arrow_inactive.png",
+      "sha256": "9c549ac5595bc65cbc5ca9bacfc8486b0a2961118152460878c4926ffc3c2457",
+      "size": [
+        22,
+        15
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "processing-flame-full": {
+      "source": "resource_pack/textures/ui/flame_full_image.png",
+      "sha256": "2cf0471cb2a0aa060c209f3a0dfd866caf795135dbd594ac1768273725aee196",
+      "size": [
+        13,
+        13
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "processing-flame-empty": {
+      "source": "resource_pack/textures/ui/flame_empty_image.png",
+      "sha256": "9b04056628f93cfba11f4d4de35370d903dadd4f9f77c71dcd2137f4b1c9cecc",
+      "size": [
+        13,
+        13
+      ],
+      "slice": null,
+      "encoding": "png"
     }
   }
 }

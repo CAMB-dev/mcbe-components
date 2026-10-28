@@ -106,6 +106,132 @@
       "use": "GUI category grass-block icon; 17x17 image displayed at native integer scale, not a generic 3D block renderer",
       "modifications": "None",
       "origin": "official-bedrock-samples"
+    },
+    {
+      "file": "demo/assets/minecraft/beef_cooked.png",
+      "source": "resource_pack/textures/items/beef_cooked.png",
+      "sha256": "f00fef632b7f7ab938177c7fb6ee8480b4240bf839191a3d870c6b0f96dc7c02",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 246,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Processing and crafting demonstration item texture",
+      "modifications": "None",
+      "origin": "installed-game",
+      "upstreamReference": {
+        "release": "v1.26.60.5-full",
+        "sha256": "f00fef632b7f7ab938177c7fb6ee8480b4240bf839191a3d870c6b0f96dc7c02",
+        "matchesInstalledGameBytes": true
+      }
+    },
+    {
+      "file": "demo/assets/minecraft/beef_raw.png",
+      "source": "resource_pack/textures/items/beef_raw.png",
+      "sha256": "60fde56a603170b70b1cbae5c4e417356b394a8676d8e1a4d4989d9e98cc7832",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 241,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Processing and crafting demonstration item texture",
+      "modifications": "None",
+      "origin": "installed-game",
+      "upstreamReference": {
+        "release": "v1.26.60.5-full",
+        "sha256": "60fde56a603170b70b1cbae5c4e417356b394a8676d8e1a4d4989d9e98cc7832",
+        "matchesInstalledGameBytes": true
+      }
+    },
+    {
+      "file": "demo/assets/minecraft/coal.png",
+      "source": "resource_pack/textures/items/coal.png",
+      "sha256": "8d1dbe941a70e3c13d8c5c312c61df8b7888ba68f2905854f676d462cd3a1d6f",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 252,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Processing and crafting demonstration item texture",
+      "modifications": "None",
+      "origin": "installed-game",
+      "upstreamReference": {
+        "release": "v1.26.60.5-full",
+        "sha256": "8d1dbe941a70e3c13d8c5c312c61df8b7888ba68f2905854f676d462cd3a1d6f",
+        "matchesInstalledGameBytes": true
+      }
+    },
+    {
+      "file": "demo/assets/minecraft/iron_nugget.png",
+      "source": "resource_pack/textures/items/iron_nugget.png",
+      "sha256": "1442104640b7233814831f7d8070d0296b89acad278398ba63072299a9052f4f",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 188,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Processing and crafting demonstration item texture",
+      "modifications": "None",
+      "origin": "installed-game",
+      "upstreamReference": {
+        "release": "v1.26.60.5-full",
+        "sha256": "1442104640b7233814831f7d8070d0296b89acad278398ba63072299a9052f4f",
+        "matchesInstalledGameBytes": true
+      }
+    },
+    {
+      "file": "demo/assets/minecraft/iron_sword.png",
+      "source": "resource_pack/textures/items/iron_sword.png",
+      "sha256": "1d1faeae22cbb8db31db1380c25dfeb4b68ca649f6cc72bd974720823152bec3",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 225,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Processing and crafting demonstration item texture",
+      "modifications": "None",
+      "origin": "installed-game",
+      "upstreamReference": {
+        "release": "v1.26.60.5-full",
+        "sha256": "1d1faeae22cbb8db31db1380c25dfeb4b68ca649f6cc72bd974720823152bec3",
+        "matchesInstalledGameBytes": true
+      }
+    },
+    {
+      "file": "demo/assets/minecraft/stick.png",
+      "source": "resource_pack/textures/items/stick.png",
+      "sha256": "ed1fa033e9f46514cf2bdfce1cef503027614de6875d5fe3e117cd9d754acb8a",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 165,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Processing and crafting demonstration item texture",
+      "modifications": "None",
+      "origin": "installed-game",
+      "upstreamReference": {
+        "release": "v1.26.60.5-full",
+        "sha256": "ed1fa033e9f46514cf2bdfce1cef503027614de6875d5fe3e117cd9d754acb8a",
+        "matchesInstalledGameBytes": true
+      }
     }
   ],
   "publicSwordChecks": [

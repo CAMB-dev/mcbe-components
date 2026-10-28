@@ -1,6 +1,63 @@
 import { forwardRef, useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, KeyboardEvent, MouseEvent, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, ImgHTMLAttributes, KeyboardEvent, MouseEvent, ReactNode } from 'react';
+
+function stackAmount(value: number | undefined) {
+  return value === undefined ? undefined : Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0;
+}
+function remainingDurability(value: number | undefined, max = 1) {
+  return value === undefined || !Number.isFinite(value) || !Number.isFinite(max) || max <= 0
+    ? undefined : Math.max(0, Math.min(max, value));
+}
+
+export interface ItemImageProps extends HTMLAttributes<HTMLSpanElement> {
+  src?: string;
+  alt?: string;
+  imageProps?: Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'>;
+}
+/** A 16×16 game-pixel item rendering area. No fallback artwork is generated. */
+export const ItemImage = forwardRef<HTMLSpanElement, ItemImageProps>(function ItemImage({ src, alt = '', imageProps, children, className, ...props }, ref) {
+  return <span {...props} ref={ref} className={['mc-slot__item', className].filter(Boolean).join(' ')}>
+    {src?.trim() ? <img {...imageProps} src={src} alt={alt} draggable={imageProps?.draggable ?? false}/> : children}
+  </span>;
+});
+
+export interface SlotPlaceholderProps extends HTMLAttributes<HTMLSpanElement> { src?: string; alt?: string }
+export const SlotPlaceholder = forwardRef<HTMLSpanElement, SlotPlaceholderProps>(function SlotPlaceholder({ src, alt = '', children, className, ...props }, ref) {
+  return <span {...props} ref={ref} className={['mc-slot__placeholder', className].filter(Boolean).join(' ')}>
+    {src?.trim() ? <img src={src} alt={alt} draggable={false}/> : children}
+  </span>;
+});
+
+export interface ItemCountProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> { count?: number; hideSingle?: boolean }
+export const ItemCount = forwardRef<HTMLSpanElement, ItemCountProps>(function ItemCount({ count, hideSingle = true, className, ...props }, ref) {
+  const amount=stackAmount(count);
+  if(amount === undefined || amount === 0 || (hideSingle && amount === 1)) return null;
+  return <span {...props} ref={ref} className={['mc-slot__count', className].filter(Boolean).join(' ')}>{amount}</span>;
+});
+
+export interface DurabilityBarProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
+  value: number;
+  max?: number;
+  hideWhenFull?: boolean;
+  label?: string;
+  /** Optional renderer-provided color; the default hue is an approximation. */
+  color?: string;
+}
+/** JSON-derived geometry; the native progress renderer's hue/shadow still needs calibration. */
+export const DurabilityBar = forwardRef<HTMLSpanElement, DurabilityBarProps>(function DurabilityBar({
+  value, max = 1, hideWhenFull = true, label = 'Durability', color, className, ...props
+}, ref) {
+  const bounded=remainingDurability(value,max);
+  if(bounded === undefined || (hideWhenFull && bounded === max)) return null;
+  const ratio=bounded/max;
+  return <span {...props} ref={ref} role="meter" aria-label={props['aria-label'] ?? label}
+    aria-valuemin={0} aria-valuemax={max} aria-valuenow={bounded}
+    aria-valuetext={props['aria-valuetext'] ?? `${Math.round(ratio*100)}%`}
+    className={['mc-slot__durability',className].filter(Boolean).join(' ')}>
+    <span style={{width:`${Math.round(ratio*12)*2}px`,backgroundColor:color ?? `hsl(${Math.round(ratio*120)} 100% 50%)`}}/>
+  </span>;
+});
 
 export interface InventoryItem {
   id?: string;
@@ -17,10 +74,11 @@ export interface InventoryItem {
 }
 export interface ItemTooltipProps extends HTMLAttributes<HTMLDivElement> { item: InventoryItem }
 export const ItemTooltip = forwardRef<HTMLDivElement, ItemTooltipProps>(function ItemTooltip({ item, className, ...props }, ref) {
+  const durability=remainingDurability(item.durability);
   return <div role="tooltip" {...props} ref={ref} className={['mc-item-tooltip', className].filter(Boolean).join(' ')}>
     <div className="mc-item-tooltip__name" style={{ color: item.nameColor }}>{item.name}</div>
     {item.lore?.map((line, index) => <div className="mc-item-tooltip__lore" key={index}>{line}</div>)}
-    {item.durability !== undefined && <div className="mc-item-tooltip__lore">Durability: {Math.round(Math.max(0, Math.min(1, item.durability)) * 100)}%</div>}
+    {durability !== undefined && <div className="mc-item-tooltip__lore">Durability: {Math.round(durability * 100)}%</div>}
   </div>;
 });
 
@@ -33,11 +91,13 @@ export interface ItemSlotProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Remaining durability, between 0 and 1. */
   durability?: number;
   placeholder?: ReactNode;
+  /** Original slot overlay drawn below item art, including when occupied. */
+  underlay?: ReactNode;
   showTooltip?: boolean;
   onSecondaryAction?: (event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
 }
 export const ItemSlot = forwardRef<HTMLButtonElement, ItemSlotProps>(function ItemSlot({
-  label, item, image, count: givenCount, selected = false, durability: givenDurability, placeholder,
+  label, item, image, count: givenCount, selected = false, durability: givenDurability, placeholder, underlay,
   showTooltip = true, onSecondaryAction, children, className, type = 'button', disabled,
   onMouseEnter, onMouseLeave, onFocus, onBlur, onKeyDown, onContextMenu, ...props
 }, forwardedRef) {
@@ -46,14 +106,14 @@ export const ItemSlot = forwardRef<HTMLButtonElement, ItemSlotProps>(function It
   const [hovered, setHovered] = useState(false), [focused, setFocused] = useState(false), [dismissed, setDismissed] = useState(false);
   const [position, setPosition] = useState({ left: 8, top: 8 });
   const count = givenCount ?? item?.count;
-  const amount = count === undefined ? undefined : Number.isFinite(count) ? Math.max(0, Math.floor(count)) : 0;
+  const amount = stackAmount(count);
   const name = label ?? item?.name ?? 'Empty slot';
-  const source = image ?? item?.image, content = children ?? item?.icon;
+  const source = (image ?? item?.image)?.trim() || undefined, content = children ?? item?.icon;
   const occupied = amount !== 0 && !!(item || source || content);
   const rawDurability = givenDurability ?? item?.durability;
-  const durability = rawDurability === undefined || !Number.isFinite(rawDurability) ? undefined : Math.max(0, Math.min(1, rawDurability));
+  const durability = remainingDurability(rawDurability);
   const tooltip = showTooltip && occupied && !dismissed && (hovered || focused);
-  const tooltipItem: InventoryItem = item ?? { name, lore: amount && amount > 1 ? [`${amount} items`] : undefined, durability };
+  const tooltipItem: InventoryItem = item ? { ...item, durability } : { name, lore: amount && amount > 1 ? [`${amount} items`] : undefined, durability };
   const locate = () => {
     const bounds = node.current?.getBoundingClientRect();
     const size=tooltipNode.current?.getBoundingClientRect();
@@ -78,9 +138,10 @@ export const ItemSlot = forwardRef<HTMLButtonElement, ItemSlotProps>(function It
         if ((event.key === 'F10' && event.shiftKey) && onSecondaryAction) { event.preventDefault(); onSecondaryAction(event); }
       }}
       onContextMenu={event => { onContextMenu?.(event); if (!event.defaultPrevented && onSecondaryAction) { event.preventDefault(); onSecondaryAction(event); } }}>
-      <span className="mc-slot__item" aria-hidden="true">{occupied ? source ? <img src={source} alt="" draggable={false}/> : content : placeholder && <span className="mc-slot__placeholder">{placeholder}</span>}</span>
-      {occupied && durability !== undefined && durability < 1 && <span className="mc-slot__durability" aria-hidden="true"><span style={{ width: `${Math.round(durability * 12) * 2}px`, backgroundColor: `hsl(${Math.round(durability * 120)} 100% 50%)` }}/></span>}
-      {occupied && amount !== undefined && amount > 1 && <span aria-hidden="true" className="mc-slot__count">{amount}</span>}
+      {underlay && <span className="mc-slot__underlay" aria-hidden="true">{underlay}</span>}
+      <ItemImage aria-hidden="true" src={occupied ? source : undefined}>{occupied ? content : placeholder && <SlotPlaceholder>{placeholder}</SlotPlaceholder>}</ItemImage>
+      {occupied && durability !== undefined && <DurabilityBar value={durability} aria-hidden="true"/>}
+      {occupied && <ItemCount count={amount} aria-hidden="true"/>}
       <span className="mc-slot__highlight" aria-hidden="true"/>
     </button>
     {tooltip && typeof document !== 'undefined' && createPortal(<ItemTooltip ref={tooltipNode} id={`${id}-tooltip`} item={tooltipItem} style={position}/>, node.current?.closest('dialog') ?? document.body)}
@@ -88,6 +149,39 @@ export const ItemSlot = forwardRef<HTMLButtonElement, ItemSlotProps>(function It
 });
 
 export type InventorySlotAction = 'primary' | 'secondary';
+export interface ResultSlotProps extends ItemSlotProps {
+  /** False keeps the slot focusable but prevents taking the result. */
+  available?: boolean;
+  size?: 'normal' | 'large';
+  onTake?: (action: InventorySlotAction, event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
+}
+export const ResultSlot = forwardRef<HTMLButtonElement, ResultSlotProps>(function ResultSlot({
+  available = true, size = 'normal', onTake, onClick, onSecondaryAction, onContextMenu, onKeyDown,
+  className, disabled, item, image, children, count, ...props
+}, ref) {
+  const occupied=stackAmount(count ?? item?.count) !== 0 && !!(item || image?.trim() || children);
+  const ariaDisabled=props['aria-disabled'] === true || props['aria-disabled'] === 'true';
+  const canTake=available && occupied && !disabled && !item?.disabled && !ariaDisabled;
+  return <ItemSlot {...props} ref={ref} item={item} image={image} count={count} disabled={disabled}
+    aria-disabled={!canTake || undefined} data-result-unavailable={!canTake || undefined}
+    className={['mc-result-slot',size === 'large' && 'mc-result-slot--large',className].filter(Boolean).join(' ')}
+    onClick={event=>{
+      if(!canTake) {event.preventDefault();event.stopPropagation();return;}
+      onClick?.(event);if(!event.defaultPrevented) onTake?.('primary',event);
+    }}
+    onContextMenu={event=>{
+      if(!canTake) {event.preventDefault();event.stopPropagation();return;}
+      onContextMenu?.(event);
+    }}
+    onKeyDown={event=>{
+      if(!canTake && event.shiftKey && event.key === 'F10') {event.preventDefault();event.stopPropagation();return;}
+      onKeyDown?.(event);
+    }}
+    onSecondaryAction={event=>{if(canTake) {onSecondaryAction?.(event);onTake?.('secondary',event);}}}>
+    {children}
+  </ItemSlot>;
+});
+
 export interface InventoryGridProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> {
   label: string;
   items: readonly (InventoryItem | null)[];
@@ -102,7 +196,8 @@ export const InventoryGrid = forwardRef<HTMLDivElement, InventoryGridProps>(func
   label, items, columns = 9, size = items.length, selectedIndex, defaultSelectedIndex = -1,
   onSelectionChange, onSlotAction, className, style, onKeyDown, ...props
 }, ref) {
-  const width = Math.max(1, Math.floor(columns)); const length = Math.max(0, Math.floor(size));
+  const width = Number.isFinite(columns) && columns > 0 ? Math.max(1, Math.floor(columns)) : 9;
+  const length = Number.isFinite(size) && size >= 0 ? Math.floor(size) : items.length;
   const [internal, setInternal] = useState(defaultSelectedIndex), [focused, setFocused] = useState(0);
   const selected = selectedIndex ?? internal; const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   const firstEnabled = Array.from({length}, (_,index)=>index).find(index=>!items[index]?.disabled) ?? -1;

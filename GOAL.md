@@ -36,7 +36,9 @@
 - [x] 重做 ItemSlot，加入 ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、Grindstone、EnchantingTable，目前共 26 个导出
 - [x] 多 agent 完成原版源几何审计、真实物品材质替换、SGA 原图字形、附魔书本重建与独立验证；新增 EnchantingRunes / EnchantingBook，共 28 个导出
 - [x] 本轮 126 项检查全部通过；28 导出的 React 18 / 19 包消费与生产预览通过；整理原生组件和复用范围清单
-- [ ] 实现清单内其余 73 项 Bedrock 控件、可复用结构、HUD 和完整 GUI；为新增交互与原版表面补充验收
+- [x] 拆出物品图像 / 数量 / 耐久 / 占位 / 结果槽、附魔项与配方 / 进度 / 燃料部件，加入工作台与熔炉系列主面板，共 41 个导出
+- [x] 修正附魔书本厚页块 / UV、经验彩色阴影与青金石底层；独立附魔 QA 5/5、集成 169/169、41 导出 React 18 / 19 包消费与生产预览通过
+- [ ] 实现清单内其余 60 项 Bedrock 控件、可复用结构、HUD 和完整 GUI；为新增交互与原版表面补充验收
 - [ ] 对照游戏渲染器完善附魔书本、符文、物品 tooltip / glint、工作站完整页面
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
 
