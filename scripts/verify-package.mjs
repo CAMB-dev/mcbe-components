@@ -15,6 +15,7 @@ assert(!packed.files.some(file => /Mojangles[^/]*\.(ttf|otf|woff2?|ttc)$/i.test(
 assert(!packed.files.some(file => /\.(?:otf|ttf|ttc)$/i.test(file.path)), 'Optional original HBUI and game font binaries must stay outside the npm library.');
 assert(!packed.files.some(file => /loading-indicator\.gif$|animation-074ed0ba8c16bb30e36c\.gif$/i.test(file.path)), 'Private native loading GIF must stay outside the npm library.');
 assert(!packed.files.some(file => /ascii_sga\.png$/i.test(file.path)), 'User-owned SGA atlas must not enter the npm library.');
+assert(!packed.files.some(file => /\.(?:cso|dxbc|dxil)$|\.material\.bin$/i.test(file.path)), 'Private native shader binaries must stay outside the npm library.');
 assert(!packed.files.some(file => /^(?:demo|\.cache)\//.test(file.path)), 'Demo-only game assets and local references must not enter the npm library.');
 const tarball = packed.filename;
 const tarPath = join(root, tarball);
@@ -31,14 +32,30 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
-const components = ['InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
+const components = ['ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds'];
-assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports].sort());
+const rendererFunctions = ['shadeItemGlint','renderItemGlint'];
+assert.equal(components.length,110);
+assert.equal(dataExports.length,3);
+assert.equal(rendererFunctions.length,2);
+assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
+const glintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25]};
+const glintTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
+assert.deepEqual(ui.shadeItemGlint([.5,.5],1,glintTexture,glintUniforms,'point-repeat'),[.25,.25,.25,1]);
+assert.equal(ui.shadeItemGlint([.5,.5],0,glintTexture,glintUniforms,'bilinear-repeat'),null);
+const glintResult = ui.renderItemGlint({width:1,height:1,data:new Uint8ClampedArray([32,64,96,255])},glintTexture,{uniforms:glintUniforms,glintSampler:'bilinear-repeat',blend:{source:'one',destination:'one'}});
+assert.deepEqual([...glintResult.data],[96,128,160,255]);
 assert.equal(ui.bannerPatternIds.length,42);
 assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+const tooltipMarkup = renderToString(element(ui.ItemTooltip,{id:'consumer-tooltip',item:{name:'Consumer sword',nameColor:'#55ffff',durability:.5,lore:[element('span',{key:'enchantment',style:{color:'#aaaaaa'}},'Sharpness I')]}}));
+assert.match(tooltipMarkup,/role="tooltip"/);
+assert.match(tooltipMarkup,/id="consumer-tooltip"/);
+assert.match(tooltipMarkup,/Consumer sword/);
+assert.match(tooltipMarkup,/Sharpness I/);
+assert(!/durability/i.test(tooltipMarkup),'ItemTooltip must not invent a durability line.');
 const output = renderToString(element(ui.Panel, {title:'Settings'},
   element(ui.TextField, {label:'World name', name:'worldName', defaultValue:'My world'}),
   element(ui.Checkbox, {label:'Coordinates', defaultChecked:true, name:'coordinates'}),
@@ -120,6 +137,7 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
   element(ui.TradeOffer,{offer:{id:'bread',label:'Emeralds for bread',costs:[{item:{name:'Emerald',count:4},originalCount:5}],result:{name:'Bread',count:1}}}),
   element(ui.TradingScreen,{tiers:[],inputs:[null,null],levelProgress:.5,detailButtons:[true,true,true],runeAtlasUrl:'/caller-owned-runes.png'}),
   element(ui.MountInventory,{equipment:[{kind:'saddle'}],chested:true,storageColumns:3}),
+  element(ui.ItemGlint,{imageSrc:'/caller-item.png',uniforms:glintUniforms,glintSampler:'point-repeat',blend:{source:'one',destination:'one'}}),
   element(ui.BlockPreview,{block:'stone-stairs',label:'Stone stairs'}),
   element(ui.BannerPreview,{baseColor:'white',patterns:[{id:'border',color:'red'}]}),
   element(ui.PlayerInventoryScreen,{armor:[null,null,null,null],crafting:[]}),
@@ -137,7 +155,7 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
 assert.match(output, /mc-button--primary/);
 assert.match(output, /World name/);
 assert.match(output, /role="tablist"/);
-for (const className of ['mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
+for (const className of ['mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
 for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
@@ -153,12 +171,19 @@ for (const asset of [...rendererManifest.assets,rendererManifest.license]) {
   const bytes = await readFile(new URL(asset.file.replace(/^src\\//,'dist/'),packageRoot));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed renderer asset: '+asset.file);
 }
-console.log('React '+React.version+': ESM, '+components.length+' components + '+dataExports.length+' data exports, SSR, styles, fonts, renderer assets and licenses PASS');
+for (const [file,sha256] of [
+  ['dist/assets/glint/enchanted_item_glint.png','99cf0defcbe422c8b91a42886f469d89cfbaba157371d8142d01ba7e8055a631'],
+  ['dist/assets/glint/LICENSE.md','ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d'],
+]) {
+  const bytes = await readFile(new URL(file,packageRoot));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),sha256,'Packed original glint resource: '+file);
+}
+console.log('React '+React.version+': ESM, '+components.length+' components + '+dataExports.length+' data exports + '+rendererFunctions.length+' renderer functions, SSR, styles, fonts, renderer assets and licenses PASS');
 `);
   console.log(execFileSync(process.execPath, ['smoke.mjs'], { cwd: consumer, encoding: 'utf8' }).trim());
   await writeFile(join(consumer, 'consumer.tsx'), `
 import { createRef } from 'react';
-import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
+import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
 import type { AirBubbleState, BrewingSlot, CartographyMode, ScrollPosition } from 'mcbeui';
@@ -174,6 +199,8 @@ import type { SettingsSection } from 'mcbeui';
 import { PlayerList, TouchControls, PauseMenu, DeathScreen, TradeOffer, TradingScreen, MountInventory } from 'mcbeui';
 import type { GamePlayer, TouchAction, TouchMovement, PauseMenuAction, TradeCost, TradeOfferData, TradeTier, MountEquipmentSlot, MountEquipmentKind } from 'mcbeui';
 import { BlockPreview, BannerPreview, bannerPatternIds, bannerDyeColors, loomPatternIds } from 'mcbeui';
+import { ItemGlint, shadeItemGlint, renderItemGlint } from 'mcbeui';
+import type { ItemGlintSampler, ItemGlintUniforms, ItemGlintBlend, ItemGlintRenderOptions, ItemGlintPassColor, ItemGlintProps } from 'mcbeui';
 import type { BlockKind, BannerDye, RendererColor, BannerPatternLayer, BannerPatternId, ItemMesh, ItemMeshFace, ItemCamera, ItemLighting, Vec3, Uv, PixelTexture } from 'mcbeui';
 import { PlayerInventoryScreen, CreativeInventory, ArmorSlot, RecipeSearch, RecipeCategoryTabs, InventoryToolbar } from 'mcbeui';
 import type { ArmorSlotKind, RecipeCategory, InventoryLayout } from 'mcbeui';
@@ -197,6 +224,12 @@ const vertex: Vec3 = [0,0,0], uv: Uv = [0,16];
 const face: ItemMeshFace = {vertices:[vertex,[16,0,0],[16,16,0],[0,16,0]],uv:[uv,[16,16],[16,0],[0,0]],texture:'all'};
 const mesh: ItemMesh = {faces:[face]}, camera: ItemCamera = {yaw:-30,pitch:20,padding:2}, lighting: ItemLighting = {top:1,left:.6,right:.8};
 const adapterTexture: PixelTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
+const glintUniforms: ItemGlintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25],tintColor:[1,1,1,1],hudOpacity:1};
+const glintSampler: ItemGlintSampler = 'point-repeat', glintBlend: ItemGlintBlend = {source:'source-alpha',destination:'one-minus-source-alpha'};
+const glintOptions: ItemGlintRenderOptions = {uniforms:glintUniforms,glintSampler,blend:glintBlend,width:1,height:1};
+const glintPass: ItemGlintPassColor | null = shadeItemGlint([.5,.5],1,adapterTexture,glintUniforms,glintSampler);
+const glintPixels: PixelTexture = renderItemGlint(adapterTexture,adapterTexture,glintOptions);
+const glintProps: ItemGlintProps = {imageSrc:'/caller-item.png',uniforms:glintUniforms,glintSampler,blend:glintBlend};
 const recipeCategories: RecipeCategory[] = [{id:'construction',label:'Construction'},{id:'search',label:'Search'}];
 export const demo = <>
   <Button {...props} ref={createRef<HTMLButtonElement>()}>Play</Button>
@@ -280,6 +313,8 @@ export const demo = <>
   <TradeOffer offer={tradeOffer} onSelect={(id,action)=>id+action} ref={createRef<HTMLButtonElement>()}/>
   <TradingScreen tiers={tradeTiers} inputs={[null,null]} slotValidity={[true,false,true]} detailButtons={[true,true,true]} runeAtlasUrl="/caller-owned-runes.png" onDetails={slot=>String(slot)} onOfferSelect={(id,action)=>id+action} onTrade={()=>{}} ref={createRef<HTMLElement>()}/>
   <MountInventory equipment={mountEquipment} chested storageColumns={3} onEquipmentAction={(index,action)=>String(index)+action} onStorageSelectionChange={index=>index.toFixed(0)} ref={createRef<HTMLElement>()}/>
+  <ItemGlint {...glintProps} onReady={()=>{}} onRenderError={error=>error.message} data-pass-alpha={glintPass?.[3]} data-pixel-width={glintPixels.width} ref={createRef<HTMLCanvasElement>()}/>
+  <ItemTooltip item={{name:'Consumer sword',nameColor:'#55ffff',durability:.5,lore:[<span>Sharpness I</span>]}} ref={createRef<HTMLDivElement>()}/>
   <BlockPreview block={'stone-stairs' satisfies BlockKind} model={mesh} camera={camera} lighting={lighting} onRenderError={error=>error.message} data-pixel-width={adapterTexture.width} ref={createRef<HTMLCanvasElement>()}/>
   <BannerPreview baseColor={bannerDyeColors.white} patterns={bannerLayers} fabricShading={false} ref={createRef<HTMLCanvasElement>()}/>
   <BannerPreview view="item" patterns={bannerPatternIds.slice(0,1).map((id): BannerPatternLayer=>({id,color:dye}))}/>

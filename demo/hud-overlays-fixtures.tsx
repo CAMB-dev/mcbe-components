@@ -6,19 +6,22 @@ function Sample({id,children,width=600}:{id:string;children:ReactNode;width?:num
   return <section className="calibration-case" style={{gridColumn:'1 / -1',minWidth:0}}><h2>{id}</h2><div className="calibration-stage" data-case={id} style={{background:'#28292a',width:'100%',overflow:'auto'}}><div style={{width,maxWidth:'100%',minHeight:60,position:'relative','--mc-font-size':'20px','--mc-font-size-lg':'40px','--mc-font-size-xl':'60px'} as CSSProperties}>{children}</div></div></section>;
 }
 const messages=[{id:'first',text:'First message'},{id:'second',text:'Second message'}];
+function ChatSpecimen({label,children}:{label:string;children:ReactNode}){
+  return <div role="region" aria-label={`${label} specimen scroll area`} tabIndex={0} style={{width:'100%',maxWidth:'100%',minWidth:0,overflowX:'auto'}}><div style={{width:420}}>{children}</div></div>;
+}
 function ChatInteractions(){
   const[attempt,setAttempt]=useState(''),[sent,setSent]=useState(''),[controlledSent,setControlledSent]=useState('');
   const[dynamic,setDynamic]=useState(Array.from({length:40},(_,index)=>({id:String(index),text:`Dynamic message ${index}`})));
-  return <section id="hud-overlays-interaction-fixture" aria-label="HUD overlay interaction fixtures" style={{display:'grid',gap:24,justifyItems:'start'}}>
-    <div style={{width:420,maxWidth:'100%'}}><ChatPanel label="Uncontrolled overlay chat" messages={messages} input defaultValue="  Hello Bedrock  " onSend={setSent}/></div>
+  return <section id="hud-overlays-interaction-fixture" aria-label="HUD overlay interaction fixtures" style={{display:'grid',gridTemplateColumns:'minmax(0,1fr)',minWidth:0,gap:24,justifyItems:'start'}}>
+    <ChatSpecimen label="Uncontrolled chat"><ChatPanel label="Uncontrolled overlay chat" messages={messages} input defaultValue="  Hello Bedrock  " onSend={setSent}/></ChatSpecimen>
     <output aria-label="Overlay chat sent">{sent}</output>
-    <div style={{width:420,maxWidth:'100%'}}><ChatPanel label="Controlled overlay chat" messages={messages} input value="Fixed draft" onValueChange={setAttempt} onSend={setControlledSent}/></div>
+    <ChatSpecimen label="Controlled chat"><ChatPanel label="Controlled overlay chat" messages={messages} input value="Fixed draft" onValueChange={setAttempt} onSend={setControlledSent}/></ChatSpecimen>
     <output aria-label="Overlay chat attempted draft">{attempt}</output><output aria-label="Controlled overlay chat sent">{controlledSent}</output>
-    <div style={{width:420,maxWidth:'100%'}}><ChatPanel label="Disabled overlay chat" messages={messages} input disabled defaultValue="Disabled draft" onSend={setSent}/></div>
-    <div style={{width:420,maxWidth:'100%'}}><ChatPanel label="Readonly overlay chat" messages={messages}/></div>
-    <div style={{width:420,maxWidth:'100%'}}><ChatPanel label="Unwired overlay chat" messages={messages} input defaultValue="Cannot send"/></div>
-    <div style={{width:420,maxWidth:'100%'}}><ChatPanel label="Bounded overlay chat" messages={Array.from({length:60},(_,index)=>({id:String(index),text:`Message ${index}`}))}/></div>
-    <div style={{width:420,maxWidth:'100%'}}><ChatPanel label="Dynamic overlay chat" messages={dynamic}/></div>
+    <ChatSpecimen label="Disabled chat"><ChatPanel label="Disabled overlay chat" messages={messages} input disabled defaultValue="Disabled draft" onSend={setSent}/></ChatSpecimen>
+    <ChatSpecimen label="Readonly chat"><ChatPanel label="Readonly overlay chat" messages={messages}/></ChatSpecimen>
+    <ChatSpecimen label="Unwired chat"><ChatPanel label="Unwired overlay chat" messages={messages} input defaultValue="Cannot send"/></ChatSpecimen>
+    <ChatSpecimen label="Bounded chat"><ChatPanel label="Bounded overlay chat" messages={Array.from({length:60},(_,index)=>({id:String(index),text:`Message ${index}`}))}/></ChatSpecimen>
+    <ChatSpecimen label="Dynamic chat"><ChatPanel label="Dynamic overlay chat" messages={dynamic}/></ChatSpecimen>
     <button type="button" onClick={()=>setDynamic(value=>[...value,{id:String(value.length),text:`Dynamic message ${value.length}`}])}>Add overlay message</button>
   </section>;
 }

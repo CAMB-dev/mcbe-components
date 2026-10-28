@@ -7,7 +7,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 109 个组件（含公共 ContainerFrame、InventoryToolbar 与两个材质渲染器），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；另有 3 个运行时数据导出。implemented 只代表导出，不代表像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 110 个组件（含公共 ContainerFrame、InventoryToolbar 与三个材质渲染器），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；另有 3 个数据和 2 个纯渲染函数导出。implemented 只代表导出，不代表像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -56,6 +56,10 @@
 - [x] 用1×1 Paint新画布复测原生PNG外围标记，排除旧大画布残留；保留客户区来源未确认的限制
 - [x] 附魔修正后的实际React 18 / 19包消费、完整构建 / 类型、112导出与生产预览再次通过；公开原生来源元数据与只读材质核验脚本
 - [x] 新增原生GUI4附魔参考，与GUI5独立核对相同符文的物理像素边缘；固定参数书本在新scale仍改善，附魔12/12及后续1/1通过，累计686唯一用例中681通过、5预期跳过；已恢复100%并暂停游戏
+- [x] 新增 ItemGlint，使用真实光效 PNG 与独立核对的 UIGlint SM4/SM5 公式；110组件 / 3数据 / 2函数共115值，显式控制参数且不冒充原生动画默认值
+- [x] 取得同物品两次hover与无提示底图，按配对证据修正 ItemTooltip 平色填充、紫边、阶梯轮廓及行距；加入鼠标跟随、焦点恢复，正文仅使用宿主名称/lore
+- [x] 独立原始指令验证544数值与96整图；Tooltip独立硬边候选完整6496像素零差，原生边缘/字体仍非零差；最终实际React18/19消费和生产预览通过
+- [x] 新增11个glint、14个双端Tooltip交互及1个独立轮廓用例；校准页局部滚动保留原规格，相关范围复验完成；累计712唯一用例中707通过、5预期跳过，0未解决失败（历史与最终相关批次合并）
 - [ ] 对照游戏渲染器完善附魔书本、符文、方块 / 旗帜 / 装备预览、物品 tooltip / glint、工作站完整页面
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
 

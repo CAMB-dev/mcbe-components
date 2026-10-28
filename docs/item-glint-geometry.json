@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "component": "ItemGlint",
+  "status": "Controlled renderer reconstruction; native host binding and temporal behavior unverified",
+  "release": "v1.26.60.5",
+  "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "assets": [
+    {
+      "file": "src/assets/glint/enchanted_item_glint.png",
+      "source": "resource_pack/textures/misc/enchanted_item_glint.png",
+      "sha256": "99cf0defcbe422c8b91a42886f469d89cfbaba157371d8142d01ba7e8055a631",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/misc/enchanted_item_glint.png",
+      "size": [
+        128,
+        128
+      ],
+      "bytes": 477,
+      "rgbaSha256": "2231bc3707de58d253a3c0a3e979ccbf9601709223270b3f8e677e7b4546955b",
+      "nativeMatch": "data/resource_packs/vanilla/__brarchive/textures/misc.brarchive:enchanted_item_glint.png"
+    }
+  ],
+  "license": {
+    "file": "src/assets/glint/LICENSE.md",
+    "source": "LICENSE.md",
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "shaderEvidence": {
+    "privateFile": "data/renderer/materials/UIGlint.material.bin",
+    "sha256": "9b638364630b58556cb2ea4aec6f0d0bb956de6b345e77aa102813bb8ca169e2",
+    "format": 26,
+    "name": "UI/Glint",
+    "verifiedBackends": [
+      "Direct3D_SM40",
+      "Direct3D_SM50"
+    ],
+    "method": "System D3DDisassemble, independent duplicate extraction; compiled material footer/end verified",
+    "distributed": false,
+    "publicShaderSourceAvailable": false,
+    "hostBlendSpecified": false,
+    "hostSamplerSpecified": false,
+    "clockUniformPresent": false
+  },
+  "uniforms": {
+    "required": [
+      "uvOffset[2]",
+      "uvScale[2]",
+      "uvRotation[2] radians",
+      "glintColor[3]"
+    ],
+    "sourceDefaultsUsed": {
+      "tintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "hudOpacity": 1
+    },
+    "animation": "None. Host explicitly controls both UV offsets; no time, purple tint or speed default."
+  },
+  "uv": "p=uv-.5; layer j = ([p.x*cos(angle[j])+p.y*sin(angle[j])+offset[j],-p.x*sin(angle[j])+p.y*cos(angle[j])]+.5)*scale.xy; sample at fract(layer)",
+  "fragment": "discard maskAlpha<=1/256; rgb=((sample1.rgb+sample2.rgb)*glintColor.rgb*tintColor.rgb)^2*tintColor.a*hudOpacity; a=maskAlpha*tintColor.a*hudOpacity",
+  "compositing": {
+    "required": [
+      "glintSampler",
+      "blend.source",
+      "blend.destination"
+    ],
+    "sourceFactors": [
+      "one",
+      "source-alpha",
+      "source-color"
+    ],
+    "destinationFactors": [
+      "one",
+      "one-minus-source-alpha"
+    ],
+    "baseSampling": "Nearest normalized pixel centers, original source RGBA as straight destination",
+    "numeric": "CPU floating point; clamp and round only after final explicit blend. No gamma conversion. Canvas storage may quantize partial alpha.",
+    "warning": "New compiled fragment already squares RGB. Do not assume old SourceColor+One blend applies; explicit SourceColor squares the pass again."
+  },
+  "boundaries": [
+    "No native default tint/phase/speed/UV rectangle recovered",
+    "No automatic enchanted flag integration",
+    "Installed matching source proves presence, not active pack stack",
+    "Original actor glint is a different image and is not bundled",
+    "CPU/GPU precision, source image UV space, color space and draw state remain reconstruction boundaries"
+  ]
+}

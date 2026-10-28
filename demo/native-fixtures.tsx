@@ -5,7 +5,7 @@ import { AirBar, ArmorBar, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBa
 
 function Sample({ id, children, wide = false }: { id: string; children: ReactNode; wide?: boolean }) {
   return <section className="calibration-case" style={wide ? { gridColumn: '1 / -1', minWidth: 0 } : undefined}>
-    <h2>{id}</h2><div className="calibration-stage" data-case={id} style={{ background: '#28292a' }}>{children}</div>
+    <h2>{id}</h2><div className="calibration-stage" role="region" aria-label={`${id} specimen scroll area`} tabIndex={0} data-case={id} style={{ background: '#28292a', maxWidth: '100%', minWidth: 0, overflowX: 'auto' }}>{children}</div>
   </section>;
 }
 

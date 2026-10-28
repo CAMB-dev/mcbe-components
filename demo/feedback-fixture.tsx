@@ -14,7 +14,7 @@ export function FeedbackFixture(){
       <Spinner data-feedback-case="animated" label="World loading" paused={paused}/>
       <Button onClick={()=>setPaused(p=>!p)}>{paused?'Resume source spinner':'Pause source spinner'}</Button>
       <Button loading data-feedback-case="loading-button">Loading source action</Button>
-      <div data-feedback-case="frames" style={{display:'flex',gap:8}}>{Array.from({length:10},(_,frame)=><Spinner key={frame} frame={frame} decorative data-native-frame={frame}/>)}</div>
+      <div role="region" aria-label="Source spinner frames scroll area" tabIndex={0} style={{width:'100%',maxWidth:'100%',minWidth:0,overflowX:'auto'}}><div data-feedback-case="frames" style={{display:'flex',gap:8,width:'max-content'}}>{Array.from({length:10},(_,frame)=><Spinner key={frame} frame={frame} decorative data-native-frame={frame}/>)}</div></div>
     </div>
     <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:16}}>
       <span id="feedback-original-description" hidden>Original description.</span>

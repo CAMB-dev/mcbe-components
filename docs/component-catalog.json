@@ -35,6 +35,11 @@
         "fidelity": "renderer_reconstruction_unverified"
       },
       {
+        "name": "ItemGlint",
+        "status": "implemented",
+        "fidelity": "explicit_uiglint_formula_reconstruction_unverified_native_draw_state"
+      },
+      {
         "name": "Panel",
         "status": "implemented"
       },

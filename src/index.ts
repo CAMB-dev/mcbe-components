@@ -52,5 +52,7 @@ export { TradingScreen, TradeOffer, MountInventory } from './trading-mounts';
 export type { TradingScreenProps, TradeOfferProps, MountInventoryProps, TradeCost, TradeOfferData, TradeTier, MountEquipmentSlot, MountEquipmentKind } from './trading-mounts';
 export { BlockPreview, BannerPreview, bannerPatternIds, bannerDyeColors, loomPatternIds } from './item-renderers';
 export type { BlockKind, BannerDye, RendererColor, BannerPatternLayer, BannerPatternId, BlockPreviewProps, BannerPreviewProps, ItemMesh, ItemMeshFace, ItemCamera, ItemLighting, Vec3, Uv, PixelTexture } from './item-renderers';
+export { ItemGlint, shadeItemGlint, renderItemGlint } from './item-glint';
+export type { ItemGlintSampler, ItemGlintUniforms, ItemGlintBlend, ItemGlintRenderOptions, ItemGlintPassColor, ItemGlintProps } from './item-glint';
 export { PlayerInventoryScreen, CreativeInventory, ArmorSlot, RecipeSearch, RecipeCategoryTabs, InventoryToolbar } from './inventory-screens';
 export type { PlayerInventoryScreenProps, CreativeInventoryProps, ArmorSlotProps, ArmorSlotKind, RecipeSearchProps, RecipeCategoryTabsProps, RecipeCategory, InventoryToolbarProps, InventoryLayout } from './inventory-screens';

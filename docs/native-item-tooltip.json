@@ -1,0 +1,907 @@
+{
+  "schemaVersion": 1,
+  "profile": "Classic inventory native item hover, measured diamond sword sample",
+  "installedVersion": "1.26.6005.0",
+  "reportedGuiScale": 5,
+  "coordinates": {
+    "basis": "Half-open rectangles in original 2568x1400 PNG pixels. These are not tool or client coordinates.",
+    "toolScreenshotOriginReported": [
+      -8,
+      -8
+    ],
+    "toolScreenshotSizeReported": [
+      2560,
+      1400
+    ],
+    "toolHoverAReported": [
+      1182,
+      1039
+    ],
+    "toolHoverBReportedOrPlanned": [
+      1205,
+      1063
+    ],
+    "toolDelta": [
+      23,
+      24
+    ],
+    "nativePngToClientMapping": "Not certified; the measured tooltip delta has one additional Y pixel. No native cursor-offset or rounding algorithm is inferred."
+  },
+  "privateCaptures": [
+    {
+      "id": "A",
+      "privateSource": ".cache/tooltip-source-audit/diamond-hover-a-e208daf0.png",
+      "sha256": "e208daf0c57fd85e462625cd567b5331968d0c99dc2f78eb0d34292cb163c409",
+      "size": [
+        2568,
+        1400
+      ],
+      "mode": "RGBA",
+      "observedState": "Diamond sword tooltip",
+      "captureMethod": "Parent reported native Alt+PrintScreen to Paint paste to PNG; no JPEG intermediate.",
+      "originalCapturePath": ".cache/tooltip-native/diamond-hover-a.png"
+    },
+    {
+      "id": "B",
+      "privateSource": ".cache/tooltip-source-audit/diamond-hover-b-15d3a238.png",
+      "sha256": "15d3a23817bd5b2da2c22aeebc2e058d9b5ca0b22931da7ab40ecfc259216581",
+      "size": [
+        2568,
+        1400
+      ],
+      "mode": "RGBA",
+      "observedState": "Diamond sword tooltip",
+      "captureMethod": "Parent reported native Alt+PrintScreen to Paint paste to PNG; no JPEG intermediate.",
+      "originalCapturePath": ".cache/tooltip-native/diamond-hover-b.png"
+    },
+    {
+      "id": "C",
+      "privateSource": ".cache/tooltip-source-audit/diamond-no-hover-c1e209c3.png",
+      "sha256": "c1e209c3d78ffc66b9df82aa3b380980631725e25d15fc69d57a0a7ece02a68d",
+      "size": [
+        2568,
+        1400
+      ],
+      "mode": "RGBA",
+      "observedState": "No tooltip; underlying UI visible",
+      "captureMethod": "Parent reported native Alt+PrintScreen to Paint paste to PNG; no JPEG intermediate.",
+      "originalCapturePath": ".cache/tooltip-native/diamond-no-hover.png"
+    }
+  ],
+  "resourceAudit": {
+    "nativeMainUiJsonFilesScanned": 183,
+    "onlyExplicitHoverRenderer": {
+      "file": "ui_common.json",
+      "path": "/hover_text",
+      "definition": {
+        "$hover_text_max_width|default": 0,
+        "type": "custom",
+        "renderer": "hover_text_renderer",
+        "hover_text_max_width": "$hover_text_max_width",
+        "layer": 5,
+        "allow_clipping": false
+      }
+    },
+    "nativeAndPublicUiParsedEqual": [
+      {
+        "file": "_global_variables.json",
+        "nativeSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+        "publicSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "publicParsedEqual": true
+      },
+      {
+        "file": "hud_screen.json",
+        "nativeSha256": "d57480f488265329f3feed0cff03841aeb0359b4fe7d7351abf52db255f2a75b",
+        "publicSha256": "fd40b53e5e67f4f6b3799f25821628f80b6aa69c441b012340b8e0f6cb801a8c",
+        "publicParsedEqual": true
+      },
+      {
+        "file": "inventory_screen.json",
+        "nativeSha256": "8c3a6a756bc47500d237ebceea389d1f08d9e0dcdb02ab806ab3a03a51a22a6b",
+        "publicSha256": "10e72254bac2a95801b61cb229ad43ab793ec585a52aee7e27791e79ab6d9f80",
+        "publicParsedEqual": true
+      },
+      {
+        "file": "ui_common.json",
+        "nativeSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+        "publicSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "publicParsedEqual": true
+      },
+      {
+        "file": "ui_common_classic.json",
+        "nativeSha256": "016e8c255ea0230a8566bfcc413972d57691cedf7827303a9e8cfb85794a7907",
+        "publicSha256": "d65eb51c5264b7b9eb8611bfe250736bc48eed8207682b6c26f3ede224277783",
+        "publicParsedEqual": true
+      }
+    ],
+    "genericTooltipPng": {
+      "path": "resource_pack/textures/ui/tooltip_default_background.png",
+      "sha256": "7c71b806e3e6ff807f04668a26f3aff6d8a67d0e72db60ea2083d37ac8a31dfa",
+      "size": [
+        9,
+        9
+      ],
+      "nineslice": 4,
+      "identity": "Separate gray/black static/dynamic Tooltip skin; not the item hover frame."
+    },
+    "officialItemSchemas": [
+      {
+        "source": "metadata/json_schemas/server/item/1.20.50/minecraft_hover_text_color.json",
+        "sha256": "f7e1e1eb152fa4b326f99ca52d43481e0670ebb261f7eed3a702cb1b8ce1e100",
+        "schema": {
+          "$id": "/server/item/1.20.50/minecraft_hover_text_color.json",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "description": "The hover_text_color component specifies the color of the item name when the players hovers the cursor over the item.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "properties": {
+                "value": {
+                  "default": "",
+                  "description": "Specifies the color of the item's hover text.",
+                  "type": "string",
+                  "x-ordinal-index": 0
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "title": "minecraft:hover_text_color",
+          "x-format-version": "1.20.50"
+        }
+      },
+      {
+        "source": "metadata/json_schemas/server/item/1.26.30/minecraft_rarity.json",
+        "sha256": "51e2549403ae325b72e84ca902eb85fb5e7980423e8abf52ccdc1ad37ff4d598",
+        "schema": {
+          "$id": "/server/item/1.26.30/minecraft_rarity.json",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "description": "Specifies the base rarity and subsequently color of the item name when the player hovers the cursor over the item.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "properties": {
+                "value": {
+                  "default": "",
+                  "description": "Sets the base rarity of the item. The rarity of an item automatically increases when enchanted, either to Rare when the base rarity is Common or Uncommon, or Epic when the base rarity is Rare.",
+                  "type": "string",
+                  "x-ordinal-index": 0
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "title": "minecraft:rarity",
+          "x-format-version": "1.26.30"
+        }
+      }
+    ],
+    "itemRendererStyleParameters": "The custom renderer definition does not expose background RGBA, gradient, padding, font, shadow or offset. This document measures raster behavior instead of inventing JSON values."
+  },
+  "stableUnderlayRegistration": {
+    "rectPng": [
+      1350,
+      750,
+      1600,
+      950
+    ],
+    "pixels": 50000,
+    "differentPixelsVersusC": {
+      "A": 0,
+      "B": 0
+    },
+    "scope": "Stable inventory UI only. Dynamic world and animated item/book areas are excluded from exact underlay claims."
+  },
+  "pairedColorMeasurements": {
+    "probes": {
+      "fill": {
+        "rectsPng": [
+          [
+            1260,
+            987,
+            1510,
+            992
+          ],
+          [
+            1260,
+            1002,
+            1518,
+            1012
+          ],
+          [
+            1260,
+            1052,
+            1518,
+            1062
+          ],
+          [
+            1260,
+            1102,
+            1518,
+            1107
+          ]
+        ],
+        "groups": [
+          {
+            "underlayRgb": [
+              198,
+              198,
+              198
+            ],
+            "outputs": [
+              {
+                "rgb": [
+                  27,
+                  12,
+                  27
+                ],
+                "pixels": 1250
+              }
+            ]
+          },
+          {
+            "underlayRgb": [
+              139,
+              139,
+              139
+            ],
+            "outputs": [
+              {
+                "rgb": [
+                  27,
+                  12,
+                  27
+                ],
+                "pixels": 4580
+              }
+            ]
+          },
+          {
+            "underlayRgb": [
+              255,
+              255,
+              255
+            ],
+            "outputs": [
+              {
+                "rgb": [
+                  27,
+                  12,
+                  27
+                ],
+                "pixels": 240
+              }
+            ]
+          },
+          {
+            "underlayRgb": [
+              55,
+              55,
+              55
+            ],
+            "outputs": [
+              {
+                "rgb": [
+                  27,
+                  12,
+                  27
+                ],
+                "pixels": 180
+              }
+            ]
+          }
+        ]
+      },
+      "purple": {
+        "rectsPng": [
+          [
+            1260,
+            992,
+            1510,
+            997
+          ],
+          [
+            1524,
+            1007,
+            1528,
+            1107
+          ]
+        ],
+        "groups": [
+          {
+            "underlayRgb": [
+              198,
+              198,
+              198
+            ],
+            "outputs": [
+              {
+                "rgb": [
+                  44,
+                  8,
+                  99
+                ],
+                "pixels": 1290
+              }
+            ]
+          },
+          {
+            "underlayRgb": [
+              139,
+              139,
+              139
+            ],
+            "outputs": [
+              {
+                "rgb": [
+                  44,
+                  8,
+                  99
+                ],
+                "pixels": 300
+              }
+            ]
+          },
+          {
+            "underlayRgb": [
+              255,
+              255,
+              255
+            ],
+            "outputs": [
+              {
+                "rgb": [
+                  44,
+                  8,
+                  99
+                ],
+                "pixels": 20
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "cssCandidates": {
+      "fill": "#1b0c1b",
+      "purpleBorder": "#2c0863",
+      "opacity": 1,
+      "borderGradient": "none"
+    },
+    "meaning": "Opaque flat CSS candidates reproduce the observed fully covered pixels over all sampled stable UI colors. This is effective raster opacity, not proof of internal native shader RGBA. A uniform fixed foreground with alpha240/255 cannot stay constant over55..255 underlays. Tiny near-opaque alpha and shader quantization cannot be uniquely recovered here."
+  },
+  "frame": {
+    "aConstantFillOrPurpleBoundsPng": [
+      1244,
+      987,
+      1533,
+      1127
+    ],
+    "bConstantFillOrPurpleBoundsPng": [
+      1267,
+      1012,
+      1556,
+      1152
+    ],
+    "aApproximatePaintedBoundsPng": [
+      1243,
+      987,
+      1534,
+      1127
+    ],
+    "paintedBoundsStatus": "Provisional all-painted AA extent; constant-color bounds are exact. Partial corner/edge coverage must remain separately measured.",
+    "observedGameUnitCandidate": {
+      "nominalOriginA": [
+        1243,
+        987
+      ],
+      "canvasGame": [
+        58,
+        28
+      ],
+      "physicalPixelsPerGame": 5,
+      "outerRowSpans": [
+        {
+          "yGame": [
+            0,
+            1
+          ],
+          "xGame": [
+            2,
+            55
+          ]
+        },
+        {
+          "yGame": [
+            1,
+            2
+          ],
+          "xGame": [
+            1,
+            56
+          ]
+        },
+        {
+          "yGame": [
+            2,
+            3
+          ],
+          "xGame": [
+            0,
+            57
+          ]
+        },
+        {
+          "yGame": [
+            3,
+            25
+          ],
+          "xGame": [
+            0,
+            58
+          ]
+        },
+        {
+          "yGame": [
+            25,
+            26
+          ],
+          "xGame": [
+            1,
+            58
+          ]
+        },
+        {
+          "yGame": [
+            26,
+            27
+          ],
+          "xGame": [
+            2,
+            57
+          ]
+        },
+        {
+          "yGame": [
+            27,
+            28
+          ],
+          "xGame": [
+            3,
+            56
+          ]
+        }
+      ],
+      "outerStepPolygonGame": [
+        [
+          2,
+          0
+        ],
+        [
+          55,
+          0
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          56,
+          1
+        ],
+        [
+          56,
+          2
+        ],
+        [
+          57,
+          2
+        ],
+        [
+          57,
+          3
+        ],
+        [
+          58,
+          3
+        ],
+        [
+          58,
+          26
+        ],
+        [
+          57,
+          26
+        ],
+        [
+          57,
+          27
+        ],
+        [
+          56,
+          27
+        ],
+        [
+          56,
+          28
+        ],
+        [
+          3,
+          28
+        ],
+        [
+          3,
+          27
+        ],
+        [
+          2,
+          27
+        ],
+        [
+          2,
+          26
+        ],
+        [
+          1,
+          26
+        ],
+        [
+          1,
+          25
+        ],
+        [
+          0,
+          25
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "status": "Observed A/B shape candidate, independently reproduced by the QA agent. Not a recovered native procedural algorithm, radius or drop-shadow specification. This sample is not symmetric radius2.",
+      "independentConfirmation": "Independent QA derived the same core masks, row spans and nominal58x28 shape from raw PNGs; ignored report .cache/tooltip-native/independent/tooltip-independent-audit.json.",
+      "purpleCenterSampleRows": [
+        {
+          "yGame": [
+            0,
+            1
+          ],
+          "xIntervals": []
+        },
+        {
+          "yGame": [
+            1,
+            2
+          ],
+          "xIntervals": [
+            [
+              2,
+              55
+            ]
+          ]
+        },
+        {
+          "yGame": [
+            2,
+            3
+          ],
+          "xIntervals": [
+            [
+              1,
+              2
+            ],
+            [
+              54,
+              56
+            ]
+          ]
+        },
+        {
+          "yGame": [
+            3,
+            4
+          ],
+          "xIntervals": [
+            [
+              1,
+              2
+            ],
+            [
+              55,
+              57
+            ]
+          ]
+        },
+        {
+          "yGame": [
+            4,
+            24
+          ],
+          "xIntervals": [
+            [
+              1,
+              2
+            ],
+            [
+              56,
+              57
+            ]
+          ]
+        },
+        {
+          "yGame": [
+            24,
+            25
+          ],
+          "xIntervals": [
+            [
+              1,
+              3
+            ],
+            [
+              56,
+              57
+            ]
+          ]
+        },
+        {
+          "yGame": [
+            25,
+            26
+          ],
+          "xIntervals": [
+            [
+              2,
+              4
+            ],
+            [
+              56,
+              57
+            ]
+          ]
+        },
+        {
+          "yGame": [
+            26,
+            27
+          ],
+          "xIntervals": [
+            [
+              3,
+              56
+            ]
+          ]
+        },
+        {
+          "yGame": [
+            27,
+            28
+          ],
+          "xIntervals": []
+        }
+      ],
+      "purpleSamplingMethod": "A block centers sampled at x1246+5*logicalX,y989+5*logicalY; purple color class B-R>40,G<25. This is an observed shape descriptor, not an all-pixel RGBA oracle or proof of the source stroke algorithm."
+    },
+    "flatPurpleProbes": {
+      "topPurpleProbe": {
+        "rect": [
+          1260,
+          994,
+          1510,
+          995
+        ],
+        "colors": [
+          {
+            "rgb": [
+              44,
+              8,
+              99
+            ],
+            "count": 250
+          }
+        ]
+      },
+      "bottomPurpleProbe": {
+        "rect": [
+          1260,
+          1119,
+          1510,
+          1120
+        ],
+        "colors": [
+          {
+            "rgb": [
+              44,
+              8,
+              99
+            ],
+            "count": 250
+          }
+        ]
+      },
+      "rightPurpleProbe": {
+        "rect": [
+          1525,
+          1002,
+          1526,
+          1117
+        ],
+        "colors": [
+          {
+            "rgb": [
+              44,
+              8,
+              99
+            ],
+            "count": 115
+          }
+        ]
+      }
+    },
+    "gradientFinding": "Top250px, bottom250px and stable right115px each are exactlyRGB(44,8,99); no vertical border gradient is observed in this state.",
+    "nativeCornerAntialiasing": "Partial edge columns remain. A hard CSS clip-path is a geometry candidate and has not been certified as an exact AA reproduction."
+  },
+  "text": {
+    "content": [
+      "钻石剑",
+      "+7 攻击伤害"
+    ],
+    "nameInkRectPng": [
+      1268,
+      1012,
+      1394,
+      1052
+    ],
+    "nameFullWhiteRectPng": [
+      1269,
+      1012,
+      1393,
+      1052
+    ],
+    "nameFullWhiteRgb": [
+      255,
+      255,
+      255
+    ],
+    "attackInkRectPng": [
+      1270,
+      1062,
+      1504,
+      1102
+    ],
+    "attackFullBlueRectPng": [
+      1272,
+      1062,
+      1503,
+      1102
+    ],
+    "attackFullBlueRgb": [
+      68,
+      127,
+      255
+    ],
+    "nameFullWhitePixels": 1020,
+    "attackFullBluePixels": 1675,
+    "inkHeightPhysical": 40,
+    "inkHeightGame": 8,
+    "lineInkTopAdvancePhysical": 50,
+    "lineInkTopAdvanceGame": 10,
+    "cssGui2LineHeightCandidate": 20,
+    "nameMarginBottomCandidate": 0,
+    "lineHeightStatus": "Measured top-of-ink advance for these two lines. A20px line-height and zero additional name margin preserve that advance only when both chosen glyph profiles have the corresponding baseline metrics.",
+    "observedOuterToInkOffsetGame": [
+      5,
+      5
+    ],
+    "paddingStatus": "Not an independently measured CSS padding: outer border, glyph bearings, linebox ascent and edge sampling all contribute. Do not report5game as source padding.",
+    "shadow": {
+      "standardOneGameGrayShadowObserved": false,
+      "probeOffsetPhysical": [
+        5,
+        5
+      ],
+      "translatedWhiteMaskPixelsOnUnchangedFill": 818,
+      "gray63PlateauFound": false,
+      "candidate": "text-shadow:none for this calibrated state",
+      "limits": "Only absence of a visible standard+1game gray shadow is supported. Partial text coverage is not uniform hard pixels; these captures do not prove every native text shading or font-rendering parameter."
+    },
+    "font": {
+      "fontType": "Unknown",
+      "fontSize": "Not certified independently of metrics",
+      "nativeResources": "font_metadata declares OldSmoothFont MSDF and Unicode fallbacks. Extracted Unicode glyph pages52/77/94 were considered but a simple2.5x bilinear bitmap hypothesis did not match the screenshot; do not certify those glyphs or the open Fusion fallback.",
+      "limits": "No native font/texture is distributed by these metadata documents."
+    }
+  },
+  "abTranslation": {
+    "measuredPngDelta": [
+      23,
+      25
+    ],
+    "exactPrimaryMaskComparisons": [
+      {
+        "rgb": [
+          27,
+          12,
+          27
+        ],
+        "aPixels": 30956,
+        "bPixels": 30956,
+        "translatedMaskSymmetricDifferencePixels": 0
+      },
+      {
+        "rgb": [
+          44,
+          8,
+          99
+        ],
+        "aPixels": 3414,
+        "bPixels": 3414,
+        "translatedMaskSymmetricDifferencePixels": 0
+      },
+      {
+        "rgb": [
+          255,
+          255,
+          255
+        ],
+        "aPixels": 1020,
+        "bPixels": 1020,
+        "translatedMaskSymmetricDifferencePixels": 0
+      },
+      {
+        "rgb": [
+          68,
+          127,
+          255
+        ],
+        "aPixels": 1675,
+        "bPixels": 1675,
+        "translatedMaskSymmetricDifferencePixels": 0
+      }
+    ],
+    "interiorRectA": [
+      1260,
+      1007,
+      1518,
+      1107
+    ],
+    "interiorPixels": 25800,
+    "strictDifferingPixels": 1112,
+    "maximumDifferingChannelDelta": 1,
+    "interpretation": "Exact primary ink/fill/edge masks translate rigidly.1112 partial-coverage pixels differ by at most1channel value. This is not whole-interior RGBA0 and no tolerance was used to erase that finding.",
+    "fullCandidateRectA": [
+      1243,
+      987,
+      1534,
+      1127
+    ],
+    "fullCandidatePixels": 40740,
+    "fullCandidateStrictDifferingPixels": 2087,
+    "fullCandidateMaximumChannelDelta": 229
+  },
+  "implementationGuidance": [
+    "Keep generic feedback.Tooltip and item hover as separate visual profiles.",
+    "Use flat effective opaque colors for the measured item profile; do not copy Java tooltip gradient/alpha constants.",
+    "Treat the step polygon as an observed-corner candidate. Recheck fractional corner coverage in browser rather than calling it certified pixel equality.",
+    "Use measured10game line advance as a target. Resolve font and glyph bearing before claiming exact padding or natural width.",
+    "Keep pointer/client mapping and Web cursor/focus fallback explicitly separate from unverified native positioning algorithms.",
+    "Tooltip content, rarity, item name colors and optional detailed lines come from the host. An automatic Durability percentage line is not defined by hover_text_renderer JSON."
+  ],
+  "verificationBoundary": "A/B/C support these named source bindings, stable UI composites, local outline and text observations. They do not establish complete native whole-screen equality, every item tooltip mode, rarity palette, advanced information layout, font identity, cursor offset, clipping algorithm or internal shader state."
+}

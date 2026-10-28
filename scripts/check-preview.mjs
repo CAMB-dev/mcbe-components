@@ -37,6 +37,27 @@ try {
   await page.locator('#feedback').screenshot({ path: '.cache/preview/progress.png' });
   await page.mouse.move(0, 0);
   await page.locator('#inventory-states').screenshot({ path: '.cache/preview/itemslot-rebuilt.png' });
+  await page.locator('#inventory-states .slot-state-examples').getByRole('button', { name: /^Enchanted diamond sword/ }).hover();
+  const itemTooltip = page.locator('.mc-item-tooltip');
+  await itemTooltip.waitFor({ state: 'visible' });
+  assert.equal(await itemTooltip.evaluate(node => getComputedStyle(node).boxSizing), 'border-box');
+  assert.equal(await itemTooltip.innerText(), 'Enchanted diamond sword\nSharpness IV\nUnbreaking III');
+  await itemTooltip.screenshot({ path: '.cache/preview/item-tooltip.png' });
+  await page.mouse.move(0, 0);
+  const glintExample = page.locator('#item-glint');
+  const glintCanvases = glintExample.locator('canvas[data-renderer="item-glint"]');
+  assert.equal(await glintCanvases.count(), 3);
+  assert.deepEqual(await glintCanvases.evaluateAll(nodes => nodes.map(node => node.getAttribute('data-render-state'))), ['ready', 'ready', 'ready']);
+  await glintExample.screenshot({ path: '.cache/preview/item-glint.png' });
+  const initialGlint = await glintCanvases.first().evaluate(node => node.toDataURL());
+  const glintPhase = glintExample.getByRole('slider', { name: 'Glint first-layer UV offset' });
+  await glintPhase.focus();
+  await glintPhase.press('ArrowRight');
+  await page.waitForFunction(previous => {
+    const canvas = document.querySelector('#item-glint canvas[data-renderer="item-glint"]');
+    return canvas?.getAttribute('data-render-state') === 'ready' && canvas.toDataURL() !== previous;
+  }, initialGlint);
+  await glintExample.screenshot({ path: '.cache/preview/item-glint-controlled-phase.png' });
   await page.locator('#workstations').screenshot({ path: '.cache/preview/workstations.png' });
   await page.setViewportSize({ width: 1440, height: 2000 });
   await page.locator('#processing').screenshot({ path: '.cache/preview/processing.png' });
@@ -62,7 +83,7 @@ try {
   await page.screenshot({ path: '.cache/preview/mobile-inputs.png' });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   assert.deepEqual(failures, []);
-  const result = { status: 'PASS', target: 'production site/', errors: failures, font: await page.locator('.font-note').innerText() };
+  const result = { status: 'PASS', target: 'production site/', errors: failures, font: await page.locator('.font-note').innerText(), itemGlint: { ready: 3, controlledPhaseChanged: true }, itemTooltip: { suppliedLoreOnly: true } };
   await writeFile('.cache/preview/result.json', JSON.stringify(result, null, 2));
   console.log(result);
 } finally { await browser.close(); }

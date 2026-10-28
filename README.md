@@ -78,7 +78,8 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `Alert` | `title`；`variant`: info / success / warning / danger | danger 使用 role=alert，其余 role=status；可覆盖 role |
 | `Separator` | 原生 hr 属性 | 双层硬边分割线 |
 | `ItemSlot` | `item`、`label`、`image`、`count`、`selected`、`durability`、`placeholder`、`underlay`、`showTooltip`、`onSecondaryAction`；原生 button 属性 | 真实 container cell，36×36 槽位 / 32×32 物品；蓝色选中、绿色悬停、白色键盘焦点；0 为空、1 隐藏角标；underlay 在物品下方常驻，placeholder 仅空槽显示 |
-| `ItemTooltip` | **必填** `item`；div 属性 | 名称、lore、耐久说明；ItemSlot 自动处理焦点 / hover / Escape，并在 Dialog 内挂载提示 |
+| `ItemTooltip` | **必填** `item`；div 属性 | 名称、显式 lore；耐久说明由调用方放入 lore。ItemSlot 处理鼠标跟随、键盘焦点 / Escape，并在 Dialog 内挂载提示 |
+| `ItemGlint` | **必填** `imageSrc`、`uniforms`、`glintSampler`、`blend`；可选尺寸、纹理、label 与回调 | 真实附魔光效纹理与源着色公式；受控 canvas，无内置时钟或自动附魔绑定 |
 | `InventoryGrid` | **必填** `label`、`items`；`size`、`columns`、`selectedIndex` / `defaultSelectedIndex`、`onSelectionChange`、`onSlotAction` | 单一 Tab 入口，方向键 / Home / End / Ctrl+Home/End，跳过禁用项；primary / secondary 操作事件 |
 | `ItemImage` | `src`、`alt`、`imageProps`、children；span 属性 | 独立 32×32 物品区域，最近邻渲染；缺图不生成替代图案 |
 | `ItemCount` | `count`、`hideSingle`；span 属性 | 共享槽位数量角标；默认隐藏 0 / 1，拒绝非有限数量 |
@@ -249,7 +250,19 @@ const sword: InventoryItem = {
 
 ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随 npm 分发。BlockPreview / BannerPreview 另附官方方块 / 旗帜原始材质，记录见 [item-renderers-geometry.json](docs/item-renderers-geometry.json)。展示页已使用实际 PNG，来源与 SHA 见 [item-materials.json](docs/item-materials.json)：物品清单中的 26 张 PNG 均取自官方 `v1.26.60.5 full` 合并资源，并记录本机 59 个 vanilla / 版本覆盖目录中的候选。钻石剑采用与公开合并资源一致的 198-byte PNG；此前 22 像素差异来自基础包与合并资源，不能据此认定运行时最终材质。资源存在与 manifest 不证明当前激活顺序。草方块使用官方 GUI 类目图标，保留 17×17 原图的整数缩放，不冒充 native block renderer。`durability` 为剩余比例 0…1；组件显示角标、耐久和提示，并发出操作事件，不自行计算配方、附魔或搬移物品。右键 / Shift+F10 为 secondary，Enter / Space / 点击为 primary。原生 `onContextMenu` 可阻止默认 secondary 处理。
 
-槽位依据 common.container_item 重做，cell_image 的 PNG 为 10×10、逻辑 base_size 为 5×5，因此源切片为 2px、GUI 2 的显示边宽仍为 2px。普通 / 悬停 / 选中 / 聚焦已有独立原图对照。ItemTooltip、数量基线、耐久色相和 disabled filter 仍需游戏 renderer 截图校准。已移除伪紫色 glint；`enchanted` 仅保留数据标记，缺图时也不会自绘替代物。
+槽位依据 common.container_item 重做，cell_image 的 PNG 为 10×10、逻辑 base_size 为 5×5，因此源切片为 2px、GUI 2 的显示边宽仍为 2px。普通 / 悬停 / 选中 / 聚焦已有独立原图对照。ItemTooltip 依据原生配对截图修正，中文字体与部分覆盖边缘仍非零差；数量基线、耐久色相和 disabled filter 也需继续校准。`enchanted` 仅保留数据标记，缺图时不会自绘替代物。
+
+`ItemGlint` 可单独使用，也可作为 ItemSlot 的 children。它带有真实 glint PNG，参数由调用方控制；下面是 Web 示例值，未认证为游戏运行时默认值：
+
+```tsx
+<ItemGlint imageSrc="/items/diamond_sword.png"
+  uniforms={{ uvOffset: [.125, -.2], uvScale: [1.5, .75],
+    uvRotation: [.35, -.6], glintColor: [.3, .1, .5] }}
+  glintSampler="bilinear-repeat"
+  blend={{ source: 'one', destination: 'one' }} />
+```
+
+`shadeItemGlint` 输出未量化的原始 pass，`renderItemGlint` 按显式混合模式生成像素数据。原生时间、采样和混合绑定尚未提取，不会自动给 `enchanted` 物品添加动画；公式与 Canvas 透明存储边界见 [ITEM_GLINT_QA.md](docs/ITEM_GLINT_QA.md)。
 
 砂轮布局来自 grindstone_screen.json，附魔台来自 enchanting_screen.json；逐级锚点与百分比推导见 [workstation-geometry.json](docs/workstation-geometry.json)。附魔选项保留源浮点边界，不人为取整。砂轮空结果槽保留 hover / focus，通过 `aria-disabled` 与回调 guard 阻止无效领取。真实关闭按钮支持容器内部的原始键盘导航。
 
@@ -264,7 +277,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **109 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 109 项（含 BlockPreview / BannerPreview / InventoryToolbar），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 3 份 renderer 数据 helpers，不计组件数量；ESM 值导出共 112 项。
+当前 **110 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 110 项（含 BlockPreview / BannerPreview / ItemGlint / InventoryToolbar），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 3 份 renderer 数据及 `shadeItemGlint` / `renderItemGlint` 两个纯渲染函数，不计组件数量；ESM 值导出共 115 项。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类、燃料、处理箭头、附魔选项、交易条目。
@@ -456,7 +469,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、109 个组件与 3 份数据导出、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、110 个组件、3 份数据和 2 个渲染函数、类型、CSS、皮肤、字体及许可路径。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

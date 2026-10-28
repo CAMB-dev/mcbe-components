@@ -9,7 +9,7 @@ export function HudInteractionFixture() {
   const [selection, setSelection] = useState(-1);
   const [action, setAction] = useState('');
   const [outsideKeys, setOutsideKeys] = useState(0);
-  return <section id="hud-interaction-fixture" aria-label="HUD interaction fixtures" style={{ display: 'grid', gap: 16, justifyItems: 'start', minWidth: 0 }}>
+  return <section id="hud-interaction-fixture" aria-label="HUD interaction fixtures" tabIndex={0} style={{ display: 'grid', gap: 16, justifyItems: 'start', minWidth: 0, maxWidth: '100%', overflowX: 'auto' }}>
     <h2>HUD interaction fixtures</h2>
     <Hotbar label="Uncontrolled hotbar" items={items} defaultSelectedIndex={2}
       onSelectionChange={setSelection} onSlotAction={(index, type) => setAction(`${index}:${type}`)}/>

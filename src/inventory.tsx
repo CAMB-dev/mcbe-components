@@ -74,11 +74,9 @@ export interface InventoryItem {
 }
 export interface ItemTooltipProps extends HTMLAttributes<HTMLDivElement> { item: InventoryItem }
 export const ItemTooltip = forwardRef<HTMLDivElement, ItemTooltipProps>(function ItemTooltip({ item, className, ...props }, ref) {
-  const durability=remainingDurability(item.durability);
   return <div role="tooltip" {...props} ref={ref} className={['mc-item-tooltip', className].filter(Boolean).join(' ')}>
     <div className="mc-item-tooltip__name" style={{ color: item.nameColor }}>{item.name}</div>
     {item.lore?.map((line, index) => <div className="mc-item-tooltip__lore" key={index}>{line}</div>)}
-    {durability !== undefined && <div className="mc-item-tooltip__lore">Durability: {Math.round(durability * 100)}%</div>}
   </div>;
 });
 
@@ -99,10 +97,11 @@ export interface ItemSlotProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const ItemSlot = forwardRef<HTMLButtonElement, ItemSlotProps>(function ItemSlot({
   label, item, image, count: givenCount, selected = false, durability: givenDurability, placeholder, underlay,
   showTooltip = true, onSecondaryAction, children, className, type = 'button', disabled,
-  onMouseEnter, onMouseLeave, onFocus, onBlur, onKeyDown, onContextMenu, ...props
+  onMouseEnter, onMouseMove, onMouseLeave, onFocus, onBlur, onKeyDown, onContextMenu, ...props
 }, forwardedRef) {
   const id = useId(); const node = useRef<HTMLButtonElement | null>(null);
   const tooltipNode = useRef<HTMLDivElement | null>(null);
+  const pointer = useRef<{ x: number; y: number } | null>(null);
   const [hovered, setHovered] = useState(false), [focused, setFocused] = useState(false), [dismissed, setDismissed] = useState(false);
   const [position, setPosition] = useState({ left: 8, top: 8 });
   const count = givenCount ?? item?.count;
@@ -117,7 +116,9 @@ export const ItemSlot = forwardRef<HTMLButtonElement, ItemSlotProps>(function It
   const locate = () => {
     const bounds = node.current?.getBoundingClientRect();
     const size=tooltipNode.current?.getBoundingClientRect();
-    if (bounds) setPosition({ left: Math.max(8, Math.min(bounds.right + 8, window.innerWidth - (size?.width ?? 260) - 8)), top: Math.max(8, Math.min(bounds.top, window.innerHeight - (size?.height ?? 152) - 8)) });
+    // Cursor-relative Web profile. Native captures prove tracking, but the
+    // physical-pixel/client mapping does not certify these CSS offsets.
+    if (bounds) setPosition({ left: Math.max(8, Math.min(pointer.current ? pointer.current.x + 24 : bounds.right + 8, window.innerWidth - (size?.width ?? 260) - 8)), top: Math.max(8, Math.min(pointer.current ? pointer.current.y - 24 : bounds.top, window.innerHeight - (size?.height ?? 152) - 8)) });
   };
   useEffect(()=>{
     if(!tooltip) return;
@@ -129,9 +130,10 @@ export const ItemSlot = forwardRef<HTMLButtonElement, ItemSlotProps>(function It
       type={type} disabled={disabled || item?.disabled} aria-label={props['aria-label'] ?? [name, occupied && amount !== undefined && amount > 1 && amount, occupied && durability !== undefined && `${Math.round(durability * 100)}% durability`].filter(Boolean).join(', ')}
       aria-pressed={selected} aria-describedby={[props['aria-describedby'], tooltip && `${id}-tooltip`].filter(Boolean).join(' ') || undefined}
       data-empty={!occupied || undefined} data-missing-material={occupied && !source && !content || undefined} data-enchanted={occupied && item?.enchanted || undefined} className={['mc-slot', selected && 'mc-slot--selected', className].filter(Boolean).join(' ')}
-      onMouseEnter={event => { onMouseEnter?.(event); locate(); setHovered(true); setDismissed(false); }}
-      onMouseLeave={event => { onMouseLeave?.(event); setHovered(false); }}
-      onFocus={event => { onFocus?.(event); locate(); setFocused(true); setDismissed(false); }}
+      onMouseEnter={event => { onMouseEnter?.(event); pointer.current = { x: event.clientX, y: event.clientY }; locate(); setHovered(true); setDismissed(false); }}
+      onMouseMove={event => { onMouseMove?.(event); pointer.current = { x: event.clientX, y: event.clientY }; locate(); }}
+      onMouseLeave={event => { onMouseLeave?.(event); pointer.current = null; setHovered(false); locate(); }}
+      onFocus={event => { onFocus?.(event); pointer.current = null; locate(); setFocused(true); setDismissed(false); }}
       onBlur={event => { onBlur?.(event); setFocused(false); }}
       onKeyDown={event => { onKeyDown?.(event); if (event.defaultPrevented) return;
         if (event.key === 'Escape' && tooltip) { setDismissed(true); event.preventDefault(); event.stopPropagation(); }

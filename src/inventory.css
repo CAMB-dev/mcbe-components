@@ -19,8 +19,20 @@
 .mc-result-slot--large { width: 52px; height: 52px; }
 .mc-result-slot--large .mc-slot__count { inset-inline-end: 8px; bottom: 6px; }
 .mc-result-slot--large .mc-slot__durability { left: 14px; top: 35px; }
-.mc-item-tooltip { position: fixed; z-index: 1000; width: max-content; max-width: min(260px, calc(100vw - 16px)); padding: 6px 8px; background: #100010f0; border: 2px solid #28005b; outline: 2px solid #100010; color: #ffffff; font: 400 var(--mc-font-size)/var(--mc-line-height) var(--mc-font); text-shadow: var(--mc-text-shadow); overflow-wrap: anywhere; pointer-events: none; }
-.mc-item-tooltip__name { margin-bottom: 2px; }
+/* GUI5 paired-capture profile: flat opaque cores and observed stepped contours.
+   This adaptive reconstruction does not reproduce native partial edge coverage
+   or certify the CJK font, padding bearings, or cursor/client transform. */
+.mc-item-tooltip { --mc-item-tooltip-fill: #1b0c1b; --mc-item-tooltip-edge: #2c0863; box-sizing: border-box; position: fixed; z-index: 1000; isolation: isolate; width: max-content; max-width: min(260px, calc(100vw - 16px)); padding: 8px; background: var(--mc-item-tooltip-fill); border: 0; outline: 0; color: #ffffff; font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: none; overflow-wrap: anywhere; pointer-events: none;
+  clip-path: polygon(4px 0, calc(100% - 6px) 0, calc(100% - 6px) 2px, calc(100% - 4px) 2px, calc(100% - 4px) 4px, calc(100% - 2px) 4px, calc(100% - 2px) 6px, 100% 6px, 100% calc(100% - 4px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 2px), calc(100% - 4px) calc(100% - 2px), calc(100% - 4px) 100%, 6px 100%, 6px calc(100% - 2px), 4px calc(100% - 2px), 4px calc(100% - 4px), 2px calc(100% - 4px), 2px calc(100% - 6px), 0 calc(100% - 6px), 0 4px, 2px 4px, 2px 2px, 4px 2px);
+}
+.mc-item-tooltip::before, .mc-item-tooltip::after { content: ''; position: absolute; inset: 0; pointer-events: none; }
+.mc-item-tooltip::before { z-index: -2; background: var(--mc-item-tooltip-edge);
+  clip-path: polygon(4px 2px, calc(100% - 6px) 2px, calc(100% - 6px) 4px, calc(100% - 4px) 4px, calc(100% - 4px) 6px, calc(100% - 2px) 6px, calc(100% - 2px) calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) calc(100% - 2px), 6px calc(100% - 2px), 6px calc(100% - 4px), 4px calc(100% - 4px), 4px calc(100% - 6px), 2px calc(100% - 6px), 2px 4px, 4px 4px);
+}
+.mc-item-tooltip::after { z-index: -1; background: var(--mc-item-tooltip-fill);
+  clip-path: polygon(4px 4px, calc(100% - 8px) 4px, calc(100% - 8px) 6px, calc(100% - 6px) 6px, calc(100% - 6px) 8px, calc(100% - 4px) 8px, calc(100% - 4px) calc(100% - 4px), 8px calc(100% - 4px), 8px calc(100% - 6px), 6px calc(100% - 6px), 6px calc(100% - 8px), 4px calc(100% - 8px));
+}
+.mc-item-tooltip__name { margin: 0; }
 .mc-item-tooltip__lore { color: #b1b1b1; }
 .mc-inventory-scroll { max-width: 100%; overflow: auto; padding-block: 4px; }
 .mc-inventory { display: inline-grid; grid-template-columns: repeat(var(--mc-inventory-columns, 9), 36px); gap: 0; padding: 0; }

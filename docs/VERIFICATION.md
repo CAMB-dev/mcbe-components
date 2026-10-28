@@ -2,6 +2,29 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
+## 物品提示与受控附魔光效
+
+新增 `ItemGlint` 及两个纯渲染函数，当前公共值为110个组件、3份数据、2个函数，共115项。原光效图及许可随包分发，私有编译材质和反汇编结果不分发。源公式、数值/整图验证和 Canvas 半透明1LSB边界见 [ITEM_GLINT_QA.md](ITEM_GLINT_QA.md)。
+
+物品提示框已取得A/B悬停与C无提示三张原始PNG，独立配对测量支持固定填充、平色紫边和阶梯轮廓。正式轮廓回归以独立逐行区间生成硬边候选，完整116×56区域6,496像素零差，含角外背景；没有把该结果当成原生字体或部分覆盖边缘零差。见 [ITEM_TOOLTIP_QA.md](ITEM_TOOLTIP_QA.md)。
+
+| 检查 | 结果与实际范围 |
+| --- | --- |
+| Glint及库存/工作站相关 | 39/39 PASS；`.cache/glint-tooltip-regression.json`，含全部11个新glint用例 |
+| 独立CSS border-box修正后 | 库存及部件18/18 PASS；`.cache/tooltip-border-box-regression.json` |
+| 提示框交互 | 新增desktop7/mobile7，另含既有Dialog1，共15/15 PASS；`.cache/item-tooltip-final.json` |
+| 提示框轮廓 | 独立正式用例1/1 PASS；`.cache/tooltip-contour-final.json` |
+| 校准页原规格局部滚动 | 酿造/特殊工作站32/32 PASS；`.cache/tooltip-native-fixture-regression.json`；HUD及反馈相关结果见下文 |
+| 构建与类型 | 最终完整core/demo/tests类型检查及生产demo构建PASS |
+| 实际tarball消费 | React18.3.1 /19.3.1严格115值、110组件SSR、类型/ref/API、独立CSS、原材质与许可、私有资产排除均PASS；`.cache/package-verification-final.log` |
+| 生产预览 | 3个glint canvas ready、真实键盘改变UV后像素更新、Tooltip只显示宿主name/lore、独立border-box均PASS，资源/页面错误为空；`.cache/glint-tooltip-production-preview.log` |
+
+校准页原有大尺寸HUD/聊天/帧行和新增JSON输出曾令320/412px页面横向溢出，造成mobile视觉/布局视口偏移；已对样本加局部横滚及输出断行，保留原部件尺寸和全部交互断言。新测试同时检查页面宽度约束。相关反馈/库存页面范围110项首轮106PASS、1预期SKIP、3个追踪文件收尾错误；HUD范围30项首轮28PASS、2个同类错误。五个错误均来自并行runner共用输出目录的ENOENT，已使用独立输出目录复验：相关6项及HUD2项均PASS，没有修改生产断言掩盖失败。
+
+按完整用例标题/project合并历史与最终相关覆盖，累计 **712个唯一用例：707PASS、5预期SKIP、0未解决失败**，不是单次712项全绿。额外自定义Dialog复验沿用已有desktop用例，不作为新增项计数。合并记录 `.cache/integration-summary.json`。
+
+最终实际消费的tarball SHA256为 `fe7fb4dadc0746c96a29778d35414beba1912b5753c5d12ad36483187739d3ca`；随后只补充文档重打包，其他包条目和两个实际消费项目的dist逐字节核对。完整原生字体、动态光效绑定、其余GUI状态仍待验收，Goal保持进行中。
+
 ## 原生跨缩放观察
 
 实际取得GUI4附魔台原始PNG，并恢复原100%缩放、暂停测试世界。两位独立检查者从原图集确认相同符文序列；原图固定哈希、完整84 / 66像素分量逐RGBA字节比较和三个72px库存格扫描加入正式可选检查。书本新scale保持原有全部参数，完整160×132区域比较当前候选 / unlit，并对照独立测得的旧经验式；未拟合新系数或配准。

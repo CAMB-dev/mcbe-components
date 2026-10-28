@@ -2,6 +2,12 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
+## 本轮物品提示与附魔光效
+
+`ItemTooltip` 已取得同物品两次悬停及无提示底图三张原生无损 PNG。配对测量支持实心背景 `#1b0c1b`、平色紫边 `#2c0863`、10game 行推进和阶梯轮廓；现按这些证据重建三层轮廓，取消未观察到的默认灰文字阴影和自动耐久文案。鼠标跟随、键盘槽锚点与屏幕避让为显式 Web 行为。padding8px、CSS光标偏移和字体仍是候选；原生部分覆盖边缘、中文栅格与整提示框未达零差，不能把核心色 mask 零差扩大为完整画面零差。见 [ITEM_TOOLTIP_QA.md](ITEM_TOOLTIP_QA.md)。
+
+`ItemGlint` 使用原始 item glint PNG，以及本机 UIGlint SM4/SM5 中独立核对的双层 UV 和着色公式。UV、颜色、采样器、混合必须显式给定，没有默认时钟或自动 `enchanted` 绑定；原生宿主时间与实际 draw-state 仍未知。独立字节码解释器的 544 组数值、96 张完整 RGBA 输出已核对，浏览器半透明 Canvas 存储的1LSB差异也单列记录，没有反调公式抹去差异。详见 [ITEM_GLINT_QA.md](ITEM_GLINT_QA.md)。
+
 ## 参考与版本
 
 固定 Mojang 官方 [bedrock-samples commit 46ba6ea](https://github.com/Mojang/bedrock-samples/tree/46ba6ea985fb5a92d79a9419198f10dda14c199d)，资源版本 `1.26.50.4`。另只读解析本机 Bedrock `1.26.6005.0` 的 JSON UI 与纹理归档：131 个相关 UI PNG / JSON 条目与固定参考一致，差异 0。安装版本、归档 SHA256、原版布局事实见 [local-reference.json](local-reference.json)。另将官方 v1.26.60.5 full release 的 4 份工作站相关 UI JSON 与本机逐份核对，解析后完全相同；原始 SHA 见 workstation-geometry.json。这只证明所比较的条目一致，不代表全部资源或整套游戏 UI 一致。
