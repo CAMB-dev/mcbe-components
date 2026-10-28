@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "source": {
+    "release": "v1.26.60.5",
+    "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "entries": [
+      {
+        "path": "resource_pack/ui/grindstone_screen.json",
+        "rawSha256": "561147a43e96e7d96a87fbf744275d0c44c6dad4730d3da6bc20b19a08de0992",
+        "parsedJsonEqualToLocalGame": true
+      },
+      {
+        "path": "resource_pack/ui/enchanting_screen.json",
+        "rawSha256": "c6b4ecf0120dd5c1929e855bcf92101ef40379545bf5084208a6c0e9e223e3c2",
+        "parsedJsonEqualToLocalGame": true
+      },
+      {
+        "path": "resource_pack/ui/ui_common.json",
+        "rawSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "parsedJsonEqualToLocalGame": true
+      },
+      {
+        "path": "resource_pack/ui/_global_variables.json",
+        "rawSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "parsedJsonEqualToLocalGame": true
+      }
+    ],
+    "comparisonMethod": "Remove JSONC comments outside string literals and trailing commas, parse, then compare complete JSON objects with local brarchive entries."
+  },
+  "coordinatePolicy": {
+    "unit": "game UI pixel; CSS pixel = game UI pixel * 2",
+    "scope": "Local coordinates in common.root_panel, before engine rasterization",
+    "rounding": "Preserve source floating point percentage geometry. Do not round each position, width or row height independently.",
+    "nativeRasterizationVerified": false,
+    "nativeRasterizationGap": "Game UI renderer pixel snapping and label baselines require a same-version game capture. JSON box equality is not a complete rendered-page equality claim."
+  },
+  "common": {
+    "rootGameRect": [
+      0,
+      0,
+      176,
+      166
+    ],
+    "rootCssRect": [
+      0,
+      0,
+      352,
+      332
+    ],
+    "source": "common.root_panel / common.inventory_panel_bottom_half_with_label / common.inventory_panel / common.hotbar_grid_template",
+    "inventoryLabelCssOffset": [
+      14,
+      152
+    ],
+    "inventoryCssRect": [
+      14,
+      172,
+      324,
+      108
+    ],
+    "hotbarCssRect": [
+      14,
+      286,
+      324,
+      36
+    ],
+    "inventoryDimensions": [
+      9,
+      3
+    ],
+    "hotbarDimensions": [
+      9,
+      1
+    ],
+    "close": {
+      "source": "common.common_panel controls.close_button_holder.close overrides offset to $close_button_offset, whose common_panel default is [0,0]",
+      "hitCssRect": [
+        310,
+        0,
+        42,
+        42
+      ],
+      "imageCssRect": [
+        316,
+        6,
+        30,
+        30
+      ]
+    },
+    "labelColor": "#4c4c4c"
+  },
+  "grindstone": {
+    "source": "grindstone_screen.json top_half_panel / grindstone_slots_panel / grindstone_middle_panel",
+    "topHalfGameRect": [
+      4,
+      6,
+      168,
+      75
+    ],
+    "slotsPanelGameRect": [
+      43,
+      19.5,
+      90,
+      56
+    ],
+    "titleCssOffset": [
+      16,
+      16
+    ],
+    "inputCssRect": [
+      86,
+      56,
+      36,
+      36
+    ],
+    "additionalCssRect": [
+      86,
+      98,
+      36,
+      36
+    ],
+    "resultCssRect": [
+      230,
+      77,
+      36,
+      36
+    ],
+    "arrowCssRect": [
+      154,
+      80,
+      44,
+      30
+    ],
+    "invalidCssRect": [
+      161,
+      80,
+      30,
+      30
+    ],
+    "focusOverrides": {
+      "input.ArrowDown": "additional",
+      "input.ArrowRight": "result",
+      "additional.ArrowUp": "input",
+      "additional.ArrowRight": "result",
+      "result.ArrowLeft": "additional"
+    },
+    "emptyResult": "Retains focus and hover; aria-disabled guards take callbacks when no result or invalid."
+  },
+  "enchanting": {
+    "source": "enchanting_screen.json enchanting_panel_top_half",
+    "topHalfGameRect": [
+      0,
+      7,
+      176,
+      71
+    ],
+    "titleCssOffset": [
+      24,
+      6
+    ],
+    "bookCssRect": [
+      26,
+      21,
+      80,
+      80
+    ],
+    "itemCssRect": [
+      26,
+      95,
+      36,
+      36
+    ],
+    "lapisCssRect": [
+      66,
+      95,
+      36,
+      36
+    ],
+    "optionsGameRect": [
+      61.6,
+      14.1,
+      106.4,
+      60.8
+    ],
+    "optionsCssRect": [
+      123.2,
+      28.2,
+      212.8,
+      121.6
+    ],
+    "optionIndentCssRect": [
+      121.2,
+      26.2,
+      216.8,
+      125.6
+    ],
+    "optionsFormula": {
+      "width": "176 * 0.65 - 8",
+      "height": "71 * 0.8 + 4",
+      "left": "176 - 8 - width",
+      "top": "7 + 71/2 + 2 - height/2",
+      "rowHeight": "height * 0.33333333"
+    },
+    "rows": [
+      {
+        "index": 0,
+        "gameRect": [
+          61.6,
+          14.1,
+          106.4,
+          20.266666666666666
+        ],
+        "cssRect": [
+          123.2,
+          28.2,
+          212.8,
+          40.5333333333
+        ],
+        "dustCssRect": [
+          129.2,
+          37.4666666667,
+          26,
+          22
+        ],
+        "runesCssRect": [
+          159.2,
+          40.4666666667,
+          168,
+          32
+        ],
+        "costCssBottomRightAnchor": [
+          332.0,
+          64.7333333333
+        ]
+      },
+      {
+        "index": 1,
+        "gameRect": [
+          61.6,
+          34.36666666666667,
+          106.4,
+          20.266666666666666
+        ],
+        "cssRect": [
+          123.2,
+          68.7333333333,
+          212.8,
+          40.5333333333
+        ],
+        "dustCssRect": [
+          129.2,
+          78.0,
+          26,
+          22
+        ],
+        "runesCssRect": [
+          159.2,
+          81.0,
+          168,
+          32
+        ],
+        "costCssBottomRightAnchor": [
+          332.0,
+          105.2666666667
+        ]
+      },
+      {
+        "index": 2,
+        "gameRect": [
+          61.6,
+          54.63333333333333,
+          106.4,
+          20.266666666666666
+        ],
+        "cssRect": [
+          123.2,
+          109.2666666667,
+          212.8,
+          40.5333333333
+        ],
+        "dustCssRect": [
+          129.2,
+          118.5333333333,
+          26,
+          22
+        ],
+        "runesCssRect": [
+          159.2,
+          121.5333333333,
+          168,
+          32
+        ],
+        "costCssBottomRightAnchor": [
+          332.0,
+          145.8
+        ]
+      }
+    ],
+    "compactClose": {
+      "source": "enchanting_panel.$use_compact_close_button=true / common.compact_close_button@close_button",
+      "hitCssRect": [
+        310,
+        0,
+        42,
+        26
+      ],
+      "imageCssRect": [
+        316,
+        6,
+        30,
+        14
+      ]
+    },
+    "colors": {
+      "runes": "#685e4a",
+      "costEnabled": "#80ff20",
+      "costDisabled": "#8a5e5c"
+    },
+    "colorSource": "Both selectable and unselectable controls instantiate fail_runes. Cost uses success_cost or fail_cost. Normalized RGB converted to nearest 8-bit channel.",
+    "bookRenderer": "custom enchanting_book_renderer, not a flat UI PNG; a caller-supplied book renderer belongs inside its source box.",
+    "runeRenderer": "font_type=rune; retain its 84x16 game-pixel box and source offsets, do not substitute a 12px English label as proof."
+  },
+  "typography": {
+    "sourceFacts": {
+      "workstationLabels": "No explicit font_size or font_scale_factor in these labels; engine defaults apply.",
+      "runes": "Explicit font_type=rune, size [84,16], shadow=false.",
+      "cost": "Explicit shadow=true, no font_size override."
+    },
+    "webProfile": {
+      "localMojanglesEmCssPixels": 20,
+      "openMonocraftEmCssPixels": 18,
+      "normalLineHeightCssPixels": 20,
+      "runeLineHeightCssPixels": 16
+    },
+    "evidenceStrength": "The Mojangles file and independent 20px outline raster prove local glyph geometry at that size; they do not independently prove the native normal/rune renderer default scale or baseline.",
+    "notClaimed": [
+      "Native default text baseline",
+      "Exact rune glyph shaping before the dedicated rune renderer is provided",
+      "A whole-game screenshot pixel difference of zero"
+    ]
+  },
+  "verification": {
+    "typecheck": "npm run typecheck passed after geometry and empty-result navigation changes",
+    "independentReviewer": "independent_pixel_qa agent validates source math and browser boxes separately",
+    "completeGameFrame": "Not available: Xbox Live launch error 0x80004005"
+  }
+}

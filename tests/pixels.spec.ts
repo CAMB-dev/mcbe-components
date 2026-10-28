@@ -7,7 +7,7 @@ import { PNG } from 'pngjs';
 import manifest from '../docs/classic-skins.json' with { type: 'json' };
 
 type Skin = keyof typeof manifest.skins;
-type PixelCase = { name: string; selector: string; skin: Skin; frame?: string; stretch?: boolean; opacity?: number; arrow?: Skin; open?: string; underlay?: { inset: number; color: number[] }; state?: 'hover' | 'pressed' | 'pressed-outside' };
+type PixelCase = { name: string; selector: string; skin: Skin; frame?: string; stretch?: boolean; opacity?: number; arrow?: Skin; overlay?: {skin:Skin;inset:number;opacity:number}; open?: string; underlay?: { inset: number; color: number[] }; state?: 'hover' | 'pressed' | 'pressed-outside' | 'focus' };
 const cases: PixelCase[] = [
   { name: 'button-default', selector: '[data-case="button-default"] button', skin: 'button-default', frame: '#131313' },
   { name: 'button-primary', selector: '[data-case="button-primary"] button', skin: 'button-hover', frame: '#131313' },
@@ -26,7 +26,7 @@ const cases: PixelCase[] = [
   { name: 'switch-on', selector: '[data-case="switch-on"] .mc-switch', skin: 'switch-on', stretch: true },
   { name: 'switch-disabled', selector: '[data-case="switch-disabled"] .mc-switch', skin: 'switch-off', stretch: true, opacity: .5 },
   { name: 'switch-on-disabled', selector: '[data-case="switch-on-disabled"] .mc-switch', skin: 'switch-on', stretch: true, opacity: .5 },
-  { name: 'slot', selector: '[data-case="slot"] .mc-slot', skin: 'slot', stretch: true },
+  { name: 'slot', selector: '[data-case="slot"] .mc-slot', skin: 'inventory-cell' },
   { name: 'button-hover', selector: '[data-case="button-default"] button', skin: 'button-hover', frame: '#ffffff', state: 'hover' },
   { name: 'button-pressed', selector: '[data-case="button-default"] button', skin: 'button-pressed', frame: '#ffffff', state: 'pressed' },
   { name: 'button-pressed-outside', selector: '[data-case="button-default"] button', skin: 'button-pressed-nohover', frame: '#131313', state: 'pressed-outside' },
@@ -38,7 +38,9 @@ const cases: PixelCase[] = [
   { name: 'radio-off-hover', selector: '[data-case="radio"] .mc-radio >> nth=1', skin: 'radio-off-hover', stretch: true, state: 'hover' },
   { name: 'switch-off-hover', selector: '[data-case="switch-off"] .mc-switch', skin: 'switch-off-hover', stretch: true, state: 'hover' },
   { name: 'switch-on-hover', selector: '[data-case="switch-on"] .mc-switch', skin: 'switch-on-hover', stretch: true, state: 'hover' },
-  { name: 'slot-hover', selector: '[data-case="slot"] .mc-slot', skin: 'slot-hover', stretch: true, state: 'hover' },
+  { name: 'slot-hover', selector: '[data-case="slot"] .mc-slot', skin: 'inventory-cell', state:'hover', overlay:{skin:'inventory-highlight',inset:2,opacity:.8} },
+  { name: 'slot-selected', selector: '[data-case="slot-selected"] .mc-slot', skin:'inventory-selected' },
+  { name: 'slot-focus', selector: '[data-case="slot"] .mc-slot', skin:'inventory-cell', state:'focus', overlay:{skin:'inventory-focus',inset:0,opacity:1} },
   { name: 'tab-selected', selector: '[data-case="tabs"] .mc-tab >> nth=0', skin: 'button-pressed-nohover', frame: '#131313' },
   { name: 'tab-unselected', selector: '[data-case="tabs"] .mc-tab >> nth=1', skin: 'button-default', frame: '#131313' },
   { name: 'tab-disabled', selector: '[data-case="tabs"] .mc-tab >> nth=2', skin: 'button-disabled', frame: '#131313' },
@@ -54,13 +56,17 @@ const cases: PixelCase[] = [
   { name: 'dialog-close', selector: '.calibration-close-dialog .mc-dialog__close-icon', skin: 'close', open: 'Open settings dialog', stretch:true, underlay:{inset:0,color:[198,198,198]} },
   { name: 'dialog-close-hover', selector: '.calibration-close-dialog .mc-dialog__close-icon', skin: 'close-hover', open: 'Open settings dialog', stretch:true, underlay:{inset:0,color:[198,198,198]},state:'hover' },
   { name: 'dialog-close-pressed', selector: '.calibration-close-dialog .mc-dialog__close-icon', skin: 'close-pressed', open: 'Open settings dialog', stretch:true, underlay:{inset:0,color:[198,198,198]},state:'pressed' },
+  { name:'grindstone-arrow',selector:'[data-case="grindstone"] .mc-grindstone__arrow',skin:'workstation-arrow',stretch:true,underlay:{inset:0,color:[198,198,198]} },
+  { name:'enchanting-option',selector:'.calibration-enchanting .mc-enchanting__option >> nth=0',skin:'enchanting-default' },
+  { name:'enchanting-option-hover',selector:'.calibration-enchanting .mc-enchanting__option >> nth=0',skin:'enchanting-hover',state:'hover' },
+  { name:'enchanting-option-disabled',selector:'.calibration-enchanting .mc-enchanting__option >> nth=2',skin:'enchanting-disabled' },
 ];
 
 // Independent raster reference: samples original PNGs, using the game nine-slice
 // sizes. It does not read the generated SVG or the component's style declarations.
-function expand(source: PNG, width: number, height: number, slice: number | number[], direct: boolean, opacity: number, underlay?: PixelCase['underlay']) {
+function expand(source: PNG, width: number, height: number, slice: number | number[], direct: boolean, opacity: number, underlay?: PixelCase['underlay'], edge?:number) {
   const image = new PNG({ width, height });
-  const scale = 2;
+  const scale = edge !== undefined && typeof slice==='number' && slice>0 ? edge/slice : 2;
   const [left,top,right,bottom] = typeof slice === 'number' ? [slice,slice,slice,slice] : slice;
   const coordinate = (position: number, target: number, size: number, before: number, after: number) => {
     if (direct || (before === 0 && after === 0)) return Math.min(size - 1, Math.floor((position + .5) * size / target));
@@ -111,7 +117,8 @@ for (const sample of cases) test(`${sample.name}: exact reference pixels`, async
   const node = page.locator(sample.selector);
   await node.scrollIntoViewIfNeeded();
   await page.mouse.move(0, 0);
-  if (sample.state) await pointAt(page, node);
+  if (sample.state === 'focus') await node.focus();
+  else if (sample.state) await pointAt(page, node);
   if (sample.state?.startsWith('pressed')) {
     await page.mouse.down();
     if (sample.state === 'pressed-outside') await page.mouse.move(0, 0);
@@ -122,8 +129,33 @@ for (const sample of cases) test(`${sample.name}: exact reference pixels`, async
   const originalBuffer = await readFile(new URL('../.cache/references/' + metadata.source.split('/').at(-1), import.meta.url));
   expect(createHash('sha256').update(originalBuffer).digest('hex')).toBe(metadata.sha256);
   const original = PNG.sync.read(originalBuffer);
-  const inner = expand(original, actual.width - (sample.frame ? 4 : 0), actual.height - (sample.frame ? 4 : 0), metadata.slice ?? 0, sample.stretch ?? false, sample.opacity ?? 1, sample.underlay);
+  const inner = expand(original, actual.width - (sample.frame ? 4 : 0), actual.height - (sample.frame ? 4 : 0), metadata.slice ?? 0, sample.stretch ?? false, sample.opacity ?? 1, sample.underlay, 'edge' in metadata ? metadata.edge : undefined);
   let expected = sample.frame ? frame(inner, sample.frame) : inner;
+  if(sample.overlay) {
+    const meta=manifest.skins[sample.overlay.skin], bytes=await readFile(new URL('../.cache/references/'+meta.source.split('/').at(-1),import.meta.url));
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe(meta.sha256);
+    const source=PNG.sync.read(bytes), inset=sample.overlay.inset;
+    const baseReference=PNG.sync.write(expected);
+    const width=actual.width-inset*2, height=actual.height-inset*2;
+    for(let y=0;y<height;y++) for(let x=0;x<width;x++) {
+      const coordinate=(p:number,target:number,size:number)=>p<2 ? Math.floor(p/2) : p>=target-2 ? size-1 : Math.min(size-1,1+Math.floor((p-2+.5)*Math.max(0,size-2)/(target-4)));
+      const sx=source.width===1 ? 0 : coordinate(x,width,source.width), sy=source.height===1 ? 0 : coordinate(y,height,source.height);
+      const from=(sy*source.width+sx)*4, to=((y+inset)*actual.width+x+inset)*4, alpha=source.data[from+3]!/255*sample.overlay.opacity;
+      for(let channel=0;channel<3;channel++) expected.data[to+channel]=Math.round(source.data[from+channel]!*alpha+expected.data[to+channel]!*(1-alpha));
+    }
+    if(sample.overlay.opacity<1) {
+      // Quantize the independent original PNG layer through the compositor,
+      // rather than assuming a CPU blend rounds identically on every platform.
+      await page.evaluate(async ({base,overlay,width,height,inset,opacity})=>{
+        const reference=document.createElement('div'); reference.id='original-overlay-reference';
+        Object.assign(reference.style,{position:'fixed',left:'0',top:'0',width:`${width}px`,height:`${height}px`,zIndex:'100',backgroundImage:`url("${base}")`,backgroundSize:'100% 100%',imageRendering:'pixelated'});
+        const layer=document.createElement('div'); Object.assign(layer.style,{position:'absolute',inset:`${inset}px`,backgroundImage:`url("${overlay}")`,backgroundSize:'100% 100%',opacity:String(opacity),imageRendering:'pixelated'});
+        for(const src of [base,overlay]) {const image=new Image();image.src=src;await image.decode();}
+        reference.append(layer);document.body.append(reference);
+      },{base:`data:image/png;base64,${baseReference.toString('base64')}`,overlay:`data:image/png;base64,${bytes.toString('base64')}`,width:actual.width,height:actual.height,inset,opacity:sample.overlay.opacity});
+      expected=PNG.sync.read(await page.locator('#original-overlay-reference').screenshot());
+    }
+  }
   if (sample.arrow) {
     const arrowMeta = manifest.skins[sample.arrow];
     const arrow = PNG.sync.read(await readFile(new URL('../.cache/references/' + arrowMeta.source.split('/').at(-1), import.meta.url)));
@@ -253,4 +285,31 @@ test('Input glyphs and 2px shadow match original Mojangles outlines', async ({ p
   await writeFile(new URL('../.cache/font-oracle/browser-input.png',import.meta.url),PNG.sync.write(actual));
   expect([actual.width,actual.height]).toEqual([expected.width,expected.height]);
   expect(actual.data.equals(expected.data)).toBe(true);
+});
+
+test('SGA runes sample the original game atlas without interpolated pixels',async({page})=>{
+  const path=new URL('../.cache/enchanting-source/font/ascii_sga.png',import.meta.url);
+  test.skip(!existsSync(path),'Requires a user-owned original SGA atlas.');
+  const bytes=await readFile(path);
+  expect(createHash('sha256').update(bytes).digest('hex')).toBe('624678abe1122a56f343812782f1d6542c2414ad7e94360cbf8f1d50c1415c8a');
+  const atlas=PNG.sync.read(bytes), text='AIZ';
+  const glyphs=[...text].map(char=>{
+    const code=char.charCodeAt(0),left=code%16*8,top=Math.floor(code/16)*8;
+    let last=-1;for(let y=0;y<8;y++)for(let x=0;x<8;x++)if(atlas.data[((top+y)*atlas.width+left+x)*4+3])last=Math.max(last,x);
+    return {left,top,advance:(last+2)*2};
+  });
+  const expected=new PNG({width:glyphs.reduce((sum,glyph)=>sum+glyph.advance,0),height:16});
+  for(let i=0;i<expected.data.length;i+=4)expected.data.set([40,41,42,255],i);
+  let offset=0;
+  for(const glyph of glyphs){for(let y=0;y<16;y++)for(let x=0;x<glyph.advance;x++){
+    const from=((glyph.top+Math.floor(y/2))*atlas.width+glyph.left+Math.floor(x/2))*4;
+    const to=(y*expected.width+offset+x)*4,alpha=atlas.data[from+3]!/255;
+    for(let channel=0;channel<3;channel++)expected.data[to+channel]=Math.round([104,94,74][channel]!*alpha+[40,41,42][channel]!*(1-alpha));
+  }offset+=glyph.advance;}
+  await page.goto('/calibration.html');
+  const actual=PNG.sync.read(await page.locator('[data-case="enchanting-runes"] .mc-enchanting-runes').screenshot());
+  expect([actual.width,actual.height]).toEqual([expected.width,expected.height]);
+  expect(actual.data.equals(expected.data),'Original atlas mask and CSS rune output must be byte-identical').toBe(true);
+  const folder=new URL('../.cache/font-oracle/',import.meta.url);await mkdir(folder,{recursive:true});
+  await Promise.all([writeFile(new URL('runes-actual.png',folder),PNG.sync.write(actual)),writeFile(new URL('runes-expected.png',folder),PNG.sync.write(expected))]);
 });

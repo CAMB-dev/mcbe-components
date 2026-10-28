@@ -1,0 +1,428 @@
+{
+  "scope": "Bedrock-native controls, reusable GUI parts, complete container GUIs and HUD; composition reuses source-backed primitives.",
+  "implementationStatusIsNotPixelCertification": true,
+  "basis": {
+    "edition": "Bedrock Classic / JSON UI",
+    "installedVersion": "1.26.6005.0",
+    "publicFullReference": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip"
+  },
+  "groups": {
+    "visual_and_surfaces": [
+      {
+        "name": "Text",
+        "status": "implemented"
+      },
+      {
+        "name": "PixelIcon",
+        "status": "implemented"
+      },
+      {
+        "name": "Image",
+        "status": "planned"
+      },
+      {
+        "name": "NineSlice",
+        "status": "planned"
+      },
+      {
+        "name": "Panel",
+        "status": "implemented"
+      },
+      {
+        "name": "Separator",
+        "status": "implemented"
+      },
+      {
+        "name": "Progress",
+        "status": "implemented"
+      },
+      {
+        "name": "Spinner",
+        "status": "planned"
+      },
+      {
+        "name": "Tooltip",
+        "status": "planned"
+      },
+      {
+        "name": "Dialog",
+        "status": "implemented"
+      },
+      {
+        "name": "Alert",
+        "status": "implemented"
+      },
+      {
+        "name": "Badge",
+        "status": "implemented"
+      },
+      {
+        "name": "Toast",
+        "status": "planned"
+      },
+      {
+        "name": "ScrollArea",
+        "status": "planned"
+      },
+      {
+        "name": "ScrollBar",
+        "status": "planned"
+      }
+    ],
+    "input_and_settings": [
+      {
+        "name": "Button",
+        "status": "implemented"
+      },
+      {
+        "name": "IconButton",
+        "status": "implemented"
+      },
+      {
+        "name": "Checkbox",
+        "status": "implemented"
+      },
+      {
+        "name": "RadioGroup",
+        "status": "implemented"
+      },
+      {
+        "name": "Switch",
+        "status": "implemented"
+      },
+      {
+        "name": "Slider",
+        "status": "implemented"
+      },
+      {
+        "name": "TextField",
+        "status": "implemented"
+      },
+      {
+        "name": "TextArea",
+        "status": "implemented"
+      },
+      {
+        "name": "Select",
+        "status": "implemented"
+      },
+      {
+        "name": "Combobox",
+        "status": "implemented"
+      },
+      {
+        "name": "ToggleButton",
+        "status": "planned"
+      },
+      {
+        "name": "SearchField",
+        "status": "planned"
+      },
+      {
+        "name": "Tabs",
+        "status": "implemented"
+      },
+      {
+        "name": "NavigationList",
+        "status": "planned"
+      },
+      {
+        "name": "SettingRow",
+        "status": "planned"
+      },
+      {
+        "name": "KeybindingField",
+        "status": "planned"
+      }
+    ],
+    "reusable_container_parts": [
+      {
+        "name": "ItemSlot",
+        "status": "implemented"
+      },
+      {
+        "name": "ItemImage",
+        "status": "planned"
+      },
+      {
+        "name": "ItemCount",
+        "status": "planned"
+      },
+      {
+        "name": "DurabilityBar",
+        "status": "planned"
+      },
+      {
+        "name": "ItemTooltip",
+        "status": "implemented"
+      },
+      {
+        "name": "InventoryGrid",
+        "status": "implemented"
+      },
+      {
+        "name": "PlayerInventory",
+        "status": "implemented"
+      },
+      {
+        "name": "WorkstationFrame",
+        "status": "implemented"
+      },
+      {
+        "name": "RecipeGrid",
+        "status": "planned"
+      },
+      {
+        "name": "RecipeSearch",
+        "status": "planned"
+      },
+      {
+        "name": "RecipeCategoryTabs",
+        "status": "planned"
+      },
+      {
+        "name": "ProcessingArrow",
+        "status": "planned"
+      },
+      {
+        "name": "FuelIndicator",
+        "status": "planned"
+      },
+      {
+        "name": "EnchantmentOption",
+        "status": "planned"
+      },
+      {
+        "name": "EnchantingRunes",
+        "status": "implemented"
+      },
+      {
+        "name": "EnchantingBook",
+        "status": "implemented",
+        "fidelity": "renderer_reconstruction_unverified"
+      },
+      {
+        "name": "TradeOffer",
+        "status": "planned"
+      },
+      {
+        "name": "ArmorSlot",
+        "status": "planned"
+      },
+      {
+        "name": "ResultSlot",
+        "status": "planned"
+      },
+      {
+        "name": "SlotPlaceholder",
+        "status": "planned"
+      }
+    ],
+    "workstation_and_container_guis": [
+      {
+        "name": "Grindstone",
+        "status": "implemented"
+      },
+      {
+        "name": "EnchantingTable",
+        "status": "implemented"
+      },
+      {
+        "name": "CraftingTable",
+        "status": "planned"
+      },
+      {
+        "name": "Furnace",
+        "status": "planned"
+      },
+      {
+        "name": "BlastFurnace",
+        "status": "planned"
+      },
+      {
+        "name": "Smoker",
+        "status": "planned"
+      },
+      {
+        "name": "BrewingStand",
+        "status": "planned"
+      },
+      {
+        "name": "Anvil",
+        "status": "planned"
+      },
+      {
+        "name": "SmithingTable",
+        "status": "planned"
+      },
+      {
+        "name": "Stonecutter",
+        "status": "planned"
+      },
+      {
+        "name": "Loom",
+        "status": "planned"
+      },
+      {
+        "name": "CartographyTable",
+        "status": "planned"
+      },
+      {
+        "name": "Beacon",
+        "status": "planned"
+      },
+      {
+        "name": "Chest",
+        "status": "planned"
+      },
+      {
+        "name": "Hopper",
+        "status": "planned"
+      },
+      {
+        "name": "Dispenser",
+        "status": "planned"
+      },
+      {
+        "name": "Dropper",
+        "status": "planned"
+      },
+      {
+        "name": "ShulkerBox",
+        "status": "planned"
+      },
+      {
+        "name": "Crafter",
+        "status": "planned"
+      },
+      {
+        "name": "TradingScreen",
+        "status": "planned"
+      },
+      {
+        "name": "PlayerInventoryScreen",
+        "status": "planned"
+      },
+      {
+        "name": "CreativeInventory",
+        "status": "planned"
+      },
+      {
+        "name": "MountInventory",
+        "status": "planned"
+      }
+    ],
+    "hud": [
+      {
+        "name": "Hotbar",
+        "status": "planned"
+      },
+      {
+        "name": "HealthBar",
+        "status": "planned"
+      },
+      {
+        "name": "HungerBar",
+        "status": "planned"
+      },
+      {
+        "name": "ArmorBar",
+        "status": "planned"
+      },
+      {
+        "name": "AirBar",
+        "status": "planned"
+      },
+      {
+        "name": "ExperienceBar",
+        "status": "planned"
+      },
+      {
+        "name": "BossBar",
+        "status": "planned"
+      },
+      {
+        "name": "Crosshair",
+        "status": "planned"
+      },
+      {
+        "name": "ChatMessage",
+        "status": "planned"
+      },
+      {
+        "name": "ChatPanel",
+        "status": "planned"
+      },
+      {
+        "name": "Scoreboard",
+        "status": "planned"
+      },
+      {
+        "name": "StatusEffect",
+        "status": "planned"
+      },
+      {
+        "name": "ActionBar",
+        "status": "planned"
+      },
+      {
+        "name": "TitleOverlay",
+        "status": "planned"
+      },
+      {
+        "name": "HeldItemTooltip",
+        "status": "planned"
+      },
+      {
+        "name": "PlayerList",
+        "status": "planned"
+      },
+      {
+        "name": "TouchControls",
+        "status": "planned"
+      }
+    ],
+    "game_screen_compositions": [
+      {
+        "name": "PauseMenu",
+        "status": "planned"
+      },
+      {
+        "name": "SettingsPanel",
+        "status": "planned"
+      },
+      {
+        "name": "WorldList",
+        "status": "planned"
+      },
+      {
+        "name": "ServerList",
+        "status": "planned"
+      },
+      {
+        "name": "PlayerCard",
+        "status": "planned"
+      },
+      {
+        "name": "PackList",
+        "status": "planned"
+      },
+      {
+        "name": "PackCard",
+        "status": "planned"
+      },
+      {
+        "name": "DeathScreen",
+        "status": "planned"
+      },
+      {
+        "name": "LoadingScreen",
+        "status": "planned"
+      },
+      {
+        "name": "AchievementToast",
+        "status": "planned"
+      }
+    ]
+  }
+}

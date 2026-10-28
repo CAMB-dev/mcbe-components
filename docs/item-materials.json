@@ -1,0 +1,218 @@
+{
+  "referenceCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+  "referenceRepository": "https://github.com/Mojang/bedrock-samples",
+  "upstreamLicense": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/LICENSE.md",
+  "installedGameVersion": "1.26.6005.0",
+  "distribution": "Demo-only assets, not included by the npm package files list. These game assets are subject to upstream rights, not this project MIT license.",
+  "assets": [
+    {
+      "file": "demo/assets/minecraft/apple.png",
+      "source": "resource_pack/textures/items/apple.png",
+      "sha256": "af16a9937de0faa0ef285bee9226eb99a031d46f404e300827f2e023c1be1a7f",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 257,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Inventory item texture",
+      "modifications": "None",
+      "origin": "official-bedrock-samples"
+    },
+    {
+      "file": "demo/assets/minecraft/diamond.png",
+      "source": "resource_pack/textures/items/diamond.png",
+      "sha256": "996f80148a6909588d8f83d462ddbea5302402ba644f8e7d2e5bf0b69119b862",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 256,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Inventory item texture",
+      "modifications": "None",
+      "origin": "official-bedrock-samples"
+    },
+    {
+      "file": "demo/assets/minecraft/diamond_sword.png",
+      "source": "resource_pack/textures/items/diamond_sword.png",
+      "sha256": "f8094529776d45b66ec2318c152ca90a669b7956c311017fa1f05ed8afc19da9",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 227,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Inventory item texture",
+      "modifications": "None",
+      "upstreamReference": {
+        "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
+        "changedPixelsComparedToInstalledGame": 22,
+        "reason": "The installed game texture is authoritative for this version; the pinned public sample differs."
+      },
+      "origin": "installed-game"
+    },
+    {
+      "file": "demo/assets/minecraft/dye_powder_blue.png",
+      "source": "resource_pack/textures/items/dye_powder_blue.png",
+      "sha256": "aa158721022891ee61f50b61fbfec40ce7337f13ab6365d0e04522b3658a6c0b",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 231,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Inventory item texture",
+      "modifications": "None",
+      "origin": "official-bedrock-samples"
+    },
+    {
+      "file": "demo/assets/minecraft/emerald.png",
+      "source": "resource_pack/textures/items/emerald.png",
+      "sha256": "87251879085161164bc6b2ff5945cf8ef9e6bf82dd35d80004e05459dfe0ee01",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 214,
+      "localArchive": "textures/items.brarchive",
+      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+      "matchesInstalledGameBytes": true,
+      "use": "Inventory item texture",
+      "modifications": "None",
+      "origin": "official-bedrock-samples"
+    },
+    {
+      "file": "demo/assets/minecraft/icon_recipe_nature.png",
+      "source": "resource_pack/textures/ui/icon_recipe_nature.png",
+      "sha256": "0f334a123b498ecec76b4512c4fcf269ee3e79169e79a338db43b5f6a9f6fca9",
+      "size": [
+        17,
+        17
+      ],
+      "bytes": 566,
+      "localArchive": "textures/ui.brarchive",
+      "localArchiveSha256": "9f5f7650aa592fcd72c6145005b9c4adbb9777bbb28f253d315e670030377177",
+      "matchesInstalledGameBytes": true,
+      "use": "GUI category grass-block icon; 17x17 image displayed at native integer scale, not a generic 3D block renderer",
+      "modifications": "None",
+      "origin": "official-bedrock-samples"
+    }
+  ],
+  "publicSwordChecks": [
+    {
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "role": "original pinned sample",
+      "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
+      "matchesInstalledGame": false
+    },
+    {
+      "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+      "tag": "v1.26.60.5",
+      "role": "main and latest release tag at audit time",
+      "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
+      "matchesInstalledGame": false
+    },
+    {
+      "release": "v1.26.60.5",
+      "artifact": "bedrock-samples-v1.26.60.5-full.zip",
+      "url": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+      "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+      "entry": "resource_pack/textures/items/diamond_sword.png",
+      "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
+      "matchesInstalledGame": false,
+      "changedPixelsComparedToInstalledGame": 22
+    }
+  ],
+  "rendering": {
+    "nativeItemTexturePixels": [
+      16,
+      16
+    ],
+    "standardDisplayPixels": [
+      32,
+      32
+    ],
+    "grassCategoryTexturePixels": [
+      17,
+      17
+    ],
+    "grassCategoryDisplayPixels": [
+      34,
+      34
+    ],
+    "sampling": "nearest/pixelated, integer scale only",
+    "noGeneratedItemArt": true,
+    "automaticFakeGlint": false,
+    "missingMaterialBehavior": "Keep item name, quantity, tooltip and semantic occupancy; draw no replacement letter/icon. data-missing-material identifies this condition."
+  },
+  "inventoryAudit": {
+    "source": "ui_common.json from installed vanilla ui.brarchive",
+    "sourceControls": [
+      "common.container_item",
+      "common.stack_count_label",
+      "common.durability_bar",
+      "common.cell_image_panel",
+      "common.highlight_slot_panel"
+    ],
+    "slotSizeGamePixels": [
+      18,
+      18
+    ],
+    "itemSizeGamePixels": [
+      16,
+      16
+    ],
+    "stackCount": {
+      "anchor": "bottom_right",
+      "offsetGamePixels": [
+        0,
+        1
+      ],
+      "shadow": true,
+      "layer": 27,
+      "fontRasterAndBaselineMatchesWholeGameScreenshot": false
+    },
+    "durability": {
+      "sizeGamePixels": [
+        12,
+        1
+      ],
+      "offsetGamePixels": [
+        0,
+        5
+      ],
+      "dropShadow": true,
+      "roundValue": true,
+      "geometryDerivedFromJson": true,
+      "hueAndNativeDropShadowRendererVerified": false
+    },
+    "layers": {
+      "background": 1,
+      "item": 7,
+      "durability": 20,
+      "stackCount": 27
+    },
+    "tooltip": {
+      "nativeRenderer": "hover_text_renderer",
+      "exactBackgroundAndPlacementVerified": false,
+      "widthAndWrappingMatchesNativeRenderer": false
+    },
+    "enchanted": {
+      "nativeRendererRequired": true,
+      "cssRectangleRemoved": true,
+      "dataOnlyUntilRealRendererIsProvided": true
+    },
+    "limitation": "Original asset hashes prove texture fidelity, not complete native inventory custom renderer fidelity.",
+    "disabledItemFilterMatchesNativeRenderer": false
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "gameVersion": "1.26.6005.0",
+  "book": {
+    "component": "EnchantingBook",
+    "status": "optional_renderer_reconstruction_not_pixel_verified",
+    "texture": {
+      "file": "src/assets/enchanting/enchanting_table_book.png",
+      "dimensions": [
+        64,
+        32
+      ],
+      "sha256": "e8d23533b48976b578098db767e2c8161a31fa5d7b22bf576bf531b1bc7f000f",
+      "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/entity/enchanting_table_book.png",
+      "matchesInstalledGame": true
+    },
+    "implementation": "WebGL 1, NEAREST atlas sampling, antialias=false, orthographic projection; no runtime dependency beyond React.",
+    "geometry": "Book surfaces and UV rectangles are an explicit reconstruction from the source texture, not an extracted native mesh.",
+    "missingEvidence": [
+      "Native enchanting_book_renderer mesh, projection, lighting, page-turn equations and camera transform",
+      "Same-size real-game screenshots for a fixed open/closed state"
+    ],
+    "defaultPose": {
+      "open": 1,
+      "yawDegrees": -15,
+      "pitchDegrees": -25,
+      "rollDegrees": -18,
+      "canvasPixels": [
+        80,
+        80
+      ]
+    },
+    "validation": {
+      "browser": "Chromium DPR=1 at dedicated local port 5177",
+      "pageErrors": [],
+      "webglErrors": [],
+      "evidence": ".cache/enchanting-qa/preview.png"
+    }
+  },
+  "runes": {
+    "component": "EnchantingRunes",
+    "status": "original_atlas_pixel_sampling_verified",
+    "atlas": {
+      "localFile": ".cache/enchanting-source/font/ascii_sga.png",
+      "entry": "font.brarchive/ascii_sga.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "cellDimensions": [
+        8,
+        8
+      ],
+      "sha256": "624678abe1122a56f343812782f1d6542c2414ad7e94360cbf8f1d50c1415c8a",
+      "bundledInNpm": false,
+      "reason": "Original game font atlas; only caller-supplied atlasUrl or ignored local adapter is used."
+    },
+    "sourceMetadata": {
+      "ascii_character_height": 8,
+      "ascii_character_y_offset": 0
+    },
+    "layout": "A-Z/a-z atlas cells, advance measured as last opaque x + 2; whitespace advances 4 game pixels; integer scale, mask-repeat:none, no text shadow.",
+    "defaultColor": "#685e4a",
+    "validation": {
+      "text": "AIZ",
+      "scale": 2,
+      "browserSize": [
+        28,
+        16
+      ],
+      "changedPixels": 0,
+      "method": "Independent original-atlas pixel sampling and integer expansion vs Chromium CSS mask screenshot, using solid #c6c6c6 background and #685e4a foreground.",
+      "evidence": [
+        ".cache/enchanting-qa/runes.png",
+        ".cache/enchanting-qa/runes-expected.png",
+        ".cache/enchanting-qa/rune-result.json"
+      ]
+    }
+  },
+  "publicFullReleaseInspected": {
+    "url": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "found": [
+      "resource_pack/textures/entity/enchanting_table_book.png",
+      "resource_pack/textures/entity/enchanting_table_book_shadow.png"
+    ],
+    "notFound": [
+      "font/ascii_sga.png",
+      "book model geometry"
+    ]
+  },
+  "rights": {
+    "texture": "Original Mojang sample asset; retain upstream LICENSE.md and source attribution. Not relicensed as original MIT artwork.",
+    "upstreamLicense": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/LICENSE.md",
+    "gameFont": "Separately owned user-provided game font atlas, excluded from distributable package."
+  }
+}

@@ -1,0 +1,42 @@
+.mc-workstation-scroll { max-width: 100%; overflow: auto; padding: 6px; }
+.mc-workstation { box-sizing: border-box; position: relative; width: 352px; height: 332px; isolation: isolate; color: #4c4c4c; font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: none; image-rendering: pixelated; }
+.mc-workstation::before { content: ''; position: absolute; inset: 0; z-index: -1; border: 8px solid transparent; border-image: var(--mc-skin-panel) 4 fill / 8px stretch; }
+.mc-workstation__title { position: absolute; left: 16px; top: 16px; font: inherit; margin: 0; max-width: 280px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; background: #c6c6c6; }
+.mc-workstation > .mc-dialog__close { right: 0; top: 0; }
+.mc-workstation__inventory { position: absolute; left: 14px; top: 152px; }
+.mc-player-inventory { width: 324px; font: 400 var(--mc-font-size)/20px var(--mc-font); color: #4c4c4c; text-shadow: none; }
+.mc-player-inventory__label { height: 20px; background: #c6c6c6; }
+.mc-player-inventory .mc-inventory-scroll { padding: 0; overflow: visible; line-height: 0; }
+.mc-player-inventory .mc-inventory { display: grid; }
+.mc-player-inventory__hotbar { margin-top: 6px; }
+.mc-grindstone > .mc-slot, .mc-enchanting > .mc-slot { position: absolute; }
+.mc-grindstone__input { left: 86px; top: 56px; }
+.mc-grindstone__additional { left: 86px; top: 98px; }
+.mc-grindstone__result { left: 230px; top: 77px; }
+.mc-grindstone__arrow { position: absolute; left: 154px; top: 80px; width: 44px; height: 30px; background: var(--mc-skin-workstation-arrow) center / 100% 100%; }
+.mc-grindstone__invalid { position: absolute; left: 161px; top: 80px; width: 30px; height: 30px; background: var(--mc-skin-workstation-invalid) center / 100% 100%; }
+.mc-enchanting .mc-workstation__title { left: 24px; top: 6px; }
+.mc-enchanting > .mc-dialog__close { height: 26px; }
+.mc-enchanting > .mc-dialog__close .mc-dialog__close-icon { height: 14px; background-image: var(--mc-skin-close-compact, var(--mc-skin-close)); }
+@media (hover: hover) { .mc-enchanting > .mc-dialog__close:hover .mc-dialog__close-icon { background-image: var(--mc-skin-close-compact-hover, var(--mc-skin-close-hover)); } }
+.mc-enchanting > .mc-dialog__close:focus-visible .mc-dialog__close-icon { background-image: var(--mc-skin-close-compact-hover, var(--mc-skin-close-hover)); }
+.mc-enchanting > .mc-dialog__close:active .mc-dialog__close-icon { background-image: var(--mc-skin-close-compact-pressed, var(--mc-skin-close-pressed)); }
+.mc-enchanting__book { position: absolute; left: 26px; top: 21px; width: 80px; height: 80px; display: grid; place-items: center; color: #79563d; }
+.mc-enchanting__item { left: 26px; top: 95px; }
+.mc-enchanting__lapis { left: 66px; top: 95px; }
+.mc-enchanting__lapis-placeholder { display: block; width: 32px; height: 32px; background: var(--mc-skin-enchanting-lapis) center / 100% 100%; }
+/* Keep the JSON UI's fractional geometry. Final renderer pixel snapping is a
+   separate acceptance gate; rounding each field independently moves dividers. */
+.mc-enchanting__options { position: absolute; left: 123.2px; top: 28.2px; width: 212.8px; height: 121.6px; display: grid; grid-template-rows: repeat(3, 33.333333%); isolation: isolate; }
+.mc-enchanting__options::before { content: ''; position: absolute; inset: -2px; z-index: -1; border: 2px solid transparent; border-image: var(--mc-skin-inventory-cell) 2 fill / 2px stretch; pointer-events: none; }
+.mc-enchanting__option { --mc-enchantment-skin: var(--mc-skin-enchanting-default); position: relative; width: 100%; min-width: 0; padding: 0; border: 0; cursor: pointer; font: inherit; color: #4c4c4c; background: transparent; image-rendering: pixelated; isolation: isolate; }
+.mc-enchanting__option::before { content: ''; position: absolute; inset: 0; z-index: -1; border: 2px solid transparent; border-image: var(--mc-enchantment-skin) 1 fill / 2px stretch; pointer-events: none; }
+.mc-enchanting__option:disabled { --mc-enchantment-skin: var(--mc-skin-enchanting-disabled); cursor: not-allowed; }
+@media (hover: hover) { .mc-enchanting__option:hover:not(:disabled) { --mc-enchantment-skin: var(--mc-skin-enchanting-hover); } }
+.mc-enchanting__option:focus-visible { --mc-enchantment-skin: var(--mc-skin-enchanting-hover); outline: 2px solid #ffffff; outline-offset: -2px; }
+.mc-enchanting__option:active:not(:disabled) { --mc-enchantment-skin: var(--mc-skin-enchanting-disabled); }
+.mc-enchanting__dust { position: absolute; left: 6px; top: calc(50% - 11px); width: 26px; height: 22px; background: var(--mc-enchantment-dust) center / 100% 100%; }
+.mc-enchanting__option:disabled .mc-enchanting__dust { background-image: var(--mc-enchantment-dust-disabled); }
+.mc-enchanting__runes { position: absolute; left: 36px; top: calc(50% - 8px); width: 168px; height: 32px; text-align: left; font-family: var(--mc-rune-font, var(--mc-font)); font-size: var(--mc-rune-font-size, var(--mc-font-size)); line-height: 16px; overflow: hidden; color: #685e4a; text-shadow: none; }
+.mc-enchanting__cost { position: absolute; right: 4px; bottom: 4px; color: #80ff20; text-shadow: var(--mc-text-shadow); }
+.mc-enchanting__option:disabled .mc-enchanting__cost { color: #8a5e5c; }

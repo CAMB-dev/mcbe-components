@@ -112,7 +112,7 @@ test('reference palette, focus and disabled state render correctly', async ({ pa
   await expect(button).toHaveCSS('border-radius', '0px');
   await button.focus(); await expect(button).toHaveCSS('outline-style', 'solid');
   await expect(button).toHaveCSS('outline-width', '2px');
-  await expect(page.getByRole('button', { name: 'Unavailable' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Unavailable', exact: true })).toBeDisabled();
 });
 
 test('Input exposes error, disabled, readonly, focus and text-shadow states', async ({ page }) => {

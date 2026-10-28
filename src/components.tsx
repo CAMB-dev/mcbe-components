@@ -338,18 +338,6 @@ export const Separator = forwardRef<HTMLHRElement, HTMLAttributes<HTMLHRElement>
   return <hr {...props} ref={ref} className={cx('mc-separator', className)}/>;
 });
 
-export interface ItemSlotProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string;
-  selected?: boolean;
-  count?: number;
-}
-export const ItemSlot = forwardRef<HTMLButtonElement, ItemSlotProps>(function ItemSlot({ label, selected, count, children, className, type = 'button', ...props }, ref) {
-  return <button {...props} ref={ref} type={type} aria-label={count === undefined ? label : `${label}, ${count}`}
-    aria-pressed={selected} title={label} className={cx('mc-slot', selected && 'mc-slot--selected', className)}>
-    <span aria-hidden="true" className="mc-slot__item">{children}</span>{count !== undefined && <span aria-hidden="true" className="mc-slot__count">{count}</span>}
-  </button>;
-});
-
 const iconPaths = {
   arrow: 'M2 7h10V4l4 4-4 4V9H2z',
   chevron: 'M5 2h2v2h2v2h2v4H9v2H7v2H5v-2h2v-2h2V6H7V4H5z',

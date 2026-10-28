@@ -466,6 +466,197 @@
       ],
       "slice": null,
       "encoding": "png"
+    },
+    "close-compact": {
+      "source": "resource_pack/textures/ui/close_button_default_compact.png",
+      "sha256": "b7ca516ea2456c220b058c35261423da2784a582724f1a38e447d07170c74f6e",
+      "size": [
+        15,
+        7
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "close-compact-hover": {
+      "source": "resource_pack/textures/ui/close_button_hover_compact.png",
+      "sha256": "44858d92895e520b679a5848f623287dd645a4ba841862db89e82291843daefe",
+      "size": [
+        15,
+        7
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "close-compact-pressed": {
+      "source": "resource_pack/textures/ui/close_button_pressed_compact.png",
+      "sha256": "117ba209b844afe932ae0319f1b3cbfbba5d37a0eda4cf7099930771f7e4f45c",
+      "size": [
+        15,
+        7
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "inventory-cell": {
+      "source": "resource_pack/textures/ui/cell_image.png",
+      "sha256": "296e3d0ba9640efcd2902aa9c191f544b09bdbb8f4585d39a6c030e0ae3fc023",
+      "size": [
+        10,
+        10
+      ],
+      "slice": 2,
+      "edge": 2,
+      "encoding": "png"
+    },
+    "inventory-selected": {
+      "source": "resource_pack/textures/ui/recipe_book_touch_cell_selected.png",
+      "sha256": "95743c4386456a219bdaaec2893cb0cee5de0810e15560a184854c797efa9267",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "inventory-focus": {
+      "source": "resource_pack/textures/ui/focus_border_white.png",
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "size": [
+        5,
+        5
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "inventory-highlight": {
+      "source": "resource_pack/textures/ui/highlight_slot.png",
+      "sha256": "a4e5b1b1cd05ef340fcb32fdc4a763ec22fdaa085f2defa1ac9ae514a220201b",
+      "size": [
+        1,
+        1
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "workstation-arrow": {
+      "source": "resource_pack/textures/ui/arrow_large.png",
+      "sha256": "c0b27d51e084d0018365a94905e53e8661cf0f05448145c71402ff16844fe1b6",
+      "size": [
+        22,
+        15
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "workstation-invalid": {
+      "source": "resource_pack/textures/ui/crossout.png",
+      "sha256": "e6495d114d889c557948d19035a3a76ba45b9e7a75d19052eed826ea5f05ff61",
+      "size": [
+        15,
+        15
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "enchanting-lapis": {
+      "source": "resource_pack/textures/ui/lapis_image.png",
+      "sha256": "7e105a45720469394a9c1bc8cfa09798473e65eaac0924aa301f05883bdb67d5",
+      "size": [
+        16,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "enchanting-disabled": {
+      "source": "resource_pack/textures/ui/enchanting_dark_background.png",
+      "sha256": "153512d7e98be59a3f742be4e8ee27d01c69413452197d2021ccbacd0e6b6ad0",
+      "size": [
+        108,
+        19
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "enchanting-default": {
+      "source": "resource_pack/textures/ui/enchanting_active_background.png",
+      "sha256": "26e65170e4a25ead2df3250cddc425d3037730ea449af76e5592d9c1cf848df6",
+      "size": [
+        108,
+        19
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "enchanting-hover": {
+      "source": "resource_pack/textures/ui/enchanting_active_background_with_hover_text.png",
+      "sha256": "e5cb07cfc22bd44ab36ad6983fc7f20d3fa9e30c2a60216a16c51038738a595b",
+      "size": [
+        108,
+        19
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "enchanting-dust-1": {
+      "source": "resource_pack/textures/ui/dust_selectable_1.png",
+      "sha256": "7d11095615a91dc797b4591ac85c1c35eac5172277658f7493e44d08486b952c",
+      "size": [
+        13,
+        11
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "enchanting-dust-2": {
+      "source": "resource_pack/textures/ui/dust_selectable_2.png",
+      "sha256": "9bb932cbe9d262d75c80ba871b4577b1317ab7542f922fdebcce5ea19152bbd7",
+      "size": [
+        13,
+        11
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "enchanting-dust-3": {
+      "source": "resource_pack/textures/ui/dust_selectable_3.png",
+      "sha256": "ef2253ebad67add5e868312299778630ce3806f5190304021ba1cb74f9038611",
+      "size": [
+        13,
+        11
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "enchanting-dust-disabled-1": {
+      "source": "resource_pack/textures/ui/dust_unselectable_1.png",
+      "sha256": "0f88f72c2a4a1aa97235183c56ef1691d693f5ee26ea121a0b17555301ffa593",
+      "size": [
+        13,
+        11
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "enchanting-dust-disabled-2": {
+      "source": "resource_pack/textures/ui/dust_unselectable_2.png",
+      "sha256": "17d85a310fb8134dbb00dd9f4c05cb1b76e86c2ed618b07c09e04a929b232840",
+      "size": [
+        13,
+        11
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "enchanting-dust-disabled-3": {
+      "source": "resource_pack/textures/ui/dust_unselectable_3.png",
+      "sha256": "58b22d39de34ebba554f97602f7c75e28e0a4632173f06e2eb68ea4d74683196",
+      "size": [
+        13,
+        11
+      ],
+      "slice": null,
+      "encoding": "png"
     }
   }
 }

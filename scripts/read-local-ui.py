@@ -16,7 +16,7 @@ archive_root = game / 'data/resource_packs/vanilla/__brarchive'
 mapping = json.loads((root / 'scripts/classic-reference-map.json').read_text())
 ui_names = {'_global_variables.json', 'ui_common.json', 'ui_template_buttons.json',
             'ui_template_toggles.json', 'ui_template_tabs.json', 'settings_screen.json',
-            'ui_template_dialogs.json', 'popup_dialog.json'}
+            'ui_template_dialogs.json', 'popup_dialog.json', 'grindstone_screen.json', 'enchanting_screen.json'}
 texture_names = {config['file'] + extension for config in mapping.values() for extension in ('.png', '.json')}
 
 def entries(path):
@@ -67,6 +67,16 @@ settings = definitions('settings_common.json')
 variables = definitions('_global_variables.json')
 content = settings['default_options_dropdown_toggle_button_state_content']
 facts = {
+    'containerRootSize':common['root_panel']['size'],
+    'containerSlotSize':common['container_item']['size'],
+    'containerItemSize':common['container_item']['$item_renderer_size|default'],
+    'containerCellTexture':common['cell_image']['texture'],
+    'containerSelectedTexture':common['cell_image_selected']['texture'],
+    'containerStackCountOffset':common['stack_count_label']['offset'],
+    'containerDurabilitySize':common['durability_bar']['$durability_bar_size|default'],
+    'containerDurabilityOffset':common['durability_bar']['$durability_bar_offset|default'],
+    'containerHotbarSize':common['hotbar_grid_template']['size'],
+    'containerHotbarOffset':common['hotbar_grid_template']['offset'],
     'panelTexture':common['dialog_background_opaque']['texture'],
     'dialogTexture':definitions('ui_template_dialogs.json')['main_panel_no_buttons']['$custom_background|default'],
     'dialogTitleOffset':definitions('popup_dialog.json')['modal_title_text']['$title_text_offset|default'],

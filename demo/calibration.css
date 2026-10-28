@@ -23,6 +23,10 @@ body { margin: 0; background: #171819; color: #eeeeee; font: 14px/20px 'Monocraf
 .calibration-surface-dialog { width: 320px; height: 200px; }
 .calibration-surface-dialog::backdrop { background: #28292a; }
 .calibration-surface-dialog .mc-dialog__header { visibility: hidden; }
+.calibration-enchanting .mc-enchanting__option > span { visibility: hidden; }
+/* Canonical 2x PNG surface specimen only. Complete GUI geometry is tested
+   separately in workstation-fidelity.spec.ts with unrounded source bounds. */
+.calibration-enchanting .mc-enchanting__options { left: 124px; top: 28px; width: 216px; height: 114px; grid-template-rows: repeat(3,38px); }
 @media (max-width: 700px) {
   .calibration-page { padding: 16px; }
   .calibration-page > h1 { font-size: 20px; }

@@ -42,6 +42,7 @@ for name, config in mapping.items():
         'sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
         'size': [image.width, image.height],
         'slice': config.get('slice'),
+        **({'edge': config['edge']} if 'edge' in config else {}),
         'encoding': 'png',
     }
 css.append('}')

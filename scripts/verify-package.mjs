@@ -12,6 +12,7 @@ const npm = (args, cwd = root) => execFileSync(process.execPath, [npmCli, ...arg
 npm(['run', 'build']);
 const packed = JSON.parse(npm(['pack', '--ignore-scripts', '--json']))[0];
 assert(!packed.files.some(file => /Mojangles[^/]*\.(ttf|otf|woff2?|ttc)$/i.test(file.path)), 'Local proprietary font must not enter the npm library.');
+assert(!packed.files.some(file => /ascii_sga\.png$/i.test(file.path)), 'User-owned SGA atlas must not enter the npm library.');
 const tarball = packed.filename;
 const tarPath = join(root, tarball);
 for (const major of [18, 19]) {
@@ -26,7 +27,7 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
-const exports = ['Alert','Badge','Button','Checkbox','Combobox','Dialog','IconButton','ItemSlot','Panel','PixelIcon','Progress','RadioGroup','Select','Separator','Slider','Switch','Tabs','Text','TextArea','TextField'];
+const exports = ['Alert','Badge','Button','Checkbox','Combobox','Dialog','EnchantingBook','EnchantingRunes','EnchantingTable','Grindstone','IconButton','InventoryGrid','ItemSlot','ItemTooltip','Panel','PixelIcon','PlayerInventory','Progress','RadioGroup','Select','Separator','Slider','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 assert.deepEqual(Object.keys(ui).sort(), exports.sort());
 const element = React.createElement;
 const output = renderToString(element(ui.Panel, {title:'Settings'},
@@ -34,6 +35,11 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
   element(ui.Checkbox, {label:'Coordinates', defaultChecked:true, name:'coordinates'}),
   element(ui.Button, {variant:'primary'}, 'Play'),
   element(ui.Text,{shadow:true},'Minecraft'),
+  element(ui.InventoryGrid,{label:'Inventory',items:[{name:'Diamond',count:64}],size:9}),
+  element(ui.Grindstone,{inputs:[null,null],result:null}),
+  element(ui.EnchantingTable,{options:[{id:'unbreaking',label:'Unbreaking',level:3}]}),
+  element(ui.EnchantingRunes,{text:'AIZ',atlasUrl:'/caller-owned-ascii_sga.png'}),
+  element(ui.EnchantingBook,{}),
   element(ui.Combobox, {label:'Difficulty',name:'difficulty',defaultValue:'normal',options:[{value:'normal',label:'Normal'}]}),
   element(ui.Tabs, {label:'Settings', items:[{value:'game',label:'Game',content:'Survival'}]}),
   element(ui.Dialog, {open:true,onOpenChange:()=>{},title:'SSR-safe dialog'})
@@ -43,15 +49,16 @@ assert.match(output, /World name/);
 assert.match(output, /role="tablist"/);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
-console.log('React '+React.version+': ESM, 20 exports, SSR, styles, fonts and licenses PASS');
+assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
+console.log('React '+React.version+': ESM, 28 exports, SSR, styles, fonts and licenses PASS');
 `);
   console.log(execFileSync(process.execPath, ['smoke.mjs'], { cwd: consumer, encoding: 'utf8' }).trim());
   await writeFile(join(consumer, 'consumer.tsx'), `
 import { createRef } from 'react';
-import { Button, Checkbox, Combobox, Dialog, RadioGroup, Slider, Tabs, Text, TextField } from 'mcbeui';
+import { Button, Checkbox, Combobox, Dialog, EnchantingBook, EnchantingRunes, EnchantingTable, Grindstone, InventoryGrid, ItemSlot, RadioGroup, Slider, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem } from 'mcbeui';
 const props: ButtonProps = {variant:'primary',size:'sm',type:'submit'};
 const items: TabItem[] = [{value:'game',label:'Game',content:'Survival'}];
@@ -59,6 +66,12 @@ export const demo = <>
   <Button {...props} ref={createRef<HTMLButtonElement>()}>Play</Button>
   <Text as="p" shadow ref={createRef<HTMLElement>()}>Minecraft</Text>
   <TextField label="World" name="world" ref={createRef<HTMLInputElement>()}/>
+  <ItemSlot item={{name:'Diamond',count:64}} ref={createRef<HTMLButtonElement>()}/>
+  <InventoryGrid label="Inventory" items={[{name:'Diamond'}]} onSlotAction={(index,action)=>String(index)+action}/>
+  <Grindstone inputs={[null,null]} onInputAction={(index,action)=>String(index)+action}/>
+  <EnchantingTable options={[{id:'unbreaking',label:'Unbreaking',level:3}]} onEnchant={id=>id.toUpperCase()}/>
+  <EnchantingBook ref={createRef<HTMLCanvasElement>()}/>
+  <EnchantingRunes text="AIZ" atlasUrl="/caller-atlas.png" ref={createRef<HTMLSpanElement>()}/>
   <Checkbox label="Enabled" indeterminate ref={createRef<HTMLInputElement>()}/>
   <Combobox label="Difficulty" name="difficulty" ref={createRef<HTMLButtonElement>()} options={[{value:'normal',label:'Normal'}]} onValueChange={value=>value.toUpperCase()}/>
   <Slider label="Distance" defaultValue={12} min={4} max={32} onValueChange={n=>n.toFixed(0)}/>

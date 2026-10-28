@@ -77,7 +77,15 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `Progress` | **必填** `label`；`value`、`max`、`showValue` | Classic common.progress_bar 纹理，高 10 CSS px，完整填充图按进度裁切；省略 value 为不确定进度，数值限制在 0…max；reduced motion 下静止 |
 | `Alert` | `title`；`variant`: info / success / warning / danger | danger 使用 role=alert，其余 role=status；可覆盖 role |
 | `Separator` | 原生 hr 属性 | 双层硬边分割线 |
-| `ItemSlot` | **必填** `label`；`selected`、`count`；原生 button 属性 | selected 映射 aria-pressed，计数纳入可访问名称；children 放自有图片或 SVG |
+| `ItemSlot` | `item`、`label`、`image`、`count`、`selected`、`durability`、`placeholder`、`showTooltip`、`onSecondaryAction`；原生 button 属性 | 真实 container cell，36×36 槽位 / 32×32 物品；蓝色选中、绿色悬停、白色键盘焦点；0 为空、1 隐藏角标；数量 / 耐久 / 提示 / 原生事件 |
+| `ItemTooltip` | **必填** `item`；div 属性 | 名称、lore、耐久说明；ItemSlot 自动处理焦点 / hover / Escape，并在 Dialog 内挂载提示 |
+| `InventoryGrid` | **必填** `label`、`items`；`size`、`columns`、`selectedIndex` / `defaultSelectedIndex`、`onSelectionChange`、`onSlotAction` | 单一 Tab 入口，方向键 / Home / End / Ctrl+Home/End，跳过禁用项；primary / secondary 操作事件 |
+| `PlayerInventory` | `items`、`hotbar`、`label`、`hotbarLabel`、`selectedIndex`、`onSelectionChange`、`onSlotAction` | 27 格背包与 9 格快捷栏，共享 0…35 的选中索引 |
+| `WorkstationFrame` | **必填** `title`；`inventory`、`hotbar`、`inventoryLabel`、`onClose`、`closeLabel`、`onInventoryAction` | 176×166 游戏像素 Classic 容器外框，以 GUI 2 显示；窄屏局部滚动 |
+| `Grindstone` | `inputs`: readonly [item, item]；`result`、`invalid`、`onInputAction`、`onTakeResult`；Frame 属性 | 砂轮双输入、结果、原始箭头 / 无效标记和玩家背包；结果由调用方提供 |
+| `EnchantingTable` | **必填** `options`；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`；Frame 属性 | 附魔台输入、青金石、三档选择、级别消耗与禁用态；book 支持自定义渲染 |
+| `EnchantingRunes` | **必填** `text`、`atlasUrl`；`scale`: 1…4、`color` | 按原始 SGA 图集采样字形与字距；图集由调用方提供，不随 npm 捆绑 |
+| `EnchantingBook` | `textureUrl`、`open`、`yaw`、`pitch`、`roll`、`onRendererError`；canvas 属性 | 真实原版材质的可选 WebGL 书本；mesh / 相机为待校准重建，不作为原生 renderer 的精确替代 |
 | `PixelIcon` | **必填** `name`；`size`，默认 20 | 16×16 原创 SVG 图标，默认装饰性 aria-hidden，图标按钮须提供标签 |
 
 ### 受控与非受控
@@ -144,6 +152,53 @@ const [open, setOpen] = useState(false);
 初次焦点在关闭按钮；也可在子表单中指定原生 `autoFocus`。原生 showModal 让背景失去交互，组件额外处理 Tab 首尾循环和滚动锁定。需要浏览器原生 HTMLDialogElement 支持，目标为现代 Chromium、Firefox、Safari。标题超过可用宽度时显示省略号，完整文字仍用于可访问名称；正文与按钮区域可随内容滚动。
 
 Panel 默认是 Classic 浅灰底和深灰文字，输入内容通过独立的 `--mc-input-text` 保持白色。Progress 使用通用灰色进度条模板；游戏生成世界的绿色进度 renderer 属于另一模板。逐项参考与还原范围见 FIDELITY.md。
+
+## 背包与工作站
+
+```tsx
+import type { InventoryItem } from 'mcbeui';
+import { ItemSlot, InventoryGrid, Grindstone, EnchantingTable } from 'mcbeui';
+
+const sword: InventoryItem = {
+  name: 'Diamond sword', image: '/my-assets/diamond-sword.png',
+  durability: 0.42, lore: ['Sharpness IV'], enchanted: true,
+};
+
+<ItemSlot item={sword} selected onSecondaryAction={() => splitStack()} />
+<InventoryGrid label="Inventory" items={items} size={27}
+  onSlotAction={(index, action) => handleInventory(index, action)} />
+<Grindstone inputs={[sword, null]} result={result}
+  inventory={items} onTakeResult={() => takeResult()} />
+<EnchantingTable item={sword} lapis={lapis} inventory={items}
+  options={[{ id: 'unbreaking', label: 'Unbreaking I', level: 3 }]}
+  onEnchant={id => requestEnchantment(id)} />
+```
+
+物品图由调用方提供，npm 不捆绑游戏物品纹理。展示页已使用实际 PNG，来源与 SHA 见 [item-materials.json](docs/item-materials.json)：当前钻石剑与公开 sample 有 22 像素差异，预览采用本机游戏的真实版本。草方块使用官方 GUI 类目图标，保留 17×17 原图的整数缩放，不冒充 native block renderer。`durability` 为剩余比例 0…1；组件显示角标、耐久和提示，并发出操作事件，不自行计算配方、附魔或搬移物品。右键 / Shift+F10 为 secondary，Enter / Space / 点击为 primary。原生 `onContextMenu` 可阻止默认 secondary 处理。
+
+槽位依据 common.container_item 重做，cell_image 的 PNG 为 10×10、逻辑 base_size 为 5×5，因此源切片为 2px、GUI 2 的显示边宽仍为 2px。普通 / 悬停 / 选中 / 聚焦已有独立原图对照。ItemTooltip、数量基线、耐久色相和 disabled filter 仍需游戏 renderer 截图校准。已移除伪紫色 glint；`enchanted` 仅保留数据标记，缺图时也不会自绘替代物。
+
+砂轮布局来自 grindstone_screen.json，附魔台来自 enchanting_screen.json；逐级锚点与百分比推导见 [workstation-geometry.json](docs/workstation-geometry.json)。附魔选项保留源浮点边界，不人为取整。砂轮空结果槽保留 hover / focus，通过 `aria-disabled` 与回调 guard 阻止无效领取。真实关闭按钮支持容器内部的原始键盘导航。
+
+`book` 提供原生自定义 3D renderer 的接入点，省略时不绘制假书图。展示页显式使用带真实材质的 `EnchantingBook` 重建；其 native mesh / 相机 / 光照仍待校准。`runes` 可传 `EnchantingRunes`，省略时不生成假英文符文，但按钮仍有完整可访问名称。原图集可仅在本地预览接入：
+
+```powershell
+python scripts/use-local-runes.py 'C:/XboxGames/Minecraft for Windows/Content'
+npm run dev
+```
+
+SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 的字号和基线。详见 [enchanting-renderer.json](docs/enchanting-renderer.json) 与 [WORKSTATION_QA.md](docs/WORKSTATION_QA.md)。库存布局保持固定游戏坐标，320px 窄屏在局部滚动。
+
+## 完整组件范围
+
+当前 **28 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[component-catalog.json](docs/component-catalog.json) 首轮整理 101 项，逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
+
+- 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
+- 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类、燃料、处理箭头、附魔选项、交易条目。
+- 完整 GUI：已有附魔台、砂轮；继续工作台、熔炉族、酿造、铁砧、锻造、切石、织布、制图、信标、箱子族、漏斗、发射 / 投掷、合成器、交易、玩家 / 创造 / 坐骑背包。
+- HUD 与页面组合：快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题提示、玩家列表，以及暂停 / 设置 / 世界 / 服务器 / 资源包等组合。
+
+完整 GUI 由这些基础零件组合。planned 项仍在开发，不作为已有导出；原生 3D renderer、最终像素取整与真实游戏整帧差异单独验收。
 
 ## 字体
 
@@ -213,9 +268,9 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、20 个导出、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、28 个导出、类型、CSS、皮肤、字体及许可路径。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可
 
-代码 MIT；字体 SIL OFL 1.1。展示页的像素图标、方块小岛和物品插画为本项目原创 SVG。Minecraft 名称属于其各自权利人。
+代码 MIT；开放字体 SIL OFL 1.1。像素图标、小岛和品牌方块是原创展示插画；物品、GUI 与书本素材的来源及权利说明见 THIRD_PARTY_NOTICES.md，它们不因代码的 MIT 许可而改变归属。Minecraft 名称属于其各自权利人。

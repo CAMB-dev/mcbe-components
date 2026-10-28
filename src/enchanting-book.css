@@ -1,0 +1,5 @@
+.mc-enchanting-book { display: block; width: 80px; height: 80px; max-width: 100%; image-rendering: pixelated; }
+.mc-enchanting-runes { display: inline-block; max-width: 100%; vertical-align: top; font-size: 0; white-space: normal; text-shadow: none; }
+.mc-enchanting-runes__word { display: inline-flex; vertical-align: top; }
+.mc-enchanting-runes__space { display: inline-block; vertical-align: top; }
+.mc-enchanting-runes__glyph { display: inline-block; flex: 0 0 auto; background: currentColor; mask-repeat: no-repeat; -webkit-mask-repeat: no-repeat; image-rendering: pixelated; }

@@ -3,14 +3,15 @@ import type { ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   Alert, Badge, Button, Checkbox, Combobox, Dialog, IconButton, ItemSlot, Panel, PixelIcon,
-  Progress, RadioGroup, Separator, Slider, Switch, Tabs, Text, TextArea, TextField,
+  Progress, RadioGroup, Separator, Slider, Switch, Tabs, Text, TextArea, TextField, InventoryGrid, Grindstone, EnchantingTable, EnchantingBook, EnchantingRunes,
 } from '../src';
-import type { PixelIconName } from '../src';
+import type { InventoryItem, PixelIconName } from '../src';
 import '../src/fonts.css';
 import '../src/styles.css';
 import './styles.css';
-import { hasGameFont } from 'virtual:mcbeui-game-font';
-import { GrassBlock, ItemSprite, VoxelIsland } from './art';
+import { hasGameFont, runeAtlasUrl } from 'virtual:mcbeui-game-font';
+import { GrassBlock, VoxelIsland } from './art';
+import { ItemSprite } from './materials';
 
 const navigation: { id: string; name: string; icon: PixelIconName; count?: string }[] = [
   { id: 'overview', name: 'Overview', icon: 'grid' },
@@ -20,7 +21,8 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'navigation', name: 'Tabs', icon: 'chevron', count: '01' },
   { id: 'feedback', name: 'Feedback', icon: 'chevron', count: '03' },
   { id: 'surfaces', name: 'Panels & dialogs', icon: 'chevron', count: '02' },
-  { id: 'inventory', name: 'Item slots', icon: 'chevron', count: '01' },
+  { id: 'inventory', name: 'Inventory & slots', icon: 'chevron', count: '03' },
+  { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
   { id: 'typography', name: 'Typography & icons', icon: 'chevron', count: '02' },
 ];
 const snippets: Record<string, string> = {
@@ -33,6 +35,8 @@ const snippets: Record<string, string> = {
   inventory: `<ItemSlot label="Diamond" count={64}\n  selected={selected === 'diamond'}\n  onClick={() => setSelected('diamond')}>\n  <img src="/your-diamond.png" alt="" />\n</ItemSlot>`,
   typography: `import 'mcbeui/styles.css';\nimport 'mcbeui/fonts.css'; // optional, self-hosted\n\n/* Bring your own licensed original font */\n:root {\n  --mc-font: 'Mojangles', 'Monocraft',\n    'Fusion Pixel', monospace;\n}`,
   'input-states': `<TextField label="World name" error="This name is taken." />\n<TextField label="World seed" defaultValue="8675309" disabled />\n<TextField label="World ID" defaultValue="MC-0420" readOnly />`,
+  'inventory-states': `<ItemSlot item={{ name: 'Diamond sword', icon: <YourSword />,\n  durability: 0.42, lore: ['Sharpness IV'] }} selected />\n<InventoryGrid label="Inventory" items={items} size={27}\n  onSlotAction={(index, action) => handleSlot(index, action)} />`,
+  workstations: `<Grindstone inputs={[first, second]} result={result}\n  inventory={items} onTakeResult={handleTake} />\n<EnchantingTable item={sword} lapis={lapis}\n  options={enchantments} onEnchant={handleEnchant} />`,
 };
 
 function Example({ id, title, detail, children, className = '' }: { id: string; title: string; detail: string; children: ReactNode; className?: string }) {
@@ -62,6 +66,9 @@ function App() {
   const [renderDistance, setRenderDistance] = useState(12);
   const [selectedItem, setSelectedItem] = useState(0);
   const [load, setLoad] = useState(64);
+  const [grindResult, setGrindResult] = useState(true);
+  const [grindOpen, setGrindOpen] = useState(true);
+  const [enchantOpen, setEnchantOpen] = useState(true);
   const search = useRef<HTMLInputElement>(null);
   const noticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -107,6 +114,8 @@ function App() {
     { name: 'Apples', sprite: 'apple' as const, count: 8 },
     { name: 'Emeralds', sprite: 'gem' as const, count: 16 },
   ];
+  const swordItem: InventoryItem = {name:'Enchanted diamond sword',icon:<ItemSprite name="sword"/>,durability:.42,lore:['Sharpness IV','Unbreaking III'],nameColor:'#55ffff',enchanted:true};
+  const bagItems: (InventoryItem|null)[] = [swordItem,{name:'Lapis lazuli stack',icon:<ItemSprite name="lapis"/>,count:32},{name:'Emerald stack',icon:<ItemSprite name="gem"/>,count:16},null,{name:'Apple stack',icon:<ItemSprite name="apple"/>,count:8}];
 
   return <div className="docs-app">
     <a className="skip-link" href="#main">Skip to content</a>
@@ -121,7 +130,7 @@ function App() {
       <div className="nav-group-label">GETTING STARTED</div>
       <nav aria-label="Component navigation">
         {navigation.filter(item => item.name.toLowerCase().includes(query.toLowerCase())).map((item, index) => <div key={item.id}>
-          {item.id === 'buttons' && <div className="nav-group-label components-label">COMPONENTS <span>20</span></div>}
+          {item.id === 'buttons' && <div className="nav-group-label components-label">COMPONENTS <span>28</span></div>}
           <a className={`sidebar-link ${active === item.id ? 'is-active' : ''}`} href={`#${item.id}`} aria-current={active === item.id ? 'location' : undefined} onClick={() => setActive(item.id)}>
             <PixelIcon name={index === 0 && item.id === 'overview' ? 'grid' : item.icon} size={14}/><span>{item.name}</span>{item.count && <small>{item.count}</small>}
           </a>
@@ -143,7 +152,7 @@ function App() {
       </section>
 
       <div className="install-strip"><span className="install-prompt" aria-hidden="true">$</span><code>npm install ./mcbeui-0.1.0.tgz</code><span className="local-tag">local package</span><button type="button" onClick={copyInstall} aria-label={copied ? 'Copy: install command copied' : 'Copy install command'}><PixelIcon name={copied ? 'check' : 'copy'} size={16}/>{copied ? 'Copied' : 'Copy'}</button></div>
-      <div className="section-intro"><div><span className="eyebrow">THE BUILDING BLOCKS</span><h2>Familiar pixels. Real components.</h2></div><span className="section-counter">20 COMPONENTS <span>↓</span></span></div>
+      <div className="section-intro"><div><span className="eyebrow">THE BUILDING BLOCKS</span><h2>Familiar pixels. Real components.</h2></div><span className="section-counter">28 COMPONENTS <span>↓</span></span></div>
 
       <Example id="buttons" title="Buttons" detail="That satisfying click. Every single time.">
         <div className="button-showcase"><div className="button-samples">
@@ -197,16 +206,44 @@ function App() {
         </Example>
         <Example id="surfaces" title="Panels & dialogs" detail="A home for every interaction.">
           <div className="demo-stack"><Panel title={<><PixelIcon name="book" size={16}/> World settings</>} footer={<Button size="sm" fullWidth onClick={() => setDialog(true)}>Open dialog <PixelIcon name="arrow" size={16}/></Button>}>
-            <div className="world-card"><GrassBlock size={48}/><div><span>{worldName || 'Untitled world'}</span><small>Survival · Normal difficulty</small></div></div>
+            <div className="world-card"><ItemSprite name="grass"/><div><span>{worldName || 'Untitled world'}</span><small>Survival · Normal difficulty</small></div></div>
           </Panel></div>
         </Example>
       </div>
 
       <Example id="inventory" title="Item slots" detail="A few things for the journey.">
-        <div className="inventory-preview"><div className="inventory-main"><div className="inventory-bar">{items.map((item, index) => <ItemSlot key={item.name} label={item.name} count={item.count} selected={selectedItem === index} onClick={() => setSelectedItem(index)}>{item.sprite ? <ItemSprite name={item.sprite}/> : <GrassBlock size={36}/>}</ItemSlot>)}
+        <div className="inventory-preview"><div className="inventory-main"><div className="inventory-bar">{items.map((item, index) => <ItemSlot key={item.name} label={item.name} count={item.count} selected={selectedItem === index} onClick={() => setSelectedItem(index)}><ItemSprite name={item.sprite ?? 'grass'}/></ItemSlot>)}
           {[5,6,7,8].map(index => <ItemSlot key={index} label={`Empty slot ${index + 1}`} selected={selectedItem === index} onClick={() => setSelectedItem(index)}/>)}</div>
           <span className="inventory-selection" aria-live="polite">{items[selectedItem]?.name ?? 'Empty slot'}</span></div>
           <div className="inventory-note"><PixelIcon name="heart" size={20}/><span>A familiar place<br/>for your favorite things.</span></div></div>
+      </Example>
+
+      <Example id="inventory-states" title="ItemSlot, rebuilt" detail="Container cells, 16×16 item art, counts, durability, and item tooltips.">
+        <div className="demo-stack"><div className="slot-state-examples">
+          <div><ItemSlot label="Empty revised slot"/><span>EMPTY</span></div>
+          <div><ItemSlot item={{name:'Single emerald',icon:<ItemSprite name="gem"/>,count:1}}/><span>SINGLE</span></div>
+          <div><ItemSlot item={{name:'Full emerald stack',icon:<ItemSprite name="gem"/>,count:64}}/><span>STACK</span></div>
+          <div><ItemSlot item={swordItem}/><span>DURABILITY</span></div>
+          <div><ItemSlot item={{name:'Selected apple',icon:<ItemSprite name="apple"/>}} selected/><span>SELECTED</span></div>
+          <div><ItemSlot item={{name:'Unavailable emerald',icon:<ItemSprite name="gem"/>}} disabled/><span>DISABLED</span></div>
+        </div><InventoryGrid label="Interactive inventory" items={bagItems} size={18} onSlotAction={(index,action)=>notify(`${action === 'secondary' ? 'Secondary action' : 'Selected'}: slot ${index+1}`)}/>
+        <p className="inventory-help">Arrow keys move between slots. Enter selects. Right-click or Shift+F10 triggers the secondary action. Escape dismisses an item tooltip.</p></div>
+      </Example>
+
+      <Example id="workstations" title="Workstation GUIs" detail="Classic Bedrock container layouts, exposed as React components.">
+        <div className="workstation-examples">
+          <div><h3>Grindstone</h3>{grindOpen && <Grindstone inputs={[swordItem,null]} result={grindResult ? {...swordItem,enchanted:false,lore:['Repaired item']} : null} inventory={bagItems}
+            onClose={()=>setGrindOpen(false)}
+            onInputAction={(index,action)=>notify(`${action}: grindstone input ${index+1}`)}
+            onTakeResult={()=>{setGrindResult(false);notify('Grindstone result taken.');}}
+            onInventoryAction={(index,action)=>notify(`${action}: inventory slot ${index+1}`)}/>}
+            <Button size="sm" onClick={()=>{setGrindResult(true);setGrindOpen(true);}}>Reset grindstone example</Button></div>
+          <div><h3>Enchanting table</h3>{enchantOpen ? <EnchantingTable item={swordItem} lapis={{name:'Lapis lazuli',icon:<ItemSprite name="lapis"/>,count:32}} inventory={bagItems}
+            onClose={()=>setEnchantOpen(false)}
+            book={<EnchantingBook/>}
+            options={[{id:'unbreaking',label:'Unbreaking I',level:3,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="elder light"/> : undefined},{id:'sharpness',label:'Sharpness III',level:15,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="bless creature"/> : undefined},{id:'fortune',label:'Fortune III',level:30,disabled:true,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="enchant scroll"/> : undefined}]}
+            onEnchant={id=>notify(`Enchantment requested: ${id}`)} onInputAction={slot=>notify(`Selected enchanting ${slot} slot.`)}/> : <Button onClick={()=>setEnchantOpen(true)}>Open enchanting table</Button>}</div>
+        </div><p className="workstation-note">Original game materials. Item movement and crafting rules are supplied by your app. The book uses a textured renderer reconstruction; its native camera and mesh are still being calibrated.</p>
       </Example>
 
       <Example id="typography" title="Typography & icons" detail="The details that make it feel like home.">

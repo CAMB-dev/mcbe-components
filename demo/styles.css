@@ -126,11 +126,18 @@ h1 > span { color: #a0d774; }
 .inventory-preview { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 32px 28px; background-image: radial-gradient(#464749 1px, transparent 1px); background-size: 16px 16px; }
 .inventory-main { display: flex; flex-direction: column; align-items: center; gap: 14px; min-width: 0; }
 .inventory-bar { display: flex; flex-wrap: wrap; padding: 4px; border: 2px solid #111112; background: #c6c6c6; box-shadow: inset 2px 2px #ffffff, inset -2px -2px #58585a; }
-.inventory-bar .mc-slot { width: 36px; height: 36px; font-size: 14px; }
+.inventory-bar .mc-slot { width: 36px; height: 36px; }
 .inventory-bar svg { overflow: visible; }
 .inventory-selection { font-size: 10px; color: #e4e5e6; text-shadow: 2px 2px #111112; }
 .inventory-note { display: flex; align-items: start; gap: 12px; color: #b6b8bb; font-size: 9px; }
 .inventory-note > svg { color: #e76d73; margin-top: 3px; }
+.slot-state-examples { display: flex; flex-wrap: wrap; gap: 28px; align-items: start; }
+.slot-state-examples > div { display: grid; gap: 10px; justify-items: center; }
+.slot-state-examples > div > span { font-size: 9px; color: #c0c0c0; }
+.inventory-help, .workstation-note { font-size: 12px; line-height: 20px; color: #c0c0c0; margin: 12px 0; }
+.workstation-examples { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,364px),1fr)); gap: 24px; padding: 16px; }
+.workstation-examples h3 { font-size: 16px; margin: 8px 6px 16px; }
+.workstation-note { padding: 0 24px 16px; }
 .type-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 28px; }
 .font-specimen { font-family: var(--mc-font); margin: 12px 0 8px; font-size: var(--mc-font-size-lg); color: #ffffff; }
 .font-shadow-comparison { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; }

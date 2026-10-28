@@ -16,6 +16,40 @@
     }
   ],
   "factsInGamePixels": {
+    "containerRootSize": [
+      176,
+      166
+    ],
+    "containerSlotSize": [
+      18,
+      18
+    ],
+    "containerItemSize": [
+      16,
+      16
+    ],
+    "containerCellTexture": "textures/ui/cell_image",
+    "containerSelectedTexture": "textures/ui/recipe_book_touch_cell_selected",
+    "containerStackCountOffset": [
+      0,
+      1
+    ],
+    "containerDurabilitySize": [
+      12,
+      1
+    ],
+    "containerDurabilityOffset": [
+      0,
+      5
+    ],
+    "containerHotbarSize": [
+      162,
+      18
+    ],
+    "containerHotbarOffset": [
+      0,
+      -5
+    ],
     "panelTexture": "textures/ui/dialog_background_opaque",
     "dialogTexture": "dialog_background_hollow_3",
     "dialogTitleOffset": [
@@ -80,7 +114,7 @@
     }
   },
   "assetComparison": {
-    "entries": 68,
+    "entries": 94,
     "differences": 0
   }
 }

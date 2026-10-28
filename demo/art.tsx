@@ -45,34 +45,3 @@ export function VoxelIsland() {
     <path fill="#67844a" d="M111 68h2v2h-2zm215-22h2v2h-2zm-21 151h2v2h-2z"/>
   </svg>;
 }
-
-const sprites = {
-  diamond: [
-    '     aaaa       ', '   aabbbbaa     ', '  abcccccbba    ', ' abccddccc bba  '.replace(' ', ''),
-    ' abccddcccbba   ', ' abcccccccbba   ', '  abccccbba     ', '   abbbbba      ', '    aabba       ', '     aa         ',
-  ],
-  sword: [
-    '           aa   ', '          abca  ', '         abcca  ', '        abcca   ', '       abcca    ', '      abcca     ',
-    '  dd abcca      ', '  dedacca       ', '   dedaa        ', '    ded         ', '   dedd         ', '  dedd          ', ' dedd           ', '  dd            ',
-  ],
-  apple: [
-    '       dd       ', '      dd bb     ', '     dd bb      ', '  aaaa aaaa     ', ' accccacccca    ',
-    'acddcccccbbca   ', 'acddccccbb bca  '.replace(' ', ''), 'acccccccbbbca   ', ' acccccbbbca    ', '  acccbbbca     ', '   aa aaa       ',
-  ],
-  gem: [
-    '     aa         ', '    abca        ', '   abccca       ', '  abccccca      ', ' abccddccca     ', 'abccddddccca    ',
-    'abccddddcbba    ', ' abccddcbba     ', '  abcccbba      ', '   abcbba       ', '    abba        ', '     aa         ',
-  ],
-} as const;
-const palettes = {
-  diamond: { a: '#155d61', b: '#26a9a9', c: '#54d9d0', d: '#c9fff4' },
-  sword: { a: '#185a5e', b: '#21a8a7', c: '#83eee1', d: '#573a1f', e: '#b28345' },
-  apple: { a: '#6e1723', b: '#a52030', c: '#e34244', d: '#fba199' },
-  gem: { a: '#193e34', b: '#24764e', c: '#37c378', d: '#a3f9ad' },
-} as const;
-export function ItemSprite({ name }: { name: keyof typeof sprites }) {
-  const palette: Record<string, string> = palettes[name];
-  return <svg width="36" height="36" viewBox="0 0 16 16" shapeRendering="crispEdges" aria-hidden="true">
-    {sprites[name].flatMap((line, y) => [...line].map((char, x) => char !== ' ' && <rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" fill={palette[char]}/>))}
-  </svg>;
-}

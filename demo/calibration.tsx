@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import { useState } from 'react';
-import { Button, Checkbox, Combobox, Dialog, ItemSlot, Panel, Progress, RadioGroup, Select, Slider, Switch, Tabs, Text, TextField } from '../src';
+import { Button, Checkbox, Combobox, Dialog, EnchantingRunes, EnchantingTable, Grindstone, InventoryGrid, ItemSlot, Panel, Progress, RadioGroup, Select, Slider, Switch, Tabs, Text, TextField } from '../src';
 import '../src/fonts.css';
 import '../src/styles.css';
-import { hasGameFont } from 'virtual:mcbeui-game-font';
+import { hasGameFont, runeAtlasUrl } from 'virtual:mcbeui-game-font';
 import './calibration.css';
 import type { ReactNode } from 'react';
 
@@ -41,6 +41,7 @@ function Calibration() {
       <Sample id="switch-disabled"><Switch label="Disabled switch" disabled/></Sample>
       <Sample id="switch-on-disabled"><Switch label="Disabled enabled switch" defaultChecked disabled/></Sample>
       <Sample id="slot"><ItemSlot label="Empty item slot"/></Sample>
+      <Sample id="slot-selected"><ItemSlot label="Selected item slot" selected/></Sample>
       <Sample id="slider"><Slider label="Render distance" defaultValue={50}/></Sample>
       <Sample id="tabs"><Tabs label="Calibration tabs" defaultValue="first" items={[
         { value: 'first', label: <span className="calibration-sr">Selected</span>, content: 'First panel' },
@@ -76,9 +77,17 @@ function Calibration() {
         <Slider label="Panel brightness" defaultValue={50}/>
         <Switch label="Panel multiplayer" defaultChecked/>
       </Panel></Sample>
+      <Sample id="slot-single"><ItemSlot item={{name:'Single item',icon:'D',count:1}}/></Sample>
+      <Sample id="slot-stack"><ItemSlot item={{name:'Stack of items',icon:'D',count:64,lore:['A useful stack.']}}/></Sample>
+      <Sample id="slot-zero"><ItemSlot item={{name:'Zero items',icon:'D',count:0}}/></Sample>
+      <Sample id="slot-durability"><ItemSlot item={{name:'Damaged tool',icon:'T',durability:.75}}/></Sample>
+      <Sample id="inventory-grid"><InventoryGrid label="Keyboard inventory" columns={3} size={9} items={[{name:'First item'}, {name:'Disabled item',disabled:true}, {name:'Third item'}]}/></Sample>
+      <Sample id="grindstone"><Grindstone/></Sample>
+      <Sample id="enchanting"><EnchantingTable className="calibration-enchanting" options={[{id:'first',label:'First',level:3},{id:'second',label:'Second',level:15},{id:'locked',label:'Locked',level:30,disabled:true}]}/></Sample>
+      <Sample id="enchanting-runes">{runeAtlasUrl && <EnchantingRunes atlasUrl={runeAtlasUrl} text="AIZ" style={{background:'#28292a'}}/>}</Sample>
     </div>
     <p>These samples isolate component surfaces. The test runner renders original reference PNGs independently, applies their nine-slice rules, and compares every output pixel. Text is validated separately.</p>
-    <Dialog open={dialog} onOpenChange={setDialog} title="Settings dialog" className="calibration-close-dialog"><Combobox label="Dialog difficulty" defaultValue="normal" options={difficulties}/></Dialog>
+    <Dialog open={dialog} onOpenChange={setDialog} title="Settings dialog" className="calibration-close-dialog"><Combobox label="Dialog difficulty" defaultValue="normal" options={difficulties}/><ItemSlot label="Dialog item" item={{name:'Dialog item',icon:'D',lore:['Inside the dialog']}}/></Dialog>
     <Dialog open={surfaceDialog} onOpenChange={setSurfaceDialog} title="Surface dialog" className="calibration-surface-dialog"/>
   </main>;
 }

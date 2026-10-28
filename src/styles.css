@@ -1,4 +1,7 @@
 @import './textures.css';
+@import './inventory.css';
+@import './workstations.css';
+@import './enchanting-book.css';
 /* mcbeui: scoped component styles; importing this file does not reset the page. */
 :root {
   --mc-font: 'Mojangles Pixel', 'MCBE Pixel', 'Mojangles', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace;
@@ -278,13 +281,6 @@
 .mc-alert--warning { border-color: #8b7431; border-inline-start-color: #ffe28a; background: #3d3319; }
 .mc-alert--danger { border-color: #9e454e; border-inline-start-color: #ffb1b5; background: #461f23; }
 .mc-separator { border: 0; height: 2px; background: #171819; box-shadow: 0 2px #48494a; margin-block: 20px; }
-.mc-slot { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 2px; border: 0; background: var(--mc-skin-slot) 0 0 / 100% 100% no-repeat; color: #ffffff; box-shadow: none; cursor: pointer; image-rendering: pixelated; }
-@media (hover: hover) { .mc-slot:hover:not(:disabled) { background-image: var(--mc-skin-slot-hover); } }
-.mc-slot--selected { outline: 2px solid #ffffff; outline-offset: 0; z-index: 1; }
-.mc-slot:disabled { opacity: .5; cursor: not-allowed; }
-.mc-slot__item { display: grid; place-items: center; width: 100%; height: 100%; }
-.mc-slot__item img, .mc-slot__item svg { max-width: 100%; max-height: 100%; image-rendering: pixelated; }
-.mc-slot__count { position: absolute; inset-inline-end: 4px; bottom: 0; text-shadow: 2px 2px #292929; line-height: 1.2; }
 @media (forced-colors: active) {
   .mc-button, .mc-input, .mc-select, .mc-tab, .mc-checkbox, .mc-radio, .mc-switch, .mc-switch > span, .mc-range, .mc-slot { border-color: ButtonText; }
   .mc-choice__input:checked + .mc-checkbox, .mc-choice__input:checked + .mc-radio, .mc-choice__input:checked + .mc-switch, .mc-tab[aria-selected='true'] { outline: 2px solid Highlight; }
