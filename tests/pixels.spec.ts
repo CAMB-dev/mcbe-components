@@ -304,7 +304,7 @@ test('SGA runes sample the original game atlas without interpolated pixels',asyn
   for(const glyph of glyphs){for(let y=0;y<16;y++)for(let x=0;x<glyph.advance;x++){
     const from=((glyph.top+Math.floor(y/2))*atlas.width+glyph.left+Math.floor(x/2))*4;
     const to=(y*expected.width+offset+x)*4,alpha=atlas.data[from+3]!/255;
-    for(let channel=0;channel<3;channel++)expected.data[to+channel]=Math.round([104,94,74][channel]!*alpha+[40,41,42][channel]!*(1-alpha));
+    for(let channel=0;channel<3;channel++)expected.data[to+channel]=Math.round([104,93,73][channel]!*alpha+[40,41,42][channel]!*(1-alpha));
   }offset+=glyph.advance;}
   await page.goto('/calibration.html');
   const actual=PNG.sync.read(await page.locator('[data-case="enchanting-runes"] .mc-enchanting-runes').screenshot());

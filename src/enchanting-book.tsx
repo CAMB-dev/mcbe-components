@@ -12,7 +12,7 @@ export interface EnchantingRunesProps extends Omit<HTMLAttributes<HTMLSpanElemen
 // Measured alpha bounds in the original 128×128 SGA atlas, A–Z/a–z cells.
 const runeWidths = [5, 5, 2, 5, 5, 5, 3, 5, 1, 1, 5, 3, 5, 4, 4, 3, 5, 4, 2, 5, 5, 5, 5, 5, 3, 5];
 export const EnchantingRunes = forwardRef<HTMLSpanElement, EnchantingRunesProps>(function EnchantingRunes({
-  text, atlasUrl, scale = 2, color = '#685e4a', className, style, ...props
+  text, atlasUrl, scale = 2, color = '#685d49', className, style, ...props
 }, ref) {
   return <span role="img" aria-label={text} {...props} ref={ref}
     className={['mc-enchanting-runes', className].filter(Boolean).join(' ')}
@@ -35,7 +35,7 @@ export interface EnchantingBookProps extends CanvasHTMLAttributes<HTMLCanvasElem
   open?: number;
   /** Position within a page-turn cycle. Controlled, 0–1; no animation timer. */
   pageFlip?: number;
-  /** Native-PNG calibrated face lighting, or the unchanged atlas for inspection. */
+  /** Source-shader candidate lighting checked against native PNGs, or the unchanged atlas. */
   lighting?: 'calibrated' | 'unlit';
   /** Camera adjustments in degrees; the default pitch is calibrated from native PNGs. */
   yaw?: number;
@@ -50,8 +50,9 @@ type Uv = readonly [number, number, number, number];
 /**
  * Optional textured reconstruction, NOT the native enchanting_book_renderer.
  * Full page blocks, covers and turning leaves use Mojang's Java BookModel
- * dimensions and box UV layout. Camera pitch and face lighting are calibrated
- * against native Bedrock PNGs; native mesh extraction and exact edge raster
+ * dimensions and box UV layout. Camera pitch is calibrated against native PNGs;
+ * face light follows an installed Bedrock entity-material shader candidate.
+ * Book material/uniform binding, native mesh extraction and exact edge raster
  * agreement remain unverified. See docs/enchanting-renderer.json.
  */
 export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>(function EnchantingBook({
@@ -110,10 +111,13 @@ export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>
           const magnitude=Math.hypot(...normal) || 1;
           normal=[normal[0]/magnitude,normal[1]/magnitude,normal[2]/magnitude];
           normal=rotate(rotate(rotate(normal,'y',fold),'x',Math.PI),'y',(yaw-(1-bounded)*90)*degrees);
-          // Empirical directional weights in GUI pose space, before camera
-          // pitch/roll. They fit opaque native cover, page and page-edge texels;
-          // they are not a claim to have recovered the native shader equation.
-          const shade=lighting==='unlit' ? 1 : .579*normal[0]**2+(normal[1]>=0 ? .995 : .614)*normal[1]**2+.72*normal[2]**2;
+          normal=rotate(rotate(normal,'x',pitch*degrees),'z',roll*degrees);
+          // Installed 1.26.6005 Entity/MeshFallback vertex DXBC supplies this
+          // equation, assuming white TileLightColor, TileLightIntensity=1 and
+          // OverlayColor.a=0. The book's actual material/uniform binding is
+          // unproven. One fixed equation improves both native reference states;
+          // it is not a recovered native enchanting_book_renderer.
+          const shade=lighting==='unlit' ? 1 : .725-.1*normal[0]**2+.1*normal[2]**2+.275*normal[1];
           for (const index of [0,1,2,0,2,3]) {
             coordinates.push(...transform(points[index]!,fold,pivot));
             uvs.push(corners[index]![0]!/64,corners[index]![1]!/32);
@@ -165,6 +169,6 @@ export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>
     return () => { disposed=true; image.onload=null; image.onerror=null; cleanup(); };
   },[textureUrl,open,pageFlip,lighting,yaw,pitch,roll,width,height,onRendererError]);
   return <canvas {...props} ref={element => { canvas.current=element; if (typeof forwardedRef === 'function') forwardedRef(element); else if (forwardedRef) forwardedRef.current=element; }}
-    role="img" aria-label={label} width={width} height={height} data-fidelity="renderer-reconstruction" data-geometry-source="java-1.21.5-book-model" data-lighting={lighting} data-calibration-source="bedrock-1.26.6005-native-png"
+    role="img" aria-label={label} width={width} height={height} data-fidelity="renderer-reconstruction" data-geometry-source="java-1.21.5-book-model" data-lighting={lighting} data-lighting-source={lighting==='unlit'?'unmodified-atlas':'bedrock-1.26.6005-dxbc-candidate'} data-calibration-source="bedrock-1.26.6005-native-png"
     className={['mc-enchanting-book',className].filter(Boolean).join(' ')}/>;
 });

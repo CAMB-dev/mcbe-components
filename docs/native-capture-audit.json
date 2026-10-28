@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-29",
+  "gameVersion": "1.26.6005.0",
+  "purpose": "Determine whether fixed edge pixels in saved native references were inherited from an old Paint canvas.",
+  "experiment": {
+    "steps": [
+      "Create a new blank Paint image, initially 1536x864.",
+      "Set Image Properties to pixels, width1 and height1; verify the one-pixel canvas in the native UI.",
+      "Capture the active Minecraft pause window using Alt+PrintScreen.",
+      "Paste directly into that one-pixel document without reopening an earlier image.",
+      "Observe pasted object and expanded canvas both2568x1400, then save PNG."
+    ],
+    "savedFile": ".cache/native-capture-audit/pause-from-one-pixel-canvas.png",
+    "sha256": "cd74e93a68d759d882493ca52d125c9f3b9a93fdd2bfb835b3121a190b40093d",
+    "size": [2568, 1400],
+    "prePasteCanvasEvidence": "Native Paint Image Properties and one-pixel canvas/status observations; no separate pre-paste PNG was saved.",
+    "observedRgba": {
+      "bottomLeftPixelsX0To2": [[255,0,0,255],[0,255,0,255],[0,0,255,255]],
+      "leftPixelsX3To5AtY10": [[227,227,227,255],[255,255,255,255],[240,240,240,255]],
+      "bottomPixelsAtX100Y1397To1399": [[240,240,240,255],[160,160,160,255],[105,105,105,255]]
+    }
+  },
+  "conclusions": [
+    "A previous large Paint canvas cannot account for the repeated multi-pixel edge patterns: they are present after pasting into the verified one-pixel document.",
+    "This experiment does not establish whether those edges are a window frame, capture annotation or another part of the clipboard acquisition path.",
+    "Saved PNG dimensions are not yet a verified game client rectangle. Do not remove the edges or infer a1397px client height from them alone.",
+    "Interior control ROIs have separately recorded hashes and complete domains; their measurements do not certify the entire window frame."
+  ],
+  "independentAcquisitionStatus": "A second native-browser clipboard path was not completed. The in-app browser uses an isolated virtual clipboard; the system-browser attempt was stopped before URL verification. No alternative path is claimed as a second measurement.",
+  "distribution": "Metadata only. Native captures remain in ignored local cache."
+}

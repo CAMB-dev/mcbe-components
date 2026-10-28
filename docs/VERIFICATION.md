@@ -2,6 +2,16 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
+## 附魔后续修正
+
+书本照明候选与符文默认色冻结后，附魔 renderer、附魔选项、工作站和基础像素四个文件的相关测试 **91/91 PASS**（同批约72秒，`.cache/enchanting-source-final.json`）。新增两个符文用例覆盖默认色 / 宿主覆盖及三张原生截图的独立字节检查。与下面两批历史整合按完整用例标题和 project 合并，当前684个唯一用例中679个通过、5个预期跳过、0个未解决失败；**不是单次684项全绿**。
+
+只读材质检查脚本 `python scripts/inspect-native-enchanting-materials.py` 在本机四个固定 DXBC stage 的哈希、字节范围和算术依赖检查均通过。独立 agent 从原始 binary 重新反汇编，另跑实际生产原生截图测试3/3通过。在白光 / 强度1 / overlay0假设下，同一照明候选使完整200×165区域的RGB MAE：打开0.415081→0.343333、关闭0.176596→0.165404；差异像素2239→1683、1281→656。每次比较保留全部33000像素，没有边缘裁切或 mask。两张均为已知校准样本；最大通道差仍166 / 147，原生模型、材质绑定及 uniform 未确认。
+
+符文六行实心像素均为104/93/73，默认色据此改为 `#685d49`，关闭状态无字作为负控。颜色用ROI不代表完整字形；原生符文亚像素边缘和基线仍待校准。细节见 [ENCHANTING_QA.md](ENCHANTING_QA.md)。新1×1 Paint画布粘贴实验排除了旧大画布残留，尚未确认整帧客户区；见 [native-capture-audit.json](native-capture-audit.json)。
+
+最终源码的 `npm run verify:package` 通过完整构建 / 类型检查，以及实际tarball在React 18.3.1 / 19.3.1的112值导入、109组件SSR、消费类型、CSS / 字体 / 45份原始材质与许可验证；日志 `.cache/package-verification-enchanting.log`。随后生产预览检查通过，31张页面截图完成、错误与资源失败为空，日志 `.cache/preview-enchanting.log`。本段验证记录补入后只重打文档包，并逐条确认其他包文件与实际验证过的tarball字节一致。
+
 ## 本轮：109 个组件、3 个数据导出
 
 | 检查 | 结果 | 范围 |

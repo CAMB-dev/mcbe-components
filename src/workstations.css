@@ -37,7 +37,7 @@
 .mc-enchanting__option:active:not(:disabled) { --mc-enchantment-skin: var(--mc-skin-enchanting-disabled); }
 .mc-enchanting__dust { position: absolute; left: 6px; top: calc(50% - 11px); width: 26px; height: 22px; background: var(--mc-enchantment-dust) center / 100% 100%; }
 .mc-enchanting__option:disabled .mc-enchanting__dust { background-image: var(--mc-enchantment-dust-disabled); }
-.mc-enchanting__runes { position: absolute; left: 36px; top: calc(50% - 8px); width: 168px; height: 32px; text-align: left; font-family: var(--mc-rune-font, var(--mc-font)); font-size: var(--mc-rune-font-size, var(--mc-font-size)); line-height: 16px; overflow: hidden; color: #685e4a; text-shadow: none; }
+.mc-enchanting__runes { position: absolute; left: 36px; top: calc(50% - 8px); width: 168px; height: 32px; text-align: left; font-family: var(--mc-rune-font, var(--mc-font)); font-size: var(--mc-rune-font-size, var(--mc-font-size)); line-height: 16px; overflow: hidden; color: #685d49; text-shadow: none; }
 /* GUI5 lossless Bedrock26.60 capture: opaque success127/255/31,
    shadow32/64/8 at a one-game-pixel offset. Failure remains separately calibrated. */
 .mc-enchanting__cost { position: absolute; right: 4px; bottom: 4px; color: #7fff1f; text-shadow: 2px 2px var(--mc-enchantment-cost-shadow, #204008); }

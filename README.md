@@ -253,7 +253,7 @@ ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随
 
 砂轮布局来自 grindstone_screen.json，附魔台来自 enchanting_screen.json；逐级锚点与百分比推导见 [workstation-geometry.json](docs/workstation-geometry.json)。附魔选项保留源浮点边界，不人为取整。砂轮空结果槽保留 hover / focus，通过 `aria-disabled` 与回调 guard 阻止无效领取。真实关闭按钮支持容器内部的原始键盘导航。
 
-`book` 提供原生自定义 3D renderer 的接入点，省略时不绘制假书图。展示页显式使用带真实材质的 `EnchantingBook` 重建；默认 `pitch={20}` 与 `lighting="calibrated"` 根据本机 Bedrock 1.26.6005.0 无损 PNG 校准视角和分面颜色，`lighting="unlit"` 可检查未着色图集。网格仍是重建，闭合 / 打开样本的校准不等于所有翻页动画和整屏 renderer 均已吻合。`runes` 可传 `EnchantingRunes`，省略时不生成假英文符文，但按钮仍有完整可访问名称。原图集可仅在本地预览接入：
+`book` 提供原生自定义 3D renderer 的接入点，省略时不绘制假书图。展示页显式使用带真实材质的 `EnchantingBook` 重建；默认 `pitch={20}` 由本机无损 PNG 校准，`lighting="calibrated"` 使用本机 Entity / MeshFallback 着色器支持的候选照明式，在明确的白光 / 强度 / overlay 假设下同时改善两个已知状态。实际书本材质绑定仍未确认，网格仍参考 Java BookModel；闭合 / 打开样本的改善不等于所有翻页动画和整屏 renderer 均已吻合。`lighting="unlit"` 可检查未着色图集，完整来源与残差见 [附魔 QA](docs/ENCHANTING_QA.md)。`runes` 可传 `EnchantingRunes`，默认色 `#685d49` 已核对原生字节；省略时不生成假英文符文，但按钮仍有完整可访问名称。原图集可仅在本地预览接入：
 
 ```powershell
 python scripts/use-local-runes.py 'C:/XboxGames/Minecraft for Windows/Content'

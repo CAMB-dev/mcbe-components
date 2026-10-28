@@ -82,8 +82,16 @@ Alert、Badge、部分扩展状态以及 Panel / Dialog 的任意内容排版仍
 
 另在暂停 / 死亡保存图外围发现固定灰白条纹和底角 RGB 标记。保存 PNG 的尺寸尚不能直接等同游戏客户区尺寸，需进一步核实剪贴板位图范围与 Paint 粘贴原点；没有把这些外围像素擅自当成 OS 边框裁掉，也没有据此消除死亡页尚未认证的 1px 位移。当前材质 / 库存测量采用明确登记的完整控件 ROI，不能扩展为整帧客户区认证。
 
+后续已用新建并确认的 1×1 Paint 空画布重复粘贴，仍得到2568×1400对象和相同多像素边缘标记，因此排除旧大画布残留这一解释；仍未确定其是否属于客户区外框或采集路径标记。独立系统浏览器路径未完成，没有把不成功的第二路径当成验证结果。过程、固定字节和PNG哈希见 [native-capture-audit.json](native-capture-audit.json)。
+
 原生死亡页稳定截图显示旧 `death_screen.json` 布局与实际页面不一致。只读审计安装版 HTML UI 的 gameplay JS / CSS，找到原生死亡路由、32rem 列宽、间隔比例、颜色以及 Minecraft Ten / Seven 字体声明；新默认配置据此实现，`variant="classic"` 保留原 JSON 配置。原始私有 bundle、字体和原生截图不随库分发。本机字体桥另外接入 Ten / Seven / Noto Sans SC；公共回退字体的字形差异仍然存在，相关哈希与限制见 [local-hbui-fonts.json](local-hbui-fonts.json) 和 [game-controls-geometry.json](game-controls-geometry.json)。不能把 HTML UI 与 Classic 的文字阴影和按钮规范混为同一组令牌。
 
 加载页依据 `progress` 的原版 modal / fancy loading bars 分支补入真实灰框、内层、绿色图集与标题图，原紧凑组合单独保留。世界全景由宿主提供；没有用手绘背景替代游戏渲染。库存原图检查另修复 preview border 的中心 fill、交易禁用底图的浏览器零切片绘制问题、经验条对应 DOM 图层选择，以及创造库存的标题对齐、搜索宽度和网格居中。世界缩略图的 `%y` 应从自身高度求宽度，早期按父高度的推导已撤回。
 
 BlockPreview / BannerPreview 的 45 份 PNG / TGA 保持原始字节，解码保留 175 / 176 等半透明 alpha，旗帜图案直接使用原始 UV 与掩码。软件网格、相机、光照和染色属于可配置重建；本轮真实截图用于训练和保留样本测量，非零残差必须报告为 NOT EXACT。单个台阶另有无数量角标的新原生样本；旧结果槽数量 2 遮挡不能全部归咎于材质误差。完整证据与独立测量见 [item-renderers-geometry.json](item-renderers-geometry.json) 和 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。
+
+## 附魔照明与符文后续修正
+
+本机 Entity / MeshFallback 顶点 DXBC 的算术依赖提供候选照明系数；在明确的白光 / 强度1 / overlay0假设下，用同一公式替换书本经验权重。材质、UV、模型与相机不变，完整200×165区域的RGB MAE由关闭0.176596→0.165404、打开0.415081→0.343333，差异像素分别1281→656、2239→1683。两个状态都是已知校准样本，不能称盲测；原生材质绑定、uniform、网格、1px宽度差与光栅边界仍未恢复。MSAA、全局LINEAR与高倍降采样在现样本上更差，没有为降低个别误差而启用。
+
+符文默认主色改为原生打开 / 经验不足六行共同确认的104/93/73，即#685d49；关闭无字作为负控。宿主颜色覆盖保留，AIZ原图集在Web的整数展开仍为零差；整个原生字形边界、换行与基线不由主色校准代替。完整记录及本机只读验证脚本见 [ENCHANTING_QA.md](ENCHANTING_QA.md)。

@@ -2,7 +2,7 @@
   "gameVersion": "1.26.6005.0",
   "book": {
     "component": "EnchantingBook",
-    "status": "native_png_calibrated_reconstruction_with_nonzero_residual_pixel_error",
+    "status": "source_shader_candidate_reconstruction_with_nonzero_residual_pixel_error",
     "texture": {
       "file": "src/assets/enchanting/enchanting_table_book.png",
       "dimensions": [
@@ -13,10 +13,10 @@
       "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/entity/enchanting_table_book.png",
       "matchesInstalledGame": true
     },
-    "implementation": "WebGL 1, NEAREST atlas sampling, antialias=false, seven-part box geometry, empirical per-face RGB directional shade, orthographic projection. Native partial-coverage edges are not exactly reproduced.",
-    "geometry": "Java-reference seven-part dimensions/UVs remain an explicit reconstruction. Default pitch and directional shade are calibrated against two genuine same-version Bedrock PNG states; this does not recover the native mesh, shader equation or final raster rules.",
+    "implementation": "WebGL 1, NEAREST atlas sampling, antialias=false, unchanged seven-part box geometry and orthographic projection. Directional RGB lighting uses a source-fixed installed Bedrock Entity/MeshFallback vertex-DXBC candidate; native partial-coverage edges are not exactly reproduced.",
+    "geometry": "Java-reference seven-part dimensions/UVs remain an explicit reconstruction. Default pitch is calibrated against two native Bedrock PNG states. The lighting equation is independently extracted from installed entity-material DXBC; the actual book material/uniform binding and native mesh/final raster rules remain unverified.",
     "missingEvidence": [
-      "Extracted native enchanting_book_renderer mesh and exact shader/lighting equation",
+      "Native enchanting_book_renderer material selection, model matrix/normal.w and actual TileLightColor/TileLightIntensity/OverlayColor uniforms; the generic installed Entity/MeshFallback shader formula is independently recovered.",
       "Native page-turn time/phase, broader-angle and partially-open state calibration",
       "Exact partial-coverage raster/texture filtering at book and texel boundaries"
     ],
@@ -34,7 +34,7 @@
       "nativeBedrockPixelCertified": false
     },
     "validation": {
-      "method": "Complete 200x165 RGB region, including the entire book, texels, edges and clear background margins, at GUI5. No image mask or border exclusion. Native crop [916,350,200,165], web crop [0,15,200,165] in a 200x200 canvas. The title above and unrelated inventory slots below lie outside this region.",
+      "method": "Complete 200x165 RGBA region, including the entire book, texels, edges and clear background margins, at GUI5. RGB MAE retains its historical 3-channel denominator; RGBA MAE, all-channel changed pixels and alpha error are also measured. No image mask or border exclusion. Native crop [916,350,200,165], web crop [0,15,200,165] in a 200x200 canvas. Title above and unrelated inventory slots below lie outside this region.",
       "nativeCanvasOrigin": [
         916,
         335
@@ -85,8 +85,8 @@
         {
           "state": "closed",
           "lighting": "calibrated",
-          "mae": 0.17659595959595958,
-          "changedPixels": 1281,
+          "mae": 0.16540404040404041,
+          "changedPixels": 656,
           "maxChannelError": 147,
           "palette": [
             [
@@ -114,14 +114,17 @@
               564
             ],
             [
-              "184,156,0,255",
+              "183,155,0,255",
               416
             ],
             [
-              "184,127,0,255",
+              "183,127,0,255",
               276
             ]
-          ]
+          ],
+          "rgbaMae": 0.1240530303030303,
+          "absoluteRgbErrorSum": 16375,
+          "alphaChangedPixels": 0
         },
         {
           "state": "open",
@@ -173,6 +176,112 @@
             [
               "0,0,0,255",
               8
+            ]
+          ]
+        },
+        {
+          "state": "open",
+          "lighting": "calibrated",
+          "mae": 0.3433333333333333,
+          "changedPixels": 1683,
+          "maxChannelError": 166,
+          "palette": [
+            [
+              "198,198,198,255",
+              13252
+            ],
+            [
+              "166,158,130,255",
+              4966
+            ],
+            [
+              "151,143,113,255",
+              3862
+            ],
+            [
+              "118,78,32,255",
+              3654
+            ],
+            [
+              "133,124,94,255",
+              1127
+            ],
+            [
+              "84,55,24,255",
+              914
+            ],
+            [
+              "95,61,24,255",
+              902
+            ],
+            [
+              "172,164,135,255",
+              780
+            ],
+            [
+              "118,112,95,255",
+              748
+            ],
+            [
+              "180,125,0,255",
+              568
+            ],
+            [
+              "180,152,0,255",
+              542
+            ],
+            [
+              "191,182,153,255",
+              540
+            ]
+          ],
+          "rgbaMae": 0.2575,
+          "absoluteRgbErrorSum": 33990,
+          "alphaChangedPixels": 0
+        }
+      ],
+      "regression": "Optional local native samples use pinned PNG signatures, dimensions and SHA256. The source-fixed candidate must improve complete-region RGB error sums (<41093 open, <17483 closed), changed RGBA pixels (<2239 open, <1281 closed) and RGBA MAE over the previous empirical equation, with alphaChangedPixels=0. Existing <1.5 RGB MAE/<10% unlit and one-pixel bounds checks remain. Nonzero residual pixels must never be called exact agreement.",
+      "nativePixelCertification": false,
+      "scope": "Two already-known open/closed samples at the default pose. Both must improve with one source-fixed coefficient set; neither is a statistically unseen held-out pose. Unknown animations/angles and native renderer equivalence remain unverified.",
+      "previousEmpiricalComparison": [
+        {
+          "state": "closed",
+          "lighting": "calibrated",
+          "mae": 0.17659595959595958,
+          "changedPixels": 1281,
+          "maxChannelError": 147,
+          "palette": [
+            [
+              "198,198,198,255",
+              23550
+            ],
+            [
+              "142,95,41,255",
+              3273
+            ],
+            [
+              "120,79,32,255",
+              2836
+            ],
+            [
+              "86,56,24,255",
+              1521
+            ],
+            [
+              "170,159,147,255",
+              564
+            ],
+            [
+              "178,169,160,255",
+              564
+            ],
+            [
+              "184,156,0,255",
+              416
+            ],
+            [
+              "184,127,0,255",
+              276
             ]
           ]
         },
@@ -266,9 +375,7 @@
           ]
         }
       ],
-      "regression": "Optional local native samples must be genuine PNGs with pinned SHA256. Calibrated mean absolute byte error must remain <1.5 and <10% of unlit error; bounds may differ by one pixel from native partial coverage. Nonzero changed pixels are explicitly retained and must not be labeled exact agreement.",
-      "nativePixelCertification": false,
-      "scope": "One open and one closed sample at the default pose, not native renderer equivalence across all animation states."
+      "coordinateScope": "Crop coordinates refer only to the existing pinned user-owned PNGs. Their full image dimensions do not establish the exact client rectangle or capture pipeline; no whole-frame capture equivalence is inferred."
     },
     "primaryGeometryReference": {
       "edition": "Java Edition 1.21.5, used only as a reconstruction reference",
@@ -520,9 +627,9 @@
       "pitchEvidence": "At a common GUI5 canvas origin [916,335], pitch20 gives web closed [60,39,75,126] and open [16,33,168,126], matching native positions/heights with one extra native edge-coverage column. The prior pitch25 closed top/height was [35,124], requiring a state-dependent mismatch.",
       "lighting": {
         "mode": "calibrated (default) | unlit",
-        "normalSpace": "Unit geometric face normal after part fold, X(pi), and GUI pose yaw, before final camera pitch/roll. Translation never affects the normal.",
-        "formula": "I = 0.579 * nx^2 + (ny >= 0 ? 0.995 : 0.614) * ny^2 + 0.720 * nz^2; fragment RGB = original atlas RGB * I; original alpha is unchanged.",
-        "classification": "An empirical directional reconstruction, not recovered native shader code. Positive-Y page-block light is constrained by native upper edge texels; negative-Y and unobserved poses are reconstruction extensions.",
+        "normalSpace": "Unit geometric face normal after part fold, X(pi), GUI pose yaw, then final camera pitch/roll. Translation never affects the reconstructed normal; actual native model matrix/input normal.w is not captured.",
+        "formula": "I = 0.725 - 0.1*nx^2 + 0.1*nz^2 + 0.275*ny; fragment RGB = original atlas RGB*I, original alpha unchanged. This reduces the installed Entity and MeshFallback equations only for white TileLightColor, TileLightIntensity=1 and OverlayColor.a=0.",
+        "classification": "Source-fixed installed-material shader candidate with assumed UI uniforms and normal pose, not a recovered book renderer. One equation/no per-state coefficients improves open and closed complete native ROIs; mesh/UV remain the prior reconstruction.",
         "samplePairs": [
           {
             "part": "closed cover",
@@ -604,13 +711,86 @@
           }
         ]
       },
-      "residuals": "Closed changed pixels=1281, open=2239 within 33000-pixel complete regions. Residuals include partial coverage, some page-edge lighting/UV pixels and one-byte gold differences. Antialias=false is retained; no global CSS opacity/filter hides these differences.",
+      "residuals": "Closed changed RGBA pixels=656, open=1683 in complete 33000-pixel regions; alpha agrees throughout. Residuals remain at partial coverage, texel/face boundaries, UV/pose and some color transitions; maximum channel errors remain147 closed/166 open. NEAREST/antialias=false is retained: global LINEAR, MSAA and supersampling experiments all worsened both complete reference errors.",
       "artifacts": [
-        ".cache/native-gui/measurements/native-both-lossless.json",
-        ".cache/native-gui/measurements/native-calibration-comparison.json",
-        ".cache/native-gui/measurements/web-open-calibrated-after.png",
-        ".cache/native-gui/measurements/web-closed-calibrated-after.png"
+        ".cache/book-native-study/experiment-metrics.json",
+        ".cache/book-native-study/dxbc-metrics.json",
+        ".cache/book-native-study/dxbc-open-roi.png",
+        ".cache/book-native-study/dxbc-closed-roi.png",
+        ".cache/book-independent-qa/independent-book-audit.json"
       ]
+    },
+    "sourceShaderEvidence": {
+      "verificationScript": "scripts/inspect-native-enchanting-materials.py",
+      "reproduce": "python scripts/inspect-native-enchanting-materials.py --output .cache/native-material-proof.json",
+      "installedMaterialDirectory": "C:/XboxGames/Minecraft for Windows/Content/data/renderer/materials",
+      "method": "System d3dcompiler_47.dll D3DDisassemble; fixed whole-file hashes, DXBC byte ranges/container lengths/stage hashes, arithmetic dependency checks. No binary or shader assembly is distributed.",
+      "stageSources": [
+        {
+          "file": "Entity.material.bin",
+          "materialSha256": "ac39dc5bf532073e54cfae29e0d5f720f27b152004ea1b60d3883a6d20f22ac6",
+          "programByteRange": [
+            2352,
+            1828
+          ],
+          "programSha256": "18c42db16689139b4badfca5badf5db9880c7abfe40eae8d62c02d6ae3aa420f",
+          "purpose": "entity-light",
+          "dependencyChecksPassed": 10
+        },
+        {
+          "file": "MeshFallbackPosUVNormalColor.material.bin",
+          "materialSha256": "dee2c5324e868885b6fdce6c1a7231976470be32c6009d478ae5d91fcdfd5ce3",
+          "programByteRange": [
+            122279,
+            2256
+          ],
+          "programSha256": "15aea4205dc317561394b4c58bf532044ffd9adc777560d007142ddfa64735ca",
+          "purpose": "entity-light",
+          "dependencyChecksPassed": 10
+        },
+        {
+          "file": "UIText.material.bin",
+          "materialSha256": "02d410506a3e180781992c66839432ed425bf0506fb8d258328d21959afb2d29",
+          "programByteRange": [
+            933,
+            572
+          ],
+          "programSha256": "1d8136da24ffe850b471c6b7a855b55d6f5830547c75063d9099fb17cb15a1f7",
+          "purpose": "bitmap-fragment",
+          "dependencyChecksPassed": 6
+        },
+        {
+          "file": "UIText.material.bin",
+          "materialSha256": "02d410506a3e180781992c66839432ed425bf0506fb8d258328d21959afb2d29",
+          "programByteRange": [
+            1681,
+            892
+          ],
+          "programSha256": "18ea5bfeb4a3fe19f4733778a2be3226e586d2e4c8aa92ccd7ae5c6d9b875d9b",
+          "purpose": "bitmap-vertex",
+          "dependencyChecksPassed": 4
+        }
+      ],
+      "commonDirectionalTerm": "L = 0.725 - 0.1*nx^2 + 0.1*nz^2 + 0.275*TileLightIntensity*ny",
+      "normalizedEntityLight": "(L + 0.35*OverlayColor.a)*TileLightColor",
+      "normalizedMeshFallbackLight": "L*TileLightColor + 0.35*OverlayColor.a",
+      "normalizationDifference": "Entity stage normalizes a transformed vec4 with dp4; MeshFallback uses transformed xyz/dp3. The reconstruction assumes a unit xyz face normal, normal.w=0 and rotation-only pose; the actual book model matrix/input normal is not captured.",
+      "candidateUniformAssumptions": {
+        "TileLightIntensity": 1,
+        "TileLightColor": [
+          1,
+          1,
+          1
+        ],
+        "OverlayColor.a": 0,
+        "normalSpace": "Unit face normal after model fold and complete GUI pose, including camera pitch/roll."
+      },
+      "notEstablished": [
+        "Actual enchanting_book_renderer material selection/uniform values",
+        "Native book mesh/UV extraction",
+        "Rune-specific Bitmap variant/sampler binding and full native text raster"
+      ],
+      "privateAssemblyOrBinaryBundled": false
     }
   },
   "runes": {
@@ -636,7 +816,7 @@
       "ascii_character_y_offset": 0
     },
     "layout": "A-Z/a-z atlas cells, advance measured as last opaque x + 2; whitespace advances 4 game pixels; integer scale, mask-repeat:none, no text shadow.",
-    "defaultColor": "#685e4a",
+    "defaultColor": "#685d49",
     "validation": {
       "text": "AIZ",
       "scale": 2,
@@ -645,12 +825,132 @@
         16
       ],
       "changedPixels": 0,
-      "method": "Independent original-atlas pixel sampling and integer expansion vs Chromium CSS mask screenshot, using solid #c6c6c6 background and #685e4a foreground.",
+      "method": "Independent original-atlas alpha sampling and integer expansion vs Chromium CSS mask screenshot, using solid #28292a background and native-confirmed #685d49 foreground. This verifies the web source-atlas path, not native antialiased glyph boundaries.",
       "evidence": [
-        ".cache/enchanting-qa/runes.png",
-        ".cache/enchanting-qa/runes-expected.png",
-        ".cache/enchanting-qa/rune-result.json"
+        ".cache/font-oracle/runes-actual.png",
+        ".cache/font-oracle/runes-expected.png"
       ]
+    },
+    "nativeColorBytes": [
+      104,
+      93,
+      73,
+      255
+    ],
+    "nativeColorEvidence": {
+      "version": "1.26.6005.0",
+      "scope": "Opaque dominant rune foreground only. No general JSON color-quantization rule or complete native glyph raster equality is inferred.",
+      "source": "ui/enchanting_screen.json enchant_runes/fail_runes; _global_variables enchanting_runes_fail_color [.408,.368,.29]",
+      "roiFormat": "[left,top,width,height], PNG coordinates independent of client/frame borders",
+      "rowRois": [
+        [
+          1240,
+          375,
+          310,
+          70
+        ],
+        [
+          1240,
+          476,
+          310,
+          70
+        ],
+        [
+          1240,
+          577,
+          310,
+          70
+        ]
+      ],
+      "states": [
+        {
+          "file": ".cache/native-gui/enchanting-open-native-lossless.png",
+          "sha256": "0d58418de8fe8751481563e13e4615b6752907394d73926746d627900bf308fa",
+          "opaqueForegroundPixelCounts": [
+            2110,
+            1835,
+            1875
+          ],
+          "backgroundRgb": [
+            160,
+            145,
+            114
+          ]
+        },
+        {
+          "file": ".cache/native-gui/enchanting-insufficient-native-lossless.png",
+          "sha256": "57d8cb8ecd4f28750500cbd4b7d513e158c0f897f9c42143139a3992347ec7a9",
+          "opaqueForegroundPixelCounts": [
+            2110,
+            1835,
+            1875
+          ],
+          "backgroundRgb": [
+            81,
+            73,
+            58
+          ]
+        },
+        {
+          "file": ".cache/native-gui/enchanting-closed-native-lossless.png",
+          "sha256": "c2ae69ebe7615bcb8e4e993e261833b7e72aa9cefe9ddadaba189cc01bc15646",
+          "opaqueForegroundPixelCounts": [
+            0,
+            0,
+            0
+          ],
+          "uniformBackgroundPixelCounts": [
+            21700,
+            21700,
+            21700
+          ],
+          "backgroundRgb": [
+            81,
+            73,
+            58
+          ],
+          "meaning": "Negative control: closed state has no rune text, so it is not foreground-color evidence."
+        }
+      ],
+      "optionalLocalOnly": true,
+      "nativeGlyphBoundaryFilteringVerified": false
+    },
+    "stateBindingScope": {
+      "classicSelectable": "selectable_button.controls.rune_text@enchanting.fail_runes",
+      "classicUnselectable": "unselectable_button.controls.rune_text@enchanting.fail_runes",
+      "hover": "Classic source only switches the background/hover tooltip; no rune color binding or state override is present.",
+      "unusedDefinition": "success_runes uses enchanting_runes_color [.54,.37,.36] but is not referenced by the inspected Classic controls.",
+      "nativeHoverPixelsCaptured": false,
+      "hostTint": "EnchantingRunes has an explicit color prop; color=inherit opts into host parent-state colors. Default tint intentionally remains the fixed inspected Classic branch."
+    },
+    "shaderSourceEvidence": {
+      "installedShader": "UIText.material.bin, Bitmap variants",
+      "programStages": [
+        {
+          "file": "UIText.material.bin",
+          "materialSha256": "02d410506a3e180781992c66839432ed425bf0506fb8d258328d21959afb2d29",
+          "programByteRange": [
+            933,
+            572
+          ],
+          "programSha256": "1d8136da24ffe850b471c6b7a855b55d6f5830547c75063d9099fb17cb15a1f7",
+          "purpose": "bitmap-fragment",
+          "dependencyChecksPassed": 6
+        },
+        {
+          "file": "UIText.material.bin",
+          "materialSha256": "02d410506a3e180781992c66839432ed425bf0506fb8d258328d21959afb2d29",
+          "programByteRange": [
+            1681,
+            892
+          ],
+          "programSha256": "18ea5bfeb4a3fe19f4733778a2be3226e586d2e4c8aa92ccd7ae5c6d9b875d9b",
+          "purpose": "bitmap-vertex",
+          "dependencyChecksPassed": 4
+        }
+      ],
+      "math": "Selected Bitmap shader clamps UV to per-glyph bounds before sampling, then multiplies vertex color, TintColor and alpha HudOpacity. Vertex stage uses GlyphHeight and HalfTexelOffset.",
+      "limitation": "Glyph sampler state and rune-specific runtime material binding are not captured. Foreground bytes/source atlas equality do not certify native glyph-boundary filtering."
     }
   },
   "publicFullReleaseInspected": {

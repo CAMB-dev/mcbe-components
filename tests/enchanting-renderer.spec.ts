@@ -5,6 +5,9 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { PNG } from 'pngjs';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { EnchantingRunes } from '../src/enchanting-book';
 
 // Native samples below are optional local, lossless references, never package
 // assets. Calibration reduces measured error; it does not assert zero native
@@ -50,6 +53,7 @@ test('book uses the original atlas and preserves explicit reconstruction provena
   await rendered(canvas);await expect(canvas).toHaveAttribute('data-fidelity','renderer-reconstruction');
   await expect(canvas).toHaveAttribute('data-geometry-source','java-1.21.5-book-model');
   await expect(canvas).toHaveAttribute('data-lighting','calibrated');
+  await expect(canvas).toHaveAttribute('data-lighting-source','bedrock-1.26.6005-dxbc-candidate');
   await expect(canvas).toHaveAttribute('data-calibration-source','bedrock-1.26.6005-native-png');
   expect(Number(await canvas.getAttribute('data-qa-vertices'))).toBeGreaterThan(6);
   await canonicalCanvas(canvas);const {image}=await picture(canvas,'book-default');
@@ -117,14 +121,51 @@ async function nativeSample(state:keyof typeof nativeSamples) {
   expect(createHash('sha256').update(bytes).digest('hex')).toBe(reference.sha);
   const image=PNG.sync.read(bytes);expect([image.width,image.height]).toEqual([2568,1400]);return image;
 }
+
+test('rune default uses native-confirmed foreground bytes and preserves host tint control',()=>{
+  const props={text:'AIZ',atlasUrl:'/host-owned/ascii_sga.png'};
+  const ordinary=renderToStaticMarkup(createElement(EnchantingRunes,props));
+  expect(ordinary).toContain('color:#685d49');
+  expect(renderToStaticMarkup(createElement(EnchantingRunes,{...props,color:'#123456'}))).toContain('color:#123456');
+});
+
+test('optional native open and insufficient PNGs independently establish rune foreground bytes',async()=>{
+  test.skip(!(['open','insufficient','closed'] as const).every(state=>existsSync(new URL(`../.cache/native-gui/${nativeSamples[state].file}`,import.meta.url))),'User-owned native PNGs are optional and never bundled.');
+  // Fixed source-space ROIs contain only rune labels and their panel background;
+  // the book, cost digits and level glyphs lie outside these bounds. Insets and
+  // antialiased glyph edges are retained; only the opaque dominant foreground
+  // is certified here, not complete native text raster equality.
+  for(const state of ['open','insufficient','closed'] as const){
+    const image=await nativeSample(state);
+    for(let row=0;row<3;row++){
+      const frequencies=new Map<string,number>();
+      for(let y=375+101*row;y<445+101*row;y++)for(let x=1240;x<1550;x++){
+        const i=4*(y*image.width+x),color=[...image.data.subarray(i,i+4)].join(',');
+        frequencies.set(color,(frequencies.get(color)??0)+1);
+      }
+      if(state==='closed'){
+        expect([...frequencies]).toEqual([['81,73,58,255',21700]]);
+      }else{
+        expect(frequencies.get('104,93,73,255')).toBe([2110,1835,1875][row]);
+        const foreground=[...frequencies].filter(([color])=>color!==(state==='open'?'160,145,114,255':'81,73,58,255')).sort((a,b)=>b[1]-a[1]);
+        expect(foreground[0]?.[0]).toBe('104,93,73,255');
+      }
+    }
+  }
+});
 function bookRegion(source:PNG,native:boolean) {
   // Entire object plus clear background margins, chosen to exclude the title
   // above and item slots below. No book border, texel or edge is masked out.
   const image=new PNG({width:200,height:165});PNG.bitblt(source,image,native ? 916 : 0,native ? 350 : 15,200,165,0,0);return image;
 }
 function averageError(actual:PNG,reference:PNG) {
-  let sum=0,changed=0;for(let i=0;i<actual.data.length;i+=4){let differs=false;for(let c=0;c<3;c++){const difference=Math.abs(actual.data[i+c]!-reference.data[i+c]!);sum+=difference;if(difference)differs=true;}if(differs)changed++;}
-  return{mae:sum/(actual.width*actual.height*3),changedPixels:changed};
+  let sum=0,rgbaSum=0,changed=0,alphaChanged=0,max=0;
+  for(let i=0;i<actual.data.length;i+=4){let differs=false;for(let c=0;c<4;c++){
+    const difference=Math.abs(actual.data[i+c]!-reference.data[i+c]!);rgbaSum+=difference;if(c<3)sum+=difference;
+    if(difference){differs=true;if(c===3)alphaChanged++;}max=Math.max(max,difference);
+  }if(differs)changed++;}
+  return{mae:sum/(actual.width*actual.height*3),rgbaMae:rgbaSum/(actual.width*actual.height*4),absoluteRgbErrorSum:sum,
+    changedPixels:changed,alphaChangedPixels:alphaChanged,maxChannelError:max};
 }
 function foregroundBounds(image:PNG) {
   let x0=image.width,y0=image.height,x1=-1,y1=-1;
@@ -152,6 +193,14 @@ test('optional native open and closed PNGs show a large unmasked calibration imp
     const unlit=averageError(pictures.unlit!,reference),calibrated=averageError(pictures.calibrated!,reference);
     expect(calibrated.mae,state+' complete-region byte error').toBeLessThan(1.5);
     expect(calibrated.mae,state+' improvement over unchanged atlas').toBeLessThan(unlit.mae*.1);
+    // One source-fixed equation must improve both already-known native states;
+    // this is not an unseen-pose holdout. These are the prior empirical
+    // renderer's measured sums/counts in the same complete ROI.
+    const previous=state==='open'?{sum:41093,changed:2239}:{sum:17483,changed:1281};
+    expect(calibrated.absoluteRgbErrorSum,state+' improvement over previous empirical equation').toBeLessThan(previous.sum);
+    expect(calibrated.changedPixels,state+' fewer differing RGBA pixels').toBeLessThan(previous.changed);
+    expect(calibrated.alphaChangedPixels,state+' complete alpha-plane agreement').toBe(0);
+    expect(calibrated.rgbaMae,state+' complete RGBA improvement').toBeLessThan(previous.sum/(200*165*4));
     // Native edges have partial-coverage pixels; the WebGL reconstruction is
     // not antialiased. A one-pixel bound difference is recorded, not concealed.
     const nativeBox=foregroundBounds(reference),webBox=foregroundBounds(pictures.calibrated!);
