@@ -37,7 +37,7 @@ try {
   await page.locator('#processing').screenshot({ path: '.cache/preview/processing.png' });
   await page.locator('#anvil').screenshot({ path: '.cache/preview/anvil.png' });
   await page.locator('#containers').screenshot({ path: '.cache/preview/containers.png' });
-  for (const id of ['brewing','special-workstations','hud','scrolling']) {
+  for (const id of ['brewing','special-workstations','hud','scrolling','advanced-workstations','hud-overlays','settings','feedback-primitives']) {
     await page.locator('#'+id).screenshot({ path: '.cache/preview/'+id+'.png' });
   }
   await page.setViewportSize({ width: 1440, height: 1000 });

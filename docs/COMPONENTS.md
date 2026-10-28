@@ -1,29 +1,27 @@
 # Bedrock 组件范围
 
-当前导出 63 个组件；当前目录 103 项，40 项待实现，包含本轮拆出的公共 BrewingIndicator。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 86 个组件；当前目录 106 项，20 项待实现，包含本轮拆出的 RecipeSelectionGrid、CrafterSlot 和 BeaconEffect。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 ## 已实现
 
 | 分类 | 组件 |
 | --- | --- |
-| 文字与表面（12） | Text、PixelIcon、Image、NineSlice、Panel、Separator、Progress、Dialog、Alert、Badge、ScrollArea、ScrollBar |
-| 输入与设置（11） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、Tabs |
-| 物品与容器结构（15） | ItemSlot、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、ContainerFrame、ItemImage、ItemCount、DurabilityBar、SlotPlaceholder、ResultSlot、RecipeGrid、ProcessingArrow、FuelIndicator、BrewingIndicator |
-| 工作站与容器（15） | Grindstone、EnchantingTable、CraftingTable、Furnace、BlastFurnace、Smoker、Anvil、BrewingStand、SmithingTable、CartographyTable、Chest、Hopper、Dispenser、Dropper、ShulkerBox |
+| 文字与表面（15） | Text、PixelIcon、Image、NineSlice、Panel、Separator、Progress、Dialog、Alert、Badge、ScrollArea、ScrollBar、Spinner、Tooltip、Toast |
+| 输入与设置（16） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、Tabs、ToggleButton、SearchField、NavigationList、SettingRow、KeybindingField |
+| 物品与容器结构（18） | ItemSlot、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、ContainerFrame、ItemImage、ItemCount、DurabilityBar、SlotPlaceholder、ResultSlot、RecipeGrid、ProcessingArrow、FuelIndicator、BrewingIndicator、RecipeSelectionGrid、CrafterSlot、BeaconEffect |
+| 工作站与容器（19） | Grindstone、EnchantingTable、CraftingTable、Furnace、BlastFurnace、Smoker、Anvil、BrewingStand、SmithingTable、CartographyTable、Chest、Hopper、Dispenser、Dropper、ShulkerBox、Stonecutter、Loom、Beacon、Crafter |
 | 附魔部件（3） | EnchantmentOption、EnchantingRunes、EnchantingBook |
-| HUD（7） | Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、Crosshair |
+| HUD（15） | Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、Crosshair、BossBar、ChatMessage、ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip |
 
-`EnchantingBook` 使用真实材质，网格和相机仍是重建；`EnchantingRunes` 需要调用方提供原版字图集。整套工作站仍待原游戏同版本、同状态截图对照。
+`EnchantingBook` 使用真实材质，默认视角和分面光照已通过本机无损 PNG 校准，网格及翻页仍是重建；`EnchantingRunes` 需要调用方提供原版字图集。已有部分工作站的同版本原生局部截图证据，完整状态与整屏差异仍需逐项核对。
 
 HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 custom renderer 的 Web 重建。制图台 description 的栈锚点与字体比例尚待原生校准；锻造装备预览接受调用方 renderer。这些限制独立于 PNG、JSON 与浏览器图像测试。
 
 ## 待补范围
 
-- 基础：Spinner、Tooltip、Toast。
-- 输入与设置：ToggleButton、SearchField、NavigationList、SettingRow、KeybindingField。
 - 容器部件：RecipeSearch、RecipeCategoryTabs、TradeOffer、ArmorSlot。
-- 工作站与容器：Stonecutter、Loom、Beacon、Crafter、TradingScreen、PlayerInventoryScreen、CreativeInventory、MountInventory。
-- HUD：BossBar、ChatMessage、ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip、PlayerList、TouchControls。
+- 工作站与容器：TradingScreen、PlayerInventoryScreen、CreativeInventory、MountInventory。
+- HUD：PlayerList、TouchControls。
 - 游戏页面组合：PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast。
 
 ## 复用方式
@@ -39,3 +37,7 @@ BrewingIndicator 拆出箭头、气泡与燃料三种完整原图裁切；酿造
 SmithingTable / CartographyTable 同样只包含原始主面板，关闭入口属于尚未提供的外部 toolbar。Hotbar 仅管理组件内部的焦点和激活，全局数字键 / 滚轮游戏输入由调用方绑定。
 
 UI 组件接收物品、配方、进度、选择状态与操作回调；合成、交易、附魔等游戏规则由使用方提供。可机读状态见 [component-catalog.json](./component-catalog.json)，像素验收边界见 [FIDELITY.md](./FIDELITY.md)。
+
+Stonecutter / Loom 共用 RecipeSelectionGrid 和原生滚动视口，旗帜 / 方块预览由调用方提供 renderer。CrafterSlot 将禁用槽恢复操作与普通物品操作分开；BeaconEffect 复用真实效果按钮，金字塔等级、有效选择和支付规则由调用方控制。
+
+设置控件分别提供切换、搜索、导航、标签关联和物理键捕获；SettingRow 使用 render prop 将 id / aria / disabled 传给控件。Tooltip / Toast 使用原版图层，定位、关闭和计时属于明确的 Web 组合。聊天、标题与效果组件接收内容和可见状态，游戏网络、命令、计时及完整原生 renderer 不由组件库模拟。

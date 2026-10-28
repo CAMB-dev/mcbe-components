@@ -17,6 +17,7 @@ import { ProcessingExamples } from './processing-examples';
 import { AnvilExamples } from './anvil-examples';
 import { ContainerExamples } from './container-examples';
 import { NativeExamples } from './native-examples';
+import { ExpansionExamples } from './expansion-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -38,6 +39,10 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'special-workstations', name: 'Smithing & cartography', icon: 'chevron', count: '02' },
   { id: 'hud', name: 'Heads-up display', icon: 'chevron', count: '07' },
   { id: 'scrolling', name: 'Scrolling', icon: 'chevron', count: '02' },
+  { id: 'advanced-workstations', name: 'More workstations', icon: 'chevron', count: '07' },
+  { id: 'hud-overlays', name: 'HUD overlays', icon: 'chevron', count: '08' },
+  { id: 'settings', name: 'Settings controls', icon: 'chevron', count: '05' },
+  { id: 'feedback-primitives', name: 'Tooltips & toasts', icon: 'chevron', count: '03' },
   { id: 'typography', name: 'Typography & icons', icon: 'chevron', count: '02' },
 ];
 const snippets: Record<string, string> = {
@@ -278,6 +283,7 @@ function App() {
       </Example>
 
       <NativeExamples notify={notify}/>
+      <ExpansionExamples notify={notify}/>
       <Example id="scrolling" title="Scrolling" detail="Native scrolling with original Bedrock rail and handle textures.">
         <div style={{padding:24}}><ScrollArea label="Scrollable inventory notes" style={{height:180,maxWidth:480}}>
           {Array.from({length:12},(_,index)=><p key={index} style={{margin:0,padding:12}}>Inventory note {index+1} · Wheel, touch and keyboard</p>)}

@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "sources": {
+    "ui_common.json": {
+      "publicSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "installedSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+      "parsedEqual": true
+    },
+    "ui_template_toggles.json": {
+      "publicSha256": "efe2bf9fab47aa5e29d7116a2aa705a964a42b0ef86c947c4e46188be9ac2a01",
+      "installedSha256": "4d228fb036db1efc7eed08253b05a4dd89abaf39d6d2eaac6d95593c63673f91",
+      "parsedEqual": true
+    },
+    "ui_template_buttons.json": {
+      "publicSha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "installedSha256": "6d89054b8b61fb1a1730069ec7f8547ce9e1ab263780f89b8713b87f17a232f7",
+      "parsedEqual": true
+    },
+    "_global_variables.json": {
+      "publicSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "installedSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+      "parsedEqual": true
+    },
+    "settings_sections/settings_common.json": {
+      "publicSha256": "36863803c56e42d31b915aa9df13cf88cc43a528eb40c76cbf26c911ef7b3ecf",
+      "installedSha256": "ffa324ca589ab65a210255916f338b58c2895583245fd59ebb77dcc29c57e173",
+      "parsedEqual": true
+    },
+    "settings_sections/controls_section.json": {
+      "publicSha256": "a21e90f7d63f93e1683858da1d5d51271585d2d7af729c9c5fdaa28d8e68d5f4",
+      "installedSha256": "e59959af68661f70b7636acfc42dbe106b5fc6f2593fe4b4e6b8f0fefac58055",
+      "parsedEqual": true
+    }
+  },
+  "assets": {
+    "search-icon": {
+      "source": "resource_pack/textures/ui/magnifying_glass.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/magnifying_glass.png",
+      "sha256": "f3aebd4ae834bf0b7e08c517a1bb9d166cb3a7bac60cec37659cefb7e1627b29",
+      "dimensions": [
+        7,
+        7
+      ],
+      "matchesInstalledBase": true
+    },
+    "search-clear": {
+      "source": "resource_pack/textures/ui/close_X_button.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_X_button.png",
+      "sha256": "90c419d3f7caaf146d566d80e0aa4d340dde485c33fc4490fb440810f3165286",
+      "dimensions": [
+        15,
+        15
+      ],
+      "matchesInstalledBase": true
+    },
+    "search-clear-hover": {
+      "source": "resource_pack/textures/ui/close_X_button_hover.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_X_button_hover.png",
+      "sha256": "207a4d09f161b60e396caadba5f135985b6304787bcd9aa42d82f394511ee2bf",
+      "dimensions": [
+        15,
+        15
+      ],
+      "matchesInstalledBase": true
+    },
+    "key-label": {
+      "source": "resource_pack/textures/ui/text_label_box.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/text_label_box.png",
+      "sha256": "3e97f09cef95d5d42d557d4971233a46f12a0e754a6c0e445dfb8f56a5b13b42",
+      "dimensions": [
+        4,
+        4
+      ],
+      "matchesInstalledBase": true
+    },
+    "key-reset": {
+      "source": "resource_pack/textures/ui/undoArrow.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/undoArrow.png",
+      "sha256": "41eff2b295f28ccb2f7fb3cb163f03fc95a02439ec87173c3fa29bccacce3653",
+      "dimensions": [
+        14,
+        14
+      ],
+      "matchesInstalledBase": true
+    }
+  },
+  "facts": {
+    "toggle": {
+      "source": "common_toggles.light_text_toggle/light_template_toggle",
+      "unchecked": "button_borderless_light",
+      "checked": "button_borderless_lightpressednohover",
+      "uncheckedHover": "button_borderless_lighthover",
+      "checkedHover": "button_borderless_lightpressed",
+      "locked": "disabledButtonNoBorder",
+      "checkedTextNormalized": [
+        0.1216,
+        0.1216,
+        0.1216
+      ]
+    },
+    "navigation": {
+      "source": "settings_common.section_toggle_base/toggle_button_control",
+      "rowHeightGamePixels": 30,
+      "surfaceHeightGamePixels": 31,
+      "glyphOffsetGamePixels": [
+        5,
+        0
+      ],
+      "labelOffsetGamePixels": [
+        34,
+        0
+      ]
+    },
+    "search": {
+      "source": "common.text_edit_control/common.text_edit_box",
+      "magnifierGamePixels": [
+        8,
+        8
+      ],
+      "magnifierOffsetGamePixels": [
+        0,
+        -0.5
+      ],
+      "centeringPaddingGamePixels": [
+        3,
+        2
+      ],
+      "clearGamePixels": [
+        15,
+        15
+      ],
+      "clearOffsetGamePixels": [
+        2,
+        0
+      ],
+      "textOffsetGamePixels": [
+        10,
+        0
+      ]
+    },
+    "settingRow": {
+      "source": "settings_common.option_generic_core",
+      "stackGapGamePixels": 1,
+      "bottomGapGamePixels": 4,
+      "inlineLabelOffsetGamePixels": [
+        34,
+        3
+      ],
+      "descriptionNormalizedColor": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "descriptionWebColor": "#b2b2b2",
+      "descriptionNativeQuantizationVerified": false
+    },
+    "keybinding": {
+      "source": "controls_section.keymapping_item/arrow_reset",
+      "rowHeightGamePixels": 35,
+      "controlHeightGamePixels": 31,
+      "labelColorNormalized": [
+        1,
+        1,
+        1
+      ],
+      "bindingWidth": "40% + 1px",
+      "resetWidth": "15% + 1px",
+      "resetImageGamePixels": [
+        16,
+        16
+      ]
+    }
+  },
+  "boundaries": [
+    "Source skins and JSON dimensions are verified; native whole-settings screenshot equality is not claimed.",
+    "The existing project preference keeps Text/Input hard shadows, whereas native common.text_edit_box defaults shadow=false.",
+    "Web keyboard code chords, Escape cancellation, Tab traversal, Delete-to-clear and host conflict policy are web behavior, not extracted native input-engine logic.",
+    "SettingRow render props explicitly connect the host control ID and description; native font defaults/baselines remain unverified."
+  ]
+}

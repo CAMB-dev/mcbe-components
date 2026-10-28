@@ -7,7 +7,7 @@
 - 可公开复验的 UI 定义：[Mojang v1.26.60.5 full archive](https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip)，SHA256 `d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf`。使用 `resource_pack/ui/ui_common.json`、`grindstone_screen.json`、`enchanting_screen.json`、`_global_variables.json`，并与本机归档中的完整 parsed JSON 对象比较。
 - 字体度量另外从用户自有原始 `Mojangles.ttf` 的 cmap / hmtx 得到；没有读取生产 CSS 得出期望字宽。原字体 SHA256 `3d4cdf2752075d28c6ebf0ba44a61157ec6eb38f8db0ebdc3205aec056760be5`，1000 units/em。
 - 新测试 [workstation-fidelity.spec.ts](../tests/workstation-fidelity.spec.ts) 自己保存原始尺寸、锚点、百分比和 RGBA 数值并计算期望；不把生产 CSS、生成的 skin manifest、`workstation-geometry.json` 或上一张浏览器截图当作期望。
-- 实际像素素材检查读取原始 PNG；物品审计现读取schema2的22个素材记录，直接核对公开merged-release ZIP和本机base/version-overlay候选。候选存在不证明客户端激活或覆盖顺序。
+- 实际像素素材检查读取原始 PNG；物品审计现读取schema2的26个素材记录，直接核对公开merged-release ZIP和本机base/version-overlay候选。候选存在不证明客户端激活或覆盖顺序。
 - 公开 [UI element reference](https://learn.microsoft.com/en-us/minecraft/creator/reference/content/jsonuireference/examples/jsonuicomponents/ui_element?view=minecraft-bedrock-stable) 说明了 size / offset / anchor / renderer 属性，但没有给出本次所需的原生字体 normal 点数、最终像素吸附、纹理采样与自定义 3D renderer 的完整算法。不能把文档未给出的行为补成既定事实。
 
 ## 已发现并修正的偏差
@@ -17,7 +17,7 @@
 | P1 | 附魔选项整体 | `124,28,212,122`，三行硬编码 `40,42,40` | 原 JSON 推导为 `123.2,28.2,212.8,121.6` CSS px，行高约 `40.533333px`；保留百分比算式。测试单独核对 options 和三行 |
 | P1 | 附魔选项内部 | 英文 12px 上沿标签、缺少外围 inset；文本 / 图标位置没有组合验证 | 补真实 inset；dust / rune box / cost 的位置来自原锚点和 offset。新增未遮罩 main 页面组合检查，而不是只测隐藏内容后的按钮皮肤 |
 | P1 | 消耗颜色 | 成功 `#b5e58c`，失败 `#a95050` | 源色分别为 `[.5,1,.125]` 与 `[.54,.37,.36]`。测试仅允许源 float 相邻的两个 UNORM 字节值；精确 native 字节量化仍需原生截图 |
-| P1 | ItemSlot / 材质 | 自画物品 SVG；另一类 slot 纹理；选中仅外加白框 | 改为真实 container cell 和原始物品 PNG；物品区域 16×16 game px；selected / hover / focus 各有来源。现有22个demo PNG选用official merged release，并独立核对安装包候选；不推断运行时pack激活 |
+| P1 | ItemSlot / 材质 | 自画物品 SVG；另一类 slot 纹理；选中仅外加白框 | 改为真实 container cell 和原始物品 PNG；物品区域 16×16 game px；selected / hover / focus 各有来源。现有26个demo PNG选用official merged release，并独立核对安装包候选；不推断运行时pack激活 |
 | P2 | 关闭按钮 | Demo 未传 onClose，整个工作站缺按钮；普通 / compact 模式未区分 | Demo 现显式提供关闭 / 重开行为；source 中附魔台为 compact 关闭图像，砂轮为普通关闭图像 |
 | P2 | 结果槽导航 | 空结果使用原生 disabled，破坏 JSON 中指向结果槽的显式 focus override | 使用 aria-disabled 与回调 guard，保留 native focus；测试 input Down / Right、additional Up / Right、result Left，空结果仍可聚焦 |
 | P1 | 附魔书本 / 符文 | 原创书本图标、英文代替符文 | 已移除图标占位；预览接入真实 book atlas 的 WebGL 重建和真实 SGA atlas 的 rune glyph。**书本 mesh / 相机仍为重建，不能列为原生 renderer 通过** |
@@ -59,11 +59,11 @@ Chromium 布局按 1/64 CSS px 存储。选项的百分比高度本身会量化�
 5. main 页面未隐藏的 dust / rune box / cost 位置、source 色与 shadow。
 6. GUI 标题的原 Mojangles advance：Repair & Disenchant=10200、Inventory=5000、Enchant=4000 font units；按实际字号换算。
 7. 物品示例已加载真实 img，未残留物品 SVG。
-8. 全部22个demo PNG的SHA256、尺寸、字节数与schema2 official-merged-release记录一致。
-9. 原始public ZIP中22个对应条目与demo逐字节相同；49个本机base/version-overlay候选分别核对archive哈希、entry哈希、大小及matchesSelected标记。每项选中图至少有一个安装候选匹配；不选择运行时pack或推断覆盖优先级。
+8. 全部26个demo PNG的SHA256、尺寸、字节数与schema2 official-merged-release记录一致。
+9. 原始public ZIP中26个对应条目与demo逐字节相同；58个本机base/version-overlay候选分别核对archive哈希、entry哈希、大小及matchesSelected标记。每项选中图至少有一个安装候选匹配；不选择运行时pack或推断覆盖优先级。
 10. 砂轮显式键盘 focus 路径与空结果保留聚焦。
 
-本轮新增/替换的材质审计两项已单独实跑**2/2 PASS**；原始ZIP读取使用独立标准ZIP解析和Node zlib，不调用准备素材的脚本作为oracle。CI没有用户自有字体时第6项跳过；没有原public ZIP或游戏候选时第9项明确跳过，第8项仍执行全部22图记录检查。候选审计通过也不能写成当前客户端实际激活纹理已认证。
+本轮新增/替换的材质审计两项已单独实跑**2/2 PASS**；原始ZIP读取使用独立标准ZIP解析和Node zlib，不调用准备素材的脚本作为oracle。CI没有用户自有字体时第6项跳过；没有原public ZIP或游戏候选时第9项明确跳过，第8项仍执行全部26图记录检查。候选审计通过也不能写成当前客户端实际激活纹理已认证。
 
 未遮罩的实际浏览器 frame：`.cache/independent-qa/grindstone-unmasked.png`、`.cache/independent-qa/enchanting-unmasked.png`。这两张是 **实现截图**，不是原版期望图。
 

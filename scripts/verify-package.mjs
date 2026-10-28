@@ -13,6 +13,7 @@ npm(['run', 'build']);
 const packed = JSON.parse(npm(['pack', '--ignore-scripts', '--json']))[0];
 assert(!packed.files.some(file => /Mojangles[^/]*\.(ttf|otf|woff2?|ttc)$/i.test(file.path)), 'Local proprietary font must not enter the npm library.');
 assert(!packed.files.some(file => /ascii_sga\.png$/i.test(file.path)), 'User-owned SGA atlas must not enter the npm library.');
+assert(!packed.files.some(file => /^(?:demo|\.cache)\//.test(file.path)), 'Demo-only game assets and local references must not enter the npm library.');
 const tarball = packed.filename;
 const tarPath = join(root, tarball);
 for (const major of [18, 19]) {
@@ -27,7 +28,7 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
-const exports = ['AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
+const exports = ['ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 assert.deepEqual(Object.keys(ui).sort(), exports.sort());
 const element = React.createElement;
 const output = renderToString(element(ui.Panel, {title:'Settings'},
@@ -73,6 +74,29 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
   element(ui.ExperienceBar,{progress:.5,level:3}),
   element(ui.Hotbar,{items:[],defaultSelectedIndex:2}),
   element(ui.Crosshair,{}),
+  element(ui.BossBar,{name:'Wither',value:.75,color:[1,.5,1]}),
+  element(ui.ChatMessage,{},'Hello from the Overworld'),
+  element(ui.ChatPanel,{messages:[{id:'message',text:'Hello'}],input:true}),
+  element(ui.Scoreboard,{title:'Objectives',entries:[{id:'player',name:'Player',score:3}]}),
+  element(ui.StatusEffect,{name:'Speed',effect:'speed',duration:'1:30'}),
+  element(ui.ActionBar,{},'Respawn point set'),
+  element(ui.TitleOverlay,{title:'Adventure',subtitle:'Begin your journey'}),
+  element(ui.HeldItemTooltip,{},'Diamond sword'),
+  element(ui.Stonecutter,{recipes:[{id:'slab',label:'Stone slab'}]}),
+  element(ui.Loom,{patterns:[{id:'stripe',label:'Stripe'}]}),
+  element(ui.Beacon,{effects:{speed:{enabled:true,selected:true}},extraEffect:'speed'}),
+  element(ui.Crafter,{disabledSlots:[1],powered:true}),
+  element(ui.RecipeSelectionGrid,{label:'Recipes',options:[{id:'slab',label:'Slab'}]}),
+  element(ui.CrafterSlot,{index:1,enabled:false}),
+  element(ui.BeaconEffect,{effect:'speed',selected:true}),
+  element(ui.ToggleButton,{defaultPressed:true},'Coordinates'),
+  element(ui.SearchField,{label:'Search recipes',defaultValue:'stone'}),
+  element(ui.NavigationList,{label:'Settings sections',items:[{value:'game',label:'Game'}]}),
+  element(ui.SettingRow,{label:'Coordinates',children:control=>element('input',{...control,type:'checkbox'})}),
+  element(ui.KeybindingField,{label:'Move forward',name:'forward',defaultValue:'KeyW'}),
+  element(ui.Spinner,{frame:9,label:'Loading terrain'}),
+  element(ui.Tooltip,{content:'Tooltip description'},element(ui.Button,{},'Tooltip trigger')),
+  element(ui.Toast,{open:true,onOpenChange:()=>{},title:'World saved',description:'Your progress is saved.'}),
   element(ui.Image,{src:'/caller-owned-item.png',alt:'Item',sourceSize:[16,16],scale:2}),
   element(ui.NineSlice,{src:'/caller-frame.png',sourceSize:[10,10],slice:2,destinationBorder:1,scale:2},element(ui.Button,{},'Framed action')),
   element(ui.Combobox, {label:'Difficulty',name:'difficulty',defaultValue:'normal',options:[{value:'normal',label:'Normal'}]}),
@@ -82,10 +106,10 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
 assert.match(output, /mc-button--primary/);
 assert.match(output, /World name/);
 assert.match(output, /role="tablist"/);
-for (const className of ['mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair']) assert(output.includes(className), 'Missing SSR markup: '+className);
+for (const className of ['mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -98,6 +122,11 @@ import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame,
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
 import type { AirBubbleState, BrewingSlot, CartographyMode, ScrollPosition } from 'mcbeui';
+import { BossBar, ChatMessage, ChatPanel, Scoreboard, StatusEffect, ActionBar, TitleOverlay, HeldItemTooltip } from 'mcbeui';
+import type { BossBarColor, ChatMessageData, ScoreboardEntry, BedrockStatusEffect } from 'mcbeui';
+import { Stonecutter, Loom, Beacon, Crafter, RecipeSelectionGrid, CrafterSlot, BeaconEffect, ToggleButton, SearchField, NavigationList, SettingRow, KeybindingField } from 'mcbeui';
+import type { RecipeSelectionOption, BeaconEffectState, BeaconEffectId, BeaconPrimaryEffect, NavigationItem, SettingControlProps } from 'mcbeui';
+import { Spinner, Tooltip, Toast } from 'mcbeui';
 const props: ButtonProps = {variant:'primary',size:'sm',type:'submit'};
 const items: TabItem[] = [{value:'game',label:'Game',content:'Survival'}];
 const enchantment: EnchantmentData = {id:'standalone',label:'Unbreaking',level:3};
@@ -143,6 +172,29 @@ export const demo = <>
   <ExperienceBar progress={.5} level={3} ref={createRef<HTMLDivElement>()}/>
   <Hotbar selectedIndex={0} onSelectionChange={index=>index.toFixed(0)} onSlotAction={(index,action)=>String(index)+action} ref={createRef<HTMLDivElement>()}/>
   <Crosshair blendMode="normal" ref={createRef<HTMLSpanElement>()}/>
+  <BossBar name="Wither" value={.75} color={[1,.5,1] satisfies BossBarColor} ref={createRef<HTMLDivElement>()}/>
+  <ChatMessage backgroundOpacity={.5} ref={createRef<HTMLDivElement>()}>Hello</ChatMessage>
+  <ChatPanel messages={[{id:'message',text:'Hello'}] satisfies ChatMessageData[]} input onSend={message=>message.toUpperCase()} onValueChange={value=>value.toUpperCase()} ref={createRef<HTMLDivElement>()}/>
+  <Scoreboard title="Objectives" entries={[{id:'player',name:'Player',score:3}] satisfies ScoreboardEntry[]} ref={createRef<HTMLDivElement>()}/>
+  <StatusEffect name="Speed" effect={'speed' satisfies BedrockStatusEffect} duration="1:30" ref={createRef<HTMLSpanElement>()}/>
+  <ActionBar showBackground ref={createRef<HTMLDivElement>()}>Saved</ActionBar>
+  <TitleOverlay title="Adventure" subtitle="Begin" ref={createRef<HTMLDivElement>()}/>
+  <HeldItemTooltip ref={createRef<HTMLDivElement>()}>Diamond sword</HeldItemTooltip>
+  <Stonecutter recipes={[{id:'slab',label:'Slab'}]} onRecipeSelect={id=>id.toUpperCase()} onInputAction={action=>action.toUpperCase()} ref={createRef<HTMLElement>()}/>
+  <Loom inputs={[null,null,null]} patterns={[]} bannerPreview={<span/>} onPatternSelect={id=>id.toUpperCase()} onInputAction={(index,action)=>String(index)+action} ref={createRef<HTMLElement>()}/>
+  <Beacon effects={{speed:{enabled:true,selected:true} satisfies BeaconEffectState}} extraEffect={'speed' satisfies BeaconPrimaryEffect} onEffectSelect={(effect: BeaconEffectId)=>effect.toUpperCase()} onConfirm={()=>{}} ref={createRef<HTMLElement>()}/>
+  <Crafter disabledSlots={[1]} powered onSlotEnabledChange={(index,enabled)=>String(index)+enabled} onSlotAction={(index,action)=>String(index)+action} ref={createRef<HTMLElement>()}/>
+  <RecipeSelectionGrid label="Recipes" options={[{id:'slab',label:'Slab'}] satisfies RecipeSelectionOption[]} onSelect={id=>id.toUpperCase()} ref={createRef<HTMLDivElement>()}/>
+  <CrafterSlot index={1} enabled={false} onEnabledChange={enabled=>Boolean(enabled)} ref={createRef<HTMLButtonElement>()}/>
+  <BeaconEffect effect="speed" selected ref={createRef<HTMLButtonElement>()}/>
+  <ToggleButton pressed onPressedChange={pressed=>Boolean(pressed)} ref={createRef<HTMLButtonElement>()}>Coordinates</ToggleButton>
+  <SearchField label="Search recipes" defaultValue="stone" onValueChange={value=>value.toUpperCase()} onSearch={value=>value.toUpperCase()} ref={createRef<HTMLInputElement>()}/>
+  <NavigationList label="Settings" items={[{value:'game',label:'Game'}] satisfies NavigationItem[]} onValueChange={value=>value.toUpperCase()} ref={createRef<HTMLElement>()}/>
+  <SettingRow label="Coordinates" ref={createRef<HTMLDivElement>()}>{(control: SettingControlProps)=><input {...control} type="checkbox"/>}</SettingRow>
+  <KeybindingField label="Forward" defaultValue="KeyW" name="forward" onValueChange={value=>value.toUpperCase()} ref={createRef<HTMLDivElement>()}/>
+  <Spinner frame={9} label="Loading terrain" ref={createRef<HTMLSpanElement>()}/>
+  <Tooltip content="Description" onOpenChange={open=>Boolean(open)} ref={createRef<HTMLSpanElement>()}><Button>Inspect</Button></Tooltip>
+  <Toast open onOpenChange={open=>Boolean(open)} title="World saved" description="Progress saved" ref={createRef<HTMLDivElement>()}/>
   <Image src="/caller-item.png" alt="Item" sourceSize={[16,16]} scale={2} ref={createRef<HTMLImageElement>()}/>
   <NineSlice src="/caller-frame.png" sourceSize={[10,10]} slice={2} destinationBorder={1} size={[18,18]} scale={2} ref={createRef<HTMLDivElement>()}><Button>Framed action</Button></NineSlice>
   <Checkbox label="Enabled" indeterminate ref={createRef<HTMLInputElement>()}/>

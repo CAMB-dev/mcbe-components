@@ -15,6 +15,10 @@ import { ImageFixture } from './image-fixture';
 import { ScrollFixture } from './scroll-fixture';
 import { NativeFixtures } from './native-fixtures';
 import { HudInteractionFixture } from './hud-interaction-fixture';
+import { AdvancedNativeFixtures } from './advanced-native-fixtures';
+import { HudOverlaysFixtures } from './hud-overlays-fixtures';
+import { FeedbackFixture } from './feedback-fixture';
+import { SettingsControlsFixture } from './settings-controls-fixture';
 
 function Sample({ id, children }: { id: string; children: ReactNode }) {
   return <section className="calibration-case"><h2>{id}</h2><div className="calibration-stage" data-case={id}>{children}</div></section>;
@@ -104,6 +108,10 @@ function Calibration() {
     <ScrollFixture/>
     <NativeFixtures/>
     <HudInteractionFixture/>
+    <AdvancedNativeFixtures/>
+    <HudOverlaysFixtures/>
+    <FeedbackFixture/>
+    <SettingsControlsFixture/>
     <p>These samples isolate component surfaces. The test runner renders original reference PNGs independently, applies their nine-slice rules, and compares every output pixel. Text is validated separately.</p>
     <Dialog open={dialog} onOpenChange={setDialog} title="Settings dialog" className="calibration-close-dialog"><Combobox label="Dialog difficulty" defaultValue="normal" options={difficulties}/><ItemSlot label="Dialog item" item={{name:'Dialog item',icon:'D',lore:['Inside the dialog']}}/></Dialog>
     <Dialog open={surfaceDialog} onOpenChange={setSurfaceDialog} title="Surface dialog" className="calibration-surface-dialog"/>

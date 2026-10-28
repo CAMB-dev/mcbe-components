@@ -34,7 +34,7 @@ UI 原始对照图缓存于忽略目录 `.cache`。97 个重建皮肤的来源�
 
 砂轮箭头、附魔选项默认 / hover / disabled 表面已有原始 PNG 独立对比。附魔表面 fixture 使用规范整数尺寸 216×38，仅证明皮肤解码 / 九宫格；它不替代 main 中浮点放置的未遮罩组合。另有 9 项独立源几何 / 材质 / 字距 / 导航检查，不以生产 CSS 或皮肤 manifest 反推期望。两类证据都不证明游戏 renderer 的最终像素取整。完整工作站仍待同版本 / 状态的游戏截图对比。
 
-已删除手绘物品、假 glint 和默认书图。展示页采用官方 v1.26.60.5 full 的 22 张真实物品 / GUI PNG；逐项与本机 59 个 vanilla 目录中的基础包及版本覆盖候选比较。此前把基础包钻石剑作为最终 runtime 材质的结论已撤回：基础包与 merged 图有 22 像素差异，1.16 / 1.21.90 中存在与 merged 相同的图，但候选存在不证明运行时包激活。完整记录见 item-materials.json。SGA 原图字形 AIZ 与独立图集栅格比较 0 差异；图集不随 npm 分发。EnchantingBook 使用真材质，已修正厚页块与 UV，并参考官方 Java BookModel 的七部件结构重建；Bedrock native mesh 仍未获取；已用本机 26.60 的打开 / 关闭无损截图校准默认相机仰角与分面光照，但完整书本区域仍有残差，明确属于重建，不列入 native pixel-perfect 结论。ItemTooltip、数量基线、耐久 / disabled renderer 仍待原游戏校准。
+已删除手绘物品、假 glint 和默认书图。展示页采用官方 v1.26.60.5 full 的 26 张真实物品 / GUI PNG；逐项与本机 59 个 vanilla 目录中的基础包及版本覆盖候选比较。此前把基础包钻石剑作为最终 runtime 材质的结论已撤回：基础包与 merged 图有 22 像素差异，1.16 / 1.21.90 中存在与 merged 相同的图，但候选存在不证明运行时包激活。完整记录见 item-materials.json。SGA 原图字形 AIZ 与独立图集栅格比较 0 差异；图集不随 npm 分发。EnchantingBook 使用真材质，已修正厚页块与 UV，并参考官方 Java BookModel 的七部件结构重建；Bedrock native mesh 仍未获取；已用本机 26.60 的打开 / 关闭无损截图校准默认相机仰角与分面光照，但完整书本区域仍有残差，明确属于重建，不列入 native pixel-perfect 结论。ItemTooltip、数量基线、耐久 / disabled renderer 仍待原游戏校准。
 
 工作台从 inventory_screen.json 的 work_bench_panel_3x3 推导，熔炉 / 高炉 / 烟熏炉从炉子源面板及其继承推导。已拆出 RecipeGrid / ProcessingArrow / FuelIndicator / ResultSlot；52×52 结果槽中的物品保持 32×32。炉子输入 y=29、燃料 y=105、结果 y=59 CSS px，保留源半游戏像素位置；配方书和外部 toolbar 尚未实现。源推导及 12 项独立检查见 [PROCESSING_QA.md](PROCESSING_QA.md)。其中 6 个箭头 / 火焰裁切状态与原始 PNG 独立浏览器控制样本 RGBA 零差，只证明 Chromium 合成，不替代引擎 ratio 与裁切量化验收。
 
@@ -43,6 +43,16 @@ UI 原始对照图缓存于忽略目录 `.cache`。97 个重建皮肤的来源�
 容器和铁砧的原始依据分别在 [container-geometry.json](container-geometry.json) 与 [anvil-geometry.json](anvil-geometry.json)。ContainerFrame 按实际高度锚定玩家物品栏，保留漏斗 176×133、普通箱 176×166、大箱 176×220 游戏像素规格；容器 8 项与铁砧 10 项独立检查覆盖逐格布局、原始浮点坐标、费用状态和焦点路径。铁砧 4 个素材样本与原 PNG 在同一 Chromium 的独立采样平面 RGBA 零差，不替代原生引擎吸附或整屏截图。
 
 Image / NineSlice 将 sourceSize / slice 的物理像素与 destinationBorder / size 的逻辑像素分开，7 项检查包含 6 个完整原 PNG 采样区域零差。调用方样式覆盖、非整数屏幕原点、浏览器合成以及任意资源不由这些固定样本认证；依据与限制见 [image-geometry.json](image-geometry.json)。
+
+## 高级工作站、HUD 浮层与设置控件
+
+新增 Stonecutter / Loom 的326×166游戏像素双面板、Beacon 256×219面板和Crafter Classic红石面板，拆出RecipeSelectionGrid、BeaconEffect、CrafterSlot；31张独立原PNG与6份源JSON的依据见 [advanced-workstations-geometry.json](advanced-workstations-geometry.json)。新拍的GUI 5无损原生PNG揭示了“内容能放下就隐藏滚动条”、7列图案居中和fold背景在面板边框下层的运行时细节；修正不以改变原始图片掩盖。合成器enabled/disabled槽位、付款图和信标主要布局另有局部实拍复核，仍未声称整个页面RGBA零差。
+
+BossBar、ChatMessage / ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip保留原纹理、显式透明度与阴影参数。独立完整图比较包含文字及溢出阴影；Title字号和阴影使用公开的Web字体配置合同，不把native extra_large / large枚举擅自映射成已证数字。StatusEffect HUD排列仍属custom renderer重建；native默认运行时alpha / 淡出计时未提取。详见 [HUD_OVERLAYS_QA.md](HUD_OVERLAYS_QA.md)。
+
+ToggleButton / NavigationList保留普通选中灰色凹陷、hover / focus绿色和禁用状态；SearchField采用真实magnifying_glass / close_X_button及原输入框；KeybindingField使用text_label_box和undoArrow，标签白色来自generic_button_text_color；SettingRow拆出源label / description / control结构。宿主按键映射、冲突策略、取消reset事件处理属于Web行为，和原生输入引擎规则分开记录，见 [SETTINGS_CONTROLS_QA.md](SETTINGS_CONTROLS_QA.md)。
+
+Spinner使用原loading_spin十帧 / 10fps，Button.loading复用同组件；通用Tooltip与Toast有真实焦点 / 触屏 / Dialog关闭层级和可控生命周期。Tooltip通用源背景与inventory物品tooltip renderer仍是不同范围，Toast的Web可访问性暂停 / 最短显式时长不是原生计时证据；见 [feedback-geometry.json](feedback-geometry.json)。
 
 ## 字体与 shadow
 

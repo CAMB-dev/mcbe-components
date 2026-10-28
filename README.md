@@ -115,6 +115,28 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `ExperienceBar` | `progress`: 0…1、`level`、`showLevel`、`label` | 原版经验图层与级别文本；进度和等级由调用方提供 |
 | `Hotbar` | `items`、`selectedIndex` / `defaultSelectedIndex`、`disabled`、`onSelectionChange`、`onSlotAction`、`label` | 九格原版快捷栏，方向键仅移动焦点，Enter / Space 选择；全局数字键与滚轮切换由调用方绑定 |
 | `Crosshair` | `blendMode`: difference / normal、`label` | 原版 icons.png UV 裁切；difference 对不透明背景对应原生白色准星反色，完整合成仍待原生截图 |
+| `BossBar` | **必填** `name`、`value`；`max`、`color`: readonly [r,g,b]（0…1）、`label` | 源 182×20 游戏像素面板与九宫格进度条；颜色是原图通道乘数，不选择伪造皮肤 |
+| `ChatMessage` | children；`backgroundOpacity`、`opacity`、`color`、`shadow`；div 属性 | 独立聊天行，使用原始黑色图层；格式化和本地化由调用方提供 |
+| `ChatPanel` | **必填** `messages`: {id,text}[]；`input`、`value` / `defaultValue`、`onValueChange`、`onSend`、`maxMessages` | 最多显示最近 50 条，原生滚动 log；可选 Web 输入表单处理受控草稿与 IME，不连接游戏或服务器 |
+| `Scoreboard` | **必填** `title`、`entries`: {id,name,score}[]；`backgroundOpacity`、`titleBackgroundOpacity`、`label` | 源 scoreboard 侧栏结构，保留传入顺序；分数和行排序由调用方提供 |
+| `StatusEffect` | **必填** `name`；`effect`、`iconSrc`、`ambient`、`duration`、`opacity` | 真实状态 PNG 或调用方图像；HUD 槽位布局是 custom renderer 的 Web 重建 |
+| `ActionBar` / `HeldItemTooltip` | children；`showBackground`、`backgroundOpacity`、`opacity`、`shadow`；HeldItemTooltip 的 `color` | 独立 HUD 文本及可选原始背景；生命周期由调用方管理，手持物品提示不同于背包悬停提示 |
+| `TitleOverlay` | **必填** `title`；`subtitle`、`showBackground`、`backgroundOpacity`、`opacity`、`shadow` | 标题 / 副标题源偏移与字体枚举映射；Web 数值字号及整屏位置仍需原生校准 |
+| `Spinner` | `label`、`scale`、`frame`: 0…9、`paused`、`decorative`；span 属性 | 原版 10 帧 loading_spin 图集与 10fps 序列；静态帧可用于检查原图，不合成旋转图案 |
+| `Tooltip` | **必填** 单个可聚焦 children、`content`；`open` / `defaultOpen`、`onOpenChange`、`side`、`delayDuration`、`closeDelay`、`offset`、`disabled`、`contentProps` | 原版背景与 Web 浮层定位，保留已有 aria-describedby；支持焦点、悬停、触屏及 Escape；内容用于描述，不承载交互控件 |
+| `Toast` | **必填** `open`、`onOpenChange`、`title`；`description`、`icon`、`action`、`variant`、`duration`、`dismissLabel` | 保持挂载的 polite status；默认持续显示，显式超时至少 5 秒，错误 / action 持续显示，悬停、聚焦与页面隐藏时暂停 |
+| `ToggleButton` | Button 属性；`pressed` / `defaultPressed`、`onPressedChange` | 原版 toggle 皮肤与 aria-pressed，Enter / Space 通过原生按钮激活 |
+| `SearchField` | TextField 属性；`value` / `defaultValue`、`onValueChange`、`onSearch`、`clearable`、`clearLabel`、`onClear` | 原生 search 输入、真实搜索图标；Enter 查询，清空后恢复焦点，支持表单 reset 与 IME |
+| `NavigationList` | **必填** `label`、`items`: {value,label,icon?,disabled?}[]；`value` / `defaultValue`、`onValueChange`、`disabled` | 单一 Tab 入口，方向键 / Home / End 仅移动焦点；原生激活后提交选中项，跳过禁用项 |
+| `SettingRow` | **必填** `label`、render-prop children；`description`、`disabled`、`controlId`、`layout`: stacked / inline | 将 id / aria-labelledby / aria-describedby / disabled 传给调用方控件，保留标签与说明关联 |
+| `KeybindingField` | **必填** `label`；`value` / `defaultValue`、`resetValue`、`onValueChange`、`name`、`formatValue`、`description`、`error`、`disabled` | 捕获物理 event.code 和修饰键；Escape 取消、Tab 离开、Delete / Backspace 清空；冲突规则由宿主管理 |
+| `RecipeSelectionGrid` | **必填** `label`、`options`: RecipeSelectionOption[]；`selectedId`、`onSelect`、`columns`、`previewKind` | 切石 / 织布共享的可访问选择网格，保留显式 renderer 接口和原版选中层 |
+| `Stonecutter` | `input`、`result`、`resultAvailable`、`recipes`、`selectedRecipeId`、`onRecipeSelect`、`onInputAction`、`onTakeResult` | 原版双面板、左侧配方选择与右侧库存；配方计算和 block renderer 由调用方提供 |
+| `Loom` | `inputs`、`result`、`resultAvailable`、`patterns`、`selectedPatternId`、`onPatternSelect`、`showInputOverlays`、`bannerPreview`、`onInputAction`、`onTakeResult` | 原版双面板、旗帜 / 染料 / 图案槽与提示图；旗帜渲染由调用方注入 |
+| `BeaconEffect` | **必填** `effect`；`selected`、`extraEffect`；button 属性 | 原版效果按钮与图像，供独立布局或 Beacon 复用 |
+| `Beacon` | `payment`、`acceptedItems`、`effects`、`extraEffect`、`canConfirm`、`onPaymentAction`、`onEffectSelect`、`onConfirm`、`onCancel` | 原版主 / 次级效果与支付面板；等级、可用状态、支付和选择有效性由调用方控制 |
+| `CrafterSlot` | ItemSlot 属性；`index`、`enabled`、`onEnabledChange`、`onSlotAction` | 可复用合成器槽，enabled=false 时仍能操作以重新启用；disabled 才禁止按钮操作 |
+| `Crafter` | `items`、`disabledSlots`、`powered`、`output`、`onSlotAction`、`onSlotEnabledChange` | 原版 3×3 槽与供电状态；output 为预览，不生成可取出的伪结果槽，游戏规则由调用方提供 |
 
 ### 受控与非受控
 
@@ -202,7 +224,7 @@ const sword: InventoryItem = {
   onEnchant={id => requestEnchantment(id)} />
 ```
 
-物品图由调用方提供，npm 不捆绑游戏物品纹理。展示页已使用实际 PNG，来源与 SHA 见 [item-materials.json](docs/item-materials.json)：22 张示例素材均取自官方 `v1.26.60.5 full` 合并资源，并记录本机 59 个 vanilla / 版本覆盖目录中的候选。钻石剑采用与公开合并资源一致的 198-byte PNG；此前 22 像素差异来自基础包与合并资源，不能据此认定运行时最终材质。资源存在与 manifest 不证明当前激活顺序。草方块使用官方 GUI 类目图标，保留 17×17 原图的整数缩放，不冒充 native block renderer。`durability` 为剩余比例 0…1；组件显示角标、耐久和提示，并发出操作事件，不自行计算配方、附魔或搬移物品。右键 / Shift+F10 为 secondary，Enter / Space / 点击为 primary。原生 `onContextMenu` 可阻止默认 secondary 处理。
+物品图由调用方提供，npm 不捆绑游戏物品纹理。展示页已使用实际 PNG，来源与 SHA 见 [item-materials.json](docs/item-materials.json)：26 张示例素材均取自官方 `v1.26.60.5 full` 合并资源，并记录本机 59 个 vanilla / 版本覆盖目录中的候选。钻石剑采用与公开合并资源一致的 198-byte PNG；此前 22 像素差异来自基础包与合并资源，不能据此认定运行时最终材质。资源存在与 manifest 不证明当前激活顺序。草方块使用官方 GUI 类目图标，保留 17×17 原图的整数缩放，不冒充 native block renderer。`durability` 为剩余比例 0…1；组件显示角标、耐久和提示，并发出操作事件，不自行计算配方、附魔或搬移物品。右键 / Shift+F10 为 secondary，Enter / Space / 点击为 primary。原生 `onContextMenu` 可阻止默认 secondary 处理。
 
 槽位依据 common.container_item 重做，cell_image 的 PNG 为 10×10、逻辑 base_size 为 5×5，因此源切片为 2px、GUI 2 的显示边宽仍为 2px。普通 / 悬停 / 选中 / 聚焦已有独立原图对照。ItemTooltip、数量基线、耐久色相和 disabled filter 仍需游戏 renderer 截图校准。已移除伪紫色 glint；`enchanted` 仅保留数据标记，缺图时也不会自绘替代物。
 
@@ -219,12 +241,12 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **63 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 103 项（含公共 ContainerFrame 与 BrewingIndicator），逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
+当前 **86 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 106 项（含 RecipeSelectionGrid / CrafterSlot / BeaconEffect 公共零件），逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类、燃料、处理箭头、附魔选项、交易条目。
-- GUI：已有附魔台、砂轮、工作台与熔炉族主面板、铁砧、酿造台、现代锻造台、制图台、箱子族、漏斗、发射器与投掷器；继续切石、织布、信标、合成器、交易、玩家 / 创造 / 坐骑背包，以及尚缺的配方书和 screen wrapper。
-- HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验条及准星；继续 Boss 条、聊天、计分板、效果、标题提示、玩家列表，以及暂停 / 设置 / 世界 / 服务器 / 资源包等组合。
+- GUI：已有附魔台、砂轮、工作台与熔炉族主面板、铁砧、酿造台、现代锻造台、制图台、切石机、织布机、信标、合成器、箱子族、漏斗、发射器与投掷器；继续交易、玩家 / 创造 / 坐骑背包，以及尚缺的配方书和 screen wrapper。
+- HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示；继续玩家列表及触屏控制，以及暂停 / 设置 / 世界 / 服务器 / 资源包等组合。
 
 完整 GUI 由这些基础零件组合。planned 项仍在开发，不作为已有导出；原生 3D renderer、最终像素取整与真实游戏整帧差异单独验收。
 
@@ -273,6 +295,32 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 酿造进度 0 表示空前景，1 表示完整前景；不是游戏配方时间。锻造台默认仅显示 template 提示（`templateOverlay={true}`），`baseOverlay` / `materialOverlay` 默认 `null`，宿主根据实际模板和后端状态显式传入对应图集；启用的提示图集按源序列播放，`overlayFrame` 可冻结帧，已放入物品时可关闭对应 underlay。显式启用全部图集的示例用于检查材质，不代表原生空状态。`preview` 的原生装备 renderer 由使用方接入。锻造与制图组件仅包含原始主面板，外部 toolbar 尚未实现，因此不提供内部关闭按钮。
 
 [酿造几何](docs/brewing-geometry.json)、[锻造 / 制图几何](docs/special-workstations-geometry.json)、[HUD 几何](docs/hud-geometry.json) 分别记录来源和未验证项。真实 PNG、JSON 坐标及 Web 截图通过不等于原生整屏 pixel-perfect：生命等状态排列算法、经验 / 书本原生 renderer、制图 description 的栈锚点及浏览器最终量化仍需同版本游戏截图。
+
+### 设置、反馈与 HUD 组合
+
+```tsx
+<SettingRow label="Coordinates" description="Show your current position">
+  {control => <input {...control} type="checkbox" />}
+</SettingRow>
+<SearchField label="Find a recipe" onSearch={setQuery} />
+<KeybindingField label="Move forward" name="forward"
+  defaultValue="KeyW" onValueChange={saveBinding} />
+<Tooltip content="Save your progress"><Button>Save world</Button></Tooltip>
+<Toast open={saved} onOpenChange={setSaved} title="World saved" />
+<BossBar name="Wither" value={0.75} />
+<ChatPanel messages={messages} input onSend={sendMessage} />
+<Scoreboard title="Objectives" entries={scores} />
+<Stonecutter recipes={recipes} selectedRecipeId={selectedRecipe}
+  onRecipeSelect={setSelectedRecipe} input={stone} result={slab} />
+```
+
+`KeybindingField` 保存 `KeyW` / `Control+KeyS` 等物理键字符串，不推断游戏动作或按键冲突。`Tooltip` 的 children 应转发 `aria-describedby`；动态提示在挂载后创建 portal，SSR 保留触发元素。`Toast` 建议保持挂载，通过 `open` 控制内容，便于保留稳定的 live region。
+
+`SettingRow` 的默认说明文字使用原 JSON 中性灰对应的 Web 配置 `#b2b2b2`，可通过 `--mc-setting-description-color` 覆盖；嵌入 Panel / inset 时保留该主题既有说明色。源 `[.7,.7,.7]` 在原生 renderer 中的 178 / 179 字节量化仍未认证。
+
+切石 / 织布的配方图格、信标效果及合成器禁用槽分别拆为 `RecipeSelectionGrid`、`BeaconEffect`、`CrafterSlot`。`Beacon` 默认显示五个主效果和 regeneration，六项均锁定；升级额外槽默认隐藏，宿主需显式传 `effects.extra.visible=true` 并提供有效状态。预览、游戏规则和网络由宿主提供。已确认的原生空状态、局部层级与布局边界独立记录，不代表整个工作站 renderer 已逐像素吻合。
+
+HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命周期由调用方管理。[工作站几何](docs/advanced-workstations-geometry.json)、[HUD 叠层几何](docs/hud-overlays-geometry.json)、[设置控件](docs/settings-controls-geometry.json)、[反馈组件](docs/feedback-geometry.json) 记录原图、源定义和 Web 组合边界。
 
 ## 字体
 
@@ -342,7 +390,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、63 个导出、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、86 个导出、类型、CSS、皮肤、字体及许可路径。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

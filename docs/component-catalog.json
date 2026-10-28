@@ -38,11 +38,12 @@
       },
       {
         "name": "Spinner",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Tooltip",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "Dialog",
@@ -58,7 +59,8 @@
       },
       {
         "name": "Toast",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "ScrollArea",
@@ -112,11 +114,11 @@
       },
       {
         "name": "ToggleButton",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "SearchField",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Tabs",
@@ -124,15 +126,15 @@
       },
       {
         "name": "NavigationList",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "SettingRow",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "KeybindingField",
-        "status": "planned"
+        "status": "implemented"
       }
     ],
     "reusable_container_parts": [
@@ -173,6 +175,10 @@
         "status": "implemented"
       },
       {
+        "name": "RecipeSelectionGrid",
+        "status": "implemented"
+      },
+      {
         "name": "RecipeSearch",
         "status": "planned"
       },
@@ -190,6 +196,10 @@
       },
       {
         "name": "BrewingIndicator",
+        "status": "implemented"
+      },
+      {
+        "name": "BeaconEffect",
         "status": "implemented"
       },
       {
@@ -219,6 +229,10 @@
       },
       {
         "name": "SlotPlaceholder",
+        "status": "implemented"
+      },
+      {
+        "name": "CrafterSlot",
         "status": "implemented"
       },
       {
@@ -265,11 +279,11 @@
       },
       {
         "name": "Stonecutter",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Loom",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "CartographyTable",
@@ -277,7 +291,7 @@
       },
       {
         "name": "Beacon",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Chest",
@@ -301,7 +315,7 @@
       },
       {
         "name": "Crafter",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "TradingScreen",
@@ -351,7 +365,7 @@
       },
       {
         "name": "BossBar",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Crosshair",
@@ -359,31 +373,34 @@
       },
       {
         "name": "ChatMessage",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "ChatPanel",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "Scoreboard",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "StatusEffect",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "renderer_or_font_mapping_unverified"
       },
       {
         "name": "ActionBar",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "TitleOverlay",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "renderer_or_font_mapping_unverified"
       },
       {
         "name": "HeldItemTooltip",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "PlayerList",

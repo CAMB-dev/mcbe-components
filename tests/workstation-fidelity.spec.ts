@@ -197,8 +197,8 @@ type MaterialRecord={file:string;source:string;sha256:string;size:number[];bytes
 async function materialManifest(){return JSON.parse(await readFile(new URL('../docs/item-materials.json',import.meta.url),'utf8'))as{schemaVersion:number;referenceRelease:string;archiveSha256:string;assets:MaterialRecord[]};}
 const sha256=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
 
-test('all22 demo PNGs match schema2 official merged-release material records',async()=>{
-  const manifest=await materialManifest();expect(manifest.schemaVersion).toBe(2);expect(manifest.referenceRelease).toBe('v1.26.60.5');expect(manifest.assets).toHaveLength(22);expect(new Set(manifest.assets.map(asset=>asset.file)).size).toBe(22);
+test('all26 demo PNGs match schema2 official merged-release material records',async()=>{
+  const manifest=await materialManifest();expect(manifest.schemaVersion).toBe(2);expect(manifest.referenceRelease).toBe('v1.26.60.5');expect(manifest.assets).toHaveLength(26);expect(new Set(manifest.assets.map(asset=>asset.file)).size).toBe(26);
   for(const asset of manifest.assets){const bytes=await readFile(new URL(`../${asset.file}`,import.meta.url));expect(sha256(bytes),asset.file).toBe(asset.sha256);expect(bytes.length).toBe(asset.bytes);const image=PNG.sync.read(bytes);expect([image.width,image.height]).toEqual(asset.size);expect(asset.origin).toBe('official-merged-release');expect(asset.release).toBe('v1.26.60.5');expect(asset.matchesAtLeastOneInstalledCandidate).toBe(true);expect(asset.nativeCandidates.some(candidate=>candidate.matchesSelectedMergedBytes)).toBe(true);}
 });
 

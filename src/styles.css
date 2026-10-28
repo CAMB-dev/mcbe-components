@@ -10,6 +10,10 @@
 @import './special-workstations.css';
 @import './scroll-area.css';
 @import './hud.css';
+@import './hud-overlays.css';
+@import './advanced-workstations.css';
+@import './feedback.css';
+@import './settings-controls.css';
 /* mcbeui: scoped component styles; importing this file does not reset the page. */
 :root {
   --mc-font: 'Mojangles Pixel', 'MCBE Pixel', 'Mojangles', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace;
@@ -116,9 +120,6 @@
 .mc-button:disabled { --button-bg: #757575; --button-text: #4c4c4c; cursor: not-allowed; text-shadow: none; }
 .mc-button:disabled::before { border: 0; background: var(--mc-skin-button-disabled) 0 0 / 100% 100%; }
 .mc-button--ghost:disabled { background: transparent; border-color: transparent; box-shadow: none; color: #77787a; }
-.mc-spinner { width: 16px; height: 16px; border: 3px solid currentColor; border-inline-end-color: transparent; }
-@media (prefers-reduced-motion: no-preference) { .mc-spinner { animation: mc-spin 1s steps(4) infinite; } }
-@keyframes mc-spin { to { transform: rotate(360deg); } }
 
 .mc-panel { --mc-text: #4c4c4c; --mc-text-muted: #4c4c4c; --mc-error-text: #8b0000; --mc-value-text: #245e00; border: 8px solid transparent; border-image: var(--mc-skin-panel) 4 fill / 8px stretch; color: var(--mc-text); background: #c6c6c6; background-clip: padding-box; box-shadow: none; text-shadow: none; }
 .mc-panel__header { padding: 10px 10px 6px; color: inherit; text-shadow: none; }

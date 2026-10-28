@@ -25,6 +25,10 @@ export const gameItemTextures = {
   emptyMap: { src: new URL('./assets/minecraft/map_empty.png', import.meta.url).href, width: 16, height: 16 },
   filledMap: { src: new URL('./assets/minecraft/map_filled.png', import.meta.url).href, width: 16, height: 16 },
   paper: { src: new URL('./assets/minecraft/paper.png', import.meta.url).href, width: 16, height: 16 },
+  goldIngot: { src: new URL('./assets/minecraft/gold_ingot.png', import.meta.url).href, width: 16, height: 16 },
+  ironIngot: { src: new URL('./assets/minecraft/iron_ingot.png', import.meta.url).href, width: 16, height: 16 },
+  redDye: { src: new URL('./assets/minecraft/dye_powder_red.png', import.meta.url).href, width: 16, height: 16 },
+  flowerBannerPattern: { src: new URL('./assets/minecraft/flower_banner_pattern.png', import.meta.url).href, width: 16, height: 16 },
   // This official GUI category image is already rendered, not a hand-built cube.
   // Preserve its 17×17 pixels at integer scale; do not squeeze it to 16×16.
   grass: { src: new URL('./assets/minecraft/icon_recipe_nature.png', import.meta.url).href, width: 17, height: 17 },

@@ -6,6 +6,7 @@ import type {
   InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { Spinner } from './feedback';
 
 function cx(...names: (string | false | undefined)[]) { return names.filter(Boolean).join(' '); }
 function useValue<T>(value: T | undefined, defaultValue: T, onChange?: (value: T) => void) {
@@ -49,7 +50,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   return <button {...props} ref={ref} type={type} disabled={disabled || loading}
     aria-busy={loading || undefined}
     className={cx('mc-button', `mc-button--${variant}`, `mc-button--${size}`, fullWidth && 'mc-full', className)}>
-    {loading ? <span className="mc-spinner" aria-hidden="true"/> : startIcon}
+    {loading ? <Spinner decorative/> : startIcon}
     <span className="mc-button__label">{children}</span>{endIcon}
   </button>;
 });

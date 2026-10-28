@@ -1,0 +1,308 @@
+{
+  "assets": {
+    "loading_spin": {
+      "source": "resource_pack/textures/ui/loading_spin.png",
+      "sha256": "024ee98b3e4d000b748aab1e4e564473bd84f423c860f2ce8c1db203770a6b10",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/loading_spin.png",
+      "metadata": {
+        "base_size": [
+          70,
+          7
+        ]
+      }
+    },
+    "tooltip_default_background": {
+      "source": "resource_pack/textures/ui/tooltip_default_background.png",
+      "sha256": "7c71b806e3e6ff807f04668a26f3aff6d8a67d0e72db60ea2083d37ac8a31dfa",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/tooltip_default_background.png",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          9,
+          9
+        ]
+      }
+    },
+    "greyBorder": {
+      "source": "resource_pack/textures/ui/greyBorder.png",
+      "sha256": "d64f10ee78e7a09ed72c0659a70e7c8e109af304383092fbb6d1ac469fdd81e0",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/greyBorder.png",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          16,
+          16
+        ]
+      }
+    },
+    "close_button_default_light": {
+      "source": "resource_pack/textures/ui/close_button_default_light.png",
+      "sha256": "c0a7413ccebff8c8cf6868b6bd5310d4638ce24fa1969f7bd70cce4dce4b09e0",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/close_button_default_light.png"
+    },
+    "close_button_hover_light": {
+      "source": "resource_pack/textures/ui/close_button_hover_light.png",
+      "sha256": "5bbbba3c8e947a973b8a9773a298fe674b11e7009410d5dc9ec01db02be9431d",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/close_button_hover_light.png"
+    },
+    "close_button_pressed_light": {
+      "source": "resource_pack/textures/ui/close_button_pressed_light.png",
+      "sha256": "1ca7a00fa243eec0cfcb489214ed7eab4dc88838edada5a2f9933216ac5d098b",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/close_button_pressed_light.png"
+    }
+  },
+  "sourceCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+  "httpVerification": {
+    "loading_spin": {
+      "status": 200,
+      "sha256": "024ee98b3e4d000b748aab1e4e564473bd84f423c860f2ce8c1db203770a6b10"
+    },
+    "tooltip_default_background": {
+      "status": 200,
+      "sha256": "7c71b806e3e6ff807f04668a26f3aff6d8a67d0e72db60ea2083d37ac8a31dfa"
+    },
+    "greyBorder": {
+      "status": 200,
+      "sha256": "d64f10ee78e7a09ed72c0659a70e7c8e109af304383092fbb6d1ac469fdd81e0"
+    },
+    "close_button_default_light": {
+      "status": 200,
+      "sha256": "c0a7413ccebff8c8cf6868b6bd5310d4638ce24fa1969f7bd70cce4dce4b09e0"
+    },
+    "close_button_hover_light": {
+      "status": 200,
+      "sha256": "5bbbba3c8e947a973b8a9773a298fe674b11e7009410d5dc9ec01db02be9431d"
+    },
+    "close_button_pressed_light": {
+      "status": 200,
+      "sha256": "1ca7a00fa243eec0cfcb489214ed7eab4dc88838edada5a2f9933216ac5d098b"
+    }
+  },
+  "implementationStatusIsNotNativePixelCertification": true,
+  "basis": {
+    "edition": "Bedrock Classic JSON UI, installed 1.26.6005.0",
+    "publicFullRelease": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "fullReleaseSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "spinnerDefinitions": {
+      "spinner_animation": {
+        "anim_type": "flip_book",
+        "initial_uv": [
+          0,
+          0
+        ],
+        "frame_count": 10,
+        "frame_step": 7,
+        "fps": 10
+      },
+      "progress_loading_spinner": {
+        "type": "image",
+        "layer": 2,
+        "texture": "textures/ui/loading_spin",
+        "offset": [
+          0,
+          24
+        ],
+        "uv_size": [
+          7,
+          7
+        ],
+        "size": [
+          14,
+          14
+        ],
+        "uv": "@progress.spinner_animation",
+        "bindings": [
+          {
+            "binding_name": "#spinner_animation_visible",
+            "binding_name_override": "#visible"
+          }
+        ]
+      }
+    },
+    "tooltipDefinition": {
+      "type": "image",
+      "$tooltip_background_texture|default": "textures/ui/tooltip_default_background",
+      "texture": "$tooltip_background_texture",
+      "$tooltip_background_color|default": "$f_color_format",
+      "color": "$tooltip_background_color"
+    },
+    "toastBackground": {
+      "type": "image",
+      "texture": "textures/ui/greyBorder",
+      "anims": "$alpha_anims"
+    },
+    "toastSourceEntry": "resource_pack/ui/toast_screen.json",
+    "toastSourceSha256": "10a60194971cf605a7cfac9c032f9884b698663b96ac233dec2897233da961bb"
+  },
+  "geometry": {
+    "Spinner": {
+      "physicalAtlasSize": [
+        70,
+        7
+      ],
+      "frameCount": 10,
+      "physicalFrameSize": [
+        7,
+        7
+      ],
+      "frameStep": 7,
+      "fps": 10,
+      "logicalDisplaySize": [
+        14,
+        14
+      ],
+      "defaultGuiScale": 2,
+      "defaultCssSize": [
+        28,
+        28
+      ],
+      "sourceTexelExpansionAtGui2": 4,
+      "method": "Original full strip as a background image, integer frame offsets, CSS steps(10,end), 1s period. No synthetic dash drawing, conic gradient, CSS rotate, smoothing or generated spinner frames."
+    },
+    "Tooltip": {
+      "physicalBackground": [
+        9,
+        9
+      ],
+      "sourceNineSlice": 4,
+      "gui2DestinationEdge": 8,
+      "method": "Unchanged common.tooltip_background asset with source-white tint. Text wraps inside a source-backed nine-slice frame; above/below/side collision positioning and interaction timing are web adaptations.",
+      "scope": "General UI descriptive tooltip. Does not claim to replace native custom hover_text_renderer or inventory ItemTooltip appearance. No invented chevron is added."
+    },
+    "Toast": {
+      "physicalBackground": [
+        16,
+        16
+      ],
+      "sourceNineSlice": 4,
+      "gui2DestinationEdge": 8,
+      "source": "toast_screen.popup background = textures/ui/greyBorder",
+      "iconLogicalSize": [
+        13,
+        13
+      ],
+      "iconGui2CssSize": [
+        26,
+        26
+      ],
+      "dismissTextures": "Real 15x15 close_button_*_light PNG states at GUI2, in a 44px keyboard/touch target. Web dismiss/actions and layout are adaptations; original assets are not recolored."
+    }
+  },
+  "api": {
+    "Spinner": {
+      "ref": "HTMLSpanElement",
+      "props": {
+        "label": "string, default Loading",
+        "scale": "positive integer GUI scale, default 2",
+        "frame": "optional static original frame 0–9",
+        "paused": "pause at current animated frame",
+        "decorative": "true removes status/label and hides the image from assistive technology"
+      },
+      "semantics": "Default role=status with accessible label; visual frame is hidden from assistive technology. Frame changes do not replace live text.",
+      "motion": "Source animation is enabled only under prefers-reduced-motion:no-preference. Reduced motion shows a static source frame while preserving the loading status."
+    },
+    "Tooltip": {
+      "ref": "Outer HTMLSpanElement",
+      "props": {
+        "children": "One ReactElement that is focusable and accepts aria-describedby",
+        "content": "ReactNode descriptive content; interactive content belongs in a popover",
+        "open/defaultOpen/onOpenChange": "controlled or uncontrolled visibility; default false",
+        "side": "top | bottom | left | right, default top",
+        "delayDuration": "hover delay in ms, default 400",
+        "closeDelay": "hover transfer grace in ms, default 100",
+        "offset": "CSS-pixel anchor gap, default 8",
+        "disabled": "disables opening",
+        "contentProps": "native content div attributes and intentional style overrides"
+      },
+      "semantics": "Only aria-describedby is cloned onto the original child, merging an existing description. Original child ref/handlers remain intact. Content has role=tooltip. Trigger click and text selection remain native.",
+      "interactions": "Pointer hover, keyboard focus, transferable popup hover, touch tap toggle, outside pointer dismissal, Escape dismissal and touch scroll/pointercancel dismissal. Escape does not move focus.",
+      "portal": "Nearest containing dialog, otherwise document.body; this keeps descriptions in the modal top layer. Escape chooses the last eligible tooltip in the active native modal. A readonly/background tooltip outside that modal cannot swallow its Escape. First Escape closes the modal tooltip, next Escape reaches native Dialog cancel.",
+      "lifecycle": "No server-side DOM or portal; mounting enables positioning. Visible popup owns ResizeObservers plus resize/scroll/outside-pointer/Escape listeners, all removed on cleanup. Delayed timers are cleared on unmount."
+    },
+    "Toast": {
+      "ref": "HTMLDivElement status owner",
+      "required": [
+        "open:boolean",
+        "onOpenChange(open):void",
+        "title:string"
+      ],
+      "optional": {
+        "description": "string",
+        "icon": "ReactNode, decorative visual",
+        "action": "ReactNode native consumer action",
+        "variant": "default | error",
+        "duration": "explicit low-stakes timeout in ms; defaults to 0 (persistent); minimum 5000ms",
+        "dismissLabel": "default Dismiss notification"
+      },
+      "semantics": "role=status, aria-live=polite, aria-atomic=true owner stays mounted and empty when closed. Consumers should keep the component mounted and control open. No forced focus and no global Escape interception. Native dismiss button works with Enter/Space.",
+      "timeoutPolicy": "Errors and action-bearing notifications never auto-dismiss, including when duration is supplied. Ordinary notifications time out only when explicitly requested; hover, child focus and document hiding pause remaining time. Reopen resets paused flags and duration.",
+      "sourceDifference": "Native game toast animations/timeouts are not blindly copied onto actionable/error web notifications. No unsolicited slide animation is added, and reduced-motion behavior remains static."
+    }
+  },
+  "rights": {
+    "assets": "Original Mojang sample PNG bytes embedded unchanged in feedback-textures.css; no AI-generated or hand-drawn feedback art. Preserve the existing Minecraft sample attribution and license.",
+    "license": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/LICENSE.md"
+  },
+  "verification": {
+    "spec": "tests/feedback.spec.ts",
+    "fixture": "demo/feedback-fixture.tsx: FeedbackFixture",
+    "independentPort": 5193,
+    "output": ".cache/feedback-test-results",
+    "runs": [
+      {
+        "scope": "Both desktop/mobile, before Button integration; includes readonly background/modal layering regression",
+        "passed": 23,
+        "skipped": 1,
+        "skipReason": "Desktop does not perform the native touch path; mobile tap test passes."
+      },
+      {
+        "scope": "Button.loading source integration, Dialog layering, ten original frames, both viewports",
+        "passed": 8
+      },
+      {
+        "scope": "After removing obsolete source-data CSS reset: Button.loading and all ten original frames, both viewports",
+        "passed": 4
+      }
+    ],
+    "currentSpecCaseCount": 13,
+    "nativeFrameRaster": {
+      "sourceHashVerified": true,
+      "sourcePhysicalSize": [
+        70,
+        7
+      ],
+      "frames": 10,
+      "renderedFrameCssSize": [
+        28,
+        28
+      ],
+      "dpr": 1,
+      "changedPixels": 0,
+      "method": "Every complete 28x28 region vs independent nearest expansion of the corresponding original 7x7 PNG frame, including transparent pixels composed over the fixture background. No baseline screenshot, masking, synthetic SVG or edge exclusion."
+    },
+    "behavior": [
+      "Static server rendering without browser globals",
+      "Tooltip child ref/handler and existing aria-describedby preservation",
+      "Hover-transfer grace, focus, outside action preservation, narrow viewport collision",
+      "Native-dialog portal and first-tooltip/second-dialog Escape order",
+      "Readonly background tooltip cannot steal active-modal Escape",
+      "Mobile tap toggle, native trigger action and outside-tap dismiss",
+      "Stable status DOM owner across close/reopen, controlled dismissal and native Undo action",
+      "Explicit 5s timer pause/resume with remaining time, keyboard-dismiss/reopen reset",
+      "Error/action notifications remain open after 30s of virtual time despite supplied duration",
+      "Source animation pause and reduced-motion static loading status",
+      "Core Button.loading actual atlas/hash, 28px source image, disabled/busy/decorative semantics"
+    ],
+    "visualEvidence": [
+      ".cache/feedback-qa/fixture.png",
+      ".cache/feedback-qa/desktop.png",
+      ".cache/feedback-qa/browser-result.json"
+    ],
+    "pageErrors": [],
+    "acceptanceLimit": "Original-material/specimen verification and web interaction validation. No claim that browser positioning, native custom inventory hover renderer, native toast trajectory or entire native screen is pixel certified."
+  },
+  "integration": {
+    "Button.loading": "src/components.tsx imports Spinner directly from feedback and uses <Spinner decorative/>. feedback has no components/Button import, so this introduces no circular dependency. Button remains disabled and aria-busy; no second live status is nested inside it.",
+    "legacyCleanup": "Old 16px border-dash/rotate .mc-spinner rules and mc-spin keyframe were removed from shared styles by the integrator. No high-priority data-source CSS workaround remains. data-source=loading-spin identifies actual asset provenance only."
+  }
+}

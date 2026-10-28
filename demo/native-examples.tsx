@@ -16,6 +16,7 @@ const materialNames: Record<GameItemName, string> = {
   grass: 'Grass block', waterBottle: 'Water bottle', glassBottle: 'Glass bottle', blazePowder: 'Blaze powder',
   netherWart: 'Nether wart', netheriteUpgradeTemplate: 'Netherite upgrade', netheriteIngot: 'Netherite ingot',
   netheriteSword: 'Netherite sword', emptyMap: 'Empty map', filledMap: 'Map', paper: 'Paper',
+  goldIngot: 'Gold ingot', ironIngot: 'Iron ingot', redDye: 'Red dye', flowerBannerPattern: 'Flower banner pattern',
 };
 function item(key: GameItemName, count = 1): InventoryItem {
   return { name: materialNames[key], icon: <GameItemIcon name={key}/>, count };

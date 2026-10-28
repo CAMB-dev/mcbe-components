@@ -2,10 +2,19 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 const manifest = JSON.parse(await readFile(new URL('../docs/classic-skins.json', import.meta.url), 'utf8'));
 const hudManifest = JSON.parse(await readFile(new URL('../docs/hud-geometry.json', import.meta.url), 'utf8'));
+const hudOverlayManifest = JSON.parse(await readFile(new URL('../docs/hud-overlays-geometry.json', import.meta.url), 'utf8'));
+const advancedManifest = JSON.parse(await readFile(new URL('../docs/advanced-workstation-textures.json', import.meta.url), 'utf8'));
+const feedbackManifest = JSON.parse(await readFile(new URL('../docs/feedback-geometry.json', import.meta.url), 'utf8'));
+const settingsManifest = JSON.parse(await readFile(new URL('../docs/settings-controls-geometry.json', import.meta.url), 'utf8'));
 const directory = new URL('../.cache/references/', import.meta.url);
 await mkdir(directory, { recursive: true });
 const references = new Map();
-for (const skin of [...Object.values(manifest.skins), ...Object.values(hudManifest.assets)]) {
+// Caller-bound recipe backgrounds are exercised by QA, not default production skins.
+const fixtureReferences = [{
+  source: 'resource_pack/textures/ui/recipe_book_item_bg.png',
+  sha256: 'd70b22cb99397cd6ef3902df63166e719b6982cf18f98bc95f368977c44533c4',
+}];
+for (const skin of [...Object.values(manifest.skins), ...Object.values(hudManifest.assets), ...Object.values(hudOverlayManifest.assets), ...advancedManifest.source.textures, ...Object.values(feedbackManifest.assets), ...Object.values(settingsManifest.assets), ...fixtureReferences]) {
   const name = skin.source.split('/').at(-1);
   const previous = references.get(name);
   if (previous && previous.sha256 !== skin.sha256) throw new Error(`Reference filename collision: ${name}`);
@@ -22,4 +31,4 @@ for (const [name, skin] of references) {
   if (createHash('sha256').update(bytes).digest('hex') !== skin.sha256) throw new Error(`Reference hash mismatch: ${name}`);
   await writeFile(target, bytes);
 }
-console.log(`Verified ${references.size} immutable reference images (${Object.keys(hudManifest.assets).length} HUD assets).`);
+console.log(`Verified ${references.size} immutable reference images (${Object.keys(hudManifest.assets).length} HUD, ${Object.keys(hudOverlayManifest.assets).length} HUD overlay, ${advancedManifest.source.textures.length} advanced workstation, ${Object.keys(feedbackManifest.assets).length} feedback, ${Object.keys(settingsManifest.assets).length} settings assets).`);

@@ -1643,6 +1643,195 @@
         }
       ],
       "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "goldIngot",
+      "file": "demo/assets/minecraft/gold_ingot.png",
+      "source": "resource_pack/textures/items/gold_ingot.png",
+      "sha256": "0c901e4f17de2bcde290409b76ba2395cb86232e7d2d67292b5211977a08da1d",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 232,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "gold_ingot.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "0c901e4f17de2bcde290409b76ba2395cb86232e7d2d67292b5211977a08da1d",
+          "bytes": 232,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "gold_ingot.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "0c901e4f17de2bcde290409b76ba2395cb86232e7d2d67292b5211977a08da1d",
+          "bytes": 232,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "ironIngot",
+      "file": "demo/assets/minecraft/iron_ingot.png",
+      "source": "resource_pack/textures/items/iron_ingot.png",
+      "sha256": "247f59e08365383582ca519c378cf2d7d966a021bd929a686f62f7cc622cd6d0",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 218,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "iron_ingot.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "247f59e08365383582ca519c378cf2d7d966a021bd929a686f62f7cc622cd6d0",
+          "bytes": 218,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "iron_ingot.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "247f59e08365383582ca519c378cf2d7d966a021bd929a686f62f7cc622cd6d0",
+          "bytes": 218,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "redDye",
+      "file": "demo/assets/minecraft/dye_powder_red.png",
+      "source": "resource_pack/textures/items/dye_powder_red.png",
+      "sha256": "d8702968887c9bfdab91f467d9c2348e9e96cd05e008c6c902b30f783a49aefc",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 237,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "dye_powder_red.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "57dc9b0347377324ea1ae18e898780aadfb13cc5e09fe3f9de15c2ce6d1661f8",
+          "bytes": 223,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        },
+        {
+          "pack": "vanilla_1.21.110",
+          "path": "data/resource_packs/vanilla_1.21.110/__brarchive/textures/items.brarchive",
+          "entry": "dye_powder_red.png",
+          "archiveSha256": "44b760d9dc56704ee69ee913b50503f6451ca053d18e45465de2de2ae288bff0",
+          "sha256": "d8702968887c9bfdab91f467d9c2348e9e96cd05e008c6c902b30f783a49aefc",
+          "bytes": 237,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "dye_powder_red.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "57dc9b0347377324ea1ae18e898780aadfb13cc5e09fe3f9de15c2ce6d1661f8",
+          "bytes": 223,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "flowerBannerPattern",
+      "file": "demo/assets/minecraft/flower_banner_pattern.png",
+      "source": "resource_pack/textures/items/flower_banner_pattern.png",
+      "sha256": "6a5be9a97a3a709f5ee959eed94b6a6b554bf03d14eab5507d1aedcd4564d690",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 415,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.21.30",
+          "path": "data/resource_packs/vanilla_1.21.30/__brarchive/textures/items.brarchive",
+          "entry": "flower_banner_pattern.png",
+          "archiveSha256": "81587505d741cd3e614d5b479ef04cb90955ea17bf68fb00a94d50865f9fea93",
+          "sha256": "6a5be9a97a3a709f5ee959eed94b6a6b554bf03d14eab5507d1aedcd4564d690",
+          "bytes": 415,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "flower_banner_pattern.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "6a5be9a97a3a709f5ee959eed94b6a6b554bf03d14eab5507d1aedcd4564d690",
+          "bytes": 415,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
     }
   ],
   "historicalSwordCorrection": {

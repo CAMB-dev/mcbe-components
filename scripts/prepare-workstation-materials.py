@@ -43,6 +43,10 @@ MATERIALS = [
     ('emptyMap', 'items/map_empty.png'),
     ('filledMap', 'items/map_filled.png'),
     ('paper', 'items/paper.png'),
+    ('goldIngot', 'items/gold_ingot.png'),
+    ('ironIngot', 'items/iron_ingot.png'),
+    ('redDye', 'items/dye_powder_red.png'),
+    ('flowerBannerPattern', 'items/flower_banner_pattern.png'),
 ]
 
 

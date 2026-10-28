@@ -1,0 +1,1214 @@
+{
+  "schemaVersion": 1,
+  "referenceCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+  "assets": {
+    "black": {
+      "file": "Black.png",
+      "source": "resource_pack/textures/ui/Black.png",
+      "size": [
+        2,
+        2
+      ],
+      "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/Black.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e"
+    },
+    "boss-empty": {
+      "file": "empty_progress_bar.png",
+      "source": "resource_pack/textures/ui/empty_progress_bar.png",
+      "size": [
+        13,
+        5
+      ],
+      "sha256": "747ece8f4372304e3a8e90101db00b1e6a65289dc2bed7e48cc2bf549b803894",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/empty_progress_bar.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "747ece8f4372304e3a8e90101db00b1e6a65289dc2bed7e48cc2bf549b803894",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "747ece8f4372304e3a8e90101db00b1e6a65289dc2bed7e48cc2bf549b803894"
+    },
+    "boss-filled": {
+      "file": "filled_progress_bar.png",
+      "source": "resource_pack/textures/ui/filled_progress_bar.png",
+      "size": [
+        13,
+        5
+      ],
+      "sha256": "c2c57b072ae406d89986240cc2e36ee5bc971724e0c56d836373b34f3c7e237a",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/filled_progress_bar.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "c2c57b072ae406d89986240cc2e36ee5bc971724e0c56d836373b34f3c7e237a",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "c2c57b072ae406d89986240cc2e36ee5bc971724e0c56d836373b34f3c7e237a"
+    },
+    "tooltip-background": {
+      "file": "hud_tip_text_background.png",
+      "source": "resource_pack/textures/ui/hud_tip_text_background.png",
+      "size": [
+        6,
+        6
+      ],
+      "sha256": "8bcad4aa663cdcf3cbfe93acd5c8ba2c4ab5c18032b2f053fea5ebd907c700cf",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/hud_tip_text_background.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "8bcad4aa663cdcf3cbfe93acd5c8ba2c4ab5c18032b2f053fea5ebd907c700cf",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "8bcad4aa663cdcf3cbfe93acd5c8ba2c4ab5c18032b2f053fea5ebd907c700cf"
+    },
+    "effect-background": {
+      "file": "hud_mob_effect_background.png",
+      "source": "resource_pack/textures/ui/hud_mob_effect_background.png",
+      "size": [
+        24,
+        24
+      ],
+      "sha256": "d3af5654fbe5d2d1b0f32a69d93eb83b62b59a4185f60aad411faa507e57c8d4",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/hud_mob_effect_background.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "d3af5654fbe5d2d1b0f32a69d93eb83b62b59a4185f60aad411faa507e57c8d4",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "d3af5654fbe5d2d1b0f32a69d93eb83b62b59a4185f60aad411faa507e57c8d4"
+    },
+    "effect-background-ambient": {
+      "file": "hud_mob_ambient_effect_background.png",
+      "source": "resource_pack/textures/ui/hud_mob_ambient_effect_background.png",
+      "size": [
+        24,
+        24
+      ],
+      "sha256": "d6a726643bf403c53982ab705f77b144209509492d8704466a2bcb6833b09f31",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/hud_mob_ambient_effect_background.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "d6a726643bf403c53982ab705f77b144209509492d8704466a2bcb6833b09f31",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "d6a726643bf403c53982ab705f77b144209509492d8704466a2bcb6833b09f31"
+    },
+    "effect-absorption": {
+      "file": "absorption_effect.png",
+      "source": "resource_pack/textures/ui/absorption_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "999b1e5b1b1e078da3e0beee70df09d306dcdf2bf38c613c826fb12d14759f48",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/absorption_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "999b1e5b1b1e078da3e0beee70df09d306dcdf2bf38c613c826fb12d14759f48",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "999b1e5b1b1e078da3e0beee70df09d306dcdf2bf38c613c826fb12d14759f48"
+    },
+    "effect-bad-omen": {
+      "file": "bad_omen_effect.png",
+      "source": "resource_pack/textures/ui/bad_omen_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "5b9875ac4ae397a5ceecd0c51197b66783fc8a9f8eb1051307799b6d488a2971",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/bad_omen_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "5b9875ac4ae397a5ceecd0c51197b66783fc8a9f8eb1051307799b6d488a2971",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "5b9875ac4ae397a5ceecd0c51197b66783fc8a9f8eb1051307799b6d488a2971"
+    },
+    "effect-blindness": {
+      "file": "blindness_effect.png",
+      "source": "resource_pack/textures/ui/blindness_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "7c6c0439d8b22be1bfd1f32a8b847bf11d2d37fc3fe04059a306b3855d11eafd",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/blindness_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "7c6c0439d8b22be1bfd1f32a8b847bf11d2d37fc3fe04059a306b3855d11eafd",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "7c6c0439d8b22be1bfd1f32a8b847bf11d2d37fc3fe04059a306b3855d11eafd"
+    },
+    "effect-breath-of-the-nautilus": {
+      "file": "breath_of_the_nautilus_effect.png",
+      "source": "resource_pack/textures/ui/breath_of_the_nautilus_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "6ae442eee73177d3ccb0c590c51956c85f50698137652f6b167cb9bacedbd772",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/breath_of_the_nautilus_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "6ae442eee73177d3ccb0c590c51956c85f50698137652f6b167cb9bacedbd772",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "6ae442eee73177d3ccb0c590c51956c85f50698137652f6b167cb9bacedbd772"
+    },
+    "effect-conduit-power": {
+      "file": "conduit_power_effect.png",
+      "source": "resource_pack/textures/ui/conduit_power_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "84394b8742afc7eaa179298e08f50504357a3393f69a4541e522fbda4ac83ba6",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/conduit_power_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "84394b8742afc7eaa179298e08f50504357a3393f69a4541e522fbda4ac83ba6",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "84394b8742afc7eaa179298e08f50504357a3393f69a4541e522fbda4ac83ba6"
+    },
+    "effect-darkness": {
+      "file": "darkness_effect.png",
+      "source": "resource_pack/textures/ui/darkness_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "509e860a6df7d2f35da4565f63a7855b4ee596254a8efc8d102bc0bbcb113104",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/darkness_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "509e860a6df7d2f35da4565f63a7855b4ee596254a8efc8d102bc0bbcb113104",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "509e860a6df7d2f35da4565f63a7855b4ee596254a8efc8d102bc0bbcb113104"
+    },
+    "effect-fire-resistance": {
+      "file": "fire_resistance_effect.png",
+      "source": "resource_pack/textures/ui/fire_resistance_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "305a1a3c759f33fe544e279af5ebc2c554ee208405ad8330093618968636c00d",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/fire_resistance_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "305a1a3c759f33fe544e279af5ebc2c554ee208405ad8330093618968636c00d",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "305a1a3c759f33fe544e279af5ebc2c554ee208405ad8330093618968636c00d"
+    },
+    "effect-haste": {
+      "file": "haste_effect.png",
+      "source": "resource_pack/textures/ui/haste_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "e8658200c26e6645250f63f4ffe8a1326be4dc966d65db27df1e0d6b559d1f8d",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/haste_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "e8658200c26e6645250f63f4ffe8a1326be4dc966d65db27df1e0d6b559d1f8d",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "e8658200c26e6645250f63f4ffe8a1326be4dc966d65db27df1e0d6b559d1f8d"
+    },
+    "effect-health-boost": {
+      "file": "health_boost_effect.png",
+      "source": "resource_pack/textures/ui/health_boost_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "b6579b7182ca6479499781214641f6ec476cb9cd926c7dc235e72ae659325a86",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/health_boost_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "b6579b7182ca6479499781214641f6ec476cb9cd926c7dc235e72ae659325a86",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "b6579b7182ca6479499781214641f6ec476cb9cd926c7dc235e72ae659325a86"
+    },
+    "effect-hunger": {
+      "file": "hunger_effect.png",
+      "source": "resource_pack/textures/ui/hunger_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "c02de265b1a75993681abace07cd49bf45563952e59e37b99f160746ce7dbabe",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/hunger_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "c02de265b1a75993681abace07cd49bf45563952e59e37b99f160746ce7dbabe",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "c02de265b1a75993681abace07cd49bf45563952e59e37b99f160746ce7dbabe"
+    },
+    "effect-infested": {
+      "file": "infested_effect.png",
+      "source": "resource_pack/textures/ui/infested_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "01752beae8dc933ae8ad96d7bf241e28ef36476110defdf5bc845bc619ce5191",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/infested_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "01752beae8dc933ae8ad96d7bf241e28ef36476110defdf5bc845bc619ce5191",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "01752beae8dc933ae8ad96d7bf241e28ef36476110defdf5bc845bc619ce5191"
+    },
+    "effect-invisibility": {
+      "file": "invisibility_effect.png",
+      "source": "resource_pack/textures/ui/invisibility_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "4e25a02e0163a57d7fc32eb6d9b6e3003c23bc153172573efedd247467927d49",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/invisibility_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "4e25a02e0163a57d7fc32eb6d9b6e3003c23bc153172573efedd247467927d49",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "4e25a02e0163a57d7fc32eb6d9b6e3003c23bc153172573efedd247467927d49"
+    },
+    "effect-jump-boost": {
+      "file": "jump_boost_effect.png",
+      "source": "resource_pack/textures/ui/jump_boost_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "4c184ca78d1ccbfde5b61b182baed9f02b1ce1bc395afcb17cb8bb8268c4cd9d",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/jump_boost_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "4c184ca78d1ccbfde5b61b182baed9f02b1ce1bc395afcb17cb8bb8268c4cd9d",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "4c184ca78d1ccbfde5b61b182baed9f02b1ce1bc395afcb17cb8bb8268c4cd9d"
+    },
+    "effect-levitation": {
+      "file": "levitation_effect.png",
+      "source": "resource_pack/textures/ui/levitation_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "802b2dce33db91ba549cd71bdb782cd328f19f9e9249d6a04cb45a24aa0d3f8a",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/levitation_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "802b2dce33db91ba549cd71bdb782cd328f19f9e9249d6a04cb45a24aa0d3f8a",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "802b2dce33db91ba549cd71bdb782cd328f19f9e9249d6a04cb45a24aa0d3f8a"
+    },
+    "effect-mining-fatigue": {
+      "file": "mining_fatigue_effect.png",
+      "source": "resource_pack/textures/ui/mining_fatigue_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "cabd7bdccacb775155754f7c26acc1fc6055fbaacac3da668a52e0553e5d3eb0",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/mining_fatigue_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "cabd7bdccacb775155754f7c26acc1fc6055fbaacac3da668a52e0553e5d3eb0",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "cabd7bdccacb775155754f7c26acc1fc6055fbaacac3da668a52e0553e5d3eb0"
+    },
+    "effect-nausea": {
+      "file": "nausea_effect.png",
+      "source": "resource_pack/textures/ui/nausea_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "18127991ab91a6fec51664ef07163fb0d43b79972b1e2910e04fb89b748209bd",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/nausea_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "18127991ab91a6fec51664ef07163fb0d43b79972b1e2910e04fb89b748209bd",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "18127991ab91a6fec51664ef07163fb0d43b79972b1e2910e04fb89b748209bd"
+    },
+    "effect-night-vision": {
+      "file": "night_vision_effect.png",
+      "source": "resource_pack/textures/ui/night_vision_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "3921dfda6e0b344353e485e1bf310721562a7f1912b7f0a9630b27e32d1687b2",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/night_vision_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "3921dfda6e0b344353e485e1bf310721562a7f1912b7f0a9630b27e32d1687b2",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "3921dfda6e0b344353e485e1bf310721562a7f1912b7f0a9630b27e32d1687b2"
+    },
+    "effect-oozing": {
+      "file": "oozing_effect.png",
+      "source": "resource_pack/textures/ui/oozing_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "d6b63592ea9df728c636ed2569dcea5beac40464b46427ecd1185a813488b238",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/oozing_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "d6b63592ea9df728c636ed2569dcea5beac40464b46427ecd1185a813488b238",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "d6b63592ea9df728c636ed2569dcea5beac40464b46427ecd1185a813488b238"
+    },
+    "effect-poison": {
+      "file": "poison_effect.png",
+      "source": "resource_pack/textures/ui/poison_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "35e01fa415fb6f2138c881af6dde8d7185fbe927c9342956f70e501756503600",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/poison_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "35e01fa415fb6f2138c881af6dde8d7185fbe927c9342956f70e501756503600",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "35e01fa415fb6f2138c881af6dde8d7185fbe927c9342956f70e501756503600"
+    },
+    "effect-raid-omen": {
+      "file": "raid_omen_effect.png",
+      "source": "resource_pack/textures/ui/raid_omen_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "d3e0ce680dac5d69d547d52d738a7b9b574b64442c40f3c71dfa8024a7ddeb5d",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/raid_omen_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "d3e0ce680dac5d69d547d52d738a7b9b574b64442c40f3c71dfa8024a7ddeb5d",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "d3e0ce680dac5d69d547d52d738a7b9b574b64442c40f3c71dfa8024a7ddeb5d"
+    },
+    "effect-regeneration": {
+      "file": "regeneration_effect.png",
+      "source": "resource_pack/textures/ui/regeneration_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "673e5c6df2136a9e3236bc6ce59d6e5a282f8353a32bdc580a79acd64d2cce5b",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/regeneration_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "673e5c6df2136a9e3236bc6ce59d6e5a282f8353a32bdc580a79acd64d2cce5b",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "673e5c6df2136a9e3236bc6ce59d6e5a282f8353a32bdc580a79acd64d2cce5b"
+    },
+    "effect-resistance": {
+      "file": "resistance_effect.png",
+      "source": "resource_pack/textures/ui/resistance_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "6aec7580f9d0a82dd12637a8342307aed1dd17c4059e4e89cf1b95316c036131",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/resistance_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "6aec7580f9d0a82dd12637a8342307aed1dd17c4059e4e89cf1b95316c036131",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "6aec7580f9d0a82dd12637a8342307aed1dd17c4059e4e89cf1b95316c036131"
+    },
+    "effect-slow-falling": {
+      "file": "slow_falling_effect.png",
+      "source": "resource_pack/textures/ui/slow_falling_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "59c40e663e3a8ad6dac3e66b77d07627bec7922012768b28877c387fc596691d",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/slow_falling_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "59c40e663e3a8ad6dac3e66b77d07627bec7922012768b28877c387fc596691d",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "59c40e663e3a8ad6dac3e66b77d07627bec7922012768b28877c387fc596691d"
+    },
+    "effect-slowness": {
+      "file": "slowness_effect.png",
+      "source": "resource_pack/textures/ui/slowness_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "74d21962cbee6b7d55da3eb858f466e258f86c762253680995ccab82d6a00078",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/slowness_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "74d21962cbee6b7d55da3eb858f466e258f86c762253680995ccab82d6a00078",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "74d21962cbee6b7d55da3eb858f466e258f86c762253680995ccab82d6a00078"
+    },
+    "effect-speed": {
+      "file": "speed_effect.png",
+      "source": "resource_pack/textures/ui/speed_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "91128dc77c33d4694a8912eaddda92bbb119f9cc2e07dbc6245bdb40bbb4b7f8",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/speed_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "91128dc77c33d4694a8912eaddda92bbb119f9cc2e07dbc6245bdb40bbb4b7f8",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "91128dc77c33d4694a8912eaddda92bbb119f9cc2e07dbc6245bdb40bbb4b7f8"
+    },
+    "effect-strength": {
+      "file": "strength_effect.png",
+      "source": "resource_pack/textures/ui/strength_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "a009fb12ed3db82ac1afff6512d64b64e89a76079ea062b1b9829b89d288f011",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/strength_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "a009fb12ed3db82ac1afff6512d64b64e89a76079ea062b1b9829b89d288f011",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "a009fb12ed3db82ac1afff6512d64b64e89a76079ea062b1b9829b89d288f011"
+    },
+    "effect-trial-omen": {
+      "file": "trial_omen_effect.png",
+      "source": "resource_pack/textures/ui/trial_omen_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "6de4961462dd57b48d528ac128ad45680aa60362554f0b48281334f5027137e3",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/trial_omen_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "6de4961462dd57b48d528ac128ad45680aa60362554f0b48281334f5027137e3",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "6de4961462dd57b48d528ac128ad45680aa60362554f0b48281334f5027137e3"
+    },
+    "effect-village-hero": {
+      "file": "village_hero_effect.png",
+      "source": "resource_pack/textures/ui/village_hero_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "6804c499675f3a935d3468baa57a7e57086e4c162c133f155728885f4ab72dc2",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/village_hero_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "6804c499675f3a935d3468baa57a7e57086e4c162c133f155728885f4ab72dc2",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "6804c499675f3a935d3468baa57a7e57086e4c162c133f155728885f4ab72dc2"
+    },
+    "effect-water-breathing": {
+      "file": "water_breathing_effect.png",
+      "source": "resource_pack/textures/ui/water_breathing_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "4873dd7273d3cac93074c93622910924460d6a7cb488b789bb95884a573e87ac",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/water_breathing_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "4873dd7273d3cac93074c93622910924460d6a7cb488b789bb95884a573e87ac",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "4873dd7273d3cac93074c93622910924460d6a7cb488b789bb95884a573e87ac"
+    },
+    "effect-weakness": {
+      "file": "weakness_effect.png",
+      "source": "resource_pack/textures/ui/weakness_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "a33be0b579901d1aafe112781aa7206f5f4c8107b98a4b6b8d5a01294db779b0",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/weakness_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "a33be0b579901d1aafe112781aa7206f5f4c8107b98a4b6b8d5a01294db779b0",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "a33be0b579901d1aafe112781aa7206f5f4c8107b98a4b6b8d5a01294db779b0"
+    },
+    "effect-weaving": {
+      "file": "weaving_effect.png",
+      "source": "resource_pack/textures/ui/weaving_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "7911913437cedac9da80d8f3e47f071a3eebd6b66cb277776aaefa35404979ec",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/weaving_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "7911913437cedac9da80d8f3e47f071a3eebd6b66cb277776aaefa35404979ec",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "7911913437cedac9da80d8f3e47f071a3eebd6b66cb277776aaefa35404979ec"
+    },
+    "effect-wind-charged": {
+      "file": "wind_charged_effect.png",
+      "source": "resource_pack/textures/ui/wind_charged_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "f0f057f8f7c94223a984da1f8b0b5b61eeb16b02df241537f1984ac7dd6c8e12",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/wind_charged_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "f0f057f8f7c94223a984da1f8b0b5b61eeb16b02df241537f1984ac7dd6c8e12",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "f0f057f8f7c94223a984da1f8b0b5b61eeb16b02df241537f1984ac7dd6c8e12"
+    },
+    "effect-wither": {
+      "file": "wither_effect.png",
+      "source": "resource_pack/textures/ui/wither_effect.png",
+      "size": [
+        18,
+        18
+      ],
+      "sha256": "6d4b9109b9d63124aa719fc2c4b96343c2dd95c5771a88a179a36cb2d6f7950a",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/wither_effect.png",
+      "pinnedHttpStatus": 200,
+      "pinnedSha256": "6d4b9109b9d63124aa719fc2c4b96343c2dd95c5771a88a179a36cb2d6f7950a",
+      "matchesPinned": true,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "fullReleaseSha256": "6d4b9109b9d63124aa719fc2c4b96343c2dd95c5771a88a179a36cb2d6f7950a"
+    }
+  },
+  "provenance": {
+    "installedRoot": "C:\\XboxGames\\Minecraft for Windows\\Content",
+    "nativeUiArchive": "data/resource_packs/vanilla/__brarchive/ui.brarchive",
+    "nativeTextureArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+    "fullReleaseArchive": {
+      "file": "bedrock-samples-v1.26.60.5-full.zip",
+      "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+    },
+    "nativeDefinitions": {
+      "hud_screen.json": {
+        "sha256": "d57480f488265329f3feed0cff03841aeb0359b4fe7d7351abf52db255f2a75b",
+        "fullReleaseSource": "resource_pack/ui/hud_screen.json",
+        "fullReleaseSha256": "fd40b53e5e67f4f6b3799f25821628f80b6aa69c441b012340b8e0f6cb801a8c"
+      },
+      "ui_common.json": {
+        "sha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+        "fullReleaseSource": "resource_pack/ui/ui_common.json",
+        "fullReleaseSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+      },
+      "scoreboards.json": {
+        "sha256": "59284dced1515c9348334128aba06a19fe1d7019195acaef4d4c1a640f22abd5",
+        "fullReleaseSource": "resource_pack/ui/scoreboards.json",
+        "fullReleaseSha256": "e8692c69e00bfbfcb721760a8b732b5d8daa5fe129f1035fe8b9d115fa01f422"
+      },
+      "mob_effect_screen.json": {
+        "sha256": "b1a3f50c59df63d7073131562a12e7d746d1d618ce5c425fec9951fbee48b327",
+        "fullReleaseSource": "resource_pack/ui/mob_effect_screen.json",
+        "fullReleaseSha256": "d3158915d594fb77fb11a3030f3def35d5cd28fb70e6a277d9e255646f1b26b3"
+      },
+      "_global_variables.json": {
+        "sha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+        "fullReleaseSource": "resource_pack/ui/_global_variables.json",
+        "fullReleaseSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b"
+      }
+    },
+    "verification": "Every PNG matches installed archive, full release and actual HTTP 200 pinned raw file bytes. CSS preserves those original bytes without re-encoding."
+  },
+  "profile": "Bedrock 26.60 Classic HUD overlays, fixed GUI scale 2, in-flow reusable components",
+  "scope": "Eight components with original PNG resources and explicit JSON geometry. Native world anchors, dynamic binding defaults, font enum rasterization, hidden status renderer behavior and engine animation are not certified as matching an in-game frame.",
+  "geometry": {
+    "BossBar": {
+      "sources": [
+        "hud_screen.json:boss_health_panel",
+        "hud_screen.json:boss_name_panel",
+        "ui_common.json:progress_bar",
+        "ui_common.json:progress_bar_for_collections",
+        "ui_common.json:filled_progress_bar_for_collections"
+      ],
+      "native": {
+        "panelSize": [
+          182,
+          20
+        ],
+        "anchor": "top_middle",
+        "trackSize": [
+          182,
+          5
+        ],
+        "trackOffset": [
+          0,
+          10
+        ],
+        "nameShadow": true,
+        "nameColor": [
+          1,
+          1,
+          1
+        ],
+        "fillClipDirection": "left",
+        "clipPixelperfect": false,
+        "colorBinding": "#bar_color",
+        "pngSize": [
+          13,
+          5
+        ],
+        "physicalNineSlice": [
+          4,
+          0,
+          4,
+          0
+        ]
+      },
+      "web": {
+        "panelCss": [
+          364,
+          40
+        ],
+        "trackCss": [
+          364,
+          10
+        ],
+        "trackOffsetCss": [
+          0,
+          20
+        ],
+        "normalFontCss": [
+          18,
+          20
+        ],
+        "nameShadowCss": "2px 2px #3f3f3f",
+        "defaultColor": [
+          1,
+          1,
+          1
+        ],
+        "fillTint": "RGB component multiplication in sRGB, SVG component-transfer filter; original PNG remains the sole artwork.",
+        "normalFontMojanglesProfileCss": [
+          20,
+          20
+        ]
+      },
+      "limits": [
+        "Native #bar_color is bound dynamically; the neutral Web default is not an assertion of the native default boss color. The empty PNG stays neutral because the public collection color binding is on the filled child.",
+        "The supplied value is clamped to a finite max and translated to a visible fill fraction. Engine progress binding semantics and native color shader rasterization require independent validation.",
+        "No Java boss segments, invented dividers or gradient replacements. The source bar is the original four-edge nine-slice clipped continuously from the left."
+      ]
+    },
+    "ChatMessage": {
+      "sources": [
+        "hud_screen.json:chat_label",
+        "hud_screen.json:chat_grid_item",
+        "hud_screen.json:anim_chat_txt_alpha",
+        "hud_screen.json:anim_chat_bg_alpha"
+      ],
+      "native": {
+        "rowWidth": "100%-2px",
+        "textOffset": [
+          2,
+          0
+        ],
+        "textWidth": "100%-5px",
+        "shadow": true,
+        "textColor": [
+          1,
+          1,
+          1
+        ],
+        "fontType": "$chat_font_type",
+        "fontScale": "$chat_font_scale_factor",
+        "linePadding": "$chat_line_spacing",
+        "background": "Black.png",
+        "backgroundOpacity": "$chat_background_opacity",
+        "wait": "$chat_item_lifetime",
+        "fadeSeconds": 1,
+        "fadeEasing": "in_quart"
+      },
+      "web": {
+        "rowWidth": "calc(100% - 4px)",
+        "textOffsetCss": [
+          4,
+          0
+        ],
+        "textWidth": "calc(100% - 10px)",
+        "normalFontCss": [
+          18,
+          20
+        ],
+        "backgroundOpacityDefault": 0.5,
+        "opacityDefault": 1,
+        "shadowDefault": true,
+        "normalFontMojanglesProfileCss": [
+          20,
+          20
+        ]
+      },
+      "limits": [
+        "Background opacity, font scale/type, line spacing and chat lifetime are runtime variables with no native default proven here. Values above are explicit Web profile defaults.",
+        "Caller supplies already formatted React content. There is no command engine, translation, profanity filter, game color-code parser or server connection.",
+        "Opacity and shadow are caller-controlled. Automatic lifetime/fade are intentionally not emulated; native animation declarations are recorded separately."
+      ]
+    },
+    "ChatPanel": {
+      "sources": [
+        "hud_screen.json:chat_panel"
+      ],
+      "native": {
+        "anchor": "top_left",
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "maxSize": [
+          "100%",
+          "50%"
+        ],
+        "stackAnchor": "bottom_left",
+        "factoryMaxChildren": 50
+      },
+      "web": {
+        "maxMessages": 50,
+        "maxMessagesRange": [
+          0,
+          50
+        ],
+        "messageViewportMaxHeight": "50vh",
+        "rootWidth": "min(640px, 100%)",
+        "messageViewport": "ScrollArea with native scrolling and source-backed scrollbar",
+        "optionalInput": "Existing Button skin plus native input; controlled or uncontrolled text state; onSend callback only."
+      },
+      "limits": [
+        "The source HUD chat_panel has no composer. Optional form and scrollbar are an explicitly documented Web composition for usability, not a clone of a native chat input screen.",
+        "The 50vh cap uses the browser viewport as the containing HUD canvas in the default profile. Native cap is 50% of its parent.",
+        "Newest messages are kept when the 50-message factory limit is reached. The viewport follows new messages only while the reader remains at the bottom. Caller owns message IDs/order and storage.",
+        "Blank messages and disabled submissions are blocked. IME composition blocks submit until composition ends. Controlled mode reports edits and clear intent without mutating the owner value."
+      ]
+    },
+    "Scoreboard": {
+      "sources": [
+        "scoreboards.json:scoreboard_sidebar",
+        "scoreboards.json:scoreboard_sidebar_player",
+        "scoreboards.json:scoreboard_sidebar_score",
+        "_global_variables.json:$player_score_color"
+      ],
+      "native": {
+        "anchor": "right_middle",
+        "mainWidth": "100%cm + 4px",
+        "mainOpacity": "#objective_background_opacity",
+        "titleSize": [
+          "default",
+          10
+        ],
+        "titleMax": [
+          170,
+          10
+        ],
+        "titleBackgroundHeight": 9,
+        "titleBackgroundOpacity": "#scoreboard_objective_background_opacity",
+        "listOffset": [
+          0,
+          10
+        ],
+        "rowHeight": 10,
+        "playerMax": [
+          100,
+          10
+        ],
+        "horizontalPadding": 10,
+        "textLockedAlpha": 1,
+        "shadowDeclared": false,
+        "titleAndNameColor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "scoreColor": [
+          1,
+          0,
+          0,
+          1
+        ]
+      },
+      "web": {
+        "outerPaddingCss": [
+          0,
+          4
+        ],
+        "titleHeightCss": 20,
+        "titleMaxWidthCss": 340,
+        "titleBackgroundHeightCss": 18,
+        "rowHeightCss": 20,
+        "nameMaxWidthCss": 200,
+        "columnGapCss": 20,
+        "normalFontCss": [
+          18,
+          20
+        ],
+        "scoreColor": "#ff0000",
+        "textShadow": "none",
+        "backgroundOpacityDefault": 0.5,
+        "titleBackgroundOpacityDefault": 0.5,
+        "normalFontMojanglesProfileCss": [
+          20,
+          20
+        ]
+      },
+      "limits": [
+        "This component is the public sidebar, not the pause-screen scoreboard player list. The latter explicitly has shadows and is a different UI.",
+        "Collection length, formatting, order and score updates are caller-owned; no Java 15-row cap or sorting rule is invented.",
+        "Background opacities are engine bindings; .5 is a Web default. Label typography still needs native font/baseline calibration even though explicit row geometry and colors are source-backed."
+      ]
+    },
+    "StatusEffect": {
+      "sources": [
+        "hud_screen.json:mob_effects_renderer",
+        "original hud_mob_effect_background.png",
+        "original hud_mob_ambient_effect_background.png",
+        "original 18x18 *_effect.png files"
+      ],
+      "native": {
+        "renderer": "mob_effects_renderer",
+        "type": "custom",
+        "backgroundPngSize": [
+          24,
+          24
+        ],
+        "iconPngSize": [
+          18,
+          18
+        ],
+        "legacyBackgroundMapping": {
+          "mappingFile": "data/texture_backwards_compatibility_mapping.json",
+          "key": "textures/ui/hud_mob_effect_background",
+          "uv": [
+            144,
+            184
+          ],
+          "uv_size": [
+            22,
+            22
+          ],
+          "base_size": [
+            256,
+            256
+          ],
+          "back_compat_texture": "textures/gui/gui",
+          "comparison": "The installed legacy atlas mapping size is 22x22; the standalone current HUD background PNG is 24x24. Neither alone proves the custom HUD renderer slot geometry. Ambient background has no corresponding mapping entry."
+        }
+      },
+      "web": {
+        "dataFidelity": "renderer-reconstruction",
+        "slotCss": [
+          48,
+          48
+        ],
+        "iconCss": [
+          36,
+          36
+        ],
+        "iconOffsetCss": [
+          6,
+          6
+        ],
+        "effectCount": 33,
+        "duration": "accessible label and native title only; no timer text painted outside the HUD slot",
+        "iconOverride": "Caller-supplied original PNG URL via iconSrc"
+      },
+      "limits": [
+        "The custom HUD renderer does not publish slot placement, gaps, beneficial/harmful ordering, icon offsets, blinking, duration conversion or ambient priority. Centering the raw 18x18 icon inside a raw 24x24 background is an explicit Web reconstruction, not native frame certification.",
+        "mob_effect_screen.json is a separate 240x30 detail row. Its 27px offsets, labels and timer are not silently used as HUD slot geometry.",
+        "Only 33 actual 18x18 resources are bundled. Other-sized resources are not resized to imitate missing glyphs; iconSrc permits a caller to supply its own source-backed icon."
+      ]
+    },
+    "ActionBar": {
+      "sources": [
+        "hud_screen.json:hud_actionbar_text",
+        "hud_screen.json:anim_actionbar_text_alpha_out",
+        "hud_screen.json:anim_actionbar_text_background_alpha_out"
+      ],
+      "native": {
+        "backgroundSize": [
+          "100%c + 12px",
+          "100%c + 5px"
+        ],
+        "offset": [
+          0,
+          "50%-68px"
+        ],
+        "textAnchor": "center",
+        "textShadow": true,
+        "textColor": [
+          1,
+          1,
+          1
+        ],
+        "backgroundAlpha": "$actionbar_text_background_alpha",
+        "fadeSeconds": 3,
+        "fadeEasing": "in_expo",
+        "backgroundNineSlice": [
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "web": {
+        "paddingCss": [
+          5,
+          12
+        ],
+        "normalFontCss": [
+          18,
+          20
+        ],
+        "showBackgroundDefault": false,
+        "backgroundOpacityDefault": 0.5,
+        "opacityDefault": 1,
+        "normalFontMojanglesProfileCss": [
+          20,
+          20
+        ]
+      },
+      "limits": [
+        "Source image extent is split symmetrically around the text for the in-flow component. Native full-screen offset is recorded but caller owns world/screen positioning.",
+        "The engine fades text and background through separate dynamic alpha bindings; static opacity controls make states deterministic without claiming to implement native end events or easing."
+      ]
+    },
+    "HeldItemTooltip": {
+      "sources": [
+        "hud_screen.json:item_name_text_root",
+        "hud_screen.json:item_name_text@hud.item_name_text_root",
+        "hud_screen.json:anim_item_name_text_alpha_out"
+      ],
+      "native": {
+        "rootAnchor": "bottom_middle",
+        "textMaxWidth": 200,
+        "textAlignment": "center",
+        "shadow": true,
+        "textColorDefault": "$tool_tip_text",
+        "showBackgroundDefault": false,
+        "backgroundSize": [
+          "100%sm + 12px",
+          "100%sm + 5px"
+        ],
+        "waitSecondsDefault": 1,
+        "fadeOutSeconds": 2,
+        "fadeOutEasing": "in_expo",
+        "interactPadding": 18,
+        "survivalPadding": 17,
+        "positionBinding": "#item_name_text_offset"
+      },
+      "web": {
+        "textMaxWidthCss": 400,
+        "paddingCss": {
+          "showBackground": [
+            5,
+            12
+          ],
+          "plain": [
+            0,
+            0
+          ]
+        },
+        "normalFontCss": [
+          18,
+          20
+        ],
+        "showBackgroundDefault": false,
+        "backgroundOpacityDefault": 0.5,
+        "opacityDefault": 1,
+        "normalFontMojanglesProfileCss": [
+          20,
+          20
+        ]
+      },
+      "limits": [
+        "Held-item HUD text is distinct from the library inventory hover tooltip. Native localization/name/lore formatting and world interaction/survival buffers are caller-owned.",
+        "No automatic lifetime is inferred from a component render. Caller can update opacity or remove the node based on its own timing.",
+        "When the optional background is ignored, only the label contributes intrinsic size: plain has zero padding. ActionBar differs because its root image remains present even at alpha zero."
+      ]
+    },
+    "TitleOverlay": {
+      "sources": [
+        "hud_screen.json:hud_title_text",
+        "hud_screen.json:anim_title_text_alpha_in",
+        "hud_screen.json:anim_title_background_alpha_in"
+      ],
+      "native": {
+        "rootOffset": [
+          0,
+          -19
+        ],
+        "orientation": "vertical",
+        "propagateAlpha": true,
+        "titleFontEnum": "extra_large",
+        "subtitleFontEnum": "large",
+        "titleOffset": [
+          0,
+          6
+        ],
+        "subtitleOffset": [
+          1,
+          19
+        ],
+        "titleBackgroundSize": [
+          "100%sm + 30px",
+          "100%sm + 6px"
+        ],
+        "subtitleBackgroundSize": [
+          "100%sm + 20px",
+          "100%sm + 5px"
+        ],
+        "subtitleBackgroundOffset": [
+          0,
+          16
+        ],
+        "textColor": [
+          1,
+          1,
+          1
+        ],
+        "shadow": "$title_shadow",
+        "backgroundAlpha": "$title_alpha",
+        "timingVariables": [
+          "$title_fade_in_time",
+          "$title_stay_time",
+          "$title_fade_out_time"
+        ],
+        "easing": "linear"
+      },
+      "web": {
+        "titleFontCss": [
+          54,
+          72
+        ],
+        "subtitleFontCss": [
+          36,
+          48
+        ],
+        "titleOffsetCss": [
+          0,
+          12
+        ],
+        "subtitleOffsetCss": [
+          2,
+          38
+        ],
+        "titleBackgroundOutsetCss": [
+          6,
+          30
+        ],
+        "subtitleBackgroundOutsetCss": [
+          5,
+          20
+        ],
+        "subtitleBackgroundOffsetCss": [
+          0,
+          32
+        ],
+        "rootWorldOffsetApplied": false,
+        "flowAccommodationPaddingCss": [
+          6,
+          30,
+          38
+        ],
+        "showBackgroundDefault": false,
+        "shadowDefault": true,
+        "backgroundOpacityDefault": 0.5,
+        "opacityDefault": 1,
+        "titleShadowCss": "6px 6px #3f3f3f",
+        "subtitleShadowCss": "4px 4px #3f3f3f",
+        "titleFontMojanglesProfileCss": [
+          60,
+          72
+        ],
+        "subtitleFontMojanglesProfileCss": [
+          40,
+          48
+        ]
+      },
+      "limits": [
+        "Numeric font sizes are the existing library Text xl/lg mapping for native extra_large/large enums. No numeric enum mapping or native text raster fidelity is claimed without native calibration.",
+        "The in-flow wrapper reserves space for translated children. Native root offset (0,-19) and centered full-screen placement are caller-owned instead of being applied to every gallery/container context.",
+        "Title/subtitle arrival, independent subtitle visibility events, alpha propagation, timers and destroy/end events are engine behavior, not implemented as hidden browser timers.",
+        "Shadow/background defaults are dynamic native bindings; true/.5 are explicit Web profile defaults."
+      ]
+    }
+  },
+  "globalLimits": [
+    "All source assets retain original Mojang ownership. Upstream notice is retained by the package; these PNGs are not MIT-authored replacement artwork.",
+    "All layout uses fixed GUI scale 2. The caller provides the containing HUD canvas and screen placement. Font rasterization, shadow darkening, alpha quantization and runtime binding values are distinct from source PNG/JSON identity.",
+    "Normal text reuses Text and inherits --mc-font-size: base styles use 18px, the optional Mojangles metrics profile uses 20px; overlay line height is 20px, with existing 2px shadow. Title/subtitle similarly inherit 54/36px or 60/40px. Neither numeric enum mapping nor shadow darkening is asserted to be a native renderer algorithm.",
+    "All number inputs used in values, colors, opacity and limits are bounded and finite. Components render on the server without DOM reads; browser scrolling begins only after mount."
+  ],
+  "definitionVerification": {
+    "method": "Actual TypeScript parseConfigFileTextToJson on all five full-release JSONC files and deepStrictEqual with installed JSON objects.",
+    "semanticallyEqual": [
+      "hud_screen.json",
+      "ui_common.json",
+      "scoreboards.json",
+      "mob_effect_screen.json",
+      "_global_variables.json"
+    ]
+  },
+  "fontProfiles": {
+    "baseStyles": "styles.css defines normal/lg/xl variables 18/36/54px.",
+    "optionalMojanglesProfile": "mojangles.css overrides normal/lg/xl variables to 20/40/60px. The local Vite game-font module imports this profile when the user-owned game font is available.",
+    "overlayLineHeightsCss": {
+      "normal": 20,
+      "title": 72,
+      "subtitle": 48
+    },
+    "meaning": "Components reuse Text and inherit these font variables. The source enum and font asset can be verified separately; neither mapping is asserted as an engine-certified numeric font enum definition."
+  }
+}

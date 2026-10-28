@@ -1,0 +1,551 @@
+{
+  "source": {
+    "release": "v1.26.60.5",
+    "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "referenceCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+    "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "ui": [
+      {
+        "source": "resource_pack/ui/stonecutter_screen.json",
+        "releaseSha256": "e1803e769b878cddb627e62a93e99f7454978145b032387ce92fff930d7afe94",
+        "localSha256": "23c99c5e407993b952afc182e5fda75545e453a1d1dd074bc5a38adbab06fdd0",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/loom_screen.json",
+        "releaseSha256": "e87bbfbbb771f2b38c259650a2378137edbb8ab23a3204628c2303b4b7e9e73a",
+        "localSha256": "8d5a9e7560b881ee26a58b5d1e76aa4dcbc27c60ab7bf299887e6930b89cef65",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/beacon_screen.json",
+        "releaseSha256": "323ea909ba190557da33478435d30e3da35de47e41ca3c4a5f3c20cc4c385c86",
+        "localSha256": "e2503744910fced4f57ee9d7c64365fe5bfcc7f57849f7fc13e0af8ec98dbdbb",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/redstone_screen.json",
+        "releaseSha256": "ed88e3fa5d953a0217a8fa3691fb280d55aecfed4bafe64725aac2d4f9a20672",
+        "localSha256": "4867d980c29300d8b434de14a6f9f34e35200e1fa5c72da04c68cdd947c06cee",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/ui_common.json",
+        "releaseSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "localSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/_global_variables.json",
+        "releaseSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "localSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+        "parsedEqual": true
+      }
+    ],
+    "textures": [
+      {
+        "key": "recipe-back-panel",
+        "source": "resource_pack/textures/ui/recipe_back_panel.png",
+        "sha256": "daa6d490de8583f424e24787812c6c2921bc688a7761d9d03e93badb27ed1d77",
+        "size": [
+          16,
+          16
+        ],
+        "metadata": {
+          "nineslice_size": 4,
+          "base_size": [
+            16,
+            16
+          ]
+        },
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/recipe_back_panel.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/recipe_back_panel.png"
+      },
+      {
+        "key": "recipe-book-pane-bg",
+        "source": "resource_pack/textures/ui/recipe_book_pane_bg.png",
+        "sha256": "c6af11420c349b07c73c0ff3dd296829a3017428e7e2ffeff907d3ccfb5e213e",
+        "size": [
+          1,
+          1
+        ],
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/recipe_book_pane_bg.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/recipe_book_pane_bg.png"
+      },
+      {
+        "key": "banners",
+        "source": "resource_pack/textures/ui/Banners.png",
+        "sha256": "41c874a8ffb72a40b0404c6955388aed577aabc74118729336604c376689748f",
+        "size": [
+          4,
+          4
+        ],
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/Banners.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/Banners.png"
+      },
+      {
+        "key": "loom-banner-empty",
+        "source": "resource_pack/textures/ui/loom_banner_empty.png",
+        "sha256": "6caaf027b42abfaa6e7f321effca3181cf1897c767d8743393c7a84da10ea578",
+        "size": [
+          16,
+          16
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/loom_banner_empty.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/loom_banner_empty.png"
+      },
+      {
+        "key": "loom-dye-empty",
+        "source": "resource_pack/textures/ui/loom_dye_empty.png",
+        "sha256": "dcac30a740bb31fcfc6f3c6f1c66e372b32697acc56c904bda4888f853cc5f22",
+        "size": [
+          16,
+          16
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/loom_dye_empty.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/loom_dye_empty.png"
+      },
+      {
+        "key": "loom-pattern-item-empty",
+        "source": "resource_pack/textures/ui/loom_pattern_item_empty.png",
+        "sha256": "414c83195c81026d04d6bfee7859c4e65fad4ff5265369d4c1d3184481cec016",
+        "size": [
+          16,
+          16
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/loom_pattern_item_empty.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/loom_pattern_item_empty.png"
+      },
+      {
+        "key": "effect-background",
+        "source": "resource_pack/textures/ui/effect_background.png",
+        "sha256": "46ae567772738afaac986020724da72ca09362d4168fe949d6967baaa07f8d48",
+        "size": [
+          120,
+          32
+        ],
+        "metadata": {
+          "nineslice_size": 4,
+          "base_size": [
+            120,
+            32
+          ]
+        },
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/effect_background.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/effect_background.png"
+      },
+      {
+        "key": "middle-strip",
+        "source": "resource_pack/textures/ui/middle_strip.png",
+        "sha256": "90a4a9363f4fa5018fc113c50590532da74ffdf785ce2d1dc93414e28ca526ca",
+        "size": [
+          2,
+          1
+        ],
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            1
+          ]
+        },
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/middle_strip.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/middle_strip.png"
+      },
+      {
+        "key": "pyramid-level-1",
+        "source": "resource_pack/textures/ui/pyramid_level_1.png",
+        "sha256": "a4a2ed4ca0c6628a7238dc0b318a9d7354c0751d43fc0bedc7cece3928bb7cdf",
+        "size": [
+          19,
+          20
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/pyramid_level_1.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/pyramid_level_1.png"
+      },
+      {
+        "key": "pyramid-level-2",
+        "source": "resource_pack/textures/ui/pyramid_level_2.png",
+        "sha256": "37d9024499b39cf0375ab45508472e9a024824ddd236fcc0c8b434e749d170fc",
+        "size": [
+          19,
+          20
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/pyramid_level_2.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/pyramid_level_2.png"
+      },
+      {
+        "key": "pyramid-level-3",
+        "source": "resource_pack/textures/ui/pyramid_level_3.png",
+        "sha256": "a742e42b9c9d9ad48e9317ffddd2e4f386601129b50e38458d6369817ad891f1",
+        "size": [
+          19,
+          20
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/pyramid_level_3.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/pyramid_level_3.png"
+      },
+      {
+        "key": "pyramid-level-4",
+        "source": "resource_pack/textures/ui/pyramid_level_4.png",
+        "sha256": "7deee6e93100fd3307936cd625e33234112e5a9f1e4fe9941164a457f6671267",
+        "size": [
+          19,
+          20
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/pyramid_level_4.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/pyramid_level_4.png"
+      },
+      {
+        "key": "item-seperator",
+        "source": "resource_pack/textures/ui/item_seperator.png",
+        "sha256": "d6b50a72358ac921666c4b22298007ef487cffd14f0b1b62bd8242a9b3deb0d0",
+        "size": [
+          5,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/item_seperator.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/item_seperator.png"
+      },
+      {
+        "key": "beacon-button-default",
+        "source": "resource_pack/textures/ui/beacon_button_default.png",
+        "sha256": "7ed865c543b3a7d911ea9b43225a08601e8d051b551c8edc18b718c26d881cef",
+        "size": [
+          22,
+          22
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/beacon_button_default.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/beacon_button_default.png"
+      },
+      {
+        "key": "beacon-button-hover",
+        "source": "resource_pack/textures/ui/beacon_button_hover.png",
+        "sha256": "b6a49bc3182625bf00fd6d35ebf57c7963105d3f0b9ad8724d4a071253f4e7a1",
+        "size": [
+          22,
+          22
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/beacon_button_hover.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/beacon_button_hover.png"
+      },
+      {
+        "key": "beacon-button-pressed",
+        "source": "resource_pack/textures/ui/beacon_button_pressed.png",
+        "sha256": "978b04a18efe92e827d29deb6a25b53887193421f3e29a96fa5d54b31ac40b69",
+        "size": [
+          22,
+          22
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/beacon_button_pressed.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/beacon_button_pressed.png"
+      },
+      {
+        "key": "beacon-button-locked",
+        "source": "resource_pack/textures/ui/beacon_button_locked.png",
+        "sha256": "998148e30d48c222e37daac641eb2d4b190d8bc0bc1087d871f139ee3b812bf1",
+        "size": [
+          22,
+          22
+        ],
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            22,
+            22
+          ]
+        },
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/beacon_button_locked.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/beacon_button_locked.png"
+      },
+      {
+        "key": "speed-effect",
+        "source": "resource_pack/textures/ui/speed_effect.png",
+        "sha256": "91128dc77c33d4694a8912eaddda92bbb119f9cc2e07dbc6245bdb40bbb4b7f8",
+        "size": [
+          18,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/speed_effect.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/speed_effect.png"
+      },
+      {
+        "key": "haste-effect",
+        "source": "resource_pack/textures/ui/haste_effect.png",
+        "sha256": "e8658200c26e6645250f63f4ffe8a1326be4dc966d65db27df1e0d6b559d1f8d",
+        "size": [
+          18,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/haste_effect.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/haste_effect.png"
+      },
+      {
+        "key": "resistance-effect",
+        "source": "resource_pack/textures/ui/resistance_effect.png",
+        "sha256": "6aec7580f9d0a82dd12637a8342307aed1dd17c4059e4e89cf1b95316c036131",
+        "size": [
+          18,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/resistance_effect.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/resistance_effect.png"
+      },
+      {
+        "key": "jump-boost-effect",
+        "source": "resource_pack/textures/ui/jump_boost_effect.png",
+        "sha256": "4c184ca78d1ccbfde5b61b182baed9f02b1ce1bc395afcb17cb8bb8268c4cd9d",
+        "size": [
+          18,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/jump_boost_effect.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/jump_boost_effect.png"
+      },
+      {
+        "key": "strength-effect",
+        "source": "resource_pack/textures/ui/strength_effect.png",
+        "sha256": "a009fb12ed3db82ac1afff6512d64b64e89a76079ea062b1b9829b89d288f011",
+        "size": [
+          18,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/strength_effect.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/strength_effect.png"
+      },
+      {
+        "key": "regeneration-effect",
+        "source": "resource_pack/textures/ui/regeneration_effect.png",
+        "sha256": "673e5c6df2136a9e3236bc6ce59d6e5a282f8353a32bdc580a79acd64d2cce5b",
+        "size": [
+          18,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/regeneration_effect.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/regeneration_effect.png"
+      },
+      {
+        "key": "confirm",
+        "source": "resource_pack/textures/ui/confirm.png",
+        "sha256": "2ead79a230d0136e654579c22270d7232477db2a50e82bface954e4887350567",
+        "size": [
+          14,
+          12
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/confirm.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/confirm.png"
+      },
+      {
+        "key": "cancel",
+        "source": "resource_pack/textures/ui/cancel.png",
+        "sha256": "a55ea0c9c3995fa86dd53ed6c639f3d82c3deb2965f7ff01b5190bd5da3c6727",
+        "size": [
+          13,
+          13
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/cancel.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/cancel.png"
+      },
+      {
+        "key": "slot-enabled",
+        "source": "resource_pack/textures/ui/slot_enabled.png",
+        "sha256": "ec0a663f0b08a4f489633aab782bd81bb3e29fe9938ca279503d69353997f520",
+        "size": [
+          18,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/slot_enabled.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/slot_enabled.png"
+      },
+      {
+        "key": "slot-disabled",
+        "source": "resource_pack/textures/ui/slot_disabled.png",
+        "sha256": "0ca2ea6c4cddadd6392ebfa6d93229f956614f3f2682d1a7d0d6cc76bfaa473d",
+        "size": [
+          18,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/slot_disabled.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/slot_disabled.png"
+      },
+      {
+        "key": "slot-enabled-hover",
+        "source": "resource_pack/textures/ui/slot_enabled_hover.png",
+        "sha256": "68749407919d58e96402daa7898f4c3fca1f296dbaba0c130b1d655b6dcef864",
+        "size": [
+          18,
+          18
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/slot_enabled_hover.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/slot_enabled_hover.png"
+      },
+      {
+        "key": "crafter-item-border",
+        "source": "resource_pack/textures/ui/crafter_item_border.png",
+        "sha256": "f5f1d3ec3b26995aef5fdef2464bda6144d29a228614801c8eaf41f9e6b705f5",
+        "size": [
+          26,
+          26
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/crafter_item_border.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/crafter_item_border.png"
+      },
+      {
+        "key": "redstone-arrow-unpowered",
+        "source": "resource_pack/textures/ui/redstone_arrow_unpowered.png",
+        "sha256": "74732015a438f0c34029766638c73471fcfc192b514e3d44cb5a3ee66e6866c6",
+        "size": [
+          16,
+          16
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/redstone_arrow_unpowered.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/redstone_arrow_unpowered.png"
+      },
+      {
+        "key": "redstone-arrow-powered",
+        "source": "resource_pack/textures/ui/redstone_arrow_powered.png",
+        "sha256": "6728eca01a393c4f3e609c42b9c9728534ca8bda906165ecaffda95c9522f353",
+        "size": [
+          16,
+          16
+        ],
+        "metadata": null,
+        "localEqual": true,
+        "fullReleaseEqual": true,
+        "pinnedEqual": true,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/redstone_arrow_powered.png",
+        "referenceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/redstone_arrow_powered.png"
+      }
+    ]
+  },
+  "encoding": "Original PNG bytes embedded unchanged; no generated replacement art."
+}

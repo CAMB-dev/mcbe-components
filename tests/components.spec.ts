@@ -34,7 +34,7 @@ test('switches, checkboxes and radios respond to native input', async ({ page })
 });
 
 test('slider responds to keyboard and announces its formatted value', async ({ page }) => {
-  const slider = page.getByRole('slider', { name: 'Render distance' });
+  const slider = page.locator('#selection').getByRole('slider', { name: 'Render distance' });
   await slider.focus(); await slider.press('ArrowRight');
   await expect(slider).toHaveValue('13'); await expect(slider).toHaveAttribute('aria-valuetext', '13 chunks');
   await slider.press('End'); await expect(slider).toHaveValue('32');
@@ -141,7 +141,7 @@ test('forms retain readable colors and native input behavior inside a Classic pa
 });
 
 test('page and modal have no serious or critical axe violations', async ({ page }) => {
-  // The complete 63-component showcase and its modal each run the full axe ruleset.
+  // The complete 86-component showcase and its modal each run the full axe ruleset.
   test.slow();
   const pageResults = await new AxeBuilder({ page }).analyze();
   expect(pageResults.violations.filter(item => item.impact === 'serious' || item.impact === 'critical')).toEqual([]);
