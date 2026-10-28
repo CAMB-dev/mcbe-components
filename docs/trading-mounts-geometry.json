@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 1,
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "source": {
+    "provenanceManifest": "docs/trading-mount-textures.json",
+    "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "ui": [
+      {
+        "source": "resource_pack/ui/trade_2_screen.json",
+        "releaseSha256": "1fb70baa7d454160bb2b65de49e724674a4533a883ee951433eaa5d995670ed9",
+        "localSha256": "01126a6eae0e5323f34d63040ef4b60bacd5c8f139e428effd5b92a391ed9334",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/horse_screen.json",
+        "releaseSha256": "026b91b78cadb5ed09b8cd4e4f648f488aae25611edcb1a2762aa81cdfac8e36",
+        "localSha256": "f82cefb2ddbe420af3e5912a91df1134d495e1fee46a91cdfe33c62bf6a353da",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/ui_common.json",
+        "releaseSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "localSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/_global_variables.json",
+        "releaseSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "localSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/ui_template_toggles.json",
+        "releaseSha256": "efe2bf9fab47aa5e29d7116a2aa705a964a42b0ef86c947c4e46188be9ac2a01",
+        "localSha256": "4d228fb036db1efc7eed08253b05a4dd89abaf39d6d2eaac6d95593c63673f91",
+        "parsedEqual": true
+      },
+      {
+        "source": "resource_pack/ui/ui_template_buttons.json",
+        "releaseSha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+        "localSha256": "6d89054b8b61fb1a1730069ec7f8547ce9e1ab263780f89b8713b87f17a232f7",
+        "parsedEqual": true
+      }
+    ],
+    "materialProof": "All20PNG files are unchanged original bytes and compare equal across the native installation archive, official full-release ZIP and pinned46ba6HTTP raw source. The independent texture manifest records every SHA/size/metadata/URL. All6complete parsed UI objects match local and official full-release sources."
+  },
+  "coordinates": "Game rectangles[x,y,width,height] are local to the named source panel; multiply every value by2for CSS. Native final subpixel sampling is not silently replaced by integer rounding.",
+  "trading": {
+    "source": "trade_2_screen.json, namespace trade2, desktop screen_contenttrade2.screen_panel. Legacy trade_screen.json, Pocket and Ore are not substituted.",
+    "rootGameRect": [
+      0,
+      0,
+      316,
+      166
+    ],
+    "rootCssRect": [
+      0,
+      0,
+      632,
+      332
+    ],
+    "leftGameRect": [
+      0,
+      0,
+      136,
+      166
+    ],
+    "foldGameRect": [
+      136,
+      0,
+      4,
+      166
+    ],
+    "rightGameRect": [
+      140,
+      0,
+      176,
+      166
+    ],
+    "foldImageGameRect": [
+      132,
+      3,
+      12,
+      160
+    ],
+    "fold": "recipe_back_panel16x16slice4; image100%+8px/100%-6px centered, below both panel backgrounds to preserve their border occlusion.",
+    "scroll": {
+      "gameRect": [
+        6,
+        6,
+        124,
+        154
+      ],
+      "background": "Original background_with_border3x3slice1. Reuses native-overflow ScrollArea container auto bar behavior, one-game viewport padding, content bottom2game. This Web scroll bridge is not an assertion of every native scrollbar algorithm.",
+      "selectorWidth": "trade_selector_stack_panel100%-4px after the actual viewport. Source tiers have2game top padding, natural label height,23game row stride and1game extra bottom.",
+      "labels": "Source unlocked tier RGB1,1,1; locked tierRGB.5,.5,.5. The existing library normal-font/20CSS line profile supplies natural label height; exact native glyph metrics are not measured here."
+    },
+    "title": "Right top_middle anchor[88,5]game, caller title maps#name_label.",
+    "level": {
+      "rightLocalGameRect": [
+        11.5,
+        17,
+        153,
+        5
+      ],
+      "cssRect": [
+        23,
+        34,
+        306,
+        10
+      ],
+      "layers": "Original experience_bar_empty_blue; white possible-progress layer; blue current-progress layer above white; nub tiled above both. Progress primitive is deeply reused for semantics/controlled finite values, with source-specific original-image layers.",
+      "metadataLTRB": {
+        "empty": [
+          6,
+          1,
+          6,
+          1
+        ],
+        "white": [
+          4,
+          0,
+          4,
+          0
+        ],
+        "blue": [
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      "nub": "Original11x5sprite tiles at22x10CSS within width143game centered, leaving5game on each side.",
+      "sourceBinding": "#exp_progress/#exp_possible_progress -> #clip_ratio,clip_directionleft,clip_pixelperfectfalse. Public ratios explicitly mean0empty/1full reveal; native backend clip semantics still need same-state game capture.",
+      "finiteValues": "Nonfinite ratios become0, finite values clamp0..1. No custom2CSS floor is introduced."
+    },
+    "mainTopGameRect": [
+      7,
+      15,
+      162,
+      61
+    ],
+    "mainStackFormula": "Horizontal96+1+48+(18-1)=162game. Three28game holders establish28game max height, centered in61 =>y31.5. Detail12game buttons anchor below holders and do not inflate that center row.",
+    "rightLocal": {
+      "firstInput": [
+        7,
+        31.5,
+        28,
+        28
+      ],
+      "secondInput": [
+        35,
+        31.5,
+        28,
+        28
+      ],
+      "result": [
+        75,
+        31.5,
+        28,
+        28
+      ],
+      "tradeButton": [
+        104,
+        36.5,
+        48,
+        18
+      ],
+      "helpButton": [
+        151,
+        36.5,
+        18,
+        18
+      ],
+      "firstDetails": [
+        7,
+        59.5,
+        28,
+        12
+      ],
+      "secondDetails": [
+        35,
+        59.5,
+        28,
+        12
+      ],
+      "enchantmentDetails": [
+        75,
+        59.5,
+        28,
+        12
+      ]
+    },
+    "itemRendering": "Source item_slot overrides cell28x28,item_renderer_panel24x24,item_renderer24x24game. Both actual item image and its wrapper display48CSS; no16game icon is incorrectly retained inside a larger28game slot.",
+    "mainCounts": "24game item renderer panel centers within28game cell. Count inset4CSS from right,bottom2CSS represents the panel inset and source bottom+1game offset. Native count baseline and durability renderer are not separately calibrated.",
+    "mainArrowFormula": "96game item row has84game three slots plus12remaining =>two6gamefillholders. Each image width100%+3px gives9game, not16. With second input ignored, remaining40splits20each,image23game. Preserve asymmetric caps rather than stretching the16x13raster whole.",
+    "rightLocalArrows": {
+      "twoInputsRight": [
+        63,
+        33.5,
+        9,
+        13
+      ],
+      "twoInputsLeft": [
+        66,
+        44.5,
+        9,
+        13
+      ],
+      "oneInputRight": [
+        35,
+        33.5,
+        23,
+        13
+      ],
+      "oneInputLeft": [
+        52,
+        44.5,
+        23,
+        13
+      ]
+    },
+    "arrowMetadataLTRB": {
+      "right": [
+        1,
+        0,
+        7,
+        0
+      ],
+      "left": [
+        7,
+        0,
+        1,
+        0
+      ]
+    },
+    "slotValidity": "Source container_cell_image uses per-item#item_valid to choose common.cell_image or cell_image_red. slotValidity is an explicit3boolean host input, controlling real source skin and aria-invalid. This visual flag does not independently compute whether the host transaction can execute.",
+    "details": "detailButtons3boolean source visibility maps the two normal!buttons and purple enchantment button, with onDetails callback. Source detailsbutton has border_visiblefalse and full-size buttonimage; result defaultimagebutton_purple, color[1,.8,1], source rune textdab. An actual caller-owned ascii_sga atlas is rendered through the existing EnchantingRunes primitive when runeAtlasUrl is supplied. Without that atlas the glyph area is explicitly marked unavailable, never replaced by invented runes or Latin glyphs.",
+    "detailsFactoryGap": "Native animated trade_details popup/factory and selected_hover_text formatting remain host-owned; onDetails exposes the action, but the component does not fabricate metadata, enchantment descriptions or popup animations.",
+    "actions": "Offer selection, both trade inputs, guarded result-taking, canTrade-controlled Trade action and Help action are operational controlled callbacks. No stock/reputation/price/XP/inventory/game transaction algorithm is computed.",
+    "close": "Both source panels suppress internal close and use independent toolbarchrome. TradingScreen omits onClose/closeLabel and never adds an internalX.",
+    "inventory": "Right local label[7,76],grid[7,86,162,54],hotbar[7,143,162,18]; absolute whole-component x adds140game."
+  },
+  "tradeOffer": {
+    "size": "Native toggle is100%wide,24game high. Its outer holder is height100%c-1px =>23game stride, so adjacent rows overlap1game. Standalone component retains24game height; screen owns23game holder.",
+    "normalSkins": "Source light_image_toggle_collection uses button_borderless_light unchecked, lightpressednohover checked, lighthover uncheckedhover, lightpressed checkedhover. Real existing shared skin variables are reused, not re-drawn.",
+    "unavailableSkins": "trade_possiblefalse overrides unchecked/checked normal controls with original button_trade_red/button_trade_red_pressed. Source inherited hover controls remain the light-toggle hover controls; unavailable is not conflated with locked.",
+    "locked": "Source trade_toggle_enabledfalse uses disabledButtonNoBorder and a black8game lock. Component keeps locked offer focusable and blocks primary/secondary selection; explicitHTMLdisabled remains native disabled. This accessible focus policy is a Web contract, not a claim about every native gamepad focus rule.",
+    "state": "selected maps controlled toggle state; locked maps enabledfalse; available maps trade_possible; crossedOut maps separate trade_cross_out_visible; paddedResult maps padding_around_sell_item. None are inferred from item counts or tier labels.",
+    "content": "Two16game cost renderer areas are retained even if cost2is absent. With paddedResulttrue: gaps2/2/2game and result holder32game =>86game combined centered content. With false: first gap12,second8,last2,result holder24=>94game. Result item16game centers in the holder. Native source content has3game panel inset, but symmetric centering preserves these item positions.",
+    "arrows": "Offer arrow-holder16x16game. Normal16x13rightimage centers vertically; cross15x15right_middle; locked8x8center. Lock sourceRGB is multiplied by[0,0,0], represented by brightness0 preserving original alpha.",
+    "priceChanges": "TradeCost.item.count is the current visible price; originalCount explicitly supplies the crossed old price. Both counts must be finite nonnegative integers after normalization; noNaN/Infinitytext is emitted. Changed price group has source2game gap,bottom_middle offset[4,1]. Red_slash is the real5x2sprite with LTRB[2,0,2,0], displayed6x2(single)or12x2(double) at bottom_right offset[0,-4]. Count formatting and glyph baseline use the existing font profile.",
+    "hoverRendererGap": "Native common.hover_text is a custom engine renderer. Offer label is accessible; exact native hover content placement/delay is not asserted."
+  },
+  "mountInventory": {
+    "source": "horse_screen.json, horse.horse_panel, current Classic shared mount interface. There is no separate llama desktop layout to substitute; native binding dimensions and capability flags change this panel.",
+    "rootGameRect": [
+      0,
+      0,
+      176,
+      166
+    ],
+    "rootCssRect": [
+      0,
+      0,
+      352,
+      332
+    ],
+    "titleGameAnchor": [
+      7,
+      7
+    ],
+    "equipmentGameAnchor": [
+      7,
+      18
+    ],
+    "previewBackgroundGameRect": [
+      25,
+      18,
+      54,
+      54
+    ],
+    "equipment": "equipment array explicitly supplies0..2source vertical18game slots. Kinds saddle/armor/carpet/nautilus-armor map the native capability bindings. Horse example provides saddle+armor, donkey saddle, llama carpet; component itself does not calculate entity equipment capabilities.",
+    "overlays": "Original16x16ghosts at local[1,1]or[1,19],alpha.5. The flags#has_saddle_slot/#has_only_armor/#has_*and_saddle are not item-empty bindings: overlays are underlays even when occupied, unless showOverlayfalse is explicitly supplied. No generic.35placeholder opacity is applied.",
+    "entity": "Actual pocket_button_pressed8x8slice1 draws the source54game renderer background. live_horse_renderer is a native custom entity renderer; caller entityPreview fills its original control surface. No horse/llama mesh or screenshot is invented.",
+    "entityInnerGameRect": [
+      43.9,
+      53.1,
+      16.2,
+      16.2
+    ],
+    "entityInnerFormula": "horse_custom_panel size30%x30%=16.2, centered in54x54, offset[0,30%]=[0,16.2] =>relative[18.9,35.1], plus outer[25,18]. Native camera/model projection may overflow this control box and remains host-owned.",
+    "chestBackgroundGameRect": [
+      79,
+      18,
+      90,
+      54
+    ],
+    "storage": "When chestedtrue, original common.cell_image90x54background remains fixed. Actual grid uses exactly3rows and1..5columns at[79,18], each18game; llama column count must not shrink the background. storageColumns floors and clamps1..5; nonfinite falls back5. chestedfalse removes storage controls regardless of supplied items.",
+    "selectionActions": "Storage and equipment use existing InventoryGrid/ItemSlot. Controlled storage selection and primary/secondary actions forward to host without transfer logic.",
+    "compactClose": "Source common_panel uses compact closebutton. Existing original compact default/hover/pressed icons are reused when ContainerFrame onClose is supplied.",
+    "inventory": "ContainerFrame deeply reuses common player inventory: label[7,76],grid[7,86,162,54],hotbar[7,143,162,18]."
+  },
+  "demo": "TradingMountsExamples uses only existing genuine item PNGs. Its two-input custom offer is explicitly samplehost data, not a fabricated vanilla trade rule. QA owns TradingMountsFixture for locked/unavailable/discounted/double-input and mount1/3/5column states.",
+  "verification": {
+    "source": "20original textures three-way byte-equal and6complete UI objects parsed-equal.",
+    "coreTypeScript": "npx tsc -p tsconfig.json --noEmit passed before final shared integration.",
+    "integratedTypeScript": "npm run typecheck passed again after the additional details/invalid/XP fixtures: core and demo TypeScript both exited 0.",
+    "independentQa": {
+      "report": "docs/TRADING_MOUNTS_QA.md",
+      "coveredTests": 27,
+      "completeSourceRgbaSurfaces": 19,
+      "execution": "All 27 independent trading/mount tests have PASS evidence across batches; this is not a claim that one complete 27-test run was green. Original 23: 21 passed, two locked surfaces failed; nine targeted follow-up checks passed seven and exposed a QA stale-box issue plus the production XP wrapper-selector defect; final two detail/XP checks passed after the respective narrow fixes. Subsequent accessible-name correction was followed by one complete 27/27 passing regression run (1.7m), retaining all source PNG/RGBA oracles.",
+      "coverage": "Source PNG pins, 28/24-game main-slot geometry, 36 inventory cells, controlled trade/result/offer availability, 1/3/5-column mount storage, four occupied/empty equipment overlays, source asymmetric arrows, offer state skins, invalid red slots, three detail callbacks and real-rune absence semantics, purple details and complete four-layer XP composition.",
+      "nativeWholeScreen": "No same-state native trading/mount capture; no whole-screen pixel-perfect claim."
+    },
+    "lockedSkinCorrection": "Independent browser RGBA checks exposed zero-slice border-image fill failing to paint the original opaque 2x2 disabledButtonNoBorder. Locked/HTML-disabled offer ::before now uses the unchanged original PNG as a stretched background, matching the existing generic button implementation; the transparent outer border geometry remains unchanged.",
+    "levelBarCorrection": "An independent complete XP composition test exposed selectors attached to the Progress wrapper rather than its nested track. Original empty/possible/blue-fill skins and raw fractional clipping now target .mc-progress__track and .mc-progress__fill; no source texture, geometry or oracle was changed.",
+    "accessibleNames": {
+      "finding": "Live main-page axe reproduced three label-content-name-mismatch failures: two discounted Paper offers exposed concatenated visible text 2412, and the locked offer exposed 612 while its label omitted the quantities.",
+      "fix": "Real whitespace now separates old/current and cost/result count text without changing fixed flex dimensions. The default accessible name retains offer.label and, when needed, appends visible quantities in display order with InventoryItem.name, for example 24 → 12 (Paper) or 6 → 12 (Diamond → Emerald). Explicit host aria-label remains an override. No PNG, CSS or text colors changed.",
+      "axe": "Live whole-page label-content-name-mismatch checks returned zero failures. Focused Trading all-rules axe returned no serious/critical failures; the existing duplicate landmark label remains moderate.",
+      "pixels": "A paired full-section screenshot compared the updated DOM with a browser-only reconstruction of the original whitespace/name DOM; 0 differing RGBA pixels. This is a controlled DOM A/B comparison, not a native-game screenshot comparison.",
+      "artifacts": ".cache/trading-accessible-names/result.json, after.png and original-dom.png (ignored local QA artifacts).",
+      "regression": "Complete independent-authored Trading/Mount suite passed 27/27 in one run (1.7m) after the final accessible-name fix; core+demo TypeScript also passed."
+    }
+  },
+  "evidenceLimits": [
+    "Pinned source bytes and algebraic geometry establish provenance, not complete native game-screenRGBA equality.",
+    "Native text/rune baselines, natural label heights, fractional sampling, full scrolling/focus algorithms and transient details factories still need same-state game captures.",
+    "Native trade and horse bindings are host state. This library does not infer trades, reputation, stock, item transfer, mount capabilities, llama strength or live entity rendering.",
+    "Pocket/Ore variants and external trading toolbar/help chrome are outside these fixed Classic main-panel profiles.",
+    "No new native trading or mount screenshot was used to claim whole-frame pixel-perfect acceptance during this implementation round."
+  ]
+}

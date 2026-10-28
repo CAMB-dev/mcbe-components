@@ -77,7 +77,7 @@ test('world form validates, submits with Enter and synchronizes name', async ({ 
   await expect(field).toBeFocused();
   await field.fill('Pixel valley'); await field.press('Enter');
   await expect(dialog).not.toBeVisible();
-  await expect(page.getByRole('textbox', { name: 'World name', exact: true })).toHaveValue('Pixel valley');
+  await expect(page.locator('#inputs').getByRole('textbox', { name: 'World name', exact: true })).toHaveValue('Pixel valley');
   await expect(page.locator('.toast')).toHaveText('World created: Pixel valley');
 });
 
@@ -107,7 +107,7 @@ test('code previews, search and documentation are functional', async ({ page }) 
 });
 
 test('reference palette, focus and disabled state render correctly', async ({ page }) => {
-  const button = page.getByRole('button', { name: 'Settings', exact: true });
+  const button = page.locator('#buttons').getByRole('button', { name: 'Settings', exact: true });
   await expect(button).toHaveCSS('background-color', 'rgb(198, 198, 198)');
   await expect(button).toHaveCSS('border-radius', '0px');
   await button.focus(); await expect(button).toHaveCSS('outline-style', 'solid');
@@ -123,7 +123,7 @@ test('Input exposes error, disabled, readonly, focus and text-shadow states', as
   await expect(page.locator(`[id="${description}"]`)).toHaveText('This world name is already taken.');
   await expect(page.getByRole('textbox', { name: 'World seed · disabled' })).toBeDisabled();
   await expect(page.getByRole('textbox', { name: 'World ID · read only' })).toHaveAttribute('readonly','');
-  const field = page.getByRole('textbox', { name: 'World name', exact: true });
+  const field = page.locator('#inputs').getByRole('textbox', { name: 'World name', exact: true });
   await field.focus(); await expect(field).toBeFocused();
   await expect(field).toHaveCSS('text-shadow','rgb(63, 63, 63) 2px 2px 0px');
   await expect(page.locator('.font-shadow-comparison .mc-text').first()).toHaveCSS('text-shadow','rgb(63, 63, 63) 2px 2px 0px');
@@ -141,7 +141,7 @@ test('forms retain readable colors and native input behavior inside a Classic pa
 });
 
 test('page and modal have no serious or critical axe violations', async ({ page }) => {
-  // The complete 86-component showcase and its modal each run the full axe ruleset.
+  // The complete showcase and its modal each run the full axe ruleset.
   test.slow();
   const pageResults = await new AxeBuilder({ page }).analyze();
   expect(pageResults.violations.filter(item => item.impact === 'serious' || item.impact === 'critical')).toEqual([]);

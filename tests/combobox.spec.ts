@@ -113,3 +113,35 @@ test('open combobox has no serious or critical accessibility violations', async 
   const result = await new AxeBuilder({ page }).include('[data-case="combobox"]').analyze();
   expect(result.violations.filter(item => item.impact === 'serious' || item.impact === 'critical')).toEqual([]);
 });
+
+test('real visual viewport panning keeps the visible keyboard anchor and popup in view', async ({ page, isMobile }) => {
+  test.skip(!isMobile, 'Chromium mobile visual viewport panning');
+  await page.evaluate(() => document.fonts.ready);
+  const field = page.locator('[data-case="combobox"]'); const trigger = field.getByRole('combobox');
+  // Keep this regression independent of unrelated calibration fixture widths.
+  await page.evaluate(() => {
+    const wide = document.createElement('div');
+    Object.assign(wide.style, { position: 'absolute', left: '0', top: '0', width: '800px', height: '1px', pointerEvents: 'none' });
+    document.body.append(wide);
+  });
+  for (const horizontal of [false, true]) {
+    if (horizontal) await trigger.evaluate(button => {
+      button.blur();
+      Object.assign(button.style, { position: 'absolute', left: '550px', top: '80px', zIndex: '9999' });
+    });
+    await trigger.focus();
+    const view = await page.evaluate(() => ({ left: visualViewport!.offsetLeft, top: visualViewport!.offsetTop }));
+    expect(view.top).toBeGreaterThan(0);
+    if (horizontal) expect(view.left).toBeGreaterThan(0);
+    await trigger.press('h'); await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    // Active-option scrolling can pan again. Read popup and viewport atomically
+    // rather than comparing against a stale viewport from before the key press.
+    await expect.poll(() => field.getByRole('listbox').evaluate(list => {
+      const rect = list.getBoundingClientRect(); const visual = visualViewport!;
+      return rect.x >= visual.offsetLeft + 8 && rect.right <= visual.offsetLeft + visual.width - 8
+        && rect.y >= visual.offsetTop + 8 && rect.bottom <= visual.offsetTop + visual.height - 8;
+    })).toBe(true);
+    await trigger.press('Enter'); await expect(trigger).toHaveText('Hard');
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  }
+});

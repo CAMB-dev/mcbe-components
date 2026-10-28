@@ -2,6 +2,26 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
+## 本轮：109 个组件、3 个数据导出
+
+| 检查 | 结果 | 范围 |
+| --- | --- | --- |
+| 全套整合 | 680 项：670 PASS、4 预期 SKIP、6 FAIL；14 分钟 | 原始完整运行 `.cache/integration-final.json`，没有把失败隐藏为通过 |
+| 最终相关范围复验 | 69 项：68 PASS、1 预期 SKIP；80 秒 | 完整 Combobox 双端、设置控件双端、容器几何、材质渲染器；`.cache/integration-regression.json` |
+| 最终唯一用例覆盖 | 682 项：677 个取得 PASS、5 预期 SKIP、0 未解决失败 | 按文件 / 完整用例标题 / project 合并两批；**不是单次 682 项全绿**。新增跳过仅桌面的真实 mobile visual viewport panning |
+| 构建及类型 | PASS | 最后生产修复后 core / demo / tests TypeScript、tsup 和 Vite 构建 |
+| 实际包消费 | React 18.3.1 / 19.3.1 均 PASS | 精确 112 个运行时值、109 个组件、SSR、严格 TSX / ref / API、全部 CSS / 字体 / 许可路径；两个实际安装消费者与最终 dist JS 字节相同 |
+| 原件 / 包排除 | 375 份固定来源、45 份材质均 PASS | 原始 PNG / TGA 字节及许可保留；私有 Mojangles / Ten / Seven / Noto 本机副本、SGA、GIF、demo、原生截图均不入库包 |
+| 生产预览 | PASS，错误与资源失败为空 | 所有材质 canvas 等待 ready；31 张截图覆盖新增 GUI、字体 / 阴影、选中搜索状态和移动端，`.cache/preview/` |
+
+六项整合失败已分别闭环：两个旧 World title 定位在新增 SettingsPanel 后产生歧义，定位收紧到原 settings-row fixture；三个移动端 Combobox 失败是真实 visual viewport 偏移问题，分别计算按钮的实际可见范围和弹层的布局尺寸上限，原断言保留，新增真实双轴 panning 用例有修复前失败 / 修复后通过证据；一个容器检查因逐槽位连续浏览器往返超出 30 秒，改为每网格原子读取全部几何，仍逐格核对相同原始坐标、尺寸和 `.02` 阈值，没有提高超时或放宽精度。相关 69 项最终同批 exit0。
+
+此前停止的稳定部分首轮另外发现并修复了展示页 320px 溢出、PlayerList / TradeOffer 可见数字与无障碍名称不匹配，以及灰框伪元素背景未被 axe 识别。文字与原生配色不变；名称修正有整个区域截图零像素变化证据。独立检查还修复了库存预览中心 fill、交易禁用背景、经验条图层、创造搜索框受后加载 CSS 影响变成双行、工具栏焦点额外描边和跨控件键盘路径。
+
+独立组件来源 / 几何与原 PNG 同一浏览器比较保持零容差；原生材质测量仍明确 **NOT EXACT**：完整 80×80 Stone / Stone bricks / Clean slab / Stairs 的 RGB RMSE 分别为 3.5422 / 4.0480 / 5.0326 / 6.5320；两个完整 100×200 布料样本分别为 2.8670 / 3.7111。完整空创造物品区 965550 像素中有 16305 处差异，RMSE 0.130267、最大差 3。截图外围 / 客户区尺寸仍待核实，死亡页 1px 原生位移没有宣称已消除。详见 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)、[GAME_CONTROLS_QA.md](GAME_CONTROLS_QA.md)、[SYSTEM_SCREENS_QA.md](SYSTEM_SCREENS_QA.md) 和 [FIDELITY.md](FIDELITY.md)。Goal 继续进行。
+
+## 前一轮：86 个组件的历史记录
+
 | 检查 | 结果 | 范围 |
 | --- | --- | --- |
 | 本轮整合全套 | 450项：446 PASS / 2 SKIP / 2旧定位FAIL，7.4分钟 | `.cache/expansion-final-results/`；唯一两项失败为旧Render distance定位被新增同名示例触发歧义，未发生生产断言失败 |

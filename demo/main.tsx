@@ -18,6 +18,11 @@ import { AnvilExamples } from './anvil-examples';
 import { ContainerExamples } from './container-examples';
 import { NativeExamples } from './native-examples';
 import { ExpansionExamples } from './expansion-examples';
+import { GameListsExamples } from './game-lists-examples';
+import { SystemScreensExamples } from './system-screens-examples';
+import { GameControlsExamples } from './game-controls-examples';
+import { TradingMountsExamples } from './trading-mounts-examples';
+import { InventoryScreensExamples } from './inventory-screens-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -39,10 +44,17 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'special-workstations', name: 'Smithing & cartography', icon: 'chevron', count: '02' },
   { id: 'hud', name: 'Heads-up display', icon: 'chevron', count: '07' },
   { id: 'scrolling', name: 'Scrolling', icon: 'chevron', count: '02' },
-  { id: 'advanced-workstations', name: 'More workstations', icon: 'chevron', count: '07' },
+  { id: 'advanced-workstations', name: 'More workstations', icon: 'chevron', count: '09' },
   { id: 'hud-overlays', name: 'HUD overlays', icon: 'chevron', count: '08' },
   { id: 'settings', name: 'Settings controls', icon: 'chevron', count: '05' },
   { id: 'feedback-primitives', name: 'Tooltips & toasts', icon: 'chevron', count: '03' },
+  { id: 'game-lists', name: 'Worlds, servers & packs', icon: 'chevron', count: '05' },
+  { id: 'settings-panel', name: 'Settings panel', icon: 'chevron', count: '01' },
+  { id: 'loading-screen', name: 'Loading screen', icon: 'chevron', count: '01' },
+  { id: 'achievement-toast', name: 'Achievement toast', icon: 'chevron', count: '01' },
+  { id: 'game-controls', name: 'Players, touch & menus', icon: 'chevron', count: '04' },
+  { id: 'trading-mounts', name: 'Trading & mounts', icon: 'chevron', count: '03' },
+  { id: 'inventory-screens', name: 'Player & creative inventory', icon: 'chevron', count: '06' },
   { id: 'typography', name: 'Typography & icons', icon: 'chevron', count: '02' },
 ];
 const snippets: Record<string, string> = {
@@ -284,6 +296,11 @@ function App() {
 
       <NativeExamples notify={notify}/>
       <ExpansionExamples notify={notify}/>
+      <Example id="game-lists" title="Worlds, servers & packs" detail="Reusable Classic list rows and cards with original state textures."><GameListsExamples notify={notify}/></Example>
+      <SystemScreensExamples/>
+      <GameControlsExamples/>
+      <TradingMountsExamples notify={notify}/>
+      <Example id="inventory-screens" title="Player & creative inventory" detail="Equipment slots, recipe navigation and inventory screens."><InventoryScreensExamples notify={notify}/></Example>
       <Example id="scrolling" title="Scrolling" detail="Native scrolling with original Bedrock rail and handle textures.">
         <div style={{padding:24}}><ScrollArea label="Scrollable inventory notes" style={{height:180,maxWidth:480}}>
           {Array.from({length:12},(_,index)=><p key={index} style={{margin:0,padding:12}}>Inventory note {index+1} · Wheel, touch and keyboard</p>)}

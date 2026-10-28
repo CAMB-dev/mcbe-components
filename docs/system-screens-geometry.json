@@ -1,0 +1,386 @@
+{
+  "schemaVersion": 1,
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "releaseUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+  "sources": {
+    "ui_common.json": {
+      "source": "resource_pack/ui/ui_common.json",
+      "publicSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "installedSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+      "parsedEqual": true
+    },
+    "_global_variables.json": {
+      "source": "resource_pack/ui/_global_variables.json",
+      "publicSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "installedSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+      "parsedEqual": true
+    },
+    "progress_screen.json": {
+      "source": "resource_pack/ui/progress_screen.json",
+      "publicSha256": "2453144b1e4d98bcc56d63c014034dae50172f5e15989589a8dca2676599ee80",
+      "installedSha256": "6d929728aba328eadb9e8b46c3d3d88fdeb5bdd4dbff8e648c1387c57719bdcd",
+      "parsedEqual": true
+    },
+    "toast_screen.json": {
+      "source": "resource_pack/ui/toast_screen.json",
+      "publicSha256": "10a60194971cf605a7cfac9c032f9884b698663b96ac233dec2897233da961bb",
+      "installedSha256": "21286a976c09a4350b52b2eff5d0ed03f0d30044ce0b534419db016035c4e9df",
+      "parsedEqual": true
+    },
+    "achievement_screen.json": {
+      "source": "resource_pack/ui/achievement_screen.json",
+      "publicSha256": "0f596bb9a0cfc964cc07db5d75d9088a7dd276346136d453f668216dd553bdca",
+      "installedSha256": "c9e573b7328b7f66aa16988a11c9635ac030f18cd01d2b105cdb791692da0e38",
+      "parsedEqual": true
+    },
+    "ui_art_assets_common.json": {
+      "source": "resource_pack/ui/ui_art_assets_common.json",
+      "publicSha256": "f6085c9aa28ed04057e1ff83a90620dc024ab43e72166e2949bfde938c1fce3a",
+      "installedSha256": "42b51195188f7c003631bd5ff3395749f903075ff3a1669ab6526d5cd16a1a51",
+      "parsedEqual": true
+    },
+    "settings_sections/settings_common.json": {
+      "source": "resource_pack/ui/settings_sections/settings_common.json",
+      "publicSha256": "36863803c56e42d31b915aa9df13cf88cc43a528eb40c76cbf26c911ef7b3ecf",
+      "installedSha256": "ffa324ca589ab65a210255916f338b58c2895583245fd59ebb77dcc29c57e173",
+      "parsedEqual": true
+    },
+    "settings_screen.json": {
+      "source": "resource_pack/ui/settings_screen.json",
+      "publicSha256": "c7b429f87f79a68cf8f8d3eeecf0706a9e410bb73420580500e5b31e56ec9b5c",
+      "installedSha256": "69eb667c11c3c4d8e874c6460e0221e2aa6551deac195bd1175e5f29da6a9b8e",
+      "parsedEqual": true
+    }
+  },
+  "assets": {
+    "settings-frame": {
+      "source": "resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "dimensions": [
+        18,
+        33
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": [
+          8,
+          23,
+          8,
+          8
+        ],
+        "base_size": [
+          18,
+          33
+        ]
+      },
+      "metadataSha256": "36700ca1326d14a269b2052c27d95115200897bee9c27b4d36e75fe893973415"
+    },
+    "settings-divider": {
+      "source": "resource_pack/textures/ui/HowToPlayDivider.png",
+      "sha256": "e17d780302672be622ed504abc1565707cf3d46b77cacceaf8f687020df9493e",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/HowToPlayDivider.png",
+      "dimensions": [
+        3,
+        3
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "metadataSha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422"
+    },
+    "loading-dirt": {
+      "source": "resource_pack/textures/blocks/dirt.png",
+      "sha256": "34bf03b346c0e86214a32117e3f892529da6b76ca8096347cbb6be3da313deab",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/blocks/dirt.png",
+      "dimensions": [
+        16,
+        16
+      ],
+      "matchesInstalledBase": true
+    },
+    "loading-classic": {
+      "source": "resource_pack/textures/ui/bg32.png",
+      "sha256": "76842acb4488a28062ca494d9150a56db94d1555704d66340ef72cd42066d6bb",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/bg32.png",
+      "dimensions": [
+        32,
+        32
+      ],
+      "matchesInstalledBase": true
+    },
+    "loading-empty": {
+      "source": "resource_pack/textures/ui/experiencebarempty.png",
+      "sha256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/experiencebarempty.png",
+      "dimensions": [
+        13,
+        5
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": [
+          6,
+          1,
+          6,
+          1
+        ],
+        "base_size": [
+          13,
+          5
+        ]
+      },
+      "metadataSha256": "de67894f88e78223fa154d60fbd826da1349d35dbfe3b0d8dae5d6365161243f"
+    },
+    "loading-full": {
+      "source": "resource_pack/textures/ui/experiencebarfull.png",
+      "sha256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/experiencebarfull.png",
+      "dimensions": [
+        13,
+        5
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "base_size": [
+          13,
+          5
+        ]
+      },
+      "metadataSha256": "8ec618d73df58faa04e6ce31c88b77d88d6af1c2ae30d290eb25b57aa4601876"
+    },
+    "loading-nub": {
+      "source": "resource_pack/textures/ui/experiencenub.png",
+      "sha256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/experiencenub.png",
+      "dimensions": [
+        11,
+        5
+      ],
+      "matchesInstalledBase": true
+    },
+    "loading-waveform": {
+      "source": "resource_pack/textures/ui/loading_bar.png",
+      "sha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/loading_bar.png",
+      "dimensions": [
+        640,
+        8
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "base_size": [
+          640,
+          8
+        ]
+      },
+      "metadataSha256": "38bc67e02f506f01308a16c9be27bbe203ea6da76cd02961571801327ad5f665"
+    },
+    "loading-control": {
+      "source": "resource_pack/textures/ui/control.png",
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/control.png",
+      "dimensions": [
+        2,
+        2
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataSha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+    },
+    "loading-title": {
+      "source": "resource_pack/textures/ui/title.png",
+      "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/title.png",
+      "dimensions": [
+        1937,
+        333
+      ],
+      "matchesInstalledBase": true
+    }
+  },
+  "facts": {
+    "settings": {
+      "source": "settings_common.settings_content/dialog_titles/selector_area/content_area/section_divider",
+      "sourceBackgroundNormalized": [
+        0.192,
+        0.196,
+        0.2
+      ],
+      "selectorWidth": "40% - 3px",
+      "contentWidth": "60% - 8px",
+      "sourceContentOffsetGamePixels": [
+        0,
+        21
+      ],
+      "sourceDividerWidthGamePixels": 4,
+      "frameSourceSliceLTRB": [
+        8,
+        23,
+        8,
+        8
+      ],
+      "destinationScale": 2,
+      "navigation": "NavigationList source-backed section_toggle_base, 30 GUI-pixel rows",
+      "pageState": "Hidden sections remain mounted; all settings and persistence are host owned."
+    },
+    "loading": {
+      "defaultProfile": "world-modal",
+      "source": "progress.world_convert_modal_progress_screen_content/world_modal_progress_panel/fancy_progress_loading_bars; common_art.title_panel_content/title_panel_win10",
+      "panelSizeGamePixels": [
+        290,
+        100
+      ],
+      "frameSourceSliceLTRB": [
+        8,
+        23,
+        8,
+        8
+      ],
+      "innerControlSource": "common.dialog_background_hollow_common; control PNG RGB9 inset4 GUI pixels at opacity .8. Original 2x2 PNG is stretched as all four pixels are identical; CSS nine-slice would have an empty 0x0 center.",
+      "baseContentWidth": "100% - 12px",
+      "titleTopGamePixels": 9,
+      "messageGapGamePixels": 8,
+      "insideBottomPaddingGamePixels": 14,
+      "buttonTopGapGamePixels": 5,
+      "greenBar": {
+        "widthOfInsideContent": "90%",
+        "heightGamePixels": 5,
+        "emptySourceSliceLTRB": [
+          6,
+          1,
+          6,
+          1
+        ],
+        "fullSourceSliceLTRB": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "fullClip": "Public value/max clips the already sized full image from the right; native clip_pixelperfect=false.",
+        "nub": "Original 11x5 PNG tiled across centered (bar width - 10 GUI pixels), above full and empty; never clipped with the value."
+      },
+      "titleImage": {
+        "source": "common_art.title_image",
+        "texture": "textures/ui/title",
+        "panelWidth": "55%",
+        "panelHeightOfWidth": "18.85%",
+        "topOfScreen": "10%"
+      },
+      "worldBackground": "Transparent host scene slot. The captured panorama belongs to the render-below scene; no synthetic panorama or flattened cube face is substituted.",
+      "indeterminate": {
+        "source": "progress.bar_animation/progress_loading_bars",
+        "frameCount": 10,
+        "frameSourcePixels": [
+          64,
+          8
+        ],
+        "fps": 10,
+        "reversible": true,
+        "normalizedTint": [
+          0.7,
+          0.7,
+          0.7,
+          1
+        ],
+        "staticFrameProp": "loadingFrame"
+      },
+      "compactProfileSource": "common.dirt_background; progress.world_loading_screen_background/overworld_loading_background/progress_loading_spinner/cancel_button",
+      "overworldTileSourcePixels": [
+        16,
+        16
+      ],
+      "tiledScale": [
+        2,
+        2
+      ],
+      "guiScale": 2,
+      "webTileCssPixels": [
+        64,
+        64
+      ],
+      "overworldGradientBlackAlpha": [
+        0.5,
+        0.7
+      ],
+      "classicBackground": "common.dirt_background uses bg32 tiled; web displays it at GUI scale 2",
+      "spinner": {
+        "source": "progress.spinner_animation",
+        "frames": 10,
+        "fps": 10,
+        "sourceFramePixels": [
+          7,
+          7
+        ],
+        "guiSize": [
+          14,
+          14
+        ]
+      },
+      "cancelSizeGamePixels": [
+        66,
+        26
+      ],
+      "textShadow": false,
+      "compactDeterminate": "Only variant=compact uses public Progress/common.empty_progress_bar/filled_progress_bar. The default world-modal uses native achievement experience textures."
+    },
+    "achievement": {
+      "source": "toast_screen.popup/toast_image/toast_label/third_party_achievement_icon",
+      "sourceFrame": "textures/ui/greyBorder (existing Toast)",
+      "sourceIconGamePixels": [
+        13,
+        13
+      ],
+      "textShadow": false,
+      "iconPolicy": "Host artwork is optional. Source achievement_third_party is referenced in JSON but absent from this official full ZIP; no invented trophy is substituted.",
+      "timing": "Persistent by default; explicit duration uses Toast minimum 5s with hover/focus/hidden-document pause."
+    }
+  },
+  "boundaries": [
+    "These are reusable Classic compositions, not complete native system screens or native game controllers.",
+    "The installed/full-release Classic JSON parses equally where recorded; migrated Ore settings runtime coverage is unverified.",
+    "The web composition adapts spacing, text wrapping, action placement and narrow layouts; no native fullscreen pixel-perfect claim.",
+    "Dirt tiling and gradient belong to the optional compact/source-background profiles; the default world-modal leaves panorama/background ownership to the host.",
+    "World-modal title art caps at 282 GUI pixels for very wide embedded regions; narrow panels fit available width, long messages can expand the source minimum height and optional percentages alter layout.",
+    "Waveform uses the ten original frames with a 10fps reversible CSS timeline; native endpoint timing and tint byte quantization are not certified from an animation capture.",
+    "Host background and achievement artwork are not source-certified by the library.",
+    "No local settings, game loading, achievements, files, or user data are detected or modified.",
+    "Original Mojang asset rights remain under their source terms; this manifest does not relicense them as MIT."
+  ],
+  "nativeObservation": {
+    "file": ".cache/native-system-screens/world-loading-state-native-lossless.png",
+    "sha256": "8b0e92e7cad5845d1e200264f030e53b8156404c24ddcefb77d6fdb5a6d53351",
+    "dimensions": [
+      2568,
+      1400
+    ],
+    "gameVersion": "1.26.6005.0",
+    "guiScale": 5,
+    "observed": "Stable center shows hollow3 gray frame, dark transparent interior, textured green experience bar, title PNG and scene panorama.",
+    "branchEvidence": "Classic world_convert_modal_progress_screen_content directly composes title_panel_content and world_modal_progress_panel. Local HBUI routes.json (125 routes), routes-react.json (2), routes-solid.json (2) contain no load/progress route; this does not prove engine call-stack identity.",
+    "barEvidence": "Native rows830/850 contain RGB(14,17,16) x670..1910 inclusive,1241px. Source(290-12)*.9*5 gives1251px; subtracting two1-GUI-pixel caps gives1241px.",
+    "limitation": "Transient screenshot retains prior page at top/left. Whole-frame equality is invalid; source material correspondence is separate from native runtime/frame geometry certification.",
+    "font": "This source Classic label branch is not the HBUI death Seven/Ten typography branch."
+  }
+}

@@ -7,6 +7,8 @@ import { ActionBar, BossBar, ChatMessage, ChatPanel, HeldItemTooltip, Scoreboard
 import { KeybindingField, NavigationList, SearchField, SettingRow, ToggleButton } from '../src/settings-controls';
 import { Spinner, Toast, Tooltip } from '../src/feedback';
 import type { InventoryItem } from '../src/inventory';
+import { BannerPreview, BlockPreview, loomPatternIds } from '../src/item-renderers';
+import type { BannerPatternId, BlockKind } from '../src/item-renderers';
 import { GameItemIcon } from './materials';
 import type { GameItemName } from './materials';
 import './expansion-examples.css';
@@ -18,16 +20,17 @@ function material(key: GameItemName, name: string, count = 1): InventoryItem {
 const inventory = [material('diamond', 'Diamond', 32), material('gem', 'Emerald', 16), material('goldIngot', 'Gold ingot', 16),
   material('ironIngot', 'Iron ingot', 16), material('netheriteIngot', 'Netherite ingot'), material('redDye', 'Red dye', 16),
   material('flowerBannerPattern', 'Flower banner pattern'), material('stick', 'Stick', 32), material('sword', 'Diamond sword')];
-const stone: InventoryItem = { name: 'Stone', count: 64, lore: ['Native block item renderer required.'] };
-const whiteBanner: InventoryItem = { name: 'White banner', lore: ['Native banner item renderer required.'] };
+const stone: InventoryItem = { name: 'Stone', count: 64, icon: <BlockPreview block="stone"/> };
+const whiteBanner: InventoryItem = { name: 'White banner', icon: <BannerPreview view="item" width={32} height={32}/> };
 const stoneRecipes: readonly RecipeSelectionOption[] = [
-  { id: 'stone-bricks', label: 'Stone bricks', item: { name: 'Stone bricks' } },
-  { id: 'stone-slab', label: 'Stone slab', item: { name: 'Stone slab' } },
-  { id: 'stone-stairs', label: 'Stone stairs', item: { name: 'Stone stairs' } },
+  { id: 'stone-bricks', label: 'Stone bricks', item: { name: 'Stone bricks', icon: <BlockPreview block="stone-bricks"/> } },
+  { id: 'stone-slab', label: 'Stone slab', item: { name: 'Stone slab', icon: <BlockPreview block="stone-slab"/> } },
+  { id: 'stone-stairs', label: 'Stone stairs', item: { name: 'Stone stairs', icon: <BlockPreview block="stone-stairs"/> } },
 ];
-const loomPatterns: readonly RecipeSelectionOption[] = [
-  { id: 'flower', label: 'Flower charge' }, { id: 'stripe', label: 'Center stripe' }, { id: 'cross', label: 'Cross' },
-];
+const patternLabel = (id: string) => id.replaceAll('-', ' ').replace(/^./, character => character.toUpperCase());
+const patternOptions = (ids: readonly BannerPatternId[]): readonly RecipeSelectionOption[] => ids.map(id => ({
+  id, label: patternLabel(id), preview: <BannerPreview view="cloth" width={14} height={28} baseColor="gray" patterns={[{ id, color: 'white' }]}/>,
+}));
 
 function Section({ id, title, detail, code, children }: { id: string; title: string; detail: string; code: string; children: ReactNode }) {
   const [view, setView] = useState<'preview' | 'code'>('preview');
@@ -43,35 +46,41 @@ function Section({ id, title, detail, code, children }: { id: string; title: str
 }
 
 function AdvancedWorkstationExamples({ notify }: { notify: Notify }) {
-  const [recipe, setRecipe] = useState('stone-bricks'), [pattern, setPattern] = useState('flower');
+  const [recipe, setRecipe] = useState('stone-bricks'), [pattern, setPattern] = useState<BannerPatternId>('stripe-center');
+  const [flowerTemplate, setFlowerTemplate] = useState(false);
   const [stoneTaken, setStoneTaken] = useState(false), [bannerTaken, setBannerTaken] = useState(false);
   const [primaryEffect, setPrimaryEffect] = useState<BeaconPrimaryEffect>('speed'), [secondaryEffect, setSecondaryEffect] = useState<'regeneration' | 'extra'>('regeneration'), [beaconOpen, setBeaconOpen] = useState(true);
   const [powered, setPowered] = useState(false), [crafterOpen, setCrafterOpen] = useState(true), [disabledSlots, setDisabledSlots] = useState<readonly number[]>([0, 2, 3, 5, 6, 8]);
   const crafterItems: readonly (InventoryItem | null)[] = [null, material('diamond', 'Diamond'), null, null, material('diamond', 'Diamond'), null, null, material('stick', 'Stick'), null];
   const effects: Partial<Record<BeaconEffectId, BeaconEffectState>> = {};
+  const loomPatterns = patternOptions(flowerTemplate ? ['flower'] : loomPatternIds);
+  const selectPattern = (id: string) => { const selected = loomPatterns.find(option => option.id === id); if (selected) { setPattern(selected.id as BannerPatternId); setBannerTaken(false); } };
+  const bannerLayers = [{ id: pattern, color: 'red' as const }];
   for (const id of ['speed', 'haste', 'resistance', 'jump-boost', 'strength', 'regeneration', 'extra'] as const) {
     effects[id] = { visible: true, enabled: true, selected: id === primaryEffect || id === secondaryEffect };
   }
-  const reset = () => { setRecipe('stone-bricks'); setPattern('flower'); setStoneTaken(false); setBannerTaken(false); setPrimaryEffect('speed'); setSecondaryEffect('regeneration'); setBeaconOpen(true); setPowered(false); setCrafterOpen(true); setDisabledSlots([0, 2, 3, 5, 6, 8]); };
+  const reset = () => { setRecipe('stone-bricks'); setPattern('stripe-center'); setFlowerTemplate(false); setStoneTaken(false); setBannerTaken(false); setPrimaryEffect('speed'); setSecondaryEffect('regeneration'); setBeaconOpen(true); setPowered(false); setCrafterOpen(true); setDisabledSlots([0, 2, 3, 5, 6, 8]); };
   return <Section id="advanced-workstations" title="More native workstations" detail="Stonecutting, loom patterns, beacon powers and the crafter grid."
     code={`<Stonecutter input={stone} recipes={recipes}\n  selectedRecipeId={recipe} onRecipeSelect={setRecipe}\n  result={result} onTakeResult={takeResult} />\n\n<Loom inputs={[banner, dye, patternItem]}\n  patterns={patterns} selectedPatternId={pattern}\n  onPatternSelect={setPattern} bannerPreview={nativePreview} />\n\n<Beacon payment={emerald} effects={effects}\n  onEffectSelect={selectEffect} canConfirm onConfirm={applyEffect} />\n\n<Crafter items={items} disabledSlots={disabledSlots}\n  powered={powered} output={output}\n  onSlotAction={handleSlot} onSlotEnabledChange={setSlotEnabled} />`}>
     <div className="expansion-controls">
       <Select label="Stonecutter recipe" value={recipe} options={stoneRecipes.map(option => ({ value: option.id, label: option.label }))}
         onChange={event => { setRecipe(event.currentTarget.value); setStoneTaken(false); }}/>
       <Select label="Loom pattern" value={pattern} options={loomPatterns.map(option => ({ value: option.id, label: option.label }))}
-        onChange={event => { setPattern(event.currentTarget.value); setBannerTaken(false); }}/>
+        onChange={event => selectPattern(event.currentTarget.value)}/>
+      <Checkbox label="Flower pattern template" checked={flowerTemplate} onChange={event => { setFlowerTemplate(event.target.checked); setPattern(event.target.checked ? 'flower' : 'stripe-center'); setBannerTaken(false); }}/>
       <Checkbox label="Crafter powered" checked={powered} onChange={event => setPowered(event.target.checked)}/>
       <Button size="sm" onClick={reset}>Reset workstations</Button></div>
     <div className="workstation-examples expansion-advanced-grid">
       <div className="expansion-dual-card"><h3>Stonecutter</h3><Stonecutter input={stone} recipes={stoneRecipes} selectedRecipeId={recipe}
         onRecipeSelect={id => { setRecipe(id); setStoneTaken(false); notify(`Stonecutter recipe: ${stoneRecipes.find(option => option.id === id)?.label ?? id}`); }}
-        result={stoneTaken ? null : { name: stoneRecipes.find(option => option.id === recipe)?.label ?? 'Stone bricks', count: recipe === 'stone-slab' ? 2 : 1 }}
+        result={stoneTaken ? null : { name: stoneRecipes.find(option => option.id === recipe)?.label ?? 'Stone bricks', count: recipe === 'stone-slab' ? 2 : 1, icon: <BlockPreview block={recipe as BlockKind}/> }}
         inventory={inventory} onInputAction={action => notify(`${action}: stonecutter input`)}
         onTakeResult={action => { setStoneTaken(true); notify(`${action}: stonecutter result taken.`); }}/></div>
-      <div className="expansion-dual-card"><h3>Loom</h3><Loom inputs={[whiteBanner, material('redDye', 'Red dye', 16), material('flowerBannerPattern', 'Flower banner pattern')]}
-        patterns={loomPatterns} selectedPatternId={pattern} showInputOverlays={[false, false, false]}
-        onPatternSelect={id => { setPattern(id); setBannerTaken(false); notify(`Loom pattern: ${id}`); }}
-        result={bannerTaken ? null : { name: 'Red patterned banner', lore: ['Native banner item renderer required.'] }}
+      <div className="expansion-dual-card"><h3>Loom</h3><Loom inputs={[whiteBanner, material('redDye', 'Red dye', 16), flowerTemplate ? material('flowerBannerPattern', 'Flower banner pattern') : null]}
+        patterns={loomPatterns} selectedPatternId={pattern} showInputOverlays={[false, false, !flowerTemplate]}
+        onPatternSelect={id => { selectPattern(id); notify(`Loom pattern: ${id}`); }}
+        bannerPreview={<BannerPreview view="cloth" width={40} height={80} patterns={bannerLayers}/>}
+        result={bannerTaken ? null : { name: 'Red patterned banner', icon: <BannerPreview view="item" width={32} height={32} patterns={bannerLayers}/> }}
         inventory={inventory} onInputAction={(index, action) => notify(`${action}: loom input ${index + 1}`)}
         onTakeResult={action => { setBannerTaken(true); notify(`${action}: loom result taken.`); }}/></div>
       <div className="expansion-beacon-card"><h3>Beacon</h3>{beaconOpen ? <Beacon payment={material('gem', 'Emerald')} inventory={inventory}
@@ -91,7 +100,7 @@ function AdvancedWorkstationExamples({ notify }: { notify: Notify }) {
         }} onSlotEnabledChange={(index, enabled) => setDisabledSlots(previous => enabled ? previous.filter(value => value !== index) : [...new Set([...previous, index])])}/>
         : <Button onClick={() => setCrafterOpen(true)}>Open crafter</Button>}</div>
     </div>
-    <p className="workstation-note">Gold, iron, dye and pattern items use original PNGs. Stone blocks and banners use native renderers without flat item PNGs, so those slots retain names and counts while their artwork stays empty. Your app can supply their renderer output.</p>
+    <p className="workstation-note">Original stone and banner atlases now render the block items, banner items and all32 normal pattern previews. Mesh pose, lighting and named dye colors are reconstructed profiles being calibrated against native Bedrock captures; your app can provide its own model, camera and texture sources.</p>
   </Section>;
 }
 

@@ -1,0 +1,429 @@
+{
+  "schemaVersion": 1,
+  "profile": "bedrock-classic-json-ui",
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "sources": {
+    "play_screen.json": {
+      "publicSha256": "10b1cab24aeee5cb5a875255bb6ffe266ca4056394c05f1c4d99b8cc56cf805a",
+      "installedSha256": "ae8027c6f7b4a4b74e3cdb451ecf99417da1b5b8f0faafe9ff81c585249d2e8b",
+      "parsedEqual": true
+    },
+    "resource_packs_screen.json": {
+      "publicSha256": "c73819a074d90e63268f9b52e86ce32179f10989288aefdd18a66c6ba394f3ae",
+      "installedSha256": "af3845c01a8947bc797e9fb0cc8b6976fc63a4746bb78c9e649a6ea08209ce2e",
+      "parsedEqual": true
+    },
+    "pause_screen.json": {
+      "publicSha256": "4abc34ecc4dd9e87d671aae32936d3c51b2ea498fc861f0af710e17be2a158a8",
+      "installedSha256": "07d478ee18ca1a7d83897a36353777b97afdd876eafd9afca7093a9e69ee72bc",
+      "parsedEqual": true
+    },
+    "ui_template_buttons.json": {
+      "publicSha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "installedSha256": "6d89054b8b61fb1a1730069ec7f8547ce9e1ab263780f89b8713b87f17a232f7",
+      "parsedEqual": true
+    },
+    "ui_template_toggles.json": {
+      "publicSha256": "efe2bf9fab47aa5e29d7116a2aa705a964a42b0ef86c947c4e46188be9ac2a01",
+      "installedSha256": "4d228fb036db1efc7eed08253b05a4dd89abaf39d6d2eaac6d95593c63673f91",
+      "parsedEqual": true
+    },
+    "_global_variables.json": {
+      "publicSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "installedSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+      "parsedEqual": true
+    }
+  },
+  "assets": {
+    "dark": {
+      "source": "resource_pack/textures/ui/button_borderless_dark.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_dark.png",
+      "sha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "dimensions": [
+        4,
+        4
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataSha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+    },
+    "dark-hover": {
+      "source": "resource_pack/textures/ui/button_borderless_darkhover.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_darkhover.png",
+      "sha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b",
+      "dimensions": [
+        4,
+        4
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataSha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+    },
+    "dark-pressed": {
+      "source": "resource_pack/textures/ui/button_borderless_darkpressed.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_darkpressed.png",
+      "sha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532",
+      "dimensions": [
+        4,
+        4
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataSha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+    },
+    "disabled": {
+      "source": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "dimensions": [
+        2,
+        2
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataSha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+    },
+    "indent": {
+      "source": "resource_pack/textures/ui/default_indent.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/default_indent.png",
+      "sha256": "35f98c105d7eb71519be92e9afd5c7cbd8239dd1addf40bb4a79fad472d5e395",
+      "dimensions": [
+        5,
+        5
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "metadataSha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+    },
+    "screenshot-focus": {
+      "source": "resource_pack/textures/ui/world_screenshot_focus_border.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/world_screenshot_focus_border.png",
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "metadataSha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+    },
+    "focus": {
+      "source": "resource_pack/textures/ui/focus_border_white.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/focus_border_white.png",
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "metadataSha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+    },
+    "edit": {
+      "source": "resource_pack/textures/ui/editIcon.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/editIcon.png",
+      "sha256": "53689fd0a99a52c18591f9d5638ed868d79555bc454ff321b2b63aaef1236563",
+      "dimensions": [
+        22,
+        16
+      ],
+      "matchesInstalledBase": true
+    },
+    "trash": {
+      "source": "resource_pack/textures/ui/trash_light.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/trash_light.png",
+      "sha256": "53556e3e2e9fd3e1947c5961fa80289c04f3ad795d62d341c67b5cdbb98cb627",
+      "dimensions": [
+        13,
+        17
+      ],
+      "matchesInstalledBase": true
+    },
+    "online": {
+      "source": "resource_pack/textures/ui/online.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/online.png",
+      "sha256": "e2782521b081320bc3785780e409b64bc8cbd22799207f532bb54398f0f91094",
+      "dimensions": [
+        7,
+        7
+      ],
+      "matchesInstalledBase": true
+    },
+    "offline": {
+      "source": "resource_pack/textures/ui/offline.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/offline.png",
+      "sha256": "a05d38826a76ff5abb58f3f6c1a38fb1975cc1dcd5d6be336f7b73c359c7aec9",
+      "dimensions": [
+        7,
+        7
+      ],
+      "matchesInstalledBase": true
+    },
+    "up": {
+      "source": "resource_pack/textures/ui/up_arrow.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/up_arrow.png",
+      "sha256": "22ae6f6ffa12425448df5851df46bf875634058540d4b941f3eb7e1f60dfc374",
+      "dimensions": [
+        12,
+        12
+      ],
+      "matchesInstalledBase": true
+    },
+    "down": {
+      "source": "resource_pack/textures/ui/down_arrow.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/down_arrow.png",
+      "sha256": "9b1fac2d525c31eaec23b1ad4167b054010a4254a63d88eccebadb9d4f5c10cb",
+      "dimensions": [
+        12,
+        12
+      ],
+      "matchesInstalledBase": true
+    },
+    "plus": {
+      "source": "resource_pack/textures/ui/plus.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/plus.png",
+      "sha256": "965fa4c152e09cdd8d61ead15b5eb2ecefd9e1c78cd49a9b652b84b78bf55f9f",
+      "dimensions": [
+        11,
+        11
+      ],
+      "matchesInstalledBase": true
+    },
+    "minus": {
+      "source": "resource_pack/textures/ui/minus.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/minus.png",
+      "sha256": "0284676ac3f7d0a653c68c9a3f9547fdde4ad4c3c1356b3c60e939bea2ec8052",
+      "dimensions": [
+        11,
+        3
+      ],
+      "matchesInstalledBase": true
+    },
+    "permissions": {
+      "source": "resource_pack/textures/ui/permissions_member_star.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/permissions_member_star.png",
+      "sha256": "47da5219d820044f07b5e08a2648097bb19755f39501faa53370980040d37798",
+      "dimensions": [
+        13,
+        14
+      ],
+      "matchesInstalledBase": true
+    },
+    "player-border": {
+      "source": "resource_pack/textures/ui/pause_screen_border.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/pause_screen_border.png",
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "metadataSha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+    },
+    "demo-world": {
+      "source": "resource_pack/textures/ui/default_world.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/default_world.png",
+      "sha256": "d1ea2e0920619595a419a380cedaa23341123eed3a501da0e63eb22745b59ee8",
+      "dimensions": [
+        128,
+        128
+      ],
+      "matchesInstalledBase": true
+    },
+    "demo-pack": {
+      "source": "resource_pack/textures/ui/missing_pack_icon.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/missing_pack_icon.png",
+      "sha256": "cd20f4aa8dbae47340be8906ba8cdc372551f45e5aacee5fb052860b076f6b51",
+      "dimensions": [
+        64,
+        64
+      ],
+      "matchesInstalledBase": true
+    },
+    "pack-actions-border": {
+      "source": "resource_pack/textures/ui/packs_border.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/packs_border.png",
+      "sha256": "899475815e6c585c04fb1a3d5ab4c63cdca3f0640f101e66032a2934f692ff7e",
+      "dimensions": [
+        5,
+        5
+      ],
+      "matchesInstalledBase": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "metadataSha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+    },
+    "pack-actions-middle": {
+      "source": "resource_pack/textures/ui/packs_middle.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/packs_middle.png",
+      "sha256": "ce73fbd188f3ee89fa25ebba3f100dc5f9cfccde523667f9e3c42b6037eb3d4b",
+      "dimensions": [
+        1,
+        1
+      ],
+      "matchesInstalledBase": true
+    }
+  },
+  "facts": {
+    "world": {
+      "source": "play.local_world_item/local_world_text_panel/collection_world_screenshot",
+      "rowStride": 29,
+      "surfaceHeight": 30,
+      "thumbnailHeightInset": 2,
+      "thumbnailWidthPercentOfHeight": 173.91,
+      "buttonContentInset": 6,
+      "contentHeight": 24,
+      "thumbnailImage": [
+        38.2602,
+        22
+      ],
+      "thumbnailBorder": [
+        40.2602,
+        24
+      ],
+      "thumbnailWidthBasis": "173.91%y uses the image own height of 22, not parent height 24; corrected by independent native Loading-logo cross-axis evidence.",
+      "editGlyph": [
+        22,
+        16
+      ],
+      "deleteGlyph": [
+        22,
+        16
+      ],
+      "textLineHeight": 10,
+      "textShadow": false
+    },
+    "server": {
+      "source": "play.network_world_item/network_world_item_button_content",
+      "rowStride": 30,
+      "surfaceHeight": 31,
+      "statusIcon": [
+        8,
+        8
+      ],
+      "statusContainer": [
+        10,
+        10
+      ],
+      "textLineHeight": 10
+    },
+    "player": {
+      "source": "pause.player_grid_item/player_button_content/player_gamer_pic/player_permission_button",
+      "rowStride": 27,
+      "surfaceHeight": 28,
+      "contentInset": [
+        4,
+        4
+      ],
+      "portrait": [
+        18,
+        18
+      ],
+      "portraitPanelWidth": 20,
+      "permissionWidth": 28,
+      "permissionGlyph": [
+        15,
+        15
+      ]
+    },
+    "pack": {
+      "source": "resource_packs.selected_pack_panel/available_pack_panel/selected_pack_button_layout/selected_text_panel",
+      "minimumPanelHeight": 50,
+      "icon": [
+        42,
+        42
+      ],
+      "iconOffset": [
+        1,
+        0
+      ],
+      "textWidthInset": 48,
+      "nameLineHeight": 10,
+      "descriptionDefaultHeight": 32,
+      "descriptionWidthInsetFromTextPanel": 60,
+      "actionPanelHeight": 24,
+      "actionHeight": 18,
+      "actionHorizontalInset": 4,
+      "movementButton": [
+        18,
+        18
+      ],
+      "movementGlyph": [
+        14,
+        14
+      ],
+      "onlineGlyph": [
+        7,
+        7
+      ]
+    }
+  },
+  "boundaries": [
+    "Classic JSON UI source profile. Current Play-screen migration to Ore is not emulated or claimed as native runtime appearance.",
+    "Original texture bytes and parsed public/installed JSON are verified. Whole-screen native screenshot and font-baseline equality are unverified; sizecm and percentage-layout rounding have not been captured from the native engine.",
+    "The earlier parent-height interpretation of thumbnail %y was withdrawn. Self-height cross-axis semantics are corroborated independently by a native Loading-logo capture; native world-thumbnail fractional snapping is still unverified.",
+    "WorldList uses local-world rows; ServerList uses external/network-world rows, not featured-server navigation cards.",
+    "Caller supplies thumbnails, dates, file sizes, server status/counts, pack data and skin/avatar rendering. No networking or world filesystem operations.",
+    "Selection persistence, keyboard roving, host callback policy, delete action placement, visible selected focus and responsive wrapping are web adaptations.",
+    "PlayerCard uses the compact pause-player row. A caller skin renderer is a slot, not an implementation of native paper_doll_renderer.",
+    "Pack descriptions declare font_type=smooth in JSON. The shared Web font is not certified against the native smooth-text rasterizer.",
+    "Pack read-more, warnings/errors and proprietary marketplace/permissions workflows are not implemented. Pack data and reorder callbacks are caller-owned."
+  ]
+}

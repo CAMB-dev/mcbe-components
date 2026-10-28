@@ -8,6 +8,11 @@ const pixelFontPath = fileURLToPath(new URL('./.cache/local-fonts/Mojangles-Pixe
 const fontPath = existsSync(pixelFontPath) ? pixelFontPath : rawFontPath;
 const virtualFont = 'virtual:mcbeui-game-font';
 const runePath = fileURLToPath(new URL('./.cache/enchanting-source/font/ascii_sga.png', import.meta.url));
+const localFont = (name: string) => fileURLToPath(new URL(`./.cache/local-fonts/hbui/${name}`, import.meta.url));
+const hbuiTenPath = localFont('Minecraft-Ten-v2.otf');
+const hbuiSevenPath = localFont('Minecraft-Seven-v2.otf');
+const hbuiChinesePath = localFont('NotoSansSC-Regular.otf');
+const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loading-indicator.gif', import.meta.url));
 export default defineConfig({
   base: './', build: { outDir: 'site', rollupOptions: { input: { main: fileURLToPath(new URL('./index.html', import.meta.url)), calibration: fileURLToPath(new URL('./calibration.html', import.meta.url)) } } },
   server: {
@@ -24,13 +29,32 @@ export default defineConfig({
       const runeModule = existsSync(runePath)
         ? `import runeUrl from ${JSON.stringify(normalizePath(runePath) + '?url')}; export const runeAtlasUrl = runeUrl;`
         : 'export const runeAtlasUrl = undefined;';
-      if (!existsSync(fontPath)) return runeModule + 'export const hasGameFont = false;';
-      return `${runeModule} import fontUrl from ${JSON.stringify(normalizePath(fontPath) + '?url')};
-        import ${JSON.stringify(normalizePath(fileURLToPath(new URL('./src/mojangles.css', import.meta.url))))};
-        const style = document.createElement('style');
-        style.textContent = ${JSON.stringify(`@font-face{font-family:'${existsSync(pixelFontPath) ? 'Mojangles Pixel' : 'Mojangles'}';src:url(`)} + JSON.stringify(fontUrl) + ${JSON.stringify(`) format('${existsSync(pixelFontPath) ? 'woff2' : 'truetype'}');font-display:swap}`)};
-        document.head.appendChild(style);
-        export const hasGameFont = true;`;
+      const parts = [runeModule];
+      parts.push(existsSync(hbuiLoadingPath)
+        ? `import hbuiLoadingIndicatorUrl from ${JSON.stringify(normalizePath(hbuiLoadingPath) + '?url')}; export { hbuiLoadingIndicatorUrl };`
+        : 'export const hbuiLoadingIndicatorUrl = undefined;');
+      const faces: string[] = [];
+      const fonts = [
+        { path: fontPath, family: existsSync(pixelFontPath) ? 'Mojangles Pixel' : 'Mojangles', format: existsSync(pixelFontPath) ? 'woff2' : 'truetype', flag: 'hasGameFont' },
+        { path: hbuiTenPath, family: 'Minecraft Ten v2', format: 'opentype', flag: 'hasHBUITenFont' },
+        { path: hbuiSevenPath, family: 'Minecraft Seven v2', format: 'opentype', flag: 'hasHBUISevenFont' },
+        { path: hbuiChinesePath, family: 'Noto Sans SC', format: 'opentype', flag: 'hasHBUIChineseFont' },
+      ];
+      fonts.forEach((font, index) => {
+        const present = existsSync(font.path);
+        parts.push(`export const ${font.flag} = ${present};`);
+        if (!present) return;
+        const url = `localFontUrl${index}`;
+        parts.push(`import ${url} from ${JSON.stringify(normalizePath(font.path) + '?url')};`);
+        faces.push(`${JSON.stringify(`@font-face{font-family:'${font.family}';font-style:normal;font-weight:400;src:url(`)} + JSON.stringify(${url}) + ${JSON.stringify(`) format('${font.format}');font-display:swap}`)}`);
+      });
+      if (existsSync(fontPath)) parts.push(`import ${JSON.stringify(normalizePath(fileURLToPath(new URL('./src/mojangles.css', import.meta.url))))};`);
+      // The locale fallback is optional and applies only to the HBUI death view.
+      // Open defaults in the public component styles remain unchanged.
+      if (existsSync(hbuiChinesePath)) faces.push(JSON.stringify(":root{--mc-death-title-font:'Minecraft Ten v2','Noto Sans SC',var(--mc-font);--mc-death-body-font:'Minecraft Seven v2','Noto Sans SC',var(--mc-font)}"));
+      parts.push('export const hasHBUIFont = hasHBUITenFont && hasHBUISevenFont;');
+      if (faces.length) parts.push(`const style = document.createElement('style'); style.textContent = [${faces.join(',')}].join('\\n'); document.head.appendChild(style);`);
+      return parts.join('\n');
     },
   }],
 });

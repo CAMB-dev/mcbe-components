@@ -1,0 +1,120 @@
+@import './inventory-screen-textures.css';
+.mc-armor-slot__overlay { display: block; width: 32px; height: 32px; background: var(--armor-overlay) center / 32px 32px no-repeat; image-rendering: pixelated; }
+.mc-armor-slot__overlay--helmet { --armor-overlay: var(--mc-inv-screen-helmet); }
+.mc-armor-slot__overlay--chestplate { --armor-overlay: var(--mc-inv-screen-chestplate); }
+.mc-armor-slot__overlay--leggings { --armor-overlay: var(--mc-inv-screen-leggings); }
+.mc-armor-slot__overlay--boots { --armor-overlay: var(--mc-inv-screen-boots); }
+.mc-armor-slot__overlay--offhand { --armor-overlay: var(--mc-inv-screen-offhand); }
+.mc-player-screen > .mc-workstation__title { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.mc-player-screen .mc-player-inventory__label { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.mc-player-screen .mc-workstation__inventory { left: 14px; top: 172px; }
+.mc-player-screen__armor { position: absolute; left: 14px; top: 14px; display: flex; flex-direction: column; width: 36px; height: 144px; }
+.mc-player-screen__offhand { position: absolute; left: 158px; top: 122px; }
+.mc-player-screen__preview { position: absolute; box-sizing: border-box; left: 50px; top: 14px; width: 108px; height: 144px; border: 2px solid transparent; border-image: var(--mc-inv-screen-preview) 1 fill / 2px stretch; }
+.mc-player-screen__preview-content { position: absolute; left: 0; top: 0; width: 104px; height: 140px; background: var(--mc-inv-screen-black) center / 100% 100% no-repeat; overflow: hidden; display: grid; place-items: center; }
+.mc-player-screen__crafting { position: absolute; left: 192px; top: 36px; width: 72px; height: 72px; }
+.mc-player-screen__crafting .mc-inventory-scroll { padding: 0; overflow: visible; }
+.mc-player-screen__result { position: absolute; left: 304px; top: 52px; }
+.mc-player-screen__arrow { position: absolute; left: 268px; top: 58px; width: 32px; height: 26px; background: var(--mc-inv-screen-arrow) center / 100% 100% no-repeat; image-rendering: pixelated; }
+.mc-player-screen__crafting-label { position: absolute; left: 162px; top: 14px; width: 132px; height: 20px; line-height: 20px; text-align: center; color: #4c4c4c; background-color: #c6c6c6; }
+.mc-inventory-toolbar { position: relative; isolation: isolate; box-sizing: border-box; width: 252px; height: 40px; image-rendering: pixelated; }
+.mc-inventory-toolbar::before { content: ''; position: absolute; z-index: -1; left: 0; top: -6px; width: 252px; height: 56px; box-sizing: border-box; border: 8px solid transparent; border-image: var(--mc-inv-screen-toolbar) 4 fill / 8px stretch; pointer-events: none; }
+.mc-inventory-toolbar button { position: absolute; box-sizing: border-box; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; touch-action: manipulation; }
+.mc-inventory-toolbar__mode { --toolbar-mode-skin: var(--mc-inv-screen-toolbar-off); top: 2px; width: 50px; height: 36px; }
+.mc-inventory-toolbar__mode[data-layout='creative'] { left: 16px; }
+.mc-inventory-toolbar__mode[data-layout='recipe-book'] { left: 70px; }
+.mc-inventory-toolbar__mode[data-layout='survival'] { left: 122px; }
+.mc-inventory-toolbar__mode::before { content: ''; position: absolute; inset: 2px; border: 2px solid transparent; border-image: var(--toolbar-mode-skin) 1 fill / 2px stretch; pointer-events: none; }
+.mc-inventory-toolbar__mode::after { content: ''; position: absolute; inset: 0; border: 2px solid transparent; border-image: var(--mc-inv-screen-toolbar-border) 1 fill / 2px stretch; filter: brightness(.075); pointer-events: none; }
+.mc-inventory-toolbar__mode[aria-pressed='true'] { --toolbar-mode-skin: var(--mc-inv-screen-toolbar-on); }
+.mc-inventory-toolbar__mode:focus-visible { --toolbar-mode-skin: var(--mc-inv-screen-toolbar-off-hover); outline: none; }
+.mc-inventory-toolbar__mode[aria-pressed='true']:focus-visible { --toolbar-mode-skin: var(--mc-inv-screen-toolbar-on-hover); }
+.mc-inventory-toolbar__mode:focus-visible::after { filter: none; }
+.mc-inventory-toolbar__mode:disabled::before { border: 0; border-image: none; background: var(--mc-inv-screen-toolbar-locked) center / 100% 100% no-repeat; }
+.mc-inventory-toolbar__icon { display: block; position: absolute; left: 6px; top: 4px; width: 38px; height: 26px; background: var(--toolbar-icon) center / 100% 100% no-repeat; pointer-events: none; }
+.mc-inventory-toolbar__icon--creative { --toolbar-icon: var(--mc-inv-screen-toolbar-creative); }
+.mc-inventory-toolbar__icon--recipe-book { --toolbar-icon: var(--mc-inv-screen-toolbar-recipe-book); }
+.mc-inventory-toolbar__icon--survival { --toolbar-icon: var(--mc-inv-screen-toolbar-survival); }
+.mc-inventory-toolbar .mc-inventory-toolbar__help { left: 180px; top: 5px; width: 30px; height: 30px; background: var(--mc-inv-screen-toolbar-help) center / 100% 100% no-repeat; }
+.mc-inventory-toolbar__close { left: 204px; top: -1px; width: 42px; height: 42px; }
+.mc-inventory-toolbar__close > span { position: absolute; left: 6px; top: 6px; width: 30px; height: 30px; background: var(--mc-inv-screen-toolbar-close) center / 100% 100% no-repeat; pointer-events: none; }
+.mc-inventory-toolbar .mc-inventory-toolbar__help:focus-visible { background-image: var(--mc-inv-screen-toolbar-help-hover); }
+.mc-inventory-toolbar__close:focus-visible > span { background-image: var(--mc-inv-screen-toolbar-close-hover); }
+.mc-inventory-toolbar__help:focus-visible, .mc-inventory-toolbar__close:focus-visible { outline: none; }
+.mc-inventory-toolbar .mc-inventory-toolbar__help:active:not(:disabled) { background-image: var(--mc-inv-screen-toolbar-help-pressed); }
+.mc-inventory-toolbar__close:active:not(:disabled) > span { background-image: var(--mc-inv-screen-toolbar-close-pressed); }
+.mc-inventory-toolbar button:disabled { cursor: not-allowed; }
+.mc-inventory-toolbar__help:disabled, .mc-inventory-toolbar__close:disabled { opacity: .5; }
+@media (hover: hover) {
+  .mc-inventory-toolbar__mode:hover:not(:disabled) { --toolbar-mode-skin: var(--mc-inv-screen-toolbar-off-hover); }
+  .mc-inventory-toolbar__mode[aria-pressed='true']:hover:not(:disabled) { --toolbar-mode-skin: var(--mc-inv-screen-toolbar-on-hover); }
+  .mc-inventory-toolbar__mode:hover:not(:disabled)::after { filter: none; }
+  .mc-inventory-toolbar .mc-inventory-toolbar__help:hover:not(:disabled) { background-image: var(--mc-inv-screen-toolbar-help-hover); }
+  .mc-inventory-toolbar__close:hover:not(:disabled) > span { background-image: var(--mc-inv-screen-toolbar-close-hover); }
+  .mc-inventory-toolbar .mc-inventory-toolbar__help:hover:active:not(:disabled) { background-image: var(--mc-inv-screen-toolbar-help-pressed); }
+  .mc-inventory-toolbar__close:hover:active:not(:disabled) > span { background-image: var(--mc-inv-screen-toolbar-close-pressed); }
+}
+.mc-recipe-search { display: flex; align-items: center; gap: 2px; min-width: 0; color: #fff; font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: none; }
+.mc-recipe-search__field.mc-search-field { flex: 1; gap: 0; grid-template-rows: 32px; color: #fff; font: inherit; text-shadow: none; }
+.mc-recipe-search__field .mc-field__label { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.mc-recipe-search .mc-recipe-search__field .mc-input { box-sizing: border-box; grid-area: 1 / 1; min-height: 32px; height: 32px; padding-block: 0; padding-inline-start: 22px; border-image-source: var(--mc-inv-screen-search); color: #fff; text-shadow: none; line-height: 20px; outline-offset: -2px; }
+.mc-recipe-search .mc-recipe-search__field .mc-input:hover:not(:disabled), .mc-recipe-search .mc-recipe-search__field .mc-input:focus-visible:not(:disabled) { border-image-source: var(--mc-inv-screen-search-hover); }
+.mc-recipe-search .mc-recipe-search__field .mc-input:disabled { color: #fff; }
+.mc-recipe-search__field .mc-search-field__icon, .mc-recipe-search__field .mc-search-field__clear { grid-area: 1 / 1; }
+.mc-recipe-search__field .mc-field__description { grid-area: 2 / 1; }
+.mc-recipe-search__filter { position: relative; flex: 0 0 58px; width: 58px; height: 34px; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; touch-action: manipulation; }
+.mc-recipe-search__filter::before { content: ''; position: absolute; inset: 2px; background: var(--mc-inv-screen-filter-off) center / 54px 30px no-repeat; image-rendering: pixelated; }
+.mc-recipe-search__filter[aria-pressed='true']::before { background-image: var(--mc-inv-screen-filter-on); }
+.mc-recipe-search__filter:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.mc-recipe-search__filter:disabled { opacity: .5; cursor: not-allowed; }
+@media (hover: hover) {
+  .mc-recipe-search__filter:hover:not(:disabled)::before { background-image: var(--mc-inv-screen-filter-off-hover); }
+  .mc-recipe-search__filter[aria-pressed='true']:hover:not(:disabled)::before { background-image: var(--mc-inv-screen-filter-on-hover); }
+}
+.mc-recipe-categories { display: flex; position: relative; width: 292px; height: 54px; isolation: isolate; }
+.mc-recipe-categories__tab { --tab-back: var(--mc-inv-screen-tab-back); --tab-back-hover: var(--mc-inv-screen-tab-back-hover); --tab-front: var(--mc-inv-screen-tab-front); --tab-front-hover: var(--mc-inv-screen-tab-front-hover); --tab-skin: var(--tab-back); position: relative; display: grid; place-items: center; box-sizing: border-box; width: 50px; flex: 0 0 50px; height: 54px; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; touch-action: manipulation; }
+.mc-recipe-categories__tab[data-edge='left'] { --tab-back: var(--mc-inv-screen-tab-back-left); --tab-back-hover: var(--mc-inv-screen-tab-back-left-hover); --tab-front: var(--mc-inv-screen-tab-front-left); --tab-front-hover: var(--mc-inv-screen-tab-front-left-hover); }
+.mc-recipe-categories__tab[data-edge='right'] { margin-left: auto; --tab-back: var(--mc-inv-screen-tab-back-right); --tab-back-hover: var(--mc-inv-screen-tab-back-right-hover); --tab-front: var(--mc-inv-screen-tab-front-right); --tab-front-hover: var(--mc-inv-screen-tab-front-right-hover); }
+.mc-recipe-categories__tab::before { content: ''; position: absolute; inset: 0; border: 8px solid transparent; border-image: var(--tab-skin) 4 fill / 8px stretch; image-rendering: pixelated; pointer-events: none; }
+.mc-recipe-categories__tab[aria-selected='true'] { --tab-skin: var(--tab-front); z-index: 2; }
+.mc-recipe-categories__tab:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.mc-recipe-categories__tab:disabled { cursor: not-allowed; }
+.mc-recipe-categories__tab:disabled .mc-recipe-categories__icon { opacity: .5; }
+.mc-recipe-categories__icon { position: relative; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: var(--category-icon) center / 34px 34px no-repeat; image-rendering: pixelated; pointer-events: none; }
+.mc-recipe-categories__icon > * { max-width: 34px; max-height: 34px; }
+.mc-recipe-categories__icon--construction { --category-icon: var(--mc-inv-screen-category-construction); }
+.mc-recipe-categories__icon--equipment { --category-icon: var(--mc-inv-screen-category-equipment); }
+.mc-recipe-categories__icon--items { --category-icon: var(--mc-inv-screen-category-items); }
+.mc-recipe-categories__icon--nature { --category-icon: var(--mc-inv-screen-category-nature); }
+.mc-recipe-categories__icon--search { --category-icon: var(--mc-inv-screen-category-search); }
+@media (hover: hover) {
+  .mc-recipe-categories__tab:hover:not(:disabled) { --tab-skin: var(--tab-back-hover); }
+  .mc-recipe-categories__tab[aria-selected='true']:hover:not(:disabled) { --tab-skin: var(--tab-front-hover); }
+}
+.mc-creative-inventory-scroll { max-width: 100%; overflow: auto; padding: 52px 6px 54px; }
+.mc-creative-inventory { position: relative; isolation: isolate; box-sizing: border-box; width: 652px; height: 332px; color: #4c4c4c; font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: none; image-rendering: pixelated; }
+.mc-creative-inventory::before { content: ''; position: absolute; inset: 0; z-index: -1; border: 8px solid transparent; border-image: var(--mc-skin-panel) 4 fill / 8px stretch; }
+.mc-creative-inventory__tabs { position: absolute; left: 0; top: -46px; z-index: -2; }
+.mc-creative-inventory__toolbar { position: absolute; left: 400px; top: -40px; z-index: -2; }
+.mc-creative-inventory__label { position: absolute; left: 18px; top: 16px; margin: 0; width: 618px; height: 20px; overflow: hidden; font: inherit; text-align: right; background-color: #c6c6c6; }
+.mc-creative-inventory > .mc-dialog__close { top: 0; right: 0; }
+.mc-creative-inventory__search { position: absolute; left: 12px; top: 38px; width: 628px; }
+.mc-creative-inventory__items { position: absolute; left: 12px; top: 42px; width: 628px; height: 278px; background: var(--mc-inv-screen-recipe-pane) center / 100% 100% no-repeat; }
+.mc-creative-inventory__items::before, .mc-creative-inventory__items::after { content: ''; position: absolute; left: 0; right: 0; z-index: 10; pointer-events: none; background: var(--mc-inv-screen-white) center / 100% 100% no-repeat; }
+.mc-creative-inventory__items::before { top: 0; height: 4px; filter: brightness(0); opacity: .5; }
+.mc-creative-inventory__items::after { top: -2px; height: 2px; filter: brightness(.75); }
+.mc-creative-inventory__items:has(.mc-scrollbar:not([hidden]))::before, .mc-creative-inventory__items:has(.mc-scrollbar:not([hidden]))::after { right: 12px; }
+.mc-creative-inventory__items[data-search] { top: 74px; height: 246px; }
+.mc-creative-inventory__items .mc-inventory-scroll { padding: 0; overflow: visible; }
+.mc-creative-inventory__items .mc-inventory { display: grid; justify-content: center; }
+.mc-creative-inventory__items .mc-slot { --mc-slot-skin: var(--mc-inv-screen-recipe-cell); }
+.mc-creative-inventory__items .mc-slot--selected { --mc-slot-skin: var(--mc-skin-inventory-selected); }
+.mc-creative-inventory__empty { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.mc-creative-inventory__hotbar { position: absolute; box-sizing: border-box; left: 152px; top: 322px; width: 348px; height: 56px; padding: 8px 12px 12px; }
+.mc-creative-inventory__hotbar::before { content: ''; position: absolute; inset: 0; z-index: -1; border: 8px solid transparent; border-image: var(--mc-inv-screen-creative-hotbar) 4 fill / 8px stretch; }
+.mc-creative-inventory__hotbar .mc-inventory-scroll { padding: 0; overflow: visible; }
+@media (forced-colors: active) {
+  .mc-recipe-categories__tab::before { border-image: none; border-color: ButtonText; background: ButtonFace; }
+  .mc-recipe-categories__tab[aria-selected='true'] { outline: 2px solid Highlight; }
+  .mc-recipe-search__filter:focus-visible { outline-color: Highlight; }
+}

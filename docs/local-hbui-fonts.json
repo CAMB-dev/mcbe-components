@@ -1,0 +1,44 @@
+{
+  "profile": "Optional local HBUI fonts from installed Bedrock 1.26.6005.0",
+  "distribution": "Metadata only. Original font binaries remain in ignored local cache, outside Git/public/npm. Local site builds can embed them when enabled.",
+  "prepare": "python scripts/use-local-hbui-fonts.py [GAME_CONTENT]",
+  "fonts": [
+    {
+      "source": "data/gui/dist/hbui/fonts/Minecraft-Ten-ed29a1bbe6a620b83378.otf",
+      "family": "Minecraft Ten v2",
+      "version": "Version 2.5",
+      "bytes": 19960,
+      "sha256": "1dd0c122794d0ac5c504e853143e078bd295f24b3a0d6ddd23dba2ca70b6e815",
+      "modifications": "None"
+    },
+    {
+      "source": "data/gui/dist/hbui/fonts/Minecraft-Seven-66398119c2c20ee73019.otf",
+      "family": "Minecraft Seven v2",
+      "version": "Version 2.5",
+      "bytes": 30784,
+      "sha256": "3ac46d75d4fe3aae7412d18e09047b70073a8e779488f72560c09f8c474fecc6",
+      "modifications": "None"
+    },
+    {
+      "source": "data/gui/dist/hbui/fonts/NotoSansSC-Regular-a4317c614d07055b56ed.otf",
+      "family": "Noto Sans SC Regular",
+      "cssFamily": "Noto Sans SC",
+      "version": "Version 1.004",
+      "bytes": 8368828,
+      "sha256": "8c37936063c7c8ab747a939e13833894f9edc80dd41b98874ca8f3938a33c32f",
+      "modifications": "None"
+    }
+  ],
+  "optionalMedia": {
+    "source": "data/gui/dist/hbui/assets/animation-074ed0ba8c16bb30e36c.gif",
+    "bytes": 871,
+    "sha256": "27d3ad3174cbe640acbed6346646ba1f8d69891dd2e8aaed63ccd8c6536270b3",
+    "distribution": "Ignored local cache and local preview only; not Git/public/npm.",
+    "modifications": "None"
+  },
+  "boundaries": [
+    "The public package keeps its open-font fallbacks; these families are optional host resources.",
+    "The local preview registers unchanged OpenType bytes and applies the Chinese fallback only through DeathScreen font tokens.",
+    "Font identity does not by itself certify native glyph rasterization, platform antialiasing, baseline or spacing."
+  ]
+}

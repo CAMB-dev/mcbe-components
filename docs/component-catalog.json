@@ -25,6 +25,16 @@
         "status": "implemented"
       },
       {
+        "name": "BlockPreview",
+        "status": "implemented",
+        "fidelity": "renderer_reconstruction_unverified"
+      },
+      {
+        "name": "BannerPreview",
+        "status": "implemented",
+        "fidelity": "renderer_reconstruction_unverified"
+      },
+      {
         "name": "Panel",
         "status": "implemented"
       },
@@ -180,11 +190,16 @@
       },
       {
         "name": "RecipeSearch",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "RecipeCategoryTabs",
-        "status": "planned"
+        "status": "implemented"
+      },
+      {
+        "name": "InventoryToolbar",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "ProcessingArrow",
@@ -217,11 +232,11 @@
       },
       {
         "name": "TradeOffer",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "ArmorSlot",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "ResultSlot",
@@ -319,19 +334,20 @@
       },
       {
         "name": "TradingScreen",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "PlayerInventoryScreen",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "CreativeInventory",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_profile_or_renderer_reconstruction"
       },
       {
         "name": "MountInventory",
-        "status": "planned"
+        "status": "implemented"
       }
     ],
     "hud": [
@@ -404,53 +420,64 @@
       },
       {
         "name": "PlayerList",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "TouchControls",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_profile_or_renderer_reconstruction"
       }
     ],
     "game_screen_compositions": [
       {
         "name": "PauseMenu",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_profile_or_renderer_reconstruction"
       },
       {
         "name": "SettingsPanel",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "WorldList",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "ServerList",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "PlayerCard",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "PackList",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "PackCard",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "DeathScreen",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_profile_or_renderer_reconstruction"
       },
       {
         "name": "LoadingScreen",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       },
       {
         "name": "AchievementToast",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition"
       }
     ]
   }

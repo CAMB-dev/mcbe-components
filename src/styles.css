@@ -14,6 +14,12 @@
 @import './advanced-workstations.css';
 @import './feedback.css';
 @import './settings-controls.css';
+@import './game-lists.css';
+@import './system-screens.css';
+@import './game-controls.css';
+@import './trading-mounts.css';
+@import './item-renderers.css';
+@import './inventory-screens.css';
 /* mcbeui: scoped component styles; importing this file does not reset the page. */
 :root {
   --mc-font: 'Mojangles Pixel', 'MCBE Pixel', 'Mojangles', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace;

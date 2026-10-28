@@ -73,9 +73,14 @@ export const Combobox = forwardRef<HTMLButtonElement, ComboboxProps>(function Co
       const documentElement = button.ownerDocument.documentElement;
       const visual = view.visualViewport;
       const left = Math.max(0, visual?.offsetLeft ?? 0), top = Math.max(0, visual?.offsetTop ?? 0);
-      const right = Math.min(documentElement.clientWidth, left + (visual?.width ?? documentElement.clientWidth));
-      const bottom = Math.min(documentElement.clientHeight, top + (visual?.height ?? documentElement.clientHeight));
-      if (right - left <= 16 || bottom - top <= 16 || rect.bottom <= top || rect.top >= bottom || rect.right <= left || rect.left >= right) { setOpen(false); return; }
+      // Anchor visibility uses the actual visual viewport. An overflowing page can
+      // expose an anchor outside the smaller intended layout-viewport bounds.
+      const visualRight = left + (visual?.width ?? documentElement.clientWidth);
+      const visualBottom = top + (visual?.height ?? documentElement.clientHeight);
+      // Popup dimensions retain the intended layout cap at the panned origin.
+      const right = left + Math.min(documentElement.clientWidth, visual?.width ?? documentElement.clientWidth);
+      const bottom = top + Math.min(documentElement.clientHeight, visual?.height ?? documentElement.clientHeight);
+      if (right - left <= 16 || bottom - top <= 16 || rect.bottom <= top || rect.top >= visualBottom || rect.right <= left || rect.left >= visualRight) { setOpen(false); return; }
       const width = Math.min(rect.width, right - left - 16);
       const below = Math.max(0, bottom - rect.bottom - 8);
       const above = Math.max(0, rect.top - top - 8);

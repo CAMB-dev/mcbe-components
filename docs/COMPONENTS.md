@@ -1,28 +1,26 @@
 # Bedrock 组件范围
 
-当前导出 86 个组件；当前目录 106 项，20 项待实现，包含本轮拆出的 RecipeSelectionGrid、CrafterSlot 和 BeaconEffect。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 109 个组件，目录 109 项均为 implemented；另有 3 份可复用 renderer 数据导出，不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 ## 已实现
 
 | 分类 | 组件 |
 | --- | --- |
-| 文字与表面（15） | Text、PixelIcon、Image、NineSlice、Panel、Separator、Progress、Dialog、Alert、Badge、ScrollArea、ScrollBar、Spinner、Tooltip、Toast |
-| 输入与设置（16） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、Tabs、ToggleButton、SearchField、NavigationList、SettingRow、KeybindingField |
-| 物品与容器结构（18） | ItemSlot、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、ContainerFrame、ItemImage、ItemCount、DurabilityBar、SlotPlaceholder、ResultSlot、RecipeGrid、ProcessingArrow、FuelIndicator、BrewingIndicator、RecipeSelectionGrid、CrafterSlot、BeaconEffect |
-| 工作站与容器（19） | Grindstone、EnchantingTable、CraftingTable、Furnace、BlastFurnace、Smoker、Anvil、BrewingStand、SmithingTable、CartographyTable、Chest、Hopper、Dispenser、Dropper、ShulkerBox、Stonecutter、Loom、Beacon、Crafter |
+| 文字与表面（17） | Text、PixelIcon、Image、NineSlice、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
+| 输入与设置（16） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、ToggleButton、SearchField、Tabs、NavigationList、SettingRow、KeybindingField |
+| 物品与容器结构（23） | ItemSlot、ItemImage、ItemCount、DurabilityBar、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、RecipeGrid、RecipeSelectionGrid、RecipeSearch、RecipeCategoryTabs、InventoryToolbar、ProcessingArrow、FuelIndicator、BrewingIndicator、BeaconEffect、TradeOffer、ArmorSlot、ResultSlot、SlotPlaceholder、CrafterSlot、ContainerFrame |
+| 工作站与容器（23） | Grindstone、EnchantingTable、CraftingTable、Furnace、BlastFurnace、Smoker、BrewingStand、Anvil、SmithingTable、Stonecutter、Loom、CartographyTable、Beacon、Chest、Hopper、Dispenser、Dropper、ShulkerBox、Crafter、TradingScreen、PlayerInventoryScreen、CreativeInventory、MountInventory |
 | 附魔部件（3） | EnchantmentOption、EnchantingRunes、EnchantingBook |
-| HUD（15） | Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、Crosshair、BossBar、ChatMessage、ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip |
+| HUD（17） | Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、BossBar、Crosshair、ChatMessage、ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip、PlayerList、TouchControls |
+| 页面与列表组合（10） | PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast |
 
 `EnchantingBook` 使用真实材质，默认视角和分面光照已通过本机无损 PNG 校准，网格及翻页仍是重建；`EnchantingRunes` 需要调用方提供原版字图集。已有部分工作站的同版本原生局部截图证据，完整状态与整屏差异仍需逐项核对。
 
 HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 custom renderer 的 Web 重建。制图台 description 的栈锚点与字体比例尚待原生校准；锻造装备预览接受调用方 renderer。这些限制独立于 PNG、JSON 与浏览器图像测试。
 
-## 待补范围
+## 验收边界
 
-- 容器部件：RecipeSearch、RecipeCategoryTabs、TradeOffer、ArmorSlot。
-- 工作站与容器：TradingScreen、PlayerInventoryScreen、CreativeInventory、MountInventory。
-- HUD：PlayerList、TouchControls。
-- 游戏页面组合：PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast。
+当前目录中的 109 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 / 服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与 Web 测试通过不能替代真实游戏逐屏验收。
 
 ## 复用方式
 
@@ -41,3 +39,9 @@ UI 组件接收物品、配方、进度、选择状态与操作回调；合成�
 Stonecutter / Loom 共用 RecipeSelectionGrid 和原生滚动视口，旗帜 / 方块预览由调用方提供 renderer。CrafterSlot 将禁用槽恢复操作与普通物品操作分开；BeaconEffect 复用真实效果按钮，金字塔等级、有效选择和支付规则由调用方控制。
 
 设置控件分别提供切换、搜索、导航、标签关联和物理键捕获；SettingRow 使用 render prop 将 id / aria / disabled 传给控件。Tooltip / Toast 使用原版图层，定位、关闭和计时属于明确的 Web 组合。聊天、标题与效果组件接收内容和可见状态，游戏网络、命令、计时及完整原生 renderer 不由组件库模拟。
+
+WorldList / ServerList / PackList 共享原始列表图、Image、Button 与 ScrollArea；PackCard 和 PlayerCard 也能单独使用。SettingsPanel 组合 NavigationList 与保留挂载的内容页面，LoadingScreen 复用 Spinner / Progress，AchievementToast 复用 Toast 的稳定 live region。
+
+BlockPreview / BannerPreview 使用 45 份官方原始 PNG / TGA 材质，网格、视角、光照和染色仍是可配置重建。bannerPatternIds（42 个原图 ID）、bannerDyeColors（16 个 Web 色彩预设）、loomPatternIds（原生截图观察的 32 个基础图案顺序）为三份数据导出；后者不作为跨版本 engine registry。
+
+InventoryToolbar 将三种背包布局与帮助 / 关闭入口拆为独立受控组件；CreativeInventory 默认包含完整 chrome，可显式 chrome=none 保留 pane。DeathScreen 默认采用当前 HBUI source profile，classic 保留 JSON UI 版本；LoadingScreen 默认采用世界加载 modal，compact 保留原组合。字体与背景场景的边界分别记录。

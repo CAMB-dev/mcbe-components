@@ -65,9 +65,25 @@ test('every container inventory and hotbar derives its bottom anchors from that 
     // Label: H - 93 + 3. Inventory: bottom aligned grid54, offset -26.
     await rect(region.locator('.mc-player-inventory__label'),frame,{x:7,y:profile.height-93+3});
     await expect(inventory.getByRole('gridcell')).toHaveCount(27);await expect(hotbar.getByRole('gridcell')).toHaveCount(9);
-    for(let index=0;index<27;index++)await rect(inventory.locator('.mc-slot').nth(index),frame,{x:7+index%9*18,y:profile.height-54-26+Math.floor(index/9)*18,width:18,height:18});
-    for(let index=0;index<9;index++)await rect(hotbar.locator('.mc-slot').nth(index),frame,{x:7+index*18,y:profile.height-18-5,width:18,height:18});
+    // Read each complete grid atomically instead of issuing a browser round trip per cell.
+    for (const [grid, size, baseY] of [[inventory, 27, profile.height-54-26], [hotbar, 9, profile.height-18-5]] as const) {
+      const cells = await grid.locator('.mc-slot').evaluateAll(nodes => nodes.map(node => {
+        const { x, y, width, height } = node.getBoundingClientRect();
+        return { x, y, width, height };
+      }));
+      expect(cells).toHaveLength(size);
+      cells.forEach((cell, index) => {
+        const expected = { x: 7+index%9*18, y: baseY+Math.floor(index/9)*18, width: 18, height: 18 };
+        for (const dimension of ['x','y','width','height'] as const) {
+          const relative = cell[dimension]-(dimension==='x'?frame.x:dimension==='y'?frame.y:0);
+          expect(Math.abs(relative-expected[dimension]*2), `source ${dimension}`).toBeLessThanOrEqual(.02);
+        }
+      });
+    }
     const art=region.locator('.mc-container__grid .mc-slot:not([data-empty]) .mc-slot__item');
-    for(let index=0;index<await art.count();index++){const bounds=await box(art.nth(index));expect([bounds.width,bounds.height]).toEqual([32,32]);}
+    const sizes = await art.evaluateAll(nodes => nodes.map(node => {
+      const { width, height } = node.getBoundingClientRect(); return [width, height];
+    }));
+    for (const size of sizes) expect(size).toEqual([32,32]);
   }
 });

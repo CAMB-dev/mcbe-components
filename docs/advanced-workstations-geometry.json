@@ -95,8 +95,8 @@
         154
       ],
       "background": "common.container_scroll_background_image uses recipe_book_pane_bg, an original1x1opaque#5d5d5d image. Stretch the one pixel; metadata slice1 is not treated as overlapping opposite nine-slice caps.",
-      "sourceViewport": "container_scroll_panel declares viewport[100%-2px,100%-2px],offset[1,1], scrollbar4wide plus left padding2/right0. With overflow the134game layout allocates128game to viewport then126game content =>7columns. When content fits, the scrollbar disappears; allocation134 gives132game content and7columns126 center with3game additional inset. Native31-pattern snapshot confirms the first cell at book-local10game rather than7.",
-      "webBridge": "Reuses ScrollArea container auto visibility, outer268x308CSS at12,12. Viewport padding2CSS per side and7columns of36CSS; margin-inlineauto centers the grid when the bar is absent, and becomes zero when the bar consumes its12CSS. Content bottom padding4CSS matches100%c+2px. Empty and31-option native captures corroborate hidden fits bars; other scroll/thumb/overscroll behavior remains a Web bridge rather than a native algorithm claim.",
+      "sourceViewport": "container_scroll_panel declares viewport[100%-2px,100%-2px],offset[1,1], scrollbar4wide plus left padding2/right0. With overflow the134game layout allocates128game to viewport then126game content =>7columns. When content fits, the scrollbar disappears; allocation134 gives132game content and7columns126 center with3game additional inset. Native32-pattern snapshot confirms the first cell at book-local10game rather than7.",
+      "webBridge": "Reuses ScrollArea container auto visibility, outer268x308CSS at12,12. Viewport padding2CSS per side and7columns of36CSS; margin-inlineauto centers the grid when the bar is absent, and becomes zero when the bar consumes its12CSS. Content bottom padding4CSS matches100%c+2px. Empty and32-option native captures corroborate hidden fits bars; other scroll/thumb/overscroll behavior remains a Web bridge rather than a native algorithm claim.",
       "columns": 7,
       "cellGameSize": [
         18,
@@ -567,11 +567,11 @@
         670,
         770
       ],
-      "fitsBarEvidence": "Both native Stonecutter empty and Loom31-option images have4200safe pixels at x1160..1174,y780..1059 entirelyRGB93,93,93; no rail or thumb is present.",
+      "fitsBarEvidence": "Both native Stonecutter empty and Loom32-option images have4200safe pixels at x1160..1174,y780..1059 entirelyRGB93,93,93; no rail or thumb is present.",
       "gridEvidence": "Loom first cell left526, next616/706 and last row-edge1156 with native edge sampling; seven18game cells occupy630screen px centered in the670px selector body. Top317 corresponds book-local7game.",
       "foldEvidence": "At safe native x1188/1193/1198/1203 and y400/600/800/1000, colors are198/85/85/0, proving the book border must occlude the extended fold image.",
       "rightPane": "Stone input approx1441,465/result1761,445, Loom three inputs1331/1431/1531,465, result1771,465, banner outline1891,405, common inventory1261,712 and hotbar1261,997 agree with the source geometry after native half-pixel rounding.",
-      "patterns": "Native empty Loom still supplies31banner patterns. The component accepts caller patterns/previews; it does not fabricate the native pattern catalogue or banner_pattern_renderer output."
+      "patterns": "Native empty Loom still supplies32banner patterns (independent count:4complete rows of7plus4final cells). The component accepts caller patterns/previews; it does not fabricate the native pattern catalogue or banner_pattern_renderer output."
     },
     "crafter": {
       "rootScreenOriginApprox": [

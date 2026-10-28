@@ -1,0 +1,2043 @@
+{
+  "schemaVersion": 1,
+  "release": "v1.26.60.5",
+  "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "license": {
+    "file": "src/assets/item-renderers/LICENSE.md",
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "source": "LICENSE.md"
+  },
+  "assets": [
+    {
+      "file": "src/assets/item-renderers/stone.png",
+      "source": "resource_pack/textures/blocks/stone.png",
+      "sha256": "12f1c99206df13e951a68b9e5e294c5e0e15c252c3bb141632c8c969a909d1a8",
+      "bytes": 244,
+      "size": [
+        16,
+        16
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/blocks/stone.png",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "archive": "data/resource_packs/vanilla/__brarchive/textures/blocks.brarchive",
+          "entry": "stone.png",
+          "sha256": "12f1c99206df13e951a68b9e5e294c5e0e15c252c3bb141632c8c969a909d1a8",
+          "bytes": 244
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/blocks.brarchive",
+          "entry": "stone.png",
+          "sha256": "12f1c99206df13e951a68b9e5e294c5e0e15c252c3bb141632c8c969a909d1a8",
+          "bytes": 244
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/stonebrick.png",
+      "source": "resource_pack/textures/blocks/stonebrick.png",
+      "sha256": "10014eab68cbae15fd5c473845e703274b23576f906f32d2a3a4a652f9bdf596",
+      "bytes": 271,
+      "size": [
+        16,
+        16
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/blocks/stonebrick.png",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "archive": "data/resource_packs/vanilla/__brarchive/textures/blocks.brarchive",
+          "entry": "stonebrick.png",
+          "sha256": "10014eab68cbae15fd5c473845e703274b23576f906f32d2a3a4a652f9bdf596",
+          "bytes": 271
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/blocks.brarchive",
+          "entry": "stonebrick.png",
+          "sha256": "10014eab68cbae15fd5c473845e703274b23576f906f32d2a3a4a652f9bdf596",
+          "bytes": 271
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_base.tga",
+      "source": "resource_pack/textures/entity/banner/banner_base.tga",
+      "sha256": "e86227e771f2d760f25e205c477770531d1a35158c0db5a41f16586fdbc78537",
+      "bytes": 10869,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_base.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_base.tga",
+          "sha256": "e86227e771f2d760f25e205c477770531d1a35158c0db5a41f16586fdbc78537",
+          "bytes": 10869
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_base.tga",
+          "sha256": "e86227e771f2d760f25e205c477770531d1a35158c0db5a41f16586fdbc78537",
+          "bytes": 10869
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_border.tga",
+      "source": "resource_pack/textures/entity/banner/banner_border.tga",
+      "sha256": "575ed4c1ddc4957e7f1f98db7e70f4fbad1b26b6fbbf4d722ec728d7693dc73a",
+      "bytes": 2526,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_border.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_border.tga",
+          "sha256": "575ed4c1ddc4957e7f1f98db7e70f4fbad1b26b6fbbf4d722ec728d7693dc73a",
+          "bytes": 2526
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_border.tga",
+          "sha256": "575ed4c1ddc4957e7f1f98db7e70f4fbad1b26b6fbbf4d722ec728d7693dc73a",
+          "bytes": 2526
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_bricks.tga",
+      "source": "resource_pack/textures/entity/banner/banner_bricks.tga",
+      "sha256": "edfee43a0f107e3226060d815c538094f75f9033c5338d92cc83d386c12e8ff7",
+      "bytes": 3967,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_bricks.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_bricks.tga",
+          "sha256": "edfee43a0f107e3226060d815c538094f75f9033c5338d92cc83d386c12e8ff7",
+          "bytes": 3967
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_bricks.tga",
+          "sha256": "edfee43a0f107e3226060d815c538094f75f9033c5338d92cc83d386c12e8ff7",
+          "bytes": 3967
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_circle.tga",
+      "source": "resource_pack/textures/entity/banner/banner_circle.tga",
+      "sha256": "9aea3ddbfaecd0f9a0bf1ce92c2d0f77808f4e7eb947ef03a85335686a0e5f99",
+      "bytes": 1315,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_circle.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_circle.tga",
+          "sha256": "9aea3ddbfaecd0f9a0bf1ce92c2d0f77808f4e7eb947ef03a85335686a0e5f99",
+          "bytes": 1315
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_circle.tga",
+          "sha256": "9aea3ddbfaecd0f9a0bf1ce92c2d0f77808f4e7eb947ef03a85335686a0e5f99",
+          "bytes": 1315
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_creeper.tga",
+      "source": "resource_pack/textures/entity/banner/banner_creeper.tga",
+      "sha256": "f974da6eb06c11faa76ceaadfdfa891762122e7e78a70bd34598b0338a7930c3",
+      "bytes": 1973,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_creeper.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_creeper.tga",
+          "sha256": "f974da6eb06c11faa76ceaadfdfa891762122e7e78a70bd34598b0338a7930c3",
+          "bytes": 1973
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_creeper.tga",
+          "sha256": "f974da6eb06c11faa76ceaadfdfa891762122e7e78a70bd34598b0338a7930c3",
+          "bytes": 1973
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_cross.tga",
+      "source": "resource_pack/textures/entity/banner/banner_cross.tga",
+      "sha256": "cc56f42421713cd40fc2326029ad212d29505a14962f4dc29ea32bfa90846022",
+      "bytes": 3482,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_cross.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_cross.tga",
+          "sha256": "cc56f42421713cd40fc2326029ad212d29505a14962f4dc29ea32bfa90846022",
+          "bytes": 3482
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_cross.tga",
+          "sha256": "cc56f42421713cd40fc2326029ad212d29505a14962f4dc29ea32bfa90846022",
+          "bytes": 3482
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_curly_border.tga",
+      "source": "resource_pack/textures/entity/banner/banner_curly_border.tga",
+      "sha256": "ea4daf4abf8baff02a9441a35a9dcf69827bca220b5d6a184060ff97fd89d77e",
+      "bytes": 2645,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_curly_border.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_curly_border.tga",
+          "sha256": "ea4daf4abf8baff02a9441a35a9dcf69827bca220b5d6a184060ff97fd89d77e",
+          "bytes": 2645
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_curly_border.tga",
+          "sha256": "ea4daf4abf8baff02a9441a35a9dcf69827bca220b5d6a184060ff97fd89d77e",
+          "bytes": 2645
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_diagonal_left.tga",
+      "source": "resource_pack/textures/entity/banner/banner_diagonal_left.tga",
+      "sha256": "23f56f425fc5769a806577e8967790e89f2db587326db328824e201f5f23fc42",
+      "bytes": 1845,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_diagonal_left.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_diagonal_left.tga",
+          "sha256": "23f56f425fc5769a806577e8967790e89f2db587326db328824e201f5f23fc42",
+          "bytes": 1845
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_diagonal_left.tga",
+          "sha256": "23f56f425fc5769a806577e8967790e89f2db587326db328824e201f5f23fc42",
+          "bytes": 1845
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_diagonal_right.tga",
+      "source": "resource_pack/textures/entity/banner/banner_diagonal_right.tga",
+      "sha256": "ac2fe73528d4e3d3a856609c5539a389ccb4bace4b37cbd51194a6fab56aed82",
+      "bytes": 1668,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_diagonal_right.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_diagonal_right.tga",
+          "sha256": "ac2fe73528d4e3d3a856609c5539a389ccb4bace4b37cbd51194a6fab56aed82",
+          "bytes": 1668
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_diagonal_right.tga",
+          "sha256": "ac2fe73528d4e3d3a856609c5539a389ccb4bace4b37cbd51194a6fab56aed82",
+          "bytes": 1668
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_diagonal_up_left.tga",
+      "source": "resource_pack/textures/entity/banner/banner_diagonal_up_left.tga",
+      "sha256": "e8d8101548dc9eeaf00514206b39885204c33031dbfdebf61f5fbc08e3fc945c",
+      "bytes": 1856,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_diagonal_up_left.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_diagonal_up_left.tga",
+          "sha256": "e8d8101548dc9eeaf00514206b39885204c33031dbfdebf61f5fbc08e3fc945c",
+          "bytes": 1856
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_diagonal_up_left.tga",
+          "sha256": "e8d8101548dc9eeaf00514206b39885204c33031dbfdebf61f5fbc08e3fc945c",
+          "bytes": 1856
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_diagonal_up_right.tga",
+      "source": "resource_pack/textures/entity/banner/banner_diagonal_up_right.tga",
+      "sha256": "eb846f50bc5f66bbe79853b3852e22d16182214cd5fafbc1ac274e70b1af5a94",
+      "bytes": 1673,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_diagonal_up_right.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_diagonal_up_right.tga",
+          "sha256": "eb846f50bc5f66bbe79853b3852e22d16182214cd5fafbc1ac274e70b1af5a94",
+          "bytes": 1673
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_diagonal_up_right.tga",
+          "sha256": "eb846f50bc5f66bbe79853b3852e22d16182214cd5fafbc1ac274e70b1af5a94",
+          "bytes": 1673
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_flow.png",
+      "source": "resource_pack/textures/entity/banner/banner_flow.png",
+      "sha256": "349f6d1c38004b23f3663b0f66d3c4bd13776d539e447d39954410eb7cfbd619",
+      "bytes": 293,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_flow.png",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.21.0",
+          "archive": "data/resource_packs/vanilla_1.21.0/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_flow.png",
+          "sha256": "56733fab4a63db2853474a39e88d97a75f2dfb8c8c294aa7330dc8ec30cecd28",
+          "bytes": 395
+        },
+        {
+          "pack": "vanilla_1.21.20",
+          "archive": "data/resource_packs/vanilla_1.21.20/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_flow.png",
+          "sha256": "349f6d1c38004b23f3663b0f66d3c4bd13776d539e447d39954410eb7cfbd619",
+          "bytes": 293
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_flow.png",
+          "sha256": "349f6d1c38004b23f3663b0f66d3c4bd13776d539e447d39954410eb7cfbd619",
+          "bytes": 293
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.21.20",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_flower.tga",
+      "source": "resource_pack/textures/entity/banner/banner_flower.tga",
+      "sha256": "d5dcb905eedd9f9c57d267eddb9a20cbd54439e095a31cd89d90656ef1221c57",
+      "bytes": 2388,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_flower.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_flower.tga",
+          "sha256": "d5dcb905eedd9f9c57d267eddb9a20cbd54439e095a31cd89d90656ef1221c57",
+          "bytes": 2388
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_flower.tga",
+          "sha256": "d5dcb905eedd9f9c57d267eddb9a20cbd54439e095a31cd89d90656ef1221c57",
+          "bytes": 2388
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_globe.tga",
+      "source": "resource_pack/textures/entity/banner/banner_globe.tga",
+      "sha256": "36c915e33c896ec249c125e67e4ca2f575c757e8e3437699f5fe5bb00e701b3e",
+      "bytes": 3076,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_globe.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.18.10",
+          "archive": "data/resource_packs/vanilla_1.18.10/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_globe.tga",
+          "sha256": "36c915e33c896ec249c125e67e4ca2f575c757e8e3437699f5fe5bb00e701b3e",
+          "bytes": 3076
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_globe.tga",
+          "sha256": "36c915e33c896ec249c125e67e4ca2f575c757e8e3437699f5fe5bb00e701b3e",
+          "bytes": 3076
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.18.10",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_gradient.tga",
+      "source": "resource_pack/textures/entity/banner/banner_gradient.tga",
+      "sha256": "1d72469272b3f5b4a38649d6f8e223af90fa20f3cdbb86437cfc325ebcb1e71e",
+      "bytes": 5937,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_gradient.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_gradient.tga",
+          "sha256": "1d72469272b3f5b4a38649d6f8e223af90fa20f3cdbb86437cfc325ebcb1e71e",
+          "bytes": 5937
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_gradient.tga",
+          "sha256": "1d72469272b3f5b4a38649d6f8e223af90fa20f3cdbb86437cfc325ebcb1e71e",
+          "bytes": 5937
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_gradient_up.tga",
+      "source": "resource_pack/textures/entity/banner/banner_gradient_up.tga",
+      "sha256": "ec39e04643dec5d7eb037ec58aaa973e7d551a1a33f46daa6d2c8397811ed457",
+      "bytes": 5887,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_gradient_up.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_gradient_up.tga",
+          "sha256": "ec39e04643dec5d7eb037ec58aaa973e7d551a1a33f46daa6d2c8397811ed457",
+          "bytes": 5887
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_gradient_up.tga",
+          "sha256": "ec39e04643dec5d7eb037ec58aaa973e7d551a1a33f46daa6d2c8397811ed457",
+          "bytes": 5887
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_guster.png",
+      "source": "resource_pack/textures/entity/banner/banner_guster.png",
+      "sha256": "9815f5ad176bfa5fc54fa8036b1fdb0c3729cf3b6bc5163ed7affc962b18dcba",
+      "bytes": 251,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_guster.png",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.21.0",
+          "archive": "data/resource_packs/vanilla_1.21.0/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_guster.png",
+          "sha256": "51e6460bb9590bff2e8bed208640c90eff16f3aa9be60502efc5a4411fd50eb8",
+          "bytes": 339
+        },
+        {
+          "pack": "vanilla_1.21.20",
+          "archive": "data/resource_packs/vanilla_1.21.20/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_guster.png",
+          "sha256": "9815f5ad176bfa5fc54fa8036b1fdb0c3729cf3b6bc5163ed7affc962b18dcba",
+          "bytes": 251
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_guster.png",
+          "sha256": "9815f5ad176bfa5fc54fa8036b1fdb0c3729cf3b6bc5163ed7affc962b18dcba",
+          "bytes": 251
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.21.20",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_half_horizontal.tga",
+      "source": "resource_pack/textures/entity/banner/banner_half_horizontal.tga",
+      "sha256": "aeb31eacbedb766ceddfad5a38385e9ab8c558a8e10190f4f3f89d62091edd2c",
+      "bytes": 1073,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_half_horizontal.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_half_horizontal.tga",
+          "sha256": "aeb31eacbedb766ceddfad5a38385e9ab8c558a8e10190f4f3f89d62091edd2c",
+          "bytes": 1073
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_half_horizontal.tga",
+          "sha256": "aeb31eacbedb766ceddfad5a38385e9ab8c558a8e10190f4f3f89d62091edd2c",
+          "bytes": 1073
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_half_horizontal_bottom.tga",
+      "source": "resource_pack/textures/entity/banner/banner_half_horizontal_bottom.tga",
+      "sha256": "3e071851375167fed79dd54a282fff2838892e4a5dc853505fb95d2b20cb7683",
+      "bytes": 1080,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_half_horizontal_bottom.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_half_horizontal_bottom.tga",
+          "sha256": "3e071851375167fed79dd54a282fff2838892e4a5dc853505fb95d2b20cb7683",
+          "bytes": 1080
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_half_horizontal_bottom.tga",
+          "sha256": "3e071851375167fed79dd54a282fff2838892e4a5dc853505fb95d2b20cb7683",
+          "bytes": 1080
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_half_vertical.tga",
+      "source": "resource_pack/textures/entity/banner/banner_half_vertical.tga",
+      "sha256": "b37076c7110d6ba166b2f9451ffcc36fcfb1b0bb218d120a820fa3f27443211a",
+      "bytes": 1889,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_half_vertical.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_half_vertical.tga",
+          "sha256": "b37076c7110d6ba166b2f9451ffcc36fcfb1b0bb218d120a820fa3f27443211a",
+          "bytes": 1889
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_half_vertical.tga",
+          "sha256": "b37076c7110d6ba166b2f9451ffcc36fcfb1b0bb218d120a820fa3f27443211a",
+          "bytes": 1889
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_half_vertical_right.tga",
+      "source": "resource_pack/textures/entity/banner/banner_half_vertical_right.tga",
+      "sha256": "0ab50b77254df97d7ebac19e805ab415639441e0c60129f9ac43111be8c240df",
+      "bytes": 1689,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_half_vertical_right.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_half_vertical_right.tga",
+          "sha256": "0ab50b77254df97d7ebac19e805ab415639441e0c60129f9ac43111be8c240df",
+          "bytes": 1689
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_half_vertical_right.tga",
+          "sha256": "0ab50b77254df97d7ebac19e805ab415639441e0c60129f9ac43111be8c240df",
+          "bytes": 1689
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_mojang.tga",
+      "source": "resource_pack/textures/entity/banner/banner_mojang.tga",
+      "sha256": "8ece0b67eed96b7de83906e49477a4c92dc3f773f699eb63172a323fe72e2270",
+      "bytes": 1786,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_mojang.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_mojang.tga",
+          "sha256": "8ece0b67eed96b7de83906e49477a4c92dc3f773f699eb63172a323fe72e2270",
+          "bytes": 1786
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_mojang.tga",
+          "sha256": "8ece0b67eed96b7de83906e49477a4c92dc3f773f699eb63172a323fe72e2270",
+          "bytes": 1786
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_piglin.png",
+      "source": "resource_pack/textures/entity/banner/banner_piglin.png",
+      "sha256": "d8518c2d619f5af6146638ce7ca44479ac979dd0535e544117cb68e42c442c05",
+      "bytes": 139,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_piglin.png",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.16",
+          "archive": "data/resource_packs/vanilla_1.16/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_piglin.png",
+          "sha256": "d8518c2d619f5af6146638ce7ca44479ac979dd0535e544117cb68e42c442c05",
+          "bytes": 139
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_piglin.png",
+          "sha256": "d8518c2d619f5af6146638ce7ca44479ac979dd0535e544117cb68e42c442c05",
+          "bytes": 139
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.16",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_rhombus.tga",
+      "source": "resource_pack/textures/entity/banner/banner_rhombus.tga",
+      "sha256": "fb17a3bf942488ec75614db861675a804ebe7e74f85fc1bd7b5ecde302829389",
+      "bytes": 1787,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_rhombus.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_rhombus.tga",
+          "sha256": "fb17a3bf942488ec75614db861675a804ebe7e74f85fc1bd7b5ecde302829389",
+          "bytes": 1787
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_rhombus.tga",
+          "sha256": "fb17a3bf942488ec75614db861675a804ebe7e74f85fc1bd7b5ecde302829389",
+          "bytes": 1787
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_skull.png",
+      "source": "resource_pack/textures/entity/banner/banner_skull.png",
+      "sha256": "fa4b1e4a82f58b7129d9b8bec3cdc628b859983607952ed7f7a345b79c807291",
+      "bytes": 389,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_skull.png",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.21.20",
+          "archive": "data/resource_packs/vanilla_1.21.20/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_skull.png",
+          "sha256": "fa4b1e4a82f58b7129d9b8bec3cdc628b859983607952ed7f7a345b79c807291",
+          "bytes": 389
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.21.20"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_small_stripes.tga",
+      "source": "resource_pack/textures/entity/banner/banner_small_stripes.tga",
+      "sha256": "919ad133a477ef43ca6c7802ca2d61c572229855bc1cdeecd44ca81b989ff68c",
+      "bytes": 6763,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_small_stripes.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_small_stripes.tga",
+          "sha256": "919ad133a477ef43ca6c7802ca2d61c572229855bc1cdeecd44ca81b989ff68c",
+          "bytes": 6763
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_small_stripes.tga",
+          "sha256": "919ad133a477ef43ca6c7802ca2d61c572229855bc1cdeecd44ca81b989ff68c",
+          "bytes": 6763
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_square_bottom_left.tga",
+      "source": "resource_pack/textures/entity/banner/banner_square_bottom_left.tga",
+      "sha256": "b3fe6b893715f3289a5ad19110081027b681cbc2ee45be909ac32c1c95384893",
+      "bytes": 1258,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_square_bottom_left.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_square_bottom_left.tga",
+          "sha256": "b3fe6b893715f3289a5ad19110081027b681cbc2ee45be909ac32c1c95384893",
+          "bytes": 1258
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_square_bottom_left.tga",
+          "sha256": "b3fe6b893715f3289a5ad19110081027b681cbc2ee45be909ac32c1c95384893",
+          "bytes": 1258
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_square_bottom_right.tga",
+      "source": "resource_pack/textures/entity/banner/banner_square_bottom_right.tga",
+      "sha256": "eece28d128702fd749857add5b25788d754da3b7683e4b65192a992626c29be5",
+      "bytes": 1159,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_square_bottom_right.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_square_bottom_right.tga",
+          "sha256": "eece28d128702fd749857add5b25788d754da3b7683e4b65192a992626c29be5",
+          "bytes": 1159
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_square_bottom_right.tga",
+          "sha256": "eece28d128702fd749857add5b25788d754da3b7683e4b65192a992626c29be5",
+          "bytes": 1159
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_square_top_left.tga",
+      "source": "resource_pack/textures/entity/banner/banner_square_top_left.tga",
+      "sha256": "ba5ba30b75df6339528366cc670d7a3b668e47ff9c8fd4a3c7f5e80cff3b07d9",
+      "bytes": 1229,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_square_top_left.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_square_top_left.tga",
+          "sha256": "ba5ba30b75df6339528366cc670d7a3b668e47ff9c8fd4a3c7f5e80cff3b07d9",
+          "bytes": 1229
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_square_top_left.tga",
+          "sha256": "ba5ba30b75df6339528366cc670d7a3b668e47ff9c8fd4a3c7f5e80cff3b07d9",
+          "bytes": 1229
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_square_top_right.tga",
+      "source": "resource_pack/textures/entity/banner/banner_square_top_right.tga",
+      "sha256": "6f8f8d46e800e997036fc3a9b29e2231639c84bcdd96fff291e9086781e4d235",
+      "bytes": 1159,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_square_top_right.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_square_top_right.tga",
+          "sha256": "6f8f8d46e800e997036fc3a9b29e2231639c84bcdd96fff291e9086781e4d235",
+          "bytes": 1159
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_square_top_right.tga",
+          "sha256": "6f8f8d46e800e997036fc3a9b29e2231639c84bcdd96fff291e9086781e4d235",
+          "bytes": 1159
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_straight_cross.tga",
+      "source": "resource_pack/textures/entity/banner/banner_straight_cross.tga",
+      "sha256": "0496c5e48630617a687fc9c9ae99cb0d8782a53af4fcd2e94439abf430ff6a31",
+      "bytes": 2522,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_straight_cross.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_straight_cross.tga",
+          "sha256": "0496c5e48630617a687fc9c9ae99cb0d8782a53af4fcd2e94439abf430ff6a31",
+          "bytes": 2522
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_straight_cross.tga",
+          "sha256": "0496c5e48630617a687fc9c9ae99cb0d8782a53af4fcd2e94439abf430ff6a31",
+          "bytes": 2522
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_stripe_bottom.tga",
+      "source": "resource_pack/textures/entity/banner/banner_stripe_bottom.tga",
+      "sha256": "7459c23f8bf115e069928823a798210d6532e7ff68bb0e83ebaedc3335033960",
+      "bytes": 992,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_stripe_bottom.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_bottom.tga",
+          "sha256": "7459c23f8bf115e069928823a798210d6532e7ff68bb0e83ebaedc3335033960",
+          "bytes": 992
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_bottom.tga",
+          "sha256": "7459c23f8bf115e069928823a798210d6532e7ff68bb0e83ebaedc3335033960",
+          "bytes": 992
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_stripe_center.tga",
+      "source": "resource_pack/textures/entity/banner/banner_stripe_center.tga",
+      "sha256": "f67794e6fa0b6e79eb65f551f7deb5981f4e0a7027a596f6e65579c0e544ddcb",
+      "bytes": 2499,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_stripe_center.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_center.tga",
+          "sha256": "f67794e6fa0b6e79eb65f551f7deb5981f4e0a7027a596f6e65579c0e544ddcb",
+          "bytes": 2499
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_center.tga",
+          "sha256": "f67794e6fa0b6e79eb65f551f7deb5981f4e0a7027a596f6e65579c0e544ddcb",
+          "bytes": 2499
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_stripe_downleft.tga",
+      "source": "resource_pack/textures/entity/banner/banner_stripe_downleft.tga",
+      "sha256": "96159aa096c707bc71de42b03bed80c73bd962980b75ec12d4e957fc20bdb1b2",
+      "bytes": 2293,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_stripe_downleft.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_downleft.tga",
+          "sha256": "96159aa096c707bc71de42b03bed80c73bd962980b75ec12d4e957fc20bdb1b2",
+          "bytes": 2293
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_downleft.tga",
+          "sha256": "96159aa096c707bc71de42b03bed80c73bd962980b75ec12d4e957fc20bdb1b2",
+          "bytes": 2293
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_stripe_downright.tga",
+      "source": "resource_pack/textures/entity/banner/banner_stripe_downright.tga",
+      "sha256": "4205ec4bb13b974fddefbc288267c0dc8c1f15c182eeb14c87a0d3694af7660e",
+      "bytes": 2303,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_stripe_downright.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_downright.tga",
+          "sha256": "4205ec4bb13b974fddefbc288267c0dc8c1f15c182eeb14c87a0d3694af7660e",
+          "bytes": 2303
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_downright.tga",
+          "sha256": "4205ec4bb13b974fddefbc288267c0dc8c1f15c182eeb14c87a0d3694af7660e",
+          "bytes": 2303
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_stripe_left.tga",
+      "source": "resource_pack/textures/entity/banner/banner_stripe_left.tga",
+      "sha256": "6408d285828c1fdb2ff8ead9d47e1dbf50b5a71ee45f205256a3b93e60dfe5ca",
+      "bytes": 1889,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_stripe_left.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_left.tga",
+          "sha256": "6408d285828c1fdb2ff8ead9d47e1dbf50b5a71ee45f205256a3b93e60dfe5ca",
+          "bytes": 1889
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_left.tga",
+          "sha256": "6408d285828c1fdb2ff8ead9d47e1dbf50b5a71ee45f205256a3b93e60dfe5ca",
+          "bytes": 1889
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_stripe_middle.tga",
+      "source": "resource_pack/textures/entity/banner/banner_stripe_middle.tga",
+      "sha256": "ddc9b292339ba8cb67026f0df7f33d7e3b996b9d227c2ffab39986126fe1f75e",
+      "bytes": 1045,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_stripe_middle.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_middle.tga",
+          "sha256": "ddc9b292339ba8cb67026f0df7f33d7e3b996b9d227c2ffab39986126fe1f75e",
+          "bytes": 1045
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_middle.tga",
+          "sha256": "ddc9b292339ba8cb67026f0df7f33d7e3b996b9d227c2ffab39986126fe1f75e",
+          "bytes": 1045
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_stripe_right.tga",
+      "source": "resource_pack/textures/entity/banner/banner_stripe_right.tga",
+      "sha256": "75b7f37f113a6d72990f242f9eddd118f4108f06eb4a1129c95dec69d54dfa5e",
+      "bytes": 1689,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_stripe_right.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_right.tga",
+          "sha256": "75b7f37f113a6d72990f242f9eddd118f4108f06eb4a1129c95dec69d54dfa5e",
+          "bytes": 1689
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_right.tga",
+          "sha256": "75b7f37f113a6d72990f242f9eddd118f4108f06eb4a1129c95dec69d54dfa5e",
+          "bytes": 1689
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_stripe_top.tga",
+      "source": "resource_pack/textures/entity/banner/banner_stripe_top.tga",
+      "sha256": "5ecf063a82b4f03f90334b8cc8947e1d3b4af7a5486645a17483614bea8e6f7d",
+      "bytes": 989,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_stripe_top.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_top.tga",
+          "sha256": "5ecf063a82b4f03f90334b8cc8947e1d3b4af7a5486645a17483614bea8e6f7d",
+          "bytes": 989
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_stripe_top.tga",
+          "sha256": "5ecf063a82b4f03f90334b8cc8947e1d3b4af7a5486645a17483614bea8e6f7d",
+          "bytes": 989
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_triangle_bottom.tga",
+      "source": "resource_pack/textures/entity/banner/banner_triangle_bottom.tga",
+      "sha256": "76ebcbb57e15a4abd1a5872f0ce719a204fb38442fd5c13b67d4e824acc618dc",
+      "bytes": 2691,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_triangle_bottom.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_triangle_bottom.tga",
+          "sha256": "76ebcbb57e15a4abd1a5872f0ce719a204fb38442fd5c13b67d4e824acc618dc",
+          "bytes": 2691
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_triangle_bottom.tga",
+          "sha256": "76ebcbb57e15a4abd1a5872f0ce719a204fb38442fd5c13b67d4e824acc618dc",
+          "bytes": 2691
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_triangle_top.tga",
+      "source": "resource_pack/textures/entity/banner/banner_triangle_top.tga",
+      "sha256": "caa5d395689a05585dedbe8e21255188042dd170c68cfafcf4ce26597c7aaf41",
+      "bytes": 1627,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_triangle_top.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_triangle_top.tga",
+          "sha256": "caa5d395689a05585dedbe8e21255188042dd170c68cfafcf4ce26597c7aaf41",
+          "bytes": 1627
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_triangle_top.tga",
+          "sha256": "caa5d395689a05585dedbe8e21255188042dd170c68cfafcf4ce26597c7aaf41",
+          "bytes": 1627
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_triangles_bottom.tga",
+      "source": "resource_pack/textures/entity/banner/banner_triangles_bottom.tga",
+      "sha256": "afb51c1a0a4221837c9d5139f45f41512629b9014a660fcf7bcdfae793b9b3e6",
+      "bytes": 1464,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_triangles_bottom.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_triangles_bottom.tga",
+          "sha256": "afb51c1a0a4221837c9d5139f45f41512629b9014a660fcf7bcdfae793b9b3e6",
+          "bytes": 1464
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_triangles_bottom.tga",
+          "sha256": "afb51c1a0a4221837c9d5139f45f41512629b9014a660fcf7bcdfae793b9b3e6",
+          "bytes": 1464
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "src/assets/item-renderers/banner_triangles_top.tga",
+      "source": "resource_pack/textures/entity/banner/banner_triangles_top.tga",
+      "sha256": "3742d2cf6bbbab99cfc2f9f235dc0d1d53c1cd85c7a4dad72c8cd319a7dbc573",
+      "bytes": 1464,
+      "size": [
+        64,
+        64
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner_triangles_top.tga",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.15",
+          "archive": "data/resource_packs/vanilla_1.15/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_triangles_top.tga",
+          "sha256": "3742d2cf6bbbab99cfc2f9f235dc0d1d53c1cd85c7a4dad72c8cd319a7dbc573",
+          "bytes": 1464
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/entity/banner.brarchive",
+          "entry": "banner_triangles_top.tga",
+          "sha256": "3742d2cf6bbbab99cfc2f9f235dc0d1d53c1cd85c7a4dad72c8cd319a7dbc573",
+          "bytes": 1464
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla_1.15",
+        "vanilla_1.21.90"
+      ]
+    }
+  ],
+  "referenceSources": [
+    {
+      "source": "resource_pack/textures/terrain_texture.json",
+      "sha256": "623b5a67fa1c1f50972db86607492b629c0b3ce9d7f886e1f569a4d820d91e95",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/terrain_texture.json"
+    },
+    {
+      "source": "resource_pack/blocks.json",
+      "sha256": "59267aa7553d7fea1ba2bccf46b540ba72d54ba8a0c2e18733cfb8bbbf1682cf",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/blocks.json"
+    },
+    {
+      "source": "resource_pack/ui/loom_screen.json",
+      "sha256": "e87bbfbbb771f2b38c259650a2378137edbb8ab23a3204628c2303b4b7e9e73a",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/loom_screen.json"
+    },
+    {
+      "source": "resource_pack/textures/entity/banner/banner.tga",
+      "sha256": "f546871c60da461337b9e85ebd9181397d7c3246559a233fa1a12ade555c152c",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/banner/banner.tga"
+    }
+  ],
+  "runtimePackActivationProven": false,
+  "sourceSelection": "Unmodified official merged-release texture files, each matching at least one installed vanilla/version-overlay entry. Presence does not prove runtime activation, especially PBR overlays.",
+  "blockAliases": {
+    "stone": "blocks.stone -> terrain.stone[0] -> stone.png",
+    "stone-bricks": "blocks.stone_bricks -> terrain.stone_bricks -> stonebrick.png",
+    "stone-slab": "blocks.normal_stone_slab -> terrain.normal_stone_slab -> stone.png",
+    "stone-stairs": "blocks.normal_stone_stairs -> terrain.stone[0] -> stone.png"
+  },
+  "blockAliasWarning": "Legacy stone_stairs names cobblestone stairs. stone_slab/smooth_stone use different smooth-stone textures. These presets explicitly mean normal stone.",
+  "banner": {
+    "atlasSize": [
+      64,
+      64
+    ],
+    "frontUvPixels": [
+      1,
+      1,
+      20,
+      40
+    ],
+    "patternCount": 42,
+    "patternOrder": "Exported IDs are lexical source-file names, not a claimed native Loom collection order. Native #banner_patterns/#banner_colors are backend bindings.",
+    "alpha": "Preserve full source alpha, including partial175/176 edges; never threshold to a binary mask.",
+    "sampling": "Native entity.material banner samplerIndex0 textureFilter Point. banner_pole adds DISABLE_TINTING.",
+    "composition": "Tint RGB multiplicatively and composite pattern layers source-over over the base cloth. This is a reconstruction pending native shader/screenshot calibration."
+  },
+  "reconstruction": {
+    "mesh": "Unit-cube/slab/voxel-stair surfaces and banner cuboids reconstructed from shapes and original atlas layout; no native C++ mesh or Java model is presented as Bedrock ground truth.",
+    "camera": "Orthographic item pose, per-face brightness and dye profiles are configurable reconstructions. Empirical native calibration and remaining residuals are recorded below; no native camera or shader recovery is claimed.",
+    "textureIdentityVsRenderer": "Original texture hashes establish texture identity; they do not certify the complete item renderer."
+  },
+  "calibration": {
+    "status": "NOT EXACT",
+    "nativeCapturesCompared": true,
+    "nativeScreenshotVerified": false,
+    "wholeGuiCertified": false,
+    "capturePolicy": "User-owned native lossless PNGs and original fonts remain ignored/private. No native screenshot pixels are packaged or committed.",
+    "captures": [
+      {
+        "privateFile": ".cache/native-item-renderers/stone-and-bricks-native-lossless.png",
+        "sha256": "ca36e61e14ffde5861746eb28d2c5311b0952b6b21813ec096d2c5e1e10951cc"
+      },
+      {
+        "privateFile": ".cache/native-item-renderers/stone-and-stairs-native-lossless.png",
+        "sha256": "368fe6efb7c16178ecb2e4f228bb82090fcf3f8efabe60ace388427633df2fde"
+      },
+      {
+        "privateFile": ".cache/native-item-renderers/stone-and-slab-native-lossless.png",
+        "sha256": "ee49995565233e73eba7aaf5b44a9f10bf3a87da34e5cc8ce875be162974e9b9"
+      },
+      {
+        "privateFile": ".cache/native-item-renderers/loom-white-red-border-native-lossless.png",
+        "sha256": "966d7cda9ba888267a92af5f57cd0f388ffb2bd599e98c92a91eacfac9e9d07a"
+      },
+      {
+        "privateFile": ".cache/native-item-renderers/loom-white-red-stripe-native-lossless.png",
+        "sha256": "706342f55aac91e056177cec14b83cc21384379ca38c13cc57d7fedc3b2864e3"
+      },
+      {
+        "privateFile": ".cache/native-item-renderers/stone-slab-single-inventory-native-lossless.png",
+        "sha256": "36df308df2fc030c3e8687abbfdbd608ac9ac528bd166f6c23a279db128517ee"
+      }
+    ],
+    "coordinates": {
+      "blockInput": [
+        1446,
+        470,
+        80,
+        80
+      ],
+      "blockResult": [
+        1786,
+        470,
+        80,
+        80
+      ],
+      "bannerCloth": [
+        1896,
+        410,
+        100,
+        200
+      ],
+      "bannerItemInput": [
+        1336,
+        470,
+        80,
+        80
+      ],
+      "bannerItemResult": [
+        1776,
+        470,
+        80,
+        80
+      ]
+    },
+    "block": {
+      "fitTraining": "Stone input1 only; source texture identities fixed. Stone-bricks output1 held out.",
+      "camera": {
+        "yaw": 45.25,
+        "pitch": 29.75,
+        "zoom": 1.0354999999999999,
+        "offsetX": 0.39999999999999997,
+        "offsetY": 0.9
+      },
+      "perFaceBrightness": {
+        "top": 0.9960302160677906,
+        "right": 0.49582374839536725,
+        "left": 0.7286712761982413
+      },
+      "uv": "Top rotates90degrees; sides mirrorU in world space. Stairs shape rotates90degrees and then uses the same world-aligned block UV policy.",
+      "fitReportDomain": "79x80 pixels: only the input crop leftmost1px slot-skin bleed column excluded, same domain reported for holdout. Independent QA separately reports complete80x80 without masks.",
+      "training": {
+        "role": "training",
+        "domain": "79x80 excluding only leftmost slot-skin bleed column of input crop; same domain for heldout",
+        "changed": 1932,
+        "total": 6320,
+        "rmse": 3.4490413270863205,
+        "max": 69
+      },
+      "differentTextureHoldout": {
+        "role": "heldout stone-bricks output1",
+        "domain": "79x80 excluding only leftmost slot-skin bleed column of input crop; same domain for heldout",
+        "changed": 2555,
+        "total": 6320,
+        "rmse": 4.0735718162040735,
+        "max": 77
+      },
+      "full80ShapeValidation": [
+        {
+          "kind": "cube",
+          "rotation": 0,
+          "changed": 2012,
+          "total": 6400,
+          "rmse": 3.5422009400936023,
+          "max": 69
+        },
+        {
+          "kind": "slab",
+          "rotation": 0,
+          "changed": 2002,
+          "total": 6400,
+          "rmse": 38.20932068880576,
+          "max": 197,
+          "note": "Native result includes quantity2 overlay; complete measurement intentionally retains it."
+        },
+        {
+          "kind": "stairs",
+          "rotation": 0,
+          "changed": 2574,
+          "total": 6400,
+          "rmse": 25.742043673725675,
+          "max": 91
+        },
+        {
+          "kind": "stairs",
+          "rotation": 90,
+          "changed": 1943,
+          "total": 6400,
+          "rmse": 6.531976634220303,
+          "max": 70
+        },
+        {
+          "kind": "stairs",
+          "rotation": 180,
+          "changed": 3181,
+          "total": 6400,
+          "rmse": 28.286610679789828,
+          "max": 91
+        },
+        {
+          "kind": "stairs",
+          "rotation": 270,
+          "changed": 3310,
+          "total": 6400,
+          "rmse": 33.09207561864321,
+          "max": 91
+        }
+      ],
+      "slabOcclusion": "The first native slab-result capture contains quantity2 plus its black shadow in the item ROI. Full measurements retain them; that residual cannot all be assigned to block mesh/shader.",
+      "referenceRaster": [
+        80,
+        80
+      ],
+      "scalePolicy": "Offsets and padding scale proportionally with raster resolution. Host-supplied custom meshes keep the generic camera defaults.",
+      "shapeValidationNote": "The table contains counterfactual orientation candidates too. Shipping normal-stone-stairs uses90degrees with world-aligned UVs; other listed rotations are not the production preset.",
+      "cleanSlabHoldout": {
+        "status": "NOT EXACT",
+        "capture": ".cache/native-item-renderers/stone-slab-single-inventory-native-lossless.png",
+        "sha256": "36df308df2fc030c3e8687abbfdbd608ac9ac528bd166f6c23a279db128517ee",
+        "crop": [
+          1266,
+          1002,
+          80,
+          80
+        ],
+        "domainPixels": 6400,
+        "changed": 1509,
+        "rmse": 5.032565821725534,
+        "max": 75,
+        "quantityOverlay": false,
+        "parameterRefit": false,
+        "roiEvidence": "Independent QA verified actual hotbar top border at997..1001, interior1002..1081; therefore y1002 is the full80 renderer ROI. Earlier estimated1003 included a lower white border and is not used."
+      }
+    },
+    "bannerSelector": {
+      "source": "Native32 normal-pattern collection observed in lossless Loom capture, independently matched against original TGA shapes.",
+      "orderEvidence": "Not source JSON enumeration. Binding registry remains backend-owned; captured order includes32, correcting earlier31 count.",
+      "colorFitTraining": "Only border cell35x70 fitted;31 other cells held out.",
+      "effectiveBaseTint": [
+        71.04701548435489,
+        79.11740400363098,
+        81.91051718912777
+      ],
+      "effectivePatternTint": [
+        239.69823493759307,
+        239.70814092679203,
+        239.67441450498487
+      ],
+      "training": {
+        "id": "border",
+        "different": 364,
+        "rmse": 0.5635166549518863,
+        "max": 2
+      },
+      "holdouts": [
+        {
+          "id": "circle",
+          "different": 279,
+          "rmse": 0.36589281356759135,
+          "max": 2
+        },
+        {
+          "id": "cross",
+          "different": 649,
+          "rmse": 0.9556135614941662,
+          "max": 3
+        },
+        {
+          "id": "diagonal_up_left",
+          "different": 282,
+          "rmse": 0.8367413306522923,
+          "max": 4
+        },
+        {
+          "id": "diagonal_up_right",
+          "different": 291,
+          "rmse": 0.8320943169983511,
+          "max": 4
+        },
+        {
+          "id": "diagonal_left",
+          "different": 267,
+          "rmse": 1.1111677990074318,
+          "max": 5
+        },
+        {
+          "id": "diagonal_right",
+          "different": 275,
+          "rmse": 1.230618449685963,
+          "max": 6
+        },
+        {
+          "id": "gradient",
+          "different": 1156,
+          "rmse": 0.4494895063586364,
+          "max": 2
+        },
+        {
+          "id": "gradient_up",
+          "different": 1194,
+          "rmse": 0.45773770821706344,
+          "max": 2
+        },
+        {
+          "id": "half_horizontal",
+          "different": 168,
+          "rmse": 0.3479776363132402,
+          "max": 2
+        },
+        {
+          "id": "half_horizontal_bottom",
+          "different": 147,
+          "rmse": 0.4511512107553147,
+          "max": 3
+        },
+        {
+          "id": "half_vertical",
+          "different": 288,
+          "rmse": 0.9840911411803582,
+          "max": 4
+        },
+        {
+          "id": "half_vertical_right",
+          "different": 269,
+          "rmse": 0.9786148756430857,
+          "max": 4
+        },
+        {
+          "id": "rhombus",
+          "different": 372,
+          "rmse": 1.3616716417198185,
+          "max": 6
+        },
+        {
+          "id": "small_stripes",
+          "different": 1397,
+          "rmse": 1.0292325917357827,
+          "max": 3
+        },
+        {
+          "id": "square_bottom_left",
+          "different": 222,
+          "rmse": 0.3597050946289763,
+          "max": 2
+        },
+        {
+          "id": "square_bottom_right",
+          "different": 232,
+          "rmse": 0.46686098966766265,
+          "max": 3
+        },
+        {
+          "id": "square_top_left",
+          "different": 225,
+          "rmse": 0.5760527186758844,
+          "max": 4
+        },
+        {
+          "id": "square_top_right",
+          "different": 224,
+          "rmse": 0.6049680938345617,
+          "max": 4
+        },
+        {
+          "id": "straight_cross",
+          "different": 512,
+          "rmse": 1.3300299214065578,
+          "max": 6
+        },
+        {
+          "id": "stripe_bottom",
+          "different": 158,
+          "rmse": 0.6863092656836751,
+          "max": 5
+        },
+        {
+          "id": "stripe_center",
+          "different": 499,
+          "rmse": 0.579467266482905,
+          "max": 2
+        },
+        {
+          "id": "stripe_downleft",
+          "different": 423,
+          "rmse": 0.5382005796592737,
+          "max": 2
+        },
+        {
+          "id": "stripe_downright",
+          "different": 441,
+          "rmse": 0.7524110904150682,
+          "max": 3
+        },
+        {
+          "id": "stripe_left",
+          "different": 273,
+          "rmse": 0.8377975661845539,
+          "max": 4
+        },
+        {
+          "id": "stripe_middle",
+          "different": 219,
+          "rmse": 0.4633507068636244,
+          "max": 4
+        },
+        {
+          "id": "stripe_right",
+          "different": 283,
+          "rmse": 1.0306196537754844,
+          "max": 5
+        },
+        {
+          "id": "stripe_top",
+          "different": 160,
+          "rmse": 0.6770283206327307,
+          "max": 5
+        },
+        {
+          "id": "triangle_bottom",
+          "different": 403,
+          "rmse": 0.427617987059879,
+          "max": 3
+        },
+        {
+          "id": "triangle_top",
+          "different": 313,
+          "rmse": 0.41926401339152647,
+          "max": 2
+        },
+        {
+          "id": "triangles_bottom",
+          "different": 261,
+          "rmse": 0.5350313106738339,
+          "max": 3
+        },
+        {
+          "id": "triangles_top",
+          "different": 282,
+          "rmse": 0.6526763321569299,
+          "max": 4
+        }
+      ],
+      "productionProfile": "Integer namedgray[71,79,82] and namedwhite[240,240,240], matching the fitted effective colors. Regression float fit residuals are distinct from independent measurements of actual produced canvases.",
+      "observedCount": 32,
+      "observedOrder": [
+        "border",
+        "circle",
+        "cross",
+        "diagonal-up-left",
+        "diagonal-up-right",
+        "diagonal-left",
+        "diagonal-right",
+        "gradient",
+        "gradient-up",
+        "half-horizontal",
+        "half-horizontal-bottom",
+        "half-vertical",
+        "half-vertical-right",
+        "rhombus",
+        "small-stripes",
+        "square-bottom-left",
+        "square-bottom-right",
+        "square-top-left",
+        "square-top-right",
+        "straight-cross",
+        "stripe-bottom",
+        "stripe-center",
+        "stripe-downleft",
+        "stripe-downright",
+        "stripe-left",
+        "stripe-middle",
+        "stripe-right",
+        "stripe-top",
+        "triangle-bottom",
+        "triangle-top",
+        "triangles-bottom",
+        "triangles-top"
+      ]
+    },
+    "bannerCloth": {
+      "fullDomainPixels": 20000,
+      "crop": [
+        1896,
+        410,
+        100,
+        200
+      ],
+      "colorEvidence": "Opaque red in native GUI is[176,46,38]. White base modulation matches[240,240,240]. Namedother14 dye profiles have not all been independently calibrated.",
+      "measurements": [
+        {
+          "capture": "border",
+          "sourceCrop": [
+            1896,
+            410,
+            100,
+            200
+          ],
+          "best": [
+            {
+              "pattern": "banner_border.tga",
+              "rmse": 2.8669815718510177,
+              "changed": 970,
+              "max": 26,
+              "interiorRmse": 2.395896463814717,
+              "interiorChanged": 770
+            },
+            {
+              "pattern": "banner_curly_border.tga",
+              "rmse": 52.513751373648155,
+              "changed": 5870,
+              "max": 193,
+              "interiorRmse": 52.71317790248587,
+              "interiorChanged": 5670
+            },
+            {
+              "pattern": "banner_triangles_top.tga",
+              "rmse": 82.01984922362797,
+              "changed": 7965,
+              "max": 194,
+              "interiorRmse": 81.09509320183399,
+              "interiorChanged": 7765
+            }
+          ]
+        },
+        {
+          "capture": "stripe",
+          "sourceCrop": [
+            1896,
+            410,
+            100,
+            200
+          ],
+          "best": [
+            {
+              "pattern": "banner_stripe_right.tga",
+              "rmse": 3.7111206753037105,
+              "changed": 970,
+              "max": 33,
+              "interiorRmse": 1.8392924272656137,
+              "interiorChanged": 770
+            },
+            {
+              "pattern": "banner_half_vertical_right.tga",
+              "rmse": 63.131747824160016,
+              "changed": 5720,
+              "max": 193,
+              "interiorRmse": 63.36677214004049,
+              "interiorChanged": 5520
+            },
+            {
+              "pattern": "banner_square_top_right.tga",
+              "rmse": 77.56729336518066,
+              "changed": 6690,
+              "max": 194,
+              "interiorRmse": 77.89050687090219,
+              "interiorChanged": 6490
+            }
+          ]
+        }
+      ],
+      "selectionCorrection": "The native filename containingstripe actually showsstripe-right; source42-mask matching confirms it, notstripe-center.",
+      "noMask": "All100x200 pixels retained, including leftmost native frame/renderer phase blending."
+    },
+    "bannerItem": {
+      "fitTraining": "White banner input only; red-border output held out.",
+      "camera": {
+        "yaw": -29.799999999999997,
+        "pitch": 22.599999999999998,
+        "zoom": 1.0360000000000003,
+        "offsetX": 3.4,
+        "offsetY": -0.8
+      },
+      "lighting": {
+        "top": 1,
+        "left": 1,
+        "right": 0.9700000000000005,
+        "bottom": 1
+      },
+      "trainingRgbRmse": 6.088933033400192,
+      "heldoutRedBorderRgbRmse": 6.839302219694687,
+      "domain": "79x80; native input leftmost1px slot-skin bleed excluded; independent full-domain comparison is separate.",
+      "fabricEvidence": "Native flat preview red is176/46/38, while3D item red edges are161..168 from original cloth shading. Item pattern shading therefore multiplies the original fabric RGB; flat GUI mode does not. Original pole/bar texture uses untinted base atlas.",
+      "geometry": "Reconstructed20x40x1cloth,2x42x2pole,20x2x2bar. Conventional cuboid unwrapping follows original64x64 atlas; this is not a recovered native mesh."
+    },
+    "remainingDifferences": [
+      "Nearest pixel-center rasterization does not reproduce all native GPU edge coverage, shader arithmetic or filtering.",
+      "Orthographic profiles are empirically fitted approximations; native C++ matrices and mesh implementation remain unavailable.",
+      "Namedwhite/red/gray have native capture evidence; the other named dye colors remain explicit configurable Web profiles.",
+      "Only captured states and sizes have been measured; other cameras/models, GUI scales and pack stacks are not certified."
+    ],
+    "tests": "11/11 item-renderers.spec.ts browser/SSR/codec checks passed after finalstair orientation and fabric shading changes; formal /calibration.html fixture; source/decode invariants include exact independent complete RGBA hashes."
+  }
+}

@@ -57,7 +57,7 @@ test('controlled and disabled navigation preserve owner selection', async ({ pag
 });
 
 test('setting row connects its label, description and disabled state to the real control', async ({ page }) => {
-  const input = page.getByRole('textbox', { name: 'World title', exact: true }); await expect(input).toHaveAccessibleDescription('Shown in the world list');
+  const input = page.locator('[data-case="settings-row"]').getByRole('textbox', { name: 'World title', exact: true }); await expect(input).toHaveAccessibleDescription('Shown in the world list');
   await page.locator('label[for="settings-world-title"]').click(); await expect(input).toBeFocused(); await expect(input).toHaveAttribute('aria-labelledby', 'settings-world-title-label');
   await expect(page.getByRole('textbox', { name: 'Locked title', exact: true })).toBeDisabled(); await expect(page.getByRole('textbox', { name: 'Locked title', exact: true })).toHaveAccessibleDescription('Host controls this setting');
   await expect(page.getByRole('textbox', { name: 'Inline world title', exact: true })).toHaveAccessibleDescription('Inline description');

@@ -7,7 +7,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 106 项（含公共 ContainerFrame），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；implemented 只代表导出，不代表像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 109 个组件（含公共 ContainerFrame、InventoryToolbar 与两个材质渲染器），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；另有 3 个运行时数据导出。implemented 只代表导出，不代表像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -16,7 +16,7 @@
 
 - 构建、真实浏览器交互测试、无障碍自动检查、桌面与手机截图检查通过。
 - 从 Mojang 官方样本提取边框和颜色基准，记录来源、采样方法和字体许可。
-- 展示 default / hover / pressed / focus / disabled 状态，整数像素倒角，无圆角、渐变或平滑缩放。
+- 展示 default / hover / pressed / focus / disabled 状态，遵循各原生分支的倒角、圆角、渐变和像素采样方式；不把 Classic JSON 与当前 HTML UI 的规则混用。
 - 像素级还原是目标；只有固定游戏版本、屏幕、GUI scale、语言、DPR 和原版字体，逐像素对比之后才能声称零偏差。开放字体的字宽差异必须公开记录。
 - npm pack 后在独立消费项目验证导入、类型、CSS 及字体路径。发布到注册表不在本任务范围。
 
@@ -49,7 +49,9 @@
 - [x] 取得原生石切机、织布机、信标、合成器空状态与合成器禁用槽无损截图；依据截图修正 selector 滚动条、居中及 fold 层级
 - [x] 本轮450项整合后精准修复2个旧定位并复验，新增说明色 / Panel无障碍3项通过；当前453项清单含2个预期desktop触控跳过
 - [x] 86导出 React 18.3.1 / 19.3.1 真实tarball消费、SSR / ref / 类型 / CSS / 字体 / 许可及最终生产预览全部通过
-- [ ] 实现清单内其余 20 项 Bedrock 控件、可复用结构和完整 GUI；为新增交互与原版表面补充验收
+- [x] 实现清单内其余 20 项 Bedrock 控件、可复用结构和 GUI 组合，另拆出 BlockPreview / BannerPreview / InventoryToolbar；109 个组件与 3 个数据导出已接入
+- [x] 完成本轮统一浏览器回归：682 个唯一用例中 677 通过、5 预期跳过（完整运行＋最终相关范围复验）；109 组件 / 112 值的实际 React 18 / 19 包消费和生产预览通过
+- [x] 按实际内置 HTML UI 修正当前死亡页，按原生加载分支修正加载页，并保留明确的旧版 / 紧凑配置
 - [ ] 对照游戏渲染器完善附魔书本、符文、方块 / 旗帜 / 装备预览、物品 tooltip / glint、工作站完整页面
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
 

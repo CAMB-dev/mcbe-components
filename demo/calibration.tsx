@@ -19,6 +19,12 @@ import { AdvancedNativeFixtures } from './advanced-native-fixtures';
 import { HudOverlaysFixtures } from './hud-overlays-fixtures';
 import { FeedbackFixture } from './feedback-fixture';
 import { SettingsControlsFixture } from './settings-controls-fixture';
+import { GameListsFixture } from './game-lists-fixture';
+import { SystemScreensFixture } from './system-screens-fixture';
+import { GameControlsFixture } from './game-controls-fixture';
+import { TradingMountsFixture } from './trading-mounts-fixture';
+import { InventoryScreensFixture } from './inventory-screens-fixture';
+import { ItemRenderersFixture } from './item-renderers-fixture';
 
 function Sample({ id, children }: { id: string; children: ReactNode }) {
   return <section className="calibration-case"><h2>{id}</h2><div className="calibration-stage" data-case={id}>{children}</div></section>;
@@ -112,6 +118,12 @@ function Calibration() {
     <HudOverlaysFixtures/>
     <FeedbackFixture/>
     <SettingsControlsFixture/>
+    <GameListsFixture/>
+    <SystemScreensFixture/>
+    <GameControlsFixture/>
+    <TradingMountsFixture/>
+    <InventoryScreensFixture/>
+    <ItemRenderersFixture/>
     <p>These samples isolate component surfaces. The test runner renders original reference PNGs independently, applies their nine-slice rules, and compares every output pixel. Text is validated separately.</p>
     <Dialog open={dialog} onOpenChange={setDialog} title="Settings dialog" className="calibration-close-dialog"><Combobox label="Dialog difficulty" defaultValue="normal" options={difficulties}/><ItemSlot label="Dialog item" item={{name:'Dialog item',icon:'D',lore:['Inside the dialog']}}/></Dialog>
     <Dialog open={surfaceDialog} onOpenChange={setSurfaceDialog} title="Surface dialog" className="calibration-surface-dialog"/>

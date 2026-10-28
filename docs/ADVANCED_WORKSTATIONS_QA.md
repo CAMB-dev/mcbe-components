@@ -92,7 +92,7 @@ npx playwright test --config .cache/advanced-qa-output/playwright.config.mjs adv
 | stonecutter-empty-native-lossless.png | `1b4d7e00197997a10ef4984bb04d52f508d7cad0e40d8bfdac96b33a3734b956` |
 | loom-empty-native-lossless.png | `63b6e16febe2fa6cd37f718b2f1a644bb836998bda8c52c6d5bbfdef573dde6c` |
 
-独立查看完整PNG并量得共同book左边缘约x476、top282，dark pane从约x506/y312开始；存在1px混色边缘，不能把该近似锚点和Web整数裁切当作整块0差异。织布机原生第一格x526/y317、列间90px，即7×18game grid居中134game pane，左右各4game。切石机空选择和织布机31个pattern都容纳在pane内，原图固定矩形x1160…1174、y780…1059每幅4200像素全部是`#5d5d5d`，没有滚动条。Web增加空/31fit/84overflow fixture验证不溢出隐藏bar、7列居中、溢出时bar实际可操作；这不认证游戏滚动thumb的动态大小算法。
+独立查看完整PNG并量得共同book左边缘约x476、top282，dark pane从约x506/y312开始；存在1px混色边缘，不能把该近似锚点和Web整数裁切当作整块0差异。织布机原生第一格x526/y317、列间90px，即7×18game grid居中134game pane，左右各4game。切石机空选择和织布机32个pattern都容纳在pane内，原图固定矩形x1160…1174、y780…1059每幅4200像素全部是`#5d5d5d`，没有滚动条。Web增加空/31fit/84overflow fixture验证不溢出隐藏bar、7列居中、溢出时bar实际可操作；这不认证游戏滚动thumb的动态大小算法。
 
 原图固定x1188/1193/1198/1203、y400/600/800/1000，对应game142/143/144/145的中段plateau，分别是198/85/85/0灰阶。旧Web折页的0/174/174/96覆盖了book右边缘，表明source`center_bg` layer0应位于book的`commonbg` layer1下。增加actual scene采样验证正确遮挡，独立的完整24×320 fold skin比较继续保留。两类测试分别证明皮肤与组合层级，互不替代。
 
@@ -100,3 +100,6 @@ Crafter的HTML属性透传、同一节点重新启用和白色键盘focus outlin
 
 
 同批Beacon原生截图 `beacon-empty-native-lossless.png` SHA256 `3e39ea327571fb3d30f575d3da19ce3df214c9e07a9b874d3ccacb6922a8fe40`，2568×1400、GUI5。未激活/零等级/无payment状态的extra区域固定`[1556,390,100,100]`共10000像素全部为`#212121`背景，只有五个primary和regeneration按钮。旧库默认第七个locked extra缺少native依据，现改为默认隐藏，宿主显式`effects.extra.visible=true`才显示；独立fixture和测试同时验证六个默认locked及显式extra。没有从该空状态推断游戏所有高等级效果状态，组件仍由宿主管理游戏规则。
+
+
+更正（第三轮独立复核）：此前将原生Loom可见选择计为31有误；原PNG为4行×7格加末行4格，共32。先前31fit Web fixture仍是有效的容纳状态测试，未更改旧生产源码或测试断言；native无bar、首格居中和fold遮挡的固定像素结论均不变。

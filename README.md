@@ -137,6 +137,29 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `Beacon` | `payment`、`acceptedItems`、`effects`、`extraEffect`、`canConfirm`、`onPaymentAction`、`onEffectSelect`、`onConfirm`、`onCancel` | 原版主 / 次级效果与支付面板；等级、可用状态、支付和选择有效性由调用方控制 |
 | `CrafterSlot` | ItemSlot 属性；`index`、`enabled`、`onEnabledChange`、`onSlotAction` | 可复用合成器槽，enabled=false 时仍能操作以重新启用；disabled 才禁止按钮操作 |
 | `Crafter` | `items`、`disabledSlots`、`powered`、`output`、`onSlotAction`、`onSlotEnabledChange` | 原版 3×3 槽与供电状态；output 为预览，不生成可取出的伪结果槽，游戏规则由调用方提供 |
+| `WorldList` | **必填** `label`、`worlds`；`value` / `defaultValue`、`onValueChange`、`onPlay`、`onEdit`、`onDelete`、`scale`、`maxHeight` | 世界行与缩略图布局；方向键移动焦点，激活发出操作意图，日期 / 大小 / 模式由调用方格式化 |
+| `ServerList` | **必填** `label`、`servers`；选择属性、`onConnect`、`onEdit`、`onDelete` | 服务器名称、说明、人数与状态原图；连接和在线检测由调用方实现 |
+| `PlayerCard` | **必填** `name`；`avatar`、`renderSkin`、`platform`、`permissionIcon`、`onProfile`、`onPermissions`、`scale` | 玩家卡与权限入口，头像或 3D 皮肤 renderer 由调用方提供 |
+| `PackCard` | **必填** `pack`；`selected`、`onSelect`、`onActiveChange`、`onMoveUp`、`onMoveDown`、`canMoveUp`、`canMoveDown` | 独立资源包卡，选中时显示启停 / 排序操作；状态由宿主管理 |
+| `PackList` | **必填** `label`、`packs`；选择属性、`onActiveChange`、`onReorder(ids,movedPack)`、`scale`、`maxHeight` | 组合 PackCard 与滚动列表，发出完整新 ID 顺序，不读取或更改游戏资源包文件 |
+| `SettingsPanel` | **必填** `sections`: SettingsSection[]；`title`、`value` / `defaultValue`、`onValueChange`、`onBack`、`headerActions`、`footer` | 复用 NavigationList 与原版边框，隐藏页面保持挂载以保留草稿；section value 必须非空且唯一 |
+| `LoadingScreen` | **必填** `title`；`variant`: world-modal（默认）/ compact、`scale`、`branding`、`loadingFrame`；`message`、`value`、`max`、`showValue`、`onCancel`、`cancelling`、`background`、`backgroundVariant`、`spinnerFrame`、`paused` | 默认原版世界加载 modal / 标题原图；未定进度用 source loading_bar，有限值用原始经验条图层；compact 复用 Spinner / Progress，宿主负责背景场景和加载动作 |
+| `AchievementToast` | Toast 的受控 open / onOpenChange / title 等属性；`achievementIcon`、`announcementLabel` | 复用 Toast 的原图、稳定 live region 和可暂停时序；成就内容、图像与触发事件由调用方提供 |
+| `PlayerList` | **必填** `players`: GamePlayer[]；`title`、`selectedId` / `defaultSelectedId`、`onSelect`、`onInvite` | 玩家行和邀请入口，方向键焦点与选中独立；头像 / 平台图 / 在线状态由调用方提供 |
+| `TouchControls` | `actions`、`onAction(action,pressed)`、`onMove({x,y})`、`disabled`、`opacity`、`labels` | 原图触屏按钮与 Web 摇杆重建；移动向量限制在单位圆，取消 / 禁用 / 卸载会释放输入，不绑定游戏引擎 |
+| `PauseMenu` | `actions`、`footerActions`、`skinActions`、`disabledActions`、`onAction`、`logo` / `logoSrc`、`skinRenderer`、`players`、`onPlayerSelect`、`onInvite`、`width`、`height`、`autoFocus` | Classic 暂停菜单组合，Escape 发出 resume 意图；路由、保存和退出由宿主执行，logo / 皮肤由调用方提供 |
+| `DeathScreen` | `variant`: native（默认）/ classic、`guiScale`；`title`、`deathMessage`、`state`: ready / loading、`loadingIndicator`、`respawnEnabled` / `respawnVisible`、`quitEnabled` / `quitVisible`、`onRespawn`、`onQuit` | 默认匹配当前 HBUI Death 源 profile，classic 保留 JSON UI 组合；字体需调用方提供或使用公开 fallback，score 仅为宿主扩展 |
+| `TradeOffer` | **必填** `offer`: TradeOfferData；`selected`、`onSelect(id,action)`；button 属性 | 一 / 双成本、改价划线、锁定和售罄原图状态；locked 阻止操作，available 与结果 / 交易可用性由宿主分别控制 |
+| `TradingScreen` | `tiers`、`selectedOfferId`、`onOfferSelect`、`inputs`、`showSecondInput`、`slotValidity`、`result`、`resultAvailable`、`canTrade`、`levelProgress`、`possibleProgress`、`detailButtons`、`onDetails`、`runeAtlasUrl`、`onTrade` | 原版 trade2 双面板，复用 TradeOffer、库存与进度；交易、报价、升级与消耗规则由调用方提供 |
+| `MountInventory` | `equipment`、`chested`、`storageColumns`、`storage`、`storageSelectedIndex`、`onStorageSelectionChange`、`onStorageAction`、`onEquipmentAction`、`entityPreview` | 原版坐骑面板与鞍 / 盔甲 / 地毯 / 鹦鹉螺甲占位，storageColumns 限制 1…5；实体 renderer 由调用方提供 |
+| `BlockPreview` | `block`: stone / stone-bricks / stone-slab / stone-stairs；`size`、`resolution`、`model`、`textures`、`camera`、`lighting`、`onReady`、`onRenderError` | 原始方块 PNG 与可配置网格的 Canvas renderer，默认 32×32 CSS px；模型 / 光照属于重建，非原生 item renderer 认证 |
+| `BannerPreview` | `view`: cloth / item；`width`、`height`、`baseColor`、`patterns`、`baseTexture`、`model`、`camera`、`lighting`、`onReady`、`onRenderError` | 原始 PNG / TGA 图案与真实 alpha 合成，cloth 默认 40×80、item 默认 32×32；颜色接受命名染料、六位 hex 或 0…255 RGB 元组 |
+| `ArmorSlot` | ItemSlot 属性；**必填** `kind`: helmet / chestplate / leggings / boots / offhand | 复用真实槽位和原版装备占位图；有物品时隐藏空槽覆盖层 |
+| `RecipeSearch` | SearchField 属性；`showFilter`、`craftableOnly` / `defaultCraftableOnly`、`onCraftableOnlyChange`、`filterLabel` | 原图搜索框与仅可合成开关，输入和筛选状态独立；默认最多 30 字符，配方可用性由宿主计算 |
+| `RecipeCategoryTabs` | `categories`: RecipeCategory[]；`value` / `defaultValue`、`onValueChange`、`label`、`disabled`、`panelId` | 原版顶部分页图，支持 RTL、方向键和 Home / End；键盘激活可用分类 |
+| `PlayerInventoryScreen` | `armor`、`offhand`、`crafting`、`result`、`playerPreview`、`onArmorAction`、`onCraftingAction`、`onTakeResult`；WorkstationFrame 属性 | 生存背包主面板，复用装备槽、2×2 合成及结果槽；原生外部 toolbar 和角色 renderer 由宿主提供 |
+| `CreativeInventory` | **必填** `items`；`chrome`: full / none、`layout` / `defaultLayout`、`onLayoutChange`、`onHelp`；`categories`、`categoryId` / `defaultCategoryId`、`onCategoryChange`、`query` / `defaultQuery`、`onQueryChange`、`hotbar`、`onItemAction`、`onHotbarAction`、`onClose` | 默认完整原版工具条和创造面板，chrome=none 仅提供可复用 pane；宿主提供当前分类集合，搜索仅筛名称且回调保留原始 items 索引，IME 输入完成后再筛选 |
+| `InventoryToolbar` | `value` / `defaultValue`: creative / recipe-book / survival；`onValueChange`、`onHelp`、`onClose`、`disabled`、`modeLabels` | 可复用原版三模式工具条、帮助和关闭入口；真实受控回调，模式数据与路由由宿主切换 |
 
 ### 受控与非受控
 
@@ -224,7 +247,7 @@ const sword: InventoryItem = {
   onEnchant={id => requestEnchantment(id)} />
 ```
 
-物品图由调用方提供，npm 不捆绑游戏物品纹理。展示页已使用实际 PNG，来源与 SHA 见 [item-materials.json](docs/item-materials.json)：26 张示例素材均取自官方 `v1.26.60.5 full` 合并资源，并记录本机 59 个 vanilla / 版本覆盖目录中的候选。钻石剑采用与公开合并资源一致的 198-byte PNG；此前 22 像素差异来自基础包与合并资源，不能据此认定运行时最终材质。资源存在与 manifest 不证明当前激活顺序。草方块使用官方 GUI 类目图标，保留 17×17 原图的整数缩放，不冒充 native block renderer。`durability` 为剩余比例 0…1；组件显示角标、耐久和提示，并发出操作事件，不自行计算配方、附魔或搬移物品。右键 / Shift+F10 为 secondary，Enter / Space / 点击为 primary。原生 `onContextMenu` 可阻止默认 secondary 处理。
+ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随 npm 分发。BlockPreview / BannerPreview 另附官方方块 / 旗帜原始材质，记录见 [item-renderers-geometry.json](docs/item-renderers-geometry.json)。展示页已使用实际 PNG，来源与 SHA 见 [item-materials.json](docs/item-materials.json)：物品清单中的 26 张 PNG 均取自官方 `v1.26.60.5 full` 合并资源，并记录本机 59 个 vanilla / 版本覆盖目录中的候选。钻石剑采用与公开合并资源一致的 198-byte PNG；此前 22 像素差异来自基础包与合并资源，不能据此认定运行时最终材质。资源存在与 manifest 不证明当前激活顺序。草方块使用官方 GUI 类目图标，保留 17×17 原图的整数缩放，不冒充 native block renderer。`durability` 为剩余比例 0…1；组件显示角标、耐久和提示，并发出操作事件，不自行计算配方、附魔或搬移物品。右键 / Shift+F10 为 secondary，Enter / Space / 点击为 primary。原生 `onContextMenu` 可阻止默认 secondary 处理。
 
 槽位依据 common.container_item 重做，cell_image 的 PNG 为 10×10、逻辑 base_size 为 5×5，因此源切片为 2px、GUI 2 的显示边宽仍为 2px。普通 / 悬停 / 选中 / 聚焦已有独立原图对照。ItemTooltip、数量基线、耐久色相和 disabled filter 仍需游戏 renderer 截图校准。已移除伪紫色 glint；`enchanted` 仅保留数据标记，缺图时也不会自绘替代物。
 
@@ -241,14 +264,14 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **86 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 106 项（含 RecipeSelectionGrid / CrafterSlot / BeaconEffect 公共零件），逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
+当前 **109 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 109 项（含 BlockPreview / BannerPreview / InventoryToolbar），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 3 份 renderer 数据 helpers，不计组件数量；ESM 值导出共 112 项。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类、燃料、处理箭头、附魔选项、交易条目。
-- GUI：已有附魔台、砂轮、工作台与熔炉族主面板、铁砧、酿造台、现代锻造台、制图台、切石机、织布机、信标、合成器、箱子族、漏斗、发射器与投掷器；继续交易、玩家 / 创造 / 坐骑背包，以及尚缺的配方书和 screen wrapper。
-- HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示；继续玩家列表及触屏控制，以及暂停 / 设置 / 世界 / 服务器 / 资源包等组合。
+- GUI：已有附魔台、砂轮、工作台与熔炉族主面板、铁砧、酿造台、现代锻造台、制图台、切石机、织布机、信标、合成器、箱子族、漏斗、发射器、投掷器、交易、玩家 / 创造 / 坐骑背包及共享配方搜索 / 分类部件。
+- HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示、玩家列表及触屏控制，以及暂停 / 死亡 / 设置 / 加载 / 世界 / 服务器 / 资源包 / 成就提示等组合。
 
-完整 GUI 由这些基础零件组合。planned 项仍在开发，不作为已有导出；原生 3D renderer、最终像素取整与真实游戏整帧差异单独验收。
+目录中的 GUI 由这些基础零件组合。目录范围不等于所有版本、所有平台的完整游戏界面；原生 3D renderer、游戏规则、最终像素取整与真实游戏整帧差异单独验收。
 
 ### 原图、边框和可变容器
 
@@ -322,6 +345,30 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命周期由调用方管理。[工作站几何](docs/advanced-workstations-geometry.json)、[HUD 叠层几何](docs/hud-overlays-geometry.json)、[设置控件](docs/settings-controls-geometry.json)、[反馈组件](docs/feedback-geometry.json) 记录原图、源定义和 Web 组合边界。
 
+`TradingScreen.detailButtons` 对应原版三个详情按钮的可见性绑定，`onDetails` 接收 `0` / `1` / `'result'`；第三个按钮使用 `runeAtlasUrl` 的真实 SGA 字形，缺少图集时保留可访问名称，不生成替代英文字母。`MountInventory` 的装备覆盖层按宿主提供的坐骑能力数组显示，以原版 0.5 alpha 常驻物品下方；不根据空槽猜测坐骑能力。存储底板保持原始 90×54 游戏像素，实际列数由 `storageColumns` 决定。
+
+### 物品 renderer、库存与列表
+
+```tsx
+<ItemSlot item={{name: 'Stone stairs', icon:
+  <BlockPreview block="stone-stairs" decorative />}} />
+<ItemSlot item={{name: 'Banner', icon:
+  <BannerPreview view="item" baseColor="white"
+    patterns={[{id: 'border', color: 'red'}]} decorative />}} />
+<CreativeInventory items={categoryItems} categoryId={category}
+  onCategoryChange={setCategory}
+  onItemAction={(sourceIndex, action) => handleItem(sourceIndex, action)} />
+<WorldList label="Worlds" worlds={worlds} onPlay={requestPlay} />
+<PackList label="Resource packs" packs={packs}
+  onActiveChange={requestPackState} onReorder={requestPackOrder} />
+```
+
+`BlockPreview` / `BannerPreview` 在 SSR 输出带语义的 canvas，挂载后加载随包分发的原始 PNG / TGA 并绘制；`onReady` / `onRenderError` 报告结果。网格、相机、染色与光照是可配置重建，使用真实材质不等于复刻了原生 renderer。[renderer 资源与边界](docs/item-renderers-geometry.json) 记录 45 份原始资源及其候选来源。
+
+另导出三份可复用数据：`bannerPatternIds` 为这版资源中的 42 个图案 ID，`bannerDyeColors` 为 16 色 Web 预设，`loomPatternIds` 为同版本原生截图观察的 32 个基础图案顺序。染料预设不宣称是原生染色算法，图案顺序不作为所有版本的 engine registry；可以传入自己的 RGB、纹理、网格、相机和光照。
+
+世界、服务器、资源包和玩家卡仅接收内容并发出操作意图；网络连接、世界删除、权限变更、资源包持久化由宿主决定和执行。完整字段由 `.d.ts` 导出，源事实见 [库存](docs/inventory-screens-geometry.json)、[交易 / 坐骑](docs/trading-mounts-geometry.json)、[菜单 / 控制](docs/game-controls-geometry.json)、[列表](docs/game-lists-geometry.json) 与 [系统页面](docs/system-screens-geometry.json)。
+
 ## 字体
 
 字体文件在仓库中，构建和运行均不依赖字体 CDN。样式与字体分开导出，不导入 `fonts.css` 就不请求字体。
@@ -363,6 +410,25 @@ npm run dev
 
 接入自有 Mojangles 时还可导入 `mcbeui/mojangles.css`，统一 20 / 40 / 60px 字号。Windows 上直接使用原始 TTF 可能出现彩边；本地转换使用 [COLR 前景色图层](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)，不重绘字形。
 
+当前 HBUI Death 的标题使用 Minecraft Ten v2，正文使用 Minecraft Seven v2；中文原生界面另用 Noto Sans SC。公开包仍使用开源 fallback，字形与原生有差异。持有适用原文件时，本地展示页可运行：
+
+```powershell
+python scripts/use-local-hbui-fonts.py 'C:/XboxGames/Minecraft for Windows/Content'
+npm run dev
+```
+
+脚本将三份原始 OTF 与可选 HBUI loading GIF 复制到忽略的本地 cache，Vite 自动注册；不写入 Git、public 或 npm。启用后生成的 `site/` 可包含这些本地资源。身份与 SHA 见 [local-hbui-fonts.json](docs/local-hbui-fonts.json)。调用方也可自行托管有权使用的字体并覆盖 Death 令牌：
+
+```css
+@font-face { font-family: 'Minecraft Ten v2'; src: url('/my-fonts/ten.otf') format('opentype'); }
+@font-face { font-family: 'Minecraft Seven v2'; src: url('/my-fonts/seven.otf') format('opentype'); }
+@font-face { font-family: 'Noto Sans SC'; src: url('/my-fonts/noto-sc.otf') format('opentype'); }
+:root {
+  --mc-death-title-font: 'Minecraft Ten v2', 'Noto Sans SC', var(--mc-font);
+  --mc-death-body-font: 'Minecraft Seven v2', 'Noto Sans SC', var(--mc-font);
+}
+```
+
 ```tsx
 <Text as="p">Hello, Minecraft!</Text>
 <Text shadow={false}>Without shadow</Text>
@@ -390,7 +456,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、86 个导出、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、109 个组件与 3 份数据导出、类型、CSS、皮肤、字体及许可路径。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

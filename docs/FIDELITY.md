@@ -1,6 +1,6 @@
 # 视觉基准与还原边界
 
-目标为 Minecraft: Bedrock Classic / JSON UI；当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
+主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
 ## 参考与版本
 
@@ -73,3 +73,17 @@ Alert、Badge、部分扩展状态以及 Panel / Dialog 的任意内容排版仍
 `npm test` 会缓存固定参考并运行桌面 / 手机交互、无障碍、源 PNG 合成、源布局、字体和渲染器检查。新增酿造、锻造、制图、滚动区及 HUD 独立证据分别见 [BREWING_QA.md](BREWING_QA.md)、[SPECIAL_WORKSTATIONS_QA.md](SPECIAL_WORKSTATIONS_QA.md) 与 [HUD_QA.md](HUD_QA.md)。原版字形、SGA、原版 advance 与原生 PNG 检查需要用户自有资源；缺少时相应项目明确跳过。字体准备步骤见 README。
 
 可选工具：`python scripts/prepare-classic.py` 重建皮肤，`python scripts/read-local-ui.py` 读取已安装游戏布局事实，`python scripts/prepare-pixel-font.py` 生成 COLR 字体，`python scripts/prepare-font-oracle.py` 生成原始轮廓期望图。普通消费和构建无需 Python 或本机游戏。
+
+## 第三轮原生页面与材质对照
+
+新增世界 / 服务器 / 玩家 / 资源包列表、玩家和创造库存、交易和坐骑容器、玩家列表 / 触控 / 暂停 / 死亡页、设置 / 加载 / 成就组合，以及 BlockPreview / BannerPreview。InventoryToolbar 将创造库存右上方的模式 / 帮助 / 关闭操作单独复用。组件导出和原生完整页面认证仍分别计数，不能因目录全部 implemented 就宣布目标完成。
+
+本轮新增原始剪贴板 PNG 均为本机 1.26.6005.0、GUI 5、2568×1400，只保留在忽略缓存；普通自动化 JPEG 不用于颜色基准。样本包含暂停、死亡、玩家 / 创造库存、石头 / 石砖 / 台阶 / 楼梯和白旗加红色图案。`world-loading-state-native-lossless.png` 是过渡帧，左侧仍有上页残留，只支持可见中央加载区域；`save-exit-state-native-lossless.png` 已进入世界列表，不能冒充保存中画面。名为 `loom-white-red-stripe-native-lossless.png` 的图实际选择 stripe_right，依图案和原始掩码匹配确认，不按文件名推断 center。
+
+另在暂停 / 死亡保存图外围发现固定灰白条纹和底角 RGB 标记。保存 PNG 的尺寸尚不能直接等同游戏客户区尺寸，需进一步核实剪贴板位图范围与 Paint 粘贴原点；没有把这些外围像素擅自当成 OS 边框裁掉，也没有据此消除死亡页尚未认证的 1px 位移。当前材质 / 库存测量采用明确登记的完整控件 ROI，不能扩展为整帧客户区认证。
+
+原生死亡页稳定截图显示旧 `death_screen.json` 布局与实际页面不一致。只读审计安装版 HTML UI 的 gameplay JS / CSS，找到原生死亡路由、32rem 列宽、间隔比例、颜色以及 Minecraft Ten / Seven 字体声明；新默认配置据此实现，`variant="classic"` 保留原 JSON 配置。原始私有 bundle、字体和原生截图不随库分发。本机字体桥另外接入 Ten / Seven / Noto Sans SC；公共回退字体的字形差异仍然存在，相关哈希与限制见 [local-hbui-fonts.json](local-hbui-fonts.json) 和 [game-controls-geometry.json](game-controls-geometry.json)。不能把 HTML UI 与 Classic 的文字阴影和按钮规范混为同一组令牌。
+
+加载页依据 `progress` 的原版 modal / fancy loading bars 分支补入真实灰框、内层、绿色图集与标题图，原紧凑组合单独保留。世界全景由宿主提供；没有用手绘背景替代游戏渲染。库存原图检查另修复 preview border 的中心 fill、交易禁用底图的浏览器零切片绘制问题、经验条对应 DOM 图层选择，以及创造库存的标题对齐、搜索宽度和网格居中。世界缩略图的 `%y` 应从自身高度求宽度，早期按父高度的推导已撤回。
+
+BlockPreview / BannerPreview 的 45 份 PNG / TGA 保持原始字节，解码保留 175 / 176 等半透明 alpha，旗帜图案直接使用原始 UV 与掩码。软件网格、相机、光照和染色属于可配置重建；本轮真实截图用于训练和保留样本测量，非零残差必须报告为 NOT EXACT。单个台阶另有无数量角标的新原生样本；旧结果槽数量 2 遮挡不能全部归咎于材质误差。完整证据与独立测量见 [item-renderers-geometry.json](item-renderers-geometry.json) 和 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。

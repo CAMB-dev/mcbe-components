@@ -8,8 +8,13 @@ try {
   const failures = [];
   page.on('pageerror', error => failures.push(error.message));
   page.on('requestfailed', request => failures.push(request.url()));
+  page.on('response', response => { if (response.status() >= 400) failures.push(`${response.status()} ${response.url()}`); });
   await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
+  await page.waitForFunction(() => {
+    const renderers = [...document.querySelectorAll('[data-render-state]')];
+    return renderers.length > 0 && renderers.every(node => node.getAttribute('data-render-state') === 'ready');
+  });
   assert.match(await page.title(), /mcbeui/);
   assert.equal(await page.getByRole('button', { name: 'Create new world', exact: true }).count(), 1);
   await page.getByRole('button', { name: 'Create new world', exact: true }).click();
@@ -22,7 +27,7 @@ try {
   assert(!(await page.getByRole('dialog', { name: 'Create new world' }).isVisible()));
   await page.screenshot({ path: '.cache/preview/desktop.png' });
   await page.locator('#inputs').scrollIntoViewIfNeeded();
-  const input = page.getByRole('textbox', { name: 'World name', exact: true });
+  const input = page.locator('#inputs').getByRole('textbox', { name: 'World name', exact: true });
   assert.equal(await input.evaluate(node => getComputedStyle(node).textShadow), 'rgb(63, 63, 63) 2px 2px 0px');
   await page.getByRole('combobox', { name: 'Difficulty' }).click();
   await page.screenshot({ path: '.cache/preview/inputs-combobox.png' });
@@ -37,9 +42,16 @@ try {
   await page.locator('#processing').screenshot({ path: '.cache/preview/processing.png' });
   await page.locator('#anvil').screenshot({ path: '.cache/preview/anvil.png' });
   await page.locator('#containers').screenshot({ path: '.cache/preview/containers.png' });
-  for (const id of ['brewing','special-workstations','hud','scrolling','advanced-workstations','hud-overlays','settings','feedback-primitives']) {
+  for (const id of ['brewing','special-workstations','hud','scrolling','advanced-workstations','hud-overlays','settings','feedback-primitives','game-lists','settings-panel','loading-screen','achievement-toast','game-controls','trading-mounts','inventory-screens']) {
     await page.locator('#'+id).screenshot({ path: '.cache/preview/'+id+'.png' });
   }
+  await page.setViewportSize({ width: 1100, height: 900 });
+  const creative = page.locator('#inventory-screens .mc-creative-inventory');
+  await creative.getByRole('tab', { name: 'Search', exact: true }).click();
+  await creative.getByRole('searchbox', { name: 'Search creative inventory' }).fill('diamond');
+  assert.equal(await creative.locator('.mc-creative-inventory__items .mc-slot').count(), 2);
+  await page.mouse.move(0, 0);
+  await page.locator('#inventory-screens .mc-creative-inventory-scroll').screenshot({ path: '.cache/preview/creative-search.png' });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.locator('#typography').screenshot({ path: '.cache/preview/fonts-shadow.png' });
   assert.equal(await page.locator('.font-shadow-comparison .mc-text').first().evaluate(node=>getComputedStyle(node).textShadow), 'rgb(63, 63, 63) 2px 2px 0px');

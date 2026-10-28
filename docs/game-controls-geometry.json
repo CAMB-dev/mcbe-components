@@ -1,0 +1,1208 @@
+{
+  "schemaVersion": 1,
+  "referenceCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "assets": {
+    "dark-default": {
+      "file": "button_borderless_dark.png",
+      "source": "resource_pack/textures/ui/button_borderless_dark.png",
+      "sha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_dark.png",
+      "size": [
+        4,
+        4
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "pinnedSha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548"
+    },
+    "dark-hover": {
+      "file": "button_borderless_darkhover.png",
+      "source": "resource_pack/textures/ui/button_borderless_darkhover.png",
+      "sha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_darkhover.png",
+      "size": [
+        4,
+        4
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b",
+      "pinnedSha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b"
+    },
+    "dark-pressed": {
+      "file": "button_borderless_darkpressed.png",
+      "source": "resource_pack/textures/ui/button_borderless_darkpressed.png",
+      "sha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_darkpressed.png",
+      "size": [
+        4,
+        4
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532",
+      "pinnedSha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532"
+    },
+    "dark-pressed-nohover": {
+      "file": "button_borderless_darkpressednohover.png",
+      "source": "resource_pack/textures/ui/button_borderless_darkpressednohover.png",
+      "sha256": "5ce36bfbe4a3d94c8ab42c897a7b483aed253fce4a1d6864b432bf42dd60807d",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_darkpressednohover.png",
+      "size": [
+        4,
+        4
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "5ce36bfbe4a3d94c8ab42c897a7b483aed253fce4a1d6864b432bf42dd60807d",
+      "pinnedSha256": "5ce36bfbe4a3d94c8ab42c897a7b483aed253fce4a1d6864b432bf42dd60807d"
+    },
+    "player-banner": {
+      "file": "MainBannersHover.png",
+      "source": "resource_pack/textures/ui/MainBannersHover.png",
+      "sha256": "c8e899024b825e2baae02b4588e1182d3812019f621859856b045bfc50c41488",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/MainBannersHover.png",
+      "size": [
+        3,
+        3
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "c8e899024b825e2baae02b4588e1182d3812019f621859856b045bfc50c41488",
+      "pinnedSha256": "c8e899024b825e2baae02b4588e1182d3812019f621859856b045bfc50c41488"
+    },
+    "pause-border": {
+      "file": "pause_screen_border.png",
+      "source": "resource_pack/textures/ui/pause_screen_border.png",
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/pause_screen_border.png",
+      "size": [
+        5,
+        5
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "pinnedSha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"
+    },
+    "menu-background": {
+      "file": "menubackground.png",
+      "source": "resource_pack/textures/ui/menubackground.png",
+      "sha256": "b28791d22e7a7b8aa42f50de1ef549a19e4bc3208823b1df991cfcdf47ba0216",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/menubackground.png",
+      "size": [
+        2,
+        2
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "b28791d22e7a7b8aa42f50de1ef549a19e4bc3208823b1df991cfcdf47ba0216",
+      "pinnedSha256": "b28791d22e7a7b8aa42f50de1ef549a19e4bc3208823b1df991cfcdf47ba0216"
+    },
+    "screen-background": {
+      "file": "screen_background.png",
+      "source": "resource_pack/textures/ui/screen_background.png",
+      "sha256": "e612514247e30fdaf71b8ab025ca2162c2ac18816b648b73c4ac7a1f441d13ab",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/screen_background.png",
+      "size": [
+        1,
+        1
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "e612514247e30fdaf71b8ab025ca2162c2ac18816b648b73c4ac7a1f441d13ab",
+      "pinnedSha256": "e612514247e30fdaf71b8ab025ca2162c2ac18816b648b73c4ac7a1f441d13ab"
+    },
+    "lan-icon": {
+      "file": "lan_icon.png",
+      "source": "resource_pack/textures/ui/lan_icon.png",
+      "sha256": "093a08fa77753b88d6cd225815e0b49df72b46b7523393188137f56579df3cc2",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/lan_icon.png",
+      "size": [
+        14,
+        14
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "093a08fa77753b88d6cd225815e0b49df72b46b7523393188137f56579df3cc2",
+      "pinnedSha256": "093a08fa77753b88d6cd225815e0b49df72b46b7523393188137f56579df3cc2"
+    },
+    "joystick-frame": {
+      "file": "joystick_frame.png",
+      "source": "resource_pack/textures/ui/joystick_frame.png",
+      "sha256": "286218c5385c4d0f63384637180bcf96d327dd3ffc94c380dc1f03fac21fc987",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/joystick_frame.png",
+      "size": [
+        64,
+        64
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "286218c5385c4d0f63384637180bcf96d327dd3ffc94c380dc1f03fac21fc987",
+      "pinnedSha256": "286218c5385c4d0f63384637180bcf96d327dd3ffc94c380dc1f03fac21fc987"
+    },
+    "joystick-knob": {
+      "file": "joystick_knob.png",
+      "source": "resource_pack/textures/ui/joystick_knob.png",
+      "sha256": "31a00ef5aa2c829a8afca3e00716687a593fa5d7973d14f4cdf7d97ea94bea73",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/joystick_knob.png",
+      "size": [
+        32,
+        32
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "31a00ef5aa2c829a8afca3e00716687a593fa5d7973d14f4cdf7d97ea94bea73",
+      "pinnedSha256": "31a00ef5aa2c829a8afca3e00716687a593fa5d7973d14f4cdf7d97ea94bea73"
+    },
+    "achievements": {
+      "file": "achievements_pause_menu_icon.png",
+      "source": "resource_pack/textures/ui/achievements_pause_menu_icon.png",
+      "sha256": "4cc57fbff07bc84b8256d25d047abd92c9b26213948a934b8094a24a2f91c7cd",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/achievements_pause_menu_icon.png",
+      "size": [
+        32,
+        32
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "4cc57fbff07bc84b8256d25d047abd92c9b26213948a934b8094a24a2f91c7cd",
+      "pinnedSha256": "4cc57fbff07bc84b8256d25d047abd92c9b26213948a934b8094a24a2f91c7cd"
+    },
+    "how-to-play": {
+      "file": "how_to_play_button_default.png",
+      "source": "resource_pack/textures/ui/how_to_play_button_default.png",
+      "sha256": "6f5a17d7a6270604d4c4bd0db8bec17cf8fa46691fcbc46419efd3e78e842500",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/how_to_play_button_default.png",
+      "size": [
+        15,
+        15
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "6f5a17d7a6270604d4c4bd0db8bec17cf8fa46691fcbc46419efd3e78e842500",
+      "pinnedSha256": "6f5a17d7a6270604d4c4bd0db8bec17cf8fa46691fcbc46419efd3e78e842500"
+    },
+    "screenshot": {
+      "file": "camera-yo.png",
+      "source": "resource_pack/textures/ui/camera-yo.png",
+      "sha256": "da1a6675c28a6f0b895f7d89f1191d3a6869fec4e2e46478f61bda3a474db989",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/camera-yo.png",
+      "size": [
+        14,
+        11
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "da1a6675c28a6f0b895f7d89f1191d3a6869fec4e2e46478f61bda3a474db989",
+      "pinnedSha256": "da1a6675c28a6f0b895f7d89f1191d3a6869fec4e2e46478f61bda3a474db989"
+    },
+    "jump": {
+      "file": "jump.png",
+      "source": "resource_pack/textures/ui/jump.png",
+      "sha256": "fe455f0193dd2061cace38f46815e417108a0155a39b107f5b68eccac9e0db9b",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/jump.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "fe455f0193dd2061cace38f46815e417108a0155a39b107f5b68eccac9e0db9b",
+      "pinnedSha256": "fe455f0193dd2061cace38f46815e417108a0155a39b107f5b68eccac9e0db9b"
+    },
+    "jump-pressed": {
+      "file": "jump_pressed.png",
+      "source": "resource_pack/textures/ui/jump_pressed.png",
+      "sha256": "bfae2246af37c35f89f41b73b7c33b44d8c9409882dbf5d44d7c5a51cb6d7c8c",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/jump_pressed.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "bfae2246af37c35f89f41b73b7c33b44d8c9409882dbf5d44d7c5a51cb6d7c8c",
+      "pinnedSha256": "bfae2246af37c35f89f41b73b7c33b44d8c9409882dbf5d44d7c5a51cb6d7c8c"
+    },
+    "attack": {
+      "file": "attack.png",
+      "source": "resource_pack/textures/ui/attack.png",
+      "sha256": "72e422880e85f0b57818b7024a8602d9ef875c40b9d437a22c34c313b09e02fb",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/attack.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "72e422880e85f0b57818b7024a8602d9ef875c40b9d437a22c34c313b09e02fb",
+      "pinnedSha256": "72e422880e85f0b57818b7024a8602d9ef875c40b9d437a22c34c313b09e02fb"
+    },
+    "attack-pressed": {
+      "file": "attack_pressed.png",
+      "source": "resource_pack/textures/ui/attack_pressed.png",
+      "sha256": "6f72c27298ab5473f6ffb01b58d46b1e4a874e20f9b484bb5dab46b53c468e50",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/attack_pressed.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "6f72c27298ab5473f6ffb01b58d46b1e4a874e20f9b484bb5dab46b53c468e50",
+      "pinnedSha256": "6f72c27298ab5473f6ffb01b58d46b1e4a874e20f9b484bb5dab46b53c468e50"
+    },
+    "interact": {
+      "file": "interact.png",
+      "source": "resource_pack/textures/ui/interact.png",
+      "sha256": "db7dbe03bab193c907987ebb386f955920a4e1b077ccd96532bd0b88aa22a965",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/interact.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "db7dbe03bab193c907987ebb386f955920a4e1b077ccd96532bd0b88aa22a965",
+      "pinnedSha256": "db7dbe03bab193c907987ebb386f955920a4e1b077ccd96532bd0b88aa22a965"
+    },
+    "interact-pressed": {
+      "file": "interact_pressed.png",
+      "source": "resource_pack/textures/ui/interact_pressed.png",
+      "sha256": "6ac8b9d8f3f1a74e43d93362644e03e5bbf5a5a0277148002aaed7b199a785d1",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/interact_pressed.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "6ac8b9d8f3f1a74e43d93362644e03e5bbf5a5a0277148002aaed7b199a785d1",
+      "pinnedSha256": "6ac8b9d8f3f1a74e43d93362644e03e5bbf5a5a0277148002aaed7b199a785d1"
+    },
+    "sneak": {
+      "file": "sneak.png",
+      "source": "resource_pack/textures/ui/sneak.png",
+      "sha256": "2fcc63048e74cb4eb4c4e52e0de6312b48fd54b9626a347f1aece13b1d8a9229",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/sneak.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "2fcc63048e74cb4eb4c4e52e0de6312b48fd54b9626a347f1aece13b1d8a9229",
+      "pinnedSha256": "2fcc63048e74cb4eb4c4e52e0de6312b48fd54b9626a347f1aece13b1d8a9229"
+    },
+    "sneak-pressed": {
+      "file": "sneak_pressed.png",
+      "source": "resource_pack/textures/ui/sneak_pressed.png",
+      "sha256": "883b1820840a7188c8c5f2bf8c8d8cf9fe4fe0ee926c5fbac3dc693766538882",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/sneak_pressed.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "883b1820840a7188c8c5f2bf8c8d8cf9fe4fe0ee926c5fbac3dc693766538882",
+      "pinnedSha256": "883b1820840a7188c8c5f2bf8c8d8cf9fe4fe0ee926c5fbac3dc693766538882"
+    },
+    "sprint": {
+      "file": "sprint.png",
+      "source": "resource_pack/textures/ui/sprint.png",
+      "sha256": "9e5abcb76a60d34ecfe291b19c66008a525844ecb20434ec66a91b0294e4775b",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/sprint.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "9e5abcb76a60d34ecfe291b19c66008a525844ecb20434ec66a91b0294e4775b",
+      "pinnedSha256": "9e5abcb76a60d34ecfe291b19c66008a525844ecb20434ec66a91b0294e4775b"
+    },
+    "sprint-pressed": {
+      "file": "sprint_pressed.png",
+      "source": "resource_pack/textures/ui/sprint_pressed.png",
+      "sha256": "de862fd3122540d9fa73fb8dd8e68ad79295fe08a78ae79d5b1837ae3eeb55da",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/sprint_pressed.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "de862fd3122540d9fa73fb8dd8e68ad79295fe08a78ae79d5b1837ae3eeb55da",
+      "pinnedSha256": "de862fd3122540d9fa73fb8dd8e68ad79295fe08a78ae79d5b1837ae3eeb55da"
+    },
+    "ascend": {
+      "file": "flyingascend.png",
+      "source": "resource_pack/textures/ui/flyingascend.png",
+      "sha256": "546b8b85af6888c6183112bfc03572e30649e8529d001106dd706dbaf44cc943",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/flyingascend.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "546b8b85af6888c6183112bfc03572e30649e8529d001106dd706dbaf44cc943",
+      "pinnedSha256": "546b8b85af6888c6183112bfc03572e30649e8529d001106dd706dbaf44cc943"
+    },
+    "ascend-pressed": {
+      "file": "flyingascend_pressed.png",
+      "source": "resource_pack/textures/ui/flyingascend_pressed.png",
+      "sha256": "ddc6a307855dc1db3624d3faf371410c9fb68e5a37656a9130d2e09c1c14e51f",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/flyingascend_pressed.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "ddc6a307855dc1db3624d3faf371410c9fb68e5a37656a9130d2e09c1c14e51f",
+      "pinnedSha256": "ddc6a307855dc1db3624d3faf371410c9fb68e5a37656a9130d2e09c1c14e51f"
+    },
+    "descend": {
+      "file": "flyingdescend.png",
+      "source": "resource_pack/textures/ui/flyingdescend.png",
+      "sha256": "10463eb341019b5c02d962b37e5e261b821a20566ba54e2553436c059e139d56",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/flyingdescend.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "10463eb341019b5c02d962b37e5e261b821a20566ba54e2553436c059e139d56",
+      "pinnedSha256": "10463eb341019b5c02d962b37e5e261b821a20566ba54e2553436c059e139d56"
+    },
+    "descend-pressed": {
+      "file": "flyingdescend_pressed.png",
+      "source": "resource_pack/textures/ui/flyingdescend_pressed.png",
+      "sha256": "7cb0dda7c09cbef72fcb0e2d6b8ee78de60660f3aa5fe4b1dabbdde96c15e730",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/flyingdescend_pressed.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "7cb0dda7c09cbef72fcb0e2d6b8ee78de60660f3aa5fe4b1dabbdde96c15e730",
+      "pinnedSha256": "7cb0dda7c09cbef72fcb0e2d6b8ee78de60660f3aa5fe4b1dabbdde96c15e730"
+    },
+    "sprint-disabled": {
+      "file": "sprint_disable.png",
+      "source": "resource_pack/textures/ui/sprint_disable.png",
+      "sha256": "e88a1763d541657fe33834d7ed9af66c38de773157ff88bc67f26112d5aa6ba0",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/sprint_disable.png",
+      "size": [
+        22,
+        22
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "e88a1763d541657fe33834d7ed9af66c38de773157ff88bc67f26112d5aa6ba0",
+      "pinnedSha256": "e88a1763d541657fe33834d7ed9af66c38de773157ff88bc67f26112d5aa6ba0"
+    }
+  },
+  "provenance": {
+    "installedRoot": "C:\\XboxGames\\Minecraft for Windows\\Content",
+    "nativeUiArchive": "data/resource_packs/vanilla/__brarchive/ui.brarchive",
+    "nativeTextureArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+    "fullReleaseArchive": {
+      "file": "bedrock-samples-v1.26.60.5-full.zip",
+      "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+    },
+    "definitions": {
+      "pause_screen.json": {
+        "nativeSha256": "07d478ee18ca1a7d83897a36353777b97afdd876eafd9afca7093a9e69ee72bc",
+        "publicSha256": "4abc34ecc4dd9e87d671aae32936d3c51b2ea498fc861f0af710e17be2a158a8",
+        "source": "resource_pack/ui/pause_screen.json"
+      },
+      "death_screen.json": {
+        "nativeSha256": "81860cb284ef9b9d52afc4d1185052661efbbcff0c78d54895f996b663b1e096",
+        "publicSha256": "36e410160611c9b73f3eb5026858988f82e7821e6e3546df3a026d64825ebf33",
+        "source": "resource_pack/ui/death_screen.json"
+      },
+      "hud_screen.json": {
+        "nativeSha256": "d57480f488265329f3feed0cff03841aeb0359b4fe7d7351abf52db255f2a75b",
+        "publicSha256": "fd40b53e5e67f4f6b3799f25821628f80b6aa69c441b012340b8e0f6cb801a8c",
+        "source": "resource_pack/ui/hud_screen.json"
+      },
+      "scoreboards.json": {
+        "nativeSha256": "59284dced1515c9348334128aba06a19fe1d7019195acaef4d4c1a640f22abd5",
+        "publicSha256": "e8692c69e00bfbfcb721760a8b732b5d8daa5fe129f1035fe8b9d115fa01f422",
+        "source": "resource_pack/ui/scoreboards.json"
+      },
+      "ui_common.json": {
+        "nativeSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+        "publicSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "source": "resource_pack/ui/ui_common.json"
+      },
+      "ui_template_buttons.json": {
+        "nativeSha256": "6d89054b8b61fb1a1730069ec7f8547ce9e1ab263780f89b8713b87f17a232f7",
+        "publicSha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+        "source": "resource_pack/ui/ui_template_buttons.json"
+      },
+      "ui_art_assets_common.json": {
+        "nativeSha256": "42b51195188f7c003631bd5ff3395749f903075ff3a1669ab6526d5cd16a1a51",
+        "publicSha256": "f6085c9aa28ed04057e1ff83a90620dc024ab43e72166e2949bfde938c1fce3a",
+        "source": "resource_pack/ui/ui_art_assets_common.json"
+      },
+      "_global_variables.json": {
+        "nativeSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+        "publicSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "source": "resource_pack/ui/_global_variables.json"
+      }
+    }
+  },
+  "demoAssets": {
+    "logo": {
+      "file": "title.png",
+      "source": "resource_pack/textures/ui/title.png",
+      "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/title.png",
+      "size": [
+        1937,
+        333
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662",
+      "pinnedSha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662"
+    },
+    "avatar": {
+      "file": "gamerpic.png",
+      "source": "resource_pack/textures/ui/gamerpic.png",
+      "sha256": "79b65a9d9a1e733f5d93c090cd29694211ee4d23fdb26a4e40dd7471244dcd5d",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/gamerpic.png",
+      "size": [
+        64,
+        64
+      ],
+      "pinnedHttpStatus": 200,
+      "matchesInstalledGame": true,
+      "matchesFullRelease": true,
+      "matchesPinned": true,
+      "fullReleaseSha256": "79b65a9d9a1e733f5d93c090cd29694211ee4d23fdb26a4e40dd7471244dcd5d",
+      "pinnedSha256": "79b65a9d9a1e733f5d93c090cd29694211ee4d23fdb26a4e40dd7471244dcd5d"
+    }
+  },
+  "profile": "Classic Bedrock 26.60 component profiles, fixed GUI scale 2; game routing, player data and actual 3D skin rendering supplied by host",
+  "scope": "Four reusable controls. Original PNG identity and explicit JSON declarations are verified separately from responsive screen layout, native renderer output and Web input behavior.",
+  "geometry": {
+    "PlayerList": {
+      "source": [
+        "pause_screen.json:player_list",
+        "pause_screen.json:player_grid_item/player_grid_item_content/player_button_content",
+        "pause_screen.json:player_pic_panel/player_gamer_pic/player_gamertag",
+        "pause_screen.json:invite_players_button"
+      ],
+      "native": {
+        "topPadding": 8,
+        "titleHeight": 10,
+        "titleGap": 3,
+        "rowHeight": 27,
+        "innerButtonPanelHeight": "100% + 1px",
+        "contentSize": [
+          "100% - 4px",
+          "100% - 4px"
+        ],
+        "contentOffset": [
+          4,
+          0
+        ],
+        "portraitPanelWidth": 20,
+        "portraitPanelOffset": [
+          1,
+          0
+        ],
+        "avatarSize": [
+          18,
+          18
+        ],
+        "avatarBorderSize": [
+          "100% + 2px",
+          "100% + 2px"
+        ],
+        "avatarBorderColor": [
+          0,
+          0,
+          0
+        ],
+        "localIconSize": [
+          13,
+          13
+        ],
+        "nameHeight": 10,
+        "nameShadowDeclared": false,
+        "platformIconSize": [
+          15,
+          15
+        ],
+        "platformPanelExtraWidth": 4,
+        "inviteHeight": 28,
+        "inviteWidth": "100% - 1px",
+        "inviteGap": 3
+      },
+      "web": {
+        "defaultWidthCss": 300,
+        "topPaddingCss": 16,
+        "titleCssHeight": 20,
+        "titleBottomGapCss": 6,
+        "rowCssHeight": 54,
+        "buttonCssHeight": 56,
+        "contentOuterOffsetCss": [
+          14,
+          10
+        ],
+        "contentBottomInsetCss": 10,
+        "portraitPanelWidthCss": 40,
+        "portraitOffsetWithinContentCss": 2,
+        "avatarCss": [
+          36,
+          36
+        ],
+        "avatarBorderOutsetCss": 2,
+        "nameLineHeightCss": 20,
+        "platformCss": [
+          30,
+          30
+        ],
+        "inviteCssHeight": 56,
+        "inviteCssWidth": "calc(100% - 2px)",
+        "inviteGapCss": 6,
+        "onlineStatusLineCss": [
+          14,
+          16
+        ],
+        "contentRightInsetCss": 6,
+        "avatarOuterOffsetCss": [
+          16,
+          10
+        ],
+        "nameOuterOffsetCss": [
+          54,
+          18
+        ],
+        "disabledBannerContentSize": "92% x 90% of outer surface, source offset (14px,0), vertically centered",
+        "localIconOuterOffsetCss": [
+          23,
+          15
+        ],
+        "bottomPaddingCss": 0,
+        "buttonCaptionShadow": "none, as declared by common_buttons.new_ui_binding_button_label; actual caption overrides inherited shared Button Web profile.",
+        "disabledVisibleAlignment": "Visible avatar/name are vertically centered in an exact 36 CSS px inner line, mathematically equivalent to centered source content while avoiding intermediate 90%-height DOM quantization."
+      },
+      "behavior": "Native buttons in a vertically labeled toolbar, roving ArrowUp/Down/Home/End skips disabled rows. Enter/Space and pointer selection report player ID. Controlled selectedId keeps ownership with host. Invite callback is optional; absent callback omits invite button.",
+      "limits": [
+        "The native action opens a player profile card; persistent selectedId is an application state extension and does not invent a persistent selected skin. aria-current identifies host selection.",
+        "Online/offline status text is an explicit host extension. The Classic pause player row contains a gamertag and platform/local icon, not this second status line. Supplying no online property preserves the one-line source profile.",
+        "Avatar PNG/React slot and platform icon are caller supplied. No portrait, skin, gamertag or network presence is fabricated.",
+        "Permission button, friends drawer, engine-specific gamerpic visibility and disabled-banner bindings are not implemented as multiplayer transport. Disabled Web rows use the source banner skin and native disabled semantics.",
+        "Flattening includes both common.new_ui_button_panel content inset (3 game px) and pause.player_button_content inset/offset, not just the leaf controls. Disabled banner uses its independent 92%/90% layout; avatar and name remain aligned.",
+        "The reusable list omits social controls, disconnected/IP labels and their surrounding trailing spacers; bottom padding is explicitly zero. Disabled MainBannersHover paints its full outer rectangle without the active button border."
+      ]
+    },
+    "TouchControls": {
+      "source": [
+        "Original textures/ui/joystick_frame.png and joystick_knob.png",
+        "Original 22x22 action PNGs and pressed variants",
+        "Installed Classic HUD/touch texture inventory; no public native layout/input algorithm was found in hud_screen.json"
+      ],
+      "nativeAssets": {
+        "joystickFrame": [
+          64,
+          64
+        ],
+        "joystickKnob": [
+          32,
+          32
+        ],
+        "actionImages": [
+          22,
+          22
+        ],
+        "variants": [
+          "jump",
+          "attack",
+          "interact",
+          "sneak",
+          "sprint",
+          "flyingascend",
+          "flyingdescend"
+        ],
+        "sourceAlpha": "Original PNG alpha is unchanged. Sprint includes a real disabled PNG."
+      },
+      "web": {
+        "dataFidelity": "renderer-reconstruction",
+        "variant": "joystick",
+        "frameCss": [
+          128,
+          128
+        ],
+        "knobCss": [
+          64,
+          64
+        ],
+        "travelRadiusCss": 32,
+        "actionCss": [
+          44,
+          44
+        ],
+        "actionGridColumns": 3,
+        "actionGapCss": 8,
+        "groupGapCss": 32,
+        "opacityDefault": 1,
+        "movement": "Unit-circle normalized x right-positive / y forward-negative; diagonal keyboard vectors normalize to length 1."
+      },
+      "behavior": "Every pointer ID owns a held-action source. Two pointers holding the same action emit one down and one final up. Pointer up/cancel/lost capture, disabling, removing an action and unmount release held state. Joystick captures its first pointer, clamps its vector, and returns to zero on release/cancel/lost capture/unmount. Native buttons also support held Space/Enter and joystick Arrow keys; blur releases keyboard holds. Assistive click produces a down/up pulse. No global OS key injection or network action is performed.",
+      "limits": [
+        "No invented D-pad glyphs or Java atlas UV are used. Only the original standalone joystick/action PNGs are painted. A D-pad variant is deferred until its Bedrock resource/UV behavior can be established.",
+        "Bitmap dimensions do not prove native control positions, GUI scale, joystick travel/deadzone, finger sliding policy, alpha settings or engine gesture arbitration. All current slot spacing and input policy are explicitly Web reconstruction.",
+        "Opacity defaults to preserving original asset alpha, not an asserted native touch-opacity setting. No synthetic disabled artwork is drawn.",
+        "The CSS grid may wrap as a group but the 128/64/44px source-profile regions never shrink to fit; no animation or hidden timer is added."
+      ]
+    },
+    "PauseMenu": {
+      "source": [
+        "pause_screen.json:pause_screen_main_panels/left_buttons_panel/the_rest_panel/menu_the_rest_panel/menu_background",
+        "pause_screen.json:pause_button_template/smaller_buttons_panel/skin_panel/skin_viewer_panel/info_panel",
+        "ui_art_assets_common.json:title_image"
+      ],
+      "native": {
+        "mainSize": [
+          "113%",
+          "113%"
+        ],
+        "leftPanelWidth": "55%",
+        "leftBackground": "screen_background",
+        "leftAlpha": 0.5,
+        "leftTopFiller": 10,
+        "menuPanelSize": [
+          "60%",
+          "60%"
+        ],
+        "menuBackgroundOffset": [
+          "13%",
+          "0%"
+        ],
+        "menuButtonHeight": 28,
+        "primaryVerticalGap": 3,
+        "titlePanelHeight": "20%x",
+        "logoTexture": "textures/ui/title",
+        "logoBottomGap": 4,
+        "footerWrapperHeight": 32,
+        "footerButtonSize": [
+          24,
+          24
+        ],
+        "footerItemExtraWidth": 4,
+        "footerGap": "2%",
+        "footerSidePadding": 5,
+        "footerBottomPadding": 1,
+        "footerPressedAlpha": 0.65,
+        "footerGlyphs": {
+          "achievements": [
+            26,
+            14
+          ],
+          "how-to-play": [
+            14,
+            14
+          ],
+          "screenshot": [
+            24,
+            12
+          ]
+        },
+        "skinPanelWidth": "50% - 75px",
+        "viewerHeight": 170,
+        "viewerOffset": [
+          0,
+          11
+        ],
+        "paperDollOffset": [
+          0,
+          -22
+        ],
+        "paperDollRenderer": "paper_doll_renderer",
+        "dressingRoomMinimumHeight": 22,
+        "dressingRoomOffset": [
+          0,
+          -5
+        ],
+        "legacyInfoPanelWidth": 150,
+        "legacyBackgroundTexture": "menubackground",
+        "legacyBackgroundAlpha": 0.8
+      },
+      "web": {
+        "canvasDefaultCss": [
+          960,
+          540
+        ],
+        "mainSize": "113% by 113%, centered",
+        "leftWidth": "55% of main",
+        "leftTopFillerCss": 20,
+        "menuPanel": "60% by 60% inside remaining left body",
+        "buttonPanelWidth": "menu width - 20px",
+        "buttonPanelCenterX": "63% (center plus source 13% offset)",
+        "primaryButtonHeightCss": 56,
+        "primaryGapCss": 6,
+        "logoAspectRatio": 5,
+        "logoBottomGapCss": 8,
+        "defaultPrimaryActions": [
+          "resume",
+          "settings",
+          "store",
+          "quit"
+        ],
+        "defaultFooterActions": [
+          "achievements",
+          "how-to-play",
+          "screenshot"
+        ],
+        "defaultSkinActions": [
+          "dressing-room"
+        ],
+        "footerWrapperCssHeight": 64,
+        "footerButtonCss": [
+          48,
+          48
+        ],
+        "footerItemCssWidth": 56,
+        "skinPanelWidth": "50% - 150px",
+        "skinViewerCssHeight": 340,
+        "skinViewerOffsetCss": [
+          0,
+          22
+        ],
+        "legacySidebarWidthCss": 300,
+        "autoFocusDefault": false,
+        "footerGlyphFit": "contain centered inside the declared source image box, preserving actual PNG aspect",
+        "buttonCaptionShadow": "none, as declared by common_buttons.new_ui_binding_button_label; actual caption overrides inherited shared Button Web profile."
+      },
+      "behavior": "All menu actions are typed callbacks. Main actions support ArrowUp/Down/Home/End focus and native button activation. Escape invokes resume only while focus is in the component and resume is enabled. autoFocus is opt-in for embedded galleries. Disabled actions and full disabled mode block routes; full disabled also disables supplied player rows and invite.",
+      "nativeObservation": {
+        "file": ".cache/native-system-screens/pause-singleplayer-native-lossless.png",
+        "size": [
+          2568,
+          1400
+        ],
+        "guiScale": 5,
+        "locale": "zh-CN",
+        "observed": "Four primary buttons, three footer icons and a paper-doll/dressing-room area are visible. The native current singleplayer branch has a top-right social drawer, no inline legacy player sidebar. No unmasked native-to-browser frame equality is claimed."
+      },
+      "limits": [
+        "The 960x540 canvas is a Web default, not a native fixed screen dimension. Callers can set finite width/height; percent layout is an explicit source-layout reconstruction pending native viewport/anchor calibration.",
+        "The optional players prop composes the legacy 150-game-pixel info panel. It is not asserted to be the active 26.60 singleplayer social-drawer layout. Native friends drawer, announcements, trial/editor branches and controller helpers are deferred.",
+        "The optional logo is host art. The demo uses the actual original title.png, kept outside library textures; no Minecraft logo is required or bundled by the library component itself.",
+        "skinRenderer is a host React slot. There is no CSS/sprite imitation of the native 3D paper doll. Empty slots remain empty; optional playerName is an explicitly labeled host-text reconstruction of a native custom name tag.",
+        "When a legacy sidebar is explicitly composed, the host skin area is shifted left by its 300px width to avoid overlap; this extra composition rule is not a source-native screen certification.",
+        "Shared Button skins implement Web states. The source footer pressed_alpha=.65 is recorded, but its native shader/content/border propagation is not certified by these component states.",
+        "The footer JSON declares image boxes, not source pixel aspect ratios: achievements PNG is 32x32 and camera PNG14x11. Native lossless capture shows preserved shape. The browser profile uses centered contain; an explicit keep_ratio default is not proven solely by these JSON declarations."
+      ]
+    },
+    "DeathScreen": {
+      "source": [
+        "death_screen.json:you_died_panel/death_reason_panel/labels_panel/buttons_panel",
+        "death_screen.json:death_screen_content/background_gradient"
+      ],
+      "native": {
+        "labelsPanelSize": [
+          "100%",
+          "50%"
+        ],
+        "labelsAnchor": "top_middle",
+        "titlePanelSize": [
+          "100%",
+          "10%"
+        ],
+        "titleColor": [
+          1,
+          1,
+          1
+        ],
+        "titleFontEnum": "large",
+        "titleScale": 1.25,
+        "titleShadow": true,
+        "titleReasonGap": 12,
+        "reasonPanelSize": [
+          "100%",
+          "20%"
+        ],
+        "reasonMaxSize": [
+          "70%",
+          "fill"
+        ],
+        "reasonScale": 1.25,
+        "reasonShadow": true,
+        "labelsBottomPadding": 20,
+        "buttonsPanelSize": [
+          "30%",
+          "50%"
+        ],
+        "buttonsAnchor": "bottom_middle",
+        "buttonsTopPadding": 14,
+        "buttonHeight": 26,
+        "buttonGap": 8,
+        "loadingAnchor": "top_middle",
+        "loadingOffset": [
+          0,
+          "85%"
+        ],
+        "gradientRenderer": "gradient_renderer",
+        "color1": [
+          0.313,
+          0,
+          0,
+          0.37
+        ],
+        "color2": [
+          0.5,
+          0.188,
+          0.188,
+          0.627
+        ]
+      },
+      "web": {
+        "canvasDefaultCss": [
+          960,
+          540
+        ],
+        "labelsHeight": "50%",
+        "titlePanelHeight": "10% of labels",
+        "titleFont": "Text lg variable * 1.25",
+        "reasonPanelHeight": "20% of labels",
+        "reasonFont": "Text md variable * 1.25",
+        "titleReasonGapCss": 24,
+        "buttonsWidth": "30%",
+        "buttonsLeft": "35%",
+        "buttonsHeight": "50%",
+        "buttonsTopPaddingCss": 28,
+        "buttonCssHeight": 52,
+        "buttonGapCss": 16,
+        "loadingTop": "85%",
+        "gradient": "Vertical CSS interpolation of the two declared source endpoints; data-fidelity=renderer-reconstruction",
+        "labelsTrailingSpacerCss": 40,
+        "readyGeometryAt960x540": {
+          "titlePanel": [
+            0,
+            125,
+            960,
+            27
+          ],
+          "reasonPanel": [
+            0,
+            176,
+            960,
+            54
+          ],
+          "respawnButton": [
+            336,
+            298,
+            288,
+            52
+          ],
+          "quitButton": [
+            336,
+            366,
+            288,
+            52
+          ]
+        },
+        "buttonCaptionShadow": "none, as declared by common_buttons.new_ui_binding_button_label; actual caption overrides inherited shared Button Web profile."
+      },
+      "behavior": "ready/loading is controlled by the host. Respawn/quit visibility and enabled state are independent props and use native buttons with typed callbacks. loading omits title/action controls and exposes a status label. No automatic respawn, timers, game save, command engine or routing is performed.",
+      "limits": [
+        "Classic death_screen.json has no score label. The optional score/scoreLabel region is explicitly data-source=host-extension and absent unless supplied.",
+        "The source custom gradient gives endpoint RGBA but no exposed interpolation direction, color-space policy or premultiplied quantization. CSS vertical interpolation is a declared renderer reconstruction, not an original PNG or native-frame proof.",
+        "DeathScreen is a reusable canvas/region, not a modal focus trap; the host owns scene placement, page/game input ownership and screen route state.",
+        "The final 20-game-pixel labels spacer is a stack child, not container padding. This preserves title/reason percentages against the full H/2 labels panel.",
+        "variant=classic selects the older JSON profile. Default native uses independently identified installed HTML UI geometry, palette and typography. Browser/native text, radial gradient and underlying world/HUD rasterization remains outside complete frame equivalence."
+      ],
+      "nativeRuntimeObservation": {
+        "file": ".cache/native-system-screens/death-classic-native-lossless.png",
+        "size": [
+          2568,
+          1400
+        ],
+        "guiScale": 5,
+        "locale": "zh-CN",
+        "result": "Active installed gameplay.html loads the HTML UI gameplay bundle. Its death component, typography, palette and rem scaling explain the captured runtime. Native is now the default; variant=classic retains the old resource JSON profile.",
+        "activeOverrideResolved": true,
+        "nativeFrameEquality": false
+      },
+      "defaultVariant": "native",
+      "classicProfile": {
+        "source": [
+          "death_screen.json:you_died_panel/death_reason_panel/labels_panel/buttons_panel",
+          "death_screen.json:death_screen_content/background_gradient"
+        ],
+        "web": {
+          "canvasDefaultCss": [
+            960,
+            540
+          ],
+          "labelsHeight": "50%",
+          "titlePanelHeight": "10% of labels",
+          "titleFont": "Text lg variable * 1.25",
+          "reasonPanelHeight": "20% of labels",
+          "reasonFont": "Text md variable * 1.25",
+          "titleReasonGapCss": 24,
+          "buttonsWidth": "30%",
+          "buttonsLeft": "35%",
+          "buttonsHeight": "50%",
+          "buttonsTopPaddingCss": 28,
+          "buttonCssHeight": 52,
+          "buttonGapCss": 16,
+          "loadingTop": "85%",
+          "gradient": "Vertical CSS interpolation of the two declared source endpoints; data-fidelity=renderer-reconstruction",
+          "labelsTrailingSpacerCss": 40,
+          "readyGeometryAt960x540": {
+            "titlePanel": [
+              0,
+              125,
+              960,
+              27
+            ],
+            "reasonPanel": [
+              0,
+              176,
+              960,
+              54
+            ],
+            "respawnButton": [
+              336,
+              298,
+              288,
+              52
+            ],
+            "quitButton": [
+              336,
+              366,
+              288,
+              52
+            ]
+          },
+          "buttonCaptionShadow": "none, as declared by common_buttons.new_ui_binding_button_label; actual caption overrides inherited shared Button Web profile."
+        },
+        "limits": [
+          "Classic death_screen.json has no score label. The optional score/scoreLabel region is explicitly data-source=host-extension and absent unless supplied.",
+          "The source custom gradient gives endpoint RGBA but no exposed interpolation direction, color-space policy or premultiplied quantization. CSS vertical interpolation is a declared renderer reconstruction, not an original PNG or native-frame proof.",
+          "Font enum to numerical Text mapping, 1.25 font scaling, line boxes, baseline and shadow darkening are Web profile choices pending actual native death screenshot calibration. Source large/normal scale declarations are retained.",
+          "DeathScreen is a reusable canvas/region, not a modal focus trap; the host owns scene placement, page/game input ownership and screen route state.",
+          "The final 20-game-pixel labels spacer is a stack child, not container padding. This preserves title/reason percentages against the full H/2 labels panel.",
+          "A current native death capture is now available and visibly differs from this base Classic JSON profile. Classic-looking styling does not establish that the base resource JSON is the active runtime screen. An independent override audit is in progress; no runtime pixel-equivalence claim is made."
+        ]
+      },
+      "nativeProfile": {
+        "sourceProof": [
+          {
+            "installedPath": "data/gui/dist/hbui/gameplay.html",
+            "sha256": "7e58d5cf68c9ae4bc13639d81a7f4c42c5cdb496b37005e507db011082f488ce",
+            "publication": "Private installed source; neither bundle nor original font is distributed by this library."
+          },
+          {
+            "installedPath": "data/gui/dist/hbui/gameplay-6de8e340eddced55490b.js",
+            "sha256": "9e7efe423b6cc8a1c1fa92756bd181675cffa51a4728bce386b0081cad1bb979",
+            "publication": "Private installed source; neither bundle nor original font is distributed by this library."
+          },
+          {
+            "installedPath": "data/gui/dist/hbui/gameplay-2778064b6874c712adbb.css",
+            "sha256": "04fb7a7ea41955c53cf51c0e6dc9e0928b29b7a8150fdcd83d04765742528ab5",
+            "publication": "Private installed source; neither bundle nor original font is distributed by this library."
+          },
+          {
+            "installedPath": "data/gui/dist/hbui/gameplay-theme-922e7c15cd35326d4a6a.css",
+            "sha256": "137dda4d1f90e14afeae77b6b9002bdf25615295f7ae1bfb9d3ae6a7bb82cd9c",
+            "publication": "Private installed source; neither bundle nor original font is distributed by this library."
+          },
+          {
+            "installedPath": "data/gui/dist/hbui/fonts/Minecraft-Ten-ed29a1bbe6a620b83378.otf",
+            "sha256": "1dd0c122794d0ac5c504e853143e078bd295f24b3a0d6ddd23dba2ca70b6e815",
+            "publication": "Private installed source; neither bundle nor original font is distributed by this library."
+          },
+          {
+            "installedPath": "data/gui/dist/hbui/fonts/Minecraft-Seven-66398119c2c20ee73019.otf",
+            "sha256": "3ac46d75d4fe3aae7412d18e09047b70073a8e779488f72560c09f8c474fecc6",
+            "publication": "Private installed source; neither bundle nor original font is distributed by this library."
+          }
+        ],
+        "entry": "gameplay.html -> gameplay bundle -> HN death view; BN CSS mapping; gc guiScale; IP vanilla palette; cm/hm/ym buttons; tu Typography",
+        "guiScale": {
+          "default": 2,
+          "remCss": "5 * guiScale; local CSS custom property only",
+          "source": "gc sets documentElement fontSize to 5*guiScale; this component scopes the unit to itself."
+        },
+        "mainWidthRem": 32,
+        "spacersFlex": [
+          3,
+          5,
+          2
+        ],
+        "gradient": "radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.4) 0%,rgba(45,4,4,.8) 100%)",
+        "typography": {
+          "title": {
+            "family": "Minecraft Ten v2",
+            "sizeRem": 3.2,
+            "lineHeightRem": 4
+          },
+          "body": {
+            "family": "Minecraft Seven v2",
+            "sizeRem": 1.6,
+            "lineHeightRem": 2
+          },
+          "hero": {
+            "family": "Minecraft Ten v2",
+            "sizeRem": 2,
+            "lineHeightRem": 2.4
+          },
+          "secondary": {
+            "family": "Minecraft Seven v2",
+            "sizeRem": 1.6,
+            "lineHeightRem": 2
+          },
+          "letterSpacingRem": 0.04,
+          "shadowRem": [
+            0.2,
+            0.2
+          ],
+          "shadowColor": "rgba(0,0,0,.3)",
+          "heroShadow": "variant hero && !disabled",
+          "secondaryShadow": false,
+          "fontTokens": [
+            "--mc-death-title-font",
+            "--mc-death-body-font"
+          ],
+          "fallback": "Open library font through --mc-font. Supply separately licensed original families for native text metrics."
+        },
+        "buttons": {
+          "faceHeightRem": 4,
+          "borderRem": 0.2,
+          "elevationRem": 0.4,
+          "totalHeightRem": 4.8,
+          "gapRem": 0.4,
+          "trailingSpacerRem": 1.2,
+          "captionPaddingInlineRem": 2,
+          "primary": {
+            "background": "#3c8527",
+            "hover": "#2a641c",
+            "pressed": "#1d4d13",
+            "shadow": "#1d4d13",
+            "text": "#ffffff",
+            "border": "#1e1e1f",
+            "specularTop": "rgba(255,255,255,.2)",
+            "specularBottom": "rgba(255,255,255,.1)"
+          },
+          "secondary": {
+            "background": "#d0d1d4",
+            "hover": "#b1b2b5",
+            "pressed": "#b1b2b5",
+            "shadow": "#58585a",
+            "text": "#1e1e1f",
+            "border": "#1e1e1f",
+            "specularTop": "rgba(255,255,255,.6)",
+            "specularBottom": "rgba(255,255,255,.4)"
+          },
+          "disabled": {
+            "background": "#b1b2b5",
+            "shadow": "#8c8d90",
+            "text": "#58585a",
+            "border": "#58585a"
+          }
+        },
+        "loadingBottomRem": 6.4,
+        "scope": "Controlled ready/loading content, native HTML button behavior and host callbacks. No engine retry/timing/routing/world renderer. Score is an absent-by-default host extension. Original fonts are optional caller/local-preview inputs. Whole native-frame equality is not claimed.",
+        "loadingIndicator": {
+          "source": "data/gui/dist/hbui/assets/animation-074ed0ba8c16bb30e36c.gif",
+          "sourceModule": 26121,
+          "cssClass": "ed618c1f0ad81ad31820",
+          "sizeRem": [
+            2,
+            2
+          ],
+          "gapRem": 0.4,
+          "bodyShadow": false,
+          "publication": "Private installed GIF is not redistributed. Optional loadingIndicator caller slot; no fabricated replacement. Default exposes the source body status without a spinner.",
+          "sha256": "27d3ad3174cbe640acbed6346646ba1f8d69891dd2e8aaed63ccd8c6536270b3"
+        },
+        "behavior": {
+          "escape": "Native ready routes component-scoped Escape to onQuit only when quit is visible/enabled; host onKeyDown can preventDefault. Loading does not route Escape. No document/global keyboard listener.",
+          "quitLabel": "Game menu for native; Main menu for classic; explicit quitLabel overrides either.",
+          "loadingIndicator": "Optional host slot for the licensed original GIF; animation belongs to supplied content. The component owns no animation timers or engine retries."
+        }
+      }
+    }
+  },
+  "boundaries": [
+    "All PNGs preserve original Mojang ownership and bytes, including intrinsic alpha. New controls do not relicense assets as MIT artwork.",
+    "Normal/large font sizes inherit existing Text CSS variables. The optional Mojangles profile is 20/40/60px; base library variables are 18/36/54px. Source font enums and shadow flags do not alone prove numeric browser font metrics.",
+    "Only explicit geometry and decoded original resources can be source-certified here. Web input handling, host extensions and reconstructed native custom-renderer output are labeled separately.",
+    "Callbacks never inject global operating-system keyboard input or perform multiplayer/server operations. DOM reads occur only after mount or inside input events."
+  ]
+}

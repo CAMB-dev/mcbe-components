@@ -1,0 +1,110 @@
+@import './game-control-textures.css';
+.mc-player-list[hidden],.mc-touch-controls[hidden],.mc-pause-menu[hidden],.mc-death-screen[hidden] { display: none; }
+.mc-game-controls-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* Native new_ui_binding_button_label explicitly has shadow:false. Keep the
+   shared Button profile intact; declare this on the actual caption so hover
+   shadows on its parent cannot reintroduce a shadow through inheritance. */
+.mc-player-list .mc-button__label,.mc-pause-menu .mc-button__label,.mc-death-screen .mc-button__label { text-shadow: none; }
+.mc-player-list { box-sizing: border-box; width: 300px; max-width: 100%; min-width: 0; padding-top: 16px; color: #fff; font: 400 var(--mc-font-size)/20px var(--mc-font); }
+.mc-player-list .mc-player-list__title { display: block; height: 20px; margin-bottom: 6px; line-height: 20px; }
+.mc-player-list__row { position: relative; height: 54px; }
+.mc-player-list .mc-player-list__player { --button-skin: var(--mc-game-texture-dark-default); --button-bg: #474747; --button-text: #fff; display: block; width: 100%; height: 56px; min-height: 56px; padding: 0; border-color: #131313; text-shadow: none; }
+.mc-player-list .mc-player-list__player:is(:hover,:focus-visible):not(:disabled) { --button-skin: var(--mc-game-texture-dark-hover); --button-bg: #585858; border-color: #fff; text-shadow: none; }
+.mc-player-list .mc-player-list__player:active:not(:disabled) { --button-skin: var(--mc-game-texture-dark-pressed); }
+.mc-player-list .mc-player-list__player:disabled { --button-bg: #757575; color: #fff; border-color: transparent; }
+.mc-player-list .mc-player-list__player:disabled::before { inset: -2px; border: 2px solid transparent; border-image: var(--mc-game-texture-player-banner) 1 fill / 2px stretch; background: transparent; }
+.mc-player-list .mc-player-list__player.mc-button > .mc-button__label { position: static; transform: none; }
+.mc-player-list__content { position: absolute; left: 12px; right: 4px; top: 8px; bottom: 8px; display: flex; align-items: center; }
+.mc-player-list__player:disabled .mc-player-list__content { top: 50%; bottom: auto; right: auto; width: calc(92% + 3.68px); height: 36px; transform: translateY(-50%); }
+.mc-player-list__player:active:not(:disabled) .mc-player-list__content { transform: translateY(2px); }
+.mc-player-list__portrait-panel { position: relative; flex: 0 0 40px; left: 2px; height: 100%; display: flex; align-items: center; }
+.mc-player-list__avatar { position: relative; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; }
+.mc-player-list__avatar > img { display: block; width: 36px; height: 36px; object-fit: contain; image-rendering: pixelated; }
+.mc-player-list__avatar-border { position: absolute; inset: -2px; border: 2px solid transparent; border-image: var(--mc-game-texture-pause-border) 1 / 2px stretch; filter: brightness(0); pointer-events: none; image-rendering: pixelated; }
+.mc-player-list__local { width: 26px; height: 26px; transform: translateX(2px); background: var(--mc-game-texture-lan-icon) 0 0 / 26px 26px no-repeat; image-rendering: pixelated; }
+.mc-player-list__identity { min-width: 0; flex: 1; text-align: left; }
+.mc-player-list__name { display: block; line-height: 20px; overflow: hidden; white-space: nowrap; }
+.mc-player-list__status { display: block; font-size: 14px; line-height: 16px; }
+.mc-player-list__platform { flex: none; width: 30px; height: 30px; margin-inline-end: 8px; }
+.mc-player-list__platform > img { width: 30px; height: 30px; object-fit: contain; image-rendering: pixelated; }
+.mc-player-list .mc-player-list__invite { width: calc(100% - 2px); height: 56px; min-height: 56px; margin-top: 6px; padding: 0; }
+.mc-touch-controls { display: flex; align-items: center; justify-content: space-between; gap: 32px; width: max-content; max-width: 100%; flex-wrap: wrap; }
+.mc-touch-controls__joystick,.mc-touch-controls__action { box-sizing: border-box; display: block; flex: none; margin: 0; padding: 0; border: 0; border-radius: 0; appearance: none; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; background-color: transparent; image-rendering: pixelated; }
+.mc-touch-controls__joystick { position: relative; width: 128px; height: 128px; background: var(--mc-game-texture-joystick-frame) 0 0 / 128px 128px no-repeat; }
+.mc-touch-controls__knob { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; background: var(--mc-game-texture-joystick-knob) 0 0 / 64px 64px no-repeat; pointer-events: none; }
+.mc-touch-controls__actions { display: grid; grid-template-columns: repeat(3,44px); gap: 8px; }
+.mc-touch-controls__action { width: 44px; height: 44px; background-position: 0 0; background-size: 44px 44px; background-repeat: no-repeat; }
+.mc-touch-controls__joystick:focus-visible,.mc-touch-controls__action:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.mc-pause-menu,.mc-death-screen { box-sizing: border-box; position: relative; flex: none; overflow: hidden; color: #fff; isolation: isolate; }
+.mc-pause-menu__main { position: absolute; left: 50%; top: 50%; width: 113%; height: 113%; transform: translate(-50%,-50%); display: flex; }
+.mc-pause-menu__left { position: relative; flex: 0 0 55%; height: 100%; }
+.mc-pause-menu__backdrop { position: absolute; inset: 0; background: var(--mc-game-texture-screen-background) 0 0 / 2px 2px repeat; opacity: .5; }
+.mc-pause-menu__body { position: absolute; top: 20px; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; }
+.mc-pause-menu__menu { position: relative; width: 60%; height: 60%; }
+.mc-pause-menu__buttons { position: absolute; left: 63%; top: 50%; transform: translate(-50%,-50%); width: calc(100% - 20px); }
+.mc-pause-menu__logo { width: 100%; aspect-ratio: 5; margin-bottom: 8px; }
+.mc-pause-menu__logo > img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+.mc-pause-menu__actions { display: flex; flex-direction: column; gap: 6px; }
+.mc-pause-menu .mc-pause-menu__actions > .mc-button { width: 100%; height: 56px; min-height: 56px; padding: 0; }
+.mc-pause-menu__footer { display: flex; align-items: center; justify-content: center; gap: 2%; height: 64px; margin-bottom: 2px; padding: 0 10px; }
+.mc-pause-menu__footer-item { flex: none; width: 56px; height: 64px; display: flex; align-items: center; justify-content: center; }
+.mc-pause-menu .mc-pause-menu__footer-button { width: 48px; height: 48px; min-height: 48px; padding: 0; }
+.mc-pause-menu__footer-icon { display: block; background-position: center; background-size: contain; background-repeat: no-repeat; image-rendering: pixelated; }
+.mc-pause-menu__footer-icon[data-icon='achievements'] { width: 52px; height: 28px; background-image: var(--mc-game-texture-achievements); }
+.mc-pause-menu__footer-icon[data-icon='how-to-play'] { width: 28px; height: 28px; background-image: var(--mc-game-texture-how-to-play); }
+.mc-pause-menu__footer-icon[data-icon='screenshot'] { width: 48px; height: 24px; background-image: var(--mc-game-texture-screenshot); }
+.mc-pause-menu__skin { position: absolute; right: 0; bottom: 0; width: calc(50% - 150px); height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.mc-pause-menu__skin-viewer { position: relative; flex: none; width: 100%; height: 340px; transform: translateY(22px); }
+.mc-pause-menu__skin-viewer > * { max-width: 100%; max-height: 100%; }
+.mc-pause-menu .mc-pause-menu__player-name { position: relative; text-align: center; }
+.mc-pause-menu__skin-actions { display: flex; justify-content: center; gap: 6px; position: relative; transform: translateY(-10px); }
+.mc-pause-menu .mc-pause-menu__skin-actions > .mc-button { min-height: 44px; padding: 6px 8px; }
+.mc-pause-menu__sidebar { position: absolute; right: 0; top: 0; width: 300px; height: 100%; box-sizing: border-box; padding: 0 4px 16px; overflow: auto; isolation: isolate; border: 2px solid transparent; border-image: var(--mc-game-texture-pause-border) 1 / 2px stretch; image-rendering: pixelated; }
+.mc-pause-menu__sidebar::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--mc-game-texture-menu-background) 0 0 / 4px 4px repeat; opacity: .8; pointer-events: none; }
+.mc-pause-menu__sidebar .mc-player-list { width: 100%; }
+.mc-pause-menu:has(.mc-pause-menu__sidebar) .mc-pause-menu__skin { right: 300px; }
+.mc-death-screen__gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgb(31.3% 0% 0% / .37), rgb(50% 18.8% 18.8% / .627)); pointer-events: none; }
+.mc-death-screen__labels { position: absolute; top: 0; left: 0; width: 100%; height: 50%; display: flex; flex-direction: column; align-items: center; }
+.mc-death-screen__labels::after { content: ''; display: block; flex: none; width: 100%; height: 40px; }
+.mc-death-screen__labels-fill { flex: 1; }
+.mc-death-screen__title-panel { flex: none; width: 100%; height: 10%; text-align: center; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
+.mc-death-screen .mc-death-screen__title { font-size: calc(var(--mc-font-size-lg) * 1.25); white-space: nowrap; line-height: 1; }
+.mc-death-screen__reason-panel { flex: none; width: 100%; height: 20%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.mc-death-screen .mc-death-screen__reason { display: inline-block; max-width: 70%; font-size: calc(var(--mc-font-size) * 1.25); line-height: 1.25; }
+.mc-death-screen .mc-death-screen__score { display: block; line-height: 20px; }
+.mc-death-screen__buttons { position: absolute; left: 35%; bottom: 0; width: 30%; height: 50%; padding-top: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+.mc-death-screen .mc-death-screen__buttons > .mc-button { flex: none; width: 100%; height: 52px; min-height: 52px; padding: 0; }
+.mc-death-screen .mc-death-screen__loading { position: absolute; top: 85%; left: 50%; transform: translateX(-50%); line-height: 20px; }
+
+/* Current installed HTML UI profile. All units are local; never change the host rem. */
+.mc-death-screen--native { display: flex; align-items: center; justify-content: center; }
+.mc-death-screen--native .mc-death-screen__gradient { background: radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.4) 0%,rgba(45,4,4,.8) 100%); }
+.mc-death-screen--native .mc-death-screen__main { position: relative; display: flex; flex-direction: column; flex: none; width: calc(var(--mc-death-rem) * 32); height: 100%; text-align: center; z-index: 1; }
+.mc-death-screen--native .mc-death-screen__space-above { flex: 3; }
+.mc-death-screen--native .mc-death-screen__space-between { flex: 5; }
+.mc-death-screen--native .mc-death-screen__space-below { flex: 2; }
+.mc-death-screen--native .mc-death-screen__message,.mc-death-screen--native .mc-death-screen__native-actions { display: flex; flex: none; flex-direction: column; min-width: 0; }
+.mc-death-screen--native .mc-death-screen__title { font: 400 calc(var(--mc-death-rem) * 3.2)/calc(var(--mc-death-rem) * 4) var(--mc-death-title-font,"Minecraft Ten v2",var(--mc-font)); letter-spacing: calc(var(--mc-death-rem) * .04); white-space: normal; text-shadow: calc(var(--mc-death-rem) * .2) calc(var(--mc-death-rem) * .2) 0 rgba(0,0,0,.3); }
+.mc-death-screen--native .mc-death-screen__reason,.mc-death-screen--native .mc-death-screen__score,.mc-death-screen--native .mc-death-screen__loading { display: block; max-width: none; font: 400 calc(var(--mc-death-rem) * 1.6)/calc(var(--mc-death-rem) * 2) var(--mc-death-body-font,"Minecraft Seven v2",var(--mc-font)); letter-spacing: calc(var(--mc-death-rem) * .04); text-shadow: calc(var(--mc-death-rem) * .2) calc(var(--mc-death-rem) * .2) 0 rgba(0,0,0,.3); }
+.mc-death-screen--native .mc-death-screen__button-spacer { flex: none; height: calc(var(--mc-death-rem) * .4); }
+.mc-death-screen--native .mc-death-screen__actions-spacer { flex: none; height: calc(var(--mc-death-rem) * 1.2); }
+.mc-death-screen--native .mc-death-screen__native-button { --death-face:#d0d1d4; --death-shadow:#58585a; --death-ink:#1e1e1f; --death-specular-top:rgba(255,255,255,.6); --death-specular-bottom:rgba(255,255,255,.4); box-sizing: border-box; position: relative; display: block; flex: none; width: 100%; height: calc(var(--mc-death-rem) * 4.8); min-height: 0; margin: 0; border: calc(var(--mc-death-rem) * .2) solid #1e1e1f; border-radius: 0; padding: 0 0 calc(var(--mc-death-rem) * .4); background: var(--death-shadow); color: var(--death-ink); cursor: pointer; appearance: none; outline: none; }
+.mc-death-screen--native .mc-death-screen__respawn { --death-face:#3c8527; --death-shadow:#1d4d13; --death-ink:#fff; --death-specular-top:rgba(255,255,255,.2); --death-specular-bottom:rgba(255,255,255,.1); }
+.mc-death-screen--native .mc-death-screen__button-face { box-sizing: border-box; position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: calc(var(--mc-death-rem) * 4); background: var(--death-face); }
+.mc-death-screen--native .mc-death-screen__button-face::before,.mc-death-screen--native .mc-death-screen__button-face::after { content:''; position:absolute; inset:0; pointer-events:none; border:0 solid transparent; border-width:calc(var(--mc-death-rem) * .2) 0 0 calc(var(--mc-death-rem) * .2); border-color:var(--death-specular-top); }
+.mc-death-screen--native .mc-death-screen__button-face::after { border-width:0 calc(var(--mc-death-rem) * .2) calc(var(--mc-death-rem) * .2) 0; border-color:var(--death-specular-bottom); }
+.mc-death-screen--native .mc-death-screen__button-label { position: relative; display:block; min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; padding:0 calc(var(--mc-death-rem) * 2); font:400 calc(var(--mc-death-rem) * 1.6)/calc(var(--mc-death-rem) * 2) var(--mc-death-body-font,"Minecraft Seven v2",var(--mc-font)); letter-spacing:calc(var(--mc-death-rem) * .04); }
+.mc-death-screen--native .mc-death-screen__respawn .mc-death-screen__button-label { font-family:var(--mc-death-title-font,"Minecraft Ten v2",var(--mc-font)); font-size:calc(var(--mc-death-rem) * 2); line-height:calc(var(--mc-death-rem) * 2.4); text-shadow:calc(var(--mc-death-rem) * .2) calc(var(--mc-death-rem) * .2) 0 rgba(0,0,0,.3); }
+.mc-death-screen--native .mc-death-screen__native-button:hover:not(:disabled) { --death-face:#b1b2b5; --death-specular-top:rgba(255,255,255,.8); --death-specular-bottom:rgba(255,255,255,.6); }
+.mc-death-screen--native .mc-death-screen__respawn:hover:not(:disabled) { --death-face:#2a641c; --death-specular-top:rgba(255,255,255,.4); --death-specular-bottom:rgba(255,255,255,.3); }
+.mc-death-screen--native .mc-death-screen__native-button:active:not(:disabled) { margin-top:calc(var(--mc-death-rem) * .4); height:calc(var(--mc-death-rem) * 4.4); padding-bottom:0; --death-face:#b1b2b5; }
+.mc-death-screen--native .mc-death-screen__respawn:active:not(:disabled) { --death-face:#1d4d13; }
+.mc-death-screen--native .mc-death-screen__native-button:focus-visible { outline:calc(var(--mc-death-rem) * .2) solid #fff; outline-offset:calc(var(--mc-death-rem) * .2); z-index:2; }
+.mc-death-screen--native .mc-death-screen__native-button:disabled { --death-face:#b1b2b5; --death-shadow:#8c8d90; --death-ink:#58585a; border-color:#58585a; cursor:default; }
+.mc-death-screen--native .mc-death-screen__native-button:disabled .mc-death-screen__button-face::before,.mc-death-screen--native .mc-death-screen__native-button:disabled .mc-death-screen__button-face::after { display:none; }
+.mc-death-screen--native .mc-death-screen__native-button:disabled .mc-death-screen__button-label { text-shadow:none; }
+.mc-death-screen--native .mc-death-screen__loading { position:absolute; top:auto; bottom:calc(var(--mc-death-rem) * 6.4); left:0; right:0; transform:none; text-align:center; }
+
+.mc-death-screen--native .mc-death-screen__loading { display:flex; flex-direction:column; align-items:center; text-shadow:none; }
+.mc-death-screen--native .mc-death-screen__loading-indicator { display:flex; width:calc(var(--mc-death-rem) * 2); height:calc(var(--mc-death-rem) * 2); }
+.mc-death-screen--native .mc-death-screen__loading-indicator > img { width:100%; height:100%; object-fit:contain; image-rendering:pixelated; }
