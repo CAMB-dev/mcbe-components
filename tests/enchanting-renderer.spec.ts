@@ -1,12 +1,15 @@
 import { expect, test } from '@playwright/test';
 import type { Locator, Page } from '@playwright/test';
 import { createHash } from 'node:crypto';
+import { existsSync } from 'node:fs';
 import { mkdir, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { PNG } from 'pngjs';
 
-// Runtime / regression smoke only. The seven-part Java BookModel reference is
-// NOT an oracle for Bedrock's native mesh, camera, lighting or final raster.
+// Native samples below are optional local, lossless references, never package
+// assets. Calibration reduces measured error; it does not assert zero native
+// pixel differences or establish the underlying Bedrock mesh/shader equations.
+test.use({deviceScaleFactor:1});
 const atlasHash='e8d23533b48976b578098db767e2c8161a31fa5d7b22bf576bf531b1bc7f000f';
 async function instrumentation(page:Page) {
   const errors:string[]=[];
@@ -46,6 +49,8 @@ test('book uses the original atlas and preserves explicit reconstruction provena
   const fixture=page.locator('[data-enchanting-renderer-fixture]'),canvas=fixture.getByRole('img',{name:'Controlled enchanting book',exact:true});
   await rendered(canvas);await expect(canvas).toHaveAttribute('data-fidelity','renderer-reconstruction');
   await expect(canvas).toHaveAttribute('data-geometry-source','java-1.21.5-book-model');
+  await expect(canvas).toHaveAttribute('data-lighting','calibrated');
+  await expect(canvas).toHaveAttribute('data-calibration-source','bedrock-1.26.6005-native-png');
   expect(Number(await canvas.getAttribute('data-qa-vertices'))).toBeGreaterThan(6);
   await canonicalCanvas(canvas);const {image}=await picture(canvas,'book-default');
   expect([image.width,image.height]).toEqual([80,80]);
@@ -79,26 +84,118 @@ test('controlled openness and page turn change rendered pixels and restore deter
   await expect(fixture.getByRole('status',{name:'Book renderer errors'})).toBeEmpty();expect(errors).toEqual([]);
 });
 
-test('enchant costs retain original foregrounds and use distinct inferred tinted shadows in both states',async({page})=>{
+test('enchant costs use native-confirmed success and disabled foreground and shadow bytes',async({page})=>{
   await page.goto('/');await page.evaluate(()=>document.fonts.ready);
   const options=page.locator('#workstations .mc-enchanting__option');await expect(options).toHaveCount(3);
-  const expected=[{color:[128,255,32],shadow:[32,63,8],disabled:false},{color:[128,255,32],shadow:[32,63,8],disabled:false},{color:[138,94,92],shadow:[34,23,23],disabled:true}];
+  const expected=[{color:[127,255,31],shadow:[32,64,8],disabled:false},{color:[127,255,31],shadow:[32,64,8],disabled:false},{color:[137,94,91],shadow:[34,23,23],disabled:true}];
   for(let index=0;index<3;index++) {
     const option=options.nth(index),cost=option.locator('.mc-enchanting__cost'),want=expected[index]!;
     const actual=await cost.evaluate(node=>{const s=getComputedStyle(node);return{color:s.color.match(/\d+/g)?.map(Number),shadow:s.textShadow.match(/[\d.]+/g)?.map(Number)};});
     expect(actual.color).toEqual(want.color);
-    // These exact shadow bytes are an implementation regression expectation;
-    // the native Bedrock 0.25 darkening algorithm has NOT been established.
+    // Both states' bytes and GUI5 (5,5) displacement are sampled below from
+    // genuine native PNGs, independently of these CSS regression expectations.
     expect(actual.shadow).toEqual([...want.shadow,2,2,0]);
     if(want.disabled)await expect(option).toBeDisabled();else await expect(option).toBeEnabled();
     const outer=await option.boundingBox(),inner=await cost.boundingBox();
     expect(Math.abs(outer!.x+outer!.width-inner!.x-inner!.width-4)).toBeLessThanOrEqual(.02);
     expect(Math.abs(outer!.y+outer!.height-inner!.y-inner!.height-4)).toBeLessThanOrEqual(.02);
   }
-  // Host calibration remains possible when native screenshot evidence arrives.
+  // Host calibration remains possible for another resource pack or game version.
   const cost=options.nth(0).locator('.mc-enchanting__cost');
   await cost.evaluate(node=>(node as HTMLElement).style.setProperty('--mc-enchantment-cost-shadow','#112233'));
   expect(await cost.evaluate(node=>getComputedStyle(node).textShadow)).toBe('rgb(17, 34, 51) 2px 2px 0px');
+});
+
+const nativeSamples={
+  open:{file:'enchanting-open-native-lossless.png',sha:'0d58418de8fe8751481563e13e4615b6752907394d73926746d627900bf308fa'},
+  closed:{file:'enchanting-closed-native-lossless.png',sha:'c2ae69ebe7615bcb8e4e993e261833b7e72aa9cefe9ddadaba189cc01bc15646'},
+  insufficient:{file:'enchanting-insufficient-native-lossless.png',sha:'57d8cb8ecd4f28750500cbd4b7d513e158c0f897f9c42143139a3992347ec7a9'},
+} as const;
+async function nativeSample(state:keyof typeof nativeSamples) {
+  const reference=nativeSamples[state],path=new URL(`../.cache/native-gui/${reference.file}`,import.meta.url);
+  const bytes=await readFile(path);expect(bytes.subarray(0,8).toString('hex')).toBe('89504e470d0a1a0a');
+  expect(createHash('sha256').update(bytes).digest('hex')).toBe(reference.sha);
+  const image=PNG.sync.read(bytes);expect([image.width,image.height]).toEqual([2568,1400]);return image;
+}
+function bookRegion(source:PNG,native:boolean) {
+  // Entire object plus clear background margins, chosen to exclude the title
+  // above and item slots below. No book border, texel or edge is masked out.
+  const image=new PNG({width:200,height:165});PNG.bitblt(source,image,native ? 916 : 0,native ? 350 : 15,200,165,0,0);return image;
+}
+function averageError(actual:PNG,reference:PNG) {
+  let sum=0,changed=0;for(let i=0;i<actual.data.length;i+=4){let differs=false;for(let c=0;c<3;c++){const difference=Math.abs(actual.data[i+c]!-reference.data[i+c]!);sum+=difference;if(difference)differs=true;}if(differs)changed++;}
+  return{mae:sum/(actual.width*actual.height*3),changedPixels:changed};
+}
+function foregroundBounds(image:PNG) {
+  let x0=image.width,y0=image.height,x1=-1,y1=-1;
+  for(let y=0;y<image.height;y++)for(let x=0;x<image.width;x++){const i=4*(y*image.width+x);if(image.data[i]!==198||image.data[i+1]!==198||image.data[i+2]!==198){x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y);}}
+  return{x:x0,y:y0,width:x1-x0+1,height:y1-y0+1};
+}
+test('optional native open and closed PNGs show a large unmasked calibration improvement, not exact-match certification',async({page},testInfo)=>{
+  test.skip(!(['open','closed'] as const).every(state=>existsSync(new URL(`../.cache/native-gui/${nativeSamples[state].file}`,import.meta.url))),'User-owned native PNGs are optional and excluded from the package.');
+  const errors=await instrumentation(page);await page.goto('/calibration.html');
+  await page.evaluate(async()=>{
+    const reactPath='/@id/react',domPath='/@id/react-dom/client',bookPath='/src/enchanting-book.tsx';
+    const [r,d,book]=await Promise.all([import(reactPath),import(domPath),import(bookPath)]),React=r.default ?? r,ReactDOM=d.default ?? d;
+    const stage=document.createElement('div');stage.id='native-book-comparison';document.body.appendChild(stage);const root=ReactDOM.createRoot(stage);
+    (window as typeof window & {paintNativeBook:(open:number,lighting:'calibrated'|'unlit')=>void}).paintNativeBook=(open,lighting)=>root.render(React.createElement(book.EnchantingBook,{open,lighting,width:200,height:200,'aria-label':'Native comparison book',style:{position:'fixed',left:16,top:16,width:200,height:200,background:'#c6c6c6',zIndex:2147483647}}));
+  });
+  const canvas=page.locator('#native-book-comparison canvas'),reports=[];
+  for(const state of ['open','closed'] as const){
+    const reference=bookRegion(await nativeSample(state),true),pictures:Partial<Record<'calibrated'|'unlit',PNG>>={};
+    for(const lighting of ['unlit','calibrated'] as const){
+      const before=await canvas.count() ? Number(await canvas.getAttribute('data-qa-draws')) : 0;
+      await page.evaluate(({open,lighting})=>(window as typeof window & {paintNativeBook:(open:number,lighting:'calibrated'|'unlit')=>void}).paintNativeBook(open,lighting),{open:state==='open' ? 1 : 0,lighting});
+      await expect.poll(async()=>Number(await canvas.getAttribute('data-qa-draws'))).toBeGreaterThan(before);await rendered(canvas);
+      pictures[lighting]=bookRegion(PNG.sync.read(await canvas.screenshot()),false);
+    }
+    const unlit=averageError(pictures.unlit!,reference),calibrated=averageError(pictures.calibrated!,reference);
+    expect(calibrated.mae,state+' complete-region byte error').toBeLessThan(1.5);
+    expect(calibrated.mae,state+' improvement over unchanged atlas').toBeLessThan(unlit.mae*.1);
+    // Native edges have partial-coverage pixels; the WebGL reconstruction is
+    // not antialiased. A one-pixel bound difference is recorded, not concealed.
+    const nativeBox=foregroundBounds(reference),webBox=foregroundBounds(pictures.calibrated!);
+    for(const key of ['x','y','width','height'] as const)expect(Math.abs(nativeBox[key]-webBox[key]),state+' '+key).toBeLessThanOrEqual(1);
+    expect(calibrated.changedPixels,'residual differences must not be mislabeled exact').toBeGreaterThan(0);
+    reports.push({state,unlit,calibrated,nativeBox,webBox});
+    await testInfo.attach(state+' native complete book region',{body:PNG.sync.write(reference),contentType:'image/png'});
+    await testInfo.attach(state+' calibrated complete book region',{body:PNG.sync.write(pictures.calibrated!),contentType:'image/png'});
+  }
+  await testInfo.attach('native-calibration-error-and-residuals',{body:JSON.stringify(reports,null,2),contentType:'application/json'});expect(errors).toEqual([]);
+});
+
+test('optional native PNG proves opaque green bytes and the threshold-detected shadow displacement',async()=>{
+  test.skip(!existsSync(new URL(`../.cache/native-gui/${nativeSamples.open.file}`,import.meta.url)),'User-owned native PNG is optional.');
+  const image=await nativeSample('open');
+  for(let row=0;row<3;row++){
+    const foreground=new Set<string>(),shadow=new Set<string>();let opaqueGreen=0,opaqueShadow=0;
+    for(let y=380+101*row;y<450+101*row;y++)for(let x=1600;x<1705;x++){
+      const i=4*(y*image.width+x),r=image.data[i]!,g=image.data[i+1]!,b=image.data[i+2]!;
+      if(r===127&&g===255&&b===31)opaqueGreen++;if(r===32&&g===64&&b===8)opaqueShadow++;
+      if(g>180&&r<140&&b<70)foreground.add(`${x},${y}`);
+      if(r<80&&g<120&&g>r+10&&g>b+15)shadow.add(`${x},${y}`);
+    }
+    expect(opaqueGreen).toBeGreaterThan(200);expect(opaqueShadow).toBeGreaterThan(200);
+    const predicted=new Set([...foreground].map(key=>{const [x,y]=key.split(',').map(Number);return `${x!+5},${y!+5}`;}).filter(key=>!foreground.has(key)));
+    expect([...shadow].sort()).toEqual([...predicted].sort());
+  }
+});
+
+test('optional insufficient-state PNG proves opaque red bytes and its threshold-detected shadow displacement',async()=>{
+  test.skip(!existsSync(new URL(`../.cache/native-gui/${nativeSamples.insufficient.file}`,import.meta.url)),'User-owned native PNG is optional.');
+  const image=await nativeSample('insufficient');
+  for(let row=0;row<3;row++){
+    const foreground=new Set<string>(),shadow=new Set<string>();let opaqueRed=0,opaqueShadow=0;
+    for(let y=380+101*row;y<450+101*row;y++)for(let x=1600;x<1705;x++){
+      const i=4*(y*image.width+x),r=image.data[i]!,g=image.data[i+1]!,b=image.data[i+2]!;
+      if(r===137&&g===94&&b===91)opaqueRed++;if(r===34&&g===23&&b===23)opaqueShadow++;
+      if(r>100&&g>70&&g<110&&b>70&&b<110)foreground.add(`${x},${y}`);
+      if(r<60&&g<45&&b<45&&r>g+3)shadow.add(`${x},${y}`);
+    }
+    expect(opaqueRed).toBeGreaterThan(200);expect(opaqueShadow).toBeGreaterThan(200);
+    const predicted=new Set([...foreground].map(key=>{const [x,y]=key.split(',').map(Number);return `${x!+5},${y!+5}`;}).filter(key=>!foreground.has(key)));
+    expect([...shadow].sort()).toEqual([...predicted].sort());
+  }
 });
 
 test('main enchanting page paints a textured book without page or GL errors',async({page},testInfo)=>{

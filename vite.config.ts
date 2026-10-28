@@ -9,7 +9,13 @@ const fontPath = existsSync(pixelFontPath) ? pixelFontPath : rawFontPath;
 const virtualFont = 'virtual:mcbeui-game-font';
 const runePath = fileURLToPath(new URL('./.cache/enchanting-source/font/ascii_sga.png', import.meta.url));
 export default defineConfig({
-  base: './', build: { outDir: 'site', rollupOptions: { input: { main: fileURLToPath(new URL('./index.html', import.meta.url)), calibration: fileURLToPath(new URL('./calibration.html', import.meta.url)) } } }, server: { port: 5173, strictPort: true },
+  base: './', build: { outDir: 'site', rollupOptions: { input: { main: fileURLToPath(new URL('./index.html', import.meta.url)), calibration: fileURLToPath(new URL('./calibration.html', import.meta.url)) } } },
+  server: {
+    port: 5173, strictPort: true,
+    // Native captures and browser reports can be held open while they are saved.
+    // They are test artifacts, so watching them only adds reloads and Windows locks.
+    watch: { ignored: ['**/.cache/**', '**/test-results/**', '**/playwright-report/**'] },
+  },
   plugins: [{
     name: 'mcbeui-local-game-font',
     resolveId(id) { if (id === virtualFont) return '\0' + virtualFont; },

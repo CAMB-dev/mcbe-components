@@ -1,0 +1,57 @@
+/* Source Classic main-panel profiles. Toolbars and custom native equipment /
+   hover renderers are separate; source fractions and original pixels remain. */
+.mc-smithing > .mc-workstation__title { left: 98.24px; top: 33.32px; width: 168.48px; height: 16.56px; max-width: none; font-size: var(--mc-font-size); line-height: 16.56px; overflow: visible; background: transparent; }
+.mc-smithing__icon { position: absolute; left: 14px; top: 14px; width: 60px; height: 60px; background: var(--mc-skin-smithing-icon) 0 0 / 60px 60px no-repeat; }
+.mc-smithing__template, .mc-smithing__input, .mc-smithing__material, .mc-smithing__result { position: absolute; top: 92.6px; }
+.mc-smithing__template { left: 14px; }
+.mc-smithing__input { left: 50px; }
+.mc-smithing__material { left: 86px; }
+.mc-smithing__result { left: 194px; }
+.mc-smithing__arrow, .mc-smithing__invalid { position: absolute; left: 139.964px; top: 98.6px; width: 36px; height: 24px; }
+.mc-smithing__arrow .mc-processing-arrow__empty { background-size: 36px 24px; }
+.mc-smithing__invalid { background: var(--mc-skin-workstation-invalid) 0 0 / 36px 24px no-repeat; }
+.mc-smithing__preview { position: absolute; left: 263px; top: 85.6px; width: 50px; height: 50px; }
+.mc-smithing__overlay { display: block; width: 32px; height: 32px; background-repeat: no-repeat; background-size: var(--mc-smithing-strip-width) 32px; background-position: 0 0; animation: mc-smithing-overlay var(--mc-smithing-duration) steps(var(--mc-smithing-frames), end) infinite; }
+.mc-smithing__overlay--templates { background-image: var(--mc-skin-smithing-templates); }
+.mc-smithing__overlay--armors { background-image: var(--mc-skin-smithing-armors); }
+.mc-smithing__overlay--armors-and-tools { background-image: var(--mc-skin-smithing-armors-tools); }
+.mc-smithing__overlay--all { background-image: var(--mc-skin-smithing-materials); }
+.mc-smithing__overlay--ingot { background-image: var(--mc-skin-smithing-ingot); }
+.mc-smithing__overlay--static { animation: none; background-position: var(--mc-smithing-frame-position) 0; }
+@keyframes mc-smithing-overlay { to { background-position: var(--mc-smithing-end-position) 0; } }
+@media (prefers-reduced-motion: reduce) { .mc-smithing__overlay { animation: none; } }
+.mc-cartography { height: 440px; }
+.mc-cartography > .mc-workstation__title { left: 12px; top: 12px; width: 328px; max-width: none; height: 20px; text-align: center; }
+.mc-cartography > .mc-workstation__inventory { top: 260px; }
+.mc-cartography__name-label { position: absolute; left: 12px; top: 40px; width: 328px; height: 60px; color: inherit; font: inherit; text-shadow: none; }
+.mc-cartography__name-label > span:first-child { display: block; height: 20px; text-align: left; }
+.mc-cartography__name-field { --mc-cartography-input-skin: var(--mc-skin-input); display: block; position: relative; height: 40px; cursor: text; isolation: isolate; }
+.mc-cartography__name-field::before { content: ''; position: absolute; inset: 0; z-index: -1; border: 4px solid transparent; border-image: var(--mc-cartography-input-skin) 2 fill / 4px stretch; pointer-events: none; }
+.mc-cartography__name-input { appearance: none; position: absolute; left: 6px; top: 10px; box-sizing: border-box; width: calc(100% - 12px); height: 20px; min-width: 0; padding: 0; margin: 0; border: 0; border-radius: 0; outline: 0; background: transparent; color: #fff; caret-color: #fff; font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: none; }
+.mc-cartography__name-input::placeholder { color: rgb(85.1% 85.1% 85.1%); opacity: 1; }
+@media (hover: hover) { .mc-cartography__name-field:hover:not([data-disabled]) { --mc-cartography-input-skin: var(--mc-skin-input-hover); } }
+.mc-cartography__name-field:focus-within:not([data-disabled]) { --mc-cartography-input-skin: var(--mc-skin-input-hover); }
+.mc-cartography__name-field[data-disabled] { cursor: default; }
+.mc-cartography__name-field[data-disabled]::before { opacity: .5; }
+.mc-cartography__name-input:disabled { color: rgb(255 255 255 / .5); -webkit-text-fill-color: rgb(255 255 255 / .5); opacity: 1; cursor: default; }
+.mc-cartography__main { position: absolute; left: 14px; top: 108px; width: 324px; height: 132px; }
+.mc-cartography__input, .mc-cartography__additional, .mc-cartography__result { position: absolute; }
+/* The native GUI5 empty capture places these at58.5/97.5game. Its vertical
+   stack does not apply the source child offsets+1/-1 along the stack axis. */
+.mc-cartography__input { left: 0; top: 9px; }
+.mc-cartography__additional { left: 0; top: 87px; }
+.mc-cartography__result { left: 272px; top: 40px; }
+.mc-cartography__plus { position: absolute; left: 5px; top: 53px; width: 26px; height: 26px; background: var(--mc-skin-anvil-plus) 0 0 / 26px 26px no-repeat; }
+.mc-cartography__arrow { position: absolute; top: 53px; width: 32px; height: 26px; background: var(--mc-skin-cartography-arrow) 0 0 / 32px 26px no-repeat; }
+.mc-cartography__arrow--input { left: 50px; }
+.mc-cartography__arrow--result { left: 234px; }
+.mc-cartography__map { position: absolute; left: 96px; top: 0; width: 132px; height: 132px; background: var(--mc-skin-cartography-empty) 0 0 / 132px 132px no-repeat; }
+.mc-cartography__map--clone { background-image: var(--mc-skin-cartography-copy); }
+.mc-cartography__map--rename, .mc-cartography__map--basic, .mc-cartography__map--locator { background-image: var(--mc-skin-cartography-map); }
+.mc-cartography__map--extend { background-image: var(--mc-skin-cartography-zoom); }
+.mc-cartography__map--locked { background-image: var(--mc-skin-cartography-glass); }
+.mc-cartography__description { position: absolute; left: 12px; top: 240px; width: 328px; height: 20px; text-align: center; white-space: nowrap; overflow: hidden; font: inherit; text-shadow: none; }
+/* Match the original panel centre explicitly, including for contrast analysis
+   that cannot derive a background from the nine-sliced pseudo-element. */
+.mc-smithing > .mc-workstation__title, .mc-cartography > .mc-workstation__title,
+.mc-cartography__name-label > span:first-child { background: #c6c6c6; }

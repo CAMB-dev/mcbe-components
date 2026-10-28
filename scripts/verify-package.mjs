@@ -27,7 +27,7 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
-const exports = ['Alert','Anvil','Badge','BlastFurnace','Button','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','FuelIndicator','Furnace','Grindstone','Hopper','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
+const exports = ['AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 assert.deepEqual(Object.keys(ui).sort(), exports.sort());
 const element = React.createElement;
 const output = renderToString(element(ui.Panel, {title:'Settings'},
@@ -60,6 +60,19 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
   element(ui.Dispenser,{}),
   element(ui.Dropper,{}),
   element(ui.ShulkerBox,{}),
+  element(ui.BrewingStand,{progress:.5,bubbles:.25,fuelRemaining:.75}),
+  element(ui.BrewingIndicator,{variant:'bubbles',progress:.5}),
+  element(ui.SmithingTable,{overlayFrame:0}),
+  element(ui.CartographyTable,{name:'Map',mode:'extend'}),
+  element(ui.ScrollArea,{label:'Content',style:{height:100}},'Scrollable content'),
+  element(ui.ScrollBar,{label:'Offset',controls:'consumer-content',value:10,max:100,pageSize:20,onValueChange:()=>{}}),
+  element(ui.HealthBar,{value:19}),
+  element(ui.HungerBar,{value:17,effect:true}),
+  element(ui.ArmorBar,{value:1}),
+  element(ui.AirBar,{states:['full','pop','hidden']}),
+  element(ui.ExperienceBar,{progress:.5,level:3}),
+  element(ui.Hotbar,{items:[],defaultSelectedIndex:2}),
+  element(ui.Crosshair,{}),
   element(ui.Image,{src:'/caller-owned-item.png',alt:'Item',sourceSize:[16,16],scale:2}),
   element(ui.NineSlice,{src:'/caller-frame.png',sourceSize:[10,10],slice:2,destinationBorder:1,scale:2},element(ui.Button,{},'Framed action')),
   element(ui.Combobox, {label:'Difficulty',name:'difficulty',defaultValue:'normal',options:[{value:'normal',label:'Normal'}]}),
@@ -69,9 +82,10 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
 assert.match(output, /mc-button--primary/);
 assert.match(output, /World name/);
 assert.match(output, /role="tablist"/);
+for (const className of ['mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -82,6 +96,8 @@ console.log('React '+React.version+': ESM, '+exports.length+' exports, SSR, styl
 import { createRef } from 'react';
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData } from 'mcbeui';
+import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
+import type { AirBubbleState, BrewingSlot, CartographyMode, ScrollPosition } from 'mcbeui';
 const props: ButtonProps = {variant:'primary',size:'sm',type:'submit'};
 const items: TabItem[] = [{value:'game',label:'Game',content:'Survival'}];
 const enchantment: EnchantmentData = {id:'standalone',label:'Unbreaking',level:3};
@@ -93,7 +109,8 @@ export const demo = <>
   <InventoryGrid label="Inventory" items={[{name:'Diamond'}]} onSlotAction={(index,action)=>String(index)+action}/>
   <Grindstone inputs={[null,null]} onInputAction={(index,action)=>String(index)+action}/>
   <EnchantingTable options={[{id:'unbreaking',label:'Unbreaking',level:3}]} onEnchant={id=>id.toUpperCase()}/>
-  <EnchantingBook pageFlip={.25} ref={createRef<HTMLCanvasElement>()}/>
+  <EnchantingBook pageFlip={.25} lighting="calibrated" pitch={20} ref={createRef<HTMLCanvasElement>()}/>
+  <EnchantingBook lighting="unlit"/>
   <EnchantingRunes text="AIZ" atlasUrl="/caller-atlas.png" ref={createRef<HTMLSpanElement>()}/>
   <EnchantmentOption {...enchantment} ref={createRef<HTMLButtonElement>()} onEnchant={id=>id.toUpperCase()}/>
   <ItemImage src="/caller-item.png" ref={createRef<HTMLSpanElement>()}/>
@@ -113,6 +130,19 @@ export const demo = <>
   <Chest rows={6} items={[]} onSelectionChange={index=>index.toFixed(0)} onSlotAction={(index,action)=>String(index)+action}/>
   <Hopper items={[]} inventorySelectedIndex={0} onInventorySelectionChange={index=>index.toFixed(0)}/>
   <Dispenser/><Dropper/><ShulkerBox/>
+  <BrewingIndicator variant="fuel" progress={.5} ref={createRef<HTMLDivElement>()}/>
+  <BrewingStand selectedSlot="ingredient" onSelectionChange={(slot: BrewingSlot)=>String(slot)} onSlotAction={(slot,action)=>String(slot)+action} ref={createRef<HTMLElement>()}/>
+  <SmithingTable inputs={[null,null,null]} overlayFrame={1} preview={<span/>} onInputAction={(index,action)=>String(index)+action} ref={createRef<HTMLElement>()}/>
+  <CartographyTable name="Map" mode={'extend' satisfies CartographyMode} onNameChange={name=>name.toUpperCase()} onTakeResult={action=>action.toUpperCase()} ref={createRef<HTMLElement>()}/>
+  <ScrollArea label="Content" orientation="both" viewportRef={createRef<HTMLDivElement>()} onScrollPositionChange={(position: ScrollPosition)=>position.scrollTop.toFixed(0)} ref={createRef<HTMLDivElement>()}>Content</ScrollArea>
+  <ScrollBar label="Offset" controls="content" value={0} max={100} pageSize={20} onValueChange={value=>value.toFixed(0)} ref={createRef<HTMLDivElement>()}/>
+  <HealthBar value={19} variant="poison" ref={createRef<HTMLDivElement>()}/>
+  <HungerBar value={17} effect flashing ref={createRef<HTMLDivElement>()}/>
+  <ArmorBar value={1} ref={createRef<HTMLDivElement>()}/>
+  <AirBar states={['full','pop'] satisfies AirBubbleState[]} ref={createRef<HTMLDivElement>()}/>
+  <ExperienceBar progress={.5} level={3} ref={createRef<HTMLDivElement>()}/>
+  <Hotbar selectedIndex={0} onSelectionChange={index=>index.toFixed(0)} onSlotAction={(index,action)=>String(index)+action} ref={createRef<HTMLDivElement>()}/>
+  <Crosshair blendMode="normal" ref={createRef<HTMLSpanElement>()}/>
   <Image src="/caller-item.png" alt="Item" sourceSize={[16,16]} scale={2} ref={createRef<HTMLImageElement>()}/>
   <NineSlice src="/caller-frame.png" sourceSize={[10,10]} slice={2} destinationBorder={1} size={[18,18]} scale={2} ref={createRef<HTMLDivElement>()}><Button>Framed action</Button></NineSlice>
   <Checkbox label="Enabled" indeterminate ref={createRef<HTMLInputElement>()}/>

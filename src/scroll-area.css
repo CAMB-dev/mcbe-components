@@ -1,0 +1,26 @@
+.mc-scroll-area { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: minmax(0, 1fr) auto; min-width: 0; min-height: 0; height: 100%; }
+.mc-scroll-area__viewport { grid-area: 1 / 1; min-width: 0; min-height: 0; scrollbar-width: none; scroll-behavior: auto; }
+.mc-scroll-area__viewport::-webkit-scrollbar { display: none; }
+.mc-scroll-area__viewport:focus-visible { outline-offset: -2px; }
+.mc-scroll-area__content { display: flow-root; min-width: 100%; }
+.mc-scroll-area > .mc-scrollbar[data-orientation="vertical"] { grid-area: 1 / 2; }
+.mc-scroll-area > .mc-scrollbar[data-orientation="horizontal"] { grid-area: 2 / 1; }
+.mc-scrollbar { position: relative; box-sizing: border-box; flex-shrink: 0; min-width: 0; min-height: 0; touch-action: none; user-select: none; }
+.mc-scrollbar[hidden] { display: none; }
+.mc-scrollbar[data-orientation="vertical"] { height: 100%; }
+.mc-scrollbar[data-orientation="horizontal"] { width: 100%; }
+.mc-scrollbar:focus-visible { outline-offset: 2px; }
+.mc-scrollbar__track, .mc-scrollbar__thumb { position: absolute; box-sizing: border-box; display: block; image-rendering: pixelated; }
+.mc-scrollbar__track { pointer-events: none; background: var(--mc-skin-scroll-track) center / 100% 100% no-repeat; }
+.mc-scrollbar[data-orientation="vertical"] > .mc-scrollbar__track { top: 0; height: 100%; }
+.mc-scrollbar[data-orientation="horizontal"] > .mc-scrollbar__track { left: 0; width: 100%; }
+.mc-scrollbar__thumb { cursor: grab; }
+.mc-scrollbar__thumb::before { content: ''; position: absolute; inset: 0; pointer-events: none; border: solid transparent; border-width: var(--mc-scroll-thumb-edge-y) var(--mc-scroll-edge); border-image: var(--mc-skin-scroll-thumb) 2 1 2 1 fill / var(--mc-scroll-thumb-edge-y) var(--mc-scroll-edge) stretch; image-rendering: pixelated; }
+.mc-scrollbar[data-variant="container"] > .mc-scrollbar__track { background: none; border: var(--mc-scroll-edge) solid transparent; border-image: var(--mc-skin-scroll-container-track) 1 fill / var(--mc-scroll-edge) stretch; }
+.mc-scrollbar[data-variant="container"] > .mc-scrollbar__thumb::before { border-image-source: var(--mc-skin-scroll-container-thumb); border-image-slice: 1 fill; }
+.mc-scrollbar[data-dragging] > .mc-scrollbar__thumb { cursor: grabbing; }
+.mc-scrollbar[data-disabled] > .mc-scrollbar__thumb { cursor: default; }
+@media (forced-colors: active) {
+  .mc-scrollbar__track, .mc-scrollbar[data-variant="container"] > .mc-scrollbar__track { background: Canvas; border: 1px solid CanvasText; border-image: none; }
+  .mc-scrollbar__thumb::before { border: 1px solid ButtonText; border-image: none; background: ButtonFace; }
+}

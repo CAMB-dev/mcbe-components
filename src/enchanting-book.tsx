@@ -35,7 +35,9 @@ export interface EnchantingBookProps extends CanvasHTMLAttributes<HTMLCanvasElem
   open?: number;
   /** Position within a page-turn cycle. Controlled, 0–1; no animation timer. */
   pageFlip?: number;
-  /** Camera adjustments in degrees; defaults use the documented Java GUI pose. */
+  /** Native-PNG calibrated face lighting, or the unchanged atlas for inspection. */
+  lighting?: 'calibrated' | 'unlit';
+  /** Camera adjustments in degrees; the default pitch is calibrated from native PNGs. */
   yaw?: number;
   pitch?: number;
   roll?: number;
@@ -48,12 +50,13 @@ type Uv = readonly [number, number, number, number];
 /**
  * Optional textured reconstruction, NOT the native enchanting_book_renderer.
  * Full page blocks, covers and turning leaves use Mojang's Java BookModel
- * dimensions and box UV layout. This is NOT evidence of Bedrock's native mesh
- * or camera: those remain unverified. See docs/enchanting-renderer.json.
+ * dimensions and box UV layout. Camera pitch and face lighting are calibrated
+ * against native Bedrock PNGs; native mesh extraction and exact edge raster
+ * agreement remain unverified. See docs/enchanting-renderer.json.
  */
 export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>(function EnchantingBook({
   textureUrl = new URL('./assets/enchanting/enchanting_table_book.png', import.meta.url).href,
-  open = 1, pageFlip = 0, yaw = -90, pitch = 25, roll = 0, width = 80, height = 80,
+  open = 1, pageFlip = 0, lighting = 'calibrated', yaw = -90, pitch = 20, roll = 0, width = 80, height = 80,
   onRendererError, className, 'aria-label': label = 'Enchanting book', ...props
 }, forwardedRef) {
   const canvas = useRef<HTMLCanvasElement | null>(null);
@@ -76,11 +79,11 @@ export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>
       if (disposed) return;
       try {
         program = gl.createProgram(); if (!program) throw new Error('Cannot allocate book program');
-        gl.attachShader(program, shader(gl.VERTEX_SHADER, 'attribute vec3 p;attribute vec2 uv;varying vec2 v;void main(){gl_Position=vec4(p,1.0);v=uv;}'));
-        gl.attachShader(program, shader(gl.FRAGMENT_SHADER, 'precision mediump float;varying vec2 v;uniform sampler2D atlas;void main(){gl_FragColor=texture2D(atlas,v);}'));
+        gl.attachShader(program, shader(gl.VERTEX_SHADER, 'attribute vec3 p;attribute vec2 uv;attribute float shade;varying vec2 v;varying float light;void main(){gl_Position=vec4(p,1.0);v=uv;light=shade;}'));
+        gl.attachShader(program, shader(gl.FRAGMENT_SHADER, 'precision mediump float;varying vec2 v;varying float light;uniform sampler2D atlas;void main(){vec4 color=texture2D(atlas,v);gl_FragColor=vec4(color.rgb*light,color.a);}'));
         gl.linkProgram(program); if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error('Book program link failed');
         gl.useProgram(program);
-        const coordinates: number[] = [], uvs: number[] = [], degrees = Math.PI / 180;
+        const coordinates: number[] = [], uvs: number[] = [], shades: number[] = [], degrees = Math.PI / 180;
         const bounded = Math.max(0, Math.min(1, open));
         const rotate = ([x, y, z]: Point, axis: 'x' | 'y' | 'z', angle: number): Point => {
           const c = Math.cos(angle), s = Math.sin(angle);
@@ -101,9 +104,20 @@ export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>
         const quad = (points: readonly Point[], uv: Uv, fold: number, pivot: Point) => {
           const [u,v,w,h] = uv;
           const corners = [[u+w,v],[u,v],[u,v+h],[u+w,v+h]];
+          const a=points[0]!,b=points[1]!,c=points[2]!;
+          const ab:Point=[b[0]-a[0],b[1]-a[1],b[2]-a[2]],ac:Point=[c[0]-a[0],c[1]-a[1],c[2]-a[2]];
+          let normal:Point=[ab[1]*ac[2]-ab[2]*ac[1],ab[2]*ac[0]-ab[0]*ac[2],ab[0]*ac[1]-ab[1]*ac[0]];
+          const magnitude=Math.hypot(...normal) || 1;
+          normal=[normal[0]/magnitude,normal[1]/magnitude,normal[2]/magnitude];
+          normal=rotate(rotate(rotate(normal,'y',fold),'x',Math.PI),'y',(yaw-(1-bounded)*90)*degrees);
+          // Empirical directional weights in GUI pose space, before camera
+          // pitch/roll. They fit opaque native cover, page and page-edge texels;
+          // they are not a claim to have recovered the native shader equation.
+          const shade=lighting==='unlit' ? 1 : .579*normal[0]**2+(normal[1]>=0 ? .995 : .614)*normal[1]**2+.72*normal[2]**2;
           for (const index of [0,1,2,0,2,3]) {
             coordinates.push(...transform(points[index]!,fold,pivot));
             uvs.push(corners[index]![0]!/64,corners[index]![1]!/32);
+            shades.push(shade);
           }
         };
         // Standard unfolded box UVs, verified against the official Java
@@ -136,7 +150,7 @@ export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>
           buffers.push(buffer); gl.bindBuffer(gl.ARRAY_BUFFER,buffer); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);
           const location = gl.getAttribLocation(program!,name); gl.enableVertexAttribArray(location); gl.vertexAttribPointer(location,size,gl.FLOAT,false,0,0);
         };
-        attribute('p',coordinates,3); attribute('uv',uvs,2);
+        attribute('p',coordinates,3); attribute('uv',uvs,2); attribute('shade',shades,1);
         texture=gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,texture);
         gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,image);
         gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
@@ -149,8 +163,8 @@ export const EnchantingBook = forwardRef<HTMLCanvasElement, EnchantingBookProps>
     image.onerror = () => { if (!disposed) onRendererError?.('Cannot load the book atlas.'); };
     image.src = textureUrl;
     return () => { disposed=true; image.onload=null; image.onerror=null; cleanup(); };
-  },[textureUrl,open,pageFlip,yaw,pitch,roll,width,height,onRendererError]);
+  },[textureUrl,open,pageFlip,lighting,yaw,pitch,roll,width,height,onRendererError]);
   return <canvas {...props} ref={element => { canvas.current=element; if (typeof forwardedRef === 'function') forwardedRef(element); else if (forwardedRef) forwardedRef.current=element; }}
-    role="img" aria-label={label} width={width} height={height} data-fidelity="renderer-reconstruction" data-geometry-source="java-1.21.5-book-model"
+    role="img" aria-label={label} width={width} height={height} data-fidelity="renderer-reconstruction" data-geometry-source="java-1.21.5-book-model" data-lighting={lighting} data-calibration-source="bedrock-1.26.6005-native-png"
     className={['mc-enchanting-book',className].filter(Boolean).join(' ')}/>;
 });

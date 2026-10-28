@@ -67,15 +67,24 @@ export const Combobox = forwardRef<HTMLButtonElement, ComboboxProps>(function Co
       if (!list || !button) return;
       const rect = button.getBoundingClientRect();
       const view = button.ownerDocument.defaultView!;
-      if (rect.bottom <= 0 || rect.top >= view.innerHeight || rect.right <= 0 || rect.left >= view.innerWidth) { setOpen(false); return; }
-      const width = Math.min(rect.width, view.innerWidth - 16);
-      const below = view.innerHeight - rect.bottom - 8;
-      const above = rect.top - 8;
+      // Mobile browsers can expand innerWidth/innerHeight to fit overflowing
+      // page content. Keep the popup within the intended layout viewport, and
+      // also respect the smaller visible area after pinch zoom / a soft keyboard.
+      const documentElement = button.ownerDocument.documentElement;
+      const visual = view.visualViewport;
+      const left = Math.max(0, visual?.offsetLeft ?? 0), top = Math.max(0, visual?.offsetTop ?? 0);
+      const right = Math.min(documentElement.clientWidth, left + (visual?.width ?? documentElement.clientWidth));
+      const bottom = Math.min(documentElement.clientHeight, top + (visual?.height ?? documentElement.clientHeight));
+      if (right - left <= 16 || bottom - top <= 16 || rect.bottom <= top || rect.top >= bottom || rect.right <= left || rect.left >= right) { setOpen(false); return; }
+      const width = Math.min(rect.width, right - left - 16);
+      const below = Math.max(0, bottom - rect.bottom - 8);
+      const above = Math.max(0, rect.top - top - 8);
       const flip = below < Math.min(options.length * 40 + 8, 280) && above > below;
       list.style.width = `${width}px`;
       list.style.maxHeight = `${Math.max(0, Math.min(280, flip ? above : below))}px`;
-      list.style.left = `${Math.max(8, Math.min(rect.left, view.innerWidth - width - 8))}px`;
-      list.style.top = `${flip ? Math.max(8, rect.top - 4 - list.offsetHeight) : rect.bottom + 4}px`;
+      list.style.left = `${Math.max(left + 8, Math.min(rect.left, right - width - 8))}px`;
+      const preferredTop = flip ? rect.top - 4 - list.offsetHeight : rect.bottom + 4;
+      list.style.top = `${Math.max(top + 8, Math.min(preferredTop, bottom - list.offsetHeight - 8))}px`;
       list.dataset.side = flip ? 'top' : 'bottom';
     }
     list.showPopover?.(); position();
@@ -86,12 +95,16 @@ export const Combobox = forwardRef<HTMLButtonElement, ComboboxProps>(function Co
     doc.addEventListener('pointerdown', closeOutside, true);
     doc.addEventListener('scroll', position, true);
     doc.defaultView?.addEventListener('resize', position);
+    doc.defaultView?.visualViewport?.addEventListener('resize', position);
+    doc.defaultView?.visualViewport?.addEventListener('scroll', position);
     const observer = new ResizeObserver(position); observer.observe(button);
     return () => {
       list.hidePopover?.(); observer.disconnect();
       doc.removeEventListener('pointerdown', closeOutside, true);
       doc.removeEventListener('scroll', position, true);
       doc.defaultView?.removeEventListener('resize', position);
+      doc.defaultView?.visualViewport?.removeEventListener('resize', position);
+      doc.defaultView?.visualViewport?.removeEventListener('scroll', position);
     };
   }, [open, disabled, options.length]);
   useEffect(() => {

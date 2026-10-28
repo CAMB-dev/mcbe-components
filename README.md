@@ -91,7 +91,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `EnchantingTable` | **必填** `options`；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`；Frame 属性 | 附魔台输入、青金石、三档选择、级别消耗与禁用态；book 支持自定义渲染 |
 | `EnchantmentOption` | **必填** `id`、`label`、`level`；`tier`: 1 / 2 / 3、`runes`、`disabled`、`buttonId`、`onEnchant`；button 属性 | 可独立使用的附魔选项；id 是业务 ID，buttonId 是可选 DOM id；onClick.preventDefault() 取消选择回调 |
 | `EnchantingRunes` | **必填** `text`、`atlasUrl`；`scale`: 1…4、`color` | 按原始 SGA 图集采样字形与字距；图集由调用方提供，不随 npm 捆绑 |
-| `EnchantingBook` | `textureUrl`、`open`、`pageFlip`、`yaw`、`pitch`、`roll`、`onRendererError`；canvas 属性 | 真实材质、封面 / 书脊 / 厚页块 / 翻页的可选 WebGL 书本；模型参考 Mojang Java BookModel 重建，Bedrock 相机与 renderer 仍待原生对照 |
+| `EnchantingBook` | `textureUrl`、`open`、`pageFlip`、`lighting`: calibrated / unlit、`yaw`、`pitch`、`roll`、`onRendererError`；canvas 属性 | 真实材质、封面 / 书脊 / 厚页块 / 翻页的可选 WebGL 书本；默认 pitch=20、lighting=calibrated，以本机 Bedrock 无损 PNG 校准视角和分面光照，模型仍参考 Mojang Java BookModel 重建 |
 | `ProcessingArrow` | `progress`: 0…1、`label`、`variant`: smelting / crafting；div 属性 | 原始箭头纹理，smelting 从左向右裁切完整填充图；crafting 使用静态箭头 |
 | `FuelIndicator` | `progress`: 0…1、`label`；div 属性 | 原始火焰纹理，自底部显示剩余比例，保留 full 图原尺寸 |
 | `RecipeGrid` | InventoryGrid 属性；`columns`、`rows`: 2 / 3 | 共用合成网格；尺寸决定槽位数，支持 2×2 和 3×3 |
@@ -104,6 +104,17 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `Chest` | `rows`、`items`、`selectedIndex`、`onSelectionChange`、`onSlotAction`；容器库存属性 | 3 / 6 行箱子及 1…6 行数据驱动布局；行数取整并限制范围，非有限值回退 3 |
 | `Hopper` / `Dispenser` / `Dropper` / `ShulkerBox` | `items`、`selectedIndex`、`onSelectionChange`、`onSlotAction`；容器库存属性 | 共用存储 API，分别保留 5 / 9 / 9 / 27 格与原始面板高度；空槽允许操作回调 |
 | `Anvil` | **必填** `name`；`onNameChange`、`inputs`、`result`、`invalid`、`cost`、`renameDisabled`、`renameReadOnly`、`onInputAction`、`onTakeResult` | 原版重命名框、30 字符限制、修复槽位与费用；结果守卫空槽、无效、经验不足和过贵状态，保留焦点 |
+| `BrewingIndicator` | `variant`: arrow / bubbles / fuel；`progress`: 0…1、`label` | 可复用的原版酿造图层；裁切完整前景，不缩放填充图 |
+| `BrewingStand` | `ingredient`、`fuel`、`bottles`、`selectedSlot`、`progress`、`bubbles`、`fuelRemaining`、`onSelectionChange`、`onSlotAction`；Frame 属性 | 酿造主面板与五个可操作槽；配方、消耗和动画时序由调用方提供 |
+| `SmithingTable` | `inputs`: readonly [template, base, addition]；`result`、`invalid`、`templateOverlay`、`baseOverlay`、`materialOverlay`、`overlayFrame`、`preview`、`onInputAction`、`onTakeResult` | 现代三输入锻造主面板，真实横向提示图集；baseOverlay / materialOverlay 默认 null，由宿主根据实际模板状态显式启用；preview 接入调用方 renderer |
+| `CartographyTable` | `name`、`onNameChange`、`inputs`、`result`、`resultAvailable`、`mode`、`description`、`onInputAction`、`onTakeResult` | 七种原版预览模式、30 字符重命名、352×440 CSS px 大视口布局；description 栈锚点仍待原生校准 |
+| `ScrollBar` | **必填** `value`、`max`、`pageSize`、`onValueChange`、`label`、`controls`；`orientation`、`variant`、`scale`、`disabled` | 受控滚动偏移，单位 CSS px；原版 rail / handle，支持拖动、翻页、方向键和 Home / End |
+| `ScrollArea` | `orientation`: vertical / horizontal / both；`variant`、`scale`、`scrollbarVisibility`、`label`、`viewportRef`、`viewportProps`、`contentProps`、`onScrollPositionChange` | 原生 overflow 保留滚轮、触屏与文本选择，自动测量内容并关联原版滚动条 |
+| `HealthBar` / `HungerBar` / `ArmorBar` | `value`: 0…20、`label`；Health 的 `variant` / `flashing`；Hunger 的 `effect` / `flashing` | 使用真实整格 / 半格图；行排列属于 custom renderer 的 Web 重建，尚未取得整帧验收 |
+| `AirBar` | `value`: 0…10 或显式 `states`: full / empty / pop / hidden | 显式气泡状态，不把 value 等同于游戏水下 tick |
+| `ExperienceBar` | `progress`: 0…1、`level`、`showLevel`、`label` | 原版经验图层与级别文本；进度和等级由调用方提供 |
+| `Hotbar` | `items`、`selectedIndex` / `defaultSelectedIndex`、`disabled`、`onSelectionChange`、`onSlotAction`、`label` | 九格原版快捷栏，方向键仅移动焦点，Enter / Space 选择；全局数字键与滚轮切换由调用方绑定 |
+| `Crosshair` | `blendMode`: difference / normal、`label` | 原版 icons.png UV 裁切；difference 对不透明背景对应原生白色准星反色，完整合成仍待原生截图 |
 
 ### 受控与非受控
 
@@ -191,13 +202,13 @@ const sword: InventoryItem = {
   onEnchant={id => requestEnchantment(id)} />
 ```
 
-物品图由调用方提供，npm 不捆绑游戏物品纹理。展示页已使用实际 PNG，来源与 SHA 见 [item-materials.json](docs/item-materials.json)：当前钻石剑与公开 sample 有 22 像素差异，预览采用本机游戏的真实版本。草方块使用官方 GUI 类目图标，保留 17×17 原图的整数缩放，不冒充 native block renderer。`durability` 为剩余比例 0…1；组件显示角标、耐久和提示，并发出操作事件，不自行计算配方、附魔或搬移物品。右键 / Shift+F10 为 secondary，Enter / Space / 点击为 primary。原生 `onContextMenu` 可阻止默认 secondary 处理。
+物品图由调用方提供，npm 不捆绑游戏物品纹理。展示页已使用实际 PNG，来源与 SHA 见 [item-materials.json](docs/item-materials.json)：22 张示例素材均取自官方 `v1.26.60.5 full` 合并资源，并记录本机 59 个 vanilla / 版本覆盖目录中的候选。钻石剑采用与公开合并资源一致的 198-byte PNG；此前 22 像素差异来自基础包与合并资源，不能据此认定运行时最终材质。资源存在与 manifest 不证明当前激活顺序。草方块使用官方 GUI 类目图标，保留 17×17 原图的整数缩放，不冒充 native block renderer。`durability` 为剩余比例 0…1；组件显示角标、耐久和提示，并发出操作事件，不自行计算配方、附魔或搬移物品。右键 / Shift+F10 为 secondary，Enter / Space / 点击为 primary。原生 `onContextMenu` 可阻止默认 secondary 处理。
 
 槽位依据 common.container_item 重做，cell_image 的 PNG 为 10×10、逻辑 base_size 为 5×5，因此源切片为 2px、GUI 2 的显示边宽仍为 2px。普通 / 悬停 / 选中 / 聚焦已有独立原图对照。ItemTooltip、数量基线、耐久色相和 disabled filter 仍需游戏 renderer 截图校准。已移除伪紫色 glint；`enchanted` 仅保留数据标记，缺图时也不会自绘替代物。
 
 砂轮布局来自 grindstone_screen.json，附魔台来自 enchanting_screen.json；逐级锚点与百分比推导见 [workstation-geometry.json](docs/workstation-geometry.json)。附魔选项保留源浮点边界，不人为取整。砂轮空结果槽保留 hover / focus，通过 `aria-disabled` 与回调 guard 阻止无效领取。真实关闭按钮支持容器内部的原始键盘导航。
 
-`book` 提供原生自定义 3D renderer 的接入点，省略时不绘制假书图。展示页显式使用带真实材质的 `EnchantingBook` 重建；其 native mesh / 相机 / 光照仍待校准。`runes` 可传 `EnchantingRunes`，省略时不生成假英文符文，但按钮仍有完整可访问名称。原图集可仅在本地预览接入：
+`book` 提供原生自定义 3D renderer 的接入点，省略时不绘制假书图。展示页显式使用带真实材质的 `EnchantingBook` 重建；默认 `pitch={20}` 与 `lighting="calibrated"` 根据本机 Bedrock 1.26.6005.0 无损 PNG 校准视角和分面颜色，`lighting="unlit"` 可检查未着色图集。网格仍是重建，闭合 / 打开样本的校准不等于所有翻页动画和整屏 renderer 均已吻合。`runes` 可传 `EnchantingRunes`，省略时不生成假英文符文，但按钮仍有完整可访问名称。原图集可仅在本地预览接入：
 
 ```powershell
 python scripts/use-local-runes.py 'C:/XboxGames/Minecraft for Windows/Content'
@@ -208,12 +219,12 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **50 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 102 项（含新增公共 ContainerFrame），逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
+当前 **63 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 103 项（含公共 ContainerFrame 与 BrewingIndicator），逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类、燃料、处理箭头、附魔选项、交易条目。
-- GUI：已有附魔台、砂轮、工作台与熔炉族主面板、铁砧、箱子族、漏斗、发射器与投掷器；继续酿造、锻造、切石、织布、制图、信标、合成器、交易、玩家 / 创造 / 坐骑背包，以及尚缺的配方书和 screen wrapper。
-- HUD 与页面组合：快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题提示、玩家列表，以及暂停 / 设置 / 世界 / 服务器 / 资源包等组合。
+- GUI：已有附魔台、砂轮、工作台与熔炉族主面板、铁砧、酿造台、现代锻造台、制图台、箱子族、漏斗、发射器与投掷器；继续切石、织布、信标、合成器、交易、玩家 / 创造 / 坐骑背包，以及尚缺的配方书和 screen wrapper。
+- HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验条及准星；继续 Boss 条、聊天、计分板、效果、标题提示、玩家列表，以及暂停 / 设置 / 世界 / 服务器 / 资源包等组合。
 
 完整 GUI 由这些基础零件组合。planned 项仍在开发，不作为已有导出；原生 3D renderer、最终像素取整与真实游戏整帧差异单独验收。
 
@@ -237,6 +248,31 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 上述纹理 URL 由使用方提供。`sourceSize` / `slice` 描述 PNG 物理像素，`size` / `destinationBorder` 描述缩放前的 GUI 逻辑像素：例如 cell_image 的物理图为 10×10，逻辑 base_size 为 5×5，不能把两个尺寸混用。Image / NineSlice 的 sourceSize、slice 与 scale 必须为合法整数，非有限、负数或越界切片抛 `RangeError`；内容尺寸和目标边距可用有限逻辑值，像素验收仍要求对齐物理像素。`style` 可覆盖默认布局，但不包含在默认参数的像素证明中。
 
 `AnvilCost` 支持 `{kind:'levels', levels, affordable?, label?}` 或 `{kind:'too-expensive', label?}`；费用与可用性来自调用方，不推算游戏规则。重命名字段遵循原版模板的 `shadow:false`，费用文字保留 `shadow:true`。费用阴影色与原生 baseline / snapping 仍待实拍验证。
+
+### 酿造、锻造、制图与 HUD
+
+```tsx
+<BrewingStand ingredient={netherWart} fuel={blazePowder}
+  bottles={[firstBottle, secondBottle, null]}
+  progress={0.5} bubbles={0.75} fuelRemaining={0.5}
+  onSlotAction={(slot, action) => handleBrewing(slot, action)} />
+<SmithingTable inputs={[template, sword, ingot]} result={upgradedSword}
+  templateOverlay={false} baseOverlay={null} materialOverlay={null}
+  onTakeResult={takeUpgradedItem} />
+<CartographyTable name={mapName} onNameChange={setMapName}
+  inputs={[map, paper]} result={expandedMap} mode="extend" />
+<ScrollArea label="Recipes" style={{height: 240}}>
+  {recipeList}
+</ScrollArea>
+<HealthBar value={19} />
+<ExperienceBar progress={0.5} level={30} />
+<Hotbar items={hotbarItems} selectedIndex={selected}
+  onSelectionChange={setSelected} />
+```
+
+酿造进度 0 表示空前景，1 表示完整前景；不是游戏配方时间。锻造台默认仅显示 template 提示（`templateOverlay={true}`），`baseOverlay` / `materialOverlay` 默认 `null`，宿主根据实际模板和后端状态显式传入对应图集；启用的提示图集按源序列播放，`overlayFrame` 可冻结帧，已放入物品时可关闭对应 underlay。显式启用全部图集的示例用于检查材质，不代表原生空状态。`preview` 的原生装备 renderer 由使用方接入。锻造与制图组件仅包含原始主面板，外部 toolbar 尚未实现，因此不提供内部关闭按钮。
+
+[酿造几何](docs/brewing-geometry.json)、[锻造 / 制图几何](docs/special-workstations-geometry.json)、[HUD 几何](docs/hud-geometry.json) 分别记录来源和未验证项。真实 PNG、JSON 坐标及 Web 截图通过不等于原生整屏 pixel-perfect：生命等状态排列算法、经验 / 书本原生 renderer、制图 description 的栈锚点及浏览器最终量化仍需同版本游戏截图。
 
 ## 字体
 
@@ -306,7 +342,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、50 个导出、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、63 个导出、类型、CSS、皮肤、字体及许可路径。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

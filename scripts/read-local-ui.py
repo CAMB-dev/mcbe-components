@@ -18,7 +18,8 @@ ui_names = {'_global_variables.json', 'ui_common.json', 'ui_template_buttons.jso
             'ui_template_toggles.json', 'ui_template_tabs.json', 'settings_screen.json',
             'ui_template_dialogs.json', 'popup_dialog.json', 'grindstone_screen.json', 'enchanting_screen.json',
             'inventory_screen.json', 'furnace_screen.json', 'blast_furnace_screen.json', 'smoker_screen.json',
-            'anvil_screen.json', 'resource_packs_screen.json', 'chest_screen.json', 'redstone_screen.json'}
+            'anvil_screen.json', 'resource_packs_screen.json', 'chest_screen.json', 'redstone_screen.json',
+            'brewing_stand_screen.json', 'smithing_table_2_screen.json', 'cartography_screen.json', 'hud_screen.json'}
 texture_names = {config['file'] + extension for config in mapping.values() for extension in ('.png', '.json')}
 
 def entries(path):

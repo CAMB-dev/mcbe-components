@@ -1,0 +1,771 @@
+{
+  "schemaVersion": 1,
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "source": {
+    "release": "v1.26.60.5",
+    "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "pinnedTextureCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+    "localArchiveDirectory": "data/resource_packs/vanilla/__brarchive",
+    "ui": {
+      "smithing_table_2_screen.json": {
+        "releaseSha256": "921450b4fe163b56305cc5ff8462d5b15aa4887c451bae35cc3ba737ab7e8a4e",
+        "installedSha256": "06affd3fbfe40828c31bf5993d7fc57c8170b8d37881e5f6dc1f0bd512644e85",
+        "parsedEqual": true
+      },
+      "cartography_screen.json": {
+        "releaseSha256": "17b35bb927388fd7decbf7b306320127bfa1bb71d60ed55ded708d575c2f1589",
+        "installedSha256": "9c567c1dbca2287961ebdc87621750c805ea3286611d6b3c20376e5357d5b987",
+        "parsedEqual": true
+      },
+      "ui_common.json": {
+        "releaseSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "installedSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+        "parsedEqual": true
+      },
+      "_global_variables.json": {
+        "releaseSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "installedSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+        "parsedEqual": true
+      }
+    },
+    "textures": {
+      "smithing_icon.png": {
+        "sha256": "25f2a66d7d0ab4f792c066eb35c9f8a41846b05a974ee4d524b4f87d96d554d1",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "25f2a66d7d0ab4f792c066eb35c9f8a41846b05a974ee4d524b4f87d96d554d1",
+        "physicalSize": [
+          30,
+          30
+        ]
+      },
+      "templates_slot_overlay.png": {
+        "sha256": "c639d94cf7818bda6ff75011442a8684aaff034b105fdab58b12f19f249595cd",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "c639d94cf7818bda6ff75011442a8684aaff034b105fdab58b12f19f249595cd",
+        "physicalSize": [
+          32,
+          16
+        ]
+      },
+      "armors_slot_overlay.png": {
+        "sha256": "66c7ef27f7743e124debf60d03bbb6344b6ecfee9cbdddfc6d7401c4251c4c02",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "66c7ef27f7743e124debf60d03bbb6344b6ecfee9cbdddfc6d7401c4251c4c02",
+        "physicalSize": [
+          64,
+          16
+        ]
+      },
+      "armors_and_tools_slot_overlay.png": {
+        "sha256": "f5616005e5cc31239d26ecb839268b88be2c5dff5a8fcd3207a5be612a142ae4",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "f5616005e5cc31239d26ecb839268b88be2c5dff5a8fcd3207a5be612a142ae4",
+        "physicalSize": [
+          192,
+          16
+        ]
+      },
+      "smithing_material_slot_overlay.png": {
+        "sha256": "16ca599d4e7abf24fd013eb1dfb32c0110c37575f4cf9ed8457e1d4064dd5833",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "16ca599d4e7abf24fd013eb1dfb32c0110c37575f4cf9ed8457e1d4064dd5833",
+        "physicalSize": [
+          112,
+          16
+        ]
+      },
+      "ingot_image.png": {
+        "sha256": "5607b2cd220a7c04391d90aaf19a9d4c40689c75c240f41e4d7dc7408756f074",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "5607b2cd220a7c04391d90aaf19a9d4c40689c75c240f41e4d7dc7408756f074",
+        "physicalSize": [
+          16,
+          16
+        ]
+      },
+      "cartography_table_empty.png": {
+        "sha256": "861fb025a824098063e36cb4b43157712765ca4d4564044a1479d6a62958a009",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "861fb025a824098063e36cb4b43157712765ca4d4564044a1479d6a62958a009",
+        "physicalSize": [
+          66,
+          66
+        ]
+      },
+      "cartography_table_copy.png": {
+        "sha256": "6297cf07c77350bd5bf07eb4dc75cc9d84c20c0e6bea204a972c7c6379a90aa9",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "6297cf07c77350bd5bf07eb4dc75cc9d84c20c0e6bea204a972c7c6379a90aa9",
+        "physicalSize": [
+          66,
+          66
+        ]
+      },
+      "cartography_table_map.png": {
+        "sha256": "f4de80554f918d967f4652225fc2a1fce19ccaefca589d0c5340d142ee2fc1c1",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "f4de80554f918d967f4652225fc2a1fce19ccaefca589d0c5340d142ee2fc1c1",
+        "physicalSize": [
+          66,
+          66
+        ]
+      },
+      "cartography_table_zoom.png": {
+        "sha256": "4063df3833a86b6fac21c0b1b7b3a348055ffd987c2ccc04f339de97f4c17933",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "4063df3833a86b6fac21c0b1b7b3a348055ffd987c2ccc04f339de97f4c17933",
+        "physicalSize": [
+          66,
+          66
+        ]
+      },
+      "cartography_table_glass.png": {
+        "sha256": "9bba526661cf0c63bb33aaa7b309a65a413e9a84918df316e6b3ef6fa59150e3",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "9bba526661cf0c63bb33aaa7b309a65a413e9a84918df316e6b3ef6fa59150e3",
+        "physicalSize": [
+          66,
+          66
+        ]
+      },
+      "arrow.png": {
+        "sha256": "7b72bbdcf787adee14c1cdd08e416846a616725f6bed0a7e5064c7b55501e7d5",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "7b72bbdcf787adee14c1cdd08e416846a616725f6bed0a7e5064c7b55501e7d5",
+        "physicalSize": [
+          16,
+          13
+        ]
+      },
+      "arrow_large.png": {
+        "sha256": "c0b27d51e084d0018365a94905e53e8661cf0f05448145c71402ff16844fe1b6",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "c0b27d51e084d0018365a94905e53e8661cf0f05448145c71402ff16844fe1b6",
+        "physicalSize": [
+          22,
+          15
+        ]
+      },
+      "crossout.png": {
+        "sha256": "e6495d114d889c557948d19035a3a76ba45b9e7a75d19052eed826ea5f05ff61",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "e6495d114d889c557948d19035a3a76ba45b9e7a75d19052eed826ea5f05ff61",
+        "physicalSize": [
+          15,
+          15
+        ]
+      },
+      "anvil-plus.png": {
+        "sha256": "f162fdc2ed1785debed24173efd5d014b1bb444173bd8d719c88f138ecb9ce6f",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "f162fdc2ed1785debed24173efd5d014b1bb444173bd8d719c88f138ecb9ce6f",
+        "physicalSize": [
+          13,
+          13
+        ]
+      }
+    },
+    "comparison": "All four complete parsed UI objects match local native ui.brarchive and official full ZIP. All15 PNGs match the native textures/ui.brarchive, full ZIP, and pinned official HTTP raw bytes; no assertion is inferred from filenames."
+  },
+  "coordinateConvention": "Rectangles are[x,y,width,height], root-relative game pixels. CSS uses2x each coordinate without independent integer rounding. Final native renderer snapping is not proved.",
+  "smithing": {
+    "profile": "Modern three-input smithing_table_2_screen.json. Legacy smithing_table_screen.json is a different two-input layout and is not silently substituted.",
+    "root": {
+      "gameRect": [
+        0,
+        0,
+        176,
+        166
+      ],
+      "cssRect": [
+        0,
+        0,
+        352,
+        332
+      ]
+    },
+    "top": {
+      "gameRect": [
+        7,
+        7,
+        162,
+        69
+      ],
+      "formula": "size[100%-14px,50%-14px], offset[7,7]."
+    },
+    "header": {
+      "gameRect": [
+        7,
+        7,
+        105.3,
+        27.6
+      ],
+      "formula": "icon_and_text_panel size[65%,40%] within top."
+    },
+    "icon": {
+      "gameRect": [
+        7,
+        7,
+        30,
+        30
+      ],
+      "cssRect": [
+        14,
+        14,
+        60,
+        60
+      ],
+      "note": "smithing_icon physical30x30; unlike the15x15 anvil_icon, it enlarges by2x at GUI2."
+    },
+    "title": {
+      "gameRect": [
+        49.12,
+        16.66,
+        84.24,
+        8.28
+      ],
+      "cssRect": [
+        98.24,
+        33.32,
+        168.48,
+        16.56
+      ],
+      "formula": "upgrade_label centered, size[80%,30%] of header105.3x27.6, offset[30%,0] => x7+(105.3-84.24)/2+.3*105.3,y7+(27.6-8.28)/2.",
+      "note": "Box geometry is source-derived; normal-font glyph baseline within this short label box remains a Web-profile choice."
+    },
+    "recipePanel": {
+      "gameRect": [
+        7,
+        34.6,
+        162,
+        41.4
+      ],
+      "formula": "top child size[100%,60%], offset[0,40%]."
+    },
+    "recipeGrid": {
+      "gameRect": [
+        7,
+        36.67,
+        162,
+        37.26
+      ],
+      "formula": "recipe_panel size[100%,90%], left_middle anchors; nine columns give18game cell width."
+    },
+    "slots": {
+      "template": {
+        "gameRect": [
+          7,
+          46.3,
+          18,
+          18
+        ],
+        "cssRect": [
+          14,
+          92.6,
+          36,
+          36
+        ]
+      },
+      "base": {
+        "gameRect": [
+          25,
+          46.3,
+          18,
+          18
+        ],
+        "cssRect": [
+          50,
+          92.6,
+          36,
+          36
+        ]
+      },
+      "addition": {
+        "gameRect": [
+          43,
+          46.3,
+          18,
+          18
+        ],
+        "cssRect": [
+          86,
+          92.6,
+          36,
+          36
+        ]
+      },
+      "result": {
+        "gameRect": [
+          97,
+          46.3,
+          18,
+          18
+        ],
+        "cssRect": [
+          194,
+          92.6,
+          36,
+          36
+        ]
+      },
+      "formula": "Fixed18game common.container_item centers in grid columns0,1,2,5; y=36.67+(37.26-18)/2. Result is normal18, not large26."
+    },
+    "arrowAndInvalid": {
+      "gameRect": [
+        69.982,
+        49.3,
+        18,
+        12
+      ],
+      "cssRect": [
+        139.964,
+        98.6,
+        36,
+        24
+      ],
+      "formula": "yields at grid column3 x61, size[22.2%,100%] interpreted against162game grid =>35.964game span. Center18x12 image gives x61+(35.964-18)/2. This percentage span needs final native capture; it is retained rather than rounded to36game.",
+      "invalid": "cross_out_icon_button visible from #cross_out_icon; it overlays the existing arrow. Caller invalid guards result taking."
+    },
+    "preview": {
+      "gameRect": [
+        131.5,
+        42.8,
+        25,
+        25
+      ],
+      "cssRect": [
+        263,
+        85.6,
+        50,
+        50
+      ],
+      "formula": "result_item_preview at column7 (x133), inner25x25 centers within18x37.26 with offset[2,0].",
+      "nativeRenderer": "equipment_preview_renderer",
+      "nativeRotation": [
+        30,
+        -30
+      ],
+      "nativeBindings": [
+        "#item_id_aux",
+        "#item_custom_color",
+        "#armor_trim_pattern",
+        "#armor_trim_material"
+      ],
+      "implementation": "Empty native-sized slot when preview is omitted; caller may supply a renderer through preview. No invented equipment image or simulated3D model."
+    },
+    "underlays": {
+      "geometry": "source smithing_image top_left offset[1,1], size16x16. ItemSlot underlay always remains below actual item art, including occupied slots; it is not the faded generic empty placeholder.",
+      "visibility": "Source exposes #show_input_overlay_templates, #show_input_overlay_armors_and_tools, #show_input_overlay_armors, #show_material_overlay_all and #show_material_overlay_ingot, without JSON expressions for their values. Native empty screenshot confirms only the template overlay. Defaults are templateOverlaytrue,baseOverlaynull,materialOverlaynull; caller explicitly supplies other visibility states from the actual template/backend. The component does not infer recipe eligibility or binding values.",
+      "sprites": {
+        "templates": {
+          "texture": "templates_slot_overlay.png",
+          "frames": 2
+        },
+        "armors": {
+          "texture": "armors_slot_overlay.png",
+          "frames": 4
+        },
+        "armors-and-tools": {
+          "texture": "armors_and_tools_slot_overlay.png",
+          "frames": 12
+        },
+        "all": {
+          "texture": "smithing_material_slot_overlay.png",
+          "frames": 7
+        },
+        "ingot": {
+          "texture": "ingot_image.png",
+          "frames": 1
+        }
+      },
+      "sourceAnimation": "All animated strips use16x16game UV, fps1, frame_step0. Actual PNGs are horizontal strips:32/64/192/112x16, not vertical.",
+      "webAnimation": "A32CSS square viewport crops full-size horizontal strips using one source frame each second. overlayFrame freezes a finite floored frame modulo frame count; NaN/infinities freeze frame0. Reduced motion stops animation at frame0 unless a caller selected a fixed frame.",
+      "limits": "Native flip-book start phase and frame_step interpretation are not engine-capture verified; exact crops are independently testable."
+    },
+    "focus": {
+      "template.ArrowRight": "base",
+      "base.ArrowLeft": "template",
+      "base.ArrowRight": "addition",
+      "addition.ArrowLeft": "base",
+      "addition.ArrowRight": "result",
+      "result.ArrowLeft": "addition"
+    },
+    "invalidTooltip": "Source common.hover_text is custom hover_text_renderer with max width500game. invalidReason is exposed as the invalid marker accessible label; no browser-native tooltip or fabricated source renderer is substituted.",
+    "inventory": {
+      "labelCssAnchor": [
+        14,
+        152
+      ],
+      "gridCssRect": [
+        14,
+        172,
+        324,
+        108
+      ],
+      "hotbarCssRect": [
+        14,
+        286,
+        324,
+        36
+      ]
+    }
+  },
+  "cartography": {
+    "profile": "Classic cartography main panel at the source large-viewport maximum176x220game. Source root uses size[100%-44px,100%] with max_size[176,220]; the component fixes this maximum profile inside the existing scroll wrapper. Compact game viewport reflow is not implemented or claimed.",
+    "root": {
+      "gameRect": [
+        0,
+        0,
+        176,
+        220
+      ],
+      "cssRect": [
+        0,
+        0,
+        352,
+        440
+      ]
+    },
+    "top": {
+      "gameRect": [
+        6,
+        0,
+        164,
+        130
+      ],
+      "formula": "top_middle size[100%-12px,100%-90px]."
+    },
+    "normalFontProfile": "Source title and MapName labels have natural normal-font heights. The Web stack model uses10game/20CSS label line boxes, consistent with existing Mojangles profile, not a native measured height.",
+    "stackModel": {
+      "gameHeights": {
+        "padding1": 6,
+        "title": 10,
+        "padding2": 4,
+        "mapName": 10,
+        "nameField": 20,
+        "padding3": 4,
+        "padding4Fill": 0,
+        "main": 66,
+        "descriptionRow": 10,
+        "padding5Fill": 0
+      },
+      "formula": "Fixed total130game equals top height at220game root. Name/title baseline and stack anchor behavior need native capture."
+    },
+    "title": {
+      "gameRect": [
+        6,
+        6,
+        164,
+        10
+      ],
+      "cssRect": [
+        12,
+        12,
+        328,
+        20
+      ]
+    },
+    "mapNameLabel": {
+      "gameRect": [
+        6,
+        20,
+        164,
+        10
+      ],
+      "cssRect": [
+        12,
+        40,
+        328,
+        20
+      ],
+      "textAlignment": "left; confirmed by the GUI5 Chinese native capture, where the Map Name label starts at approximately x881, aligned with the name field left edge, rather than centered."
+    },
+    "nameField": {
+      "gameRect": [
+        6,
+        30,
+        164,
+        20
+      ],
+      "cssRect": [
+        12,
+        60,
+        328,
+        40
+      ],
+      "maximumLength": 30,
+      "source": "cartography.text_edit_control sets size[default,20], label size[default,10], max_length30; it has no visibility binding and is always part of the source stack.",
+      "text": "common.text_edit_box white normal-font text, shadowfalse, centering_panel[100%-6px,100%-4px]; GUI2 text strip horizontal6px inset and20px height. Placeholder binding #text_box_placeholder_name is passed as renamePlaceholder. Caller controls renameDisabled/renameReadOnly/name/onNameChange."
+    },
+    "main": {
+      "gameRect": [
+        7,
+        54,
+        162,
+        66
+      ],
+      "cssRect": [
+        14,
+        108,
+        324,
+        132
+      ],
+      "formula": "main width162 centered in164wide top; height100%cm=max(66map,57inputstack,26result,13arrows). y depends on normal10game label profile above."
+    },
+    "map": {
+      "gameRect": [
+        55,
+        54,
+        66,
+        66
+      ],
+      "cssRect": [
+        110,
+        108,
+        132,
+        132
+      ],
+      "source": "map_image_panel66x66, center anchors. Every mode uses the actual66x66 Mojang image, not a reconstructed terrain/map renderer.",
+      "modes": {
+        "none": "cartography_table_empty.png",
+        "clone": "cartography_table_copy.png",
+        "rename": "cartography_table_map.png",
+        "basic": "cartography_table_map.png",
+        "locator": "cartography_table_map.png",
+        "extend": "cartography_table_zoom.png",
+        "locked": "cartography_table_glass.png"
+      }
+    },
+    "slots": {
+      "input": {
+        "gameRect": [
+          7,
+          58.5,
+          18,
+          18
+        ],
+        "cssRect": [
+          14,
+          117,
+          36,
+          36
+        ]
+      },
+      "additional": {
+        "gameRect": [
+          7,
+          97.5,
+          18,
+          18
+        ],
+        "cssRect": [
+          14,
+          195,
+          36,
+          36
+        ]
+      },
+      "result": {
+        "gameRect": [
+          143,
+          74,
+          26,
+          26
+        ],
+        "cssRect": [
+          286,
+          148,
+          52,
+          52
+        ]
+      },
+      "formula": "input_slots stack heights18+(13+8)+18=57, center in66=>y58.5. Native GUI5 capture shows input top440 and additional top635, corresponding to58.5/97.5game after native pixel rounding. Unlike a normal panel, this vertical stack does not apply the source child main-axis offsets+1/-1. The previous59.5/96.5 source-only interpretation was disproved by this capture. Result26game remains right_middle in main162x66."
+    },
+    "plus": {
+      "gameRect": [
+        9.5,
+        80.5,
+        13,
+        13
+      ],
+      "cssRect": [
+        19,
+        161,
+        26,
+        26
+      ]
+    },
+    "arrows": {
+      "inputGameRect": [
+        32,
+        80.5,
+        16,
+        13
+      ],
+      "inputCssRect": [
+        64,
+        161,
+        32,
+        26
+      ],
+      "resultGameRect": [
+        124,
+        80.5,
+        16,
+        13
+      ],
+      "resultCssRect": [
+        248,
+        161,
+        32,
+        26
+      ],
+      "texture": "arrow.png physical16x13; source main overrides the generic22x15 arrow size to16x13."
+    },
+    "description": {
+      "webProfileGameRect": [
+        6,
+        120,
+        164,
+        10
+      ],
+      "webProfileCssRect": [
+        12,
+        240,
+        328,
+        20
+      ],
+      "source": "output_description_label size[100%,10], text_alignmentcenter, text #output_description, anchors bottom_middle -> top_middle.",
+      "evidence": "Native stack-panel anchor resolution is not established by source alone. Web implementation uses the allocated row immediately after main, marked data-fidelity=stack-anchor-unverified. Its y120 is NOT a certified native coordinate; independent QA should not certify this position as a game pixel match."
+    },
+    "inventory": {
+      "labelGameAnchor": [
+        7,
+        130
+      ],
+      "labelCssAnchor": [
+        14,
+        260
+      ],
+      "gridCssRect": [
+        14,
+        280,
+        324,
+        108
+      ],
+      "hotbarCssRect": [
+        14,
+        394,
+        324,
+        36
+      ],
+      "formula": "Bottom inventory-with-label is fixed93game: label=rootHeight-93+3, grid=rootHeight-80, hotbar=rootHeight-23."
+    },
+    "focus": {
+      "input.ArrowDown": "additional",
+      "input.ArrowRight": "result",
+      "additional.ArrowUp": "input",
+      "additional.ArrowRight": "result",
+      "result.ArrowLeft": "additional"
+    },
+    "resultState": "Source has no cartography crossout control. Caller supplies resultAvailable to guard unavailable results, while an empty ResultSlot also guards itself. No fabricated invalid icon or automatic map rule is introduced."
+  },
+  "sharedBehavior": {
+    "state": "All item/result/name/mode/overlay visibility data and operation callbacks are caller-controlled. Neither component computes recipes, consumes inputs, modifies maps, or generates renderable equipment.",
+    "closeButtons": "Both source main panels set show_close_buttonfalse and use separate external toolbar/tab chrome. Public props omit onClose/closeLabel; runtime overrides onCloseundefined after forwarded props to prevent accidental internal X. External chrome is outside this main-panel profile.",
+    "normalFont": "Existing var(--mc-font-size)/--mc-font controls typography. Absolute native normal scale, glyph baseline and default texture pixel snapping still require game capture."
+  },
+  "verification": {
+    "coreTypeScript": "npx tsc -p tsconfig.json --noEmit passed after both components.",
+    "independentQa": "Before the native corrections, the independent combined source-material/profile run passed31/31, including15special cases. That result did not detect the backend default visibility or stack-axis offset differences; targeted post-correction validation is recorded separately.",
+    "nativeCorrectionFollowup": "16/16 special-only browser tests passed in28.3s on an isolated5189server/output, including default template-only visibility, corrected58.5/97.5game slot positions, left-aligned Map Name, both source UV frames and all seven original map modes. Integrated npm run typecheck passed. No repeat of the full301-test integration suite was needed. These tests validate the narrow corrections and source image rendering, not whole native-screen equality."
+  },
+  "evidenceLimits": [
+    "Byte-equal materials and algebraically source-derived boxes do not constitute whole-screen native GPU verification.",
+    "Empty native screenshots corroborate selected grid/stack/main-box landmarks, but do not prove all nested anchor behavior, native normal-font glyph metrics, pixel snapping or the blank output-description position.",
+    "The equipment_preview_renderer and hover_text_renderer are custom engine paths. Only explicit renderer slots/accessibility text are provided; their appearance is not claimed.",
+    "Compact cartography viewport layout and external toolbar/tab/help chrome are outside these fixed main-panel profiles.",
+    "Lossless native empty smithing/cartography references were captured on 2026-10-29; this does not establish complete native-screen equality."
+  ],
+  "nativeEmptyStateEvidence": {
+    "date": "2026-10-29",
+    "installation": "1.26.6005.0",
+    "language": "Simplified Chinese",
+    "guiScale": 5,
+    "captures": [
+      {
+        "path": ".cache/native-gui/smithing-empty-native-lossless.png",
+        "sha256": "08aeeac425a0647520583b5498b7ca57f613a3d49ee149549ce22ce942786013",
+        "dimensions": [
+          2568,
+          1400
+        ]
+      },
+      {
+        "path": ".cache/native-gui/cartography-empty-native-lossless.png",
+        "sha256": "84fd59694c2acd030a731f4afdde855109037e3b7af2c686cafe9201b64ac1ce",
+        "dimensions": [
+          2568,
+          1400
+        ]
+      }
+    ],
+    "smithing": "Native empty state shows the template ghost and flat empty base/material slots. This establishes the default empty visibility only, not values of every backend binding for occupied/invalid templates.",
+    "cartography": {
+      "method": "Read original lossless PNG pixels. The66game map texture is330screen pixels; its top-left approximately1126,417 fixes panel origin approximately851,147 at GUI5. Fractional slot positions may round at the native raster boundary; this is landmark validation, not full RGBA equality.",
+      "landmarksScreenPixels": {
+        "mapTopLeft": [
+          1126,
+          417
+        ],
+        "inputTopLeft": [
+          886,
+          440
+        ],
+        "additionalTopLeft": [
+          886,
+          635
+        ],
+        "nameFieldTopLeft": [
+          881,
+          297
+        ],
+        "resultTopLeft": [
+          1566,
+          517
+        ],
+        "inventoryGridTopLeft": [
+          886,
+          847
+        ],
+        "hotbarTopLeft": [
+          886,
+          1132
+        ]
+      },
+      "correction": "Stack input y58.5 and additional y97.5 fit the native pixel edges; applying source offsets+1/-1 would predict approximately445/630 and is wrong by5screen pixels each. WebGUI2 local slot top values are9/87CSS, rather than11/85.",
+      "label": "Map Name is left-aligned with the text field in the native image.",
+      "unchanged": "Map132CSS square, name field, result52CSS square, arrows, inventory and hotbar major boxes remain consistent with the existing large-viewport profile.",
+      "description": "No description text is visible in the empty native screenshot, so the description stack anchor remains unverified."
+    },
+    "scope": "Confirms only empty-state visibility and the stated local geometry/alignment. It does not establish matching language glyphs, native font baseline, custom renderer output, occupied states, compact viewport behavior or whole-screen pixel equality."
+  }
+}

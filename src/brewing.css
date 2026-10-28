@@ -1,0 +1,43 @@
+/* brewing_stand_screen Classic root176x166, top panel176x71 at y7.
+   All coordinates are source game pixels multiplied by2; no Java offsets. */
+.mc-brewing > .mc-workstation__title { left: 50%; top: 8px; transform: translateX(-50%); text-align: center; width: max-content; max-width: 280px; }
+.mc-brewing__pipes, .mc-brewing__fuel-pipes { position: absolute; z-index: 2; pointer-events: none; background-repeat: no-repeat; background-position: center; background-size: 100% 100%; }
+.mc-brewing__pipes { left: 146px; top: 65px; width: 60px; height: 52px; background-image: var(--mc-skin-brewing-pipes); }
+.mc-brewing__fuel-pipes { left: 52px; top: 53px; width: 60px; height: 44px; background-image: var(--mc-skin-brewing-fuel-pipes); }
+.mc-brewing > .mc-slot { position: absolute; isolation: auto; }
+/* Allow the source layer2 pipes to cross cell backgrounds but stay underneath
+   slot overlays/items and layer3 indicator foregrounds. Pipe controls are last
+   in the source list, so they also follow backgrounds at the same layer. */
+.mc-brewing > .mc-slot::before { z-index: 2; }
+.mc-brewing > .mc-slot--selected::before { z-index: 5; }
+.mc-brewing > .mc-slot > .mc-slot__placeholder { position: relative; z-index: 4; }
+.mc-brewing > .mc-slot > .mc-slot__highlight { z-index: 6; }
+.mc-brewing > .mc-slot > .mc-slot__item { z-index: 8; }
+.mc-brewing > .mc-slot > .mc-slot__durability { z-index: 21; }
+.mc-brewing > .mc-slot > .mc-slot__count { z-index: 28; }
+.mc-brewing > .mc-slot:focus-visible::after { z-index: 6; }
+.mc-brewing__ingredient { left: 158px; top: 31px; }
+.mc-brewing__fuel { left: 18px; top: 31px; }
+.mc-brewing__bottle[data-brewing-slot='0'] { left: 112px; top: 99px; }
+.mc-brewing__bottle[data-brewing-slot='1'] { left: 158px; top: 113px; }
+.mc-brewing__bottle[data-brewing-slot='2'] { left: 204px; top: 99px; }
+.mc-brewing .mc-slot__placeholder { opacity: 1; }
+.mc-brewing__bottle-placeholder, .mc-brewing__fuel-placeholder { display: block; width: 32px; height: 32px; background: var(--mc-skin-brewing-bottle-empty) center / 100% 100% no-repeat; }
+.mc-brewing__fuel-placeholder { transform: translateY(-2px); background-image: var(--mc-skin-brewing-fuel-empty); }
+.mc-brewing-indicator { position: relative; isolation: isolate; image-rendering: pixelated; }
+.mc-brewing-indicator__empty, .mc-brewing-indicator__full { position: absolute; inset: 0; background-position: 0 0; background-repeat: no-repeat; background-size: 100% 100%; pointer-events: none; }
+.mc-brewing-indicator__empty { z-index: 1; }
+.mc-brewing-indicator__full { z-index: 3; }
+.mc-brewing-indicator--arrow { width: 18px; height: 56px; }
+.mc-brewing-indicator--arrow > .mc-brewing-indicator__empty { background-image: var(--mc-skin-brewing-arrow-empty); }
+.mc-brewing-indicator--arrow > .mc-brewing-indicator__full { background-image: var(--mc-skin-brewing-arrow-full); clip-path: inset(0 0 calc(100% - var(--mc-brewing-reveal, 0%)) 0); }
+.mc-brewing-indicator--bubbles { width: 24px; height: 60px; }
+.mc-brewing-indicator--bubbles > .mc-brewing-indicator__empty { z-index: 2; background-image: var(--mc-skin-brewing-bubbles-empty); }
+.mc-brewing-indicator--bubbles > .mc-brewing-indicator__full { background-image: var(--mc-skin-brewing-bubbles-full); clip-path: inset(calc(100% - var(--mc-brewing-reveal, 0%)) 0 0 0); }
+.mc-brewing-indicator--fuel { width: 48px; height: 12px; }
+.mc-brewing-indicator--fuel > .mc-brewing-indicator__empty { background-image: var(--mc-skin-brewing-fuel-bar-empty); }
+.mc-brewing-indicator--fuel > .mc-brewing-indicator__full { inset: 2px; background-image: var(--mc-skin-brewing-fuel-bar-full); clip-path: inset(0 calc(100% - var(--mc-brewing-reveal, 0%)) 0 0); }
+.mc-brewing > .mc-brewing-indicator { position: absolute; isolation: auto; }
+.mc-brewing__arrow { left: 199px; top: 29px; }
+.mc-brewing__bubbles { left: 118px; top: 27px; }
+.mc-brewing__fuel-bar { left: 106px; top: 85px; }

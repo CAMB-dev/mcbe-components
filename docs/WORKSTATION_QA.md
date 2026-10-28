@@ -7,7 +7,7 @@
 - 可公开复验的 UI 定义：[Mojang v1.26.60.5 full archive](https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip)，SHA256 `d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf`。使用 `resource_pack/ui/ui_common.json`、`grindstone_screen.json`、`enchanting_screen.json`、`_global_variables.json`，并与本机归档中的完整 parsed JSON 对象比较。
 - 字体度量另外从用户自有原始 `Mojangles.ttf` 的 cmap / hmtx 得到；没有读取生产 CSS 得出期望字宽。原字体 SHA256 `3d4cdf2752075d28c6ebf0ba44a61157ec6eb38f8db0ebdc3205aec056760be5`，1000 units/em。
 - 新测试 [workstation-fidelity.spec.ts](../tests/workstation-fidelity.spec.ts) 自己保存原始尺寸、锚点、百分比和 RGBA 数值并计算期望；不把生产 CSS、生成的 skin manifest、`workstation-geometry.json` 或上一张浏览器截图当作期望。
-- 实际像素素材检查读取原始 PNG；物品检查直接读取本机 `textures/items.brarchive` 与 demo PNG 逐字节比较。
+- 实际像素素材检查读取原始 PNG；物品审计现读取schema2的22个素材记录，直接核对公开merged-release ZIP和本机base/version-overlay候选。候选存在不证明客户端激活或覆盖顺序。
 - 公开 [UI element reference](https://learn.microsoft.com/en-us/minecraft/creator/reference/content/jsonuireference/examples/jsonuicomponents/ui_element?view=minecraft-bedrock-stable) 说明了 size / offset / anchor / renderer 属性，但没有给出本次所需的原生字体 normal 点数、最终像素吸附、纹理采样与自定义 3D renderer 的完整算法。不能把文档未给出的行为补成既定事实。
 
 ## 已发现并修正的偏差
@@ -17,7 +17,7 @@
 | P1 | 附魔选项整体 | `124,28,212,122`，三行硬编码 `40,42,40` | 原 JSON 推导为 `123.2,28.2,212.8,121.6` CSS px，行高约 `40.533333px`；保留百分比算式。测试单独核对 options 和三行 |
 | P1 | 附魔选项内部 | 英文 12px 上沿标签、缺少外围 inset；文本 / 图标位置没有组合验证 | 补真实 inset；dust / rune box / cost 的位置来自原锚点和 offset。新增未遮罩 main 页面组合检查，而不是只测隐藏内容后的按钮皮肤 |
 | P1 | 消耗颜色 | 成功 `#b5e58c`，失败 `#a95050` | 源色分别为 `[.5,1,.125]` 与 `[.54,.37,.36]`。测试仅允许源 float 相邻的两个 UNORM 字节值；精确 native 字节量化仍需原生截图 |
-| P1 | ItemSlot / 材质 | 自画物品 SVG；另一类 slot 纹理；选中仅外加白框 | 改为真实 container cell 和原始物品 PNG；物品区域 16×16 game px；selected / hover / focus 各有来源。五个 demo 物品 PNG 已与本机归档逐字节独立比对 |
+| P1 | ItemSlot / 材质 | 自画物品 SVG；另一类 slot 纹理；选中仅外加白框 | 改为真实 container cell 和原始物品 PNG；物品区域 16×16 game px；selected / hover / focus 各有来源。现有22个demo PNG选用official merged release，并独立核对安装包候选；不推断运行时pack激活 |
 | P2 | 关闭按钮 | Demo 未传 onClose，整个工作站缺按钮；普通 / compact 模式未区分 | Demo 现显式提供关闭 / 重开行为；source 中附魔台为 compact 关闭图像，砂轮为普通关闭图像 |
 | P2 | 结果槽导航 | 空结果使用原生 disabled，破坏 JSON 中指向结果槽的显式 focus override | 使用 aria-disabled 与回调 guard，保留 native focus；测试 input Down / Right、additional Up / Right、result Left，空结果仍可聚焦 |
 | P1 | 附魔书本 / 符文 | 原创书本图标、英文代替符文 | 已移除图标占位；预览接入真实 book atlas 的 WebGL 重建和真实 SGA atlas 的 rune glyph。**书本 mesh / 相机仍为重建，不能列为原生 renderer 通过** |
@@ -50,7 +50,7 @@ Chromium 布局按 1/64 CSS px 存储。选项的百分比高度本身会量化�
 
 ## 验证结果
 
-独立 Chromium 1280×1000、DPR=1、关闭 hover 状态，临时端口5184：**9/9 PASS，12.2s**。测试结束后已检查临时 Vite 进程不存在。
+首轮独立 Chromium 1280×1000、DPR=1、关闭 hover 状态，临时端口5184：**9/9 PASS，12.2s**。后续已将旧单一base归档材质检查替换为下面两项schema2审计；不能用首轮结果为运行时资源选择背书。
 
 1. 四个原始 UI PNG 固定 SHA / 尺寸及 cell 的 logical density。
 2. 砂轮整块区域、标题、输入、结果、箭头的相对布局。
@@ -59,10 +59,11 @@ Chromium 布局按 1/64 CSS px 存储。选项的百分比高度本身会量化�
 5. main 页面未隐藏的 dust / rune box / cost 位置、source 色与 shadow。
 6. GUI 标题的原 Mojangles advance：Repair & Disenchant=10200、Inventory=5000、Enchant=4000 font units；按实际字号换算。
 7. 物品示例已加载真实 img，未残留物品 SVG。
-8. 五个物品 PNG 与本机 archive 逐字节一致。
-9. 砂轮显式键盘 focus 路径与空结果保留聚焦。
+8. 全部22个demo PNG的SHA256、尺寸、字节数与schema2 official-merged-release记录一致。
+9. 原始public ZIP中22个对应条目与demo逐字节相同；49个本机base/version-overlay候选分别核对archive哈希、entry哈希、大小及matchesSelected标记。每项选中图至少有一个安装候选匹配；不选择运行时pack或推断覆盖优先级。
+10. 砂轮显式键盘 focus 路径与空结果保留聚焦。
 
-CI 没有用户自有字体 / 游戏归档时，第6 / 8项明确跳过，不能写成原生字体 / 当前客户端物品已认证。其余测试不依赖安装游戏。
+本轮新增/替换的材质审计两项已单独实跑**2/2 PASS**；原始ZIP读取使用独立标准ZIP解析和Node zlib，不调用准备素材的脚本作为oracle。CI没有用户自有字体时第6项跳过；没有原public ZIP或游戏候选时第9项明确跳过，第8项仍执行全部22图记录检查。候选审计通过也不能写成当前客户端实际激活纹理已认证。
 
 未遮罩的实际浏览器 frame：`.cache/independent-qa/grindstone-unmasked.png`、`.cache/independent-qa/enchanting-unmasked.png`。这两张是 **实现截图**，不是原版期望图。
 
@@ -70,14 +71,14 @@ CI 没有用户自有字体 / 游戏归档时，第6 / 8项明确跳过，不能
 
 | 等级 | 缺口 | 要完成的验收 |
 | --- | --- | --- |
-| P1 | 没有相同版本和状态的原生整块 GUI 截图 | 当前游戏启动遭遇 Xbox Live 0x80004005。需固定 desktop profile、语言、GUI scale、窗口分辨率、物品 / 数量 / 耐久 / XP / 三档附魔内容、book 开合和鼠标状态，捕获原图后与未遮罩实现做同尺寸差异计数 |
+| P1 | 没有相同版本和状态的原生整块 GUI 截图验收 | 早期启动曾遇Xbox Live 0x80004005，后续已进入游戏继续采集；仍需固定 desktop profile、语言、GUI scale、窗口分辨率、物品 / 数量 / 耐久 / XP / 三档附魔内容、book 开合和鼠标状态，捕获原图后与未遮罩实现做同尺寸差异计数 |
 | P1 | 书本 renderer 不是原生实现 | 真 atlas 已接入，但 native hardcoded mesh、相机、灯光、翻页方程和状态仍未取得。`data-fidelity=renderer-reconstruction` 的 canvas 必须继续保持这个身份，不应称为原生零差异 |
 | P1 | JSON float 与最终 native pixel snapping 的关系未知 | 保留 raw float 修正了逻辑布局错误；CSS 分数坐标的边缘采样仍可能与游戏 GPU 不同。最终 raster oracle 缺失前不能凭数值接近宣布整图一致 |
 | P2 | 原生 font_size=normal 与文字 baseline / 换行 | 原始 Mojangles advance 已核对，但不等于已证明 native normal=20 CSS px；没有 native 字号 / baseline / rune wrapping 的整块截图证据 |
 | P2 | 草方块图标使用真实 UI category 预渲染图 | `icon_recipe_nature.png` 是17×17的官方 GUI 图像，整数2倍34px可避免扭曲；它不是原生 inventory_item_renderer 的3D方块结果。需要在原生 target 截图中确认对应物品结果 |
 | P2 | 物品 glint / durability / tooltip 原生 renderer | 假紫色矩形已经移除；具体 shader、耐久颜色、tooltip 组合仍不可仅用贴图 / CSS 验收 |
 
-来源版本也必须区分：本机 diamond_sword.png 为227 bytes、SHA `f8094529776d45b66ec2318c152ca90a669b7956c311017fa1f05ed8afc19da9`；旧固定 sample / full release 中的剑为198 bytes、SHA `cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94`，22个像素不同。已按本机目标版本使用真实图，但不能把两种来源笼统称为完全一致。
+**撤回此前“本机当前运行时剑与公开sample差22像素”的结论。** 227 bytes、SHA `f8094529776d45b66ec2318c152ca90a669b7956c311017fa1f05ed8afc19da9`仅是`vanilla` base条目；198 bytes、SHA `cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94`是official v1.26.60.5 merged-release选中图，本机`vanilla_1.16`和`vanilla_1.21.90`候选也包含完全相同字节。22像素仅表示base条目与merged图的RGBA差异，不能证明当前客户端用base图，也不能仅凭候选目录名或文件存在证明某overlay已经激活。Demo现在统一使用公开merged-release素材；运行时pack选择仍需独立游戏证据。
 
 ## 验收层级不能互相替代
 

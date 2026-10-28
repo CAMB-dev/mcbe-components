@@ -1,0 +1,564 @@
+{
+  "schemaVersion": 1,
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "source": {
+    "release": "v1.26.60.5",
+    "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "repositoryCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "pinnedTextureCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+    "licenseUrl": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/LICENSE.md",
+    "ui": {
+      "path": "resource_pack/ui/brewing_stand_screen.json",
+      "releaseRawSha256": "adf574c4f461d05e8fa74187d684d01ae7ab1532c393df64c88ece9ea9788197",
+      "localRawSha256": "702e53ecbc9568d2632981c4f6357bdd8a42b730e489fbc2907605e8ce62d014",
+      "parsedJsonEqual": true
+    },
+    "comparison": "Fresh local brarchive UI parsed as JSON and the official full release JSONC parsed with TypeScript parseConfigFileTextToJson; assert.deepStrictEqual passed. All10 original PNGs compare byte-for-byte equal across local game, full release zip and pinned public raw URL.",
+    "textures": [
+      {
+        "file": "brewing_pipes.png",
+        "size": [
+          30,
+          26
+        ],
+        "bytes": 247,
+        "sha256": "c13ce22c300cb464844a08f1b4e84a00511c6dbadb503b3fe26ebbe2b6798767",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "c13ce22c300cb464844a08f1b4e84a00511c6dbadb503b3fe26ebbe2b6798767",
+        "skin": "brewing-pipes",
+        "source": "resource_pack/textures/ui/brewing_pipes.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/brewing_pipes.png"
+      },
+      {
+        "file": "brewing_fuel_pipes.png",
+        "size": [
+          30,
+          22
+        ],
+        "bytes": 270,
+        "sha256": "f868469df7b68a9257175a015e53aa7231aa2c72d4ff7dda772d3c2b8c9fa461",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "f868469df7b68a9257175a015e53aa7231aa2c72d4ff7dda772d3c2b8c9fa461",
+        "skin": "brewing-fuel-pipes",
+        "source": "resource_pack/textures/ui/brewing_fuel_pipes.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/brewing_fuel_pipes.png"
+      },
+      {
+        "file": "bottle_empty.png",
+        "size": [
+          16,
+          16
+        ],
+        "bytes": 127,
+        "sha256": "1c629d4a4265548827804e3e3413cecf64911090f917fe275e95de5112c625d0",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "1c629d4a4265548827804e3e3413cecf64911090f917fe275e95de5112c625d0",
+        "skin": "brewing-bottle-empty",
+        "source": "resource_pack/textures/ui/bottle_empty.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/bottle_empty.png"
+      },
+      {
+        "file": "brewing_fuel_empty.png",
+        "size": [
+          16,
+          16
+        ],
+        "bytes": 203,
+        "sha256": "84e89ce218f43511041833da6b132e9fff4c0e938c5555f2fc10bc663e27002c",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "84e89ce218f43511041833da6b132e9fff4c0e938c5555f2fc10bc663e27002c",
+        "skin": "brewing-fuel-empty",
+        "source": "resource_pack/textures/ui/brewing_fuel_empty.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/brewing_fuel_empty.png"
+      },
+      {
+        "file": "bubbles_empty.png",
+        "size": [
+          12,
+          30
+        ],
+        "bytes": 241,
+        "sha256": "1101a177831943ed9fc2d8e91457d221f6680fc4532a36be22822f7b5a747177",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "1101a177831943ed9fc2d8e91457d221f6680fc4532a36be22822f7b5a747177",
+        "skin": "brewing-bubbles-empty",
+        "source": "resource_pack/textures/ui/bubbles_empty.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/bubbles_empty.png"
+      },
+      {
+        "file": "bubbles_full.png",
+        "size": [
+          12,
+          30
+        ],
+        "bytes": 249,
+        "sha256": "dcfa0312a6992bfbb928cfc7d1a453b78648c069ec10ff2c422ac0a4ea5d3614",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "dcfa0312a6992bfbb928cfc7d1a453b78648c069ec10ff2c422ac0a4ea5d3614",
+        "skin": "brewing-bubbles-full",
+        "source": "resource_pack/textures/ui/bubbles_full.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/bubbles_full.png"
+      },
+      {
+        "file": "brewing_arrow_empty.png",
+        "size": [
+          9,
+          28
+        ],
+        "bytes": 159,
+        "sha256": "10484ecfe381f20a5f26be7b02113f0b636bfdb3201eb8853beb9d1bb45147f0",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "10484ecfe381f20a5f26be7b02113f0b636bfdb3201eb8853beb9d1bb45147f0",
+        "skin": "brewing-arrow-empty",
+        "source": "resource_pack/textures/ui/brewing_arrow_empty.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/brewing_arrow_empty.png"
+      },
+      {
+        "file": "brewing_arrow_full.png",
+        "size": [
+          9,
+          28
+        ],
+        "bytes": 176,
+        "sha256": "8d58f3fd4f5e9b4bebe102002194ebe393247a1553e1b37f47b6c77ac7b67701",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "8d58f3fd4f5e9b4bebe102002194ebe393247a1553e1b37f47b6c77ac7b67701",
+        "skin": "brewing-arrow-full",
+        "source": "resource_pack/textures/ui/brewing_arrow_full.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/brewing_arrow_full.png"
+      },
+      {
+        "file": "brewing_fuel_bar_empty.png",
+        "size": [
+          24,
+          6
+        ],
+        "bytes": 130,
+        "sha256": "cc41cb2f13d532a7e4958aca342815e17e1fd4321a2a4a9040ba1c0151a2f70c",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "cc41cb2f13d532a7e4958aca342815e17e1fd4321a2a4a9040ba1c0151a2f70c",
+        "skin": "brewing-fuel-bar-empty",
+        "source": "resource_pack/textures/ui/brewing_fuel_bar_empty.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/brewing_fuel_bar_empty.png"
+      },
+      {
+        "file": "brewing_fuel_bar_full.png",
+        "size": [
+          22,
+          4
+        ],
+        "bytes": 193,
+        "sha256": "48b153b187b46c2ed41620f4414192142b61fb3b5a7277afdd06f432c9af9574",
+        "matchesRelease": true,
+        "matchesPinned": true,
+        "pinnedResult": "48b153b187b46c2ed41620f4414192142b61fb3b5a7277afdd06f432c9af9574",
+        "skin": "brewing-fuel-bar-full",
+        "source": "resource_pack/textures/ui/brewing_fuel_bar_full.png",
+        "modifications": "None",
+        "localArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "matchesPinnedCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+        "publicSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/brewing_fuel_bar_full.png"
+      }
+    ],
+    "commonReference": "docs/container-geometry.json records public/local ui_common and _global_variables hashes and exact parsed equality."
+  },
+  "profile": {
+    "name": "Classic desktop brewing_stand_panel",
+    "nativeScreenshotVerified": false,
+    "gameRootSize": [
+      176,
+      166
+    ],
+    "cssRootSize": [
+      352,
+      332
+    ]
+  },
+  "derivation": {
+    "topPanelGameRect": [
+      0,
+      7,
+      176,
+      71
+    ],
+    "topPanelFormula": "[100%,50%-12px] at top_middle offset[0,7]; 166/2-12=71.",
+    "pictogramGameSize": [
+      70.4,
+      56.8
+    ],
+    "pictogramFormula": "Centered40%x80% child; its center remains[88,42.5]. Percent bounds do not change the absolute centered item offsets.",
+    "pictogramGameCenter": [
+      88,
+      42.5
+    ],
+    "title": {
+      "gameAnchor": "top_middle",
+      "gameOffset": [
+        0,
+        -3
+      ],
+      "rootGameY": 4,
+      "rootCssY": 8,
+      "derivation": "Top-panel y7 plus label offset-3. No explicit font_type/font_size/shadow in source; uses project font variables without claiming native normal font calibration."
+    },
+    "slotGeometry": "All slots are18x18 game pixels, item renderer16x16. Apply centered offset to pictogram center, then subtract half slot size.",
+    "ingredient": {
+      "gameRect": [
+        79,
+        15.5,
+        18,
+        18
+      ],
+      "cssRect": [
+        158,
+        31,
+        36,
+        36
+      ],
+      "pictogramOffset": [
+        0,
+        -18
+      ]
+    },
+    "fuel": {
+      "gameRect": [
+        9,
+        15.5,
+        18,
+        18
+      ],
+      "cssRect": [
+        18,
+        31,
+        36,
+        36
+      ],
+      "pictogramOffset": [
+        -70,
+        -18
+      ]
+    },
+    "bottles": {
+      "outputGridGameRect": [
+        61,
+        56.5,
+        54,
+        18
+      ],
+      "outputGridOffset": [
+        0,
+        23
+      ],
+      "childOffsets": [
+        [
+          -5,
+          -7
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          5,
+          -7
+        ]
+      ],
+      "gameRects": [
+        [
+          56,
+          49.5,
+          18,
+          18
+        ],
+        [
+          79,
+          56.5,
+          18,
+          18
+        ],
+        [
+          102,
+          49.5,
+          18,
+          18
+        ]
+      ],
+      "cssRects": [
+        [
+          112,
+          99,
+          36,
+          36
+        ],
+        [
+          158,
+          113,
+          36,
+          36
+        ],
+        [
+          204,
+          99,
+          36,
+          36
+        ]
+      ],
+      "derivation": "Centered54x18 grid at offset[0,23]. The left and right grid-cell child panels offset their slots outward5 and upward7 game pixels; the middle stays in place."
+    },
+    "pipes": {
+      "gameRect": [
+        73,
+        32.5,
+        30,
+        26
+      ],
+      "cssRect": [
+        146,
+        65,
+        60,
+        52
+      ],
+      "offset": [
+        0,
+        3
+      ]
+    },
+    "fuelPipes": {
+      "gameRect": [
+        26,
+        26.5,
+        30,
+        22
+      ],
+      "cssRect": [
+        52,
+        53,
+        60,
+        44
+      ],
+      "offset": [
+        -47,
+        -5
+      ]
+    },
+    "arrow": {
+      "emptyGameRect": [
+        99.5,
+        14.5,
+        9,
+        28
+      ],
+      "fullGameRect": [
+        99.5,
+        14.5,
+        9,
+        28
+      ],
+      "cssRect": [
+        199,
+        29,
+        18,
+        56
+      ],
+      "offset": [
+        16,
+        -14
+      ],
+      "nativeClipDirection": "up",
+      "nativeBinding": "#brewing_arrow_ratio -> #clip_ratio"
+    },
+    "bubbles": {
+      "emptyGameRect": [
+        59,
+        13.5,
+        12,
+        30
+      ],
+      "fullGameRect": [
+        59,
+        13.5,
+        12,
+        30
+      ],
+      "cssRect": [
+        118,
+        27,
+        24,
+        60
+      ],
+      "offset": [
+        -23,
+        -14
+      ],
+      "nativeClipDirection": "down",
+      "nativeBinding": "#brewing_bubbles_ratio -> #clip_ratio"
+    },
+    "fuelBar": {
+      "emptyGameRect": [
+        53,
+        42.5,
+        24,
+        6
+      ],
+      "fullGameRect": [
+        54,
+        43.5,
+        22,
+        4
+      ],
+      "emptyCssRect": [
+        106,
+        85,
+        48,
+        12
+      ],
+      "fullCssRect": [
+        108,
+        87,
+        44,
+        8
+      ],
+      "offset": [
+        -23,
+        3
+      ],
+      "nativeClipDirection": "left",
+      "nativeBinding": "#brewing_fuel_ratio -> #clip_ratio",
+      "derivation": "Different source empty/full bounds share the same center, so the full layer is inset1 game pixel (2 CSS pixels) on all four sides."
+    },
+    "playerInventory": {
+      "labelCssOrigin": [
+        14,
+        152
+      ],
+      "gridCssRect": [
+        14,
+        172,
+        324,
+        108
+      ],
+      "hotbarCssRect": [
+        14,
+        286,
+        324,
+        36
+      ],
+      "implementation": "Reuses WorkstationFrame and PlayerInventory, same common inventory layout as the native brewing panel."
+    }
+  },
+  "emptyOverlays": {
+    "bottle": {
+      "source": "brewing_stand.bottle_empty_image",
+      "gameSize": [
+        16,
+        16
+      ],
+      "gameOffset": [
+        0,
+        0
+      ],
+      "binding": "#empty_bottle_image_visible",
+      "web": "Only rendered as the ItemSlot empty placeholder; opacity1; sourcePNG alpha preserved."
+    },
+    "fuel": {
+      "source": "brewing_stand.fuel_empty_image",
+      "gameSize": [
+        16,
+        16
+      ],
+      "gameOffset": [
+        0,
+        -1
+      ],
+      "binding": "#empty_fuel_image_visible",
+      "web": "Only rendered as the ItemSlot empty placeholder; opacity1; translateY(-2px) at GUI2."
+    },
+    "stateMapping": "Web empty means ItemSlot not occupied, including zero/invalid count; occupied slots hide placeholders. Native runtime bindings may carry additional game-specific visibility rules which the caller must model if needed."
+  },
+  "layers": {
+    "source": "Empty arrow/fuelbar layer1, pipes/bubbles-empty layer2, all full images layer3; source common.container_item has background and overlay/item sublayers.",
+    "web": "Within BrewingStand, release per-slot/per-indicator isolation so layers can interleave: arrow/fuelbar empty1; cell backgrounds, bubbles-empty and pipes2; full3; empty slot overlay4; selected5; hover/focus6; item8; durability21; count28. Pipe elements occur last to match same-layer source control ordering. Standalone BrewingIndicator keeps its own isolation.",
+    "alphaEvidence": "At GUI2, original fuel-pipes and fuel-bar empty have24 overlapping nontransparent pixels; fuel-pipes/full have8. Pipes also cross slot backgrounds, including72 pixels under ingredient and middle bottle. Making each entire slot/indicator an isolated stack would change this composition.",
+    "limit": "This preserves source-relative draw ordering as a web mapping. Native renderer flattening and game GPU color blending still require screenshot confirmation."
+  },
+  "publicRatios": {
+    "range": "0..1; NaN ->0; -Infinity/below0 ->0; +Infinity/above1 ->1. ARIA receives finite0..100.",
+    "arrow": "progress: reveal top-to-bottom. The complete18x56CSS image remains fixed, bottom is clipped.",
+    "bubbles": "bubbles: reveal bottom-to-top. The complete24x60CSS image remains fixed, top is clipped.",
+    "fuel": "fuelRemaining: reveal left-to-right. The complete44x8CSS foreground remains fixed inside48x12CSS empty border, right is clipped.",
+    "nativeMappingLimit": "Public values mean visible fraction, deliberately matching the existing Web processing indicators. Native #clip_ratio inversion/direction and pixel rounding are not established by the source JSON alone; these values are not claimed to be raw game binding ratios.",
+    "rounding": "No additional game-pixel quantization is imposed. Browser clip-path retains continuous CSS clipping."
+  },
+  "focus": {
+    "explicitNative": {
+      "ingredient.ArrowLeft": "fuel",
+      "bottle0.ArrowLeft": "fuel",
+      "fuel.ArrowRight": "ingredient"
+    },
+    "webSpatialInference": {
+      "ingredient.ArrowDown": "middle bottle (fallback left,right)",
+      "fuel.ArrowDown": "left bottle (fallback middle,right)",
+      "bottles.ArrowUp": "ingredient (fallback fuel)",
+      "bottle0.ArrowRight": "middle (fallback right)",
+      "bottle1.ArrowLeft": "left (fallback fuel)",
+      "bottle1.ArrowRight": "right",
+      "bottle2.ArrowLeft": "middle (fallback left,fuel)"
+    },
+    "disabled": "Focus helper skips disabled candidates. Standard ItemSlot Tab and secondary action keyboard handling remain available.",
+    "limit": "Only the three explicit overrides are direct source declarations. Other keyboard edges are Web choices, not reproduced native automatic magnet/gamepad behavior."
+  },
+  "behavior": {
+    "data": "All five slots, brewing progress/bubbles/fuel and selectedSlot are controlled values. No timer, recipe computation, transfer or fuel consumption is simulated.",
+    "actions": "onSlotAction(slot,primary|secondary) forwards empty and occupied slot actions; all three bottles may accept items. Disabled ItemSlots suppress activation. onSelectionChange fires on primary selection, same convention as InventoryGrid.",
+    "extras": "Only the first3 bottle entries are rendered; missing entries are empty; invalid runtime selectedSlot matches no slot.",
+    "close": "Uses the standard optional WorkstationFrame close button, consistent with common_panel in this native source."
+  },
+  "evidenceLimits": [
+    "Source geometry, original texture bytes and browser rendering are separate from complete native-game pixel-perfect certification.",
+    "Native font baseline/default normal scale, text localization/truncation, color rounding, GPU pixel snapping and raw clip_ratio semantics remain unverified.",
+    "Native item renderer, durability/tooltip details, inventory transfer logic, item-lock/flying-item effects, sounds, touch and gamepad controls are not recreated by this main-pane component.",
+    "Desktop Classic only; the separate brewing_stand_pocket source layout is outside this component.",
+    "Screenwrapper/background at alpha0.4 is host-owned; no native whole-screen screenshot has passed acceptance."
+  ],
+  "verification": {
+    "typescript": "npm run typecheck passed after implementation; independent brewing QA is tracked separately."
+  }
+}

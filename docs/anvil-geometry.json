@@ -419,12 +419,12 @@
   "closeButton": "Source anvil_panel inherits common.common_panel with show_close_button defaulttrue. WorkstationFrame onClose remains optional and caller-controlled; unlike the furnace/crafting right-pane profile, Anvil does not suppress it.",
   "verification": {
     "coreTypeScript": "npx tsc -p tsconfig.json --noEmit passed.",
-    "independentQa": "Pending independent source-derived browser validation."
+    "independentQa": "10/10 PASS: source-derived float geometry, normal36CSS result, name maxLength30/white/no-shadow, cost105% original black PNG alpha.3/source color/anchor and explicit focus paths. Four canonical icon/plus/arrow/invalid renders matched independently displayed original PNGs with zero differing RGBA pixels. Combined Anvil/container run18/18 passed in45.1s; native-game GPU output remains unverified."
   },
   "evidenceLimits": [
     "Source geometry, texture equality, Web rendered bounds and native game GPU capture are distinct evidence levels.",
     "Fractional percentages are retained; native engine final pixel snapping is unverified.",
     "Default normal font scale, glyph baseline, selected-text/caret appearance, colored cost-shadow shader tint and the disabled edit box composite require same-state native screenshots.",
-    "Game launch encountered Xbox Live0x80004005 in this session. No whole native anvil screenshot acceptance is claimed."
+    "Local game launch recovered on 2026-10-29. No whole native anvil screenshot acceptance is claimed."
   ]
 }

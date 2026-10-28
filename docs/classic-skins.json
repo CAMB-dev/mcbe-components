@@ -727,6 +727,271 @@
       ],
       "slice": null,
       "encoding": "png"
+    },
+    "brewing-pipes": {
+      "source": "resource_pack/textures/ui/brewing_pipes.png",
+      "sha256": "c13ce22c300cb464844a08f1b4e84a00511c6dbadb503b3fe26ebbe2b6798767",
+      "size": [
+        30,
+        26
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "brewing-fuel-pipes": {
+      "source": "resource_pack/textures/ui/brewing_fuel_pipes.png",
+      "sha256": "f868469df7b68a9257175a015e53aa7231aa2c72d4ff7dda772d3c2b8c9fa461",
+      "size": [
+        30,
+        22
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "brewing-bottle-empty": {
+      "source": "resource_pack/textures/ui/bottle_empty.png",
+      "sha256": "1c629d4a4265548827804e3e3413cecf64911090f917fe275e95de5112c625d0",
+      "size": [
+        16,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "brewing-fuel-empty": {
+      "source": "resource_pack/textures/ui/brewing_fuel_empty.png",
+      "sha256": "84e89ce218f43511041833da6b132e9fff4c0e938c5555f2fc10bc663e27002c",
+      "size": [
+        16,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "brewing-bubbles-empty": {
+      "source": "resource_pack/textures/ui/bubbles_empty.png",
+      "sha256": "1101a177831943ed9fc2d8e91457d221f6680fc4532a36be22822f7b5a747177",
+      "size": [
+        12,
+        30
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "brewing-bubbles-full": {
+      "source": "resource_pack/textures/ui/bubbles_full.png",
+      "sha256": "dcfa0312a6992bfbb928cfc7d1a453b78648c069ec10ff2c422ac0a4ea5d3614",
+      "size": [
+        12,
+        30
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "brewing-arrow-empty": {
+      "source": "resource_pack/textures/ui/brewing_arrow_empty.png",
+      "sha256": "10484ecfe381f20a5f26be7b02113f0b636bfdb3201eb8853beb9d1bb45147f0",
+      "size": [
+        9,
+        28
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "brewing-arrow-full": {
+      "source": "resource_pack/textures/ui/brewing_arrow_full.png",
+      "sha256": "8d58f3fd4f5e9b4bebe102002194ebe393247a1553e1b37f47b6c77ac7b67701",
+      "size": [
+        9,
+        28
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "brewing-fuel-bar-empty": {
+      "source": "resource_pack/textures/ui/brewing_fuel_bar_empty.png",
+      "sha256": "cc41cb2f13d532a7e4958aca342815e17e1fd4321a2a4a9040ba1c0151a2f70c",
+      "size": [
+        24,
+        6
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "brewing-fuel-bar-full": {
+      "source": "resource_pack/textures/ui/brewing_fuel_bar_full.png",
+      "sha256": "48b153b187b46c2ed41620f4414192142b61fb3b5a7277afdd06f432c9af9574",
+      "size": [
+        22,
+        4
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "smithing-icon": {
+      "source": "resource_pack/textures/ui/smithing_icon.png",
+      "sha256": "25f2a66d7d0ab4f792c066eb35c9f8a41846b05a974ee4d524b4f87d96d554d1",
+      "size": [
+        30,
+        30
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "smithing-templates": {
+      "source": "resource_pack/textures/ui/templates_slot_overlay.png",
+      "sha256": "c639d94cf7818bda6ff75011442a8684aaff034b105fdab58b12f19f249595cd",
+      "size": [
+        32,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "smithing-armors": {
+      "source": "resource_pack/textures/ui/armors_slot_overlay.png",
+      "sha256": "66c7ef27f7743e124debf60d03bbb6344b6ecfee9cbdddfc6d7401c4251c4c02",
+      "size": [
+        64,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "smithing-armors-tools": {
+      "source": "resource_pack/textures/ui/armors_and_tools_slot_overlay.png",
+      "sha256": "f5616005e5cc31239d26ecb839268b88be2c5dff5a8fcd3207a5be612a142ae4",
+      "size": [
+        192,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "smithing-materials": {
+      "source": "resource_pack/textures/ui/smithing_material_slot_overlay.png",
+      "sha256": "16ca599d4e7abf24fd013eb1dfb32c0110c37575f4cf9ed8457e1d4064dd5833",
+      "size": [
+        112,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "smithing-ingot": {
+      "source": "resource_pack/textures/ui/ingot_image.png",
+      "sha256": "5607b2cd220a7c04391d90aaf19a9d4c40689c75c240f41e4d7dc7408756f074",
+      "size": [
+        16,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "cartography-empty": {
+      "source": "resource_pack/textures/ui/cartography_table_empty.png",
+      "sha256": "861fb025a824098063e36cb4b43157712765ca4d4564044a1479d6a62958a009",
+      "size": [
+        66,
+        66
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "cartography-copy": {
+      "source": "resource_pack/textures/ui/cartography_table_copy.png",
+      "sha256": "6297cf07c77350bd5bf07eb4dc75cc9d84c20c0e6bea204a972c7c6379a90aa9",
+      "size": [
+        66,
+        66
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "cartography-map": {
+      "source": "resource_pack/textures/ui/cartography_table_map.png",
+      "sha256": "f4de80554f918d967f4652225fc2a1fce19ccaefca589d0c5340d142ee2fc1c1",
+      "size": [
+        66,
+        66
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "cartography-zoom": {
+      "source": "resource_pack/textures/ui/cartography_table_zoom.png",
+      "sha256": "4063df3833a86b6fac21c0b1b7b3a348055ffd987c2ccc04f339de97f4c17933",
+      "size": [
+        66,
+        66
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "cartography-glass": {
+      "source": "resource_pack/textures/ui/cartography_table_glass.png",
+      "sha256": "9bba526661cf0c63bb33aaa7b309a65a413e9a84918df316e6b3ef6fa59150e3",
+      "size": [
+        66,
+        66
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "cartography-arrow": {
+      "source": "resource_pack/textures/ui/arrow.png",
+      "sha256": "7b72bbdcf787adee14c1cdd08e416846a616725f6bed0a7e5064c7b55501e7d5",
+      "size": [
+        16,
+        13
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "scroll-track": {
+      "source": "resource_pack/textures/ui/ScrollRail.png",
+      "sha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be",
+      "size": [
+        1,
+        1
+      ],
+      "slice": 0,
+      "encoding": "png"
+    },
+    "scroll-thumb": {
+      "source": "resource_pack/textures/ui/ScrollHandle.png",
+      "sha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a",
+      "size": [
+        3,
+        5
+      ],
+      "slice": [
+        2,
+        1,
+        2,
+        1
+      ],
+      "encoding": "png"
+    },
+    "scroll-container-track": {
+      "source": "resource_pack/textures/ui/ScrollGutterWithBG.png",
+      "sha256": "2bf03c1220f01e0825b831b64dc007c5643a20a18e33afef8c8b7744ff8b560b",
+      "size": [
+        3,
+        3
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "scroll-container-thumb": {
+      "source": "resource_pack/textures/ui/ScrollBox.png",
+      "sha256": "9671fab7614309dfce95b82e42a5535fe7a8e9e70cef57630070c8b5565e2105",
+      "size": [
+        3,
+        3
+      ],
+      "slice": 1,
+      "encoding": "png"
     }
   }
 }

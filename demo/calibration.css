@@ -7,7 +7,7 @@ body { margin: 0; background: #171819; color: #eeeeee; font: 14px/20px 'Monocraf
 .calibration-page > a { color: #b5e58c; }
 .calibration-grid { display: grid; grid-template-columns: repeat(auto-fit, 320px); gap: 24px; margin-block: 32px; }
 .calibration-case { border: 1px solid #48494a; }
-.calibration-case h2 { margin: 0; font-size: 12px; line-height: 20px; font-weight: 400; padding: 8px 16px; background: #1e1f20; }
+.calibration-case > h2 { margin: 0; font-size: 12px; line-height: 20px; font-weight: 400; padding: 8px 16px; background: #1e1f20; }
 .calibration-stage { background: #28292a; padding: 24px; min-height: 120px; }
 .calibration-stage .mc-button { width: 160px; height: 48px; padding: 0; }
 .calibration-stage .mc-input { width: 200px; height: 48px; caret-color: transparent; }

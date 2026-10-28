@@ -1,0 +1,32 @@
+@import './hud-textures.css';
+
+/* Fixed GUI scale 2. Native custom stat renderers have no public layout algorithm. */
+.mc-hud-stat { display: flex; position: relative; width: 162px; height: 18px; flex: none; }
+.mc-hud-stat--reverse { flex-direction: row-reverse; }
+.mc-hud-stat__icon { position: relative; display: block; width: 18px; min-width: 18px; height: 18px; margin-right: -2px; }
+.mc-hud-stat__icon:last-child { margin-right: 0; }
+.mc-hud-stat--reverse .mc-hud-stat__icon { margin-right: 0; margin-left: -2px; }
+.mc-hud-stat--reverse .mc-hud-stat__icon:last-child { margin-left: 0; }
+.mc-hud-stat__background, .mc-hud-stat__fill { position: absolute; inset: 0; display: block; background-size: 18px 18px; background-repeat: no-repeat; image-rendering: pixelated; }
+/* Empty resources are rendered once, without double-compositing transparent edges. */
+.mc-hud-stat__icon[data-state='empty'] .mc-hud-stat__background { display: none; }
+
+.mc-experience-bar { position: relative; width: 364px; height: 10px; flex: none; }
+.mc-experience-bar__empty, .mc-experience-bar__fill { position: absolute; inset: 0; box-sizing: border-box; border-style: solid; border-image-repeat: stretch; image-rendering: pixelated; }
+.mc-experience-bar__empty { border-width: 2px 12px; border-image-source: var(--mc-hud-texture-experience-empty); border-image-slice: 1 6 1 6 fill; }
+.mc-experience-bar__clip { position: absolute; inset: 0 auto 0 0; overflow: hidden; }
+.mc-experience-bar__fill { width: 364px; border-width: 0 2px; border-image-source: var(--mc-hud-texture-experience-full); border-image-slice: 0 1 0 1 fill; }
+.mc-experience-bar__nub { position: absolute; inset: 0 10px; background: var(--mc-hud-texture-experience-nub) left top / 22px 10px repeat-x; image-rendering: pixelated; }
+.mc-experience-bar__level { position: absolute; left: 50%; bottom: 100%; transform: translateX(-50%); color: #80ff00; font-family: var(--mc-font, 'Minecraft Seven', monospace); font-size: 20px; line-height: 20px; white-space: nowrap; text-shadow: 2px 2px #203f00; }
+
+.mc-hotbar { display: flex; position: relative; width: 364px; height: 44px; flex: none; }
+.mc-hotbar__cap { display: block; flex: 0 0 2px; height: 44px; opacity: .65; image-rendering: pixelated; background-size: 2px 44px; }
+.mc-hotbar__cap--start { background-image: var(--mc-hud-texture-hotbar-start-cap); }
+.mc-hotbar__cap--end { background-image: var(--mc-hud-texture-hotbar-end-cap); }
+.mc-hotbar__slot { display: block; position: relative; flex: 0 0 40px; width: 40px; height: 44px; margin: 0; padding: 0; border: 0; border-radius: 0; appearance: none; background-color: transparent; background-size: 40px 44px; background-repeat: no-repeat; image-rendering: pixelated; color: inherit; font: inherit; cursor: pointer; outline: none; }
+.mc-hotbar__slot:disabled { cursor: default; }
+.mc-hotbar__slot:focus-visible { outline: 2px solid white; outline-offset: 4px; z-index: 2; }
+.mc-hotbar__selected { position: absolute; z-index: 8; width: 48px; height: 48px; top: -2px; left: -4px; background: var(--mc-hud-texture-selected-hotbar-slot) 0 0 / 48px 48px no-repeat; image-rendering: pixelated; pointer-events: none; }
+.mc-hotbar__inner { display: block; position: absolute; width: 36px; height: 36px; left: 2px; top: 4px; pointer-events: none; }
+.mc-hotbar__inner > .mc-slot__item { position: absolute; left: 2px; top: 2px; }
+.mc-crosshair { display: inline-block; flex: none; width: 32px; height: 32px; background: var(--mc-hud-texture-icons-atlas) 0 0 / 512px 512px no-repeat; image-rendering: pixelated; pointer-events: none; }

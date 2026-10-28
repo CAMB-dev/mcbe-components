@@ -5,6 +5,7 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
+import { inflateRawSync } from 'node:zlib';
 import { PNG } from 'pngjs';
 
 // Independent source oracle, not copied from production CSS, generated skin
@@ -191,24 +192,30 @@ test('the public inventory showcase uses real raster item resources', async ({ p
   }
 });
 
-test('the five item PNGs match the installed game archive byte for byte', async () => {
-  const archivePath=join(process.env.MCBE_INSTALL_ROOT ?? 'C:/XboxGames/Minecraft for Windows/Content','data/resource_packs/vanilla/__brarchive/textures/items.brarchive');
-  test.skip(!existsSync(archivePath),'The user-owned original game archive is required for native item certification.');
-  const archive=await readFile(archivePath), count=archive.readUInt32LE(8), version=archive.readUInt32LE(12), payload=16+count*256;
-  expect(version).toBe(1); expect(payload).toBeLessThanOrEqual(archive.length);
-  for(const name of ['diamond_sword.png','diamond.png','apple.png','emerald.png','dye_powder_blue.png']) {
-    let native:Buffer | undefined;
-    for(let index=0;index<count;index++) {
-      const start=16+index*256, length=archive[start]!;
-      if(archive.toString('utf8',start+1,start+1+length)!==name) continue;
-      const offset=archive.readUInt32LE(start+248), size=archive.readUInt32LE(start+252);
-      expect(payload+offset+size).toBeLessThanOrEqual(archive.length);
-      native=archive.subarray(payload+offset,payload+offset+size); break;
-    }
-    expect(native,`native archive contains ${name}`).toBeDefined();
-    const demo=await readFile(new URL(`../demo/assets/minecraft/${name}`,import.meta.url));
-    expect(demo.equals(native!),`${name} must be the actual installed texture`).toBe(true);
-  }
+type MaterialCandidate={path:string;entry?:string;sha256:string;archiveSha256?:string;bytes:number;size:number[];matchesSelectedMergedBytes:boolean};
+type MaterialRecord={file:string;source:string;sha256:string;size:number[];bytes:number;origin:string;release:string;matchesAtLeastOneInstalledCandidate:boolean;nativeCandidates:MaterialCandidate[]};
+async function materialManifest(){return JSON.parse(await readFile(new URL('../docs/item-materials.json',import.meta.url),'utf8'))as{schemaVersion:number;referenceRelease:string;archiveSha256:string;assets:MaterialRecord[]};}
+const sha256=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
+
+test('all22 demo PNGs match schema2 official merged-release material records',async()=>{
+  const manifest=await materialManifest();expect(manifest.schemaVersion).toBe(2);expect(manifest.referenceRelease).toBe('v1.26.60.5');expect(manifest.assets).toHaveLength(22);expect(new Set(manifest.assets.map(asset=>asset.file)).size).toBe(22);
+  for(const asset of manifest.assets){const bytes=await readFile(new URL(`../${asset.file}`,import.meta.url));expect(sha256(bytes),asset.file).toBe(asset.sha256);expect(bytes.length).toBe(asset.bytes);const image=PNG.sync.read(bytes);expect([image.width,image.height]).toEqual(asset.size);expect(asset.origin).toBe('official-merged-release');expect(asset.release).toBe('v1.26.60.5');expect(asset.matchesAtLeastOneInstalledCandidate).toBe(true);expect(asset.nativeCandidates.some(candidate=>candidate.matchesSelectedMergedBytes)).toBe(true);}
+});
+
+test('material provenance matches original public merged ZIP and installed pack candidates without inferring activation',async()=>{
+  const installation=process.env.MCBE_INSTALL_ROOT??'C:/XboxGames/Minecraft for Windows/Content',zipPath=new URL('../.cache/references/bedrock-samples-v1.26.60.5-full.zip',import.meta.url);
+  test.skip(!existsSync(zipPath)||!existsSync(join(installation,'data/resource_packs/vanilla/__brarchive/textures/items.brarchive')),'Optional independent provenance audit needs the original public ZIP and user-owned installed pack candidates.');
+  const manifest=await materialManifest(),zip=await readFile(zipPath);expect(sha256(zip)).toBe('d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf');expect(manifest.archiveSha256).toBe(sha256(zip));
+  // Read the public ZIP directly with standard ZIP central-directory records;
+  // neither the material preparation script nor its conclusions are the oracle.
+  let footer=-1;for(let i=zip.length-22;i>=Math.max(0,zip.length-65557);i--)if(zip.readUInt32LE(i)===0x06054b50){footer=i;break;}expect(footer).toBeGreaterThanOrEqual(0);
+  const entries=new Map<string,Buffer>();let cursor=zip.readUInt32LE(footer+16);const wanted=new Set(manifest.assets.map(asset=>asset.source));
+  for(let i=0;i<zip.readUInt16LE(footer+10);i++){if(zip.readUInt32LE(cursor)!==0x02014b50)throw new Error('Invalid original ZIP central directory');const length=zip.readUInt16LE(cursor+28),extra=zip.readUInt16LE(cursor+30),comment=zip.readUInt16LE(cursor+32),name=zip.toString('utf8',cursor+46,cursor+46+length);if(wanted.has(name)){const method=zip.readUInt16LE(cursor+10),compressed=zip.readUInt32LE(cursor+20),size=zip.readUInt32LE(cursor+24),local=zip.readUInt32LE(cursor+42);expect(zip.readUInt32LE(local)).toBe(0x04034b50);const start=local+30+zip.readUInt16LE(local+26)+zip.readUInt16LE(local+28),payload=zip.subarray(start,start+compressed);expect([0,8]).toContain(method);const bytes=method===8?inflateRawSync(payload):payload;expect(bytes.length).toBe(size);entries.set(name,bytes);}cursor+=46+length+extra+comment;}
+  const selected=new Map<string,Buffer>(),groups=new Map<string,{asset:MaterialRecord;candidate:MaterialCandidate}[]>();
+  for(const asset of manifest.assets){const bytes=await readFile(new URL(`../${asset.file}`,import.meta.url));selected.set(asset.file,bytes);expect(entries.get(asset.source)?.equals(bytes),`${asset.file} matches original merged release`).toBe(true);for(const candidate of asset.nativeCandidates){const group=groups.get(candidate.path)??[];group.push({asset,candidate});groups.set(candidate.path,group);}}
+  for(const[path,records]of groups){const bytes=await readFile(join(installation,path));const archiveHash=sha256(bytes);for(const{asset,candidate}of records){let original:Buffer=bytes;if(candidate.entry){expect(archiveHash).toBe(candidate.archiveSha256);const count=bytes.readUInt32LE(8),base=16+count*256;expect(bytes.readUInt32LE(12)).toBe(1);let found:Buffer|undefined;for(let i=0;i<count;i++){const row=16+i*256;if(bytes.toString('utf8',row+1,row+1+bytes[row]!)!==candidate.entry)continue;const offset=bytes.readUInt32LE(row+248),size=bytes.readUInt32LE(row+252);expect(base+offset+size).toBeLessThanOrEqual(bytes.length);found=bytes.subarray(base+offset,base+offset+size);break;}expect(found,`${path}:${candidate.entry}`).toBeDefined();original=found!;}expect(sha256(original)).toBe(candidate.sha256);expect(original.length).toBe(candidate.bytes);const image=PNG.sync.read(original);expect([image.width,image.height]).toEqual(candidate.size);expect(original.equals(selected.get(asset.file)!)).toBe(candidate.matchesSelectedMergedBytes);}}
+  // Matching an installed base or version-overlay candidate proves presence.
+  // This audit deliberately does not choose an active pack or runtime order.
 });
 
 test('grindstone follows explicit source focus overrides, including an empty result', async ({page}) => {

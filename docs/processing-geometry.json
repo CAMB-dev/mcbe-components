@@ -368,7 +368,7 @@
     "Source box mathematics and original PNG equality are proved separately from a whole-frame native screenshot.",
     "Native default panel sizing, text baseline, pixel snapping and clip_ratio backend semantics still need same-state game capture.",
     "The recipe-book pane and toolbar are outside the implemented right-pane profile.",
-    "Current local game launch is blocked by Xbox Live0x80004005; no complete native screenshot acceptance is claimed."
+    "Local game launch recovered on 2026-10-29; native screenshots have been captured for enchanting, smithing and cartography, but no complete native processing-screen acceptance is claimed."
   ],
   "verification": {
     "coreTypeScript": "npx tsc -p tsconfig.json --noEmit passed",

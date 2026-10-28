@@ -62,11 +62,11 @@
       },
       {
         "name": "ScrollArea",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "ScrollBar",
-        "status": "planned"
+        "status": "implemented"
       }
     ],
     "input_and_settings": [
@@ -189,6 +189,10 @@
         "status": "implemented"
       },
       {
+        "name": "BrewingIndicator",
+        "status": "implemented"
+      },
+      {
         "name": "EnchantmentOption",
         "status": "implemented"
       },
@@ -249,7 +253,7 @@
       },
       {
         "name": "BrewingStand",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Anvil",
@@ -257,7 +261,7 @@
       },
       {
         "name": "SmithingTable",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Stonecutter",
@@ -269,7 +273,7 @@
       },
       {
         "name": "CartographyTable",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Beacon",
@@ -319,27 +323,31 @@
     "hud": [
       {
         "name": "Hotbar",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "HealthBar",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "custom_renderer_reconstruction_unverified"
       },
       {
         "name": "HungerBar",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "custom_renderer_reconstruction_unverified"
       },
       {
         "name": "ArmorBar",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "custom_renderer_reconstruction_unverified"
       },
       {
         "name": "AirBar",
-        "status": "planned"
+        "status": "implemented",
+        "fidelity": "custom_renderer_reconstruction_unverified"
       },
       {
         "name": "ExperienceBar",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "BossBar",
@@ -347,7 +355,7 @@
       },
       {
         "name": "Crosshair",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "ChatMessage",

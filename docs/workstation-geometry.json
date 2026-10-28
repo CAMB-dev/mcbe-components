@@ -316,12 +316,26 @@
     },
     "colors": {
       "runes": "#685e4a",
-      "costEnabled": "#80ff20",
-      "costDisabled": "#8a5e5c"
+      "costEnabled": "#7fff1f",
+      "costDisabled": "#895e5b"
     },
-    "colorSource": "Both selectable and unselectable controls instantiate fail_runes. Cost uses success_cost or fail_cost. Normalized RGB converted to nearest 8-bit channel.",
+    "colorSource": "JSON normalized RGB defines the state colors. Opaque pixels in lossless installed Bedrock 26.60 GUI 5 screenshots confirm success #7fff1f and failure #895e5b; these replace the earlier nearest-8-bit estimate. Rune source color remains a source-derived value.",
     "bookRenderer": "custom enchanting_book_renderer, not a flat UI PNG; a caller-supplied book renderer belongs inside its source box.",
-    "runeRenderer": "font_type=rune; retain its 84x16 game-pixel box and source offsets, do not substitute a 12px English label as proof."
+    "runeRenderer": "font_type=rune; retain its 84x16 game-pixel box and source offsets, do not substitute a 12px English label as proof.",
+    "nativeCostShadow": {
+      "enabled": "#204008",
+      "disabled": "#221717",
+      "offsetAtGui5PhysicalPixels": [
+        5,
+        5
+      ],
+      "offsetAtGui2CssPixels": [
+        2,
+        2
+      ],
+      "scope": "Three observed success rows and three insufficient-state rows; does not establish a general engine darkening formula.",
+      "evidence": "enchanting-renderer.json"
+    }
   },
   "typography": {
     "sourceFacts": {
@@ -345,6 +359,6 @@
   "verification": {
     "typecheck": "npm run typecheck passed after geometry and empty-result navigation changes",
     "independentReviewer": "independent_pixel_qa agent validates source math and browser boxes separately",
-    "completeGameFrame": "Not available: Xbox Live launch error 0x80004005"
+    "completeGameFrame": "Lossless native open/closed/insufficient enchanting PNGs captured 2026-10-29; book subregion improves but remains nonzero. No whole-page native equality certification."
   }
 }

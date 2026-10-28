@@ -1,0 +1,355 @@
+{
+  "scope": "Classic source-backed ScrollArea and controlled ScrollBar, using native browser overflow for content. Source raster/geometry checks are not native Bedrock renderer certification.",
+  "basis": {
+    "installedVersion": "1.26.6005.0",
+    "installedUi": ".cache/game-ui/ui_common.json",
+    "fullRelease": {
+      "url": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+      "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+      "uiEntry": "resource_pack/ui/ui_common.json",
+      "uiEntrySha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    },
+    "referenceCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+    "pinnedRawHttpChecks": [
+      {
+        "file": "ScrollRail.png",
+        "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollRail.png",
+        "status": 200,
+        "sha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be"
+      },
+      {
+        "file": "ScrollRail.json",
+        "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollRail.json",
+        "status": 200,
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6"
+      },
+      {
+        "file": "ScrollHandle.png",
+        "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollHandle.png",
+        "status": 200,
+        "sha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a"
+      },
+      {
+        "file": "ScrollHandle.json",
+        "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollHandle.json",
+        "status": 200,
+        "sha256": "08856911c52b8d9e90c4906df474bf3785813187971a0d2b57b0d3a7e82c4a77"
+      },
+      {
+        "file": "ScrollBox.png",
+        "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollBox.png",
+        "status": 200,
+        "sha256": "9671fab7614309dfce95b82e42a5535fe7a8e9e70cef57630070c8b5565e2105"
+      },
+      {
+        "file": "ScrollBox.json",
+        "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollBox.json",
+        "status": 200,
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422"
+      },
+      {
+        "file": "ScrollGutterWithBG.png",
+        "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollGutterWithBG.png",
+        "status": 200,
+        "sha256": "2bf03c1220f01e0825b831b64dc007c5643a20a18e33afef8c8b7744ff8b560b"
+      },
+      {
+        "file": "ScrollGutterWithBG.json",
+        "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollGutterWithBG.json",
+        "status": 200,
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422"
+      }
+    ],
+    "sourceDefinitions": {
+      "scrollbar_box_image": {
+        "type": "image",
+        "texture": "textures/ui/ScrollHandle",
+        "size": [
+          5,
+          "100%"
+        ],
+        "layer": 4
+      },
+      "scroll_indent_image": {
+        "type": "image",
+        "texture": "textures/ui/ScrollRail",
+        "size": [
+          3,
+          "100%"
+        ],
+        "layer": 3
+      },
+      "container_scroll_box_image": {
+        "type": "image",
+        "texture": "textures/ui/ScrollBox"
+      },
+      "container_scroll_bar_side_rails": {
+        "type": "image",
+        "layer": 1,
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "texture": "textures/ui/ScrollGutterWithBG"
+      },
+      "scroll_box_indent": {
+        "type": "image",
+        "texture": "textures/ui/ScrollRail",
+        "layer": 1
+      }
+    },
+    "scrollingPanelDefaults": {
+      "$scroll_bar_left_padding_size|default": [
+        2,
+        0
+      ],
+      "$scroll_bar_right_padding_size|default": [
+        2,
+        0
+      ],
+      "$scroll_size|default": [
+        4,
+        "100%"
+      ],
+      "$scroll_box_visible|default": true,
+      "$scroll_box_visible_touch|default": false
+    },
+    "scrollView": {
+      "type": "scroll_view",
+      "scroll_speed": 15,
+      "scrollbar_track_button": "button.scrollbar_skip_track"
+    },
+    "sourceMinimumThumbExtent": "Not exposed in this JSON. The web default of five logical pixels is an implementation choice, not a certified native rule."
+  },
+  "skins": [
+    {
+      "key": "scroll-track",
+      "file": "ScrollRail.png",
+      "physicalSize": [
+        1,
+        1
+      ],
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          1,
+          1
+        ]
+      },
+      "implementation": "Plain nearest-neighbor stretch of its one original opaque #434343 pixel. The source metadata says nineslice_size=1 on a 1x1 image; it is not treated as overlapping conventional two-sided cuts.",
+      "logicalDisplayCrossSize": 3,
+      "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollRail.png",
+      "sha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be"
+    },
+    {
+      "key": "scroll-thumb",
+      "file": "ScrollHandle.png",
+      "physicalSize": [
+        3,
+        5
+      ],
+      "metadata": {
+        "nineslice_size": [
+          1,
+          2,
+          1,
+          2
+        ],
+        "base_size": [
+          3,
+          5
+        ]
+      },
+      "cssSliceTopRightBottomLeft": [
+        2,
+        1,
+        2,
+        1
+      ],
+      "logicalDisplayCrossSize": 5,
+      "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollHandle.png",
+      "sha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a"
+    },
+    {
+      "key": "scroll-container-track",
+      "file": "ScrollGutterWithBG.png",
+      "physicalSize": [
+        3,
+        3
+      ],
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "cssSliceTopRightBottomLeft": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "logicalDisplayCrossSize": 4,
+      "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollGutterWithBG.png",
+      "sha256": "2bf03c1220f01e0825b831b64dc007c5643a20a18e33afef8c8b7744ff8b560b"
+    },
+    {
+      "key": "scroll-container-thumb",
+      "file": "ScrollBox.png",
+      "physicalSize": [
+        3,
+        3
+      ],
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "cssSliceTopRightBottomLeft": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "logicalDisplayCrossSize": 4,
+      "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/ScrollBox.png",
+      "sha256": "9671fab7614309dfce95b82e42a5535fe7a8e9e70cef57630070c8b5565e2105"
+    }
+  ],
+  "states": {
+    "default": "Original track and thumb PNGs without recoloring.",
+    "hover": "No separate hover asset or tint was found in the inspected scroll templates and complete full-release scroll texture entries. Reuses the unchanged source.",
+    "disabled": "Explicit disabled or zero max/page suppresses all custom actions and removes the bar from sequential focus; no invented gray or opacity filter. Same source textures remain visible if requested.",
+    "focus": "Browser focus-visible outline is retained as a web accessibility adaptation.",
+    "dragging": "Pointer capture plus grab/grabbing cursor only; no invented skin.",
+    "touch": "Content uses native pan/inertia. Classic bars stay as configured; automatic Pocket fade-out/touch renderer substitution is outside this component."
+  },
+  "geometry": {
+    "scale": "Positive integer GUI scale, defaults to 2. Source image pixels are never enlarged through transform:scale.",
+    "defaultCross": {
+      "logicalColumn": 8,
+      "sourceInnerControl": 4,
+      "leftPadding": 2,
+      "rightPadding": 2,
+      "trackWidth": 3,
+      "thumbWidth": 5,
+      "gui2Css": {
+        "column": 16,
+        "trackLeft": 5,
+        "trackWidth": 6,
+        "thumbLeft": 3,
+        "thumbWidth": 10
+      }
+    },
+    "containerCross": {
+      "logicalColumn": 6,
+      "leftPadding": 2,
+      "rightPadding": 0,
+      "trackWidth": 4,
+      "thumbWidth": 4,
+      "gui2Css": {
+        "column": 12,
+        "trackLeft": 4,
+        "trackWidth": 8,
+        "thumbLeft": 4,
+        "thumbWidth": 8
+      }
+    },
+    "axisExtent": "thumbExtent = min(trackExtent, max(minThumbSize * scale, trackExtent * pageSize / (max + pageSize))). minThumbSize defaults to 5 logical pixels.",
+    "axisPosition": "thumbOffset = clamp(value,0,max) / max * (trackExtent - thumbExtent). Horizontal RTL reverses the visual position and pointer direction.",
+    "rangeUnits": "max is the maximum scroll offset, not total content extent. max/pageSize/value/step are CSS pixels; scale affects the source thickness, edges and default keyboard step.",
+    "nativeMetrics": "ScrollArea uses browser clientWidth/clientHeight/scrollWidth/scrollHeight and current native offsets. Fractional CSS thumb extents/offsets are retained, not independently rounded. Native Bedrock final snapping and ratio rules remain unverified.",
+    "horizontalLimit": "Horizontal interaction is a browser adaptation; the original vertical source artwork is retained without rotating lighting or inventing a separate asset. No native horizontal Bedrock control certification is implied."
+  },
+  "api": {
+    "ScrollBar": {
+      "ref": "HTMLDivElement",
+      "required": [
+        "value: number",
+        "max: number",
+        "pageSize: number",
+        "onValueChange(value): void",
+        "label: string",
+        "controls: string (actual viewport ID)"
+      ],
+      "optional": {
+        "orientation": "vertical | horizontal; default vertical",
+        "variant": "default | container; default default",
+        "scale": "positive safe integer; default 2",
+        "disabled": "boolean; default false",
+        "step": "CSS pixels per arrow; default 15 * scale, inspired by source scroll_speed but not a claim about native wheel units",
+        "minThumbSize": "logical GUI pixels; default 5"
+      },
+      "semantics": "role=scrollbar, name, controls, orientation, min=0, current bounded value, max and disabled. Disabled bars have tabIndex=-1. The controlled callback must update the supplied value.",
+      "keys": "Axis arrows use step, PageUp/PageDown use pageSize, Home/End use bounds. Wrong-axis arrows and modifier shortcuts remain untouched. Caller onKeyDown/onPointerDown/onPointerMove run first and can prevent custom actions.",
+      "pointer": "Primary pointer thumb drag uses pointer capture, continues outside the bar, releases on up/cancel/lost capture/unmount. Track clicks page toward the pointer. No global pointermove/up listeners.",
+      "normalization": "Negative/nonfinite max/pageSize become zero; nonfinite/negative value becomes zero and is clamped to max. Zero max or page disables input. Invalid scale throws RangeError. Invalid step/minThumbSize fall back to defaults.",
+      "wheel": "The custom bar has a passive:false native wheel listener because it is a sibling of the viewport. CSS-pixel, line and page modes use their corresponding units; horizontal deltaX follows physical RTL direction. Only an offset change is consumed, so boundaries can chain outward. Ctrl+wheel zoom and vertical Shift+wheel are left alone. Listener is removed on cleanup."
+    },
+    "ScrollArea": {
+      "ref": "Outer HTMLDivElement; viewportRef exposes the actual native overflow div.",
+      "optional": {
+        "orientation": "vertical | horizontal | both; default vertical",
+        "variant": "default | container",
+        "scale": "positive safe integer; default 2",
+        "scrollbarVisibility": "auto | always; default auto",
+        "label": "native viewport name; defaults to Scrollable content",
+        "viewportProps": "native div attributes including id, className, style, tabIndex, onScroll and onKeyDown",
+        "viewportRef": "React ref to the actual scrollable HTMLDivElement",
+        "contentProps": "native content div className/style/attributes",
+        "onScrollPositionChange": "({scrollTop,scrollLeft}) callback with actual native signed DOM offsets"
+      },
+      "layout": "CSS grid reserves a separate source-width bar column/row. Native scrollbars are visually hidden, while the viewport remains overflow:auto. Caller provides area dimensions through ordinary style or layout. Auto bars are hidden when their axis has no overflow; always bars remain visible and disabled when no scrolling is possible.",
+      "nativeBehavior": "Wheel, touch pan/inertia, focus-driven scrolling and selection use the browser. Viewport wheel/touch handlers are not intercepted or converted. Wheel over the custom scrollbar changes its controlled value and therefore the linked native viewport; boundaries continue outward normally.",
+      "viewportKeys": "Native focused viewport keys are preserved, including editable descendants. Only PageUp/PageDown/Home/End on a horizontal-only viewport itself are mapped to that axis. Custom scrollbar keys are separate.",
+      "observation": "ResizeObserver watches viewport and content; a content MutationObserver catches subtree text/children and class/style/hidden changes, image load is captured, and window resize is observed. Bar wheel and resize listeners, observers, content load listener and capture are cleaned up.",
+      "ssr": "No browser access or measurement occurs while rendering; measurements start in effects. Initial zero-range bars reflect the absence of server-side viewport measurements, without a hydration-dependent alternate tree."
+    }
+  },
+  "verification": {
+    "spec": "tests/scroll-area.spec.ts",
+    "fixture": "demo/scroll-fixture.tsx: ScrollFixture",
+    "isolatedCommand": "npx playwright test --config .cache/scroll-qa.config.ts",
+    "desktopAndMobileResult": {
+      "passed": 19,
+      "skipped": 1,
+      "skippedReason": "Desktop project does not perform the touch-only gesture; mobile CDP touchStart/touchMove/touchEnd passed."
+    },
+    "sourcePixels": {
+      "dpr": 1,
+      "changedPixels": 0,
+      "completeRegions": [
+        "Default 16x200 CSS-pixel rail+thumb column",
+        "Same default region with actual thumb hover",
+        "Container 12x200 CSS-pixel rail+thumb column",
+        "Disabled 16x100 CSS-pixel rail+thumb column"
+      ],
+      "reference": "Independent nearest source PNG sampling with pinned raw hashes; no screenshot-generated expected baseline, masking, border exclusion or allowed differing pixels.",
+      "coordinateCondition": "Fixture at ordinary viewport (0,0) integer layout; no fractional translate/compositor filtering. Dynamic fractional thumb states still need their own native-frame comparison.",
+      "latestStrengthenedPixelRun": "2 passed (desktop and mobile source-pixel tests); same source test now verifies all four complete regions."
+    },
+    "interactionCoverage": [
+      "Controlled keys, wrong-axis keys, track paging, explicit disabled and caller preventDefault",
+      "Real mouse capture drag outside the thumb and pointercancel",
+      "Direct native scroll/ref, native content wheel, and custom-bar hovered wheel synchronization",
+      "Native viewport PageDown/Home/End and editable child caret keys",
+      "Both-axis synchronization and horizontal-only page keys",
+      "RTL signed DOM offset normalization",
+      "ResizeObserver-driven content and viewport changes, auto hide and native clamp on shrink",
+      "Unmount during active capture, owned ResizeObservers disconnected, no ghost drag/page errors",
+      "Actual mobile native touch pan"
+    ],
+    "visualEvidence": [
+      ".cache/scroll-qa/fixture.png",
+      ".cache/scroll-qa/browser-result.json"
+    ],
+    "pageErrors": [],
+    "wheelCleanupAndSourceRepeat": "6 targeted desktop/mobile tests passed after adding bar-hover wheel, including active-capture unmount cleanup and all four complete source-pixel regions."
+  },
+  "acceptanceLimit": "Pixel comparisons certify these original-PNG web specimens only. Native Bedrock thumb minimums, engine ratio/rounding, focus/touch behavior and complete current-version screenshots remain independent acceptance gates.",
+  "rights": {
+    "assets": "Unchanged Mojang sample assets with original source hashes; no hand-drawn scrollbar art or fabricated state images.",
+    "upstreamLicense": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/LICENSE.md"
+  }
+}

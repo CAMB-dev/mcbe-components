@@ -141,6 +141,8 @@ test('forms retain readable colors and native input behavior inside a Classic pa
 });
 
 test('page and modal have no serious or critical axe violations', async ({ page }) => {
+  // The complete 63-component showcase and its modal each run the full axe ruleset.
+  test.slow();
   const pageResults = await new AxeBuilder({ page }).analyze();
   expect(pageResults.violations.filter(item => item.impact === 'serious' || item.impact === 'critical')).toEqual([]);
   await page.getByRole('button', { name: 'Create new world', exact: true }).click();

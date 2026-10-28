@@ -1,27 +1,675 @@
 {
-  "referenceCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+  "schemaVersion": 2,
   "referenceRepository": "https://github.com/Mojang/bedrock-samples",
-  "upstreamLicense": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/LICENSE.md",
+  "referenceCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "referenceRelease": "v1.26.60.5",
+  "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "upstreamLicense": "https://github.com/Mojang/bedrock-samples/blob/15701fa9c13923f12662984c32c124327e40e3d3/LICENSE.md",
   "installedGameVersion": "1.26.6005.0",
-  "distribution": "Demo-only assets, not included by the npm package files list. These game assets are subject to upstream rights, not this project MIT license.",
+  "distribution": "Demo-only game assets, not npm library assets. Upstream rights apply separately from this project MIT license.",
+  "selectionBasis": "Select official v1.26.60.5 full merged-release PNGs. Every selected byte sequence is also present in an installed vanilla or version-overlay candidate. No runtime pack activation or precedence is inferred from folder names, manifests or file presence.",
+  "reproduce": "python scripts/prepare-workstation-materials.py [GAME_CONTENT] [--reference FULL_ZIP]",
+  "audit": {
+    "scope": "All installed resource_packs/vanilla* directories, exact requested paths in loose files and __brarchive/textures/items.brarchive or ui.brarchive. Candidate order is lexical directory order, not runtime precedence.",
+    "scannedPackCount": 59,
+    "packManifests": [
+      {
+        "pack": "vanilla",
+        "manifestSha256": "47c70eb3e18691487495d951f1706dd0e4b3f0bb14cc444a599c4e8ba89ab988",
+        "manifestVersion": [
+          0,
+          0,
+          1
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.14",
+        "manifestSha256": "d93ecad25191588a08e9a5d5d8f5c89d01bbc7176d4f27512728b076fd89dd20",
+        "manifestVersion": [
+          1,
+          14,
+          0
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.15",
+        "manifestSha256": "0b4edb6df837e718debad3c9961d095b43627e97953cb9b22a9ed9f756fc2bb0",
+        "manifestVersion": [
+          1,
+          15,
+          0
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.16",
+        "manifestSha256": "9e2f4f2f5545723503095b523d9a02fd8f174273e0f8a0676595b91c2849a6b5",
+        "manifestVersion": [
+          1,
+          16,
+          0
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.16.100",
+        "manifestSha256": "de7072f69ba1538d77674f26a1a9e2d3e9698913b407883f3f611017ed28fc1d",
+        "manifestVersion": [
+          1,
+          16,
+          100
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.16.200",
+        "manifestSha256": "97c6126a4b1277dec0d0df5d0c8b8c903a5c5bf0b0ada88c964ac71c40d1fa23",
+        "manifestVersion": [
+          1,
+          16,
+          200
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.16.210",
+        "manifestSha256": "31e7c62721df09a5f83f4f3a869809be55c0c3f5b41a79cdbedc5b1bdc973007",
+        "manifestVersion": [
+          1,
+          16,
+          210
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.16.220",
+        "manifestSha256": "a67c9dbb14a5dddf06df5a2e63ba8418ab84d79c8d6d314dcf5f97fd6662e98b",
+        "manifestVersion": [
+          1,
+          16,
+          220
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.17.0",
+        "manifestSha256": "7a7522804e6b6036ed17d2c82a6a43479cb869b0376af1ad68720aae2569a7e2",
+        "manifestVersion": [
+          1,
+          17,
+          0
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.17.10",
+        "manifestSha256": "3c9c1aa68b82570d55745cd8704fa53c3658662c1763fef4923297f1464f0c20",
+        "manifestVersion": [
+          1,
+          17,
+          10
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.17.20",
+        "manifestSha256": "9023a50d7af9b79c4e7e43b0bfa30f7974529b402ad1105d16db817975ee5c47",
+        "manifestVersion": [
+          1,
+          17,
+          20
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.17.30",
+        "manifestSha256": "ea92d4154a8385cac8a8e04e1eb1514ebea8a199f03bed210645b52dee5518a3",
+        "manifestVersion": [
+          1,
+          17,
+          30
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.17.40",
+        "manifestSha256": "8b03402fabf45548d4bb3fe4da0af43eb57ff105b1546be81aa8f2ce892a44dc",
+        "manifestVersion": [
+          1,
+          17,
+          40
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.18.0",
+        "manifestSha256": "611d651d3e972e4b2d012151176e503c4972d53b9ff1d8400715da110d5faaab",
+        "manifestVersion": [
+          1,
+          18,
+          0
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.18.10",
+        "manifestSha256": "57b4e5e3f40d81f4768b91e3bc1a5cadbdf8cb552b25588df1a92201823f615d",
+        "manifestVersion": [
+          1,
+          18,
+          10
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.18.20",
+        "manifestSha256": "747d69a80cfea4aaafbbf567efba8bd34a3126e200fc246007bf19f378e5b598",
+        "manifestVersion": [
+          1,
+          18,
+          20
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.18.30",
+        "manifestSha256": "4d8c3e5701d6e9d8f217c3ed2f124525ac08cbb4e2f6a3e3da99ad5f5ae2cea2",
+        "manifestVersion": [
+          1,
+          18,
+          30
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.19.0",
+        "manifestSha256": "33ff58e2bad9450de76406401d78e304af9219b362bc028700838e4cb9004aed",
+        "manifestVersion": [
+          1,
+          19,
+          0
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.19.10",
+        "manifestSha256": "78ef673a89382c5df91612028082c58c392ef27cd79301339f140b438af0f830",
+        "manifestVersion": [
+          1,
+          19,
+          10
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.19.20",
+        "manifestSha256": "d7234c93ad2cb481ae248899880c0f3ce90bd6b902e5c6736b3e75848e937df6",
+        "manifestVersion": [
+          1,
+          19,
+          20
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.19.30",
+        "manifestSha256": "5dc4c7a95f213236d5434e99cffe902ac5682932d889f112bbf4c6d5caa6b737",
+        "manifestVersion": [
+          1,
+          19,
+          30
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.19.40",
+        "manifestSha256": "d3dda2938b0907d44ee109fa976ef3d41a3d27dec99a1811ad806c7db49c6c26",
+        "manifestVersion": [
+          1,
+          19,
+          40
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.19.50",
+        "manifestSha256": "1a4786db6d3f8a9f52f18c5b57b5e05707f0b9be170625f265fa956dcf42e552",
+        "manifestVersion": [
+          1,
+          19,
+          50
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.19.60",
+        "manifestSha256": "15c253b9d7d2998d6688f71162ec3c8d7c62a4512288c6b44d4b78a9cfa1f413",
+        "manifestVersion": [
+          1,
+          19,
+          60
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.19.70",
+        "manifestSha256": "855ee332ca466517e7514eead3b2750377f821bee7de7211f68ff9d3de9a2a4e",
+        "manifestVersion": [
+          1,
+          19,
+          70
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.19.80",
+        "manifestSha256": "7302c49f47a35472003a0e736a04a677c9cd71960355ede5318f309ce1bc4448",
+        "manifestVersion": [
+          1,
+          19,
+          80
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.20.0",
+        "manifestSha256": "5d75afba3aa28931e97bb80151962fb7d67525980445dd4eaccac9ecb532cc36",
+        "manifestVersion": [
+          1,
+          20,
+          0
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.20.10",
+        "manifestSha256": "96e7bbc1641bf01ab99840fd31a4ada02d5df80a3940a9a6e7813bb3cbb745dd",
+        "manifestVersion": [
+          1,
+          20,
+          10
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.20.20",
+        "manifestSha256": "fa10fbff7b5f69dda29d4d89209009d7f2d16d14f27059efad4778c95284cce4",
+        "manifestVersion": [
+          1,
+          20,
+          20
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.20.30",
+        "manifestSha256": "bf7fb2755e87b7d27b6197e67f133ce4cf116e0398e3f101049aa1718ffbfe21",
+        "manifestVersion": [
+          1,
+          20,
+          30
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.20.40",
+        "manifestSha256": "35b3ac99d7a97c674ba5e19af6d7c23ee09be7754917db3dfcb515c7ac061158",
+        "manifestVersion": [
+          1,
+          20,
+          40
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.20.50",
+        "manifestSha256": "dd2e699df92b2021b8dd028a256cdb4f68c2d82fe905882bf0c40e7ea9715b82",
+        "manifestVersion": [
+          1,
+          20,
+          50
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.20.60",
+        "manifestSha256": "806279d5303088dfffca9e41d5c1b7bfe1491d257b74c65d710129c0f0192efb",
+        "manifestVersion": [
+          1,
+          20,
+          60
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.20.70",
+        "manifestSha256": "2814b2fcd7c4889773cc97bf09ebfc0cbed9239f1190b806c2239c3e42bfa0ad",
+        "manifestVersion": [
+          1,
+          20,
+          70
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.20.80",
+        "manifestSha256": "d10b3b1fd62211c7255d902eb094b1e0ce54046669c325fb56ee94a3ca40f4f4",
+        "manifestVersion": [
+          1,
+          20,
+          80
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.0",
+        "manifestSha256": "1b163baa9320aa86fceb90f88c49b17296c2d59a44ffba0c2db5a0bc112074e3",
+        "manifestVersion": [
+          1,
+          21,
+          0
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.10",
+        "manifestSha256": "20acb986dc73cf5e27e3ca5bbb0b1961c6e22497ba3c96dbf8d060930aaef198",
+        "manifestVersion": [
+          1,
+          21,
+          10
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.100",
+        "manifestSha256": "985dbbcbff7e2cd66a73ffec8440d2007917516df241a420ef01f0e1bdfea438",
+        "manifestVersion": [
+          1,
+          21,
+          100
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.110",
+        "manifestSha256": "bdc1578fe0237818176dd1830e71392e2c00a7d906162fe7fc6c57cf867d7827",
+        "manifestVersion": [
+          1,
+          21,
+          110
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.120",
+        "manifestSha256": "c7ed5cb73a94d50aa4f125f566edbeea191cd6e48583333330d863b1c1683d4b",
+        "manifestVersion": [
+          1,
+          21,
+          120
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.130",
+        "manifestSha256": "2b1dbe05aa8b04784a5280e469b0fea8dcef830a80c5337ba0648201aa1711b9",
+        "manifestVersion": [
+          1,
+          21,
+          130
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.20",
+        "manifestSha256": "a405784777f817e91a4b8a39812b5e5a88dd81ca16ed1f8f9b6392913d1150d6",
+        "manifestVersion": [
+          1,
+          21,
+          20
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.30",
+        "manifestSha256": "ac3699a6c7a1b753a6668cea267a8d561e0bac34582616cb783668d01ed03472",
+        "manifestVersion": [
+          1,
+          21,
+          30
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.40",
+        "manifestSha256": "e79f65fe8eaa7bfe693b48e0776c0e3c3f3f4590e019d294040267369cf477b0",
+        "manifestVersion": [
+          1,
+          21,
+          40
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.50",
+        "manifestSha256": "9892137fe84e29ecd5c7dc1d66a1f393ec99cb781f799f1d34a4a6fe98f2d11b",
+        "manifestVersion": [
+          1,
+          21,
+          50
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.60",
+        "manifestSha256": "8448dbecc17338f2168752f910deb62da53628bc9450afb286e095b70e06e00c",
+        "manifestVersion": [
+          1,
+          21,
+          60
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.70",
+        "manifestSha256": "3d34eb7008ef44c4c8652af71ed3daffc092d5e65978b06c9a0593b65fc32a27",
+        "manifestVersion": [
+          1,
+          21,
+          70
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.80",
+        "manifestSha256": "459dbef7755b8d577e67364b29dfb678c60efec85892b11e6e3b17535bbfbccc",
+        "manifestVersion": [
+          1,
+          21,
+          80
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.21.90",
+        "manifestSha256": "09ce8a012c1221accb9e853b3e06e03bdb896ccebea055f2a086d97d71b5b54a",
+        "manifestVersion": [
+          1,
+          21,
+          90
+        ],
+        "capabilities": [
+          "pbr"
+        ]
+      },
+      {
+        "pack": "vanilla_1.26.0",
+        "manifestSha256": "1b62062e573f9ab4da2a3581246bee81f85e3688af5f67c3ae9737b8ab0f7a52",
+        "manifestVersion": [
+          1,
+          26,
+          0
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.26.10",
+        "manifestSha256": "4c14c1e0da4414d69f59f1ff99c9773ae0b083e9375055b9b163794748f15ade",
+        "manifestVersion": [
+          1,
+          26,
+          10
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.26.20",
+        "manifestSha256": "84c145427f77c45e821b736be631e73235d49a711396f5f6f8ffac94069cd88b",
+        "manifestVersion": [
+          1,
+          26,
+          20
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.26.30",
+        "manifestSha256": "21358cece0ff4dce9bdbb179f893bece00fd8a0c424564a1bf92a3d2ad9ac6ad",
+        "manifestVersion": [
+          1,
+          26,
+          30
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.26.40",
+        "manifestSha256": "041d0bf10631f1507736d9ab786555560c5d2e8b548b79b23645779148ffe6fd",
+        "manifestVersion": [
+          1,
+          26,
+          40
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.26.50",
+        "manifestSha256": "7042d487b12f8dae37fab6d2e31dd660c35c2a66ceeebb899ee3e4e4ce92b033",
+        "manifestVersion": [
+          1,
+          26,
+          50
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_1.26.60",
+        "manifestSha256": "82dafde42b3c71b7b8c87e2d9afb38f6258580fd027bae51d13b297805ba6ab7",
+        "manifestVersion": [
+          1,
+          26,
+          60
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_base",
+        "manifestSha256": "652bf7cbd39e0f902ab9796256e5e37a1e8e50482ae3f89bf2b4b3bff6ffb4f6",
+        "manifestVersion": [
+          0,
+          0,
+          1
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_music",
+        "manifestSha256": "bd38a5fe1786447bc46ea495a4b60c012ae7fc2e02ea66f87abbd35e9238491e",
+        "manifestVersion": [
+          0,
+          0,
+          1
+        ],
+        "capabilities": []
+      },
+      {
+        "pack": "vanilla_trial",
+        "manifestSha256": "08f0bcf38944b0c82f24eb0535f88400c4160a183bbfff9cb7555b2b25251d5f",
+        "manifestVersion": [
+          0,
+          0,
+          1
+        ],
+        "capabilities": []
+      }
+    ],
+    "runtimePackStackProven": false,
+    "caveat": "In particular vanilla_1.21.90 advertises capability pbr. This audit does not prove whether PBR or any version overlay is active in a running session. Platform packs, user packs and native renderer changes may alter actual runtime output."
+  },
   "assets": [
     {
-      "file": "demo/assets/minecraft/apple.png",
-      "source": "resource_pack/textures/items/apple.png",
-      "sha256": "af16a9937de0faa0ef285bee9226eb99a031d46f404e300827f2e023c1be1a7f",
+      "key": "sword",
+      "file": "demo/assets/minecraft/diamond_sword.png",
+      "source": "resource_pack/textures/items/diamond_sword.png",
+      "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
       "size": [
         16,
         16
       ],
-      "bytes": 257,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Inventory item texture",
+      "bytes": 198,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
       "modifications": "None",
-      "origin": "official-bedrock-samples"
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "diamond_sword.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "f8094529776d45b66ec2318c152ca90a669b7956c311017fa1f05ed8afc19da9",
+          "bytes": 227,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        },
+        {
+          "pack": "vanilla_1.16",
+          "path": "data/resource_packs/vanilla_1.16/__brarchive/textures/items.brarchive",
+          "entry": "diamond_sword.png",
+          "archiveSha256": "ba31a1ee0cdd4691e43eb4bbf9db7f311697cfed1dfec35b757c79a3788b83bd",
+          "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
+          "bytes": 198,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "diamond_sword.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
+          "bytes": 198,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
     },
     {
+      "key": "diamond",
       "file": "demo/assets/minecraft/diamond.png",
       "source": "resource_pack/textures/items/diamond.png",
       "sha256": "996f80148a6909588d8f83d462ddbea5302402ba644f8e7d2e5bf0b69119b862",
@@ -30,52 +678,86 @@
         16
       ],
       "bytes": 256,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Inventory item texture",
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
       "modifications": "None",
-      "origin": "official-bedrock-samples"
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "diamond.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "996f80148a6909588d8f83d462ddbea5302402ba644f8e7d2e5bf0b69119b862",
+          "bytes": 256,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "diamond.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "996f80148a6909588d8f83d462ddbea5302402ba644f8e7d2e5bf0b69119b862",
+          "bytes": 256,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
     },
     {
-      "file": "demo/assets/minecraft/diamond_sword.png",
-      "source": "resource_pack/textures/items/diamond_sword.png",
-      "sha256": "f8094529776d45b66ec2318c152ca90a669b7956c311017fa1f05ed8afc19da9",
+      "key": "apple",
+      "file": "demo/assets/minecraft/apple.png",
+      "source": "resource_pack/textures/items/apple.png",
+      "sha256": "af16a9937de0faa0ef285bee9226eb99a031d46f404e300827f2e023c1be1a7f",
       "size": [
         16,
         16
       ],
-      "bytes": 227,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Inventory item texture",
+      "bytes": 257,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
       "modifications": "None",
-      "upstreamReference": {
-        "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
-        "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
-        "changedPixelsComparedToInstalledGame": 22,
-        "reason": "The installed game texture is authoritative for this version; the pinned public sample differs."
-      },
-      "origin": "installed-game"
-    },
-    {
-      "file": "demo/assets/minecraft/dye_powder_blue.png",
-      "source": "resource_pack/textures/items/dye_powder_blue.png",
-      "sha256": "aa158721022891ee61f50b61fbfec40ce7337f13ab6365d0e04522b3658a6c0b",
-      "size": [
-        16,
-        16
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "apple.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "af16a9937de0faa0ef285bee9226eb99a031d46f404e300827f2e023c1be1a7f",
+          "bytes": 257,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "apple.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "af16a9937de0faa0ef285bee9226eb99a031d46f404e300827f2e023c1be1a7f",
+          "bytes": 257,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
       ],
-      "bytes": 231,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Inventory item texture",
-      "modifications": "None",
-      "origin": "official-bedrock-samples"
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
     },
     {
+      "key": "gem",
       "file": "demo/assets/minecraft/emerald.png",
       "source": "resource_pack/textures/items/emerald.png",
       "sha256": "87251879085161164bc6b2ff5945cf8ef9e6bf82dd35d80004e05459dfe0ee01",
@@ -84,72 +766,86 @@
         16
       ],
       "bytes": 214,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Inventory item texture",
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
       "modifications": "None",
-      "origin": "official-bedrock-samples"
-    },
-    {
-      "file": "demo/assets/minecraft/icon_recipe_nature.png",
-      "source": "resource_pack/textures/ui/icon_recipe_nature.png",
-      "sha256": "0f334a123b498ecec76b4512c4fcf269ee3e79169e79a338db43b5f6a9f6fca9",
-      "size": [
-        17,
-        17
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "emerald.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "87251879085161164bc6b2ff5945cf8ef9e6bf82dd35d80004e05459dfe0ee01",
+          "bytes": 214,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "emerald.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "87251879085161164bc6b2ff5945cf8ef9e6bf82dd35d80004e05459dfe0ee01",
+          "bytes": 214,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
       ],
-      "bytes": 566,
-      "localArchive": "textures/ui.brarchive",
-      "localArchiveSha256": "9f5f7650aa592fcd72c6145005b9c4adbb9777bbb28f253d315e670030377177",
-      "matchesInstalledGameBytes": true,
-      "use": "GUI category grass-block icon; 17x17 image displayed at native integer scale, not a generic 3D block renderer",
-      "modifications": "None",
-      "origin": "official-bedrock-samples"
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
     },
     {
-      "file": "demo/assets/minecraft/beef_cooked.png",
-      "source": "resource_pack/textures/items/beef_cooked.png",
-      "sha256": "f00fef632b7f7ab938177c7fb6ee8480b4240bf839191a3d870c6b0f96dc7c02",
-      "size": [
-        16,
-        16
-      ],
-      "bytes": 246,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Processing and crafting demonstration item texture",
-      "modifications": "None",
-      "origin": "installed-game",
-      "upstreamReference": {
-        "release": "v1.26.60.5-full",
-        "sha256": "f00fef632b7f7ab938177c7fb6ee8480b4240bf839191a3d870c6b0f96dc7c02",
-        "matchesInstalledGameBytes": true
-      }
-    },
-    {
-      "file": "demo/assets/minecraft/beef_raw.png",
-      "source": "resource_pack/textures/items/beef_raw.png",
-      "sha256": "60fde56a603170b70b1cbae5c4e417356b394a8676d8e1a4d4989d9e98cc7832",
+      "key": "lapis",
+      "file": "demo/assets/minecraft/dye_powder_blue.png",
+      "source": "resource_pack/textures/items/dye_powder_blue.png",
+      "sha256": "aa158721022891ee61f50b61fbfec40ce7337f13ab6365d0e04522b3658a6c0b",
       "size": [
         16,
         16
       ],
-      "bytes": 241,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Processing and crafting demonstration item texture",
+      "bytes": 231,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
       "modifications": "None",
-      "origin": "installed-game",
-      "upstreamReference": {
-        "release": "v1.26.60.5-full",
-        "sha256": "60fde56a603170b70b1cbae5c4e417356b394a8676d8e1a4d4989d9e98cc7832",
-        "matchesInstalledGameBytes": true
-      }
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "dye_powder_blue.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "aa158721022891ee61f50b61fbfec40ce7337f13ab6365d0e04522b3658a6c0b",
+          "bytes": 231,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "dye_powder_blue.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "aa158721022891ee61f50b61fbfec40ce7337f13ab6365d0e04522b3658a6c0b",
+          "bytes": 231,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
     },
     {
+      "key": "coal",
       "file": "demo/assets/minecraft/coal.png",
       "source": "resource_pack/textures/items/coal.png",
       "sha256": "8d1dbe941a70e3c13d8c5c312c61df8b7888ba68f2905854f676d462cd3a1d6f",
@@ -158,61 +854,42 @@
         16
       ],
       "bytes": 252,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Processing and crafting demonstration item texture",
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
       "modifications": "None",
-      "origin": "installed-game",
-      "upstreamReference": {
-        "release": "v1.26.60.5-full",
-        "sha256": "8d1dbe941a70e3c13d8c5c312c61df8b7888ba68f2905854f676d462cd3a1d6f",
-        "matchesInstalledGameBytes": true
-      }
-    },
-    {
-      "file": "demo/assets/minecraft/iron_nugget.png",
-      "source": "resource_pack/textures/items/iron_nugget.png",
-      "sha256": "1442104640b7233814831f7d8070d0296b89acad278398ba63072299a9052f4f",
-      "size": [
-        16,
-        16
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "coal.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "8d1dbe941a70e3c13d8c5c312c61df8b7888ba68f2905854f676d462cd3a1d6f",
+          "bytes": 252,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "coal.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "8d1dbe941a70e3c13d8c5c312c61df8b7888ba68f2905854f676d462cd3a1d6f",
+          "bytes": 252,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
       ],
-      "bytes": 188,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Processing and crafting demonstration item texture",
-      "modifications": "None",
-      "origin": "installed-game",
-      "upstreamReference": {
-        "release": "v1.26.60.5-full",
-        "sha256": "1442104640b7233814831f7d8070d0296b89acad278398ba63072299a9052f4f",
-        "matchesInstalledGameBytes": true
-      }
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
     },
     {
-      "file": "demo/assets/minecraft/iron_sword.png",
-      "source": "resource_pack/textures/items/iron_sword.png",
-      "sha256": "1d1faeae22cbb8db31db1380c25dfeb4b68ca649f6cc72bd974720823152bec3",
-      "size": [
-        16,
-        16
-      ],
-      "bytes": 225,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Processing and crafting demonstration item texture",
-      "modifications": "None",
-      "origin": "installed-game",
-      "upstreamReference": {
-        "release": "v1.26.60.5-full",
-        "sha256": "1d1faeae22cbb8db31db1380c25dfeb4b68ca649f6cc72bd974720823152bec3",
-        "matchesInstalledGameBytes": true
-      }
-    },
-    {
+      "key": "stick",
       "file": "demo/assets/minecraft/stick.png",
       "source": "resource_pack/textures/items/stick.png",
       "sha256": "ed1fa033e9f46514cf2bdfce1cef503027614de6875d5fe3e117cd9d754acb8a",
@@ -221,44 +898,772 @@
         16
       ],
       "bytes": 165,
-      "localArchive": "textures/items.brarchive",
-      "localArchiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
-      "matchesInstalledGameBytes": true,
-      "use": "Processing and crafting demonstration item texture",
-      "modifications": "None",
-      "origin": "installed-game",
-      "upstreamReference": {
-        "release": "v1.26.60.5-full",
-        "sha256": "ed1fa033e9f46514cf2bdfce1cef503027614de6875d5fe3e117cd9d754acb8a",
-        "matchesInstalledGameBytes": true
-      }
-    }
-  ],
-  "publicSwordChecks": [
-    {
-      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
-      "role": "original pinned sample",
-      "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
-      "matchesInstalledGame": false
-    },
-    {
-      "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
-      "tag": "v1.26.60.5",
-      "role": "main and latest release tag at audit time",
-      "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
-      "matchesInstalledGame": false
-    },
-    {
+      "origin": "official-merged-release",
       "release": "v1.26.60.5",
-      "artifact": "bedrock-samples-v1.26.60.5-full.zip",
-      "url": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
-      "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
-      "entry": "resource_pack/textures/items/diamond_sword.png",
-      "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
-      "matchesInstalledGame": false,
-      "changedPixelsComparedToInstalledGame": 22
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "stick.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "ed1fa033e9f46514cf2bdfce1cef503027614de6875d5fe3e117cd9d754acb8a",
+          "bytes": 165,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "stick.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "ed1fa033e9f46514cf2bdfce1cef503027614de6875d5fe3e117cd9d754acb8a",
+          "bytes": 165,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "rawBeef",
+      "file": "demo/assets/minecraft/beef_raw.png",
+      "source": "resource_pack/textures/items/beef_raw.png",
+      "sha256": "60fde56a603170b70b1cbae5c4e417356b394a8676d8e1a4d4989d9e98cc7832",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 241,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "beef_raw.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "60fde56a603170b70b1cbae5c4e417356b394a8676d8e1a4d4989d9e98cc7832",
+          "bytes": 241,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "beef_raw.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "60fde56a603170b70b1cbae5c4e417356b394a8676d8e1a4d4989d9e98cc7832",
+          "bytes": 241,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "steak",
+      "file": "demo/assets/minecraft/beef_cooked.png",
+      "source": "resource_pack/textures/items/beef_cooked.png",
+      "sha256": "f00fef632b7f7ab938177c7fb6ee8480b4240bf839191a3d870c6b0f96dc7c02",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 246,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "beef_cooked.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "f00fef632b7f7ab938177c7fb6ee8480b4240bf839191a3d870c6b0f96dc7c02",
+          "bytes": 246,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "beef_cooked.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "f00fef632b7f7ab938177c7fb6ee8480b4240bf839191a3d870c6b0f96dc7c02",
+          "bytes": 246,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "ironSword",
+      "file": "demo/assets/minecraft/iron_sword.png",
+      "source": "resource_pack/textures/items/iron_sword.png",
+      "sha256": "1d1faeae22cbb8db31db1380c25dfeb4b68ca649f6cc72bd974720823152bec3",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 225,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "iron_sword.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "1d1faeae22cbb8db31db1380c25dfeb4b68ca649f6cc72bd974720823152bec3",
+          "bytes": 225,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "iron_sword.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "1d1faeae22cbb8db31db1380c25dfeb4b68ca649f6cc72bd974720823152bec3",
+          "bytes": 225,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "ironNugget",
+      "file": "demo/assets/minecraft/iron_nugget.png",
+      "source": "resource_pack/textures/items/iron_nugget.png",
+      "sha256": "1442104640b7233814831f7d8070d0296b89acad278398ba63072299a9052f4f",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 188,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "iron_nugget.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "1442104640b7233814831f7d8070d0296b89acad278398ba63072299a9052f4f",
+          "bytes": 188,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "iron_nugget.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "1442104640b7233814831f7d8070d0296b89acad278398ba63072299a9052f4f",
+          "bytes": 188,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "grass",
+      "file": "demo/assets/minecraft/icon_recipe_nature.png",
+      "source": "resource_pack/textures/ui/icon_recipe_nature.png",
+      "sha256": "0f334a123b498ecec76b4512c4fcf269ee3e79169e79a338db43b5f6a9f6fca9",
+      "size": [
+        17,
+        17
+      ],
+      "bytes": 566,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+          "entry": "icon_recipe_nature.png",
+          "archiveSha256": "9f5f7650aa592fcd72c6145005b9c4adbb9777bbb28f253d315e670030377177",
+          "sha256": "0f334a123b498ecec76b4512c4fcf269ee3e79169e79a338db43b5f6a9f6fca9",
+          "bytes": 566,
+          "size": [
+            17,
+            17
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Already-rendered17x17 GUI category grass icon, not a generic block renderer"
+    },
+    {
+      "key": "waterBottle",
+      "file": "demo/assets/minecraft/potion_bottle_drinkable.png",
+      "source": "resource_pack/textures/items/potion_bottle_drinkable.png",
+      "sha256": "01a72abe1ce8ffd6aa78e2aee935c181eaea5d0edcff15d6e1ff09c676162add",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 355,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "potion_bottle_drinkable.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "a675f428fadc3ddc67eee5e4aa37f403d93667fb824c92a6a62736f1c477b009",
+          "bytes": 298,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        },
+        {
+          "pack": "vanilla_1.20.0",
+          "path": "data/resource_packs/vanilla_1.20.0/__brarchive/textures/items.brarchive",
+          "entry": "potion_bottle_drinkable.png",
+          "archiveSha256": "7f2337ba7d54ad50458696d33109405553288bc4c289c60512ea51f9424058a3",
+          "sha256": "01a72abe1ce8ffd6aa78e2aee935c181eaea5d0edcff15d6e1ff09c676162add",
+          "bytes": 355,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "potion_bottle_drinkable.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "01a72abe1ce8ffd6aa78e2aee935c181eaea5d0edcff15d6e1ff09c676162add",
+          "bytes": 355,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Original default drinkable-bottle PNG; item_texture.json potion_bottle_drinkable textures[0]. No recoloring or synthesized potion overlay."
+    },
+    {
+      "key": "glassBottle",
+      "file": "demo/assets/minecraft/potion_bottle_empty.png",
+      "source": "resource_pack/textures/items/potion_bottle_empty.png",
+      "sha256": "bd9a15f88247fb07eec84bff18ccdbe000f28e89f95c85820a5b76454782c236",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 194,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "potion_bottle_empty.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "bd9a15f88247fb07eec84bff18ccdbe000f28e89f95c85820a5b76454782c236",
+          "bytes": 194,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "potion_bottle_empty.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "bd9a15f88247fb07eec84bff18ccdbe000f28e89f95c85820a5b76454782c236",
+          "bytes": 194,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "blazePowder",
+      "file": "demo/assets/minecraft/blaze_powder.png",
+      "source": "resource_pack/textures/items/blaze_powder.png",
+      "sha256": "1f1ce5f98bd9a932424ec88d91326f4d90b364c7088297f3273310c35882d5a2",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 307,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "blaze_powder.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "1f1ce5f98bd9a932424ec88d91326f4d90b364c7088297f3273310c35882d5a2",
+          "bytes": 307,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "blaze_powder.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "1f1ce5f98bd9a932424ec88d91326f4d90b364c7088297f3273310c35882d5a2",
+          "bytes": 307,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "netherWart",
+      "file": "demo/assets/minecraft/nether_wart.png",
+      "source": "resource_pack/textures/items/nether_wart.png",
+      "sha256": "c3f71304377daf81fc43dc0f8100caa13d48576caa6bc86c6422eca61f327fba",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 180,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "nether_wart.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "c3f71304377daf81fc43dc0f8100caa13d48576caa6bc86c6422eca61f327fba",
+          "bytes": 180,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "nether_wart.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "c3f71304377daf81fc43dc0f8100caa13d48576caa6bc86c6422eca61f327fba",
+          "bytes": 180,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "netheriteUpgradeTemplate",
+      "file": "demo/assets/minecraft/netherite_upgrade_smithing_template.png",
+      "source": "resource_pack/textures/items/netherite_upgrade_smithing_template.png",
+      "sha256": "4535af58d78f30c28b52e847a1b60a23ca747072651eb34eec64d0d69e0dd7dd",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 237,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.20.0",
+          "path": "data/resource_packs/vanilla_1.20.0/__brarchive/textures/items.brarchive",
+          "entry": "netherite_upgrade_smithing_template.png",
+          "archiveSha256": "7f2337ba7d54ad50458696d33109405553288bc4c289c60512ea51f9424058a3",
+          "sha256": "4535af58d78f30c28b52e847a1b60a23ca747072651eb34eec64d0d69e0dd7dd",
+          "bytes": 237,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "netherite_upgrade_smithing_template.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "4535af58d78f30c28b52e847a1b60a23ca747072651eb34eec64d0d69e0dd7dd",
+          "bytes": 237,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "netheriteIngot",
+      "file": "demo/assets/minecraft/netherite_ingot.png",
+      "source": "resource_pack/textures/items/netherite_ingot.png",
+      "sha256": "5327f4aec6f68e8821478084c7c9bdecf6a78649a91fa8a838d9d39db5262a7b",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 222,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.16",
+          "path": "data/resource_packs/vanilla_1.16/__brarchive/textures/items.brarchive",
+          "entry": "netherite_ingot.png",
+          "archiveSha256": "ba31a1ee0cdd4691e43eb4bbf9db7f311697cfed1dfec35b757c79a3788b83bd",
+          "sha256": "addb539a3242ebebc7336316afdcec6bc1cf0c19d5c88af5a9b664f2a23bec2f",
+          "bytes": 208,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        },
+        {
+          "pack": "vanilla_1.17.0",
+          "path": "data/resource_packs/vanilla_1.17.0/__brarchive/textures/items.brarchive",
+          "entry": "netherite_ingot.png",
+          "archiveSha256": "28581f5e97817ab5fadb43b388648bfe0176b46209605e6e54271d7f5eb646d7",
+          "sha256": "5327f4aec6f68e8821478084c7c9bdecf6a78649a91fa8a838d9d39db5262a7b",
+          "bytes": 222,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "netherite_ingot.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "5327f4aec6f68e8821478084c7c9bdecf6a78649a91fa8a838d9d39db5262a7b",
+          "bytes": 222,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "netheriteSword",
+      "file": "demo/assets/minecraft/netherite_sword.png",
+      "source": "resource_pack/textures/items/netherite_sword.png",
+      "sha256": "8293e5f33847659e2910fe998651aff3fb8b1806307047ba5dbb987243d27fac",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 210,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla_1.16",
+          "path": "data/resource_packs/vanilla_1.16/__brarchive/textures/items.brarchive",
+          "entry": "netherite_sword.png",
+          "archiveSha256": "ba31a1ee0cdd4691e43eb4bbf9db7f311697cfed1dfec35b757c79a3788b83bd",
+          "sha256": "9aa42056e573dd578503c2501559b8ad333593faee151e5e87e221b80f5d33ba",
+          "bytes": 204,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        },
+        {
+          "pack": "vanilla_1.17.0",
+          "path": "data/resource_packs/vanilla_1.17.0/__brarchive/textures/items.brarchive",
+          "entry": "netherite_sword.png",
+          "archiveSha256": "28581f5e97817ab5fadb43b388648bfe0176b46209605e6e54271d7f5eb646d7",
+          "sha256": "8293e5f33847659e2910fe998651aff3fb8b1806307047ba5dbb987243d27fac",
+          "bytes": 210,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "netherite_sword.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "8293e5f33847659e2910fe998651aff3fb8b1806307047ba5dbb987243d27fac",
+          "bytes": 210,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
+    },
+    {
+      "key": "emptyMap",
+      "file": "demo/assets/minecraft/map_empty.png",
+      "source": "resource_pack/textures/items/map_empty.png",
+      "sha256": "886f170d8676f231668d84fbb0c5f01a94311ed7634849c035e0c75b0e2ffe56",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 210,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "map_empty.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "8186419439c1451085c5e31af97cee198ac62d610f7afd6e477267714d7e4224",
+          "bytes": 206,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "map_empty.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "8186419439c1451085c5e31af97cee198ac62d610f7afd6e477267714d7e4224",
+          "bytes": 206,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        },
+        {
+          "pack": "vanilla_1.26.50",
+          "path": "data/resource_packs/vanilla_1.26.50/__brarchive/textures/items.brarchive",
+          "entry": "map_empty.png",
+          "archiveSha256": "23f1ddc6a4b6b67a5eace28179b053fa859433661b6dd69c3c8587b37561ef4a",
+          "sha256": "886f170d8676f231668d84fbb0c5f01a94311ed7634849c035e0c75b0e2ffe56",
+          "bytes": 210,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Original empty/filled map item icon. This PNG does not render world-specific map data."
+    },
+    {
+      "key": "filledMap",
+      "file": "demo/assets/minecraft/map_filled.png",
+      "source": "resource_pack/textures/items/map_filled.png",
+      "sha256": "c18c2dcf148bcada142f342332af8ef61d358213805a88a8c1bbb857d4c814da",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 267,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "map_filled.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "94392e9229635f0e21a6d6c87e077d3aa21c6bb929d7ccfe006f0f7a5ebb2b53",
+          "bytes": 227,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "map_filled.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "94392e9229635f0e21a6d6c87e077d3aa21c6bb929d7ccfe006f0f7a5ebb2b53",
+          "bytes": 227,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": false
+        },
+        {
+          "pack": "vanilla_1.26.50",
+          "path": "data/resource_packs/vanilla_1.26.50/__brarchive/textures/items.brarchive",
+          "entry": "map_filled.png",
+          "archiveSha256": "23f1ddc6a4b6b67a5eace28179b053fa859433661b6dd69c3c8587b37561ef4a",
+          "sha256": "c18c2dcf148bcada142f342332af8ef61d358213805a88a8c1bbb857d4c814da",
+          "bytes": 267,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Original empty/filled map item icon. This PNG does not render world-specific map data."
+    },
+    {
+      "key": "paper",
+      "file": "demo/assets/minecraft/paper.png",
+      "source": "resource_pack/textures/items/paper.png",
+      "sha256": "f1cfbcacfd55e795d7a612bb7c63ef5f76445db8d15deb6844ea2847a79a006b",
+      "size": [
+        16,
+        16
+      ],
+      "bytes": 205,
+      "origin": "official-merged-release",
+      "release": "v1.26.60.5",
+      "modifications": "None",
+      "matchesAtLeastOneInstalledCandidate": true,
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "path": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "paper.png",
+          "archiveSha256": "8d68d6828cc8d5e534f106faf452296db541a9f52c0c3ebb66b4d6a385910f24",
+          "sha256": "f1cfbcacfd55e795d7a612bb7c63ef5f76445db8d15deb6844ea2847a79a006b",
+          "bytes": 205,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "path": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "paper.png",
+          "archiveSha256": "13b74af92c40093ab045aece5ecd043f00476678bcca12ddff30e6d38eecd8b4",
+          "sha256": "f1cfbcacfd55e795d7a612bb7c63ef5f76445db8d15deb6844ea2847a79a006b",
+          "bytes": 205,
+          "size": [
+            16,
+            16
+          ],
+          "matchesSelectedMergedBytes": true
+        }
+      ],
+      "use": "Unmodified item texture; no generated recolor, tint or fallback artwork"
     }
   ],
+  "historicalSwordCorrection": {
+    "earlierClaimWithdrawn": "The earlier conclusion that the installed game sword differs from public samples by22 pixels treated only the vanilla base entry as current runtime authority and overlooked version overlays.",
+    "baseEntry": {
+      "pack": "vanilla",
+      "sha256": "f8094529776d45b66ec2318c152ca90a669b7956c311017fa1f05ed8afc19da9",
+      "bytes": 227
+    },
+    "selectedMergedEntry": {
+      "release": "v1.26.60.5",
+      "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
+      "bytes": 198
+    },
+    "baseVsMergedChangedRgbaPixels": 22,
+    "matchingNativePacks": [
+      "vanilla_1.16",
+      "vanilla_1.21.90"
+    ],
+    "correctInterpretation": "The22-pixel delta is base-entry versus official merged-release PNG. Installed version overlays include matching merged bytes; this is not evidence of a current-runtime-versus-sample discrepancy."
+  },
   "rendering": {
     "nativeItemTexturePixels": [
       16,

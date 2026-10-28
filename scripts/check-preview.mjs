@@ -37,6 +37,9 @@ try {
   await page.locator('#processing').screenshot({ path: '.cache/preview/processing.png' });
   await page.locator('#anvil').screenshot({ path: '.cache/preview/anvil.png' });
   await page.locator('#containers').screenshot({ path: '.cache/preview/containers.png' });
+  for (const id of ['brewing','special-workstations','hud','scrolling']) {
+    await page.locator('#'+id).screenshot({ path: '.cache/preview/'+id+'.png' });
+  }
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.locator('#typography').screenshot({ path: '.cache/preview/fonts-shadow.png' });
   assert.equal(await page.locator('.font-shadow-comparison .mc-text').first().evaluate(node=>getComputedStyle(node).textShadow), 'rgb(63, 63, 63) 2px 2px 0px');

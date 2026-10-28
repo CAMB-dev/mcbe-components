@@ -16,6 +16,8 @@ import componentCatalog from '../docs/component-catalog.json';
 import { ProcessingExamples } from './processing-examples';
 import { AnvilExamples } from './anvil-examples';
 import { ContainerExamples } from './container-examples';
+import { NativeExamples } from './native-examples';
+import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
 
@@ -32,9 +34,14 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '07' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'containers', name: 'Storage containers', icon: 'chevron', count: '06' },
+  { id: 'brewing', name: 'Brewing', icon: 'chevron', count: '02' },
+  { id: 'special-workstations', name: 'Smithing & cartography', icon: 'chevron', count: '02' },
+  { id: 'hud', name: 'Heads-up display', icon: 'chevron', count: '07' },
+  { id: 'scrolling', name: 'Scrolling', icon: 'chevron', count: '02' },
   { id: 'typography', name: 'Typography & icons', icon: 'chevron', count: '02' },
 ];
 const snippets: Record<string, string> = {
+  scrolling: `<ScrollArea label="Inventory notes" style={{height:180}}>\n  <YourScrollableContent/>\n</ScrollArea>\n// ScrollBar is also available as a controlled primitive.`,
   buttons: `import { Button, PixelIcon } from 'mcbeui';\n\n<Button variant="primary"\n  startIcon={<PixelIcon name="plus" />}\n  onClick={() => createWorld()}>\n  Create new world\n</Button>`,
   inputs: `<TextField label="World name" name="worldName"\n  placeholder="My world" required />\n<Combobox label="Difficulty" options={[\n  { value: 'normal', label: 'Normal' },\n  { value: 'hard', label: 'Hard' },\n]} />`,
   selection: `<Switch label="Multiplayer game"\n  checked={multiplayer} onChange={e =>\n    setMultiplayer(e.target.checked)} />\n<Slider label="Render distance" min={4}\n  max={32} defaultValue={12}\n  formatValue={n => n + ' chunks'} />`,
@@ -270,6 +277,12 @@ function App() {
         <ContainerExamples notify={notify}/>
       </Example>
 
+      <NativeExamples notify={notify}/>
+      <Example id="scrolling" title="Scrolling" detail="Native scrolling with original Bedrock rail and handle textures.">
+        <div style={{padding:24}}><ScrollArea label="Scrollable inventory notes" style={{height:180,maxWidth:480}}>
+          {Array.from({length:12},(_,index)=><p key={index} style={{margin:0,padding:12}}>Inventory note {index+1} · Wheel, touch and keyboard</p>)}
+        </ScrollArea></div>
+      </Example>
       <Example id="typography" title="Typography & icons" detail="The details that make it feel like home.">
         <div className="type-showcase"><div><span className="sample-label">{hasGameFont ? 'MOJANGLES · BEDROCK ORIGINAL' : 'MONOCRAFT · OPEN FONT'}</span><Text as="p" size="lg" className="font-specimen">Aa Bb Cc 0123</Text><span className="type-subtitle">{hasGameFont ? 'Original glyphs. Integer pixels. A hard-edged shadow.' : 'Self-hosted, with crisp pixel shadows.'}</span>
           <div className="font-shadow-comparison"><div><span className="sample-label">SHADOW ON</span><Text>Hello, Minecraft!</Text></div><div><span className="sample-label">SHADOW OFF</span><Text shadow={false}>Hello, Minecraft!</Text></div></div>

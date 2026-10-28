@@ -15,6 +15,16 @@ export const gameItemTextures = {
   steak: { src: new URL('./assets/minecraft/beef_cooked.png', import.meta.url).href, width: 16, height: 16 },
   ironSword: { src: new URL('./assets/minecraft/iron_sword.png', import.meta.url).href, width: 16, height: 16 },
   ironNugget: { src: new URL('./assets/minecraft/iron_nugget.png', import.meta.url).href, width: 16, height: 16 },
+  waterBottle: { src: new URL('./assets/minecraft/potion_bottle_drinkable.png', import.meta.url).href, width: 16, height: 16 },
+  glassBottle: { src: new URL('./assets/minecraft/potion_bottle_empty.png', import.meta.url).href, width: 16, height: 16 },
+  blazePowder: { src: new URL('./assets/minecraft/blaze_powder.png', import.meta.url).href, width: 16, height: 16 },
+  netherWart: { src: new URL('./assets/minecraft/nether_wart.png', import.meta.url).href, width: 16, height: 16 },
+  netheriteUpgradeTemplate: { src: new URL('./assets/minecraft/netherite_upgrade_smithing_template.png', import.meta.url).href, width: 16, height: 16 },
+  netheriteIngot: { src: new URL('./assets/minecraft/netherite_ingot.png', import.meta.url).href, width: 16, height: 16 },
+  netheriteSword: { src: new URL('./assets/minecraft/netherite_sword.png', import.meta.url).href, width: 16, height: 16 },
+  emptyMap: { src: new URL('./assets/minecraft/map_empty.png', import.meta.url).href, width: 16, height: 16 },
+  filledMap: { src: new URL('./assets/minecraft/map_filled.png', import.meta.url).href, width: 16, height: 16 },
+  paper: { src: new URL('./assets/minecraft/paper.png', import.meta.url).href, width: 16, height: 16 },
   // This official GUI category image is already rendered, not a hand-built cube.
   // Preserve its 17×17 pixels at integer scale; do not squeeze it to 16×16.
   grass: { src: new URL('./assets/minecraft/icon_recipe_nature.png', import.meta.url).href, width: 17, height: 17 },

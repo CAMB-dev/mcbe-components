@@ -82,6 +82,23 @@ test('popover fits the viewport and outside clicks dismiss it', async ({ page })
   await page.mouse.click(4, 4); await expect(trigger).toHaveAttribute('aria-expanded', 'false');
 });
 
+test('popover clamps to the layout viewport when wide content expands the mobile visual viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 400 });
+  const field = page.locator('[data-case="combobox"]'); const trigger = field.getByRole('combobox');
+  await trigger.evaluate(button => {
+    const wide = document.createElement('div');
+    Object.assign(wide.style, { position: 'absolute', left: '0', top: '0', width: '640px', height: '1px', pointerEvents: 'none' });
+    document.body.append(wide);
+    Object.assign(button.style, { position: 'fixed', left: '240px', top: '320px', zIndex: '1000' });
+  });
+  await trigger.click({ position: { x: 20, y: 20 } }); const list = field.getByRole('listbox');
+  await expect(list).toHaveAttribute('data-side', 'top');
+  const rect = await list.boundingBox(); expect(rect).not.toBeNull();
+  expect(rect!.x).toBeGreaterThanOrEqual(8); expect(rect!.x + rect!.width).toBeLessThanOrEqual(312);
+  expect(rect!.y).toBeGreaterThanOrEqual(8); expect(rect!.y + rect!.height).toBeLessThanOrEqual(392);
+  await trigger.press('Home'); await trigger.press('Enter'); await expect(trigger).toHaveText('Peaceful');
+});
+
 test('combobox stays interactive inside a dialog and handles Escape first', async ({ page }) => {
   await page.getByRole('button', { name: 'Open settings dialog' }).click();
   const dialog = page.getByRole('dialog', { name: 'Settings dialog' }); const trigger = dialog.getByRole('combobox');

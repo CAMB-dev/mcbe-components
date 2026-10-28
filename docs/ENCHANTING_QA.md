@@ -1,44 +1,49 @@
-# 附魔书本与经验文字独立 QA
+# 附魔书本与经验文字 QA
 
-2026-10-29。验证对象是当前 React / WebGL 重建、Classic GUI 2、Chromium DPR=1。结论是本次修正改善了可见书本结构和经验彩字阴影，浏览器运行与受控参数检查通过；**没有取得当前版本 Bedrock 原生截图，不能判定书本或文字阴影为原生 pixel perfect。**
+2026-10-29。本次在本机 Bedrock 1.26.6005.0（界面显示26.60）取得真实无损截图，修正经验数字的色阶，以及书本默认仰角和分面光照。**书本完整比较区域仍有残差，尚未达到原生 pixel perfect。**
 
-## 经验文字的证据等级
+## 原生参考
 
-原始 `enchanting_screen.json` 明确给出 `enchant_cost`：`shadow:true`、bottom-right 锚点和 offset `[-2,-2]`；成功色来自 `[.5,1,.125]`，失败色来自 `[.54,.37,.36]`。这些信息来自已核对本机与公开 full release 的原始 JSON，GUI 2 对应文字右/下4 CSS pixel偏移。
+参考来自新建单人测试世界 `mcbeui GUI Reference`，简体中文、Classic GUI 5。外框176×166游戏像素显示为880×830像素，槽位18×18显示为90×90；保存的窗口图像均为2568×1400。打开 / 关闭样本在创造模式取得；经验不足样本在生存模式、0级、无青金石时取得。
 
-原定义没有声明阴影 RGB 或变暗系数。另查本机 `materials/ui.material`，`ui_text` 只引用 `shaders/text.fragment`，没有提供文字阴影变暗计算。[Microsoft 官方 UI element 参考](https://learn.microsoft.com/en-us/minecraft/creator/reference/content/jsonuireference/examples/jsonuicomponents/ui_element?view=minecraft-bedrock-stable) 同样只规定 `shadow` 是是否渲染文字阴影的布尔属性，没有给出0.25算法。
+普通自动截图接口返回JPEG，不能验证颜色字节。本次使用原生 Alt+PrintScreen 将剪贴板原图粘贴到画图，再直接保存PNG；PNG签名及尺寸经过检查，没有把JPEG转存作为无损证据。原图只在忽略目录 `.cache/native-gui/` 保存，不进入Git或npm。
 
-因此当前成功阴影 `#203f08`、失败阴影 `#221717` 是按彩色文字变暗得到的**近似与实现选择，Bedrock 原生算法未验证**。原先统一灰色阴影没有跟随彩字色相，本次改为绿色/棕红色阴影确有视觉改善；但不能将“更合理”写成“已经证明原版就是这些字节”。`--mc-enchantment-cost-shadow` 允许宿主在得到原生证据后校准。
+| 样本 | 文件 | SHA256 |
+| --- | --- | --- |
+| 打开 / 可用 | enchanting-open-native-lossless.png | 0d58418de8fe8751481563e13e4615b6752907394d73926746d627900bf308fa |
+| 关闭 / 空槽 | enchanting-closed-native-lossless.png | c2ae69ebe7615bcb8e4e993e261833b7e72aa9cefe9ddadaba189cc01bc15646 |
+| 打开 / 经验不足 | enchanting-insufficient-native-lossless.png | 57d8cb8ecd4f28750500cbd4b7d513e158c0f897f9c42143139a3992347ec7a9 |
 
-自动测试分别核对两种主色、当前默认阴影、2×2 CSS pixel无模糊偏移、右/下4 CSS pixel位置和变量覆盖。阴影字节是浏览器组件的回归期望，**不是从原始 JSON 直接导出的原生验收值**。
+## 经验文字
 
-## 书本来源与目视检查
+原始 `enchanting_screen.json` 给出 `shadow:true`、bottom-right锚点、offset `[-2,-2]`，成功色 `[.5,1,.125]` 和失败色 `[.54,.37,.36]`。此前按归一化RGB四舍五入得到的颜色不是最终游戏字节；现直接按上述PNG的不透明字面像素校准：
 
-原始 `enchanting_table_book.png` 为64×32，SHA256 `e8d23533b48976b578098db767e2c8161a31fa5d7b22bf576bf531b1bc7f000f`。资源文件先前已经与本机原图字节匹配；本次测试再次固定该哈希与尺寸。
+| 状态 | 主字 | 阴影 |
+| --- | --- | --- |
+| 成功 | #7fff1f | #204008 |
+| 经验不足 | #895e5b | #221717 |
 
-生产实现参照官方 Java 1.21.5 客户端的 BookModel / ModelPart.Cube：左右封面、书脊、左右页块、两张翻页面，使用同一张 atlas 的 box UV 布局。这为重建提供了比平面四边形更具体的参考，但 Java 几何、姿态或 UV 算法不构成 Bedrock `enchanting_book_renderer` 的实现证据。
+原生GUI 5中三个费用行的可见阴影均向右下偏移5像素，对应GUI 2的2×2 CSS像素。测试独立提取字面和阴影轮廓，比较阈值识别轮廓的位移；其中包含部分覆盖边缘，但低覆盖边缘可能被阈值排除，不代表全部可见抗锯齿边缘都已验过。经验数字的锚点仍由源JSON推导，尚未完成整行文字基线的原生零差认证。
 
-独立查看修改前后与本次运行实际截图后：
+这直接证明当前捕获状态的字节和位移，未推断全引擎通用的0.25暗化或量化算法。`--mc-enchantment-cost-shadow` 仍允许宿主覆盖。公开JSON只声明shadow开关，并不提供阴影RGB算法。
 
-- 默认打开状态能看到正面浅色纸页、两侧金棕封面边和书脊，前一版倾斜薄纸片的观感已有改善，没有看到整本错误显示成封面背面。
-- 关闭状态可见褐色正封面，当前80×80画布内绘制边界为 `(24,14,30,50)`，不是把纸页面缩成一条线。打开状态边界为 `(6,13,67,50)`。
-- `pageFlip=.25` 保持同一整体边界，但与0状态相比有467个RGBA像素变化；`open=0` 与 `open=1` 相比有3128个像素变化。两项参数确实改变 WebGL 图像，重置后回到完全相同的图像。
-- 光照仍为纹理颜色直接采样，投影、相机、翻页方程和极薄面的厚度属于重建；仅凭当前正面截图无法逐面认证所有 UV、背面方向或遮挡关系。原生阴影纹理、动态光照、原生逐帧姿态尚未复现或验证。
+## 书本
 
-父任务看到的2024年 Wiki Bedrock GUI 图片可作关闭书本外形参考，但版本和缩放条件不匹配，不能当成当前版本逐像素基准。
+使用真实64×32 `enchanting_table_book.png`，SHA256 `e8d23533b48976b578098db767e2c8161a31fa5d7b22bf576bf531b1bc7f000f`。七部件网格参考官方Java 1.21.5客户端BookModel：左右封面、书脊、左右页块及两张翻页面。它仍是Bedrock renderer重建，原生网格与翻页算法未获取。
 
-## 运行与组合验证
+默认pitch由25°改为20°，让关闭 / 打开书本的高度接近同尺寸原生轮廓。按原图不透明封面、纸页和页边校准法线分面RGB光照，保留纹理alpha；没有用CSS透明度把整本书淡化。`lighting="unlit"` 可查看未经光照改变的atlas颜色。
 
-新增 [enchanting-renderer.spec.ts](../tests/enchanting-renderer.spec.ts)，**5/5 PASS，9.1s**：
+比较原生与Web的完整200×165像素书本区域，包含边缘、背景和遮挡，不隐藏纹理差异，不只比较主体掩码。固定新姿态后，分面光照相对unlit的结果为：
 
-1. 原始 atlas 哈希/尺寸、canvas显式 `renderer-reconstruction` / Java几何来源标签、实际 WebGL draw 调用及非空纸页/封面像素。
-2. `open` / `pageFlip` 控件改变实际渲染，恢复原值后图像确定性一致。
-3. 成功/失败经验色、当前近似阴影、位置和宿主覆盖行为。
-4. 主页面附魔台实际 WebGL 与完整未遮罩组合截图，无 page error，draw 后 `gl.getError()=0`。
-5. 空槽和装有青金石时均保留32×32、不乘0.35透明度的 underlay，槽内偏移2 CSS pixel，层级低于物品图像。
+| 状态 | unlit平均绝对RGB误差 | 校准后误差 | 校准后差异像素 |
+| --- | --- | --- | --- |
+| 关闭 | 10.2114 | 0.1766 | 1281 / 33000 |
+| 打开 | 31.0869 | 0.4151 | 2239 / 33000 |
 
-主页面书本位于 `aria-hidden=true` 的装饰父层，测试直接定位 `canvas.mc-enchanting-book`；初次测试使用可访问性角色查询找不到该装饰元素，已修正测试定位，没有更改生产装饰语义。
+平均误差按每通道0–255计。原生关闭书本为76×126像素，打开为169×126；浏览器对应75×126、168×126，边界仍有1像素差异。光照系数由这些样本拟合，改善量是对校准样本的测量，不能当作独立未知姿态的泛化认证。残差包含原生边缘采样、网格 / 遮挡及动态翻页相位；不以“大幅改善”代替“零差”。
 
-使用独立5184端口执行，结束后确认对应 Node/Vite 进程已退出。命令为 `npx playwright test --config .cache/enchanting-independent-qa/playwright.config.mjs`。集成后可运行 `npx playwright test --project=pixels tests/enchanting-renderer.spec.ts`。
+## 自动验证与复验
 
-实际截图位于 `.cache/enchanting-independent-qa/`，包括 `book-open.png`、`book-closed.png`、`book-quarter-turn.png` 和 `enchanting-unmasked.png`。这些是当前实现的证据，**不是原生游戏期望图**。测试只在独立 canvas specimen 中固定整数屏幕位置，主页面组合截图保留原始生产布局。
+`tests/enchanting-renderer.spec.ts` 覆盖真实atlas哈希、WebGL非空渲染、开合与翻页受控行为、经验主字和阴影、宿主覆盖、主页面未遮罩组合、青金石underlay，以及三个可选原生PNG验收项。原生项验证PNG签名 / 哈希、完整区域改善与残差、绿字 / 红字及阈值阴影轮廓位移；用户没有这些本地PNG时明确跳过，不生成替代期望图。
+
+运行 `npx playwright test --project=pixels tests/enchanting-renderer.spec.ts`。普通构建和消费不需要本机游戏或PNG。完整数据、相机 / 光照参数与证据路径见 [enchanting-renderer.json](enchanting-renderer.json)。书本重建、费用局部证据及整个附魔台原生验收是三个不同范围。

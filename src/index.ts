@@ -26,3 +26,11 @@ export { ContainerFrame, Chest, Hopper, Dispenser, Dropper, ShulkerBox } from '.
 export type { ContainerFrameProps, NativeContainerProps, ChestProps, HopperProps, DispenserProps, DropperProps, ShulkerBoxProps } from './containers';
 export { Image, NineSlice } from './image';
 export type { ImageProps, NineSliceProps, ImageSize, ImageInsets } from './image';
+export { BrewingStand, BrewingIndicator } from './brewing';
+export type { BrewingStandProps, BrewingIndicatorProps, BrewingSlot } from './brewing';
+export { SmithingTable, CartographyTable } from './special-workstations';
+export type { SmithingTableProps, CartographyTableProps, SmithingBaseOverlay, SmithingMaterialOverlay, CartographyMode } from './special-workstations';
+export { ScrollArea, ScrollBar } from './scroll-area';
+export type { ScrollAreaProps, ScrollBarProps, ScrollPosition, ScrollOrientation, ScrollVariant } from './scroll-area';
+export { HealthBar, HungerBar, ArmorBar, AirBar, ExperienceBar, Hotbar, Crosshair } from './hud';
+export type { HealthBarProps, HungerBarProps, ArmorBarProps, AirBarProps, AirBubbleState, ExperienceBarProps, HotbarProps, CrosshairProps } from './hud';
