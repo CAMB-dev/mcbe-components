@@ -95,3 +95,5 @@ BlockPreview / BannerPreview 的 45 份 PNG / TGA 保持原始字节，解码保
 本机 Entity / MeshFallback 顶点 DXBC 的算术依赖提供候选照明系数；在明确的白光 / 强度1 / overlay0假设下，用同一公式替换书本经验权重。材质、UV、模型与相机不变，完整200×165区域的RGB MAE由关闭0.176596→0.165404、打开0.415081→0.343333，差异像素分别1281→656、2239→1683。两个状态都是已知校准样本，不能称盲测；原生材质绑定、uniform、网格、1px宽度差与光栅边界仍未恢复。MSAA、全局LINEAR与高倍降采样在现样本上更差，没有为降低个别误差而启用。
 
 符文默认主色改为原生打开 / 经验不足六行共同确认的104/93/73，即#685d49；关闭无字作为负控。宿主颜色覆盖保留，AIZ原图集在Web的整数展开仍为零差；整个原生字形边界、换行与基线不由主色校准代替。完整记录及本机只读验证脚本见 [ENCHANTING_QA.md](ENCHANTING_QA.md)。
+
+后续取得GUI4无损原图：相同首字竖笔在GUI4/5的混色边界均各1物理像素，RGBA相同，实心核心由4px变3px。这是完整分量含空白halo的原生观察，不证明生产字形已零差，也未据此加入拟合偏移或全局linear。书本固定既有参数，在新scale完整21120像素中RGB MAE为0.660859、差异1409，旧式分别为0.750395、1853；最大差仍198。详情见 [native-rune-sampling.json](native-rune-sampling.json) 和 [enchanting-renderer.json](enchanting-renderer.json)。

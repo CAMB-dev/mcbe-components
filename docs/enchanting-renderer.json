@@ -40,6 +40,27 @@
         335
       ],
       "browser": "Chromium DPR=1",
+      "newScaleObservation": {
+        "scale": 4,
+        "file": ".cache/native-capture-audit/enchanting-gui4-open-native.png",
+        "sha256": "9db5c35d6d9a1cb1d1178f0db2bdf6e5adae12e11d96e8137be32792975876e8",
+        "scope": "New GUI scale of the already-known open pose; no coefficient, mesh, texture, camera or alignment fitting on this sample.",
+        "sourceRegistration": "Observed panel [940,365,704,664]; source book offset [13,10.5]*4 gives canvas [992,407,160,160]. Scale the previous complete GUI5 ROI by 4/5.",
+        "nativeRoi": [992, 419, 160, 132],
+        "webRoi": [0, 12, 160, 132],
+        "completePixels": 21120,
+        "clearBoundaryPixels": 580,
+        "comparison": [
+          {"lighting": "candidate", "rgbMae": 0.6608585858585858, "rgbaMae": 0.4956439393939394, "absoluteRgbErrorSum": 41872, "changedRgbaPixels": 1409},
+          {"lighting": "previous-empirical", "rgbMae": 0.7503945707070707, "rgbaMae": 0.562795928030303, "absoluteRgbErrorSum": 47545, "changedRgbaPixels": 1853},
+          {"lighting": "unlit", "rgbMae": 31.446780303030303, "rgbaMae": 23.585085227272727, "absoluteRgbErrorSum": 1992468, "changedRgbaPixels": 12699}
+        ],
+        "alphaChangedPixelsAllThree": 0,
+        "maxChannelErrorAllThree": 198,
+        "nativeBookBoundsInRoi": [13, 15, 135, 100],
+        "webBookBoundsInRoi": [13, 15, 134, 100],
+        "limitation": "Nonzero full-region differences and 1px width mismatch remain. Improvement on a new scale is not new-pose or native-renderer certification."
+      },
       "comparison": [
         {
           "state": "closed",

@@ -1,0 +1,68 @@
+{
+  "gameVersion": "1.26.6005.0",
+  "date": "2026-10-29",
+  "status": "native_cross_scale_observation_not_production_raster_certification",
+  "capture": "Native Alt+PrintScreen clipboard pasted into a fresh 1x1 Paint document and saved directly as PNG; no JPEG conversion or source image rewriting.",
+  "configuration": {
+    "world": "mcbeui GUI Reference",
+    "language": "zh_CN",
+    "profile": "Classic",
+    "uiScalePercentBefore": 100,
+    "uiScalePercentObserved": 80,
+    "uiScalePercentRestored": 100,
+    "finalGameState": "paused",
+    "seedEvidence": "No enchant action was executed. Actual atlas-glyph matching, rather than an assumed seed, identifies mental snuff / wet hot wet / earth towards in both captures."
+  },
+  "references": {
+    "gui5": {
+      "file": ".cache/native-gui/enchanting-open-native-lossless.png",
+      "sha256": "0d58418de8fe8751481563e13e4615b6752907394d73926746d627900bf308fa",
+      "imageSize": [2568, 1400],
+      "panelObservedPixels": [851, 282, 880, 830],
+      "slotStride": 90,
+      "completeFirstPhraseRoi": [1240, 375, 380, 65],
+      "completeWordMentalRoi": [1240, 380, 180, 55],
+      "completeFirstGlyphRoi": [1240, 380, 39, 55],
+      "completeSourcePixelComponentRoi": [1246, 387, 12, 7],
+      "sourcePixelComponentInkRowsInclusive": [388, 392],
+      "sourcePixelComponentRow": "BBB L FFFF R BBB"
+    },
+    "gui4": {
+      "file": ".cache/native-capture-audit/enchanting-gui4-open-native.png",
+      "sha256": "9db5c35d6d9a1cb1d1178f0db2bdf6e5adae12e11d96e8137be32792975876e8",
+      "imageSize": [2568, 1400],
+      "panelObservedPixels": [940, 365, 704, 664],
+      "firstInventorySlot": [968, 709, 72, 72],
+      "slotStride": 72,
+      "slotVerticalBorderInteriorBorder": [4, 64, 4],
+      "completeFirstPhraseRoi": [1250, 440, 310, 50],
+      "completeWordMentalRoi": [1250, 441, 146, 44],
+      "completeFirstGlyphRoi": [1250, 441, 32, 44],
+      "completeSourcePixelComponentRoi": [1255, 448, 11, 6],
+      "sourcePixelComponentInkRowsInclusive": [449, 452],
+      "sourcePixelComponentRow": "BBB L FFF R BBB"
+    }
+  },
+  "profileRgba": {
+    "B": [160, 145, 114, 255],
+    "L": [108, 97, 76, 255],
+    "F": [104, 93, 73, 255],
+    "R": [156, 141, 111, 255]
+  },
+  "observations": [
+    "All four boundaries of each listed first-phrase/word/glyph/component rectangle are background. Complete component comparisons retain all 84 GUI5 and 66 GUI4 RGBA pixels, including the halo; no threshold, mask, cropped edge or nonzero tolerance.",
+    "The component has one blank row above/below and three blank columns on each side. Its ink profile repeats for five rows at GUI5 and four rows at GUI4.",
+    "Mixed left/right edge bands are each exactly one physical pixel at both scales, with identical RGBA. Solid width changes from four to three physical pixels.",
+    "Seven logical rows of the first phrase have the same atlas-matched normalized stroke positions and lengths at both scales.",
+    "This contradicts the measured direct-original-atlas bilinear magnification model, whose transition spans several physical pixels. It does not uniquely establish the actual glyph-cache sampler, coverage or final compositor."
+  ],
+  "productionDecision": "Preserve the original atlas and verified #685d49 foreground. Do not insert fitted fractional-origin/scale constants or globally switch atlas filtering based on these observations.",
+  "limitations": [
+    "Exact complete production rune raster, native line wrapping and baseline remain unverified.",
+    "A previous area-coverage model fitted to GUI5 predicts nonzero GUI4 differences; a maximum difference of one is not a zero-error pass.",
+    "The actual rune draw material variant, glyph-cache contents/size, sampler state and dynamic transforms have not been recovered.",
+    "Observed panel bounds are local layout evidence, not independent certification of the entire game client rectangle."
+  ],
+  "checks": "npx playwright test --project=pixels tests/enchanting-renderer.spec.ts",
+  "privateReferencesDistributed": false
+}

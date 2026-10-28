@@ -20,6 +20,27 @@
       "bottomPixelsAtX100Y1397To1399": [[240,240,240,255],[160,160,160,255],[105,105,105,255]]
     }
   },
+  "repeatAfterResume": {
+    "file": ".cache/native-capture-audit/pause-sky-altprint.png",
+    "sha256": "7d30eef158a31afa41b461f59c3f5d46c15db76d4541edb23663734f32b5b9b1",
+    "size": [2568, 1400],
+    "method": "Fresh 1x1 Paint document, native Alt+PrintScreen, paste, save as PNG. Initially saved as an untitled PNG and then renamed through ordinary file tools without rewriting its bytes.",
+    "changedPixelsVersusPrevious": 14367,
+    "wholeFramePixels": 3595200,
+    "sampledBestTranslation": [0, 0],
+    "fixedMenuPieces": {"count": 5, "pixels": 89865, "changedPixels": 0},
+    "toolScreenshotMetadata": {"width": 2560, "height": 1400, "originX": -8, "originY": -8},
+    "toolMetadataLimitation": "Coordinates/dimensions only; the tool screenshot is not a lossless color oracle or an independent client-rectangle measurement."
+  },
+  "crossSceneAudit": {
+    "originalPngCount": 25,
+    "sameDimensions": [2568, 1400],
+    "sameBottomThreeRowsRgbaSha256": "b077d53adcbb6f74ff66a42a4d6fde278cc7dde65f8c39601c70135dd094e7cf",
+    "sameColumns3To5Rows0To1396RgbaSha256": "9367626685f6ae0a69c3268cbe4ab8273da2f834bf897f9db2f23258d68f1515",
+    "rgbBottomMarkersAgree": true,
+    "sceneDependentPixelsAlsoExistInColumns0To2": true,
+    "interpretation": "Common acquisition-frame features and stable local control coordinates are confirmed. Their cause and the true client rectangle remain unproven; do not crop at a presumed 6px or 8px origin."
+  },
   "conclusions": [
     "A previous large Paint canvas cannot account for the repeated multi-pixel edge patterns: they are present after pasting into the verified one-pixel document.",
     "This experiment does not establish whether those edges are a window frame, capture annotation or another part of the clipboard acquisition path.",

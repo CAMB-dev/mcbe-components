@@ -153,6 +153,42 @@ test('optional native open and insufficient PNGs independently establish rune fo
     }
   }
 });
+const gui4Path=new URL('../.cache/native-capture-audit/enchanting-gui4-open-native.png',import.meta.url);
+async function nativeGui4Sample(){
+  const bytes=await readFile(gui4Path);
+  expect(bytes.subarray(0,8).toString('hex')).toBe('89504e470d0a1a0a');
+  expect(createHash('sha256').update(bytes).digest('hex')).toBe('9db5c35d6d9a1cb1d1178f0db2bdf6e5adae12e11d96e8137be32792975876e8');
+  const image=PNG.sync.read(bytes);expect([image.width,image.height]).toEqual([2568,1400]);return image;
+}
+
+test('optional native GUI4 and GUI5 retain one-physical-pixel rune edge bands',async({},testInfo)=>{
+  test.skip(!existsSync(gui4Path)||!existsSync(new URL(`../.cache/native-gui/${nativeSamples.open.file}`,import.meta.url)),
+    'User-owned native GUI4/GUI5 PNGs are optional and never bundled.');
+  const gui4=await nativeGui4Sample(),gui5=await nativeSample('open');
+  const background=[160,145,114,255],foreground=[104,93,73,255],leftEdge=[108,97,76,255],rightEdge=[156,141,111,255];
+  const at=(image:PNG,x:number,y:number)=>[...image.data.subarray(4*(y*image.width+x),4*(y*image.width+x)+4)];
+  // Independent original-atlas matching identifies the same "mental" word at
+  // both scales. These complete source-pixel components include a blank halo;
+  // every RGBA byte is checked, with no threshold, mask or tolerance. This is
+  // native observation evidence, not production text-raster certification.
+  for(const sample of [{image:gui4,scale:4,x:1255,y:448},{image:gui5,scale:5,x:1246,y:387}]){
+    const profile=[background,background,background,leftEdge,...Array.from({length:sample.scale-1},()=>foreground),rightEdge,background,background,background];
+    for(let y=0;y<sample.scale+2;y++)for(let x=0;x<profile.length;x++){
+      expect(at(sample.image,sample.x+x,sample.y+y),`GUI${sample.scale} complete component at ${x},${y}`)
+        .toEqual(y===0||y===sample.scale+1?background:profile[x]);
+    }
+  }
+  // Independently confirm GUI4 from three adjacent inventory cells: 4px dark
+  // border, 64px interior, 4px white border, 72px pitch. Frame dimensions alone
+  // do not certify the game client rectangle or a nominal horizontal crop.
+  for(const top of [709,781,853])for(let y=0;y<72;y++){
+    expect(at(gui4,1000,top+y)).toEqual(y<4?[55,55,55,255]:y<68?[139,139,139,255]:[255,255,255,255]);
+  }
+  await testInfo.attach('native-cross-scale-rune-observation',{
+    body:JSON.stringify({gui4Component:[1255,448,11,6],gui5Component:[1246,387,12,7],
+      mixedEdgePixelsPerSide:1,gui4SolidWidth:3,gui5SolidWidth:4,productionRasterCertified:false},null,2),contentType:'application/json'});
+});
+
 function bookRegion(source:PNG,native:boolean) {
   // Entire object plus clear background margins, chosen to exclude the title
   // above and item slots below. No book border, texel or edge is masked out.
@@ -211,6 +247,43 @@ test('optional native open and closed PNGs show a large unmasked calibration imp
     await testInfo.attach(state+' calibrated complete book region',{body:PNG.sync.write(pictures.calibrated!),contentType:'image/png'});
   }
   await testInfo.attach('native-calibration-error-and-residuals',{body:JSON.stringify(reports,null,2),contentType:'application/json'});expect(errors).toEqual([]);
+});
+
+test('optional native GUI4 book keeps fixed parameters and reports the complete scaled region',async({page},testInfo)=>{
+  test.skip(!existsSync(gui4Path),'User-owned native GUI4 PNG is optional and never bundled.');
+  const source=await nativeGui4Sample(),reference=new PNG({width:160,height:132});
+  // Source root [940,365,704,664] and JSON book offset [13,10.5]*4 give
+  // canvas [992,407,160,160]. Scale the existing GUI5 ROI by 4/5; do not
+  // optimize registration against book pixels or exclude partial edges.
+  PNG.bitblt(source,reference,992,419,160,132,0,0);
+  const errors=await instrumentation(page);await page.goto('/calibration.html');
+  await page.evaluate(async()=>{
+    const reactPath='/@id/react',domPath='/@id/react-dom/client',bookPath='/src/enchanting-book.tsx';
+    const [r,d,book]=await Promise.all([import(reactPath),import(domPath),import(bookPath)]),React=r.default??r,ReactDOM=d.default??d;
+    const stage=document.createElement('div');stage.id='gui4-book-comparison';document.body.appendChild(stage);const root=ReactDOM.createRoot(stage);
+    (window as typeof window&{paintGui4Book:(lighting:'calibrated'|'unlit')=>void}).paintGui4Book=lighting=>root.render(React.createElement(book.EnchantingBook,
+      {lighting,width:160,height:160,style:{position:'fixed',left:16,top:16,width:160,height:160,background:'#c6c6c6',zIndex:2147483647}}));
+  });
+  const canvas=page.locator('#gui4-book-comparison canvas'),pictures:Partial<Record<'calibrated'|'unlit',PNG>>={};
+  for(const lighting of ['unlit','calibrated'] as const){
+    const before=await canvas.count()?Number(await canvas.getAttribute('data-qa-draws')):0;
+    await page.evaluate(lighting=>(window as typeof window&{paintGui4Book:(lighting:'calibrated'|'unlit')=>void}).paintGui4Book(lighting),lighting);
+    await expect.poll(async()=>Number(await canvas.getAttribute('data-qa-draws'))).toBeGreaterThan(before);await rendered(canvas);
+    const image=new PNG({width:160,height:132});PNG.bitblt(PNG.sync.read(await canvas.screenshot()),image,0,12,160,132,0,0);pictures[lighting]=image;
+  }
+  const unlit=averageError(pictures.unlit!,reference),calibrated=averageError(pictures.calibrated!,reference);
+  expect(calibrated.mae,'fixed lighting improves the same pose at the new GUI scale').toBeLessThan(unlit.mae*.1);
+  // Prior empirical lighting measured independently with the same new-scale
+  // registration, mesh and atlas. No coefficient was refitted for GUI4.
+  expect(calibrated.absoluteRgbErrorSum).toBeLessThan(47545);
+  expect(calibrated.changedPixels).toBeLessThan(1853);
+  expect(calibrated.alphaChangedPixels).toBe(0);
+  await testInfo.attach('gui4-complete-book-region-measurement',{body:JSON.stringify({scope:'New scale of the known open pose; native raster equality remains unproven',
+    nativeRoi:[992,419,160,132],webRoi:[0,12,160,132],pixels:21120,unlit,calibrated,
+    nativeBox:foregroundBounds(reference),webBox:foregroundBounds(pictures.calibrated!)},null,2),contentType:'application/json'});
+  await testInfo.attach('gui4-complete-native-book-region',{body:PNG.sync.write(reference),contentType:'image/png'});
+  await testInfo.attach('gui4-complete-production-book-region',{body:PNG.sync.write(pictures.calibrated!),contentType:'image/png'});
+  expect(errors).toEqual([]);
 });
 
 test('optional native PNG proves opaque green bytes and the threshold-detected shadow displacement',async()=>{
