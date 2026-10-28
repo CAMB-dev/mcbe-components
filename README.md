@@ -98,6 +98,12 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `CraftingTable` | `inputs`、`result`、`selectedInputIndex`、`onInputAction`、`onTakeResult`；容器库存属性 | 源 3×3 工作台右面板，大结果槽与共享库存；配方书及外部 toolbar 尚未实现 |
 | `Furnace` / `BlastFurnace` / `Smoker` | `input`、`fuel`、`result`、`progress`、`fuelRemaining`、`onInputAction`、`onTakeResult`；容器库存属性 | 共用原版熔炼右面板，原始浮点槽位布局、火焰与进度裁切；游戏规则由使用方提供 |
 | `PixelIcon` | **必填** `name`；`size`，默认 20 | 16×16 原创 SVG 图标，默认装饰性 aria-hidden，图标按钮须提供标签 |
+| `Image` | **必填** `src`、`alt`、`sourceSize`；`size`、`scale`；img 属性 | PNG 物理尺寸与 GUI 逻辑尺寸分离，静态 SSR，无加载后测量；空 alt 表示装饰图 |
+| `NineSlice` | **必填** `src`、`sourceSize`、`slice`；`destinationBorder`、`size`、`scale`、`fill`、`alt`、children | 源切片用物理像素，目标边距用逻辑像素；边框层与内容分离，children 保持可访问和交互；非法几何抛 RangeError |
+| `ContainerFrame` | **必填** `title`；`height`、`titleAlign`、`titleOffset`、`inventory`、`hotbar`、`inventorySelectedIndex`、`onInventorySelectionChange`、`onInventoryAction`、`onClose` | 352 CSS px 宽、可变高度容器，共享底部锚定的玩家物品栏；height / titleOffset 用 CSS px |
+| `Chest` | `rows`、`items`、`selectedIndex`、`onSelectionChange`、`onSlotAction`；容器库存属性 | 3 / 6 行箱子及 1…6 行数据驱动布局；行数取整并限制范围，非有限值回退 3 |
+| `Hopper` / `Dispenser` / `Dropper` / `ShulkerBox` | `items`、`selectedIndex`、`onSelectionChange`、`onSlotAction`；容器库存属性 | 共用存储 API，分别保留 5 / 9 / 9 / 27 格与原始面板高度；空槽允许操作回调 |
+| `Anvil` | **必填** `name`；`onNameChange`、`inputs`、`result`、`invalid`、`cost`、`renameDisabled`、`renameReadOnly`、`onInputAction`、`onTakeResult` | 原版重命名框、30 字符限制、修复槽位与费用；结果守卫空槽、无效、经验不足和过贵状态，保留焦点 |
 
 ### 受控与非受控
 
@@ -202,14 +208,35 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **41 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 首轮整理 101 项，逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
+当前 **50 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 102 项（含新增公共 ContainerFrame），逐项标记 implemented / planned；implemented 只代表已导出，不等于 pixel-perfect 已验收。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类、燃料、处理箭头、附魔选项、交易条目。
-- 完整 GUI：已有附魔台、砂轮；继续工作台、熔炉族、酿造、铁砧、锻造、切石、织布、制图、信标、箱子族、漏斗、发射 / 投掷、合成器、交易、玩家 / 创造 / 坐骑背包。
+- GUI：已有附魔台、砂轮、工作台与熔炉族主面板、铁砧、箱子族、漏斗、发射器与投掷器；继续酿造、锻造、切石、织布、制图、信标、合成器、交易、玩家 / 创造 / 坐骑背包，以及尚缺的配方书和 screen wrapper。
 - HUD 与页面组合：快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题提示、玩家列表，以及暂停 / 设置 / 世界 / 服务器 / 资源包等组合。
 
 完整 GUI 由这些基础零件组合。planned 项仍在开发，不作为已有导出；原生 3D renderer、最终像素取整与真实游戏整帧差异单独验收。
+
+### 原图、边框和可变容器
+
+```tsx
+<Image src="/textures/diamond.png" alt="Diamond"
+  sourceSize={[16, 16]} scale={2} />
+<NineSlice src="/textures/cell_image.png"
+  sourceSize={[10, 10]} slice={2} destinationBorder={1}
+  size={[18, 18]} scale={2} />
+<Chest rows={6} items={storage} inventory={inventory}
+  selectedIndex={selected} onSelectionChange={setSelected}
+  onSlotAction={(index, action) => handleStorage(index, action)} />
+<Anvil name={name} onNameChange={setName}
+  inputs={[tool, material]} result={result}
+  cost={{kind: 'levels', levels: 3, affordable: true}}
+  onTakeResult={takeRepairedItem} />
+```
+
+上述纹理 URL 由使用方提供。`sourceSize` / `slice` 描述 PNG 物理像素，`size` / `destinationBorder` 描述缩放前的 GUI 逻辑像素：例如 cell_image 的物理图为 10×10，逻辑 base_size 为 5×5，不能把两个尺寸混用。Image / NineSlice 的 sourceSize、slice 与 scale 必须为合法整数，非有限、负数或越界切片抛 `RangeError`；内容尺寸和目标边距可用有限逻辑值，像素验收仍要求对齐物理像素。`style` 可覆盖默认布局，但不包含在默认参数的像素证明中。
+
+`AnvilCost` 支持 `{kind:'levels', levels, affordable?, label?}` 或 `{kind:'too-expensive', label?}`；费用与可用性来自调用方，不推算游戏规则。重命名字段遵循原版模板的 `shadow:false`，费用文字保留 `shadow:true`。费用阴影色与原生 baseline / snapping 仍待实拍验证。
 
 ## 字体
 
@@ -279,7 +306,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、41 个导出、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、50 个导出、类型、CSS、皮肤、字体及许可路径。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

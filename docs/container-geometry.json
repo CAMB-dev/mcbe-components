@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "source": {
+    "release": "v1.26.60.5",
+    "repositoryCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "licenseUrl": "https://github.com/Mojang/bedrock-samples/blob/15701fa9c13923f12662984c32c124327e40e3d3/LICENSE.md",
+    "localUiArchive": "data/resource_packs/vanilla/__brarchive/ui.brarchive",
+    "entries": [
+      {
+        "path": "resource_pack/ui/chest_screen.json",
+        "releaseRawSha256": "421885e0928a2db41a2850dc2fafcd2faba1cf3639eb90eb3e630f0742b78ee5",
+        "localRawSha256": "ee9b4c0506a7774ff994010cf783998c601be8a0b11b6edd17a85ae2ab15a891",
+        "parsedJsonEqual": true
+      },
+      {
+        "path": "resource_pack/ui/redstone_screen.json",
+        "releaseRawSha256": "ed88e3fa5d953a0217a8fa3691fb280d55aecfed4bafe64725aac2d4f9a20672",
+        "localRawSha256": "4867d980c29300d8b434de14a6f9f34e35200e1fa5c72da04c68cdd947c06cee",
+        "parsedJsonEqual": true
+      },
+      {
+        "path": "resource_pack/ui/data_driven_container_screen.json",
+        "releaseRawSha256": "a91d2cf394bf1d3ce98beed2ce9387fcaacaa9476bf3ee4970b3ac94cf2820b0",
+        "localRawSha256": "5f2eefaf1ef2ebf54c0664cf5faff2f128965155bd866bfd9a743ad01fab48c4",
+        "parsedJsonEqual": true
+      },
+      {
+        "path": "resource_pack/ui/ui_common.json",
+        "releaseRawSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "localRawSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+        "parsedJsonEqual": true
+      },
+      {
+        "path": "resource_pack/ui/_global_variables.json",
+        "releaseRawSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "localRawSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+        "parsedJsonEqual": true
+      }
+    ],
+    "comparison": "Fresh local brarchive payloads parsed as JSON, official release JSONC parsed with TypeScript parseConfigFileTextToJson, then Node assert.deepStrictEqual. Comments and formatting explain raw hash differences; all five parsed objects were identical."
+  },
+  "profile": {
+    "uiProfile": "Classic desktop main container pane",
+    "sourceUnit": "game pixel",
+    "cssUnit": "2 CSS pixels per game pixel",
+    "nativeScreenshotVerified": false
+  },
+  "shared": {
+    "panelGameWidth": 176,
+    "slotGameSize": [
+      18,
+      18
+    ],
+    "itemRendererGameSize": [
+      16,
+      16
+    ],
+    "panelSkin": "common.common_panel -> common.dialog_background_opaque -> textures/ui/dialog_background_opaque; existing --mc-skin-panel, 4 source px nine-slice -> 8 CSS px edge",
+    "slotSkin": "common.container_item / existing ItemSlot, --mc-skin-inventory-cell and selected/hover/focus skins",
+    "titleColor": {
+      "source": "_global_variables $title_text_color",
+      "rgbFloat": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "css": "#4c4c4c",
+      "caveat": "Byte rounding is inherited from the existing components, not measured in a native capture."
+    },
+    "titleFont": {
+      "source": "chest.chest_label, redstone.item_dropper_label, common.section_heading_label",
+      "fontSizeExplicit": false,
+      "fontTypeExplicit": false,
+      "shadowExplicit": false,
+      "web": "font: 400 var(--mc-font-size)/20px var(--mc-font); no text shadow",
+      "caveat": "Uses the loaded project font scale, including Mojangles overrides. Native normal font rasterization and default size remain uncalibrated."
+    },
+    "playerInventory": {
+      "source": "common.inventory_panel_bottom_half_with_label / inventory_panel / hotbar_grid_template",
+      "bottomHalfGameSize": [
+        "100%",
+        93
+      ],
+      "labelGameOffset": [
+        7,
+        3
+      ],
+      "labelRootGameOrigin": [
+        "7",
+        "H - 90"
+      ],
+      "inventoryGridGameRect": [
+        "7",
+        "H - 80",
+        162,
+        54
+      ],
+      "hotbarGameRect": [
+        "7",
+        "H - 23",
+        162,
+        18
+      ],
+      "derivation": "Bottom panel starts H-93. Inventory label is +3. Inventory grid bottom is H-26, so its top is H-80. Separate root hotbar is bottom anchored -5 with height18, so top H-23.",
+      "implementation": "Shared PlayerInventory; label20 CSSpx + grid108 + hotbar gap6 + hotbar36, starts at 2*(H-90)."
+    },
+    "screenBackground": {
+      "sourceAlpha": 0.4,
+      "included": false,
+      "reason": "Main panes are embedded components; host controls screen-wrapper backdrop and modal placement."
+    },
+    "viewport": "The outer .mc-container-scroll has6 CSSpx padding and horizontal overflow so exact panel geometry is preserved on narrow hosts; this padding is not an original in-game UI element."
+  },
+  "chest": {
+    "source": "chest_screen small_chest_panel / large_chest_panel; other rows use data_driven_container_screen container_panel",
+    "rows": {
+      "allowed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "default": 3,
+      "normalization": "Finite numbers floor and clamp1..6; NaN/Infinity/-Infinity use3."
+    },
+    "gameWidth": 176,
+    "gameHeightFormula": "112 + 18*rows",
+    "gameHeights": [
+      130,
+      148,
+      166,
+      184,
+      202,
+      220
+    ],
+    "gridGameOrigin": [
+      7,
+      21
+    ],
+    "gridDimensions": [
+      "9",
+      "rows"
+    ],
+    "smallTitleGameOrigin": [
+      7,
+      11
+    ],
+    "largeTitleGameOrigin": [
+      7,
+      10
+    ],
+    "otherRowsTitleGameOrigin": [
+      7,
+      10
+    ],
+    "derivation": "Small top panel offset[0,12] + label[7,-1] / grid[7,9]. Large top panel offset[0,11] + label[7,-1] / grid[7,10]. Data-driven rows1..6 top panel offset[0,11], grid[7,10], root heights130..220 step18.",
+    "defaults": {
+      "rows3": "Chest",
+      "rows6": "Large Chest"
+    },
+    "aliasNote": "Ender chest and barrel also inherit small_chest_panel in source, but are not separate exports in this implementation."
+  },
+  "shulkerBox": {
+    "source": "chest.shulker_box_panel@chest.small_chest_panel: {}",
+    "gameSize": [
+      176,
+      166
+    ],
+    "gridDimensions": [
+      9,
+      3
+    ],
+    "gridGameOrigin": [
+      7,
+      21
+    ],
+    "titleGameOrigin": [
+      7,
+      11
+    ]
+  },
+  "hopper": {
+    "source": "redstone.hopper_screen / redstone_panel_top_half / redstone_input_grid / hopper_label",
+    "gameSize": [
+      176,
+      133
+    ],
+    "gridDimensions": [
+      5,
+      1
+    ],
+    "titleGameOrigin": [
+      7,
+      7
+    ],
+    "gridGameRect": [
+      43,
+      18.25,
+      90,
+      18
+    ],
+    "derivation": "Top panel y7, height=H/2-12=54.5. Grid is center anchored with offset[0,-7]. x=(176-90)/2=43; y=7+(54.5-18)/2-7=18.25 gamepx. At GUI2 this is CSS y36.5; it is deliberately not rounded without native evidence.",
+    "inventoryGameLabel": [
+      7,
+      43
+    ],
+    "inventoryGameGrid": [
+      7,
+      53,
+      162,
+      54
+    ],
+    "hotbarGameRect": [
+      7,
+      110,
+      162,
+      18
+    ]
+  },
+  "dispenser": {
+    "source": "redstone.dispenser_screen / redstone_panel_top_half / redstone_input_grid / dispenser_label@item_dropper_label",
+    "gameSize": [
+      176,
+      166
+    ],
+    "gridDimensions": [
+      3,
+      3
+    ],
+    "titleAnchor": "top_middle",
+    "titleGameOffset": [
+      0,
+      5
+    ],
+    "gridGameRect": [
+      61,
+      15.5,
+      54,
+      54
+    ],
+    "derivation": "Top panel y7, height=166/2-12=71. Grid center offset[0,0]. x=(176-54)/2=61; y=7+(71-54)/2=15.5 gamepx, or CSS y31."
+  },
+  "dropper": {
+    "source": "redstone.dropper_screen; same screen_dimensions / grid_dimensions / grid_offset and panel as dispenser",
+    "gameSize": [
+      176,
+      166
+    ],
+    "gridDimensions": [
+      3,
+      3
+    ],
+    "titleAnchor": "top_middle",
+    "titleGameOffset": [
+      0,
+      5
+    ],
+    "gridGameRect": [
+      61,
+      15.5,
+      54,
+      54
+    ]
+  },
+  "behavior": {
+    "data": "Controlled item arrays; no invented placeholder items. Excess items beyond native capacity are ignored by InventoryGrid; missing entries produce empty slots.",
+    "selection": "selectedIndex addresses native storage. inventorySelectedIndex is separate,0..35. Invalid, noninteger, or out-of-range controlled indexes show no selection.",
+    "actions": "onSlotAction(index,primary|secondary), onInventoryAction(index,primary|secondary). Empty slots stay actionable to allow placing held items; disabled item slots cannot activate.",
+    "keyboard": "Reuses InventoryGrid roving focus, arrow/Home/End navigation and secondary keyboard action; does not claim native gamepad mapping or cross-collection transfer behavior.",
+    "frame": "height is CSSpx, finite minimum212, otherwise332. This custom frame extension is distinct from each fixed native source layout."
+  },
+  "limits": [
+    "Geometry and texture identity are source-derived, not proof of a complete pixel-perfect native screenshot match.",
+    "Bedrock native renderer pixel snapping of the half-pixel hopper grid and redstone controls still needs a real game capture at a known GUI scale.",
+    "Native font baseline/default font size, title truncation/localization, color quantization, tooltip and durability renderer remain separate calibration tasks.",
+    "Does not include game screenwrapper, selected-held/flying-item renderer, item-lock notifications, container quick-move/stack-splitting logic, sounds or gamepad cursor/help panels.",
+    "Pocket profile is a different source layout and is not represented by these Classic components.",
+    "Close is optional because the host may own dismissal; native common_panel defaults the close button on subject to runtime visibility binding."
+  ]
+}

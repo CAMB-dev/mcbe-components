@@ -697,6 +697,36 @@
       ],
       "slice": null,
       "encoding": "png"
+    },
+    "anvil-icon": {
+      "source": "resource_pack/textures/ui/anvil_icon.png",
+      "sha256": "5858dfc62fe01b7629dbea9a1b71bb7523c196e1418e2a075ff3fc8ec6e624a3",
+      "size": [
+        15,
+        15
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "anvil-plus": {
+      "source": "resource_pack/textures/ui/anvil-plus.png",
+      "sha256": "f162fdc2ed1785debed24173efd5d014b1bb444173bd8d719c88f138ecb9ce6f",
+      "size": [
+        13,
+        13
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "anvil-cost-background": {
+      "source": "resource_pack/textures/ui/Gray.png",
+      "sha256": "e21915e60b32df0c5bd7fa8153571c1d8899a20de2973ee92f8aab8f11c35797",
+      "size": [
+        2,
+        2
+      ],
+      "slice": null,
+      "encoding": "png"
     }
   }
 }

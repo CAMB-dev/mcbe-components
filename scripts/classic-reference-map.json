@@ -66,5 +66,8 @@
   "processing-arrow-active": { "file": "arrow_active" },
   "processing-arrow-inactive": { "file": "arrow_inactive" },
   "processing-flame-full": { "file": "flame_full_image" },
-  "processing-flame-empty": { "file": "flame_empty_image" }
+  "processing-flame-empty": { "file": "flame_empty_image" },
+  "anvil-icon": { "file": "anvil_icon" },
+  "anvil-plus": { "file": "anvil-plus" },
+  "anvil-cost-background": { "file": "Gray" }
 }

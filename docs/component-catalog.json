@@ -18,11 +18,11 @@
       },
       {
         "name": "Image",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "NineSlice",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Panel",
@@ -216,6 +216,10 @@
       {
         "name": "SlotPlaceholder",
         "status": "implemented"
+      },
+      {
+        "name": "ContainerFrame",
+        "status": "implemented"
       }
     ],
     "workstation_and_container_guis": [
@@ -249,7 +253,7 @@
       },
       {
         "name": "Anvil",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "SmithingTable",
@@ -273,23 +277,23 @@
       },
       {
         "name": "Chest",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Hopper",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Dispenser",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Dropper",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "ShulkerBox",
-        "status": "planned"
+        "status": "implemented"
       },
       {
         "name": "Crafter",

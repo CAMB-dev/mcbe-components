@@ -33,7 +33,11 @@ try {
   await page.mouse.move(0, 0);
   await page.locator('#inventory-states').screenshot({ path: '.cache/preview/itemslot-rebuilt.png' });
   await page.locator('#workstations').screenshot({ path: '.cache/preview/workstations.png' });
+  await page.setViewportSize({ width: 1440, height: 2000 });
   await page.locator('#processing').screenshot({ path: '.cache/preview/processing.png' });
+  await page.locator('#anvil').screenshot({ path: '.cache/preview/anvil.png' });
+  await page.locator('#containers').screenshot({ path: '.cache/preview/containers.png' });
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page.locator('#typography').screenshot({ path: '.cache/preview/fonts-shadow.png' });
   assert.equal(await page.locator('.font-shadow-comparison .mc-text').first().evaluate(node=>getComputedStyle(node).textShadow), 'rgb(63, 63, 63) 2px 2px 0px');
   assert.equal(await page.locator('.font-shadow-comparison .mc-text').last().evaluate(node=>getComputedStyle(node).textShadow), 'none');

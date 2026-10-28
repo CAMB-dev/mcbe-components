@@ -1,0 +1,12 @@
+/* Classic JSON UI coordinates at GUI scale 2. Fractional redstone grid offsets
+   are retained; the native renderer's final pixel-snapping remains uncalibrated. */
+.mc-container-scroll { max-width: 100%; overflow: auto; padding: 6px; }
+.mc-container { box-sizing: border-box; position: relative; width: 352px; height: var(--mc-container-height, 332px); isolation: isolate; color: #4c4c4c; font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: none; image-rendering: pixelated; }
+.mc-container::before { content: ''; position: absolute; inset: 0; z-index: -1; border: 8px solid transparent; border-image: var(--mc-skin-panel) 4 fill / 8px stretch; pointer-events: none; }
+.mc-container__title { position: absolute; left: var(--mc-container-title-x, 14px); top: var(--mc-container-title-y, 20px); width: 90%; margin: 0; font: inherit; color: inherit; background: #c6c6c6; text-shadow: none; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.mc-container__title[data-align='center'] { left: 50%; transform: translateX(-50%); text-align: center; width: max-content; max-width: calc(100% - 56px); }
+.mc-container > .mc-dialog__close { right: 0; top: 0; }
+.mc-container__grid { position: absolute; }
+.mc-container__grid .mc-inventory-scroll { padding: 0; overflow: visible; line-height: 0; }
+.mc-container__grid .mc-inventory { display: grid; }
+.mc-container__inventory { position: absolute; left: 14px; top: calc(var(--mc-container-height, 332px) - 180px); }

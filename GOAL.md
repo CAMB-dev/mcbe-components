@@ -7,7 +7,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 首轮梳理 101 项，覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；implemented 只代表导出，不代表像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 102 项（含公共 ContainerFrame），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；implemented 只代表导出，不代表像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -38,7 +38,9 @@
 - [x] 本轮 126 项检查全部通过；28 导出的 React 18 / 19 包消费与生产预览通过；整理原生组件和复用范围清单
 - [x] 拆出物品图像 / 数量 / 耐久 / 占位 / 结果槽、附魔项与配方 / 进度 / 燃料部件，加入工作台与熔炉系列主面板，共 41 个导出
 - [x] 修正附魔书本厚页块 / UV、经验彩色阴影与青金石底层；独立附魔 QA 5/5、集成 169/169、41 导出 React 18 / 19 包消费与生产预览通过
-- [ ] 实现清单内其余 60 项 Bedrock 控件、可复用结构、HUD 和完整 GUI；为新增交互与原版表面补充验收
+- [x] 加入铁砧与箱子 / 漏斗 / 发射器 / 投掷器 / 潜影盒，拆出 ContainerFrame、Image、NineSlice，目前共 50 个导出
+- [x] 本轮独立容器 / 铁砧 QA 18/18、Image / NineSlice 7/7，集成 214/214、50 导出 React 18 / 19 包消费及生产预览通过
+- [ ] 实现清单内其余 52 项 Bedrock 控件、可复用结构、HUD 和完整 GUI；为新增交互与原版表面补充验收
 - [ ] 对照游戏渲染器完善附魔书本、符文、物品 tooltip / glint、工作站完整页面
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
 

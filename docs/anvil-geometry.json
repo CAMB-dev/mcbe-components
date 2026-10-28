@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 1,
+  "gameVersion": "1.26.6005.0",
+  "guiScale": 2,
+  "source": {
+    "release": "v1.26.60.5",
+    "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "pinnedTextureCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+    "localUiArchive": "data/resource_packs/vanilla/__brarchive/ui.brarchive",
+    "localTextureArchive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+    "ui": {
+      "anvil_screen.json": {
+        "releaseSha256": "7a94dac7ba6d93917cb5d0c9d3e50056950441d41af2ef75636e83d5800569ae",
+        "installedSha256": "86f208f8c7e29c5c53c13848826cbd5623c8196ad7e13e754e6f0df0c50147a1",
+        "parsedEqual": true
+      },
+      "ui_common.json": {
+        "releaseSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "installedSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+        "parsedEqual": true
+      },
+      "_global_variables.json": {
+        "releaseSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "installedSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+        "parsedEqual": true
+      },
+      "resource_packs_screen.json": {
+        "releaseSha256": "c73819a074d90e63268f9b52e86ce32179f10989288aefdd18a66c6ba394f3ae",
+        "installedSha256": "af3845c01a8947bc797e9fb0cc8b6976fc63a4746bb78c9e649a6ea08209ce2e",
+        "parsedEqual": true
+      }
+    },
+    "textures": {
+      "anvil_icon.png": {
+        "sha256": "5858dfc62fe01b7629dbea9a1b71bb7523c196e1418e2a075ff3fc8ec6e624a3",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "5858dfc62fe01b7629dbea9a1b71bb7523c196e1418e2a075ff3fc8ec6e624a3",
+        "physicalSize": [
+          15,
+          15
+        ]
+      },
+      "anvil-plus.png": {
+        "sha256": "f162fdc2ed1785debed24173efd5d014b1bb444173bd8d719c88f138ecb9ce6f",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "f162fdc2ed1785debed24173efd5d014b1bb444173bd8d719c88f138ecb9ce6f",
+        "physicalSize": [
+          13,
+          13
+        ]
+      },
+      "Gray.png": {
+        "sha256": "e21915e60b32df0c5bd7fa8153571c1d8899a20de2973ee92f8aab8f11c35797",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "e21915e60b32df0c5bd7fa8153571c1d8899a20de2973ee92f8aab8f11c35797",
+        "physicalSize": [
+          2,
+          2
+        ]
+      },
+      "arrow_large.png": {
+        "sha256": "c0b27d51e084d0018365a94905e53e8661cf0f05448145c71402ff16844fe1b6",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "c0b27d51e084d0018365a94905e53e8661cf0f05448145c71402ff16844fe1b6",
+        "physicalSize": [
+          22,
+          15
+        ]
+      },
+      "crossout.png": {
+        "sha256": "e6495d114d889c557948d19035a3a76ba45b9e7a75d19052eed826ea5f05ff61",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "e6495d114d889c557948d19035a3a76ba45b9e7a75d19052eed826ea5f05ff61",
+        "physicalSize": [
+          15,
+          15
+        ]
+      },
+      "edit_box_indent.png": {
+        "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109",
+        "physicalSize": [
+          6,
+          6
+        ]
+      },
+      "edit_box_indent_hover.png": {
+        "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb",
+        "installedEqual": true,
+        "pinnedEqual": true,
+        "pinnedSha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb",
+        "physicalSize": [
+          6,
+          6
+        ]
+      }
+    },
+    "comparison": "UI comparisons use complete parsed objects from the actual installed archive and the full official ZIP; raw hashes differ because installed UI is compiled/minified. All seven PNGs are byte-equal in the ZIP, local install and pinned official raw URLs."
+  },
+  "coordinateConvention": "All game rectangles are [x,y,width,height], relative to common.root_panel176x166. CSS rectangles multiply every value by2, retaining source fractions. Anchors are stated when the source label has natural text size.",
+  "panels": {
+    "root": {
+      "gameRect": [
+        0,
+        0,
+        176,
+        166
+      ],
+      "cssRect": [
+        0,
+        0,
+        352,
+        332
+      ],
+      "source": "common.root_panel"
+    },
+    "topHalf": {
+      "gameRect": [
+        7,
+        7,
+        162,
+        69
+      ],
+      "formula": "size[100%-14px,50%-14px], top_left offset[7,7]."
+    },
+    "iconAndText": {
+      "gameRect": [
+        7,
+        10.45,
+        162,
+        27.6
+      ],
+      "formula": "topHalf size[100%,40%], offset[0,5%] => y7+.05*69, h.4*69."
+    },
+    "titleAndText": {
+      "gameRect": [
+        39.4,
+        10.45,
+        129.6,
+        27.6
+      ],
+      "formula": "iconAndText size[80%,100%], offset[20%,0]."
+    },
+    "titlePanel": {
+      "gameRect": [
+        40.4,
+        10.45,
+        129.6,
+        5.52
+      ],
+      "formula": "titleAndText size[100%,20%], offset[1,0]."
+    },
+    "recipePanel": {
+      "gameRect": [
+        7,
+        34.6,
+        162,
+        41.4
+      ],
+      "formula": "topHalf size[100%,60%], offset[0,40%]."
+    },
+    "recipeGrid": {
+      "gameRect": [
+        20.77,
+        47.02,
+        134.46,
+        16.56
+      ],
+      "formula": "recipePanel size[83%,40%], center anchors => x7+(162-134.46)/2,y34.6+(41.4-16.56)/2."
+    }
+  },
+  "elements": {
+    "title": {
+      "bottomMiddleGameAnchor": [
+        105.2,
+        18.97
+      ],
+      "bottomMiddleCssAnchor": [
+        210.4,
+        37.94
+      ],
+      "formula": "titlePanel bottom_middle offset[0,3]. Text natural width/height are not declared in anvil.generic_label; render with the library normal-font profile."
+    },
+    "icon": {
+      "gameRect": [
+        7,
+        10.45,
+        30,
+        30
+      ],
+      "cssRect": [
+        14,
+        20.9,
+        60,
+        60
+      ],
+      "texture": "anvil_icon.png",
+      "note": "Physical PNG15x15 is intentionally displayed30x30game, a4x nearest-neighbor raster enlargement at GUI2."
+    },
+    "nameField": {
+      "gameRect": [
+        39.4,
+        20.73,
+        129.6,
+        19.32
+      ],
+      "cssRect": [
+        78.8,
+        41.46,
+        259.2,
+        38.64
+      ],
+      "formula": "text_edit_panel bottom_left size[100%,70%], offset[0,2] => titleAndText.y+27.6-19.32+2. anvil.text_edit_control inherits full parent size; it does not declare a generic fixed control height.",
+      "maximumLength": 30
+    },
+    "input": {
+      "gameRect": [
+        25.216,
+        46.3,
+        18,
+        18
+      ],
+      "cssRect": [
+        50.432,
+        92.6,
+        36,
+        36
+      ]
+    },
+    "material": {
+      "gameRect": [
+        79,
+        46.3,
+        18,
+        18
+      ],
+      "cssRect": [
+        158,
+        92.6,
+        36,
+        36
+      ]
+    },
+    "result": {
+      "gameRect": [
+        132.784,
+        46.3,
+        18,
+        18
+      ],
+      "cssRect": [
+        265.568,
+        92.6,
+        36,
+        36
+      ],
+      "note": "Normal18game container, not the26game furnace result."
+    },
+    "slotFormula": "recipeGrid grid_dimensions[5,1] => cell26.892x16.56game. Fixed18x18 anvil_item_slot centers within cells0/2/4; inner common.container_item explicitly centers. x=20.77+column*26.892+(26.892-18)/2; y=47.02+(16.56-18)/2.",
+    "plus": {
+      "gameRect": [
+        54.608,
+        48.8,
+        13,
+        13
+      ],
+      "cssRect": [
+        109.216,
+        97.6,
+        26,
+        26
+      ],
+      "formula": "Center13x13 icon in cell1."
+    },
+    "arrow": {
+      "gameRect": [
+        105.892,
+        49.3,
+        18,
+        12
+      ],
+      "cssRect": [
+        211.784,
+        98.6,
+        36,
+        24
+      ],
+      "formula": "Center18x12 icon in cell3. arrow_large.png physically22x15 is displayed18x12game, matching source scaling rather than the crafting-table22x15 display."
+    },
+    "invalid": {
+      "gameRect": [
+        105.892,
+        49.3,
+        18,
+        12
+      ],
+      "cssRect": [
+        211.784,
+        98.6,
+        36,
+        24
+      ],
+      "source": "anvil.cross_out_icon, layer1, visibility #cross_out_icon. Underlying arrow remains present."
+    },
+    "cost": {
+      "bottomRightGameAnchor": [
+        169,
+        76
+      ],
+      "bottomRightCssAnchor": [
+        338,
+        152
+      ],
+      "formula": "recipePanel bottom_right offset[0,0]; width is natural text width.",
+      "background": {
+        "source": "resource_packs.gray_image => textures/ui/Gray",
+        "relativeSize": [
+          "105%",
+          "105%"
+        ],
+        "alpha": 0.3,
+        "note": "Original2x2 Gray PNG is black, despite its filename; use the actual texture."
+      }
+    },
+    "inventory": {
+      "labelGameAnchor": [
+        7,
+        76
+      ],
+      "labelCssAnchor": [
+        14,
+        152
+      ],
+      "gridCssRect": [
+        14,
+        172,
+        324,
+        108
+      ],
+      "hotbarCssRect": [
+        14,
+        286,
+        324,
+        36
+      ],
+      "source": "common.inventory_panel_bottom_half_with_label and common.hotbar_grid_template."
+    }
+  },
+  "typographyAndInput": {
+    "sourceNormal": "anvil.generic_label does not override font_size; common.text_edit_box sets normal. No current game capture proves the absolute normal font metrics.",
+    "webProfile": "The existing library profile uses var(--mc-font-size),20px line-height and the selected --mc-font. Mojangles calibration is independent of native default font-size/baseline acceptance.",
+    "editText": {
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "shadow": false,
+      "labelHeightGame": 10,
+      "labelHeightCss": 20,
+      "source": "anvil.text_edit_control overrides label size[default,10], common.text_edit_box uses text_box_text_color and shadowfalse."
+    },
+    "editClipper": {
+      "sourceGameInsets": [
+        3,
+        2
+      ],
+      "cssInsets": [
+        6,
+        4
+      ],
+      "formula": "common.text_edit_box centering_panel size[100%-6px,100%-4px] centered. Label minimum width100%, right_middle anchors and10game label height => centered20CSS text strip inside that clipper.",
+      "implementation": "Native input uses a20px text strip, left6px,width100%-12px vertically centered inside the full source-sized label hit area; horizontal scroll/caret are browser-native."
+    },
+    "disabled": {
+      "textAlpha": 0.5,
+      "backgroundAlpha": 0.5,
+      "source": "common.text_edit_box locked state with disabled_alpha. renameDisabled is caller-provided, not inferred from input occupancy."
+    },
+    "readonly": "renameReadOnly is a Web affordance with no separate native visual state; browser readOnly is forwarded.",
+    "successCostColor": [
+      0.5,
+      1,
+      0.125
+    ],
+    "failureCostColor": [
+      1,
+      0.35,
+      0.35
+    ],
+    "costShadow": true,
+    "webCostShadow": "CSS shadow offset2x2 represents1game pixel and uses quarter RGB tint. Source proves shadowtrue, but does not prove the native shadow shader tint or rasterization; this choice needs native capture."
+  },
+  "focus": {
+    "explicitSource": {
+      "input.ArrowRight": "material",
+      "material.ArrowLeft": "input",
+      "material.ArrowRight": "result",
+      "result.ArrowLeft": "material"
+    },
+    "nameField": "No explicit source directional focus overrides. Browser arrow keys retain normal caret editing; Tab follows DOM order rather than claiming native gamepad navigation.",
+    "unavailableResult": "Result remains focusable and hoverable; ResultSlot blocks taking empty, invalid, unaffordable, too-expensive, or malformed numeric-cost states."
+  },
+  "costApi": {
+    "levels": "{kind:levels,levels:number,affordable?:boolean,label?:string}; finite nonnegative values format as Enchantment Cost: plus truncated integer, matching source English %1$d formatting. Negative or nonfinite levels do not render a cost and disable result taking.",
+    "tooExpensive": "{kind:too-expensive,label?:string}; default Too Expensive!, source failure red and result unavailable.",
+    "none": "null or undefined hides cost. No level threshold, rename cost, recipe or transfer is computed.",
+    "localizedLabels": "title, renameLabel and cost.label are caller-provided overrides; source English translations are Repair & Name, Enchantment Cost: %1$d, Too Expensive!."
+  },
+  "closeButton": "Source anvil_panel inherits common.common_panel with show_close_button defaulttrue. WorkstationFrame onClose remains optional and caller-controlled; unlike the furnace/crafting right-pane profile, Anvil does not suppress it.",
+  "verification": {
+    "coreTypeScript": "npx tsc -p tsconfig.json --noEmit passed.",
+    "independentQa": "Pending independent source-derived browser validation."
+  },
+  "evidenceLimits": [
+    "Source geometry, texture equality, Web rendered bounds and native game GPU capture are distinct evidence levels.",
+    "Fractional percentages are retained; native engine final pixel snapping is unverified.",
+    "Default normal font scale, glyph baseline, selected-text/caret appearance, colored cost-shadow shader tint and the disabled edit box composite require same-state native screenshots.",
+    "Game launch encountered Xbox Live0x80004005 in this session. No whole native anvil screenshot acceptance is claimed."
+  ]
+}

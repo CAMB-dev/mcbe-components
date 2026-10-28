@@ -10,6 +10,8 @@ import { EnchantmentOptionFixture } from './enchantment-option-fixture';
 import { ProcessingFixture } from './processing-fixture';
 import { InventoryPartsFixture } from './inventory-parts-fixture';
 import { EnchantingRendererFixture } from './enchanting-renderer-fixture';
+import { AnvilFixture } from './anvil-fixture';
+import { ImageFixture } from './image-fixture';
 
 function Sample({ id, children }: { id: string; children: ReactNode }) {
   return <section className="calibration-case"><h2>{id}</h2><div className="calibration-stage" data-case={id}>{children}</div></section>;
@@ -94,6 +96,8 @@ function Calibration() {
     <ProcessingFixture/>
     <InventoryPartsFixture/>
     <EnchantingRendererFixture/>
+    <AnvilFixture/>
+    <ImageFixture/>
     <p>These samples isolate component surfaces. The test runner renders original reference PNGs independently, applies their nine-slice rules, and compares every output pixel. Text is validated separately.</p>
     <Dialog open={dialog} onOpenChange={setDialog} title="Settings dialog" className="calibration-close-dialog"><Combobox label="Dialog difficulty" defaultValue="normal" options={difficulties}/><ItemSlot label="Dialog item" item={{name:'Dialog item',icon:'D',lore:['Inside the dialog']}}/></Dialog>
     <Dialog open={surfaceDialog} onOpenChange={setSurfaceDialog} title="Surface dialog" className="calibration-surface-dialog"/>

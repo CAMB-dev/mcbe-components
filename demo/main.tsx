@@ -14,6 +14,8 @@ import { GrassBlock, VoxelIsland } from './art';
 import { ItemSprite } from './materials';
 import componentCatalog from '../docs/component-catalog.json';
 import { ProcessingExamples } from './processing-examples';
+import { AnvilExamples } from './anvil-examples';
+import { ContainerExamples } from './container-examples';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
 
@@ -28,6 +30,8 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'inventory', name: 'Inventory & slots', icon: 'chevron', count: '03' },
   { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '07' },
+  { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
+  { id: 'containers', name: 'Storage containers', icon: 'chevron', count: '06' },
   { id: 'typography', name: 'Typography & icons', icon: 'chevron', count: '02' },
 ];
 const snippets: Record<string, string> = {
@@ -43,6 +47,8 @@ const snippets: Record<string, string> = {
   'inventory-states': `<ItemSlot item={{ name: 'Diamond sword', icon: <YourSword />,\n  durability: 0.42, lore: ['Sharpness IV'] }} selected />\n<InventoryGrid label="Inventory" items={items} size={27}\n  onSlotAction={(index, action) => handleSlot(index, action)} />`,
   workstations: `<Grindstone inputs={[first, second]} result={result}\n  inventory={items} onTakeResult={handleTake} />\n<EnchantingTable item={sword} lapis={lapis}\n  options={enchantments} onEnchant={handleEnchant} />`,
   processing: `<CraftingTable inputs={recipeInputs} result={result}\n  onInputAction={handleInput} onTakeResult={handleTake} />\n<Furnace input={rawBeef} fuel={coal} result={steak}\n  progress={0.5} fuelRemaining={0.75}\n  inventory={items} onTakeResult={handleTake} />\n// BlastFurnace and Smoker use the same controlled API.`,
+  anvil: `<Anvil name={name} onNameChange={setName}\n  inputs={[item, material]} result={result}\n  cost={{kind: 'levels', levels: 3, affordable: true}}\n  onTakeResult={handleTake} />`,
+  containers: `<Chest rows={6} items={storage} inventory={inventory}\n  selectedIndex={selected} onSelectionChange={setSelected}\n  onSlotAction={handleStorageAction} />\n<Hopper items={hopperItems} inventory={inventory} />\n// Dispenser, Dropper and ShulkerBox share the same storage API.`,
 };
 
 function Example({ id, title, detail, children, className = '' }: { id: string; title: string; detail: string; children: ReactNode; className?: string }) {
@@ -254,6 +260,14 @@ function App() {
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>
+      </Example>
+
+      <Example id="anvil" title="Anvil" detail="Original rename field, repair slots and experience cost states.">
+        <AnvilExamples notify={notify}/>
+      </Example>
+
+      <Example id="containers" title="Storage containers" detail="Source-sized chests, shulker boxes, hoppers, dispensers and droppers.">
+        <ContainerExamples notify={notify}/>
       </Example>
 
       <Example id="typography" title="Typography & icons" detail="The details that make it feel like home.">

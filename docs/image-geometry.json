@@ -1,0 +1,336 @@
+{
+  "scope": "Original-PNG Image and NineSlice primitives, independent of inventory ItemImage semantics. No generated artwork, bundled generic skin, asset fetcher, atlas engine or runtime dependency is added.",
+  "basis": {
+    "installedBedrockVersion": "1.26.6005.0",
+    "installedUiFile": ".cache/game-ui/ui_common.json",
+    "publicCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+    "publicUiReference": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/ui/ui_common.json",
+    "definitions": {
+      "common.empty_image": {
+        "type": "image"
+      },
+      "common.checkbox_image": {
+        "type": "image",
+        "size": [
+          10,
+          10
+        ]
+      },
+      "common.slider_button_state": {
+        "type": "image",
+        "texture": "textures/ui/slider_button_default"
+      }
+    },
+    "interpretation": "Minecraft image controls name a texture and logical control size; companion texture JSON can give base_size and nineslice_size. The library keeps these meanings explicit rather than inferring that one PNG texel always equals one game pixel.",
+    "publicUiReferenceSha256": "8c17795cca5b8c56d72976c7176f7c3586b144b55474eb87b146e161d19f817f",
+    "publicUiReferenceHttpStatus": 200,
+    "fullReleaseReference": {
+      "url": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+      "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+      "uiEntry": "resource_pack/ui/ui_common.json",
+      "uiEntrySha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "uiEntryBytes": 243941,
+      "verifiedDefinitions": {
+        "empty_image": {
+          "type": "image"
+        },
+        "checkbox_image": {
+          "type": "image",
+          "size": [
+            10,
+            10
+          ]
+        },
+        "slider_button_state": {
+          "type": "image",
+          "layer": 2,
+          "texture": "textures/ui/slider_button_default"
+        }
+      },
+      "note": "The pinned git UI file is reachable, but its raw bytes differ from this release. The cited image definitions are independently checked in installed JSON and the full-release JSONC."
+    },
+    "httpVerification": {
+      "date": "2026-10-29",
+      "method": "Actual HTTP GET via urllib; all cited raw references returned 200; PNG response hashes match the fixture input bytes.",
+      "evidence": ".cache/image-qa/reference-http.json",
+      "results": [
+        {
+          "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/ui/ui_common.json",
+          "status": 200,
+          "sha256": "8c17795cca5b8c56d72976c7176f7c3586b144b55474eb87b146e161d19f817f",
+          "bytes": 243795
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/cell_image.png",
+          "status": 200,
+          "sha256": "296e3d0ba9640efcd2902aa9c191f544b09bdbb8f4585d39a6c030e0ae3fc023",
+          "bytes": 135
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/cell_image.json",
+          "status": 200,
+          "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+          "bytes": 60
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/button_border_light.png",
+          "status": 200,
+          "sha256": "8e472e04dbc2cb851b03a474b2578531b241614679afbf7b9bbb716a005b32cb",
+          "bytes": 1445
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/dialog_background_hollow_3.png",
+          "status": 200,
+          "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+          "bytes": 260
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/arrow_large.png",
+          "status": 200,
+          "sha256": "c0b27d51e084d0018365a94905e53e8661cf0f05448145c71402ff16844fe1b6",
+          "bytes": 157
+        }
+      ]
+    }
+  },
+  "api": {
+    "Image": {
+      "element": "img",
+      "ref": "HTMLImageElement",
+      "required": [
+        "src: string",
+        "alt: string",
+        "sourceSize: readonly [physical PNG width, physical PNG height]"
+      ],
+      "optional": {
+        "size": "readonly [logical GUI width, logical GUI height], defaults to sourceSize",
+        "scale": "positive safe integer, defaults to 1",
+        "draggable": "native img attribute, defaults to false",
+        "style": "native CSSProperties; consumer overrides default display width/height"
+      },
+      "geometry": "Native width/height attributes and CSS width/height are size * scale, emitted during server rendering. No browser measurement or load-triggered layout change. sourceSize is caller-declared actual PNG dimensions; mismatched files cannot be detected without loading and are outside this pure component contract.",
+      "semantics": "alt is required. Use alt=\"\" for decoration; informative and functional images keep native img naming. Native onLoad/onError, loading, decoding, className, data attributes and ARIA props are forwarded."
+    },
+    "NineSlice": {
+      "element": "div with one non-interactive span image layer, followed by original children",
+      "ref": "HTMLDivElement",
+      "required": [
+        "src: string",
+        "sourceSize: readonly [physical PNG width, physical PNG height]",
+        "slice: physical source-pixel number or {left,top,right,bottom}"
+      ],
+      "optional": {
+        "destinationBorder": "logical GUI-pixel number or named insets; defaults numerically to slice",
+        "size": "OUTER logical dimensions, including destination edges; omitted means normal child-driven layout",
+        "scale": "positive safe integer, defaults to 1",
+        "fill": "boolean, defaults to true; false leaves the center transparent",
+        "alt": "names only the separate image layer; omitted or empty means decorative",
+        "children": "ordinary content; remains accessible and interactive",
+        "style": "consumer overrides default outer width/height/minimums/padding, independently of the image layer"
+      },
+      "geometry": "source slice maps to CSS border-image-slice in top/right/bottom/left order; destination border = destinationBorder * scale CSS pixels. The image layer occupies the complete outer box with border-image-outset:0 and stretch edge repetition. Root padding reserves exactly the destination edges by default, so children occupy the remaining inner box. CSS border-box means explicit size already includes these edges; padding does not extend the requested outer dimensions.",
+      "automaticSize": "Without size, normal CSS content layout plus destination padding determines outer dimensions. With no children, minimum width/height is the sum of horizontal/vertical destination edges.",
+      "semantics": "The frame is decorative by default. A nonempty alt adds role=img and aria-label to the image span only; the outer div does not become role=img, so descendant controls retain their own semantics. The image layer has pointer-events:none and cannot intercept children.",
+      "styleOverrideLimit": "Defaults can be intentionally overridden by consumer style. Pixel evidence covers unmodified geometry at an integer device-pixel origin; transforms, fractional parent layout, CSS overrides and a different device pixel ratio require their own verification."
+    },
+    "sharedTypes": {
+      "ImageSize": "readonly [width: number, height: number]",
+      "ImageInsets": "{ readonly left: number; readonly top: number; readonly right: number; readonly bottom: number }"
+    },
+    "runtime": "forwardRef only; no useEffect, window/document access, natural-size fetching, canvas or hydration dependency. Both primitives render using react-dom/server."
+  },
+  "validationPolicy": {
+    "sourceSize": "Positive safe integer physical dimensions.",
+    "slice": "Nonnegative safe integer physical pixels. Left+right must not exceed physical width; top+bottom must not exceed physical height. Equal sums are allowed as a zero-size center; no pixels are invented for that center.",
+    "destinationBorder": "Nonnegative finite logical values; multiplication by scale and edge sums must stay finite.",
+    "size": "Positive finite logical values; multiplied outer dimensions must be finite and must contain the destination borders. Fractional logical values are allowed, but are not automatically pixel-certified.",
+    "scale": "Positive safe integer.",
+    "failure": "Invalid numeric parameters throw RangeError during both client and static server render. No silent clamping, negative CSS dimensions or NaN serialization. Consumer-supplied style is standard CSS and remains the consumer responsibility."
+  },
+  "sourceExamples": [
+    {
+      "file": "cell_image.png",
+      "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/cell_image.png",
+      "sha256": "296e3d0ba9640efcd2902aa9c191f544b09bdbb8f4585d39a6c030e0ae3fc023",
+      "physicalSize": [
+        10,
+        10
+      ],
+      "metadataSource": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/cell_image.json",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "imageExample": {
+        "sourceSize": [
+          10,
+          10
+        ],
+        "size": [
+          5,
+          5
+        ],
+        "scale": 2,
+        "resultCssSize": [
+          10,
+          10
+        ]
+      },
+      "nineSliceExample": {
+        "sourceSize": [
+          10,
+          10
+        ],
+        "slice": 2,
+        "destinationBorder": 1,
+        "size": [
+          18,
+          18
+        ],
+        "scale": 2,
+        "resultCssSize": [
+          36,
+          36
+        ],
+        "resultCssBorder": 2
+      },
+      "explanation": "The texture has 2 physical texels per logical base pixel. Metadata nineslice_size=1 becomes a physical source cut of 2; at GUI2 its destination edge is still 2 CSS pixels, not 4.",
+      "fullReleaseMetadata": {
+        "entry": "resource_pack/textures/ui/cell_image.json",
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+      }
+    },
+    {
+      "file": "button_border_light.png",
+      "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/button_border_light.png",
+      "sha256": "8e472e04dbc2cb851b03a474b2578531b241614679afbf7b9bbb716a005b32cb",
+      "physicalSize": [
+        4,
+        4
+      ],
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "nineSliceExample": {
+        "sourceSize": [
+          4,
+          4
+        ],
+        "slice": 1,
+        "size": [
+          20,
+          14
+        ],
+        "scale": 3,
+        "resultCssSize": [
+          60,
+          42
+        ],
+        "resultCssBorder": 3
+      },
+      "fullReleaseMetadata": {
+        "entry": "resource_pack/textures/ui/button_border_light.json",
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    },
+    {
+      "file": "dialog_background_hollow_3.png",
+      "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+      "physicalSize": [
+        18,
+        33
+      ],
+      "metadata": {
+        "nineslice_size": [
+          8,
+          23,
+          8,
+          8
+        ],
+        "base_size": [
+          18,
+          33
+        ]
+      },
+      "nineSliceExample": {
+        "sourceSize": [
+          18,
+          33
+        ],
+        "slice": {
+          "left": 8,
+          "top": 23,
+          "right": 8,
+          "bottom": 8
+        },
+        "size": [
+          50,
+          45
+        ],
+        "scale": 1
+      },
+      "ordering": "The source metadata array uses left/top/right/bottom. The public API uses named fields; CSS receives top/right/bottom/left.",
+      "fullReleaseMetadata": {
+        "entry": "resource_pack/textures/ui/dialog_background_hollow_3.json",
+        "sha256": "36700ca1326d14a269b2052c27d95115200897bee9c27b4d36e75fe893973415"
+      }
+    },
+    {
+      "file": "arrow_large.png",
+      "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/ui/arrow_large.png",
+      "sha256": "c0b27d51e084d0018365a94905e53e8661cf0f05448145c71402ff16844fe1b6",
+      "physicalSize": [
+        22,
+        15
+      ],
+      "imageExample": {
+        "sourceSize": [
+          22,
+          15
+        ],
+        "scale": 2,
+        "resultCssSize": [
+          44,
+          30
+        ]
+      }
+    }
+  ],
+  "verification": {
+    "testFile": "tests/images.spec.ts",
+    "fixture": "demo/image-fixture.tsx: ImageFixture",
+    "isolatedCommand": "npx playwright test --config .cache/image-qa.config.ts --project desktop",
+    "passed": 7,
+    "dpr": 1,
+    "pixelComparison": "Full original PNG sampling, independent source hashes, no screenshot-derived baseline and no allowed differing pixels. Cases cover direct integer magnification, physical/logical density, scalar/asymmetric cuts, retained edge density and transparent center.",
+    "changedPixels": 0,
+    "additionalChecks": [
+      "Node static server render without browser globals",
+      "RangeError for invalid scale/source/cuts/destination geometry",
+      "Native image names, decorative alt and unchanged fixture source bytes",
+      "Forwarded img/div refs and consumer attributes",
+      "Explicit outer geometry, reserved content padding and Enter activation of child button",
+      "Consumer style can intentionally override outer dimensions and padding"
+    ],
+    "fixtureAlignment": "Specimen is laid out at viewport (0,0), without a fractional transform. Native heading em margins and fractional compositor translations otherwise add edge filtering unrelated to source cut arithmetic.",
+    "acceptanceLimit": "These checks prove web rendering against original PNG raster/metadata for these cases. They do not compare a complete native Bedrock frame or prove native final renderer snapping.",
+    "visualEvidence": [
+      ".cache/image-qa/fixture.png",
+      ".cache/image-qa/browser-result.json"
+    ],
+    "pageErrors": []
+  },
+  "rights": {
+    "fixturePngs": "Unchanged official Mojang sample PNG bytes embedded as data URLs for reproducible offline fixture rendering; preserve upstream attribution and license.",
+    "upstreamLicense": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/LICENSE.md",
+    "library": "No artwork or asset is generated or silently fetched by Image/NineSlice. Caller supplies src."
+  }
+}

@@ -1,25 +1,25 @@
 # Bedrock 组件范围
 
-当前导出 41 个组件；首轮目录 101 项，60 项待实现。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 50 个组件；当前目录 102 项，52 项待实现，包含本轮拆出的公共 ContainerFrame。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 ## 已实现
 
 | 分类 | 组件 |
 | --- | --- |
-| 文字与表面（8） | Text、PixelIcon、Panel、Separator、Progress、Dialog、Alert、Badge |
+| 文字与表面（10） | Text、PixelIcon、Image、NineSlice、Panel、Separator、Progress、Dialog、Alert、Badge |
 | 输入与设置（11） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、Tabs |
-| 物品与容器结构（13） | ItemSlot、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、ItemImage、ItemCount、DurabilityBar、SlotPlaceholder、ResultSlot、RecipeGrid、ProcessingArrow、FuelIndicator |
-| 工作站（6） | Grindstone、EnchantingTable、CraftingTable、Furnace、BlastFurnace、Smoker |
+| 物品与容器结构（14） | ItemSlot、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、ContainerFrame、ItemImage、ItemCount、DurabilityBar、SlotPlaceholder、ResultSlot、RecipeGrid、ProcessingArrow、FuelIndicator |
+| 工作站与容器（12） | Grindstone、EnchantingTable、CraftingTable、Furnace、BlastFurnace、Smoker、Anvil、Chest、Hopper、Dispenser、Dropper、ShulkerBox |
 | 附魔部件（3） | EnchantmentOption、EnchantingRunes、EnchantingBook |
 
 `EnchantingBook` 使用真实材质，网格和相机仍是重建；`EnchantingRunes` 需要调用方提供原版字图集。整套工作站仍待原游戏同版本、同状态截图对照。
 
 ## 待补范围
 
-- 基础：Image、NineSlice、Spinner、Tooltip、Toast、ScrollArea、ScrollBar。
+- 基础：Spinner、Tooltip、Toast、ScrollArea、ScrollBar。
 - 输入与设置：ToggleButton、SearchField、NavigationList、SettingRow、KeybindingField。
 - 容器部件：RecipeSearch、RecipeCategoryTabs、TradeOffer、ArmorSlot。
-- 工作站与容器：BrewingStand、Anvil、SmithingTable、Stonecutter、Loom、CartographyTable、Beacon、Chest、Hopper、Dispenser、Dropper、ShulkerBox、Crafter、TradingScreen、PlayerInventoryScreen、CreativeInventory、MountInventory。
+- 工作站与容器：BrewingStand、SmithingTable、Stonecutter、Loom、CartographyTable、Beacon、Crafter、TradingScreen、PlayerInventoryScreen、CreativeInventory、MountInventory。
 - HUD：Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、BossBar、Crosshair、ChatMessage、ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip、PlayerList、TouchControls。
 - 游戏页面组合：PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast。
 

@@ -4,9 +4,9 @@
 
 ## 参考与版本
 
-固定 Mojang 官方 [bedrock-samples commit 46ba6ea](https://github.com/Mojang/bedrock-samples/tree/46ba6ea985fb5a92d79a9419198f10dda14c199d)，资源版本 `1.26.50.4`。另只读解析本机 Bedrock `1.26.6005.0` 的 JSON UI 与纹理归档：98 个相关 UI PNG / JSON 条目与固定参考一致，差异 0。安装版本、归档 SHA256、原版布局事实见 [local-reference.json](local-reference.json)。另将官方 v1.26.60.5 full release 的 4 份工作站相关 UI JSON 与本机逐份核对，解析后完全相同；原始 SHA 见 workstation-geometry.json。这只证明所比较的条目一致，不代表全部资源或整套游戏 UI 一致。
+固定 Mojang 官方 [bedrock-samples commit 46ba6ea](https://github.com/Mojang/bedrock-samples/tree/46ba6ea985fb5a92d79a9419198f10dda14c199d)，资源版本 `1.26.50.4`。另只读解析本机 Bedrock `1.26.6005.0` 的 JSON UI 与纹理归档：101 个相关 UI PNG / JSON 条目与固定参考一致，差异 0。安装版本、归档 SHA256、原版布局事实见 [local-reference.json](local-reference.json)。另将官方 v1.26.60.5 full release 的 4 份工作站相关 UI JSON 与本机逐份核对，解析后完全相同；原始 SHA 见 workstation-geometry.json。这只证明所比较的条目一致，不代表全部资源或整套游戏 UI 一致。
 
-UI 原始对照图缓存于忽略目录 `.cache`。68 个重建皮肤的来源、尺寸、九宫格参数和 SHA256 见 [classic-skins.json](classic-skins.json)，嵌入式 PNG 由 `scripts/prepare-classic.py` 生成。展示物品与可选书本另用真实 PNG，来源权利说明见 THIRD_PARTY_NOTICES.md。
+UI 原始对照图缓存于忽略目录 `.cache`。71 个重建皮肤的来源、尺寸、九宫格参数和 SHA256 见 [classic-skins.json](classic-skins.json)，嵌入式 PNG 由 `scripts/prepare-classic.py` 生成。展示物品与可选书本另用真实 PNG，来源权利说明见 THIRD_PARTY_NOTICES.md。
 
 ## 已校准细节
 
@@ -39,6 +39,10 @@ UI 原始对照图缓存于忽略目录 `.cache`。68 个重建皮肤的来源�
 工作台从 inventory_screen.json 的 work_bench_panel_3x3 推导，熔炉 / 高炉 / 烟熏炉从炉子源面板及其继承推导。已拆出 RecipeGrid / ProcessingArrow / FuelIndicator / ResultSlot；52×52 结果槽中的物品保持 32×32。炉子输入 y=29、燃料 y=105、结果 y=59 CSS px，保留源半游戏像素位置；配方书和外部 toolbar 尚未实现。源推导及 12 项独立检查见 [PROCESSING_QA.md](PROCESSING_QA.md)。其中 6 个箭头 / 火焰裁切状态与原始 PNG 独立浏览器控制样本 RGBA 零差，只证明 Chromium 合成，不替代引擎 ratio 与裁切量化验收。
 
 附魔经验主色与右下偏移来自原 JSON；成功 / 失败文字已分别配深绿 / 深红阴影，0.25 暗化系数仍属待原生实拍校准的近似。青金石槽使用不额外淡化的原始 lapis_image，在空槽与有物品时都保留于物品图下层。书本由无厚度平面改为完整封面、书脊、厚页块和翻页结构；目前开合 / 翻页控制、WebGL 正常工作检查与原生 Bedrock 像素验收仍是不同证据层级。
+
+本轮新增容器和铁砧的原始依据分别在 [container-geometry.json](container-geometry.json) 与 [anvil-geometry.json](anvil-geometry.json)。ContainerFrame 按实际高度锚定玩家物品栏，保留漏斗 176×133、普通箱 176×166、大箱 176×220 游戏像素规格；容器 8 项与铁砧 10 项独立检查覆盖逐格布局、原始浮点坐标、费用状态和焦点路径。铁砧 4 个素材样本与原 PNG 在同一 Chromium 的独立采样平面 RGBA 零差，不替代原生引擎吸附或整屏截图。
+
+Image / NineSlice 将 sourceSize / slice 的物理像素与 destinationBorder / size 的逻辑像素分开，7 项检查包含 6 个完整原 PNG 采样区域零差。调用方样式覆盖、非整数屏幕原点、浏览器合成以及任意资源不由这些固定样本认证；依据与限制见 [image-geometry.json](image-geometry.json)。
 
 ## 字体与 shadow
 

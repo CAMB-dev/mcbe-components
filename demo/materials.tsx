@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import type { ImgHTMLAttributes } from 'react';
+import { Image } from '../src/image';
 
 /** Actual Mojang textures. Provenance and hashes: docs/item-materials.json. */
 export const gameItemTextures = {
@@ -25,9 +26,8 @@ export interface GameItemIconProps extends Omit<ImgHTMLAttributes<HTMLImageEleme
 }
 export const GameItemIcon = forwardRef<HTMLImageElement, GameItemIconProps>(function GameItemIcon({ name, scale = 2, alt = '', style, ...props }, ref) {
   const texture = gameItemTextures[name];
-  const width = texture.width * scale, height = texture.height * scale;
-  return <img {...props} ref={ref} src={texture.src} alt={alt} draggable={false} width={width} height={height}
-    data-game-material={name} style={{ width, height, maxWidth: 'none', maxHeight: 'none', imageRendering: 'pixelated', ...style }}/>;
+  return <Image {...props} ref={ref} src={texture.src} alt={alt} sourceSize={[texture.width,texture.height]} scale={scale} draggable={false}
+    data-game-material={name} style={{ maxWidth: 'none', maxHeight: 'none', imageRendering: 'pixelated', ...style }}/>;
 });
 
 /** Compatibility name used by the existing demo. */

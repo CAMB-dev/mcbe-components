@@ -27,7 +27,7 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
-const exports = ['Alert','Badge','BlastFurnace','Button','Checkbox','Combobox','CraftingTable','Dialog','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','FuelIndicator','Furnace','Grindstone','IconButton','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','Select','Separator','Slider','SlotPlaceholder','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
+const exports = ['Alert','Anvil','Badge','BlastFurnace','Button','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','FuelIndicator','Furnace','Grindstone','Hopper','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 assert.deepEqual(Object.keys(ui).sort(), exports.sort());
 const element = React.createElement;
 const output = renderToString(element(ui.Panel, {title:'Settings'},
@@ -53,6 +53,15 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
   element(ui.Furnace,{}),
   element(ui.BlastFurnace,{}),
   element(ui.Smoker,{}),
+  element(ui.Anvil,{name:'Tool',cost:{kind:'levels',levels:3}}),
+  element(ui.ContainerFrame,{title:'Container'}),
+  element(ui.Chest,{rows:6}),
+  element(ui.Hopper,{}),
+  element(ui.Dispenser,{}),
+  element(ui.Dropper,{}),
+  element(ui.ShulkerBox,{}),
+  element(ui.Image,{src:'/caller-owned-item.png',alt:'Item',sourceSize:[16,16],scale:2}),
+  element(ui.NineSlice,{src:'/caller-frame.png',sourceSize:[10,10],slice:2,destinationBorder:1,scale:2},element(ui.Button,{},'Framed action')),
   element(ui.Combobox, {label:'Difficulty',name:'difficulty',defaultValue:'normal',options:[{value:'normal',label:'Normal'}]}),
   element(ui.Tabs, {label:'Settings', items:[{value:'game',label:'Game',content:'Survival'}]}),
   element(ui.Dialog, {open:true,onOpenChange:()=>{},title:'SSR-safe dialog'})
@@ -62,7 +71,7 @@ assert.match(output, /World name/);
 assert.match(output, /role="tablist"/);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -71,7 +80,7 @@ console.log('React '+React.version+': ESM, '+exports.length+' exports, SSR, styl
   console.log(execFileSync(process.execPath, ['smoke.mjs'], { cwd: consumer, encoding: 'utf8' }).trim());
   await writeFile(join(consumer, 'consumer.tsx'), `
 import { createRef } from 'react';
-import { BlastFurnace, Button, Checkbox, Combobox, CraftingTable, Dialog, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, InventoryGrid, ItemCount, ItemImage, ItemSlot, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
+import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData } from 'mcbeui';
 const props: ButtonProps = {variant:'primary',size:'sm',type:'submit'};
 const items: TabItem[] = [{value:'game',label:'Game',content:'Survival'}];
@@ -99,6 +108,13 @@ export const demo = <>
   <Furnace input={null} fuel={null} progress={.5} fuelRemaining={.5} onInputAction={(slot,action)=>slot+action}/>
   <BlastFurnace title="Blast furnace"/>
   <Smoker title="Smoker"/>
+  <Anvil name="Tool" onNameChange={name=>name.toUpperCase()} cost={{kind:'levels',levels:3}} onInputAction={(index,action)=>String(index)+action}/>
+  <ContainerFrame title="Container" height={332} ref={createRef<HTMLElement>()}/>
+  <Chest rows={6} items={[]} onSelectionChange={index=>index.toFixed(0)} onSlotAction={(index,action)=>String(index)+action}/>
+  <Hopper items={[]} inventorySelectedIndex={0} onInventorySelectionChange={index=>index.toFixed(0)}/>
+  <Dispenser/><Dropper/><ShulkerBox/>
+  <Image src="/caller-item.png" alt="Item" sourceSize={[16,16]} scale={2} ref={createRef<HTMLImageElement>()}/>
+  <NineSlice src="/caller-frame.png" sourceSize={[10,10]} slice={2} destinationBorder={1} size={[18,18]} scale={2} ref={createRef<HTMLDivElement>()}><Button>Framed action</Button></NineSlice>
   <Checkbox label="Enabled" indeterminate ref={createRef<HTMLInputElement>()}/>
   <Combobox label="Difficulty" name="difficulty" ref={createRef<HTMLButtonElement>()} options={[{value:'normal',label:'Normal'}]} onValueChange={value=>value.toUpperCase()}/>
   <Slider label="Distance" defaultValue={12} min={4} max={32} onValueChange={n=>n.toFixed(0)}/>
