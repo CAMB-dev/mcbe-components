@@ -1,0 +1,29 @@
+/* Optional: all fonts are self-hosted. See THIRD_PARTY_NOTICES.md. */
+@font-face {
+  font-family: 'MCBE CJK';
+  src: url('./fonts/MCBECJK-12px-zh-hans.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MCBE Pixel';
+  src: url('./fonts/MCBEPixel-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Monocraft';
+  src: url('./fonts/Monocraft-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fusion Pixel';
+  src: url('./fonts/FusionPixel-12px-zh-hans.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

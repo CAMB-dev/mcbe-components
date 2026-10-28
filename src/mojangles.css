@@ -1,0 +1,9 @@
+/* Metrics profile only. Supply your own @font-face; no game font is bundled. */
+:root {
+  --mc-font: 'Mojangles Pixel', 'Mojangles', 'MCBE Pixel', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace;
+  --mc-font-size: 20px;
+  --mc-font-size-sm: 20px;
+  --mc-font-size-lg: 40px;
+  --mc-font-size-xl: 60px;
+  --mc-title-size: 40px;
+}

@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "declaration": false },
+  "include": ["src", "demo", "tests", "playwright.config.ts", "vite.config.ts", "tsup.config.ts"]
+}

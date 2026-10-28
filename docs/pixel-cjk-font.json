@@ -1,0 +1,8 @@
+{
+  "family": "MCBE CJK",
+  "sourceSha256": "7cdaf516e63dbcb7b190b3d0606bdd5d451ef51593d6d3d934d30ba086e88b6d",
+  "outputSha256": "ef9a950e89f948d74a7b09f3980e21826aa68b15f80273565f2b8a5c57c5d19d",
+  "glyphLayers": 37562,
+  "bytes": 1058508,
+  "change": "COLR v0 foreground layers (paletteIndex=0xFFFF); unchanged outlines and advance widths; renamed family."
+}

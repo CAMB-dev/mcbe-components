@@ -1,0 +1,79 @@
+{
+  "name": "mcbeui",
+  "version": "0.1.0",
+  "description": "Minecraft Bedrock inspired pixel UI components for React and TypeScript.",
+  "type": "module",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/CAMB-dev/mcbe-components.git" },
+  "homepage": "https://github.com/CAMB-dev/mcbe-components#readme",
+  "bugs": { "url": "https://github.com/CAMB-dev/mcbe-components/issues" },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./textures.css": "./dist/textures.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./mojangles.css": "./dist/mojangles.css",
+    "./fonts/*": "./dist/fonts/*",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.demo.json --noEmit",
+    "build": "npm run typecheck && tsup && node scripts/copy-assets.mjs && vite build",
+    "pretest": "node scripts/fetch-references.mjs",
+    "test": "playwright test",
+    "test:pixels": "node scripts/fetch-references.mjs && playwright test --project=pixels",
+    "preview": "vite preview --host 127.0.0.1",
+    "verify:package": "node scripts/verify-package.mjs",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18.3.0 <20",
+    "react-dom": ">=18.3.0 <20"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "pngjs": "^7.0.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsup": "^8.5.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.12"
+  },
+  "engines": {
+    "node": "^22.12.0 || >=24"
+  },
+  "overrides": {
+    "esbuild": "^0.28.2"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "minecraft",
+    "bedrock",
+    "pixel",
+    "ui",
+    "components"
+  ]
+}

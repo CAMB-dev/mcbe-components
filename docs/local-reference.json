@@ -1,0 +1,86 @@
+{
+  "installedVersion": "1.26.6005.0",
+  "referenceCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+  "archives": [
+    {
+      "path": "data/resource_packs/vanilla/__brarchive/ui.brarchive",
+      "sha256": "8d13e053654e3a832c7a99fe6f4ef53af1798ae474731036a127fef17638b1c5"
+    },
+    {
+      "path": "data/resource_packs/vanilla/__brarchive/ui/settings_sections.brarchive",
+      "sha256": "12c504b28c54a8246db5f20572a23791a28e2fc177d310861ccfc9a69e01be8f"
+    },
+    {
+      "path": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+      "sha256": "9f5f7650aa592fcd72c6145005b9c4adbb9777bbb28f253d315e670030377177"
+    }
+  ],
+  "factsInGamePixels": {
+    "panelTexture": "textures/ui/dialog_background_opaque",
+    "dialogTexture": "dialog_background_hollow_3",
+    "dialogTitleOffset": [
+      9,
+      9
+    ],
+    "dialogBackdropAlpha": 0.5,
+    "dialogCloseHitSize": [
+      21,
+      21
+    ],
+    "dialogCloseImageSize": [
+      15,
+      15
+    ],
+    "progressSize": [
+      182,
+      5
+    ],
+    "progressTextureEmpty": "textures/ui/empty_progress_bar",
+    "progressTextureFilled": "textures/ui/filled_progress_bar",
+    "checkboxSize": [
+      10,
+      10
+    ],
+    "radioSize": [
+      10,
+      10
+    ],
+    "sliderThumbSize": [
+      10,
+      16
+    ],
+    "sliderTrackHeight": 10,
+    "buttonPressedOffset": [
+      0,
+      1
+    ],
+    "buttonTemplateShadow": false,
+    "dropdownHeight": 30,
+    "dropdownHorizontalPadding": 8,
+    "dropdownChevronSize": [
+      8,
+      8
+    ],
+    "dropdownColors": {
+      "unchecked": [
+        0.43,
+        0.43,
+        0.43
+      ],
+      "checked": [
+        0.29,
+        0.29,
+        0.29
+      ],
+      "hover": [
+        0.12,
+        0.48,
+        0
+      ]
+    }
+  },
+  "assetComparison": {
+    "entries": 68,
+    "differences": 0
+  }
+}

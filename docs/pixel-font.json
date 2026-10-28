@@ -1,0 +1,8 @@
+{
+  "family": "MCBE Pixel",
+  "sourceSha256": "90fb2c038f9f051e99f5875e64a1d482e0079389b442f84a2444fd66432449c8",
+  "outputSha256": "63afb50e1a41962f939ffad9df43f0f9047ccfe9f7daedb0b64612a074161c2f",
+  "glyphLayers": 1699,
+  "bytes": 44304,
+  "change": "COLR v0 foreground layers (paletteIndex=0xFFFF); unchanged outlines and advance widths; renamed family."
+}

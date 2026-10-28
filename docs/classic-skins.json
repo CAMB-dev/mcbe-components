@@ -1,0 +1,471 @@
+{
+  "referenceCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+  "scale": 2,
+  "skins": {
+    "button-default": {
+      "source": "resource_pack/textures/ui/button_borderless_light.png",
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "button-hover": {
+      "source": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "button-pressed": {
+      "source": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "button-pressed-nohover": {
+      "source": "resource_pack/textures/ui/button_borderless_lightpressednohover.png",
+      "sha256": "c3e928f9c58b6cf42399686ba71f5656de59a2dadcdd6cee9b26111ec5200c52",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "button-disabled": {
+      "source": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "size": [
+        2,
+        2
+      ],
+      "slice": 0,
+      "encoding": "png"
+    },
+    "button-danger": {
+      "source": "resource_pack/textures/ui/button_red.png",
+      "sha256": "36622ee5302d3af3e7bc3eb47ceb29ed18dceb06b023ea9260b9ee8c8f6aaf2e",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "button-danger-pressed": {
+      "source": "resource_pack/textures/ui/button_red_pressed.png",
+      "sha256": "45554d7cf0f7a5ab5a380b84e175c7645d70e0586b1ae66d50961b1e1ab9e34b",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "button-dark": {
+      "source": "resource_pack/textures/ui/button_borderless_dark.png",
+      "sha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "button-dark-hover": {
+      "source": "resource_pack/textures/ui/button_borderless_darkhover.png",
+      "sha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "button-dark-pressed": {
+      "source": "resource_pack/textures/ui/button_borderless_darkpressed.png",
+      "sha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532",
+      "size": [
+        4,
+        4
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "checkbox-off": {
+      "source": "resource_pack/textures/ui/checkbox_space.png",
+      "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "checkbox-on": {
+      "source": "resource_pack/textures/ui/checkbox_check.png",
+      "sha256": "8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "checkbox-off-hover": {
+      "source": "resource_pack/textures/ui/checkbox_spaceHover.png",
+      "sha256": "bd5babf3900537bda4f887be0cd22abbaea656959d32b88517d3943e5d95c0a6",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "checkbox-on-hover": {
+      "source": "resource_pack/textures/ui/checkbox_checkHover.png",
+      "sha256": "29b33214de8a4621a2b882eaeb5adcce22053e97669cac459bf167a70bdec8c2",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "checkbox-off-disabled": {
+      "source": "resource_pack/textures/ui/checkbox_spaceDisabled.png",
+      "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "checkbox-on-disabled": {
+      "source": "resource_pack/textures/ui/checkbox_checkDisabled.png",
+      "sha256": "8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "radio-off": {
+      "source": "resource_pack/textures/ui/radio_off.png",
+      "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "radio-on": {
+      "source": "resource_pack/textures/ui/radio_on.png",
+      "sha256": "9f89aee03e8573999bc835495d4cea6bb7705f4011cf9e0fae86df62ac91a813",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "radio-off-hover": {
+      "source": "resource_pack/textures/ui/radio_off_hover.png",
+      "sha256": "bd5babf3900537bda4f887be0cd22abbaea656959d32b88517d3943e5d95c0a6",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "radio-on-hover": {
+      "source": "resource_pack/textures/ui/radio_on_hover.png",
+      "sha256": "4aaa602b5428d97827c8242c0193b28f5641b38e37d0313f712612475d627d3a",
+      "size": [
+        10,
+        10
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "switch-off": {
+      "source": "resource_pack/textures/ui/toggle_off.png",
+      "sha256": "e3c03f72af1d8afc7617f229e4eddb6d439a02411e464e48c1bdd1f01f873962",
+      "size": [
+        30,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "switch-on": {
+      "source": "resource_pack/textures/ui/toggle_on.png",
+      "sha256": "b37762f63652856a4c735f5adf55e511e9c01744a883ec70647b97e08a1711ff",
+      "size": [
+        30,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "switch-off-hover": {
+      "source": "resource_pack/textures/ui/toggle_off_hover.png",
+      "sha256": "5083272d331669bde3e5c3ef14cbfd12d6660763bad23b7474c902b4fc82d056",
+      "size": [
+        30,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "switch-on-hover": {
+      "source": "resource_pack/textures/ui/toggle_on_hover.png",
+      "sha256": "3ce38b76a06e672c95cb8fa4892456e4deaf482c7f6a67b8e991761421fe6b8b",
+      "size": [
+        30,
+        16
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "input": {
+      "source": "resource_pack/textures/ui/edit_box_indent.png",
+      "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109",
+      "size": [
+        6,
+        6
+      ],
+      "slice": 2,
+      "encoding": "png"
+    },
+    "input-hover": {
+      "source": "resource_pack/textures/ui/edit_box_indent_hover.png",
+      "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb",
+      "size": [
+        6,
+        6
+      ],
+      "slice": 2,
+      "encoding": "png"
+    },
+    "dropdown": {
+      "source": "resource_pack/textures/ui/dropdown_background.png",
+      "sha256": "22acaa35bef8444642054c0bc3c5e0d69eb188bb8ccb26f354d59f85c2055010",
+      "size": [
+        5,
+        5
+      ],
+      "slice": 2,
+      "encoding": "png"
+    },
+    "chevron-down": {
+      "source": "resource_pack/textures/ui/dropdown_chevron.png",
+      "sha256": "f661ee43ad1096cd996fdbaf33f96453f583e759da6af4bdbc5d9a843ca22ebe",
+      "size": [
+        11,
+        11
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "chevron-up": {
+      "source": "resource_pack/textures/ui/dropdown_chevron_up.png",
+      "sha256": "f4fae1fdd3702d011142e8e8514b8561de93f30af890022253fbae1d264db95c",
+      "size": [
+        11,
+        11
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "chevron-down-hover": {
+      "source": "resource_pack/textures/ui/chevron_white_down.png",
+      "sha256": "44535c4efb28008a1fff518e34c040652bd1e6edafcf5e47e89b1e8fa82c6bdd",
+      "size": [
+        11,
+        11
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "slider-thumb": {
+      "source": "resource_pack/textures/ui/slider_button_default.png",
+      "sha256": "6bb35793c1b8ff4be20d8530f5c2e48971eecab5b6b108fbbe646894dc5ca546",
+      "size": [
+        6,
+        6
+      ],
+      "slice": 2,
+      "encoding": "png"
+    },
+    "slider-thumb-hover": {
+      "source": "resource_pack/textures/ui/slider_button_hover.png",
+      "sha256": "fead483b0ef56c3ff149e8c1092f7324d2de8e30918fc1eb92e3be08d99676cd",
+      "size": [
+        6,
+        6
+      ],
+      "slice": 2,
+      "encoding": "png"
+    },
+    "slider-track": {
+      "source": "resource_pack/textures/ui/slider_background.png",
+      "sha256": "2b073c092b631fd3ed3fadbf75d63445de04a8d4eb632ab5f931e55ea225736d",
+      "size": [
+        3,
+        3
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "slider-track-hover": {
+      "source": "resource_pack/textures/ui/slider_background_hover.png",
+      "sha256": "6c148dd7ad0721b9e4aadabb9ee8d531d92f224a0e120f241a1799c9a3565f47",
+      "size": [
+        3,
+        3
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "slider-fill": {
+      "source": "resource_pack/textures/ui/slider_progress.png",
+      "sha256": "60f269d75e11ae63cb9a5b32a40f29cb1a6c394d4545bf241a88b05bf85fc8e1",
+      "size": [
+        3,
+        3
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "slider-fill-hover": {
+      "source": "resource_pack/textures/ui/slider_progress_hover.png",
+      "sha256": "9ce6522e836365a1f65d1019881902564fa58386b3786d2ee4b6c60f5090add7",
+      "size": [
+        3,
+        3
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "slot": {
+      "source": "resource_pack/textures/ui/slot_enabled.png",
+      "sha256": "ec0a663f0b08a4f489633aab782bd81bb3e29fe9938ca279503d69353997f520",
+      "size": [
+        18,
+        18
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "slot-hover": {
+      "source": "resource_pack/textures/ui/slot_enabled_hover.png",
+      "sha256": "68749407919d58e96402daa7898f4c3fca1f296dbaba0c130b1d655b6dcef864",
+      "size": [
+        18,
+        18
+      ],
+      "slice": 1,
+      "encoding": "png"
+    },
+    "panel": {
+      "source": "resource_pack/textures/ui/dialog_background_opaque.png",
+      "sha256": "45e365955de8800424ea35bfa589ca38535df6211c10d24bcde280cae09dc69f",
+      "size": [
+        16,
+        16
+      ],
+      "slice": 4,
+      "encoding": "png"
+    },
+    "dialog": {
+      "source": "resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+      "size": [
+        18,
+        33
+      ],
+      "slice": [
+        8,
+        23,
+        8,
+        8
+      ],
+      "encoding": "png"
+    },
+    "progress-empty": {
+      "source": "resource_pack/textures/ui/empty_progress_bar.png",
+      "sha256": "747ece8f4372304e3a8e90101db00b1e6a65289dc2bed7e48cc2bf549b803894",
+      "size": [
+        13,
+        5
+      ],
+      "slice": [
+        4,
+        0,
+        4,
+        0
+      ],
+      "encoding": "png"
+    },
+    "progress-fill": {
+      "source": "resource_pack/textures/ui/filled_progress_bar.png",
+      "sha256": "c2c57b072ae406d89986240cc2e36ee5bc971724e0c56d836373b34f3c7e237a",
+      "size": [
+        13,
+        5
+      ],
+      "slice": [
+        4,
+        0,
+        4,
+        0
+      ],
+      "encoding": "png"
+    },
+    "close": {
+      "source": "resource_pack/textures/ui/close_button_default.png",
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "size": [
+        15,
+        15
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "close-hover": {
+      "source": "resource_pack/textures/ui/close_button_hover.png",
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "size": [
+        15,
+        15
+      ],
+      "slice": null,
+      "encoding": "png"
+    },
+    "close-pressed": {
+      "source": "resource_pack/textures/ui/close_button_pressed.png",
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "size": [
+        15,
+        15
+      ],
+      "slice": null,
+      "encoding": "png"
+    }
+  }
+}

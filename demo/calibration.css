@@ -1,0 +1,31 @@
+* { box-sizing: border-box; }
+html { color-scheme: dark; }
+body { margin: 0; background: #171819; color: #eeeeee; font: 14px/20px 'Monocraft', monospace; }
+.calibration-page { max-width: 1200px; margin: auto; padding: 32px; }
+.calibration-page > h1 { font-size: 26px; line-height: 40px; margin: 20px 0; font-weight: 400; }
+.calibration-page > p { max-width: 85ch; color: #bbbbbb; font-size: 12px; line-height: 20px; margin: 12px 0; }
+.calibration-page > a { color: #b5e58c; }
+.calibration-grid { display: grid; grid-template-columns: repeat(auto-fit, 320px); gap: 24px; margin-block: 32px; }
+.calibration-case { border: 1px solid #48494a; }
+.calibration-case h2 { margin: 0; font-size: 12px; line-height: 20px; font-weight: 400; padding: 8px 16px; background: #1e1f20; }
+.calibration-stage { background: #28292a; padding: 24px; min-height: 120px; }
+.calibration-stage .mc-button { width: 160px; height: 48px; padding: 0; }
+.calibration-stage .mc-input { width: 200px; height: 48px; caret-color: transparent; }
+.calibration-font { display: inline-block; font: 20px/1 'Mojangles Pixel', 'Mojangles', 'MCBE Pixel', 'Monocraft', monospace; color: #ffffff; font-kerning: none; white-space: nowrap; }
+.calibration-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 16px; }
+.calibration-stage .calibration-actions .mc-button { width: auto; padding-inline: 12px; }
+.calibration-stage .mc-tab { width: 84px; height: 48px; padding: 0; }
+.calibration-stage .mc-combobox-trigger { width: 200px; }
+.calibration-sr { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
+.calibration-stage .mc-panel { height: 120px; }
+.calibration-stage .calibration-form-panel { height: auto; }
+.calibration-form-panel .mc-panel__body { display: grid; gap: 16px; }
+.calibration-surface-dialog { width: 320px; height: 200px; }
+.calibration-surface-dialog::backdrop { background: #28292a; }
+.calibration-surface-dialog .mc-dialog__header { visibility: hidden; }
+@media (max-width: 700px) {
+  .calibration-page { padding: 16px; }
+  .calibration-page > h1 { font-size: 20px; }
+  .calibration-grid { grid-template-columns: minmax(0, 1fr); }
+  .calibration-stage .mc-input { width: 100%; }
+}

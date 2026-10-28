@@ -1,0 +1,502 @@
+{
+  "button_borderless_light.png": {
+    "size": [
+      4,
+      4
+    ],
+    "matrix": [
+      [
+        "#fefefeff",
+        "#f7f7f7ff",
+        "#f7f7f7ff",
+        "#c0bfc0ff"
+      ],
+      [
+        "#f7f7f7ff",
+        "#c6c6c6ff",
+        "#c6c6c6ff",
+        "#656465ff"
+      ],
+      [
+        "#f7f7f7ff",
+        "#c6c6c6ff",
+        "#c6c6c6ff",
+        "#656465ff"
+      ],
+      [
+        "#c0bfc0ff",
+        "#656465ff",
+        "#656465ff",
+        "#595759ff"
+      ]
+    ],
+    "colors": [
+      {
+        "hex": "#f7f7f7ff",
+        "pixels": 4
+      },
+      {
+        "hex": "#c6c6c6ff",
+        "pixels": 4
+      },
+      {
+        "hex": "#656465ff",
+        "pixels": 4
+      },
+      {
+        "hex": "#c0bfc0ff",
+        "pixels": 2
+      },
+      {
+        "hex": "#fefefeff",
+        "pixels": 1
+      },
+      {
+        "hex": "#595759ff",
+        "pixels": 1
+      }
+    ]
+  },
+  "button_borderless_lighthover.png": {
+    "size": [
+      4,
+      4
+    ],
+    "matrix": [
+      [
+        "#17cd07ff",
+        "#17cd07ff",
+        "#17cd07ff",
+        "#218306ff"
+      ],
+      [
+        "#17cd07ff",
+        "#218306ff",
+        "#218306ff",
+        "#004e00ff"
+      ],
+      [
+        "#17cd07ff",
+        "#218306ff",
+        "#218306ff",
+        "#004e00ff"
+      ],
+      [
+        "#218306ff",
+        "#004e00ff",
+        "#004e00ff",
+        "#004e00ff"
+      ]
+    ],
+    "colors": [
+      {
+        "hex": "#218306ff",
+        "pixels": 6
+      },
+      {
+        "hex": "#17cd07ff",
+        "pixels": 5
+      },
+      {
+        "hex": "#004e00ff",
+        "pixels": 5
+      }
+    ]
+  },
+  "button_borderless_lightpressed.png": {
+    "size": [
+      4,
+      4
+    ],
+    "matrix": [
+      [
+        "#004e00ff",
+        "#004e00ff",
+        "#004e00ff",
+        "#218306ff"
+      ],
+      [
+        "#004e00ff",
+        "#218306ff",
+        "#218306ff",
+        "#17cd07ff"
+      ],
+      [
+        "#004e00ff",
+        "#218306ff",
+        "#218306ff",
+        "#17cd07ff"
+      ],
+      [
+        "#218306ff",
+        "#17cd07ff",
+        "#17cd07ff",
+        "#17cd07ff"
+      ]
+    ],
+    "colors": [
+      {
+        "hex": "#218306ff",
+        "pixels": 6
+      },
+      {
+        "hex": "#004e00ff",
+        "pixels": 5
+      },
+      {
+        "hex": "#17cd07ff",
+        "pixels": 5
+      }
+    ]
+  },
+  "checkbox_check.png": {
+    "size": [
+      10,
+      10
+    ],
+    "matrix": [
+      [
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff"
+      ],
+      [
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff"
+      ],
+      [
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#403f40ff",
+        "#ffffffff"
+      ],
+      [
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#403f40ff",
+        "#ffffffff",
+        "#ffffffff"
+      ],
+      [
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#403f40ff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff"
+      ],
+      [
+        "#ffffffff",
+        "#403f40ff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#403f40ff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff"
+      ],
+      [
+        "#ffffffff",
+        "#ffffffff",
+        "#403f40ff",
+        "#ffffffff",
+        "#403f40ff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff"
+      ],
+      [
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#403f40ff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff"
+      ],
+      [
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff"
+      ],
+      [
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff",
+        "#ffffffff"
+      ]
+    ],
+    "colors": [
+      {
+        "hex": "#ffffffff",
+        "pixels": 92
+      },
+      {
+        "hex": "#403f40ff",
+        "pixels": 8
+      }
+    ]
+  },
+  "checkbox_space.png": {
+    "size": [
+      10,
+      10
+    ],
+    "matrix": [
+      [
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#585658ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff"
+      ]
+    ],
+    "colors": [
+      {
+        "hex": "#585658ff",
+        "pixels": 64
+      },
+      {
+        "hex": "#000000ff",
+        "pixels": 36
+      }
+    ]
+  },
+  "edit_box_indent.png": {
+    "size": [
+      6,
+      6
+    ],
+    "matrix": [
+      [
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#464446ff",
+        "#464446ff",
+        "#464446ff",
+        "#464446ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#5e5e5eff",
+        "#5e5e5eff",
+        "#5e5e5eff",
+        "#5e5e5eff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#5e5e5eff",
+        "#5e5e5eff",
+        "#5e5e5eff",
+        "#5e5e5eff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#b2b2b2ff",
+        "#b2b2b2ff",
+        "#b2b2b2ff",
+        "#b2b2b2ff",
+        "#000000ff"
+      ],
+      [
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff",
+        "#000000ff"
+      ]
+    ],
+    "colors": [
+      {
+        "hex": "#000000ff",
+        "pixels": 20
+      },
+      {
+        "hex": "#5e5e5eff",
+        "pixels": 8
+      },
+      {
+        "hex": "#464446ff",
+        "pixels": 4
+      },
+      {
+        "hex": "#b2b2b2ff",
+        "pixels": 4
+      }
+    ]
+  }
+}
