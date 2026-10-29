@@ -2,6 +2,10 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
+## 当前检查点：共享BitmapText资源治理
+
+shared组件复用有限GPU资源且不readPixels，公共renderBitmapGlyphs仍独占一次性完整读回；默认CPU /font /shader输入合同不变。资源政策与finite ledger不是总heap /driver VRAM、batching或新native像素认证。最终kernel Node11、loader Node22 /首browser5、正式65及03实际React包通过各自范围，固定8draw新native及48完整矩阵、生产115辅助通过；旧rawshared /固定8draw /旧包仍仅属历史source，见 [BITMAP_RESOURCES_QA.md](BITMAP_RESOURCES_QA.md)。
+
 ## 当前检查点：铁砧可选原图图层
 
 Anvil新增可选imageRender /三profile类型、39槽与四文字角色，120组件 /134runtime不变。28完整原PNG /29keys及私有字体用于正常source。旧wrapper居中及arrow /cross stretch误设撤回：三槽从grid cell origin放置，18×12 box内arrow contain17.6×12、cross12²，仅更正Anvil。首invalid40像素残差由私有source耐久候选对齐修复，四GUI5状态各完整3,603,140像素及747,600 ROI RGBA0，CSS18 /gallery20仍非零；host另供dim .4、原字页与显式投影。候选非唯一，不恢复world /Present或所有编辑 /GPU。React18 /19包及按整文件GPU profile的Anvil35＋旧回归103共138项通过，生产73辅助检查通过；真实OS IME /active-editor native pixels /任意ratio /crossGPU /Present未证，见 [ANVIL_IMAGE_QA.md](ANVIL_IMAGE_QA.md)。

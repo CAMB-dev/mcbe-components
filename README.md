@@ -497,7 +497,13 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
   sampling="bilinear" shader="bitmap-smooth" color="#ffffff">钻石剑</BitmapText>
 ```
 
-`renderBitmapGlyphs(options)` 是浏览器 GPU 函数，接收原始页、顺序 runs 和可选 target 背景；默认 `output="framebuffer"` 返回预乘 RGBA8，`output="straight-alpha"` 会显式做8位反预乘并可能产生舍入差。组件将 FBO 直接 GPU copy 到 `premultipliedAlpha:true` 的活 canvas，不经 `putImageData`。`renderer="webgl"` 每实例占用独立 context；显式 `renderer="webgl-shared"` 在同一 Document 内复用 Offscreen WebGL 会话，再用 ImageBitmap 转移至各实例 bitmaprenderer。后者仍保留每实例 canvas / bitmap 资源、同步 GPU 工作与 readPixels，不代表零拷贝或无限实例容量。共享会话缺少必要 API 或发生 context loss 时报告错误并显示原文，不静默切到 CPU；输入更新可尝试新会话。API 与既有独立路径验证见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md)，新共享路径的资源、支持条件及分项验证范围见 [BITMAP_SHARED_QA.md](docs/BITMAP_SHARED_QA.md)。
+`renderBitmapGlyphs(options)` 是浏览器GPU函数，接收原页 /顺序runs /target背景；默认framebuffer返回预乘RGBA8，显式straight-alpha为可能舍入的8位反预乘。独立webgl每实例活context并GPU copy，公共函数完整readPixels合同保留。显式webgl-shared同Document复用Offscreen私有后端和有限program /buffer /page LRU /target，ImageBitmap转各实例bitmaprenderer，共享组件不readPixels。模块跨Document记账上限256MiB（非driver总VRAM），另限512leases /16MP呈现；同步多run仍非多实例batch或零拷贝。缺API /loss报告错误并保留原文，不静默换CPU；输入更新可取新session。当前资源治理的实现边界 /待验状态见 [BITMAP_RESOURCES_QA.md](docs/BITMAP_RESOURCES_QA.md)，历史独立 /共享验证见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md) / [BITMAP_SHARED_QA.md](docs/BITMAP_SHARED_QA.md)。
+
+复用仅在session存续时成立；全owner同时更新仍可能微任务释放并重建，保持稳定owner的stress观察不代表任意全量更新newGL0。ledger不计临时JS顶点打包 /typed arrays、driver二进制、active fetch或host-held refs，不能据256MiB推断总JS heap或全部显存硬限。
+
+共享0readPixels仅指GPU目标绘制 /显示链，colorRgba与字体loadTexture解码仍可使用Canvas2D /getImageData；公共renderBitmapGlyphs的完整readPixels也继续保留。
+
+本轮最终kernel Node11、loader Node22 /首browser5、正式65与03实际React18 /19包已分别通过；固定8draw新共享native显示及48完整矩阵按独立参考通过、生产115辅助checks通过，旧nativebitmap诊断残差不因正式通过消失。provisional10与02成功包历史保留，不能移作最终source证据，见 [BITMAP_RESOURCES_QA.md](docs/BITMAP_RESOURCES_QA.md)。
 
 `layout="visual"` 默认让外层占完整字图 / shadow 包络。显式 `layout="advance"` 则用最大逐行 pen advance 与行高作为 CSS 逻辑框，完整 canvas 按 bearing / origin 偏移保留外溢，不缩图或裁字。费用等 end 对齐容器建议同时使用 `style={{ display: 'block' }}`；inline-block / baseline 仍会受父级 line-height strut 影响，不能仅凭 advance 模式推断原生基线或费用 Y 坐标。
 

@@ -2,6 +2,20 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
+## 当前检查点：BitmapText共享资源治理
+
+本轮保持120组件 /134runtime及默认CPU，shared私有有限资源复用 /256MiB payload ledger与loadTexture resident LRU不增加公共API。最终kernel Node11 /11，loader Node22 /22及browser首5通过各自范围；provisional kernel10与02实际成功包原件保留，presentation失败resize后记账低估已在最终source修复 /新增case，不将provisional身份套到最终。
+
+正式 `.cache/shared-text-resource-independent-qa/formal-01/report.json` 实际65 /65 PASS、90.318725秒、0skip /retry /flaky，七整文件standard SwiftShader /worker1，823pins不变：shared14 /webgl7 /BitmapText13 /glint11 /itemrenderers12 /nativebitmap3 /loader5。nativebitmap原残差诊断仍在，不称65项native像素全0；loader不同运行不重复累计。
+
+03实际verify:package exit0、36.41秒，React18.3.1 /19.3.1原API /SSR /strictTS /134值 /assets /licenses通过，两个consumer各256dist与tar /build同字节，453source /demo /config pins不变。immutable `.cache/bitmap-resource-production-03/package/consumer-verified.tgz` SHA256 `fce119bcdacd6b3e1708b30d23b02d4905415fb933a07cf989f68dc4d3a1a2c6`，JS SHA256 `b34ec8061062be8731c7ae5493cf1888883dc1c270bfc5a2885a7147f84ee1bb`。固定8draw新native与48完整矩阵实际复验、生产115辅助通过各自范围。session存续 /stable owner、临时JS数组 /driver /activefetch预算外及更广目标见 [BITMAP_RESOURCES_QA.md](BITMAP_RESOURCES_QA.md)，不更改下方历史证据或编新全库累计。
+
+固定原8draw本轮新native实际通过：当前共享DOM /旧published共享DOM /native-byte独立GPU-copy在initial及13×7 interleave后完整target均RGBA0；独立公共raw各全RGBA0，共享readPixels0，非shared raw读回 /默认字体恢复。48矩阵首轮pixels全0但累计context常量假设错误导致整体失败，原报告保留；仅改为相对loss前新增1 /1live，完整重跑五个898,560px grid新旧0及48个独立PSO完整cell0。矩阵当前readPixels0 /published168，cold48 programs96→2 /textures240→56 /buffers816→5，而drawElements192 /drawArrays48 /bufferData816未减少，非batch或VRAM基准。
+
+native /矩阵canonical `.cache/bitmap-resource-independent-01/FINAL.json` SHA256 `ce5d71796e3a9840cec12cd41b81471b611bace6ff9d278d22d394c1baf04b35`，NVIDIA /ANGLE D3D11；96source /133旧证据 /16input /6published Gitblob pins不变。包与旧Anvil tar各256dist仅JS /map两项变化，254types /CSS /font /assets同字节；native /矩阵和payload对比均不增加正式65。
+
+03生产canonical `.cache/bitmap-resource-production-03/production/FINAL.json` SHA256 `03919292b695aec0cf51a821224f6287c4bb86d05ed5778707df05faa30da496` 首轮exit0 /18.64秒，42bitmap＋73Anvil＝115辅助checks通过，不加formal65。8 HTTP入口byte0、全部256dist /47site与03包pins相同；main-B4lLTS7R.js SHA256 `6aeeb592f7095fe672cace726924618b3605c4798cfd9e98d2d261ac645631b4`。bitmap25 /Anvil27 font HTTP fresh200 /sitebyte0；本次raw取消 /page /console /非取消网络错误0，仅此观察。actual SwiftShader无GPUhook，40ready /控制切换 /hide-remount /narrow与Anvil行为不是物理VRAM或具体pool对象数证明。
+
 ## 当前检查点：铁砧可选原图图层
 
 Anvil实现三profile类型及四文字角色，组件120 /runtime134不变。source /demo tsc已实际通过。GuiImage实际运行18项全部通过；此前“14项”为静态声明漏参数化计数，现更正，不据声明数计算正式累计。QA /Long正常source公式对已用native image /text属性相同，另invalid cross原15²实际paint12²。原wrapper-center /arrow-cross stretch /简单enclosing clip等初始假设保留。

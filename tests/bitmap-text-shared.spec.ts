@@ -12,6 +12,9 @@ type Rgba = readonly [number, number, number, number];
 interface ProbeSnapshot {
   contexts: number; active: number; htmlWebgl: number; presenters: number;
   produced: number; consumed: number; closed: number; outstanding: number; loseRequests: number; lossEvents: number;
+  resources: Record<string, { created: number; deleted: number; live: number; peak: number }>;
+  pageUploads: number; targetAllocations: number; readbacks: number;
+  maxOffscreenPixels: number; maxPresenterPixels: number; unsafeResizeAttempts: number;
 }
 type ProbeWindow = typeof window & { sharedProbe: { snapshot: () => ProbeSnapshot; lose: () => void; targetSizes: () => number[][] } };
 type ApiFailure = 'offscreen' | 'transfer' | 'presenter' | 'presentation-error';
@@ -23,6 +26,42 @@ async function instrument(page: Page, failure?: ApiFailure) {
     const seenGl = new WeakSet<WebGLRenderingContext>(), seenPresenter = new WeakSet<HTMLCanvasElement>(), seenExtension = new WeakSet<object>();
     const bitmaps = new WeakSet<ImageBitmap>(), outstanding = new Set<ImageBitmap>();
     let produced = 0, consumed = 0, closed = 0, htmlWebgl = 0, loseRequests = 0, lossEvents = 0;
+    const resources: Record<string, { created: number; deleted: number; live: number; peak: number }> = {};
+    let pageUploads = 0, targetAllocations = 0, readbacks = 0;
+    let maxOffscreenPixels = 0, maxPresenterPixels = 0, unsafeResizeAttempts = 0;
+    const guardDimensions = (prototype: object, offscreen: boolean) => {
+      for (const key of ['width', 'height'] as const) {
+        const property = Object.getOwnPropertyDescriptor(prototype, key); if (!property?.set) throw Error('Missing actual canvas size setter.');
+        Object.defineProperty(prototype, key, { ...property, set(this: HTMLCanvasElement | OffscreenCanvas, value: number) {
+          const pixels = key === 'width' ? value * this.height : this.width * value;
+          // Prevent the regression itself from allocating an8192x8192 backing
+          // store. Intended targets in the swap case are only16384pixels.
+          if (pixels > 16777216) { unsafeResizeAttempts++; throw Error('Unsafe intermediate bitmap canvas resize exceeds16MP.'); }
+          if (offscreen) maxOffscreenPixels = Math.max(maxOffscreenPixels, pixels);
+          else if (seenPresenter.has(this as HTMLCanvasElement)) maxPresenterPixels = Math.max(maxPresenterPixels, pixels);
+          property.set!.call(this, value);
+        } });
+      }
+    };
+    guardDimensions(HTMLCanvasElement.prototype, false); if (typeof OffscreenCanvas !== 'undefined') guardDimensions(OffscreenCanvas.prototype, true);
+    const prototype = WebGLRenderingContext.prototype as unknown as Record<string, (...args: unknown[]) => unknown>;
+    for (const kind of ['Program', 'Shader', 'Buffer', 'Texture', 'Framebuffer']) {
+      const objects = new Set<object>(), counter = { created: 0, deleted: 0, live: 0, peak: 0 }; resources[kind] = counter;
+      const create = prototype[`create${kind}`]!, remove = prototype[`delete${kind}`]!;
+      prototype[`create${kind}`] = function (this: WebGLRenderingContext, ...args) {
+        const value = Reflect.apply(create, this, args);
+        if (value && typeof value === 'object') { objects.add(value); counter.created++; counter.live = objects.size; counter.peak = Math.max(counter.peak, counter.live); }
+        return value;
+      };
+      prototype[`delete${kind}`] = function (this: WebGLRenderingContext, ...args) {
+        const value = args[0]; if (value && typeof value === 'object' && objects.delete(value)) { counter.deleted++; counter.live = objects.size; }
+        return Reflect.apply(remove, this, args);
+      };
+    }
+    const image = prototype.texImage2D!, subImage = prototype.texSubImage2D!, readPixels = prototype.readPixels!;
+    prototype.texImage2D = function (this: WebGLRenderingContext, ...args) { if (args.at(-1) == null) targetAllocations++; else pageUploads++; return Reflect.apply(image, this, args); };
+    prototype.texSubImage2D = function (this: WebGLRenderingContext, ...args) { pageUploads++; return Reflect.apply(subImage, this, args); };
+    prototype.readPixels = function (this: WebGLRenderingContext, ...args) { readbacks++; return Reflect.apply(readPixels, this, args); };
     const htmlGet = HTMLCanvasElement.prototype.getContext;
     HTMLCanvasElement.prototype.getContext = function (this: HTMLCanvasElement, kind, ...args) {
       const result = Reflect.apply(htmlGet, this, [kind, ...args]);
@@ -69,7 +108,8 @@ async function instrument(page: Page, failure?: ApiFailure) {
     ImageBitmap.prototype.close = function (this: ImageBitmap) { if (bitmaps.has(this)) { closed++;outstanding.delete(this); }return close.call(this); };
     (window as ProbeWindow).sharedProbe = {
       snapshot: () => ({ contexts: contexts.length, active: contexts.filter(gl => !gl.isContextLost()).length, htmlWebgl,
-        presenters: presenters.length, produced, consumed, closed, outstanding: outstanding.size, loseRequests, lossEvents }),
+        presenters: presenters.length, produced, consumed, closed, outstanding: outstanding.size, loseRequests, lossEvents,
+        resources: Object.fromEntries(Object.entries(resources).map(([kind, counter]) => [kind, { ...counter }])), pageUploads, targetAllocations, readbacks, maxOffscreenPixels, maxPresenterPixels, unsafeResizeAttempts }),
       lose: () => { const gl = contexts.find(context => !context.isContextLost());if (!gl) throw new Error('No actual shared GL context.');gl.getExtension('WEBGL_lose_context')!.loseContext(); },
       targetSizes: () => presenters.map(canvas => [canvas.width, canvas.height]),
     };
@@ -98,7 +138,10 @@ async function ready(page: Page, count = 1) {
 }
 async function choose(page: Page, mode: string, count = 1) { await page.locator(`button[data-mode="${mode}"]`).click();await ready(page, count);return page.locator(texts).first(); }
 async function presentation(wrapper: Locator, background?: string) {
-  return wrapper.locator('canvas').evaluate((node, fill) => {
+  return bitmapPresentation(wrapper.locator('canvas'), background);
+}
+async function bitmapPresentation(canvas: Locator, background?: string) {
+  return canvas.evaluate((node, fill) => {
     const source = node as HTMLCanvasElement, canvas = document.createElement('canvas');canvas.width = source.width;canvas.height = source.height;
     const context = canvas.getContext('2d')!;
     if (fill) { context.fillStyle = fill;context.fillRect(0, 0, canvas.width, canvas.height); }
@@ -134,6 +177,89 @@ test('48 StrictMode instances use one actual Offscreen GL context and consume di
     const canvas = node as HTMLCanvasElement;return { width: canvas.width, height: canvas.height, bitmap: !!canvas.getContext('bitmaprenderer'), gl: !!canvas.getContext('webgl') };
   }));
   expect(outputs.every(output => output.width > 0 && output.height > 0 && output.bitmap && !output.gl)).toBe(true);expect(errors).toEqual([]);
+});
+
+test('48 same-page owners reuse actual programs uploads buffers and target without shared readbacks across eight updates', async ({ page }) => {
+  const errors = await instrument(page); await page.goto(url); await ready(page); await choose(page, 'reuse-stress', 48);
+  const warmed = await stats(page); expect(warmed.contexts).toBe(1); expect(warmed.pageUploads).toBe(1); expect(warmed.resources.Program!.created).toBe(2); expect(warmed.resources.Shader!.created).toBe(4); expect(warmed.resources.Buffer!.created).toBeLessThanOrEqual(9); expect(warmed.resources.Framebuffer!.created).toBe(1); expect(warmed.targetAllocations).toBe(1); expect(warmed.readbacks).toBe(0);
+  for (let phase = 1; phase <= 8; phase++) { await page.getByRole('button', { name: 'Advance glyphs', exact: true }).click(); await ready(page, 48); await expect.poll(async () => (await callbacks(page)).ready['1']).toBe(phase + 1); }
+  const red = plane(4, 2); rect(red, 0, 0, 2, 2, [255, 0, 0, 128]); exact(await presentation(page.locator(texts).first()), red); exact(await presentation(page.locator(texts).nth(1)), red);
+  const after = await stats(page); expect(after.contexts).toBe(1); expect(after.pageUploads).toBe(warmed.pageUploads); expect(after.targetAllocations).toBe(warmed.targetAllocations); expect(after.readbacks).toBe(0); expect(after.outstanding).toBe(0);
+  for (const kind of ['Program', 'Shader', 'Buffer', 'Texture', 'Framebuffer']) expect(after.resources[kind]!.created, kind + ' allocations remain bounded after warmup').toBe(warmed.resources[kind]!.created);
+  await page.getByRole('button', { name: 'Toggle shared mounted', exact: true }).click(); await expect.poll(async () => Object.values((await stats(page)).resources).every(value => value.live === 0)).toBe(true); expect((await stats(page)).active).toBe(0); expect(errors).toEqual([]);
+});
+
+test('equal page bytes reuse uploads while mutable bytes repaint and cancelled transfers preserve earlier presented pixels', async ({ page }) => {
+  const errors = await instrument(page); await page.goto(url); await ready(page);
+  const owner = await page.evaluate(() => window.sharedDirectQA.create(2)); expect(owner.errors).toEqual([]); const [first, second] = owner.ids;
+  expect(await page.evaluate(id => window.sharedDirectQA.render(id!), first)).toEqual({ rendered: true }); const warm = await stats(page);
+  expect(await page.evaluate(id => window.sharedDirectQA.render(id!, { clone: true }), second)).toEqual({ rendered: true }); expect((await stats(page)).pageUploads).toBe(warm.pageUploads);
+  expect(await page.evaluate(id => window.sharedDirectQA.render(id!, { rgba: [0, 255, 0, 255] }), second)).toEqual({ rendered: true }); expect((await stats(page)).pageUploads).toBe(warm.pageUploads + 1);
+  const red = plane(4, 2), green = plane(4, 2); rect(red, 0, 0, 2, 2, [255, 0, 0, 128]); rect(green, 0, 0, 2, 2, [0, 255, 0, 255]);
+  exact(await bitmapPresentation(page.locator(`canvas[data-shared-direct="${first}"]`)), red); exact(await bitmapPresentation(page.locator(`canvas[data-shared-direct="${second}"]`)), green);
+  const before = await stats(page); expect(await page.evaluate(id => window.sharedDirectQA.render(id!, { rgba: [0, 0, 255, 255], cancel: 'after-transfer' }), second)).toEqual({ rendered: false });
+  const cancelled = await stats(page); expect(cancelled.produced).toBe(before.produced + 1); expect(cancelled.closed).toBe(before.closed + 1); expect(cancelled.consumed).toBe(before.consumed); expect(cancelled.outstanding).toBe(0); exact(await bitmapPresentation(page.locator(`canvas[data-shared-direct="${second}"]`)), green);
+  const stopped = await stats(page); expect(await page.evaluate(id => window.sharedDirectQA.render(id!, { cancel: 'before' }), second)).toEqual({ rendered: false }); expect((await stats(page)).produced).toBe(stopped.produced); expect((await stats(page)).pageUploads).toBe(stopped.pageUploads);
+  await page.evaluate(ids => window.sharedDirectQA.release(ids), owner.ids); await page.getByRole('button', { name: 'Toggle shared mounted', exact: true }).click(); await expect.poll(async () => Object.values((await stats(page)).resources).every(value => value.live === 0)).toBe(true); expect((await stats(page)).readbacks).toBe(0); expect(errors).toEqual([]);
+});
+
+test('declared lease and retained-output budgets reject before allocation and preserve existing ready owners and rollback capacity', async ({ page }) => {
+  const errors = await instrument(page); await page.goto(url); await ready(page); const main = page.locator(texts), canvas = await main.locator('canvas').elementHandle(), beforeCallbacks = await callbacks(page);
+  // Declared independent contracts:512 leases and16MP across this module's
+  // documents. No production private constant is imported as the expectation.
+  const leases = await page.evaluate(() => window.sharedDirectQA.create(511)); expect(leases.ids).toHaveLength(511); expect(leases.errors).toEqual([]);
+  const rejected = await page.evaluate(() => window.sharedDirectQA.create(1)); expect(rejected.ids).toEqual([]); expect(rejected.errors).toHaveLength(1); expect(rejected.errors[0]).toMatch(/lease|owner|budget|limit/i);
+  const before = await stats(page), id = leases.ids[0]!;
+  const pixels = await page.evaluate(id => window.sharedDirectQA.render(id, { width: 8192, height: 2048, empty: true }), id); expect(pixels.rangeError).toBe(true);
+  const denied = await stats(page); expect(denied.resources).toEqual(before.resources); expect(denied.targetAllocations).toBe(before.targetAllocations); expect(denied.produced).toBe(before.produced); await expect(main).toHaveAttribute('data-render-state', 'ready'); expect(await callbacks(page)).toEqual(beforeCallbacks); expect(await canvas!.evaluate(node => node.isConnected)).toBe(true);
+  const red = plane(4, 2); rect(red, 0, 0, 2, 2, [255, 0, 0, 128]); exact(await presentation(main), red);
+  expect(await page.evaluate(id => window.sharedDirectQA.render(id), id)).toEqual({ rendered: true }); exact(await bitmapPresentation(page.locator(`canvas[data-shared-direct="${id}"]`)), red);
+  await page.evaluate(ids => window.sharedDirectQA.release(ids), leases.ids); const recovered = await page.evaluate(() => window.sharedDirectQA.create(1)); expect(recovered.errors).toEqual([]); expect(recovered.ids).toHaveLength(1); await page.evaluate(ids => window.sharedDirectQA.release(ids), recovered.ids);
+  await page.getByRole('button', { name: 'Toggle shared mounted', exact: true }).click(); await expect.poll(async () => Object.values((await stats(page)).resources).every(value => value.live === 0)).toBe(true); expect((await stats(page)).active).toBe(0); expect(errors).toEqual([]);
+});
+
+test('one owner presentation failure closes its bitmap without losing siblings or retaining resources after final release', async ({ page }) => {
+  const errors = await instrument(page); await page.goto(url); await ready(page); const stable = await callbacks(page), owners = await page.evaluate(() => window.sharedDirectQA.create(1));
+  const before = await stats(page), failure = await page.evaluate(id => {
+    const original = ImageBitmapRenderingContext.prototype.transferFromImageBitmap;
+    ImageBitmapRenderingContext.prototype.transferFromImageBitmap = function (this: ImageBitmapRenderingContext, bitmap) { if (this.canvas instanceof HTMLCanvasElement && this.canvas.hasAttribute('data-shared-direct')) throw Error('Synthetic isolated owner presentation failure'); return original.call(this, bitmap); };
+    try { return window.sharedDirectQA.render(id!); } finally { ImageBitmapRenderingContext.prototype.transferFromImageBitmap = original; }
+  }, owners.ids[0]); expect(failure.error).toContain('Synthetic isolated owner presentation failure');
+  await expect(page.locator(`canvas[data-shared-direct="${owners.ids[0]}"]`)).toHaveAttribute('width', '0'); await expect(page.locator(`canvas[data-shared-direct="${owners.ids[0]}"]`)).toHaveAttribute('height', '0');
+  const after = await stats(page); expect(after.produced).toBe(before.produced + 1); expect(after.closed).toBe(before.closed + 1); expect(after.outstanding).toBe(0); expect(after.active).toBe(1); expect(after.lossEvents).toBe(before.lossEvents); expect(await callbacks(page)).toEqual(stable); await expect(page.locator(texts)).toHaveAttribute('data-render-state', 'ready');
+  const red = plane(4, 2); rect(red, 0, 0, 2, 2, [255, 0, 0, 128]); exact(await presentation(page.locator(texts)), red);
+  await page.evaluate(ids => window.sharedDirectQA.release(ids), owners.ids); await page.getByRole('button', { name: 'Toggle shared mounted', exact: true }).click(); await expect.poll(async () => Object.values((await stats(page)).resources).every(value => value.live === 0)).toBe(true); expect(errors).toEqual([]);
+});
+
+test('more than256 distinct pages evict bounded cache entries while already presented owners keep their pixels', async ({ page }) => {
+  const errors = await instrument(page); await page.goto(url); await ready(page); const owners = await page.evaluate(() => window.sharedDirectQA.create(1)), before = await stats(page);
+  const churn = await page.evaluate(id => {
+    const failures: string[] = []; for (let i = 0; i < 300; i++) { const result = window.sharedDirectQA.render(id!, { clone: true, rgba: [i % 256, Math.floor(i / 256), 70, 255] }); if (!result.rendered) failures.push(result.error ?? 'not rendered'); } return failures;
+  }, owners.ids[0]); expect(churn).toEqual([]);
+  const after = await stats(page); expect(after.contexts).toBe(1); expect(after.resources.Program!.created).toBe(before.resources.Program!.created); expect(after.resources.Buffer!.created).toBeLessThanOrEqual(9); expect(after.resources.Texture!.live).toBeLessThanOrEqual(257); expect(after.resources.Texture!.deleted).toBeGreaterThan(before.resources.Texture!.deleted); expect(after.pageUploads - before.pageUploads).toBe(300); expect(after.readbacks).toBe(0); expect(after.outstanding).toBe(0);
+  const red = plane(4, 2), last = plane(4, 2); rect(red, 0, 0, 2, 2, [255, 0, 0, 128]); rect(last, 0, 0, 2, 2, [43, 1, 70, 255]); exact(await presentation(page.locator(texts)), red); exact(await bitmapPresentation(page.locator(`canvas[data-shared-direct="${owners.ids[0]}"]`)), last);
+  await page.getByRole('button', { name: 'Advance glyphs', exact: true }).click(); await ready(page); const green = plane(4, 2); rect(green, 0, 0, 2, 2, [0, 255, 0, 255]); exact(await presentation(page.locator(texts)), green);
+  await page.evaluate(ids => window.sharedDirectQA.release(ids), owners.ids); await page.getByRole('button', { name: 'Toggle shared mounted', exact: true }).click(); await expect.poll(async () => Object.values((await stats(page)).resources).every(value => value.live === 0)).toBe(true); expect(errors).toEqual([]);
+});
+
+test('A B A legal source pages exceeding cache residency reacquire evicted textures without stale handles or sibling damage', async ({ page }) => {
+  test.setTimeout(60000); const errors = await instrument(page); await page.goto(url); await ready(page); const owners = await page.evaluate(() => window.sharedDirectQA.create(1)), before = await stats(page), stable = await callbacks(page);
+  expect(await page.evaluate(id => window.sharedDirectQA.cyclePages(id!), owners.ids[0])).toEqual({ rendered: true });
+  const after = await stats(page); expect(after.pageUploads - before.pageUploads).toBe(3); expect(after.readbacks).toBe(0); expect(after.active).toBe(1); expect(after.lossEvents).toBe(before.lossEvents); expect(after.outstanding).toBe(0); expect(await callbacks(page)).toEqual(stable);
+  const expected = plane(6, 2), red = plane(4, 2); rect(expected, 0, 0, 2, 2, [255, 0, 0, 255]); rect(expected, 2, 0, 2, 2, [0, 255, 0, 255]); rect(expected, 4, 0, 2, 2, [255, 0, 0, 255]); rect(red, 0, 0, 2, 2, [255, 0, 0, 128]);
+  exact(await bitmapPresentation(page.locator(`canvas[data-shared-direct="${owners.ids[0]}"]`)), expected); exact(await presentation(page.locator(texts)), red);
+  await page.evaluate(ids => window.sharedDirectQA.release(ids), owners.ids); await page.getByRole('button', { name: 'Toggle shared mounted', exact: true }).click(); await expect.poll(async () => Object.values((await stats(page)).resources).every(value => value.live === 0)).toBe(true); expect(errors).toEqual([]);
+});
+
+test('narrow tall and wide short size swaps never allocate a forbidden intermediate backing and retain complete pixels', async ({ page }) => {
+  const errors = await instrument(page); await page.goto(url); await ready(page); const owners = await page.evaluate(() => window.sharedDirectQA.create(1)), stable = await callbacks(page);
+  for (const [width, height] of [[2, 8192], [8192, 2], [2, 8192]] as const) {
+    expect(await page.evaluate(({ id, width, height }) => window.sharedDirectQA.render(id!, { width, height }), { id: owners.ids[0], width, height })).toEqual({ rendered: true });
+    const expected = plane(width, height); rect(expected, 0, 0, 2, 2, [255, 0, 0, 128]); exact(await bitmapPresentation(page.locator(`canvas[data-shared-direct="${owners.ids[0]}"]`)), expected);
+  }
+  const after = await stats(page); expect(after.maxOffscreenPixels).toBeLessThanOrEqual(16384); expect(after.maxPresenterPixels).toBeLessThanOrEqual(16384); expect(after.unsafeResizeAttempts).toBe(0); expect(after.readbacks).toBe(0); expect(after.active).toBe(1); expect(await callbacks(page)).toEqual(stable);
+  const red = plane(4, 2); rect(red, 0, 0, 2, 2, [255, 0, 0, 128]); exact(await presentation(page.locator(texts)), red);
+  await page.evaluate(ids => window.sharedDirectQA.release(ids), owners.ids); await page.getByRole('button', { name: 'Toggle shared mounted', exact: true }).click(); await expect.poll(async () => Object.values((await stats(page)).resources).every(value => value.live === 0)).toBe(true); expect(errors).toEqual([]);
 });
 
 test('shared transparent and solid backgrounds retain complete original alpha and correct DOM composition', async ({ page }) => {

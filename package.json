@@ -74,6 +74,8 @@
     "pretest": "node scripts/fetch-references.mjs",
     "test": "playwright test",
     "test:pixels": "node scripts/fetch-references.mjs && playwright test --project=pixels",
+    "test:texture-cache": "node --test tests/texture-loader-cache.node.test.mjs",
+    "test:bitmap-resources": "node --test tests/bitmap-text-resources.node.test.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "verify:package": "node scripts/verify-package.mjs",
     "prepack": "npm run build"

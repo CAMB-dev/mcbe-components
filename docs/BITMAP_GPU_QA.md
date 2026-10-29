@@ -1,6 +1,6 @@
 # Bitmap 字体 GPU 路径与验证边界
 
-当前公开范围为 117 个组件、3 份 renderer 数据及 3 个渲染函数，共 123 个运行时值。`shadeItemGlint` / `renderItemGlint` 是纯纹理运算；新增 `renderBitmapGlyphs` 会分配浏览器 WebGL 资源、执行绘制与读回，不能作为纯函数或 SSR 绘制调用。它不增加组件数量。
+初始独立GPU阶段为117组件 /123运行时值，下方原证据保留当时身份；当前库120组件 /134值。`shadeItemGlint` / `renderItemGlint` 是纯纹理运算，`renderBitmapGlyphs` 分配浏览器WebGL资源、绘制与读回，非纯函数 /SSR绘制。后续共享资源治理范围见 [BITMAP_RESOURCES_QA.md](BITMAP_RESOURCES_QA.md)，不增加公共API。
 
 ## 组件 API
 
@@ -33,7 +33,7 @@ CPU 仅支持 atlas-rect，且不接受 background。atlas-rect 支持合法裁�
 
 结果中的 `data` 默认保留 RGBA8 framebuffer 预乘存储，`alphaMode='premultiplied'`。`output='straight-alpha'` 以已经量化的8位数据进行反预乘、舍入和钳位，可能产生 LSB 差；它不用于证明透明 DOM / native 零差。纹理背景编码与目标 clear 色也参与混合，不能把带原背景的结果直接套作透明文字。
 
-独立 `renderer="webgl"` 将 FBO 直接 copy 到 `premultipliedAlpha:true` 的活 canvas；共享 `webgl-shared` 使用 Offscreen WebGL、transferToImageBitmap 与每实例 bitmaprenderer，不经 Canvas2D / putImageData 往返。共享会话内部管理，不新增公共 lease / session 导出；其新验证见 [BITMAP_SHARED_QA.md](./BITMAP_SHARED_QA.md)。函数仍执行像素读回供调用方使用，不能称为完全无 CPU 读回。未传 canvas 时函数使用临时 context 并在结束后释放；传入 canvas 时返回 `dispose()`，宿主不再使用时必须调用，释放后不能继续在该 canvas 绘制。内部 buffers、textures、programs 等在调用结束清理。
+独立 `renderer="webgl"` 将FBO直接copy到预乘活canvas；共享webgl-shared使用Offscreen /ImageBitmap /每实例bitmaprenderer，不经Canvas2D /putImageData。当前共享私有后端复用有限GPU资源且不readPixels；公共 `renderBitmapGlyphs` 仍完整读回，独占canvas、buffers /textures /programs在调用结束清理。公共调用未传canvas时释放临时context，传入时宿主必须调用返回dispose，之后不能继续绘制。共享没有公共lease /session API，其历史证据及新资源边界分别见 [BITMAP_SHARED_QA.md](BITMAP_SHARED_QA.md) / [BITMAP_RESOURCES_QA.md](BITMAP_RESOURCES_QA.md)。
 
 ## 已捕获输入的独立验证
 
@@ -55,7 +55,7 @@ CPU 仅支持 atlas-rect，且不接受 background。atlas-rect 支持合法裁�
 
 ## 资源与后续验收
 
-`renderer="webgl"` 每实例持有独立活 context；新增 `webgl-shared` 按 Document 共享内部 Offscreen WebGL 会话，但每实例仍持有独立 bitmaprenderer canvas / bitmap。共享按输入同步渲染与转移，不是 Worker / 多实例一次 batch，也不消除 readPixels、内存和设备限制。建议控制同时可见实例、复用稳定输入，并让组件切换 / unmount 释放不再使用的资源。
+`renderer="webgl"` 每实例独立活context；webgl-shared按Document共享Offscreen，每实例仍有bitmaprenderer canvas /显示结果。当前共享有限持久page /program /buffer /target与跨Document payload预算不代表driver总VRAM或无限容量；按输入同步绘制 /转移，非Worker /多实例一次batch。只有共享组件去除readPixels，公共调用读回和设备限制仍在，资源政策 /待验状态见 [BITMAP_RESOURCES_QA.md](BITMAP_RESOURCES_QA.md)。
 
 组件错误路径保留原文，context loss 经回调报告。此前独立 webgl 路径新GPU7项与旧CPU13项共20/20通过、0跳过，覆盖完整RGBA、Unicode、多页/换行、PMA、StrictMode、后端切换、错误恢复及异步取消；旧CPU测试未改。实际React18/19的123值包消费通过，两消费者各102份dist与受测包逐字节一致。正式结果与包身份见 [VERIFICATION.md](VERIFICATION.md)。公开函数包含尺寸 / 页 / runs / 顶点数量上限检查，但实际可用范围仍受设备 WebGL 限制。
 

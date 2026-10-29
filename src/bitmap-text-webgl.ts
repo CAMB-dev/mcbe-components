@@ -1,5 +1,6 @@
 import { GUI_BITMAP_CELL_VERTEX_SHADER as UNICODE_VERTEX, GUI_BITMAP_FRAGMENT_SHADER as GLYPH_FRAGMENT } from './gui-layer-kernels';
 import type { PixelTexture } from './item-renderer-engine';
+import { resizeSharedBitmapCanvas, SharedBitmapGpuResources } from './bitmap-text-shared-resources';
 
 export type BitmapRgba = readonly [number, number, number, number];
 /** Top-left target coordinates, in physical framebuffer pixels. */
@@ -210,6 +211,23 @@ void main() { gl_FragColor = texture2D(atlas, uv); }
  * Straight-alpha readback is an explicit lossy adapter and cannot certify DOM/native equality.
  */
 export function renderBitmapGlyphs(options: BitmapGlyphRenderOptions): BitmapGlyphRenderResult {
+  return renderBitmapGlyphsInternal(options);
+}
+
+/** Internal shared-only storage; the exclusive public renderer remains one-shot. */
+export function createSharedBitmapGlyphRenderer(canvas: OffscreenCanvas, gl: WebGLRenderingContext) {
+  const resources = new SharedBitmapGpuResources(gl, canvas);
+  let closed = false;
+  return {
+    estimate(options: Omit<BitmapGlyphRenderOptions, 'canvas' | 'output'>) { if (!resources.live) throw new Error('The shared bitmap GPU resources were disposed.'); validate(options); return resources.estimate(options); },
+    render(options: Omit<BitmapGlyphRenderOptions, 'canvas' | 'output'>) { if (!resources.live) throw new Error('The shared bitmap GPU resources were disposed.'); renderBitmapGlyphsInternal({ ...options, canvas }, resources); },
+    get bytes() { return resources.bytes; },
+    get live() { return resources.live; },
+    dispose() { if (closed) return; closed = true; resources.dispose(); resizeSharedBitmapCanvas(canvas, 1, 1); if (!gl.isContextLost()) gl.getExtension('WEBGL_lose_context')?.loseContext(); },
+  };
+}
+
+function renderBitmapGlyphsInternal(options: BitmapGlyphRenderOptions, resources?: SharedBitmapGpuResources): BitmapGlyphRenderResult {
   validate(options);
   const { width, height } = options;
   const alphaMode = options.output === 'straight-alpha' ? 'straight' : 'premultiplied';
@@ -219,7 +237,7 @@ export function renderBitmapGlyphs(options: BitmapGlyphRenderOptions): BitmapGly
   }
   if (!options.canvas && typeof document === 'undefined') throw new Error('WebGL bitmap rendering requires a browser canvas.');
   const canvas = options.canvas ?? document.createElement('canvas');
-  canvas.width = width; canvas.height = height;
+  if (resources) resizeSharedBitmapCanvas(canvas, width, height); else { canvas.width = width; canvas.height = height; }
   const attributes: WebGLContextAttributes = { alpha: true, premultipliedAlpha: true, antialias: false, preserveDrawingBuffer: true };
   // Narrow the two canvas types so TypeScript selects their WebGL-specific
   // overloads, rather than the incompatible union of all rendering contexts.
@@ -233,19 +251,25 @@ export function renderBitmapGlyphs(options: BitmapGlyphRenderOptions): BitmapGly
   let disposed = false, successful = false;
   const dispose = () => { if (!disposed) { disposed = true; gl.getExtension('WEBGL_lose_context')?.loseContext(); } };
   const program = (vertex: string, fragment: string) => {
+    const key = vertex === UNICODE_VERTEX ? 'unicode' : vertex === ATLAS_VERTEX ? 'atlas' : 'copy';
+    const cached = resources?.programs.get(key); if (cached) return cached;
     const result = gl.createProgram(); if (!result) throw new Error('Unable to allocate bitmap shader program.'); programs.push(result);
+    resources?.programObjects.add(result);
     for (const [type, source] of [[gl.VERTEX_SHADER, vertex], [gl.FRAGMENT_SHADER, fragment]] as const) {
       const shader = gl.createShader(type); if (!shader) throw new Error('Unable to allocate bitmap shader.'); shaders.push(shader);
+      resources?.shaders.add(shader);
       gl.shaderSource(shader, source); gl.compileShader(shader);
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) throw new Error(`Bitmap shader compilation failed: ${gl.getShaderInfoLog(shader)}`);
       gl.attachShader(result, shader);
     }
     gl.linkProgram(result);
     if (!gl.getProgramParameter(result, gl.LINK_STATUS)) throw new Error(`Bitmap shader link failed: ${gl.getProgramInfoLog(result)}`);
+    resources?.programs.set(key, result); resources?.programKeys.set(result, key);
     return result;
   };
   const upload = (w: number, h: number, data: Uint8Array | Uint8ClampedArray | null) => {
     const result = gl.createTexture(); if (!result) throw new Error('Unable to allocate bitmap texture.'); textures.push(result);
+    resources?.textures.add(result);
     gl.bindTexture(gl.TEXTURE_2D, result);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
@@ -253,7 +277,8 @@ export function renderBitmapGlyphs(options: BitmapGlyphRenderOptions): BitmapGly
     return result;
   };
   const attribute = (active: WebGLProgram, name: string, data: Float32Array | Uint16Array | Uint8Array, size: number, type: number, normalized = false) => {
-    const buffer = gl.createBuffer(); if (!buffer) throw new Error('Unable to allocate bitmap buffer.'); buffers.push(buffer);
+    const buffer = resources ? resources.buffer(`${resources.programKeys.get(active)!}:${name}`, data.byteLength) : gl.createBuffer();
+    if (!buffer) throw new Error('Unable to allocate bitmap buffer.'); if (!resources) buffers.push(buffer);
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
     const location = gl.getAttribLocation(active, name); if (location < 0) throw new Error(`Missing bitmap attribute ${name}.`);
     gl.enableVertexAttribArray(location); gl.vertexAttribPointer(location, size, type, normalized, 0, 0);
@@ -279,8 +304,14 @@ export function renderBitmapGlyphs(options: BitmapGlyphRenderOptions): BitmapGly
         for (let channel = 0; channel < 3; channel++) initial[i + channel] = Math.round(initial[i + channel]! * alpha);
       }
     }
-    const target = upload(width, height, initial);
-    const framebuffer = gl.createFramebuffer(); if (!framebuffer) throw new Error('Unable to allocate bitmap framebuffer.'); framebuffers.push(framebuffer);
+    if (resources?.target && (resources.target.width !== width || resources.target.height !== height)) {
+      gl.deleteFramebuffer(resources.target.framebuffer); resources.framebuffers.delete(resources.target.framebuffer);
+      gl.deleteTexture(resources.target.texture); resources.textures.delete(resources.target.texture); resources.target = undefined;
+    }
+    const target = resources?.target?.texture ?? upload(width, height, initial);
+    if (resources?.target && initial) { gl.bindTexture(gl.TEXTURE_2D, target); gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, initial); }
+    const framebuffer = resources?.target?.framebuffer ?? gl.createFramebuffer(); if (!framebuffer) throw new Error('Unable to allocate bitmap framebuffer.');
+    if (resources) { resources.framebuffers.add(framebuffer); resources.target = { width, height, texture: target, framebuffer }; } else framebuffers.push(framebuffer);
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, target, 0);
     if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) throw new Error('Bitmap RGBA8 framebuffer is incomplete.');
     gl.disable(gl.DITHER); gl.disable(gl.DEPTH_TEST); gl.disable(gl.STENCIL_TEST); gl.disable(gl.SAMPLE_ALPHA_TO_COVERAGE); gl.disable(gl.SAMPLE_COVERAGE);
@@ -297,7 +328,8 @@ export function renderBitmapGlyphs(options: BitmapGlyphRenderOptions): BitmapGly
     for (const run of options.runs) {
       const page = options.pages.get(run.page)!;
       let atlas = pageTextures.get(run.page);
-      if (!atlas) { atlas = upload(page.width, page.height, page.data); pageTextures.set(run.page, atlas); }
+      if (resources && atlas && !resources.textures.has(atlas)) atlas = undefined;
+      if (!atlas) { atlas = resources ? resources.page(page, data => upload(page.width, page.height, data)) : upload(page.width, page.height, page.data); pageTextures.set(run.page, atlas); }
       gl.bindTexture(gl.TEXTURE_2D, atlas);
       const filter = run.sampling === 'point' ? gl.NEAREST : gl.LINEAR;
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
@@ -336,15 +368,18 @@ export function renderBitmapGlyphs(options: BitmapGlyphRenderOptions): BitmapGly
         attribute(active, 'sourceBounds', new Float32Array(bounds), 4, gl.FLOAT); attribute(active, 'color', new Float32Array(colors), 4, gl.FLOAT);
         indices = new Uint16Array(elements);
       }
-      const buffer = gl.createBuffer(); if (!buffer) throw new Error('Unable to allocate bitmap index buffer.'); buffers.push(buffer);
+      const buffer = resources ? resources.buffer('index', indices.byteLength) : gl.createBuffer(); if (!buffer) throw new Error('Unable to allocate bitmap index buffer.'); if (!resources) buffers.push(buffer);
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffer); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
       gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
       if (gl.getError() !== gl.NO_ERROR || gl.isContextLost()) throw new Error('GPU bitmap drawing failed.');
     }
-    const bottom = new Uint8Array(width * height * 4), data = new Uint8ClampedArray(bottom.length);
-    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, bottom);
-    if (gl.getError() !== gl.NO_ERROR) throw new Error('GPU bitmap readback failed.');
-    for (let y = 0; y < height; y++) data.set(bottom.subarray(y * width * 4, (y + 1) * width * 4), (height - 1 - y) * width * 4);
+    const data = resources ? new Uint8ClampedArray(0) : new Uint8ClampedArray(width * height * 4);
+    if (!resources) {
+      const bottom = new Uint8Array(width * height * 4);
+      gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, bottom);
+      if (gl.getError() !== gl.NO_ERROR) throw new Error('GPU bitmap readback failed.');
+      for (let y = 0; y < height; y++) data.set(bottom.subarray(y * width * 4, (y + 1) * width * 4), (height - 1 - y) * width * 4);
+    }
     if (options.canvas) {
       gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, width, height);
       gl.disable(gl.SCISSOR_TEST); gl.disable(gl.CULL_FACE); gl.disable(gl.BLEND);
@@ -363,11 +398,14 @@ export function renderBitmapGlyphs(options: BitmapGlyphRenderOptions): BitmapGly
     return { width, height, data, alphaMode, dispose };
   } finally {
     gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.useProgram(null);
-    for (const buffer of buffers) gl.deleteBuffer(buffer);
-    for (const framebuffer of framebuffers) gl.deleteFramebuffer(framebuffer);
-    for (const value of textures) gl.deleteTexture(value);
-    for (const value of programs) gl.deleteProgram(value);
-    for (const value of shaders) gl.deleteShader(value);
+    if (resources) { if (!successful) resources.dispose(); }
+    else {
+      for (const buffer of buffers) gl.deleteBuffer(buffer);
+      for (const framebuffer of framebuffers) gl.deleteFramebuffer(framebuffer);
+      for (const value of textures) gl.deleteTexture(value);
+      for (const value of programs) gl.deleteProgram(value);
+      for (const value of shaders) gl.deleteShader(value);
+    }
     if (!options.canvas || !successful) dispose();
   }
 }

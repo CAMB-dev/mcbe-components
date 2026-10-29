@@ -1,6 +1,6 @@
 # BitmapText 共享 WebGL 路径
 
-本轮新增显式 `renderer="webgl-shared"`，不新增组件或公共函数：仍为117个组件、3份数据、3个渲染函数，共123个运行时值。CPU 仍是默认，原 `renderer="webgl"` 的独立 context 路径保留。本文记录实际源码合同与已完成的正式 / 包消费结果；共享路径的实际 native 捕获、独立浏览器检查与生产预览均已完成，各自认证范围分开记录。
+初始共享阶段新增显式 `renderer="webgl-shared"`，当时为117组件 /123运行时值；下方原native /正式 /包 /生产证据保留当时身份。当前库120组件 /134值，CPU默认与独立webgl不变。本轮共享资源治理最终kernel11 /loader22 Node、正式浏览器65与03实际包已分别通过，固定8draw新native及48完整矩阵、生产115辅助均通过本阶段范围，见 [BITMAP_RESOURCES_QA.md](BITMAP_RESOURCES_QA.md)，不自动迁移旧source通过记录。
 
 ## API 与选择
 
@@ -18,13 +18,17 @@
 
 当前实现用模块内部 `WeakMap<Document, Session>` 管理会话：同一库实例、同一 Document 的共享组件复用一个 OffscreenCanvas WebGL context；iframe / 不同 Document 分开，不承诺多个独立加载的库副本跨模块共享。
 
-加载所需字图后，每次绘制同步执行生产 `renderBitmapGlyphs`，再通过 `transferToImageBitmap()` 得到结果，交给该实例 canvas 的 `bitmaprenderer.transferFromImageBitmap()`。每实例消费自己的 ImageBitmap，避免后续组件绘制覆盖之前实例的显示。取消或失效、尚未消费的 bitmap 会关闭。
+加载字图后，每次绘制同步执行私有共享后端，再通过 `transferToImageBitmap()` 得到结果，交给该实例canvas的bitmaprenderer。每实例消费自己的ImageBitmap，取消或失效的未消费bitmap关闭。当前后端与公共函数共用shader core，复用持久GPU资源；公共函数仍独占单调用。
 
 HTML 标准规定 transferToImageBitmap 创建 ImageBitmap 并把 OffscreenCanvas 的图像换为新的空图像；这属于所有权与显示语义，不是实现层面的零拷贝性能保证。见 [HTML Standard：OffscreenCanvas](https://html.spec.whatwg.org/multipage/canvas.html#the-offscreencanvas-interface)。transferFromImageBitmap 将 bitmap 的所有权交给显示 canvas，不能把同一对象反复当作独立实例结果使用。见 [MDN：transferFromImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext/transferFromImageBitmap)。
 
-这条显示链不经 Canvas2D / putImageData，但底层函数仍调用 readPixels，不是无 CPU 读回，也没有新增 Worker、并行绘制或多实例一次 draw batch。PMA framebuffer、target background 和显式8位 straight-alpha 转换的边界沿用 [BITMAP_GPU_QA.md](./BITMAP_GPU_QA.md)；不以 transfer 的名字推断任意后端的 alpha / 色彩处理完全一致。
+显示链不经Canvas2D /putImageData，当前共享后端也不调用readPixels；公共 `renderBitmapGlyphs` 读回保留。未新增Worker /并行绘制 /多实例一次draw batch。PMA、背景、straight-alpha边界仍见 [BITMAP_GPU_QA.md](BITMAP_GPU_QA.md)，不从transfer名称推断零拷贝或跨后端alpha一致。
 
-每个 mounted 组件持有内部 lease。输入变化、renderer 切换或 unmount 会释放旧 lease，并清空旧显示目标；最后一个 lease 释放后通过微任务销毁会话，给 StrictMode 的紧邻 cleanup / setup 留出重新获取窗口。会话中间绘制的 GPU buffers / textures / programs 仍按生产函数的单次调用生命周期清理，不宣称实现了持久字图 cache。
+上述仅限共享GPU目标绘制 /显示；colorRgba与loadTexture字体解码仍可用Canvas2D /getImageData，不代表字体加载全过程没有CPU读回。
+
+每个mounted组件持有内部lease。输入变化、renderer切换或unmount释放旧lease并清空旧目标，最后release经微任务销毁session，保留StrictMode相邻cleanup /setup窗口。当前会话复用program /buffer /单target FBO及有限page LRU；取消 /失败结算pending，loss /最终release清理session。具体预算见 [BITMAP_RESOURCES_QA.md](BITMAP_RESOURCES_QA.md)；每draw即时销毁描述仅属初始共享阶段。
+
+持久reuse只在session存续时成立，当前reuse-stress保留稳定owner；全部owner同时signature变化仍可能释放全部lease并销毁 /重建，不能声称48实例任意全量更新均不新建GL。256MiB仅计明确payload，临时JS顶点数组 /typed arrays、driver二进制、active fetch /host refs不在其总量内，不是总heap或全部VRAM硬限。
 
 ## 错误与恢复
 
@@ -34,11 +38,11 @@ HTML 标准规定 transferToImageBitmap 创建 ImageBitmap 并把 OffscreenCanva
 
 ## 资源限制
 
-共享路径减少同一 Document 内同时活跃的 WebGL context 数量，但每实例仍有 DOM canvas、bitmaprenderer 与显示 bitmap。字图加载、目标像素、GPU 内存、同步绘制 / readPixels 及浏览器资源限制仍在；不能由“一份 WebGL context”推导无限实例、固定帧率或固定内存。尺寸与输入上限检查也不能替代设备实际能力。
+共享路径减少同Document活跃GL context，每实例仍有canvas /bitmaprenderer /显示结果。当前模块跨Document按256MiB payload ledger、512leases及16MP呈现预算限制，page LRU≤256 /16MP，非OS /driver总VRAM测量。同步绘制 /transfer与设备限制仍在；公共读回仍readPixels，不能推导无限实例、固定帧率或全进程固定内存。
 
 正式测试已覆盖48个 StrictMode 实例、切换 / unmount、context loss 全 lease 通知、输入更新恢复及异步取消。48实例是本轮已测规模，不是容量上限、吞吐基准或任意实例保证。
 
-## 验证分层
+## 初始共享阶段的历史验证分层
 
 此前独立 webgl 路径的20项正式测试、原生固定8 draw 复现与实际包消费保留为其自身证据，不直接覆盖本次新共享路径。
 

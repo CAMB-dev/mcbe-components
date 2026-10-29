@@ -1,3 +1,5 @@
+import { createTexturePromiseCache } from './texture-promise-cache';
+
 export interface PixelTexture { width: number; height: number; data: Uint8ClampedArray }
 export type Vec3 = readonly [number, number, number];
 export type Uv = readonly [number, number];
@@ -43,20 +45,20 @@ export function decodeTga(buffer: ArrayBuffer): PixelTexture {
   return { width, height, data };
 }
 
-const textureCache = new Map<string, Promise<PixelTexture>>();
-export function loadTexture(url: string): Promise<PixelTexture> {
-  const cached = textureCache.get(url); if (cached) return cached;
-  const task = (async () => {
+const cachedTexture = createTexturePromiseCache(async url => {
     const response = await fetch(url); if (!response.ok) throw new Error(`Texture HTTP ${response.status}: ${url}`);
     const buffer = await response.arrayBuffer();
     if (!new Uint8Array(buffer).subarray(0, 8).every((byte, index) => byte === [137, 80, 78, 71, 13, 10, 26, 10][index])) return decodeTga(buffer);
     const bitmap = await createImageBitmap(new Blob([buffer], { type: 'image/png' }));
-    const canvas = document.createElement('canvas'); canvas.width = bitmap.width; canvas.height = bitmap.height;
-    const context = canvas.getContext('2d'); if (!context) throw new Error('Canvas2D unavailable.');
-    context.drawImage(bitmap, 0, 0); bitmap.close();
-    return { width: canvas.width, height: canvas.height, data: context.getImageData(0, 0, canvas.width, canvas.height).data };
-  })();
-  textureCache.set(url, task); return task;
+    try {
+      const canvas = document.createElement('canvas'); canvas.width = bitmap.width; canvas.height = bitmap.height;
+      const context = canvas.getContext('2d'); if (!context) throw new Error('Canvas2D unavailable.');
+      context.drawImage(bitmap, 0, 0);
+      return { width: canvas.width, height: canvas.height, data: context.getImageData(0, 0, canvas.width, canvas.height).data };
+    } finally { bitmap.close(); }
+});
+export function loadTexture(url: string): Promise<PixelTexture> {
+  return cachedTexture(url);
 }
 
 export function cuboid(min: Vec3, max: Vec3, texture = 'all', atlas?: readonly [number, number]): ItemMeshFace[] {
