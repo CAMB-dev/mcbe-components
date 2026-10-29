@@ -1,5 +1,25 @@
 # 独立工作站 GUI 验证
 
+## 当前检查点：砂轮空结果操作保护与新原生样本
+
+本轮修正 `Grindstone` 用result对象真假判断能否取出的缺口：`ItemSlot` 已把count0、负数、NaN、Infinity显示为空，旧砂轮仍会向宿主发送取出回调。现在复用公共 `ResultSlot`，声明 `available={!invalid}` 并转发 `onTake`；保持普通18×18 game槽、36×36 CSS / 32×32物品区域与原按钮，不增加wrapper或改CSS。空 / invalid结果仍可聚焦，鼠标左 / 右键、Enter和Shift+F10不会取出，既有方向键路径保留；有效结果正常发送动作，取出后清空也保留同一个聚焦节点。它只修UI操作合同，不计算游戏修复 / 祛魔规则。
+
+`.cache/grindstone-result-guard-01/{final-report,FINAL}.json` / RESULT.md的producer正式桌面批为8 / 8 PASS，24.019774秒，0skip / retry / flaky，1440×1000 / DPR1，完整demo类型检查通过。修改前count0的真实mouse / keyboard回调放行失败保留在initial-report.json / initial-results。修复后首次helper因普通Playwright click遵循aria-disabled而等待enabled超时，诊断中断前日志 / 截图 / trace保留、未生成JSON；最终用force pointer input实际触发可聚焦按钮的guard，未改变生产行为或像素阈值。
+
+集成的canonical `.cache/grindstone-integration-01/final-report.json` 为56 / 56 PASS，60.983588秒，0skip / retry / flaky：新desktop8＋mobile8共16项，以及旧双端inventory-parts12、invalid17、workstation-fidelity11共40项。前述producer桌面8项不另计为新增。原nested报告保留，canonical是同一结果副本。首隔离Vite配置漏掉virtual-font插件导致fixture import失败的日志保留；仅合并项目Vite配置并禁watch / HMR后重跑，未改生产 / 测试以消除该环境错误。
+
+实际 `npm run verify:package` 已通过React18.3.1 / 19.3.1的134值、SSR、strict TS、styles / fonts / assets / licenses检查，日志 `.cache/grindstone-integration-01/package.log`。已测包 `.cache/grindstone-consumer-verified.tgz` SHA256 `a378e0925b588c00f9b9d4a32050d9effc9f547fe63e0e478805f43a4263ddf4`；dist/index.js SHA256 `2ccc9fe0c73f8b9e1f6d56e9c864f33f3c8893e0aa0ffe140b14b7205cf902b1`。`.cache/grindstone-consumer-identity.json` 证明两消费者各256份dist与本轮构建逐字节相同。后补文档包须另逐条核对非文档条目身份，不能沿用旧runtime包认证。
+
+实际生产构建4173在IAB另验一次取出交互：结果按钮含mc-result-slot、36×36；取出后data-empty / aria-disabled / data-result-unavailable均true，仍为同一聚焦按钮。实现截图 `.cache/grindstone-integration-01/production-after-take.png` 是辅助交互证据，不加正式56数，也不是原版游戏截图或原生像素oracle。
+
+本轮已有新的真实砂轮样本：GUI5、上格钻石剑 / 下格木剑、不兼容状态；PIX原件 `.cache/grindstone-native-01/grindstone-incompatible-gui5.wpix` 为246,728,325字节，SHA256 `bd71d242bd92db9ba7b2e79a75e1c89bb35bba1cff2cfff1c99542357445029d`。无损BMP同目录同名，2570×1402、32bit BI_RGB / BGRX、14,412,614字节，SHA256 `944cea3f74a6a6c9431be38a5e7bba9d2ad95145a9a086d2671d0d958a8f0f5a`。派生PNG `.cache/workstation-next-audit-01/grindstone-incompatible-gui5-bmp-derivative.png` SHA256 `21f841791700a0e7913477d9ed7b8aff0e7e882d6a6bb3eea0be5d47b4cde27e` 经自实现转换 / roundtrip和独立GDI+在3,603,140像素上逐通道一致；这个0只证明文件转换，不是生产GUI与原生0差。BMP第四字节全FF但无alpha mask，转成PNG A255不能认证原生RT alpha。
+
+新样本skin光栅支持[845,287,880,830]；逻辑root[845,287.5]目前只是与光栅相容的候选，尚无该draw矩阵核实，未据此拟合或宣称生产砂轮整GUI pixel-perfect。早期两份png后缀实际JPEG的文件保留，禁止作颜色oracle。关闭砂轮时游戏自动把两输入退回库存，hotbar位置已变化；未取出结果或执行修复，之后游戏已暂停，JPEG仅作操作状态证据。
+
+## 历史检查点：早期GUI2逻辑布局（保留原结果）
+
+以下“当前 / 缺失 / 未取得”等表述保留早期检查时的范围，不能据此声称今天仍无原生砂轮样本；本轮捕获与尚未完成的生产像素验收见上。附魔台后续显式source-model / atlas验证另见 [GUI_MODEL_QA.md](GUI_MODEL_QA.md)，不回写下列旧结果。
+
 2026-10-29。目标是 Bedrock Classic 桌面 profile、安装版本 `1.26.6005.0`、GUI 2、浏览器 DPR=1 的附魔台和砂轮。**当前不能判定整个 GUI 为 pixel perfect。** 已验证逻辑布局、部分原图像素及资源来源；原生游戏整块画面的最终栅格对照仍缺失。
 
 ## 来源与方法

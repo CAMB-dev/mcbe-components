@@ -1,6 +1,6 @@
 import { forwardRef, useContext, useId, useRef, useState } from 'react';
 import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
-import { InventoryGrid, ItemSlot } from './inventory';
+import { InventoryGrid, ItemSlot, ResultSlot } from './inventory';
 import type { InventoryItem, InventorySlotAction } from './inventory';
 import { EnchantingImagePresentation, useEnchantingImageLayer } from './enchanting-image-layer';
 import type { EnchantingTableImageRenderProfile } from './enchanting-image-layer';
@@ -100,9 +100,8 @@ export const Grindstone = forwardRef<HTMLElement, GrindstoneProps>(function Grin
       onKeyDown={event=>{if(event.key==='ArrowUp') navigate(event,inputsRef.current[0]); else if(event.key==='ArrowRight') navigate(event,resultRef.current);}}/>
     <span className="mc-grindstone__arrow" aria-hidden="true"/>
     {invalid && <span className="mc-grindstone__invalid" role="img" aria-label="Items cannot be combined"/>}
-    <ItemSlot ref={resultRef} className="mc-grindstone__result" label="Result" item={result} aria-disabled={!result || invalid}
-      onClick={()=>{if(result && !invalid) onTakeResult?.('primary');}}
-      onSecondaryAction={()=>{if(result && !invalid) onTakeResult?.('secondary');}}
+    <ResultSlot ref={resultRef} className="mc-grindstone__result" label="Result" item={result} available={!invalid}
+      onTake={action=>onTakeResult?.(action)}
       onKeyDown={event=>{if(event.key==='ArrowLeft') navigate(event,inputsRef.current[1]);}}/>
   </WorkstationFrame>;
 });

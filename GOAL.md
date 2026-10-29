@@ -7,7 +7,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 117 个组件（含公共 ContainerFrame、InventoryToolbar、BitmapText、RecipeBook、InventoryScreenFrame 与完整生存背包 / 工作台组合），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；另有3个数据、2个纯纹理函数和1个GPU字体函数，共123个值导出。implemented 只代表导出，不代表像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 120 个组件（含公共 ContainerFrame、InventoryToolbar、BitmapText、RecipeBook、InventoryScreenFrame、GuiImageLayer、GuiLayer 与完整生存背包 / 工作台组合），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；另有4个数据、10个渲染 / 几何 / 纹理函数，共134个值导出。implemented 只代表导出，不代表像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -68,6 +68,8 @@
 - [x] 将验证过的字体GPU绘制链迁入可复用renderBitmapGlyphs与BitmapText可选后端；真实8draw及原背景在限定NVIDIA后端全目标/字段/halo零差，组件多底色Web合同独立通过；CPU默认保留，正式新7+旧13共20项通过，123值React18/19消费通过
 - [x] 统一13处Select与Combobox可见实现，修复reset/hidden/事件兼容；Dialog按显式尺寸裁切无自动滚动；核对原版经验六图比例及不同轮廓，新增13项与相关双端回归、React18/19消费和4173生产19项检查通过
 - [x] 新增显式共享GPU字体后端，48实例仅1个Offscreen上下文，实际8draw及独立混合实例完整像素零差；正式27/27、React18/19包消费与生产40实例25项检查通过，取消/报错/最后卸载均释放资源
+- [x] 增加同目标 image / text / sprite / model 合成及显式原图 atlas 装配；固定 GUI5 附魔台观察 target 的实际 React 完整画面 RGBA 零差，依赖调用方原字页及明确观察配置，不推广成默认字体、所有 GUI、动画或跨 GPU 认证；见 docs/GUI_MODEL_QA.md
+- [x] 砂轮复用 ResultSlot，修复空数量 / 非有限数量仍触发领取的问题；新双端16项与相关40项共56/56通过，React18/19实际包通过；新增砂轮不兼容状态的原生GPU捕获与无损BMP，仅建立参考，不作为整页零差认证
 - [ ] 完成默认字体与原生整GUI的最终合成 / Present / 窗口映射验证；共享GPU文字的draw批处理与总显存预算仍待完善
 - [ ] 对照游戏渲染器完善附魔书本动态算法、符文、方块 / 旗帜 / 装备预览、物品 tooltip / glint、工作站完整页面
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
