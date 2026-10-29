@@ -299,6 +299,83 @@
         ]
       }
     ],
+    "optionRowStructure": {
+      "sourcePanel": "enchanting.enchant_button_panel",
+      "sourceGrid": {
+        "collection": "#enchant_buttons",
+        "dimensions": [
+          1,
+          3
+        ],
+        "rowSize": [
+          "100%",
+          "33.333333%"
+        ],
+        "rowLayer": 7
+      },
+      "permanentBackground": {
+        "sourceChild": "dark_background@enchanting.dark_background",
+        "visibility": "Unconditional image; no visibility binding, ignored flag or collection condition in its inherited source definition.",
+        "texture": "textures/ui/enchanting_dark_background",
+        "pixels": [
+          108,
+          19
+        ],
+        "nineSlice": 1,
+        "sha256": "153512d7e98be59a3f742be4e8ee27d01c69413452197d2021ccbacd0e6b6ad0",
+        "webToken": "--mc-skin-enchanting-disabled"
+      },
+      "conditionalActions": {
+        "sourceLayer": 22,
+        "unselectableVisibilityBinding": "#unselectable_button_visibility",
+        "selectableVisibilityBinding": "#selectable_button_visibility",
+        "separateFromPermanentBackground": true
+      },
+      "webEmptyContract": {
+        "fixedRows": 3,
+        "providedRecords": "Use the first three records at their corresponding indices; existing EnchantmentOption behavior is unchanged.",
+        "missingRecords": "A presentational empty div with the original dark nine-slice, aria-hidden=true, no text/children/role/tabindex/action handlers, pointer-events:none and no option-button hover/pressed styles.",
+        "syntheticCostRuneDustOrAction": false,
+        "optionsEmptyKeepsAllThreeBackgrounds": true,
+        "incompleteRecordListKeepsMissingRowBackgrounds": true,
+        "eligibilityInferredFromItem": false
+      },
+      "nativeEmptyEvidence": {
+        "privateFile": ".cache/native-gui/enchanting-closed-native-lossless.png",
+        "sha256": "c2ae69ebe7615bcb8e4e993e261833b7e72aa9cefe9ddadaba189cc01bc15646",
+        "pixels": [
+          2568,
+          1400
+        ],
+        "measuredRowsPhysicalHalfOpen": [
+          [
+            353,
+            454
+          ],
+          [
+            454,
+            555
+          ],
+          [
+            555,
+            657
+          ]
+        ],
+        "measuredContentColumnsPhysicalHalfOpen": [
+          1159,
+          1691
+        ],
+        "completeRowHeightsPhysical": [
+          101,
+          101,
+          102
+        ],
+        "audit": ".cache/enchanting-empty-study/audit.json",
+        "auditSha256": "8b45636d6718376101a216843eb418157b532c236bf5416a38ef2d7fd866008e",
+        "reportSha256": "99db4813efae629ff2392b2e77e6c5448f58ec42e9433cc1f669ca75df181235",
+        "limits": "JSON grid dimensions alone do not establish empty-collection materialization. The native empty-input frame independently shows three rows. Mixed borders and lower-left cursor contamination remain in full crops/halos; palette agreement is not complete native RGBA equality or snap/layer recovery."
+      }
+    },
     "compactClose": {
       "source": "enchanting_panel.$use_compact_close_button=true / common.compact_close_button@close_button",
       "hitCssRect": [

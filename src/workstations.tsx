@@ -129,8 +129,11 @@ export const EnchantingTable = forwardRef<HTMLElement, EnchantingTableProps>(fun
     <ItemSlot className="mc-enchanting__item" label="Item to enchant" item={item} onClick={()=>onInputAction?.('item','primary')} onSecondaryAction={()=>onInputAction?.('item','secondary')}/>
     <ItemSlot className="mc-enchanting__lapis" label="Lapis lazuli" item={lapis} underlay={<span className="mc-enchanting__lapis-placeholder"/>}
       onClick={()=>onInputAction?.('lapis','primary')} onSecondaryAction={()=>onInputAction?.('lapis','secondary')}/>
-    <div className="mc-enchanting__options" role="group" aria-label="Enchantments">{options.slice(0,3).map((option,index)=><EnchantmentOption
-      key={option.id} id={option.id} label={option.label} level={option.level} runes={option.runes} disabled={option.disabled}
-      tier={([1,2,3] as const)[index]} onEnchant={onEnchant}/>)}</div>
+    <div className="mc-enchanting__options" role="group" aria-label="Enchantments">{Array.from({length:3},(_,index)=>{
+      const option=options[index];
+      return option ? <EnchantmentOption key={`option:${option.id}`} id={option.id} label={option.label} level={option.level} runes={option.runes} disabled={option.disabled}
+        tier={([1,2,3] as const)[index]} onEnchant={onEnchant}/>
+        : <div key={`empty:${index}`} className="mc-enchanting__empty-option" aria-hidden="true"/>;
+    })}</div>
   </WorkstationFrame>;
 });

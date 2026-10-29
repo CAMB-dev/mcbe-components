@@ -90,7 +90,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `PlayerInventory` | `items`、`hotbar`、`label`、`hotbarLabel`、`selectedIndex`、`onSelectionChange`、`onSlotAction` | 27 格背包与 9 格快捷栏，共享 0…35 的选中索引 |
 | `WorkstationFrame` | **必填** `title`；`inventory`、`hotbar`、`inventoryLabel`、`onClose`、`closeLabel`、`onInventoryAction` | 176×166 游戏像素 Classic 容器外框，以 GUI 2 显示；窄屏局部滚动 |
 | `Grindstone` | `inputs`: readonly [item, item]；`result`、`invalid`、`onInputAction`、`onTakeResult`；Frame 属性 | 砂轮双输入、结果、原始箭头 / 无效标记和玩家背包；结果由调用方提供 |
-| `EnchantingTable` | **必填** `options`；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`；Frame 属性 | 附魔台输入、青金石、三档选择、级别消耗与禁用态；book 支持自定义渲染 |
+| `EnchantingTable` | **必填** `options`，可为空数组；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`；Frame 属性 | 固定三行背景；仅有记录的行提供选项/费用/动作，缺记录为 aria-hidden 非交互背景；book 支持自定义渲染 |
 | `EnchantmentOption` | **必填** `id`、`label`、`level`；`tier`: 1 / 2 / 3、`runes`、`disabled`、`buttonId`、`onEnchant`；button 属性 | 可独立使用的附魔选项；id 是业务 ID，buttonId 是可选 DOM id；onClick.preventDefault() 取消选择回调 |
 | `EnchantingRunes` | **必填** `text`、`atlasUrl`；`scale`: 1…4、`color` | 按原始 SGA 图集采样字形与字距；图集由调用方提供，不随 npm 捆绑 |
 | `EnchantingBook` | `textureUrl`、`open`、`pageFlip`、`lighting`: calibrated / unlit、`yaw`、`pitch`、`roll`、`onRendererError`；canvas 属性 | 真实材质、封面 / 书脊 / 厚页块 / 翻页的可选 WebGL 书本；默认 pitch=20、lighting=calibrated，以本机 Bedrock 无损 PNG 校准视角和分面光照，模型仍参考 Mojang Java BookModel 重建 |
@@ -268,6 +268,8 @@ ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随
 `shadeItemGlint` 输出未量化的原始 pass，`renderItemGlint` 按显式混合模式生成像素数据。原生时间、采样和混合绑定尚未提取，不会自动给 `enchanted` 物品添加动画；公式与 Canvas 透明存储边界见 [ITEM_GLINT_QA.md](docs/ITEM_GLINT_QA.md)。
 
 砂轮布局来自 grindstone_screen.json，附魔台来自 enchanting_screen.json；逐级锚点与百分比推导见 [workstation-geometry.json](docs/workstation-geometry.json)。附魔选项保留源浮点边界，不人为取整。砂轮空结果槽保留 hover / focus，通过 `aria-disabled` 与回调 guard 阻止无效领取。真实关闭按钮支持容器内部的原始键盘导航。
+
+`EnchantingTable` 在 `options={[]}` 或不足三条记录时仍保留三个原版 dark 背景，缺记录的行不生成 rune、dust、cost、按钮或回调。已有记录继续使用 `EnchantmentOption`。这对应源 `enchant_button_panel` 的常驻背景和独立按钮可见性绑定，并由原生空槽截图确认，不代表整页或书本已达原生零差。演示页用干净钻石剑，Clear / Restore 显式切换输入、记录及 `EnchantingBook open={0/1}`；库本身不猜附魔资格，也不据 `options` 自动开合宿主书本。
 
 `book` 提供原生自定义 3D renderer 的接入点，省略时不绘制假书图。展示页显式使用带真实材质的 `EnchantingBook` 重建；默认 `pitch={20}` 由本机无损 PNG 校准，`lighting="calibrated"` 使用本机 Entity / MeshFallback 着色器支持的候选照明式，在明确的白光 / 强度 / overlay 假设下同时改善两个已知状态。实际书本材质绑定仍未确认，网格仍参考 Java BookModel；闭合 / 打开样本的改善不等于所有翻页动画和整屏 renderer 均已吻合。`lighting="unlit"` 可检查未着色图集，完整来源与残差见 [附魔 QA](docs/ENCHANTING_QA.md)。`runes` 可传 `EnchantingRunes`，默认色 `#685d49` 已核对原生字节；省略时不生成假英文符文，但按钮仍有完整可访问名称。原图集可仅在本地预览接入：
 

@@ -1079,6 +1079,20 @@
       "supersedes": "Previously inferred #80ff20/#203f08 and #8a5e5c foregrounds were off by one byte in some channels; the success shadow green is 64. Red shadow #221717 was already correct."
     }
   },
+  "compositionStateContract": {
+    "scope": "EnchantingTable composition only; no new export, native book renderer recovery or pixel-perfect certification.",
+    "fixedOptionRows": 3,
+    "optionsEmptyOrShort": "Keep original dark background for each missing index. Missing rows are aria-hidden presentational divs with no cost, runes, dust or action; supplied records retain EnchantmentOption behavior.",
+    "source": "enchant_button_panel has an unconditional dark_background child separate from selectable/unselectable button visibility bindings. See workstation-geometry.json.enchanting.optionRowStructure.",
+    "bookControl": "The library renders the caller-supplied book ReactNode and does not infer open state or enchantability from item/options. EnchantingBook defaultPose and prior mesh/lighting evidence are unchanged.",
+    "demo": "The host uses a clean Diamond sword. Clear/Restore enchanting inputs explicitly controls item/lapis/options and EnchantingBook open=0/1; it is a demonstration state policy, not recovered game eligibility.",
+    "nativeReference": {
+      "file": ".cache/native-gui/enchanting-closed-native-lossless.png",
+      "sha256": "c2ae69ebe7615bcb8e4e993e261833b7e72aa9cefe9ddadaba189cc01bc15646",
+      "provedScope": "Three retained dark rows in the observed empty-input closed state, supported independently by source structure and original PNG scans.",
+      "fullNativeBookOrGuiRgbaCertified": false
+    }
+  },
   "visualSanityReference": {
     "url": "https://minecraft.wiki/w/File:Enchanting_Table_GUI_BE.png",
     "observedThrough": "Browser media viewer",

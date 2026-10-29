@@ -29,6 +29,7 @@ import { ItemGlintFixture } from './item-glint-fixture';
 import { ItemTooltipFixture } from './item-tooltip-fixture';
 import { BitmapTextFixture } from './bitmap-text-fixture';
 import { NativeBitmapTextFixture } from './native-bitmap-text-fixture';
+import { EnchantingEmptyFixture } from './enchanting-empty-fixture';
 
 function Sample({ id, children }: { id: string; children: ReactNode }) {
   return <section className="calibration-case"><h2>{id}</h2><div className="calibration-stage" data-case={id}>{children}</div></section>;
@@ -132,6 +133,7 @@ function Calibration() {
     <ItemTooltipFixture/>
     <BitmapTextFixture/>
     <NativeBitmapTextFixture/>
+    <EnchantingEmptyFixture/>
     <p>These samples isolate component surfaces. The test runner renders original reference PNGs independently, applies their nine-slice rules, and compares every output pixel. Text is validated separately.</p>
     <Dialog open={dialog} onOpenChange={setDialog} title="Settings dialog" className="calibration-close-dialog"><Combobox label="Dialog difficulty" defaultValue="normal" options={difficulties}/><ItemSlot label="Dialog item" item={{name:'Dialog item',icon:'D',lore:['Inside the dialog']}}/></Dialog>
     <Dialog open={surfaceDialog} onOpenChange={setSurfaceDialog} title="Surface dialog" className="calibration-surface-dialog"/>

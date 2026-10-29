@@ -111,6 +111,7 @@ function App() {
   const [grindResult, setGrindResult] = useState(true);
   const [grindOpen, setGrindOpen] = useState(true);
   const [enchantOpen, setEnchantOpen] = useState(true);
+  const [enchantInputs, setEnchantInputs] = useState(true);
   const search = useRef<HTMLInputElement>(null);
   const noticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -283,11 +284,12 @@ function App() {
             onTakeResult={()=>{setGrindResult(false);notify('Grindstone result taken.');}}
             onInventoryAction={(index,action)=>notify(`${action}: inventory slot ${index+1}`)}/>}
             <Button size="sm" onClick={()=>{setGrindResult(true);setGrindOpen(true);}}>Reset grindstone example</Button></div>
-          <div><h3>Enchanting table</h3>{enchantOpen ? <EnchantingTable item={swordItem} lapis={{name:'Lapis lazuli',icon:<ItemSprite name="lapis"/>,count:32}} inventory={bagItems}
+          <div><h3>Enchanting table</h3>{enchantOpen ? <EnchantingTable item={enchantInputs ? {name:'Diamond sword',icon:<ItemSprite name="sword"/>} : null} lapis={enchantInputs ? {name:'Lapis lazuli',icon:<ItemSprite name="lapis"/>,count:32} : null} inventory={bagItems}
             onClose={()=>setEnchantOpen(false)}
-            book={<EnchantingBook/>}
-            options={[{id:'unbreaking',label:'Unbreaking I',level:3,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="elder light"/> : undefined},{id:'sharpness',label:'Sharpness III',level:15,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="bless creature"/> : undefined},{id:'fortune',label:'Fortune III',level:30,disabled:true,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="enchant scroll"/> : undefined}]}
-            onEnchant={id=>notify(`Enchantment requested: ${id}`)} onInputAction={slot=>notify(`Selected enchanting ${slot} slot.`)}/> : <Button onClick={()=>setEnchantOpen(true)}>Open enchanting table</Button>}</div>
+            book={<EnchantingBook open={enchantInputs ? 1 : 0}/>}
+            options={enchantInputs ? [{id:'unbreaking',label:'Unbreaking I',level:3,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="elder light"/> : undefined},{id:'sharpness',label:'Sharpness III',level:15,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="bless creature"/> : undefined},{id:'fortune',label:'Fortune III',level:30,disabled:true,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="enchant scroll"/> : undefined}] : []}
+            onEnchant={id=>notify(`Enchantment requested: ${id}`)} onInputAction={slot=>notify(`Selected enchanting ${slot} slot.`)}/> : <Button onClick={()=>setEnchantOpen(true)}>Open enchanting table</Button>}
+            <Button size="sm" onClick={()=>setEnchantInputs(value=>!value)}>{enchantInputs ? 'Clear enchanting inputs' : 'Restore enchanting inputs'}</Button></div>
         </div><p className="workstation-note">Original game materials. Item movement and crafting rules are supplied by your app. The book uses a textured renderer reconstruction; its native camera and mesh are still being calibrated.</p>
       </Example>
 
