@@ -59,7 +59,8 @@ export function CraftingLayerExamples() {
     .map(entry => ({ ...entry, ...((entry.craftableCount ?? 0) === 0 ? { backgroundImage: redBackground, backgroundSlice: 1, backgroundSize: [3, 3] as const } : {}) }));
   const labels = nativeGuiCraftingLabels;
   const labelStyle: CraftingScreenTextStyle | undefined = original && labels ? {
-    font: labels, fontScale: .5, sampling: 'bilinear', shader: 'bitmap-smooth', metrics: { lineHeight: 8, paintOffset: [0, 0] },
+    // The captured GUI4 label profile uses POINT; the GUI5 profile uses LINEAR.
+    font: labels, fontScale: .5, sampling: guiScale === 4 ? 'point' : 'bilinear', shader: 'bitmap-smooth', metrics: { lineHeight: 8, paintOffset: [0, 0] },
   } : undefined;
   const imageRender: CraftingScreenImageRenderProfile | undefined = source ? {
     frame: scale === '2' ? { width: 1280, height: 720, guiScale } : { width: 2570, height: 1402, guiScale },

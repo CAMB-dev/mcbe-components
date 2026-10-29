@@ -78,7 +78,7 @@ python scripts/use-local-crafting-fonts.py "C:/XboxGames/Minecraft for Windows/C
 
 也可用 `--archive PATH` 指定原始 `font.brarchive`；脚本校验已审计版本的哈希。输出仅写 ignored `.cache/local-fonts/crafting-ui`：16张完整原始 Unicode 页、17字符的 `labels.json`、原 metadata 与 manifest / 来源记录，共20文件。字符覆盖“建筑 / 装备 / 物品 / 自然 / 全部配方 / 合成 / 物品栏 / 搜索”。重复生成的20文件内容相同，check-only 的内容和修改时间均未变化；原有119个字体文件保持不变。
 
-`nativeGuiCraftingLabels` 仅属于本地 demo 虚拟模块，未准备时为 null，不是 npm 导出，也不注册全局字体。示例只给 crafting / inventory / recipeTitle 三个 role 配置明确的 `.5` 字号倍率、bilinear / bitmap-smooth 和 lineHeight8 / paintOffset0；搜索、placeholder 和数量仍保留 DOM 字体。新增标签的字页覆盖不等于其原生排版已全部认证。原始页不进入库的 dist 或 npm；使用本地字体构建的 site 会包含这些页。
+`nativeGuiCraftingLabels` 仅属于本地 demo 虚拟模块，未准备时为 null，不是 npm 导出，也不注册全局字体。示例只给 crafting / inventory / recipeTitle 三个 role 配置明确的 `.5` 字号倍率、bitmap-smooth 和 lineHeight8 / paintOffset0；GUI4 使用 point 采样，GUI2和GUI5仍用 bilinear。搜索、placeholder 和数量仍保留 DOM 字体。这只是 demo 的显式 profile 选择，没有更改 npm API 或默认字体；新增17字的覆盖不等于其原生排版已全部认证。原始页不进入库的 dist 或 npm；使用本地字体构建的 site 会包含这些页。
 
 ## 已验证范围与尚未验收部分
 
@@ -109,6 +109,23 @@ v03至v05 已实际比较两种完整2570×1402画面，每种均计入3,603,140
 
 另对建筑分类的全部10条配方完成首次完整目标baseline：3,603,140个像素中仍有3,878个RGB差异像素，alpha差异为0。候选保留全部阶梯、玻璃板、半砖、完整方块和地毯，使用8张完整原PNG、正常cuboid / authored box-union以及已有显式投影候选；10条source model均实际接管，未用捕获顶点、atlas或矩阵作输入。此数值是待校准的完整残差，不能当成普通模型相机已恢复。记录位于 `.cache/crafting-native-populated-01`；全部配方搜索页36条仍待补齐与实测。
 
+随后两个独立输入实验使用同一完整原生目标，各自保留原A。Pane B只改变玻璃板的普通几何 / 面材质输入，整帧差异降至2,427个RGB像素，玻璃板单元由2,867降至1,416；该单元外A/B每个RGBA字节完全相同。Atlas B只改变原图集表示，整帧仍有3,610个RGB差异像素，三个半砖单元各为严格RGBA零差；但同时有280个旧差异变精确、12个原精确像素新增差异，以及15个双方仍错但数值改变的像素，玻璃板内也有6个像素改变。两B的alpha差异均为0；它们没有组合执行，不能相加减少值或宣称图集方案全面改善，也未修改source05。证据分别见 `.cache/crafting-pane-material-study-01/pane-b-01/gpu-result-01/FINAL.json` 与 `.cache/crafting-model-rule-study-01/atlas-single-variable-01/gpu-result-01/FINAL.json`。
+
 v03完整结果保存在 `.cache/crafting-native-comparison-01/production-close-actual-01/`，v04在 `.cache/crafting-native-comparison-02/FINAL.json`，v05在 `.cache/crafting-native-comparison-03/FINAL.json`，首轮残差与原图不删除。v04修正嵌套缩放采样和工具条透明边框；v05修正选中分类层级和原JSON大写White对应的平色材质。该材质是正常2×2全白RGBA常量，不是新增原PNG或捕获贴图。剩余5个放大镜像素、4个标题像素全部保留，不以容差删除。固定的原裁剪 / 偶数原点 / 整帧字体对照保留相同4点，因此未采用裁剪对齐作为修复；image VS的两种同义表达式也保留相同5／4点，未据此修改内核。两个有配方的原生目标已保存，普通视觉输入仍在核对。旧 [CRAFTING_SCREEN_QA.md](CRAFTING_SCREEN_QA.md) 的23项属于历史 CSS / 局部原PNG合同。
 
-本页不认证默认字体、所有 Unicode、GUI4、跨 GPU / DPR、真实 OS IME、世界合成或最终 Present 零差。后续应保留实际完整 target 残差与失败记录，再限定可声明的场景范围。
+### GUI4 的有限原生对照
+
+四个新GUI4 capture已分别确认实际UI RT及八次完整pre/post读取，raw→PNG逐行字节与原件身份独立复验，pre全透明、post alpha为102/255。这是来源认证；其中只有下面两个状态执行了产品A/B比较。compact是在创造模式采集，不能称为生存模式保留场景；filter-empty为生存模式。
+
+A沿用bilinear标签采样，B只将各场景已有标签的sampling改为point（compact两种、filter-empty三种），字体、metrics、shader及非文字输入保持不变。B在A首个结果之前已冻结，没有按结果拟合偏移。每张都比较完整2570×1402的3,603,140个RGBA像素，没有掩码或容差：
+
+| GUI4状态 | A：差异像素 / 字节 | B：差异像素 / 字节 | 各组相对原生的alpha差异像素 |
+| --- | ---: | ---: | ---: |
+| 创造模式compact | 151 / 453 | 0 / 0 | 均为0 |
+| 生存模式filter-empty | 411 / 1,194 | 160 / 441 | 均为0 |
+
+两种B的已覆盖字体区域均与原生零差，A/B在文字范围之外逐RGBA字节一致。Filter B的160个残差全部位于搜索分类 `magnifyingGlass` 的范围，包围盒为[1134,306,1193,357]；放大镜A/B未变，不能据此宣称整页零差或删除这些残差。两次A和两次B的独立原生复制显示也完整零差，运行无异常，源及输入pin未变。原GUI5的5个放大镜像素、4个标题像素保持此前结果。
+
+完整A/B与区域分类见 `.cache/crafting-native-gui4-point-01/FINAL-AB.json`；独立整帧PNG复验见 `.cache/crafting-followup-close-01/ROOT-GUI4-PRODUCT-VERIFICATION.json`。这些辅助对照不增加正式测试数，也不把后续候选实验算作已完成。
+
+上述结果只认证已观察输入、指定字体与NVIDIA / ANGLE D3D11路径；不泛化到所有GUI4状态、默认字体、全部Unicode、跨GPU / DPR、真实OS IME、世界合成或最终Present。后续仍需保留完整target残差并按场景限定结论。
