@@ -36,11 +36,11 @@ import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
 const components = ['InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds'];
-const rendererFunctions = ['shadeItemGlint','renderItemGlint'];
+const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs'];
 assert.equal(components.length,117);
 assert.equal(dataExports.length,3);
-assert.equal(rendererFunctions.length,2);
-assert.equal(Object.keys(ui).length,122);
+assert.equal(rendererFunctions.length,3);
+assert.equal(Object.keys(ui).length,123);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
 const glintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25]};
@@ -62,6 +62,12 @@ assert.match(recipeBookMarkup,/Host stone recipe/);
 assert.match(recipeBookMarkup,/data-modifier="expand"/);
 const bitmapFont = {pages:['/caller-owned-atlas.png'],glyphs:{A:{page:0,x:0,y:0,width:1,height:1,advance:1}},lineHeight:1};
 const bitmapMarkup = renderToString(element(ui.BitmapText,{font:bitmapFont,sampling:'point',shader:'bitmap',color:'#ffffff'},'A'));
+const emptyGpu = ui.renderBitmapGlyphs({width:0,height:0,pages:new Map(),runs:[]});
+assert.equal(emptyGpu.alphaMode,'premultiplied');
+assert.equal(emptyGpu.data.length,0);
+emptyGpu.dispose();
+const bitmapGpuMarkup = renderToString(element(ui.BitmapText,{font:bitmapFont,sampling:'point',shader:'bitmap',renderer:'webgl',profile:'atlas-rect',background:'#102030'},'A'));
+assert.match(bitmapGpuMarkup,/A/);
 assert.match(bitmapMarkup,/mc-bitmap-text/);
 assert(bitmapMarkup.includes('>A</span>'));
 assert.match(bitmapMarkup,/data-render-state="loading"/);
@@ -220,8 +226,8 @@ console.log('React '+React.version+': ESM, '+components.length+' components + '+
 import { createRef } from 'react';
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState } from 'mcbeui';
-import { BitmapText } from 'mcbeui';
-import type { BitmapTextProps, BitmapFont, BitmapGlyph } from 'mcbeui';
+import { BitmapText, renderBitmapGlyphs } from 'mcbeui';
+import type { BitmapTextProps, BitmapTextRenderer, BitmapTextProfile, BitmapFont, BitmapGlyph, BitmapGlyphRun, BitmapGlyphRenderOptions, BitmapGlyphRenderResult, BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, BitmapUnicodeVertex, BitmapUnicodeRun, BitmapGlyphBackground } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
 import type { AirBubbleState, BrewingSlot, CartographyMode, ScrollPosition } from 'mcbeui';
 import { BossBar, ChatMessage, ChatPanel, Scoreboard, StatusEffect, ActionBar, TitleOverlay, HeldItemTooltip } from 'mcbeui';
@@ -285,6 +291,18 @@ const glintProps: ItemGlintProps = {imageSrc:'/caller-item.png',uniforms:glintUn
 const recipeCategories: RecipeCategory[] = [{id:'construction',label:'Construction'},{id:'search',label:'Search'}];
 const bookIdentity: readonly number[] = Object.freeze([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);
 const bookRendererState: EnchantingBookRendererState = {projection:bookIdentity,view:bookIdentity,model:bookIdentity,bones:Object.freeze(Array.from({length:7},()=>bookIdentity)),tileLightColor:[1,1,1,1],overlayColor:[0,0,0,0]};
+const gpuColor: BitmapRgba = [1,1,1,1];
+const gpuRect: BitmapTargetRect = [0,0,1,1];
+const gpuQuad: BitmapAtlasQuad = {x:0,y:0,width:1,height:1,atlasRect:gpuRect,color:gpuColor};
+const gpuAtlas: BitmapAtlasRun = {profile:'atlas-rect',page:0,sampling:'point',shader:'bitmap',quads:[gpuQuad],viewport:gpuRect,scissor:gpuRect};
+const gpuVertex: BitmapUnicodeVertex = {position:[0,0,0],uvRaw:[0,0],rgba:[255,255,255,255]};
+const gpuUnicode: BitmapUnicodeRun = {profile:'bedrock-unicode',page:0,sampling:'bilinear',shader:'bitmap-smooth',vertices:[gpuVertex],indices:[],glyphHeight:1/16,halfTexelOffset:1/512};
+const gpuBackground: BitmapGlyphBackground = {kind:'solid',color:gpuColor};
+const gpuRuns: readonly BitmapGlyphRun[] = [gpuAtlas,gpuUnicode];
+const gpuBackend: BitmapTextRenderer = 'webgl';
+const gpuProfile: BitmapTextProfile = 'atlas-rect';
+export const gpuRenderer: (options: BitmapGlyphRenderOptions)=>BitmapGlyphRenderResult = renderBitmapGlyphs;
+export const emptyGpuOptions: BitmapGlyphRenderOptions = {width:0,height:0,pages:new Map(),runs:[],background:gpuBackground,output:'framebuffer'};
 export const demo = <>
   <Button {...props} ref={createRef<HTMLButtonElement>()}>Play</Button>
   <Text as="p" shadow ref={createRef<HTMLElement>()}>Minecraft</Text>
@@ -378,6 +396,7 @@ export const demo = <>
   <MountInventory equipment={mountEquipment} chested storageColumns={3} onEquipmentAction={(index,action)=>String(index)+action} onStorageSelectionChange={index=>index.toFixed(0)} ref={createRef<HTMLElement>()}/>
   <ItemGlint {...glintProps} onReady={()=>{}} onRenderError={error=>error.message} data-pass-alpha={glintPass?.[3]} data-pixel-width={glintPixels.width} ref={createRef<HTMLCanvasElement>()}/>
   <BitmapText {...bitmapProps} onReady={()=>{}} onRenderError={error=>error.message} ref={createRef<HTMLSpanElement>()}/>
+  <BitmapText {...bitmapProps} renderer={gpuBackend} profile={gpuProfile} background="#1b0c1b" ref={createRef<HTMLSpanElement>()}/>
   <ItemTooltip item={rendererItem} renderText={textRenderer} ref={createRef<HTMLDivElement>()}/>
   <ItemSlot item={rendererItem}/>
   <ItemTooltip item={{name:'Consumer sword',nameColor:'#55ffff',durability:.5,lore:[<span>Sharpness I</span>]}} ref={createRef<HTMLDivElement>()}/>

@@ -2,7 +2,21 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点与历史记录范围
+## 当前检查点：可复用 GPU 字体后端
+
+当前117个组件、3份数据、3个渲染函数，共123值；其中2个glint纯纹理函数，1个浏览器GPU字体函数。`BitmapText` 保留默认CPU，新增WebGL/source profile/显式背景；公开 `renderBitmapGlyphs`。API、PMA与上下文预算见 [BITMAP_GPU_QA.md](BITMAP_GPU_QA.md)。
+
+| 本轮检查 | 结果与范围 |
+| --- | --- |
+| 正式回归 | 新WebGL7项＋旧CPU13项，20/20 PASS、0 skip/flaky/unexpected，39.446秒；`.cache/bitmap-gpu-independent-final.json` SHA `ea24b2e3ddb577481cd3f10c79dbbc510f299330ec364b03395213681aa14d52`。既有CPU测试未修改 |
+| 实际生产函数 | 对原始8draw输入及原pre目标，临时context/livecanvas/默认framebuffer完整3603140像素及25688像素field＋halo均RGBA0差；独立期望来自真实post102，不是生产shader快照 |
+| 独立组件检查 | 四种背景与alpha组合完整field/halo相对独立PSO shader浏览器控制样本0差；15项辅助生命周期/DOM等检查通过，无浏览器异常，不增加正式用例数 |
+| 包消费 | React18.3.1/19.3.1实际包的123值、SSR、类型/ref、GPU类型与无DOM空目标、CSS/fonts/assets/licenses通过；实际受测包SHA `593c984d88224329db5984ee1625839e0f0ec1c44615b8c7edc57b7109e57460`，JS SHA `444a56f9aa24a5eb1534dae69efe9b271d7e7a2560ebb30c8b3ab621a96630ec`；两消费者各102份dist逐字节相同 |
+| 生产展示 | 4173五项入口与site逐字节相同，14项辅助检查通过；GPU clear像素、CPU往返、context-loss报错/恢复、320px及局部pan正确，页面错误为空 |
+
+按正式项目、文件与完整标题合并历史最终结果，当前799唯一用例：794 PASS、5预期SKIP、0未解决失败；这是多批次累计，非整库单次全绿。限定GPU绘制链通过不等于默认CPU、任意硬件、最终Present或整GUI认证。
+
+## 上一检查点：生存背包与 GPU 书本（117组件、122值）
 
 当前公开 **117个组件、3份数据、2个函数，共122项值导出**。本轮新增 InventoryScreenFrame / SurvivalInventoryScreen，并保留 CraftingScreen 的API和既有右面板。源几何、可复用边界和完整证据见 [SURVIVAL_INVENTORY_QA.md](SURVIVAL_INVENTORY_QA.md)。
 

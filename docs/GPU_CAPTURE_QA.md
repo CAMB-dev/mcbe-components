@@ -30,6 +30,6 @@
 
 实际tooltip的8张256×256字体纹理亦已回读，并与原始glyph页逐字节匹配。对应 Global95..102 / queue0 events440..496 / PSO793；POSITION 为half4、UV为UNORM16、COLOR为UNORM8，线性CLAMP采样、SRC_ALPHA/INV_SRC_ALPHA混合、单采样目标106。
 
-以原pre95目标为背景，真实8个font draw的硬件重放对完整2570×1402目标及完整字段/halo均为RGBA零差。报告SHA256 `f26db0532251617d1ce73fb37d25be5c4277008d9c5510cf077c782026e5b353`。这是捕获输入下的条件式重放；生产Canvas2D字体后端尚未迁入此profile，旧截图映射和整GUI仍待验证，见 [NATIVE_BITMAP_FONT_QA.md](NATIVE_BITMAP_FONT_QA.md)。
+以原pre95目标为背景，真实8个font draw的硬件重放对完整2570×1402目标及完整字段/halo均为RGBA零差。初次诊断报告SHA256 `f26db0532251617d1ce73fb37d25be5c4277008d9c5510cf077c782026e5b353`。随后已将绘制链迁入实际 `renderBitmapGlyphs` 和 `BitmapText` 的可选WebGL后端；独立调用生产函数的临时及livecanvas路径同样全目标RGBA零差，报告SHA256 `bea90d671be706a3e2675ad6b5e89753e2221b2ddc93bcbde5aa1ee14538ec59`。这是捕获输入下的条件式复现；CPU默认、旧截图映射和整GUI仍待验证，见 [BITMAP_GPU_QA.md](BITMAP_GPU_QA.md)、[NATIVE_BITMAP_FONT_QA.md](NATIVE_BITMAP_FONT_QA.md)。
 
 UI目标106与最终场景目标100须区分：106为单采样，Global251采样它绘入8倍采样的100；Global254 resolve 100→单采样101。API事件确认原始Global258为 `ID3D12SharingContract::Present` 接收101。导出程序再复制到其新swapchain是重放适配步骤；最终桌面窗口映射仍不能从这些步骤推断。

@@ -7,7 +7,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 111 个组件（含公共 ContainerFrame、InventoryToolbar、BitmapText 与三个材质渲染器），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；另有 3 个数据和 2 个纯渲染函数导出。implemented 只代表导出，不代表像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 117 个组件（含公共 ContainerFrame、InventoryToolbar、BitmapText、RecipeBook、InventoryScreenFrame 与完整生存背包 / 工作台组合），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；另有3个数据、2个纯纹理函数和1个GPU字体函数，共123个值导出。implemented 只代表导出，不代表像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -62,7 +62,12 @@
 - [x] 新增11个glint、14个双端Tooltip交互及1个独立轮廓用例；校准页局部滚动保留原规格，相关范围复验完成；累计712唯一用例中707通过、5预期跳过，0未解决失败（历史与最终相关批次合并）
 - [x] 确认已测原生中文采用基础 Unicode 位图设计，新增 BitmapText 与物品提示文字渲染入口；111组件 / 116公共值，字体图页由调用方提供，本地10字符样本不分发
 - [x] BitmapText 13项与物品提示相关38项通过；正式配置下字图及原生布局合同16/16通过，累计734唯一用例中729通过、5预期跳过；原生GUI5高覆盖阈值仍各5像素差、完整RGBA仍非零，未算作原生像素认证
-- [ ] 对照游戏渲染器完善附魔书本、符文、方块 / 旗帜 / 装备预览、物品 tooltip / glint、工作站完整页面
+- [x] 实现完整 Classic 工作台和生存背包，共享 Frame / RecipeBook / Entry / Filter，117组件、122公共值；库存相关109项及书本15项最终批次通过，实际React18/19 tarball消费验证通过
+- [x] 经授权安装 PIX 并采集真实附魔台GPU帧；恢复书本与tooltip字体draw的实际纹理、VB/IB、shader、矩阵、UV及混合，完整2570×1402目标在限定NVIDIA后端的条件式重放RGBA零差
+- [x] 将实际书本网格、UV及shader迁入组件，新增caller rendererState；实际组件显式捕获状态全目标RGBA零差，默认动态姿态和旧PNG非零差继续保留
+- [x] 将验证过的字体GPU绘制链迁入可复用renderBitmapGlyphs与BitmapText可选后端；真实8draw及原背景在限定NVIDIA后端全目标/字段/halo零差，组件多底色Web合同独立通过；CPU默认保留，正式新7+旧13共20项通过，123值React18/19消费通过
+- [ ] 完成默认字体与原生整GUI的最终合成 / Present / 窗口映射验证，并完善大量GPU文字的共享批处理和上下文预算
+- [ ] 对照游戏渲染器完善附魔书本动态算法、符文、方块 / 旗帜 / 装备预览、物品 tooltip / glint、工作站完整页面
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
 
 Goal 保持进行中：首版组件库已实现，严格的游戏画面对照验收尚未完成。当前可通过 `npm run preview -- --port 4173` 打开展示页。

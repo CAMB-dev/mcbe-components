@@ -15,7 +15,21 @@
       {
         "name": "BitmapText",
         "status": "implemented",
-        "fidelity": "caller_owned_bitmap_atlas_controlled_reconstruction_native_sampling_unverified"
+        "fidelity": "cpu_default_controlled_atlas_reconstruction_opt_in_webgl_captured_eight_draw_state_exact_not_dom_or_all_text_certification",
+        "api": {
+          "renderer": [
+            "cpu",
+            "webgl"
+          ],
+          "defaultRenderer": "cpu",
+          "profile": [
+            "atlas-rect",
+            "bedrock-unicode"
+          ],
+          "defaultProfile": "atlas-rect",
+          "background": "optional concrete CSS color, WebGL target clear only",
+          "details": "docs/BITMAP_GPU_QA.md"
+        }
       },
       {
         "name": "PixelIcon",
@@ -520,5 +534,18 @@
         "fidelity": "source_texture_web_composition"
       }
     ]
+  },
+  "publicExports": {
+    "components": 117,
+    "rendererDataValues": 3,
+    "pureGlintFunctions": [
+      "shadeItemGlint",
+      "renderItemGlint"
+    ],
+    "sideEffectingGpuFunctions": [
+      "renderBitmapGlyphs"
+    ],
+    "runtimeValues": 123,
+    "countsAreNotPixelCertification": true
   }
 }

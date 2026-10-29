@@ -60,7 +60,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | 组件 | 主要属性 | 行为 |
 | --- | --- | --- |
 | `Text` | `as`: span / p / h1…h4；`size`: sm / md / lg / xl；`shadow` 默认 true | 像素文字与无模糊阴影，转发 HTMLElement ref |
-| `BitmapText` | **必填** 字符串 children、`font`、`sampling`: point / bilinear、`shader`: bitmap / bitmap-smooth；可选 `scale`、具体 CSS `color`、显式 `shadow` 与回调 | 按字图矩形、advance/offset 和行高绘制；ref 为 span；保留真实 DOM 文字供读屏/复制，加载失败显示原文 |
+| `BitmapText` | **必填** 字符串 children、`font`、`sampling`: point / bilinear、`shader`: bitmap / bitmap-smooth；可选 `renderer`: cpu（默认）/ webgl、`profile`: atlas-rect（默认）/ bedrock-unicode、具体 CSS `background`、`scale`、`color`、显式 `shadow` 与回调 | ref 为 span；CPU 绘制任意字图矩形，WebGL 使用独立活 GPU canvas；background 是 GPU target clear 色；保留真实 DOM 原文及加载失败回退 |
 | `Button` | `variant`: default / primary / danger / ghost；`size`: sm / md / lg；`loading`、`fullWidth`、`startIcon`、`endIcon` | 默认 `type="button"`；loading 保留文字，禁用并设置 aria-busy；继承 button 属性 |
 | `IconButton` | Button 属性；**必填** `aria-label` | 正方形按钮，children 放图标 |
 | `Panel` | `title`、`footer`、`variant`: default / inset | Classic 浅灰九宫格面板 / 灰色凹陷面板；section，标题自动关联 aria-labelledby |
@@ -292,7 +292,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **117 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 117 项（含 InventoryScreenFrame / SurvivalInventoryScreen / RecipeBook / CraftingScreen），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 3 份 renderer 数据及 `shadeItemGlint` / `renderItemGlint` 两个纯渲染函数，不计组件数量；ESM 值导出共 122 项。
+当前 **117 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 117 项（含 InventoryScreenFrame / SurvivalInventoryScreen / RecipeBook / CraftingScreen），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 3 份 renderer 数据及 `shadeItemGlint` / `renderItemGlint` 两个纯渲染函数，以及有 GPU 副作用的 `renderBitmapGlyphs`，均不计组件数量；ESM 值导出共 123 项。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -426,9 +426,18 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 }} />
 ```
 
+`renderer="cpu"` 默认保持已有 Canvas2D 路径，只支持 `profile="atlas-rect"` 且不接收 `background`。显式选择 `renderer="webgl"` 后，`atlas-rect` 支持任意合法矩形字格；`bedrock-unicode` 要求 256×256 原页、16×16 完整字格、x/y 按16对齐，使用 packed UV 与 corner 规则，不自动转换 trimmed 字格。`background` 是具体 CSS 色的 GPU target clear，省略时透明，不能用 CSS 背景替代其混合条件。
+
+```tsx
+<BitmapText font={fullCellFont} renderer="webgl" profile="bedrock-unicode"
+  sampling="bilinear" shader="bitmap-smooth" color="#ffffff">钻石剑</BitmapText>
+```
+
+`renderBitmapGlyphs(options)` 是浏览器 GPU 函数，接收原始页、顺序 runs 和可选 target 背景；默认 `output="framebuffer"` 返回预乘 RGBA8，`output="straight-alpha"` 会显式做8位反预乘并可能产生舍入差。组件将 FBO 直接 GPU copy 到 `premultipliedAlpha:true` 的活 canvas，不经 `putImageData`。每个 WebGL 组件实例占用独立 context，受浏览器预算限制；共享 batch renderer 尚未实现。API、释放方式及验证边界见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md)。
+
 本机样本可执行 `python scripts/use-local-unicode-sample.py "C:/XboxGames/Minecraft for Windows/Content"` 后重启 Vite。该仓库工具只准备已测的8张原页、10字符，保存在忽略目录；它不生成完整 Unicode 字体，也不改变全局字体。启用后 `site/` 构建可能包含这些本地字图，npm 包不含它们。
 
-原生 GUI4/5 对照确认了这些 Unicode 字形和主要排版数据；实际着色器绑定、覆盖率和共同 UI 采样仍有差异。`BitmapSmooth` 的采样后 smoothstep、标准 Web source-over、源像素半 texel 夹取和 CSS 颜色的 Canvas RGBA8 解析均有明确边界。见 [NATIVE_BITMAP_FONT_QA.md](docs/NATIVE_BITMAP_FONT_QA.md)。
+早期 GUI4/5 字形、排版与 CPU / 软件后端反例保留在 [NATIVE_BITMAP_FONT_QA.md](docs/NATIVE_BITMAP_FONT_QA.md)。新 GPU 函数以真实捕获的8个 draw、原 API-before 背景和固定输入，在已测 NVIDIA 后端对完整 target / field＋halo 零 RGBA 差；这不认证默认 CPU、任意文字、透明 DOM 合成或完整 GUI。具体证据范围见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md)。
 
 本地展示页也可以使用自己安装的 Bedrock 字体：
 

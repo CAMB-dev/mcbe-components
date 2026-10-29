@@ -2,13 +2,13 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
-当前公开117个组件、3份数据及2个函数，共122项值导出。新增共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
+当前公开117个组件、3份数据及3个渲染函数，共123项值导出；其中新增 `renderBitmapGlyphs` 为浏览器GPU函数，两个glint函数为纯纹理运算。共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen 已实现；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
 
 ## 实际 GPU 捕获与当前书本实现
 
 PIX已捕获本机附魔台的一帧。书本实际mesh、UV、PSO795状态与shader算术已迁入 `EnchantingBook`；新增调用方 `rendererState` 接口。实际组件在NVIDIA / ANGLE D3D11、原始矩阵与骨骼下，对该次book draw完整2570×1402目标RGBA零差；默认开合 / 翻页CPU算法仍为受控重建，在旧GUI4/5原图上仍有非零误差。此为限定draw认证，不等于整GUI、默认动画或其他GPU认证。
 
-同一捕获的8个字体draw已独立硬件重放为全目标、完整字段与halo RGBA零差；生产 `BitmapText` 仍为原Canvas2D后端，尚未迁入这组GPU profile。真实UNORM16 UV、half顶点、MVP及混合已查实；没有把旧phi拟合加进生产。完整证据及原件哈希见 [GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)、[ENCHANTING_QA.md](ENCHANTING_QA.md)、[NATIVE_BITMAP_FONT_QA.md](NATIVE_BITMAP_FONT_QA.md)。
+同一捕获的8个字体draw已由实际生产 `renderBitmapGlyphs` 函数硬件重现为全目标、完整字段与halo RGBA零差；`BitmapText` 新增可选WebGL / Bedrock Unicode profile与PMA活画布，CPU默认保留。真实UNORM16 UV、cornerID、MVP及混合已查实；没有把旧phi拟合加进生产。低层原生输入零差、组件多底色Web合同与整GUI验收分别记录；见 [BITMAP_GPU_QA.md](BITMAP_GPU_QA.md)、[GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)、[NATIVE_BITMAP_FONT_QA.md](NATIVE_BITMAP_FONT_QA.md)。
 
 ## 本轮物品提示与附魔光效
 

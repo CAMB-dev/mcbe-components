@@ -235,7 +235,7 @@ alpha全相同不等于RGBA相同。负控也必须保留：bilinear/Smooth GPU�
 
 报告和实际完整输出均在ignored目录：`REPORT.md` SHA `498ea116187f2781e9b70fe2ddd04540dcacc92c688d51868cc60d10ebe149c9`，`summary.json` SHA `8ac346a6a9ffde5fa532fcd9afb925c677e76a17db7c198f52562eb136963937`，`result.json` SHA `18f5ed6786e27e43ea2c04e0e925d83702d0a6bbb8a8d95752523c768dfd3098`（均位于 `.cache/bitmap-hardware-diagnostic/`）。八配置保存PNG的完整field/halo、CPU/实际组件/native比较指标已重新核算，未启动新的GPU或测试run。
 
-## 2026-10-29：原生 GPU 采集状态更新
+## 2026-10-29：原生 GPU 采集诊断阶段
 
 前述准备和硬件诊断是各自历史检查点。用户授权后，PIX 2610.28 安装与受控重启已成功，图形界面已采集并保存含展开书本、中文钻石剑提示框的一帧；分析副本的事件列表及完整 C++ 静态导出成功。详见 [GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。采集文件不随组件库分发，生产 `BitmapText` 的采样规则在本轮没有改变。
 
@@ -243,4 +243,12 @@ alpha全相同不等于RGBA相同。负控也必须保留：bilinear/Smooth GPU�
 
 独立 NVIDIA RTX3050 / ANGLE D3D11 重放以真实 pre95 目标为背景，绘制8个实际文字draw，与真实后续目标相比，**2570×1402全部3603140像素、完整243×100字段以及含空白的247×104 halo均为RGBA零差**，8个draw的GL错误全为0。条件式诊断报告 `.cache/pix-capture/independent-state-audit/captured-tooltip-hardware-replay.json` SHA256 `f26db0532251617d1ce73fb37d25be5c4277008d9c5510cf077c782026e5b353`；完整来源追踪见 `TRACE_REPORT.md`，SHA256 `bd2467b0f340c3202bbe516381d75546ad81d1aed8a3602b35cfa705f959aa61`。
 
-这认证本次实际输入的8个font pass重放，**不是现有Canvas2D生产组件的原生零差认证**，也不是独立重建整GUI。末端Global251的真实float32四边形及UV为精确0/1，VS不读取其bound CBV；捕获内未观察到旧phi的显式变换。旧2568×1400 PNG属于不同帧 / 尺寸，SharingContract后桌面映射仍未知；不将旧拟合偏移加入生产。下一阶段需将已恢复的GPU profile迁入可复用字体后端，并保留原DOM可选文字、字体来源和背景混合边界。
+这认证本次实际输入的8个font pass重放，**不是现有Canvas2D生产组件的原生零差认证**，也不是独立重建整GUI。末端Global251的真实float32四边形及UV为精确0/1，VS不读取其bound CBV；捕获内未观察到旧phi的显式变换。旧2568×1400 PNG属于不同帧 / 尺寸，SharingContract后桌面映射仍未知；不将旧拟合偏移加入生产。后续生产迁移如下。
+
+## 当前可复用 WebGL 后端
+
+`BitmapText` 已新增显式 `renderer="webgl"`、`profile="bedrock-unicode"` 与可选 framebuffer `background`。CPU / atlas-rect 仍为默认；真实 DOM 原文、ref、SSR 与错误回退保留。低层 `renderBitmapGlyphs` 支持调用方页面、runs、MVP、原背景、scissor及viewport；不包含本帧矩阵、坐标或私有图集。任意裁剪字格与 Bedrock 完整16×16字格是分开的 source profile。完整合同见 [BITMAP_GPU_QA.md](BITMAP_GPU_QA.md)。
+
+独立验证直接调用当前生产函数（源码SHA256 `f44fd97c8a866244c7b7555805425896b87b22c430d357b959794fa35642a9de`），以原pre95背景与实际8个draw为输入，对真实post102目标逐RGBA比较：临时context、livecanvas及其默认framebuffer的完整3603140像素、完整字段与halo均0差。报告 `.cache/pix-capture/independent-production-font/production-capture-verification.json` SHA256 `bea90d671be706a3e2675ad6b5e89753e2221b2ddc93bcbde5aa1ee14538ec59`。这已由实际库函数完成，未将旧诊断GLSL当成生产结果。
+
+实际组件另以独立原PSO shader的浏览器输出为期望，四种背景 / alpha组合的完整243×100字段及247×104 halo均0差；15项独立生命周期 / DOM等辅助检查通过，浏览器异常为0。汇总 `.cache/pix-capture/independent-production-font/FINAL_SUMMARY.json` SHA256 `a4b772ead0df50e9c75b0e8b371ed7833159da699b541fefd47ae7ac00dca922`。这些组件底色比较认证声明的GPU/Web合成合同，不替代原生整GUI、最终Present、其他GPU、旧PNG映射或默认CPU的认证。PMA数据与straight-alpha转换明确区分；活GPU画布直接copy，未借Canvas2D重复混合。每实例context数量受浏览器预算限制，共享批处理仍待完善。
