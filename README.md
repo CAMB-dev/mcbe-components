@@ -534,6 +534,8 @@ CSS、GuiText与BitmapText的阴影offset单位及已知宿主缩放换算见 [T
 
 早期 GUI4/5 字形、排版与 CPU / 软件后端反例保留在 [NATIVE_BITMAP_FONT_QA.md](docs/NATIVE_BITMAP_FONT_QA.md)。新 GPU 函数以真实捕获的8个 draw、原 API-before 背景和固定输入，在已测 NVIDIA 后端对完整 target / field＋halo 零 RGBA 差；这不认证默认 CPU、任意文字、透明 DOM 合成或完整 GUI。具体证据范围见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md)。
 
+三工作站的六场景文字对照见 [WORKSTATION_TEXT_RENDERING.md](docs/WORKSTATION_TEXT_RENDERING.md)。提高局部文字画布分辨率没有统一改善原版差异，因此没有改为默认；完整 source 合成的有限零差结果与普通 DOM 字体的残差分别记录。
+
 本地展示页也可以使用自己安装的 Bedrock 字体：
 
 ```powershell
