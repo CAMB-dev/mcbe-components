@@ -21,6 +21,9 @@ export interface BitmapLayout {
   pages: readonly number[];
   width: number;
   height: number;
+  /** Scaled CSS-pixel advance box, independent of glyph/shadow visual overhang. */
+  logicalWidth: number;
+  logicalHeight: number;
   originX: number;
   originY: number;
   scale: number;
@@ -35,9 +38,9 @@ export function layoutBitmapText(font: BitmapFont, text: string, scale: number, 
   if (font.pages.some(page => typeof page !== 'string' || !page.trim())) throw new RangeError('Font pages must have non-empty source URLs.');
   if (shadow) { finite(shadow.offsetX, 'shadow.offsetX'); finite(shadow.offsetY, 'shadow.offsetY'); }
   const glyphs: PlacedGlyph[] = [], pages = new Set<number>();
-  let pen = 0, line = 0, minX = 0, minY = 0, maxX = 0, maxY = text ? font.lineHeight : 0;
+  let pen = 0, line = 0, maxLineAdvance = 0, minX = 0, minY = 0, maxX = 0, maxY = text ? font.lineHeight : 0;
   for (const character of text.replace(/\r\n?/g, '\n')) {
-    if (character === '\n') { pen = 0; line++; maxY = Math.max(maxY, (line + 1) * font.lineHeight); continue; }
+    if (character === '\n') { maxLineAdvance = Math.max(maxLineAdvance, pen); pen = 0; line++; maxY = Math.max(maxY, (line + 1) * font.lineHeight); continue; }
     const glyph = Object.prototype.hasOwnProperty.call(font.glyphs, character) ? font.glyphs[character] : undefined;
     if (!glyph) throw new Error(`Missing bitmap glyph U+${character.codePointAt(0)!.toString(16).toUpperCase()}.`);
     coordinate(glyph.page, 'glyph.page'); coordinate(glyph.x, 'glyph.x'); coordinate(glyph.y, 'glyph.y'); coordinate(glyph.width, 'glyph.width'); coordinate(glyph.height, 'glyph.height');
@@ -53,7 +56,9 @@ export function layoutBitmapText(font: BitmapFont, text: string, scale: number, 
   }
   const width = Math.ceil((maxX - minX) * scale), height = Math.ceil((maxY - minY) * scale);
   if (!Number.isFinite(width) || !Number.isFinite(height) || width > 8192 || height > 8192 || width * height > 4194304) throw new RangeError('Bitmap text exceeds the whole-canvas size limit.');
-  return { glyphs, pages: [...pages], width, height, originX: -minX, originY: -minY, scale };
+  const logicalWidth = Math.max(0, maxLineAdvance, pen) * scale;
+  const logicalHeight = text ? (line + 1) * font.lineHeight * scale : 0;
+  return { glyphs, pages: [...pages], width, height, logicalWidth, logicalHeight, originX: -minX, originY: -minY, scale };
 }
 
 function sample(texture: PixelTexture, glyph: BitmapGlyph, x: number, y: number, sampling: 'point' | 'bilinear'): number[] {

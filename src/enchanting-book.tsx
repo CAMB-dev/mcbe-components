@@ -20,7 +20,9 @@ export const EnchantingRunes = forwardRef<HTMLSpanElement, EnchantingRunesProps>
     {text.split(/(\s+)/).map((word, wordIndex) => /^\s+$/.test(word)
       ? <span key={wordIndex} className="mc-enchanting-runes__space" aria-hidden="true" style={{ width: 4 * scale * word.length, height: 8 * scale }}/>
       : <span key={wordIndex} className="mc-enchanting-runes__word" aria-hidden="true">{[...word].map((char, index) => {
-        const code = char.toUpperCase().charCodeAt(0), width = runeWidths[code - 65] ?? 3;
+        // Native SGA ellipses advance one game pixel per empty period cell.
+        // Keep the other unmeasured fallback characters unchanged.
+        const code = char.toUpperCase().charCodeAt(0), width = code === 46 ? 0 : runeWidths[code - 65] ?? 3;
         const mask = { maskImage: `url("${atlasUrl}")`, maskSize: `${128 * scale}px ${128 * scale}px`, maskPosition: `${-(code % 16) * 8 * scale}px ${-Math.floor(code / 16) * 8 * scale}px` };
         return <span key={index} className="mc-enchanting-runes__glyph" data-rune={char}
           style={{ ...mask, WebkitMaskImage: mask.maskImage, WebkitMaskSize: mask.maskSize, WebkitMaskPosition: mask.maskPosition, width: (width + 1) * scale, height: 8 * scale } as CSSProperties}/>;

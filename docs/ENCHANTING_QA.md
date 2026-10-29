@@ -2,13 +2,23 @@
 
 2026-10-29。本机 Bedrock 1.26.6005.0（界面显示26.60）。当前已将实际 GPU draw 的书本网格、UV、采样和 shader 算术迁入组件；传入捕获的 `rendererState` 时，实际 React 组件在已核验的 NVIDIA 后端与该次书本 draw 全目标 RGBA 零差。**默认开合 / 翻页仍是受控重建，旧原生截图比较仍非零，整个附魔台尚未达到原生 pixel perfect。**
 
+## 本轮追加：可选工作站文字与 SGA 句点
+
+WorkstationFrame / PlayerInventory / EnchantmentOption 新增可选 renderText，EnchantingTable 转发标题、库存标签与三个费用；原文字及 canonical 可访问语义保留，字体和 GPU 使用由宿主显式选择。BitmapText 的 advance 布局只改变 CSS 逻辑占位，完整 bearing / shadow canvas 保留；费用 end 锚定示例采用 display:block，避免父级 inline strut。原六字 CJK 与费用1/2本机子集只是已观察单行 profile，末字 advance、费用相邻数字和多行 / 原生Y仍有边界。完整合同及示例见 [WORKSTATION_TEXT_QA.md](WORKSTATION_TEXT_QA.md)。
+
+两帧真实 SGA 六行表明空句点虽无 ink，仍 advance1 game；本轮仅将 `.` 从旧 fallback4修为1，其他默认字符不动。此修改发生在 enchanting-book.tsx 的 rune 部分，不改变实际 Book renderer。没有因为字图单元测试或可选文字 seam 声称整页附魔台已零差。
+
+本feature正式58/58通过（新增工作站文字5＋句点1，旧相关52），0跳过，126.4秒；完整报告 `.cache/workstation-text-qa/final-result.json`。行框与DPR2已知背景整面比较是Web合同，SGA atlas仅本机可选，不归因于未含此条目的公开full ZIP；不当作新增原生整页认证。
+
+新的实际 post-all-UI R117 整面板＋halo747,600像素基线仍非零：普通 React 公开字体CSS18主 profile 不同51,666像素，gallery本机20 profile不同53,523像素，max均255。它们是完整组件基线，不是本轮可选字体 adapter 成果认证；缺图标、文字、边角与alpha差都保留在评分里。单 draw、自动排版、整GUI和最终Present仍分别验收，最新研究来源与范围见上述文字QA。
+
 ## 本轮追加：关闭入口、经验粉与书本端点
 
 附魔台 compact 关闭图原本应为15×7 game；本轮仅修正它的定位覆盖，使 GUI2 的局部位置 / 尺寸为 [312,10,30,14] CSS px。实际原生 GUI5 完整75×35、2,625像素裁切与修复后按钮 RGBA 零差，键盘 Enter 回调一次；Grindstone 既有位置不变。独立证据 `.cache/enchanting-full-gui-audit/fixed-close-independent-verification.json` SHA256 `9e3b2c7c9802f352fd5e8e96e892a4a437c8f9c46016c0b87c8eb5e76761e878`。相关正式36项分批通过（新增1＋旧pixels17＋desktop9＋mobile9），0跳过；该新增一项的数量与证据只记录这一局部范围，不是整页认证。汇总 `.cache/enchanting-close-qa/final-summary.json` SHA256 `ade7ddfdb9c95eaa47876adb49e5cb9a6fed19f4c27268ac6de2ad9b6586b53c` 保留首轮透明 RGB oracle 修正说明，没有变更原图字节或可见色。
 
 经验粉全入口复查未发现拉伸或另造圆球：原13×11各档轮廓本来不同，CSS26×22整数展开的六个完整 ROI 共3,432像素零差，无 mask / 容差。本轮不重绘图像、不改变经验粉生产逻辑；原生 quad / texture 证据不等于整屏合成验收。报告 `.cache/enchanting-dust-study/expanded-entrypoint-audit.json` SHA256 `f01909abb24d20fd6e2330a725a92fd26ac603e4e78ec7bc05f995c49536248a`。
 
-新实际 open-clean / closed-stable 捕获支持现有闭合局部平移 T(.2,.1,.25)（网格单位偏移3.2/1.6/4）及端点 yaw 从−90°到−180°；不支持再按截图任意移动书本。两次 model 的相对位移经父级缩放 / pitch 逆变换与既有参数一致，捕获的全局位置不能写入默认组件。源码 SHA256 仍为 `390fd9620c7ab99d479d7ce46441457bbd5a59df9d95652150509e759d4a88d7`，书本生产实现未改。
+新实际 open-clean / closed-stable 捕获支持现有闭合局部平移 T(.2,.1,.25)（网格单位偏移3.2/1.6/4）及端点 yaw 从−90°到−180°；不支持再按截图任意移动书本。两次 model 的相对位移经父级缩放 / pitch 逆变换与既有参数一致，捕获的全局位置不能写入默认组件。该端点研究时源码 SHA256 为 `390fd9620c7ab99d479d7ce46441457bbd5a59df9d95652150509e759d4a88d7`，当时书本生产实现未改；本轮 SGA 句点 advance 的局部修改改变了文件身份，但没有修改 Book 函数、mesh、shader 或 pose。
 
 端点记录 `.cache/pix-capture/closed-stable-book-study/ENDPOINTS.json` SHA256 `a58866d99ad13f0dd31b785b3c6750e876697594bc80929901ccf7ffb0ab61e4`，独立推导 `.cache/book-endpoint-plan/analysis.json` SHA256 `38ea9143827279096c2a473675e969a441c3ce3d9a9a85497e8a788902f08ae8`。这新增两个观察端点的矩阵证据，没有新渲染像素分数，不恢复 native 数值 #open / time / partial tick、连续动画或翻页 CPU 算法，也不把端点一致写成默认整姿态或原生整 GUI 零差。
 
@@ -16,9 +26,9 @@
 
 `EnchantingBook` 使用 Bedrock 实际七部件网格、half 源坐标、UNORM16 UV、零厚度封面 / 翻页和原始64×32图集，按实际 PSO795 的模型法线、方向光、POINT / CLAMP、FRONT culling 与 depth LESS 绘制。`rendererState?: EnchantingBookRendererState` 接收调用方提供的列主序 projection / view / model、七或八个 bones 及可选 tileLightColor / overlayColor；校验矩阵有限值与尺寸，错误通过 `onRendererError` 报告。库不包含捕获矩阵、私有 shader 二进制或测试世界画面。
 
-当前源码 SHA256 `390fd9620c7ab99d479d7ce46441457bbd5a59df9d95652150509e759d4a88d7` 的实际 React 硬件验证：NVIDIA RTX3050 Laptop、正常 GPU 沙箱、ANGLE D3D11，2570×1402 全3603140像素逐RGBA比较为 **0不同像素 / 0不同通道 / 最大差0**。结果 `.cache/pix-capture/book-draw-study/production-hardware-result.json` SHA256 `79036c93a9de6dd3e1e3cf9d95b5deefcdd414574dd4407f4186ce8b711f593d`。仅该次捕获姿态及显式状态获此结果，未恢复原生 CPU 动态骨骼算法，实际材质字符串名仍未知。
+此前源码 SHA256 `390fd9620c7ab99d479d7ce46441457bbd5a59df9d95652150509e759d4a88d7` 时的实际 React 硬件验证：NVIDIA RTX3050 Laptop、正常 GPU 沙箱、ANGLE D3D11，2570×1402 全3603140像素逐RGBA比较为 **0不同像素 / 0不同通道 / 最大差0**。结果 `.cache/pix-capture/book-draw-study/production-hardware-result.json` SHA256 `79036c93a9de6dd3e1e3cf9d95b5deefcdd414574dd4407f4186ce8b711f593d`。仅该次捕获姿态及显式状态获此结果，未恢复原生 CPU 动态骨骼算法，实际材质字符串名仍未知。
 
-15项正式书本回归全部通过、0跳过，包括新增显式状态、输入不可变、无效状态报错，以及原生完整 ROI 比较。旧 ROI 与阈值保持不变；当前默认重建的 GUI5 open 为1566个不同像素、RGB误差和13410，closed为621个 /4536；GUI4为1236个 /11078，alpha差均0。它们与显式捕获状态的零差是不同范围。
+此前15项正式书本回归全部通过、0跳过，包括新增显式状态、输入不可变、无效状态报错，以及原生完整 ROI 比较。旧 ROI 与阈值保持不变；当前默认重建的 GUI5 open 为1566个不同像素、RGB误差和13410，closed为621个 /4536；GUI4为1236个 /11078，alpha差均0。它们与显式捕获状态的零差是不同范围。
 
 ## 默认姿态的数值审计
 

@@ -2,7 +2,26 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：校准下拉框、尺寸演示与附魔局部复核
+## 当前检查点：工作站文字、150原图图标与 invalid
+
+当前公开118个组件、4份数据、3个渲染函数，共125值。新增GuiIcon / guiIconNames，保留16个PixelIcon；工作站renderText及BitmapText layout默认行为保持兼容，字体子集默认关闭。API / 来源 / 资源边界见 [WORKSTATION_TEXT_QA.md](WORKSTATION_TEXT_QA.md)、[GUI_ICONS_QA.md](GUI_ICONS_QA.md)。
+
+| 本轮检查 | 结果与范围 |
+| --- | --- |
+| 文字与排版 | 新文字5＋SGA句点1及旧相关52，同批58/58 PASS，0skip/flaky，126.4秒。advance逻辑框与完整visual overhang分开，block宿主消除inline strut；DPR2整ROI零差为Web合同，非native费用行高证书 |
+| 原版图标 | 新11/11 PASS，150张原PNG bytes及全部RGBA含alpha0值与固定官方ZIP一致；1/2/3整数倍率×深浅底色六完整atlas共23,654,400像素RGBA0。非自动原生state/layout认证 |
+| invalid | 新17/17 PASS，14.0秒。删除额外粉色框，原default/hover/focus保留；ErrorGlyph / 4控件＋6pxhalo / crossout整面与语义行为通过。消息布局和可读文字token仍为Web适配，不改18×12/15²源crossout尺寸 |
+| 旧控件回归 | 56项范围55 PASS、1预期SKIP，`.cache/icons-invalid-existing-regression.json`；不作为56个新增case |
+| build / 包消费 | build、typecheck及实际React18.3.1/19.3.1消费通过；125值、SSR、类型/ref/layout/renderText、150PNG真实URL及原license身份已检查。两消费者各253份dist与最终dist逐字节一致 |
+| 生产身份与可见操作 | `.cache/gui-icons-final-production-identity.json` 最终8入口与site同字节，前次同构建核验另存 `.cache/icons-invalid-production-identity.json`。150图几何＋25项功能aux通过（不计175正式case）；图库搜索/类别/3倍/恢复/卸载重开/320px、invalid原框+13×20glyph、本机字体0→5ready/1context→卸载live0及回调均通过，errors[]。主JS144615B使用轻量UI表，完整provenance留docs |
+
+按 project / 文件 / 完整标题实合并，`.cache/icons-validation-integration-summary.json` 为856个唯一正式用例：851 PASS、5预期SKIP、0未解决失败；新增34项为文字6、图标11、invalid17。这是多批次累计，不是856项单次全绿。原样本辅助probe与生产smoke不再计作正式用例。
+
+实际consumer包保存在 `.cache/icons-invalid-consumer-verified.tgz`，SHA256 `4f172c7939196de7b44ac0cabab717a84a5dee7d50f2f209ce764d2874941a8b`；两消费者253条目身份见 `.cache/icons-invalid-consumer-identity.json`。后续doc-only重打包的最终根包身份另核，不把保留consumer包hash冒作未测试的另一份包。
+
+上述生产smoke记录 `.cache/gui-icons-final-production-smoke.json`；root实际IAB亦检查图库150项、分类及invalid白色focus/原ErrorGlyph。下方历史检查点不补作本轮成果。实际postR117普通React整747600像素面板＋halo仍非零（公开CSS18主profile51666 / 本机gallery20 profile53523不同像素，最大差255），缺图标/字形/角落均留在评分中；坐标量化候选不是生产fix，整GUI、末端合成/Present、跨viewport与默认CPU动画仍未认证。
+
+## 历史检查点：校准下拉框、尺寸演示与附魔局部复核
 
 组件与导出保持117个组件、3份数据、3个渲染函数，共123值。本轮完成校准入口遗漏修复与 Dialog 尺寸演示，保留经验粉原图；书本新端点研究没有改生产。范围见 [CONTROLS_CONSISTENCY_QA.md](CONTROLS_CONSISTENCY_QA.md) 与 [ENCHANTING_QA.md](ENCHANTING_QA.md)。
 
@@ -14,11 +33,13 @@
 | 附魔关闭入口 | 仅修compact图定位，GUI2局部 [312,10,30,14]，GUI5完整75×35共2625像素相对原生裁切RGBA0，Grindstone不变；新增1＋既有相关35，分批36 PASS |
 | 经验粉与书本 | XP六完整ROI共3432像素对原13×11图整数2倍零差，全入口无拉伸/另造圆球，保留原三档轮廓。新open/closed捕获支持既有T(.2,.1,.25)与端点yaw，未改书本、未恢复CPU连续动画、未增加原生渲染分数 |
 | 构建与实际包消费 | build/typecheck及verify:package通过；React18.3.1/19.3.1实际消费123值、SSR、严格类型/ref、CSS/fonts/assets/licenses通过，两消费者各102个dist条目逐字节一致 |
-| 生产身份 | `.cache/controls-followup-production-identity.json` 证实2份HTML＋6份assets与site逐字节相同；真实IAB打开640×360 Dialog、clip/无滚条，与独立生产报告一致 |
+| 历史生产身份 | 当时HTTP校验曾确认2份HTML＋6份assets与site相同；该旧身份索引后因复用checker被覆盖，现 `.cache/controls-followup-production-identity.json` 仅为透明pointer，不能检查为原body。真实IAB尺寸观察及原入口 / Dialog生产报告仍保留 |
 
-按正式 project / 文件 / 完整标题去重，最新822个唯一用例：817 PASS、5预期SKIP、0未解决失败；本轮新增3项为关闭入口、主页面尺寸演示和校准dropdown。`.cache/controls-followup-integration-summary.json` 为多批次累计，不是单次822项全绿；辅助入口审计、生产尺寸和原生ROI不再计作正式case。
+按正式 project / 文件 / 完整标题去重，该历史阶段822个唯一用例：817 PASS、5预期SKIP、0未解决失败；本轮新增3项为关闭入口、主页面尺寸演示和校准dropdown。`.cache/controls-followup-integration-summary.json` 为多批次累计，不是单次822项全绿；辅助入口审计、生产尺寸和原生ROI不再计作正式case。
 
 本轮 consumer 实测包保存在 `.cache/controls-followup-consumer-verified.tgz`，SHA256 `7b449859276a86c19fcae0d4f35c0b0329a36684d7c1bf6df00cc4ee02615c62`；字节证据 `.cache/controls-followup-consumer-identity.json`。JS与此前共享字体受测实现不变，workstations.css包含关闭定位修复。后续仅文档重打包的根包身份另算，不能把本文保留的consumer实测hash冒作最终根包hash。整个原生GUI、末端合成/Present及默认书本连续动画仍未认证；以下819等数字均为各自历史检查点。
+
+旧索引pointer保留先前记录SHA与覆盖事实，引用 `.cache/select-unification/production-entry-confirmation.json`、`.cache/dialog-readonly-reaudit/production-report.json`；原raw测试和截图仍存。没有虚构恢复旧JSON body；当前构建的8入口身份使用上方新 `.cache/icons-invalid-production-identity.json`，不能混用两个阶段。
 
 ## 历史检查点：共享 GPU 位图文字
 

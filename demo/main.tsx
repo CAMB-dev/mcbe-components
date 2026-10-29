@@ -25,6 +25,8 @@ import { TradingMountsExamples } from './trading-mounts-examples';
 import { InventoryScreensExamples } from './inventory-screens-examples';
 import { ItemGlintExamples } from './item-glint-examples';
 import { BitmapTextExamples } from './bitmap-text-examples';
+import { WorkstationTextExamples } from './workstation-text-examples';
+import { GuiIconsExamples } from './gui-icons-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -41,6 +43,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'item-glint', name: 'Item glint', icon: 'chevron', count: '01' },
   { id: 'bitmap-text', name: 'Bitmap text', icon: 'chevron', count: '01' },
   { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
+  { id: 'workstation-text', name: 'Workstation text', icon: 'chevron', count: '01' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'containers', name: 'Storage containers', icon: 'chevron', count: '06' },
@@ -60,6 +63,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'trading-mounts', name: 'Trading & mounts', icon: 'chevron', count: '03' },
   { id: 'inventory-screens', name: 'Player & creative inventory', icon: 'chevron', count: '09' },
   { id: 'typography', name: 'Typography & icons', icon: 'chevron', count: '02' },
+  { id: 'gui-icons', name: 'GUI icons', icon: 'chevron', count: '150' },
 ];
 const snippets: Record<string, string> = {
   scrolling: `<ScrollArea label="Inventory notes" style={{height:180}}>\n  <YourScrollableContent/>\n</ScrollArea>\n// ScrollBar is also available as a controlled primitive.`,
@@ -76,6 +80,8 @@ const snippets: Record<string, string> = {
   'input-states': `<TextField label="World name" error="This name is taken." />\n<TextField label="World seed" defaultValue="8675309" disabled />\n<TextField label="World ID" defaultValue="MC-0420" readOnly />`,
   'inventory-states': `<ItemSlot item={{ name: 'Diamond sword', icon: <YourSword />,\n  durability: 0.42, lore: ['Sharpness IV'] }} selected />\n<InventoryGrid label="Inventory" items={items} size={27}\n  onSlotAction={(index, action) => handleSlot(index, action)} />`,
   workstations: `<Grindstone inputs={[first, second]} result={result}\n  inventory={items} onTakeResult={handleTake} />\n<EnchantingTable item={sword} lapis={lapis}\n  options={enchantments} onEnchant={handleEnchant} />`,
+  'gui-icons': `<GuiIcon name="sound-glyph" scale={2} label="Audio" />\n<GuiIcon name="warning-glyph-small" scale={2} />\n\n// guiIconNames lists all 150 typed names.\n// Without a label, an icon is decorative.\n// Original colors and image proportions are retained.`,
+  'workstation-text': `const renderGuiText: WorkstationTextRenderer =\n  (text, context) => (\n    <BitmapText\n      {...(context.kind === 'enchantment-cost'\n        ? costTextProfile : labelTextProfile)}\n      layout="advance" style={{ display: 'block' }}>\n      {text}\n    </BitmapText>\n  );\n<EnchantingTable title="附魔台" inventoryLabel="物品栏"\n  options={options} renderText={renderGuiText} />\n// Each host profile supplies its own font, scale,\n// renderer, sampling, shader, color and shadow.`,
   processing: `<CraftingScreen\n  recipeBook={{ title: 'Recipes', entries,\n    categoryId, onCategoryChange: setCategoryId,\n    query, onQueryChange: setQuery,\n    craftableOnly, onCraftableOnlyChange: setCraftableOnly,\n    onRecipeAction: handleRecipe }}\n  crafting={{ inputs: recipeInputs, result,\n    inventory: items, onTakeResult: handleTake }} />\n// entries are filtered and flattened by your application.\n// CraftingTable also remains available as a right pane.\n<Furnace input={rawBeef} fuel={coal} result={steak}\n  progress={0.5} fuelRemaining={0.75}\n  inventory={items} onTakeResult={handleTake} />`,
   anvil: `<Anvil name={name} onNameChange={setName}\n  inputs={[item, material]} result={result}\n  cost={{kind: 'levels', levels: 3, affordable: true}}\n  onTakeResult={handleTake} />`,
   containers: `<Chest rows={6} items={storage} inventory={inventory}\n  selectedIndex={selected} onSelectionChange={setSelected}\n  onSlotAction={handleStorageAction} />\n<Hopper items={hopperItems} inventory={inventory} />\n// Dispenser, Dropper and ShulkerBox share the same storage API.`,
@@ -302,6 +308,10 @@ function App() {
         </div><p className="workstation-note">Original game materials. Item movement and crafting rules are supplied by your app. The book uses a textured renderer reconstruction; its native camera and mesh are still being calibrated.</p>
       </Example>
 
+      <Example id="workstation-text" title="Workstation text" detail="One text renderer for titles, inventory labels and enchantment costs.">
+        <div style={{ padding: 24, minWidth: 0 }}><WorkstationTextExamples notify={notify}/></div>
+      </Example>
+
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>
       </Example>
@@ -332,8 +342,12 @@ function App() {
         </div>
           <div className="chinese-specimen" lang="zh-CN"><span className="sample-label" lang="en">FUSION PIXEL · 简体中文</span><p>创造属于你的世界</p><span className="type-subtitle" lang="en">CJK fallback. No missing adventures.</span></div>
         </div>
-        <div className="icon-specimen">{(['heart', 'settings', 'book', 'grid', 'code', 'search', 'plus', 'check', 'sun', 'moon', 'download', 'arrow'] as const).map(name => <span key={name} title={name}><PixelIcon name={name} size={24}/></span>)}<span className="type-subtitle">16 original pixel icons</span></div>
+        <div className="icon-specimen">{(['heart', 'settings', 'book', 'grid', 'code', 'search', 'plus', 'check', 'sun', 'moon', 'download', 'arrow'] as const).map(name => <span key={name} title={name}><PixelIcon name={name} size={24}/></span>)}<span className="type-subtitle">16 vector pixel icons</span></div>
         <div className="font-note"><PixelIcon name="info" size={14}/><span>{hasGameFont ? 'Preview uses Mojangles from your local game. The package includes open-source alternatives.' : 'Open-source font alternatives. Bring your own Mojangles for original glyph metrics.'}</span></div>
+      </Example>
+
+      <Example id="gui-icons" title="Original GUI icons" detail="150 original Bedrock images for navigation, settings, feedback, social, inventory and devices.">
+        <GuiIconsExamples/>
       </Example>
 
       <footer className="page-footer"><div className="footer-brand"><GrassBlock size={24}/><span>mcbeui</span><span className="footer-dot">·</span><span>Made of little squares.</span></div><p>An independent fan project. Not affiliated with Mojang or Microsoft.</p><span className="footer-issue">Classic Bedrock inspired · v0.1.0</span></footer>

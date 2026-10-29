@@ -31,13 +31,29 @@
           "background": "optional concrete CSS color, WebGL target clear only",
           "details": "docs/BITMAP_GPU_QA.md",
           "sharedResources": "webgl-shared: one internal Offscreen WebGL session per Document, one bitmaprenderer canvas per instance; GPU readback remains",
-          "sharedDetails": "docs/BITMAP_SHARED_QA.md"
+          "sharedDetails": "docs/BITMAP_SHARED_QA.md",
+          "layout": {
+            "default": "visual",
+            "optional": "advance: logical pen/line box with full visual overhang; caller block formatting for anchored costs"
+          }
         },
         "sharedValidation": "27/27 formal PASS (new shared7 + unchanged GPU7/CPU13); tested48instances/lifecycle and React18.3.1/19.3.1 consumers PASS; fixed native8draw raw RT and independent PMA DOM-reference full-target exact on testedNVIDIA; production25aux and40instances/context lifecycle PASS, not added formal cases. docs/BITMAP_SHARED_QA.md"
       },
       {
         "name": "PixelIcon",
         "status": "implemented"
+      },
+      {
+        "name": "GuiIcon",
+        "status": "implemented",
+        "fidelity": "original_whole_png_integer_scale_no_automatic_state_tint_or_native_usage_size_certification",
+        "api": {
+          "name": "GuiIconName, 150 source names",
+          "scale": "positive safe integer, default1",
+          "label": "optional accessible name; decorative by default",
+          "ref": "HTMLSpanElement",
+          "source": "docs/gui-icons.json"
+        }
       },
       {
         "name": "Image",
@@ -571,7 +587,7 @@
     ]
   },
   "publicExports": {
-    "components": 117,
+    "components": 118,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -580,7 +596,12 @@
     "sideEffectingGpuFunctions": [
       "renderBitmapGlyphs"
     ],
-    "runtimeValues": 123,
-    "countsAreNotPixelCertification": true
+    "runtimeValues": 125,
+    "countsAreNotPixelCertification": true,
+    "dataValues": 4,
+    "guiIconDataValues": 1,
+    "iconNameRegistries": [
+      "guiIconNames"
+    ]
   }
 }

@@ -138,13 +138,13 @@
 .mc-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; color: var(--mc-text); }
 .mc-field__label { display: block; padding: 0; color: inherit; }
 .mc-field__description { display: block; font-size: 12px; color: var(--mc-text-muted); line-height: 20px; }
-.mc-field__error { color: var(--mc-error-text); }
+.mc-field__error { display: flex; align-items: flex-start; gap: 8px; color: var(--mc-error-text); }
+.mc-field__error-icon { flex: none; }
+.mc-field__error-text { min-width: 0; }
 .mc-input { width: 100%; min-height: 48px; padding: 8px 10px; border: 4px solid transparent; border-image: var(--mc-skin-input) 2 fill / 4px stretch; background: #5e5e5e; color: var(--mc-input-text); box-shadow: none; font: inherit; }
 .mc-input::placeholder { color: #dddddd; opacity: 1; }
 .mc-input { line-height: 1; text-shadow: var(--mc-text-shadow); }
 .mc-input:hover:not(:disabled), .mc-input:focus-visible:not(:disabled) { border-image-source: var(--mc-skin-input-hover); }
-.mc-input[aria-invalid='true'], .mc-select[aria-invalid='true'] { border-color: #ff959a; }
-.mc-input[aria-invalid='true'] { outline: 2px solid #ff959a; outline-offset: 2px; }
 .mc-input:disabled { color: #cccccc; opacity: .5; cursor: not-allowed; }
 .mc-textarea { min-height: 112px; resize: vertical; line-height: var(--mc-line-height); }
 .mc-choice { position: relative; display: flex; align-items: center; gap: 12px; min-height: 40px; cursor: pointer; color: var(--mc-text); }
@@ -217,7 +217,6 @@
 .mc-combobox-trigger > * { position: relative; }
 .mc-combobox-trigger[aria-expanded='true'] { --mc-combobox-skin: var(--mc-skin-button-pressed-nohover); }
 .mc-combobox-trigger:focus-visible { outline: 2px solid var(--mc-focus); outline-offset: 3px; }
-.mc-combobox-trigger[aria-invalid='true'] { outline: 2px solid #ff959a; outline-offset: 2px; }
 .mc-combobox-trigger:disabled { background: #757575; cursor: not-allowed; }
 .mc-combobox-trigger:disabled::before { border: 0; background: var(--mc-skin-button-disabled) 0 0 / 100% 100%; }
 .mc-combobox-value, .mc-combobox-placeholder { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

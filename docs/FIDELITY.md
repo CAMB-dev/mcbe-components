@@ -2,7 +2,19 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
-当前公开117个组件、3份数据及3个渲染函数，共123项值导出；其中新增 `renderBitmapGlyphs` 为浏览器GPU函数，两个glint函数为纯纹理运算。共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen 已实现；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
+当前公开118个组件、4份数据及3个渲染函数，共125项值导出；其中 `renderBitmapGlyphs` 为浏览器GPU函数，两个glint函数为纯纹理运算。共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen 已实现；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
+
+## 原版图标目录
+
+新增GuiIcon与guiIconNames，保留旧PixelIcon。150张完整原版PNG按物理尺寸整数缩放，原字节及安装基础包身份已记录；不自动复刻所有原生使用尺寸、裁切、tint或交互状态。默认装饰及显式可访问命名属于Web接口，PNG相同不是整GUI认证；见 [gui-icons.json](gui-icons.json)。
+
+通用invalid已移除额外粉色框，沿原default / hover / focus皮肤。ErrorGlyph13×20及源$error_text_color红有出处，但把它们用于Web表单消息是语义适配，文字token保留可读配色，不能称native通用错误模板。Anvil/Smithing18×12与Grindstone15×15 crossout均为源使用尺寸，未统一图像宽高比。图标11项、invalid17项独立正式套通过，包含原图、完整表面与halo；源资产/浏览器合成结果不冒称native通用错误模板或整GUI验收。见 [GUI_ICONS_QA.md](GUI_ICONS_QA.md)。
+
+## 可选工作站文字与整页基线
+
+工作站 renderText 保留 canonical 原文与默认DOM，宿主显式选择字图、采样、颜色、scale和shadow。BitmapText 默认visual，advance模式以pen/行高占CSS框并保留完整视觉外溢；费用示例还需display:block，不能由inline-block推断原生行高。六字CJK/数字1、2的本机子集默认不开启，不是完整字体或native多行指标；见 [WORKSTATION_TEXT_QA.md](WORKSTATION_TEXT_QA.md)。
+
+SGA空句点在两帧六行实际pen中advance1game，本轮只修该字符旧fallback4，不改Book mesh/shader/pose。整页普通React相对实际post R117、完整747600像素面板与halo仍为非零：公开字体CSS18主profile不同51666，本机gallery20不同53523，最大通道差255；不是可选文字接入已达原生整页一致。布局量化候选解释两帧适用image顶点，不等于恢复CPU、跨viewport或字体/整RGBA认证，未据此改生产。
 
 ## 共享 GPU 字体的显示路径
 

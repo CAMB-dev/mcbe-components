@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useId, useImperativeHandle, useRef, useState } from 'react';
 import type { ButtonHTMLAttributes, ForwardedRef, ReactNode, SelectHTMLAttributes, SyntheticEvent } from 'react';
+import { GuiIcon } from './gui-icon';
 
 export interface ComboboxOption { value: string; label: string; disabled?: boolean }
 export interface ComboboxProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'value' | 'defaultValue' | 'onChange' | 'type'> {
@@ -265,7 +266,9 @@ export const ComboboxBase = forwardRef<HTMLButtonElement, ComboboxBaseProps>(fun
         <span className="mc-combobox-option-mark" aria-hidden="true"/><span>{option.label}</span>
       </div>)}
     </div>
-    {message && <span id={`${id}-message`} className={['mc-field__description', invalid && 'mc-field__error'].filter(Boolean).join(' ')}>{message}</span>}
+    {message && <span id={`${id}-message`} className={['mc-field__description', invalid && 'mc-field__error'].filter(Boolean).join(' ')}>
+      {invalid ? <><GuiIcon name="error-glyph" className="mc-field__error-icon" aria-hidden="true"/><span className="mc-field__error-text">{message}</span></> : message}
+    </span>}
   </div>;
 });
 

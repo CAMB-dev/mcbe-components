@@ -15,7 +15,8 @@ assert(!packed.files.some(file => /Mojangles[^/]*\.(ttf|otf|woff2?|ttc)$/i.test(
 assert(!packed.files.some(file => /\.(?:otf|ttf|ttc)$/i.test(file.path)), 'Optional original HBUI and game font binaries must stay outside the npm library.');
 assert(!packed.files.some(file => /loading-indicator\.gif$|animation-074ed0ba8c16bb30e36c\.gif$/i.test(file.path)), 'Private native loading GIF must stay outside the npm library.');
 assert(!packed.files.some(file => /ascii_sga\.png$/i.test(file.path)), 'User-owned SGA atlas must not enter the npm library.');
-assert(!packed.files.some(file => /(?:^|\/)glyph_(?:00|4f|51|52|5b|65|77|94)\.png$/i.test(file.path)), 'Private native Unicode atlas pages must stay outside the npm library.');
+assert(!packed.files.some(file => /(?:^|\/)glyph_[0-9a-f]{2}\.png$/i.test(file.path)), 'Private native Unicode atlas pages must stay outside the npm library.');
+assert(!packed.files.some(file => /(?:^|\/)default8(?:_[12])?\.png$/i.test(file.path)), 'Private native ASCII atlas pages must stay outside the npm library.');
 assert(!packed.files.some(file => /(?:^|\/)local-fonts\/unicode\//i.test(file.path)), 'Local Unicode sample metrics and provenance must stay outside the npm library.');
 assert(!packed.files.some(file => /\.(?:cso|dxbc|dxil)$|\.material\.bin$/i.test(file.path)), 'Private native shader binaries must stay outside the npm library.');
 assert(!packed.files.some(file => /^(?:demo|\.cache)\//.test(file.path)), 'Demo-only game assets and local references must not enter the npm library.');
@@ -34,13 +35,13 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
-const components = ['InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
-const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds'];
+const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
+const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames'];
 const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs'];
-assert.equal(components.length,117);
-assert.equal(dataExports.length,3);
+assert.equal(components.length,118);
+assert.equal(dataExports.length,4);
 assert.equal(rendererFunctions.length,3);
-assert.equal(Object.keys(ui).length,123);
+assert.equal(Object.keys(ui).length,125);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -77,6 +78,18 @@ assert.match(bitmapGpuMarkup,/A/);
 assert.match(bitmapMarkup,/mc-bitmap-text/);
 assert(bitmapMarkup.includes('>A</span>'));
 assert.match(bitmapMarkup,/data-render-state="loading"/);
+const advanceMarkup = renderToString(element(ui.BitmapText,{font:bitmapFont,sampling:'point',shader:'bitmap',layout:'advance'},'A'));
+assert(advanceMarkup.includes('>A</span>'));
+assert(!/ layout=/.test(advanceMarkup), 'Layout mode must not leak into HTML attributes.');
+const workstationCalls=[];
+const workstationMarkup=renderToString(element(ui.EnchantingTable,{title:'Host title',inventoryLabel:'Host inventory',
+  options:[{id:'first',label:'First',level:1},{id:'second',label:'Second',level:2,disabled:true},{id:'third',label:'Third',level:3}],
+  renderText:(text,context)=>{workstationCalls.push({text,...context});return element('canvas',{'data-text-kind':context.kind});}}));
+assert.equal(workstationCalls.length,5);
+assert.deepEqual(workstationCalls.filter(value=>value.kind==='enchantment-cost').map(value=>[value.text,value.id,value.tier,value.disabled,value.align]),
+  [['1','first',1,false,'end'],['2','second',2,true,'end'],['3','third',3,false,'end']]);
+assert(workstationMarkup.includes('>Host title</span>') && workstationMarkup.includes('>Host inventory</span>'));
+assert.equal((workstationMarkup.match(/class="mc-workstation-text__semantic"/g)??[]).length,5);
 const itemRendererCalls=[], overrideRendererCalls=[];
 const itemTextRenderer=(text,context)=>{itemRendererCalls.push([text,context.kind,context.index]);return element('mark',{'data-item-rendered':context.kind},text);};
 const overrideTextRenderer=(text,context)=>{overrideRendererCalls.push([text,context.kind,context.index]);return element('mark',{'data-override-rendered':context.kind},text);};
@@ -213,6 +226,18 @@ const packageRoot = new URL('./',import.meta.resolve('mcbeui/package.json'));
 const componentCatalog = JSON.parse(await readFile(new URL('docs/component-catalog.json',packageRoot),'utf8'));
 const documentedComponents = Object.values(componentCatalog.groups).flat().filter(entry=>entry.status==='implemented').map(entry=>entry.name);
 assert.deepEqual(documentedComponents.sort(),components.slice().sort(),'Packed catalog must match component exports without counting data helpers.');
+const guiIcons = JSON.parse(await readFile(new URL('docs/gui-icons.json',packageRoot),'utf8'));
+assert.equal(ui.guiIconNames.length,150); assert(Object.isFrozen(ui.guiIconNames));
+assert.deepEqual([...ui.guiIconNames].sort(),Object.keys(guiIcons.assets).sort());
+for (const name of ui.guiIconNames) {
+  const asset = guiIcons.assets[name];
+  const bytes = await readFile(new URL(asset.assetPath.replace(/^src\\//,'dist/'),packageRoot));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed GUI icon: '+name);
+  const markup = renderToString(element(ui.GuiIcon,{name,scale:2,label:name}));
+  const imageSource = markup.match(/<img[^>]+src="([^"]+)"/)[1].replaceAll('&amp;','&');
+  assert.equal(createHash('sha256').update(await readFile(new URL(imageSource))).digest('hex'),asset.sha256,'Consumer GuiIcon URL: '+name);
+  assert(markup.includes('role="img"'));
+}
 const rendererManifest = JSON.parse(await readFile(new URL('docs/item-renderers-geometry.json',packageRoot),'utf8'));
 for (const asset of [...rendererManifest.assets,rendererManifest.license]) {
   const bytes = await readFile(new URL(asset.file.replace(/^src\\//,'dist/'),packageRoot));
@@ -221,6 +246,7 @@ for (const asset of [...rendererManifest.assets,rendererManifest.license]) {
 for (const [file,sha256] of [
   ['dist/assets/glint/enchanted_item_glint.png','99cf0defcbe422c8b91a42886f469d89cfbaba157371d8142d01ba7e8055a631'],
   ['dist/assets/glint/LICENSE.md','ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d'],
+  ['dist/assets/gui-icons/LICENSE.md','ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d'],
 ]) {
   const bytes = await readFile(new URL(file,packageRoot));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),sha256,'Packed original glint resource: '+file);
@@ -231,10 +257,10 @@ console.log('React '+React.version+': ESM, '+components.length+' components + '+
   await writeFile(join(consumer, 'consumer.tsx'), `
 import { createRef } from 'react';
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
-import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState } from 'mcbeui';
-import { BitmapText, renderBitmapGlyphs } from 'mcbeui';
+import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState, WorkstationTextContext, WorkstationTextRenderer } from 'mcbeui';
+import { BitmapText, renderBitmapGlyphs, GuiIcon, guiIconNames } from 'mcbeui';
 import { Select } from 'mcbeui';
-import type { BitmapTextProps, BitmapTextRenderer, BitmapTextProfile, BitmapFont, BitmapGlyph, BitmapGlyphRun, BitmapGlyphRenderOptions, BitmapGlyphRenderResult, BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, BitmapUnicodeVertex, BitmapUnicodeRun, BitmapGlyphBackground } from 'mcbeui';
+import type { GuiIconProps, GuiIconName, BitmapTextProps, BitmapTextRenderer, BitmapTextProfile, BitmapFont, BitmapGlyph, BitmapGlyphRun, BitmapGlyphRenderOptions, BitmapGlyphRenderResult, BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, BitmapUnicodeVertex, BitmapUnicodeRun, BitmapGlyphBackground } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
 import type { AirBubbleState, BrewingSlot, CartographyMode, ScrollPosition } from 'mcbeui';
 import { BossBar, ChatMessage, ChatPanel, Scoreboard, StatusEffect, ActionBar, TitleOverlay, HeldItemTooltip } from 'mcbeui';
@@ -267,6 +293,10 @@ const craftingScreenProps: CraftingScreenProps = {recipeBook:recipeBookProps,lay
 const bitmapGlyph: BitmapGlyph = {page:0,x:0,y:0,width:1,height:1,advance:1,offsetX:0,offsetY:0};
 const bitmapFont: BitmapFont = {pages:['/caller-owned-atlas.png'],glyphs:{A:bitmapGlyph},lineHeight:1};
 const bitmapProps: BitmapTextProps = {font:bitmapFont,sampling:'point',shader:'bitmap',children:'A',color:'#ffffff',shadow:{color:'#000000',offsetX:1,offsetY:1}};
+export const logicalBitmapProps: BitmapTextProps = {...bitmapProps,layout:'advance'};
+const originalIcon: GuiIconName = guiIconNames[0]!;
+const iconProps: GuiIconProps = {name:originalIcon,scale:2,label:'Original icon'};
+const workstationText: WorkstationTextRenderer = (text,context:WorkstationTextContext)=><span data-kind={context.kind} data-tier={context.kind==='enchantment-cost'?context.tier:undefined} data-disabled={context.kind==='enchantment-cost'?context.disabled:undefined}>{text}</span>;
 const textRenderer: ItemTooltipTextRenderer = (text,context)=><span data-kind={context.kind} data-index={context.index}>{text}</span>;
 const rendererItem: InventoryItem = {name:'A',durability:.5,lore:['A',<strong>Rich node lore</strong>],tooltipTextRenderer:textRenderer};
 const props: ButtonProps = {variant:'primary',size:'sm',type:'submit'};
@@ -322,11 +352,14 @@ export const demo = <>
   <InventoryGrid label="Inventory" items={[{name:'Diamond'}]} onSlotAction={(index,action)=>String(index)+action}/>
   <Grindstone inputs={[null,null]} onInputAction={(index,action)=>String(index)+action}/>
   <EnchantingTable options={[{id:'unbreaking',label:'Unbreaking',level:3}]} onEnchant={id=>id.toUpperCase()}/>
+  <EnchantingTable options={[{id:'unbreaking',label:'Unbreaking',level:3}]} renderText={workstationText}/>
   <EnchantingBook pageFlip={.25} lighting="calibrated" pitch={20} ref={createRef<HTMLCanvasElement>()}/>
   <EnchantingBook lighting="unlit"/>
   <EnchantingBook rendererState={bookRendererState} onRendererError={message=>message.toUpperCase()}/>
   <EnchantingRunes text="AIZ" atlasUrl="/caller-atlas.png" ref={createRef<HTMLSpanElement>()}/>
   <EnchantmentOption {...enchantment} ref={createRef<HTMLButtonElement>()} onEnchant={id=>id.toUpperCase()}/>
+  <EnchantmentOption {...enchantment} renderText={workstationText}/>
+  <GuiIcon {...iconProps} ref={createRef<HTMLSpanElement>()}/>
   <ItemImage src="/caller-item.png" ref={createRef<HTMLSpanElement>()}/>
   <ItemCount count={64} ref={createRef<HTMLSpanElement>()}/>
   <DurabilityBar value={3} max={4} ref={createRef<HTMLSpanElement>()}/>

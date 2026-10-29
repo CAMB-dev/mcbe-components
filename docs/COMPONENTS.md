@@ -1,12 +1,12 @@
 # Bedrock 组件范围
 
-当前导出 117 个组件，目录 117 项均为 implemented；另有 3 份可复用 renderer 数据、2 个 glint 纯渲染函数和 1 个有 GPU 副作用的 renderBitmapGlyphs，共 123 个运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 118 个组件，目录 118 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、2 个 glint 纯渲染函数和 1 个有 GPU 副作用的 renderBitmapGlyphs，共 125 个运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 ## 已实现
 
 | 分类 | 组件 |
 | --- | --- |
-| 文字与表面（18） | Text、BitmapText、PixelIcon、Image、NineSlice、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
+| 文字与表面（19） | Text、BitmapText、PixelIcon、GuiIcon、Image、NineSlice、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
 | 输入与设置（16） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、ToggleButton、SearchField、Tabs、NavigationList、SettingRow、KeybindingField |
 | 物品与容器结构（27） | ItemSlot、ItemImage、ItemCount、DurabilityBar、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、InventoryScreenFrame、RecipeGrid、RecipeSelectionGrid、RecipeSearch、RecipeFilterToggle、RecipeBook、RecipeBookEntry、RecipeCategoryTabs、InventoryToolbar、ProcessingArrow、FuelIndicator、BrewingIndicator、BeaconEffect、TradeOffer、ArmorSlot、ResultSlot、SlotPlaceholder、CrafterSlot、ContainerFrame |
 | 工作站与容器（25） | Grindstone、EnchantingTable、CraftingTable、CraftingScreen、Furnace、BlastFurnace、Smoker、BrewingStand、Anvil、SmithingTable、Stonecutter、Loom、CartographyTable、Beacon、Chest、Hopper、Dispenser、Dropper、ShulkerBox、Crafter、TradingScreen、PlayerInventoryScreen、SurvivalInventoryScreen、CreativeInventory、MountInventory |
@@ -16,7 +16,9 @@
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
 
-`BitmapText` 默认 `renderer="cpu"` / `profile="atlas-rect"`；显式 WebGL 支持 atlas-rect 与 bedrock-unicode 完整字格 profile，background 为 GPU clear 色。公开 `renderBitmapGlyphs` 接收原始页及顺序 runs，默认返回预乘 framebuffer 数据；它需要 GPU，属于有副作用的函数。真实捕获8个 draw 的固定背景复现不等于透明 DOM 或默认 CPU 认证；webgl 每实例独立 context，新增 webgl-shared 在同一 Document 内复用 Offscreen WebGL 会话并向每实例 bitmaprenderer 转移 ImageBitmap。两者仍有设备与 bitmap 预算限制，共享路径的新验收范围单列。见 [BITMAP_GPU_QA.md](./BITMAP_GPU_QA.md) 与 [BITMAP_SHARED_QA.md](./BITMAP_SHARED_QA.md)。
+`GuiIcon` 提供150张完整原版 PNG，guiIconNames 为第4份数据导出；按原图尺寸整数缩放，默认装饰，可显式命名。它保留原字节，不自动切换状态、tint或套用原生使用框；旧16个 PixelIcon 保持兼容。来源 / 状态 / 使用引用见 [gui-icons.json](./gui-icons.json)，素材一致不代表整GUI验收。
+
+`BitmapText` 默认 `renderer="cpu"` / `profile="atlas-rect"` / `layout="visual"`；可选advance逻辑占位保留视觉外溢，费用宿主需明确display:block以避开inline strut；工作站renderText保留canonical原文，见 [WORKSTATION_TEXT_QA.md](./WORKSTATION_TEXT_QA.md)。显式 WebGL 支持 atlas-rect 与 bedrock-unicode 完整字格 profile，background 为 GPU clear 色。公开 `renderBitmapGlyphs` 接收原始页及顺序 runs，默认返回预乘 framebuffer 数据；它需要 GPU，属于有副作用的函数。真实捕获8个 draw 的固定背景复现不等于透明 DOM 或默认 CPU 认证；webgl 每实例独立 context，新增 webgl-shared 在同一 Document 内复用 Offscreen WebGL 会话并向每实例 bitmaprenderer 转移 ImageBitmap。两者仍有设备与 bitmap 预算限制，共享路径的新验收范围单列。见 [BITMAP_GPU_QA.md](./BITMAP_GPU_QA.md) 与 [BITMAP_SHARED_QA.md](./BITMAP_SHARED_QA.md)。
 
 `ItemGlint` 使用真实光效纹理和已核对的着色公式，接收显式 UV、颜色、采样与混合参数。`shadeItemGlint` / `renderItemGlint` 可用于自定义渲染流程；原生时间和 draw-state 仍未认证，组件不自行启动动画。
 
@@ -24,7 +26,7 @@ HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 cus
 
 ## 验收边界
 
-当前目录中的 117 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 / 服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与 Web 测试通过不能替代真实游戏逐屏验收。
+当前目录中的 118 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 / 服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与 Web 测试通过不能替代真实游戏逐屏验收。
 
 ## 复用方式
 

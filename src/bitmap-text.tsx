@@ -21,6 +21,8 @@ export interface BitmapTextProps extends Omit<HTMLAttributes<HTMLSpanElement>, '
   shader: 'bitmap' | 'bitmap-smooth';
   /** CPU remains the default. Shared WebGL uses one Offscreen context per Document. */
   renderer?: BitmapTextRenderer;
+  /** Advance aligns by logical pen/line metrics while retaining the full visual canvas. */
+  layout?: 'visual' | 'advance';
   /** Unicode is an explicit packed-UV profile for complete 16x16 cells on 256x256 pages. */
   profile?: BitmapTextProfile;
   /** WebGL target clear color, not a CSS background. Omission keeps a transparent target. */
@@ -92,34 +94,35 @@ function glyphRuns(layout: BitmapLayout, pages: ReadonlyMap<number, PixelTexture
 }
 
 /** Source glyphs on one controlled canvas, with real selectable DOM text kept. */
-export const BitmapText = forwardRef<HTMLSpanElement, BitmapTextProps>(function BitmapText({ font, children, scale = 1, color = '#ffffff', sampling, shader, renderer = 'cpu', profile = 'atlas-rect', background, shadow, onReady, onRenderError, className, style, ...props }, ref) {
+export const BitmapText = forwardRef<HTMLSpanElement, BitmapTextProps>(function BitmapText({ font, children, scale = 1, color = '#ffffff', sampling, shader, renderer = 'cpu', layout: layoutMode = 'visual', profile = 'atlas-rect', background, shadow, onReady, onRenderError, className, style, ...props }, ref) {
   if (typeof children !== 'string') throw new RangeError('BitmapText children must be a string.');
   if (!font || !Array.isArray(font.pages) || !font.glyphs) throw new RangeError('An explicit bitmap font is required.');
   if (!Number.isFinite(scale) || scale <= 0) throw new RangeError('scale must be positive and finite.');
   if (!['point', 'bilinear'].includes(sampling) || !['bitmap', 'bitmap-smooth'].includes(shader)) throw new RangeError('Explicit supported sampling and shader are required.');
   concreteColor(color); if (shadow) concreteColor(shadow.color);
   const used = [...new Set([...children.replace(/\r\n?/g, '\n')].filter(character => character !== '\n'))];
-  const signature = JSON.stringify({ text: children, font: { pages: font.pages, lineHeight: font.lineHeight, glyphs: used.map(character => [character, font.glyphs[character]]) }, scale, color, sampling, shader, shadow, renderer, profile, background });
+  const signature = JSON.stringify({ text: children, font: { pages: font.pages, lineHeight: font.lineHeight, glyphs: used.map(character => [character, font.glyphs[character]]) }, scale, color, sampling, shader, shadow, renderer, layout: layoutMode, profile, background });
   const canvas = useRef<HTMLCanvasElement | null>(null), callbacks = useRef({ onReady, onRenderError }); callbacks.current = { onReady, onRenderError };
-  const [state, setState] = useState<{ key: string; status: 'loading' | 'ready' | 'error'; width: number; height: number }>({ key: '', status: 'loading', width: 0, height: 0 });
+  const [state, setState] = useState<{ key: string; status: 'loading' | 'ready' | 'error'; width: number; height: number; logicalWidth: number; logicalHeight: number; originX: number; originY: number }>({ key: '', status: 'loading', width: 0, height: 0, logicalWidth: 0, logicalHeight: 0, originX: 0, originY: 0 });
   const ready = state.key === signature && state.status === 'ready';
   useEffect(() => {
     let cancelled = false, failed = false, dispose: (() => void) | undefined;
     let shared: SharedBitmapLease | undefined;
     const target = canvas.current;
     if (target) { target.width = 0; target.height = 0; }
-    setState({ key: signature, status: 'loading', width: 0, height: 0 });
+    setState({ key: signature, status: 'loading', width: 0, height: 0, logicalWidth: 0, logicalHeight: 0, originX: 0, originY: 0 });
     const fail = (error: unknown) => {
       if (cancelled || failed) return; failed = true;
       const lease = shared; shared = undefined; lease?.release();
       if (target) { target.width = 0; target.height = 0; }
-      setState({ key: signature, status: 'error', width: 0, height: 0 });
+      setState({ key: signature, status: 'error', width: 0, height: 0, logicalWidth: 0, logicalHeight: 0, originX: 0, originY: 0 });
       callbacks.current.onRenderError?.(error instanceof Error ? error : new Error(String(error)));
     };
     const contextLost = (event: Event) => { event.preventDefault(); fail(new Error('The bitmap WebGL context was lost.')); };
     if (renderer === 'webgl') target?.addEventListener('webglcontextlost', contextLost);
     void (async () => {
       if (!['cpu', 'webgl', 'webgl-shared'].includes(renderer)) throw new RangeError('Unsupported bitmap renderer.');
+      if (!['visual', 'advance'].includes(layoutMode)) throw new RangeError('Unsupported bitmap layout.');
       if (!['atlas-rect', 'bedrock-unicode'].includes(profile)) throw new RangeError('Unsupported bitmap profile.');
       if (renderer === 'cpu' && (profile !== 'atlas-rect' || background !== undefined)) throw new RangeError('The CPU bitmap renderer supports atlas-rect without a target background. Select WebGL for these options.');
       const layout = layoutBitmapText(font, children, scale, shadow), fill = colorRgba(color), shade = shadow && { ...shadow, color: colorRgba(shadow.color) };
@@ -143,7 +146,7 @@ export const BitmapText = forwardRef<HTMLSpanElement, BitmapTextProps>(function 
         target.width = result.width; target.height = result.height;
         if (result.width && result.height) { const image = context.createImageData(result.width, result.height); image.data.set(result.data); context.putImageData(image, 0, 0); }
       }
-      setState({ key: signature, status: 'ready', width: layout.width, height: layout.height });
+      setState({ key: signature, status: 'ready', width: layout.width, height: layout.height, logicalWidth: layout.logicalWidth, logicalHeight: layout.logicalHeight, originX: layout.originX, originY: layout.originY });
     })().catch(fail);
     return () => {
       cancelled = true; target?.removeEventListener('webglcontextlost', contextLost);
@@ -157,8 +160,8 @@ export const BitmapText = forwardRef<HTMLSpanElement, BitmapTextProps>(function 
   }, [signature]);
   useEffect(() => { if (ready) callbacks.current.onReady?.(); }, [ready, signature]);
   return <span {...props} ref={ref} className={['mc-bitmap-text', className].filter(Boolean).join(' ')} data-render-state={state.key === signature ? state.status : 'loading'} data-fidelity="controlled-bitmap-reconstruction" data-renderer={renderer} data-profile={profile}
-    style={{ display: 'inline-block', position: 'relative', verticalAlign: 'baseline', ...(ready ? { width: state.width, height: state.height } : {}), ...style } as CSSProperties}>
-    <canvas key={renderer === 'cpu' ? 'cpu' : signature} ref={canvas} aria-hidden="true" className="mc-bitmap-text__canvas" width={0} height={0} style={{ display: ready ? 'block' : 'none', imageRendering: 'pixelated', userSelect: 'none' }}/>
+    style={{ display: 'inline-block', position: 'relative', verticalAlign: 'baseline', ...(ready ? layoutMode === 'advance' ? { width: state.logicalWidth, height: state.logicalHeight, overflow: 'visible' } : { width: state.width, height: state.height } : {}), ...style } as CSSProperties}>
+    <canvas key={renderer === 'cpu' ? 'cpu' : signature} ref={canvas} aria-hidden="true" className="mc-bitmap-text__canvas" width={0} height={0} style={{ display: ready ? 'block' : 'none', ...(ready && layoutMode === 'advance' ? { position: 'absolute', left: -state.originX * scale, top: -state.originY * scale } : {}), imageRendering: 'pixelated', userSelect: 'none' }}/>
     <span className="mc-bitmap-text__text" style={ready ? { position: 'absolute', inset: 0, overflow: 'hidden', color: 'transparent', textShadow: 'none', whiteSpace: 'pre', userSelect: 'text' } : { color, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{children}</span>
   </span>;
 });

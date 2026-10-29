@@ -8,6 +8,7 @@ import type {
 import { createPortal } from 'react-dom';
 import { Spinner } from './feedback';
 import { ComboboxBase } from './combobox';
+import { GuiIcon } from './gui-icon';
 
 function cx(...names: (string | false | undefined)[]) { return names.filter(Boolean).join(' '); }
 function useValue<T>(value: T | undefined, defaultValue: T, onChange?: (value: T) => void) {
@@ -87,7 +88,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
     <label className="mc-field__label" htmlFor={id}>{label}</label>
     <input {...props} ref={ref} id={id} className="mc-input" aria-invalid={error ? true : props['aria-invalid']}
       aria-describedby={cx(describedBy, !!message && `${id}-message`) || undefined}/>
-    {message && <span id={`${id}-message`} className={cx('mc-field__description', !!error && 'mc-field__error')}>{message}</span>}
+    {message && <span id={`${id}-message`} className={cx('mc-field__description', !!error && 'mc-field__error')}>
+      {error ? <><GuiIcon name="error-glyph" className="mc-field__error-icon" aria-hidden="true"/><span className="mc-field__error-text">{message}</span></> : message}
+    </span>}
   </div>;
 });
 
@@ -100,7 +103,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function 
     <label className="mc-field__label" htmlFor={id}>{label}</label>
     <textarea {...props} ref={ref} id={id} className="mc-input mc-textarea" aria-invalid={error ? true : props['aria-invalid']}
       aria-describedby={cx(describedBy, !!message && `${id}-message`) || undefined}/>
-    {message && <span id={`${id}-message`} className={cx('mc-field__description', !!error && 'mc-field__error')}>{message}</span>}
+    {message && <span id={`${id}-message`} className={cx('mc-field__description', !!error && 'mc-field__error')}>
+      {error ? <><GuiIcon name="error-glyph" className="mc-field__error-icon" aria-hidden="true"/><span className="mc-field__error-text">{message}</span></> : message}
+    </span>}
   </div>;
 });
 

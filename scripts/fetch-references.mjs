@@ -15,6 +15,20 @@ const inventoryScreensManifest = JSON.parse(await readFile(new URL('../docs/inve
 const recipeBookManifest = JSON.parse(await readFile(new URL('../docs/recipe-book-textures.json', import.meta.url), 'utf8'));
 const directory = new URL('../.cache/references/', import.meta.url);
 await mkdir(directory, { recursive: true });
+// Icon fidelity tests read the original ZIP entries independently of bundled assets.
+const archiveName = 'bedrock-samples-v1.26.60.5-full.zip';
+const archiveHash = 'd93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf';
+const archiveTarget = new URL(archiveName, directory);
+let archiveBytes;
+try { archiveBytes = await readFile(archiveTarget); } catch { /* Cold source cache. */ }
+if (!archiveBytes || createHash('sha256').update(archiveBytes).digest('hex') !== archiveHash) {
+  const response = await fetch(`https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/${archiveName}`);
+  if (!response.ok) throw new Error(`Source archive download failed: ${response.status}`);
+  const bytes = Buffer.from(await response.arrayBuffer());
+  if (createHash('sha256').update(bytes).digest('hex') !== archiveHash) throw new Error('Full source archive hash mismatch.');
+  await writeFile(archiveTarget, bytes);
+}
+archiveBytes = undefined;
 const references = new Map();
 // Caller-bound recipe backgrounds are exercised by QA, not default production skins.
 const fixtureReferences = [

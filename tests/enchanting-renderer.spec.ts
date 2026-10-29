@@ -224,6 +224,49 @@ test('rune default uses native-confirmed foreground bytes and preserves host tin
   expect(renderToStaticMarkup(createElement(EnchantingRunes,{...props,color:'#123456'}))).toContain('color:#123456');
 });
 
+test('optional original SGA empty periods preserve native ellipsis advances, following word placement and wrapping', async ({ page }) => {
+  const path = new URL('../.cache/enchanting-source/font/ascii_sga.png', import.meta.url);
+  test.skip(!existsSync(path), 'Original unbundled local vanilla SGA atlas is optional.');
+  const bytes = await readFile(path);expect(createHash('sha256').update(bytes).digest('hex')).toBe('624678abe1122a56f343812782f1d6542c2414ad7e94360cbf8f1d50c1415c8a');
+  const atlas = PNG.sync.read(bytes);expect([atlas.width, atlas.height]).toEqual([128, 128]);
+  for (let y = 16; y < 24; y++) for (let x = 112; x < 120; x++) expect(atlas.data[(y * 128 + x) * 4 + 3]).toBe(0);
+  // Two independent native captures contain six rows of three consecutive
+  // periods. Their decoded quad pens differ by1game pixel, despite this empty
+  // source cell. An empty cell alone does not determine its runtime advance.
+  const proofPath = new URL('../.cache/open-clean-full-gui/sga-period-native-proof.json', import.meta.url);
+  if (existsSync(proofPath)) {
+    const proofBytes = await readFile(proofPath);expect(createHash('sha256').update(proofBytes).digest('hex')).toBe('61179b3794667555d0669e245f7c5cb4baafc744e0d27f3190c7b4e1e86410f0');
+    const proof = JSON.parse(proofBytes.toString()) as { captures: { rows: { glyphs: { code: number; penXGame: number }[] }[] }[] };
+    const rows = proof.captures.flatMap(capture => capture.rows);expect(rows).toHaveLength(6);
+    for (const row of rows) { const pens = row.glyphs.filter(glyph => glyph.code === 46).map(glyph => glyph.penXGame);expect(pens).toHaveLength(3);expect([pens[1]! - pens[0]!, pens[2]! - pens[1]!]).toEqual([1, 1]); }
+  }
+  const letterAdvance = (code: number) => {
+    let right = -1;
+    for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) if (atlas.data[((Math.floor(code / 16) * 8 + y) * 128 + code % 16 * 8 + x) * 4 + 3]) right = Math.max(right, x);
+    expect(right).toBeGreaterThanOrEqual(0);return (right + 2) * 2;
+  };
+  const aAdvance = letterAdvance(65), bAdvance = letterAdvance(66), periodAdvance = 2, spaceAdvance = 8;
+  await page.goto('/calibration.html');
+  await page.evaluate(async base64 => {
+    const reactPath = '/@id/react', domPath = '/@id/react-dom/client', runePath = '/src/enchanting-book.tsx';
+    const [r, d, module] = await Promise.all([import(reactPath), import(domPath), import(runePath)]);const React = r.default ?? r, ReactDOM = d.default ?? d;
+    const host = document.createElement('div');host.id = 'period-source-probe';host.style.cssText = 'position:fixed;left:16px;top:16px;z-index:9999;background:#28292a;line-height:0';document.body.appendChild(host);
+    ReactDOM.createRoot(host).render(React.createElement('div', {}, [100, 30].map(width => React.createElement('div', { key: width, 'data-period-width': width, style: { width } },
+      React.createElement(module.EnchantingRunes, { text: 'A... B', atlasUrl: 'data:image/png;base64,' + base64, scale: 2 })))));
+  }, bytes.toString('base64'));
+  const wide = page.locator('[data-period-width="100"] .mc-enchanting-runes'), narrow = page.locator('[data-period-width="30"] .mc-enchanting-runes');
+  await expect(wide.locator('[data-rune="."]')).toHaveCount(3);
+  const origin = await wide.boundingBox(), dots = await wide.locator('[data-rune="."]').all(), following = await wide.locator('.mc-enchanting-runes__word').nth(1).boundingBox();
+  for (let index = 0; index < dots.length; index++) {
+    const box = await dots[index]!.boundingBox();expect([box!.x - origin!.x, box!.width]).toEqual([aAdvance + index * periodAdvance, periodAdvance]);
+    const pixels = PNG.sync.read(await dots[index]!.screenshot()), expected = Buffer.from(Array(pixels.width * pixels.height).fill([40, 41, 42, 255]).flat());
+    expect(pixels.data.equals(expected), 'the original empty period cell adds no invented ink').toBe(true);
+  }
+  expect([following!.x - origin!.x, following!.y - origin!.y, origin!.width]).toEqual([aAdvance + 3 * periodAdvance + spaceAdvance, 0, aAdvance + 3 * periodAdvance + spaceAdvance + bAdvance]);
+  const wrappedOrigin = await narrow.boundingBox(), wrappedWord = await narrow.locator('.mc-enchanting-runes__word').nth(1).boundingBox();
+  expect([wrappedWord!.x - wrappedOrigin!.x, wrappedWord!.y - wrappedOrigin!.y, wrappedOrigin!.height]).toEqual([0, 16, 32]);
+});
+
 test('optional native open and insufficient PNGs independently establish rune foreground bytes',async()=>{
   test.skip(!(['open','insufficient','closed'] as const).every(state=>existsSync(new URL(`../.cache/native-gui/${nativeSamples[state].file}`,import.meta.url))),'User-owned native PNGs are optional and never bundled.');
   // Fixed source-space ROIs contain only rune labels and their panel background;

@@ -10,6 +10,8 @@ export type {
 } from './components';
 export { Combobox } from './combobox';
 export type { ComboboxProps, ComboboxOption } from './combobox';
+export { GuiIcon, guiIconNames } from './gui-icon';
+export type { GuiIconProps, GuiIconName } from './gui-icon';
 export { Text } from './text';
 export type { TextProps } from './text';
 export { BitmapText } from './bitmap-text';
@@ -19,7 +21,7 @@ export type { BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, Bit
 export { ItemSlot, ItemTooltip, InventoryGrid, ItemImage, ItemCount, DurabilityBar, SlotPlaceholder, ResultSlot } from './inventory';
 export type { ItemSlotProps, ItemTooltipProps, ItemTooltipTextRenderer, InventoryItem, InventoryGridProps, InventorySlotAction, ItemImageProps, ItemCountProps, DurabilityBarProps, SlotPlaceholderProps, ResultSlotProps } from './inventory';
 export { WorkstationFrame, PlayerInventory, Grindstone, EnchantingTable, EnchantmentOption } from './workstations';
-export type { WorkstationFrameProps, PlayerInventoryProps, GrindstoneProps, EnchantingTableProps, EnchantmentOptionProps } from './workstations';
+export type { WorkstationFrameProps, PlayerInventoryProps, GrindstoneProps, EnchantingTableProps, EnchantmentOptionProps, WorkstationTextRenderer, WorkstationTextContext } from './workstations';
 export { EnchantingBook, EnchantingRunes } from './enchanting-book';
 export type { EnchantingBookProps, EnchantingBookRendererState, EnchantingRunesProps } from './enchanting-book';
 export { ProcessingArrow, FuelIndicator, RecipeGrid, CraftingTable, Furnace, BlastFurnace, Smoker } from './processing';

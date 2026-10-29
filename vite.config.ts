@@ -15,6 +15,7 @@ const hbuiSevenPath = localFont('Minecraft-Seven-v2.otf');
 const hbuiChinesePath = localFont('NotoSansSC-Regular.otf');
 const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loading-indicator.gif', import.meta.url));
 const nativeBitmapPath = fileURLToPath(new URL('./.cache/local-fonts/unicode/font.json', import.meta.url));
+const nativeWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/fonts.json', import.meta.url));
 export default defineConfig({
   base: './', build: { outDir: 'site', rollupOptions: { input: { main: fileURLToPath(new URL('./index.html', import.meta.url)), calibration: fileURLToPath(new URL('./calibration.html', import.meta.url)) } } },
   server: {
@@ -51,6 +52,34 @@ export default defineConfig({
         }
       }
       parts.push(bitmapModule);
+      // Optional local-only GUI text profiles. No global font registration or package export.
+      let workstationModule = 'export const nativeWorkstationFonts = undefined;';
+      if (existsSync(nativeWorkstationPath)) {
+        type LocalWorkstationFont = { pages: string[]; glyphs: object; lineHeight: number };
+        const sample = JSON.parse(readFileSync(nativeWorkstationPath, 'utf8')) as { labels: LocalWorkstationFont; costs: LocalWorkstationFont };
+        const directory = dirname(nativeWorkstationPath);
+        const imports: string[] = [], fonts: string[] = [];
+        let complete = true;
+        for (const kind of ['labels', 'costs'] as const) {
+          const font = sample[kind];
+          if (!font || !Array.isArray(font.pages) || !font.pages.length || !font.glyphs || !Number.isFinite(font.lineHeight) || font.lineHeight <= 0) throw new Error('Invalid local workstation subset; rerun use-local-workstation-fonts.py.');
+          const pages = font.pages.map(page => {
+            if (typeof page !== 'string' || isAbsolute(page)) throw new Error('Workstation font pages must be relative local paths.');
+            const path = resolve(directory, page), fromDirectory = relative(directory, path);
+            if (fromDirectory === '..' || fromDirectory.startsWith('../') || fromDirectory.startsWith('..\\') || isAbsolute(fromDirectory)) throw new Error('Workstation font page is outside its local cache.');
+            return path;
+          });
+          complete &&= pages.every(path => existsSync(path));
+          const names = pages.map((path, index) => {
+            const name = `workstation${kind}Page${index}`;
+            imports.push(`import ${name} from ${JSON.stringify(normalizePath(path) + '?url')};`);
+            return name;
+          });
+          fonts.push(`${kind}: { ...${JSON.stringify(font)}, pages: [${names.join(',')}] }`);
+        }
+        if (complete) workstationModule = imports.join('\n') + `\nexport const nativeWorkstationFonts = { ${fonts.join(',')} };`;
+      }
+      parts.push(workstationModule);
       parts.push(existsSync(hbuiLoadingPath)
         ? `import hbuiLoadingIndicatorUrl from ${JSON.stringify(normalizePath(hbuiLoadingPath) + '?url')}; export { hbuiLoadingIndicatorUrl };`
         : 'export const hbuiLoadingIndicatorUrl = undefined;');
