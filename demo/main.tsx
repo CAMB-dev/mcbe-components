@@ -33,6 +33,7 @@ import { GrindstoneLayerExamples } from './grindstone-layer-examples';
 import { CraftingLayerExamples } from './crafting-layer-examples';
 import { AnvilLayerExamples } from './anvil-layer-examples';
 import { ItemRenderersExamples } from './item-renderers-examples';
+import { BookExamples } from './book-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -54,6 +55,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'gui-layer', name: 'Composed GUI', icon: 'chevron', count: '01' },
   { id: 'grindstone-layer', name: 'Source Grindstone', icon: 'chevron', count: '01' },
   { id: 'crafting-layer', name: 'Source Crafting', icon: 'chevron', count: '01' },
+  { id: 'books', name: 'Books & writing', icon: 'chevron', count: '04' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'anvil-layer', name: 'Source Anvil', icon: 'chevron', count: '01' },
@@ -77,6 +79,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'gui-icons', name: 'GUI icons', icon: 'chevron', count: '150' },
 ];
 const snippets: Record<string, string> = {
+  books: `import { BookReader, BookEditor } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<BookReader pages={['First leaf', 'Second leaf']} />\n<BookEditor defaultPages={['A new adventure']}\n  defaultAuthor="Player"\n  onSign={snapshot => saveBook(snapshot)} />\n// spreadIndex addresses a pair of leaf pages.\n// The host accepts structural page edits and persists signed books.`,
   scrolling: `<ScrollArea label="Inventory notes" style={{height:180}}>\n  <YourScrollableContent/>\n</ScrollArea>\n// ScrollBar is also available as a controlled primitive.`,
   buttons: `import { Button, PixelIcon } from 'mcbeui';\n\n<Button variant="primary"\n  startIcon={<PixelIcon name="plus" />}\n  onClick={() => createWorld()}>\n  Create new world\n</Button>`,
   inputs: `<TextField label="World name" name="worldName"\n  placeholder="My world" required />\n<Combobox label="Difficulty" options={[\n  { value: 'normal', label: 'Normal' },\n  { value: 'hard', label: 'Hard' },\n]} />`,
@@ -386,6 +389,7 @@ function App() {
       <Example id="gui-layer" title="Composed GUI" detail="Original images and glyphs drawn together, with live workstation controls."><GuiLayerExamples/></Example>
       <Example id="grindstone-layer" title="Source Grindstone" detail="Original images, item models and optional local glyphs with all 39 slots interactive."><GrindstoneLayerExamples/></Example>
       <Example id="crafting-layer" title="Source Crafting" detail="A complete recipe book and workbench, with source images, model fallbacks and 46 interactive slots."><CraftingLayerExamples/></Example>
+      <Example id="books" title="Books & writing" detail="Two-page reading, editable pages and a signing cover with original textures."><BookExamples notify={notify}/></Example>
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

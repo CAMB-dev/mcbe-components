@@ -86,3 +86,5 @@ export { InventoryScreenFrame } from './inventory-screen-frame';
 export type { InventoryScreenFrameProps, InventoryScreenLayout } from './inventory-screen-frame';
 export { SurvivalInventoryScreen } from './survival-inventory-screen';
 export type { SurvivalInventoryScreenProps } from './survival-inventory-screen';
+export { BookReader, BookEditor, BookPage, BookPageTurnButton } from './book';
+export type { BookMode, BookPageAction, BookDocumentSnapshot, BookLayoutProfile, BookSkinSources, BookLabels, BookPagesChangeDetail, BookNavigationDetail, BookBaseProps, BookReaderProps, BookEditorProps, BookPageProps, BookPageTurnButtonProps } from './book';

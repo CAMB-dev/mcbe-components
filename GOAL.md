@@ -7,7 +7,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。docs/component-catalog.json 当前梳理 120 个组件（含公共 ContainerFrame、InventoryToolbar、BitmapText、RecipeBook、InventoryScreenFrame、GuiImageLayer、GuiLayer 与完整生存背包 / 工作台组合），覆盖基础控件、容器零件、工作站、背包 / HUD 和游戏页面组合；另有4个数据、10个渲染 / 几何 / 纹理函数，共134个值导出。implemented 只代表导出，不代表像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前124个组件含新增BookReader / BookEditor / BookPage / BookPageTurnButton；另有4个数据、10个渲染 / 几何 / 纹理函数，共138个值导出。docs/component-catalog.json记录具体边界；Book独立30项客户端合同与138值React18 /19实际消费已分别通过，implemented仍不代表原生像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -82,7 +82,9 @@
 - [x] 实现完整CraftingScreen可选原图路径：326根、46右槽与RecipeN、搜索/滚动/选中及模型原子回退；公开回归新增21+旧23+Survival22共66/66通过，生产#crafting-layer的20条辅助检查通过，React18/19真实npm包SSR及类型消费通过。提供17字本地字体脚本与63张原PNG逐资源来源。四GUI5各自完整pre/post目标与正常输入核对后，空配方/紧凑两态仍有5/4个RGB差异像素，alpha均0差；三种字体裁剪及两种imageVS表达式对照均未消除残差。新增建筑10配方完整目标baseline仍3,878个RGB像素不同、alpha0差，全部配方搜索36条、GUI4独立holdout及剩余原生模型/字体继续校准，不算native像素验收完成，见docs/CRAFTING_IMAGE_QA.md。
 - [x] 完成GuiLayer完整原TGA URL的有限格式 / adapter扩展：20项CPU、新12项标准浏览器及旧56项相关合同分别通过，React18.3.1 / 19.3.1实际tarball消费通过；无新公共API / 默认shader / 缓存策略，不作为复杂GUI或原生整页零差认证。见docs/GUI_LAYER_QA.md。
 - [x] 完成source06石切机minY8的有限独立C对照：完整原TGA URL与RGBA control先逐字节相同，再只改四个局部Y，完整原生残差11,626→11,450、index32为2,078→1,902、alpha0；176个旧差异消除、无新增、57个双方仍错点改变，其余35格和补集全同。公开demo共享source / 真实fallback构造已完成实际build及首轮52项辅助检查，GUI2 / 4 / 5实际source34 / DOM2和回退节点身份保留；不计新增正式case，也不把私有C残差作为新公开整页认证，body lighting / 动画phase / native整体模型和Present未完成。
-- [ ] 补齐五类Classic组合及可复用零件：书本阅读 / 编辑与分页、普通 / 悬挂告示牌编辑、命令方块、结构编辑 / XYZ字段、拼图编辑。固定官方v1.26.60.5 JSON已确认来源缺口，但未证明安装版完整对象、活动路由或原生截图；不计入当前120组件，也不因catalog已implemented判为完成。
+- [x] 实现普通Classic书本BookReader / BookEditor，并拆出BookPage / BookPageTurnButton：plain pages与spread、真实textarea、宿主签名快照和结构操作意图；32原PNG / 8metadata保留上游许可，124组件 /138值已导出。独立完整第二批30/30及React18 /19新138值实际tarball消费通过，首批28/2键盘焦点失败保留；六项像素合同仅属Web DOM / CSS / POINT。公开#books的27项辅助及旧6项导航分别通过，首辅助runner完成17后误定位Switch的失败保留、不累计，仍不宣称native0。见docs/BOOK_QA.md。
+- [ ] 继续校准Book祖先百分比clamp、字体换行、caret / IME、安装版活动路由与原生完整书本画面；不以原图SSR、Web像素合同或名义尺寸替代原生验收。
+- [ ] 补齐其余四类Classic组合及可复用零件：普通 / 悬挂告示牌编辑、命令方块、结构编辑 / XYZ字段、拼图编辑。固定官方v1.26.60.5 JSON已确认来源缺口，但未证明安装版完整对象、活动路由或原生截图；不计入当前124组件，也不因catalog已implemented判为完成。
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
 
 Goal 保持进行中：首版组件库已实现，严格的游戏画面对照验收尚未完成。当前可通过 `npm run preview -- --port 4173` 打开展示页。
