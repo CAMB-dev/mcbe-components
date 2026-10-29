@@ -57,7 +57,7 @@ async function open(page: Page, path = '/') {
 }
 function station(page:Page, variant:string) {
   const className = variant === 'furnace' ? '.mc-furnace:not(.mc-blast-furnace):not(.mc-smoker)' : `.mc-${variant}`;
-  return page.locator(`#processing ${className}`);
+  return page.locator(`#processing [data-processing-examples] ${className}`);
 }
 async function png(name: string) {
   return PNG.sync.read(await readFile(new URL(`../.cache/references/${name}`, import.meta.url)));
@@ -154,7 +154,7 @@ test('furnace, blast furnace and smoker preserve source half-pixel geometry', as
 });
 
 test('crafting uses original 3x3 bench offsets and large output rather than a generic inventory grid', async ({page}) => {
-  await open(page); const region = page.locator('#processing .mc-crafting'), frame = await box(region);
+  await open(page); const region = page.locator('#processing [data-processing-examples] .mc-crafting'), frame = await box(region);
   expect([frame.width,frame.height]).toEqual([root.width*2,root.height*2]);
   await rect(region.locator('.mc-crafting__grid'), frame, bench.grid);
   await rect(region.locator('.mc-workstation__title'), frame, bench.title);

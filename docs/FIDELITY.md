@@ -50,7 +50,7 @@ UI 原始对照图缓存于忽略目录 `.cache`。97 个重建皮肤的来源�
 
 已删除手绘物品、假 glint 和默认书图。展示页采用官方 v1.26.60.5 full 的 26 张真实物品 / GUI PNG；逐项与本机 59 个 vanilla 目录中的基础包及版本覆盖候选比较。此前把基础包钻石剑作为最终 runtime 材质的结论已撤回：基础包与 merged 图有 22 像素差异，1.16 / 1.21.90 中存在与 merged 相同的图，但候选存在不证明运行时包激活。完整记录见 item-materials.json。SGA 原图字形 AIZ 与独立图集栅格比较 0 差异；图集不随 npm 分发。EnchantingBook 使用真材质，已修正厚页块与 UV，并参考官方 Java BookModel 的七部件结构重建；Bedrock native mesh 仍未获取；已用本机 26.60 的打开 / 关闭无损截图校准默认相机仰角与分面光照，但完整书本区域仍有残差，明确属于重建，不列入 native pixel-perfect 结论。ItemTooltip 与耐久条已有上述局部原生观察；数量基线、耐久颜色/数值算法和 disabled renderer 仍待校准。
 
-工作台从 inventory_screen.json 的 work_bench_panel_3x3 推导，熔炉 / 高炉 / 烟熏炉从炉子源面板及其继承推导。已拆出 RecipeGrid / ProcessingArrow / FuelIndicator / ResultSlot；52×52 结果槽中的物品保持 32×32。炉子输入 y=29、燃料 y=105、结果 y=59 CSS px，保留源半游戏像素位置；配方书和外部 toolbar 尚未实现。源推导及 12 项独立检查见 [PROCESSING_QA.md](PROCESSING_QA.md)。其中 6 个箭头 / 火焰裁切状态与原始 PNG 独立浏览器控制样本 RGBA 零差，只证明 Chromium 合成，不替代引擎 ratio 与裁切量化验收。
+工作台从 inventory_screen.json 的 work_bench_panel_3x3 推导，熔炉 / 高炉 / 烟熏炉从炉子源面板及其继承推导。已拆出 RecipeGrid / ProcessingArrow / FuelIndicator / ResultSlot；52×52 结果槽中的物品保持 32×32。炉子输入 y=29、燃料 y=105、结果 y=59 CSS px，保留源半游戏像素位置。CraftingTable 继续提供右面板；CraftingScreen 组合 RecipeBook、书脊、双模式 InventoryToolbar 和该右面板，保留326×166逻辑根及收起布局75像素留白。RecipeBookEntry 使用宿主提供的原始背景、分组角标与独立可合成数量；红背景不等于禁用。完整组合来源和原生对照见 [CRAFTING_SCREEN_QA.md](CRAFTING_SCREEN_QA.md)。原右面板源推导及12项独立检查见 [PROCESSING_QA.md](PROCESSING_QA.md)。其中6个箭头 / 火焰裁切状态与原始PNG独立浏览器控制样本RGBA零差，只证明Chromium合成，不替代引擎ratio与裁切量化验收。
 
 附魔经验主色与右下锚点来自原 JSON；本机 26.60 无损截图确认成功字色 #7fff1f / 阴影 #204008，失败字色 #895e5b / 阴影 #221717，已修正归一化颜色四舍五入造成的色阶偏差。GUI 5 的可见阴影偏移为 [5,5] 物理像素，对应当前 GUI 2 的 [2,2] CSS 像素；这证明该状态的颜色与位移，不推断引擎通用暗化算法。青金石槽使用不额外淡化的原始 lapis_image，在空槽与有物品时都保留于物品图下层。书本由无厚度平面改为完整封面、书脊、厚页块和翻页结构；目前开合 / 翻页控制、WebGL 正常工作检查与原生 Bedrock 像素验收仍是不同证据层级。
 

@@ -17,8 +17,8 @@
 .mc-player-screen__result { position: absolute; left: 304px; top: 52px; }
 .mc-player-screen__arrow { position: absolute; left: 268px; top: 58px; width: 32px; height: 26px; background: var(--mc-inv-screen-arrow) center / 100% 100% no-repeat; image-rendering: pixelated; }
 .mc-player-screen__crafting-label { position: absolute; left: 162px; top: 14px; width: 132px; height: 20px; line-height: 20px; text-align: center; color: #4c4c4c; background-color: #c6c6c6; }
-.mc-inventory-toolbar { position: relative; isolation: isolate; box-sizing: border-box; width: 252px; height: 40px; image-rendering: pixelated; }
-.mc-inventory-toolbar::before { content: ''; position: absolute; z-index: -1; left: 0; top: -6px; width: 252px; height: 56px; box-sizing: border-box; border: 8px solid transparent; border-image: var(--mc-inv-screen-toolbar) 4 fill / 8px stretch; pointer-events: none; }
+.mc-inventory-toolbar { position: relative; isolation: isolate; box-sizing: border-box; width: var(--mc-inventory-toolbar-width,252px); height: 40px; image-rendering: pixelated; }
+.mc-inventory-toolbar::before { content: ''; position: absolute; z-index: -1; left: 0; top: -6px; width: 100%; height: 56px; box-sizing: border-box; border: 8px solid transparent; border-image: var(--mc-inv-screen-toolbar) 4 fill / 8px stretch; pointer-events: none; }
 .mc-inventory-toolbar button { position: absolute; box-sizing: border-box; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; touch-action: manipulation; }
 .mc-inventory-toolbar__mode { --toolbar-mode-skin: var(--mc-inv-screen-toolbar-off); top: 2px; width: 50px; height: 36px; }
 .mc-inventory-toolbar__mode[data-layout='creative'] { left: 16px; }
@@ -35,8 +35,8 @@
 .mc-inventory-toolbar__icon--creative { --toolbar-icon: var(--mc-inv-screen-toolbar-creative); }
 .mc-inventory-toolbar__icon--recipe-book { --toolbar-icon: var(--mc-inv-screen-toolbar-recipe-book); }
 .mc-inventory-toolbar__icon--survival { --toolbar-icon: var(--mc-inv-screen-toolbar-survival); }
-.mc-inventory-toolbar .mc-inventory-toolbar__help { left: 180px; top: 5px; width: 30px; height: 30px; background: var(--mc-inv-screen-toolbar-help) center / 100% 100% no-repeat; }
-.mc-inventory-toolbar__close { left: 204px; top: -1px; width: 42px; height: 42px; }
+.mc-inventory-toolbar .mc-inventory-toolbar__help { left: var(--mc-inventory-toolbar-help-left,180px); top: 5px; width: 30px; height: 30px; background: var(--mc-inv-screen-toolbar-help) center / 100% 100% no-repeat; }
+.mc-inventory-toolbar__close { left: var(--mc-inventory-toolbar-close-left,204px); top: -1px; width: 42px; height: 42px; }
 .mc-inventory-toolbar__close > span { position: absolute; left: 6px; top: 6px; width: 30px; height: 30px; background: var(--mc-inv-screen-toolbar-close) center / 100% 100% no-repeat; pointer-events: none; }
 .mc-inventory-toolbar .mc-inventory-toolbar__help:focus-visible { background-image: var(--mc-inv-screen-toolbar-help-hover); }
 .mc-inventory-toolbar__close:focus-visible > span { background-image: var(--mc-inv-screen-toolbar-close-hover); }
@@ -62,14 +62,14 @@
 .mc-recipe-search .mc-recipe-search__field .mc-input:disabled { color: #fff; }
 .mc-recipe-search__field .mc-search-field__icon, .mc-recipe-search__field .mc-search-field__clear { grid-area: 1 / 1; }
 .mc-recipe-search__field .mc-field__description { grid-area: 2 / 1; }
-.mc-recipe-search__filter { position: relative; flex: 0 0 58px; width: 58px; height: 34px; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; touch-action: manipulation; }
-.mc-recipe-search__filter::before { content: ''; position: absolute; inset: 2px; background: var(--mc-inv-screen-filter-off) center / 54px 30px no-repeat; image-rendering: pixelated; }
-.mc-recipe-search__filter[aria-pressed='true']::before { background-image: var(--mc-inv-screen-filter-on); }
-.mc-recipe-search__filter:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
-.mc-recipe-search__filter:disabled { opacity: .5; cursor: not-allowed; }
+.mc-recipe-filter-toggle { position: relative; flex: 0 0 58px; width: 58px; height: 34px; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; touch-action: manipulation; }
+.mc-recipe-filter-toggle::before { content: ''; position: absolute; inset: 2px; background: var(--mc-inv-screen-filter-off) center / 54px 30px no-repeat; image-rendering: pixelated; }
+.mc-recipe-filter-toggle[aria-pressed='true']::before { background-image: var(--mc-inv-screen-filter-on); }
+.mc-recipe-filter-toggle:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.mc-recipe-filter-toggle:disabled { opacity: .5; cursor: not-allowed; }
 @media (hover: hover) {
-  .mc-recipe-search__filter:hover:not(:disabled)::before { background-image: var(--mc-inv-screen-filter-off-hover); }
-  .mc-recipe-search__filter[aria-pressed='true']:hover:not(:disabled)::before { background-image: var(--mc-inv-screen-filter-on-hover); }
+  .mc-recipe-filter-toggle:hover:not(:disabled)::before { background-image: var(--mc-inv-screen-filter-off-hover); }
+  .mc-recipe-filter-toggle[aria-pressed='true']:hover:not(:disabled)::before { background-image: var(--mc-inv-screen-filter-on-hover); }
 }
 .mc-recipe-categories { display: flex; position: relative; width: 292px; height: 54px; isolation: isolate; }
 .mc-recipe-categories__tab { --tab-back: var(--mc-inv-screen-tab-back); --tab-back-hover: var(--mc-inv-screen-tab-back-hover); --tab-front: var(--mc-inv-screen-tab-front); --tab-front-hover: var(--mc-inv-screen-tab-front-hover); --tab-skin: var(--tab-back); position: relative; display: grid; place-items: center; box-sizing: border-box; width: 50px; flex: 0 0 50px; height: 54px; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; touch-action: manipulation; }
@@ -116,5 +116,5 @@
 @media (forced-colors: active) {
   .mc-recipe-categories__tab::before { border-image: none; border-color: ButtonText; background: ButtonFace; }
   .mc-recipe-categories__tab[aria-selected='true'] { outline: 2px solid Highlight; }
-  .mc-recipe-search__filter:focus-visible { outline-color: Highlight; }
+  .mc-recipe-filter-toggle:focus-visible { outline-color: Highlight; }
 }

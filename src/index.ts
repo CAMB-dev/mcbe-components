@@ -56,5 +56,9 @@ export { BlockPreview, BannerPreview, bannerPatternIds, bannerDyeColors, loomPat
 export type { BlockKind, BannerDye, RendererColor, BannerPatternLayer, BannerPatternId, BlockPreviewProps, BannerPreviewProps, ItemMesh, ItemMeshFace, ItemCamera, ItemLighting, Vec3, Uv, PixelTexture } from './item-renderers';
 export { ItemGlint, shadeItemGlint, renderItemGlint } from './item-glint';
 export type { ItemGlintSampler, ItemGlintUniforms, ItemGlintBlend, ItemGlintRenderOptions, ItemGlintPassColor, ItemGlintProps } from './item-glint';
-export { PlayerInventoryScreen, CreativeInventory, ArmorSlot, RecipeSearch, RecipeCategoryTabs, InventoryToolbar } from './inventory-screens';
-export type { PlayerInventoryScreenProps, CreativeInventoryProps, ArmorSlotProps, ArmorSlotKind, RecipeSearchProps, RecipeCategoryTabsProps, RecipeCategory, InventoryToolbarProps, InventoryLayout } from './inventory-screens';
+export { PlayerInventoryScreen, CreativeInventory, ArmorSlot, RecipeSearch, RecipeFilterToggle, RecipeCategoryTabs, InventoryToolbar } from './inventory-screens';
+export type { PlayerInventoryScreenProps, CreativeInventoryProps, ArmorSlotProps, ArmorSlotKind, RecipeSearchProps, RecipeFilterToggleProps, RecipeCategoryTabsProps, RecipeCategory, InventoryToolbarProps, InventoryLayout } from './inventory-screens';
+export { RecipeBook, RecipeBookEntry } from './recipe-book';
+export type { RecipeBookProps, RecipeBookEntryProps, RecipeBookItem, RecipeBookAction } from './recipe-book';
+export { CraftingScreen } from './crafting-screen';
+export type { CraftingScreenProps, CraftingLayout } from './crafting-screen';

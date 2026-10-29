@@ -41,7 +41,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'item-glint', name: 'Item glint', icon: 'chevron', count: '01' },
   { id: 'bitmap-text', name: 'Bitmap text', icon: 'chevron', count: '01' },
   { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
-  { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '07' },
+  { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'containers', name: 'Storage containers', icon: 'chevron', count: '06' },
   { id: 'brewing', name: 'Brewing', icon: 'chevron', count: '02' },
@@ -58,7 +58,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'achievement-toast', name: 'Achievement toast', icon: 'chevron', count: '01' },
   { id: 'game-controls', name: 'Players, touch & menus', icon: 'chevron', count: '04' },
   { id: 'trading-mounts', name: 'Trading & mounts', icon: 'chevron', count: '03' },
-  { id: 'inventory-screens', name: 'Player & creative inventory', icon: 'chevron', count: '06' },
+  { id: 'inventory-screens', name: 'Player & creative inventory', icon: 'chevron', count: '07' },
   { id: 'typography', name: 'Typography & icons', icon: 'chevron', count: '02' },
 ];
 const snippets: Record<string, string> = {
@@ -76,7 +76,7 @@ const snippets: Record<string, string> = {
   'input-states': `<TextField label="World name" error="This name is taken." />\n<TextField label="World seed" defaultValue="8675309" disabled />\n<TextField label="World ID" defaultValue="MC-0420" readOnly />`,
   'inventory-states': `<ItemSlot item={{ name: 'Diamond sword', icon: <YourSword />,\n  durability: 0.42, lore: ['Sharpness IV'] }} selected />\n<InventoryGrid label="Inventory" items={items} size={27}\n  onSlotAction={(index, action) => handleSlot(index, action)} />`,
   workstations: `<Grindstone inputs={[first, second]} result={result}\n  inventory={items} onTakeResult={handleTake} />\n<EnchantingTable item={sword} lapis={lapis}\n  options={enchantments} onEnchant={handleEnchant} />`,
-  processing: `<CraftingTable inputs={recipeInputs} result={result}\n  onInputAction={handleInput} onTakeResult={handleTake} />\n<Furnace input={rawBeef} fuel={coal} result={steak}\n  progress={0.5} fuelRemaining={0.75}\n  inventory={items} onTakeResult={handleTake} />\n// BlastFurnace and Smoker use the same controlled API.`,
+  processing: `<CraftingScreen\n  recipeBook={{ title: 'Recipes', entries,\n    categoryId, onCategoryChange: setCategoryId,\n    query, onQueryChange: setQuery,\n    craftableOnly, onCraftableOnlyChange: setCraftableOnly,\n    onRecipeAction: handleRecipe }}\n  crafting={{ inputs: recipeInputs, result,\n    inventory: items, onTakeResult: handleTake }} />\n// entries are filtered and flattened by your application.\n// CraftingTable also remains available as a right pane.\n<Furnace input={rawBeef} fuel={coal} result={steak}\n  progress={0.5} fuelRemaining={0.75}\n  inventory={items} onTakeResult={handleTake} />`,
   anvil: `<Anvil name={name} onNameChange={setName}\n  inputs={[item, material]} result={result}\n  cost={{kind: 'levels', levels: 3, affordable: true}}\n  onTakeResult={handleTake} />`,
   containers: `<Chest rows={6} items={storage} inventory={inventory}\n  selectedIndex={selected} onSelectionChange={setSelected}\n  onSlotAction={handleStorageAction} />\n<Hopper items={hopperItems} inventory={inventory} />\n// Dispenser, Dropper and ShulkerBox share the same storage API.`,
 };

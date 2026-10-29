@@ -203,6 +203,21 @@
         "status": "implemented"
       },
       {
+        "name": "RecipeFilterToggle",
+        "status": "implemented",
+        "fidelity": "source_texture_controlled_recipe_filter"
+      },
+      {
+        "name": "RecipeBook",
+        "status": "implemented",
+        "fidelity": "source_texture_host_resolved_recipe_collection"
+      },
+      {
+        "name": "RecipeBookEntry",
+        "status": "implemented",
+        "fidelity": "source_texture_host_resolved_recipe_binding"
+      },
+      {
         "name": "RecipeCategoryTabs",
         "status": "implemented"
       },
@@ -277,6 +292,11 @@
       {
         "name": "CraftingTable",
         "status": "implemented"
+      },
+      {
+        "name": "CraftingScreen",
+        "status": "implemented",
+        "fidelity": "source_texture_classic_screen_composition_native_parity_unverified"
       },
       {
         "name": "Furnace",

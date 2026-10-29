@@ -97,7 +97,11 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `ProcessingArrow` | `progress`: 0…1、`label`、`variant`: smelting / crafting；div 属性 | 原始箭头纹理，smelting 从左向右裁切完整填充图；crafting 使用静态箭头 |
 | `FuelIndicator` | `progress`: 0…1、`label`；div 属性 | 原始火焰纹理，自底部显示剩余比例，保留 full 图原尺寸 |
 | `RecipeGrid` | InventoryGrid 属性；`columns`、`rows`: 2 / 3 | 共用合成网格；尺寸决定槽位数，支持 2×2 和 3×3 |
-| `CraftingTable` | `inputs`、`result`、`selectedInputIndex`、`onInputAction`、`onTakeResult`；容器库存属性 | 源 3×3 工作台右面板，大结果槽与共享库存；配方书及外部 toolbar 尚未实现 |
+| `CraftingTable` | `inputs`、`result`、`selectedInputIndex`、`onInputAction`、`onTakeResult`；容器库存属性 | 可复用源 3×3 工作台右面板；完整组合使用 CraftingScreen |
+| `CraftingScreen` | **必填** `recipeBook: RecipeBookProps`；可选 `crafting: Omit<CraftingTableProps, 'title'>`、`layout` / `defaultLayout`: recipe-book / survival、`onLayoutChange`、`onHelp`、`onClose`、`showClose` | Classic 配方书＋右面板＋工具条完整组合；默认 recipe-book，ref 为 section；窄屏局部滚动，配方与物品操作由宿主处理 |
+| `RecipeBook` | **必填** `title`、`entries`、`categoryId`、`query`、`craftableOnly`；分类 / 搜索 / 筛选回调、`selectedId`、`onRecipeAction`、`creative` | 受控配方页，entries 已由宿主筛选和展开；复用分类、搜索、筛选和滚动，ref 为 div |
+| `RecipeBookEntry` | **必填** `entry: RecipeBookItem`；`onRecipeAction(id, action)`、槽位按钮属性 | entry 提供 item / preview、craftableCount、backgroundImage / backgroundSlice、modifier；零可制作数保留物品，不可制作颜色不自动禁用；primary / secondary / tertiary 操作，ref 为 button |
+| `RecipeFilterToggle` | `craftableOnly` / `defaultCraftableOnly`、`onCraftableOnlyChange`、`label`、`disabled`、`readOnly` | 可独立复用的可制作筛选按钮，aria-pressed 表达状态；ref 为 button，不自行过滤集合 |
 | `Furnace` / `BlastFurnace` / `Smoker` | `input`、`fuel`、`result`、`progress`、`fuelRemaining`、`onInputAction`、`onTakeResult`；容器库存属性 | 共用原版熔炼右面板，原始浮点槽位布局、火焰与进度裁切；游戏规则由使用方提供 |
 | `PixelIcon` | **必填** `name`；`size`，默认 20 | 16×16 原创 SVG 图标，默认装饰性 aria-hidden，图标按钮须提供标签 |
 | `Image` | **必填** `src`、`alt`、`sourceSize`；`size`、`scale`；img 属性 | PNG 物理尺寸与 GUI 逻辑尺寸分离，静态 SSR，无加载后测量；空 alt 表示装饰图 |
@@ -161,7 +165,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `RecipeCategoryTabs` | `categories`: RecipeCategory[]；`value` / `defaultValue`、`onValueChange`、`label`、`disabled`、`panelId` | 原版顶部分页图，支持 RTL、方向键和 Home / End；键盘激活可用分类 |
 | `PlayerInventoryScreen` | `armor`、`offhand`、`crafting`、`result`、`playerPreview`、`onArmorAction`、`onCraftingAction`、`onTakeResult`；WorkstationFrame 属性 | 生存背包主面板，复用装备槽、2×2 合成及结果槽；原生外部 toolbar 和角色 renderer 由宿主提供 |
 | `CreativeInventory` | **必填** `items`；`chrome`: full / none、`layout` / `defaultLayout`、`onLayoutChange`、`onHelp`；`categories`、`categoryId` / `defaultCategoryId`、`onCategoryChange`、`query` / `defaultQuery`、`onQueryChange`、`hotbar`、`onItemAction`、`onHotbarAction`、`onClose` | 默认完整原版工具条和创造面板，chrome=none 仅提供可复用 pane；宿主提供当前分类集合，搜索仅筛名称且回调保留原始 items 索引，IME 输入完成后再筛选 |
-| `InventoryToolbar` | `value` / `defaultValue`: creative / recipe-book / survival；`onValueChange`、`onHelp`、`onClose`、`disabled`、`modeLabels` | 可复用原版三模式工具条、帮助和关闭入口；真实受控回调，模式数据与路由由宿主切换 |
+| `InventoryToolbar` | `value` / `defaultValue`: creative / recipe-book / survival；`layouts`、`showClose`、`onValueChange`、`onHelp`、`onClose`、`disabled`、`modeLabels` | 可复用模式工具条、帮助和关闭入口；layouts 限制可见模式，showClose 控制关闭入口；数据与路由由宿主切换 |
 
 ### 受控与非受控
 
@@ -282,11 +286,11 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **111 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 111 项（含 BitmapText / BlockPreview / BannerPreview / ItemGlint / InventoryToolbar），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 3 份 renderer 数据及 `shadeItemGlint` / `renderItemGlint` 两个纯渲染函数，不计组件数量；ESM 值导出共 116 项。
+当前 **115 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 115 项（含 RecipeBook / RecipeBookEntry / CraftingScreen / RecipeFilterToggle），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 3 份 renderer 数据及 `shadeItemGlint` / `renderItemGlint` 两个纯渲染函数，不计组件数量；ESM 值导出共 120 项。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
-- 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类、燃料、处理箭头、附魔选项、交易条目。
-- GUI：已有附魔台、砂轮、工作台与熔炉族主面板、铁砧、酿造台、现代锻造台、制图台、切石机、织布机、信标、合成器、箱子族、漏斗、发射器、投掷器、交易、玩家 / 创造 / 坐骑背包及共享配方搜索 / 分类部件。
+- 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
+- GUI：已有附魔台、砂轮、完整 Classic 合成屏幕、工作台与熔炉族主面板、铁砧、酿造台、现代锻造台、制图台、切石机、织布机、信标、合成器、箱子族、漏斗、发射器、投掷器、交易、玩家 / 创造 / 坐骑背包及共享配方搜索 / 分类部件。
 - HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示、玩家列表及触屏控制，以及暂停 / 死亡 / 设置 / 加载 / 世界 / 服务器 / 资源包 / 成就提示等组合。
 
 目录中的 GUI 由这些基础零件组合。目录范围不等于所有版本、所有平台的完整游戏界面；原生 3D renderer、游戏规则、最终像素取整与真实游戏整帧差异单独验收。
@@ -492,7 +496,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、111 个组件、3 份数据和 2 个渲染函数、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、115 个组件、3 份数据和 2 个渲染函数、类型、CSS、皮肤、字体及许可路径。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

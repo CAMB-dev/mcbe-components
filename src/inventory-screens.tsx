@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useId, useRef, useState } from 'react';
-import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, KeyboardEvent, ReactNode, RefObject } from 'react';
 import { InventoryGrid, ItemSlot, ResultSlot } from './inventory';
 import type { InventoryItem, InventorySlotAction, ItemSlotProps } from './inventory';
 import { WorkstationFrame } from './workstations';
@@ -18,6 +18,13 @@ export interface RecipeSearchProps extends Omit<SearchFieldProps, 'label'> {
   onCraftableOnlyChange?: (craftableOnly: boolean) => void;
   filterLabel?: string;
 }
+export interface RecipeFilterToggleProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'defaultValue' | 'onChange'> {
+  craftableOnly?: boolean;
+  defaultCraftableOnly?: boolean;
+  onCraftableOnlyChange?: (craftableOnly: boolean) => void;
+  label?: string;
+  readOnly?: boolean;
+}
 export interface RecipeCategory { id: string; label: string; icon?: ReactNode; disabled?: boolean }
 export interface RecipeCategoryTabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'defaultValue' | 'onChange'> {
   categories?: readonly RecipeCategory[];
@@ -30,6 +37,8 @@ export interface RecipeCategoryTabsProps extends Omit<HTMLAttributes<HTMLDivElem
 }
 export type InventoryLayout = 'creative' | 'recipe-book' | 'survival';
 export interface InventoryToolbarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'defaultValue' | 'onChange'> {
+  layouts?: readonly InventoryLayout[];
+  showClose?: boolean;
   value?: InventoryLayout;
   defaultValue?: InventoryLayout;
   onValueChange?: (value: InventoryLayout) => void;
@@ -89,14 +98,37 @@ const armorKinds: readonly ArmorSlotKind[] = ['helmet', 'chestplate', 'leggings'
 const inventoryLayouts: readonly InventoryLayout[] = ['creative', 'recipe-book', 'survival'];
 const layoutLabels: Record<InventoryLayout, string> = { creative: 'Creative layout', 'recipe-book': 'Recipe book layout', survival: 'Survival inventory layout' };
 
-/** Original three layout controls, help and close, including the native 21x21 close hit target. */
+/** Source toolbar stack: conditional layouts/close, help, and the native 21x21 close hit target. */
 export const InventoryToolbar = forwardRef<HTMLDivElement, InventoryToolbarProps>(function InventoryToolbar({
-  value, defaultValue = 'creative', onValueChange, onHelp, onClose, disabled, label = 'Inventory toolbar', modeLabels,
-  helpLabel = 'How to play', closeLabel = 'Close inventory', className, onKeyDown, ...props
+  layouts = inventoryLayouts, showClose = true, value, defaultValue = 'creative', onValueChange, onHelp, onClose, disabled, label = 'Inventory toolbar', modeLabels,
+  helpLabel = 'How to play', closeLabel = 'Close inventory', className, style, onKeyDown, ...props
 }, ref) {
-  const [internal, setInternal] = useState(defaultValue), selected = value ?? internal;
-  const [focused, setFocused] = useState<string>(selected);
+  const visibleLayouts = Array.from(new Set(layouts)).filter(layout => inventoryLayouts.includes(layout));
+  const [internal, setInternal] = useState(defaultValue), selected = value ?? (visibleLayouts.includes(internal) ? internal : visibleLayouts[0]);
+  const [focused, setFocused] = useState<string>(selected ?? 'help');
+  const controls: string[] = [...visibleLayouts, 'help', ...(showClose ? ['close'] : [])];
+  const tabStop = controls.includes(focused) ? focused : selected && controls.includes(selected) ? selected : controls[0];
+  const buttons = useRef(new Map<string, HTMLButtonElement>()), removedFocus = useRef<string | null>(null);
+  const remember = (id: string, node: HTMLButtonElement | null) => {
+    if (node) buttons.current.set(id, node);
+    else {
+      const previous = buttons.current.get(id);
+      if (previous && previous.ownerDocument.activeElement === previous) removedFocus.current = id;
+      buttons.current.delete(id);
+    }
+  };
+  useEffect(() => {
+    const removed = removedFocus.current; removedFocus.current = null;
+    if (removed && !disabled && !controls.includes(removed) && tabStop) buttons.current.get(tabStop)?.focus();
+  });
+  // Source stack: 8g left; creative 25g+2g; recipe book 25g+1g; survival 25g;
+  // then 4g gap, 15g help, conditional 15g close, and 6g right padding.
+  let cursor = 16;
+  const positions = new Map<InventoryLayout, number>();
+  for (const layout of visibleLayouts) { positions.set(layout, cursor); cursor += 50 + (layout === 'creative' ? 4 : layout === 'recipe-book' ? 2 : 0); }
+  const helpLeft = cursor + 8, width = helpLeft + 30 + (showClose ? 30 : 0) + 12;
   return <div {...props} ref={ref} role="toolbar" aria-label={label} className={cx('mc-inventory-toolbar', className)}
+    style={{ '--mc-inventory-toolbar-width': `${width}px`, '--mc-inventory-toolbar-help-left': `${helpLeft}px`, '--mc-inventory-toolbar-close-left': `${helpLeft + 24}px`, ...style } as CSSProperties}
     onKeyDown={event => {
       onKeyDown?.(event); if (disabled || event.defaultPrevented || event.nativeEvent.isComposing || !(event.target instanceof HTMLButtonElement)) return;
       const buttons = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('button:not(:disabled)'));
@@ -106,15 +138,15 @@ export const InventoryToolbar = forwardRef<HTMLDivElement, InventoryToolbarProps
       if (![previous, next, 'Home', 'End'].includes(event.key)) return;
       event.preventDefault(); const target = event.key === 'Home' ? buttons[0] : event.key === 'End' ? buttons.at(-1) : buttons[(index + (event.key === next ? 1 : -1) + buttons.length) % buttons.length]; target?.focus();
     }}>
-    {inventoryLayouts.map(layout => <button key={layout} type="button" data-layout={layout} data-toolbar-control={layout}
+    {visibleLayouts.map(layout => <button ref={node => remember(layout, node)} key={layout} type="button" data-layout={layout} data-toolbar-control={layout} style={{ left: positions.get(layout) }}
       className="mc-inventory-toolbar__mode" aria-label={modeLabels?.[layout] ?? layoutLabels[layout]} aria-pressed={selected === layout}
-      disabled={disabled} tabIndex={!disabled && focused === layout ? 0 : -1} onFocus={() => setFocused(layout)} onClick={() => {
+      disabled={disabled} tabIndex={!disabled && tabStop === layout ? 0 : -1} onFocus={() => setFocused(layout)} onClick={() => {
         if (value === undefined) setInternal(layout); onValueChange?.(layout);
       }}><span aria-hidden="true" className={`mc-inventory-toolbar__icon mc-inventory-toolbar__icon--${layout}`}/></button>)}
-    <button type="button" className="mc-inventory-toolbar__help" aria-label={helpLabel} disabled={disabled} data-toolbar-control="help"
-      tabIndex={!disabled && focused === 'help' ? 0 : -1} onFocus={() => setFocused('help')} onClick={onHelp}/>
-    <button type="button" className="mc-inventory-toolbar__close" aria-label={closeLabel} disabled={disabled} data-toolbar-control="close"
-      tabIndex={!disabled && focused === 'close' ? 0 : -1} onFocus={() => setFocused('close')} onClick={onClose}><span aria-hidden="true"/></button>
+    <button ref={node => remember('help', node)} type="button" className="mc-inventory-toolbar__help" aria-label={helpLabel} disabled={disabled} data-toolbar-control="help"
+      tabIndex={!disabled && tabStop === 'help' ? 0 : -1} onFocus={() => setFocused('help')} onClick={onHelp}/>
+    {showClose && <button ref={node => remember('close', node)} type="button" className="mc-inventory-toolbar__close" aria-label={closeLabel} disabled={disabled} data-toolbar-control="close"
+      tabIndex={!disabled && tabStop === 'close' ? 0 : -1} onFocus={() => setFocused('close')} onClick={onClose}><span aria-hidden="true"/></button>}
   </div>;
 });
 
@@ -132,26 +164,51 @@ export const ArmorSlot = forwardRef<HTMLButtonElement, ArmorSlotProps>(function 
   </ItemSlot>;
 });
 
+function useRecipeFilterState(craftableOnly: boolean | undefined, defaultCraftableOnly: boolean, button: RefObject<HTMLButtonElement | null>, visible = true) {
+  const [internal, setInternal] = useState(defaultCraftableOnly);
+  const selected = craftableOnly ?? internal;
+  const resetState = useRef(() => {});
+  resetState.current = () => { if (craftableOnly === undefined) setInternal(defaultCraftableOnly); };
+  useEffect(() => {
+    const doc = button.current?.ownerDocument; if (!doc) return;
+    const timers = new Set<ReturnType<typeof setTimeout>>();
+    const reset = (event: Event) => {
+      if (event.target !== button.current?.form) return;
+      const timer = setTimeout(() => { timers.delete(timer); if (!event.defaultPrevented) resetState.current(); }, 0); timers.add(timer);
+    };
+    doc.addEventListener('reset', reset, true);
+    return () => { doc.removeEventListener('reset', reset, true); for (const timer of timers) clearTimeout(timer); };
+  }, [button, visible]);
+  return { selected, setInternal };
+}
+
+/** Original 29x17 craftable-only toggle; inventory filtering remains host-owned. */
+export const RecipeFilterToggle = forwardRef<HTMLButtonElement, RecipeFilterToggleProps>(function RecipeFilterToggle({
+  craftableOnly, defaultCraftableOnly = false, onCraftableOnlyChange, label = 'Craftable recipes only',
+  disabled, readOnly, className, onClick, ...props
+}, ref) {
+  const button = useRef<HTMLButtonElement>(null);
+  const { selected, setInternal } = useRecipeFilterState(craftableOnly, defaultCraftableOnly, button);
+  return <button {...props} ref={node => { button.current = node; if (typeof ref === 'function') ref(node); else if (ref) ref.current = node; }}
+    type="button" className={cx('mc-recipe-filter-toggle', className)} aria-label={props['aria-label'] ?? label}
+    aria-pressed={selected} disabled={disabled || readOnly} onClick={event => {
+      onClick?.(event); if (event.defaultPrevented || disabled || readOnly) return;
+      if (craftableOnly === undefined) setInternal(!selected); onCraftableOnlyChange?.(!selected);
+    }}/>;
+});
+
 /** Source search edit-box and source craftable-only toggle; filtering is host-owned. */
 export const RecipeSearch = forwardRef<HTMLInputElement, RecipeSearchProps>(function RecipeSearch({
   label = 'Search recipes', showFilter = true, craftableOnly, defaultCraftableOnly = false, onCraftableOnlyChange,
   filterLabel = 'Craftable recipes only', disabled, readOnly, className, maxLength = 30, ...props
 }, ref) {
-  const [internal, setInternal] = useState(defaultCraftableOnly);
-  const selected = craftableOnly ?? internal;
   const button = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    const form = button.current?.form; if (!form || craftableOnly !== undefined) return;
-    const timers = new Set<ReturnType<typeof setTimeout>>();
-    const reset = (event: Event) => { const timer = setTimeout(() => { timers.delete(timer); if (!event.defaultPrevented) setInternal(defaultCraftableOnly); }, 0); timers.add(timer); };
-    form.addEventListener('reset', reset);
-    return () => { form.removeEventListener('reset', reset); for (const timer of timers) clearTimeout(timer); };
-  }, [craftableOnly, defaultCraftableOnly]);
+  const { selected, setInternal } = useRecipeFilterState(craftableOnly, defaultCraftableOnly, button, showFilter);
   return <div className={cx('mc-recipe-search', className)}>
     <SearchField {...props} ref={ref} label={label} disabled={disabled} readOnly={readOnly} maxLength={maxLength} className="mc-recipe-search__field"/>
-    {showFilter && <button ref={button} type="button" className="mc-recipe-search__filter" aria-label={filterLabel}
-      aria-pressed={selected} disabled={disabled || readOnly} onClick={() => {
-        if (craftableOnly === undefined) setInternal(!selected); onCraftableOnlyChange?.(!selected);
+    {showFilter && <RecipeFilterToggle ref={button} className="mc-recipe-search__filter" label={filterLabel}
+      craftableOnly={selected} disabled={disabled} readOnly={readOnly} onCraftableOnlyChange={next => {
+        if (craftableOnly === undefined) setInternal(next); onCraftableOnlyChange?.(next);
       }}/>}
   </div>;
 });

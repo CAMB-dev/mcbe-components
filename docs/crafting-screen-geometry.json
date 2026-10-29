@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "profile": "bedrock-classic-json-ui",
+  "gameVersion": "1.26.6005.0",
+  "release": "v1.26.60.5",
+  "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "sources": {
+    "inventory_screen.json": {
+      "publicSha256": "10e72254bac2a95801b61cb229ad43ab793ec585a52aee7e27791e79ab6d9f80",
+      "installedSha256": "8c3a6a756bc47500d237ebceea389d1f08d9e0dcdb02ab806ab3a03a51a22a6b",
+      "parsedEqual": true,
+      "source": "resource_pack/ui/inventory_screen.json",
+      "rawPublic": "public/inventory_screen.json",
+      "rawInstalled": "installed/inventory_screen.json"
+    },
+    "ui_common.json": {
+      "publicSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "installedSha256": "1de0c736edeeb6c6fbf1baf398a1c92e4d00b91b8fb44c81193e9c6cc5a421ec",
+      "parsedEqual": true,
+      "source": "resource_pack/ui/ui_common.json",
+      "rawPublic": "public/ui_common.json",
+      "rawInstalled": "installed/ui_common.json"
+    },
+    "ui_template_tabs.json": {
+      "publicSha256": "e4aae0403646ee6a0a4199f0b9eafd89550c301b2683fada406f6f6491b6dc88",
+      "installedSha256": "7a8f9af4dc3fc1b55782c2d4eed37d513494a04a4dd1df3667859b43847903c5",
+      "parsedEqual": true,
+      "source": "resource_pack/ui/ui_template_tabs.json",
+      "rawPublic": "public/ui_template_tabs.json",
+      "rawInstalled": "installed/ui_template_tabs.json"
+    },
+    "ui_template_toggles.json": {
+      "publicSha256": "efe2bf9fab47aa5e29d7116a2aa705a964a42b0ef86c947c4e46188be9ac2a01",
+      "installedSha256": "4d228fb036db1efc7eed08253b05a4dd89abaf39d6d2eaac6d95593c63673f91",
+      "parsedEqual": true,
+      "source": "resource_pack/ui/ui_template_toggles.json",
+      "rawPublic": "public/ui_template_toggles.json",
+      "rawInstalled": "installed/ui_template_toggles.json"
+    },
+    "ui_template_buttons.json": {
+      "publicSha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "installedSha256": "6d89054b8b61fb1a1730069ec7f8547ce9e1ab263780f89b8713b87f17a232f7",
+      "parsedEqual": true,
+      "source": "resource_pack/ui/ui_template_buttons.json",
+      "rawPublic": "public/ui_template_buttons.json",
+      "rawInstalled": "installed/ui_template_buttons.json"
+    },
+    "_global_variables.json": {
+      "publicSha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "installedSha256": "6d458a58cbe3f28f5f752f27808744c0b3f49bc40e346462b0af9e3805dbd920",
+      "parsedEqual": true,
+      "source": "resource_pack/ui/_global_variables.json",
+      "rawPublic": "public/_global_variables.json",
+      "rawInstalled": "installed/_global_variables.json"
+    },
+    "inventory_screen_pocket.json": {
+      "publicSha256": "2652ac6ea429606650f0e6cbc959e9fdc0bb9d1d7b004faf4d88a1431e585d3d",
+      "installedSha256": "179ed73fa93c7d9ffad9298a3823bada9bf7bdea08c7716fe485be22fbed5c4e",
+      "parsedEqual": true,
+      "source": "resource_pack/ui/inventory_screen_pocket.json",
+      "rawPublic": "public/inventory_screen_pocket.json",
+      "rawInstalled": "installed/inventory_screen_pocket.json"
+    },
+    "pocket_containers.json": {
+      "publicSha256": "2c8f65e38a167095217d1ef6dd0ad26cbabcfc12b3c1d645a20c5463164eb03b",
+      "installedSha256": "4ff1a68c05846321de2437c6659dbc66a73743d66e7548760dffd366a64f100a",
+      "parsedEqual": true,
+      "source": "resource_pack/ui/pocket_containers.json",
+      "rawPublic": "public/pocket_containers.json",
+      "rawInstalled": "installed/pocket_containers.json"
+    },
+    "_ui_defs.json": {
+      "publicSha256": "b4f7f25b6ee4246b3582eb78a031ecc93793fdb2cf09f77b886d73f4038cb270",
+      "installedSha256": "27ee2498eadc51ab81bc08400b0e3ccccf3feceb4ceb8dc37846829b6e505fcb",
+      "parsedEqual": true,
+      "source": "resource_pack/ui/_ui_defs.json",
+      "rawPublic": "public/_ui_defs.json",
+      "rawInstalled": "installed/_ui_defs.json"
+    }
+  },
+  "geometry": {
+    "units": "logical game pixels; GUI2 multiplies by two",
+    "wide": {
+      "root": [
+        326,
+        166
+      ],
+      "book": [
+        0,
+        0,
+        146,
+        166
+      ],
+      "fold": [
+        146,
+        0,
+        4,
+        166
+      ],
+      "right": [
+        150,
+        0,
+        176,
+        166
+      ],
+      "toolbarRight": 326
+    },
+    "compact": {
+      "right": [
+        75,
+        0,
+        176,
+        166
+      ],
+      "toolbarRight": 251,
+      "unoccupiedTail": 75
+    },
+    "book": {
+      "content": [
+        6,
+        6,
+        134,
+        154
+      ],
+      "tabs": [
+        0,
+        -23,
+        146,
+        27
+      ],
+      "headerLabel": [
+        9,
+        8,
+        100,
+        10
+      ],
+      "headerFilter": [
+        112,
+        3.5,
+        29,
+        17
+      ],
+      "searchHeaderLabel": [
+        9,
+        8,
+        129,
+        10
+      ],
+      "searchInput": [
+        6,
+        19,
+        104,
+        16
+      ],
+      "searchFilter": [
+        112,
+        18.5,
+        29,
+        17
+      ],
+      "items": [
+        6,
+        21,
+        134,
+        139
+      ],
+      "searchItems": [
+        6,
+        37,
+        134,
+        123
+      ],
+      "cell": [
+        18,
+        18
+      ],
+      "modifier": [
+        10,
+        10,
+        7,
+        7
+      ],
+      "columnsAt146": 7
+    },
+    "right": {
+      "inputs": [
+        29,
+        16,
+        54,
+        54
+      ],
+      "arrow": [
+        90,
+        35.5,
+        22,
+        15
+      ],
+      "result": [
+        123,
+        30,
+        26,
+        26
+      ],
+      "inventory": [
+        7,
+        86,
+        162,
+        54
+      ],
+      "hotbar": [
+        7,
+        143,
+        162,
+        18
+      ]
+    },
+    "toolbar": {
+      "threeModesWidth": 126,
+      "twoModesWidth": 99,
+      "closeHitSize": [
+        21,
+        21
+      ],
+      "closeGlyphSize": [
+        15,
+        15
+      ]
+    }
+  },
+  "bindings": {
+    "entryCount": "#recipe_craftable_count",
+    "entryBackground": "#container_item_background_texture",
+    "entryModifier": "#container_item_modifier",
+    "selected": "#is_creative_selected_slot",
+    "actions": [
+      "recipe_select",
+      "recipe_secondary",
+      "recipe_tertiary"
+    ]
+  },
+  "boundaries": [
+    "Classic profile only; Pocket is a separate source namespace.",
+    "Host supplies filtered/flattened collections, item rendering, recipe eligibility and crafting results.",
+    "Grid keyboard navigation is a Web adaptation; missing native armor focus targets are not invented.",
+    "Source geometry and original PNG tests do not certify native full-frame RGBA parity.",
+    "Native font, book lighting and fractional rasterization still have retained nonzero differences."
+  ],
+  "nativeEvidence": {
+    "method": "NativeAlt+PrintScreen -> ordinaryPaintCtrl+V -> Ctrl+Shift+S -> basename -> explicitPNGformat -> Save. Parentcompactclipboardwasconsumedbeforeanynewfilenameinput. No tool-screenshot payloadwasusedaslosslesssource.",
+    "settings": {
+      "gameModeDuringCaptures": "survival",
+      "guiScale": 5,
+      "aa": 16,
+      "settingsEvidence": "Parent-observedinitialsetup, not independentlyreopenedthisagent. NoGUI/AAsettingchanged. Allrawcapturesare2568x1400; thisdoesnotcertifygameclientrectangle."
+    },
+    "captures": [
+      {
+        "path": ".cache/tooltip-native/crafting-search-survival-gui5.png",
+        "sha256": "d4904aafcff21d10b0f952638d57af22d2da7f3a599913889435c2d19f50f7bf",
+        "bytes": 1191855,
+        "dimensions": [
+          2568,
+          1400
+        ],
+        "format": "PNG"
+      },
+      {
+        "path": ".cache/tooltip-native/crafting-compact-survival-gui5.png",
+        "sha256": "5633e464bcdc7cb78a8377c627baca0555ae856c8883fea8d1827d7749059278",
+        "bytes": 1258004,
+        "dimensions": [
+          2568,
+          1400
+        ],
+        "format": "PNG"
+      },
+      {
+        "path": ".cache/tooltip-native/crafting-category-construction-survival-gui5.png",
+        "sha256": "843ecf44f830c6174d00c04cca8086be75e4e15ae1adf9fe93f4fc0d544c55c0",
+        "bytes": 902599,
+        "dimensions": [
+          2568,
+          1400
+        ],
+        "format": "PNG"
+      },
+      {
+        "path": ".cache/tooltip-native/crafting-filter-craftable-empty-survival-gui5.png",
+        "sha256": "8091636e43cde08702c77149eeb8a914148d698df0f4302c59972bf5c50e75c9",
+        "bytes": 860214,
+        "dimensions": [
+          2568,
+          1400
+        ],
+        "format": "PNG"
+      }
+    ],
+    "restoredCreativeAndPaused": true,
+    "fullFrameParityCertified": false
+  }
+}

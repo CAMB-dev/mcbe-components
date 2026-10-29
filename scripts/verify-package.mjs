@@ -34,12 +34,13 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
-const components = ['BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
+const components = ['RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds'];
 const rendererFunctions = ['shadeItemGlint','renderItemGlint'];
-assert.equal(components.length,111);
+assert.equal(components.length,115);
 assert.equal(dataExports.length,3);
 assert.equal(rendererFunctions.length,2);
+assert.equal(Object.keys(ui).length,120);
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
 const glintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25]};
 const glintTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
@@ -52,6 +53,12 @@ assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+const recipeEntry = {id:'stone',label:'Host stone recipe',item:{name:'Stone',count:64},craftableCount:0,modifier:'expand'};
+const recipeBookProps = {title:'Craftable recipes',entries:[recipeEntry],categoryId:'search',query:'host supplies filtered entries',craftableOnly:true};
+const recipeBookMarkup = renderToString(element(ui.RecipeBook,recipeBookProps));
+assert.match(recipeBookMarkup,/data-recipe-id="stone"/);
+assert.match(recipeBookMarkup,/Host stone recipe/);
+assert.match(recipeBookMarkup,/data-modifier="expand"/);
 const bitmapFont = {pages:['/caller-owned-atlas.png'],glyphs:{A:{page:0,x:0,y:0,width:1,height:1,advance:1}},lineHeight:1};
 const bitmapMarkup = renderToString(element(ui.BitmapText,{font:bitmapFont,sampling:'point',shader:'bitmap',color:'#ffffff'},'A'));
 assert.match(bitmapMarkup,/mc-bitmap-text/);
@@ -96,6 +103,11 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
   element(ui.FuelIndicator,{progress:.5}),
   element(ui.RecipeGrid,{label:'Recipe',items:[]}),
   element(ui.CraftingTable,{}),
+  element(ui.RecipeBook,recipeBookProps),
+  element(ui.RecipeBookEntry,{entry:recipeEntry}),
+  element(ui.RecipeFilterToggle,{craftableOnly:true}),
+  element(ui.CraftingScreen,{recipeBook:recipeBookProps}),
+  element(ui.CraftingScreen,{recipeBook:recipeBookProps,layout:'survival',crafting:{inputs:[],result:null}}),
   element(ui.Furnace,{}),
   element(ui.BlastFurnace,{}),
   element(ui.Smoker,{}),
@@ -175,10 +187,10 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
 assert.match(output, /mc-button--primary/);
 assert.match(output, /World name/);
 assert.match(output, /role="tablist"/);
-for (const className of ['mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
+for (const className of ['mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -226,6 +238,13 @@ import type { ItemGlintSampler, ItemGlintUniforms, ItemGlintBlend, ItemGlintRend
 import type { BlockKind, BannerDye, RendererColor, BannerPatternLayer, BannerPatternId, ItemMesh, ItemMeshFace, ItemCamera, ItemLighting, Vec3, Uv, PixelTexture } from 'mcbeui';
 import { PlayerInventoryScreen, CreativeInventory, ArmorSlot, RecipeSearch, RecipeCategoryTabs, InventoryToolbar } from 'mcbeui';
 import type { ArmorSlotKind, RecipeCategory, InventoryLayout } from 'mcbeui';
+import { RecipeBook, RecipeBookEntry, RecipeFilterToggle, CraftingScreen } from 'mcbeui';
+import type { RecipeBookProps, RecipeBookEntryProps, RecipeBookItem, RecipeBookAction, RecipeFilterToggleProps, CraftingScreenProps, CraftingLayout } from 'mcbeui';
+const recipeBookItem: RecipeBookItem = {id:'stone',item:{name:'Stone',count:64},label:'Stone recipe',craftableCount:0,backgroundImage:'/caller-recipe-background.png',backgroundSlice:1,modifier:'expand',preview:<span>Caller item art</span>};
+const recipeBookProps: RecipeBookProps = {title:'Craftable',entries:[recipeBookItem],categoryId:'search',query:'stone',craftableOnly:true,selectedId:'stone',onCategoryChange:id=>id.toUpperCase(),onQueryChange:query=>query.toLowerCase(),onCraftableOnlyChange:value=>Boolean(value),onRecipeAction:(id,action:RecipeBookAction)=>id+action};
+const recipeBookEntryProps: RecipeBookEntryProps = {entry:recipeBookItem,selected:true,onRecipeAction:(id,action)=>id+action};
+const recipeFilterProps: RecipeFilterToggleProps = {craftableOnly:true,onCraftableOnlyChange:value=>Boolean(value),label:'Craftable recipes only'};
+const craftingScreenProps: CraftingScreenProps = {recipeBook:recipeBookProps,layout:'recipe-book',onLayoutChange:(layout:CraftingLayout)=>layout.toUpperCase(),crafting:{inputs:[],result:null,onInputAction:(index,action)=>String(index)+action},onHelp:()=>{},onClose:()=>{}};
 const bitmapGlyph: BitmapGlyph = {page:0,x:0,y:0,width:1,height:1,advance:1,offsetX:0,offsetY:0};
 const bitmapFont: BitmapFont = {pages:['/caller-owned-atlas.png'],glyphs:{A:bitmapGlyph},lineHeight:1};
 const bitmapProps: BitmapTextProps = {font:bitmapFont,sampling:'point',shader:'bitmap',children:'A',color:'#ffffff',shadow:{color:'#000000',offsetX:1,offsetY:1}};
@@ -278,6 +297,11 @@ export const demo = <>
   <ProcessingArrow progress={.5} ref={createRef<HTMLDivElement>()}/>
   <FuelIndicator progress={.5} ref={createRef<HTMLDivElement>()}/>
   <RecipeGrid label="Recipe" items={[]} columns={3} rows={3} onSlotAction={(index,action)=>String(index)+action}/>
+  <RecipeBook {...recipeBookProps} ref={createRef<HTMLDivElement>()}/>
+  <RecipeBookEntry {...recipeBookEntryProps} ref={createRef<HTMLButtonElement>()}/>
+  <RecipeFilterToggle {...recipeFilterProps} ref={createRef<HTMLButtonElement>()}/>
+  <CraftingScreen {...craftingScreenProps} ref={createRef<HTMLElement>()}/>
+  <CraftingScreen recipeBook={recipeBookProps} defaultLayout="survival" showClose={false} ref={createRef<HTMLElement>()}/>
   <CraftingTable onInputAction={(index,action)=>String(index)+action} onTakeResult={action=>action.toUpperCase()}/>
   <Furnace input={null} fuel={null} progress={.5} fuelRemaining={.5} onInputAction={(slot,action)=>slot+action}/>
   <BlastFurnace title="Blast furnace"/>
@@ -353,7 +377,7 @@ export const demo = <>
   <ArmorSlot kind="helmet" item={null} ref={createRef<HTMLButtonElement>()}/>
   <RecipeSearch craftableOnly onCraftableOnlyChange={value=>Boolean(value)} onValueChange={value=>value.toUpperCase()} ref={createRef<HTMLInputElement>()}/>
   <RecipeCategoryTabs categories={recipeCategories} panelId="consumer-items" onValueChange={id=>id.toUpperCase()} ref={createRef<HTMLDivElement>()}/>
-  <InventoryToolbar value="creative" onValueChange={(layout: InventoryLayout)=>layout.toUpperCase()} onHelp={()=>{}} onClose={()=>{}} ref={createRef<HTMLDivElement>()}/>
+  <InventoryToolbar layouts={['creative','recipe-book','survival']} showClose={false} value="creative" onValueChange={(layout: InventoryLayout)=>layout.toUpperCase()} onHelp={()=>{}} onClose={()=>{}} ref={createRef<HTMLDivElement>()}/>
   <Image src="/caller-item.png" alt="Item" sourceSize={[16,16]} scale={2} ref={createRef<HTMLImageElement>()}/>
   <NineSlice src="/caller-frame.png" sourceSize={[10,10]} slice={2} destinationBorder={1} size={[18,18]} scale={2} ref={createRef<HTMLDivElement>()}><Button>Framed action</Button></NineSlice>
   <Checkbox label="Enabled" indeterminate ref={createRef<HTMLInputElement>()}/>

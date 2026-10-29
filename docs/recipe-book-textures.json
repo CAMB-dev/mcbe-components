@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "profile": "bedrock-classic-json-ui",
+  "gameVersion": "1.26.6005.0",
+  "release": "v1.26.60.5",
+  "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "assets": {
+    "collapse-icon": {
+      "source": "resource_pack/textures/ui/recipe_book_collapse_icon.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_collapse_icon.png",
+      "sha256": "4d71c9ea45ffa8aeb0de3f9c889878e1da122cd46c735ec00882b864f721cc22",
+      "bytes": 151,
+      "dimensions": [
+        7,
+        7
+      ],
+      "cssVariable": "--mc-recipe-book-collapse-icon",
+      "embeddedIn": "src/recipe-book-textures.css",
+      "encoding": "Unmodified PNG bytes embedded as base64; no decode/re-encode",
+      "matchesInstalledBase": true,
+      "installedSource": {
+        "archive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "entry": "recipe_book_collapse_icon.png",
+        "sha256": "4d71c9ea45ffa8aeb0de3f9c889878e1da122cd46c735ec00882b864f721cc22"
+      }
+    },
+    "expand-icon": {
+      "source": "resource_pack/textures/ui/recipe_book_expand_icon.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_expand_icon.png",
+      "sha256": "2660820c417ed4633ad584963286aacc85cfcc581a930f262aa79cae7f30bbd7",
+      "bytes": 176,
+      "dimensions": [
+        7,
+        7
+      ],
+      "cssVariable": "--mc-recipe-book-expand-icon",
+      "embeddedIn": "src/recipe-book-textures.css",
+      "encoding": "Unmodified PNG bytes embedded as base64; no decode/re-encode",
+      "matchesInstalledBase": true,
+      "installedSource": {
+        "archive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "entry": "recipe_book_expand_icon.png",
+        "sha256": "2660820c417ed4633ad584963286aacc85cfcc581a930f262aa79cae7f30bbd7"
+      }
+    },
+    "light-button": {
+      "source": "resource_pack/textures/ui/recipe_book_light_button.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_light_button.png",
+      "sha256": "51459a443f86ed9fb9fdfdc8c3c3389071bf8a95e3d02f9260ea2273c7547b77",
+      "bytes": 138,
+      "dimensions": [
+        3,
+        3
+      ],
+      "cssVariable": "--mc-recipe-book-light-button",
+      "embeddedIn": "src/recipe-book-textures.css",
+      "encoding": "Unmodified PNG bytes embedded as base64; no decode/re-encode",
+      "matchesInstalledBase": true,
+      "installedSource": {
+        "archive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "entry": "recipe_book_light_button.png",
+        "sha256": "51459a443f86ed9fb9fdfdc8c3c3389071bf8a95e3d02f9260ea2273c7547b77"
+      },
+      "nineSliceMetadata": {
+        "source": "resource_pack/textures/ui/recipe_book_light_button.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_light_button.json",
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            3,
+            3
+          ]
+        }
+      }
+    },
+    "dark-button-pressed": {
+      "source": "resource_pack/textures/ui/recipe_book_dark_button_pressed.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_dark_button_pressed.png",
+      "sha256": "0c17b82f946ebd0182462dac001522b05e03da5263b17231bfd2176966adfd41",
+      "bytes": 91,
+      "dimensions": [
+        3,
+        3
+      ],
+      "cssVariable": "--mc-recipe-book-dark-button-pressed",
+      "embeddedIn": "src/recipe-book-textures.css",
+      "encoding": "Unmodified PNG bytes embedded as base64; no decode/re-encode",
+      "matchesInstalledBase": true,
+      "installedSource": {
+        "archive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "entry": "recipe_book_dark_button_pressed.png",
+        "sha256": "0c17b82f946ebd0182462dac001522b05e03da5263b17231bfd2176966adfd41"
+      },
+      "nineSliceMetadata": {
+        "source": "resource_pack/textures/ui/recipe_book_dark_button_pressed.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_dark_button_pressed.json",
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            3,
+            3
+          ]
+        }
+      }
+    },
+    "dark-button": {
+      "source": "resource_pack/textures/ui/recipe_book_dark_button.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_dark_button.png",
+      "sha256": "a7cb75a4f23c778bd7b33bd384cdac0a24fd4aee3af93d984e12c513b1182a9c",
+      "bytes": 137,
+      "dimensions": [
+        3,
+        3
+      ],
+      "cssVariable": "--mc-recipe-book-dark-button",
+      "embeddedIn": "src/recipe-book-textures.css",
+      "encoding": "Unmodified PNG bytes embedded as base64; no decode/re-encode",
+      "matchesInstalledBase": true,
+      "installedSource": {
+        "archive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "entry": "recipe_book_dark_button.png",
+        "sha256": "a7cb75a4f23c778bd7b33bd384cdac0a24fd4aee3af93d984e12c513b1182a9c"
+      },
+      "nineSliceMetadata": {
+        "source": "resource_pack/textures/ui/recipe_book_dark_button.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_dark_button.json",
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            3,
+            3
+          ]
+        }
+      }
+    },
+    "red-button": {
+      "source": "resource_pack/textures/ui/recipe_book_red_button.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_red_button.png",
+      "sha256": "0e58a82cdcb5ad26f7595f68cd481c347e39563a997fdb9b90599cc87217c654",
+      "bytes": 144,
+      "dimensions": [
+        3,
+        3
+      ],
+      "cssVariable": "--mc-recipe-book-red-button",
+      "embeddedIn": "src/recipe-book-textures.css",
+      "encoding": "Unmodified PNG bytes embedded as base64; no decode/re-encode",
+      "matchesInstalledBase": true,
+      "installedSource": {
+        "archive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "entry": "recipe_book_red_button.png",
+        "sha256": "0e58a82cdcb5ad26f7595f68cd481c347e39563a997fdb9b90599cc87217c654"
+      },
+      "nineSliceMetadata": {
+        "source": "resource_pack/textures/ui/recipe_book_red_button.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_red_button.json",
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            3,
+            3
+          ]
+        }
+      }
+    },
+    "cell-invert": {
+      "source": "resource_pack/textures/ui/cell_image_invert.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/cell_image_invert.png",
+      "sha256": "ebe0c28b46b51f1e8e28d159b7c4b39520174c1bb7bddc7c26a36a6730d4efaf",
+      "bytes": 144,
+      "dimensions": [
+        5,
+        5
+      ],
+      "cssVariable": "--mc-recipe-book-cell-invert",
+      "embeddedIn": "src/recipe-book-textures.css",
+      "encoding": "Unmodified PNG bytes embedded as base64; no decode/re-encode",
+      "matchesInstalledBase": true,
+      "installedSource": {
+        "archive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "entry": "cell_image_invert.png",
+        "sha256": "ebe0c28b46b51f1e8e28d159b7c4b39520174c1bb7bddc7c26a36a6730d4efaf"
+      },
+      "nineSliceMetadata": {
+        "source": "resource_pack/textures/ui/cell_image_invert.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/cell_image_invert.json",
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "cell-darkgrey": {
+      "source": "resource_pack/textures/ui/cell_image_darkgrey.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/cell_image_darkgrey.png",
+      "sha256": "b73c7e0b923f7faa56394adf62d86b0e4883656f2c28035fde86475f97807cef",
+      "bytes": 162,
+      "dimensions": [
+        5,
+        5
+      ],
+      "cssVariable": "--mc-recipe-book-cell-darkgrey",
+      "embeddedIn": "src/recipe-book-textures.css",
+      "encoding": "Unmodified PNG bytes embedded as base64; no decode/re-encode",
+      "matchesInstalledBase": true,
+      "installedSource": {
+        "archive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "entry": "cell_image_darkgrey.png",
+        "sha256": "b73c7e0b923f7faa56394adf62d86b0e4883656f2c28035fde86475f97807cef"
+      },
+      "nineSliceMetadata": {
+        "source": "resource_pack/textures/ui/cell_image_darkgrey.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/cell_image_darkgrey.json",
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "selected-slot": {
+      "source": "resource_pack/textures/ui/pocket_ui_highlight_selected_slot.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/pocket_ui_highlight_selected_slot.png",
+      "sha256": "59909e979328ea00f94225c1153a87c713d0481faa65574257332bd310007ebe",
+      "bytes": 475,
+      "dimensions": [
+        16,
+        16
+      ],
+      "cssVariable": "--mc-recipe-book-selected-slot",
+      "embeddedIn": "src/recipe-book-textures.css",
+      "encoding": "Unmodified PNG bytes embedded as base64; no decode/re-encode",
+      "matchesInstalledBase": true,
+      "installedSource": {
+        "archive": "data/resource_packs/vanilla/__brarchive/textures/ui.brarchive",
+        "entry": "pocket_ui_highlight_selected_slot.png",
+        "sha256": "59909e979328ea00f94225c1153a87c713d0481faa65574257332bd310007ebe"
+      },
+      "nineSliceMetadata": {
+        "source": "resource_pack/textures/ui/pocket_ui_highlight_selected_slot.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/pocket_ui_highlight_selected_slot.json",
+        "sha256": "c685de5f221d9f72b503c3f1177187fcd2ed5f4ef144a40f1e10b15c734bab69",
+        "value": {
+          "nineslice_size": 5,
+          "base_size": [
+            16,
+            16
+          ]
+        }
+      },
+      "sourceControl": {
+        "source": "resource_pack/ui/ui_common.json",
+        "name": "common.slot_selected",
+        "line": 5094,
+        "size": [
+          "100% + 5px",
+          "100% + 5px"
+        ],
+        "layer": 20,
+        "recipeCellSize": [
+          18,
+          18
+        ],
+        "resolvedRecipeBound": [
+          23,
+          23
+        ],
+        "boundUnits": "logical game pixels; GUI2 display is 46 by 46 CSS pixels"
+      }
+    }
+  },
+  "license": {
+    "source": "LICENSE.md",
+    "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/LICENSE.md",
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "notice": "(c) Mojang AB. All rights reserved. Repository files are subject to the Minecraft End User License Agreement; not relicensed under this project MIT license.",
+    "bundledLicense": "dist/assets/Minecraft-Sample-LICENSE.md"
+  },
+  "boundaries": [
+    "Original byte identity is verified against the official pinned full-release archive and installed vanilla base archive. Matching installed bytes do not prove the active resource-pack stack.",
+    "CSS variables provide textures only. Runtime background bindings, selection conditions, nine-slice placement, native workbench screenshots and whole-frame equivalence are separate verification scopes."
+  ]
+}

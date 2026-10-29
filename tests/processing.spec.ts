@@ -21,7 +21,7 @@ test('all three smelting GUIs consume controlled progress and fuel updates',asyn
 });
 
 test('taking a crafting result updates its external state and keeps empty result focusable',async({page})=>{
-  const crafting=page.locator('#processing .mc-crafting');
+  const crafting=page.locator('#processing [data-processing-examples] .mc-crafting');
   const result=crafting.locator('.mc-crafting__result');
   await result.click();await expect(page.locator('.toast')).toHaveText('primary: crafting result taken.');
   await expect(result).toHaveAttribute('aria-disabled','true');
@@ -47,7 +47,8 @@ test('processing GUIs retain local overflow and accessible structure at 320px',a
   await page.setViewportSize({width:320,height:900});
   const section=page.locator('#processing');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await expect(section.locator('.mc-workstation')).toHaveCount(4);
+  await expect(section.locator('[data-processing-examples] .mc-workstation')).toHaveCount(4);
+  await expect(section.locator('.mc-crafting-screen')).toHaveCount(1);
   await expect(section.getByRole('button',{name:'Close container'})).toHaveCount(0);
   const results=await new AxeBuilder({page}).include('#processing').analyze();
   expect(results.violations.filter(issue=>issue.impact==='serious'||issue.impact==='critical')).toEqual([]);

@@ -75,4 +75,4 @@ alpha=35 的原图 shadow 像素还单独检查 alpha 通道。最初手算 `rou
 
 执行 `npx playwright test --config .cache/processing-qa/playwright.config.mjs`：**12/12 PASS，12.3s**。配置使用独立临时端口5184；结束后确认该端口对应的 Node/Vite 进程已退出。集成配置中归属 `pixels` 项目，可用 `npx playwright test --project=pixels tests/processing-fidelity.spec.ts` 复跑。原PNG参考由项目的 `fetch-references.mjs` 准备；本机 archive 检查在没有用户游戏安装时明确 skip，其余测试不依赖安装目录。
 
-仍缺少原生游戏截图、引擎 normal 字体的实际像素度量、最终像素吸附和裁切量化，以及配方书/搜索/筛选/toolbar/gamepad helper 的整屏布局与状态。当前组件范围是上述右面板与可复用基础件，不能将局部PNG零差、DOM布局通过或测试数量当作整个游戏GUI零差的证据。
+以上记录限定于原右面板与可复用基础件。后续新增的完整工作台组合 CraftingScreen、RecipeBook / RecipeBookEntry / RecipeFilterToggle，以及工作台原生截图与布局比较，单独记录于 [CRAFTING_SCREEN_QA.md](CRAFTING_SCREEN_QA.md)。引擎normal字体的完整像素、最终像素吸附、裁切量化、gamepad helper与全屏原生零差仍未完成；不能将局部PNG零差、DOM布局通过或测试数量当作整个游戏GUI零差的证据。熔炉族此处仍为右面板范围。

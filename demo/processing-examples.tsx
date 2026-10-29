@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BlastFurnace, Button, CraftingTable, Furnace, Slider, Smoker } from '../src';
 import type { InventoryItem } from '../src';
 import { GameItemIcon } from './materials';
+import { CraftingScreenExamples } from './crafting-screen-examples';
 
 const coal: InventoryItem = { name: 'Coal', icon: <GameItemIcon name="coal"/>, count: 16 };
 const rawBeef: InventoryItem = { name: 'Raw beef', icon: <GameItemIcon name="rawBeef"/>, count: 8 };
@@ -28,6 +29,7 @@ export function ProcessingExamples({ notify }: { notify: (message: string) => vo
       <Slider label="Fuel remaining" min={0} max={100} step={1} value={fuel} onValueChange={setFuel} formatValue={value=>`${value}%`}/>
       <Button size="sm" onClick={()=>{setTaken({});setProgress(50);setFuel(50);}}>Reset processing examples</Button>
     </div>
+    <CraftingScreenExamples notify={notify}/>
     <div className="workstation-examples" data-processing-examples>
       <div><h3>Crafting table</h3><CraftingTable inputs={[null,diamond,null,null,diamond,null,null,stick,null]}
         result={taken.crafting ? null : sword} inventory={inventory}

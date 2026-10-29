@@ -1,0 +1,31 @@
+@import './recipe-book-textures.css';
+/* Classic inventory_screen.json recipe_book/tab_content, GUI2 logical-to-CSS scale. */
+.mc-recipe-book { box-sizing: border-box; position: relative; isolation: isolate; width: 292px; height: 332px; min-width: 0; color: #4c4c4c; font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: none; image-rendering: pixelated; }
+.mc-recipe-book::before { content: ''; position: absolute; inset: 0; z-index: -1; border: 8px solid transparent; border-image: var(--mc-skin-panel) 4 fill / 8px stretch; image-rendering: pixelated; }
+.mc-recipe-book__categories { position: absolute; left: 0; top: -46px; }
+.mc-recipe-book__header { position: absolute; left: 12px; top: 16px; width: calc(100% - 22px); height: 20px; }
+.mc-recipe-book__title { box-sizing: border-box; margin: 0; position: absolute; left: 6px; top: 0; width: calc(100% - 70px); height: 20px; overflow: hidden; white-space: nowrap; text-align: right; font: inherit; color: #4c4c4c; background: #c6c6c6; }
+.mc-recipe-book[data-search] .mc-recipe-book__title, .mc-recipe-book[data-creative] .mc-recipe-book__title { width: calc(100% - 12px); }
+.mc-recipe-book__header-filter { position: absolute; right: 0; top: -9px; }
+.mc-recipe-book__search.mc-recipe-search { box-sizing: border-box; position: absolute; left: 12px; top: 38px; width: calc(100% - 22px); height: 32px; padding-right: 2px; gap: 2px; }
+.mc-recipe-book__search .mc-recipe-search__field { min-width: 0; }
+.mc-recipe-book__search .mc-recipe-search__filter { transform: translateX(2px); }
+.mc-recipe-book__items { position: absolute; left: 12px; top: 42px; width: calc(100% - 24px); height: 278px; background: var(--mc-inv-screen-recipe-pane) center / 100% 100% no-repeat; }
+.mc-recipe-book[data-search] .mc-recipe-book__items { top: 74px; height: 246px; }
+.mc-recipe-book__items::before, .mc-recipe-book__items::after { content: ''; position: absolute; left: 0; right: 0; z-index: 10; pointer-events: none; background: var(--mc-inv-screen-white) center / 100% 100% no-repeat; }
+.mc-recipe-book__items::before { top: 0; height: 4px; filter: brightness(0); opacity: .5; }
+.mc-recipe-book__items::after { top: -2px; height: 2px; filter: brightness(.75); }
+.mc-recipe-book__items:has(.mc-scrollbar:not([hidden]))::before, .mc-recipe-book__items:has(.mc-scrollbar:not([hidden]))::after { right: 12px; }
+.mc-recipe-book__grid { display: grid; grid-template-columns: repeat(var(--mc-recipe-book-columns, 7), 36px); justify-content: center; gap: 0; padding: 0; }
+.mc-recipe-book__grid > [role='row'] { display: contents; }
+.mc-recipe-book__grid [role='gridcell'] { width: 36px; height: 36px; }
+.mc-recipe-book__empty { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.mc-recipe-book-entry.mc-slot { box-sizing: border-box; display: flex; --mc-recipe-entry-background: var(--mc-inv-screen-recipe-cell); }
+.mc-recipe-book-entry.mc-slot::before { border-image: var(--mc-recipe-entry-background) var(--mc-recipe-entry-slice, 0) fill / var(--mc-recipe-entry-edge, 0px) stretch; }
+.mc-recipe-book-entry .mc-slot__item { position: static; }
+.mc-recipe-book-entry__art { position: relative; z-index: 2; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; }
+.mc-recipe-book-entry__art > * { max-width: 32px; max-height: 32px; }
+.mc-recipe-book-entry .mc-slot__count { z-index: 4; }
+.mc-recipe-book-entry__modifier { position: absolute; left: 20px; top: 20px; z-index: 3; width: 14px; height: 14px; pointer-events: none; background: var(--mc-recipe-book-collapse-icon) center / 14px 14px no-repeat; }
+.mc-recipe-book-entry[data-modifier='expand'] .mc-recipe-book-entry__modifier { background-image: var(--mc-recipe-book-expand-icon); }
+.mc-recipe-book-entry__selected { box-sizing: border-box; position: absolute; left: -5px; top: -5px; width: 46px; height: 46px; z-index: 5; pointer-events: none; border: 10px solid transparent; border-image: var(--mc-recipe-book-selected-slot) 5 fill / 10px stretch; }
