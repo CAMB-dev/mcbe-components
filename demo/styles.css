@@ -104,7 +104,7 @@ h1 > span { color: #a0d774; }
 .demo-stack .mc-radio-group { font-size: var(--mc-font-size); }
 .demo-stack .mc-radio-group legend { font-size: var(--mc-font-size); }
 .demo-stack .mc-radio-group--horizontal .mc-radio-options { column-gap: 20px; }
-.demo-stack .mc-select { font-size: var(--mc-font-size); }
+.demo-stack .mc-combobox-trigger { font-size: var(--mc-font-size); }
 .demo-stack .mc-panel__header { display: flex; align-items: center; gap: 10px; font-size: 12px; }
 .demo-padded { padding: 24px; }
 .mc-tab { display: inline-flex; align-items: center; gap: 8px; font-size: var(--mc-font-size); }
@@ -241,7 +241,7 @@ h1 > span { color: #a0d774; }
   .example-bottom { font-size: 8px; padding-inline: 16px; }
   .example-bottom code { display: none; }
   .demo-stack { padding: 20px; }
-  .demo-stack .mc-input, .demo-stack .mc-select { font-size: var(--mc-font-size); }
+  .demo-stack .mc-input, .demo-stack .mc-combobox-trigger { font-size: var(--mc-font-size); }
   .demo-padded { padding: 16px; }
   .mc-tablist { flex-wrap: wrap; }
   .mc-tab { font-size: var(--mc-font-size); padding-inline: 10px; min-height: 40px; }

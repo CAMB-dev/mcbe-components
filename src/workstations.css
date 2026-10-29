@@ -16,7 +16,7 @@
 .mc-grindstone__arrow { position: absolute; left: 154px; top: 80px; width: 44px; height: 30px; background: var(--mc-skin-workstation-arrow) center / 100% 100%; }
 .mc-grindstone__invalid { position: absolute; left: 161px; top: 80px; width: 30px; height: 30px; background: var(--mc-skin-workstation-invalid) center / 100% 100%; }
 .mc-enchanting .mc-workstation__title { left: 24px; top: 6px; }
-.mc-enchanting > .mc-dialog__close { height: 26px; }
+.mc-enchanting > .mc-dialog__close { right: 4px; top: 4px; height: 26px; }
 .mc-enchanting > .mc-dialog__close .mc-dialog__close-icon { height: 14px; background-image: var(--mc-skin-close-compact, var(--mc-skin-close)); }
 @media (hover: hover) { .mc-enchanting > .mc-dialog__close:hover .mc-dialog__close-icon { background-image: var(--mc-skin-close-compact-hover, var(--mc-skin-close-hover)); } }
 .mc-enchanting > .mc-dialog__close:focus-visible .mc-dialog__close-icon { background-image: var(--mc-skin-close-compact-hover, var(--mc-skin-close-hover)); }

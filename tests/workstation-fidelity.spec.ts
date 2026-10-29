@@ -233,3 +233,69 @@ test('grindstone follows explicit source focus overrides, including an empty res
   await expect(result).toBeFocused();
   await result.press('ArrowLeft'); await expect(additional).toBeFocused();
 });
+
+test('enchanting compact close preserves inherited source offset, complete GUI2/GUI5 sprite and isolated keyboard callbacks', async ({ page }, testInfo) => {
+  // enchanting_panel enables common.compact_close_button. It inherits
+  // common.close_button's top_right anchor and offset[-2,2], changes the button
+  // to21x13 and centers its15x7 original image. On a176px panel:
+  // x=176-21-2+(21-15)/2=156, y=2+(13-7)/2=5 logical GUI pixels.
+  // Sources: resource_pack/ui/{enchanting_screen,ui_common}.json, v1.26.60.5.
+  const source = await readFile(new URL('../.cache/references/close_button_default_compact.png', import.meta.url));
+  expect(createHash('sha256').update(source).digest('hex')).toBe('b7ca516ea2456c220b058c35261423da2784a582724f1a38e447d07170c74f6e');
+  const original = PNG.sync.read(source);expect([original.width, original.height]).toEqual([15, 7]);
+  expect([...new Set(original.data.filter((_, index) => index % 4 === 3))].sort((a, b) => a - b)).toEqual([0, 255]);
+  const generic = await readFile(new URL('../.cache/references/close_button_default.png', import.meta.url));
+  expect(createHash('sha256').update(generic).digest('hex')).toBe('5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c');
+  const ordinarySource = PNG.sync.read(generic);expect([ordinarySource.width, ordinarySource.height]).toEqual([15, 15]);
+  const originalBackground = async (icon: Locator, expected: PNG) => {
+    const bytes = await icon.evaluate(async node => {
+      const uri = getComputedStyle(node).backgroundImage.match(/^url\(["']?(.*?)["']?\)$/)?.[1];
+      if (!uri) throw new Error('Missing original close texture');
+      return [...new Uint8Array(await (await fetch(uri)).arrayBuffer())];
+    });
+    const actual = PNG.sync.read(Buffer.from(bytes));expect([actual.width, actual.height]).toEqual([expected.width, expected.height]);
+    // Generated CSS may recompress PNGs and zero RGB under alpha0. Compare the
+    // complete alpha plane and exact RGB*alpha integers; do not demand identical
+    // compressed bytes or invisible straight RGB. The rendered compact ROI
+    // below still compares every presented RGBA byte without normalization.
+    const premultiplied = (image: PNG) => Array.from(image.data, (value, index) => index % 4 === 3 ? value : value * image.data[index - index % 4 + 3]!);
+    expect(premultiplied(actual)).toEqual(premultiplied(expected));
+  };
+  await open(page);
+  const enchanting = page.locator('#workstations .mc-enchanting'), compact = enchanting.locator('.mc-dialog__close-icon');
+  const grinder = page.locator('#workstations .mc-grindstone'), ordinary = grinder.locator('.mc-dialog__close-icon');
+  await expectRect(compact, await box(enchanting), { x: 156, y: 5, width: 15, height: 7 });
+  await expectRect(ordinary, await box(grinder), { x: 158, y: 3, width: 15, height: 15 });
+  await originalBackground(ordinary, ordinarySource);
+  const initialStyle = await enchanting.getAttribute('style');
+  // Put the whole source panel on an integer screen plane so the complete
+  // image screenshot cannot include a fractional outside row. Only host
+  // placement/scale changes; the production close geometry remains untouched.
+  await enchanting.evaluate(node => Object.assign((node as HTMLElement).style, {
+    position: 'fixed', left: '20px', top: '20px', margin: '0', zIndex: '9999', transformOrigin: '0 0',
+  }));
+  for (const gui of [2, 5]) {
+    await enchanting.evaluate((node, scale) => { (node as HTMLElement).style.transform = `scale(${scale / 2})`; }, gui);
+    await page.mouse.move(0, 0);await expectRect(compact, await box(enchanting), { x: 156, y: 5, width: 15, height: 7 }, gui);
+    const bytes = await compact.screenshot(), actual = PNG.sync.read(bytes), expected = new PNG({ width: 15 * gui, height: 7 * gui });
+    for (let y = 0; y < expected.height; y++) for (let x = 0; x < expected.width; x++) {
+      const from = (Math.floor(y / gui) * original.width + Math.floor(x / gui)) * 4, to = (y * expected.width + x) * 4;
+      // Original alpha is binary. Keep every source pixel, including transparent
+      // margins over the panel's flat198/198/198 face; no glyph-edge crop.
+      expected.data.set(original.data[from + 3] ? original.data.subarray(from, from + 4) : [198, 198, 198, 255], to);
+    }
+    expect([actual.width, actual.height]).toEqual([expected.width, expected.height]);
+    expect(actual.data.equals(expected.data), `GUI${gui} complete compact-close RGBA`).toBe(true);
+    await testInfo.attach(`compact-close-gui${gui}-complete-source-roi`, { body: bytes, contentType: 'image/png' });
+  }
+  await enchanting.evaluate((node, value) => value === null ? node.removeAttribute('style') : node.setAttribute('style', value), initialStyle);
+  await enchanting.getByRole('button', { name: 'Close container', exact: true }).press('Enter');await expect(enchanting).toHaveCount(0);await expect(grinder).toHaveCount(1);
+  await page.getByRole('button', { name: 'Open enchanting table', exact: true }).click();await expect(enchanting).toHaveCount(1);
+  await enchanting.getByRole('button', { name: 'Close container', exact: true }).press('Space');await expect(enchanting).toHaveCount(0);await expect(grinder).toHaveCount(1);
+  await page.goto('/calibration.html');await page.getByRole('button', { name: 'Open settings dialog', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Settings dialog', exact: true });await dialog.getByRole('heading', { name: 'Settings dialog', exact: true }).click();await page.mouse.move(0, 0);
+  const dialogIcon = dialog.locator('.mc-dialog__close-icon');expect(await dialogIcon.evaluate(node => { const r = node.getBoundingClientRect();return [r.width, r.height]; })).toEqual([30, 30]);
+  await originalBackground(dialogIcon, ordinarySource);
+  await expect(dialog.locator('.mc-dialog__close')).toHaveCSS('top', '-4px');await expect(dialog.locator('.mc-dialog__close')).toHaveCSS('right', '-4px');
+  await dialog.getByRole('button', { name: 'Close dialog', exact: true }).press('Enter');await expect(dialog).not.toBeVisible();
+});

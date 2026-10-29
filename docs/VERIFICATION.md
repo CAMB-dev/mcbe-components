@@ -2,7 +2,25 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：共享 GPU 位图文字
+## 当前检查点：校准下拉框、尺寸演示与附魔局部复核
+
+组件与导出保持117个组件、3份数据、3个渲染函数，共123值。本轮完成校准入口遗漏修复与 Dialog 尺寸演示，保留经验粉原图；书本新端点研究没有改生产。范围见 [CONTROLS_CONSISTENCY_QA.md](CONTROLS_CONSISTENCY_QA.md) 与 [ENCHANTING_QA.md](ENCHANTING_QA.md)。
+
+| 本轮检查 | 结果与范围 |
+| --- | --- |
+| 下拉框全入口 | 校准页 Block preset / Banner dye / Banner pattern 改用已有 Select，两个旧字体覆盖迁到可见 trigger；库选择逻辑未改。dev全状态审计与4173实际入口均为主站14 / 校准9，无可见 OS select；计算样式审计不冒充整图零差 |
+| 下拉框正式回归 | 既有renderer交互1＋新增入口1的list批2 PASS，旧Select6 PASS；终端摘要与原始JSON明确区分。新增入口另以raw JSON定向1/1 PASS（10.17秒），用于去重聚合，不重复计算已通过case |
+| Dialog | source14/14 PASS（尺寸6＋desktop4＋mobile4）；主展示加入 Set dialog dimensions 与两 Slider。生产5种实际尺寸均无自动滚动，root/body clip，wheel/程序偏移0、gutter0、errors[]。显式 ScrollArea 与CSS长度/style覆盖另由sourcefixture验证 |
+| 附魔关闭入口 | 仅修compact图定位，GUI2局部 [312,10,30,14]，GUI5完整75×35共2625像素相对原生裁切RGBA0，Grindstone不变；新增1＋既有相关35，分批36 PASS |
+| 经验粉与书本 | XP六完整ROI共3432像素对原13×11图整数2倍零差，全入口无拉伸/另造圆球，保留原三档轮廓。新open/closed捕获支持既有T(.2,.1,.25)与端点yaw，未改书本、未恢复CPU连续动画、未增加原生渲染分数 |
+| 构建与实际包消费 | build/typecheck及verify:package通过；React18.3.1/19.3.1实际消费123值、SSR、严格类型/ref、CSS/fonts/assets/licenses通过，两消费者各102个dist条目逐字节一致 |
+| 生产身份 | `.cache/controls-followup-production-identity.json` 证实2份HTML＋6份assets与site逐字节相同；真实IAB打开640×360 Dialog、clip/无滚条，与独立生产报告一致 |
+
+按正式 project / 文件 / 完整标题去重，最新822个唯一用例：817 PASS、5预期SKIP、0未解决失败；本轮新增3项为关闭入口、主页面尺寸演示和校准dropdown。`.cache/controls-followup-integration-summary.json` 为多批次累计，不是单次822项全绿；辅助入口审计、生产尺寸和原生ROI不再计作正式case。
+
+本轮 consumer 实测包保存在 `.cache/controls-followup-consumer-verified.tgz`，SHA256 `7b449859276a86c19fcae0d4f35c0b0329a36684d7c1bf6df00cc4ee02615c62`；字节证据 `.cache/controls-followup-consumer-identity.json`。JS与此前共享字体受测实现不变，workstations.css包含关闭定位修复。后续仅文档重打包的根包身份另算，不能把本文保留的consumer实测hash冒作最终根包hash。整个原生GUI、末端合成/Present及默认书本连续动画仍未认证；以下819等数字均为各自历史检查点。
+
+## 历史检查点：共享 GPU 位图文字
 
 新增显式 `BitmapText renderer="webgl-shared"`，同一Document的实例共用一个OffscreenGL上下文，每个canvas通过bitmaprenderer呈现；默认CPU和原独占WebGL保留。`renderBitmapGlyphs` 支持HTMLCanvasElement或OffscreenCanvas，五份shader字符串与此前逐字节一致。接口及资源边界见 [BITMAP_SHARED_QA.md](BITMAP_SHARED_QA.md)。
 
@@ -15,7 +33,7 @@
 | 实际包消费 | React18.3.1/19.3.1的123值、SSR、类型/ref、shared选项与Offscreen类型、CSS/fonts/assets/licenses通过；受测包SHA `ac91e8175e577f3aeeed1b663b03b1feee973cd28388e336c3db8f12b2ea50f9`，JS SHA `b55078aa8b38fadd2e80398abeb8489ee89a35f72fd64436a6d81b28d5ad5cfc`；两消费者各102份dist逐字节一致 |
 | 生产展示 | 4173五项入口与site逐字节相同，25项辅助断言通过。40实例按需挂载/卸载/重开、shared/独占/CPU往返、真实共享上下文最终释放通过；320px页面无横溢出、局部滚动不缩小画布，错误记录为空。用户IAB也实际选择shared并显示40/40ready |
 
-按正式项目/文件/完整标题去重，当前819唯一用例：814 PASS、5预期SKIP、0未解决失败，为多批次累计。独立原生结果限已测NVIDIA/ANGLE D3D11与指定输入；未覆盖末端251合成/resolve/Present、整GUI或heap GC。共享路径仍有像素读回、逐实例draw和ImageBitmap显存成本，不宣称零拷贝、Worker或无限实例。默认书本的数值审计另记于 [ENCHANTING_QA.md](ENCHANTING_QA.md)，没有据单帧候选改动动画参数。
+该历史检查点按正式项目/文件/完整标题去重为819唯一用例：814 PASS、5预期SKIP、0未解决失败，为多批次累计。独立原生结果限已测NVIDIA/ANGLE D3D11与指定输入；未覆盖末端251合成/resolve/Present、整GUI或heap GC。共享路径仍有像素读回、逐实例draw和ImageBitmap显存成本，不宣称零拷贝、Worker或无限实例。默认书本的数值审计另记于 [ENCHANTING_QA.md](ENCHANTING_QA.md)，没有据单帧候选改动动画参数。
 
 ## 历史检查点：下拉框一致性与 Dialog 尺寸
 

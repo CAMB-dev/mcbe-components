@@ -2,6 +2,22 @@
 
 本轮更新三项可见行为与来源说明，不增加组件或运行时值导出。本轮正式结果按首批与定向复跑分别记录；通过表示本文列出的契约与比较范围通过，不宣称全部原生 pixel-perfect。
 
+## 本轮追加：校准入口与尺寸演示
+
+主站已统一后，复查发现校准页 Block preset / Banner dye / Banner pattern 三个入口仍直接使用 OS select。本轮将 demo/item-renderers-fixture.tsx 中这三处改为已有 Select，并将 demo/styles.css 两处旧 .mc-select 字体覆盖迁至可见 trigger；库生产 Select / Combobox 逻辑和样式没有新增改动。实际 dev 审计覆盖主站14个、校准页9个入口，没有可见 OS select；default / hover / disabled 的计算样式、popup 与 selected / active 状态按对应状态检查，宽度和内容仍由宿主配置。
+
+证据 `.cache/select-unification/all-entry-audit.json` SHA256 `7129c49c9c1d38f65004d03a2013d544924cc809678fae0d7c42990acbc80d15`。审计中的 disabled 样式临时施加在实际 trigger，真正 disabled prop 和完整 trigger / popup 六状态由既有 Select consistency 测试独立覆盖。定向8项通过（既有 renderer 交互1、唯一新增入口审计1、既有 Select6）；前两项15.5秒、后六项7.3秒。该批使用 list reporter，`.cache/select-unification/targeted-eight-summary.json` 是如实整理的终端结果（SHA256 `aab3daeb4529775025c1a41e46abeebb578afaaa233188710ebdda9e775ad2cf`），不是原始 Playwright JSON。仅新增 tests/item-renderers.spec.ts 的一个正式 case，不把重复测试算成新增。
+
+新构建4173也实际复核主站14 / 校准9个入口，可见 OS select 均为0；三个迁移字段均使用共享 trigger、20px字体、60px高度，真实 popup 可打开并有一个 selected 项，Escape 可关闭。证据 `.cache/select-unification/production-entry-confirmation.json` SHA256 `49f4d7e03dd64c9a2080ad98e860d434491762182413f93dde5e32442b185c74`。这是入口/状态检查，不将计算样式审计写成全图像素零差。
+
+Dialog 的 width / height、border-box、style 优先和两层 clip 合同不变。主展示新增 Set dialog dimensions 及宽 / 高 Slider，便于直接调节后打开；root 实际 IAB 已观察宽640、高360、root / body 均 clip 且无自动滚条。独立14/14 source 回归（pixels尺寸6、desktop相关4、mobile相关4）通过。生产分别实测默认、640×360、320×240、800×600超视口及窄屏默认五种尺寸，root / body 均 clip、wheel / 程序滚动为0、无 scrollbar gutter 或嵌套自动滚动容器，错误为空；root extent 多出的4px来自关闭按钮 right:-4px，不是隐藏滚动条。CSS长度 / style覆盖及显式 ScrollArea 在 source fixture 验证，生产只记录真实存在的数值尺寸控件路径。证据 `.cache/dialog-readonly-reaudit/final-summary.json` / `production-report.json`。
+
+新增 calibration dropdown 正式用例又以原始 JSON 定向1/1通过，10.17秒，报告 `.cache/controls-followup-dropdown-final.json`，没有为了取报告重跑已通过的8项。与 close / 主页面 Dialog 演示各一个新增 case 合并后，本轮唯一新增正式 case 为3个；正式全库按 project / 文件 / 完整标题去重为822项：817 PASS、5预期 SKIP、无未解决失败，多批次累计而非单次全绿。证据 `.cache/controls-followup-integration-summary.json`，当前包消费及2份 HTML＋6份 assets 的生产字节身份见 [VERIFICATION.md](./VERIFICATION.md) 最新检查点；不把下方旧包身份当成本轮成果。
+
+经验粉已扩大到所有生产 / demo 入口只读复查：没有发现另一套圆球 renderer 或非等比拉伸。EnchantmentOption 保留原版三档 selectable / unselectable 图；ExperienceBar / TradingScreen 为水平条，Anvil 为文字，不是相同图元。六个完整26×22 ROI 共3,432像素仍为 RGBA零差，tier / state 轮廓不同来自原13×11 PNG，无需重绘。扩展报告 `.cache/enchanting-dust-study/expanded-entrypoint-audit.json` SHA256 `f01909abb24d20fd6e2330a725a92fd26ac603e4e78ec7bc05f995c49536248a`；原生三 quad 尺寸证据与 CSS 整数2倍表面对照是不同范围，不认证原生整 GUI。
+
+以下各节保留此前一致性修复的历史批次、生产及包身份，不作为本轮重新打包或单次全库全绿的记录。
+
 ## Select：统一可见皮肤，保留表单合同
 
 Select 现在通过内部 ComboboxBase 与 Combobox 共用 Classic trigger、popup、选中标记及活动态，不再使用操作系统绘制的展开列表。内部 Base 不作为新增公共组件。

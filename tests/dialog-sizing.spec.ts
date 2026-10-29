@@ -76,3 +76,20 @@ test('an explicit host ScrollArea still scrolls while the dialog and body remain
   await viewport.press('Home');await expect.poll(() => viewport.evaluate(node => node.scrollTop)).toBe(0);
   await viewport.hover();await page.mouse.wheel(0, 160);await expect.poll(() => viewport.evaluate(node => node.scrollTop)).toBeGreaterThan(0);
 });
+
+test('the main showcase renders the configured dialog dimensions and keeps its footer visible', async ({ page }) => {
+  await page.goto('/#surfaces');
+  await page.getByRole('checkbox', { name: 'Set dialog dimensions', exact: true }).check();
+  const width = page.getByRole('slider', { name: 'Dialog width', exact: true });
+  await width.focus();
+  for (let step = 0; step < 8; step++) await width.press('ArrowRight');
+  await expect(width).toHaveValue('640');
+  await page.getByRole('button', { name: 'Open dialog', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Create new world', exact: true });
+  await expect(dialog).toBeVisible();expect(await dimensions(dialog)).toEqual([640, 360]);
+  expect(await dialog.evaluate(node => [getComputedStyle(node).overflow, getComputedStyle(node.querySelector('.mc-dialog__body')!).overflow])).toEqual(['clip', 'clip']);
+  const outer = await dialog.boundingBox(), footer = await dialog.locator('.mc-dialog__footer').boundingBox();
+  expect(footer!.y + footer!.height).toBeLessThanOrEqual(outer!.y + outer!.height);
+  await expect(dialog.getByRole('button', { name: 'Create world', exact: true })).toBeVisible();
+  await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();
+});

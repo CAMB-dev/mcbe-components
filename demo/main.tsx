@@ -101,6 +101,9 @@ function App() {
   const [copied, setCopied] = useState(false);
   const [notice, setNotice] = useState('');
   const [dialog, setDialog] = useState(false);
+  const [explicitDialogSize, setExplicitDialogSize] = useState(false);
+  const [dialogWidth, setDialogWidth] = useState(480);
+  const [dialogHeight, setDialogHeight] = useState(360);
   const [docs, setDocs] = useState(false);
   const [worldName, setWorldName] = useState('My blocky world');
   const [multiplayer, setMultiplayer] = useState(true);
@@ -250,7 +253,13 @@ function App() {
         <Example id="surfaces" title="Panels & dialogs" detail="A home for every interaction.">
           <div className="demo-stack"><Panel title={<><PixelIcon name="book" size={16}/> World settings</>} footer={<Button size="sm" fullWidth onClick={() => setDialog(true)}>Open dialog <PixelIcon name="arrow" size={16}/></Button>}>
             <div className="world-card"><ItemSprite name="grass"/><div><span>{worldName || 'Untitled world'}</span><small>Survival · Normal difficulty</small></div></div>
-          </Panel></div>
+          </Panel>
+            <Checkbox label="Set dialog dimensions" checked={explicitDialogSize} onChange={event => setExplicitDialogSize(event.target.checked)}/>
+            {explicitDialogSize && <>
+              <Slider label="Dialog width" min={320} max={800} step={20} value={dialogWidth} onValueChange={setDialogWidth} formatValue={value => `${value}px`}/>
+              <Slider label="Dialog height" min={240} max={600} step={20} value={dialogHeight} onValueChange={setDialogHeight} formatValue={value => `${value}px`}/>
+            </>}
+          </div>
         </Example>
       </div>
 
@@ -330,7 +339,7 @@ function App() {
       <footer className="page-footer"><div className="footer-brand"><GrassBlock size={24}/><span>mcbeui</span><span className="footer-dot">·</span><span>Made of little squares.</span></div><p>An independent fan project. Not affiliated with Mojang or Microsoft.</p><span className="footer-issue">Classic Bedrock inspired · v0.1.0</span></footer>
     </main>
     <div className={`toast ${notice ? 'toast--visible' : ''}`} role="status">{notice && <><PixelIcon name="check" size={16}/>{notice}</>}</div>
-    <Dialog open={dialog} onOpenChange={setDialog} title="Create new world" description="Every great adventure starts with a name. What will you call yours?" footer={<><Button onClick={() => setDialog(false)}>Cancel</Button><Button variant="primary" type="submit" form="create-world-form">Create world</Button></>}>
+    <Dialog open={dialog} onOpenChange={setDialog} title="Create new world" width={explicitDialogSize ? dialogWidth : undefined} height={explicitDialogSize ? dialogHeight : undefined} description="Every great adventure starts with a name. What will you call yours?" footer={<><Button onClick={() => setDialog(false)}>Cancel</Button><Button variant="primary" type="submit" form="create-world-form">Create world</Button></>}>
       <form id="create-world-form" onSubmit={event => { event.preventDefault(); setDialog(false); notify(`World created: ${worldName.trim()}`); }}>
         <TextField label="New world name" name="worldName" value={worldName} required pattern=".*\S.*" onChange={event => setWorldName(event.target.value)}/>
       </form>

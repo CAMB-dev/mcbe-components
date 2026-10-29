@@ -118,12 +118,39 @@ test('controlled presets, dyes, remounts and async ready callbacks work without 
   const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
   const block=page.locator('[data-case="item-controlled"] [data-renderer="block"]'),banner=page.locator('[data-case="item-controlled"] [data-renderer="banner"]');
   await expect(block).toHaveAttribute('data-render-state','ready');await expect(banner).toHaveAttribute('data-render-state','ready');
-  await page.getByRole('combobox',{name:'Block preset'}).selectOption('stone-stairs');await expect(block).toHaveAttribute('data-block','stone-stairs');await expect(block).toHaveAttribute('data-render-state','ready');
+  await page.getByRole('combobox',{name:'Block preset'}).click();await page.getByRole('listbox',{name:'Block preset'}).getByRole('option',{name:'stone-stairs',exact:true}).click();await expect(block).toHaveAttribute('data-block','stone-stairs');await expect(block).toHaveAttribute('data-render-state','ready');
   const red=await banner.evaluate(node=>[...(node as HTMLCanvasElement).getContext('2d')!.getImageData(20,30,1,1).data]);
-  await page.getByRole('combobox',{name:'Banner dye'}).selectOption('blue');await expect(banner).toHaveAttribute('data-render-state','ready');
+  await page.getByRole('combobox',{name:'Banner dye'}).click();await page.getByRole('listbox',{name:'Banner dye'}).getByRole('option',{name:'blue',exact:true}).click();await expect(banner).toHaveAttribute('data-render-state','ready');
   const blue=await banner.evaluate(node=>[...(node as HTMLCanvasElement).getContext('2d')!.getImageData(20,30,1,1).data]);expect(red).not.toEqual(blue);
   await page.getByRole('button',{name:'Toggle renderers'}).click();await expect(block).toHaveCount(0);await page.getByRole('button',{name:'Toggle renderers'}).click();await expect(block).toHaveAttribute('data-render-state','ready');
   await expect(page.getByLabel('Renderer callbacks')).toContainText('"errors":0');expect(errors).toEqual([]);
+});
+
+test('renderer calibration dropdowns share the Bedrock trigger and selected popup states', async ({ page }) => {
+  const baseline=page.locator('[data-case="combobox"] .mc-combobox-trigger');
+  const surface=(node: import('@playwright/test').Locator)=>node.evaluate(element=>{
+    const s=getComputedStyle(element),skin=getComputedStyle(element,'::before');
+    return {background:s.backgroundColor,color:s.color,border:s.borderColor,shadow:s.boxShadow,font:s.font,height:s.height,padding:s.padding,skin:skin.borderImageSource};
+  });
+  await page.mouse.move(0,0); const normal=await surface(baseline);
+  await baseline.hover(); const hover=await surface(baseline);
+  await baseline.click(); const baselineList=page.locator('[data-case="combobox"] [role="listbox"]');
+  await baselineList.locator('[role="option"]:not([aria-selected="true"]):not([aria-disabled="true"])').first().hover();
+  const selectedStyle=await baselineList.locator('[aria-selected="true"]').evaluate(node=>({background:getComputedStyle(node).backgroundColor,mark:getComputedStyle(node.querySelector('.mc-combobox-option-mark')!).backgroundImage}));
+  await baseline.press('Escape');
+  const fixture=page.locator('#item-renderers-fixture');
+  await expect(fixture.locator('select')).toHaveCount(3);
+  for(const label of ['Block preset','Banner dye','Banner pattern']){
+    const trigger=fixture.getByRole('combobox',{name:label,exact:true});
+    await trigger.scrollIntoViewIfNeeded(); await page.mouse.move(0,0);
+    await expect(trigger).toHaveClass('mc-combobox-trigger'); expect(await surface(trigger),label+' default').toEqual(normal);
+    const native=trigger.locator('..').locator('select'); await expect(native).toHaveAttribute('aria-hidden','true');await expect(native).toHaveCSS('opacity','0');
+    await trigger.hover(); expect(await surface(trigger),label+' hover').toEqual(hover);
+    await trigger.click(); const list=fixture.getByRole('listbox',{name:label,exact:true});await expect(list).toHaveClass('mc-combobox-popup');
+    await list.locator('[role="option"]:not([aria-selected="true"]):not([aria-disabled="true"])').first().hover();
+    expect(await list.locator('[aria-selected="true"]').evaluate(node=>({background:getComputedStyle(node).backgroundColor,mark:getComputedStyle(node.querySelector('.mc-combobox-option-mark')!).backgroundImage})),label+' selected').toEqual(selectedStyle);
+    await trigger.press('Escape');await expect(list).toBeHidden();
+  }
 });
 
 test('server rendering needs no browser, with finite dimensions and explicit invalid-input errors', () => {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Select } from '../src/components';
 import { BannerPreview, BlockPreview, bannerPatternIds, loomPatternIds } from '../src/item-renderers';
 import type { BannerDye, BlockKind, ItemMesh } from '../src/item-renderers';
 import { blockTextureUrls } from '../src/item-renderer-assets';
@@ -14,9 +15,9 @@ export function ItemRenderersFixture() {
   return <section id="item-renderers-fixture" style={{ background: '#28292a', color: '#fff', padding: 20, display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', minWidth: 0, gap: 24 }}>
     <h2>Original-texture renderer calibration</h2>
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-      <label>Block preset<select aria-label="Block preset" value={block} onChange={event => setBlock(event.currentTarget.value as BlockKind)}>{blocks.map(value => <option key={value}>{value}</option>)}</select></label>
-      <label>Banner dye<select aria-label="Banner dye" value={color} onChange={event => setColor(event.currentTarget.value as BannerDye)}>{(['red','blue','white','black'] as const).map(value => <option key={value}>{value}</option>)}</select></label>
-      <label>Banner pattern<select aria-label="Banner pattern" value={pattern} onChange={event => setPattern(event.currentTarget.value as typeof pattern)}>{bannerPatternIds.map(value => <option key={value}>{value}</option>)}</select></label>
+      <Select label="Block preset" value={block} onChange={event => setBlock(event.currentTarget.value as BlockKind)} options={blocks.map(value => ({ value, label: value }))}/>
+      <Select label="Banner dye" value={color} onChange={event => setColor(event.currentTarget.value as BannerDye)} options={['red','blue','white','black'].map(value => ({ value, label: value }))}/>
+      <Select label="Banner pattern" value={pattern} onChange={event => setPattern(event.currentTarget.value as typeof pattern)} options={bannerPatternIds.map(value => ({ value, label: value }))}/>
       <button type="button" onClick={() => setShow(value => !value)}>Toggle renderers</button>
     </div>
     {show && <div style={{ display: 'flex', gap: 24, alignItems: 'center' }} data-case="item-controlled">

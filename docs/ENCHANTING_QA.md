@@ -2,6 +2,16 @@
 
 2026-10-29。本机 Bedrock 1.26.6005.0（界面显示26.60）。当前已将实际 GPU draw 的书本网格、UV、采样和 shader 算术迁入组件；传入捕获的 `rendererState` 时，实际 React 组件在已核验的 NVIDIA 后端与该次书本 draw 全目标 RGBA 零差。**默认开合 / 翻页仍是受控重建，旧原生截图比较仍非零，整个附魔台尚未达到原生 pixel perfect。**
 
+## 本轮追加：关闭入口、经验粉与书本端点
+
+附魔台 compact 关闭图原本应为15×7 game；本轮仅修正它的定位覆盖，使 GUI2 的局部位置 / 尺寸为 [312,10,30,14] CSS px。实际原生 GUI5 完整75×35、2,625像素裁切与修复后按钮 RGBA 零差，键盘 Enter 回调一次；Grindstone 既有位置不变。独立证据 `.cache/enchanting-full-gui-audit/fixed-close-independent-verification.json` SHA256 `9e3b2c7c9802f352fd5e8e96e892a4a437c8f9c46016c0b87c8eb5e76761e878`。相关正式36项分批通过（新增1＋旧pixels17＋desktop9＋mobile9），0跳过；该新增一项的数量与证据只记录这一局部范围，不是整页认证。汇总 `.cache/enchanting-close-qa/final-summary.json` SHA256 `ade7ddfdb9c95eaa47876adb49e5cb9a6fed19f4c27268ac6de2ad9b6586b53c` 保留首轮透明 RGB oracle 修正说明，没有变更原图字节或可见色。
+
+经验粉全入口复查未发现拉伸或另造圆球：原13×11各档轮廓本来不同，CSS26×22整数展开的六个完整 ROI 共3,432像素零差，无 mask / 容差。本轮不重绘图像、不改变经验粉生产逻辑；原生 quad / texture 证据不等于整屏合成验收。报告 `.cache/enchanting-dust-study/expanded-entrypoint-audit.json` SHA256 `f01909abb24d20fd6e2330a725a92fd26ac603e4e78ec7bc05f995c49536248a`。
+
+新实际 open-clean / closed-stable 捕获支持现有闭合局部平移 T(.2,.1,.25)（网格单位偏移3.2/1.6/4）及端点 yaw 从−90°到−180°；不支持再按截图任意移动书本。两次 model 的相对位移经父级缩放 / pitch 逆变换与既有参数一致，捕获的全局位置不能写入默认组件。源码 SHA256 仍为 `390fd9620c7ab99d479d7ce46441457bbd5a59df9d95652150509e759d4a88d7`，书本生产实现未改。
+
+端点记录 `.cache/pix-capture/closed-stable-book-study/ENDPOINTS.json` SHA256 `a58866d99ad13f0dd31b785b3c6750e876697594bc80929901ccf7ffb0ab61e4`，独立推导 `.cache/book-endpoint-plan/analysis.json` SHA256 `38ea9143827279096c2a473675e969a441c3ce3d9a9a85497e8a788902f08ae8`。这新增两个观察端点的矩阵证据，没有新渲染像素分数，不恢复 native 数值 #open / time / partial tick、连续动画或翻页 CPU 算法，也不把端点一致写成默认整姿态或原生整 GUI 零差。
+
 ## 当前书本实现与验收范围
 
 `EnchantingBook` 使用 Bedrock 实际七部件网格、half 源坐标、UNORM16 UV、零厚度封面 / 翻页和原始64×32图集，按实际 PSO795 的模型法线、方向光、POINT / CLAMP、FRONT culling 与 depth LESS 绘制。`rendererState?: EnchantingBookRendererState` 接收调用方提供的列主序 projection / view / model、七或八个 bones 及可选 tileLightColor / overlayColor；校验矩阵有限值与尺寸，错误通过 `onRendererError` 报告。库不包含捕获矩阵、私有 shader 二进制或测试世界画面。
@@ -14,7 +24,7 @@
 
 另对当前默认 `open=1/pageFlip=0` 的112个骨骼矩阵元素做离线审计，未改生产参数、未执行新采集或按截图拟合。其七个预期折叠角与捕获姿态一致：封面/页块含±1.25、翻页面±1、书脊π/2。当前双精度三角函数再上传float32与捕获有28个元素不同；逐步float32四元数生成矩阵后，28个变化旋转项全部吻合，仅4个pivot值不同。
 
-65536项正弦表加float32表角的候选又能使这4个pivot吻合，单帧合112/112相同。此结果不是对原生CPU算法的唯一识别：没有恢复CPU函数或表，也没有已知时间/open输入的第二姿态来排除其他算法，故未将查表候选或捕获常量改成默认。相机矩阵有另一数值路径，不能直接套用骨骼候选；闭合态偏移也仍无新增矩阵证据。
+65536项正弦表加float32表角的候选又能使这4个pivot吻合，单帧合112/112相同。此结果不是对原生CPU算法的唯一识别：没有恢复CPU函数或表，也该阶段没有第二姿态来排除其他算法，故未将查表候选或捕获常量改成默认。现已补得上述闭合端点，但仍无已知数值时间/open输入，不能识别连续动画或唯一查表算法；相机矩阵有另一数值路径，不能直接套用骨骼候选。
 
 可复现离线实验为 `.cache/book-default-pose-audit/audit.py`；完整数值报告 `audit.json` SHA256 `208470c68c66f8aa8294dd2dbce795e42fb9ee95038acc865a28838d917e553c`，说明报告SHA256 `c01882543f5466ba34c3b990402036503fc5bf5a26a8b2928e58a124aece57c7`。这是矩阵算术检查，不增加正式浏览器用例，不提供新渲染像素分数。继续验证默认动画需要已知输入的闭合/中间/打开GUI骨骼及时间参数，或原生CPU实现证据。
 
