@@ -133,3 +133,58 @@ ready状态保留的透明可选择DOM文字曾继承父级阴影，真实24×25
 固定同一源UV/quad/metrics测试了ONE混合、既有槽位插值及采样前直接`±phi/scale`：它们未重现剩余native角点，部分组合恶化全域和三阈值误差，未按单点最小误差选出“原生绑定”。原报告分别是 `.cache/font-shader-audit/BLEND_AUDIT.md` 与 `.cache/tooltip-font-research/BLEND_FALSIFICATION.md`，完整hash已持久化。数学反事实也没有冒充实际Canvas截图结果。
 
 当前结论是**组件合同和限定source/layout验证通过，native覆盖/RGBA仍未解决**。未增加生产phi、逐字/逐比例拟合、mask或猜测客户区高度；私有atlas分发边界、运行时字体/材质/sampler/blend链及共同UI后采样机制继续保持未知。
+
+
+## 后续排查：原投影、精度、GPU与AA对照
+
+以下均保持同一字格、UV/quad/metrics及原生阈值，没有加入生产phi或逐字修正。**native覆盖/RGBA结论仍为NOT EXACT**；静态程序存在、软件GPU结果和AA热切换分别记录，不互相替代运行时绑定证据。
+
+### 原始程序与精度
+
+- 原Bitmap/BitmapSmooth VS使用完整cell UV；半texel只限制fragment采样范围，不收缩vertex UV。原`position.z`转整数用于选UV角点，不是屏幕X/Y取整。A/B的5个差异点共10实例距cell边至少1texel，inset为`0/.25/.5/1`时全部不触发clamp。因此固定映射下，仅将half改quarter不能影响这些点；CPU产生的quad/cache UV仍未知。
+- 用官方[Microsoft DXC v1.9.2609](https://github.com/microsoft/DirectXShaderCompiler/releases/tag/v1.9.2609)的`-dumpbin`读取原SM65程序，未重编译。8变体共16个VS/PS、96条signature均为float/componentType3、minimumPrecision0，UV输入/运算/输出/采样为f32；审计body无half/min16或窄化转换。工具exe SHA为`aa7965b3763d9c710baaa5a28cedcc633449962a75d1391d161a85304a41b3e2`，release zip SHA为`ad31b1fc8443175d204f77a611fdb3ef2ec42759bdc2f1167368de24a4a7e7f1`。
+- 当前256²atlas的`k/16`边界及默认`±1/512` bounds共64值往返binary16全部不变。它不能证明真实vertex格式、插值硬件精度、cache上传值或活动SM65分支。SM65原Smooth常量为`-.30000001192092896`与`5.000000476837158`，而SM50反汇编仅显示六位十进制`-.300000/5.000000`。前述7680组、最大`2e-16`验证针对规范化ASM的抽象实数解释与闭式公式，不是原常数字面bits或GPU f32/FMA模拟。固定float32(.45)标量重放仍得`.84375`；生产声明`q=saturate((sample-.3)*5)`保持不变，没有据未认证native绑定的细微常数差改profile，也未解释剩余约14RGB差。
+- 安装包确有TAAU、SM65 FULL FSR1 EASU/RCAS/BILINEAR等程序。EASU有48个gather/4stores；RCAS有20个load/4stores，对应每输出中心加四邻域；BILINEAR为4sampleLevel/4stores。SM4/5的FSR占位程序不能被误称为整个FSR不存在。82个renderer JSON、74个已提取Classic UI JSON、4个GUI JSON的有界检索未提供Classic tooltip到这些pass的绑定；目录、世界preset及单采样UI/Blit都不是活动rendergraph证明。未据程序名称选择滤镜，亦未排除可执行文件里的未观测路径。
+
+### 固定软件GPU与局部反例
+
+实际后端为ANGLE/SwiftShader软件Vulkan，WebGL2 highp为23精度位，**不是原生硬件RenderDragon**。原RGBA8纹理、固定SRC_ALPHA RGB/独立ONE alpha、不启用MSAA、dither、mipmap或额外gamma转换，不用phi或拟合；8个point/bilinear与Bitmap/Smooth配置均保留，字段与单独halo渲染裁回字段逐字节一致。
+
+| 固定profile | GPU对double数学：不同像素/通道/max | GPU对实际组件：不同像素/通道/max |
+| --- | --- | --- |
+| scale2 point Bitmap | 0 / 0 / 0 | 0 / 0 / 0 |
+| scale2.5 bilinear Smooth | 0 / 0 / 0 | 380 / 776 / 1 |
+
+scale2.5 Smooth对native A/B的完整字段及halo仍分别有1542不同像素，RGB差和56035/57774、max24/25；`.25/.5/.75`仍为`0/0/5`。这组软件GPU统计与前面的实际Canvas组件统计有意分开。五点实际float采样约`.450000793`、Smooth约`.843754411`：白字GPU RGB186/183/186对native199/196/199，蓝字53/92/186对56/99/200。软件GPU没有消除剩余13–14RGB差，不能据此认证硬件或更换生产采样规则。
+
+独立14个同`0010`源2×2、同`fx=.1/fy=.5`控制中，5个`.75`失败而9个不失败。尤其石field`[76,17]`与剑`[111,32]`的actual完整3×3相同，native周围8像素也全部相同，但native中心分别为199/196/199与190/188/190。单独相同4texels/phase或该3×3规则不足以解释这对中心，**不泛化为排除所有较大邻域、位置相关处理或cache机制**。固定整quad Y移`±.5physical px`还会显著恶化GUI5完整字段/halo的低阈值几何；未选择新Y相位。
+
+### 原生AA16→1→16热切换
+
+本机界面测试实际在设置中热切换，最终恢复16并暂停，未重启。两张2568×1400无损PNG由独立QA按同位置直接比较；完整两行9glyph、space、末尾linebox和halo均不使用mask：
+
+| 原图矩形 `[x,y,w,h]` | 像素数 | AA1对AA16严格RGBA差 |
+| --- | ---: | ---: |
+| 字段 `[1273,1127,243,100]` | 24,300 | 0 |
+| 字段+2px `[1271,1125,247,104]` | 25,688 | 0 |
+| 不透明内部 `[1264,1112,260,120]` | 31,200 | 0 |
+| 完整窗口 `[1248,1102,291,140]` | 40,740 | 255 |
+
+窗口255差包括240个透明阶梯角/外侧和15个混色边列；世界底图发生变化，不能把这些差单归AA，也不能把整窗口写为0。原5点在两状态native值相同，保存的实际组件对每张原图的halo仍为1573/25688不同像素、RGB差和56653、max24，三阈值`0/0/5`。新原图对旧A字段也有311个1LSB差，故未假装与旧A整字段相同。
+
+AA1 SHA为`9bab05dcc92856a120271674872f3d3c844f19a3a3b8a73e760b25f70afde07b`；AA16 SHA为`d6e601e45ef58b56e898aee8635381d83da4b9b99a4133a2e68a17df0691402b`。这些结果只约束本次无重启热切换所保存的区域；实际RT sample count、所有后端设置是否即时应用、其它AA或UI路径仍未认证。
+
+### 后续证据指纹与仍缺的数据
+
+完整方法、静态范围、所有8个GPU配置及区域RGBA hash保留在ignored报告；JSON仅持久化摘要和以下完整SHA，不分发原图、atlas或私有程序：
+
+| ignored JSON报告 | SHA256 |
+| --- | --- |
+| `.cache/font-shader-audit/projection-audit.json` | `7400fe318799611d2d1441519a1b757d0d23e0f44ba11be081ae43471b40c05c` |
+| `.cache/font-shader-audit/dxil/precision-audit.json` | `9255dc6140b34a18ab931ca2067c3719743286fc817492dc1fc9909895e6251a` |
+| `.cache/font-shader-audit/postprocess-audit.json` | `c823f788ccadd1b307526a99f7e7eb89012313d153d67fc472ddf068dad1685c` |
+| `.cache/bitmap-gpu-diagnostic/summary.json` | `f268c4e7a047d1223469ed9670320316576207881663ce9db20861853d966eb7` |
+| `.cache/tooltip-native/independent-pattern-study/matched-controls-summary.json` | `f030c511575f87f7166f57d3e641fe16f8aca6a4baefc988b8ffc95f309303f6` |
+| `.cache/tooltip-native/independent-aa-study/aa1-vs-aa16-independent.json` | `f66c1cf3ae0d7b3adb6e1610ee8de48ed6b28eafd7a82efbaa18db49ef605609` |
+
+要进一步区分quad/UV、cache、sampler与后续处理，仍需原生draw的实际vertex/index及格式、cellBase UV、上传GlyphTexture/MIP、uniform/sampler/blend、MVP/viewport/scissor、RT/MSAA/resolve及后续读该RT的pass。当前没有这类capture；本轮无生产更改，未新增拟合、mask或阈值豁免，未把限定source/layout合同提升为native覆盖或RGBA通过。

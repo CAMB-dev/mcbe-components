@@ -1089,5 +1089,587 @@
     "Do not add diagnostic phi/screen-space transfer to production.",
     "Do not label binarymask0 or verified shader equations as full nativeRGBA0.",
     "Unknown runtime binding, version generalization and client coordinates remain explicit."
-  ]
+  ],
+  "followUpInvestigations": {
+    "date": "2026-10-29",
+    "status": "native-raster-NOT-EXACT",
+    "scope": "Only documentation of fixed-state static audits, a software WebGL diagnostic, matched controls and a parent-observed no-restart native AA hot switch. No production correction or new native parity gate.",
+    "projectionAndClamp": {
+      "originalMaterialSha256": "02d410506a3e180781992c66839432ed425bf0506fb8d258328d21959afb2d29",
+      "vertexContract": "Full-cell interpolated UV; separate fragment clamp bounds. Position.z integer conversion selects UV corners, not screen X/Y snapping.",
+      "fiveDistinctSites": 5,
+      "captures": 2,
+      "siteInstances": 10,
+      "testedClampInsetsSourceTexels": [
+        0,
+        0.25,
+        0.5,
+        1
+      ],
+      "changedSiteCoordinates": 0,
+      "minimumSourceCellEdgeDistanceTexels": 1,
+      "conclusion": "Changing only the fragment half-texel clamp to a quarter-texel clamp cannot affect these sites under the unchanged full-cell mapping.",
+      "limits": [
+        "CPU-generated quad/cellBase UV and actual cache upload are not captured.",
+        "UI/Blit is a single sample plus Tint/Hud with MVP/UV passthrough; ordinary resampling is compatible with its existence, not demonstrated as an active UI postpass."
+      ]
+    },
+    "originalSm65Precision": {
+      "tool": {
+        "name": "Microsoft DirectXShaderCompiler",
+        "release": "v1.9.2609",
+        "officialReleaseUrl": "https://github.com/microsoft/DirectXShaderCompiler/releases/tag/v1.9.2609",
+        "operation": "dumpbin original DXIL, no recompilation",
+        "exeSha256": "aa7965b3763d9c710baaa5a28cedcc633449962a75d1391d161a85304a41b3e2",
+        "releaseZipSha256": "ad31b1fc8443175d204f77a611fdb3ef2ec42759bdc2f1167368de24a4a7e7f1"
+      },
+      "variants": 8,
+      "originalVertexAndFragmentPrograms": 16,
+      "signatureRows": 96,
+      "allComponentTypeRaw": 3,
+      "allMinimumPrecisionRaw": 0,
+      "explicitHalfOrNarrowingUses": 0,
+      "uvOperations": "f32 input/output, corner/bound arithmetic, clamp and sample coordinates; no half/min16 conversion in audited original bodies.",
+      "fixed256AtlasBinary16Roundtrips": {
+        "values": 64,
+        "changed": 0,
+        "scope": "Declared k/16 bases/corners and default k/16 +/- 1/512 clamp bounds only."
+      },
+      "smoothConstants": {
+        "sampleOffset": -0.30000001192092896,
+        "multiplier": 5.000000476837158
+      },
+      "limits": [
+        "Active native SM65 branch and input layout/vertex bytes are uncaptured.",
+        "f32 IR does not certify hardware interpolation/texture-coordinate precision or actual native cache UV values.",
+        "SampleFrequency0 does not establish render-target sample count or later resolve state."
+      ],
+      "normalizedSm50PrintedConstants": {
+        "sampleOffset": "-0.300000",
+        "multiplier": "5.000000"
+      },
+      "formulaVerificationBoundary": "Earlier7680cases/max2.220446049250313e-16 compare the normalized printed ASM abstract-real interpretation with independent closed-form equations, not original constant literal bits or GPU f32/FMA execution.",
+      "productionProfileUnchanged": "Declared q=saturate((sample-.3)*5) and cubic smoothing remain unchanged; small original constant differences without native binding do not justify modifying the profile or explain the remaining14RGB native residual."
+    },
+    "postprocessInventory": {
+      "originalUpscalingSha256": "59a352d7801ed283265c7a4da9a2c56f86d24cab54034ed4427448afe982cce4",
+      "originalFsr1Sha256": "358eca1d3d88686b0d617da3cef7c0ce89455bd5a64946be44ee17975c88e356",
+      "availablePrograms": [
+        "TAAU current/motion neighborhood and history reconstruction",
+        "SM65 FULL FSR1 EASU spatial reconstruction",
+        "SM65 FULL FSR1 RCAS center and four-cardinal-neighbor sharpening",
+        "SM65 FULL FSR1 BILINEAR",
+        "Bloom spatial passes and ordinary blits/color postprocessing"
+      ],
+      "sm65FullComputeStaticCounts": [
+        {
+          "filter": "EASU",
+          "sha256": "44d4afc4358a8427d20c2bff7ac61402e2d535b7f24bed5eec507e0ca2b9ffe1",
+          "operationCounts": {
+            "textureGather.f32": 48,
+            "textureStore.f32": 4
+          }
+        },
+        {
+          "filter": "RCAS",
+          "sha256": "e8d6a37137e0fe9a848ad670ebca4e89e3460fc51f6bbb4231c66f663ed4dfb3",
+          "operationCounts": {
+            "textureLoad.f32": 20,
+            "textureStore.f32": 4
+          }
+        },
+        {
+          "filter": "BILINEAR",
+          "sha256": "98dc96971bf5f2563512eef20cf4d2a078f2793bdfd99ecb5d6d80145de80fe3",
+          "operationCounts": {
+            "sampleLevel.f32": 4,
+            "textureStore.f32": 4
+          }
+        }
+      ],
+      "sm4Sm5FsrBodies": "Placeholder orange/diagnostic stripe; not evidence that actual SM65 FSR is absent.",
+      "boundedJsonSearchFileCounts": {
+        "installed_renderer_json": 82,
+        "extracted_classic_ui_json": 74,
+        "installed_gui_json": 4
+      },
+      "classicUiBindingCaptured": false,
+      "limits": [
+        "Material catalogs and world/platform presets are not an active UI rendergraph.",
+        "No UI attachment was found in the bounded asset searches; executable-side or unnamed processing remains possible.",
+        "No FSR/TAAU/FXAA/sharpen filter is justified as a production correction."
+      ]
+    },
+    "softwareWebglDiagnostic": {
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "hardware": false,
+      "highFloat": {
+        "rangeMin": 127,
+        "rangeMax": 127,
+        "precision": 23
+      },
+      "fixedState": "Original binary RGBA Unicode pages; unchanged cells, metrics, origins and colors; no phi, fitting, MSAA, dither, gamma conversion or mipmaps. SRC_ALPHA RGB / separate ONE alpha, RGBA8 FBO.",
+      "profileTupleFormat": {
+        "gpuComparisons": "changedPixels / changedChannels / maxChannelError",
+        "nativeComparisons": "changedPixels / absoluteRgbSum / maxChannelError",
+        "binaryThresholdOrder": [
+          0.25,
+          0.5,
+          0.75
+        ]
+      },
+      "allFieldCropsEqualSeparatelyRenderedHalo": true,
+      "allNativeAlphaEqual": true,
+      "fiveSiteFloatProbe": {
+        "rawSample": 0.4500007927417755,
+        "postSmooth": 0.8437544107437134,
+        "doubleRaw": 0.45,
+        "doubleSmooth": 0.84375
+      },
+      "fiveSiteRgb": {
+        "whiteGpu": [
+          186,
+          183,
+          186
+        ],
+        "whiteActualComponent": [
+          185,
+          182,
+          185
+        ],
+        "whiteNative": [
+          199,
+          196,
+          199
+        ],
+        "blueGpu": [
+          53,
+          92,
+          186
+        ],
+        "blueActualComponent": [
+          52,
+          91,
+          185
+        ],
+        "blueNative": [
+          56,
+          99,
+          200
+        ]
+      },
+      "conclusion": "Scale2.5 bilinear Smooth is byte-identical to independent double math; current component differs at380pixels/776channels, max1LSB. All5 native .75 differences persist; strict native fields/halos remain NOT EXACT.",
+      "nativeBindingProven": false,
+      "limits": [
+        "SwiftShader is software, not native hardware RenderDragon.",
+        "Eight fixed profiles are recorded rather than selected per glyph.",
+        "This diagnostic does not certify native draw state or justify a production change."
+      ],
+      "comparisonRowColumns": [
+        "profile",
+        "GPU vs double",
+        "GPU vs CPU-U8",
+        "GPU vs actual component"
+      ],
+      "comparisonRows": [
+        [
+          "s2-point-bitmap",
+          "0/0/0",
+          "0/0/0",
+          "0/0/0"
+        ],
+        [
+          "s2-point-bitmap-smooth",
+          "0/0/0",
+          "0/0/0",
+          "0/0/0"
+        ],
+        [
+          "s2-bilinear-bitmap",
+          "0/0/0",
+          "450/568/1",
+          "2434/4840/1"
+        ],
+        [
+          "s2-bilinear-bitmap-smooth",
+          "0/0/0",
+          "0/0/0",
+          "60/60/1"
+        ],
+        [
+          "s2.5-point-bitmap",
+          "0/0/0",
+          "0/0/0",
+          "0/0/0"
+        ],
+        [
+          "s2.5-point-bitmap-smooth",
+          "0/0/0",
+          "0/0/0",
+          "0/0/0"
+        ],
+        [
+          "s2.5-bilinear-bitmap",
+          "564/564/1",
+          "3394/5668/1",
+          "5020/10649/2"
+        ],
+        [
+          "s2.5-bilinear-bitmap-smooth",
+          "0/0/0",
+          "134/216/1",
+          "380/776/1"
+        ]
+      ],
+      "nativeBaselineRows": [
+        {
+          "profile": "s2-point-bitmap",
+          "comparisons": [
+            {
+              "sample": "GUI4",
+              "field": [
+                1314,
+                45227,
+                22
+              ],
+              "halo": [
+                1444,
+                45754,
+                22
+              ],
+              "thresholds": [
+                0,
+                0,
+                0
+              ],
+              "haloThresholds": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "profile": "s2.5-bilinear-bitmap-smooth",
+          "comparisons": [
+            {
+              "sample": "GUI5 A",
+              "field": [
+                1542,
+                56035,
+                24
+              ],
+              "halo": [
+                1542,
+                56035,
+                24
+              ],
+              "thresholds": [
+                0,
+                0,
+                5
+              ],
+              "haloThresholds": [
+                0,
+                0,
+                5
+              ]
+            },
+            {
+              "sample": "GUI5 B",
+              "field": [
+                1542,
+                57774,
+                25
+              ],
+              "halo": [
+                1542,
+                57774,
+                25
+              ],
+              "thresholds": [
+                0,
+                0,
+                5
+              ],
+              "haloThresholds": [
+                0,
+                0,
+                5
+              ]
+            }
+          ]
+        }
+      ],
+      "allEightNativeProfileResults": "All fixed-profile native comparisons, including worse alternative samplers/shaders, remain in the hash-pinned GPU summary; none was selected per glyph."
+    },
+    "matchedLocalControls": {
+      "motif": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "rationalPhase": [
+        "1/10",
+        "1/2"
+      ],
+      "matchedSites": 14,
+      "highThresholdFailures": 5,
+      "nonFailingControls": 9,
+      "counterexample": {
+        "sample": "GUI5 A",
+        "stoneField": [
+          76,
+          17
+        ],
+        "swordField": [
+          111,
+          32
+        ],
+        "stoneAbsolute": [
+          1344,
+          1029
+        ],
+        "swordAbsolute": [
+          1379,
+          1044
+        ],
+        "stoneNativeCenter": [
+          199,
+          196,
+          199,
+          255
+        ],
+        "swordNativeCenter": [
+          190,
+          188,
+          190,
+          255
+        ],
+        "allEightNativeNeighborsEqual": true,
+        "actualComplete3x3Equal": true
+      },
+      "scope": "Identical source2x2+phase or identical actual3x3 alone is insufficient to explain these observed native centers; the native eight neighbors also match for the specified stone/sword pair.",
+      "limits": [
+        "This does not exclude every larger neighborhood, position-dependent transform, cache rule or temporal process.",
+        "No hidden mechanism or replacement parameter has been identified."
+      ],
+      "fixedWholeQuadYCounterfactual": "Unchanged glyphs with +/-0.5physicalY substantially worsen GUI5 whole-field/halo geometry; this simple global phase correction is not supported.",
+      "preservedControlReport": {
+        "ignoredReport": ".cache/tooltip-native/independent-pattern-study/motif-controls-and-fixed-y.json",
+        "sha256": "3f5cc6107fdec6ca66f516505a6eb5300495aee442a6c00a6e323859f269adc0"
+      }
+    },
+    "nativeAaHotSwitch": {
+      "operation": "Parent-observed AA16 -> 1 -> 16 without restart; restored16 and paused. Independent QA directly compared the saved full PNGs.",
+      "inputs": {
+        "aa1": {
+          "file": ".cache/tooltip-native/diamond-aa1.png",
+          "sha256": "9bab05dcc92856a120271674872f3d3c844f19a3a3b8a73e760b25f70afde07b",
+          "size": [
+            2568,
+            1400
+          ]
+        },
+        "aa16": {
+          "file": ".cache/tooltip-native/diamond-aa16.png",
+          "sha256": "d6e601e45ef58b56e898aee8635381d83da4b9b99a4133a2e68a17df0691402b",
+          "size": [
+            2568,
+            1400
+          ]
+        }
+      },
+      "fieldOrigin": [
+        1273,
+        1127
+      ],
+      "fieldSize": [
+        243,
+        100
+      ],
+      "haloPhysicalPixels": 2,
+      "regions": {
+        "completeField": {
+          "rawRect": [
+            1273,
+            1127,
+            243,
+            100
+          ],
+          "pixels": 24300,
+          "changedRgbaPixels": 0,
+          "absoluteRgbSum": 0,
+          "maxChannelError": 0,
+          "rgbaSha256Aa1": "0344a4ac2b62b18c714963257579e3a0bdb3cc72abc3e574a5b76ffe194da4ed",
+          "rgbaSha256Aa16": "0344a4ac2b62b18c714963257579e3a0bdb3cc72abc3e574a5b76ffe194da4ed"
+        },
+        "completeFieldWithHalo": {
+          "rawRect": [
+            1271,
+            1125,
+            247,
+            104
+          ],
+          "pixels": 25688,
+          "changedRgbaPixels": 0,
+          "absoluteRgbSum": 0,
+          "maxChannelError": 0,
+          "rgbaSha256Aa1": "755d311d9ada894ed814e658399c2b346c7da39f4f35300185cf3ee7cd883a9c",
+          "rgbaSha256Aa16": "755d311d9ada894ed814e658399c2b346c7da39f4f35300185cf3ee7cd883a9c"
+        },
+        "opaqueInteriorRectangleContainingWholeFieldAndHalo": {
+          "rawRect": [
+            1264,
+            1112,
+            260,
+            120
+          ],
+          "pixels": 31200,
+          "changedRgbaPixels": 0,
+          "absoluteRgbSum": 0,
+          "maxChannelError": 0,
+          "rgbaSha256Aa1": "1a304318c6aef24eceb9e033f4ece3beb946780ed36cd6ab62a1bb9e2989f936",
+          "rgbaSha256Aa16": "1a304318c6aef24eceb9e033f4ece3beb946780ed36cd6ab62a1bb9e2989f936"
+        },
+        "completeNominalWindowIncludingMixedEdgesAndTransparentCorners": {
+          "rawRect": [
+            1248,
+            1102,
+            291,
+            140
+          ],
+          "pixels": 40740,
+          "changedRgbaPixels": 255,
+          "absoluteRgbSum": 8463,
+          "maxChannelError": 36,
+          "rgbaSha256Aa1": "48190a96c3dcd82707283bdb07e560ab9890f3b0fc6e93152e2bd4f91aad6cb9",
+          "rgbaSha256Aa16": "84388e3ed77e7bedd3520349882d8b698c59f9ca0f75d4ac04a236e84c2655ae"
+        }
+      },
+      "wholeWindowDifferenceCategories": {
+        "transparentCornerOrOutside": 240,
+        "mixedBoundaryColumn": 15,
+        "otherInside": 0
+      },
+      "savedActualComponentComparison": {
+        "aa1": {
+          "scope": "Previously captured fixed actualcomponent output, not a newly renderedCanvas and not a model fitted to this AA pair. All247x104 halo pixels retained.",
+          "metrics": {
+            "size": [
+              247,
+              104
+            ],
+            "pixels": 25688,
+            "changedRgbaPixels": 1573,
+            "absoluteRgbSum": 56653,
+            "rgbMae": 0.7351422194539603,
+            "maxChannelError": 24
+          },
+          "binaryChanged": {
+            "0.25": 0,
+            "0.5": 0,
+            "0.75": 5
+          }
+        },
+        "aa16": {
+          "scope": "Previously captured fixed actualcomponent output, not a newly renderedCanvas and not a model fitted to this AA pair. All247x104 halo pixels retained.",
+          "metrics": {
+            "size": [
+              247,
+              104
+            ],
+            "pixels": 25688,
+            "changedRgbaPixels": 1573,
+            "absoluteRgbSum": 56653,
+            "rgbMae": 0.7351422194539603,
+            "maxChannelError": 24
+          },
+          "binaryChanged": {
+            "0.25": 0,
+            "0.5": 0,
+            "0.75": 5
+          }
+        }
+      },
+      "fiveHighThresholdSites": "All5 retained the same native RGB in both saved AA states; white199/196/199 and blue56/99/200. .75 discrepancies against saved actual component remain5 in each state.",
+      "oldAFieldVsNewFields": {
+        "aa1": {
+          "pixels": 24300,
+          "changedRgbaPixels": 311,
+          "absoluteRgbSum": 414,
+          "maxChannelError": 1
+        },
+        "aa16": {
+          "pixels": 24300,
+          "changedRgbaPixels": 311,
+          "absoluteRgbSum": 414,
+          "maxChannelError": 1
+        }
+      },
+      "nativeRenderTargetSampleCountCertified": false,
+      "limits": [
+        "World time/background changed; transparent corners and mixed outer edges cannot be attributed solely to the AA setting.",
+        "No client-rectangle mapping or actual render-target MSAA sample count is established.",
+        "No result implies all native UI or other objects are insensitive to AA.",
+        "All three observed interior/field regions are rectangular and unmasked; source glyph design masks are not used.",
+        "No restart was performed; setting application across every backend/path is not established.",
+        "The complete291x140 window is not identical and world/mixed-edge changes cannot be attributed solely to AA.",
+        "The saved native pair being equal does not make the actual component native-RGBA exact."
+      ]
+    },
+    "evidenceReports": [
+      {
+        "ignoredReport": ".cache/font-shader-audit/PROJECTION_AUDIT.md",
+        "sha256": "45e70a0d2d83bce8629c6a430632c7a63bb31cf53a6472c3d3da1713757f87e4"
+      },
+      {
+        "ignoredReport": ".cache/font-shader-audit/projection-audit.json",
+        "sha256": "7400fe318799611d2d1441519a1b757d0d23e0f44ba11be081ae43471b40c05c"
+      },
+      {
+        "ignoredReport": ".cache/font-shader-audit/DXIL_PRECISION_AUDIT.md",
+        "sha256": "760e148a1df7c30887f25600548cd8327aaaedadd4803f0f7c979943fa31a699"
+      },
+      {
+        "ignoredReport": ".cache/font-shader-audit/dxil/precision-audit.json",
+        "sha256": "9255dc6140b34a18ab931ca2067c3719743286fc817492dc1fc9909895e6251a"
+      },
+      {
+        "ignoredReport": ".cache/font-shader-audit/POSTPROCESS_AUDIT.md",
+        "sha256": "f82484bd80a75407f586dbbfe4c3d30ea9daaf459a3b9e2e54d8007a86b72ebd"
+      },
+      {
+        "ignoredReport": ".cache/font-shader-audit/postprocess-audit.json",
+        "sha256": "c823f788ccadd1b307526a99f7e7eb89012313d153d67fc472ddf068dad1685c"
+      },
+      {
+        "ignoredReport": ".cache/bitmap-gpu-diagnostic/REPORT.md",
+        "sha256": "f1900377d17c94e8ed7a4261d917002b389811d207d9aaec5353c8bdc5d3b9a7"
+      },
+      {
+        "ignoredReport": ".cache/bitmap-gpu-diagnostic/summary.json",
+        "sha256": "f268c4e7a047d1223469ed9670320316576207881663ce9db20861853d966eb7"
+      },
+      {
+        "ignoredReport": ".cache/tooltip-native/independent-pattern-study/matched-controls-summary.json",
+        "sha256": "f030c511575f87f7166f57d3e641fe16f8aca6a4baefc988b8ffc95f309303f6"
+      },
+      {
+        "ignoredReport": ".cache/tooltip-native/independent-aa-study/aa1-vs-aa16-independent.json",
+        "sha256": "f66c1cf3ae0d7b3adb6e1610ee8de48ed6b28eafd7a82efbaa18db49ef605609"
+      }
+    ],
+    "remainingDiscriminatingEvidence": [
+      "Actual glyph draw vertex/index bytes and input format; full quad and cellBase UV contract.",
+      "Bound glyph-cache texture/MIP and upload pixels; actual sampler, uniforms and blend factors.",
+      "MVP, physical viewport/scissor, render targets, active MSAA/resolve and subsequent target-reading passes."
+    ],
+    "productionChanged": false,
+    "newFitOrPhiAdded": false,
+    "nativeCoverageParityPassed": false,
+    "nativeRgbaParityPassed": false
+  }
 }
