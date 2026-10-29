@@ -67,7 +67,11 @@ test('anvil composed layout retains original fractional grid, input and bottom-r
   await rect(region.locator('.mc-anvil__plus'),frame,image(1,13,13));await rect(region.locator('.mc-anvil__arrow'),frame,image(3,18,12));
   const title=await box(region.locator('.mc-workstation__title'));const titleCenter=iconPanel.x+iconPanel.width*.2+1+iconPanel.width*.8/2,titleBottom=iconPanel.y+iconPanel.height*.2+3;
   expect(Math.abs(title.x+title.width/2-frame.x-titleCenter*2)).toBeLessThanOrEqual(.02);expect(Math.abs(title.y+title.height-frame.y-titleBottom*2)).toBeLessThanOrEqual(.02);
-  const input=region.locator('.mc-anvil__name-input');await expect(input).toHaveAttribute('maxlength','30');await expect(input).toHaveCSS('text-shadow','none');await expect(input).toHaveCSS('color','rgb(255, 255, 255)');
+  const input=region.locator('.mc-anvil__name-input');await expect(input).toHaveAttribute('maxlength','30');await expect(input).toHaveCSS('text-shadow','none');
+  await expect(region.locator('.mc-anvil__name-field')).toHaveAttribute('data-mc-name-display','ready');
+  await expect(input).toHaveCSS('color','rgba(0, 0, 0, 0)');await expect(region.locator('.mc-anvil__name-text')).toHaveCSS('color','rgb(255, 255, 255)');
+  await input.focus();await expect(input).toHaveCSS('color','rgb(255, 255, 255)');await expect(region.locator('.mc-anvil__name-clip')).toHaveCSS('visibility','hidden');await input.blur();
+  await expect(region.locator('.mc-anvil__name-clip')).toHaveCSS('visibility','visible');
   const field=await box(region.locator('.mc-anvil__name-field')),text=await box(input);expect(Math.abs(text.x-field.x-6)).toBeLessThanOrEqual(.02);expect(Math.abs(text.width-(field.width-12))).toBeLessThanOrEqual(.02);expect(text.height).toBe(20);expect(Math.abs(text.y+text.height/2-field.y-field.height/2)).toBeLessThanOrEqual(.02);
   const result=await box(region.locator('.mc-anvil__result .mc-slot__item'));expect([result.width,result.height]).toEqual([32,32]);
   await mkdir(new URL('../.cache/anvil-qa/',import.meta.url),{recursive:true});const path=fileURLToPath(new URL('../.cache/anvil-qa/anvil-unmasked.png',import.meta.url));await region.screenshot({path});await testInfo.attach('actual-implementation-not-native-reference',{path,contentType:'image/png'});

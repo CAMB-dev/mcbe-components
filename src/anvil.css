@@ -11,6 +11,13 @@
 .mc-anvil__name-field[data-disabled] { cursor: default; }
 .mc-anvil__name-field[data-disabled]::before { opacity: .5; }
 .mc-anvil__name-input:disabled { color: rgb(255 255 255 / .5); -webkit-text-fill-color: rgb(255 255 255 / .5); opacity: 1; cursor: default; }
+/* The source has a clipped, right-anchored min-width label while unfocused.
+   Its normal text child follows the input editor's line-box rule. */
+.mc-anvil__name-clip { position: absolute; left: 6px; top: 4px; width: calc(100% - 12px); height: calc(100% - 8px); overflow: hidden; pointer-events: none; white-space: pre; text-align: start; visibility: hidden; }
+.mc-anvil__name-display { display: block; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: max-content; min-width: 100%; height: 20px; align-content: unsafe center; white-space: pre; text-align: start; }
+.mc-anvil__name-text { display: flow-root; white-space: pre; text-align: start; }
+.mc-anvil__name-field[data-mc-name-display='ready']:not(:focus-within):not([data-mc-name-composing='true']) > .mc-anvil__name-clip { visibility: visible; }
+.mc-anvil__name-field[data-mc-name-display='ready']:not(:focus-within):not([data-mc-name-composing='true']):not([data-mc-name-measuring='true']) > .mc-anvil__name-input { color: transparent; -webkit-text-fill-color: transparent; text-shadow: none; }
 .mc-anvil__input, .mc-anvil__material, .mc-anvil__result { position: absolute; top: 94.04px; }
 .mc-anvil__input { left: 41.54px; }
 .mc-anvil__material { left: 149.108px; }
@@ -56,6 +63,7 @@
 .mc-anvil:has(> .mc-anvil-image-window[data-text-cost='true'] > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__cost::before { display: none; }
 /* Focus itself restores native browser glyphs immediately; the named-control
    state also removes source name paint for focus and IME composition. */
-.mc-anvil:has(> .mc-anvil-image-window[data-text-name='true'] > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__name-field > .mc-anvil__name-input:not(:focus) { color: transparent; -webkit-text-fill-color: transparent; text-shadow: none; }
+.mc-anvil:has(> .mc-anvil-image-window[data-text-name='true'] > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__name-field:not([data-mc-name-composing='true']):not([data-mc-name-measuring='true']) > .mc-anvil__name-input:not(:focus) { color: transparent; -webkit-text-fill-color: transparent; text-shadow: none; }
+.mc-anvil:has(> .mc-anvil-image-window[data-text-name='true'] > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__name-field > .mc-anvil__name-clip { visibility: hidden; }
 .mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) .mc-slot[data-mc-source-item='image'] > .mc-slot__item > img,
 .mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) .mc-slot[data-mc-source-item='model'] > .mc-slot__item { visibility: hidden; }

@@ -2,6 +2,14 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
+## 当前检查点：Anvil普通DOM失焦名称
+
+产品04采用源clipper /右锚min100% label、浏览器条件normal子行与unsafe center；不按font名 /字符offset拟合，真input继续处理focus /selection /IME，React name值独占失焦装饰文本。三font短值原型pair0与ClassicLong改善不等于产品完整native通过，LocalLong scroll方案A反而优于C的实测也保留。
+
+父ref /controlled reject真产品bug与caret工具副作用分别留证。修后57 /57及fresh React18 /19包04e65通过；7完整field plane72,800px0只证浏览器input参考。产品对冻结C六font /value完整0、三QA对原input0、Empty /Invalid另CPU补证整图 /PNGbytes0；四source完整RT /ROI0，普通Classic native仍49,631 /52,998 /34,886 /38,081。LocalLong A67,031优于C68,845不隐藏，未宣普通默认native0。
+
+最终生产171辅助验证三profile /真实input /单paint /source owner /390；有限CDP实用font与加载状态分开，synthetic IME不认证OS。native rawsource6取消与production source2取消分别保留，后者回访200，不称全部网络0。旧包 /原错误不回填，final doc-only包须关联已测非文档identity；baseline /AA /真实IME /其他engine /动态 /其它GUI /Present广义限制继续，见 [ANVIL_NAME_QA.md](ANVIL_NAME_QA.md)。
+
 ## 2026-10-30检查点：有限Classic DOM字体
 
 新增源码仓库准备的私有Classic /Unicode /ASCII三face（189 /189 /95glyph）及可选root scope CSS；原字体不入npm，demo三profile /portal /input继承与显式cost /tooltip Unicode角色按有限合同验证。字体内部构字8game与最终normal-line typographic9 /1分开，主题保原24px行高；plus9 /7＋space16有真实约束，8 /8拆分仍候选，未恢复完整Unicode /native cmap与linebox。
@@ -155,6 +163,8 @@ ToggleButton / NavigationList保留普通选中灰色凹陷、hover / focus绿�
 Spinner使用原loading_spin十帧 / 10fps，Button.loading复用同组件；通用Tooltip与Toast有真实焦点 / 触屏 / Dialog关闭层级和可控生命周期。Tooltip通用源背景与inventory物品tooltip renderer仍是不同范围，Toast的Web可访问性暂停 / 最短显式时长不是原生计时证据；见 [feedback-geometry.json](feedback-geometry.json)。
 
 ## 字体与 shadow
+
+CSS局部px、GuiText game单位与BitmapText源metric单位的区别及有限跨scale观察见 [TEXT_SHADOWS.md](TEXT_SHADOWS.md)；不能将单role的2physical px推广成全局默认。
 
 - npm 默认英文为 MCBE Pixel，基于 OFL Monocraft v4.2.1，原始轮廓和字宽不变，重命名并增加 COLR v0 前景色图层。18px 使字体像素网格落在整数坐标。它仍是等宽替代字体，与 Mojangles 字宽不同。
 - 中文默认为 MCBE CJK，基于 Fusion Pixel 12px proportional zh_hans 添加前景色 COLR 层、重命名并保留原始轮廓与字宽；原始上游 WOFF2 和许可仍保留。示例采用 24px，另检查中文字形和阴影没有彩边或半透明边缘。未声称它匹配游戏中文字形。

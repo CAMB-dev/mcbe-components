@@ -113,7 +113,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `ContainerFrame` | **必填** `title`；`height`、`titleAlign`、`titleOffset`、`inventory`、`hotbar`、`inventorySelectedIndex`、`onInventorySelectionChange`、`onInventoryAction`、`onClose` | 352 CSS px 宽、可变高度容器，共享底部锚定的玩家物品栏；height / titleOffset 用 CSS px |
 | `Chest` | `rows`、`items`、`selectedIndex`、`onSelectionChange`、`onSlotAction`；容器库存属性 | 3 / 6 行箱子及 1…6 行数据驱动布局；行数取整并限制范围，非有限值回退 3 |
 | `Hopper` / `Dispenser` / `Dropper` / `ShulkerBox` | `items`、`selectedIndex`、`onSelectionChange`、`onSlotAction`；容器库存属性 | 共用存储 API，分别保留 5 / 9 / 9 / 27 格与原始面板高度；空槽允许操作回调 |
-| `Anvil` | **必填** `name`；`onNameChange`、`inputs`、`result`、`invalid`、`cost`、`renameDisabled`、`renameReadOnly`、`onInputAction`、`onTakeResult`、可选 `imageRender: AnvilImageRenderProfile` | 真input /30字符、39槽与费用；可选源image /sprite /model及title /inventory /name /cost四文字角色，见 [ANVIL_IMAGE_QA.md](docs/ANVIL_IMAGE_QA.md) |
+| `Anvil` | **必填** `name`；`onNameChange`、`inputs`、`result`、`invalid`、`cost`、`renameDisabled`、`renameReadOnly`、`onInputAction`、`onTakeResult`、可选 `imageRender: AnvilImageRenderProfile` | 真实input编辑、30字符、39槽与费用；失焦长名称按原版clipper /右锚显示末尾；可选原图四文字角色。见 [ANVIL_NAME_QA.md](docs/ANVIL_NAME_QA.md) / [ANVIL_IMAGE_QA.md](docs/ANVIL_IMAGE_QA.md) |
 | `BrewingIndicator` | `variant`: arrow / bubbles / fuel；`progress`: 0…1、`label` | 可复用的原版酿造图层；裁切完整前景，不缩放填充图 |
 | `BrewingStand` | `ingredient`、`fuel`、`bottles`、`selectedSlot`、`progress`、`bubbles`、`fuelRemaining`、`onSelectionChange`、`onSlotAction`；Frame 属性 | 酿造主面板与五个可操作槽；配方、消耗和动画时序由调用方提供 |
 | `SmithingTable` | `inputs`: readonly [template, base, addition]；`result`、`invalid`、`templateOverlay`、`baseOverlay`、`materialOverlay`、`overlayFrame`、`preview`、`onInputAction`、`onTakeResult` | 现代三输入锻造主面板，真实横向提示图集；baseOverlay / materialOverlay 默认 null，由宿主根据实际模板状态显式启用；preview 接入调用方 renderer |
@@ -486,6 +486,8 @@ python scripts/prepare-classic-fonts.py --check-only
 导入 `mcbeui/classic-fonts.css`，在html根添加 `mc-classic-fonts`，使Input与portal Dialog继承同一字体；局部scope不会自动覆盖document.body portal。该CSS只有scope与字号令牌，不带font-face或字体数据。
 
 demo提供Classic /本机Mojangles /开放字体切换。原cell字体仍有浏览器与游戏的AA、基线、阴影及长输入差异；有限字集不代表全Unicode或pixel perfect。追加字符、行高与详细验证见 [CLASSIC_FONTS_QA.md](docs/CLASSIC_FONTS_QA.md)。
+
+CSS、GuiText与BitmapText的阴影offset单位及已知宿主缩放换算见 [TEXT_SHADOWS.md](docs/TEXT_SHADOWS.md)。
 
 原版字体：如已持有可用于该场景的 Mojangles 字体，可以自行接入；npm 库不包含游戏原版字体。重建控件皮肤的来源见视觉基准文档。
 

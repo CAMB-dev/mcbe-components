@@ -2,6 +2,18 @@
 
 日期：2026-10-30（Asia/Singapore，本批本地收尾；下方历史记录保留各自时刻）。
 
+## 当前检查点：Anvil普通DOM失焦名称
+
+新增私有blurred input display，公开Anvil API /组件数不变。原source两box /右锚min100% label与Blink156正常子行机制取代只依赖input viewport的失焦显示；focus /composition保留真input，文字由JSX name值独占，不按font-name拟合。cache C三font短QA pair0、ClassicLong60,343→52,998只是原型，LocalLong A67,031优于C68,845同时保留，不称产品或native完整0。
+
+真实formal01 45 PASS /11 FAIL为产品祖先ref生命周期；formal02 55 /1为截图caret工具null→空inline style，未规范化放宽；phase03真实拒绝编辑probe出现input QA /可见QAx，产品04删一行命令式赋值交JSX独占修复。原失败不删，最终formal03实际57 /57 PASS、129.984505秒、0skip /retry /flaky、894pins0变（FINAL70529d9386d950c0f3dcc4f1fd77c8c723c4282a10be0b83846e358d94a19d55）。7完整field plane72,800px0是同浏览器真实失焦input参考，不是native Smooth；reject不setState＋syncblur双方QA、accepted QAX与first mount /Strict /styles /清理 /source owner真实通过，不累计旧PASS。
+
+旧包01 npm实际成功但PS5 snapshot /wrapper失败使source proof不全；包02真实成功但属旧phase03。修后04 package03实际fresh React18 /19 exit0、40.40128秒，134runtime /SSR /strictTS /styles /assets /licenses、617完整source路径 /counts /bytes及257dist两consumer /tar /build同byte。immutable tar `04e65ecf219f049058e097ddd70dc18b6e12342ccd31b8e16759be080f6b4483`，JS583,783bytes SHA `1e676daf78f4169f3a5a65c708492704d4e5be1f1dc95cc23753f7868b357f23`，不套cab4旧包。49site /260nonDoc、精确sourceMap /CSS身份另留证；最终补文档重pack需单证非文档同字节，不增加consumer或全库累计，见 [ANVIL_NAME_QA.md](ANVIL_NAME_QA.md)。
+
+native integration FINAL `02e8fa5629977a756a603505e3b366f63e41012f5a6121d29855861da9f94307`：8ordinary /4source /4nativecopy，六font×QA /Long产品对冻结C完整RGBA0，三QA对原input0；Empty /Invalid after-run CPU supplement整frame及PNGfile bytes0，不回填raw /run-start pins。四source完整3,603,140px /747,600 ROI /alpha0；普通Classic native仍49,631 /52,998 /34,886 /38,081，不泛化默认GUI0。98source /33原资源 /50不可变pins不变；ordinary请求fail0、raw source6 ERR_ABORTED留存、generation未知、allRequestsSucceeded=false，非取消 /page /console0。没有记录process stopwatch，不把文件时间区间称精确进程耗时。
+
+production FINAL `.cache/anvil-name-production-03/production/FINAL.json` SHA `ae62b2552dab08bbf3f1c3780c3494aa5c0246c24664f7c32db232494f64d959` 首轮exit0 /40.30203秒：96profile-name＋75sourceAnvil＝171辅助、不加正式57。三profile真input /单blur label /focus选择 /synthetic IME /theme /long右锚 /390、source独占与GUI4 /off DOM fallback通过；非真实OS IME或nativeRGBA。8入口byte0、257dist /49site /617source绑定04e65包；main-HPn6GNgz.js SHA `f1dfc4072b10c4fef303bff64e8f9cad5b80c023d70463940c893485e4b23196`。10HTTP＋1inline字体分别按bytes /解码SHA，29observed fontHTTP同byte；profile raw0 /source2 ERR_ABORTED保留并回访200，page /console /render /非取消0。actual SwiftShader，所有后台GPU /临时服务已释放，无CUA /用户tab操作；本批仅有限阶段完成，广义Goal保持ACTIVE。
+
 ## 当前检查点：有限Classic DOM字体与profile集成
 
 保持120组件 /134runtime，新增可选classic-fonts.css，不带原font-face /WOFF2。源码工具从用户archive编译189 /189 /95有限glyph；plus9与7＋space合16的native约束、owned输入目录修复、473mapped /949base-paint-notdef结构均独立核对。最终构字baseline8game不动，uniform typographic900 /−100与metadata9 /1分开，CSS保原24px行高，非通用native linebox算法。

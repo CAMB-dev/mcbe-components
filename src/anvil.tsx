@@ -8,6 +8,7 @@ import type { WorkstationFrameProps } from './workstations';
 import { WorkstationImagePresentation } from './workstation-source-layer';
 import { useAnvilImageLayer } from './anvil-image-layer';
 import type { AnvilImageRenderProfile } from './anvil-image-layer';
+import { BlurredInputDisplay } from './blurred-input-display';
 export type { AnvilImageRenderProfile, AnvilTextRenderProfile, AnvilTextRenderStyle } from './anvil-image-layer';
 
 /** Caller-supplied game state; the component does not calculate repair costs. */
@@ -48,6 +49,8 @@ export const Anvil = forwardRef<HTMLElement, AnvilProps>(function Anvil({
   const inputRef = useRef<HTMLButtonElement | null>(null);
   const materialRef = useRef<HTMLButtonElement | null>(null);
   const resultRef = useRef<HTMLButtonElement | null>(null);
+  const nameFieldRef = useRef<HTMLLabelElement | null>(null);
+  const nameInputRef = useRef<HTMLInputElement | null>(null);
   const validLevels = cost?.kind === 'levels' && Number.isFinite(cost.levels) && cost.levels >= 0;
   const costVisible = cost?.kind === 'too-expensive' || validLevels;
   const affordable = cost?.kind !== 'too-expensive' && (cost?.kind !== 'levels' || (validLevels && cost.affordable !== false));
@@ -66,10 +69,12 @@ export const Anvil = forwardRef<HTMLElement, AnvilProps>(function Anvil({
   }} title={title} className={['mc-anvil', className].filter(Boolean).join(' ')}>
     {paint.layer}
     <span className="mc-anvil__icon" aria-hidden="true"/>
-    <label className="mc-anvil__name-field" data-disabled={renameDisabled || undefined}>
-      <input className="mc-anvil__name-input" aria-label={renameLabel} value={name} maxLength={30}
+    <label ref={nameFieldRef} className="mc-anvil__name-field" data-disabled={renameDisabled || undefined}>
+      <input ref={nameInputRef} className="mc-anvil__name-input" aria-label={renameLabel} value={name} maxLength={30}
         disabled={renameDisabled} readOnly={renameReadOnly} autoComplete="off" spellCheck={false}
         onChange={event => onNameChange?.(event.currentTarget.value)}/>
+      <BlurredInputDisplay input={nameInputRef} field={nameFieldRef} value={name}
+        className="mc-anvil__name-clip" boxClassName="mc-anvil__name-display" textClassName="mc-anvil__name-text"/>
     </label>
     <ItemSlot ref={inputRef} className="mc-anvil__input" label="Item to repair" item={inputs[0]}
       onClick={() => onInputAction?.(0, 'primary')} onSecondaryAction={() => onInputAction?.(0, 'secondary')}
