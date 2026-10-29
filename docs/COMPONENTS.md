@@ -1,12 +1,12 @@
 # Bedrock 组件范围
 
-当前导出 118 个组件，目录 118 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、2 个 glint 纯渲染函数和 1 个有 GPU 副作用的 renderBitmapGlyphs，共 125 个运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 119 个组件，目录 119 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、3 个纯函数（2个glint与layoutGuiImages）及2个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages），共 128 个运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 ## 已实现
 
 | 分类 | 组件 |
 | --- | --- |
-| 文字与表面（19） | Text、BitmapText、PixelIcon、GuiIcon、Image、NineSlice、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
+| 文字与表面（20） | Text、BitmapText、PixelIcon、GuiIcon、Image、NineSlice、GuiImageLayer、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
 | 输入与设置（16） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、ToggleButton、SearchField、Tabs、NavigationList、SettingRow、KeybindingField |
 | 物品与容器结构（27） | ItemSlot、ItemImage、ItemCount、DurabilityBar、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、InventoryScreenFrame、RecipeGrid、RecipeSelectionGrid、RecipeSearch、RecipeFilterToggle、RecipeBook、RecipeBookEntry、RecipeCategoryTabs、InventoryToolbar、ProcessingArrow、FuelIndicator、BrewingIndicator、BeaconEffect、TradeOffer、ArmorSlot、ResultSlot、SlotPlaceholder、CrafterSlot、ContainerFrame |
 | 工作站与容器（25） | Grindstone、EnchantingTable、CraftingTable、CraftingScreen、Furnace、BlastFurnace、Smoker、BrewingStand、Anvil、SmithingTable、Stonecutter、Loom、CartographyTable、Beacon、Chest、Hopper、Dispenser、Dropper、ShulkerBox、Crafter、TradingScreen、PlayerInventoryScreen、SurvivalInventoryScreen、CreativeInventory、MountInventory |
@@ -15,6 +15,8 @@
 | 页面与列表组合（10） | PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast |
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
+
+`GuiImageLayer` 接收实际物理frame、guiScale与已求值GLOBAL rect，按源image / nine-slice几何和UI/Blit GPU profile绘制；layoutGuiImages为无GPU几何函数，renderGuiImages为有GPU副作用的函数。outputRect只截取输出，不改变全frame投影；不是JSON布局引擎或响应式DOM替代。底层16项和附魔台集成13项已验证，实际包 / 生产亦通过；完整GUI仍非零，implemented不代表原生整GUI认证。见 [GUI_IMAGE_QA.md](./GUI_IMAGE_QA.md)。
 
 `GuiIcon` 提供150张完整原版 PNG，guiIconNames 为第4份数据导出；按原图尺寸整数缩放，默认装饰，可显式命名。它保留原字节，不自动切换状态、tint或套用原生使用框；旧16个 PixelIcon 保持兼容。来源 / 状态 / 使用引用见 [gui-icons.json](./gui-icons.json)，素材一致不代表整GUI验收。
 
@@ -26,7 +28,7 @@ HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 cus
 
 ## 验收边界
 
-当前目录中的 118 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 / 服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与 Web 测试通过不能替代真实游戏逐屏验收。
+当前目录中的 119 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 / 服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与 Web 测试通过不能替代真实游戏逐屏验收。
 
 ## 复用方式
 

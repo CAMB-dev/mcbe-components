@@ -45,3 +45,28 @@
    shadow32/64/8 at a one-game-pixel offset. Failure remains separately calibrated. */
 .mc-enchanting__cost { position: absolute; right: 4px; bottom: 4px; color: #7fff1f; text-shadow: 2px 2px var(--mc-enchantment-cost-shadow, #204008); }
 .mc-enchanting__option:disabled .mc-enchanting__cost { color: #895e5b; --mc-enchantment-cost-shadow: #221717; }
+
+/* Opt-in source-image profile: preserve a GUI2 semantic plane and reserve its
+   complete scaled paint window in flow, including half-packed edge outsets. */
+.mc-workstation-scroll--image-profile { padding: 0; }
+.mc-workstation-image-reservation { position: relative; overflow: clip; flex: 0 0 auto; }
+.mc-workstation-image-plane { box-sizing: border-box; position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.mc-enchanting-image-window { position: absolute; z-index: -1; overflow: clip; pointer-events: none; visibility: hidden; }
+.mc-enchanting-image-window:has(> .mc-gui-image-layer[data-render-state='ready']) { visibility: visible; }
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready'])::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__options::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__option::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__empty-option::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-slot::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-slot::after,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::after { display: none; }
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-workstation__title,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-player-inventory__label,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__dust,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__lapis-placeholder,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-dialog__close .mc-dialog__close-icon,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-slot .mc-slot__highlight,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot__highlight { background: transparent; }
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__option:focus-visible,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-dialog__close:focus-visible { outline: none; box-shadow: none; }

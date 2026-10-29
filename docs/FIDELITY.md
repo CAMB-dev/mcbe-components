@@ -2,7 +2,13 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
-当前公开118个组件、4份数据及3个渲染函数，共125项值导出；其中 `renderBitmapGlyphs` 为浏览器GPU函数，两个glint函数为纯纹理运算。共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen 已实现；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
+当前公开119个组件、4份数据及5个函数，共128项值导出；其中 `renderBitmapGlyphs` 为浏览器GPU函数，两个glint函数为纯纹理运算，layoutGuiImages为纯几何函数，renderGuiImages为新增浏览器GPU函数。共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen 已实现；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
+
+## 源图像 GPU 图层与可选集成
+
+新增GuiImageLayer与layoutGuiImages / renderGuiImages，将已求值GLOBAL源rect、逻辑nine-slice及全物理frame输入送入UI/Blit图像profile；保持旧DOM/CSS路径，不把图像pass的局部重现推广成文字、物品、书本或整GUI零差。底层16项与固定image-pass已独立复核，EnchantingTable可选imageRender实施已冻；完整GUI辅助测量、实际包、组件最终13项及生产34项辅助检查均完成；原生整GUI仍非零，旧nonzero报告不变，见 [GUI_IMAGE_QA.md](GUI_IMAGE_QA.md)。
+
+imageRender实际整页8组合在同source graph保留747600像素ROI，public18差异49520→26595 / MAE3.767670546→1.673396536，gallery20为51377→28452 / 3.948262105→1.853986423；max255→252，alpha1760→0，whole native parity仍FAIL。旧60+59文件不变，before精确重现旧hash；这不是字体 / 物品 / book全0认证。详见上述图层QA，包消费与正式组件 / 生产验收分层记录。
 
 ## 附魔台物品预设与 GUI4 留出帧
 

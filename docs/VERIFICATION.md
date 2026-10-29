@@ -2,7 +2,25 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：附魔台物品预设与 GUI4 留出证据
+## 当前检查点：源 GUI 图像图层与附魔台可选集成
+
+当前119组件、4份数据、5个函数，共128值；新增GuiImageLayer / layoutGuiImages / renderGuiImages及EnchantingTable可选imageRender，默认CSS保留。API与原图 / alpha / 坐标边界见 [GUI_IMAGE_QA.md](GUI_IMAGE_QA.md)。
+
+| 本轮检查 | 结果与范围 |
+| --- | --- |
+| 底层图像profile | 最终16/16 PASS，12公开＋4私有捕获，0skip/retry/flaky，26.7秒；四native目标×FBO / React完整28,825,120像素RGBA0，prefix从透明clear重建、暗行使用原before条件式绘制。两轮CPU半值rounding预期失败与trace保留，未反调源或放容差 |
+| 真实组件集成 | authoritative final-report.json 13/13 PASS、0skip/retry/flaky，28.4秒；此前report.json的13不重复计。11完整source-queue canvas共7,818,129像素0，用另轮native已验证通用renderer作参考，非独立shader / wholeGUI0 |
+| 状态 / 展示 | DOM / ref / 回调、valid-invalid-CSS往返、同section/焦点/内部选择/book状态、loading/error/contextloss fallback与恢复通过；3displayScale×3视口共9展示组合保持flow、局部pan与320关闭可达 |
+| 旧回归与类型 | `.cache/gui-image-existing-final.json` 32/32通过，不计新增32；最终npm run typecheck exit0，日志gui-image-final-typecheck.log |
+| 生产 | `.cache/gui-image-production-01/identity.json` 8实际入口与当前site同字节；smoke.json 34辅助PASS、errors[]。真实GUI4/5单ready层与38slots、状态paint / 空行 / CSS往返 / 关闭重开、150图标及390px文档390/390通过；辅助不计正式case |
+
+`.cache/gui-image-validation-integration-summary.json` 按正式项目 / 文件 / 完整标题实合并893唯一用例：888 PASS、5预期SKIP、无未解决失败，为多批次累计，非单次整套全绿；新增为底层16＋集成13。旧864 / 125值包身份留为历史，不套作当前成果。
+
+本轮实际包 `.cache/gui-image-consumer-verified.tgz` SHA256 `29c2ab902d21762b1e83892dd36f46f5c69a1b81d615d4927ab0825b04113405` 已通过React18.3.1 / 19.3.1，128值、SSR warnings0 / profile类型 / 18原PNG嵌入及license、ESM / types均验证；两消费者各256份dist同字节，身份 `.cache/gui-image-consumer-identity.json`。
+
+完整真实组件8组合在同source graph：public18不同49520→26595，RGBA MAE3.767670546→1.673396536；gallery20为51377→28452、3.948262105→1.853986423。固定747600像素两book端点同结果，max255→252 / alpha1760→0，但whole parity仍FAIL。`.cache/full-gui-image-integration-01/FINAL.json` 保留初8组source变化诊断、重启自管Vite后的最终8组；旧60+59文件不变，辅助不增加正式case。最终集成报告 `.cache/enchanting-image-independent-qa/FINAL.json` 与累计见上；生产smoke自动后端为SwiftShader、displayScale1，仅认证功能合同，不套用NVIDIA native-pass0。root实际IAB选GUI5 ready38slots并留完整截图，主main-BgFxUfkM.js身份随8入口记录。
+
+## 历史检查点：附魔台物品预设与 GUI4 留出证据
 
 118个组件、4份数据、3个函数，共125值保持不变。BlockPreview新增block='enchanting-table'，原始renderer资源45→48；真实三PNG、12高cuboid、侧UV `[0,4,16,12]` 与可见面白色倍率有源证据，camera / 未观察底面仍不认证。来源及保留边界见 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。
 

@@ -37,14 +37,17 @@ import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
 const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames'];
-const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs'];
-assert.equal(components.length,118);
+components.push('GuiImageLayer');
+const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages'];
+assert.equal(components.length,119);
 assert.equal(dataExports.length,4);
-assert.equal(rendererFunctions.length,3);
-assert.equal(Object.keys(ui).length,125);
+assert.equal(rendererFunctions.length,5);
+assert.equal(Object.keys(ui).length,128);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
+assert(!Object.hasOwn(ui,'workstationImageAssets'),'Internal workstation assets must not become a public export.');
+assert(!Object.hasOwn(ui,'useEnchantingImageLayer'),'Internal workstation image adapter must not become a public export.');
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
 const glintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25]};
 const glintTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
@@ -57,6 +60,26 @@ assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+const imageLayout = ui.layoutGuiImages({width:17,height:11,guiScale:2,images:[{rect:[.3,.2,2.1,1.9]}]});
+assert.deepEqual(imageLayout.logicalStage,[9,6]);
+assert.deepEqual(imageLayout.projectionSize,[8.5,5.5]);
+assert.deepEqual(imageLayout.meshes[0].drawRect,[0,0,2.5,2]);
+assert.deepEqual(imageLayout.meshes[0].vertices[0],{position:[0,2],uvRaw:[0,65535]});
+assert.throws(()=>ui.renderGuiImages({width:0,height:11,guiScale:2,images:[]}),RangeError);
+const imageMarkup = renderToString(element(ui.GuiImageLayer,{width:17,height:11,guiScale:2,images:[{rect:[0,0,1,1],texture:glintTexture}],label:'Host image layer'}));
+assert.match(imageMarkup,/role="img"/);
+assert.match(imageMarkup,/Host image layer/);
+assert.match(imageMarkup,/data-render-state="loading"/);
+const imageSsrWarnings = [], previousConsoleError = console.error;
+let imageWorkstationMarkup;
+try {
+  console.error=(...args)=>imageSsrWarnings.push(args.map(String).join(' '));
+  renderToString(element(ui.EnchantingTable,{title:'Default host frame',options:[]}));
+  imageWorkstationMarkup=renderToString(element(ui.EnchantingTable,{title:'Host native frame',options:[],imageRender:{frame:{width:2570,height:1402,guiScale:5},origin:[169,57.5],displayScale:2.5}}));
+} finally { console.error=previousConsoleError; }
+assert.deepEqual(imageSsrWarnings,[],'Default and image-profile workstations must remain SSR warning-free.');
+assert.match(imageWorkstationMarkup,/Host native frame/);
+assert(!/ imageRender=/.test(imageWorkstationMarkup),'Image profile must not leak into HTML attributes.');
 const recipeEntry = {id:'stone',label:'Host stone recipe',item:{name:'Stone',count:64},craftableCount:0,modifier:'expand'};
 const recipeBookProps = {title:'Craftable recipes',entries:[recipeEntry],categoryId:'search',query:'host supplies filtered entries',craftableOnly:true};
 const recipeBookMarkup = renderToString(element(ui.RecipeBook,recipeBookProps));
@@ -240,6 +263,14 @@ for (const name of ui.guiIconNames) {
   assert(markup.includes('role="img"'));
 }
 const rendererManifest = JSON.parse(await readFile(new URL('docs/item-renderers-geometry.json',packageRoot),'utf8'));
+const workstationImages = JSON.parse(await readFile(new URL('docs/workstation-image-assets.json',packageRoot),'utf8'));
+assert.equal(workstationImages.assetCount,18);
+assert.equal(workstationImages.registryKeyCount,19);
+const bundle = await readFile(new URL('dist/index.js',packageRoot),'utf8');
+const embeddedImages = new Set([...bundle.matchAll(/data:image\\/png;base64,([A-Za-z0-9+/=]+)/g)].map(match=>createHash('sha256').update(Buffer.from(match[1],'base64')).digest('hex')));
+for (const image of workstationImages.assets) assert(embeddedImages.has(image.sha256),'Packed original workstation PNG: '+image.source);
+const workstationLicense = await readFile(new URL('dist/assets/Minecraft-Sample-LICENSE.md',packageRoot));
+assert.equal(createHash('sha256').update(workstationLicense).digest('hex'),workstationImages.license.sha256);
 for (const asset of [...rendererManifest.assets,rendererManifest.license]) {
   const bytes = await readFile(new URL(asset.file.replace(/^src\\//,'dist/'),packageRoot));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed renderer asset: '+asset.file);
@@ -259,7 +290,8 @@ console.log('React '+React.version+': ESM, '+components.length+' components + '+
 import { createRef } from 'react';
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState, WorkstationTextContext, WorkstationTextRenderer } from 'mcbeui';
-import { BitmapText, renderBitmapGlyphs, GuiIcon, guiIconNames } from 'mcbeui';
+import { BitmapText, renderBitmapGlyphs, GuiIcon, guiIconNames, GuiImageLayer, layoutGuiImages, renderGuiImages } from 'mcbeui';
+import type { GuiImage, GuiImageLayerProps, GuiImageLayerState, GuiImageRect, GuiImageRgba, GuiImageNineSlice, GuiImageGeometry, GuiImageLayoutOptions, GuiImageVertex, GuiImageMesh, GuiImageLayout, GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderOptions, GuiImageRenderResult, EnchantingTableImageRenderProfile } from 'mcbeui';
 import { Select } from 'mcbeui';
 import type { GuiIconProps, GuiIconName, BitmapTextProps, BitmapTextRenderer, BitmapTextProfile, BitmapFont, BitmapGlyph, BitmapGlyphRun, BitmapGlyphRenderOptions, BitmapGlyphRenderResult, BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, BitmapUnicodeVertex, BitmapUnicodeRun, BitmapGlyphBackground } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
@@ -320,6 +352,23 @@ const vertex: Vec3 = [0,0,0], uv: Uv = [0,16];
 const face: ItemMeshFace = {vertices:[vertex,[16,0,0],[16,16,0],[0,16,0]],uv:[uv,[16,16],[16,0],[0,0]],texture:'all'};
 const mesh: ItemMesh = {faces:[face]}, camera: ItemCamera = {yaw:-30,pitch:20,padding:2}, lighting: ItemLighting = {top:1,left:.6,right:.8};
 const adapterTexture: PixelTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
+const imageRect: GuiImageRect = [0,0,4,4], imageColor: GuiImageRgba = [1,1,1,1];
+const imageSlice: GuiImageNineSlice = {insets:1,baseSize:[2,2]};
+const imageGeometry: GuiImageGeometry = {rect:imageRect,nineSlice:imageSlice,tint:imageColor};
+const imageTexture: GuiImageTexture = adapterTexture;
+const imageDraw: GuiImageDraw = {...imageGeometry,texture:imageTexture};
+const guiImage: GuiImage = {...imageGeometry,texture:'/caller-image.png'};
+const imageBackground: GuiImageBackground = {kind:'solid',color:imageColor};
+export const imageOptions: GuiImageLayoutOptions = {width:17,height:11,guiScale:2,images:[imageGeometry],outputRect:[0,0,8,8]};
+export const imageLayout: GuiImageLayout = layoutGuiImages(imageOptions);
+export const imageMesh: GuiImageMesh = imageLayout.meshes[0]!;
+export const imageVertex: GuiImageVertex = imageMesh.vertices[0]!;
+export const guiImageRenderer: (options:GuiImageRenderOptions)=>GuiImageRenderResult = renderGuiImages;
+export function renderOffscreenImages(canvas:OffscreenCanvas):GuiImageRenderResult {
+  return renderGuiImages({...imageOptions,images:[imageDraw],background:imageBackground,canvas,output:'framebuffer'});
+}
+const imageProps: GuiImageLayerProps = {...imageOptions,images:[guiImage],label:'Caller GUI',onRenderStateChange:(state:GuiImageLayerState)=>state.toUpperCase(),onRenderError:error=>error.message.toUpperCase()};
+const imageRenderProfile: EnchantingTableImageRenderProfile = {frame:{width:2570,height:1402,guiScale:5},origin:[169,57.5],displayScale:2.5};
 const glintUniforms: ItemGlintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25],tintColor:[1,1,1,1],hudOpacity:1};
 const glintSampler: ItemGlintSampler = 'point-repeat', glintBlend: ItemGlintBlend = {source:'source-alpha',destination:'one-minus-source-alpha'};
 const glintOptions: ItemGlintRenderOptions = {uniforms:glintUniforms,glintSampler,blend:glintBlend,width:1,height:1};
@@ -346,6 +395,8 @@ export function renderOffscreenFont(canvas: OffscreenCanvas): BitmapGlyphRenderR
 }
 export const emptyGpuOptions: BitmapGlyphRenderOptions = {width:0,height:0,pages:new Map(),runs:[],background:gpuBackground,output:'framebuffer'};
 export const demo = <>
+  <GuiImageLayer {...imageProps} ref={createRef<HTMLCanvasElement>()}/>
+  <EnchantingTable options={[]} imageRender={imageRenderProfile} ref={createRef<HTMLElement>()}/>
   <Button {...props} ref={createRef<HTMLButtonElement>()}>Play</Button>
   <Text as="p" shadow ref={createRef<HTMLElement>()}>Minecraft</Text>
   <TextField label="World" name="world" ref={createRef<HTMLInputElement>()}/>

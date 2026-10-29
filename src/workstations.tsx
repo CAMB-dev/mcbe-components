@@ -1,7 +1,10 @@
-import { forwardRef, useId, useRef, useState } from 'react';
+import { forwardRef, useContext, useId, useRef, useState } from 'react';
 import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
 import { InventoryGrid, ItemSlot } from './inventory';
 import type { InventoryItem, InventorySlotAction } from './inventory';
+import { EnchantingImagePresentation, useEnchantingImageLayer } from './enchanting-image-layer';
+import type { EnchantingTableImageRenderProfile } from './enchanting-image-layer';
+export type { EnchantingTableImageRenderProfile } from './enchanting-image-layer';
 
 export type WorkstationTextContext =
   | { kind: 'title' | 'inventory-label'; align: 'start' }
@@ -52,14 +55,23 @@ export const WorkstationFrame = forwardRef<HTMLElement, WorkstationFrameProps>(f
   title, onClose, closeLabel = 'Close container', inventory, hotbar, inventoryLabel, renderText,
   onInventoryAction, children, className, ...props
 }, ref) {
-  const id=useId();
-  return <div className="mc-workstation-scroll"><section {...props} ref={ref} aria-labelledby={`${id}-title`}
+  const id=useId(), paint = useContext(EnchantingImagePresentation);
+  const section = <EnchantingImagePresentation.Provider value={undefined}><section {...props} ref={ref} aria-labelledby={`${id}-title`}
     className={['mc-workstation',className].filter(Boolean).join(' ')}>
     <h2 id={`${id}-title`} className="mc-workstation__title">{workstationText(title, { kind: 'title', align: 'start' }, renderText)}</h2>
     {onClose && <button type="button" className="mc-dialog__close" aria-label={closeLabel} onClick={onClose}><span className="mc-dialog__close-icon" aria-hidden="true"/></button>}
     {children}
     <PlayerInventory className="mc-workstation__inventory" items={inventory} hotbar={hotbar} label={inventoryLabel} renderText={renderText} onSlotAction={onInventoryAction}/>
-  </section></div>;
+  </section></EnchantingImagePresentation.Provider>;
+  if (paint === undefined) return <div className="mc-workstation-scroll">{section}</div>;
+  const width = paint ? 352 + paint.left + paint.right : 0, height = paint ? 332 + paint.top + paint.bottom : 0;
+  return <div className={['mc-workstation-scroll', paint && 'mc-workstation-scroll--image-profile'].filter(Boolean).join(' ')}>
+    <div className="mc-workstation-image-reservation" data-image-display-scale={paint?.scale} style={paint ? { display: 'block', width: width * paint.scale, height: height * paint.scale } : { display: 'contents' }}>
+      <div className="mc-workstation-image-plane" style={paint ? { display: 'block', width, height, transform: `scale(${paint.scale})`, paddingLeft: paint.left, paddingTop: paint.top } : { display: 'contents' }}>
+        {section}
+      </div>
+    </div>
+  </div>;
 });
 
 export interface GrindstoneProps extends Omit<WorkstationFrameProps,'children'|'title'> {
@@ -134,11 +146,18 @@ export interface EnchantingTableProps extends Omit<WorkstationFrameProps,'childr
   book?: ReactNode;
   onInputAction?: (slot: 'item' | 'lapis', action: InventorySlotAction) => void;
   onEnchant?: (id: string) => void;
+  /** Explicit whole-frame source image profile; omission retains themed CSS skins. */
+  imageRender?: EnchantingTableImageRenderProfile;
 }
 export const EnchantingTable = forwardRef<HTMLElement, EnchantingTableProps>(function EnchantingTable({
-  title='Enchant', item, lapis, options, book, onInputAction, onEnchant, renderText, className, ...props
+  title='Enchant', item, lapis, options, book, onInputAction, onEnchant, renderText, imageRender, className, ...props
 }, ref) {
-  return <WorkstationFrame {...props} ref={ref} title={title} renderText={renderText} className={['mc-enchanting',className].filter(Boolean).join(' ')}>
+  const root = useRef<HTMLElement | null>(null);
+  const paint = useEnchantingImageLayer(imageRender, root, options, !!props.onClose);
+  return <EnchantingImagePresentation.Provider value={paint.presentation}><WorkstationFrame {...props} ref={node => {
+    root.current = node; if (typeof ref === 'function') ref(node); else if (ref) ref.current = node;
+  }} title={title} renderText={renderText} className={['mc-enchanting',className].filter(Boolean).join(' ')}>
+    {paint.layer}
     <div className="mc-enchanting__book" aria-hidden="true">{book}</div>
     <ItemSlot className="mc-enchanting__item" label="Item to enchant" item={item} onClick={()=>onInputAction?.('item','primary')} onSecondaryAction={()=>onInputAction?.('item','secondary')}/>
     <ItemSlot className="mc-enchanting__lapis" label="Lapis lazuli" item={lapis} underlay={<span className="mc-enchanting__lapis-placeholder"/>}
@@ -149,5 +168,5 @@ export const EnchantingTable = forwardRef<HTMLElement, EnchantingTableProps>(fun
         tier={([1,2,3] as const)[index]} onEnchant={onEnchant} renderText={renderText}/>
         : <div key={`empty:${index}`} className="mc-enchanting__empty-option" aria-hidden="true"/>;
     })}</div>
-  </WorkstationFrame>;
+  </WorkstationFrame></EnchantingImagePresentation.Provider>;
 });

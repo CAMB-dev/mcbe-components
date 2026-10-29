@@ -2,6 +2,12 @@
 
 2026-10-29。本机 Bedrock 1.26.6005.0（界面显示26.60）。当前已将实际 GPU draw 的书本网格、UV、采样和 shader 算术迁入组件；传入捕获的 `rendererState` 时，实际 React 组件在已核验的 NVIDIA 后端与该次书本 draw 全目标 RGBA 零差。**默认开合 / 翻页仍是受控重建，旧原生截图比较仍非零，整个附魔台尚未达到原生 pixel perfect。**
 
+## 可选imageRender的完整组件测量
+
+实际普通React开启imageRender后，在相同747600像素面板＋halo，public18不同49520→26595、RGBA MAE3.767670546→1.673396536；gallery20为51377→28452、3.948262105→1.853986423。max255→252、alpha1760→0，仍非完整native parity。最终8组同source graph、before完整hash重现旧preset结果，旧60+59文件未变；初8组source变化诊断另保留并重启Vite重测，不覆盖历史。
+
+两open book分支各自得到相同结果仅限该状态。DOM字 / SGA、items / durability与真实book仍在组合里，区域重叠不可当成排他因果mask。完整记录 `.cache/full-gui-image-integration-01/FINAL.json`；底层16项及实际包已通过，真实组件最终正式13项与生产34项辅助检查也通过；source-queue完整canvas0不是独立shader或整GUI0，见 [GUI_IMAGE_QA.md](GUI_IMAGE_QA.md)。
+
 ## GUI4 新留出捕获：图像坐标与字体 profile
 
 本轮真实新捕获 `enchanting-open-gui4-holdout.wpix`，SHA256 `0fc962cf98f15261441c2ed9187c8d5bfa35db8ebc0495ed7951109060632bea`，原始viewport2570×1402、UI80% / GUI4；采集后root已恢复100%，剑归库存；恢复GUI5截图只证明操作状态，不是本轮native光栅oracle。新帧自己的资源 / draw绑定独立解码，不套用旧GUI5的ID。记录 `.cache/gui4-holdout-full-gui/REPORT.md`。

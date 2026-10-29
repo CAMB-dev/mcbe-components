@@ -64,6 +64,20 @@
         "status": "implemented"
       },
       {
+        "name": "GuiImageLayer",
+        "status": "implemented",
+        "fidelity": "source_global_image_geometry_ui_blit_declared_contract_verified_not_whole_gui_certification",
+        "api": {
+          "images": "readonly GuiImage[]; URL or explicit straight RGBA8 source",
+          "frame": "actual physical width/height + explicit guiScale",
+          "rect": "already evaluated GLOBAL game-unit source rect",
+          "outputRect": "physical crop only; whole-frame projection phase retained",
+          "ref": "HTMLCanvasElement",
+          "state": "loading/ready/error callbacks; changed renderKey or inputs retries",
+          "details": "docs/GUI_IMAGE_QA.md"
+        }
+      },
+      {
         "name": "BlockPreview",
         "status": "implemented",
         "fidelity": "renderer_reconstruction_unverified"
@@ -587,21 +601,25 @@
     ]
   },
   "publicExports": {
-    "components": 118,
+    "components": 119,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
       "renderItemGlint"
     ],
     "sideEffectingGpuFunctions": [
-      "renderBitmapGlyphs"
+      "renderBitmapGlyphs",
+      "renderGuiImages"
     ],
-    "runtimeValues": 125,
+    "runtimeValues": 128,
     "countsAreNotPixelCertification": true,
     "dataValues": 4,
     "guiIconDataValues": 1,
     "iconNameRegistries": [
       "guiIconNames"
+    ],
+    "pureGeometryFunctions": [
+      "layoutGuiImages"
     ]
   }
 }

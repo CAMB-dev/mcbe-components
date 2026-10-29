@@ -124,6 +124,7 @@ function App() {
   const [grindOpen, setGrindOpen] = useState(true);
   const [enchantOpen, setEnchantOpen] = useState(true);
   const [enchantInputs, setEnchantInputs] = useState(true);
+  const [enchantImages, setEnchantImages] = useState('css');
   const search = useRef<HTMLInputElement>(null);
   const noticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -305,7 +306,11 @@ function App() {
             onTakeResult={()=>{setGrindResult(false);notify('Grindstone result taken.');}}
             onInventoryAction={(index,action)=>notify(`${action}: inventory slot ${index+1}`)}/>}
             <Button size="sm" onClick={()=>{setGrindResult(true);setGrindOpen(true);}}>Reset grindstone example</Button></div>
-          <div><h3>Enchanting table</h3>{enchantOpen ? <EnchantingTable item={enchantInputs ? {name:'Diamond sword',icon:<ItemSprite name="sword"/>} : null} lapis={enchantInputs ? {name:'Lapis lazuli',icon:<ItemSprite name="lapis"/>,count:32} : null} inventory={bagItems}
+          <div><h3>Enchanting table</h3>
+            <Combobox label="Enchanting image layout" value={enchantImages} onValueChange={setEnchantImages}
+              options={[{value:'css',label:'CSS skin'},{value:'4',label:'Original images · GUI 4'},{value:'5',label:'Original images · GUI 5'}]}/>
+            {enchantOpen ? <EnchantingTable item={enchantInputs ? {name:'Diamond sword',icon:<ItemSprite name="sword"/>} : null} lapis={enchantInputs ? {name:'Lapis lazuli',icon:<ItemSprite name="lapis"/>,count:32} : null} inventory={bagItems}
+            imageRender={enchantImages === 'css' ? undefined : {frame:{width:2570,height:1402,guiScale:Number(enchantImages)}}}
             onClose={()=>setEnchantOpen(false)}
             book={<EnchantingBook open={enchantInputs ? 1 : 0}/>}
             options={enchantInputs ? [{id:'unbreaking',label:'Unbreaking I',level:3,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="elder light"/> : undefined},{id:'sharpness',label:'Sharpness III',level:15,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="bless creature"/> : undefined},{id:'fortune',label:'Fortune III',level:30,disabled:true,runes:runeAtlasUrl ? <EnchantingRunes atlasUrl={runeAtlasUrl} text="enchant scroll"/> : undefined}] : []}

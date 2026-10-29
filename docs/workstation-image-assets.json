@@ -1,0 +1,693 @@
+{
+  "schemaVersion": 1,
+  "generator": "scripts/prepare-workstation-image-assets.py",
+  "generatedModule": "src/workstation-image-assets.ts",
+  "release": "v1.26.60.5",
+  "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archive": {
+    "url": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "license": {
+    "source": "LICENSE.md",
+    "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/LICENSE.md",
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "notice": "(c) Mojang AB. All rights reserved.\n\nBy downloading the files in this repository, you agree to the [Minecraft End User License Agreement](https://www.minecraft.net/en-us/eula) and that these files are subject to its terms."
+  },
+  "uiSources": [
+    {
+      "source": "resource_pack/ui/ui_common.json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_common.json",
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    },
+    {
+      "source": "resource_pack/ui/enchanting_screen.json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/enchanting_screen.json",
+      "sha256": "c6b4ecf0120dd5c1929e855bcf92101ef40379545bf5084208a6c0e9e223e3c2"
+    }
+  ],
+  "assetCount": 18,
+  "registryKeyCount": 19,
+  "contract": {
+    "encoding": "Complete original PNG bytes embedded once per unique source; no image re-encoding or CSS parsing.",
+    "nineSlice": "Original JSON base_size and nineslice_size; insets are logical game units ordered left/top/right/bottom, not physical PNG pixel bands.",
+    "focus": "common.white_border_slot and its white_border control use textures/ui/focus_border_white, matching --mc-skin-inventory-focus. There is no white_border.png in this release.",
+    "highlight": "Original 1x1 base and 1-unit insets intentionally preserve reversed center UV bands; do not clamp or substitute a 2x2 base.",
+    "dark": "optionDark aliases optionUnselectable; permanent dark background and current unselectable/pressed overlay remain separate ordered uses.",
+    "scope": "Public release source evidence only; no private font/shader, active installed pack-stack assertion, or whole-GUI native-fidelity claim.",
+    "installedCheck": "Optional --game checks all 18 original PNGs against the installed vanilla base ui.brarchive; presence alone does not establish active pack stack."
+  },
+  "assets": [
+    {
+      "keys": [
+        "panel"
+      ],
+      "source": "resource_pack/textures/ui/dialog_background_opaque.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/dialog_background_opaque.png",
+      "sha256": "45e365955de8800424ea35bfa589ca38535df6211c10d24bcde280cae09dc69f",
+      "bytes": 186,
+      "sourceSize": [
+        16,
+        16
+      ],
+      "rgbaSha256": "066fd1c24c8aff3da7c9867bfe4afd0223501457d986631bfd60f66e6bfe481b",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/dialog_background_opaque@dialog_background_common/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "baseSize": [
+          16,
+          16
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/dialog_background_opaque.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/dialog_background_opaque.json",
+        "sha256": "f5e0d63d8b595601b0a643fa5417813186c09da1fbe0b8341ab387cfda773222",
+        "value": {
+          "nineslice_size": 4,
+          "base_size": [
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "cell"
+      ],
+      "source": "resource_pack/textures/ui/cell_image.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/cell_image.png",
+      "sha256": "296e3d0ba9640efcd2902aa9c191f544b09bdbb8f4585d39a6c030e0ae3fc023",
+      "bytes": 135,
+      "sourceSize": [
+        10,
+        10
+      ],
+      "rgbaSha256": "4e747a609f3fe75826eed0947f26c549d71119eef5ad82143b1c4b05163c577b",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 2,
+        "colorType": 3
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/cell_image/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseSize": [
+          5,
+          5
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/cell_image.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/cell_image.json",
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "selected"
+      ],
+      "source": "resource_pack/textures/ui/recipe_book_touch_cell_selected.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_touch_cell_selected.png",
+      "sha256": "95743c4386456a219bdaaec2893cb0cee5de0810e15560a184854c797efa9267",
+      "bytes": 118,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "rgbaSha256": "f2d17a625e367a35394a583c34d5179b2c9639d8c12eae854911b85b9f927602",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/cell_image_selected/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseSize": [
+          4,
+          4
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/recipe_book_touch_cell_selected.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/recipe_book_touch_cell_selected.json",
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "focus"
+      ],
+      "source": "resource_pack/textures/ui/focus_border_white.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/focus_border_white.png",
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "bytes": 105,
+      "sourceSize": [
+        5,
+        5
+      ],
+      "rgbaSha256": "7ade542643cd10ac042f8297c694c945d49f968ae8d84775db7fccdb28f89bbb",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/focus_border_white/texture"
+        },
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/white_border_slot/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseSize": [
+          5,
+          5
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/focus_border_white.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/focus_border_white.json",
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "highlight"
+      ],
+      "source": "resource_pack/textures/ui/highlight_slot.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/highlight_slot.png",
+      "sha256": "a4e5b1b1cd05ef340fcb32fdc4a763ec22fdaa085f2defa1ac9ae514a220201b",
+      "bytes": 120,
+      "sourceSize": [
+        1,
+        1
+      ],
+      "rgbaSha256": "0d624c0806ab06488ec754436d56b6268ffeb556b69b699212e0ad0b29e7e120",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/highlight_slot/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseSize": [
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/highlight_slot.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/highlight_slot.json",
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "close"
+      ],
+      "source": "resource_pack/textures/ui/close_button_default_compact.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_button_default_compact.png",
+      "sha256": "b7ca516ea2456c220b058c35261423da2784a582724f1a38e447d07170c74f6e",
+      "bytes": 89,
+      "sourceSize": [
+        15,
+        7
+      ],
+      "rgbaSha256": "2352de42d5f4848ca7474a184e20a7b637828345bddbf5a78a4b99fa3dc58b9f",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/compact_close_button@close_button/controls/0/default@common.close_button_panel/$close_button_texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "closeHover"
+      ],
+      "source": "resource_pack/textures/ui/close_button_hover_compact.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_button_hover_compact.png",
+      "sha256": "44858d92895e520b679a5848f623287dd645a4ba841862db89e82291843daefe",
+      "bytes": 122,
+      "sourceSize": [
+        15,
+        7
+      ],
+      "rgbaSha256": "8dd896cd1025fd5eefcc81193c9bdf511780258da97e5c51297f42a83f839edc",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/compact_close_button@close_button/controls/1/hover@common.close_button_panel/$close_button_texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "closePressed"
+      ],
+      "source": "resource_pack/textures/ui/close_button_pressed_compact.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_button_pressed_compact.png",
+      "sha256": "117ba209b844afe932ae0319f1b3cbfbba5d37a0eda4cf7099930771f7e4f45c",
+      "bytes": 1412,
+      "sourceSize": [
+        15,
+        7
+      ],
+      "rgbaSha256": "2fd2db4b7b1945806422af3db2155d58c39dede6ba1aaf0536dcb248410254f4",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 2
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/compact_close_button@close_button/controls/2/pressed@common.close_button_panel/$close_button_texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "lapis"
+      ],
+      "source": "resource_pack/textures/ui/lapis_image.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/lapis_image.png",
+      "sha256": "7e105a45720469394a9c1bc8cfa09798473e65eaac0924aa301f05883bdb67d5",
+      "bytes": 227,
+      "sourceSize": [
+        16,
+        16
+      ],
+      "rgbaSha256": "0f847e75e041eaaeaab127d65f4e2ad62cfd4a47e1ea63df8bcb35a36b76c329",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 2
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/lapis_image@enchanting.enchanting_image/texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "optionSelectable"
+      ],
+      "source": "resource_pack/textures/ui/enchanting_active_background.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/enchanting_active_background.png",
+      "sha256": "26e65170e4a25ead2df3250cddc425d3037730ea449af76e5592d9c1cf848df6",
+      "bytes": 162,
+      "sourceSize": [
+        108,
+        19
+      ],
+      "rgbaSha256": "4f3a94f1ad9c15ba3c4d05b88b7e97a9defb79c3529e802a21f105e29f1ef27b",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/active_background@enchanting.enchanting_image/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseSize": [
+          108,
+          19
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/enchanting_active_background.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/enchanting_active_background.json",
+        "sha256": "a9c7680a747d12a3514be93dcec8db18aee4552244f654403306782f8b56dd24",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            108,
+            19
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "optionUnselectable",
+        "optionDark"
+      ],
+      "source": "resource_pack/textures/ui/enchanting_dark_background.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/enchanting_dark_background.png",
+      "sha256": "153512d7e98be59a3f742be4e8ee27d01c69413452197d2021ccbacd0e6b6ad0",
+      "bytes": 164,
+      "sourceSize": [
+        108,
+        19
+      ],
+      "rgbaSha256": "5622cb2b51e4eb12c01b16347274cede344cb41d60680fb6c241dcefec1a7e61",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/dark_background@enchanting.enchanting_image/texture"
+        },
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/dark_background_with_hover_text@enchanting.background_with_hover_text/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseSize": [
+          108,
+          19
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/enchanting_dark_background.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/enchanting_dark_background.json",
+        "sha256": "a9c7680a747d12a3514be93dcec8db18aee4552244f654403306782f8b56dd24",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            108,
+            19
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "optionHover"
+      ],
+      "source": "resource_pack/textures/ui/enchanting_active_background_with_hover_text.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/enchanting_active_background_with_hover_text.png",
+      "sha256": "e5cb07cfc22bd44ab36ad6983fc7f20d3fa9e30c2a60216a16c51038738a595b",
+      "bytes": 163,
+      "sourceSize": [
+        108,
+        19
+      ],
+      "rgbaSha256": "801d14d3c9f9400f834108df38d15502f333d02e1f9332b53f28304bb5735742",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/active_background_with_hover_text@enchanting.background_with_hover_text/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseSize": [
+          108,
+          19
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/enchanting_active_background_with_hover_text.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/enchanting_active_background_with_hover_text.json",
+        "sha256": "a9c7680a747d12a3514be93dcec8db18aee4552244f654403306782f8b56dd24",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            108,
+            19
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "dustSelectable1"
+      ],
+      "source": "resource_pack/textures/ui/dust_selectable_1.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/dust_selectable_1.png",
+      "sha256": "7d11095615a91dc797b4591ac85c1c35eac5172277658f7493e44d08486b952c",
+      "bytes": 371,
+      "sourceSize": [
+        13,
+        11
+      ],
+      "rgbaSha256": "c86689cf1979f92903c60d2538dc05a42a51022b45805b579d04a10cf906cd55",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/dust_panel/controls/0/a@enchanting.dust_template/$texture_selectable"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "dustSelectable2"
+      ],
+      "source": "resource_pack/textures/ui/dust_selectable_2.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/dust_selectable_2.png",
+      "sha256": "9bb932cbe9d262d75c80ba871b4577b1317ab7542f922fdebcce5ea19152bbd7",
+      "bytes": 385,
+      "sourceSize": [
+        13,
+        11
+      ],
+      "rgbaSha256": "26491b9c815871eca816e3c98529a7340acc3d50d2fae9d19a80f52ad5e137ca",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/dust_panel/controls/1/b@enchanting.dust_template/$texture_selectable"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "dustSelectable3"
+      ],
+      "source": "resource_pack/textures/ui/dust_selectable_3.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/dust_selectable_3.png",
+      "sha256": "ef2253ebad67add5e868312299778630ce3806f5190304021ba1cb74f9038611",
+      "bytes": 399,
+      "sourceSize": [
+        13,
+        11
+      ],
+      "rgbaSha256": "641ef1d667db687f80bcd24e646577de9f3854bd31ab5ecb6995570d1caa1666",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/dust_panel/controls/2/c@enchanting.dust_template/$texture_selectable"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "dustUnselectable1"
+      ],
+      "source": "resource_pack/textures/ui/dust_unselectable_1.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/dust_unselectable_1.png",
+      "sha256": "0f88f72c2a4a1aa97235183c56ef1691d693f5ee26ea121a0b17555301ffa593",
+      "bytes": 372,
+      "sourceSize": [
+        13,
+        11
+      ],
+      "rgbaSha256": "2823b39e7bb17bdf7dcbe12bf230db890aaea74aefa1b8fe2a1da68a91cc3151",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/dust_panel/controls/0/a@enchanting.dust_template/$texture_unselectable"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "dustUnselectable2"
+      ],
+      "source": "resource_pack/textures/ui/dust_unselectable_2.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/dust_unselectable_2.png",
+      "sha256": "17d85a310fb8134dbb00dd9f4c05cb1b76e86c2ed618b07c09e04a929b232840",
+      "bytes": 396,
+      "sourceSize": [
+        13,
+        11
+      ],
+      "rgbaSha256": "829ddd10abf2099a921feda1952f29dcc85ba2ae66d499d3af729c86805e8152",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/dust_panel/controls/1/b@enchanting.dust_template/$texture_unselectable"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "dustUnselectable3"
+      ],
+      "source": "resource_pack/textures/ui/dust_unselectable_3.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/dust_unselectable_3.png",
+      "sha256": "58b22d39de34ebba554f97602f7c75e28e0a4632173f06e2eb68ea4d74683196",
+      "bytes": 381,
+      "sourceSize": [
+        13,
+        11
+      ],
+      "rgbaSha256": "0f672fe7f731c233f8a374de47bce7870485cfdff7ce947c709cae43fe1f7008",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/enchanting_screen.json",
+          "jsonPointer": "/dust_panel/controls/2/c@enchanting.dust_template/$texture_unselectable"
+        }
+      ]
+    }
+  ]
+}
