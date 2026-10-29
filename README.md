@@ -305,6 +305,8 @@ ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随
 
 `CraftingScreen.imageRender` 可绘制完整326×166源布局与顶部外扩工具条。应用明确提供 frame、字体、metrics及输入clip策略；ready后接管覆盖外观，未覆盖文字和自定义节点保留DOM。交互预览见 `#crafting-layer`，可用 `python scripts/use-local-crafting-fonts.py "C:/XboxGames/Minecraft for Windows/Content"` 准备17个中文标签的本地字页，加 `--check-only` 只验不写。字体页不随包分发，详细用法及当前验证边界见 [CRAFTING_IMAGE_QA.md](docs/CRAFTING_IMAGE_QA.md)。
 
+预览的集合选项新增 **36 original-material examples**，展示36项原材质示例。独立的[材质表](demo/crafting-observed-materials.ts)和[普通模型构造](demo/crafting-observed-items.tsx)复用库的公开 API；集合只供查看与交互，不提供游戏配方规则，也不表示全部模型已达到原生像素一致。
+
 `book` 提供自定义3D renderer的接入点，省略时不绘制假书图。`EnchantingBook` 当前mesh、packed UV、normal/winding和着色路径来自本机PIX捕获的实际GUI书本draw（该capture的Global65 / PSO795），已替换旧Java参考网格和Entity / MeshFallback候选；实际材质字符串名仍未知，不能把捕获程序称为旧候选文件的相同字节。
 
 显式 `rendererState` 可接入调用方的列主序16数矩阵、7或8组bone矩阵及可选 `tileLightColor` / `overlayColor`。该捕获状态下，独立WebGL与实际React组件在已测试NVIDIA正常sandbox后端，以原API-before为背景、比较完整2570×1402 target，均与API-after零RGBA差异。这只认证一个打开姿态的一次draw，不是默认动画、完整GUI或后续合成链的零差。默认 `open/pageFlip/yaw/pitch/roll` 仍受控重建，native CPU状态生成尚未恢复；旧PNG误差数字明确保留为迁移前历史，不能套用为新默认值。`lighting="unlit"` 仍可检查未着色图集，详见 [enchanting-renderer.json](docs/enchanting-renderer.json) 与 [附魔 QA](docs/ENCHANTING_QA.md)。`runes` 可传 `EnchantingRunes`，默认色 `#685d49` 已核对原生字节；省略时不生成假英文符文，但按钮仍有完整可访问名称。原图集可仅在本地预览接入：

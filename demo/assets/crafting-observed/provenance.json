@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 1,
+  "scope": "Finite caller-owned observed36 gallery materials; whole original resources, no captured images/geometry/atlas or recipe database",
+  "release": "v1.26.60.5",
+  "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archive": "bedrock-samples-v1.26.60.5-full.zip",
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "archiveUrl": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+  "distribution": "New originals are demo-only, outside the npm library. Reused source renderer resources retain existing upstream terms. No image is cropped, redrawn or re-encoded.",
+  "license": {
+    "entry": "LICENSE.md",
+    "destination": "demo/assets/crafting-observed/LICENSE.md",
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "resources": [
+    {
+      "key": "crafting_table_front",
+      "entry": "resource_pack/textures/blocks/crafting_table_front.png",
+      "destination": "demo/assets/crafting-observed/blocks/crafting_table_front.png",
+      "sha256": "ff53d9803d469fec24d2bc0d547f5e2155b080788f3cd701ca3e39973985665d",
+      "bytes": 351,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "crafting_table_side",
+      "entry": "resource_pack/textures/blocks/crafting_table_side.png",
+      "destination": "demo/assets/crafting-observed/blocks/crafting_table_side.png",
+      "sha256": "414736f6eab354a21063908a71e0372a6c52191d808113f1c8bfbbdf4c39ffc3",
+      "bytes": 337,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "crafting_table_top",
+      "entry": "resource_pack/textures/blocks/crafting_table_top.png",
+      "destination": "demo/assets/crafting-observed/blocks/crafting_table_top.png",
+      "sha256": "a6689bb645bdb2e6c21776b1d09547fd370ab8b26ff3b3d13740bb870f7eed3b",
+      "bytes": 291,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "enchanting_table_side",
+      "entry": "resource_pack/textures/blocks/enchanting_table_side.png",
+      "destination": "src/assets/item-renderers/enchanting_table_side.png",
+      "sha256": "a8e6579c97f235bb19f7ceb7a6e10bcce769c2614586b1386ba267c88a42b3f5",
+      "bytes": 302,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": false
+    },
+    {
+      "key": "enchanting_table_top",
+      "entry": "resource_pack/textures/blocks/enchanting_table_top.png",
+      "destination": "src/assets/item-renderers/enchanting_table_top.png",
+      "sha256": "8109bbeeeb8dd4fa28fb196be7116f2213b6f68886396f43058f900e88c8dd6d",
+      "bytes": 228,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": false
+    },
+    {
+      "key": "glass_pane_top_red",
+      "entry": "resource_pack/textures/blocks/glass_pane_top_red.png",
+      "destination": "demo/assets/crafting-observed/blocks/glass_pane_top_red.png",
+      "sha256": "e835973639c15b8e4f02ea67465e1bdfe7cf14721ada65b97484f69a290c4569",
+      "bytes": 153,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "glass_red",
+      "entry": "resource_pack/textures/blocks/glass_red.png",
+      "destination": "demo/assets/crafting-observed/blocks/glass_red.png",
+      "sha256": "1256b359a78bdd8020d73190cb9aa26fcb1f7d65f52e1ceac50b8d8f77a9286e",
+      "bytes": 106,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "grindstone_pivot",
+      "entry": "resource_pack/textures/blocks/grindstone_pivot.tga",
+      "destination": "demo/assets/crafting-observed/blocks/grindstone_pivot.tga",
+      "sha256": "3e9cf1d011ce1aaa066b1e9ef934a6bdd130a42963c607b83773b0327d541651",
+      "bytes": 1068,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "grindstone_round",
+      "entry": "resource_pack/textures/blocks/grindstone_round.tga",
+      "destination": "demo/assets/crafting-observed/blocks/grindstone_round.tga",
+      "sha256": "7294127b50915cd1beef82121932eb12b45a7db77963fce52ed1d8c153397ad1",
+      "bytes": 1068,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "grindstone_side",
+      "entry": "resource_pack/textures/blocks/grindstone_side.tga",
+      "destination": "demo/assets/crafting-observed/blocks/grindstone_side.tga",
+      "sha256": "696a53df334fa457825e88668869bc9e2d85476d66cd8ecf93d216f572b8ffa6",
+      "bytes": 1068,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "lapis_block",
+      "entry": "resource_pack/textures/blocks/lapis_block.png",
+      "destination": "demo/assets/crafting-observed/blocks/lapis_block.png",
+      "sha256": "893d28065ff2e66fa07c79fea9c7c84c681f1bd7706c621ec259132336b50b3d",
+      "bytes": 345,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "log_big_oak",
+      "entry": "resource_pack/textures/blocks/log_big_oak.png",
+      "destination": "demo/assets/crafting-observed/blocks/log_big_oak.png",
+      "sha256": "f4e9e505874943d6f8a32c6c6d096c08c46d0d1016287a5f199c7b9288c33157",
+      "bytes": 289,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "stone",
+      "entry": "resource_pack/textures/blocks/stone.png",
+      "destination": "src/assets/item-renderers/stone.png",
+      "sha256": "12f1c99206df13e951a68b9e5e294c5e0e15c252c3bb141632c8c969a909d1a8",
+      "bytes": 244,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": false
+    },
+    {
+      "key": "stonebrick",
+      "entry": "resource_pack/textures/blocks/stonebrick.png",
+      "destination": "src/assets/item-renderers/stonebrick.png",
+      "sha256": "10014eab68cbae15fd5c473845e703274b23576f906f32d2a3a4a652f9bdf596",
+      "bytes": 271,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": false
+    },
+    {
+      "key": "stonecutter2_bottom",
+      "entry": "resource_pack/textures/blocks/stonecutter2_bottom.png",
+      "destination": "demo/assets/crafting-observed/blocks/stonecutter2_bottom.png",
+      "sha256": "c62587af615aa67dc35fc2f7a4683b4fee58f7a42b451ca69d864cb74021b39a",
+      "bytes": 294,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "stonecutter2_saw",
+      "entry": "resource_pack/textures/blocks/stonecutter2_saw.tga",
+      "destination": "demo/assets/crafting-observed/blocks/stonecutter2_saw.tga",
+      "sha256": "03acee302db2616b6dca85d7e4a3f50390a4027827cafc58cb72061e8c8b856b",
+      "bytes": 3116,
+      "dimensions": [
+        16,
+        48
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "stonecutter2_side",
+      "entry": "resource_pack/textures/blocks/stonecutter2_side.png",
+      "destination": "demo/assets/crafting-observed/blocks/stonecutter2_side.png",
+      "sha256": "14e166ebc1a9eb9ebfffb880fbc9d13cbe32514bf5e5b8164eb09dc82801c242",
+      "bytes": 306,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "stonecutter2_top",
+      "entry": "resource_pack/textures/blocks/stonecutter2_top.png",
+      "destination": "demo/assets/crafting-observed/blocks/stonecutter2_top.png",
+      "sha256": "00e4fb4552535a197b1796774506ce564f07a77f12958255c205f2308a2482d2",
+      "bytes": 424,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "wool_colored_blue",
+      "entry": "resource_pack/textures/blocks/wool_colored_blue.png",
+      "destination": "demo/assets/crafting-observed/blocks/wool_colored_blue.png",
+      "sha256": "3f0fbf12559e6bd81ea36c23e37911802a5b6d7b83c8005f20e25cfea14748da",
+      "bytes": 592,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "wool_colored_red",
+      "entry": "resource_pack/textures/blocks/wool_colored_red.png",
+      "destination": "demo/assets/crafting-observed/blocks/wool_colored_red.png",
+      "sha256": "651250e52e328022ee219eabf1ebfc1c05c057ab5e10ad6fdc611368dd790a04",
+      "bytes": 585,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "banner_base",
+      "entry": "resource_pack/textures/entity/banner/banner_base.tga",
+      "destination": "src/assets/item-renderers/banner_base.tga",
+      "sha256": "e86227e771f2d760f25e205c477770531d1a35158c0db5a41f16586fdbc78537",
+      "bytes": 10869,
+      "dimensions": [
+        64,
+        64
+      ],
+      "newDemoOriginal": false
+    },
+    {
+      "key": "bed_blue",
+      "entry": "resource_pack/textures/items/bed_blue.png",
+      "destination": "demo/assets/crafting-observed/items/bed_blue.png",
+      "sha256": "435dd4b66d379b4d6945cf5b720637e0de2efc6b43876c72ce7373656a2af82a",
+      "bytes": 218,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "bed_red",
+      "entry": "resource_pack/textures/items/bed_red.png",
+      "destination": "demo/assets/crafting-observed/items/bed_red.png",
+      "sha256": "171c313c27b585a41282110ee02d95a225b00ae3341977c22fb0e4915e4ed4ec",
+      "bytes": 217,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "blue_cushion",
+      "entry": "resource_pack/textures/items/blue_cushion.png",
+      "destination": "demo/assets/crafting-observed/items/blue_cushion.png",
+      "sha256": "f01f9f149d9c6fc3e868d9c3832af14917e00355e9db371c9a96ad5aa8904e87",
+      "bytes": 169,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "bundle_blue",
+      "entry": "resource_pack/textures/items/bundle_blue.png",
+      "destination": "demo/assets/crafting-observed/items/bundle_blue.png",
+      "sha256": "25368208168069e1e5a18bd3eaa9122049495beb41cade86b179f6ed8d458755",
+      "bytes": 1310,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "bundle_red",
+      "entry": "resource_pack/textures/items/bundle_red.png",
+      "destination": "demo/assets/crafting-observed/items/bundle_red.png",
+      "sha256": "c42f014667648d691810c8123e780b44f6fea41bb3a171f25cb1e645d4241e33",
+      "bytes": 1334,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "blue_candle",
+      "entry": "resource_pack/textures/items/candles/blue_candle.png",
+      "destination": "demo/assets/crafting-observed/items/candles/blue_candle.png",
+      "sha256": "5c6076558d5c7f909cfe3626ef8811b4e94ed86a1ff104b8503c80a9fab6b1ac",
+      "bytes": 200,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "red_candle",
+      "entry": "resource_pack/textures/items/candles/red_candle.png",
+      "destination": "demo/assets/crafting-observed/items/candles/red_candle.png",
+      "sha256": "93e4d1a673221862b27412d45ca898b72b4bd83ea2098431d4891f5b2020206e",
+      "bytes": 200,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "diamond_sword",
+      "entry": "resource_pack/textures/items/diamond_sword.png",
+      "destination": "demo/assets/minecraft/diamond_sword.png",
+      "sha256": "cf75a6e96b2d3e06bf078dbc28367febf01f03dcec177ceb64ca80608aa2ad94",
+      "bytes": 198,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": false
+    },
+    {
+      "key": "dye_powder_blue",
+      "entry": "resource_pack/textures/items/dye_powder_blue.png",
+      "destination": "demo/assets/minecraft/dye_powder_blue.png",
+      "sha256": "aa158721022891ee61f50b61fbfec40ce7337f13ab6365d0e04522b3658a6c0b",
+      "bytes": 231,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": false
+    },
+    {
+      "key": "dye_powder_blue_new",
+      "entry": "resource_pack/textures/items/dye_powder_blue_new.png",
+      "destination": "demo/assets/crafting-observed/items/dye_powder_blue_new.png",
+      "sha256": "57344fb64169c8b975c4397ec98b89c827c853ba82832280f07e21d653b8b454",
+      "bytes": 220,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "dye_powder_cyan",
+      "entry": "resource_pack/textures/items/dye_powder_cyan.png",
+      "destination": "demo/assets/crafting-observed/items/dye_powder_cyan.png",
+      "sha256": "28f4c21ea1496a4e907eecdb713b578c09bb86214600966354b762da4e3c2e6c",
+      "bytes": 261,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "dye_powder_light_blue",
+      "entry": "resource_pack/textures/items/dye_powder_light_blue.png",
+      "destination": "demo/assets/crafting-observed/items/dye_powder_light_blue.png",
+      "sha256": "42421dafa0c3f4119fd4ac5cad42b77a390f03eead6b6e4e699c5a392417512f",
+      "bytes": 253,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "dye_powder_magenta",
+      "entry": "resource_pack/textures/items/dye_powder_magenta.png",
+      "destination": "demo/assets/crafting-observed/items/dye_powder_magenta.png",
+      "sha256": "c6181a9ac8b5451df29fc4c3aeb098a1a2da97f8855790e12d085a0236408037",
+      "bytes": 229,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "dye_powder_orange",
+      "entry": "resource_pack/textures/items/dye_powder_orange.png",
+      "destination": "demo/assets/crafting-observed/items/dye_powder_orange.png",
+      "sha256": "8cab16707059b30696a3f525b3d7aa54646339da271a8a4cb79fdb781c663d22",
+      "bytes": 248,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "dye_powder_pink",
+      "entry": "resource_pack/textures/items/dye_powder_pink.png",
+      "destination": "demo/assets/crafting-observed/items/dye_powder_pink.png",
+      "sha256": "cd24755c4faecafb629b61bcd16cb0c16f79a7653ddd0acac88450bfbf9d17f1",
+      "bytes": 253,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "dye_powder_purple",
+      "entry": "resource_pack/textures/items/dye_powder_purple.png",
+      "destination": "demo/assets/crafting-observed/items/dye_powder_purple.png",
+      "sha256": "117a004c30e2cee08980b0141e8042b925a92cf4bf535f4657e44eb65f3d6638",
+      "bytes": 239,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "dye_powder_red",
+      "entry": "resource_pack/textures/items/dye_powder_red.png",
+      "destination": "demo/assets/minecraft/dye_powder_red.png",
+      "sha256": "d8702968887c9bfdab91f467d9c2348e9e96cd05e008c6c902b30f783a49aefc",
+      "bytes": 237,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": false
+    },
+    {
+      "key": "red_cushion",
+      "entry": "resource_pack/textures/items/red_cushion.png",
+      "destination": "demo/assets/crafting-observed/items/red_cushion.png",
+      "sha256": "8947a6added25761bcb38f2932ca9853ae3fa884e05e06566903f1b1e872a356",
+      "bytes": 169,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": true
+    },
+    {
+      "key": "wood_sword",
+      "entry": "resource_pack/textures/items/wood_sword.png",
+      "destination": "demo/assets/grindstone/wooden_sword.png",
+      "sha256": "af0f711c51bb28d6d2c677791cbbb5f6e0a797518e959392c3d0d9027eb17243",
+      "bytes": 225,
+      "dimensions": [
+        16,
+        16
+      ],
+      "newDemoOriginal": false
+    },
+    {
+      "key": "recipe_book_red_button",
+      "entry": "resource_pack/textures/ui/recipe_book_red_button.png",
+      "destination": "demo/assets/minecraft/recipe-red-button.png",
+      "sha256": "0e58a82cdcb5ad26f7595f68cd481c347e39563a997fdb9b90599cc87217c654",
+      "bytes": 144,
+      "dimensions": [
+        3,
+        3
+      ],
+      "newDemoOriginal": false
+    }
+  ]
+}

@@ -68,6 +68,17 @@ The catalog is from the official `v1.26.60.5` full release, pinned to sample com
 
 ## Actual game materials and renderer resources
 
+The finite 36-item Crafting gallery collection adds 31 unchanged complete official
+images under `demo/assets/crafting-observed` (27 PNGs and four complete TGA files),
+and reuses ten byte-identical existing resources. Original release entries,
+SHA256 values, dimensions and destinations are listed in that directory's
+`provenance.json`; the pinned release's unchanged `LICENSE.md` is retained there.
+`scripts/prepare-crafting-observed-materials.py --check` verifies the whole files.
+The new images are demo-only and excluded from the npm library. They remain
+Mojang artwork under their upstream terms. The collection's authored models and
+caller-owned order do not constitute Minecraft's recipe database or a certified
+recovery of the native model, camera or animation rules.
+
 The demonstration now uses actual raster item resources rather than original item illustrations. The original voxel island and branding block remain project illustrations. The twenty-six PNGs listed in `docs/item-materials.json` are unchanged resources from the official `v1.26.60.5-full` merged release, stored under `demo/assets/minecraft`. Their SHA256, sample source paths, and matching installed base/overlay candidates from 59 vanilla resource directories are recorded in schema 2 of that manifest. Those files are demo-only and excluded from the npm package. The diamond sword uses the 198-byte merged-release image; the earlier 22-pixel difference describes base-pack versus merged images and does not establish which resource the running game selects. Candidate presence and manifest metadata do not prove runtime activation or pack precedence.
 
 The survival-inventory demo adds four unchanged official merged-release diamond armor item PNGs under `demo/assets/minecraft/survival-*.png`, documented separately in `docs/survival-inventory-demo-materials.json`; they remain Mojang assets subject to the upstream Minecraft EULA notice, are demo-only and excluded from npm, and do not include a player model or crafting-table renderer. Matching installed overlay candidates do not prove the active resource-pack stack.

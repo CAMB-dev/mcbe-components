@@ -5,6 +5,7 @@ import { nativeGuiCraftingLabels } from 'virtual:mcbeui-game-font';
 import { gameItemTextures } from './materials';
 import type { GameItemName } from './materials';
 import { sampleGuiBlockItems } from './gui-model-items';
+import { createObservedHotbar, createObservedRecipeEntries } from './crafting-observed-items';
 
 const categories = [
   { id: 'construction', label: '建筑' }, { id: 'equipment', label: '装备' },
@@ -39,6 +40,9 @@ const startingInputs: readonly (InventoryItem | null)[] = [null, sprite('diamond
 const startingInventory: readonly (InventoryItem | null)[] = Array.from({ length: 27 }, (_, index) => index < samples.length ? samples[index]!.item ?? null : null);
 const startingHotbar: readonly (InventoryItem | null)[] = [...sampleGuiBlockItems, sprite('sword', 'Diamond sword'), sprite('apple', 'Apple', 5), null, sprite('coal', 'Coal', 16), null, sprite('stick', 'Stick', 32)];
 const initialSlots = () => ({ inputs: [...startingInputs], inventory: [...startingInventory], hotbar: [...startingHotbar], result: samples[2]!.item ?? null, held: null as InventoryItem | null });
+const observedRecipes = createObservedRecipeEntries();
+const observedSlots = () => ({ inputs: Array<InventoryItem | null>(9).fill(null), inventory: Array<InventoryItem | null>(27).fill(null),
+  hotbar: createObservedHotbar(), result: null as InventoryItem | null, held: null as InventoryItem | null });
 
 export function CraftingLayerExamples() {
   const [source, setSource] = useState(true), [images, setImages] = useState(true), [models, setModels] = useState(true), [original, setOriginal] = useState(true);
@@ -50,7 +54,7 @@ export function CraftingLayerExamples() {
   const [shown, setShown] = useState(true), [receipt, setReceipt] = useState('Select a recipe, or pick up and place an item.');
   const guiScale = Number(scale), displayScale = display === 'native' ? guiScale / 2 : 1;
   const expandedSamples = samples.flatMap(entry => entry.group ? [{ ...entry, modifier: expanded ? 'collapse' as const : 'expand' as const }, ...(expanded ? groupChildren : [])] : [entry]);
-  const records: DemoRecipe[] = collection === 'empty' ? [] : collection === 'many'
+  const records: readonly DemoRecipe[] = collection === 'observed36' ? observedRecipes : collection === 'empty' ? [] : collection === 'many'
     ? Array.from({ length: 8 }, (_, batch) => expandedSamples.map(entry => ({ ...entry, id: `${entry.id}-${batch}`, label: `${entry.label ?? entry.item?.name} · sample ${batch + 1}` }))).flat()
     : expandedSamples;
   const entries = records.filter(entry => (category === 'search' || entry.category === category)
@@ -70,6 +74,10 @@ export function CraftingLayerExamples() {
   const chooseRecipe = (id: string, action: RecipeBookAction = 'primary') => {
     const entry = entries.find(candidate => candidate.id === id);
     setSelected(id);
+    if (collection === 'observed36') {
+      setReceipt(entry ? `${action}: inspect ${entry.label ?? entry.item?.name}. No crafting rule is supplied for this collection.` : 'Recipe selection cleared.');
+      return;
+    }
     if (entry?.group && action === 'primary') setExpanded(value => !value);
     if (entry) setSlots(previous => ({ ...previous, result: (entry.craftableCount ?? 0) > 0 ? { ...entry.item, name: entry.item?.name ?? entry.label ?? id, count: 1 } : null }));
     setReceipt(entry ? `${action}: ${entry.label ?? entry.item?.name}; craftable count ${entry.craftableCount ?? 0}.` : 'Recipe selection cleared.');
@@ -102,8 +110,11 @@ export function CraftingLayerExamples() {
         options={[{ value: 'recipe-book', label: 'Wide · recipe book' }, { value: 'survival', label: 'Compact · right pane' }]}/>
       <Combobox label="Crafting category" value={category} onValueChange={setCategory} options={categories.map(entry => ({ value: entry.id, label: entry.label }))}/>
       <Combobox label="Crafting demo collection" value={collection} onValueChange={value => {
-        setCollection(value); setSelected(''); if (value === 'many') { setCategory('search'); setQuery(''); setCraftable(false); }
-      }} options={[{ value: 'sample', label: 'Small example collection' }, { value: 'many', label: 'Repeated samples · scroll' }, { value: 'empty', label: 'Empty collection' }]}/>
+        setCollection(value); setSelected('');
+        if (value === 'many' || value === 'observed36') { setCategory('search'); setQuery(''); setCraftable(false); }
+        if (value === 'observed36') { setExpanded(false); setSlots(observedSlots()); setSelectedInput(-1); setReceipt('36 original-material examples. Select an entry to inspect it.'); }
+        else if (collection === 'observed36') { setSlots(initialSlots()); setSelectedInput(-1); }
+      }} options={[{ value: 'sample', label: 'Small example collection' }, { value: 'observed36', label: '36 original-material examples' }, { value: 'many', label: 'Repeated samples · scroll' }, { value: 'empty', label: 'Empty collection' }]}/>
       <Combobox label="Selected crafting recipe" value={entries.some(entry => entry.id === selected) ? selected : ''} onValueChange={id => chooseRecipe(id)}
         options={[{ value: '', label: 'No visible selection' }, ...entries.map(entry => ({ value: entry.id, label: entry.label ?? entry.item?.name ?? entry.id }))]}/>
     </div>
@@ -118,7 +129,7 @@ export function CraftingLayerExamples() {
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
       <Button size="sm" onClick={() => { setCategory('search'); setLayout('recipe-book'); }}>Open recipe search</Button>
       <Button size="sm" onClick={() => { setQuery(''); setCraftable(false); }}>Clear search and filter</Button>
-      <Button size="sm" onClick={() => { setSlots(initialSlots()); setSelected(''); setSelectedInput(-1); setReceipt('Demo slots reset.'); }}>Reset 46 slots</Button>
+      <Button size="sm" onClick={() => { setSlots(collection === 'observed36' ? observedSlots() : initialSlots()); setSelected(''); setSelectedInput(-1); setReceipt('Demo slots reset.'); }}>Reset 46 slots</Button>
     </div>
     {shown ? <CraftingScreen title="合成" layout={layout} onLayoutChange={setLayout} imageRender={imageRender}
       recipeBook={{ title: categories.find(entry => entry.id === category)?.label ?? '全部配方', categories, entries,
@@ -132,9 +143,9 @@ export function CraftingLayerExamples() {
       onClose={() => { setShown(false); setReceipt('Crafting screen closed. Demo inventory is preserved.'); }}/>
       : <Button onClick={() => setShown(true)}>Reopen Crafting</Button>}
     <output aria-label="Source Crafting actions" style={{ fontSize: 12, overflowWrap: 'anywhere' }}>{receipt} Held: {slots.held ? `${slots.held.name} × ${slots.held.count ?? 1}` : 'nothing'}. Visible recipes: {entries.length}.</output>
-    <p style={{ margin: 0, fontSize: 12 }}>This is a finite demo-host collection, not the Minecraft recipe database. Repeated samples demonstrate scrolling. Recipe craftableCount and item.count are separate; selecting a sample offers a one-item result without simulating game crafting rules.</p>
+    <p style={{ margin: 0, fontSize: 12 }}>These are finite host-owned collections. Repeated samples demonstrate scrolling. The 36 original-material examples keep their observed order and have no supplied crafting rules or counts; selecting one only inspects it. The small sample collection offers demonstration results.</p>
     <p style={{ margin: 0, fontSize: 12 }}>Source rendering keeps the real controls and falls back to DOM while loading or on error. Block models retain their BlockPreview fallback. Query, placeholder and counts use DOM text; focused search remains a real input.</p>
-    <p style={{ margin: 0, fontSize: 12 }}>Native comparison covers fixed GUI 5 scenes only, with 9 pixels still differing. GUI 2/4 and this interactive sample collection have not been certified pixel-identical. 1:1 mode may require horizontal scrolling.</p>
+    <p style={{ margin: 0, fontSize: 12 }}>The 36-item collection uses ordinary authored models, whole original textures and real previews for the grindstone, stonecutter and banner. Their native appearance and camera rules are still being verified. This interactive collection has not been certified pixel-identical. 1:1 mode may require horizontal scrolling.</p>
     {!labels && <p style={{ margin: 0, fontSize: 12 }}>Optional original label pages are unavailable. Run scripts/use-local-crafting-fonts.py and restart the preview to enable the three label roles.</p>}
   </section>;
 }

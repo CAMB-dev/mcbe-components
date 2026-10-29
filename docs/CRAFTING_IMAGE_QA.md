@@ -80,6 +80,20 @@ python scripts/use-local-crafting-fonts.py "C:/XboxGames/Minecraft for Windows/C
 
 `nativeGuiCraftingLabels` 仅属于本地 demo 虚拟模块，未准备时为 null，不是 npm 导出，也不注册全局字体。示例只给 crafting / inventory / recipeTitle 三个 role 配置明确的 `.5` 字号倍率、bitmap-smooth 和 lineHeight8 / paintOffset0；GUI4 使用 point 采样，GUI2和GUI5仍用 bilinear。搜索、placeholder 和数量仍保留 DOM 字体。这只是 demo 的显式 profile 选择，没有更改 npm API 或默认字体；新增17字的覆盖不等于其原生排版已全部认证。原始页不进入库的 dist 或 npm；使用本地字体构建的 site 会包含这些页。
 
+### 36条原材质集合
+
+在 `#crafting-layer` 的集合菜单选择“36 original-material examples”，可查看按观察顺序组织的36条示例。分类、筛选、source开关、GUI2 / 4 / 5及46槽位仍可交互；此集合没有配方规则、可制作数量或自动合成结果，点击条目只查看，Reset恢复示例槽位。原有small / many / empty集合继续提供小型交互及滚动示例。
+
+源码仓库将材料、构造和宿主分开：`demo/crafting-observed-materials.ts`集中41份完整原材质及尺寸，`demo/crafting-observed-items.tsx`复用普通cuboid、真实BlockPreview / BannerPreview构造条目，`demo/crafting-layer-examples.tsx`只管理受控数据与操作。31份新增原PNG / TGA仅属于demo，另10份复用既有资源；未裁切、重绘或重新编码。来源及许可见 `demo/assets/crafting-observed/provenance.json` 与同目录LICENSE，可在源码仓库复验：
+
+```powershell
+python scripts/prepare-crafting-observed-materials.py --check
+```
+
+`--reference PATH` 可另对固定官方full ZIP核对。当前41份完整原文件及registry对应均已复验。这套预览使用局部UV、两个完整cuboid的阶梯和thin-Z玻璃板；切石机锯片是X=8平面、Y / V为9…16，取完整16×48原TGA的frame0。这是正常输入的静态候选，挂载、照明和动画尚未恢复。它与下文12,406像素baseline的输入不同，不能套用该结果，也不能把材料真实等同于模型原生一致。
+
+实际构建后，公开集合首轮31项辅助检查通过，45.191秒；观察到36条顺序、33条source art与3个真实DOM预览、19个BlockPreview和1个BannerPreview ready，source关闭 / 恢复、三个GUI scale、文字角色、查看不合成及集合切换均符合合同。149个source / demo / material和59个site pin无变化；41/41素材的真实响应或inline dataURL字节匹配，CDP body错误与补GET均为0。一条glyph_51的ERR_ABORTED原样保留，页面、控制台、render、HTTP及非取消网络错误为0。七张截图和trace见 `.cache/crafting-observed-browser-01/FINAL.json`；这31项不计入正式66项，也不认证该集合原生像素零差。
+
 ## 已验证范围与尚未验收部分
 
 公开回归入口为 `tests/crafting-image.spec.ts` 与 `demo/crafting-image-fixture.html`。21项保留原先129个主体断言，使用仓库已有的合成128²字页及95个ASCII字格，不依赖私有字页、捕获资源或 `.cache`。它额外检查非预期的浏览器异常、HTTP失败和控制台错误，故意触发的指定404单独记录。可以直接执行：
@@ -107,11 +121,15 @@ v03至v05 已实际比较两种完整2570×1402画面，每种均计入3,603,140
 | 建筑分类，仅可合成为空 | 59,879 / 2,500 | 3,454 / 0 | 5 / 0 |
 | 紧凑工作台 | 42,815 / 1,890 | 4 / 0 | 4 / 0 |
 
-另对建筑分类的全部10条配方完成首次完整目标baseline：3,603,140个像素中仍有3,878个RGB差异像素，alpha差异为0。候选保留全部阶梯、玻璃板、半砖、完整方块和地毯，使用8张完整原PNG、正常cuboid / authored box-union以及已有显式投影候选；10条source model均实际接管，未用捕获顶点、atlas或矩阵作输入。此数值是待校准的完整残差，不能当成普通模型相机已恢复。记录位于 `.cache/crafting-native-populated-01`；全部配方搜索页36条仍待补齐与实测。
+另对建筑分类的全部10条配方完成首次完整目标baseline：3,603,140个像素中仍有3,878个RGB差异像素，alpha差异为0。候选保留全部阶梯、玻璃板、半砖、完整方块和地毯，使用8张完整原PNG、正常cuboid / authored box-union以及已有显式投影候选；10条source model均实际接管，未用捕获顶点、atlas或矩阵作输入。此数值是待校准的完整残差，不能当成普通模型相机已恢复。记录位于 `.cache/crafting-native-populated-01`。
+
+搜索36条也已完成首次完整目标baseline：3,603,140个RGBA像素中有12,406个RGB差异像素、36,973个不同字节，alpha差异为0，没有遮罩。Index10至28的19个原PNG平面单元各自零差；所有36个诊断单元的11,409个残差与单元外997个残差均计入完整结果。砂轮index30、切石机index32和旗帜index35的真实DOM预览分别仍有2,317 / 2,768 / 1,516个差异像素。实际33条source、3条DOM，19个BlockPreview及1个BannerPreview ready；完整记录见 `.cache/crafting-native-search-01/gpu-baseline-01/FINAL.json`。这不是公开交互集合的新输入或整页零差认证。
 
 随后两个独立输入实验使用同一完整原生目标，各自保留原A。Pane B只改变玻璃板的普通几何 / 面材质输入，整帧差异降至2,427个RGB像素，玻璃板单元由2,867降至1,416；该单元外A/B每个RGBA字节完全相同。Atlas B只改变原图集表示，整帧仍有3,610个RGB差异像素，三个半砖单元各为严格RGBA零差；但同时有280个旧差异变精确、12个原精确像素新增差异，以及15个双方仍错但数值改变的像素，玻璃板内也有6个像素改变。两B的alpha差异均为0；它们没有组合执行，不能相加减少值或宣称图集方案全面改善，也未修改source05。证据分别见 `.cache/crafting-pane-material-study-01/pane-b-01/gpu-result-01/FINAL.json` 与 `.cache/crafting-model-rule-study-01/atlas-single-variable-01/gpu-result-01/FINAL.json`。
 
-v03完整结果保存在 `.cache/crafting-native-comparison-01/production-close-actual-01/`，v04在 `.cache/crafting-native-comparison-02/FINAL.json`，v05在 `.cache/crafting-native-comparison-03/FINAL.json`，首轮残差与原图不删除。v04修正嵌套缩放采样和工具条透明边框；v05修正选中分类层级和原JSON大写White对应的平色材质。该材质是正常2×2全白RGBA常量，不是新增原PNG或捕获贴图。剩余5个放大镜像素、4个标题像素全部保留，不以容差删除。固定的原裁剪 / 偶数原点 / 整帧字体对照保留相同4点，因此未采用裁剪对齐作为修复；image VS的两种同义表达式也保留相同5／4点，未据此修改内核。两个有配方的原生目标已保存，普通视觉输入仍在核对。旧 [CRAFTING_SCREEN_QA.md](CRAFTING_SCREEN_QA.md) 的23项属于历史 CSS / 局部原PNG合同。
+后续Construction C使用14张完整原图的图集，整帧仍有3,608个差异像素；D仅把三个阶梯的组合改为两个完整普通cuboid，得到3,548个差异像素、10,598个不同字节，alpha0。C→D改变的60个像素全部变精确，其余七个单元及整帧补集逐字节相同。D与Pane B仍独立、未组合，阶梯、玻璃板、完整方块和放大镜残差保留，不能推算组合结果。记录见 `.cache/crafting-model-rule-study-01/stair-composition-only-D-01/gpu-result-01/FINAL.json`。
+
+v03完整结果保存在 `.cache/crafting-native-comparison-01/production-close-actual-01/`，v04在 `.cache/crafting-native-comparison-02/FINAL.json`，v05在 `.cache/crafting-native-comparison-03/FINAL.json`，首轮残差与原图不删除。v04修正嵌套缩放采样和工具条透明边框；v05修正选中分类层级和原JSON大写White对应的平色材质。该材质是正常2×2全白RGBA常量，不是新增原PNG或捕获贴图。剩余5个放大镜像素、4个标题像素全部保留，不以容差删除。固定的原裁剪 / 偶数原点 / 整帧字体对照保留相同4点，因此未采用裁剪对齐作为修复；image VS的两种同义表达式也保留相同5／4点，未据此修改内核。旧 [CRAFTING_SCREEN_QA.md](CRAFTING_SCREEN_QA.md) 的23项属于历史 CSS / 局部原PNG合同。
 
 ### GUI4 的有限原生对照
 
@@ -127,5 +145,7 @@ A沿用bilinear标签采样，B只将各场景已有标签的sampling改为point
 两种B的已覆盖字体区域均与原生零差，A/B在文字范围之外逐RGBA字节一致。Filter B的160个残差全部位于搜索分类 `magnifyingGlass` 的范围，包围盒为[1134,306,1193,357]；放大镜A/B未变，不能据此宣称整页零差或删除这些残差。两次A和两次B的独立原生复制显示也完整零差，运行无异常，源及输入pin未变。原GUI5的5个放大镜像素、4个标题像素保持此前结果。
 
 完整A/B与区域分类见 `.cache/crafting-native-gui4-point-01/FINAL-AB.json`；独立整帧PNG复验见 `.cache/crafting-followup-close-01/ROOT-GUI4-PRODUCT-VERIFICATION.json`。这些辅助对照不增加正式测试数，也不把后续候选实验算作已完成。
+
+另一次响应身份审计在正常浏览器缓存下，按原CDP requestId读取真实完成响应，68/68与预期字节一致，未用补GET替代。旧47条空body、exit1的原报告保留；新审计不回填旧body，也不据此推断旧失败根因。见 `.cache/crafting-response-identity-audit-02/FINAL.json`，资源身份通过不等于原生像素通过。Float probe仍未消除source的4个标题点；viewport phase02的A未挂载五个正常DOM耐久条及阴影，相对完整产品基线新增2,080个差异像素，未满足继续比较条件，因此B没有执行。后续CPU准备不算修复或实测通过。
 
 上述结果只认证已观察输入、指定字体与NVIDIA / ANGLE D3D11路径；不泛化到所有GUI4状态、默认字体、全部Unicode、跨GPU / DPR、真实OS IME、世界合成或最终Present。后续仍需保留完整target残差并按场景限定结论。
