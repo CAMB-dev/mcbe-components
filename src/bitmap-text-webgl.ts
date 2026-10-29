@@ -59,7 +59,7 @@ export interface BitmapGlyphRenderOptions {
   /** Default preserves framebuffer bytes. Straight conversion adds 8-bit unpremultiplication. */
   output?: 'framebuffer' | 'straight-alpha';
   /** Exclusive WebGL canvas. Its dimensions are set to the target; no 2D context may exist. */
-  canvas?: HTMLCanvasElement;
+  canvas?: HTMLCanvasElement | OffscreenCanvas;
 }
 export interface BitmapGlyphRenderResult extends PixelTexture {
   alphaMode: 'premultiplied' | 'straight';
@@ -255,7 +255,12 @@ export function renderBitmapGlyphs(options: BitmapGlyphRenderOptions): BitmapGly
   if (!options.canvas && typeof document === 'undefined') throw new Error('WebGL bitmap rendering requires a browser canvas.');
   const canvas = options.canvas ?? document.createElement('canvas');
   canvas.width = width; canvas.height = height;
-  const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, preserveDrawingBuffer: true });
+  const attributes: WebGLContextAttributes = { alpha: true, premultipliedAlpha: true, antialias: false, preserveDrawingBuffer: true };
+  // Narrow the two canvas types so TypeScript selects their WebGL-specific
+  // overloads, rather than the incompatible union of all rendering contexts.
+  const gl = 'transferToImageBitmap' in canvas
+    ? canvas.getContext('webgl', attributes)
+    : canvas.getContext('webgl', attributes);
   if (!gl || gl.isContextLost()) throw new Error('WebGL bitmap rendering is unavailable.');
   if (!gl.getContextAttributes()?.premultipliedAlpha) throw new Error('The bitmap presentation canvas must use premultipliedAlpha:true.');
   const buffers: WebGLBuffer[] = [], textures: WebGLTexture[] = [], framebuffers: WebGLFramebuffer[] = [];

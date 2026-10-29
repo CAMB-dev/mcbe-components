@@ -60,7 +60,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | 组件 | 主要属性 | 行为 |
 | --- | --- | --- |
 | `Text` | `as`: span / p / h1…h4；`size`: sm / md / lg / xl；`shadow` 默认 true | 像素文字与无模糊阴影，转发 HTMLElement ref |
-| `BitmapText` | **必填** 字符串 children、`font`、`sampling`: point / bilinear、`shader`: bitmap / bitmap-smooth；可选 `renderer`: cpu（默认）/ webgl、`profile`: atlas-rect（默认）/ bedrock-unicode、具体 CSS `background`、`scale`、`color`、显式 `shadow` 与回调 | ref 为 span；CPU 绘制任意字图矩形，WebGL 使用独立活 GPU canvas；background 是 GPU target clear 色；保留真实 DOM 原文及加载失败回退 |
+| `BitmapText` | **必填** 字符串 children、`font`、`sampling`: point / bilinear、`shader`: bitmap / bitmap-smooth；可选 `renderer`: cpu（默认）/ webgl / webgl-shared、`profile`: atlas-rect（默认）/ bedrock-unicode、具体 CSS `background`、`scale`、`color`、显式 `shadow` 与回调 | ref 为 span；CPU 绘制任意字图矩形；webgl 独立 context，webgl-shared 同 Document 共享 Offscreen context、每实例 bitmaprenderer；background 是 GPU target clear 色；保留真实 DOM 原文及加载失败回退 |
 | `Button` | `variant`: default / primary / danger / ghost；`size`: sm / md / lg；`loading`、`fullWidth`、`startIcon`、`endIcon` | 默认 `type="button"`；loading 保留文字，禁用并设置 aria-busy；继承 button 属性 |
 | `IconButton` | Button 属性；**必填** `aria-label` | 正方形按钮，children 放图标 |
 | `Panel` | `title`、`footer`、`variant`: default / inset | Classic 浅灰九宫格面板 / 灰色凹陷面板；section，标题自动关联 aria-labelledby |
@@ -448,7 +448,7 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
   sampling="bilinear" shader="bitmap-smooth" color="#ffffff">钻石剑</BitmapText>
 ```
 
-`renderBitmapGlyphs(options)` 是浏览器 GPU 函数，接收原始页、顺序 runs 和可选 target 背景；默认 `output="framebuffer"` 返回预乘 RGBA8，`output="straight-alpha"` 会显式做8位反预乘并可能产生舍入差。组件将 FBO 直接 GPU copy 到 `premultipliedAlpha:true` 的活 canvas，不经 `putImageData`。每个 WebGL 组件实例占用独立 context，受浏览器预算限制；共享 batch renderer 尚未实现。API、释放方式及验证边界见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md)。
+`renderBitmapGlyphs(options)` 是浏览器 GPU 函数，接收原始页、顺序 runs 和可选 target 背景；默认 `output="framebuffer"` 返回预乘 RGBA8，`output="straight-alpha"` 会显式做8位反预乘并可能产生舍入差。组件将 FBO 直接 GPU copy 到 `premultipliedAlpha:true` 的活 canvas，不经 `putImageData`。`renderer="webgl"` 每实例占用独立 context；显式 `renderer="webgl-shared"` 在同一 Document 内复用 Offscreen WebGL 会话，再用 ImageBitmap 转移至各实例 bitmaprenderer。后者仍保留每实例 canvas / bitmap 资源、同步 GPU 工作与 readPixels，不代表零拷贝或无限实例容量。共享会话缺少必要 API 或发生 context loss 时报告错误并显示原文，不静默切到 CPU；输入更新可尝试新会话。API 与既有独立路径验证见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md)，新共享路径的资源、支持条件及分项验证范围见 [BITMAP_SHARED_QA.md](docs/BITMAP_SHARED_QA.md)。
 
 本机样本可执行 `python scripts/use-local-unicode-sample.py "C:/XboxGames/Minecraft for Windows/Content"` 后重启 Vite。该仓库工具只准备已测的8张原页、10字符，保存在忽略目录；它不生成完整 Unicode 字体，也不改变全局字体。启用后 `site/` 构建可能包含这些本地字图，npm 包不含它们。
 

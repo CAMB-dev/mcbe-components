@@ -6,9 +6,11 @@ import { layoutBitmapText, renderBitmapLayout } from './bitmap-text-engine';
 import type { BitmapFont, BitmapLayout } from './bitmap-text-engine';
 import { renderBitmapGlyphs } from './bitmap-text-webgl';
 import type { BitmapGlyphRun, BitmapRgba, BitmapUnicodeVertex } from './bitmap-text-webgl';
+import { acquireSharedBitmapRenderer } from './bitmap-text-shared';
+import type { SharedBitmapLease } from './bitmap-text-shared';
 export type { BitmapFont, BitmapGlyph } from './bitmap-text-engine';
 
-export type BitmapTextRenderer = 'cpu' | 'webgl';
+export type BitmapTextRenderer = 'cpu' | 'webgl' | 'webgl-shared';
 export type BitmapTextProfile = 'atlas-rect' | 'bedrock-unicode';
 export interface BitmapTextProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children' | 'color'> {
   font: BitmapFont;
@@ -17,7 +19,7 @@ export interface BitmapTextProps extends Omit<HTMLAttributes<HTMLSpanElement>, '
   color?: string;
   sampling: 'point' | 'bilinear';
   shader: 'bitmap' | 'bitmap-smooth';
-  /** CPU remains the default. WebGL uses a dedicated live GPU canvas per instance. */
+  /** CPU remains the default. Shared WebGL uses one Offscreen context per Document. */
   renderer?: BitmapTextRenderer;
   /** Unicode is an explicit packed-UV profile for complete 16x16 cells on 256x256 pages. */
   profile?: BitmapTextProfile;
@@ -103,11 +105,13 @@ export const BitmapText = forwardRef<HTMLSpanElement, BitmapTextProps>(function 
   const ready = state.key === signature && state.status === 'ready';
   useEffect(() => {
     let cancelled = false, failed = false, dispose: (() => void) | undefined;
+    let shared: SharedBitmapLease | undefined;
     const target = canvas.current;
     if (target) { target.width = 0; target.height = 0; }
     setState({ key: signature, status: 'loading', width: 0, height: 0 });
     const fail = (error: unknown) => {
       if (cancelled || failed) return; failed = true;
+      const lease = shared; shared = undefined; lease?.release();
       if (target) { target.width = 0; target.height = 0; }
       setState({ key: signature, status: 'error', width: 0, height: 0 });
       callbacks.current.onRenderError?.(error instanceof Error ? error : new Error(String(error)));
@@ -115,14 +119,20 @@ export const BitmapText = forwardRef<HTMLSpanElement, BitmapTextProps>(function 
     const contextLost = (event: Event) => { event.preventDefault(); fail(new Error('The bitmap WebGL context was lost.')); };
     if (renderer === 'webgl') target?.addEventListener('webglcontextlost', contextLost);
     void (async () => {
-      if (!['cpu', 'webgl'].includes(renderer)) throw new RangeError('Unsupported bitmap renderer.');
+      if (!['cpu', 'webgl', 'webgl-shared'].includes(renderer)) throw new RangeError('Unsupported bitmap renderer.');
       if (!['atlas-rect', 'bedrock-unicode'].includes(profile)) throw new RangeError('Unsupported bitmap profile.');
       if (renderer === 'cpu' && (profile !== 'atlas-rect' || background !== undefined)) throw new RangeError('The CPU bitmap renderer supports atlas-rect without a target background. Select WebGL for these options.');
       const layout = layoutBitmapText(font, children, scale, shadow), fill = colorRgba(color), shade = shadow && { ...shadow, color: colorRgba(shadow.color) };
       const clear = background === undefined ? undefined : colorRgba(background);
       const pages = new Map(await Promise.all(layout.pages.map(async index => [index, await loadTexture(font.pages[index]!)] as const)));
       if (cancelled || !target) return;
-      if (renderer === 'webgl') {
+      if (renderer === 'webgl-shared') {
+        shared = acquireSharedBitmapRenderer(target, fail);
+        const presented = shared.render({ width: layout.width, height: layout.height, pages,
+          runs: glyphRuns(layout, pages, profile, fill, sampling, shader, shade), background: clear ? { kind: 'solid', color: clear } : undefined },
+        () => !cancelled && !failed && canvas.current === target);
+        if (!presented || failed) return;
+      } else if (renderer === 'webgl') {
         const result = renderBitmapGlyphs({ width: layout.width, height: layout.height, pages, runs: glyphRuns(layout, pages, profile, fill, sampling, shader, shade),
           background: clear ? { kind: 'solid', color: clear } : undefined, canvas: target });
         dispose = result.dispose;
@@ -137,6 +147,7 @@ export const BitmapText = forwardRef<HTMLSpanElement, BitmapTextProps>(function 
     })().catch(fail);
     return () => {
       cancelled = true; target?.removeEventListener('webglcontextlost', contextLost);
+      shared?.release();
       // StrictMode may immediately re-run an effect on the same canvas. Only a
       // detached/replaced target can lose its context; a re-used node stays live.
       queueMicrotask(() => { if (canvas.current !== target) dispose?.(); });
@@ -147,7 +158,7 @@ export const BitmapText = forwardRef<HTMLSpanElement, BitmapTextProps>(function 
   useEffect(() => { if (ready) callbacks.current.onReady?.(); }, [ready, signature]);
   return <span {...props} ref={ref} className={['mc-bitmap-text', className].filter(Boolean).join(' ')} data-render-state={state.key === signature ? state.status : 'loading'} data-fidelity="controlled-bitmap-reconstruction" data-renderer={renderer} data-profile={profile}
     style={{ display: 'inline-block', position: 'relative', verticalAlign: 'baseline', ...(ready ? { width: state.width, height: state.height } : {}), ...style } as CSSProperties}>
-    <canvas key={renderer === 'webgl' ? signature : 'cpu'} ref={canvas} aria-hidden="true" className="mc-bitmap-text__canvas" width={0} height={0} style={{ display: ready ? 'block' : 'none', imageRendering: 'pixelated', userSelect: 'none' }}/>
+    <canvas key={renderer === 'cpu' ? 'cpu' : signature} ref={canvas} aria-hidden="true" className="mc-bitmap-text__canvas" width={0} height={0} style={{ display: ready ? 'block' : 'none', imageRendering: 'pixelated', userSelect: 'none' }}/>
     <span className="mc-bitmap-text__text" style={ready ? { position: 'absolute', inset: 0, overflow: 'hidden', color: 'transparent', textShadow: 'none', whiteSpace: 'pre', userSelect: 'text' } : { color, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{children}</span>
   </span>;
 });

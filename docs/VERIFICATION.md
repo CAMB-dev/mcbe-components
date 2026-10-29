@@ -2,7 +2,22 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：下拉框一致性与 Dialog 尺寸
+## 当前检查点：共享 GPU 位图文字
+
+新增显式 `BitmapText renderer="webgl-shared"`，同一Document的实例共用一个OffscreenGL上下文，每个canvas通过bitmaprenderer呈现；默认CPU和原独占WebGL保留。`renderBitmapGlyphs` 支持HTMLCanvasElement或OffscreenCanvas，五份shader字符串与此前逐字节一致。接口及资源边界见 [BITMAP_SHARED_QA.md](BITMAP_SHARED_QA.md)。
+
+| 本轮检查 | 结果与范围 |
+| --- | --- |
+| 正式回归 | 新共享7项＋旧GPU7项＋CPU13项，同批27/27 PASS、0skip/flaky，46.2秒；`.cache/bitmap-shared-independent-final.json` SHA `8423cd770f2217681f02d3d1d7fe47a2aa196f9b60f247286740f891f903dbe6`。旧20项未改 |
+| 实际资源合同 | 48个StrictMode实例仅1个实际OffscreenGL及48个bitmaprenderer；48个ImageBitmap全部消费。取消、迟到字体、context loss广播/输入重试、API与presentation错误、最后失败owner及最终卸载释放均通过 |
+| 独立原生输入 | 8draw完整3,603,140像素rawFBO相对真实nativepost RGBA零差；bitmap实际DOM相对由原nativePMA字节独立GPUcopy的参考也全目标零差。13×7异目标/采样/scissor/背景插队后重绘保持双零差。RT字节与DOM呈现分开比较，不混同两种alpha表示 |
+| 独立组件与规模 | 四组alpha/背景对原独立shader完整字段及halo零差，15项辅助检查通过；48组混合尺寸/采样/shader/背景完整898,560像素零差，部分卸载不扰其余，真实loss及新session恢复通过。第三次取消guard在transfer之后触发时，未消费bitmap正确close。统报告SHA `31dbf00f6fa6ab0ad10c58252578cac2948f203913fad7a98cc20bc6eceb1406` |
+| 实际包消费 | React18.3.1/19.3.1的123值、SSR、类型/ref、shared选项与Offscreen类型、CSS/fonts/assets/licenses通过；受测包SHA `ac91e8175e577f3aeeed1b663b03b1feee973cd28388e336c3db8f12b2ea50f9`，JS SHA `b55078aa8b38fadd2e80398abeb8489ee89a35f72fd64436a6d81b28d5ad5cfc`；两消费者各102份dist逐字节一致 |
+| 生产展示 | 4173五项入口与site逐字节相同，25项辅助断言通过。40实例按需挂载/卸载/重开、shared/独占/CPU往返、真实共享上下文最终释放通过；320px页面无横溢出、局部滚动不缩小画布，错误记录为空。用户IAB也实际选择shared并显示40/40ready |
+
+按正式项目/文件/完整标题去重，当前819唯一用例：814 PASS、5预期SKIP、0未解决失败，为多批次累计。独立原生结果限已测NVIDIA/ANGLE D3D11与指定输入；未覆盖末端251合成/resolve/Present、整GUI或heap GC。共享路径仍有像素读回、逐实例draw和ImageBitmap显存成本，不宣称零拷贝、Worker或无限实例。默认书本的数值审计另记于 [ENCHANTING_QA.md](ENCHANTING_QA.md)，没有据单帧候选改动动画参数。
+
+## 历史检查点：下拉框一致性与 Dialog 尺寸
 
 组件数量保持117，公共运行时值保持123。Select 与 Combobox 共用同一可见实现，保留 Select 的原生表单/ref/change 合同；Dialog 新增 width/height/style，并以 overflow:clip 按设置尺寸渲染。原版附魔经验图标的三档不同轮廓保留。合同与证据见 [CONTROLS_CONSISTENCY_QA.md](CONTROLS_CONSISTENCY_QA.md)。
 

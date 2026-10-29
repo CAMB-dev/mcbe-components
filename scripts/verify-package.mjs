@@ -43,6 +43,7 @@ assert.equal(rendererFunctions.length,3);
 assert.equal(Object.keys(ui).length,123);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
+assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
 const glintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25]};
 const glintTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
@@ -68,6 +69,10 @@ assert.equal(emptyGpu.alphaMode,'premultiplied');
 assert.equal(emptyGpu.data.length,0);
 emptyGpu.dispose();
 const bitmapGpuMarkup = renderToString(element(ui.BitmapText,{font:bitmapFont,sampling:'point',shader:'bitmap',renderer:'webgl',profile:'atlas-rect',background:'#102030'},'A'));
+const bitmapSharedMarkup = renderToString(element(ui.BitmapText,{font:bitmapFont,sampling:'point',shader:'bitmap',renderer:'webgl-shared',profile:'atlas-rect',background:'#102030'},'A'));
+assert.match(bitmapSharedMarkup,/data-renderer="webgl-shared"/);
+assert.match(bitmapSharedMarkup,/data-render-state="loading"/);
+assert(bitmapSharedMarkup.includes('>A</span>'));
 assert.match(bitmapGpuMarkup,/A/);
 assert.match(bitmapMarkup,/mc-bitmap-text/);
 assert(bitmapMarkup.includes('>A</span>'));
@@ -304,6 +309,10 @@ const gpuRuns: readonly BitmapGlyphRun[] = [gpuAtlas,gpuUnicode];
 const gpuBackend: BitmapTextRenderer = 'webgl';
 const gpuProfile: BitmapTextProfile = 'atlas-rect';
 export const gpuRenderer: (options: BitmapGlyphRenderOptions)=>BitmapGlyphRenderResult = renderBitmapGlyphs;
+export const sharedBitmapBackend: BitmapTextRenderer = 'webgl-shared';
+export function renderOffscreenFont(canvas: OffscreenCanvas): BitmapGlyphRenderResult {
+  return renderBitmapGlyphs({width:0,height:0,pages:new Map(),runs:[],canvas});
+}
 export const emptyGpuOptions: BitmapGlyphRenderOptions = {width:0,height:0,pages:new Map(),runs:[],background:gpuBackground,output:'framebuffer'};
 export const demo = <>
   <Button {...props} ref={createRef<HTMLButtonElement>()}>Play</Button>

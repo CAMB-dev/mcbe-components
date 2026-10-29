@@ -19,7 +19,8 @@
         "api": {
           "renderer": [
             "cpu",
-            "webgl"
+            "webgl",
+            "webgl-shared"
           ],
           "defaultRenderer": "cpu",
           "profile": [
@@ -28,8 +29,11 @@
           ],
           "defaultProfile": "atlas-rect",
           "background": "optional concrete CSS color, WebGL target clear only",
-          "details": "docs/BITMAP_GPU_QA.md"
-        }
+          "details": "docs/BITMAP_GPU_QA.md",
+          "sharedResources": "webgl-shared: one internal Offscreen WebGL session per Document, one bitmaprenderer canvas per instance; GPU readback remains",
+          "sharedDetails": "docs/BITMAP_SHARED_QA.md"
+        },
+        "sharedValidation": "27/27 formal PASS (new shared7 + unchanged GPU7/CPU13); tested48instances/lifecycle and React18.3.1/19.3.1 consumers PASS; fixed native8draw raw RT and independent PMA DOM-reference full-target exact on testedNVIDIA; production25aux and40instances/context lifecycle PASS, not added formal cases. docs/BITMAP_SHARED_QA.md"
       },
       {
         "name": "PixelIcon",

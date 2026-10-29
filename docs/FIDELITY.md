@@ -4,6 +4,10 @@
 
 当前公开117个组件、3份数据及3个渲染函数，共123项值导出；其中新增 `renderBitmapGlyphs` 为浏览器GPU函数，两个glint函数为纯纹理运算。共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen 已实现；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
 
+## 共享 GPU 字体的显示路径
+
+`BitmapText` 可显式选择 `webgl-shared`，使用每Document一个OffscreenGL和每实例bitmaprenderer。共享路径在已测NVIDIA后端对原始8draw、完整目标和实际Bitmap呈现分别保持零差，48个混合实例的完整像素及资源隔离另行验证；默认CPU和独占WebGL保留。此为已有源shader的上下文共享，不是对整GUI、最终Present或无限规模的认证，详见 [BITMAP_SHARED_QA.md](BITMAP_SHARED_QA.md)。
+
 ## 下拉框、Dialog 与经验图标
 
 Select 与 Combobox 共用 Classic 可见皮肤、popup、选中标记和活动态；两个原图皮肤回归及两组件完整区域一致性通过。Dialog 按显式 width/height/style 渲染 border-box，根节点和正文默认不滚动；长内容由宿主显式嵌入 ScrollArea。附魔经验图标仍使用六份原 PNG：三档13×11原图的绿色轮廓本来不同，当前均以26×22等比显示，六状态完整RGBA原图对照零差；不将它们重绘成同一圆形。详细范围与表单回归见 [CONTROLS_CONSISTENCY_QA.md](CONTROLS_CONSISTENCY_QA.md)。
