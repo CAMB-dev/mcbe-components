@@ -52,21 +52,33 @@
 .mc-workstation-image-reservation { position: relative; overflow: clip; flex: 0 0 auto; }
 .mc-workstation-image-plane { box-sizing: border-box; position: absolute; left: 0; top: 0; transform-origin: 0 0; }
 .mc-enchanting-image-window { position: absolute; z-index: -1; overflow: clip; pointer-events: none; visibility: hidden; }
-.mc-enchanting-image-window:has(> .mc-gui-image-layer[data-render-state='ready']) { visibility: visible; }
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready'])::before,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__options::before,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__option::before,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__empty-option::before,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-slot::before,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-slot::after,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::before,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::after { display: none; }
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-workstation__title,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-player-inventory__label,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__dust,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__lapis-placeholder,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-dialog__close .mc-dialog__close-icon,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-slot .mc-slot__highlight,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot__highlight { background: transparent; }
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) .mc-enchanting__option:focus-visible,
-.mc-enchanting:has(> .mc-enchanting-image-window > .mc-gui-image-layer[data-render-state='ready']) > .mc-dialog__close:focus-visible { outline: none; box-shadow: none; }
+.mc-enchanting-image-window:has(> .mc-enchanting-image-layer[data-render-state='ready']) { visibility: visible; }
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready'])::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__options::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__option::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__empty-option::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) > .mc-slot::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) > .mc-slot::after,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::before,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::after { display: none; }
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-workstation__title,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-player-inventory__label,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__dust,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__lapis-placeholder,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) > .mc-dialog__close .mc-dialog__close-icon,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) > .mc-slot .mc-slot__highlight,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot__highlight { background: transparent; }
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__option:focus-visible,
+.mc-enchanting:has(> .mc-enchanting-image-window > .mc-enchanting-image-layer[data-render-state='ready']) > .mc-dialog__close:focus-visible { outline: none; box-shadow: none; }
+
+/* Hide only successful packed text visual roles. Canonical label/cost strings
+   retain their accessible DOM; caller renderText visuals are already aria-hidden. */
+.mc-enchanting:has(> .mc-enchanting-image-window[data-text-labels='true'] > .mc-enchanting-image-layer[data-render-state='ready']) .mc-workstation__title,
+.mc-enchanting:has(> .mc-enchanting-image-window[data-text-labels='true'] > .mc-enchanting-image-layer[data-render-state='ready']) .mc-player-inventory__label,
+.mc-enchanting:has(> .mc-enchanting-image-window[data-text-costs='true'] > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__cost { color: transparent; text-shadow: none; }
+.mc-enchanting:has(> .mc-enchanting-image-window[data-text-labels='true'] > .mc-enchanting-image-layer[data-render-state='ready']) .mc-workstation__title > [aria-hidden='true'],
+.mc-enchanting:has(> .mc-enchanting-image-window[data-text-labels='true'] > .mc-enchanting-image-layer[data-render-state='ready']) .mc-player-inventory__label > [aria-hidden='true'],
+.mc-enchanting:has(> .mc-enchanting-image-window[data-text-costs='true'] > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__cost > [aria-hidden='true'],
+.mc-enchanting:has(> .mc-enchanting-image-window[data-text-rune-1='true'] > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__option[data-enchantment-tier='1'] .mc-enchanting__runes,
+.mc-enchanting:has(> .mc-enchanting-image-window[data-text-rune-2='true'] > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__option[data-enchantment-tier='2'] .mc-enchanting__runes,
+.mc-enchanting:has(> .mc-enchanting-image-window[data-text-rune-3='true'] > .mc-enchanting-image-layer[data-render-state='ready']) .mc-enchanting__option[data-enchantment-tier='3'] .mc-enchanting__runes { visibility: hidden; }

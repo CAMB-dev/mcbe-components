@@ -1,3 +1,4 @@
+import { GUI_BITMAP_CELL_VERTEX_SHADER as UNICODE_VERTEX, GUI_BITMAP_FRAGMENT_SHADER as GLYPH_FRAGMENT } from './gui-layer-kernels';
 import type { PixelTexture } from './item-renderer-engine';
 
 export type BitmapRgba = readonly [number, number, number, number];
@@ -188,44 +189,8 @@ void main() {
   bounds = sourceBounds;
   ink = color;
 }`;
-const UNICODE_VERTEX = `
-attribute vec3 position;
-attribute vec2 packedUv;
-attribute vec4 color;
-uniform mat4 mvp;
-uniform float glyphHeight;
-uniform float halfTexel;
-varying highp vec2 uv;
-varying highp vec4 bounds;
-varying highp vec4 ink;
-void main() {
-  int corner = int(position.z);
-  float dx = (corner == 1 || corner == 2) ? 0.0625 : 0.0;
-  float dy = corner < 2 ? glyphHeight : 0.0;
-  uv = packedUv + vec2(dx, dy);
-  bounds = vec4(packedUv + halfTexel, packedUv + vec2(0.0625, glyphHeight) - halfTexel);
-  vec4 clip = position.x * mvp[0] + position.y * mvp[1] + mvp[3];
-  gl_Position = vec4(clip.xy, 0.0, clip.w);
-  ink = color;
-}`;
-const GLYPH_FRAGMENT = `
-precision highp float;
-uniform sampler2D atlas;
-uniform vec4 tint;
-uniform float hudOpacity;
-uniform bool smoothBitmap;
-varying highp vec2 uv;
-varying highp vec4 bounds;
-varying highp vec4 ink;
-void main() {
-  vec4 value = texture2D(atlas, clamp(uv, bounds.xy, bounds.zw));
-  if (smoothBitmap) {
-    vec4 t = clamp((value - 0.300000011920928955078125) * 5.000000476837158203125, 0.0, 1.0);
-    value = t * t * (3.0 - 2.0 * t);
-  }
-  gl_FragColor = value * ink * tint;
-  gl_FragColor.a *= hudOpacity;
-}`;
+
+
 const COPY_VERTEX = `
 attribute vec2 position;
 varying highp vec2 uv;

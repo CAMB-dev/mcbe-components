@@ -78,6 +78,22 @@
         }
       },
       {
+        "name": "GuiLayer",
+        "status": "implemented",
+        "fidelity": "ordered_source_image_and_packed_cell_text_public17_formal_pass_fixed_native_stages_exact_not_whole_gui_certification",
+        "api": {
+          "commands": "ordered image/text source commands; no captured vertex input required",
+          "frame": "actual physical width/height + explicit guiScale",
+          "text": "GuiTextFont with explicit pages/pageSizes/cellHeight/glyph metrics; global origin/fontScale/sampling/shader",
+          "color": "RGBA8 vertex color separate from normalized tint and independent shadow tint",
+          "outputRect": "physical crop retaining whole-frame projection",
+          "ref": "HTMLCanvasElement",
+          "state": "loading/ready/error; input or renderKey change retries",
+          "details": "docs/GUI_LAYER_QA.md"
+        },
+        "validation": "Public source/GPU/React final17/17 PASS; observed30draw packed VB/CBV exact; four conditional native stages across FBO and actual React full targets total28,825,120 pixels RGBA0 on testedNVIDIA/D3D11. Actual EnchantingTable adapter final10/10 PASS on SwiftShader, three compositions total2,643,089 pixels equal via same public renderer. Actual full747,600pixel native ROI remains10,155different, not wholeGUI exact; React18.3.1/19.3.1 packed131 exports and256dist entries byte-identical; scoped cumulative920 unique/915PASS/5expectedSKIP; production38auxPASS with8HTTP/site entries byte-identical; raw11ERR_ABORTED retired requests retained and5distinctresources recheckedHTTP200. AuxiliarySwiftShader does not certify nativeNVIDIA parity."
+      },
+      {
         "name": "BlockPreview",
         "status": "implemented",
         "fidelity": "renderer_reconstruction_unverified"
@@ -371,7 +387,14 @@
       },
       {
         "name": "EnchantingTable",
-        "status": "implemented"
+        "status": "implemented",
+        "api": {
+          "imageRender": "optional frame/origin/displayScale; default CSS unchanged",
+          "imageRender.text": "optional explicit metrics {lineHeight,paintOffset} + labels/costs/runes styles; one ordered image/text target",
+          "runeText": "host final original-case string, already laid out/truncated; arbitrary runes ReactNode still supported",
+          "validation": "new text integration/fallback final QA pending; previous image-only results historical",
+          "details": "docs/GUI_LAYER_QA.md"
+        }
       },
       {
         "name": "CraftingTable",
@@ -601,7 +624,7 @@
     ]
   },
   "publicExports": {
-    "components": 119,
+    "components": 120,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -609,9 +632,10 @@
     ],
     "sideEffectingGpuFunctions": [
       "renderBitmapGlyphs",
-      "renderGuiImages"
+      "renderGuiImages",
+      "renderGuiLayer"
     ],
-    "runtimeValues": 128,
+    "runtimeValues": 131,
     "countsAreNotPixelCertification": true,
     "dataValues": 4,
     "guiIconDataValues": 1,
@@ -619,7 +643,8 @@
       "guiIconNames"
     ],
     "pureGeometryFunctions": [
-      "layoutGuiImages"
+      "layoutGuiImages",
+      "layoutGuiText"
     ]
   }
 }

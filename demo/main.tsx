@@ -27,6 +27,7 @@ import { ItemGlintExamples } from './item-glint-examples';
 import { BitmapTextExamples } from './bitmap-text-examples';
 import { WorkstationTextExamples } from './workstation-text-examples';
 import { GuiIconsExamples } from './gui-icons-examples';
+import { GuiLayerExamples } from './gui-layer-examples';
 import { ItemRenderersExamples } from './item-renderers-examples';
 import { ScrollArea } from '../src';
 
@@ -46,6 +47,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'bitmap-text', name: 'Bitmap text', icon: 'chevron', count: '01' },
   { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
   { id: 'workstation-text', name: 'Workstation text', icon: 'chevron', count: '01' },
+  { id: 'gui-layer', name: 'Composed GUI', icon: 'chevron', count: '01' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'containers', name: 'Storage containers', icon: 'chevron', count: '06' },
@@ -83,6 +85,7 @@ const snippets: Record<string, string> = {
   'inventory-states': `<ItemSlot item={{ name: 'Diamond sword', icon: <YourSword />,\n  durability: 0.42, lore: ['Sharpness IV'] }} selected />\n<InventoryGrid label="Inventory" items={items} size={27}\n  onSlotAction={(index, action) => handleSlot(index, action)} />`,
   workstations: `<Grindstone inputs={[first, second]} result={result}\n  inventory={items} onTakeResult={handleTake} />\n<EnchantingTable item={sword} lapis={lapis}\n  options={enchantments} onEnchant={handleEnchant} />`,
   'gui-icons': `<GuiIcon name="sound-glyph" scale={2} label="Audio" />\n<GuiIcon name="warning-glyph-small" scale={2} />\n\n// guiIconNames lists all 150 typed names.\n// Without a label, an icon is decorative.\n// Original colors and image proportions are retained.`,
+  'gui-layer': `<GuiLayer width={640} height={480} guiScale={2}\n  commands={[\n    { kind: 'image', texture: cellUrl,\n      rect: [10, 12, 18, 18],\n      nineSlice: { baseSize: [5, 5], insets: 1 } },\n    { kind: 'text', text: 'Hello', font: yourPackedFont,\n      origin: [12, 14], fontScale: 1,\n      color: [76, 76, 76, 255],\n      sampling: 'point', shader: 'bitmap' },\n  ]} />\n// Use complete caller-owned 128/256px font pages,\n// cellHeight and glyph metrics. Origins are global game units.\n// Images and text share one RGBA8 drawing target.`,
   'item-renderers': `<BlockPreview block="enchanting-table" size={48} />\n// stone, stone-bricks, stone-slab and stone-stairs\n// are also available. Supply your own camera, lighting\n// or textures when your host uses a different profile.`,
   'workstation-text': `const renderGuiText: WorkstationTextRenderer =\n  (text, context) => (\n    <BitmapText\n      {...(context.kind === 'enchantment-cost'\n        ? costTextProfile : labelTextProfile)}\n      layout="advance" style={{ display: 'block' }}>\n      {text}\n    </BitmapText>\n  );\n<EnchantingTable title="附魔台" inventoryLabel="物品栏"\n  options={options} renderText={renderGuiText} />\n// Each host profile supplies its own font, scale,\n// renderer, sampling, shader, color and shadow.`,
   processing: `<CraftingScreen\n  recipeBook={{ title: 'Recipes', entries,\n    categoryId, onCategoryChange: setCategoryId,\n    query, onQueryChange: setQuery,\n    craftableOnly, onCraftableOnlyChange: setCraftableOnly,\n    onRecipeAction: handleRecipe }}\n  crafting={{ inputs: recipeInputs, result,\n    inventory: items, onTakeResult: handleTake }} />\n// entries are filtered and flattened by your application.\n// CraftingTable also remains available as a right pane.\n<Furnace input={rawBeef} fuel={coal} result={steak}\n  progress={0.5} fuelRemaining={0.75}\n  inventory={items} onTakeResult={handleTake} />`,
@@ -137,6 +140,17 @@ function App() {
   useEffect(() => () => {
     if (noticeTimer.current) clearTimeout(noticeTimer.current);
     if (copyTimer.current) clearTimeout(copyTimer.current);
+  }, []);
+  useEffect(() => {
+    let cancelled = false;
+    // The browser resolves its initial fragment before React mounts the sections.
+    // Wait for local font metrics before restoring the requested section.
+    void document.fonts.ready.then(() => {
+      if (cancelled) return;
+      const id = window.location.hash.slice(1);
+      if (navigation.some(item => item.id === id)) document.getElementById(id)?.scrollIntoView({ behavior: 'instant' });
+    });
+    return () => { cancelled = true; };
   }, []);
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
@@ -322,6 +336,8 @@ function App() {
       <Example id="workstation-text" title="Workstation text" detail="One text renderer for titles, inventory labels and enchantment costs.">
         <div style={{ padding: 24, minWidth: 0 }}><WorkstationTextExamples notify={notify}/></div>
       </Example>
+
+      <Example id="gui-layer" title="Composed GUI" detail="Original images and glyphs drawn together, with live workstation controls."><GuiLayerExamples/></Example>
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

@@ -2,7 +2,21 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：源 GUI 图像图层与附魔台可选集成
+## 当前检查点：GuiLayer 源图文合成
+
+API清单现为120组件＋4数据＋7函数＝131值。纯layoutGuiText与浏览器GPU renderGuiLayer、React GuiLayer已导出，内部prepared / precision helpers不公开；旧默认路径不变。公开源输入 / GPU / React最终单批17 / 17 PASS，0skip / retry / flaky，31.1秒；本机NVIDIA / D3D11固定四阶段的四FBO与四实际React完整目标共28,825,120像素严格RGBA0，全部30draw属性字节亦匹配。实际附魔台完整747,600像素ROI四组合仍10,155差异、max252、alpha0；不是整GUI认证。失败的两项测试假设与全部范围限制见 [GUI_LAYER_QA.md](GUI_LAYER_QA.md)。
+
+实际附魔台组合最终单批10 / 10 PASS，0skip / retry / flaky，23.1秒；GUI4 / GUI5及长rune三幅完整输出2,643,089像素与独立原UI命令组合一致，使用同一公共renderer，属于SwiftShader组件合同，不混称独立native shader认证。38slots、同section / ref / 焦点 / 内部选择 / stateful book、loading / error / context loss整层回退与恢复、宽窄局部pan和关闭重开均覆盖。初轮仅locator漏数量后缀导致的失败及首次测试类型错误保留；生产源未为此修改。
+
+本轮旧相关回归75 / 75 PASS（`.cache/gui-text-existing-final.json`），刷新既有范围不计新增。`.cache/gui-text-validation-integration-summary.json` 按正式project / 文件 / 完整标题累计920唯一用例：915 PASS、5预期SKIP、0未解决失败；新增17＋10，为多批次累计，不是一次整套920项全绿。
+
+实际React18.3.1 / 19.3.1消费者通过131值、SSR、严格TSX / ref / profile、CSS / assets / licenses检查；两消费者各256个dist文件与本轮构建逐字节一致。已测tarball `.cache/gui-text-consumer-verified.tgz` SHA256 `20b01191fb2e19480898b3519381209a9fc4cd4f1f8a99af70d9ff54cb9f4bfe`，`dist/index.js` SHA256 `7738b769ad9b34dcad1bf4891f16d60cfedfe4116f9fa8396c18b3809999ac69`，身份见 `.cache/gui-text-consumer-identity.json`。首次包构建因测试类型错误退出的initial日志保留；最终通过。最终文档包以 `.cache/gui-text-final-pack-proof.json` 逐条登记与已测包的比较：仅README / docs可变化，所有非文档条目必须同字节；实际消费认证只由此身份链关联。
+
+实际生产 `.cache/gui-text-production-01/{smoke,identity,FINAL}.json` / RESULT.md：38辅助检查PASS，不增加正式case；8个HTTP / site入口同字节，主main-DM5w6q7L.js SHA256 `3e5ab66465d11875e7f0ed83cd7b1eb553361b34464994999a3a17273954f6eb`。新示例GUI4 / GUI5、text开关、38slots / 焦点 / 选择 / 回调、clear / restore / close / reopen、390px局部pan和150icons通过。首次hash定位在字体ready后滚动，直开#gui-layer在1000px视口中top198.859375；只重建展示页，dist256份仍与已测consumer同字节。page / console / render / non-cancellation network errors均0；raw requestfailed为11次ERR_ABORTED，5distinct退役字页已另外HTTP200 / site字节匹配，不能声称raw失败0。该辅助浏览器为SwiftShader，不外推NVIDIA native0；sidebar active高亮前项仍为已记录边界。真实IAB ready截图为 `.cache/gui-text-production-01/iab-composed-gui.png`。
+
+下方893唯一用例（888 PASS＋5预期SKIP）、128值tested包及生产记录为上一image-only阶段历史检查点（da38b2d），不是131值当前源码的发布认证。
+
+## 历史检查点：源 GUI 图像图层与附魔台可选集成
 
 当前119组件、4份数据、5个函数，共128值；新增GuiImageLayer / layoutGuiImages / renderGuiImages及EnchantingTable可选imageRender，默认CSS保留。API与原图 / alpha / 坐标边界见 [GUI_IMAGE_QA.md](GUI_IMAGE_QA.md)。
 

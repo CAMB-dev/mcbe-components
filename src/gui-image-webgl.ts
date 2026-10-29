@@ -1,3 +1,4 @@
+import { GUI_IMAGE_VERTEX_SHADER as VERTEX, GUI_IMAGE_FRAGMENT_SHADER as FRAGMENT, GUI_COPY_VERTEX_SHADER as COPY_VERTEX, GUI_COPY_FRAGMENT_SHADER as COPY_FRAGMENT } from './gui-layer-kernels';
 import type { PixelTexture } from './item-renderer-engine';
 import { layoutGuiImages } from './gui-image-geometry';
 import type { GuiImageGeometry, GuiImageLayout, GuiImageLayoutOptions, GuiImageRect, GuiImageRgba } from './gui-image-geometry';
@@ -55,34 +56,10 @@ function validate(options: GuiImageRenderOptions): GuiImageLayout {
   return layout;
 }
 
-const VERTEX = `
-attribute vec2 position;
-attribute vec2 packedUv;
-uniform mat4 mvp;
-varying highp vec2 uv;
-void main() {
-  gl_Position = mvp * vec4(position, 0.0, 1.0);
-  uv = packedUv;
-}`;
-const FRAGMENT = `
-precision highp float;
-uniform sampler2D source;
-uniform vec4 tint;
-uniform float hudOpacity;
-varying highp vec2 uv;
-void main() {
-  vec4 value = texture2D(source, uv);
-  gl_FragColor = vec4(value.rgb * tint.rgb, (value.a * tint.a) * hudOpacity);
-}`;
-const COPY_VERTEX = `
-attribute vec2 position;
-varying highp vec2 uv;
-void main() { gl_Position = vec4(position, 0.0, 1.0); uv = (position + 1.0) * 0.5; }`;
-const COPY_FRAGMENT = `
-precision highp float;
-uniform sampler2D source;
-varying highp vec2 uv;
-void main() { gl_FragColor = texture2D(source, uv); }`;
+
+
+
+
 
 /**
  * UI/Blit-style straight-source/point/clamp rendering into an RGBA8 PMA target.

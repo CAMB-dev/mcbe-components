@@ -1,15 +1,18 @@
 """Prepare the explicitly scoped workstation font subsets from an installed game.
 
 Usage: python scripts/use-local-workstation-fonts.py [GAME_CONTENT]
-Seven original PNG pages stay in ignored .cache/local-fonts/workstation. This
-does not register a global font, change the existing ten-character subset, or
-copy game font artwork into Git/public/npm directories.
+The seven existing original PNG pages and one additional SGA page stay in
+ignored .cache/local-fonts/workstation. The separate gui-fonts.json contains
+complete-cell GuiTextFont profiles; fonts.json retains its old BitmapText
+profiles. This does not register a global font, change the existing ten-character
+subset, or copy game font artwork into Git/public/npm directories.
 """
 from pathlib import Path
 import argparse
 import hashlib
 import json
 import struct
+import zlib
 
 
 PAGES = {
@@ -24,10 +27,83 @@ PAGES = {
 DEFAULT_METADATA_SHA = '1326598897eebc60e5c6835f1fdf700c175f5d2628bb4ed6a9bba959d3695793'
 LEDGER_SHA = 'ae14be5484565a0d8db35709fae9e3b2a0c7f1869ba2ceff93c87d6e7282fe0f'
 LABEL_CHARACTERS = '附魔台物品栏'
+GUI_EXTRA = {
+    'ascii_sga.png': ('624678abe1122a56f343812782f1d6542c2414ad7e94360cbf8f1d50c1415c8a', (128, 128)),
+    'ascii_sga.json': ('619313a4e15f0250246f252f8686805d43738a3287744607ed09112068f3ba4d', None),
+}
 
 
 def sha(content):
     return hashlib.sha256(content).hexdigest()
+
+
+def indexed_alpha(content):
+    """Read the pinned indexed8 font's original alpha without re-encoding it."""
+    width, height, depth, kind, compression, filtering, interlace = struct.unpack_from('>IIBBBBB', content, 16)
+    if (depth, kind, compression, filtering, interlace) != (8, 3, 0, 0, 0):
+        raise SystemExit('Unexpected original indexed8 font encoding; audit before deriving advances.')
+    pos, packed, transparency = 8, bytearray(), b''
+    while pos < len(content):
+        size = struct.unpack_from('>I', content, pos)[0]
+        tag, payload = content[pos + 4:pos + 8], content[pos + 8:pos + 8 + size]
+        if zlib.crc32(tag + payload) != struct.unpack_from('>I', content, pos + 8 + size)[0]:
+            raise SystemExit('Original font PNG CRC mismatch.')
+        if tag == b'IDAT':
+            packed.extend(payload)
+        elif tag == b'tRNS':
+            transparency = payload
+        pos += size + 12
+        if tag == b'IEND':
+            break
+    decoded = zlib.decompress(packed)
+    if len(decoded) != (width + 1) * height:
+        raise SystemExit('Unexpected original font PNG scanline size.')
+    previous, alpha = bytearray(width), bytearray()
+    for y in range(height):
+        start = y * (width + 1)
+        mode, row = decoded[start], bytearray(decoded[start + 1:start + width + 1])
+        if mode not in range(5):
+            raise SystemExit('Invalid original font PNG filter.')
+        for x in range(width):
+            a, b, c = row[x - 1] if x else 0, previous[x], previous[x - 1] if x else 0
+            prediction = a + b - c
+            distances = (abs(prediction - a), abs(prediction - b), abs(prediction - c))
+            paeth = (a, b, c)[distances.index(min(distances))]
+            row[x] = (row[x] + (0, a, b, (a + b) // 2, paeth)[mode]) & 255
+        alpha.extend(transparency[index] if index < len(transparency) else 255 for index in row)
+        previous = row
+    return width, height, alpha
+
+
+def gui_fonts(labels, selected):
+    native_labels = {**labels, 'pageSizes': [256] * len(labels['pages']), 'cellHeight': 16,
+                     'glyphs': {character: {**glyph, 'offsetY': 0} for character, glyph in labels['glyphs'].items()}}
+    measurements = {}
+
+    def ascii_font(name, codes, height, y_offset):
+        width, _, alpha = indexed_alpha(selected[name])
+        glyphs, cells = {}, []
+        for code in codes:
+            character, x, y = chr(code), (code % 16) * 8, (code // 16) * height
+            # Exclusive right boundary plus one spacing pixel, never trim the
+            # full source quad. Empty cells retain advance1, including period.
+            right = max((xx + 1 for yy in range(height) for xx in range(8)
+                         if alpha[(y + yy) * width + x + xx]), default=0)
+            space = character == ' '
+            glyphs[character] = {'page': 0, 'x': x, 'y': y, 'width': 0 if space else 8,
+                                 'height': 0 if space else height, 'advance': 4 if space else right + 1,
+                                 'offsetX': 0, 'offsetY': y_offset}
+            cells.append({'character': character, 'codepoint': code, 'sourceRect': [x, y, 8, height],
+                          'alphaRightExclusive': right, 'advance': glyphs[character]['advance']})
+        measurements[name] = {'alphaSha256': sha(alpha), 'cells': cells}
+        return {'pages': ['./' + name], 'pageSizes': [128], 'cellHeight': height,
+                'glyphs': glyphs, 'lineHeight': height}
+
+    runes = ascii_font('ascii_sga.png', range(32, 127), 8, 0)
+    costs = ascii_font('default8.png', range(ord('0'), ord('9') + 1), 12, -3)
+    if runes['glyphs']['.']['advance'] != 1 or runes['glyphs']['.']['width'] != 8:
+        raise SystemExit('The observed empty SGA period must retain its complete cell and advance1.')
+    return {'labels': native_labels, 'runes': runes, 'costs': costs}, measurements
 
 
 def main():
@@ -43,7 +119,8 @@ def main():
     base = 16 + count * 256
     if version != 1 or not 0 < count < 100000 or base > len(data):
         raise SystemExit('Unsupported font.brarchive table.')
-    wanted = set(PAGES) | {'default8.json'}
+    original_wanted = set(PAGES) | {'default8.json'}
+    wanted = original_wanted | set(GUI_EXTRA)
     selected = {}
     for index in range(count):
         record = data[16 + index * 256:16 + (index + 1) * 256]
@@ -59,12 +136,13 @@ def main():
         if base + offset + size > len(data):
             raise SystemExit(f'Invalid font entry bounds: {name}')
         content = data[base + offset:base + offset + size]
-        if name in PAGES:
-            expected_sha, dimensions = PAGES[name]
+        if name in PAGES or name in GUI_EXTRA:
+            expected_sha, dimensions = (PAGES | GUI_EXTRA)[name]
+        else:
+            expected_sha, dimensions = DEFAULT_METADATA_SHA, None
+        if dimensions is not None:
             if len(content) < 24 or not content.startswith(b'\x89PNG\r\n\x1a\n') or struct.unpack_from('>II', content, 16) != dimensions:
                 raise SystemExit(f'Unexpected original PNG dimensions: {name}')
-        else:
-            expected_sha = DEFAULT_METADATA_SHA
         if sha(content) != expected_sha:
             raise SystemExit(f'{name} differs from the observed 1.26.6005.0 source. Do not reuse these metrics without a new audit.')
         selected[name] = content
@@ -73,6 +151,8 @@ def main():
     default_metadata = json.loads(selected['default8.json'])
     if default_metadata != {'ascii_character_height': 12, 'ascii_character_y_offset': -3, 'ascii_extended': True}:
         raise SystemExit('Unexpected default8 metadata.')
+    if json.loads(selected['ascii_sga.json']) != {'ascii_character_height': 8, 'ascii_character_y_offset': 0}:
+        raise SystemExit('Unexpected ascii_sga metadata.')
 
     label_pages = list(PAGES)[:-1]
     labels = {
@@ -92,6 +172,7 @@ def main():
                    for character, x in [('1', 8), ('2', 16)]},
         'lineHeight': 10,
     }
+    gui, measurements = gui_fonts(labels, selected)
     # All source hashes and dimensions are checked before the first write.
     destination = project / '.cache/local-fonts/workstation'
     destination.mkdir(parents=True, exist_ok=True)
@@ -119,12 +200,41 @@ def main():
             'appearance': {'enabledColor': '#7fff1f', 'shadowColor': '#204008', 'shadowOffsetSource': [1, 1], 'sampling': 'point', 'shader': 'bitmap'},
             'unverified': 'No multi-digit costs, other characters, multiline metrics or disabled-state vertex color are certified.',
         },
-        'files': [{'file': name, 'sourceEntry': name, 'sha256': sha(content), 'bytes': len(content), 'modifications': 'None; original bytes'} for name, content in selected.items()],
+        'files': [{'file': name, 'sourceEntry': name, 'sha256': sha(content), 'bytes': len(content), 'modifications': 'None; original bytes'} for name, content in selected.items() if name in original_wanted],
         'boundaries': 'This subset is not a full font or whole-GUI/native-AA certification. No global capture position or per-glyph fit is applied.',
     }
     (destination / 'provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    (destination / 'gui-fonts.json').write_text(json.dumps(gui, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    gui_provenance = {
+        'distribution': provenance['distribution'], 'observedGameVersion': '1.26.6005.0',
+        'archive': str(archive), 'archiveSha256': sha(data),
+        'virtualExport': 'nativeGuiWorkstationFonts; optional caller-owned data, not a package/global provider',
+        'labels': {
+            'characters': list(LABEL_CHARACTERS), 'pageSizes': [256] * len(label_pages), 'cellHeight': 16,
+            'hostFontScale': 0.5, 'offsetY': 0,
+            'evidence': 'Original complete16x16 Unicode cells; adjacent pen18 source units was measured in two three-character runs. offsetY0 deliberately excludes the old DOM-centering inset.',
+            'unverified': 'Uniform final trailing advance18 and lineHeight20 are host profile choices, not measured multiline/terminal advances.',
+        },
+        'runes': {
+            'characters': 'Printable ASCII U+0020..U+007E only; all other codes are absent and the renderer must report a missing glyph.',
+            'cellHeight': 8, 'sourceMetadata': json.loads(selected['ascii_sga.json']),
+            'metrics': 'Complete8x8 cell at[(code%16)*8,floor(code/16)*8]; advance=original nonzero-alpha exclusive right boundary+1. Empty cells keep a completequad and advance1, including period. Space alone is advance-only0x0+4.',
+            'ownership': 'The host supplies rune strings; no captured vertex buffer, invented word or fallback glyph generates this dictionary.',
+            'unverified': 'Source-derived advances and lineHeight8 are not a native certification for every printable ASCII string.',
+        },
+        'costs': {
+            'characters': list('0123456789'), 'cellHeight': 12, 'sourceMetadata': default_metadata,
+            'metrics': 'Complete8x12 original cells at[(code%16)*8,floor(code/16)*12], offsetY-3, advance=original nonzero-alpha exclusive right boundary+1. Source-cell lineHeight12 is a host single-line profile, not recovered native line spacing.',
+            'observed': 'Only isolated digits1/2/2, their complete source rectangles and y-bearing-3 were captured. The remaining digits and all multi-digit advances are source-derived, not native-certified.',
+        },
+        'measurements': measurements,
+        'files': [{'file': name, 'sourceEntry': name, 'sha256': sha(content), 'bytes': len(content), 'modifications': 'None; original bytes'} for name, content in selected.items()],
+        'boundaries': 'Original fonts.json/default host metrics and seven existing PNG bytes remain unchanged. This separate profile does not certify the complete native GUI or fonts beyond the explicitly declared subset.',
+    }
+    (destination / 'gui-provenance.json').write_text(json.dumps(gui_provenance, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Prepared seven unchanged font PNGs and two explicit subsets in {destination}.')
     print('Restart Vite for nativeWorkstationFonts. Only six label characters and cost digits1/2 are supported; no global font is changed.')
+    print('Separate nativeGuiWorkstationFonts adds offset0 labels, original printable-ASCII SGA and source-derived cost digits0..9; no original page is modified.')
 
 
 if __name__ == '__main__':

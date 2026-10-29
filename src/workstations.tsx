@@ -4,7 +4,7 @@ import { InventoryGrid, ItemSlot } from './inventory';
 import type { InventoryItem, InventorySlotAction } from './inventory';
 import { EnchantingImagePresentation, useEnchantingImageLayer } from './enchanting-image-layer';
 import type { EnchantingTableImageRenderProfile } from './enchanting-image-layer';
-export type { EnchantingTableImageRenderProfile } from './enchanting-image-layer';
+export type { EnchantingTableImageRenderProfile, EnchantingTableTextRenderProfile, EnchantingTableTextRenderStyle } from './enchanting-image-layer';
 
 export type WorkstationTextContext =
   | { kind: 'title' | 'inventory-label'; align: 'start' }
@@ -112,6 +112,8 @@ export interface EnchantmentOption {
   label: string;
   level: number;
   runes?: ReactNode;
+  /** Source rune string for the optional packed-cell profile; case is preserved. */
+  runeText?: string;
   disabled?: boolean;
 }
 export interface EnchantmentOptionProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'id' | 'children'>, EnchantmentOption {
@@ -124,7 +126,7 @@ export interface EnchantmentOptionProps extends Omit<ButtonHTMLAttributes<HTMLBu
 }
 /** A reusable original-texture option; game eligibility is supplied via disabled. */
 export const EnchantmentOption = forwardRef<HTMLButtonElement, EnchantmentOptionProps>(function EnchantmentOption({
-  id, label, level, runes, disabled, tier = 1, buttonId, onEnchant, onClick, renderText,
+  id, label, level, runes, runeText, disabled, tier = 1, buttonId, onEnchant, onClick, renderText,
   type = 'button', className, style, 'aria-label': ariaLabel, 'aria-description': ariaDescription, ...props
 }, ref) {
   return <button {...props} ref={ref} id={buttonId} type={type}
@@ -134,7 +136,7 @@ export const EnchantmentOption = forwardRef<HTMLButtonElement, EnchantmentOption
     onClick={event=>{onClick?.(event); if(!event.defaultPrevented && !disabled) onEnchant?.(id);}}
     style={{'--mc-enchantment-dust':`var(--mc-skin-enchanting-dust-${tier})`,'--mc-enchantment-dust-disabled':`var(--mc-skin-enchanting-dust-disabled-${tier})`,...style} as CSSProperties}>
     <span className="mc-enchanting__dust" aria-hidden="true"/>
-    <span className="mc-enchanting__runes" data-runes={runes !== undefined || undefined} aria-hidden="true">{runes}</span>{' '}
+    <span className="mc-enchanting__runes" data-runes={runes !== undefined || runeText !== undefined || undefined} aria-hidden="true">{runes !== undefined ? runes : runeText}</span>{' '}
     <span className="mc-enchanting__cost">{renderText ? workstationText(String(level), { kind: 'enchantment-cost', align: 'end', disabled: !!disabled, id, tier }, renderText) : level}</span>
   </button>;
 });
@@ -153,7 +155,7 @@ export const EnchantingTable = forwardRef<HTMLElement, EnchantingTableProps>(fun
   title='Enchant', item, lapis, options, book, onInputAction, onEnchant, renderText, imageRender, className, ...props
 }, ref) {
   const root = useRef<HTMLElement | null>(null);
-  const paint = useEnchantingImageLayer(imageRender, root, options, !!props.onClose);
+  const paint = useEnchantingImageLayer(imageRender, root, options, !!props.onClose, title, props.inventoryLabel ?? 'Inventory');
   return <EnchantingImagePresentation.Provider value={paint.presentation}><WorkstationFrame {...props} ref={node => {
     root.current = node; if (typeof ref === 'function') ref(node); else if (ref) ref.current = node;
   }} title={title} renderText={renderText} className={['mc-enchanting',className].filter(Boolean).join(' ')}>
@@ -164,7 +166,7 @@ export const EnchantingTable = forwardRef<HTMLElement, EnchantingTableProps>(fun
       onClick={()=>onInputAction?.('lapis','primary')} onSecondaryAction={()=>onInputAction?.('lapis','secondary')}/>
     <div className="mc-enchanting__options" role="group" aria-label="Enchantments">{Array.from({length:3},(_,index)=>{
       const option=options[index];
-      return option ? <EnchantmentOption key={`option:${option.id}`} id={option.id} label={option.label} level={option.level} runes={option.runes} disabled={option.disabled}
+      return option ? <EnchantmentOption key={`option:${option.id}`} id={option.id} label={option.label} level={option.level} runes={option.runes} runeText={option.runeText} disabled={option.disabled}
         tier={([1,2,3] as const)[index]} onEnchant={onEnchant} renderText={renderText}/>
         : <div key={`empty:${index}`} className="mc-enchanting__empty-option" aria-hidden="true"/>;
     })}</div>

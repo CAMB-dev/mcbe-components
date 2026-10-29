@@ -61,6 +61,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | --- | --- | --- |
 | `Text` | `as`: span / p / h1…h4；`size`: sm / md / lg / xl；`shadow` 默认 true | 像素文字与无模糊阴影，转发 HTMLElement ref |
 | `GuiImageLayer` | **必填** 物理 `width` / `height`、`guiScale`、`images`；可选 `scissor`、`outputRect`、`background`、`label`、`renderKey`、状态回调 | ref为canvas；已求值GLOBAL image / nine-slice几何及UI/Blit GPU profile；已分层验证底层 / 集成 / 包与生产，非原生整GUI认证 |
+| `GuiLayer` | **必填** 物理 `width` / `height`、`guiScale`、有序 `commands`；文字含显式 `font` / `origin` / `fontScale` / `sampling` / `shader` | 单一RGBA8目标顺序绘制原图与字格；ref为canvas，公开源输入 / GPU / React正式17项通过，固定阶段与整GUI验收边界见 [GUI_LAYER_QA.md](docs/GUI_LAYER_QA.md) |
 | `GuiIcon` | **必填** `name: GuiIconName`；`scale` 正整数（默认1）、`label`；span 属性 | 150张完整原版 GUI PNG，按原图物理像素整数缩放；ref 为 span；默认装饰，label 提供名称；不自动切状态 / tint / 裁切 |
 | `BitmapText` | **必填** 字符串 children、`font`、`sampling`: point / bilinear、`shader`: bitmap / bitmap-smooth；可选 `renderer`: cpu（默认）/ webgl / webgl-shared、`layout`: visual（默认）/ advance、`profile`: atlas-rect（默认）/ bedrock-unicode、具体 CSS `background`、`scale`、`color`、显式 `shadow` 与回调 | ref 为 span；CPU 绘制任意字图矩形；webgl 独立 context，webgl-shared 同 Document 共享 Offscreen context、每实例 bitmaprenderer；background 是 GPU target clear 色；保留真实 DOM 原文及加载失败回退 |
 | `Button` | `variant`: default / primary / danger / ghost；`size`: sm / md / lg；`loading`、`fullWidth`、`startIcon`、`endIcon` | 默认 `type="button"`；loading 保留文字，禁用并设置 aria-busy；继承 button 属性 |
@@ -93,7 +94,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `WorkstationFrame` | **必填** `title`；`inventory`、`hotbar`、`inventoryLabel`、`renderText`、`onClose`、`closeLabel`、`onInventoryAction` | 176×166 游戏像素 Classic 容器外框，以 GUI 2 显示；窄屏局部滚动 |
 | `InventoryScreenFrame` | **必填** `title`、`book: ReactNode`、`children: ReactNode`；`layout` / `defaultLayout`: recipe-book / survival、`onLayoutChange`、`onHelp`、`onClose`、`helpLabel`、`closeLabel`、`showClose` | 共享固定 326×166 game 背包 / 工作台外框；默认 recipe-book，survival 隐藏 book 并居中右面板，ref 为 section；不适用于熔炉 compact 根布局 |
 | `Grindstone` | `inputs`: readonly [item, item]；`result`、`invalid`、`onInputAction`、`onTakeResult`；Frame 属性 | 砂轮双输入、结果、原始箭头 / 无效标记和玩家背包；结果由调用方提供 |
-| `EnchantingTable` | **必填** `options`，可为空数组；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`、`renderText`、`imageRender?: EnchantingTableImageRenderProfile`；Frame 属性 | 固定三行背景；仅有记录的行提供选项/费用/动作，缺记录为 aria-hidden 非交互背景；book 支持自定义渲染 |
+| `EnchantingTable` | **必填** `options`，可为空数组；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`、`renderText`、`imageRender?: EnchantingTableImageRenderProfile`（可选text / 显式metrics与styles）、`options[].runeText`；Frame 属性 | 固定三行背景；仅有记录的行提供选项/费用/动作，缺记录为 aria-hidden 非交互背景；book 支持自定义渲染 |
 | `EnchantmentOption` | **必填** `id`、`label`、`level`；`tier`: 1 / 2 / 3、`runes`、`disabled`、`buttonId`、`onEnchant`、`renderText`；button 属性 | 可独立使用的附魔选项；id 是业务 ID，buttonId 是可选 DOM id；onClick.preventDefault() 取消选择回调 |
 | `EnchantingRunes` | **必填** `text`、`atlasUrl`；`scale`: 1…4、`color` | 按原始 SGA 图集采样字形与字距；图集由调用方提供，不随 npm 捆绑 |
 | `EnchantingBook` | `textureUrl`、`open`、`pageFlip`、`lighting`: calibrated / unlit、`yaw`、`pitch`、`roll`、`rendererState?: EnchantingBookRendererState`、`onRendererError`；canvas 属性 | 实际 Bedrock GUI draw 的mesh、UV和着色路径；rendererState 接收列主序 projection / view / model 与7或8组bone矩阵及可选光照/overlay；默认 open/pageFlip 仍是受控重建 |
@@ -298,7 +299,7 @@ ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随
 
 `EnchantingTable` 在 `options={[]}` 或不足三条记录时仍保留三个原版 dark 背景，缺记录的行不生成 rune、dust、cost、按钮或回调。已有记录继续使用 `EnchantmentOption`。这对应源 `enchant_button_panel` 的常驻背景和独立按钮可见性绑定，并由原生空槽截图确认，不代表整页或默认书本动画已达原生零差。演示页用干净钻石剑，Clear / Restore 显式切换输入、记录及 `EnchantingBook open={0/1}`；库本身不猜附魔资格，也不据 `options` 自动开合宿主书本。
 
-`EnchantingTable imageRender` 可显式给出 `frame:{width,height,guiScale}`、GLOBAL game `origin`（默认ceil stage居中）和`displayScale`（默认1，正数≤32）。单层接管panel / close / indent / 38slots / lapis / rows / dust图像，ready前或失败时保留CSS fallback；DOM文字、物品、book和操作语义保留。默认仍CSS；完整GUI辅助测量已见改善但仍非零（public18为26595 / gallery20为28452差异像素），实际组件正式13项与生产34项辅助检查已通过；四个底层image-pass零差不等于整台零差。完整配置与坐标 / 主题边界见 [GUI_IMAGE_QA.md](docs/GUI_IMAGE_QA.md)。
+上一image-only阶段中，`EnchantingTable imageRender` 可显式给出 `frame:{width,height,guiScale}`、GLOBAL game `origin`（默认ceil stage居中）和`displayScale`（默认1，正数≤32）。单层接管panel / close / indent / 38slots / lapis / rows / dust图像，ready前或失败时保留CSS fallback；DOM文字、物品、book和操作语义保留。默认仍CSS；完整GUI辅助测量已见改善但仍非零（public18为26595 / gallery20为28452差异像素），实际组件正式13项与生产34项辅助检查已通过；四个底层image-pass零差不等于整台零差。完整配置与坐标 / 主题边界见 [GUI_IMAGE_QA.md](docs/GUI_IMAGE_QA.md)。
 
 工作站文字可显式传入 `renderText: WorkstationTextRenderer`。WorkstationFrame 的标题、PlayerInventory 的可见标签及 EnchantmentOption 的数字费用提供 `WorkstationTextContext`，EnchantingTable 转发同一个回调到这些位置。`kind` 为 title / inventory-label（align=start），或 enchantment-cost（align=end，附 disabled / id / tier）。回调只返回非交互的视觉节点；原始标题、库存标签、费用与 ARIA 名称仍由库保留。未传回调时默认 DOM 文字保持原样，不自动替换字体，也不影响独立的 ItemTooltip.renderText。完整示例见 [WORKSTATION_TEXT_QA.md](docs/WORKSTATION_TEXT_QA.md)。
 
@@ -315,7 +316,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **119 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 119 项（含 InventoryScreenFrame / SurvivalInventoryScreen / RecipeBook / CraftingScreen），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 4 份数据（3份 renderer 数据及 `guiIconNames` 原图名称目录）与 `shadeItemGlint` / `renderItemGlint` 两个纯渲染函数，另有纯几何函数 `layoutGuiImages` 以及两个有 GPU 副作用的 `renderBitmapGlyphs` / `renderGuiImages`，均不计组件数量；ESM 值导出共 128 项。
+当前 **120 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 120 项（含 InventoryScreenFrame / SurvivalInventoryScreen / RecipeBook / CraftingScreen），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 4 份数据（3份 renderer 数据及 `guiIconNames` 原图名称目录）、两个纯渲染函数 `shadeItemGlint` / `renderItemGlint`、两个纯几何函数 `layoutGuiImages` / `layoutGuiText` 以及三个有 GPU 副作用的 `renderBitmapGlyphs` / `renderGuiImages` / `renderGuiLayer`，均不计组件数量；ESM 值导出共 131 项。本轮新增GuiLayer / 文字合成接口，公开GPU17项、实际组件10项及React18 / 19包消费已通过；生产38项辅助检查已通过，目录状态不代替整GUI验收。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -343,7 +344,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 新 `GuiImageLayer` / `layoutGuiImages` / `renderGuiImages` 处理已经求值的全局源矩形，不解析整套 JSON UI。width / height 是实际物理framebuffer尺寸，guiScale是显式游戏尺度；image rect 用GLOBAL game单位，scissor / outputRect用物理像素。nineSlice的baseSize / insets来自源逻辑metadata，不能用PNG物理尺寸替代。输出裁切不重置全frame投影或像素相位。
 
-layoutGuiImages是纯几何路径，可用于SSR准备；renderGuiImages需要WebGL，默认返回PMA framebuffer字节，straight-alpha仅显式8位反预乘适配。Layer支持URL或显式RGBA8，默认装饰，状态为loading / ready / error；错误不静默改CPU，改变renderKey或输入重试。每layer一个独占context，仍有readPixels和资源预算，不宣称零拷贝或无限layer。底层16项已通过，可选工作站imageRender实施已冻结，但完整GUI辅助测量与实际包已完成，实际组件13项及生产34项辅助检查已完成，完整GUI仍非零，API草稿及范围见 [GUI_IMAGE_QA.md](docs/GUI_IMAGE_QA.md)。
+layoutGuiImages是纯几何路径，可用于SSR准备；renderGuiImages需要WebGL，默认返回PMA framebuffer字节，straight-alpha仅显式8位反预乘适配。Layer支持URL或显式RGBA8，默认装饰，状态为loading / ready / error；错误不静默改CPU，改变renderKey或输入重试。每layer一个独占context，仍有readPixels和资源预算，不宣称零拷贝或无限layer。底层16项已通过，可选工作站imageRender实施已冻结，但完整GUI辅助测量与实际包已完成，实际组件13项及生产34项辅助检查已完成，完整GUI仍非零，该image-only阶段的范围见 [GUI_IMAGE_QA.md](docs/GUI_IMAGE_QA.md)。
 
 `GuiIcon` 另提供150张原版完整 GUI 图标：设置33、导航34、库存/合成26、社交23、设备13、反馈21。`guiIconNames` 是可枚举的只读名称目录，`GuiIconName` / `GuiIconProps` 为公开类型；旧 PixelIcon 的16个通用符号保留。示例：
 
@@ -357,6 +358,18 @@ layoutGuiImages是纯几何路径，可用于SSR准备；renderGuiImages需要We
 上述纹理 URL 由使用方提供。`sourceSize` / `slice` 描述 PNG 物理像素，`size` / `destinationBorder` 描述缩放前的 GUI 逻辑像素：例如 cell_image 的物理图为 10×10，逻辑 base_size 为 5×5，不能把两个尺寸混用。Image / NineSlice 的 sourceSize、slice 与 scale 必须为合法整数，非有限、负数或越界切片抛 `RangeError`；内容尺寸和目标边距可用有限逻辑值，像素验收仍要求对齐物理像素。`style` 可覆盖默认布局，但不包含在默认参数的像素证明中。
 
 `AnvilCost` 支持 `{kind:'levels', levels, affordable?, label?}` 或 `{kind:'too-expensive', label?}`；费用与可用性来自调用方，不推算游戏规则。重命名字段遵循原版模板的 `shadow:false`，费用文字保留 `shadow:true`。费用阴影色与原生 baseline / snapping 仍待实拍验证。
+
+### 同目标原图与文字
+
+`GuiLayer` / `renderGuiLayer` 按 `commands` 的 image / text 顺序绘制同一个RGBA8目标；中途不通过独立文字画布合成。`layoutGuiText` 是无I/O、无GPU的文字几何函数，接收实际物理frame、显式guiScale、GLOBAL game `origin`、`GuiTextFont`、`fontScale`、`sampling: "point" | "bilinear"` 和 `shader: "bitmap" | "bitmap-smooth"`。字体在BitmapFont之外声明原页 `pageSizes`（128或256）与 `cellHeight`，不能把裁剪字图冒充完整原页。
+
+文字 `color` 是RGBA8顶点字节，与归一化 `tint` / `hudOpacity` 分开；`shadow` 有独立 `offset` / `tint`，不预先烘焙主色。局部half顶点与全frame MVP共同决定位置，`outputRect`只裁输出，`scissor`须显式给出。函数不解析整套JSON UI，不自动恢复省略号、长文本换行或游戏生成符文。`layoutSourceGuiLayer`、prepared GPU入口和精度helpers保持内部，不是公开导出。
+
+React层的 `commands` 可包含原图URL或显式RGBA8；text的原页默认取 `font.pages`，也可用 `pages: ReadonlyMap` 显式覆盖。低层 `renderGuiLayer` 要求已解码的text `pages`；返回 `layout`、像素、`alphaMode` 与 `dispose`。默认framebuffer字节为PMA，显式straight-alpha是有损8位反预乘；活canvas独占context，保留readPixels及资源预算，不宣称零拷贝、共享池或无限实例。组件提供loading / ready / error、canvas ref及renderKey重试。
+
+`EnchantingTable imageRender.text` 新增必需的 `metrics:{lineHeight,paintOffset}`，并明确提供 `labels` / `costs` 与可选 `runes` 字体样式（font、fontScale、sampling、shader及可选颜色 / tint / hudOpacity）。`options[].runeText` 是宿主已排版 / 截断的最终原始大小写字符串；旧任意 `runes: ReactNode` 仍可用于DOM。新图文配置不推测缺字或度量，异常时整层同有效scale退回CSS；最终组件10项覆盖回退 / 恢复、DOM物品、book、焦点、选择和交互语义。旧CSS、GuiImageLayer与BitmapText默认路径不变。
+
+公开源输入 / GPU / React正式17项已通过：固定GUI4 / GUI5阶段的四FBO与四实际React完整目标共28,825,120像素RGBA零差；字符串、原字页与源布局作为正常输入，捕获属性仅用于比较。实际附魔台组件正式10项另验组合与生命周期，完整747,600像素原生区域仍有10,155个差异像素，不能称整GUI pixel perfect。实际React18 / 19包消费和生产38项辅助检查亦通过各自范围；可在本机展示页 `#gui-layer` 查看，完整API、示例和分层证据见 [GUI_LAYER_QA.md](docs/GUI_LAYER_QA.md)。
 
 ### 酿造、锻造、制图与 HUD
 
@@ -486,6 +499,8 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 
 本机样本可执行 `python scripts/use-local-unicode-sample.py "C:/XboxGames/Minecraft for Windows/Content"` 后重启 Vite。该仓库工具只准备已测的8张原页、10字符，保存在忽略目录；它不生成完整 Unicode 字体，也不改变全局字体。启用后 `site/` 构建可能包含这些本地字图，npm 包不含它们。
 
+同一 `use-local-workstation-fonts.py` 现另生成ignored `gui-fonts.json`，由仅展示页虚拟模块提供 `nativeGuiWorkstationFonts={labels,costs,runes}`；缺失返回undefined，不是npm导出或全局font-face。它在旧七页原字节外增加一张原SGA页，共八张本机字体PNG，旧 `fonts.json` 与七张源页保持不变。新cost字典0..9仅有原alpha及advance6来源，实际原生费用只观察到1/2；SGA含95个可打印ASCII，period无墨但advance1，space零宽字格advance4，不恢复游戏符文生成 / 大小写转换 / 截断。新Composed GUI `#gui-layer` 示例可选GUI4/5、清空 / 恢复，仅此例在本机资源存在时默认启用图文层；原五处字体演示仍默认关闭。私有原页不进Git / npm，包含它们的本机site不能直接当作可公开字体包。
+
 早期 GUI4/5 字形、排版与 CPU / 软件后端反例保留在 [NATIVE_BITMAP_FONT_QA.md](docs/NATIVE_BITMAP_FONT_QA.md)。新 GPU 函数以真实捕获的8个 draw、原 API-before 背景和固定输入，在已测 NVIDIA 后端对完整 target / field＋halo 零 RGBA 差；这不认证默认 CPU、任意文字、透明 DOM 合成或完整 GUI。具体证据范围见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md)。
 
 本地展示页也可以使用自己安装的 Bedrock 字体：
@@ -560,7 +575,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、119 个组件、4 份数据和 5 个函数、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball；本轮120组件 / 131值的React18.3.1 / 19.3.1消费已通过ESM、SSR、类型 / ref / profile、CSS、皮肤、字体及许可检查，两消费者各256份dist逐字节一致。正式范围累计920唯一用例（915 PASS、5预期SKIP），来自多批次，非一次整套全绿。详见 [VERIFICATION.md](docs/VERIFICATION.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

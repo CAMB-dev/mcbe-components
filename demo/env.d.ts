@@ -11,4 +11,9 @@ declare module 'virtual:mcbeui-game-font' {
     labels: import('../src/bitmap-text').BitmapFont;
     costs: import('../src/bitmap-text').BitmapFont;
   } | undefined;
+  export const nativeGuiWorkstationFonts: {
+    labels: import('../src/gui-text-geometry').GuiTextFont;
+    runes: import('../src/gui-text-geometry').GuiTextFont;
+    costs: import('../src/gui-text-geometry').GuiTextFont;
+  } | undefined;
 }

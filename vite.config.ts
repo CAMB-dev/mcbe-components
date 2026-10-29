@@ -16,6 +16,7 @@ const hbuiChinesePath = localFont('NotoSansSC-Regular.otf');
 const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loading-indicator.gif', import.meta.url));
 const nativeBitmapPath = fileURLToPath(new URL('./.cache/local-fonts/unicode/font.json', import.meta.url));
 const nativeWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/fonts.json', import.meta.url));
+const nativeGuiWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/gui-fonts.json', import.meta.url));
 export default defineConfig({
   base: './', build: { outDir: 'site', rollupOptions: { input: { main: fileURLToPath(new URL('./index.html', import.meta.url)), calibration: fileURLToPath(new URL('./calibration.html', import.meta.url)) } } },
   server: {
@@ -80,6 +81,42 @@ export default defineConfig({
         if (complete) workstationModule = imports.join('\n') + `\nexport const nativeWorkstationFonts = { ${fonts.join(',')} };`;
       }
       parts.push(workstationModule);
+      // Separate optional full-cell GUI profiles. Keep the existing BitmapText
+      // workstation subset and its DOM-centering metrics unchanged above.
+      let guiWorkstationModule = 'export const nativeGuiWorkstationFonts = undefined;';
+      if (existsSync(nativeGuiWorkstationPath)) {
+        type LocalGuiFont = { pages: string[]; pageSizes: (128 | 256)[]; cellHeight: number; glyphs: object; lineHeight: number };
+        const sample = JSON.parse(readFileSync(nativeGuiWorkstationPath, 'utf8')) as { labels: LocalGuiFont; runes: LocalGuiFont; costs: LocalGuiFont };
+        const directory = dirname(nativeGuiWorkstationPath);
+        const imports: string[] = [], fonts: string[] = [];
+        let complete = true;
+        for (const kind of ['labels', 'runes', 'costs'] as const) {
+          const font = sample[kind];
+          if (!font || !Array.isArray(font.pages) || !font.pages.length || !font.glyphs || !Number.isFinite(font.lineHeight) || font.lineHeight <= 0
+            || !Array.isArray(font.pageSizes) || font.pageSizes.length !== font.pages.length || font.pageSizes.some(size => size !== 128 && size !== 256)
+            || !Number.isSafeInteger(font.cellHeight) || font.cellHeight <= 0 || font.cellHeight > Math.min(...font.pageSizes)) throw new Error('Invalid local GUI workstation font; rerun use-local-workstation-fonts.py.');
+          const pages = font.pages.map((page, index) => {
+            if (typeof page !== 'string' || isAbsolute(page)) throw new Error('GUI workstation font pages must be relative local paths.');
+            const path = resolve(directory, page), fromDirectory = relative(directory, path);
+            if (fromDirectory === '..' || fromDirectory.startsWith('../') || fromDirectory.startsWith('..\\') || isAbsolute(fromDirectory)) throw new Error('GUI workstation font page is outside its local cache.');
+            if (existsSync(path)) {
+              const png = readFileSync(path), expectedSize = font.pageSizes[index];
+              if (png.length < 24 || !png.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+                || png.readUInt32BE(16) !== expectedSize || png.readUInt32BE(20) !== expectedSize) throw new Error('GUI workstation PNG dimensions differ from pageSizes.');
+            }
+            return path;
+          });
+          complete &&= pages.every(path => existsSync(path));
+          const names = pages.map((path, index) => {
+            const name = `guiWorkstation${kind}Page${index}`;
+            imports.push(`import ${name} from ${JSON.stringify(normalizePath(path) + '?url')};`);
+            return name;
+          });
+          fonts.push(`${kind}: { ...${JSON.stringify(font)}, pages: [${names.join(',')}] }`);
+        }
+        if (complete) guiWorkstationModule = imports.join('\n') + `\nexport const nativeGuiWorkstationFonts = { ${fonts.join(',')} };`;
+      }
+      parts.push(guiWorkstationModule);
       parts.push(existsSync(hbuiLoadingPath)
         ? `import hbuiLoadingIndicatorUrl from ${JSON.stringify(normalizePath(hbuiLoadingPath) + '?url')}; export { hbuiLoadingIndicatorUrl };`
         : 'export const hbuiLoadingIndicatorUrl = undefined;');
