@@ -73,6 +73,7 @@
 - [x] 实现Grindstone可选imageRender / 三profile类型与39槽原图组合，复用私有工作站source helper，23原PNG / 24keys保留旧图身份；独立准备砂轮8页原glyph，原默认字体不变。修后22正式合同、旧附魔46项原profile回归、React18 / 19实际包与40生产辅助检查按各自范围通过，组件120 / runtime134不变。
 - [x] 校准砂轮close自身父hitbox偏移并完成独立 / native完整target复验；保留首300像素残差与首11共同漏检。明确host原字体 / projection / 另供dim .4背景时，一个GUI5 UI target完整3,603,140像素RGBA0；默认CSS仍非零，不泛化world / Present、所有driver或所有工作站整GUI零差，见docs/GRINDSTONE_IMAGE_QA.md。
 - [ ] 完成默认字体与原生整GUI的最终合成 / Present / 窗口映射验证；共享GPU文字的draw批处理与总显存预算仍待完善
+- [x] 完成本轮有限Classic原cell DOM字体（189 /189 /95glyph）、root scope /portal /Input、cost /tooltip角色、导航 /包 /生产验收；plus /7-space约束、owned输入修复与473 /949结构独立核对，uniform900 /−100与构字8game分开。首批133 PASS /1旧skip、最终受影响16项及147生产辅助通过；257dist /260非文档payload同02cf真实React18 /19包，private字体变后只重建site、未重跑consumer。CSS保24px行高；完整scene改善伴inventory+21 /recipe+19真退化，AA /shadow /long未0，不勾广义pixel-perfect /完整Unicode /真实IME /Present。
 - [x] 验收本轮共享BitmapText有限持久GPU资源 /跨Document 256MiB payload ledger、512leases /16MP呈现与私有loadTexture LRU（64entries /32MiB resident）；最终kernel Node11、loader Node22 /browser首5、正式65与03实际React18 /19包通过各自范围，固定8draw新native与48完整矩阵复验、生产115辅助通过。payload记账不等于OS总VRAM，默认字体 /Present /多实例draw batch仍未完成。
 - [x] 完成本轮Anvil可选imageRender四文字角色、真input编辑切换及39槽组合的有限阶段验收；四个有限GUI5状态经耐久修复完整native UI target RGBA0，React18 /19包及Anvil35＋旧回归103按整文件GPU profile共138项通过。生产首轮73辅助检查通过。首invalid40像素残差 /旧oracle漏检 /非唯一候选保留；真实OS IME、active-editor native pixels、任意ratio、crossGPU、world /Present /默认字体及所有GUI广义目标未完成。
 - [ ] 对照游戏渲染器完善附魔书本动态算法、符文、方块 / 旗帜 / 装备预览、物品 tooltip / glint、工作站完整页面

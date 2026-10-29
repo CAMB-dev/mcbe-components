@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, normalizePath } from 'vite';
@@ -19,6 +20,32 @@ const nativeWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workst
 const nativeGuiWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/gui-fonts.json', import.meta.url));
 const nativeGuiGrindstonePath = fileURLToPath(new URL('./.cache/local-fonts/grindstone/gui-font.json', import.meta.url));
 const nativeGuiAnvilPath = (name: string) => fileURLToPath(new URL(`./.cache/local-fonts/anvil/${name}.json`, import.meta.url));
+const classicFontDirectory = fileURLToPath(new URL('./.cache/local-fonts/classic/', import.meta.url));
+const classicFontEntries = [
+  { key: 'classic', file: 'MCBE-Classic.woff2', family: 'MCBE Classic', flag: 'hasClassicFont' },
+  { key: 'unicode', file: 'MCBE-Classic-Unicode.woff2', family: 'MCBE Classic Unicode', flag: 'hasClassicUnicodeFont' },
+  { key: 'ascii', file: 'MCBE-Classic-ASCII.woff2', family: 'MCBE Classic ASCII', flag: 'hasClassicAsciiFont' },
+] as const;
+
+function hasPreparedClassicFonts(): boolean {
+  const metadataPath = resolve(classicFontDirectory, 'font-metrics.json');
+  if (!existsSync(metadataPath) || !classicFontEntries.every(entry => existsSync(resolve(classicFontDirectory, entry.file)))) return false;
+  const metadata = JSON.parse(readFileSync(metadataPath, 'utf8')) as {
+    schemaVersion: number; em: number; fontSize: number;
+    families: Record<string, { family: string; file: string; sha256: string }>;
+  };
+  if (metadata.schemaVersion !== 1 || metadata.em !== 1000 || metadata.fontSize !== 20 || !metadata.families) {
+    throw new Error('Invalid local Classic fonts; rerun scripts/prepare-classic-fonts.py.');
+  }
+  for (const entry of classicFontEntries) {
+    const item = metadata.families[entry.key], bytes = readFileSync(resolve(classicFontDirectory, entry.file));
+    if (!item || item.family !== entry.family || item.file !== entry.file || bytes.subarray(0, 4).toString('ascii') !== 'wOF2'
+      || createHash('sha256').update(bytes).digest('hex') !== item.sha256) {
+      throw new Error('Local Classic font bytes differ from their prepared metadata; rerun scripts/prepare-classic-fonts.py.');
+    }
+  }
+  return true;
+}
 
 function optionalGuiFontModule(path: string, exportName: string): string {
   const unavailable = `export const ${exportName} = undefined;`;
@@ -161,20 +188,24 @@ export default defineConfig({
         ? `import hbuiLoadingIndicatorUrl from ${JSON.stringify(normalizePath(hbuiLoadingPath) + '?url')}; export { hbuiLoadingIndicatorUrl };`
         : 'export const hbuiLoadingIndicatorUrl = undefined;');
       const faces: string[] = [];
+      const classicFontsReady = hasPreparedClassicFonts();
       const fonts = [
         { path: fontPath, family: existsSync(pixelFontPath) ? 'Mojangles Pixel' : 'Mojangles', format: existsSync(pixelFontPath) ? 'woff2' : 'truetype', flag: 'hasGameFont' },
         { path: hbuiTenPath, family: 'Minecraft Ten v2', format: 'opentype', flag: 'hasHBUITenFont' },
         { path: hbuiSevenPath, family: 'Minecraft Seven v2', format: 'opentype', flag: 'hasHBUISevenFont' },
         { path: hbuiChinesePath, family: 'Noto Sans SC', format: 'opentype', flag: 'hasHBUIChineseFont' },
+        ...classicFontEntries.map(entry => ({ path: resolve(classicFontDirectory, entry.file), family: entry.family,
+          format: 'woff2', flag: entry.flag, enabled: classicFontsReady })),
       ];
       fonts.forEach((font, index) => {
-        const present = existsSync(font.path);
+        const present = (!('enabled' in font) || font.enabled) && existsSync(font.path);
         parts.push(`export const ${font.flag} = ${present};`);
         if (!present) return;
         const url = `localFontUrl${index}`;
         parts.push(`import ${url} from ${JSON.stringify(normalizePath(font.path) + '?url')};`);
         faces.push(`${JSON.stringify(`@font-face{font-family:'${font.family}';font-style:normal;font-weight:400;src:url(`)} + JSON.stringify(${url}) + ${JSON.stringify(`) format('${font.format}');font-display:swap}`)}`);
       });
+      parts.push('export const hasClassicFonts = hasClassicFont && hasClassicUnicodeFont && hasClassicAsciiFont;');
       if (existsSync(fontPath)) parts.push(`import ${JSON.stringify(normalizePath(fileURLToPath(new URL('./src/mojangles.css', import.meta.url))))};`);
       // The locale fallback is optional and applies only to the HBUI death view.
       // Open defaults in the public component styles remain unchanged.

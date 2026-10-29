@@ -1,6 +1,20 @@
 # 验证记录
 
-日期：2026-10-29（Asia/Singapore）。
+日期：2026-10-30（Asia/Singapore，本批本地收尾；下方历史记录保留各自时刻）。
+
+## 当前检查点：有限Classic DOM字体与profile集成
+
+保持120组件 /134runtime，新增可选classic-fonts.css，不带原font-face /WOFF2。源码工具从用户archive编译189 /189 /95有限glyph；plus9与7＋space合16的native约束、owned输入目录修复、473mapped /949base-paint-notdef结构均独立核对。最终构字baseline8game不动，uniform typographic900 /−100与metadata9 /1分开，CSS保原24px行高，非通用native linebox算法。
+
+首正式134列项 /11files实际133 PASS /1原有desktop mobile-only skip，移动对应通过，0fail /retry /flaky、447.396258秒、876旧pins不变（FINAL fb1afc8bf8bed1aa2d9a95630c791663ba93d9c52584f93cf618ab178dcaeee7）。采纳normal-line后整Classic10＋导航6最终16 /16、43.468656秒、0skip /retry /flaky、新876pins不变（phase2 FINAL 7814f164cb574e226af4ca520f53966ccf1cec4646f9abe162c4d5b5dc8bd1af）。两阶段不是150个独立测试，也不是最终字体全134重跑。三有限POINT平面34,560完整RGBA像素0，固定x8 /baseline24原期望不改，不扩为Smooth /全部glyph认证。
+
+四scene normal-line实际全帧P→V差异为53,226→49,631 /64,296→60,343 /37,850→34,886 /41,392→38,081，source四组仍0；整体改善伴inventory27每帧+21、QA /Long recipe+19真实局部退化。CJK仍低1physical px /QA低2，AA、默认shadow5对native2、long overflow未0。native canonical82701450b6e99bccf255e3b4c64f9a385ff88c86519bb3231dc8bb3980b0ea88与producer3df2ebb4f465d4bbf6ec5b47be7df74f4d34b05056dabcfe6124c64001e5b615保留有限范围，不称默认整GUI pixel perfect。
+
+首次actual React18.3.1 /19.3.1 verify:package exit0、47.87秒，134runtime /257dist /SSR /strictTS /CSS /assets /license通过，immutable tar SHA256 `02cfccdc53fcdf1976e56e75067492249cc5e0c7f67aaa5676747b995d376999`；JS仍 `b34ec8061062be8731c7ae5493cf1888883dc1c270bfc5a2885a7147f84ee1bb`。private字体再改normal-line后仅typecheck＋Vite重建14.08秒，无新consumer执行 /library rebuild；最终257dist /260非文档条目同已测包，49site另建身份。build/site-identity.json SHA `c5350eff2d1c57b7462e86e4a8c5219ea2dfdb82b095efca931db869d506fc52`，新pins SHA `c253f2c5a21844acd90ebf382f152b85f5cd72b7e76490ea8906423408b2187c`；旧462pins保留，不称源变后仍全部不变。
+
+最终production-attempt-03实际exit0、26.82648秒，72profile＋75Anvil＝147辅助，不加formal；FINAL `.cache/classic-font-production-02/production-attempt-03/FINAL.json` SHA `566b27b2afa85b7fc84e784dacc5534e6a2c74cfe21704921dfc00cf28540a91`。10登记HTTP字体逐bytes /site相同，1 inline ASCII有解码SHA且无HTTP状态；CDP有限Latin /中文 /input内部节点 /popup /Dialog实用font与FontFace load分开核对。8入口byte0，main-DcaGjICB.js171,992bytes SHA `9d087f33bfd4611343bf732c1c58a8eda8c76a34a02b8e8510281e240c70bf01`。
+
+profile raw0，Anvil raw3 ERR_ABORTED保留、三URL回访200 /byte0；page /console /render /非取消网络0。两初harness失败（close clip外延误判滚动条、移动隐藏重复topbar link）不回写，仅修断言 /明确sidebar selector后完整通过。actual SwiftShader /Vulkan、synthetic composition非OS IME，147交互或有限platform font样本不认证nativeRGBA /全Unicode /总VRAM。CPU-only文档收尾无CUA /browser；广义Goal继续ACTIVE，详情见 [CLASSIC_FONTS_QA.md](CLASSIC_FONTS_QA.md)。
 
 ## 当前检查点：BitmapText共享资源治理
 

@@ -19,9 +19,9 @@
 .mc-anvil__arrow, .mc-anvil__invalid { position: absolute; left: 211.784px; top: 98.6px; width: 36px; height: 24px; }
 .mc-anvil__arrow .mc-processing-arrow__empty { background-size: contain; background-position: center; background-repeat: no-repeat; }
 .mc-anvil__invalid { background: var(--mc-skin-workstation-invalid) center / contain no-repeat; }
-.mc-anvil__cost { position: absolute; left: 338px; top: 152px; transform: translate(-100%, -100%); z-index: 2; isolation: isolate; width: max-content; white-space: nowrap; color: rgb(50% 100% 12.5%); font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: 2px 2px rgb(12.5% 25% 3.125%); }
+.mc-anvil__cost { position: absolute; left: 338px; top: 152px; transform: translate(-100%, -100%); z-index: 2; isolation: isolate; width: max-content; white-space: nowrap; color: var(--mc-anvil-cost-success-color, #7fff1f); font: 400 var(--mc-font-size)/20px var(--mc-font-unicode, var(--mc-font)); text-shadow: var(--mc-anvil-cost-shadow-offset, 2px) var(--mc-anvil-cost-shadow-offset, 2px) var(--mc-anvil-cost-shadow-color, #204008); }
 .mc-anvil__cost::before { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: -1; width: 105%; height: 105%; background: var(--mc-skin-anvil-cost-background) 0 0 / 100% 100% no-repeat; opacity: .3; pointer-events: none; }
-.mc-anvil__cost[data-affordable="false"] { color: rgb(100% 35% 35%); text-shadow: 2px 2px rgb(25% 8.75% 8.75%); }
+.mc-anvil__cost[data-affordable="false"] { color: var(--mc-anvil-cost-failure-color, #ff5959); text-shadow: var(--mc-anvil-cost-shadow-offset, 2px) var(--mc-anvil-cost-shadow-offset, 2px) var(--mc-anvil-cost-failure-shadow-color, #401616); }
 
 /* Optional source canvas. Semantic controls and the actual input stay mounted;
    only the current complete ready request replaces their visual paint. */

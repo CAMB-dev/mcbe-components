@@ -9,7 +9,8 @@ import type { InventoryItem, PixelIconName } from '../src';
 import '../src/fonts.css';
 import '../src/styles.css';
 import './styles.css';
-import { hasGameFont, runeAtlasUrl } from 'virtual:mcbeui-game-font';
+import { runeAtlasUrl } from 'virtual:mcbeui-game-font';
+import { ClassicFontExamples, useDemoFontProfile } from './classic-font-examples';
 import { GrassBlock, VoxelIsland } from './art';
 import { ItemSprite } from './materials';
 import componentCatalog from '../docs/component-catalog.json';
@@ -114,6 +115,7 @@ function Example({ id, title, detail, children, className = '' }: { id: string; 
 }
 
 function App() {
+  const { profile: fontProfile, setProfile: setFontProfile } = useDemoFontProfile();
   const [active, setActive] = useState('overview');
   const [query, setQuery] = useState('');
   const [copied, setCopied] = useState(false);
@@ -148,15 +150,21 @@ function App() {
     if (copyTimer.current) clearTimeout(copyTimer.current);
   }, []);
   useEffect(() => {
-    let cancelled = false;
+    let cancelled = false, interacted = false;
     // The browser resolves its initial fragment before React mounts the sections.
-    // Wait for local font metrics before restoring the requested section.
-    void document.fonts.ready.then(() => {
-      if (cancelled) return;
-      const id = window.location.hash.slice(1);
+    // Restore it after mounting/font metrics, but never pull a user back after
+    // they have scrolled, typed, or followed another native anchor.
+    const hash = window.location.hash;
+    const restore = () => {
+      if (cancelled || interacted || window.location.hash !== hash) return;
+      let id: string; try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
       if (navigation.some(item => item.id === id)) document.getElementById(id)?.scrollIntoView({ behavior: 'instant' });
-    });
-    return () => { cancelled = true; };
+    };
+    const interact = () => { interacted = true; };
+    const events = ['wheel', 'touchstart', 'pointerdown', 'keydown', 'hashchange'] as const;
+    events.forEach(event => window.addEventListener(event, interact, { passive: true }));
+    const frame = requestAnimationFrame(restore); void document.fonts.ready.then(restore);
+    return () => { cancelled = true; cancelAnimationFrame(frame); events.forEach(event => window.removeEventListener(event, interact)); };
   }, []);
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
@@ -168,12 +176,41 @@ function App() {
     window.addEventListener('keydown', handler); return () => window.removeEventListener('keydown', handler);
   }, []);
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      const entry = entries.find(item => item.isIntersecting);
-      if (entry) setActive(entry.target.id);
-    }, { rootMargin: '-90px 0px -65% 0px' });
-    navigation.forEach(item => { const node = document.getElementById(item.id); if (node) observer.observe(node); });
-    return () => observer.disconnect();
+    const ids = new Set(navigation.map(item => item.id));
+    // Actual document order differs from the sidebar grouping. Read every
+    // section, including ones whose sidebar links are filtered by search.
+    const sections = [...document.querySelectorAll<HTMLElement>('main section[id]')].filter(section => ids.has(section.id));
+    let frame = 0, cancelled = false;
+    const update = () => {
+      frame = 0; if (cancelled || !sections.length) return;
+      const padding = Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      let current = sections[0]!.id, closest = -Infinity;
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect(); if (!rect.height || !rect.width) continue;
+        const margin = Number.parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
+        // The same padding+margin used by native fragment navigation defines
+        // the reading line; tall sections stay active after their heading exits.
+        // Native scrolling rounds its offset to a CSS pixel even when font
+        // metrics leave a fractional target edge just past that reading line.
+        if (Math.floor(rect.top - padding - margin) <= 0 && rect.top >= closest) { current = section.id; closest = rect.top; }
+      }
+      const scrolling = document.scrollingElement;
+      if (scrolling && scrolling.scrollHeight > window.innerHeight && Math.ceil(window.scrollY + window.innerHeight) >= scrolling.scrollHeight) current = sections[sections.length - 1]!.id;
+      setActive(previous => previous === current ? previous : current);
+    };
+    const schedule = () => { if (!cancelled && !frame) frame = requestAnimationFrame(update); };
+    const observer = new ResizeObserver(schedule);
+    sections.forEach(section => observer.observe(section));
+    const main = document.querySelector('main'); if (main) observer.observe(main);
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule); window.addEventListener('hashchange', schedule);
+    document.fonts.addEventListener('loadingdone', schedule); document.fonts.addEventListener('loadingerror', schedule);
+    void document.fonts.ready.then(schedule); schedule();
+    return () => {
+      cancelled = true; cancelAnimationFrame(frame); observer.disconnect();
+      window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); window.removeEventListener('hashchange', schedule);
+      document.fonts.removeEventListener('loadingdone', schedule); document.fonts.removeEventListener('loadingerror', schedule);
+    };
   }, []);
   async function copyInstall() {
     try {
@@ -207,7 +244,7 @@ function App() {
       <nav aria-label="Component navigation">
         {navigation.filter(item => item.name.toLowerCase().includes(query.toLowerCase())).map((item, index) => <div key={item.id}>
           {item.id === 'buttons' && <div className="nav-group-label components-label">COMPONENTS <span>{componentCount}</span></div>}
-          <a className={`sidebar-link ${active === item.id ? 'is-active' : ''}`} href={`#${item.id}`} aria-current={active === item.id ? 'location' : undefined} onClick={() => setActive(item.id)}>
+          <a className={`sidebar-link ${active === item.id ? 'is-active' : ''}`} href={`#${item.id}`} aria-current={active === item.id ? 'location' : undefined}>
             <PixelIcon name={index === 0 && item.id === 'overview' ? 'grid' : item.icon} size={14}/><span>{item.name}</span>{item.count && <small>{item.count}</small>}
           </a>
         </div>)}
@@ -372,13 +409,14 @@ function App() {
         </ScrollArea></div>
       </Example>
       <Example id="typography" title="Typography & icons" detail="The details that make it feel like home.">
-        <div className="type-showcase"><div><span className="sample-label">{hasGameFont ? 'MOJANGLES · BEDROCK ORIGINAL' : 'MONOCRAFT · OPEN FONT'}</span><Text as="p" size="lg" className="font-specimen">Aa Bb Cc 0123</Text><span className="type-subtitle">{hasGameFont ? 'Original glyphs. Integer pixels. A hard-edged shadow.' : 'Self-hosted, with crisp pixel shadows.'}</span>
+        <ClassicFontExamples profile={fontProfile} onProfileChange={setFontProfile}/>
+        <div className="type-showcase"><div><span className="sample-label">{fontProfile === 'classic' ? 'CLASSIC BITMAP · LOCAL SOURCE' : fontProfile === 'local' ? 'MOJANGLES · LOCAL TTF' : 'MCBE PIXEL · OPEN FONT'}</span><Text as="p" size="lg" className="font-specimen">Aa Bb Cc 0123</Text><span className="type-subtitle">{fontProfile === 'classic' ? 'Source bitmap cells and hard-edged shadows.' : fontProfile === 'local' ? 'Local TTF glyphs and hard-edged shadows.' : 'Open pixel glyphs and hard-edged shadows.'}</span>
           <div className="font-shadow-comparison"><div><span className="sample-label">SHADOW ON</span><Text>Hello, Minecraft!</Text></div><div><span className="sample-label">SHADOW OFF</span><Text shadow={false}>Hello, Minecraft!</Text></div></div>
         </div>
-          <div className="chinese-specimen" lang="zh-CN"><span className="sample-label" lang="en">FUSION PIXEL · 简体中文</span><p>创造属于你的世界</p><span className="type-subtitle" lang="en">CJK fallback. No missing adventures.</span></div>
+          <div className="chinese-specimen" lang="zh-CN"><span className="sample-label" lang="en">{fontProfile === 'classic' ? 'CLASSIC BITMAP · 简体中文' : 'FUSION PIXEL · 简体中文'}</span><p style={fontProfile === 'classic' ? { fontFamily: 'var(--mc-font)', fontSize: 20 } : undefined}>创造属于你的世界</p><span className="type-subtitle" lang="en">{fontProfile === 'classic' ? 'Original cells. Caller-owned font resources.' : 'Self-hosted open CJK fallback.'}</span></div>
         </div>
         <div className="icon-specimen">{(['heart', 'settings', 'book', 'grid', 'code', 'search', 'plus', 'check', 'sun', 'moon', 'download', 'arrow'] as const).map(name => <span key={name} title={name}><PixelIcon name={name} size={24}/></span>)}<span className="type-subtitle">16 vector pixel icons</span><a href="#gui-icons">Browse 150 original GUI icons →</a></div>
-        <div className="font-note"><PixelIcon name="info" size={14}/><span>{hasGameFont ? 'Preview uses Mojangles from your local game. The package includes open-source alternatives.' : 'Open-source font alternatives. Bring your own Mojangles for original glyph metrics.'}</span></div>
+        <div className="font-note"><PixelIcon name="info" size={14}/><span>The font profile applies to the whole page, including inputs and popups. Original-derived fonts remain local; the package includes open alternatives.</span></div>
       </Example>
 
       <Example id="gui-icons" title="Original GUI icons" detail="150 original Bedrock images for navigation, settings, feedback, social, inventory and devices.">

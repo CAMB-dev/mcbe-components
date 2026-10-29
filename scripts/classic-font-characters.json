@@ -1,0 +1,583 @@
+{
+  "schemaVersion": 1,
+  "defaultAscii": {
+    "start": "U+0020",
+    "end": "U+007E",
+    "count": 95
+  },
+  "unicodeCharacters": [
+    "、",
+    "。",
+    "与",
+    "世",
+    "两",
+    "中",
+    "主",
+    "于",
+    "亡",
+    "交",
+    "伤",
+    "住",
+    "体",
+    "作",
+    "你",
+    "使",
+    "供",
+    "修",
+    "停",
+    "击",
+    "创",
+    "前",
+    "剑",
+    "动",
+    "原",
+    "台",
+    "名",
+    "向",
+    "命",
+    "和",
+    "咒",
+    "品",
+    "复",
+    "始",
+    "害",
+    "家",
+    "将",
+    "属",
+    "应",
+    "式",
+    "当",
+    "戏",
+    "或",
+    "按",
+    "接",
+    "控",
+    "提",
+    "收",
+    "攻",
+    "文",
+    "方",
+    "昂",
+    "暂",
+    "木",
+    "本",
+    "材",
+    "栏",
+    "样",
+    "死",
+    "游",
+    "版",
+    "物",
+    "玩",
+    "用",
+    "由",
+    "界",
+    "的",
+    "皮",
+    "盘",
+    "石",
+    "祛",
+    "种",
+    "简",
+    "给",
+    "肤",
+    "花",
+    "触",
+    "质",
+    "贵",
+    "费",
+    "路",
+    "过",
+    "造",
+    "采",
+    "钮",
+    "钻",
+    "键",
+    "附",
+    "面",
+    "魔",
+    "！",
+    "，",
+    "：",
+    "；"
+  ],
+  "unicodeCharacterCount": 94,
+  "characterSource": {
+    "method": "TypeScript AST StringLiteralLike/JSXText/template segments from actual demo; comments excluded. Snapshot character scope, not a production glyph coverage certificate.",
+    "auditPath": ".cache/default-font-source-study-01/project-string-coverage.json",
+    "auditSha256": "820467ad4b291efca69d001a6f5e31ad86d79b89c0865c6be847ad9c6a484d9e",
+    "productionSrcCjkCharacterCount": 0,
+    "demoSourcePageCount": 42,
+    "files": [
+      {
+        "path": "demo/anvil-layer-examples.tsx",
+        "sha256": "bf663cef796ac6647fb1dd6ec13a0d1046b2ce6248bee1345fca79690f5def49"
+      },
+      {
+        "path": "demo/bitmap-text-examples.tsx",
+        "sha256": "8cfd75ee21fc3836c23f5f4ac07e1dcaf4935e9004430b25793f5220d211ce76"
+      },
+      {
+        "path": "demo/bitmap-text-fixture.tsx",
+        "sha256": "fbe872e099d0f5a26e72c7b6a987fa6048c1c12051dd463f70ced11d02c9acec"
+      },
+      {
+        "path": "demo/calibration.tsx",
+        "sha256": "54023ac314ad776a51de249d3f650d8120216da65c67677a42ab5d96234420dd"
+      },
+      {
+        "path": "demo/game-controls-examples.tsx",
+        "sha256": "6e432f7a8837508e2b24cc36b9525ba15260d16b39b37916a123e11fb57336b8"
+      },
+      {
+        "path": "demo/grindstone-layer-examples.tsx",
+        "sha256": "e2079047032ed89b4a025f460254a2f058cd8613b1b8de9bde47fcd0ed3d7cb0"
+      },
+      {
+        "path": "demo/gui-layer-examples.tsx",
+        "sha256": "8f8021200799c7140091cba18080d6239483d41657fccf9c19b7f648bba51f80"
+      },
+      {
+        "path": "demo/main.tsx",
+        "sha256": "8a76f9eb401c125556f92b095f5ab5cf9cba6632f4d1d57f50e44c7a3f051259"
+      },
+      {
+        "path": "demo/native-bitmap-text-fixture.tsx",
+        "sha256": "ba6e25602672a38bbbdf9b0ab666cd4d60e5bb9c403d50705fd311b948c33810"
+      },
+      {
+        "path": "demo/workstation-text-examples.tsx",
+        "sha256": "98986e625242e97e3eb8f375038157e0c5f6e45ddb0bb700adcd296bd63251b1"
+      }
+    ]
+  },
+  "sourceArchiveSha256": "cdb2c8dbfcea7e0967d5369ced0eb5f4a6fcded79769e4e4605c1f0b406c86bc",
+  "observationPins": [
+    {
+      "id": "anvil-qa",
+      "path": ".cache/anvil-native-source-01/qa/font-metrics.json",
+      "sha256": "1f43e96986b1927440e7ee1583ac8e1ed077876414b8ccb062075567b9201e14",
+      "scope": "Finite source-role and adjacent native pen observations only; no terminal advance inferred."
+    },
+    {
+      "id": "anvil-long",
+      "path": ".cache/anvil-native-source-01/long/font-metrics.json",
+      "sha256": "ed2cc98aab578dd9208a9e962cd35443a641b71643b7ad2dc8d657e9c0dff685",
+      "scope": "Finite source-role and adjacent native pen observations only; no terminal advance inferred."
+    },
+    {
+      "id": "anvil-invalid",
+      "path": ".cache/anvil-native-invalid-source-01/font-metrics.json",
+      "sha256": "fb2229ce8f01131b14fba799ac8531fb4ccfcfd2d0e18c9e661cf32761f9ad01",
+      "scope": "Finite source-role and adjacent native pen observations only; no terminal advance inferred."
+    },
+    {
+      "id": "tooltip-plus-seven-space",
+      "scope": "Actual saved VB/CBV finite adjacent-pen differences. These metadata pins are not glyph artwork or runtime captured geometry inputs.",
+      "rawSources": [
+        {
+          "path": ".cache/pix-capture/api-font-buffers-q0-e440-01/buffer-view-0002-before.bin",
+          "sha256": "ab5c4ac1e9ba90a8617d90ba8735244f233873515a267ebb570d3eb00348bb9f",
+          "vertexStride": 16,
+          "decodeFormat": "<4e2H4B",
+          "usedFirstVertexByteOffsets": [
+            0,
+            64
+          ]
+        },
+        {
+          "path": ".cache/pix-capture/api-ia-q0-e480-01/buffer-view-0002-before.bin",
+          "sha256": "9b7233f3f0d531b80812c8ee7b1d60dc592e2e6c32a39ec610c0f9ecd481eba5",
+          "vertexStride": 16,
+          "decodeFormat": "<4e2H4B",
+          "usedFirstVertexByteOffsets": [
+            0
+          ]
+        },
+        {
+          "path": ".cache/pix-capture/api-font-buffers-q0-e440-01/buffer-view-0004-before.bin",
+          "sha256": "d46fce7cf0066efb755c75b5adab5452d38f54fb043bb0f61a57c5ca5c6e41bb",
+          "comparedMvpByteOffsets": [
+            0,
+            2560
+          ],
+          "comparedMvpBytes": 64,
+          "equalUsedUniformSha256": "0b17feb322a5dc40eabfbaacb615255f8653835bee8462fb5f520fb3c1547a58",
+          "equalUsedUniformBytes": 96
+        }
+      ],
+      "independentConstraintReport": {
+        "path": ".cache/classic-font-metric-constraints-01/RESULT.json",
+        "sha256": "a809b35d04bc1ade429df1361b483abc04dec5d5274e66df13871406f9137751"
+      },
+      "note": "Only advance deltas inform this font profile. No absolute placement, capture quad or native texture is a producer input."
+    }
+  ],
+  "observedAdvances": {
+    "default8": {
+      "Q": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "A": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "B": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "C": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "D": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "E": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "F": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "G": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "H": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "I": {
+        "advanceSource": 4.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "J": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "K": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "L": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "M": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "N": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "O": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "P": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "R": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "S": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "T": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "U": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "V": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "W": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "X": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "Y": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "Z": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "0": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "1": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "2": {
+        "advanceSource": 6.0,
+        "evidence": [
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      }
+    },
+    "unicode": {
+      "物": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long",
+          "anvil-invalid"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "品": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long",
+          "anvil-invalid"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "修": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long",
+          "anvil-invalid"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "复": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long",
+          "anvil-invalid"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "和": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long",
+          "anvil-invalid"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "命": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long",
+          "anvil-invalid"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "魔": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "咒": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "花": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "费": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "：": {
+        "advanceSource": 17.0,
+        "evidence": [
+          "anvil-qa",
+          "anvil-long"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "钻": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-invalid"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "石": {
+        "advanceSource": 18.0,
+        "evidence": [
+          "anvil-invalid"
+        ],
+        "scope": "Observed adjacent pen in finite original run; terminal and general width algorithm unproved."
+      },
+      "+": {
+        "advanceSource": 9,
+        "evidence": [
+          "tooltip-plus-seven-space"
+        ],
+        "scope": "Actual adjacent Unicode plus-to-seven native pen difference4.5game equals9source/CSS20 units; normal hmtx450. No absolute placement inferred."
+      }
+    }
+  },
+  "limits": "Constants describe finite adjacent native pen observations. Space and digit7 separate widths/terminals remain host candidates. New source glyphs must not be marked observed.",
+  "observedAdvanceGroups": {
+    "unicode": {
+      "tooltip-seven-space": {
+        "characters": [
+          "7",
+          " "
+        ],
+        "combinedAdvanceSource": 16,
+        "combinedAdvanceCss20": 16,
+        "chosenAdvancesSource": {
+          "7": 8,
+          " ": 8
+        },
+        "individualAdvancesObserved": false,
+        "evidence": [
+          "tooltip-plus-seven-space"
+        ],
+        "scope": "Native combined seven+undrawn space advance is measured. The8/8split is a chosen host model, not independently identified native glyph/terminal advances."
+      }
+    }
+  },
+  "hostAdvanceOverrides": {
+    "unicode": {
+      "7": {
+        "advanceSource": 8,
+        "group": "tooltip-seven-space",
+        "evidence": [
+          "tooltip-plus-seven-space"
+        ],
+        "scope": "Chosen8/8split of the measured combined16; individual advance and terminal remain unproved."
+      },
+      " ": {
+        "advanceSource": 8,
+        "group": "tooltip-seven-space",
+        "evidence": [
+          "tooltip-plus-seven-space"
+        ],
+        "scope": "Chosen8/8split of the measured combined16; individual advance and terminal remain unproved."
+      }
+    }
+  }
+}

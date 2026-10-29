@@ -1,0 +1,15 @@
+/* Optional Classic font metrics. Caller supplies the locally generated faces;
+   this stylesheet contains no original font data. Apply mc-classic-fonts to
+   the document root to include portal content, or to a deliberate local scope. */
+.mc-classic-fonts,
+:root.mc-classic-fonts {
+  --mc-font: 'MCBE Classic', 'MCBE Classic Unicode', 'Mojangles Pixel', 'MCBE Pixel', 'Mojangles', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace;
+  --mc-font-unicode: 'MCBE Classic Unicode', 'MCBE CJK', 'Fusion Pixel', monospace;
+  --mc-item-tooltip-font: var(--mc-font-unicode);
+  --mc-font-size: 20px;
+  --mc-font-size-sm: 20px;
+  --mc-font-size-lg: 40px;
+  --mc-font-size-xl: 60px;
+  --mc-title-size: 40px;
+  font-family: var(--mc-font);
+}

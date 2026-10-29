@@ -22,7 +22,7 @@
 /* GUI5 paired-capture profile: flat opaque cores and observed stepped contours.
    This adaptive reconstruction does not reproduce native partial edge coverage
    or certify the CJK font, padding bearings, or cursor/client transform. */
-.mc-item-tooltip { --mc-item-tooltip-fill: #1b0c1b; --mc-item-tooltip-edge: #2c0863; box-sizing: border-box; position: fixed; z-index: 1000; isolation: isolate; width: max-content; max-width: min(260px, calc(100vw - 16px)); padding: 8px; background: var(--mc-item-tooltip-fill); border: 0; outline: 0; color: #ffffff; font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: none; overflow-wrap: anywhere; pointer-events: none;
+.mc-item-tooltip { --mc-item-tooltip-fill: #1b0c1b; --mc-item-tooltip-edge: #2c0863; box-sizing: border-box; position: fixed; z-index: 1000; isolation: isolate; width: max-content; max-width: min(260px, calc(100vw - 16px)); padding: 8px; background: var(--mc-item-tooltip-fill); border: 0; outline: 0; color: #ffffff; font: 400 var(--mc-font-size)/20px var(--mc-item-tooltip-font, var(--mc-font)); text-shadow: none; overflow-wrap: anywhere; pointer-events: none;
   clip-path: polygon(4px 0, calc(100% - 6px) 0, calc(100% - 6px) 2px, calc(100% - 4px) 2px, calc(100% - 4px) 4px, calc(100% - 2px) 4px, calc(100% - 2px) 6px, 100% 6px, 100% calc(100% - 4px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 2px), calc(100% - 4px) calc(100% - 2px), calc(100% - 4px) 100%, 6px 100%, 6px calc(100% - 2px), 4px calc(100% - 2px), 4px calc(100% - 4px), 2px calc(100% - 4px), 2px calc(100% - 6px), 0 calc(100% - 6px), 0 4px, 2px 4px, 2px 2px, 4px 2px);
 }
 .mc-item-tooltip::before, .mc-item-tooltip::after { content: ''; position: absolute; inset: 0; pointer-events: none; }

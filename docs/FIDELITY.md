@@ -2,6 +2,14 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
+## 2026-10-30检查点：有限Classic DOM字体
+
+新增源码仓库准备的私有Classic /Unicode /ASCII三face（189 /189 /95glyph）及可选root scope CSS；原字体不入npm，demo三profile /portal /input继承与显式cost /tooltip Unicode角色按有限合同验证。字体内部构字8game与最终normal-line typographic9 /1分开，主题保原24px行高；plus9 /7＋space16有真实约束，8 /8拆分仍候选，未恢复完整Unicode /native cmap与linebox。
+
+normal-line四完整scene差异下降至49,631 /60,343 /34,886 /38,081，source四帧仍0，但inventory固定区每帧真实退化21px、QA /Long recipe退化19px；CJK低1 /QA低2physical px，Smooth /AA、shadow5对native2与long overflow未0。整体改善不等于每个局部改善或默认整GUI pixel perfect，原型 /初失败 /非零图全部保留。
+
+首134列项实际133PASS＋1旧skip，最终受影响Classic /导航整16项另通过，不宣称最终字体全134重跑或新增150测试。首次React18 /19真实包与最终257dist /260非文档payload同字节链关联；仅Vite重建最终私有字体site，没有又跑consumer。生产147辅助通过，CDP只证明有限glyph样本实用字体；10HTTP与1dataURL分别按其语义核bytes，Anvil3取消保留。默认字体全语言 /真实IME /crossGPU /Present广义目标未完成，详见 [CLASSIC_FONTS_QA.md](CLASSIC_FONTS_QA.md)。
+
 ## 当前检查点：共享BitmapText资源治理
 
 shared组件复用有限GPU资源且不readPixels，公共renderBitmapGlyphs仍独占一次性完整读回；默认CPU /font /shader输入合同不变。资源政策与finite ledger不是总heap /driver VRAM、batching或新native像素认证。最终kernel Node11、loader Node22 /首browser5、正式65及03实际React包通过各自范围，固定8draw新native及48完整矩阵、生产115辅助通过；旧rawshared /固定8draw /旧包仍仅属历史source，见 [BITMAP_RESOURCES_QA.md](BITMAP_RESOURCES_QA.md)。

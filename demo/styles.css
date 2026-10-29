@@ -1,6 +1,11 @@
 * { box-sizing: border-box; }
 html { scroll-padding-top: 100px; color-scheme: dark; }
 body { margin: 0; color: #f2f2f3; background: #171819; font-family: var(--mc-font); font-size: 14px; line-height: 1.6; }
+:root.demo-font-open { --mc-font: 'MCBE Pixel', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace; --mc-font-unicode: var(--mc-font); --mc-font-size: 18px; --mc-font-size-sm: 18px; --mc-font-size-lg: 36px; --mc-font-size-xl: 54px; --mc-title-size: 54px; }
+:root.demo-font-local { --mc-font: 'Mojangles Pixel', 'Mojangles', 'MCBE Pixel', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace; --mc-font-unicode: var(--mc-font); --mc-font-size: 20px; --mc-font-size-sm: 20px; --mc-font-size-lg: 40px; --mc-font-size-xl: 60px; --mc-title-size: 40px; }
+.classic-font-picker { display: grid; grid-template-columns: minmax(220px, 380px) minmax(0, 1fr); align-items: start; gap: 16px 24px; padding: 24px 28px; border-bottom: 1px solid #414244; }
+.classic-font-picker p { margin: 0; font-size: 12px; line-height: 20px; color: #b3b5b7; }
+@media (max-width: 640px) { .classic-font-picker { grid-template-columns: minmax(0, 1fr); padding: 20px; } }
 button, input { font: inherit; }
 button, a, input { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }

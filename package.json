@@ -64,6 +64,7 @@
     "./inventory-screen-frame.css": "./dist/inventory-screen-frame.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
+    "./classic-fonts.css": "./dist/classic-fonts.css",
     "./fonts/*": "./dist/fonts/*",
     "./package.json": "./package.json"
   },
@@ -76,6 +77,7 @@
     "test:pixels": "node scripts/fetch-references.mjs && playwright test --project=pixels",
     "test:texture-cache": "node --test tests/texture-loader-cache.node.test.mjs",
     "test:bitmap-resources": "node --test tests/bitmap-text-resources.node.test.mjs",
+    "test:classic-fonts": "python -m unittest discover -s tests -p classic_font_preparation_test.py",
     "preview": "vite preview --host 127.0.0.1",
     "verify:package": "node scripts/verify-package.mjs",
     "prepack": "npm run build"

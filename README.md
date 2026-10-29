@@ -463,7 +463,7 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 
 ## 字体
 
-字体文件在仓库中，构建和运行均不依赖字体 CDN。样式与字体分开导出，不导入 `fonts.css` 就不请求字体。
+公开替代字体文件在仓库中，构建和运行不依赖字体CDN；样式与字体分开导出，不导入fonts.css就不请求这些字体。可选的原cell Classic字体须由用户从自己的游戏资源准备，不在npm内。
 
 | 字体 | 版本 | 文件 | 用途 / 差异 |
 | --- | --- | --- | --- |
@@ -473,6 +473,19 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 | [Fusion Pixel](https://github.com/TakWolf/fusion-pixel-font) | 2026.10.25 | 12px proportional zh_hans WOFF2，960 kB | 简体中文及 CJK 回退，建议 12 / 24 / 36px 整数倍率 |
 
 这些字体采用 SIL OFL 1.1，字体许可及继承来源声明随包提供。Monocraft 仅转换格式，Fusion Pixel 保留上游文件。两个 MCBE 字体的 COLR 转换记录见 [pixel-font.json](docs/pixel-font.json) 和 [pixel-cjk-font.json](docs/pixel-cjk-font.json)。详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+在源码仓库准备可选Classic字体；npm包不含此工具，需要Python的fontTools、Brotli、Pillow：
+
+```sh
+python scripts/prepare-classic-fonts.py
+python scripts/prepare-classic-fonts.py --check-only
+```
+
+输出位于ignored `.cache/local-fonts/classic`：MCBE Classic /Unicode /ASCII三face，默认189 /189 /95glyph，覆盖95可打印ASCII及94个demo中文 /全角字符。将自己有权使用的WOFF2复制到应用并登记同名font-face，原字体不随npm分发。
+
+导入 `mcbeui/classic-fonts.css`，在html根添加 `mc-classic-fonts`，使Input与portal Dialog继承同一字体；局部scope不会自动覆盖document.body portal。该CSS只有scope与字号令牌，不带font-face或字体数据。
+
+demo提供Classic /本机Mojangles /开放字体切换。原cell字体仍有浏览器与游戏的AA、基线、阴影及长输入差异；有限字集不代表全Unicode或pixel perfect。追加字符、行高与详细验证见 [CLASSIC_FONTS_QA.md](docs/CLASSIC_FONTS_QA.md)。
 
 原版字体：如已持有可用于该场景的 Mojangles 字体，可以自行接入；npm 库不包含游戏原版字体。重建控件皮肤的来源见视觉基准文档。
 
@@ -497,7 +510,7 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
   sampling="bilinear" shader="bitmap-smooth" color="#ffffff">钻石剑</BitmapText>
 ```
 
-`renderBitmapGlyphs(options)` 是浏览器GPU函数，接收原页 /顺序runs /target背景；默认framebuffer返回预乘RGBA8，显式straight-alpha为可能舍入的8位反预乘。独立webgl每实例活context并GPU copy，公共函数完整readPixels合同保留。显式webgl-shared同Document复用Offscreen私有后端和有限program /buffer /page LRU /target，ImageBitmap转各实例bitmaprenderer，共享组件不readPixels。模块跨Document记账上限256MiB（非driver总VRAM），另限512leases /16MP呈现；同步多run仍非多实例batch或零拷贝。缺API /loss报告错误并保留原文，不静默换CPU；输入更新可取新session。当前资源治理的实现边界 /待验状态见 [BITMAP_RESOURCES_QA.md](docs/BITMAP_RESOURCES_QA.md)，历史独立 /共享验证见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md) / [BITMAP_SHARED_QA.md](docs/BITMAP_SHARED_QA.md)。
+`renderBitmapGlyphs(options)` 是浏览器GPU函数，接收原页 /顺序runs /target背景；默认framebuffer返回预乘RGBA8，显式straight-alpha为可能舍入的8位反预乘。独立webgl每实例活context并GPU copy，公共函数完整readPixels合同保留。显式webgl-shared同Document复用Offscreen私有后端和有限program /buffer /page LRU /target，ImageBitmap转各实例bitmaprenderer，共享组件不readPixels。模块跨Document记账上限256MiB（非driver总VRAM），另限512leases /16MP呈现；同步多run仍非多实例batch或零拷贝。缺API /loss报告错误并保留原文，不静默换CPU；输入更新可取新session。当前资源治理的实现边界 /分项验证见 [BITMAP_RESOURCES_QA.md](docs/BITMAP_RESOURCES_QA.md)，历史独立 /共享验证见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md) / [BITMAP_SHARED_QA.md](docs/BITMAP_SHARED_QA.md)。
 
 复用仅在session存续时成立；全owner同时更新仍可能微任务释放并重建，保持稳定owner的stress观察不代表任意全量更新newGL0。ledger不计临时JS顶点打包 /typed arrays、driver二进制、active fetch或host-held refs，不能据256MiB推断总JS heap或全部显存硬限。
 
@@ -591,7 +604,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装真实tarball；当前120组件 /134值的React18.3.1 /19.3.1消费通过ESM、SSR、三新Anvil类型 /float32 /ref /四文字角色 /真input /39槽 /model /source-atlas、28原PNG /29keys、CSS、字体及许可检查，两消费者各256dist同字节。历史model检查点973唯一用例来自多批次；当前Anvil35＋旧回归103按整文件GPU profile共138独立用例通过，另73生产辅助检查，不称单backend整套全绿。详见 [VERIFICATION.md](docs/VERIFICATION.md)。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装真实tarball；当前120组件 /134值的React18.3.1 /19.3.1消费通过ESM、SSR、三新Anvil类型 /float32 /ref /四文字角色 /真input /39槽 /model /source-atlas、28原PNG /29keys、CSS、字体及许可检查，当前两消费者各257dist同字节（含可选classic-fonts.css，不含私有face）。历史model检查点973唯一用例来自多批次；前阶段Anvil35＋旧回归103按整文件GPU profile共138独立用例通过，另73生产辅助检查，不称单backend整套全绿。详见 [VERIFICATION.md](docs/VERIFICATION.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可
