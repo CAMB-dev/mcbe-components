@@ -1,3 +1,48 @@
 /* Compatibility entry: CraftingScreen shares the original inventory frame.
    Its mc-crafting-screen part classes remain on the corresponding frame slots. */
 @import './inventory-screen-frame.css';
+
+/* Whole-page source presentation retains the fixed GUI2 semantic plane. */
+.mc-inventory-screen-frame-scroll--image-profile { position: relative; padding: 6px; }
+.mc-inventory-screen-frame-scroll--image-profile::before { content: ''; display: block; width: var(--mc-inventory-screen-reserved-width); height: var(--mc-inventory-screen-reserved-height); pointer-events: none; }
+.mc-inventory-screen-frame-scroll--image-profile > .mc-inventory-screen-frame { position: absolute; left: calc(6px + var(--mc-inventory-screen-left) * var(--mc-inventory-screen-display-scale)); top: calc(6px + var(--mc-inventory-screen-top) * var(--mc-inventory-screen-display-scale)); transform-origin: 0 0; transform: scale(var(--mc-inventory-screen-display-scale)); }
+.mc-crafting-image-window { position: absolute; z-index: -1; overflow: clip; pointer-events: none; visibility: hidden; }
+.mc-crafting-image-window:has(> .mc-crafting-image-layer[data-render-state='ready']) { visibility: visible; }
+.mc-crafting-image-layer { left: 0; top: 0; transform-origin: 0 0; transform: translate(var(--mc-image-translate-x, 0px), var(--mc-image-translate-y, 0px)) scale(var(--mc-image-pixel-scale, 1)); }
+@supports (zoom: 1) {
+  .mc-inventory-screen-frame-scroll--image-profile > .mc-inventory-screen-frame { transform: none; zoom: var(--mc-inventory-screen-display-scale); left: calc(6px / var(--mc-inventory-screen-display-scale) + var(--mc-inventory-screen-left)); top: calc(6px / var(--mc-inventory-screen-display-scale) + var(--mc-inventory-screen-top)); }
+  .mc-crafting-image-layer { transform: none; zoom: var(--mc-image-pixel-scale, 1); left: var(--mc-image-zoom-left, 0px); top: var(--mc-image-zoom-top, 0px); }
+}
+
+/* All replacements are gated by the current actual ready canvas. Loading,
+   cancellation, failure and context loss immediately recover the DOM skins. */
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) > .mc-inventory-screen-frame__fold::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) > .mc-inventory-screen-frame__book > .mc-recipe-book::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) > .mc-inventory-screen-frame__right > .mc-workstation-scroll > .mc-crafting::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) > .mc-inventory-screen-frame__toolbar::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-slot]::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-overlays]::after,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-recipe]::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-recipe]::after,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-book__items::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-book__items::after,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-categories__tab::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) .mc-inventory-toolbar__mode::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) .mc-inventory-toolbar__mode::after,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-filter-toggle::before,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-recipe] > .mc-slot__item > .mc-recipe-book-entry__modifier,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-recipe] > .mc-slot__item > .mc-recipe-book-entry__selected { display: none; }
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) :is(.mc-recipe-book__items, .mc-crafting__arrow .mc-processing-arrow__empty, .mc-inventory-toolbar__icon, .mc-inventory-toolbar__help, .mc-inventory-toolbar__close > span, .mc-search-field__icon, .mc-search-field__clear > span, [data-mc-crafting-icon] > .mc-recipe-categories__icon, [data-mc-crafting-overlays] > .mc-slot__highlight, [data-mc-crafting-recipe] > .mc-slot__highlight) { background: transparent; }
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-book__search .mc-input { border-image: none; border-color: transparent; background: transparent; }
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-book__items > .mc-scrollbar > .mc-scrollbar__track { background: none; border-image: none; border-color: transparent; }
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-book__items > .mc-scrollbar > .mc-scrollbar__thumb::before { display: none; }
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-art] > .mc-slot__item > .mc-recipe-book-entry__art,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-slot][data-mc-source-item='image'] > .mc-slot__item > img,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-slot][data-mc-source-item='model'] > .mc-slot__item > *,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-count] > .mc-slot__count,
+.mc-crafting-screen:has(> .mc-crafting-image-window > .mc-crafting-image-layer[data-render-state='ready']) [data-mc-crafting-count] > .mc-slot__item > .mc-slot__count { visibility: hidden; }
+.mc-crafting-screen:has(> .mc-crafting-image-window[data-text-crafting='true'] > .mc-crafting-image-layer[data-render-state='ready']) .mc-crafting > .mc-workstation__title,
+.mc-crafting-screen:has(> .mc-crafting-image-window[data-text-inventory='true'] > .mc-crafting-image-layer[data-render-state='ready']) .mc-crafting > .mc-workstation__inventory > .mc-player-inventory__label,
+.mc-crafting-screen:has(> .mc-crafting-image-window[data-text-recipe-title='true'] > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-book__title { color: transparent; text-shadow: none; background: transparent; }
+.mc-crafting-screen:has(> .mc-crafting-image-window[data-text-query='true'] > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-book__search .mc-input:not(:focus),
+.mc-crafting-screen:has(> .mc-crafting-image-window[data-text-query='true'] > .mc-crafting-image-layer[data-render-state='ready']) .mc-recipe-book__search .mc-input:not(:focus)::placeholder { color: transparent; -webkit-text-fill-color: transparent; text-shadow: none; }

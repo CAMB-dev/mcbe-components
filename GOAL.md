@@ -79,6 +79,7 @@
 - [x] 验收本轮共享BitmapText有限持久GPU资源 /跨Document 256MiB payload ledger、512leases /16MP呈现与私有loadTexture LRU（64entries /32MiB resident）；最终kernel Node11、loader Node22 /browser首5、正式65与03实际React18 /19包通过各自范围，固定8draw新native与48完整矩阵复验、生产115辅助通过。payload记账不等于OS总VRAM，默认字体 /Present /多实例draw batch仍未完成。
 - [x] 完成本轮Anvil可选imageRender四文字角色、真input编辑切换及39槽组合的有限阶段验收；四个有限GUI5状态经耐久修复完整native UI target RGBA0，React18 /19包及Anvil35＋旧回归103按整文件GPU profile共138项通过。生产首轮73辅助检查通过。首invalid40像素残差 /旧oracle漏检 /非唯一候选保留；真实OS IME、active-editor native pixels、任意ratio、crossGPU、world /Present /默认字体及所有GUI广义目标未完成。
 - [ ] 对照游戏渲染器完善附魔书本动态算法、符文、方块 / 旗帜 / 装备预览、物品 tooltip / glint、工作站完整页面
+- [x] 实现完整CraftingScreen可选原图路径：326根、46右槽与RecipeN、搜索/滚动/选中及模型原子回退；公开回归新增21+旧23+Survival22共66/66通过，生产#crafting-layer的20条辅助检查通过，React18/19真实npm包SSR及类型消费通过。提供17字本地字体脚本与63张原PNG逐资源来源。四GUI5各自完整pre/post目标与正常输入核对后，空配方/紧凑两态仍有5/4个RGB差异像素，alpha均0差；三种字体裁剪及两种imageVS表达式对照均未消除残差。新增建筑10配方完整目标baseline仍3,878个RGB像素不同、alpha0差，全部配方搜索36条、GUI4独立holdout及剩余原生模型/字体继续校准，不算native像素验收完成，见docs/CRAFTING_IMAGE_QA.md。
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
 
 Goal 保持进行中：首版组件库已实现，严格的游戏画面对照验收尚未完成。当前可通过 `npm run preview -- --port 4173` 打开展示页。

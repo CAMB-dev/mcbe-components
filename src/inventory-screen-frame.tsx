@@ -1,5 +1,6 @@
-import { forwardRef, useState } from 'react';
-import type { HTMLAttributes, ReactNode } from 'react';
+import { cloneElement, forwardRef, useState } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
+import type { WorkstationPresentation } from './workstation-source-layer';
 import { InventoryToolbar } from './inventory-screens';
 
 export type InventoryScreenLayout = 'recipe-book' | 'survival';
@@ -19,6 +20,8 @@ export interface InventoryScreenFrameProps extends Omit<HTMLAttributes<HTMLEleme
 interface InventoryScreenFrameBaseProps extends InventoryScreenFrameProps {
   /** Internal composition compatibility hook; not exposed by the public Frame. */
   partPrefix: string;
+  sourceLayer?: ReactNode;
+  sourcePresentation?: WorkstationPresentation;
 }
 
 const commonPrefix = 'mc-inventory-screen-frame';
@@ -28,12 +31,12 @@ const cx = (...classes: (string | undefined | false)[]) => classes.filter(Boolea
 export const InventoryScreenFrameBase = forwardRef<HTMLElement, InventoryScreenFrameBaseProps>(function InventoryScreenFrameBase({
   title, book, children, layout, defaultLayout = 'recipe-book', onLayoutChange,
   onHelp, onClose, helpLabel, closeLabel = 'Close inventory', showClose = true,
-  partPrefix, className, onKeyDown, onKeyDownCapture, ...props
+  partPrefix, sourceLayer, sourcePresentation, className, onKeyDown, onKeyDownCapture, ...props
 }, ref) {
   const [internalLayout, setInternalLayout] = useState(defaultLayout);
   const currentLayout = layout ?? internalLayout;
   const part = (suffix: string) => cx(`${commonPrefix}${suffix}`, partPrefix !== commonPrefix && `${partPrefix}${suffix}`);
-  return <div className={part('-scroll')}><section {...props} ref={ref} aria-label={props['aria-label'] ?? title}
+  const section = <section {...props} ref={ref} aria-label={props['aria-label'] ?? title}
     className={cx(part(''), className)} data-layout={currentLayout}
     onKeyDownCapture={event => {
       onKeyDownCapture?.(event);
@@ -59,7 +62,17 @@ export const InventoryScreenFrameBase = forwardRef<HTMLElement, InventoryScreenF
         if (layout === undefined) setInternalLayout(value);
         onLayoutChange?.(value);
       }} onHelp={onHelp} onClose={onClose} helpLabel={helpLabel} closeLabel={closeLabel} showClose={showClose}/>
-  </section></div>;
+  </section>;
+  // Append the optional keyed visual after the existing semantic children so
+  // toggling a profile never replaces the book, input, right pane or toolbar.
+  const painted = sourceLayer ? cloneElement(section, undefined, ...section.props.children, sourceLayer) : section;
+  if (!sourcePresentation) return <div className={part('-scroll')}>{painted}</div>;
+  const paint = sourcePresentation;
+  return <div className={cx(part('-scroll'), 'mc-inventory-screen-frame-scroll--image-profile')} style={{
+    '--mc-inventory-screen-display-scale': paint.scale, '--mc-inventory-screen-left': `${paint.left}px`, '--mc-inventory-screen-top': `${paint.top}px`,
+    '--mc-inventory-screen-reserved-width': `${(652 + paint.left + paint.right) * paint.scale}px`,
+    '--mc-inventory-screen-reserved-height': `${(332 + paint.top + paint.bottom) * paint.scale}px`,
+  } as CSSProperties}>{painted}</div>;
 });
 
 /** Inventory/workbench profile: fixed 326x166 game-pixel canvas in both layouts. */

@@ -102,7 +102,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `FuelIndicator` | `progress`: 0…1、`label`；div 属性 | 原始火焰纹理，自底部显示剩余比例，保留 full 图原尺寸 |
 | `RecipeGrid` | InventoryGrid 属性；`columns`、`rows`: 2 / 3 | 共用合成网格；尺寸决定槽位数，支持 2×2 和 3×3 |
 | `CraftingTable` | `inputs`、`result`、`selectedInputIndex`、`onInputAction`、`onTakeResult`；容器库存属性 | 可复用源 3×3 工作台右面板；完整组合使用 CraftingScreen |
-| `CraftingScreen` | **必填** `recipeBook: RecipeBookProps`；可选 `crafting: Omit<CraftingTableProps, 'title'>`、`layout` / `defaultLayout`: recipe-book / survival、`onLayoutChange`、`onHelp`、`onClose`、`showClose` | Classic 配方书＋右面板＋工具条完整组合；默认 recipe-book，ref 为 section；窄屏局部滚动，配方与物品操作由宿主处理 |
+| `CraftingScreen` | **必填** `recipeBook: RecipeBookProps`；可选 `crafting`、`layout` / `defaultLayout`: recipe-book / survival、布局 / 帮助 / 关闭回调、`showClose`、`imageRender: CraftingScreenImageRenderProfile` | Classic 配方书＋工作台＋工具条；46个右侧槽与配方集合分开；可选完整原图组合与七个文字角色，真实输入和滚动保留，配方与合成由宿主控制。见 [CRAFTING_IMAGE_QA.md](docs/CRAFTING_IMAGE_QA.md) |
 | `RecipeBook` | **必填** `title`、`entries`、`categoryId`、`query`、`craftableOnly`；分类 / 搜索 / 筛选回调、`selectedId`、`onRecipeAction`、`creative` | 受控配方页，entries 已由宿主筛选和展开；复用分类、搜索、筛选和滚动，ref 为 div |
 | `RecipeBookEntry` | **必填** `entry: RecipeBookItem`；`onRecipeAction(id, action)`、槽位按钮属性 | entry 提供 item / preview、craftableCount、backgroundImage / backgroundSlice、modifier；零可制作数保留物品，不可制作颜色不自动禁用；primary / secondary / tertiary 操作，ref 为 button |
 | `RecipeFilterToggle` | `craftableOnly` / `defaultCraftableOnly`、`onCraftableOnlyChange`、`label`、`disabled`、`readOnly` | 可独立复用的可制作筛选按钮，aria-pressed 表达状态；ref 为 button，不自行过滤集合 |
@@ -302,6 +302,8 @@ ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随
 上一image-only阶段中，`EnchantingTable imageRender` 可显式给出 `frame:{width,height,guiScale}`、GLOBAL game `origin`（默认ceil stage居中）和`displayScale`（默认1，正数≤32）。单层接管panel / close / indent / 38slots / lapis / rows / dust图像，ready前或失败时保留CSS fallback；DOM文字、物品、book和操作语义保留。默认仍CSS；完整GUI辅助测量已见改善但仍非零（public18为26595 / gallery20为28452差异像素），实际组件正式13项与生产34项辅助检查已通过；四个底层image-pass零差不等于整台零差。完整配置与坐标 / 主题边界见 [GUI_IMAGE_QA.md](docs/GUI_IMAGE_QA.md)。
 
 工作站文字可显式传入 `renderText: WorkstationTextRenderer`。WorkstationFrame 的标题、PlayerInventory 的可见标签及 EnchantmentOption 的数字费用提供 `WorkstationTextContext`，EnchantingTable 转发同一个回调到这些位置。`kind` 为 title / inventory-label（align=start），或 enchantment-cost（align=end，附 disabled / id / tier）。回调只返回非交互的视觉节点；原始标题、库存标签、费用与 ARIA 名称仍由库保留。未传回调时默认 DOM 文字保持原样，不自动替换字体，也不影响独立的 ItemTooltip.renderText。完整示例见 [WORKSTATION_TEXT_QA.md](docs/WORKSTATION_TEXT_QA.md)。
+
+`CraftingScreen.imageRender` 可绘制完整326×166源布局与顶部外扩工具条。应用明确提供 frame、字体、metrics及输入clip策略；ready后接管覆盖外观，未覆盖文字和自定义节点保留DOM。交互预览见 `#crafting-layer`，可用 `python scripts/use-local-crafting-fonts.py "C:/XboxGames/Minecraft for Windows/Content"` 准备17个中文标签的本地字页，加 `--check-only` 只验不写。字体页不随包分发，详细用法及当前验证边界见 [CRAFTING_IMAGE_QA.md](docs/CRAFTING_IMAGE_QA.md)。
 
 `book` 提供自定义3D renderer的接入点，省略时不绘制假书图。`EnchantingBook` 当前mesh、packed UV、normal/winding和着色路径来自本机PIX捕获的实际GUI书本draw（该capture的Global65 / PSO795），已替换旧Java参考网格和Entity / MeshFallback候选；实际材质字符串名仍未知，不能把捕获程序称为旧候选文件的相同字节。
 

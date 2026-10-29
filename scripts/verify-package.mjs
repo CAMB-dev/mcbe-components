@@ -194,6 +194,52 @@ try {
     assert.equal((fallback.match(/class="mc-slot(?: |")/g)??[]).length,39);assertRenameInput(fallback,bad.name);
     assert(!/ imageRender=| guiModel=/.test(fallback));
   }
+  const craftingBook={title:'1',entries:[],categoryId:'search',query:'1',searchPlaceholder:'1',onQueryChange:()=>{}};
+  const craftingFrame={frame:{width:2570,height:1402,guiScale:5},origin:[94,57.5],displayScale:2.5,imagePhysicalPrecision:'float32'};
+  const craftingTextStyle={...textStyle,metrics:{lineHeight:8,paintOffset:[0,0]}};
+  const craftingInputText={...craftingTextStyle,clipQuantization:'logical-stage-floor',scissor:[0,0,2570,1402]};
+  const craftingProfile={...craftingFrame,itemImages:true,itemModels:true,text:{crafting:craftingTextStyle,inventory:craftingTextStyle,
+    recipeTitle:craftingTextStyle,query:craftingInputText,placeholder:{...craftingInputText,clipQuantization:'floor-min-ceil-max'},
+    inventoryCount:craftingTextStyle,recipeCount:craftingTextStyle}};
+  const craftingItems={inputs:[{name:'Caller ingredient',image:'/caller-ingredient.png',count:11,durability:.5},repairModelItem],
+    result:{name:'Caller craft result',image:'/caller-craft-result.png'},inventoryLabel:'1',
+    inventory:[{name:'Caller inventory item',image:'/caller-inventory.png',count:11}],hotbar:[repairModelItem]};
+  const assertCraftingSsr=(markup,hasSearch=true)=>{
+    const start=markup.indexOf('class="mc-inventory-screen-frame__right'),end=markup.indexOf('class="mc-inventory-toolbar');
+    assert(start>=0&&end>start,'Crafting retains a distinct right pane and toolbar.');
+    assert.equal((markup.slice(start,end).match(/class="mc-slot(?: |")/g)??[]).length,46,'Crafting retains9 inputs,1 result,27 inventory and9 hotbar slots, independently of recipe entries.');
+    assert(!/ imageRender=| imagePhysicalPrecision=| guiModel=| itemImages=| itemModels=/i.test(markup),'Crafting source profile options must not leak into DOM attributes.');
+    const search=(markup.match(/<input [^>]*>/g)??[]).find(input=>input.includes('type="search"'));
+    if(hasSearch)assert(search?.includes('value="1"')||search?.includes('placeholder="1"'),'Crafting source keeps the actual HTML search input.');
+    else assert.equal(search,undefined,'Compact Crafting does not mount a hidden recipe search input.');
+  };
+  const defaultCrafting=renderToString(element(ui.CraftingScreen,{title:'1',recipeBook:craftingBook,crafting:craftingItems}));
+  const sourceCrafting=renderToString(element(ui.CraftingScreen,{title:'1',recipeBook:craftingBook,crafting:craftingItems,imageRender:craftingFrame}));
+  const sourceRecipe={id:'caller-recipe',label:'Caller recipe',item:{name:'Caller recipe image',image:'/caller-recipe.png',count:11},craftableCount:11};
+  const fullCrafting=renderToString(element(ui.CraftingScreen,{title:'1',recipeBook:{...craftingBook,entries:[sourceRecipe]},crafting:craftingItems,imageRender:craftingProfile}));
+  const placeholderCrafting=renderToString(element(ui.CraftingScreen,{title:'1',recipeBook:{...craftingBook,query:''},crafting:craftingItems,imageRender:craftingProfile}));
+  const compactCrafting=renderToString(element(ui.CraftingScreen,{title:'1',recipeBook:craftingBook,crafting:craftingItems,layout:'survival',showClose:false,imageRender:craftingProfile}));
+  for(const markup of [defaultCrafting,sourceCrafting,fullCrafting,placeholderCrafting])assertCraftingSsr(markup);
+  assertCraftingSsr(compactCrafting,false);
+  assert(!defaultCrafting.includes('mc-crafting-image-layer'),'Default CraftingScreen keeps the CSS/semantic path without an opt-in canvas.');
+  for(const markup of [sourceCrafting,fullCrafting,placeholderCrafting,compactCrafting]){
+    assert.match(markup,/mc-crafting-image-window/);assert.match(markup,/mc-crafting-image-layer/);assert.match(markup,/data-render-state="loading"/);
+    assert.match(markup,/data-right-slots="46"/);assert.match(markup,/data-frame-origin="94,57.5"/);
+    assert(!markup.includes('data-mc-source-item='),'SSR must not claim client-ready item ownership before a canvas is ready.');
+    assert.match(markup,/data-fallback-model="kept"/);
+  }
+  for(const role of ['crafting','inventory','recipe-title','query'])assert(fullCrafting.includes('data-text-'+role+'="true"'),'Packed Crafting source text role: '+role);
+  assert.match(fullCrafting,/data-recipe-count="1"/);assert.match(fullCrafting,/data-recipe-id="caller-recipe"/);
+  assert.match(placeholderCrafting,/data-text-query="true"/);assert(!compactCrafting.includes('data-text-recipe-title='),'Compact source has no recipe-book title role.');
+  for(const bad of [
+    {title:'1',profile:{...craftingProfile,text:{...craftingProfile.text,crafting:{...craftingTextStyle,fontScale:0}}}},
+    {title:'2',profile:craftingProfile},
+    {title:'1',profile:{...craftingProfile,text:{...craftingProfile.text,query:{...craftingInputText,clipQuantization:'invalid'}}}},
+  ]){
+    const fallback=renderToString(element(ui.CraftingScreen,{title:bad.title,recipeBook:craftingBook,crafting:craftingItems,imageRender:bad.profile}));
+    assertCraftingSsr(fallback);assert.match(fallback,/mc-crafting-image-error/);assert(!fallback.includes('mc-crafting-image-layer'),'Invalid Crafting text falls back atomically rather than painting a partial item/model layer.');
+    assert.match(fallback,/data-fallback-model="kept"/);
+  }
   assert.deepEqual(ssrIoCalls,[],'Default/source/text/item/model/fallback SSR must not fetch, decode images or allocate a GPU canvas.');
 } finally {
   console.error=previousConsoleError;
@@ -420,6 +466,7 @@ import type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, 
 import type { GuiImage, GuiImageLayerProps, GuiImageLayerState, GuiImageRect, GuiImageRgba, GuiImageNineSlice, GuiImageGeometry, GuiImageLayoutOptions, GuiImageVertex, GuiImageMesh, GuiImageLayout, GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderOptions, GuiImageRenderResult, EnchantingTableImageRenderProfile } from 'mcbeui';
 import type { GrindstoneImageRenderProfile, GrindstoneTextRenderProfile, GrindstoneTextRenderStyle } from 'mcbeui';
 import type { AnvilImageRenderProfile, AnvilTextRenderProfile, AnvilTextRenderStyle } from 'mcbeui';
+import type { CraftingScreenImageRenderProfile, CraftingScreenTextStyle, CraftingScreenInputTextStyle } from 'mcbeui';
 import { Select } from 'mcbeui';
 import type { GuiIconProps, GuiIconName, BitmapTextProps, BitmapTextRenderer, BitmapTextProfile, BitmapFont, BitmapGlyph, BitmapGlyphRun, BitmapGlyphRenderOptions, BitmapGlyphRenderResult, BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, BitmapUnicodeVertex, BitmapUnicodeRun, BitmapGlyphBackground } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
@@ -548,6 +595,11 @@ const anvilTextProfile: AnvilTextRenderProfile = {
   cost:{...anvilTextStyle,metrics:{lineHeight:10,paintOffset:[0,1]},color:[127,255,31,255],failureColor:[255,85,85,255],shadow:{offset:[1,1],tint:[.25,.25,.25,1]}},
 };
 const anvilProfile: AnvilImageRenderProfile = {...imageRenderProfile,text:anvilTextProfile,itemImages:true,itemModels:true};
+const craftingTextStyle: CraftingScreenTextStyle = {...textStyle,metrics:{lineHeight:8,paintOffset:[0,0]}};
+const craftingInputText: CraftingScreenInputTextStyle = {...craftingTextStyle,clipQuantization:'logical-stage-floor',scissor:[0,0,2570,1402]};
+const craftingImageProfile: CraftingScreenImageRenderProfile = {...imageRenderProfile,origin:[94,57.5],imagePhysicalPrecision:'float32',itemImages:true,itemModels:true,
+  text:{crafting:craftingTextStyle,inventory:craftingTextStyle,recipeTitle:craftingTextStyle,query:craftingInputText,
+    placeholder:{...craftingInputText,clipQuantization:'floor-min-ceil-max'},inventoryCount:craftingTextStyle,recipeCount:craftingTextStyle}};
 const glintUniforms: ItemGlintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25],tintColor:[1,1,1,1],hudOpacity:1};
 const glintSampler: ItemGlintSampler = 'point-repeat', glintBlend: ItemGlintBlend = {source:'source-alpha',destination:'one-minus-source-alpha'};
 const glintOptions: ItemGlintRenderOptions = {uniforms:glintUniforms,glintSampler,blend:glintBlend,width:1,height:1};
@@ -611,6 +663,12 @@ export const demo = <>
   <SurvivalInventoryScreen recipeBook={recipeBookProps} layout="recipe-book" showClose={false} ref={createRef<HTMLElement>()}/>
   <CraftingScreen {...craftingScreenProps} ref={createRef<HTMLElement>()}/>
   <CraftingScreen recipeBook={recipeBookProps} defaultLayout="survival" showClose={false} ref={createRef<HTMLElement>()}/>
+  <CraftingScreen {...craftingScreenProps} title="1" imageRender={craftingImageProfile}
+    recipeBook={{...recipeBookProps,title:'1',query:'1',searchPlaceholder:'1'}}
+    crafting={{inputs:[{name:'Caller ingredient',image:'/caller-ingredient.png',count:11},grindstoneBlock],result:null,inventoryLabel:'1',hotbar:[grindstoneBlock]}}
+    ref={createRef<HTMLElement>()}/>
+  <CraftingScreen {...craftingScreenProps} layout="survival" imageRender={{...craftingImageProfile,itemImages:false,itemModels:false,text:{crafting:craftingTextStyle}}}
+    onLayoutChange={layout=>layout.toUpperCase()} ref={createRef<HTMLElement>()}/>
   <CraftingTable onInputAction={(index,action)=>String(index)+action} onTakeResult={action=>action.toUpperCase()}/>
   <Furnace input={null} fuel={null} progress={.5} fuelRemaining={.5} onInputAction={(slot,action)=>slot+action}/>
   <BlastFurnace title="Blast furnace"/>
