@@ -2,6 +2,9 @@
 export const blockTextureUrls = {
   stone: new URL('./assets/item-renderers/stone.png', import.meta.url).href,
   'stone-bricks': new URL('./assets/item-renderers/stonebrick.png', import.meta.url).href,
+  'enchanting-table-top': new URL('./assets/item-renderers/enchanting_table_top.png', import.meta.url).href,
+  'enchanting-table-side': new URL('./assets/item-renderers/enchanting_table_side.png', import.meta.url).href,
+  'enchanting-table-bottom': new URL('./assets/item-renderers/enchanting_table_bottom.png', import.meta.url).href,
 };
 export const bannerBaseUrl = new URL('./assets/item-renderers/banner_base.tga', import.meta.url).href;
 export const bannerPatternUrls = {

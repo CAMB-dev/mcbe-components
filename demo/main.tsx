@@ -27,6 +27,7 @@ import { ItemGlintExamples } from './item-glint-examples';
 import { BitmapTextExamples } from './bitmap-text-examples';
 import { WorkstationTextExamples } from './workstation-text-examples';
 import { GuiIconsExamples } from './gui-icons-examples';
+import { ItemRenderersExamples } from './item-renderers-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -41,6 +42,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'surfaces', name: 'Panels & dialogs', icon: 'chevron', count: '02' },
   { id: 'inventory', name: 'Inventory & slots', icon: 'chevron', count: '03' },
   { id: 'item-glint', name: 'Item glint', icon: 'chevron', count: '01' },
+  { id: 'item-renderers', name: 'Block items', icon: 'chevron', count: '01' },
   { id: 'bitmap-text', name: 'Bitmap text', icon: 'chevron', count: '01' },
   { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
   { id: 'workstation-text', name: 'Workstation text', icon: 'chevron', count: '01' },
@@ -81,6 +83,7 @@ const snippets: Record<string, string> = {
   'inventory-states': `<ItemSlot item={{ name: 'Diamond sword', icon: <YourSword />,\n  durability: 0.42, lore: ['Sharpness IV'] }} selected />\n<InventoryGrid label="Inventory" items={items} size={27}\n  onSlotAction={(index, action) => handleSlot(index, action)} />`,
   workstations: `<Grindstone inputs={[first, second]} result={result}\n  inventory={items} onTakeResult={handleTake} />\n<EnchantingTable item={sword} lapis={lapis}\n  options={enchantments} onEnchant={handleEnchant} />`,
   'gui-icons': `<GuiIcon name="sound-glyph" scale={2} label="Audio" />\n<GuiIcon name="warning-glyph-small" scale={2} />\n\n// guiIconNames lists all 150 typed names.\n// Without a label, an icon is decorative.\n// Original colors and image proportions are retained.`,
+  'item-renderers': `<BlockPreview block="enchanting-table" size={48} />\n// stone, stone-bricks, stone-slab and stone-stairs\n// are also available. Supply your own camera, lighting\n// or textures when your host uses a different profile.`,
   'workstation-text': `const renderGuiText: WorkstationTextRenderer =\n  (text, context) => (\n    <BitmapText\n      {...(context.kind === 'enchantment-cost'\n        ? costTextProfile : labelTextProfile)}\n      layout="advance" style={{ display: 'block' }}>\n      {text}\n    </BitmapText>\n  );\n<EnchantingTable title="附魔台" inventoryLabel="物品栏"\n  options={options} renderText={renderGuiText} />\n// Each host profile supplies its own font, scale,\n// renderer, sampling, shader, color and shadow.`,
   processing: `<CraftingScreen\n  recipeBook={{ title: 'Recipes', entries,\n    categoryId, onCategoryChange: setCategoryId,\n    query, onQueryChange: setQuery,\n    craftableOnly, onCraftableOnlyChange: setCraftableOnly,\n    onRecipeAction: handleRecipe }}\n  crafting={{ inputs: recipeInputs, result,\n    inventory: items, onTakeResult: handleTake }} />\n// entries are filtered and flattened by your application.\n// CraftingTable also remains available as a right pane.\n<Furnace input={rawBeef} fuel={coal} result={steak}\n  progress={0.5} fuelRemaining={0.75}\n  inventory={items} onTakeResult={handleTake} />`,
   anvil: `<Anvil name={name} onNameChange={setName}\n  inputs={[item, material]} result={result}\n  cost={{kind: 'levels', levels: 3, affordable: true}}\n  onTakeResult={handleTake} />`,
@@ -289,6 +292,9 @@ function App() {
       </Example>
 
       <Example id="item-glint" title="Item glint" detail="A reusable material renderer with controlled phase, original texture and explicit composition."><ItemGlintExamples/></Example>
+      <Example id="item-renderers" title="Block items" detail="Original block textures on reusable item meshes.">
+        <div style={{ padding: 24, minWidth: 0 }}><ItemRenderersExamples/></div>
+      </Example>
       <Example id="bitmap-text" title="Original bitmap text" detail="Caller-owned glyph pages, explicit metrics and sampling. The original Unicode sample preserves native glyph shapes; whole-UI edge sampling is still under calibration."><BitmapTextExamples/></Example>
 
       <Example id="workstations" title="Workstation GUIs" detail="Classic Bedrock container layouts, exposed as React components.">
@@ -342,7 +348,7 @@ function App() {
         </div>
           <div className="chinese-specimen" lang="zh-CN"><span className="sample-label" lang="en">FUSION PIXEL · 简体中文</span><p>创造属于你的世界</p><span className="type-subtitle" lang="en">CJK fallback. No missing adventures.</span></div>
         </div>
-        <div className="icon-specimen">{(['heart', 'settings', 'book', 'grid', 'code', 'search', 'plus', 'check', 'sun', 'moon', 'download', 'arrow'] as const).map(name => <span key={name} title={name}><PixelIcon name={name} size={24}/></span>)}<span className="type-subtitle">16 vector pixel icons</span></div>
+        <div className="icon-specimen">{(['heart', 'settings', 'book', 'grid', 'code', 'search', 'plus', 'check', 'sun', 'moon', 'download', 'arrow'] as const).map(name => <span key={name} title={name}><PixelIcon name={name} size={24}/></span>)}<span className="type-subtitle">16 vector pixel icons</span><a href="#gui-icons">Browse 150 original GUI icons →</a></div>
         <div className="font-note"><PixelIcon name="info" size={14}/><span>{hasGameFont ? 'Preview uses Mojangles from your local game. The package includes open-source alternatives.' : 'Open-source font alternatives. Bring your own Mojangles for original glyph metrics.'}</span></div>
       </Example>
 

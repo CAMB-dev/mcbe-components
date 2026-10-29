@@ -114,3 +114,8 @@ export function WorkstationPreview({ fonts }: {
 最终 `.cache/gui-icons-final-production-smoke.json` 在真实4173中确认工作站字体默认未挂载、0个Offscreen；开启五处ready、共1个实际context；关闭全部卸载并释放live0，操作回调保留。主Bitmap预览仍独立WebGL243×100，没有把字体示例开关改成全局默认。页面 / 控制台 / 请求错误为空。
 
 React18.3.1 / 19.3.1的125值、SSR、类型 / ref / layout / renderText及所有原图 / 许可实际消费通过，两消费者各253个dist文件与受测dist逐字节相同。受测包身份、8个生产入口字节证明及整轮856唯一正式用例的多批次累计见 [VERIFICATION.md](VERIFICATION.md)。本机原字图仍不随Git / npm分发；本节不改变多位费用、native行高 / bearings或整GUI仍未认证的边界。
+
+
+## 新 GUI4 字体绑定观察
+
+真实GUI4留出帧（2570×1402、UI80%）的CJK draw明确使用Bitmap / POINT，而旧GUI5 CJK为BitmapSmooth / LINEAR；两帧SGA与费用均Bitmap / POINT。原页和相邻pen没有因此变成另一套字体数据，不能靠切换过滤器推断native末字advance / 多行或所有未测scale的绑定规则。默认示例仍是显式宿主profile而非自动引擎选择；详见 [ENCHANTING_QA.md](ENCHANTING_QA.md) 的新捕获范围。

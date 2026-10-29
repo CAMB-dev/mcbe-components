@@ -4,6 +4,29 @@
 
 公开ZIP SHA256：`d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf`。[官方full release](https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip)。`inventory_screen.json`本机原字节SHA256 `8c3a6a756bc47500d237ebceea389d1f08d9e0dcdb02ab806ab3a03a51a22a6b`，public原字节`10e72254bac2a95801b61cb229ad43ab793ec585a52aee7e27791e79ab6d9f80`；完整parsed对象一致。模板`ui_common`、`ui_template_tabs/toggles/buttons`也直接解析原始archive并比对public。
 
+## 新增附魔台物品预览：源预设与完整Web期望
+
+`BlockPreview block="enchanting-table"` 已加入，组件 / 运行时值仍118 / 125，renderer原始资源由45增至48。top / side / bottom均是官方原16×16 PNG，blocks.json / terrain_texture别名一致。捕获实际Global57中第三个block的12个顶点、18个索引支持16×12×16预设，侧面UV取 `[0,4,16,12]`，三个可见面顶点全白，不施加石块经验暗化。
+
+这是源/可见面支持的可复用模型约定，非恢复的native object-space axes / CPU camera。底图完整原文件与atlas tile一致，但捕获未绘底面，不能声称底面绑定或朝向已认证。保留模型、camera、textures与lighting覆盖，无捕获全局hotbar坐标写入默认。源审计 `.cache/enchanting-table-item-source/REPORT.md` / audit.json。
+
+独立 `.cache/enchanting-table-item-qa/FINAL.json`：20/20 PASS、0skip/flaky，57.5秒；新增8＋旧12。三PNG与原别名独立核对；前/右/顶/底四完整80×80视图共25,600像素及两组覆盖视图12,800像素，对独立Web期望合38,400像素RGBA零差，包含侧面视图20px透明顶部，不做silhouette mask或容差。该Web合同不认证默认native camera，也不替代下文旧完整原生RMSE；旧报告与期望未改。
+
+### 仅替换缺失物品的整页辅助对照
+
+冻结 `.cache/full-gui-enchanting-table-preset/FINAL.json` / RESULT.md 记录8组合（before/after×public18/gallery20×default/captured book）。before四组完整RGBA hash均重现旧基线，旧60份文件原SHA未变；after仅将hotbar第三格缺图换成新BlockPreview，保留同一747,600像素面板＋halo、相同source root / scale / ROI，不移位、fit或mask。
+
+| Profile | 整面不同像素 前→后 | 整面RGBA MAE 前→后 |
+| --- | --- | --- |
+| public18 | 51666→49520 | 4.058101926→3.767670546 |
+| gallery20 | 53523→51377 | 4.238693486→3.948262105 |
+
+固定table100×100区域 `[1055,997,100,100]` 不同像素3919→1773，MAE29.455675→7.743025，但**最大通道差143→252更差**；它包含槽边与underlay，不是纯block误差归因。每组整面sumAbsRGBA减少868506，实际before/after变化3568像素全部位于此固定区，区域外0变化。完整native framebuffer→独立PMA参考3,603,140像素零差只认证参考呈现；生产普通React的整面max仍255、alpha差1760，nativeParity仍FAIL。
+
+两种book分支仅在这个已测open状态得相同指标，不外推其他姿态 / CPU动画。该辅助实验不增加正式case，旧原生RMSE和旧整页报告不被改写；camera与native物品CPU变换仍未知。
+
+本轮verify:package与实际React18/19消费通过，含125值、48原素材及新预设，两消费者各256份dist与本次dist同字节；当前受测包身份见 [VERIFICATION.md](VERIFICATION.md)，不借用此前包hash。填入新模型的整页辅助测量见上节。生产18项辅助检查通过：6canvas实际ready/非透明，5预设真实popup切换触发绘制、切回table原hash不变；3原PNG响应SHA匹配，图库直达与320px无文档横溢出、错误为空。`.cache/enchanting-table-production/identity.json` 的8入口与site同字节，smoke.json记录可见操作；辅助检查不增加正式case，也不认证nativecamera。
+
 ## 玩家容器布局
 
 所有坐标为game pixel，Web GUI2时乘2。根176×166。四件护甲grid `[7,7,18,72]`；offhand `[79,61,18,18]`。玩家renderer黑背景 `[26,8,52,70]`，border `[25,7,54,72]`。原`live_player_renderer`不可通过一个占位图或自绘人像认证；组件仅接收宿主预览。

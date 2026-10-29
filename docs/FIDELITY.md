@@ -4,6 +4,14 @@
 
 当前公开118个组件、4份数据及3个渲染函数，共125项值导出；其中 `renderBitmapGlyphs` 为浏览器GPU函数，两个glint函数为纯纹理运算。共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen 已实现；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
 
+## 附魔台物品预设与 GUI4 留出帧
+
+BlockPreview新增enchanting-table，资源45→48；118组件 / 125值不变。三原PNG、16×12×16预设、side `[0,4,16,12]` 与可见面白色倍率有source / captured face依据；底面未在捕获绑定，默认camera及模型轴不是恢复的native CPU物品变换。正式20/20（新8＋旧12），38,400个独立Web期望像素零差；旧原生renderer非零报告完整保留，见 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。
+
+新整页辅助实验仅补hotbar第三格模型，保留747600像素ROI和旧60文件：public18差异51666→49520，gallery20为53523→51377；固定100²物品区3919→1773、MAE29.455675→7.743025，但max143→252更差。区域外0变化，nativeParity仍FAIL，不将Web轴向0或低MAE说成nativecamera/整GUI认证；完整记录见上述库存QA。
+
+实际新GUI4捕获在2570×1402viewport、80%UI下，冻结旧量化模型未经修改即对11个image draw / 52rect / 1712顶点 / 3424XY全部0差。layout stage643×351与projection642.5×350.5分开；这是相同viewport的新GUI scale留出验证，不是跨viewport、字体 / UV / shader / raster或整RGBA认证，也未恢复CPU实现。GUI4 CJK明确Bitmap/POINT，旧GUI5 CJK为Smooth/LINEAR；两帧SGA/费用仍Bitmap/POINT，不推导未测scale切换规则。该研究未改生产采样或布局。详细证据见 [ENCHANTING_QA.md](ENCHANTING_QA.md)。
+
 ## 原版图标目录
 
 新增GuiIcon与guiIconNames，保留旧PixelIcon。150张完整原版PNG按物理尺寸整数缩放，原字节及安装基础包身份已记录；不自动复刻所有原生使用尺寸、裁切、tint或交互状态。默认装饰及显式可访问命名属于Web接口，PNG相同不是整GUI认证；见 [gui-icons.json](gui-icons.json)。
@@ -14,7 +22,7 @@
 
 工作站 renderText 保留 canonical 原文与默认DOM，宿主显式选择字图、采样、颜色、scale和shadow。BitmapText 默认visual，advance模式以pen/行高占CSS框并保留完整视觉外溢；费用示例还需display:block，不能由inline-block推断原生行高。六字CJK/数字1、2的本机子集默认不开启，不是完整字体或native多行指标；见 [WORKSTATION_TEXT_QA.md](WORKSTATION_TEXT_QA.md)。
 
-SGA空句点在两帧六行实际pen中advance1game，本轮只修该字符旧fallback4，不改Book mesh/shader/pose。整页普通React相对实际post R117、完整747600像素面板与halo仍为非零：公开字体CSS18主profile不同51666，本机gallery20不同53523，最大通道差255；不是可选文字接入已达原生整页一致。布局量化候选解释两帧适用image顶点，不等于恢复CPU、跨viewport或字体/整RGBA认证，未据此改生产。
+SGA空句点在两帧六行实际pen中advance1game，本轮只修该字符旧fallback4，不改Book mesh/shader/pose。此前整页普通React相对实际post R117、完整747600像素面板与halo的基线为非零：公开字体CSS18主profile不同51666，本机gallery20不同53523，最大通道差255；不是可选文字接入已达原生整页一致。布局量化候选解释两帧适用image顶点，不等于恢复CPU、跨viewport或字体/整RGBA认证，未据此改生产。
 
 ## 共享 GPU 字体的显示路径
 
@@ -136,7 +144,7 @@ Alert、Badge、部分扩展状态以及 Panel / Dialog 的任意内容排版仍
 
 加载页依据 `progress` 的原版 modal / fancy loading bars 分支补入真实灰框、内层、绿色图集与标题图，原紧凑组合单独保留。世界全景由宿主提供；没有用手绘背景替代游戏渲染。库存原图检查另修复 preview border 的中心 fill、交易禁用底图的浏览器零切片绘制问题、经验条对应 DOM 图层选择，以及创造库存的标题对齐、搜索宽度和网格居中。世界缩略图的 `%y` 应从自身高度求宽度，早期按父高度的推导已撤回。
 
-BlockPreview / BannerPreview 的 45 份 PNG / TGA 保持原始字节，解码保留 175 / 176 等半透明 alpha，旗帜图案直接使用原始 UV 与掩码。软件网格、相机、光照和染色属于可配置重建；本轮真实截图用于训练和保留样本测量，非零残差必须报告为 NOT EXACT。单个台阶另有无数量角标的新原生样本；旧结果槽数量 2 遮挡不能全部归咎于材质误差。完整证据与独立测量见 [item-renderers-geometry.json](item-renderers-geometry.json) 和 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。
+BlockPreview / BannerPreview 的 48 份 PNG / TGA 保持原始字节，解码保留 175 / 176 等半透明 alpha，旗帜图案直接使用原始 UV 与掩码。软件网格、相机、光照和染色属于可配置重建；本轮真实截图用于训练和保留样本测量，非零残差必须报告为 NOT EXACT。单个台阶另有无数量角标的新原生样本；旧结果槽数量 2 遮挡不能全部归咎于材质误差。完整证据与独立测量见 [item-renderers-geometry.json](item-renderers-geometry.json) 和 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。
 
 ## 历史：附魔照明与符文后续修正
 

@@ -2,6 +2,22 @@
 
 2026-10-29。本机 Bedrock 1.26.6005.0（界面显示26.60）。当前已将实际 GPU draw 的书本网格、UV、采样和 shader 算术迁入组件；传入捕获的 `rendererState` 时，实际 React 组件在已核验的 NVIDIA 后端与该次书本 draw 全目标 RGBA 零差。**默认开合 / 翻页仍是受控重建，旧原生截图比较仍非零，整个附魔台尚未达到原生 pixel perfect。**
 
+## GUI4 新留出捕获：图像坐标与字体 profile
+
+本轮真实新捕获 `enchanting-open-gui4-holdout.wpix`，SHA256 `0fc962cf98f15261441c2ed9187c8d5bfa35db8ebc0495ed7951109060632bea`，原始viewport2570×1402、UI80% / GUI4；采集后root已恢复100%，剑归库存；恢复GUI5截图只证明操作状态，不是本轮native光栅oracle。新帧自己的资源 / draw绑定独立解码，不套用旧GUI5的ID。记录 `.cache/gui4-holdout-full-gui/REPORT.md`。
+
+旧量化代码与runner在读取新帧前已冻结，未调系数 / 相位。源模型对全部适用11个image draw、52个rect、1712顶点共3424个XY坐标均0差，无未映射image批；其他33个draw未由该image量化验证。layout stage由ceil(viewport/4)得643×351，实际projection为642.5×350.5，不能用前者拉伸投影。证据 `.cache/enchanting-layout-gui4-holdout/REPORT.json`。这是同一物理viewport从GUI5到GUI4的真实scale留出通过，不是跨viewport、CPU代码、UV / 字体 / shader / 最终raster / 整屏RGBA认证，量化候选没有写入生产。
+
+新CJK实际draw为Bitmap / POINT（与SGA和费用同profile），此前GUI5 CJK为BitmapSmooth / LINEAR；GUI5 SGA / 费用已经是Bitmap / POINT。六原Unicode页、字格和相邻pen仍相同，但没有恢复所有scale的绑定切换阈值，也没有认证末字advance、lineHeight、成本多位间距或disabled色。本机文字示例的shader / sampling仍是显式宿主profile，不从这两帧推广自动全scale规则。
+
+新增附魔台BlockPreview预设及三原PNG另见 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。它补齐一个源支持的模型选项，不改写下文旧整页baseline或以前书本 / 字体的非零残差；尚无新默认整GUI零差结果。
+
+## 附魔台物品补位的整页辅助测量
+
+新BlockPreview只替换hotbar第三格缺图，8组合before/after×两字体profile×两book分支保持相同747600像素面板＋halo。before重现旧四组RGBA hash且旧60文件不变；public18差异51666→49520、MAE4.058101926→3.767670546，gallery20为53523→51377、4.238693486→3.948262105。
+
+固定物品100²区3919→1773、MAE29.455675→7.743025，但最大差143→252更差；区域包含slot边与underlay。每组sumAbsRGBA减少868506，3568个实际变化像素仅在该区域，区域外0变化。整面max255 / alpha差1760仍在，nativeParity仍FAIL，不认证默认物品camera或更多book姿态。辅助报告 `.cache/full-gui-enchanting-table-preset/FINAL.json`，不增正式case、不改旧baseline；详见 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。
+
 ## 本轮追加：可选工作站文字与 SGA 句点
 
 WorkstationFrame / PlayerInventory / EnchantmentOption 新增可选 renderText，EnchantingTable 转发标题、库存标签与三个费用；原文字及 canonical 可访问语义保留，字体和 GPU 使用由宿主显式选择。BitmapText 的 advance 布局只改变 CSS 逻辑占位，完整 bearing / shadow canvas 保留；费用 end 锚定示例采用 display:block，避免父级 inline strut。原六字 CJK 与费用1/2本机子集只是已观察单行 profile，末字 advance、费用相邻数字和多行 / 原生Y仍有边界。完整合同及示例见 [WORKSTATION_TEXT_QA.md](WORKSTATION_TEXT_QA.md)。

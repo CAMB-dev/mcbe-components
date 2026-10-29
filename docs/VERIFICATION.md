@@ -2,7 +2,22 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：工作站文字、150原图图标与 invalid
+## 当前检查点：附魔台物品预设与 GUI4 留出证据
+
+118个组件、4份数据、3个函数，共125值保持不变。BlockPreview新增block='enchanting-table'，原始renderer资源45→48；真实三PNG、12高cuboid、侧UV `[0,4,16,12]` 与可见面白色倍率有源证据，camera / 未观察底面仍不认证。来源及保留边界见 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。
+
+- 独立20/20正式通过、0skip/flaky，57.5秒，新增8＋旧12；四轴及覆盖场景合38,400个完整Web期望像素RGBA0，无裁边/mask/容差，不能称nativecamera恢复。
+- 新实际GUI4捕获viewport2570×1402，在UI80%后由冻结旧量化模型检验11image draw / 52rect / 1712顶点 / 3424XY全部0；只认证此same-viewport跨GUIscale的image坐标候选，未认证其他33draw、字体 / UV / shader / raster或整个GUI。GUI4 CJK Bitmap/POINT与GUI5 Smooth/LINEAR直接绑定不同，未推出全scale规则，也未改生产量化。
+- 实际合并 `.cache/enchanting-table-validation-integration-summary.json` 为864唯一用例、859 PASS / 5预期SKIP、0未解决失败，仍是多批次累计。该孤立20项报告的空projectName仅按其明确Chromium1280×1000/DPR1配置归入pixels，去掉旧12重复，原始报告未改。旧856及原生非零报告均保留为历史。
+- verify:package已通过build与实际React18/19消费，125值不变，48份原素材与新预设入口类型 / SSR / URL纳入检查，两消费者各256份dist与当前dist逐字节一致。实际包 `.cache/enchanting-table-consumer-verified.tgz` SHA256 `dd128c6fd13fae51019ce88b50b8c5a6f42a94bd63a33857f6c567d17a371574`，身份见 `.cache/enchanting-table-consumer-identity.json`。生产18项辅助检查通过（不计正式）：6canvas ready且非透明、5预设由真实popup驱动putImageData并切回table同hash、3张实际served PNG原SHA匹配；typography→gui-icons直达、150图展开/分类搜索/3倍、320px两section无文档横溢出，errors[]。`.cache/enchanting-table-production/identity.json` 确认8实际入口与site同字节，主 `main-CGa5SPmL.js` 为146473字节；smoke.json与上下文截图同目录，未套用旧site身份。
+
+整页新辅助8组合仅填hotbar第三格，before完整hash重现旧基线、旧60文件未变。public18不同51666→49520（MAE4.058101926→3.767670546），gallery20为53523→51377（4.238693486→3.948262105）。固定100²物品区3919→1773、MAE29.455675→7.743025，但max143→252恶化；每组sumAbs减少868506，3568变化像素仅在该区、区外0变，nativeParity仍FAIL。`.cache/full-gui-enchanting-table-preset/FINAL.json` 为辅助、不增加正式case；整面仍max255 / alpha差1760，不认证nativecamera或新book动画。
+
+最终只读diff审查无actionable / mustfix，既有default / override / 类型 / 资源 / generator链保留。root实际IAB reload后确认typography直达链接，展开150图并选择anvil；不新增正式case。
+
+报告 `.cache/enchanting-table-item-qa/FINAL.json`、`.cache/enchanting-table-item-source/audit.json` 与 `.cache/enchanting-layout-gui4-holdout/REPORT.json`。新model补位或坐标留出0均未把旧完整747600像素整页baseline改成0，也没有增加量化研究为正式case。
+
+## 历史检查点：工作站文字、150原图图标与 invalid
 
 当前公开118个组件、4份数据、3个渲染函数，共125值。新增GuiIcon / guiIconNames，保留16个PixelIcon；工作站renderText及BitmapText layout默认行为保持兼容，字体子集默认关闭。API / 来源 / 资源边界见 [WORKSTATION_TEXT_QA.md](WORKSTATION_TEXT_QA.md)、[GUI_ICONS_QA.md](GUI_ICONS_QA.md)。
 
@@ -15,7 +30,7 @@
 | build / 包消费 | build、typecheck及实际React18.3.1/19.3.1消费通过；125值、SSR、类型/ref/layout/renderText、150PNG真实URL及原license身份已检查。两消费者各253份dist与最终dist逐字节一致 |
 | 生产身份与可见操作 | `.cache/gui-icons-final-production-identity.json` 最终8入口与site同字节，前次同构建核验另存 `.cache/icons-invalid-production-identity.json`。150图几何＋25项功能aux通过（不计175正式case）；图库搜索/类别/3倍/恢复/卸载重开/320px、invalid原框+13×20glyph、本机字体0→5ready/1context→卸载live0及回调均通过，errors[]。主JS144615B使用轻量UI表，完整provenance留docs |
 
-按 project / 文件 / 完整标题实合并，`.cache/icons-validation-integration-summary.json` 为856个唯一正式用例：851 PASS、5预期SKIP、0未解决失败；新增34项为文字6、图标11、invalid17。这是多批次累计，不是856项单次全绿。原样本辅助probe与生产smoke不再计作正式用例。
+按 project / 文件 / 完整标题实合并，该阶段 `.cache/icons-validation-integration-summary.json` 为856个唯一正式用例：851 PASS、5预期SKIP、0未解决失败；新增34项为文字6、图标11、invalid17。这是多批次累计，不是856项单次全绿。原样本辅助probe与生产smoke不再计作正式用例。
 
 实际consumer包保存在 `.cache/icons-invalid-consumer-verified.tgz`，SHA256 `4f172c7939196de7b44ac0cabab717a84a5dee7d50f2f209ce764d2874941a8b`；两消费者253条目身份见 `.cache/icons-invalid-consumer-identity.json`。后续doc-only重打包的最终根包身份另核，不把保留consumer包hash冒作未测试的另一份包。
 

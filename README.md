@@ -160,7 +160,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `TradeOffer` | **必填** `offer`: TradeOfferData；`selected`、`onSelect(id,action)`；button 属性 | 一 / 双成本、改价划线、锁定和售罄原图状态；locked 阻止操作，available 与结果 / 交易可用性由宿主分别控制 |
 | `TradingScreen` | `tiers`、`selectedOfferId`、`onOfferSelect`、`inputs`、`showSecondInput`、`slotValidity`、`result`、`resultAvailable`、`canTrade`、`levelProgress`、`possibleProgress`、`detailButtons`、`onDetails`、`runeAtlasUrl`、`onTrade` | 原版 trade2 双面板，复用 TradeOffer、库存与进度；交易、报价、升级与消耗规则由调用方提供 |
 | `MountInventory` | `equipment`、`chested`、`storageColumns`、`storage`、`storageSelectedIndex`、`onStorageSelectionChange`、`onStorageAction`、`onEquipmentAction`、`entityPreview` | 原版坐骑面板与鞍 / 盔甲 / 地毯 / 鹦鹉螺甲占位，storageColumns 限制 1…5；实体 renderer 由调用方提供 |
-| `BlockPreview` | `block`: stone / stone-bricks / stone-slab / stone-stairs；`size`、`resolution`、`model`、`textures`、`camera`、`lighting`、`onReady`、`onRenderError` | 原始方块 PNG 与可配置网格的 Canvas renderer，默认 32×32 CSS px；模型 / 光照属于重建，非原生 item renderer 认证 |
+| `BlockPreview` | `block`: stone / stone-bricks / stone-slab / stone-stairs / enchanting-table；`size`、`resolution`、`model`、`textures`、`camera`、`lighting`、`onReady`、`onRenderError` | 原始方块 PNG 与可配置网格的 Canvas renderer，默认 32×32 CSS px；模型 / 光照属于重建，非原生 item renderer 认证 |
 | `BannerPreview` | `view`: cloth / item；`width`、`height`、`baseColor`、`patterns`、`baseTexture`、`model`、`camera`、`lighting`、`onReady`、`onRenderError` | 原始 PNG / TGA 图案与真实 alpha 合成，cloth 默认 40×80、item 默认 32×32；颜色接受命名染料、六位 hex 或 0…255 RGB 元组 |
 | `ArmorSlot` | ItemSlot 属性；**必填** `kind`: helmet / chestplate / leggings / boots / offhand | 复用真实槽位和原版装备占位图；有物品时隐藏空槽覆盖层 |
 | `RecipeSearch` | SearchField 属性；`showFilter`、`craftableOnly` / `defaultCraftableOnly`、`onCraftableOnlyChange`、`filterLabel` | 原图搜索框与仅可合成开关，输入和筛选状态独立；默认最多 30 字符，配方可用性由宿主计算 |
@@ -420,7 +420,14 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
   onActiveChange={requestPackState} onReorder={requestPackOrder} />
 ```
 
-`BlockPreview` / `BannerPreview` 在 SSR 输出带语义的 canvas，挂载后加载随包分发的原始 PNG / TGA 并绘制；`onReady` / `onRenderError` 报告结果。网格、相机、染色与光照是可配置重建，使用真实材质不等于复刻了原生 renderer。[renderer 资源与边界](docs/item-renderers-geometry.json) 记录 45 份原始资源及其候选来源。
+`BlockPreview block="enchanting-table"` 使用三张原始16×16 top / side / bottom PNG，源支持的预设为16×12×16、侧面UV取 `[0,4,16,12]`，可见面默认白色倍率，不沿用普通石块侧面暗化。`textures` / `lighting` / `model` / `camera` 仍可覆盖；底图文件有原始来源，但捕获未显示底面，默认相机与模型轴约定仍是可配置重建。20项相关正式检查通过（新增8＋旧12），独立四轴与覆盖场景共38,400个Web期望像素零差，不等于原生物品相机或整GUI认证。来源与边界见 [INVENTORY_SCREENS_QA.md](docs/INVENTORY_SCREENS_QA.md)。
+
+```tsx
+<BlockPreview block="enchanting-table" size={32} resolution={80}
+  label="Enchanting table" />
+```
+
+`BlockPreview` / `BannerPreview` 在 SSR 输出带语义的 canvas，挂载后加载随包分发的原始 PNG / TGA 并绘制；`onReady` / `onRenderError` 报告结果。网格、相机、染色与光照是可配置重建，使用真实材质不等于复刻了原生 renderer。[renderer 资源与边界](docs/item-renderers-geometry.json) 记录 48 份原始资源及其候选来源。
 
 另导出三份可复用数据：`bannerPatternIds` 为这版资源中的 42 个图案 ID，`bannerDyeColors` 为 16 色 Web 预设，`loomPatternIds` 为同版本原生截图观察的 32 个基础图案顺序。染料预设不宣称是原生染色算法，图案顺序不作为所有版本的 engine registry；可以传入自己的 RGB、纹理、网格、相机和光照。
 
@@ -465,6 +472,8 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 `renderBitmapGlyphs(options)` 是浏览器 GPU 函数，接收原始页、顺序 runs 和可选 target 背景；默认 `output="framebuffer"` 返回预乘 RGBA8，`output="straight-alpha"` 会显式做8位反预乘并可能产生舍入差。组件将 FBO 直接 GPU copy 到 `premultipliedAlpha:true` 的活 canvas，不经 `putImageData`。`renderer="webgl"` 每实例占用独立 context；显式 `renderer="webgl-shared"` 在同一 Document 内复用 Offscreen WebGL 会话，再用 ImageBitmap 转移至各实例 bitmaprenderer。后者仍保留每实例 canvas / bitmap 资源、同步 GPU 工作与 readPixels，不代表零拷贝或无限实例容量。共享会话缺少必要 API 或发生 context loss 时报告错误并显示原文，不静默切到 CPU；输入更新可尝试新会话。API 与既有独立路径验证见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md)，新共享路径的资源、支持条件及分项验证范围见 [BITMAP_SHARED_QA.md](docs/BITMAP_SHARED_QA.md)。
 
 `layout="visual"` 默认让外层占完整字图 / shadow 包络。显式 `layout="advance"` 则用最大逐行 pen advance 与行高作为 CSS 逻辑框，完整 canvas 按 bearing / origin 偏移保留外溢，不缩图或裁字。费用等 end 对齐容器建议同时使用 `style={{ display: 'block' }}`；inline-block / baseline 仍会受父级 line-height strut 影响，不能仅凭 advance 模式推断原生基线或费用 Y 坐标。
+
+新实际GUI4留出帧直接观察到CJK为Bitmap / POINT，而此前GUI5 CJK为BitmapSmooth / LINEAR；SGA和费用在这两帧均为Bitmap / POINT。这不是所有scale的自动切换规则，因此sampling / shader仍由宿主显式提供，示例profile不冒充任意原生字号的默认。
 
 工作站本机字体演示另执行 `python scripts/use-local-workstation-fonts.py "C:/XboxGames/Minecraft for Windows/Content"`，重启 Vite 后读取仅展示页可用的 `nativeWorkstationFonts={labels,costs}`。它只准备六个 CJK 字“附魔台物品栏”与 default8 的费用数字1/2：六张256² Unicode页加一张128² default8原图，留在 `.cache/local-fonts/workstation`。展示开关默认关闭，启用后以 shared GPU 绘制五处文字；不修改全局 font-face、旧十字符样本或 npm 默认。CJK末字 advance、行高 / 居中以及费用单字 advance 均含明确宿主配置；多位费用、多行与未测字符不由该样本认证。私有原图不随 Git / npm 发布，本机构建 site 可包含可选页面，发布前需自行处理素材。详见 [WORKSTATION_TEXT_QA.md](docs/WORKSTATION_TEXT_QA.md)。
 

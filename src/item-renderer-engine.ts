@@ -78,9 +78,9 @@ export function cuboid(min: Vec3, max: Vec3, texture = 'all', atlas?: readonly [
   });
 }
 
-export function blockMesh(kind: 'cube'|'slab'|'stairs'): ItemMesh {
+export function blockMesh(kind: 'cube'|'slab'|'stairs'|'enchanting-table'): ItemMesh {
   const bounds: ItemMesh['bounds']=[[0,0,0],[16,16,16]];
-  if (kind !== 'stairs') return { bounds, faces: cuboid([0,0,0],[16,kind==='slab'?8:16,16]) };
+  if (kind !== 'stairs') return { bounds, faces: cuboid([0,0,0],[16,kind==='slab'?8:kind==='enchanting-table'?12:16,16]) };
   const occupied = (x:number,y:number,z:number) => x>=0&&x<2&&z>=0&&z<2&&y>=0&&y<2&&(y===0||z===1);
   const faces: ItemMeshFace[]=[];
   for(let x=0;x<2;x++)for(let y=0;y<2;y++)for(let z=0;z<2;z++)if(occupied(x,y,z)) {

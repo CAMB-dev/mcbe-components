@@ -199,6 +199,7 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
   element(ui.MountInventory,{equipment:[{kind:'saddle'}],chested:true,storageColumns:3}),
   element(ui.ItemGlint,{imageSrc:'/caller-item.png',uniforms:glintUniforms,glintSampler:'point-repeat',blend:{source:'one',destination:'one'}}),
   element(ui.BlockPreview,{block:'stone-stairs',label:'Stone stairs'}),
+  element(ui.BlockPreview,{block:'enchanting-table',label:'Enchanting table'}),
   element(ui.BannerPreview,{baseColor:'white',patterns:[{id:'border',color:'red'}]}),
   element(ui.PlayerInventoryScreen,{armor:[null,null,null,null],crafting:[]}),
   element(ui.CreativeInventory,{items:[{name:'Stone'}],defaultCategoryId:'search'}),
@@ -444,6 +445,7 @@ export const demo = <>
   <ItemTooltip item={rendererItem} renderText={textRenderer} ref={createRef<HTMLDivElement>()}/>
   <ItemSlot item={rendererItem}/>
   <ItemTooltip item={{name:'Consumer sword',nameColor:'#55ffff',durability:.5,lore:[<span>Sharpness I</span>]}} ref={createRef<HTMLDivElement>()}/>
+  <BlockPreview block={'enchanting-table' satisfies BlockKind}/>
   <BlockPreview block={'stone-stairs' satisfies BlockKind} model={mesh} camera={camera} lighting={lighting} onRenderError={error=>error.message} data-pixel-width={adapterTexture.width} ref={createRef<HTMLCanvasElement>()}/>
   <BannerPreview baseColor={bannerDyeColors.white} patterns={bannerLayers} fabricShading={false} ref={createRef<HTMLCanvasElement>()}/>
   <BannerPreview view="item" patterns={bannerPatternIds.slice(0,1).map((id): BannerPatternLayer=>({id,color:dye}))}/>

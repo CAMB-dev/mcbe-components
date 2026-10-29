@@ -8,7 +8,7 @@ export { bannerPatternIds };
 export type { BannerPatternId, ItemCamera, ItemLighting, ItemMesh };
 export type { ItemMeshFace, Vec3, Uv } from './item-renderer-engine';
 
-export type BlockKind = 'stone' | 'stone-bricks' | 'stone-slab' | 'stone-stairs';
+export type BlockKind = 'stone' | 'stone-bricks' | 'stone-slab' | 'stone-stairs' | 'enchanting-table';
 /** Initial Web dye profile; callers may supply exact RGB values for their game. */
 export const bannerDyeColors = {
   white: '#f0f0f0', orange: '#f9801d', magenta: '#c74ebd', 'light-blue': '#3ab3da', yellow: '#fed83d', lime: '#80c71f',
@@ -46,7 +46,7 @@ function draw(canvas:HTMLCanvasElement,data:Uint8ClampedArray,width:number,heigh
   const context=canvas.getContext('2d');if(!context)throw new Error('Canvas2D unavailable.');
   canvas.width=width;canvas.height=height;const image=context.createImageData(width,height);image.data.set(data);context.putImageData(image,0,0);
 }
-function calibratedBlockMesh(kind:'cube'|'slab'|'stairs'):ItemMesh {
+function calibratedBlockMesh(kind:'cube'|'slab'|'stairs'|'enchanting-table'):ItemMesh {
   const mesh=blockMesh(kind);
   return {...mesh,faces:mesh.faces.map(face=>{
     const vertices=(kind==='stairs'?face.vertices.map(([x,y,z])=>[16-z,y,x]):face.vertices) as unknown as typeof face.vertices;
@@ -85,16 +85,22 @@ export const BlockPreview=forwardRef<HTMLCanvasElement,BlockPreviewProps>(functi
   const [state,setState]=useState<'loading'|'ready'|'error'>('loading');
   useEffect(()=>{
     let cancelled=false;setState('loading');
-    const source=textures?.all??(block==='stone-bricks'?blockTextureUrls['stone-bricks']:blockTextureUrls.stone);
-    const urls={all:source,side:source,top:source,bottom:source,...textures};
+    const enchanting=block==='enchanting-table';
+    const source=textures?.all??(enchanting?blockTextureUrls['enchanting-table-side']:block==='stone-bricks'?blockTextureUrls['stone-bricks']:blockTextureUrls.stone);
+    const urls=enchanting
+      ? {all:source,side:source,top:textures?.all??blockTextureUrls['enchanting-table-top'],bottom:textures?.all??blockTextureUrls['enchanting-table-bottom'],...textures}
+      : {all:source,side:source,top:source,bottom:source,...textures};
     void Promise.all(Object.entries(urls).map(async([key,url])=>[key,await loadTexture(url)] as const)).then(entries=>{
       if(cancelled||!canvas.current)return;
-      const mesh=model??calibratedBlockMesh(block==='stone-slab'?'slab':block==='stone-stairs'?'stairs':'cube');
+      const mesh=model??calibratedBlockMesh(enchanting?'enchanting-table':block==='stone-slab'?'slab':block==='stone-stairs'?'stairs':'cube');
       // Empirical item profile trained on native stone input1; brick output1
       // was reserved as a different-texture holdout. These are approximations,
-      // not a recovered Bedrock camera or shader implementation.
+      // not a recovered Bedrock camera or shader implementation. The table
+      // retains this configurable Web pose; its native CPU transform is unknown.
       const view=model?camera:{yaw:45.25,pitch:29.75,zoom:1.0355,padding:resolution*.025,offsetX:.4*resolution/80,offsetY:.9*resolution/80,...camera};
-      const light=model?lighting:{top:.9960302161,left:.7286712762,right:.4958237484,...lighting};
+      // Actual table vertices24..35 in captured draw57 have white RGB on all
+      // three visible faces. Earlier slab vertices in that draw are different.
+      const light=model?lighting:enchanting?{top:1,left:1,right:1,bottom:1,...lighting}:{top:.9960302161,left:.7286712762,right:.4958237484,...lighting};
       draw(canvas.current,rasterize(mesh,Object.fromEntries(entries),resolution,resolution,view,light),resolution,resolution);
       setState('ready');callbacks.current.onReady?.();
     }).catch(reason=>{if(!cancelled){setState('error');callbacks.current.onRenderError?.(reason instanceof Error?reason:new Error(String(reason)));}});

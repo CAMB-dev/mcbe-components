@@ -1454,6 +1454,138 @@
         "vanilla_1.15",
         "vanilla_1.21.90"
       ]
+    },
+    {
+      "file": "src/assets/item-renderers/enchanting_table_top.png",
+      "source": "resource_pack/textures/blocks/enchanting_table_top.png",
+      "sha256": "8109bbeeeb8dd4fa28fb196be7116f2213b6f68886396f43058f900e88c8dd6d",
+      "bytes": 228,
+      "size": [
+        16,
+        16
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/blocks/enchanting_table_top.png",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "archive": "data/resource_packs/vanilla/__brarchive/textures/blocks.brarchive",
+          "entry": "enchanting_table_top.png",
+          "sha256": "8109bbeeeb8dd4fa28fb196be7116f2213b6f68886396f43058f900e88c8dd6d",
+          "bytes": 228
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/blocks.brarchive",
+          "entry": "enchanting_table_top.png",
+          "sha256": "8109bbeeeb8dd4fa28fb196be7116f2213b6f68886396f43058f900e88c8dd6d",
+          "bytes": 228
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla",
+        "vanilla_1.21.90"
+      ],
+      "textureSet": {
+        "source": "resource_pack/textures/blocks/enchanting_table_top.texture_set.json",
+        "sha256": "bae4ed8d6a6739740ad99290e72673f23eef97f40fc99bf4789fa3e58430a171",
+        "value": {
+          "format_version": "1.21.30",
+          "minecraft:texture_set": {
+            "color": "enchanting_table_top",
+            "metalness_emissive_roughness_subsurface": "enchanting_table_top_mers"
+          }
+        },
+        "scope": "Color/MERS texture association only; does not define geometry, GUI sizing or camera."
+      }
+    },
+    {
+      "file": "src/assets/item-renderers/enchanting_table_side.png",
+      "source": "resource_pack/textures/blocks/enchanting_table_side.png",
+      "sha256": "a8e6579c97f235bb19f7ceb7a6e10bcce769c2614586b1386ba267c88a42b3f5",
+      "bytes": 302,
+      "size": [
+        16,
+        16
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/blocks/enchanting_table_side.png",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "archive": "data/resource_packs/vanilla/__brarchive/textures/blocks.brarchive",
+          "entry": "enchanting_table_side.png",
+          "sha256": "a8e6579c97f235bb19f7ceb7a6e10bcce769c2614586b1386ba267c88a42b3f5",
+          "bytes": 302
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/blocks.brarchive",
+          "entry": "enchanting_table_side.png",
+          "sha256": "a8e6579c97f235bb19f7ceb7a6e10bcce769c2614586b1386ba267c88a42b3f5",
+          "bytes": 302
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla",
+        "vanilla_1.21.90"
+      ],
+      "textureSet": {
+        "source": "resource_pack/textures/blocks/enchanting_table_side.texture_set.json",
+        "sha256": "5e3c4a5f8247a320cb4556a992382205044bd07a90563e904bf7a8a6f67ae640",
+        "value": {
+          "format_version": "1.21.30",
+          "minecraft:texture_set": {
+            "color": "enchanting_table_side",
+            "metalness_emissive_roughness_subsurface": "enchanting_table_side_mers"
+          }
+        },
+        "scope": "Color/MERS texture association only; does not define geometry, GUI sizing or camera."
+      }
+    },
+    {
+      "file": "src/assets/item-renderers/enchanting_table_bottom.png",
+      "source": "resource_pack/textures/blocks/enchanting_table_bottom.png",
+      "sha256": "c614ae20e28ba3f1c61da175543ba50402b9663fca9dcc604ed3e6a0a527f642",
+      "bytes": 294,
+      "size": [
+        16,
+        16
+      ],
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/blocks/enchanting_table_bottom.png",
+      "modifications": "None; original binary bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "archive": "data/resource_packs/vanilla/__brarchive/textures/blocks.brarchive",
+          "entry": "enchanting_table_bottom.png",
+          "sha256": "c614ae20e28ba3f1c61da175543ba50402b9663fca9dcc604ed3e6a0a527f642",
+          "bytes": 294
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/blocks.brarchive",
+          "entry": "enchanting_table_bottom.png",
+          "sha256": "c614ae20e28ba3f1c61da175543ba50402b9663fca9dcc604ed3e6a0a527f642",
+          "bytes": 294
+        }
+      ],
+      "matchingNativePacks": [
+        "vanilla",
+        "vanilla_1.21.90"
+      ],
+      "textureSet": {
+        "source": "resource_pack/textures/blocks/enchanting_table_bottom.texture_set.json",
+        "sha256": "e386679d755f75a256e0e916a0663c78f1244f489ee2f3603f95d6608943670e",
+        "value": {
+          "format_version": "1.21.30",
+          "minecraft:texture_set": {
+            "color": "enchanting_table_bottom",
+            "metalness_emissive_roughness_subsurface": "enchanting_table_bottom_mers"
+          }
+        },
+        "scope": "Color/MERS texture association only; does not define geometry, GUI sizing or camera."
+      }
     }
   ],
   "referenceSources": [
@@ -1484,7 +1616,8 @@
     "stone": "blocks.stone -> terrain.stone[0] -> stone.png",
     "stone-bricks": "blocks.stone_bricks -> terrain.stone_bricks -> stonebrick.png",
     "stone-slab": "blocks.normal_stone_slab -> terrain.normal_stone_slab -> stone.png",
-    "stone-stairs": "blocks.normal_stone_stairs -> terrain.stone[0] -> stone.png"
+    "stone-stairs": "blocks.normal_stone_stairs -> terrain.stone[0] -> stone.png",
+    "enchanting-table": "blocks.enchanting_table.{up,side,down} -> terrain.enchanting_table_{top,side,bottom} -> original PNGs"
   },
   "blockAliasWarning": "Legacy stone_stairs names cobblestone stairs. stone_slab/smooth_stone use different smooth-stone textures. These presets explicitly mean normal stone.",
   "banner": {
@@ -2039,5 +2172,104 @@
       "Only captured states and sizes have been measured; other cameras/models, GUI scales and pack stacks are not certified."
     ],
     "tests": "11/11 item-renderers.spec.ts browser/SSR/codec checks passed after finalstair orientation and fabric shading changes; formal /calibration.html fixture; source/decode invariants include exact independent complete RGBA hashes."
+  },
+  "enchantingTable": {
+    "preset": "enchanting-table",
+    "cuboid": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        16,
+        12,
+        16
+      ]
+    ],
+    "referenceBounds": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        16,
+        16,
+        16
+      ]
+    ],
+    "geometryScope": "Source/connected-face-supported cuboid reconstruction, not exported native CPU model-space coordinates or a geometry JSON.",
+    "sourceEvidence": {
+      "captureSha256": "70ad8f55bca5680dc861e40cc6237aa25369ab51684805fc5309c4d06bfa615a",
+      "globalDraw": 57,
+      "apiEvent": 197,
+      "commandList": 799,
+      "pso": 805,
+      "vertices": [
+        24,
+        35
+      ],
+      "indexEntries": [
+        36,
+        53
+      ],
+      "auditSha256": "9afc1408a1124481badb1ff7a1cd18b5bb865f871cb66a105cd121a7d073f09e",
+      "scope": "Only the third block in draw57 is the table; preceding slab vertices are excluded. Private capture data is not distributed."
+    },
+    "uv": {
+      "topSourceRect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sideSourceRect": [
+        0,
+        4,
+        16,
+        12
+      ],
+      "bottomSourceRect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "webAxes": "In the existing renderer axes the near top corner is(16,12,16), right is(16,12,0), back is(0,12,0), left is(0,12,16). This is a chosen Web convention, not a recovered native object-axis assignment.",
+      "top": "[16-z,x]",
+      "positiveXSide": "[16-z,16-y]",
+      "positiveZSide": "[x,16-y]",
+      "capturedTopCornerUV": {
+        "front": [
+          0,
+          16
+        ],
+        "right": [
+          16,
+          16
+        ],
+        "back": [
+          16,
+          0
+        ],
+        "left": [
+          0,
+          0
+        ]
+      },
+      "bottomOrientation": "Full original down texture; native hidden-face orientation remains unobserved."
+    },
+    "defaultLighting": {
+      "top": 1,
+      "left": 1,
+      "right": 1,
+      "bottom": 1,
+      "evidence": "Actual table12 vertices have RGB255/255/255 on three visible faces. Generic slab side factors127/186 belong to different vertices and are not applied.",
+      "scope": "White factors are consistent with the captured visible faces; unseen face behavior is not independently certified."
+    },
+    "camera": "Reuses the configurable existing Web item pose. No native camera/CPU pretransform is recovered or hardcoded.",
+    "textureOverrides": "textures.all replaces all preset images; per-face keys replace only those faces. A custom model retains its existing caller-camera/lighting route.",
+    "verificationScope": "Original materials and source-supported geometry/UV only; this does not certify complete native item pixels or PBR/version-pack activation."
   }
 }
