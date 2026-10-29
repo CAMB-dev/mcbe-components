@@ -20,6 +20,23 @@
 
 width / height是实际物理framebuffer，outputRect / scissor是物理像素矩形。crop保留全frame投影及相位，不改变布局为局部坐标。单目标在image / text程序切换时不清空，不创建中间文字RT。默认输出PMA framebuffer字节；straight-alpha选项显式8位反预乘，可能损失字节精度。活canvas需要独占WebGL context并在退役后dispose，仍有readPixels和资源预算；不是共享池、零拷贝或无限图层。内部layoutSourceGuiLayer、renderPreparedGuiLayer与精度helpers不由公共barrel导出。
 
+### URL纹理格式（后续扩展）
+
+`GuiLayer` 的string纹理继续接收URL / dataURL；新增完整原始truecolor TGA的type2（未压缩）与type10（RLE）、24 / 32bit、四种图像原点和ID字段支持，复用既有`decodeTga`。保留原始alpha，不设透明阈值，也不新增公共API、默认shader或缓存策略。低层`renderGuiLayer`仍接收已解码纹理。
+
+PNG / JPEG / WebP的signature优先，沿用原Blob及`createImageBitmap`的`premultiplyAlpha:'none'`、`colorSpaceConversion:'none'`、`imageOrientation:'none'`。TGA按footer / header和MIME识别，不以`.tga`后缀推断。没有footer时需明确TGA MIME（`image/tga`、`image/x-tga`、`image/targa`、`image/x-targa`），或generic MIME（空值、`application/octet-stream`、`binary/octet-stream`）。未知或不支持的输入报告error；依赖ready切换外观的宿主继续保留 / 恢复DOM fallback，不静默替换材质。
+
+TGA decoder保留4MP上限；URL资源仍受每轴8192、合计32MP、单资源encoded64MiB / 整次layer请求encoded128MiB及最多四个加载worker限制。此格式扩展不由本文旧17项验证结果认证，也不表示复杂物品、完整GUI或最终Present已原生零差。
+
+复验新格式与组件合同：
+
+```powershell
+npm run test:gui-layer-tga
+npx playwright test tests/gui-layer-tga.spec.ts --project=pixels --workers=1
+```
+
+当前20项Node CPU检查和12项新增浏览器检查分别通过；浏览器批为标准Chromium / SwiftShader，15.402秒，零跳过 / 重试 / flaky。其范围是格式识别、adapter与生命周期：使用独立Pillow一次解码并内嵌的原TGA RGBA期望，经同一public renderer比较七个完整目标，共16,512像素零差，运行测试无需Pillow；取消、失败回退、context loss及retry另验。它不认证原生GPU材质、完整GUI或Present零差，也不代替旧回归。记录见 `.cache/gui-layer-tga-independent-qa/FINAL.json`。
+
 下面的font与image均由宿主提供真实资源，示例坐标仅为显式配置，不能当作原生布局证据：
 
 ```tsx

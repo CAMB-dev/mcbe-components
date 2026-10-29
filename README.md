@@ -379,6 +379,8 @@ layoutGuiImages是纯几何路径，可用于SSR准备；renderGuiImages需要We
 
 React层的 `commands` 可包含原图URL或显式RGBA8；text的原页默认取 `font.pages`，也可用 `pages: ReadonlyMap` 显式覆盖。低层 `renderGuiLayer` 要求已解码的text `pages`；返回 `layout`、像素、`alphaMode` 与 `dispose`。默认framebuffer字节为PMA，显式straight-alpha是有损8位反预乘；活canvas独占context，保留readPixels及资源预算，不宣称零拷贝、共享池或无限实例。组件提供loading / ready / error、canvas ref及renderKey重试。
 
+`GuiLayer` 的URL / dataURL叶纹理也可使用完整truecolor TGA（type2 / 10、24 / 32bit），无需新增API；格式按实际内容与MIME识别，不按扩展名猜测。无footer的TGA需明确TGA或generic MIME，失败仍报告error并沿用宿主fallback，详见 [URL纹理格式](docs/GUI_LAYER_QA.md#url纹理格式后续扩展)。
+
 `EnchantingTable imageRender.text` 新增必需的 `metrics:{lineHeight,paintOffset}`，并明确提供 `labels` / `costs` 与可选 `runes` 字体样式（font、fontScale、sampling、shader及可选颜色 / tint / hudOpacity）。`options[].runeText` 是宿主已排版 / 截断的最终原始大小写字符串；旧任意 `runes: ReactNode` 仍可用于DOM。新图文配置不推测缺字或度量，异常时整层同有效scale退回CSS；最终组件10项覆盖回退 / 恢复、DOM物品、book、焦点、选择和交互语义。旧CSS、GuiImageLayer与BitmapText默认路径不变。
 
 公开源输入 / GPU / React正式17项已通过：固定GUI4 / GUI5阶段的四FBO与四实际React完整目标共28,825,120像素RGBA零差；字符串、原字页与源布局作为正常输入，捕获属性仅用于比较。实际附魔台组件正式10项另验组合与生命周期，完整747,600像素原生区域仍有10,155个差异像素，不能称整GUI pixel perfect。实际React18 / 19包消费和生产38项辅助检查亦通过各自范围；可在本机展示页 `#gui-layer` 查看，完整API、示例和分层证据见 [GUI_LAYER_QA.md](docs/GUI_LAYER_QA.md)。

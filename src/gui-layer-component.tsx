@@ -1,8 +1,10 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import type { CanvasHTMLAttributes } from 'react';
 import type { PixelTexture } from './item-renderer-engine';
+import { decodeTga } from './item-renderer-engine';
+import { inspectGuiLayerTga } from './gui-layer-tga';
 import type { GuiImage, GuiImageLayerState } from './gui-image';
-import type { GuiImageBackground } from './gui-image-webgl';
+import type { GuiImageBackground, GuiImageTexture } from './gui-image-webgl';
 import { layoutSourceGuiLayer, renderGuiLayer } from './gui-layer';
 import type { GuiLayerDraw, GuiLayerGeometryCommand, GuiLayerLayout, GuiLayerLayoutOptions, GuiSpriteGeometry } from './gui-layer';
 import type { GuiTextGeometry } from './gui-text-geometry';
@@ -51,6 +53,7 @@ function validatePixels(value: PixelTexture): void {
     || value.data.length !== value.width * value.height * 4) throw new RangeError('GUI layer pixels require bounded complete RGBA8 data.');
 }
 function isAtlas(value: unknown): value is GuiTextureAtlasSource { return !!value && typeof value === 'object' && (value as { kind?: unknown }).kind === 'atlas'; }
+function isBitmap(value: GuiImageTexture): value is ImageBitmap { return Object.prototype.toString.call(value) === '[object ImageBitmap]'; }
 function sameSource(a: Source | undefined, b: Source, compared: WeakMap<object, WeakSet<object>>): boolean {
   if (typeof a === 'string' || typeof b === 'string') return a === b;
   if (!a || !b || a.width !== b.width || a.height !== b.height) return false;
@@ -237,7 +240,7 @@ export const GuiLayer = forwardRef<HTMLCanvasElement, GuiLayerProps>(function Gu
       if (request.error) throw request.error;
       // Let immediate StrictMode cleanup cancel the first setup before starting IO.
       await Promise.resolve(); if (cancelled || failed) return;
-      const urls = [...request.urls], decoded = new Map<string, ImageBitmap>(); let next = 0, pixels = request.knownPixels, encodedBytes = 0;
+      const urls = [...request.urls], decoded = new Map<string, GuiImageTexture>(); let next = 0, pixels = request.knownPixels, encodedBytes = 0;
       const worker = async () => {
         while (!cancelled && !failed && next < urls.length) {
           const [url, size] = urls[next++]!;
@@ -245,15 +248,29 @@ export const GuiLayer = forwardRef<HTMLCanvasElement, GuiLayerProps>(function Gu
           const response = await fetch(url, { signal: abort.signal }); if (!response.ok) throw new Error(`GUI layer HTTP ${response.status}: ${url}`);
           const blob = await response.blob(); encodedBytes += blob.size;
           if (blob.size > 67108864 || encodedBytes > 134217728) throw new RangeError('GUI texture responses exceed the encoded byte budget.');
-          const bitmap = await createImageBitmap(blob, { premultiplyAlpha: 'none', colorSpaceConversion: 'none', imageOrientation: 'none' });
-          if (cancelled || failed) { bitmap.close(); return; }
+          const [header, footer] = await Promise.all([blob.slice(0, 18).arrayBuffer(), blob.slice(Math.max(0, blob.size - 26)).arrayBuffer()]);
+          if (cancelled || failed) return;
+          const tga = inspectGuiLayerTga(new Uint8Array(header), new Uint8Array(footer), blob.type, blob.size);
+          const dimensions = (w: number, h: number) => {
+            if (!w || !h || w > 8192 || h > 8192 || w * h > 16777216) throw new RangeError('Decoded GUI texture exceeds its pixel budget.');
+            if (size !== undefined && (w !== size[0] || h !== size[1])) throw new RangeError('Decoded GUI texture dimensions must match their declared original size.');
+            if (pixels + w * h > 33554432) throw new RangeError('Combined decoded GUI image/font resources exceed the upload budget.');
+          };
+          let texture: GuiImageTexture;
+          if (tga) {
+            dimensions(tga.width, tga.height);
+            const buffer = await blob.arrayBuffer();
+            if (cancelled || failed) return;
+            dimensions(tga.width, tga.height);
+            texture = decodeTga(buffer);
+          } else texture = await createImageBitmap(blob, { premultiplyAlpha: 'none', colorSpaceConversion: 'none', imageOrientation: 'none' });
+          if (cancelled || failed) { if (isBitmap(texture)) texture.close(); return; }
           try {
-            if (!bitmap.width || !bitmap.height || bitmap.width > 8192 || bitmap.height > 8192 || bitmap.width * bitmap.height > 16777216) throw new RangeError('Decoded GUI texture exceeds its pixel budget.');
-            if (size !== undefined && (bitmap.width !== size[0] || bitmap.height !== size[1])) throw new RangeError('Decoded GUI texture dimensions must match their declared original size.');
-            pixels += bitmap.width * bitmap.height;
-            if (pixels > 33554432) throw new RangeError('Combined decoded GUI image/font resources exceed the upload budget.');
-          } catch (reason) { bitmap.close(); throw reason; }
-          bitmaps.add(bitmap); decoded.set(url, bitmap);
+            dimensions(texture.width, texture.height);
+            pixels += texture.width * texture.height;
+          } catch (reason) { if (isBitmap(texture)) texture.close(); throw reason; }
+          if (isBitmap(texture)) bitmaps.add(texture);
+          decoded.set(url, texture);
         }
       };
       await Promise.all(Array.from({ length: Math.min(4, urls.length) }, worker));
