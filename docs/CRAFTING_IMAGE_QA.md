@@ -90,9 +90,15 @@ python scripts/use-local-crafting-fonts.py "C:/XboxGames/Minecraft for Windows/C
 python scripts/prepare-crafting-observed-materials.py --check
 ```
 
-`--reference PATH` 可另对固定官方full ZIP核对。当前41份完整原文件及registry对应均已复验。这套预览使用局部UV、两个完整cuboid的阶梯和thin-Z玻璃板；切石机锯片是X=8平面、Y / V为9…16，取完整16×48原TGA的frame0。这是正常输入的静态候选，挂载、照明和动画尚未恢复。它与下文12,406像素baseline的输入不同，不能套用该结果，也不能把材料真实等同于模型原生一致。
+`--reference PATH` 可另对固定官方full ZIP核对。当前41份完整原文件及registry对应均已复验。这套预览使用局部UV、两个完整cuboid的阶梯和thin-Z玻璃板；它与下文12,406像素baseline的输入不同，不能套用该结果，也不能把材料真实等同于模型原生一致。
 
-实际构建后，公开集合首轮31项辅助检查通过，45.191秒；观察到36条顺序、33条source art与3个真实DOM预览、19个BlockPreview和1个BannerPreview ready，source关闭 / 恢复、三个GUI scale、文字角色、查看不合成及集合切换均符合合同。149个source / demo / material和59个site pin无变化；41/41素材的真实响应或inline dataURL字节匹配，CDP body错误与补GET均为0。一条glyph_51的ERR_ABORTED原样保留，页面、控制台、render、HTTP及非取消网络错误为0。七张截图和trace见 `.cache/crafting-observed-browser-01/FINAL.json`；这31项不计入正式66项，也不认证该集合原生像素零差。
+石切机新增demo-only `createObservedStonecutterItem(frame: 0 | 1 | 2 = 0)`：底座16×9×16，锯片位于X=8、Y8…16，UV保留原行9…16加frame×16，始终使用完整原PNG和16×48 TGA。source guiModel和真实item.icon回退共享几何，entry32不再用preview覆盖；沿用命名光照倍率top1 / bottom.5 / X.6 / Z.8，回退保留自身正常renderer，不承诺两renderer逐像素相同。默认frame0是静态选择，未恢复body lighting、动画phase或引擎默认模型；本轮接入的实际公开验证见下文，source接管不等于原生零差。
+
+此前版本实际构建后，公开集合首轮31项辅助检查通过，45.191秒；观察到36条顺序、33条source art与3个真实DOM预览、19个BlockPreview和1个BannerPreview ready，source关闭 / 恢复、三个GUI scale、文字角色、查看不合成及集合切换均符合合同。149个source / demo / material和59个site pin无变化；41/41素材的真实响应或inline dataURL字节匹配，CDP body错误与补GET均为0。一条glyph_51的ERR_ABORTED原样保留，页面、控制台、render、HTTP及非取消网络错误为0。七张截图和trace见 `.cache/crafting-observed-browser-01/FINAL.json`；这31项不计入正式66项，也不认证该集合原生像素零差，不能移用于新石切机数据。
+
+新石切机数据实际build后，公开新浏览器批首轮52项辅助检查通过，82.481秒，无重试。GUI2 / 4 / 5均观察到34条source、DOM仅保留index30砂轮和index35旗帜、46槽与三个label role ready；20个真实预览节点（19 BlockPreview、1 BannerPreview）跨source关闭 / 恢复、关闭models、报错 / retry、reset及scale切换保持身份。Models关闭时为19条source / 17条DOM，source关闭或error时36条DOM；石切机键盘焦点、secondary查看和空结果状态通过。
+
+41份完整原材质的真实字节哈希全部匹配，264条完成响应按原CDP requestId取得精确body，另有2,034条实际inline dataURL记录，无missing / incomplete。页面错误、console error、HTTP及网络失败 / ERR_ABORTED均为0；有意触发的1次WebGL context loss renderError和4条ReadPixels性能warning均保留在原报告 `.cache/crafting-observed-stonecutter-browser-02/runs/2026-10-29T22-27-31-046Z/report.json`。这52项只认证公开normal gallery的adapter / 材料身份 / 交互，不计正式测试，不将私有C的11,450像素残差用于新公开整页认证。
 
 ## 已验证范围与尚未验收部分
 
@@ -124,6 +130,8 @@ v03至v05 已实际比较两种完整2570×1402画面，每种均计入3,603,140
 另对建筑分类的全部10条配方完成首次完整目标baseline：3,603,140个像素中仍有3,878个RGB差异像素，alpha差异为0。候选保留全部阶梯、玻璃板、半砖、完整方块和地毯，使用8张完整原PNG、正常cuboid / authored box-union以及已有显式投影候选；10条source model均实际接管，未用捕获顶点、atlas或矩阵作输入。此数值是待校准的完整残差，不能当成普通模型相机已恢复。记录位于 `.cache/crafting-native-populated-01`。
 
 搜索36条也已完成首次完整目标baseline：3,603,140个RGBA像素中有12,406个RGB差异像素、36,973个不同字节，alpha差异为0，没有遮罩。Index10至28的19个原PNG平面单元各自零差；所有36个诊断单元的11,409个残差与单元外997个残差均计入完整结果。砂轮index30、切石机index32和旗帜index35的真实DOM预览分别仍有2,317 / 2,768 / 1,516个差异像素。实际33条source、3条DOM，19个BlockPreview及1个BannerPreview ready；完整记录见 `.cache/crafting-native-search-01/gpu-baseline-01/FINAL.json`。这不是公开交互集合的新输入或整页零差认证。
+
+另一组已冻结的source06石切机输入先确认完整原TGA URL与显式RGBA control整帧相同；其基线不是前述12,406。随后只把锯片最低Y由9改为8，归一化测试端口地址后，155条正常命令中仅四个局部Y值改变。完整3,603,140像素比较中，相对原生的RGB差异由11,626降至11,450，index32由2,078降至1,902，alpha均0；176个旧差异变精确、没有新增差异，另57个双方仍错的像素数值改变。其余35格及整帧补集逐RGBA字节相同，独立完整PNG复算一致，未裁去残差。此有限改善支持minY8，不认证石切机完整材质、照明、动画、任意frame或Present。证据为 `.cache/crafting-stonecutter-miny8-01/gpu-result-01/FINAL.json`，它不是新公开集合的browser结果，也不修改核心API或shader。
 
 随后两个独立输入实验使用同一完整原生目标，各自保留原A。Pane B只改变玻璃板的普通几何 / 面材质输入，整帧差异降至2,427个RGB像素，玻璃板单元由2,867降至1,416；该单元外A/B每个RGBA字节完全相同。Atlas B只改变原图集表示，整帧仍有3,610个RGB差异像素，三个半砖单元各为严格RGBA零差；但同时有280个旧差异变精确、12个原精确像素新增差异，以及15个双方仍错但数值改变的像素，玻璃板内也有6个像素改变。两B的alpha差异均为0；它们没有组合执行，不能相加减少值或宣称图集方案全面改善，也未修改source05。证据分别见 `.cache/crafting-pane-material-study-01/pane-b-01/gpu-result-01/FINAL.json` 与 `.cache/crafting-model-rule-study-01/atlas-single-variable-01/gpu-result-01/FINAL.json`。
 

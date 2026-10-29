@@ -305,7 +305,7 @@ ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随
 
 `CraftingScreen.imageRender` 可绘制完整326×166源布局与顶部外扩工具条。应用明确提供 frame、字体、metrics及输入clip策略；ready后接管覆盖外观，未覆盖文字和自定义节点保留DOM。交互预览见 `#crafting-layer`，可用 `python scripts/use-local-crafting-fonts.py "C:/XboxGames/Minecraft for Windows/Content"` 准备17个中文标签的本地字页，加 `--check-only` 只验不写。字体页不随包分发，详细用法及当前验证边界见 [CRAFTING_IMAGE_QA.md](docs/CRAFTING_IMAGE_QA.md)。
 
-预览的集合选项新增 **36 original-material examples**，展示36项原材质示例。独立的[材质表](demo/crafting-observed-materials.ts)和[普通模型构造](demo/crafting-observed-items.tsx)复用库的公开 API；集合只供查看与交互，不提供游戏配方规则，也不表示全部模型已达到原生像素一致。
+预览的集合选项新增 **36 original-material examples**，展示36项原材质示例。独立的[材质表](demo/crafting-observed-materials.ts)和[普通模型构造](demo/crafting-observed-items.tsx)复用库的公开 API；石切机的demo helper `createObservedStonecutterItem(frame=0)` 为source模型和真实预览回退提供同一几何，可显式选择静态frame0 / 1 / 2，不是npm导出或恢复的引擎动画。新版公开集合的source切换与真实回退已验证；集合只供查看与交互，不提供游戏配方规则，也不表示全部模型已达到原生像素一致。
 
 `book` 提供自定义3D renderer的接入点，省略时不绘制假书图。`EnchantingBook` 当前mesh、packed UV、normal/winding和着色路径来自本机PIX捕获的实际GUI书本draw（该capture的Global65 / PSO795），已替换旧Java参考网格和Entity / MeshFallback候选；实际材质字符串名仍未知，不能把捕获程序称为旧候选文件的相同字节。
 

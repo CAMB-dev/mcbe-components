@@ -49,11 +49,12 @@ export function createObservedCandleItem(texture: Material): GuiModelItem {
     textureSizes: { all: [texture.width, texture.height] }, textures: { all: texture.src } };
 }
 
-function modelPreview(item: GuiModelItem, onReady?: () => void) {
+function modelPreview(item: GuiModelItem, onReady?: () => void, fallbackAll?: string) {
   const model: ItemMesh = { bounds: [[0, 0, 0], [16, 16, 16]], faces: item.model.faces };
   // This helper's local materials are whole URLs. ObservedTableModel has its own
   // ordinary BlockPreview fallback and never enters this URL-only conversion.
   const textures = Object.fromEntries(Object.entries(item.textures).filter(([, value]) => typeof value === 'string')) as Record<string, string>;
+  if (fallbackAll) textures.all = fallbackAll;
   return <BlockPreview model={model} textures={textures} size={32} resolution={80} decorative onReady={onReady}/>;
 }
 
@@ -73,22 +74,33 @@ export function ObservedGrindstonePreview({ onReady }: { onReady?: () => void })
     size={32} resolution={80} decorative onReady={onReady}/>;
 }
 
-/** Whole16x48 source TGA; frame0 is an explicit static Web preview choice.
- * Source east/west saw bindings motivate an X-normal blade. Its authored
- * Y9..16 span uses frame0 rows9..16 and keeps the whole texture width,
- * including transparent border columns. Native mounting, lighting and phase
- * remain unverified; this is not captured geometry or recovered animation. */
+/** Ordinary authored stonecutter item with whole original PNG/TGA URLs.
+ * The blade mounts one unit into the 9-high base; this finite candidate improved
+ * the tested native scene but does not close native geometry/material fidelity.
+ * Frame0 is the static demo choice; frame1/2 offset source UVs on the complete
+ * 16x48 sheet. No native animation phase or camera default is recovered. */
+export function createObservedStonecutterItem(frame: 0 | 1 | 2 = 0): GuiModelItem {
+  if (![0, 1, 2].includes(frame)) throw new RangeError('Stonecutter static frame must be 0, 1 or 2.');
+  const gray = (rate: number) => { const value = Math.floor(255 * rate); return [value, value, value, 255] as const; };
+  // Existing rasterizer named defaults, expressed as source byte inputs.
+  // No new lighting rules, material colors or captured RGBA are introduced.
+  const color = { up: gray(1), down: gray(.5), east: gray(.6), west: gray(.6), north: gray(.8), south: gray(.8) };
+  const base = createGuiCuboidModel([0, 0, 0], [16, 9, 16], {
+    textures: { up: 'top', down: 'bottom', east: 'side', west: 'side', north: 'side', south: 'side' }, colors: color,
+  });
+  const minY = 8, maxY = 16, v0 = frame * 16 + 9, v1 = frame * 16 + 16;
+  const vertices: GuiModelFace['vertices'] = [[8, minY, 16], [8, minY, 0], [8, maxY, 0], [8, maxY, 16]];
+  const uv: GuiModelFace['uv'] = [[0, v1], [16, v1], [16, v0], [0, v0]];
+  const front: GuiModelFace = { vertices, uv, normal: [1, 0, 0], texture: 'saw', color: color.east };
+  const back: GuiModelFace = { vertices: [vertices[3], vertices[2], vertices[1], vertices[0]], uv: [uv[3], uv[2], uv[1], uv[0]], normal: [-1, 0, 0], texture: 'saw', color: color.west };
+  return { model: { faces: [...base.faces, front, back] }, projection: observedCuboidProjection,
+    textureSizes: { bottom: [16, 16], top: [16, 16], side: [16, 16], saw: [16, 48] },
+    textures: { bottom: materials.stonecutter2_bottom.src, top: materials.stonecutter2_top.src, side: materials.stonecutter2_side.src, saw: materials.stonecutter2_saw.src } };
+}
+
+/** Real same-geometry DOM fallback; source color bytes are not reapplied as lighting. */
 export function ObservedStonecutterPreview({ onReady }: { onReady?: () => void }) {
-  const vertices: GuiModelFace['vertices'] = [[8, 9, 16], [8, 9, 0], [8, 16, 0], [8, 16, 16]];
-  const uv: GuiModelFace['uv'] = [[0, 16], [16, 16], [16, 9], [0, 9]];
-  const model: ItemMesh = { bounds: [[0, 0, 0], [16, 16, 16]], faces: [
-    ...createGuiCuboidModel([0, 0, 0], [16, 9, 16]).faces,
-    { vertices, uv, normal: [1, 0, 0], texture: 'saw' },
-    { vertices: [vertices[3], vertices[2], vertices[1], vertices[0]], uv: [uv[3], uv[2], uv[1], uv[0]], normal: [-1, 0, 0], texture: 'saw' },
-  ] };
-  return <BlockPreview model={model} textures={{ all: materials.stonecutter2_side.src, top: materials.stonecutter2_top.src,
-    side: materials.stonecutter2_side.src, bottom: materials.stonecutter2_bottom.src, saw: materials.stonecutter2_saw.src }}
-    size={32} resolution={80} decorative onReady={onReady}/>;
+  return modelPreview(createObservedStonecutterItem(), onReady, materials.stonecutter2_side.src);
 }
 
 export function ObservedBannerPreview({ onReady }: { onReady?: () => void }) {
@@ -138,7 +150,9 @@ export function createObservedRecipeEntries(callbacks: ObservedPreviewCallbacks 
   add('Grindstone', { name: 'Grindstone' }, <ObservedGrindstonePreview onReady={() => callbacks.onBlockReady?.(30)}/>);
   add('Enchanting table', { name: 'Enchanting table', guiModel: observedTableModel,
     icon: <BlockPreview block="enchanting-table" size={32} resolution={80} decorative onReady={() => callbacks.onBlockReady?.(31)}/> });
-  add('Stonecutter', { name: 'Stonecutter' }, <ObservedStonecutterPreview onReady={() => callbacks.onBlockReady?.(32)}/>);
+  const stonecutter = createObservedStonecutterItem();
+  add('Stonecutter', { name: 'Stonecutter', guiModel: stonecutter,
+    icon: modelPreview(stonecutter, () => callbacks.onBlockReady?.(32), materials.stonecutter2_side.src) });
   block('Stone button', createObservedBlockItem([[[5, 6, 14], [11, 10, 16]]], { all: materials.stone }));
   block('Stone pressure plate', createObservedBlockItem([[[1, 0, 1], [15, 1, 15]]], { all: materials.stone }, allFaces, true));
   add('Banner', { name: 'Banner' }, <ObservedBannerPreview onReady={() => callbacks.onBannerReady?.(35)}/>);
