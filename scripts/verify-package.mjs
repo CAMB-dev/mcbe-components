@@ -219,7 +219,7 @@ console.log('React '+React.version+': ESM, '+components.length+' components + '+
   await writeFile(join(consumer, 'consumer.tsx'), `
 import { createRef } from 'react';
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
-import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer } from 'mcbeui';
+import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState } from 'mcbeui';
 import { BitmapText } from 'mcbeui';
 import type { BitmapTextProps, BitmapFont, BitmapGlyph } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
@@ -283,6 +283,8 @@ const glintPass: ItemGlintPassColor | null = shadeItemGlint([.5,.5],1,adapterTex
 const glintPixels: PixelTexture = renderItemGlint(adapterTexture,adapterTexture,glintOptions);
 const glintProps: ItemGlintProps = {imageSrc:'/caller-item.png',uniforms:glintUniforms,glintSampler,blend:glintBlend};
 const recipeCategories: RecipeCategory[] = [{id:'construction',label:'Construction'},{id:'search',label:'Search'}];
+const bookIdentity: readonly number[] = Object.freeze([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);
+const bookRendererState: EnchantingBookRendererState = {projection:bookIdentity,view:bookIdentity,model:bookIdentity,bones:Object.freeze(Array.from({length:7},()=>bookIdentity)),tileLightColor:[1,1,1,1],overlayColor:[0,0,0,0]};
 export const demo = <>
   <Button {...props} ref={createRef<HTMLButtonElement>()}>Play</Button>
   <Text as="p" shadow ref={createRef<HTMLElement>()}>Minecraft</Text>
@@ -293,6 +295,7 @@ export const demo = <>
   <EnchantingTable options={[{id:'unbreaking',label:'Unbreaking',level:3}]} onEnchant={id=>id.toUpperCase()}/>
   <EnchantingBook pageFlip={.25} lighting="calibrated" pitch={20} ref={createRef<HTMLCanvasElement>()}/>
   <EnchantingBook lighting="unlit"/>
+  <EnchantingBook rendererState={bookRendererState} onRendererError={message=>message.toUpperCase()}/>
   <EnchantingRunes text="AIZ" atlasUrl="/caller-atlas.png" ref={createRef<HTMLSpanElement>()}/>
   <EnchantmentOption {...enchantment} ref={createRef<HTMLButtonElement>()} onEnchant={id=>id.toUpperCase()}/>
   <ItemImage src="/caller-item.png" ref={createRef<HTMLSpanElement>()}/>

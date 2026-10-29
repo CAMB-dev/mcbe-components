@@ -2,7 +2,7 @@
   "gameVersion": "1.26.6005.0",
   "book": {
     "component": "EnchantingBook",
-    "status": "source_shader_candidate_reconstruction_with_nonzero_residual_pixel_error",
+    "status": "captured_bedrock_mesh_shader_and_single_caller_state_exact_on_tested_hardware_default_animation_reconstructed",
     "texture": {
       "file": "src/assets/enchanting/enchanting_table_book.png",
       "dimensions": [
@@ -13,13 +13,166 @@
       "source": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/textures/entity/enchanting_table_book.png",
       "matchesInstalledGame": true
     },
-    "implementation": "WebGL 1, NEAREST atlas sampling, antialias=false, unchanged seven-part box geometry and orthographic projection. Directional RGB lighting uses a source-fixed installed Bedrock Entity/MeshFallback vertex-DXBC candidate; native partial-coverage edges are not exactly reproduced.",
-    "geometry": "Java-reference seven-part dimensions/UVs remain an explicit reconstruction. Default pitch is calibrated against two native Bedrock PNG states. The lighting equation is independently extracted from installed entity-material DXBC; the actual book material/uniform binding and native mesh/final raster rules remain unverified.",
+    "implementation": "WebGL1 reproduces the selected captured Bedrock GUI book PSO795 path: original packed seven-part topology/UNORM16 UV/normal winding, POINT+CLAMP texture sampling, front culling, CW front face, depthLESS/writeALL and disabled blend. The source-state check uses actual captured matrices and an API-before target background; it does not execute original D3D12 bytecode or reproduce subsequent passes.",
+    "geometry": "Current mesh is recovered from the actual Bedrock1.26.6005.0 GUI draw:168 original vertices/seven parts,252 indices, zero-thickness covers/leaves/spine, original half position values and1/32texel inset encoded toUNORM16. The Java BookModel reference below is historical, not the current geometry source. Default open/pageFlip-to-bones and temporal pose generation remain controlled reconstructions.",
     "missingEvidence": [
-      "Native enchanting_book_renderer material selection, model matrix/normal.w and actual TileLightColor/TileLightIntensity/OverlayColor uniforms; the generic installed Entity/MeshFallback shader formula is independently recovered.",
-      "Native page-turn time/phase, broader-angle and partially-open state calibration",
-      "Exact partial-coverage raster/texture filtering at book and texel boundaries"
+      "Native CPU open/pageFlip/time-to-bones generation, page pivots across intermediate/closed poses and animation progression beyond the one captured open draw.",
+      "Current controlled defaults have not inherited the historical pre-capture PNG error measurements; broader pose/GUI-scale/backend/driver/default-state validation remains separate.",
+      "Runtime material string name remains unknown despite authenticated capturedPSO795 and exactVS/PS byte identities; captured programs are not byte-identical to the old Entity/MeshFallback candidate files.",
+      "Later compositing/resolve/target-read chain, fonts and wholeGUI/Present equivalence are outside the single book-draw replay."
     ],
+    "captureValidation": {
+      "scope": "One actual captured open GUI book draw, replayed over the preserved API-before target. Complete target comparison is not a reconstruction of the whole background/GUI from scratch or later Present passes.",
+      "capture": {
+        "path": ".cache/pix-capture/enchanting-open-tooltip.wpix",
+        "sha256": "9d667d37cceb0086f5fc02c1bb0f1a39369e68d2663957e9a9f21140fb45a55b"
+      },
+      "captureSpecificBinding": {
+        "globalId": 65,
+        "queueIndex": 0,
+        "eventIndex": 236,
+        "PSO": 795,
+        "renderTarget": 106,
+        "depthStencil": 109,
+        "idsAreNotCrossCaptureMaterialNames": true
+      },
+      "shaderIdentity": {
+        "VS": {
+          "size": 7820,
+          "sha256": "52067476506a562c424be65900a95cc2b3aacd5cb9aa359a434fe2897c1e9e84"
+        },
+        "PS": {
+          "size": 6624,
+          "sha256": "4225870e4b5aabdfe094f41e15e0995e571a1bfc01827f1660a9859fef3a4c59"
+        },
+        "model": "Actual boundSM65 programs; not byte-identical to historical Entity/MeshFallback candidate files.",
+        "runtimeMaterialStringNameKnown": false
+      },
+      "mesh": {
+        "sourceVertices": 168,
+        "sourceIndices": 252,
+        "parts": 7,
+        "productionExpandedDrawVertices": 252,
+        "zeroThicknessCoversLeavesSpine": true,
+        "packedPositions": "Actual half values retained, including .990234375/.01000213623046875 page-block coordinates.",
+        "UV": "Original1/32texture-pixel inset on face bounds, packed using65536 scaling and decoded asUNORM16/raw65535, not ideal float box boundaries.",
+        "sourceMeshSha256": "bf2dfa78646f8e2b7382fd8b499624b1568860e82fb1993809105a1dd5b81365"
+      },
+      "boundState": {
+        "texturePixels": [
+          64,
+          32
+        ],
+        "gpuTextureRgbaSha256": "33999be5c0123e034f442c870949db57513606cfcf5183a4ea1129628a3d586e",
+        "gpuTextureMatchesOriginalPngDecodedRgba": true,
+        "sampler": {
+          "filter": "MIN_MAG_MIP_POINT",
+          "address": [
+            "CLAMP",
+            "CLAMP",
+            "CLAMP"
+          ]
+        },
+        "PSOstate": {
+          "blendEnable": false,
+          "sampleCount": 1,
+          "cull": "FRONT",
+          "frontCounterClockwise": false,
+          "depthEnable": true,
+          "depthWriteMask": "ALL",
+          "depthFunc": "LESS",
+          "RTVformat": "R8G8B8A8_UNORM",
+          "DSVformat": "D24_UNORM_S8_UINT"
+        },
+        "transform": "projection*view*model*Bones[id]*position; normalized model*bone normal with w0.",
+        "capturedLightReduction": ".725-.1*nx^2+.1*nz^2+.275*ny for captured whiteTileLight,zeroOverlay,MatColor/Hud1,inactiveFog/Dither/ColorBased.",
+        "capturedGlobalTranslationIsProductionDefault": false
+      },
+      "publicStateContract": {
+        "type": "EnchantingBookRendererState",
+        "matrixConvention": "Column-major;16finite numbers per projection/view/model and per bone.",
+        "bones": "Seven source-part matrices; optional eighth identity matrix.",
+        "optional": [
+          "tileLightColor:RGBA tuple4",
+          "overlayColor:RGBA tuple4"
+        ],
+        "override": "Explicit matrices/bones override reconstructed pose; no automatic private capture loading.",
+        "defaultPath": "open/pageFlip/yaw/pitch/roll remain controlled reconstruction; native CPU animation/pivots/time generator not recovered.",
+        "defaultAnimationOrAllPosesCertified": false
+      },
+      "validation": {
+        "backend": "NVIDIA RTX3050Laptop ANGLE/D3D11 WebGL, driver32.0.16.1714, Chromium156.0.8078.4; original D3D12 bytecode is not directly executed.",
+        "launch": {
+          "headless": true,
+          "chromiumSandbox": true,
+          "args": [
+            "--use-angle=d3d11"
+          ],
+          "gpuSandboxed": true
+        },
+        "targetPixels": [
+          2570,
+          1402
+        ],
+        "completeTargetPixels": 3603140,
+        "apiBeforePreservedAsBackground": true,
+        "maskFitOrTolerance": false,
+        "nativeBookCoveragePixels": 19750,
+        "nativeBookInclusiveBounds": [
+          926,
+          373,
+          1093,
+          498
+        ],
+        "independentHardware": {
+          "changedRgbaPixels": 0,
+          "changedChannels": 0,
+          "absoluteRgbaSum": 0,
+          "maxChannelError": 0
+        },
+        "actualReactCallerState": {
+          "sourceFile": "src/enchanting-book.tsx",
+          "sourceSha256": "390fd9620c7ab99d479d7ce46441457bbd5a59df9d95652150509e759d4a88d7",
+          "changedRgbaPixels": 0,
+          "changedChannels": 0,
+          "absoluteRgbaSum": 0,
+          "maxChannelError": 0,
+          "coverage": 19750,
+          "errors": []
+        },
+        "softwareNegativeControl": {
+          "backend": "SwiftShader",
+          "changedRgbaPixels": 23,
+          "changedChannels": 68,
+          "absoluteRgbaSum": 3599,
+          "maxChannelError": 166,
+          "coverage": 19748
+        },
+        "apiAfterAndHardwareCompositedPngSha256": "21f38ad58b8bc9b533b3fa8cf94c36f910a6ab87a9ef290c0ee1c8364b01771e"
+      },
+      "limits": [
+        "Actual native CPU open/pageFlip-to-bones generation not captured;one pose does not certify animation.",
+        "Only selected GUI book draw is exact on capturedRTX/ANGLE-D3D11; later compositing/resolve/font/wholeGUI are outside scope.",
+        "WebGL shader is fixed-uniform reduction of capturedVS/PS, not executing originalD3D12program. GPUbackend and hardwarequalification included.",
+        "Source mesh/CBV extracted by independently reproducing onlydata XPRESS decompression,resourcepage updates andCopyBufferRegion; generatedframe neverrun."
+      ],
+      "privateCaptureArtifactsBundled": false,
+      "privateArtifactScope": "Original wpix,raw extracted VB/IB/CBV/shader binaries and private mesh/report dumps remain ignored; adapted renderer logic is public source code.",
+      "evidence": [
+        {
+          "ignoredReport": ".cache/pix-capture/book-draw-study/REPORT.md",
+          "sha256": "9fcd8a2bf8bc33a78cb6326ba3e55b5f566a5580c864d85f6b7d4c99eaf96bb4"
+        },
+        {
+          "ignoredReport": ".cache/pix-capture/book-draw-study/REPORT.json",
+          "sha256": "9086a16da8d3872aa5799f6b131d369c94c873213d427c5a63861a801ebd7b7a"
+        },
+        {
+          "ignoredReport": ".cache/pix-capture/book-draw-study/production-hardware-result.json",
+          "sha256": "79036c93a9de6dd3e1e3cf9d95b5deefcdd414574dd4407f4186ce8b711f593d"
+        }
+      ]
+    },
     "defaultPose": {
       "open": 1,
       "pageFlip": 0,
@@ -34,6 +187,9 @@
       "nativeBedrockPixelCertified": false
     },
     "validation": {
+      "historicalStatus": "pre_capture_previous_implementation",
+      "appliesToCurrentDefaultMeasurements": false,
+      "currentScopeNote": "Historical pre-capture previous implementation: all existing PNG error numbers below are retained, not measurements of the current captured-mesh default renderer.",
       "method": "Complete 200x165 RGBA region, including the entire book, texels, edges and clear background margins, at GUI5. RGB MAE retains its historical 3-channel denominator; RGBA MAE, all-channel changed pixels and alpha error are also measured. No image mask or border exclusion. Native crop [916,350,200,165], web crop [0,15,200,165] in a 200x200 canvas. Title above and unrelated inventory slots below lie outside this region.",
       "nativeCanvasOrigin": [
         916,
@@ -399,6 +555,9 @@
       "coordinateScope": "Crop coordinates refer only to the existing pinned user-owned PNGs. Their full image dimensions do not establish the exact client rectangle or capture pipeline; no whole-frame capture equivalence is inferred."
     },
     "primaryGeometryReference": {
+      "historicalStatus": "pre_capture_previous_implementation",
+      "appliesToCurrentDefaultMeasurements": false,
+      "currentScopeNote": "Historical Java reconstruction reference; superseded as the production geometry source by the actual Bedrock captured mesh.",
       "edition": "Java Edition 1.21.5, used only as a reconstruction reference",
       "clientJar": "https://piston-data.mojang.com/v1/objects/b88808bbb3da8d9f453694b5d8f74a3396f1a533/client.jar",
       "clientSha1": "b88808bbb3da8d9f453694b5d8f74a3396f1a533",
@@ -557,6 +716,9 @@
       "applicabilityLimit": "These facts are observed in Java Edition and must not be described as extracted Bedrock renderer parameters."
     },
     "validationBeforeNativeCapture": {
+      "historicalStatus": "pre_capture_previous_implementation",
+      "appliesToCurrentDefaultMeasurements": false,
+      "currentScopeNote": "Historical pre-capture renderer smoke for the previous implementation; not current default/native-state measurements.",
       "browser": "Chromium DPR=1 at isolated Vite port 5187",
       "pageErrors": [],
       "webglErrors": [],
@@ -615,6 +777,9 @@
       }
     },
     "nativeCalibration": {
+      "historicalStatus": "pre_capture_previous_implementation",
+      "appliesToCurrentDefaultMeasurements": false,
+      "currentScopeNote": "Historical pre-capture PNG pose/lighting calibration of the previous implementation; retained numbers are not relabeled as current default results.",
       "captureMethod": "Game-window Alt+PrintScreen -> system Paint paste at original dimensions -> PNG save. Files have actual PNG signature 89504e470d0a1a0a; earlier CUA JPEGs are excluded as exact references.",
       "nativeImageSize": [
         2568,
@@ -742,6 +907,9 @@
       ]
     },
     "sourceShaderEvidence": {
+      "historicalStatus": "pre_capture_previous_implementation",
+      "appliesToCurrentDefaultMeasurements": false,
+      "currentScopeNote": "Historical installed Entity/MeshFallback candidate audit. ActualPSO795 captured stages have different whole-program bytes; formula similarity does not identify the runtime material name.",
       "verificationScript": "scripts/inspect-native-enchanting-materials.py",
       "reproduce": "python scripts/inspect-native-enchanting-materials.py --output .cache/native-material-proof.json",
       "installedMaterialDirectory": "C:/XboxGames/Minecraft for Windows/Content/data/renderer/materials",

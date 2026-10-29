@@ -94,7 +94,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `EnchantingTable` | **必填** `options`，可为空数组；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`；Frame 属性 | 固定三行背景；仅有记录的行提供选项/费用/动作，缺记录为 aria-hidden 非交互背景；book 支持自定义渲染 |
 | `EnchantmentOption` | **必填** `id`、`label`、`level`；`tier`: 1 / 2 / 3、`runes`、`disabled`、`buttonId`、`onEnchant`；button 属性 | 可独立使用的附魔选项；id 是业务 ID，buttonId 是可选 DOM id；onClick.preventDefault() 取消选择回调 |
 | `EnchantingRunes` | **必填** `text`、`atlasUrl`；`scale`: 1…4、`color` | 按原始 SGA 图集采样字形与字距；图集由调用方提供，不随 npm 捆绑 |
-| `EnchantingBook` | `textureUrl`、`open`、`pageFlip`、`lighting`: calibrated / unlit、`yaw`、`pitch`、`roll`、`onRendererError`；canvas 属性 | 真实材质、封面 / 书脊 / 厚页块 / 翻页的可选 WebGL 书本；默认 pitch=20、lighting=calibrated，以本机 Bedrock 无损 PNG 校准视角和分面光照，模型仍参考 Mojang Java BookModel 重建 |
+| `EnchantingBook` | `textureUrl`、`open`、`pageFlip`、`lighting`: calibrated / unlit、`yaw`、`pitch`、`roll`、`rendererState?: EnchantingBookRendererState`、`onRendererError`；canvas 属性 | 实际 Bedrock GUI draw 的mesh、UV和着色路径；rendererState 接收列主序 projection / view / model 与7或8组bone矩阵及可选光照/overlay；默认 open/pageFlip 仍是受控重建 |
 | `ProcessingArrow` | `progress`: 0…1、`label`、`variant`: smelting / crafting；div 属性 | 原始箭头纹理，smelting 从左向右裁切完整填充图；crafting 使用静态箭头 |
 | `FuelIndicator` | `progress`: 0…1、`label`；div 属性 | 原始火焰纹理，自底部显示剩余比例，保留 full 图原尺寸 |
 | `RecipeGrid` | InventoryGrid 属性；`columns`、`rows`: 2 / 3 | 共用合成网格；尺寸决定槽位数，支持 2×2 和 3×3 |
@@ -277,9 +277,11 @@ ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随
 
 砂轮布局来自 grindstone_screen.json，附魔台来自 enchanting_screen.json；逐级锚点与百分比推导见 [workstation-geometry.json](docs/workstation-geometry.json)。附魔选项保留源浮点边界，不人为取整。砂轮空结果槽保留 hover / focus，通过 `aria-disabled` 与回调 guard 阻止无效领取。真实关闭按钮支持容器内部的原始键盘导航。
 
-`EnchantingTable` 在 `options={[]}` 或不足三条记录时仍保留三个原版 dark 背景，缺记录的行不生成 rune、dust、cost、按钮或回调。已有记录继续使用 `EnchantmentOption`。这对应源 `enchant_button_panel` 的常驻背景和独立按钮可见性绑定，并由原生空槽截图确认，不代表整页或书本已达原生零差。演示页用干净钻石剑，Clear / Restore 显式切换输入、记录及 `EnchantingBook open={0/1}`；库本身不猜附魔资格，也不据 `options` 自动开合宿主书本。
+`EnchantingTable` 在 `options={[]}` 或不足三条记录时仍保留三个原版 dark 背景，缺记录的行不生成 rune、dust、cost、按钮或回调。已有记录继续使用 `EnchantmentOption`。这对应源 `enchant_button_panel` 的常驻背景和独立按钮可见性绑定，并由原生空槽截图确认，不代表整页或默认书本动画已达原生零差。演示页用干净钻石剑，Clear / Restore 显式切换输入、记录及 `EnchantingBook open={0/1}`；库本身不猜附魔资格，也不据 `options` 自动开合宿主书本。
 
-`book` 提供原生自定义 3D renderer 的接入点，省略时不绘制假书图。展示页显式使用带真实材质的 `EnchantingBook` 重建；默认 `pitch={20}` 由本机无损 PNG 校准，`lighting="calibrated"` 使用本机 Entity / MeshFallback 着色器支持的候选照明式，在明确的白光 / 强度 / overlay 假设下同时改善两个已知状态。实际书本材质绑定仍未确认，网格仍参考 Java BookModel；闭合 / 打开样本的改善不等于所有翻页动画和整屏 renderer 均已吻合。`lighting="unlit"` 可检查未着色图集，完整来源与残差见 [附魔 QA](docs/ENCHANTING_QA.md)。`runes` 可传 `EnchantingRunes`，默认色 `#685d49` 已核对原生字节；省略时不生成假英文符文，但按钮仍有完整可访问名称。原图集可仅在本地预览接入：
+`book` 提供自定义3D renderer的接入点，省略时不绘制假书图。`EnchantingBook` 当前mesh、packed UV、normal/winding和着色路径来自本机PIX捕获的实际GUI书本draw（该capture的Global65 / PSO795），已替换旧Java参考网格和Entity / MeshFallback候选；实际材质字符串名仍未知，不能把捕获程序称为旧候选文件的相同字节。
+
+显式 `rendererState` 可接入调用方的列主序16数矩阵、7或8组bone矩阵及可选 `tileLightColor` / `overlayColor`。该捕获状态下，独立WebGL与实际React组件在已测试NVIDIA正常sandbox后端，以原API-before为背景、比较完整2570×1402 target，均与API-after零RGBA差异。这只认证一个打开姿态的一次draw，不是默认动画、完整GUI或后续合成链的零差。默认 `open/pageFlip/yaw/pitch/roll` 仍受控重建，native CPU状态生成尚未恢复；旧PNG误差数字明确保留为迁移前历史，不能套用为新默认值。`lighting="unlit"` 仍可检查未着色图集，详见 [enchanting-renderer.json](docs/enchanting-renderer.json) 与 [附魔 QA](docs/ENCHANTING_QA.md)。`runes` 可传 `EnchantingRunes`，默认色 `#685d49` 已核对原生字节；省略时不生成假英文符文，但按钮仍有完整可访问名称。原图集可仅在本地预览接入：
 
 ```powershell
 python scripts/use-local-runes.py 'C:/XboxGames/Minecraft for Windows/Content'

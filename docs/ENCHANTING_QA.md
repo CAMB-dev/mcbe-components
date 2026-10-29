@@ -1,6 +1,14 @@
 # 附魔书本与经验文字 QA
 
-2026-10-29。依据本机 Bedrock 1.26.6005.0（界面显示26.60）的无损截图与原材质程序，修正经验数字、符文前景字节和书本照明。**书本完整比较区域仍有残差，尚未达到原生 pixel perfect。**
+2026-10-29。本机 Bedrock 1.26.6005.0（界面显示26.60）。当前已将实际 GPU draw 的书本网格、UV、采样和 shader 算术迁入组件；传入捕获的 `rendererState` 时，实际 React 组件在已核验的 NVIDIA 后端与该次书本 draw 全目标 RGBA 零差。**默认开合 / 翻页仍是受控重建，旧原生截图比较仍非零，整个附魔台尚未达到原生 pixel perfect。**
+
+## 当前书本实现与验收范围
+
+`EnchantingBook` 使用 Bedrock 实际七部件网格、half 源坐标、UNORM16 UV、零厚度封面 / 翻页和原始64×32图集，按实际 PSO795 的模型法线、方向光、POINT / CLAMP、FRONT culling 与 depth LESS 绘制。`rendererState?: EnchantingBookRendererState` 接收调用方提供的列主序 projection / view / model、七或八个 bones 及可选 tileLightColor / overlayColor；校验矩阵有限值与尺寸，错误通过 `onRendererError` 报告。库不包含捕获矩阵、私有 shader 二进制或测试世界画面。
+
+当前源码 SHA256 `390fd9620c7ab99d479d7ce46441457bbd5a59df9d95652150509e759d4a88d7` 的实际 React 硬件验证：NVIDIA RTX3050 Laptop、正常 GPU 沙箱、ANGLE D3D11，2570×1402 全3603140像素逐RGBA比较为 **0不同像素 / 0不同通道 / 最大差0**。结果 `.cache/pix-capture/book-draw-study/production-hardware-result.json` SHA256 `79036c93a9de6dd3e1e3cf9d95b5deefcdd414574dd4407f4186ce8b711f593d`。仅该次捕获姿态及显式状态获此结果，未恢复原生 CPU 动态骨骼算法，实际材质字符串名仍未知。
+
+15项正式书本回归全部通过、0跳过，包括新增显式状态、输入不可变、无效状态报错，以及原生完整 ROI 比较。旧 ROI 与阈值保持不变；当前默认重建的 GUI5 open 为1566个不同像素、RGB误差和13410，closed为621个 /4536；GUI4为1236个 /11078，alpha差均0。它们与显式捕获状态的零差是不同范围。
 
 ## 原生参考
 
@@ -27,7 +35,7 @@
 
 这直接证明当前捕获状态的字节和位移，未推断全引擎通用的0.25暗化或量化算法。`--mc-enchantment-cost-shadow` 仍允许宿主覆盖。公开JSON只声明shadow开关，并不提供阴影RGB算法。
 
-## 书本
+## 历史：GPU 采集前的书本近似与原始基线
 
 使用真实64×32 `enchanting_table_book.png`，SHA256 `e8d23533b48976b578098db767e2c8161a31fa5d7b22bf576bf531b1bc7f000f`。七部件网格参考官方Java 1.21.5客户端BookModel：左右封面、书脊、左右页块及两张翻页面。它仍是Bedrock renderer重建，原生网格与翻页算法未获取。
 
@@ -64,4 +72,4 @@ Classic selectable / unselectable controls 均使用 `fail_runes` 的固定源�
 
 ## 2026-10-29：实际 GPU 帧已取得
 
-用户授权后，已安装签名验证通过的 PIX 2610.28，并通过其图形界面采集附魔台展开书本与钻石剑中文提示框的一帧。原始 `.wpix`、字节一致分析副本、事件列表和完整 C++ 静态导出均已保存；身份与失败记录见 [GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。这更新了此前尚无 draw capture 的状态，但尚未完成逐 draw 重建，不改变上方书本非零误差及原生一致性未通过的结论。
+用户授权后，已安装签名验证通过的 PIX 2610.28，并通过其图形界面采集附魔台展开书本与钻石剑中文提示框的一帧。原始 `.wpix`、字节一致分析副本、事件列表和完整 C++ 静态导出均已保存；身份与失败记录见 [GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。当前已完成上述限定 draw 的实际组件重放；历史非零误差保留，未将该结论泛化为默认动画或整页认证。

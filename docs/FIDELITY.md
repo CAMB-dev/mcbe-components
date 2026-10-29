@@ -4,6 +4,12 @@
 
 当前公开117个组件、3份数据及2个函数，共122项值导出。新增共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
 
+## 实际 GPU 捕获与当前书本实现
+
+PIX已捕获本机附魔台的一帧。书本实际mesh、UV、PSO795状态与shader算术已迁入 `EnchantingBook`；新增调用方 `rendererState` 接口。实际组件在NVIDIA / ANGLE D3D11、原始矩阵与骨骼下，对该次book draw完整2570×1402目标RGBA零差；默认开合 / 翻页CPU算法仍为受控重建，在旧GUI4/5原图上仍有非零误差。此为限定draw认证，不等于整GUI、默认动画或其他GPU认证。
+
+同一捕获的8个字体draw已独立硬件重放为全目标、完整字段与halo RGBA零差；生产 `BitmapText` 仍为原Canvas2D后端，尚未迁入这组GPU profile。真实UNORM16 UV、half顶点、MVP及混合已查实；没有把旧phi拟合加进生产。完整证据及原件哈希见 [GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)、[ENCHANTING_QA.md](ENCHANTING_QA.md)、[NATIVE_BITMAP_FONT_QA.md](NATIVE_BITMAP_FONT_QA.md)。
+
 ## 本轮物品提示与附魔光效
 
 `ItemTooltip` 已取得同物品两次悬停及无提示底图三张原生无损 PNG。配对测量支持实心背景 `#1b0c1b`、平色紫边 `#2c0863`、10game 行推进和阶梯轮廓；现按这些证据重建三层轮廓，取消未观察到的默认灰文字阴影和自动耐久文案。鼠标跟随、键盘槽锚点与屏幕避让为显式 Web 行为。padding8px、CSS光标偏移和字体仍是候选；原生部分覆盖边缘、中文栅格与整提示框未达零差，不能把核心色 mask 零差扩大为完整画面零差。见 [ITEM_TOOLTIP_QA.md](ITEM_TOOLTIP_QA.md)。
@@ -112,7 +118,7 @@ Alert、Badge、部分扩展状态以及 Panel / Dialog 的任意内容排版仍
 
 BlockPreview / BannerPreview 的 45 份 PNG / TGA 保持原始字节，解码保留 175 / 176 等半透明 alpha，旗帜图案直接使用原始 UV 与掩码。软件网格、相机、光照和染色属于可配置重建；本轮真实截图用于训练和保留样本测量，非零残差必须报告为 NOT EXACT。单个台阶另有无数量角标的新原生样本；旧结果槽数量 2 遮挡不能全部归咎于材质误差。完整证据与独立测量见 [item-renderers-geometry.json](item-renderers-geometry.json) 和 [INVENTORY_SCREENS_QA.md](INVENTORY_SCREENS_QA.md)。
 
-## 附魔照明与符文后续修正
+## 历史：附魔照明与符文后续修正
 
 本机 Entity / MeshFallback 顶点 DXBC 的算术依赖提供候选照明系数；在明确的白光 / 强度1 / overlay0假设下，用同一公式替换书本经验权重。材质、UV、模型与相机不变，完整200×165区域的RGB MAE由关闭0.176596→0.165404、打开0.415081→0.343333，差异像素分别1281→656、2239→1683。两个状态都是已知校准样本，不能称盲测；原生材质绑定、uniform、网格、1px宽度差与光栅边界仍未恢复。MSAA、全局LINEAR与高倍降采样在现样本上更差，没有为降低个别误差而启用。
 

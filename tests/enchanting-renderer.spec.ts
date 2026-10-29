@@ -11,7 +11,8 @@ import { EnchantingRunes } from '../src/enchanting-book';
 
 // Native samples below are optional local, lossless references, never package
 // assets. Calibration reduces measured error; it does not assert zero native
-// pixel differences or establish the underlying Bedrock mesh/shader equations.
+// pixel differences. Captured mesh/shader provenance is distinct from the
+// default CPU pose reconstruction and the older native screenshot residuals.
 test.use({deviceScaleFactor:1});
 const atlasHash='e8d23533b48976b578098db767e2c8161a31fa5d7b22bf576bf531b1bc7f000f';
 async function instrumentation(page:Page) {
@@ -50,12 +51,14 @@ test('book uses the original atlas and preserves explicit reconstruction provena
   const texture=PNG.sync.read(source);expect([texture.width,texture.height]).toEqual([64,32]);
   const errors=await instrumentation(page);await page.goto('/calibration.html');
   const fixture=page.locator('[data-enchanting-renderer-fixture]'),canvas=fixture.getByRole('img',{name:'Controlled enchanting book',exact:true});
-  await rendered(canvas);await expect(canvas).toHaveAttribute('data-fidelity','renderer-reconstruction');
-  await expect(canvas).toHaveAttribute('data-geometry-source','java-1.21.5-book-model');
+  await rendered(canvas);await expect(canvas).toHaveAttribute('data-fidelity','captured-mesh-reconstruction');
+  await expect(canvas).toHaveAttribute('data-geometry-source','bedrock-1.26.6005-pix-gui-book');
   await expect(canvas).toHaveAttribute('data-lighting','calibrated');
-  await expect(canvas).toHaveAttribute('data-lighting-source','bedrock-1.26.6005-dxbc-candidate');
+  await expect(canvas).toHaveAttribute('data-lighting-source','bedrock-1.26.6005-captured-gui-draw');
+  await expect(canvas).toHaveAttribute('data-renderer-state','controlled-reconstruction');
   await expect(canvas).toHaveAttribute('data-calibration-source','bedrock-1.26.6005-native-png');
-  expect(Number(await canvas.getAttribute('data-qa-vertices'))).toBeGreaterThan(6);
+  // The captured indexed draw has 252 indices, expanded by this WebGL API.
+  expect(Number(await canvas.getAttribute('data-qa-vertices'))).toBe(252);
   await canonicalCanvas(canvas);const {image}=await picture(canvas,'book-default');
   expect([image.width,image.height]).toEqual([80,80]);
   const colors=new Set<string>();let foreground=0,paper=0,cover=0;
@@ -86,6 +89,98 @@ test('controlled openness and page turn change rendered pixels and restore deter
   await change(flip,'ArrowRight');await expect(flip).toHaveValue('0.25');const turned=await picture(canvas,'book-quarter-turn');expect(turned.hash).not.toBe(initial.hash);
   await change(flip,'Home');await expect(flip).toHaveValue('0');expect((await picture(canvas,'book-turn-reset')).hash).toBe(initial.hash);
   await expect(fixture.getByRole('status',{name:'Book renderer errors'})).toBeEmpty();expect(errors).toEqual([]);
+});
+
+type ContractPose = {
+  open?:number;pageFlip?:number;yaw?:number;pitch?:number;roll?:number;
+  bones?:7|8;shift?:number;invalid?:'projection'|'model'|'bones'|'light';
+};
+type ContractWindow = typeof window & {
+  paintContractBook:(pose:ContractPose)=>void;
+  contractInputUnchanged:()=>boolean;
+};
+async function mountContractBook(page:Page) {
+  await page.goto('/calibration.html');
+  await page.evaluate(async()=>{
+    const reactPath='/@id/react',domPath='/@id/react-dom/client',bookPath='/src/enchanting-book.tsx';
+    const [r,d,book]=await Promise.all([import(reactPath),import(domPath),import(bookPath)]);
+    const React=r.default??r,ReactDOM=d.default??d;
+    const stage=document.createElement('div');stage.id='book-state-contract';document.body.appendChild(stage);
+    const status=document.createElement('output');status.id='book-state-errors';document.body.appendChild(status);
+    const root=ReactDOM.createRoot(stage),host=window as ContractWindow;
+    const identity=()=>[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
+    let unchanged=()=>true;
+    host.contractInputUnchanged=()=>unchanged();
+    host.paintContractBook=({bones=7,shift=0,invalid,...pose})=>{
+      // A synthetic orthographic scene tests the public matrix contract,
+      // independently of either the default pose or private native constants.
+      const state={projection:[.1,0,0,0,0,-.1,0,0,0,0,.01,0,0,0,.5,1],
+        view:identity(),model:identity(),bones:Array.from({length:bones},identity),tileLightColor:[1,1,1,1]};
+      state.model[12]=shift;
+      if(invalid==='projection')state.projection.pop();
+      if(invalid==='model')state.model[0]=NaN;
+      if(invalid==='bones')state.bones.pop();
+      if(invalid==='light')state.tileLightColor.pop();
+      const before=JSON.stringify(state);
+      for(const matrix of [state.projection,state.view,state.model,...state.bones])Object.freeze(matrix);
+      Object.freeze(state.bones);Object.freeze(state.tileLightColor);Object.freeze(state);
+      unchanged=()=>JSON.stringify(state)===before;
+      status.textContent='';
+      root.render(React.createElement(book.EnchantingBook,{...pose,rendererState:state,
+        'aria-label':'Caller state book',width:80,height:80,
+        style:{position:'fixed',left:16,top:16,background:'#c6c6c6',zIndex:2147483647},
+        onRendererError:(message:string)=>{status.textContent+=message+'\n';}}));
+    };
+  });
+  return page.locator('#book-state-contract canvas');
+}
+async function paintContractBook(page:Page,canvas:Locator,pose:ContractPose) {
+  const before=await canvas.count()?Number(await canvas.getAttribute('data-qa-draws')):0;
+  await page.evaluate(pose=>(window as ContractWindow).paintContractBook(pose),pose);
+  await expect.poll(async()=>Number(await canvas.getAttribute('data-qa-draws'))).toBeGreaterThan(before);
+  await rendered(canvas);
+}
+
+test('caller-owned frozen matrices accept seven or eight bones without mutation',async({page})=>{
+  const errors=await instrumentation(page),canvas=await mountContractBook(page);
+  await paintContractBook(page,canvas,{bones:7});
+  await expect(canvas).toHaveAttribute('data-renderer-state','caller-supplied');
+  const seven=await picture(canvas,'caller-seven-bones');
+  expect(foregroundBounds(seven.image).width).toBeGreaterThan(10);
+  expect(await page.evaluate(()=>(window as ContractWindow).contractInputUnchanged())).toBe(true);
+  await paintContractBook(page,canvas,{bones:8});
+  expect((await picture(canvas,'caller-eight-bones')).hash).toBe(seven.hash);
+  expect(await page.evaluate(()=>(window as ContractWindow).contractInputUnchanged())).toBe(true);
+  await expect(page.locator('#book-state-errors')).toBeEmpty();expect(errors).toEqual([]);
+});
+
+test('explicit renderer state overrides pose controls and restores after a caller matrix update',async({page})=>{
+  const errors=await instrumentation(page),canvas=await mountContractBook(page);
+  await paintContractBook(page,canvas,{});const initial=await picture(canvas,'caller-initial');
+  await paintContractBook(page,canvas,{open:0,pageFlip:.75,yaw:81,pitch:-47,roll:129});
+  expect((await picture(canvas,'caller-controls-overridden')).hash).toBe(initial.hash);
+  await paintContractBook(page,canvas,{shift:1});
+  expect((await picture(canvas,'caller-translated')).hash).not.toBe(initial.hash);
+  await paintContractBook(page,canvas,{});
+  expect((await picture(canvas,'caller-restored')).hash).toBe(initial.hash);
+  await expect(page.locator('#book-state-errors')).toBeEmpty();expect(errors).toEqual([]);
+});
+
+test('invalid caller matrices, bone count and light tuple report errors without drawing a fallback',async({page})=>{
+  const errors=await instrumentation(page);
+  for(const invalid of ['projection','model','bones','light'] as const) {
+    const canvas=await mountContractBook(page);
+    await page.evaluate(invalid=>(window as ContractWindow).paintContractBook({invalid}),invalid);
+    await expect(page.locator('#book-state-errors')).toContainText(invalid==='light'?'four finite numbers':'16 finite numbers and seven or eight bones');
+    await expect(canvas).toHaveAttribute('data-renderer-state','caller-supplied');
+    expect(await canvas.getAttribute('data-qa-draws')).toBeNull();
+    const {image}=await picture(canvas,'caller-invalid-'+invalid);
+    const blank=Buffer.alloc(image.width*image.height*4);
+    for(let i=0;i<blank.length;i+=4)blank.set([198,198,198,255],i);
+    expect(image.data.equals(blank),'complete canvas has no fallback pixels').toBe(true);
+    expect(await page.evaluate(()=>(window as ContractWindow).contractInputUnchanged())).toBe(true);
+  }
+  expect(errors).toEqual([]);
 });
 
 test('enchant costs use native-confirmed success and disabled foreground and shadow bytes',async({page})=>{

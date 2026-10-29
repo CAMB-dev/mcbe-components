@@ -19,7 +19,7 @@ export type { ItemSlotProps, ItemTooltipProps, ItemTooltipTextRenderer, Inventor
 export { WorkstationFrame, PlayerInventory, Grindstone, EnchantingTable, EnchantmentOption } from './workstations';
 export type { WorkstationFrameProps, PlayerInventoryProps, GrindstoneProps, EnchantingTableProps, EnchantmentOptionProps } from './workstations';
 export { EnchantingBook, EnchantingRunes } from './enchanting-book';
-export type { EnchantingBookProps, EnchantingRunesProps } from './enchanting-book';
+export type { EnchantingBookProps, EnchantingBookRendererState, EnchantingRunesProps } from './enchanting-book';
 export { ProcessingArrow, FuelIndicator, RecipeGrid, CraftingTable, Furnace, BlastFurnace, Smoker } from './processing';
 export type { ProcessingArrowProps, FuelIndicatorProps, RecipeGridProps, CraftingTableProps, FurnaceProps, BlastFurnaceProps, SmokerProps, FurnaceInputSlot } from './processing';
 export { Anvil } from './anvil';

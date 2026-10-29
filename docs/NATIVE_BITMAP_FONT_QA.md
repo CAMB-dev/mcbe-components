@@ -237,4 +237,10 @@ alpha全相同不等于RGBA相同。负控也必须保留：bilinear/Smooth GPU�
 
 ## 2026-10-29：原生 GPU 采集状态更新
 
-前述准备和硬件诊断是各自历史检查点。用户授权后，PIX 2610.28 安装与受控重启已成功，图形界面已采集并保存含展开书本、中文钻石剑提示框的一帧；分析副本的事件列表及完整 C++ 静态导出成功。详见 [GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。采集文件不随组件库分发。当前逐 draw 字形绑定及最终合成仍在核验，没有据采集成功将字体 RGBA 或覆盖结论改为 EXACT，也没有更换生产采样规则。
+前述准备和硬件诊断是各自历史检查点。用户授权后，PIX 2610.28 安装与受控重启已成功，图形界面已采集并保存含展开书本、中文钻石剑提示框的一帧；分析副本的事件列表及完整 C++ 静态导出成功。详见 [GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。采集文件不随组件库分发，生产 `BitmapText` 的采样规则在本轮没有改变。
+
+实际 tooltip Global95..102 的8个draw均已恢复 VB / IB、half4位置与cornerID、UNORM16 UV、原8张glyph页、MVP与常量。packedUV以 `k*4096` 写入，再由UNORM `/65535` 解码，因此不等于理想 `k/16`；实际 GlyphHeight=.0625、HalfTexel=.001953125，Smooth shader 常量为 `.30000001192092896` 与 `5.000000476837158`，SRC_ALPHA / INV_SRC_ALPHA 混合。此为捕获证据，不根据差异反推参数。
+
+独立 NVIDIA RTX3050 / ANGLE D3D11 重放以真实 pre95 目标为背景，绘制8个实际文字draw，与真实后续目标相比，**2570×1402全部3603140像素、完整243×100字段以及含空白的247×104 halo均为RGBA零差**，8个draw的GL错误全为0。条件式诊断报告 `.cache/pix-capture/independent-state-audit/captured-tooltip-hardware-replay.json` SHA256 `f26db0532251617d1ce73fb37d25be5c4277008d9c5510cf077c782026e5b353`；完整来源追踪见 `TRACE_REPORT.md`，SHA256 `bd2467b0f340c3202bbe516381d75546ad81d1aed8a3602b35cfa705f959aa61`。
+
+这认证本次实际输入的8个font pass重放，**不是现有Canvas2D生产组件的原生零差认证**，也不是独立重建整GUI。末端Global251的真实float32四边形及UV为精确0/1，VS不读取其bound CBV；捕获内未观察到旧phi的显式变换。旧2568×1400 PNG属于不同帧 / 尺寸，SharingContract后桌面映射仍未知；不将旧拟合偏移加入生产。下一阶段需将已恢复的GPU profile迁入可复用字体后端，并保留原DOM可选文字、字体来源和背景混合边界。

@@ -10,12 +10,14 @@
 | --- | --- |
 | 新增与相关正式回归 | canonical同批109/109 PASS、0 skip/unexpected/flaky，124.857秒；新增Survival22项＋工作台23项＋既有库存64项。`.cache/survival-canonical.json`，SHA `d514c4e269cd151769101116ea157a09350bee06003635f8c1367a668843e6bb` |
 | 源布局与原图 | 十二份完整JSON parsed相等；固定326根、146书页、4书脊、176右面板及两布局工具栏；箭头/fold/空preview完整原图浏览器组合检查不等于原生整屏零差 |
-| 实际包消费 | 本轮 `npm run verify:package` 已通过React18.3.1 /19.3.1的122值、117组件SSR、严格TSX/ref/API与新增Frame CSS；实际受测包SHA `a72ce275455d47eb8b9c3f6a7b6a3f091474676e04f4b2bea92563a1ca91c248`，JS SHA `9d3fa3644aff9a25705960470f21b4a45ee83ed6c4c0b46b0a853f6971abd883`，两消费者各102份dist逐字节一致，`.cache/survival-consumer-identity.json` |
+| 实际包消费 | GPU书本迁移后 `npm run verify:package` 已通过React18.3.1 /19.3.1的122值、117组件SSR、严格TSX/ref/API、新Frame CSS及新书本状态类型消费；实际受测包SHA `722057ea443c0d3a43e29e976fa722e3a486bbae740b33ddb3c5d29719e73280`，JS SHA `81937bb974a177af6e96e2a59c87914906faf5f8b423967a8832e10b99b5df03`，两消费者各102份dist逐字节一致，`.cache/book-capture-consumer-identity.json` |
+| 书本正式回归 | 独立同配置Chromium/DPR1/1280×1000批次15/15 PASS、0 skip/flaky，62.895秒；新增显式rendererState等3项，旧原生完整ROI和阈值不改，全部实际执行。报告 `.cache/book-capture-independent.json` |
 | 展示页辅助检查 | `.cache/survival-demo-smoke.json`，真实示例材质、宿主状态与局部滚动检查，页面错误为空；不增加正式用例数 |
 | 生产展示页 | 4173提供的HTML/JS/CSS五项与site构建逐字节一致；生存背包25项、工作台13项辅助检查通过，页面错误为空；412px两界面局部横滚180px，文档宽度保持412px。辅助检查不计正式用例 |
-| 原生采集边界 | PIX已实际捕获并保存附魔台展开书本与中文钻石剑提示框的单帧，离线事件/C++导出成功；见[GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。字体/书本/整屏差异仍未解决，采集成功不等于一致性通过 |
+| 新书本生产预览 | 最新4173五项入口与site构建逐字节一致；主展示开合、关闭重开、412px布局及calibration页翻页13项辅助检查通过，页面错误为空；主展示未声称具有翻页控件 |
+| 原生采集边界 | PIX实际捕获并保存书本与中文提示框。实际书本组件显式捕获状态及独立8个字体draw重放，在限定NVIDIA后端的全2570×1402目标RGBA均为0差；见[GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。默认动态书本、生产字体后端及整GUI仍未认证 |
 
-109是本轮相关范围，不是新增109项或整库单次全绿。按项目、文件及完整标题与历史最终回归合并，当前789个唯一正式用例为784 PASS、5个预期SKIP、0个未解决失败（`.cache/integration-summary.json`）；这是多批次累计。以下115/120及累计767唯一用例等保留为各自历史检查点；Goal继续进行。
+109及15分别是相关范围，不是新增124项或整库单次全绿。按项目、文件及完整标题与历史最终回归合并，当前792个唯一正式用例为787 PASS、5个预期SKIP、0个未解决失败（`.cache/integration-summary.json`）；独立书本批次的空project标签按相同pixel配置归并，没有当成额外项目重复计数。这是多批次累计。以下115/120及累计767唯一用例等保留为各自历史检查点；Goal继续进行。
 
 ## 上一检查点：Classic工作台与配方书（115组件）
 

@@ -14,7 +14,7 @@
 | HUD（17） | Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、BossBar、Crosshair、ChatMessage、ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip、PlayerList、TouchControls |
 | 页面与列表组合（10） | PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast |
 
-`EnchantingBook` 使用真实材质，默认视角和分面光照已通过本机无损 PNG 校准，网格及翻页仍是重建；`EnchantingRunes` 需要调用方提供原版字图集。已有部分工作站的同版本原生局部截图证据，完整状态与整屏差异仍需逐项核对。
+`EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
 
 `ItemGlint` 使用真实光效纹理和已核对的着色公式，接收显式 UV、颜色、采样与混合参数。`shadeItemGlint` / `renderItemGlint` 可用于自定义渲染流程；原生时间和 draw-state 仍未认证，组件不自行启动动画。
 
