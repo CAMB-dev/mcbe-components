@@ -1,0 +1,27 @@
+{
+  "scope": "One unchanged original demo-only atlas neighbor texture; not a captured bitmap or single-pixel repair. Existing item-materials.json 26-item catalog is unchanged.",
+  "release": "v1.26.60.5",
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "source": "resource_pack/textures/blocks/end_rod.png",
+  "file": "demo/assets/gui-model/end_rod.png",
+  "bytes": 159,
+  "size": [
+    16,
+    16
+  ],
+  "sha256": "94f20a6cd82eed61af0597d690f26411f83693ef943f2c0d31d9fa5a5721128e",
+  "rgbaSHA256": "f4f261d0be022a66ccac2aac0bc6808b28ae36d747a722e2af01caea5bbbce66",
+  "atlasOrigin": [
+    864,
+    112
+  ],
+  "atlasSize": [
+    1024,
+    512
+  ],
+  "purpose": "Complete source tile required by the observed GUI4 native table-face UV endpoint. No invented padding or per-pixel overwrite.",
+  "licenseFile": "demo/assets/gui-model/LICENSE.md",
+  "licenseSHA256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+  "independentEvidence": ".cache/gui-model-independent-qa/neighbor-source-identification.json",
+  "ownership": "Original Minecraft artwork retains applicable Mojang sample terms; not relicensed by project MIT."
+}

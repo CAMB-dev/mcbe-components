@@ -5,6 +5,9 @@ import { layoutGuiText } from './gui-text-geometry';
 import type { GuiTextGeometry, GuiTextLayout, GuiTextRgba8 } from './gui-text-geometry';
 import { renderPreparedGuiLayer } from './gui-layer-webgl';
 import type { GuiLayerPreparedCommand, GuiLayerPreparedResult } from './gui-layer-webgl';
+import { layoutGuiModel } from './gui-model-geometry';
+import type { GuiModelGeometry, GuiModelLayout } from './gui-model-geometry';
+import type { GuiLayerTexture } from './gui-texture-atlas';
 
 /** UI/Sprite Transparent, MultiColorTint Off source geometry. Other material passes are not implied. */
 export interface GuiSpriteGeometry extends GuiImageGeometry {
@@ -14,6 +17,7 @@ export interface GuiSpriteGeometry extends GuiImageGeometry {
 export type GuiLayerGeometryCommand =
   | ({ kind: 'image' } & GuiImageGeometry)
   | ({ kind: 'sprite' } & GuiSpriteGeometry)
+  | ({ kind: 'model' } & GuiModelGeometry)
   | ({ kind: 'text' } & GuiTextGeometry);
 export interface GuiLayerLayoutOptions extends Omit<GuiImageLayoutOptions, 'images'> {
   commands: readonly GuiLayerGeometryCommand[];
@@ -21,14 +25,16 @@ export interface GuiLayerLayoutOptions extends Omit<GuiImageLayoutOptions, 'imag
 export type GuiLayerLayoutCommand =
   | { kind: 'image'; mesh: GuiImageMesh }
   | { kind: 'sprite'; mesh: GuiImageMesh; color: GuiTextRgba8 }
+  | { kind: 'model'; layout: GuiModelLayout }
   | { kind: 'text'; layout: GuiTextLayout };
 export interface GuiLayerLayout extends Omit<GuiImageLayout, 'meshes'> {
   /** Ordered source commands. Each text layout owns its separate paint-origin MVP. */
   commands: readonly GuiLayerLayoutCommand[];
 }
 export type GuiLayerDraw =
-  | ({ kind: 'image' } & GuiImageDraw)
-  | ({ kind: 'sprite'; texture: GuiImageTexture } & GuiSpriteGeometry)
+  | ({ kind: 'image'; texture: GuiLayerTexture } & Omit<GuiImageDraw, 'texture'>)
+  | ({ kind: 'sprite'; texture: GuiLayerTexture } & GuiSpriteGeometry)
+  | ({ kind: 'model'; textures: Readonly<Record<string, GuiLayerTexture>> } & GuiModelGeometry)
   | ({ kind: 'text'; pages: ReadonlyMap<number, GuiImageTexture> } & GuiTextGeometry);
 export interface GuiLayerRenderOptions extends Omit<GuiLayerLayoutOptions, 'commands'> {
   commands: readonly GuiLayerDraw[];
@@ -43,13 +49,13 @@ export interface GuiLayerRenderResult extends GuiLayerPreparedResult {
 /** Internal source adapter, also used for SSR/loading preparation. It performs no IO or GPU work. */
 export function layoutSourceGuiLayer(options: GuiLayerLayoutOptions): GuiLayerLayout {
   if (!Array.isArray(options.commands) || options.commands.length > 4096) throw new RangeError('A bounded GUI command array is required.');
-  for (const command of options.commands) if (!command || (command.kind !== 'image' && command.kind !== 'sprite' && command.kind !== 'text')) throw new RangeError('Unsupported GUI layer command.');
-  const imageCommands = options.commands.filter((command): command is Extract<GuiLayerGeometryCommand, { kind: 'image' | 'sprite' }> => command.kind !== 'text');
+  for (const command of options.commands) if (!command || (command.kind !== 'image' && command.kind !== 'sprite' && command.kind !== 'model' && command.kind !== 'text')) throw new RangeError('Unsupported GUI layer command.');
+  const imageCommands = options.commands.filter((command): command is Extract<GuiLayerGeometryCommand, { kind: 'image' | 'sprite' }> => command.kind === 'image' || command.kind === 'sprite');
   const { meshes, ...frame } = layoutGuiImages({ ...options, images: imageCommands });
   const commands: GuiLayerLayoutCommand[] = [];
   let imageIndex = 0, vertices = 0, indices = 0, runs = 0;
   for (const command of options.commands) {
-    if (command.kind !== 'text') {
+    if (command.kind === 'image' || command.kind === 'sprite') {
       const mesh = meshes[imageIndex++]!;
       if (command.kind === 'sprite') {
         const color: GuiTextRgba8 = command.color ?? [255, 255, 255, 255];
@@ -57,6 +63,11 @@ export function layoutSourceGuiLayer(options: GuiLayerLayoutOptions): GuiLayerLa
         commands.push({ kind: 'sprite', mesh, color: [...color] });
       } else commands.push({ kind: 'image', mesh });
       vertices += mesh.vertices.length; indices += mesh.indices.length; runs++;
+    } else if (command.kind === 'model') {
+      const layout = layoutGuiModel({ ...command, width: options.width, height: options.height, guiScale: options.guiScale,
+        outputRect: options.outputRect, scissor: intersect(options.scissor, command.scissor, options.width, options.height) });
+      commands.push({ kind: 'model', layout });
+      for (const run of layout.runs) { vertices += run.mesh.vertices.length; indices += run.mesh.indices.length; runs++; }
     } else {
       const layout = layoutGuiText({ ...command, width: options.width, height: options.height, guiScale: options.guiScale,
         outputRect: options.outputRect, scissor: intersect(options.scissor, command.scissor, options.width, options.height) });
@@ -88,6 +99,16 @@ export function renderGuiLayer(options: GuiLayerRenderOptions): GuiLayerRenderRe
     const entry = layout.commands[index]!;
     if (command.kind === 'image' && entry.kind === 'image') commands.push({ kind: 'image', mesh: entry.mesh, mvp: layout.mvp, texture: command.texture });
     else if (command.kind === 'sprite' && entry.kind === 'sprite') commands.push({ kind: 'sprite', mesh: entry.mesh, mvp: layout.mvp, texture: command.texture, color: entry.color });
+    else if (command.kind === 'model' && entry.kind === 'model') {
+      if (!command.textures || typeof command.textures !== 'object' || Array.isArray(command.textures)) throw new RangeError('A model requires an explicit decoded texture record.');
+      for (const run of entry.layout.runs) {
+        const texture = Object.prototype.hasOwnProperty.call(command.textures, run.texture) ? command.textures[run.texture]
+          : Object.prototype.hasOwnProperty.call(command.textures, 'all') ? command.textures.all : undefined;
+        const size = command.textureSizes[run.texture]!;
+        if (!texture || texture.width !== size[0] || texture.height !== size[1]) throw new RangeError('Decoded model texture dimensions must match their declared source size.');
+        commands.push({ kind: 'sprite', mesh: run.mesh, mvp: entry.layout.mvp, texture, color: run.color });
+      }
+    }
     else if (command.kind === 'text' && entry.kind === 'text') {
       if (!command.pages || typeof command.pages.get !== 'function') throw new RangeError('Text requires explicit decoded font pages.');
       for (const run of entry.layout.runs) {

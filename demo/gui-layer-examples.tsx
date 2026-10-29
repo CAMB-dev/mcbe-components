@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button, Combobox, EnchantingBook, EnchantingRunes, EnchantingTable, Switch } from '../src';
 import { nativeGuiWorkstationFonts, runeAtlasUrl } from 'virtual:mcbeui-game-font';
 import { gameItemTextures } from './materials';
+import { sampleGuiBlockItems } from './gui-model-items';
 
 const runeTexts = ['elder light', 'bless creature', 'enchant scroll'];
 
@@ -9,6 +10,7 @@ const runeTexts = ['elder light', 'bless creature', 'enchant scroll'];
 export function GuiLayerExamples() {
   const [scale, setScale] = useState('5'), [original, setOriginal] = useState(true);
   const [itemImages, setItemImages] = useState(true);
+  const [itemModels, setItemModels] = useState(true);
   const [shown, setShown] = useState(true), [inputs, setInputs] = useState(true);
   const [receipt, setReceipt] = useState('This example reports actions to its host.');
   const fonts = nativeGuiWorkstationFonts, enabled = original && !!fonts;
@@ -18,8 +20,9 @@ export function GuiLayerExamples() {
       options={[{ value: '4', label: 'GUI 4 · point text' }, { value: '5', label: 'GUI 5 · smooth labels' }]}/>
     <Switch label="Use original local GUI text" checked={enabled} disabled={!fonts} onChange={event => setOriginal(event.target.checked)}/>
     <Switch label="Use source item sprites" checked={itemImages} onChange={event => setItemImages(event.target.checked)}/>
+    <Switch label="Use source block models" checked={itemModels} onChange={event => setItemModels(event.target.checked)}/>
     {shown ? <EnchantingTable title="附魔台" inventoryLabel="物品栏"
-      imageRender={{ frame: { width: 2570, height: 1402, guiScale: Number(scale) }, itemImages,
+      imageRender={{ frame: { width: 2570, height: 1402, guiScale: Number(scale) }, itemImages, itemModels,
         text: enabled && fonts ? {
           metrics: { lineHeight: 10, paintOffset: [0, 1] },
           labels: { font: fonts.labels, fontScale: .5, sampling: scale === '5' ? 'bilinear' : 'point', shader: scale === '5' ? 'bitmap-smooth' : 'bitmap' },
@@ -29,6 +32,7 @@ export function GuiLayerExamples() {
       item={inputs ? { name: 'Diamond sword', image: gameItemTextures.sword.src } : null}
       lapis={inputs ? { name: 'Lapis lazuli', image: gameItemTextures.lapis.src, count: 32 } : null}
       inventory={[{ name: 'Diamond', image: gameItemTextures.diamond.src, count: 8 }]}
+      hotbar={sampleGuiBlockItems}
       book={<EnchantingBook open={inputs ? 1 : 0}/>}
       options={inputs ? runeTexts.map((text, index) => ({ id: `composed-${index}`, label: `Sample option ${index + 1}`, level: [1, 2, 2][index]!,
         runeText: text, runes: runeAtlasUrl ? <EnchantingRunes text={text} atlasUrl={runeAtlasUrl}/> : text })) : []}
@@ -40,6 +44,7 @@ export function GuiLayerExamples() {
     <Button onClick={() => setInputs(value => !value)}>{inputs ? 'Clear composed GUI inputs' : 'Restore composed GUI inputs'}</Button>
     <output aria-label="Combined GUI actions" style={{ fontSize: 12, overflowWrap: 'anywhere' }}>{receipt}</output>
     <p style={{ margin: 0, fontSize: 12 }}>Toggle the original text and item sprites to compare their appearance. Buttons, inventory actions and the book stay interactive.</p>
+    <p style={{ margin: 0, fontSize: 12 }}>The block example uses an explicit observed projection. Native CPU centering, other camera settings and other block shapes are still being verified.</p>
     <p style={{ margin: 0, fontSize: 12 }}>{fonts ? 'Original glyph pages are prepared locally and stay outside the library. These are explicit GUI 4 and GUI 5 profiles; the text switch applies only to this example.'
       : 'Original glyphs are optional. Prepare them with scripts/use-local-workstation-fonts.py and restart the preview to enable this switch.'}</p>
   </section>;

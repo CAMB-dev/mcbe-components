@@ -38,17 +38,17 @@ import * as ui from 'mcbeui';
 const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames'];
 components.push('GuiImageLayer','GuiLayer');
-const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer'];
+const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas'];
 assert.equal(components.length,120);
 assert.equal(dataExports.length,4);
-assert.equal(rendererFunctions.length,7);
-assert.equal(Object.keys(ui).length,131);
+assert.equal(rendererFunctions.length,10);
+assert.equal(Object.keys(ui).length,134);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
 assert(!Object.hasOwn(ui,'workstationImageAssets'),'Internal workstation assets must not become a public export.');
 assert(!Object.hasOwn(ui,'useEnchantingImageLayer'),'Internal workstation image adapter must not become a public export.');
-for (const internal of ['renderPreparedGuiLayer','layoutSourceGuiLayer','packGuiHalf','packGuiUv']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
+for (const internal of ['renderPreparedGuiLayer','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
 const glintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25]};
 const glintTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
@@ -89,6 +89,23 @@ assert.match(layerMarkup,/role="img"/);
 const spriteMarkup=renderToString(element(ui.GuiLayer,{width:17,height:11,guiScale:2,commands:[{kind:'sprite',rect:[0,0,1,1],texture:glintTexture,color:[127,255,31,0]}],label:'Source sprite'}));
 assert.match(spriteMarkup,/data-render-state="loading"/);
 assert.match(spriteMarkup,/Source sprite/);
+const sourceCuboid=ui.createGuiCuboidModel([0,0,0],[16,8,16],{colors:{east:[127,127,127,255]}});
+const modelProjection={yaw:45,pitch:30,scale:.625,offset:[8,9],originQuantization:'physical-floor'};
+const sourceModel={kind:'model',model:sourceCuboid,origin:[.3,.2],projection:modelProjection,textureSizes:{all:[16,16]},textures:{all:'/caller-stone.png'}};
+const modelLayout=ui.layoutGuiModel({width:640,height:480,guiScale:2,...sourceModel});
+assert.deepEqual(modelLayout.paintOrigin,[0,0]);
+assert.equal(modelLayout.runs.length,3);
+assert.deepEqual(modelLayout.runs[1].color,[127,127,127,255]);
+assert.throws(()=>ui.createGuiCuboidModel([0,0,0],[17,8,16]),RangeError);
+const modelMarkup=renderToString(element(ui.GuiLayer,{width:640,height:480,guiScale:2,commands:[sourceModel],label:'Caller source model'}));
+assert.match(modelMarkup,/data-render-state="loading"/);
+assert.match(modelMarkup,/Caller source model/);
+const assembledAtlas=ui.assembleGuiTextureAtlas({width:2,height:1,tiles:[{origin:[1,0],texture:glintTexture}]});
+assert.deepEqual([...assembledAtlas.data],[0,0,0,0,255,255,255,255]);
+assert.throws(()=>ui.assembleGuiTextureAtlas({width:1,height:1,tiles:[{origin:[0,0],texture:glintTexture},{origin:[0,0],texture:glintTexture}]}),RangeError);
+const atlasMarkup=renderToString(element(ui.GuiLayer,{width:17,height:11,guiScale:2,commands:[{kind:'sprite',rect:[0,0,2,1],texture:{kind:'atlas',width:2,height:1,tiles:[{origin:[1,0],size:[1,1],texture:glintTexture}]}}],label:'Original source atlas'}));
+assert.match(atlasMarkup,/data-render-state="loading"/);
+assert.match(atlasMarkup,/Original source atlas/);
 const imageSsrWarnings = [], previousConsoleError = console.error;
 let imageWorkstationMarkup;
 try {
@@ -315,7 +332,9 @@ import { createRef } from 'react';
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState, WorkstationTextContext, WorkstationTextRenderer } from 'mcbeui';
 import { BitmapText, renderBitmapGlyphs, GuiIcon, guiIconNames, GuiImageLayer, layoutGuiImages, renderGuiImages } from 'mcbeui';
-import { GuiLayer, layoutGuiText, renderGuiLayer } from 'mcbeui';
+import { GuiLayer, layoutGuiText, renderGuiLayer, layoutGuiModel, createGuiCuboidModel, assembleGuiTextureAtlas } from 'mcbeui';
+import type { GuiTextureAtlasSource, GuiTextureAtlas, GuiLayerTextureSource, GuiLayerTexture } from 'mcbeui';
+import type { GuiModelFace, GuiModelMesh, GuiModelProjection, GuiModelGeometry, GuiModelLayoutOptions, GuiModelRun, GuiModelLayout, GuiModelItem, GuiCuboidFace, GuiCuboidModelOptions } from 'mcbeui';
 import type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout, GuiSpriteGeometry, GuiLayerCommand, GuiLayerProps, GuiLayerGeometryCommand, GuiLayerLayoutOptions, GuiLayerLayoutCommand, GuiLayerLayout, GuiLayerDraw, GuiLayerRenderOptions, GuiLayerRenderResult, EnchantingTableTextRenderStyle, EnchantingTableTextRenderProfile } from 'mcbeui';
 import type { GuiImage, GuiImageLayerProps, GuiImageLayerState, GuiImageRect, GuiImageRgba, GuiImageNineSlice, GuiImageGeometry, GuiImageLayoutOptions, GuiImageVertex, GuiImageMesh, GuiImageLayout, GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderOptions, GuiImageRenderResult, EnchantingTableImageRenderProfile } from 'mcbeui';
 import { Select } from 'mcbeui';
@@ -405,6 +424,23 @@ const layerSource: GuiLayerGeometryCommand = {kind:'text',...sourceText};
 const layerCommand: GuiLayerCommand = {...layerSource,pages:new Map([[0,'/caller-packed-font.png']])};
 const sourceSprite: GuiSpriteGeometry = {rect:[1,2,16,16],color:[128,64,255,0],tint:[.5,1,.25,1]};
 const spriteCommand: GuiLayerCommand = {kind:'sprite',...sourceSprite,texture:'/caller-sprite.png'};
+const cuboidColors: GuiCuboidModelOptions = {colors:{up:[255,255,255,255],east:[127,127,127,255]}};
+const cuboid: GuiModelMesh = createGuiCuboidModel([0,0,0],[16,8,16],cuboidColors);
+export const cuboidDirection: GuiCuboidFace = 'east';
+export const cuboidFace: GuiModelFace = cuboid.faces[0]!;
+const modelProjection: GuiModelProjection = {yaw:45,pitch:30,scale:.625,offset:[8,9],originQuantization:'physical-floor'};
+const modelGeometry: GuiModelGeometry = {model:cuboid,origin:[0,0],projection:modelProjection,textureSizes:{all:[16,16]}};
+const modelOptions: GuiModelLayoutOptions = {...modelGeometry,width:640,height:480,guiScale:2};
+export const modelLayout: GuiModelLayout = layoutGuiModel(modelOptions);
+export const modelRun: GuiModelRun = modelLayout.runs[0]!;
+const modelItem: GuiModelItem = {model:cuboid,projection:modelProjection,textureSizes:{all:[16,16]},textures:{all:'/caller-stone.png'}};
+const modelCommand: GuiLayerCommand = {kind:'model',...modelGeometry,textures:modelItem.textures};
+export const sourceAtlas: GuiTextureAtlasSource = {kind:'atlas',width:2,height:1,tiles:[{origin:[1,0],size:[1,1],texture:'/caller-one-pixel.png'}]};
+export const textureSource: GuiLayerTextureSource = sourceAtlas;
+export const decodedAtlas: GuiTextureAtlas = {kind:'atlas',width:2,height:1,tiles:[{origin:[1,0],texture:adapterTexture}]};
+export const decodedTexture: GuiLayerTexture = decodedAtlas;
+export const atlasPixels: PixelTexture = assembleGuiTextureAtlas({width:2,height:1,tiles:[{origin:[1,0],texture:adapterTexture}]});
+export function offscreenAtlas(canvas:OffscreenCanvas):GuiLayerRenderResult {return renderGuiLayer({width:640,height:480,guiScale:2,commands:[{kind:'sprite',rect:[0,0,2,1],texture:decodedAtlas}],canvas});}
 export const layerOptions: GuiLayerLayoutOptions = {width:640,height:480,guiScale:2,commands:[layerSource]};
 const layerDraw: GuiLayerDraw = {kind:'text',...sourceText,pages:new Map([[0,adapterTexture]])};
 export const guiLayerRenderer: (options:GuiLayerRenderOptions)=>GuiLayerRenderResult = renderGuiLayer;
@@ -412,7 +448,7 @@ export function composedOffscreen(canvas:OffscreenCanvas):GuiLayerRenderResult {
   return renderGuiLayer({...layerOptions,commands:[layerDraw],canvas});
 }
 export function inspectComposedLayout(layout:GuiLayerLayout):GuiLayerLayoutCommand|undefined {return layout.commands[0];}
-const layerProps: GuiLayerProps = {...layerOptions,commands:[layerCommand,spriteCommand],label:'Caller composed GUI',onRenderStateChange:state=>state.toUpperCase()};
+const layerProps: GuiLayerProps = {...layerOptions,commands:[layerCommand,spriteCommand,modelCommand],label:'Caller composed GUI',onRenderStateChange:state=>state.toUpperCase()};
 const textStyle: EnchantingTableTextRenderStyle = {font:packedFont,fontScale:1,sampling:'point',shader:'bitmap'};
 const textProfile: EnchantingTableTextRenderProfile = {metrics:{lineHeight:10,paintOffset:[0,1]},labels:textStyle,costs:{...textStyle,disabledColor:[137,94,91,255]},runes:textStyle};
 const glintUniforms: ItemGlintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25],tintColor:[1,1,1,1],hudOpacity:1};
@@ -443,7 +479,7 @@ export const emptyGpuOptions: BitmapGlyphRenderOptions = {width:0,height:0,pages
 export const demo = <>
   <GuiImageLayer {...imageProps} ref={createRef<HTMLCanvasElement>()}/>
   <GuiLayer {...layerProps} ref={createRef<HTMLCanvasElement>()}/>
-  <EnchantingTable title="1" inventoryLabel="1" options={[{id:'one',label:'One',level:1,runeText:'1'}]} imageRender={{...imageRenderProfile,text:textProfile,itemImages:true}} item={{name:'Caller item',image:'/caller-item.png'}}/>
+  <EnchantingTable title="1" inventoryLabel="1" options={[{id:'one',label:'One',level:1,runeText:'1'}]} imageRender={{...imageRenderProfile,text:textProfile,itemImages:true,itemModels:true}} item={{name:'Caller item',image:'/caller-item.png',guiModel:modelItem}}/>
   <EnchantingTable options={[]} imageRender={imageRenderProfile} ref={createRef<HTMLElement>()}/>
   <Button {...props} ref={createRef<HTMLButtonElement>()}>Play</Button>
   <Text as="p" shadow ref={createRef<HTMLElement>()}>Minecraft</Text>

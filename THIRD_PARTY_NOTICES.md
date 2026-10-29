@@ -50,6 +50,16 @@ The local HBUI preview can also register unchanged Minecraft Ten v2, Minecraft S
 
 The optional native HBUI loading indicator GIF also stays in ignored local cache and local preview, outside Git/public/npm. Its source identity is metadata-only in `docs/local-hbui-fonts.json`. The default world-modal LoadingScreen separately embeds the unchanged official sample `title.png` Minecraft branding and original loading-bar images in its texture CSS; this source-derived artwork retains Mojang's upstream ownership and is documented in `docs/system-screens-geometry.json`. The caller can override `branding` or pass `branding={null}`.
 
+## Source model demo atlas
+
+The source-model demo additionally retains one unchanged official `end_rod.png`
+under `demo/assets/gui-model`, with the upstream `LICENSE.md`. Its complete tile
+is needed by an observed adjacent-atlas UV endpoint, rather than an invented
+border or a single-pixel repair. Source release, file/RGBA hashes and explicit
+packing metadata are recorded separately in `docs/gui-model-assets.json`.
+This demonstration texture is outside the npm library; its original Mojang
+ownership and applicable sample terms remain unchanged.
+
 ## Original GUI icon catalog
 
 GuiIcon bundles 150 unchanged complete official Mojang GUI PNGs under `dist/assets/gui-icons` (52,654 image bytes). Their original source paths, fixed release / commit URLs, byte and RGBA hashes, physical dimensions, state labels, source UI usage references and installed base-pack matches are recorded in `docs/gui-icons.json`. The original upstream `LICENSE.md` from that same fixed release is retained unchanged at `dist/assets/gui-icons/LICENSE.md` (222 bytes, SHA256 `ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d`); Minecraft artwork remains subject to its upstream terms, and this project's MIT license does not relicense it.

@@ -1,6 +1,21 @@
 {
   "scope": "Bedrock-native controls, reusable GUI parts, complete container GUIs and HUD; composition reuses source-backed primitives.",
   "implementationStatusIsNotPixelCertification": true,
+  "sourceModelStage": {
+    "status": "scoped_model_atlas_fixed_ui_package_and_production_checks_pass_not_universal_gui_certification",
+    "newPureFunctions": ["layoutGuiModel", "createGuiCuboidModel"],
+    "sourceRuntimeValues": 134,
+    "newAtlasPureFunction": "assembleGuiTextureAtlas",
+    "sourceAtlas": "Complete original PNG URL/RGBA leaves plus explicit host packing; pure byte-copy/GPU texSubImage source assembly, no Canvas2D resampling/captured native atlas/UV epsilon. Public17PASS; four conditional native model comparisons FBO+ReactDOM28,825,120pixels strict0. GUI4 needs a complete end_rod neighbor tile in the tested packing. Standalone originalPNG GUI4=102/GUI5=32 remain nonzero.",
+    "componentCountUnchanged": 120,
+    "command": "GuiLayer model: local faces/source UVs/face RGBA8 plus explicit global source origin/yaw/pitch/scale/offset/originQuantization; no native default camera",
+    "inventory": "InventoryItem.guiModel consumed only by explicit EnchantingTable imageRender.itemModels; actual12PASS source order/binding/atomic wrapper fallback/count/durability/ref/focus/selection/book/lifecycle, SwiftShader, same-public-renderer expected queue not independent native proof",
+    "evidence": "Two known scales/three cuboids72vertices XY/UV/RGBA each288bytes exact, not fullVB/CBV or unique native CPU recovery. Offset8.9375 is host candidate, not source constant. Source-atlas actual complete3,603,140pixel/747,600ROI outputs equal one observed fixed GUI5 postUI target across four font/book combinations; three-tile16case and four-tile20case phases remain separate, not independent native scenes/allGUI/worldPresent/goal completion. Current standalone fullGUI32 hash retained.",
+    "formalValidation": "Public17/17PASS plus actual adapter12/12PASS; cumulative973unique/968PASS/5expectedSKIP from scoped batches. Related126 use a fixed whole-file rule: gui-layer and gui-sprite30 from NVIDIA/D3D11, remaining96 standard Chromium. Initial123/3 and standard121/5 retained; no production/test/RGBA threshold changes, not one full green run.",
+    "packageValidation": "Actual React18.3.1/19.3.1 consumers verify134 exports/SSR/TSX/ref/model/atlas/styles/assets/licenses; each256dist entries byte-identical. Tested tarball124d271bf609f9e622afdfbe80a69361832fb11ebfd319aedd55d5b6075e9e08; docs-only final pack identity in .cache/gui-model-final-pack-proof.json.",
+    "productionValidation": "65 auxiliary PASS,8 HTTP/site entries byte-identical; three-switch8combinations and actual source model/fallback/book/count/interaction/narrow150icons. Raw12ERR_ABORTED retained,5distinctglyph resources rechecked HTTP200/byte0; no noncancel/page/console/render errors or native-atlas-pixel/.cache request. SwiftShader auxiliary scope, no runtime native parity claim.",
+    "details": "docs/GUI_MODEL_QA.md"
+  },
   "basis": {
     "edition": "Bedrock Classic / JSON UI",
     "installedVersion": "1.26.6005.0",
@@ -82,8 +97,9 @@
         "status": "implemented",
         "fidelity": "ordered_source_image_and_packed_cell_text_public17_formal_pass_fixed_native_stages_exact_not_whole_gui_certification",
         "api": {
-          "commands": "ordered image/sprite/text source commands; no captured vertex input required",
+          "commands": "ordered image/sprite/model/text source commands; no captured vertex input required",
           "sprite": "GuiSpriteGeometry extends image geometry; optional RGBA8 color, alpha selects ceil branch and is not opacity; UI/Sprite Transparent/MultiColorTint Off profile",
+          "model": "Explicit local GuiModelMesh/source UVs/face RGBA8/original textureSizes/textures and global origin/projection; angles/scale/offset/originQuantization required, no native defaults; scoped public17/adapter12 and one fixed fullUI target exact, docs/GUI_MODEL_QA.md",
           "frame": "actual physical width/height + explicit guiScale",
           "text": "GuiTextFont with explicit pages/pageSizes/cellHeight/glyph metrics; global origin/fontScale/sampling/shader",
           "color": "RGBA8 vertex color separate from normalized tint and independent shadow tint",
@@ -93,7 +109,7 @@
           "details": "docs/GUI_LAYER_QA.md"
         },
         "validation": "Historical42f25e9 text stage: public source/GPU/React final17/17 PASS; observed30draw packed VB/CBV exact; four conditional native stages across FBO and actual React full targets total28,825,120 pixels RGBA0 on testedNVIDIA/D3D11. Actual EnchantingTable adapter final10/10 PASS on SwiftShader, three compositions total2,643,089 pixels equal via same public renderer. Actual full747,600pixel native ROI remains10,155different, not wholeGUI exact; React18.3.1/19.3.1 packed131 exports and256dist entries byte-identical; scoped cumulative920 unique/915PASS/5expectedSKIP; production38auxPASS with8HTTP/site entries byte-identical; raw11ERR_ABORTED retired requests retained and5distinctresources recheckedHTTP200. AuxiliarySwiftShader does not certify nativeNVIDIA parity.",
-        "spriteValidation": "Current sprite/layout-zoom stage: public13/13PASS, actual adapter11/11PASS; four conditional native transitions FBO+React28,825,120pixels RGBA0 on NVIDIA/D3D11. Original source48vertices XY192bytes andUV192bytes exact, not fullVB/CBV. Actual complete747600pixel ROI10155->7078zoom->4928sprite; residual only three3D cells, not wholeGUI exact. Scoped cumulative944unique/939PASS/5expectedSKIP; React18.3.1/19.3.1 actual packed131 exports and256dist entries byte-identical; production47auxPASS/8HTTPsite entries identical, raw12ERR_ABORTED retained/5distinctresources HTTP200 byte0. AuxiliarySwiftShader does not certify nativeNVIDIA parity. docs/GUI_SPRITE_QA.md"
+        "spriteValidation": "Historicalb09ff7a sprite/layout-zoom stage: public13/13PASS, actual adapter11/11PASS; four conditional native transitions FBO+React28,825,120pixels RGBA0 on NVIDIA/D3D11. Original source48vertices XY192bytes andUV192bytes exact, not fullVB/CBV. Actual complete747600pixel ROI10155->7078zoom->4928sprite; residual only three3D cells, not wholeGUI exact. Scoped cumulative944unique/939PASS/5expectedSKIP; React18.3.1/19.3.1 actual packed131 exports and256dist entries byte-identical; production47auxPASS/8HTTPsite entries identical, raw12ERR_ABORTED retained/5distinctresources HTTP200 byte0. AuxiliarySwiftShader does not certify nativeNVIDIA parity. docs/GUI_SPRITE_QA.md"
       },
       {
         "name": "BlockPreview",
@@ -394,9 +410,10 @@
           "imageRender": "optional frame/origin/displayScale; default CSS unchanged",
           "imageRender.text": "optional explicit metrics {lineHeight,paintOffset} + labels/costs/runes styles; one ordered image/text target",
           "imageRender.itemImages": "optional boolean: plain item.image in centered source16x16 game region; custom item.icon stays DOM; whole ready/failure atomic fallback",
+          "imageRender.itemModels": "optional boolean: explicit InventoryItem.guiModel uses source slot origin, DOM icon/image wrapper is atomic loading/error fallback; actual12PASS within docs/GUI_MODEL_QA.md scope",
           "runeText": "host final original-case string, already laid out/truncated; arbitrary runes ReactNode still supported",
-          "validation": "new text integration/fallback final QA pending; previous image-only results historical",
-          "details": "docs/GUI_LAYER_QA.md"
+          "validation": "Actual text10, sprite11 and model12 formal adapter scopes separately recorded; current model12 preserves atomic wrappers/count/durability/ref/focus/selection/book/lifecycle. Only one explicit observed GUI5 source-atlas fullUI target exact, not allGUI/default renderer certification.",
+          "details": "docs/GUI_MODEL_QA.md"
         }
       },
       {
@@ -638,7 +655,8 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 131,
+    "runtimeValues": 134,
+    "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 4,
     "guiIconDataValues": 1,
@@ -647,7 +665,9 @@
     ],
     "pureGeometryFunctions": [
       "layoutGuiImages",
-      "layoutGuiText"
+      "layoutGuiText",
+      "layoutGuiModel",
+      "createGuiCuboidModel"
     ]
   }
 }

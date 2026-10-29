@@ -2,7 +2,15 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
-## 本轮检查点：GUI sprite与展示采样
+## 本轮检查点：GUI source model
+
+新增路径以显式局部model / source texture / source origin及投影配置生成GLOBAL half XY、UNORM16 UV与RGBA8面色，进入同GuiLayer Sprite目标；旧BlockPreview CPU自动fit / lighting不替换。附魔台itemModels仅显式消费InventoryItem.guiModel，正常slot origin不从DOM量测。含纯assembleGuiTextureAtlas后为120组件 / 4数据 / 10函数共134值，React18 / 19实际包、公开17项、组件12项与生产65辅助检查按各自范围通过，见 [GUI_MODEL_QA.md](GUI_MODEL_QA.md)。
+
+三cuboid两known scale的72顶点各288字节XY / UV / 面色匹配是源候选研究；offsetY[8.93269052838329,8.946559207056708]多个值成立，8.9375非原生常量，local-half负控0 / 6 / 0不证明唯一算法。east旧CPU面UV正确但对角线不同；观察slab色255 / 127 / 186与table白不恢复通用光照，未绘bottom两个atlas匹配不认证唯一绑定。新两after目标读回也不证明完整GUI4928旧残差已经解决。
+
+首独立原PNG路径GUI4仍102 / GUI5为32差异；实际普通原PNG完整场景从4928降至32，旧NOT EXACT报告保留。原PNG＋明确packing的source atlas在固定GUI5完整postUI target四font / book组合全3,603,140像素和747,600 ROI均RGBA0，四tile后续亦全0（20显式辅助case、原16不改）；当前standalone仍逐字节重现旧32。该四图属于同一已观察帧，依赖原字页与显式配置 / 1:1呈现，不是四独立场景，也不认证world / Present、默认字体、其他GUI / camera / strings / animation或目标完成。无captured atlas bitmap、UV epsilon或旧shader改动；packing与offset依然显式有限host配置，不恢复自动native算法。正式973多批累计与126整文件受测profile回归另列，更广状态继续验收。
+
+## 历史检查点：GUI sprite与展示采样
 
 公开值仍120组件 / 131runtime。新sprite命令复用源image几何、按UI/Sprite Transparent原程序解释RGBA8顶点色；alpha是ceil分支选择，不等于opacity。附魔台可选itemImages只接普通PNG，保留自定义renderer与DOM语义。新布局zoom分支旨在消除互逆CSS transform的末端采样相位差，官方草案只支持布局语义，当前源码的最终像素效果仍需本轮完整对照证明。
 

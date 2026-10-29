@@ -6,12 +6,17 @@ import type { GuiImageBackground } from './gui-image-webgl';
 import { layoutSourceGuiLayer, renderGuiLayer } from './gui-layer';
 import type { GuiLayerDraw, GuiLayerGeometryCommand, GuiLayerLayout, GuiLayerLayoutOptions, GuiSpriteGeometry } from './gui-layer';
 import type { GuiTextGeometry } from './gui-text-geometry';
+import type { GuiModelGeometry } from './gui-model-geometry';
+import { validateGuiTextureAtlasLayout } from './gui-texture-atlas';
+import type { GuiLayerTexture, GuiLayerTextureSource, GuiTextureAtlas, GuiTextureAtlasSource } from './gui-texture-atlas';
 
-type Source = string | PixelTexture;
+type LeafSource = string | PixelTexture;
+type Source = GuiLayerTextureSource;
 export type GuiLayerCommand =
-  | ({ kind: 'image' } & GuiImage)
+  | ({ kind: 'image'; texture: Source } & Omit<GuiImage, 'texture'>)
   | ({ kind: 'sprite'; texture: Source } & GuiSpriteGeometry)
-  | ({ kind: 'text'; pages?: ReadonlyMap<number, Source> } & GuiTextGeometry);
+  | ({ kind: 'model'; textures: Readonly<Record<string, Source>> } & GuiModelGeometry)
+  | ({ kind: 'text'; pages?: ReadonlyMap<number, LeafSource> } & GuiTextGeometry);
 export interface GuiLayerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, 'children' | 'width' | 'height' | 'onError'>, Omit<GuiLayerLayoutOptions, 'commands'> {
   commands: readonly GuiLayerCommand[];
   background?: GuiImageBackground;
@@ -23,8 +28,10 @@ export interface GuiLayerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasEleme
   onRenderStateChange?: (state: GuiImageLayerState) => void;
 }
 
-interface SourceUse { source: Source; size?: readonly [number, number]; upload: boolean }
-type Binding = { kind: 'image' | 'sprite'; source: number } | { kind: 'text'; pages: readonly (readonly [number, number])[] };
+interface SourceUse { source: Source; size?: readonly [number, number]; upload: boolean; leafOnly?: boolean }
+type Binding = { kind: 'image' | 'sprite'; source: number }
+  | { kind: 'model'; textures: readonly (readonly [string, number])[] }
+  | { kind: 'text'; pages: readonly (readonly [number, number])[] };
 interface Request {
   key: number;
   descriptor: string;
@@ -33,20 +40,33 @@ interface Request {
   background?: GuiImageBackground;
   layout?: GuiLayerLayout;
   frame?: Omit<GuiLayerLayoutOptions, 'commands'>;
-  /** Unique used URL resources, with a declared square font size where applicable. */
-  urls: ReadonlyMap<string, number | undefined>;
+  /** Unique used URL resources, with declared source dimensions where applicable. */
+  urls: ReadonlyMap<string, readonly [number, number] | undefined>;
   knownPixels: number;
   error?: Error;
 }
 function validatePixels(value: PixelTexture): void {
-  if (!value || !Number.isSafeInteger(value.width) || !Number.isSafeInteger(value.height) || value.width < 1 || value.height < 1 || value.width > 8192 || value.height > 8192
+  if (!value || isAtlas(value) || !Number.isSafeInteger(value.width) || !Number.isSafeInteger(value.height) || value.width < 1 || value.height < 1 || value.width > 8192 || value.height > 8192
     || value.width * value.height > 16777216 || !value.data || !['[object Uint8Array]', '[object Uint8ClampedArray]'].includes(Object.prototype.toString.call(value.data))
     || value.data.length !== value.width * value.height * 4) throw new RangeError('GUI layer pixels require bounded complete RGBA8 data.');
 }
-function sameSource(a: Source | undefined, b: Source): boolean {
+function isAtlas(value: unknown): value is GuiTextureAtlasSource { return !!value && typeof value === 'object' && (value as { kind?: unknown }).kind === 'atlas'; }
+function sameSource(a: Source | undefined, b: Source, compared: WeakMap<object, WeakSet<object>>): boolean {
   if (typeof a === 'string' || typeof b === 'string') return a === b;
-  return !!a && !!b && a.width === b.width && a.height === b.height && !!b.data && ['[object Uint8Array]', '[object Uint8ClampedArray]'].includes(Object.prototype.toString.call(b.data))
+  if (!a || !b || a.width !== b.width || a.height !== b.height) return false;
+  if (compared.get(a)?.has(b)) return true;
+  let equal: boolean;
+  if (isAtlas(a) || isAtlas(b)) {
+    equal = isAtlas(a) && isAtlas(b) && Array.isArray(b.tiles) && a.tiles.length === b.tiles.length && a.tiles.every((tile, index) => {
+      const other = b.tiles[index];
+      return !!other && Array.isArray(other.origin) && other.origin.length === 2 && Array.isArray(other.size) && other.size.length === 2
+        && tile.origin[0] === other.origin[0] && tile.origin[1] === other.origin[1] && tile.size[0] === other.size[0] && tile.size[1] === other.size[1]
+        && sameSource(tile.texture, other.texture, compared);
+    });
+  } else equal = !!b.data && ['[object Uint8Array]', '[object Uint8ClampedArray]'].includes(Object.prototype.toString.call(b.data))
     && a.data.length === b.data.length && a.data.every((byte, index) => byte === b.data[index]);
+  if (equal) { let matches = compared.get(a); if (!matches) { matches = new WeakSet(); compared.set(a, matches); } matches.add(b); }
+  return equal;
 }
 function validateBackground(background: GuiImageBackground | undefined, width: number, height: number): void {
   if (background?.kind === 'texture') {
@@ -57,24 +77,48 @@ function validateBackground(background: GuiImageBackground | undefined, width: n
     if (!background.color || background.color.length !== 4 || background.color.some(value => !Number.isFinite(value) || value < 0 || value > 1)) throw new RangeError('GUI background color requires four normalized components.');
   } else if (background !== undefined && background.kind !== 'transparent') throw new RangeError('Unsupported GUI background.');
 }
-function budget(uses: readonly SourceUse[]): { urls: Map<string, number | undefined>; knownPixels: number } {
-  const urls = new Map<string, number | undefined>(), textures = new Set<PixelTexture>(); let knownPixels = 0;
-  for (const { source, size, upload } of uses) {
+function budget(uses: readonly SourceUse[]): { urls: Map<string, readonly [number, number] | undefined>; knownPixels: number } {
+  const urls = new Map<string, readonly [number, number] | undefined>(), textures = new Set<PixelTexture>(), atlases = new Set<GuiTextureAtlasSource>(); let knownPixels = 0;
+  const leaf = (source: LeafSource, size: readonly [number, number] | undefined, upload: boolean) => {
     if (typeof source === 'string') {
       if (!source.trim()) throw new RangeError('A used GUI texture URL must not be empty.');
       const declared = urls.get(source);
-      if (size && declared !== undefined && declared !== size[0]) throw new RangeError('One URL cannot represent incompatible declared font page sizes.');
-      urls.set(source, size?.[0] ?? declared);
+      if (size && declared !== undefined && (declared[0] !== size[0] || declared[1] !== size[1])) throw new RangeError('One URL cannot represent incompatible declared source sizes.');
+      urls.set(source, size ? [size[0], size[1]] : declared);
     } else {
       validatePixels(source);
-      if (size && (source.width !== size[0] || source.height !== size[1])) throw new RangeError('Font page pixels must match their declared original size.');
+      if (size && (source.width !== size[0] || source.height !== size[1])) throw new RangeError('Source pixels must match their declared original size.');
       if (upload && !textures.has(source)) { textures.add(source); knownPixels += source.width * source.height; }
     }
+  };
+  for (const { source, size, upload, leafOnly } of uses) {
+    if (!isAtlas(source)) { leaf(source, size, upload); continue; }
+    if (leafOnly) throw new RangeError('Packed-cell text requires leaf texture pages.');
+    if (size && (source.width !== size[0] || source.height !== size[1])) throw new RangeError('Atlas dimensions must match their declared source size.');
+    if (atlases.has(source)) continue;
+    validateGuiTextureAtlasLayout(source.width, source.height, source.tiles);
+    atlases.add(source); knownPixels += source.width * source.height;
+    for (const tile of source.tiles) leaf(tile.texture, tile.size, true);
   }
-  if (urls.size + textures.size > 256 || knownPixels + [...urls.values()].reduce<number>((total, size) => total + (size === undefined ? 0 : size * size), 0) > 33554432) {
+  if (urls.size + textures.size + atlases.size > 256 || knownPixels + [...urls.values()].reduce<number>((total, size) => total + (size === undefined ? 0 : size[0] * size[1]), 0) > 33554432) {
     throw new RangeError('Combined GUI image/font resources exceed the upload budget.');
   }
   return { urls, knownPixels };
+}
+function snapshotSource(source: Source, pixels: Map<PixelTexture, PixelTexture>, atlases: Map<GuiTextureAtlasSource, GuiTextureAtlasSource>): Source {
+  const leaf = (value: LeafSource): LeafSource => {
+    if (typeof value === 'string') return value;
+    let copy = pixels.get(value);
+    if (!copy) { copy = { width: value.width, height: value.height, data: new Uint8ClampedArray(value.data) }; pixels.set(value, copy); }
+    return copy;
+  };
+  if (!isAtlas(source)) return leaf(source);
+  let copy = atlases.get(source);
+  if (!copy) {
+    copy = { kind: 'atlas', width: source.width, height: source.height, tiles: source.tiles.map(tile => ({ origin: [...tile.origin], size: [...tile.size], texture: leaf(tile.texture) })) };
+    atlases.set(source, copy);
+  }
+  return copy;
 }
 
 function prepare(previous: Request | undefined, options: GuiLayerProps): Request {
@@ -86,11 +130,31 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
     const uses: SourceUse[] = [], bindings: Binding[] = [], shapes: GuiLayerGeometryCommand[] = [];
     for (let index = 0; index < options.commands.length; index++) {
       const command = options.commands[index]!;
-      if (command.kind !== 'text') {
+      if (command.kind === 'image' || command.kind === 'sprite') {
         const { rect, uvRect, nineSlice, tint, hudOpacity, scissor } = command;
         const shape = { rect, uvRect, nineSlice, tint, hudOpacity, scissor };
         shapes.push(command.kind === 'sprite' ? { kind: 'sprite', ...shape, color: command.color } : { kind: 'image', ...shape });
         bindings.push({ kind: command.kind, source: uses.length }); uses.push({ source: command.texture, upload: true });
+      } else if (command.kind === 'model') {
+        const { model, origin, projection, textureSizes, tint, hudOpacity, scissor } = command;
+        shapes.push({ kind: 'model', model: { faces: model.faces.map(face => ({
+          vertices: [[...face.vertices[0]], [...face.vertices[1]], [...face.vertices[2]], [...face.vertices[3]]],
+          uv: [[...face.uv[0]], [...face.uv[1]], [...face.uv[2]], [...face.uv[3]]], texture: face.texture,
+          normal: face.normal && [...face.normal], color: face.color && [...face.color],
+        })) }, origin, projection: { yaw: projection.yaw, pitch: projection.pitch, scale: projection.scale,
+          offset: [...projection.offset], originQuantization: projection.originQuantization },
+        textureSizes: Object.fromEntries(Object.getOwnPropertyNames(textureSizes).map(key => [key, [...textureSizes[key]!]])), tint, hudOpacity, scissor });
+        const entry = layout.commands[index]!;
+        if (entry.kind !== 'model') throw new Error('GUI source model order mismatch.');
+        if (!command.textures || typeof command.textures !== 'object' || Array.isArray(command.textures) || Object.getOwnPropertyNames(command.textures).length > 256) throw new RangeError('Model textures require a bounded source record.');
+        const textures: [string, number][] = [];
+        for (const key of new Set(entry.layout.runs.map(run => run.texture))) {
+          const source = Object.prototype.hasOwnProperty.call(command.textures, key) ? command.textures[key]
+            : Object.prototype.hasOwnProperty.call(command.textures, 'all') ? command.textures.all : undefined;
+          if (source === undefined) throw new RangeError(`Missing model texture source: ${key}.`);
+          textures.push([key, uses.length]); uses.push({ source, size: textureSizes[key]!, upload: true });
+        }
+        bindings.push({ kind: 'model', textures });
       } else {
         const { text, font, origin, fontScale, sampling, shader, color, tint, hudOpacity, shadow, scissor } = command;
         const glyphs: typeof font.glyphs = Object.fromEntries([...new Set([...text.replace(/\r\n?/g, '\n')].filter(character => character !== '\n'))].map(character => {
@@ -111,7 +175,7 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
         const pages: [number, number][] = [];
         for (const page of new Set(entry.layout.runs.map(run => run.page))) {
           const source = command.pages?.has(page) ? command.pages.get(page)! : font.pages[page]!;
-          pages.push([page, uses.length]); uses.push({ source, size: [font.pageSizes[page]!, font.pageSizes[page]!], upload: true });
+          pages.push([page, uses.length]); uses.push({ source, size: [font.pageSizes[page]!, font.pageSizes[page]!], upload: true, leafOnly: true });
         }
         bindings.push({ kind: 'text', pages });
       }
@@ -120,19 +184,16 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
     if (background?.kind === 'texture') uses.push({ source: background.texture, size: [options.width, options.height], upload: false });
     const descriptor = JSON.stringify({ width: options.width, height: options.height, guiScale: options.guiScale, shapes, bindings, outputRect: options.outputRect, scissor: options.scissor,
       background: background?.kind === 'texture' ? { kind: 'texture', encoding: background.encoding } : background, renderKey: options.renderKey });
-    if (previous?.descriptor === descriptor && uses.length === previous.uses.length && uses.every((use, index) => sameSource(previous.uses[index]?.source, use.source))) return previous;
-    const resources = budget(uses), copied = new Map<PixelTexture, PixelTexture>();
-    const snapshots = uses.map((use): SourceUse => {
-      if (typeof use.source === 'string') return { ...use };
-      let pixels = copied.get(use.source);
-      if (!pixels) { pixels = { width: use.source.width, height: use.source.height, data: new Uint8ClampedArray(use.source.data) }; copied.set(use.source, pixels); }
-      return { ...use, source: pixels };
-    });
+    const compared = new WeakMap<object, WeakSet<object>>();
+    if (previous?.descriptor === descriptor && uses.length === previous.uses.length && uses.every((use, index) => sameSource(previous.uses[index]?.source, use.source, compared))) return previous;
+    const resources = budget(uses), copied = new Map<PixelTexture, PixelTexture>(), atlasCopies = new Map<GuiTextureAtlasSource, GuiTextureAtlasSource>();
+    const snapshots = uses.map((use): SourceUse => ({ ...use, source: snapshotSource(use.source, copied, atlasCopies), size: use.size && [...use.size] }));
     const frozenShapes = JSON.parse(JSON.stringify(shapes)) as GuiLayerGeometryCommand[];
     const commands: GuiLayerCommand[] = frozenShapes.map((shape, index) => {
       const binding = bindings[index]!;
-      if (shape.kind !== 'text' && binding.kind !== 'text' && shape.kind === binding.kind) return { ...shape, texture: snapshots[binding.source]!.source };
-      if (shape.kind === 'text' && binding.kind === 'text') return { ...shape, pages: new Map(binding.pages.map(([page, source]) => [page, snapshots[source]!.source])) };
+      if ((shape.kind === 'image' || shape.kind === 'sprite') && (binding.kind === 'image' || binding.kind === 'sprite') && shape.kind === binding.kind) return { ...shape, texture: snapshots[binding.source]!.source };
+      if (shape.kind === 'model' && binding.kind === 'model') return { ...shape, textures: Object.fromEntries(binding.textures.map(([key, source]) => [key, snapshots[source]!.source])) };
+      if (shape.kind === 'text' && binding.kind === 'text') return { ...shape, pages: new Map(binding.pages.map(([page, source]) => [page, snapshots[source]!.source as LeafSource])) };
       throw new Error('GUI snapshot order mismatch.');
     });
     const clear = background?.kind === 'texture' ? { ...background, texture: snapshots[snapshots.length - 1]!.source as PixelTexture }
@@ -187,7 +248,7 @@ export const GuiLayer = forwardRef<HTMLCanvasElement, GuiLayerProps>(function Gu
           if (cancelled || failed) { bitmap.close(); return; }
           try {
             if (!bitmap.width || !bitmap.height || bitmap.width > 8192 || bitmap.height > 8192 || bitmap.width * bitmap.height > 16777216) throw new RangeError('Decoded GUI texture exceeds its pixel budget.');
-            if (size !== undefined && (bitmap.width !== size || bitmap.height !== size)) throw new RangeError('Decoded font page dimensions must match the declared original size.');
+            if (size !== undefined && (bitmap.width !== size[0] || bitmap.height !== size[1])) throw new RangeError('Decoded GUI texture dimensions must match their declared original size.');
             pixels += bitmap.width * bitmap.height;
             if (pixels > 33554432) throw new RangeError('Combined decoded GUI image/font resources exceed the upload budget.');
           } catch (reason) { bitmap.close(); throw reason; }
@@ -196,12 +257,20 @@ export const GuiLayer = forwardRef<HTMLCanvasElement, GuiLayerProps>(function Gu
       };
       await Promise.all(Array.from({ length: Math.min(4, urls.length) }, worker));
       if (cancelled || failed || !target) return;
-      const source = (value: Source) => {
+      const assembled = new Map<GuiTextureAtlasSource, GuiTextureAtlas>();
+      const leaf = (value: LeafSource) => {
         if (typeof value !== 'string') return value;
         const bitmap = decoded.get(value); if (!bitmap) throw new Error('A used GUI texture was not decoded.'); return bitmap;
       };
-      const resolved: GuiLayerDraw[] = request.commands.map(command => command.kind !== 'text' ? { ...command, texture: source(command.texture) }
-        : { ...command, pages: new Map([...command.pages!].map(([page, value]) => [page, source(value)])) });
+      const source = (value: Source): GuiLayerTexture => {
+        if (!isAtlas(value)) return leaf(value);
+        let atlas = assembled.get(value);
+        if (!atlas) { atlas = { kind: 'atlas', width: value.width, height: value.height, tiles: value.tiles.map(tile => ({ origin: tile.origin, texture: leaf(tile.texture) })) }; assembled.set(value, atlas); }
+        return atlas;
+      };
+      const resolved: GuiLayerDraw[] = request.commands.map(command => command.kind === 'image' || command.kind === 'sprite' ? { ...command, texture: source(command.texture) }
+        : command.kind === 'model' ? { ...command, textures: Object.fromEntries(Object.entries(command.textures).map(([key, value]) => [key, source(value)])) }
+          : { ...command, pages: new Map([...command.pages!].map(([page, value]) => [page, leaf(value)])) });
       const result = renderGuiLayer({ ...request.frame!, commands: resolved, background: request.background, canvas: target }); dispose = result.dispose;
       closeBitmaps(); if (failed) return;
       setState({ key: request.key, status: 'ready' });

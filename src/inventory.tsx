@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, ImgHTMLAttributes, KeyboardEvent, MouseEvent, ReactNode } from 'react';
+import type { GuiModelItem } from './gui-model-geometry';
 
 function stackAmount(value: number | undefined) {
   return value === undefined ? undefined : Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0;
@@ -66,6 +67,8 @@ export interface InventoryItem {
   name: string;
   icon?: ReactNode;
   image?: string;
+  /** Explicit source model for opt-in GUI adapters; ordinary ItemSlot keeps its DOM fallback. */
+  guiModel?: GuiModelItem;
   count?: number;
   /** Remaining durability, between 0 and 1. */
   durability?: number;

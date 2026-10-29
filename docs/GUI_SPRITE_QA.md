@@ -1,5 +1,7 @@
 # GUI sprite与展示采样验证
 
+本文记录b09ff7a sprite / 布局zoom检查点。后续source model / itemModels源码与拟新增公开函数另有验证阶段，本文944用例与已测131值包不能直接认证新代码；当前进展见 [GUI_MODEL_QA.md](GUI_MODEL_QA.md)。原4928非零完整GUI结果保留。
+
 本轮保持120组件、4份数据、7个函数，共131个运行时值。`GuiLayer` / `renderGuiLayer` 增加 `kind:'sprite'` 命令与导出类型 `GuiSpriteGeometry`；`EnchantingTable imageRender.itemImages` 可选接入普通物品PNG。公开sprite源输入 / GPU / React正式13项已通过，实际组件、整GUI、实际包与生产分别验收；上一图文阶段920唯一用例 / 131值包身份保留为历史，不能套作新shader与CSS的验收。
 
 ## 公开sprite命令

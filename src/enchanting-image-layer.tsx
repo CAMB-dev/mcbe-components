@@ -23,6 +23,8 @@ export interface EnchantingTableImageRenderProfile {
   text?: EnchantingTableTextRenderProfile;
   /** Opt in plain, square item.image sprites in the source16x16 game area; custom icons stay in DOM. */
   itemImages?: boolean;
+  /** Opt in explicit item.guiModel data; any icon/image remains its atomic DOM fallback. */
+  itemModels?: boolean;
 }
 export interface EnchantingTableTextRenderStyle {
   font: GuiTextFont;
@@ -109,6 +111,7 @@ interface Prepared {
   commands?: GuiLayerCommand[];
   textRunes: readonly boolean[];
   itemImageSlots: readonly number[];
+  itemModelSlots: readonly number[];
   textLabels: boolean;
   left: number; top: number; width: number; height: number; translateX: number; translateY: number;
   presentation: Presentation;
@@ -146,6 +149,7 @@ function textCommand(text: string, style: EnchantingTableTextRenderStyle, origin
 function prepare(profile: EnchantingTableImageRenderProfile, options: readonly Option[], state: VisualState, close: boolean, title: string, inventoryLabel: string, items: readonly (InventoryItem | null | undefined)[]): Prepared {
   const { width, height, guiScale } = profile.frame, scale = profile.displayScale ?? 1;
   if (profile.itemImages !== undefined && typeof profile.itemImages !== 'boolean') throw new RangeError('itemImages must be an explicit boolean.');
+  if (profile.itemModels !== undefined && typeof profile.itemModels !== 'boolean') throw new RangeError('itemModels must be an explicit boolean.');
   if (!Number.isFinite(scale) || scale <= 0 || scale > 32) throw new RangeError('Image displayScale must be positive and at most32.');
   const origin = profile.origin ?? [(Math.ceil(width / guiScale) - 176) / 2, (Math.ceil(height / guiScale) - 166) / 2] as const;
   if (origin.length !== 2 || origin.some(value => !Number.isFinite(value))) throw new RangeError('Image origin requires two finite game coordinates.');
@@ -164,13 +168,23 @@ function prepare(profile: EnchantingTableImageRenderProfile, options: readonly O
     // hover control (also observed as old captured Global60/61).
     if (slot?.hover || slot?.focus) images.push(image(assets.focus, [x, y, w, h], origin));
   });
-  const itemImageSlots: number[] = [], itemSprites: GuiLayerCommand[] = [];
+  const itemImageSlots: number[] = [], itemModelSlots: number[] = [], itemSprites: GuiLayerCommand[] = [];
   const beforeItemsLength = images.length;
-  if (profile.itemImages) slotRects.forEach(([x, y], index) => {
+  if (profile.itemImages || profile.itemModels) slotRects.forEach(([x, y], index) => {
     const item = items[index];
     // Match ItemSlot occupancy, without inspecting custom React nodes or DOM bounds.
     const amount = item?.count === undefined ? undefined : Number.isFinite(item.count) ? Math.max(0, Math.floor(item.count)) : 0;
-    if (!item || amount === 0 || item.icon != null || typeof item.image !== 'string' || !item.image.trim()) return;
+    if (!item || amount === 0) return;
+    if (profile.itemModels && item.guiModel !== undefined) {
+      const model = item.guiModel;
+      const hudOpacity = model.hudOpacity ?? 1;
+      if (!Number.isFinite(hudOpacity) || hudOpacity < 0 || hudOpacity > 1) throw new RangeError('Model hudOpacity must be normalized.');
+      itemSprites.push({ ...model, kind: 'model', origin: [x + 1 + origin[0], y + 1 + origin[1]],
+        hudOpacity: hudOpacity * (state.slots[index]?.disabled ? .5 : 1) });
+      itemModelSlots.push(index);
+      return;
+    }
+    if (!profile.itemImages || item.icon != null || typeof item.image !== 'string' || !item.image.trim()) return;
     itemSprites.push({ kind: 'sprite', texture: item.image.trim(), rect: [x + 1 + origin[0], y + 1 + origin[1], 16, 16],
       color: [255, 255, 255, 255], hudOpacity: state.slots[index]?.disabled ? .5 : 1 });
     itemImageSlots.push(index);
@@ -190,7 +204,7 @@ function prepare(profile: EnchantingTableImageRenderProfile, options: readonly O
   });
   let commands: GuiLayerCommand[] | undefined;
   const textRunes = [false, false, false];
-  if (profile.text !== undefined || profile.itemImages) {
+  if (profile.text !== undefined || profile.itemImages || profile.itemModels) {
     const text = profile.text;
     if (text !== undefined && (!text || !text.labels || !text.costs)) throw new RangeError('A combined profile requires explicit label and cost font styles.');
     const anchors = text ? fontOrigins(origin, text.metrics) : undefined;
@@ -222,7 +236,8 @@ function prepare(profile: EnchantingTableImageRenderProfile, options: readonly O
     }
   };
   if ('commands' in layout) for (const command of layout.commands) {
-    if (command.kind !== 'text') bounds(layout.mvp, command.mesh.vertices);
+    if (command.kind === 'model') for (const run of command.layout.runs) bounds(command.layout.mvp, run.mesh.vertices);
+    else if (command.kind !== 'text') bounds(layout.mvp, command.mesh.vertices);
     else for (const run of command.layout.runs) bounds(run.mvp, run.vertices);
   }
   else for (const mesh of layout.meshes) bounds(layout.mvp, mesh.vertices);
@@ -233,7 +248,7 @@ function prepare(profile: EnchantingTableImageRenderProfile, options: readonly O
   const tx = x * k - 2 * origin[0], ty = y * k - 2 * origin[1];
   const left = Math.floor(tx) - 1, top = Math.floor(ty) - 1;
   const windowRight = Math.ceil(tx + outputRect[2] * k) + 1, windowBottom = Math.ceil(ty + outputRect[3] * k) + 1;
-  return { images, commands, textRunes, itemImageSlots, textLabels: profile.text !== undefined, outputRect, origin, left, top, width: windowRight - left, height: windowBottom - top, translateX: tx - left, translateY: ty - top,
+  return { images, commands, textRunes, itemImageSlots, itemModelSlots, textLabels: profile.text !== undefined, outputRect, origin, left, top, width: windowRight - left, height: windowBottom - top, translateX: tx - left, translateY: ty - top,
     presentation: { scale, left: Math.max(6, -left), top: Math.max(6, -top), right: Math.max(6, windowRight - 352), bottom: Math.max(6, windowBottom - 332) } };
 }
 
@@ -247,8 +262,8 @@ export function useEnchantingImageLayer(profile: EnchantingTableImageRenderProfi
       // A failed font/metric request still has a valid explicit image frame.
       // Keep its CSS fallback at the same declared display scale. This computes
       // reservation only: never silently paint an image-only partial success.
-      if (profile.text !== undefined || profile.itemImages !== undefined) try {
-        presentation = prepare({ ...profile, text: undefined, itemImages: undefined }, options, state, close, title, inventoryLabel, items).presentation;
+      if (profile.text !== undefined || profile.itemImages !== undefined || profile.itemModels !== undefined) try {
+        presentation = prepare({ ...profile, text: undefined, itemImages: undefined, itemModels: undefined }, options, state, close, title, inventoryLabel, items).presentation;
       } catch { /* Invalid frame/scale retains the ordinary unscaled fallback. */ }
       return { error: reason instanceof Error ? reason.message : String(reason), presentation };
     }
@@ -267,6 +282,7 @@ export function useEnchantingImageLayer(profile: EnchantingTableImageRenderProfi
   return { presentation: value.presentation, layer: <div className="mc-enchanting-image-window" aria-hidden="true" style={{ left: value.left, top: value.top, width: value.width, height: value.height }}
     data-frame-origin-x={value.origin[0]} data-frame-origin-y={value.origin[1]} data-output-rect={value.outputRect.join(',')}
     data-item-images={value.itemImageSlots.length ? value.itemImageSlots.join(' ') : undefined}
+    data-item-models={value.itemModelSlots.length ? value.itemModelSlots.join(' ') : undefined}
     data-text-labels={value.textLabels || undefined} data-text-costs={value.textLabels || undefined}
     data-text-rune-1={value.textRunes[0] || undefined} data-text-rune-2={value.textRunes[1] || undefined} data-text-rune-3={value.textRunes[2] || undefined}>
     {value.commands ? <GuiLayer className="mc-enchanting-image-layer" {...profile.frame} commands={value.commands} outputRect={value.outputRect} style={style}/>

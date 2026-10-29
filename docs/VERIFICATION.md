@@ -2,7 +2,23 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：GUI sprite与展示采样
+## 当前检查点：GUI source model
+
+本轮公共barrel新增纯函数layoutGuiModel / createGuiCuboidModel及相关类型，GuiLayer增加 `kind:'model'`，附魔台显式itemModels读取InventoryItem.guiModel。正常输入为局部模型、原纹理、GLOBAL source origin与明确yaw / pitch / scale / offset / originQuantization，不接受捕获全局vertices / MVP作正常模型。含纯assembleGuiTextureAtlas后为120组件、4数据、10函数 / 134值，React18 / 19真实包消费确认。
+
+standalone首独立比较GUI4仍102差异 / GUI5为32，不能因原atlas路径通过而改称原PNG精确。普通原PNG与显式packing数据的source-atlas输入保留采样域，不使用native atlas bitmap、Canvas2D重采样、UV epsilon或改旧shader。旧完整32报告与后续新atlas完整验证分别保存。
+
+独立model / atlas最终17 / 17 PASS（43.8秒，13public＋4native），实际itemModels组件12 / 12 PASS（26.8秒），均0skip / retry / flaky。主native四FBO＋四实际1:1 React DOM完整目标28,825,120像素RGBA0；额外live / raw另列，native-before为条件式背景而非完整GUI重建。72unique顶点的XY / UV / RGBA各288字节、indices及七个XY投影条目匹配；显式offset区间仍不唯一、8.9375不是native常量。组件完整1,940,881像素与独立原UI queue同public renderer一致，后端SwiftShader，不冒称另一NVIDIA shader证明。
+
+source-atlas完整GUI原16辅助组合保留8历史与8当前：standalone原PNG旧32逐字节重现，新source-atlas四幅实际React与原post-all-UI R117完整RGBA hash相同，全3,603,140像素与747,600 ROI均RGBA0 / max0 / alpha0。后续four-tile-phase另四新图同样全0，显式合计20辅助case，原16不可变；四ImageBitmap原PNG上传、26source pin与309历史文件一致。只认证一个已观察GUI5固定UI target，非四独立场景、world / Present、默认回退字体、所有GUI / 动画 / 自动packing或目标完成；依赖显式原字页、host配置与1:1呈现。旧standalone GUI4102 / GUI532及首3tile的GUI4 1px失败、完整end_rod邻图来源均保留，见 [GUI_MODEL_QA.md](GUI_MODEL_QA.md)。
+
+相关旧回归126唯一项按预定整文件profile规则聚合通过：gui-layer / gui-sprite两完整文件30项取稳定NVIDIA，余96标准Chromium；每条保留sourceProfile / sourceReport，不按单case挑成功，也不是126单批绿。首强制NVIDIA123 / 3与标准121 / 5原报告不改：旧软件合成色的蓝通道165 / 166后端差、timeout / font-ready context销毁及native-backend / Smooth差异均登记，build / HMR只是未证可能原因。未改生产 / 测试源或RGBA阈值。`.cache/gui-model-validation-integration-summary.json` 多批累计973unique：968 PASS、5预期SKIP，新增17＋12，非一次973全绿。
+
+实际React18.3.1 / 19.3.1通过134值、SSR、严格TSX / ref / model / source-atlas / itemModels、CSS / 资源 / 许可；两消费者各256份dist与当前构建同字节。已测 `.cache/gui-model-consumer-verified.tgz` SHA256 `124d271bf609f9e622afdfbe80a69361832fb11ebfd319aedd55d5b6075e9e08`，dist/index.js SHA256 `11ad42e6f19d27c8f742ca11eb0066c5bd0cb421d1b370cc084daf774604a78a`。最终文档包由 `.cache/gui-model-final-pack-proof.json` 逐条关联，仅README / docs可变、非文档必须同字节。
+
+生产 `.cache/gui-model-production-01/{smoke,identity,FINAL}.json` / RESULT.md：65辅助checks PASS，不加正式数；8实际HTTP / site入口同字节，main-BxaFAddA.js SHA256 `e1a539c253fd1f64b04fd47609c3e30d586b26355690f532b7cfa04f91e14339`。三开关8组合、3fallback真实ready / marker29-31、38槽状态 / 回调 / count、book open / closed实际截图、clear / reopen / 390pan / 150icons通过；没有durability值，不声称有值bar演练。page / console / render / noncancel网络0，raw12 ERR_ABORTED与5distinct字页HTTP200 / sitebyte0原样记录；无.cache / native-atlas-pixel请求。实际辅助后端SwiftShader，无runtime hook，不是native0证明。下方b09ff7a的944 / 939 / 5与120 / 131值包仅作历史。
+
+## 历史检查点：GUI sprite与展示采样
 
 120组件 / 131运行时值保持不变；GuiLayer / renderGuiLayer新增 `kind:'sprite'` 与GuiSpriteGeometry类型，实际附魔台可选 `imageRender.itemImages`。sprite为UI/Sprite Transparent / MultiColorTint Off profile，RGBA8顶点alpha仅选择ceil分支，不能当作透明度乘数。支持zoom时改用布局缩放呈现显式displayScale / reciprocal canvas scale，旧transform为fallback。公开正式13 / 13 PASS（47.4秒）和实际组件扩充后11 / 11 PASS（21.5秒）已完成，NVIDIA固定四sprite过渡的四FBO / 四React完整目标28,825,120像素RGBA0；条件原before背景不计作GUI重建。相关旧回归102 / 102 PASS，累计944unique / 939 PASS / 5预期SKIP，为多批次累计，见 [GUI_SPRITE_QA.md](GUI_SPRITE_QA.md)。
 

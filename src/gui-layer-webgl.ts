@@ -3,13 +3,15 @@ import type { BitmapUnicodeRun } from './bitmap-text-webgl';
 import type { GuiTextRgba8 } from './gui-text-geometry';
 import type { GuiImageMesh, GuiImageRect, GuiImageRgba } from './gui-image-geometry';
 import type { GuiImageBackground, GuiImageTexture } from './gui-image-webgl';
+import { validateGuiTextureAtlasLayout } from './gui-texture-atlas';
+import type { GuiLayerTexture, GuiTextureAtlas } from './gui-texture-atlas';
 import { GUI_IMAGE_VERTEX_SHADER, GUI_IMAGE_FRAGMENT_SHADER, GUI_SPRITE_VERTEX_SHADER, GUI_SPRITE_FRAGMENT_SHADER, GUI_BITMAP_CELL_VERTEX_SHADER, GUI_BITMAP_FRAGMENT_SHADER, GUI_COPY_VERTEX_SHADER, GUI_COPY_FRAGMENT_SHADER } from './gui-layer-kernels';
 
 /** Internal prepared boundary. The public adapter owns source layout and matrix construction. */
 export interface GuiLayerPreparedImageCommand {
   kind: 'image';
   mesh: GuiImageMesh;
-  texture: GuiImageTexture;
+  texture: GuiLayerTexture;
   mvp: Float32Array;
 }
 export interface GuiLayerPreparedTextCommand {
@@ -61,12 +63,26 @@ function rectangle(value: GuiImageRect, width: number, height: number, name: str
   integer(value[0], 0, width, name); integer(value[1], 0, height, name); integer(value[2], 0, width, name); integer(value[3], 0, height, name);
   if (value[0] + value[2] > width || value[1] + value[3] > height) throw new RangeError(`${name} exceeds the framebuffer.`);
 }
-function isBitmap(value: GuiImageTexture): value is ImageBitmap { return Object.prototype.toString.call(value) === '[object ImageBitmap]'; }
-function texture(value: GuiImageTexture, name: string): void {
+function isBitmap(value: GuiLayerTexture): value is ImageBitmap { return Object.prototype.toString.call(value) === '[object ImageBitmap]'; }
+function isAtlas(value: unknown): value is GuiTextureAtlas { return !!value && typeof value === 'object' && (value as { kind?: unknown }).kind === 'atlas'; }
+function leafTexture(value: GuiImageTexture, name: string): void {
   if (!value) throw new RangeError(`${name} is missing.`);
+  if (isAtlas(value)) throw new RangeError('Nested atlas textures are not supported.');
   integer(value.width, 1, 8192, `${name}.width`); integer(value.height, 1, 8192, `${name}.height`);
   if (value.width * value.height > 16777216 || (!isBitmap(value) && (!value.data || !['[object Uint8Array]', '[object Uint8ClampedArray]'].includes(Object.prototype.toString.call(value.data))
     || value.data.length !== value.width * value.height * 4))) throw new RangeError(`${name} requires bounded complete straight RGBA8 or an ImageBitmap.`);
+}
+function texture(value: GuiLayerTexture, name: string): void {
+  if (!isAtlas(value)) { leafTexture(value, name); return; }
+  if (!Array.isArray(value.tiles) || value.tiles.length > 256) throw new RangeError('An atlas requires bounded explicit tiles.');
+  const metadata: { origin: readonly [number, number]; size: readonly [number, number] }[] = [];
+  for (let index = 0; index < value.tiles.length; index++) {
+    const tile = value.tiles[index];
+    if (!Object.prototype.hasOwnProperty.call(value.tiles, index) || !tile) throw new RangeError('Sparse atlas tiles are not supported.');
+    leafTexture(tile.texture, 'atlas.tile.texture');
+    metadata.push({ origin: tile.origin, size: [tile.texture.width, tile.texture.height] });
+  }
+  validateGuiTextureAtlasLayout(value.width, value.height, metadata);
 }
 function validate(options: GuiLayerPreparedOptions): GuiImageRect {
   integer(options.width, 1, 8192, 'width'); integer(options.height, 1, 8192, 'height');
@@ -77,13 +93,16 @@ function validate(options: GuiLayerPreparedOptions): GuiImageRect {
   if (options.scissor) rectangle(options.scissor, options.width, options.height, 'scissor');
   const output: GuiImageRect = options.outputRect ?? [0, 0, options.width, options.height]; rectangle(output, options.width, options.height, 'outputRect');
   if (!output[2] || !output[3]) throw new RangeError('GUI output window must have positive dimensions.');
-  const seen = new Set<GuiImageTexture>(); let pixels = 0, vertexCount = 0, indexCount = 0;
+  const seen = new Set<GuiLayerTexture>(); let pixels = 0, vertexCount = 0, indexCount = 0;
+  const resource = (value: GuiLayerTexture) => {
+    if (seen.has(value)) return;
+    texture(value, 'command.texture'); seen.add(value); pixels += value.width * value.height;
+    if (isAtlas(value)) for (const tile of value.tiles) if (!seen.has(tile.texture)) { seen.add(tile.texture); pixels += tile.texture.width * tile.texture.height; }
+    if (seen.size > 256 || pixels > 33554432) throw new RangeError('GUI layer exceeds its texture upload budget.');
+  };
   for (const command of options.commands as readonly GuiLayerPreparedCommand[]) {
     if (!command) throw new RangeError('A GUI command is missing.');
-    if (!seen.has(command.texture)) {
-      texture(command.texture, 'command.texture'); seen.add(command.texture); pixels += command.texture.width * command.texture.height;
-      if (seen.size > 256 || pixels > 33554432) throw new RangeError('GUI layer exceeds its texture upload budget.');
-    }
+    resource(command.texture);
     if (command.kind === 'image' || command.kind === 'sprite') {
       if (command.kind === 'sprite' && (!command.color || command.color.length !== 4 || [...command.color].some(channel => !Number.isSafeInteger(channel) || channel < 0 || channel > 255))) throw new RangeError('Sprite vertex color requires four RGBA8 bytes.');
       matrix(command.mvp, 'image.mvp');
@@ -98,6 +117,7 @@ function validate(options: GuiLayerPreparedOptions): GuiImageRect {
       for (const index of mesh.indices) integer(index, 0, mesh.vertices.length - 1, 'image.index');
       vertexCount += mesh.vertices.length; indexCount += mesh.indices.length;
     } else if (command.kind === 'text') {
+      if (isAtlas(command.texture)) throw new RangeError('Packed-cell text requires a leaf page, not an atlas assembly.');
       const run = command.run;
       if (!run) throw new RangeError('A prepared text run is missing.');
       matrix(run.mvp, 'text.mvp');
@@ -124,7 +144,7 @@ function validate(options: GuiLayerPreparedOptions): GuiImageRect {
   }
   const background = options.background;
   if (background?.kind === 'texture') {
-    texture(background.texture, 'background.texture');
+    leafTexture(background.texture, 'background.texture');
     if (isBitmap(background.texture) || background.texture.width !== options.width || background.texture.height !== options.height) throw new RangeError('Background RGBA8 must cover the whole framebuffer.');
     if (background.encoding !== 'framebuffer' && background.encoding !== 'straight-alpha') throw new RangeError('Explicit GUI background encoding is required.');
   } else if (background?.kind === 'solid') color(background.color, 'background.color');
@@ -206,7 +226,7 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
     gl.enable(gl.BLEND); gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD); gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.viewport(-cropX, cropY + height - options.height, options.width, options.height);
     const positionBuffer = buffer(), uvBuffer = buffer(), colorBuffer = buffer(), indexBuffer = buffer();
-    const sourceTextures = new Map<GuiImageTexture, WebGLTexture>(), shaderPrograms = new Map<'image' | 'sprite' | 'text', WebGLProgram>();
+    const sourceTextures = new Map<GuiLayerTexture, WebGLTexture>(), shaderPrograms = new Map<'image' | 'sprite' | 'text', WebGLProgram>();
     const full: GuiImageRect = [0, 0, options.width, options.height], globalScissor = options.scissor ?? full;
     const maxAttributes = gl.getParameter(gl.MAX_VERTEX_ATTRIBS) as number;
     for (const command of options.commands) {
@@ -220,7 +240,13 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
       let uploaded = sourceTextures.get(command.texture);
       if (!uploaded) {
         uploaded = allocateTexture();
-        if (isBitmap(command.texture)) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, command.texture);
+        if (isAtlas(command.texture)) {
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, command.texture.width, command.texture.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+          for (const tile of command.texture.tiles) {
+            if (isBitmap(tile.texture)) gl.texSubImage2D(gl.TEXTURE_2D, 0, tile.origin[0], tile.origin[1], gl.RGBA, gl.UNSIGNED_BYTE, tile.texture);
+            else gl.texSubImage2D(gl.TEXTURE_2D, 0, tile.origin[0], tile.origin[1], tile.texture.width, tile.texture.height, gl.RGBA, gl.UNSIGNED_BYTE, tile.texture.data);
+          }
+        } else if (isBitmap(command.texture)) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, command.texture);
         else gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, command.texture.width, command.texture.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, command.texture.data);
         sourceTextures.set(command.texture, uploaded);
       }

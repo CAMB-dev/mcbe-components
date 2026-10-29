@@ -1,6 +1,12 @@
 # Bedrock 组件范围
 
-当前导出 120 个组件，目录 120 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、4 个纯函数（2个glint与layoutGuiImages / layoutGuiText）及3个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages / renderGuiLayer），共 131 个运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 120 个组件，目录 120 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、7 个纯函数（2个glint、4个layout / model几何与assembleGuiTextureAtlas纹理装配）及3个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages / renderGuiLayer），共 134 个源运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+
+本轮source model新增layoutGuiModel / createGuiCuboidModel两个纯函数、GuiLayer `kind:'model'`与显式itemModels适配，含纯assembleGuiTextureAtlas后为10函数 / 134值，由React18 / 19实际包确认，组件数仍120。新source模型 / 显式projection不替换旧BlockPreview CPU renderer；验证范围及更广待验收边界见 [GUI_MODEL_QA.md](GUI_MODEL_QA.md)。
+
+另已接入显式source atlas装配；它接受完整原PNG和调用方packing坐标，不接受native atlas作为普通输入，也不恢复自动packing。该固定GPU / actualGUI的验证范围单列，barrel源导出或实际包通过不代表更广像素认证。
+
+本轮公开model / atlas正式17项与实际组件12项已通过；固定已观察GUI5 postUI完整target的source-atlas组合全帧RGBA0，standalone原PNG仍32非零。只认证显式host配置与该帧，不代表旧BlockPreview默认、全部camera / GUI / 动画已精确；实际包 / 生产65辅助检查与973多批累计分别记录。
 
 ## 已实现
 

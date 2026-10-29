@@ -61,7 +61,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | --- | --- | --- |
 | `Text` | `as`: span / p / h1…h4；`size`: sm / md / lg / xl；`shadow` 默认 true | 像素文字与无模糊阴影，转发 HTMLElement ref |
 | `GuiImageLayer` | **必填** 物理 `width` / `height`、`guiScale`、`images`；可选 `scissor`、`outputRect`、`background`、`label`、`renderKey`、状态回调 | ref为canvas；已求值GLOBAL image / nine-slice几何及UI/Blit GPU profile；已分层验证底层 / 集成 / 包与生产，非原生整GUI认证 |
-| `GuiLayer` | **必填** 物理 `width` / `height`、`guiScale`、有序image / sprite / text `commands`；文字含显式 `font` / `origin` / `fontScale` / `sampling` / `shader` | 单一RGBA8目标顺序绘制原图 / sprite / 字格；ref为canvas。历史图文17项范围见 [GUI_LAYER_QA.md](docs/GUI_LAYER_QA.md)，新增sprite / 呈现验证见 [GUI_SPRITE_QA.md](docs/GUI_SPRITE_QA.md) |
+| `GuiLayer` | **必填** 物理 `width` / `height`、`guiScale`、有序image / sprite / model / text `commands`；文字含显式 `font` / `origin` / `fontScale` / `sampling` / `shader` | 单一RGBA8目标顺序绘制原图 / sprite / model / 字格；ref为canvas。历史图文17项范围见 [GUI_LAYER_QA.md](docs/GUI_LAYER_QA.md)，新增sprite / 呈现验证见 [GUI_SPRITE_QA.md](docs/GUI_SPRITE_QA.md) |
 | `GuiIcon` | **必填** `name: GuiIconName`；`scale` 正整数（默认1）、`label`；span 属性 | 150张完整原版 GUI PNG，按原图物理像素整数缩放；ref 为 span；默认装饰，label 提供名称；不自动切状态 / tint / 裁切 |
 | `BitmapText` | **必填** 字符串 children、`font`、`sampling`: point / bilinear、`shader`: bitmap / bitmap-smooth；可选 `renderer`: cpu（默认）/ webgl / webgl-shared、`layout`: visual（默认）/ advance、`profile`: atlas-rect（默认）/ bedrock-unicode、具体 CSS `background`、`scale`、`color`、显式 `shadow` 与回调 | ref 为 span；CPU 绘制任意字图矩形；webgl 独立 context，webgl-shared 同 Document 共享 Offscreen context、每实例 bitmaprenderer；background 是 GPU target clear 色；保留真实 DOM 原文及加载失败回退 |
 | `Button` | `variant`: default / primary / danger / ghost；`size`: sm / md / lg；`loading`、`fullWidth`、`startIcon`、`endIcon` | 默认 `type="button"`；loading 保留文字，禁用并设置 aria-busy；继承 button 属性 |
@@ -94,7 +94,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `WorkstationFrame` | **必填** `title`；`inventory`、`hotbar`、`inventoryLabel`、`renderText`、`onClose`、`closeLabel`、`onInventoryAction` | 176×166 游戏像素 Classic 容器外框，以 GUI 2 显示；窄屏局部滚动 |
 | `InventoryScreenFrame` | **必填** `title`、`book: ReactNode`、`children: ReactNode`；`layout` / `defaultLayout`: recipe-book / survival、`onLayoutChange`、`onHelp`、`onClose`、`helpLabel`、`closeLabel`、`showClose` | 共享固定 326×166 game 背包 / 工作台外框；默认 recipe-book，survival 隐藏 book 并居中右面板，ref 为 section；不适用于熔炉 compact 根布局 |
 | `Grindstone` | `inputs`: readonly [item, item]；`result`、`invalid`、`onInputAction`、`onTakeResult`；Frame 属性 | 砂轮双输入、结果、原始箭头 / 无效标记和玩家背包；结果由调用方提供 |
-| `EnchantingTable` | **必填** `options`，可为空数组；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`、`renderText`、`imageRender?: EnchantingTableImageRenderProfile`（可选text / 显式metrics与styles、itemImages）、`options[].runeText`；Frame 属性 | 固定三行背景；仅有记录的行提供选项/费用/动作，缺记录为 aria-hidden 非交互背景；book 支持自定义渲染 |
+| `EnchantingTable` | **必填** `options`，可为空数组；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`、`renderText`、`imageRender?: EnchantingTableImageRenderProfile`（可选text / 显式metrics与styles、itemImages / itemModels）、`options[].runeText`；Frame 属性 | 固定三行背景；仅有记录的行提供选项/费用/动作，缺记录为 aria-hidden 非交互背景；book 支持自定义渲染 |
 | `EnchantmentOption` | **必填** `id`、`label`、`level`；`tier`: 1 / 2 / 3、`runes`、`disabled`、`buttonId`、`onEnchant`、`renderText`；button 属性 | 可独立使用的附魔选项；id 是业务 ID，buttonId 是可选 DOM id；onClick.preventDefault() 取消选择回调 |
 | `EnchantingRunes` | **必填** `text`、`atlasUrl`；`scale`: 1…4、`color` | 按原始 SGA 图集采样字形与字距；图集由调用方提供，不随 npm 捆绑 |
 | `EnchantingBook` | `textureUrl`、`open`、`pageFlip`、`lighting`: calibrated / unlit、`yaw`、`pitch`、`roll`、`rendererState?: EnchantingBookRendererState`、`onRendererError`；canvas 属性 | 实际 Bedrock GUI draw 的mesh、UV和着色路径；rendererState 接收列主序 projection / view / model 与7或8组bone矩阵及可选光照/overlay；默认 open/pageFlip 仍是受控重建 |
@@ -316,7 +316,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **120 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 120 项（含 InventoryScreenFrame / SurvivalInventoryScreen / RecipeBook / CraftingScreen），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 4 份数据（3份 renderer 数据及 `guiIconNames` 原图名称目录）、两个纯渲染函数 `shadeItemGlint` / `renderItemGlint`、两个纯几何函数 `layoutGuiImages` / `layoutGuiText` 以及三个有 GPU 副作用的 `renderBitmapGlyphs` / `renderGuiImages` / `renderGuiLayer`，均不计组件数量；ESM 值导出共 131 项。本轮sprite公开13项、实际组件11项、React18 / 19包消费及生产47辅助检查按其范围通过；正式多批次累计944唯一用例，目录状态不代替整GUI验收。
+当前 **120 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理120项，implemented只代表已导出，不等于所有GUI已pixel-perfect验收。另公开4份数据、两个纯渲染函数 `shadeItemGlint` / `renderItemGlint`、四个纯几何函数 `layoutGuiImages` / `layoutGuiText` / `layoutGuiModel` / `createGuiCuboidModel`、一个纯纹理装配函数 `assembleGuiTextureAtlas` 及三个浏览器GPU函数 `renderBitmapGlyphs` / `renderGuiImages` / `renderGuiLayer`，不计组件数量，共134个ESM运行时值。React18 / 19实际包消费通过，两消费者各256份dist同字节；正式973唯一用例（968 PASS、5预期SKIP）为多批次范围累计，不是一次整套全绿。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -361,7 +361,11 @@ layoutGuiImages是纯几何路径，可用于SSR准备；renderGuiImages需要We
 
 ### 同目标原图与文字
 
-本轮增加 `kind:'sprite'` 命令与 `GuiSpriteGeometry` 类型，仍使用GuiLayer / renderGuiLayer，无新增runtime导出。它使用UI/Sprite Transparent / MultiColorTint Off profile，`color` 为RGBA8顶点字节；alpha只选择纹理alpha的ceil分支，**不是透明度乘数**，整体透明度由归一化tint alpha / hudOpacity表达。旧image命令保持UI/Blit。`EnchantingTable imageRender.itemImages` 可选把普通 `item.image` 送入同目标，自定义React icon / 3D renderer、数量 / 耐久与语义保持DOM。显式displayScale的呈现支持时采用布局zoom，fallback保留transform。独立公开13项、实际组件11项、React18 / 19包消费与生产47辅助检查分别通过；固定完整747,600像素ROI仍有4,928像素不同，仅在三格3D hotbar。详见 [GUI_SPRITE_QA.md](docs/GUI_SPRITE_QA.md)；下面图文17项和10,155残差是上一冻结阶段。
+新增显式source model路径：公共barrel已导出纯 `layoutGuiModel` / `createGuiCuboidModel`，GuiLayer支持 `kind:'model'`，`InventoryItem.guiModel` 可由附魔台 `imageRender.itemModels` 显式消费。局部模型、原纹理、GLOBAL source origin及yaw / pitch / scale / offset / originQuantization均由调用方声明，库不提供native默认相机；旧BlockPreview CPU renderer保持原样。含纯atlas helper后为10函数 / 134runtime，公开17项、实际组件12项、React18 / 19包消费与生产65辅助检查分别按其范围通过。研究与边界见 [GUI_MODEL_QA.md](docs/GUI_MODEL_QA.md)；以下sprite检查点属于已冻结b09ff7a历史。
+
+原PNG模型的完整固定GUI仍32像素不同，不能把atlas与standalone采样域当作相同。普通原PNG＋显式packing的source atlas通过纯 `assembleGuiTextureAtlas` 或GPU装配，不采用captured atlas bitmap、Canvas2D重采样或UV epsilon；四幅实际React在同一个已观察GUI5 postUI target全3,603,140像素RGBA0，旧standalone32逐字节复现。零差使用宿主显式配置、原glyph pages与1:1呈现；不认证默认回退字体、所有GUI / camera / 动画、最终world / Present或整体目标完成。
+
+上一sprite检查点增加 `kind:'sprite'` 命令与 `GuiSpriteGeometry` 类型，仍使用GuiLayer / renderGuiLayer，无新增runtime导出。它使用UI/Sprite Transparent / MultiColorTint Off profile，`color` 为RGBA8顶点字节；alpha只选择纹理alpha的ceil分支，**不是透明度乘数**，整体透明度由归一化tint alpha / hudOpacity表达。旧image命令保持UI/Blit。`EnchantingTable imageRender.itemImages` 可选把普通 `item.image` 送入同目标，自定义React icon / 3D renderer、数量 / 耐久与语义保持DOM。显式displayScale的呈现支持时采用布局zoom，fallback保留transform。独立公开13项、实际组件11项、React18 / 19包消费与生产47辅助检查分别通过；固定完整747,600像素ROI仍有4,928像素不同，仅在三格3D hotbar。详见 [GUI_SPRITE_QA.md](docs/GUI_SPRITE_QA.md)；下面图文17项和10,155残差是上一冻结阶段。
 
 `GuiLayer` / `renderGuiLayer` 按 `commands` 的 image / text 顺序绘制同一个RGBA8目标；中途不通过独立文字画布合成。`layoutGuiText` 是无I/O、无GPU的文字几何函数，接收实际物理frame、显式guiScale、GLOBAL game `origin`、`GuiTextFont`、`fontScale`、`sampling: "point" | "bilinear"` 和 `shader: "bitmap" | "bitmap-smooth"`。字体在BitmapFont之外声明原页 `pageSizes`（128或256）与 `cellHeight`，不能把裁剪字图冒充完整原页。
 
@@ -577,7 +581,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball；当前120组件 / 131值的React18.3.1 / 19.3.1实际消费已通过ESM、SSR、类型 / ref / profile、CSS、皮肤、字体及许可检查，两消费者各256份dist逐字节一致。当前正式范围累计944唯一用例（939 PASS、5预期SKIP），来自多批次，非一次整套全绿；sprite / itemImages及展示样式已纳入本轮真实包检查。详见 [VERIFICATION.md](docs/VERIFICATION.md)。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装真实tarball；当前120组件 / 134值的React18.3.1 / 19.3.1消费已通过ESM、SSR、类型 / ref / model / source-atlas、CSS、皮肤、字体及许可检查，两消费者各256份dist逐字节一致。正式累计973唯一用例（968 PASS、5预期SKIP）来自多批次；相关旧126项按整文件受测GPU profile聚合，均不称单次整套全绿。详见 [VERIFICATION.md](docs/VERIFICATION.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可
