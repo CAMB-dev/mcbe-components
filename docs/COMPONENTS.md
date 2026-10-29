@@ -20,6 +20,8 @@
 
 `GuiLayer` 将有序 image / text 源命令绘制到同一RGBA8目标；新增纯文字几何函数layoutGuiText与浏览器GPU函数renderGuiLayer。字体页、glyph度量、GLOBAL paint origin、采样、shader及颜色由宿主明确提供；prepared内部接口不公开。EnchantingTable可选imageRender.text接入同层文字，默认CSS与旧GuiImageLayer / BitmapText不变。公开源输入 / GPU / React正式17项已通过；固定绘制阶段的完整目标为RGBA零差，实际附魔台完整ROI仍有10,155 / 747,600像素不同。组件与发布验证分别记录，不能据此称整GUI零差。见 [GUI_LAYER_QA.md](./GUI_LAYER_QA.md)。
 
+本轮同一GuiLayer另增 `kind:'sprite'` 与GuiSpriteGeometry类型，复用image几何并声明RGBA8顶点颜色；UI/Sprite Transparent的顶点alpha只选ceil分支，不是透明度。EnchantingTable可选 `imageRender.itemImages` 接普通物品PNG，自定义icon / 3D保持宿主DOM；展示scale在支持时采用布局zoom。公开shader13项与实际组件11项分别通过；完整ROI当前4,928 / 747,600像素仍不同，仅在三格3D hotbar，整GUI未达零差。实际包 / 生产验证另列；组件 / runtime计数不变。见 [GUI_SPRITE_QA.md](./GUI_SPRITE_QA.md)。
+
 `GuiIcon` 提供150张完整原版 PNG，guiIconNames 为第4份数据导出；按原图尺寸整数缩放，默认装饰，可显式命名。它保留原字节，不自动切换状态、tint或套用原生使用框；旧16个 PixelIcon 保持兼容。来源 / 状态 / 使用引用见 [gui-icons.json](./gui-icons.json)，素材一致不代表整GUI验收。
 
 `BitmapText` 默认 `renderer="cpu"` / `profile="atlas-rect"` / `layout="visual"`；可选advance逻辑占位保留视觉外溢，费用宿主需明确display:block以避开inline strut；工作站renderText保留canonical原文，见 [WORKSTATION_TEXT_QA.md](./WORKSTATION_TEXT_QA.md)。显式 WebGL 支持 atlas-rect 与 bedrock-unicode 完整字格 profile，background 为 GPU clear 色。公开 `renderBitmapGlyphs` 接收原始页及顺序 runs，默认返回预乘 framebuffer 数据；它需要 GPU，属于有副作用的函数。真实捕获8个 draw 的固定背景复现不等于透明 DOM 或默认 CPU 认证；webgl 每实例独立 context，新增 webgl-shared 在同一 Document 内复用 Offscreen WebGL 会话并向每实例 bitmaprenderer 转移 ImageBitmap。两者仍有设备与 bitmap 预算限制，共享路径的新验收范围单列。见 [BITMAP_GPU_QA.md](./BITMAP_GPU_QA.md) 与 [BITMAP_SHARED_QA.md](./BITMAP_SHARED_QA.md)。

@@ -81,10 +81,14 @@ assert.deepEqual(packedLayout.runs[1].vertices[0],{position:[0,9,0],uvRaw:[4096,
 assert.deepEqual(packedLayout.runs[0].tint,[.25,.25,.25,1]);
 assert.throws(()=>ui.renderGuiLayer({width:0,height:11,guiScale:2,commands:[]}),RangeError);
 assert.throws(()=>ui.renderGuiLayer({width:17,height:11,guiScale:2,commands:[{...packedText,pages:new Map([[0,glintTexture]])}]}),RangeError);
+assert.throws(()=>ui.renderGuiLayer({width:17,height:11,guiScale:2,commands:[{kind:'sprite',rect:[0,0,1,1],texture:glintTexture,color:[255,255,255,256]}]}),RangeError);
 const layerMarkup=renderToString(element(ui.GuiLayer,{width:17,height:11,guiScale:2,commands:[packedText],label:'Host composed GUI'}));
 assert.match(layerMarkup,/mc-gui-layer/);
 assert.match(layerMarkup,/data-render-state="loading"/);
 assert.match(layerMarkup,/role="img"/);
+const spriteMarkup=renderToString(element(ui.GuiLayer,{width:17,height:11,guiScale:2,commands:[{kind:'sprite',rect:[0,0,1,1],texture:glintTexture,color:[127,255,31,0]}],label:'Source sprite'}));
+assert.match(spriteMarkup,/data-render-state="loading"/);
+assert.match(spriteMarkup,/Source sprite/);
 const imageSsrWarnings = [], previousConsoleError = console.error;
 let imageWorkstationMarkup;
 try {
@@ -312,7 +316,7 @@ import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame,
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState, WorkstationTextContext, WorkstationTextRenderer } from 'mcbeui';
 import { BitmapText, renderBitmapGlyphs, GuiIcon, guiIconNames, GuiImageLayer, layoutGuiImages, renderGuiImages } from 'mcbeui';
 import { GuiLayer, layoutGuiText, renderGuiLayer } from 'mcbeui';
-import type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout, GuiLayerCommand, GuiLayerProps, GuiLayerGeometryCommand, GuiLayerLayoutOptions, GuiLayerLayoutCommand, GuiLayerLayout, GuiLayerDraw, GuiLayerRenderOptions, GuiLayerRenderResult, EnchantingTableTextRenderStyle, EnchantingTableTextRenderProfile } from 'mcbeui';
+import type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout, GuiSpriteGeometry, GuiLayerCommand, GuiLayerProps, GuiLayerGeometryCommand, GuiLayerLayoutOptions, GuiLayerLayoutCommand, GuiLayerLayout, GuiLayerDraw, GuiLayerRenderOptions, GuiLayerRenderResult, EnchantingTableTextRenderStyle, EnchantingTableTextRenderProfile } from 'mcbeui';
 import type { GuiImage, GuiImageLayerProps, GuiImageLayerState, GuiImageRect, GuiImageRgba, GuiImageNineSlice, GuiImageGeometry, GuiImageLayoutOptions, GuiImageVertex, GuiImageMesh, GuiImageLayout, GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderOptions, GuiImageRenderResult, EnchantingTableImageRenderProfile } from 'mcbeui';
 import { Select } from 'mcbeui';
 import type { GuiIconProps, GuiIconName, BitmapTextProps, BitmapTextRenderer, BitmapTextProfile, BitmapFont, BitmapGlyph, BitmapGlyphRun, BitmapGlyphRenderOptions, BitmapGlyphRenderResult, BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, BitmapUnicodeVertex, BitmapUnicodeRun, BitmapGlyphBackground } from 'mcbeui';
@@ -399,6 +403,8 @@ export const textLayout: GuiTextLayout = layoutGuiText(textOptions);
 export const textRun: GuiTextRun = textLayout.runs[0]!;
 const layerSource: GuiLayerGeometryCommand = {kind:'text',...sourceText};
 const layerCommand: GuiLayerCommand = {...layerSource,pages:new Map([[0,'/caller-packed-font.png']])};
+const sourceSprite: GuiSpriteGeometry = {rect:[1,2,16,16],color:[128,64,255,0],tint:[.5,1,.25,1]};
+const spriteCommand: GuiLayerCommand = {kind:'sprite',...sourceSprite,texture:'/caller-sprite.png'};
 export const layerOptions: GuiLayerLayoutOptions = {width:640,height:480,guiScale:2,commands:[layerSource]};
 const layerDraw: GuiLayerDraw = {kind:'text',...sourceText,pages:new Map([[0,adapterTexture]])};
 export const guiLayerRenderer: (options:GuiLayerRenderOptions)=>GuiLayerRenderResult = renderGuiLayer;
@@ -406,7 +412,7 @@ export function composedOffscreen(canvas:OffscreenCanvas):GuiLayerRenderResult {
   return renderGuiLayer({...layerOptions,commands:[layerDraw],canvas});
 }
 export function inspectComposedLayout(layout:GuiLayerLayout):GuiLayerLayoutCommand|undefined {return layout.commands[0];}
-const layerProps: GuiLayerProps = {...layerOptions,commands:[layerCommand],label:'Caller composed GUI',onRenderStateChange:state=>state.toUpperCase()};
+const layerProps: GuiLayerProps = {...layerOptions,commands:[layerCommand,spriteCommand],label:'Caller composed GUI',onRenderStateChange:state=>state.toUpperCase()};
 const textStyle: EnchantingTableTextRenderStyle = {font:packedFont,fontScale:1,sampling:'point',shader:'bitmap'};
 const textProfile: EnchantingTableTextRenderProfile = {metrics:{lineHeight:10,paintOffset:[0,1]},labels:textStyle,costs:{...textStyle,disabledColor:[137,94,91,255]},runes:textStyle};
 const glintUniforms: ItemGlintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25],tintColor:[1,1,1,1],hudOpacity:1};
@@ -437,7 +443,7 @@ export const emptyGpuOptions: BitmapGlyphRenderOptions = {width:0,height:0,pages
 export const demo = <>
   <GuiImageLayer {...imageProps} ref={createRef<HTMLCanvasElement>()}/>
   <GuiLayer {...layerProps} ref={createRef<HTMLCanvasElement>()}/>
-  <EnchantingTable title="1" inventoryLabel="1" options={[{id:'one',label:'One',level:1,runeText:'1'}]} imageRender={{...imageRenderProfile,text:textProfile}}/>
+  <EnchantingTable title="1" inventoryLabel="1" options={[{id:'one',label:'One',level:1,runeText:'1'}]} imageRender={{...imageRenderProfile,text:textProfile,itemImages:true}} item={{name:'Caller item',image:'/caller-item.png'}}/>
   <EnchantingTable options={[]} imageRender={imageRenderProfile} ref={createRef<HTMLElement>()}/>
   <Button {...props} ref={createRef<HTMLButtonElement>()}>Play</Button>
   <Text as="p" shadow ref={createRef<HTMLElement>()}>Minecraft</Text>

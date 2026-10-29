@@ -2,18 +2,25 @@ import { layoutGuiImages } from './gui-image-geometry';
 import type { GuiImageGeometry, GuiImageLayout, GuiImageLayoutOptions, GuiImageMesh } from './gui-image-geometry';
 import type { GuiImageBackground, GuiImageDraw, GuiImageTexture } from './gui-image-webgl';
 import { layoutGuiText } from './gui-text-geometry';
-import type { GuiTextGeometry, GuiTextLayout } from './gui-text-geometry';
+import type { GuiTextGeometry, GuiTextLayout, GuiTextRgba8 } from './gui-text-geometry';
 import { renderPreparedGuiLayer } from './gui-layer-webgl';
 import type { GuiLayerPreparedCommand, GuiLayerPreparedResult } from './gui-layer-webgl';
 
+/** UI/Sprite Transparent, MultiColorTint Off source geometry. Other material passes are not implied. */
+export interface GuiSpriteGeometry extends GuiImageGeometry {
+  /** Vertex-color bytes. Alpha selects the shader's ceil-alpha branch; it is not an opacity multiplier. */
+  color?: GuiTextRgba8;
+}
 export type GuiLayerGeometryCommand =
   | ({ kind: 'image' } & GuiImageGeometry)
+  | ({ kind: 'sprite' } & GuiSpriteGeometry)
   | ({ kind: 'text' } & GuiTextGeometry);
 export interface GuiLayerLayoutOptions extends Omit<GuiImageLayoutOptions, 'images'> {
   commands: readonly GuiLayerGeometryCommand[];
 }
 export type GuiLayerLayoutCommand =
   | { kind: 'image'; mesh: GuiImageMesh }
+  | { kind: 'sprite'; mesh: GuiImageMesh; color: GuiTextRgba8 }
   | { kind: 'text'; layout: GuiTextLayout };
 export interface GuiLayerLayout extends Omit<GuiImageLayout, 'meshes'> {
   /** Ordered source commands. Each text layout owns its separate paint-origin MVP. */
@@ -21,6 +28,7 @@ export interface GuiLayerLayout extends Omit<GuiImageLayout, 'meshes'> {
 }
 export type GuiLayerDraw =
   | ({ kind: 'image' } & GuiImageDraw)
+  | ({ kind: 'sprite'; texture: GuiImageTexture } & GuiSpriteGeometry)
   | ({ kind: 'text'; pages: ReadonlyMap<number, GuiImageTexture> } & GuiTextGeometry);
 export interface GuiLayerRenderOptions extends Omit<GuiLayerLayoutOptions, 'commands'> {
   commands: readonly GuiLayerDraw[];
@@ -35,15 +43,20 @@ export interface GuiLayerRenderResult extends GuiLayerPreparedResult {
 /** Internal source adapter, also used for SSR/loading preparation. It performs no IO or GPU work. */
 export function layoutSourceGuiLayer(options: GuiLayerLayoutOptions): GuiLayerLayout {
   if (!Array.isArray(options.commands) || options.commands.length > 4096) throw new RangeError('A bounded GUI command array is required.');
-  for (const command of options.commands) if (!command || (command.kind !== 'image' && command.kind !== 'text')) throw new RangeError('Unsupported GUI layer command.');
-  const imageCommands = options.commands.filter((command): command is Extract<GuiLayerGeometryCommand, { kind: 'image' }> => command.kind === 'image');
+  for (const command of options.commands) if (!command || (command.kind !== 'image' && command.kind !== 'sprite' && command.kind !== 'text')) throw new RangeError('Unsupported GUI layer command.');
+  const imageCommands = options.commands.filter((command): command is Extract<GuiLayerGeometryCommand, { kind: 'image' | 'sprite' }> => command.kind !== 'text');
   const { meshes, ...frame } = layoutGuiImages({ ...options, images: imageCommands });
   const commands: GuiLayerLayoutCommand[] = [];
   let imageIndex = 0, vertices = 0, indices = 0, runs = 0;
   for (const command of options.commands) {
-    if (command.kind === 'image') {
+    if (command.kind !== 'text') {
       const mesh = meshes[imageIndex++]!;
-      commands.push({ kind: 'image', mesh }); vertices += mesh.vertices.length; indices += mesh.indices.length; runs++;
+      if (command.kind === 'sprite') {
+        const color: GuiTextRgba8 = command.color ?? [255, 255, 255, 255];
+        if (!color || color.length !== 4 || [...color].some(channel => !Number.isSafeInteger(channel) || channel < 0 || channel > 255)) throw new RangeError('Sprite vertex color requires four RGBA8 bytes.');
+        commands.push({ kind: 'sprite', mesh, color: [...color] });
+      } else commands.push({ kind: 'image', mesh });
+      vertices += mesh.vertices.length; indices += mesh.indices.length; runs++;
     } else {
       const layout = layoutGuiText({ ...command, width: options.width, height: options.height, guiScale: options.guiScale,
         outputRect: options.outputRect, scissor: intersect(options.scissor, command.scissor, options.width, options.height) });
@@ -65,7 +78,7 @@ function intersect(layer: GuiImageLayoutOptions['scissor'], local: GuiImageLayou
 }
 
 /**
- * Draw original images and packed-cell text in source order into ONE RGBA8 target.
+ * Draw original images, UI sprites and packed-cell text in source order into ONE RGBA8 target.
  * Text inputs are source strings, metrics and paint origins, never captured vertices.
  * Whole-frame projection is retained when outputRect selects a physical output window.
  */
@@ -74,6 +87,7 @@ export function renderGuiLayer(options: GuiLayerRenderOptions): GuiLayerRenderRe
   options.commands.forEach((command, index) => {
     const entry = layout.commands[index]!;
     if (command.kind === 'image' && entry.kind === 'image') commands.push({ kind: 'image', mesh: entry.mesh, mvp: layout.mvp, texture: command.texture });
+    else if (command.kind === 'sprite' && entry.kind === 'sprite') commands.push({ kind: 'sprite', mesh: entry.mesh, mvp: layout.mvp, texture: command.texture, color: entry.color });
     else if (command.kind === 'text' && entry.kind === 'text') {
       if (!command.pages || typeof command.pages.get !== 'function') throw new RangeError('Text requires explicit decoded font pages.');
       for (const run of entry.layout.runs) {

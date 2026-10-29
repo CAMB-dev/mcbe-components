@@ -1,5 +1,5 @@
 import { createContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import type { RefObject } from 'react';
+import type { CSSProperties, RefObject } from 'react';
 import { GuiImageLayer } from './gui-image';
 import type { GuiImage } from './gui-image';
 import { layoutGuiImages } from './gui-image-geometry';
@@ -10,6 +10,7 @@ import { layoutSourceGuiLayer } from './gui-layer';
 import { layoutGuiText } from './gui-text-geometry';
 import type { GuiTextFont, GuiTextGeometry, GuiTextRgba8 } from './gui-text-geometry';
 import { workstationImageAssets as assets } from './workstation-image-assets';
+import type { InventoryItem } from './inventory';
 
 /** Explicit native-image layout inputs. CSS skins remain the default route. */
 export interface EnchantingTableImageRenderProfile {
@@ -20,6 +21,8 @@ export interface EnchantingTableImageRenderProfile {
   displayScale?: number;
   /** Optional caller-owned packed-cell fonts, drawn with images into one target. */
   text?: EnchantingTableTextRenderProfile;
+  /** Opt in plain, square item.image sprites in the source16x16 game area; custom icons stay in DOM. */
+  itemImages?: boolean;
 }
 export interface EnchantingTableTextRenderStyle {
   font: GuiTextFont;
@@ -105,6 +108,8 @@ interface Prepared {
   images: GuiImage[]; outputRect: GuiImageRect; origin: readonly [number, number];
   commands?: GuiLayerCommand[];
   textRunes: readonly boolean[];
+  itemImageSlots: readonly number[];
+  textLabels: boolean;
   left: number; top: number; width: number; height: number; translateX: number; translateY: number;
   presentation: Presentation;
 }
@@ -138,8 +143,9 @@ function textCommand(text: string, style: EnchantingTableTextRenderStyle, origin
     color: style.color ?? color, tint: style.tint, hudOpacity: style.hudOpacity, origin };
 }
 
-function prepare(profile: EnchantingTableImageRenderProfile, options: readonly Option[], state: VisualState, close: boolean, title: string, inventoryLabel: string): Prepared {
+function prepare(profile: EnchantingTableImageRenderProfile, options: readonly Option[], state: VisualState, close: boolean, title: string, inventoryLabel: string, items: readonly (InventoryItem | null | undefined)[]): Prepared {
   const { width, height, guiScale } = profile.frame, scale = profile.displayScale ?? 1;
+  if (profile.itemImages !== undefined && typeof profile.itemImages !== 'boolean') throw new RangeError('itemImages must be an explicit boolean.');
   if (!Number.isFinite(scale) || scale <= 0 || scale > 32) throw new RangeError('Image displayScale must be positive and at most32.');
   const origin = profile.origin ?? [(Math.ceil(width / guiScale) - 176) / 2, (Math.ceil(height / guiScale) - 166) / 2] as const;
   if (origin.length !== 2 || origin.some(value => !Number.isFinite(value))) throw new RangeError('Image origin requires two finite game coordinates.');
@@ -158,6 +164,17 @@ function prepare(profile: EnchantingTableImageRenderProfile, options: readonly O
     // hover control (also observed as old captured Global60/61).
     if (slot?.hover || slot?.focus) images.push(image(assets.focus, [x, y, w, h], origin));
   });
+  const itemImageSlots: number[] = [], itemSprites: GuiLayerCommand[] = [];
+  const beforeItemsLength = images.length;
+  if (profile.itemImages) slotRects.forEach(([x, y], index) => {
+    const item = items[index];
+    // Match ItemSlot occupancy, without inspecting custom React nodes or DOM bounds.
+    const amount = item?.count === undefined ? undefined : Number.isFinite(item.count) ? Math.max(0, Math.floor(item.count)) : 0;
+    if (!item || amount === 0 || item.icon != null || typeof item.image !== 'string' || !item.image.trim()) return;
+    itemSprites.push({ kind: 'sprite', texture: item.image.trim(), rect: [x + 1 + origin[0], y + 1 + origin[1], 16, 16],
+      color: [255, 255, 255, 255], hudOpacity: state.slots[index]?.disabled ? .5 : 1 });
+    itemImageSlots.push(index);
+  });
   const rowHeight = 60.8 / 3;
   const row = (index: number): GuiImageRect => [61.6, 14.1 + index * rowHeight, 106.4, 60.8 * .33333333];
   for (let index = 0; index < 3; index++) images.push(image(assets.optionDark, row(index), origin));
@@ -173,15 +190,15 @@ function prepare(profile: EnchantingTableImageRenderProfile, options: readonly O
   });
   let commands: GuiLayerCommand[] | undefined;
   const textRunes = [false, false, false];
-  if (profile.text !== undefined) {
+  if (profile.text !== undefined || profile.itemImages) {
     const text = profile.text;
-    if (!text || !text.labels || !text.costs) throw new RangeError('A combined profile requires explicit label and cost font styles.');
-    const anchors = fontOrigins(origin, text.metrics);
+    if (text !== undefined && (!text || !text.labels || !text.costs)) throw new RangeError('A combined profile requires explicit label and cost font styles.');
+    const anchors = text ? fontOrigins(origin, text.metrics) : undefined;
     const asImage = (item: GuiImage): GuiLayerCommand => ({ kind: 'image', ...item });
     commands = images.slice(0, prefixLength).map(asImage);
-    commands.push(textCommand(title, text.labels, anchors.title, [76, 76, 76, 255]), textCommand(inventoryLabel, text.labels, anchors.inventory, [76, 76, 76, 255]));
-    commands.push(...images.slice(prefixLength, beforeDustLength).map(asImage));
-    options.slice(0, 3).forEach((option, index) => {
+    if (text && anchors) commands.push(textCommand(title, text.labels, anchors.title, [76, 76, 76, 255]), textCommand(inventoryLabel, text.labels, anchors.inventory, [76, 76, 76, 255]));
+    commands.push(...images.slice(prefixLength, beforeItemsLength).map(asImage), ...itemSprites, ...images.slice(beforeItemsLength, beforeDustLength).map(asImage));
+    if (text && anchors) options.slice(0, 3).forEach((option, index) => {
       if (text.runes && typeof option.runeText === 'string') {
         commands!.push(textCommand(option.runeText, text.runes, anchors.rune(index), [104, 93, 73, 255]));
         textRunes[index] = true;
@@ -205,7 +222,7 @@ function prepare(profile: EnchantingTableImageRenderProfile, options: readonly O
     }
   };
   if ('commands' in layout) for (const command of layout.commands) {
-    if (command.kind === 'image') bounds(layout.mvp, command.mesh.vertices);
+    if (command.kind !== 'text') bounds(layout.mvp, command.mesh.vertices);
     else for (const run of command.layout.runs) bounds(run.mvp, run.vertices);
   }
   else for (const mesh of layout.meshes) bounds(layout.mvp, mesh.vertices);
@@ -216,35 +233,41 @@ function prepare(profile: EnchantingTableImageRenderProfile, options: readonly O
   const tx = x * k - 2 * origin[0], ty = y * k - 2 * origin[1];
   const left = Math.floor(tx) - 1, top = Math.floor(ty) - 1;
   const windowRight = Math.ceil(tx + outputRect[2] * k) + 1, windowBottom = Math.ceil(ty + outputRect[3] * k) + 1;
-  return { images, commands, textRunes, outputRect, origin, left, top, width: windowRight - left, height: windowBottom - top, translateX: tx - left, translateY: ty - top,
+  return { images, commands, textRunes, itemImageSlots, textLabels: profile.text !== undefined, outputRect, origin, left, top, width: windowRight - left, height: windowBottom - top, translateX: tx - left, translateY: ty - top,
     presentation: { scale, left: Math.max(6, -left), top: Math.max(6, -top), right: Math.max(6, windowRight - 352), bottom: Math.max(6, windowBottom - 332) } };
 }
 
-export function useEnchantingImageLayer(profile: EnchantingTableImageRenderProfile | undefined, root: RefObject<HTMLElement | null>, options: readonly Option[], close: boolean, title: string, inventoryLabel: string) {
+export function useEnchantingImageLayer(profile: EnchantingTableImageRenderProfile | undefined, root: RefObject<HTMLElement | null>, options: readonly Option[], close: boolean, title: string, inventoryLabel: string, items: readonly (InventoryItem | null | undefined)[]) {
   const state = useVisualState(root, !!profile);
   const prepared = useMemo(() => {
     if (!profile) return undefined;
-    try { return { value: prepare(profile, options, state, close, title, inventoryLabel) }; }
+    try { return { value: prepare(profile, options, state, close, title, inventoryLabel, items) }; }
     catch (reason) {
       let presentation: Presentation | null = null;
       // A failed font/metric request still has a valid explicit image frame.
       // Keep its CSS fallback at the same declared display scale. This computes
       // reservation only: never silently paint an image-only partial success.
-      if (profile.text !== undefined) try {
-        presentation = prepare({ ...profile, text: undefined }, options, state, close, title, inventoryLabel).presentation;
+      if (profile.text !== undefined || profile.itemImages !== undefined) try {
+        presentation = prepare({ ...profile, text: undefined, itemImages: undefined }, options, state, close, title, inventoryLabel, items).presentation;
       } catch { /* Invalid frame/scale retains the ordinary unscaled fallback. */ }
       return { error: reason instanceof Error ? reason.message : String(reason), presentation };
     }
-  }, [profile, options, state, close, title, inventoryLabel]);
+  }, [profile, options, state, close, title, inventoryLabel, items]);
   // Every profile change has a fresh immutable request; loading/error visibility
   // is switched by the actual canvas marker, not a delayed parent-state guess.
   if (!profile || !prepared) return { presentation: null, layer: null };
   if (!prepared.value) return { presentation: prepared.presentation ?? null, layer: <span className="mc-enchanting-image-error" aria-hidden="true" data-render-state="error" data-render-error={prepared.error}/> };
   const value = prepared.value;
-  const style = { position: 'absolute', left: 0, top: 0, width: value.outputRect[2], height: value.outputRect[3], transformOrigin: '0 0', transform: `translate(${value.translateX}px,${value.translateY}px) scale(${2 / profile.frame.guiScale})` } as const;
+  const pixelScale = 2 / profile.frame.guiScale;
+  const style = { position: 'absolute', width: value.outputRect[2], height: value.outputRect[3],
+    '--mc-image-pixel-scale': pixelScale,
+    '--mc-image-translate-x': `${value.translateX}px`, '--mc-image-translate-y': `${value.translateY}px`,
+    '--mc-image-zoom-left': `${value.translateX / pixelScale}px`, '--mc-image-zoom-top': `${value.translateY / pixelScale}px`,
+  } as CSSProperties;
   return { presentation: value.presentation, layer: <div className="mc-enchanting-image-window" aria-hidden="true" style={{ left: value.left, top: value.top, width: value.width, height: value.height }}
     data-frame-origin-x={value.origin[0]} data-frame-origin-y={value.origin[1]} data-output-rect={value.outputRect.join(',')}
-    data-text-labels={value.commands ? true : undefined} data-text-costs={value.commands ? true : undefined}
+    data-item-images={value.itemImageSlots.length ? value.itemImageSlots.join(' ') : undefined}
+    data-text-labels={value.textLabels || undefined} data-text-costs={value.textLabels || undefined}
     data-text-rune-1={value.textRunes[0] || undefined} data-text-rune-2={value.textRunes[1] || undefined} data-text-rune-3={value.textRunes[2] || undefined}>
     {value.commands ? <GuiLayer className="mc-enchanting-image-layer" {...profile.frame} commands={value.commands} outputRect={value.outputRect} style={style}/>
       : <GuiImageLayer className="mc-enchanting-image-layer" {...profile.frame} images={value.images} outputRect={value.outputRect} style={style}/>}

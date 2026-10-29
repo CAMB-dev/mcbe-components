@@ -67,7 +67,7 @@ export const WorkstationFrame = forwardRef<HTMLElement, WorkstationFrameProps>(f
   const width = paint ? 352 + paint.left + paint.right : 0, height = paint ? 332 + paint.top + paint.bottom : 0;
   return <div className={['mc-workstation-scroll', paint && 'mc-workstation-scroll--image-profile'].filter(Boolean).join(' ')}>
     <div className="mc-workstation-image-reservation" data-image-display-scale={paint?.scale} style={paint ? { display: 'block', width: width * paint.scale, height: height * paint.scale } : { display: 'contents' }}>
-      <div className="mc-workstation-image-plane" style={paint ? { display: 'block', width, height, transform: `scale(${paint.scale})`, paddingLeft: paint.left, paddingTop: paint.top } : { display: 'contents' }}>
+      <div className="mc-workstation-image-plane" style={paint ? { display: 'block', width, height, '--mc-workstation-display-scale': paint.scale, paddingLeft: paint.left, paddingTop: paint.top } as CSSProperties : { display: 'contents' }}>
         {section}
       </div>
     </div>
@@ -155,7 +155,8 @@ export const EnchantingTable = forwardRef<HTMLElement, EnchantingTableProps>(fun
   title='Enchant', item, lapis, options, book, onInputAction, onEnchant, renderText, imageRender, className, ...props
 }, ref) {
   const root = useRef<HTMLElement | null>(null);
-  const paint = useEnchantingImageLayer(imageRender, root, options, !!props.onClose, title, props.inventoryLabel ?? 'Inventory');
+  const sourceItems = [item, lapis, ...Array.from({ length: 27 }, (_, index) => props.inventory?.[index]), ...Array.from({ length: 9 }, (_, index) => props.hotbar?.[index])];
+  const paint = useEnchantingImageLayer(imageRender, root, options, !!props.onClose, title, props.inventoryLabel ?? 'Inventory', sourceItems);
   return <EnchantingImagePresentation.Provider value={paint.presentation}><WorkstationFrame {...props} ref={node => {
     root.current = node; if (typeof ref === 'function') ref(node); else if (ref) ref.current = node;
   }} title={title} renderText={renderText} className={['mc-enchanting',className].filter(Boolean).join(' ')}>

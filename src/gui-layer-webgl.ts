@@ -1,8 +1,9 @@
 import type { PixelTexture } from './item-renderer-engine';
 import type { BitmapUnicodeRun } from './bitmap-text-webgl';
+import type { GuiTextRgba8 } from './gui-text-geometry';
 import type { GuiImageMesh, GuiImageRect, GuiImageRgba } from './gui-image-geometry';
 import type { GuiImageBackground, GuiImageTexture } from './gui-image-webgl';
-import { GUI_IMAGE_VERTEX_SHADER, GUI_IMAGE_FRAGMENT_SHADER, GUI_BITMAP_CELL_VERTEX_SHADER, GUI_BITMAP_FRAGMENT_SHADER, GUI_COPY_VERTEX_SHADER, GUI_COPY_FRAGMENT_SHADER } from './gui-layer-kernels';
+import { GUI_IMAGE_VERTEX_SHADER, GUI_IMAGE_FRAGMENT_SHADER, GUI_SPRITE_VERTEX_SHADER, GUI_SPRITE_FRAGMENT_SHADER, GUI_BITMAP_CELL_VERTEX_SHADER, GUI_BITMAP_FRAGMENT_SHADER, GUI_COPY_VERTEX_SHADER, GUI_COPY_FRAGMENT_SHADER } from './gui-layer-kernels';
 
 /** Internal prepared boundary. The public adapter owns source layout and matrix construction. */
 export interface GuiLayerPreparedImageCommand {
@@ -17,7 +18,11 @@ export interface GuiLayerPreparedTextCommand {
   run: Omit<BitmapUnicodeRun, 'profile' | 'page' | 'mvp'> & { mvp: Float32Array };
   texture: GuiImageTexture;
 }
-export type GuiLayerPreparedCommand = GuiLayerPreparedImageCommand | GuiLayerPreparedTextCommand;
+export interface GuiLayerPreparedSpriteCommand extends Omit<GuiLayerPreparedImageCommand, 'kind'> {
+  kind: 'sprite';
+  color: GuiTextRgba8;
+}
+export type GuiLayerPreparedCommand = GuiLayerPreparedImageCommand | GuiLayerPreparedSpriteCommand | GuiLayerPreparedTextCommand;
 export interface GuiLayerPreparedOptions {
   /** Whole physical framebuffer. Crop never changes the declared projection. */
   width: number;
@@ -79,7 +84,8 @@ function validate(options: GuiLayerPreparedOptions): GuiImageRect {
       texture(command.texture, 'command.texture'); seen.add(command.texture); pixels += command.texture.width * command.texture.height;
       if (seen.size > 256 || pixels > 33554432) throw new RangeError('GUI layer exceeds its texture upload budget.');
     }
-    if (command.kind === 'image') {
+    if (command.kind === 'image' || command.kind === 'sprite') {
+      if (command.kind === 'sprite' && (!command.color || command.color.length !== 4 || [...command.color].some(channel => !Number.isSafeInteger(channel) || channel < 0 || channel > 255))) throw new RangeError('Sprite vertex color requires four RGBA8 bytes.');
       matrix(command.mvp, 'image.mvp');
       const mesh = command.mesh;
       if (!mesh || !Array.isArray(mesh.vertices) || mesh.vertices.length > 65536 || !Array.isArray(mesh.indices) || mesh.indices.length % 3 || mesh.indices.length > 196608) throw new RangeError('Malformed bounded image mesh.');
@@ -127,7 +133,7 @@ function validate(options: GuiLayerPreparedOptions): GuiImageRect {
 }
 
 /**
- * Private prepared GPU core: one RGBA8 target, ordered image/text passes, no
+ * Private prepared GPU core: one RGBA8 target, ordered image/sprite/text passes, no
  * intermediate text canvas. Source layout remains the public adapter's job.
  * All pixels are top-first; live presentation is a blend-disabled PMA GPU copy.
  */
@@ -200,11 +206,11 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
     gl.enable(gl.BLEND); gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD); gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.viewport(-cropX, cropY + height - options.height, options.width, options.height);
     const positionBuffer = buffer(), uvBuffer = buffer(), colorBuffer = buffer(), indexBuffer = buffer();
-    const sourceTextures = new Map<GuiImageTexture, WebGLTexture>(), shaderPrograms = new Map<'image' | 'text', WebGLProgram>();
+    const sourceTextures = new Map<GuiImageTexture, WebGLTexture>(), shaderPrograms = new Map<'image' | 'sprite' | 'text', WebGLProgram>();
     const full: GuiImageRect = [0, 0, options.width, options.height], globalScissor = options.scissor ?? full;
     const maxAttributes = gl.getParameter(gl.MAX_VERTEX_ATTRIBS) as number;
     for (const command of options.commands) {
-      const state = command.kind === 'image' ? command.mesh : command.run;
+      const state = command.kind !== 'text' ? command.mesh : command.run;
       const scissor = state.scissor ?? full;
       const x = Math.max(cropX, globalScissor[0], scissor[0]), y = Math.max(cropY, globalScissor[1], scissor[1]);
       const w = Math.max(0, Math.min(cropX + width, globalScissor[0] + globalScissor[2], scissor[0] + scissor[2]) - x);
@@ -223,18 +229,20 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
       let active = shaderPrograms.get(command.kind);
       if (!active) {
-        active = command.kind === 'image' ? program(GUI_IMAGE_VERTEX_SHADER, GUI_IMAGE_FRAGMENT_SHADER) : program(GUI_BITMAP_CELL_VERTEX_SHADER, GUI_BITMAP_FRAGMENT_SHADER);
+        active = command.kind === 'image' ? program(GUI_IMAGE_VERTEX_SHADER, GUI_IMAGE_FRAGMENT_SHADER)
+          : command.kind === 'sprite' ? program(GUI_SPRITE_VERTEX_SHADER, GUI_SPRITE_FRAGMENT_SHADER) : program(GUI_BITMAP_CELL_VERTEX_SHADER, GUI_BITMAP_FRAGMENT_SHADER);
         shaderPrograms.set(command.kind, active);
       }
       gl.useProgram(active); for (let index = 0; index < maxAttributes; index++) gl.disableVertexAttribArray(index);
       gl.uniform4fv(gl.getUniformLocation(active, 'tint'), new Float32Array(state.tint ?? WHITE)); gl.uniform1f(gl.getUniformLocation(active, 'hudOpacity'), state.hudOpacity ?? 1);
       let indices: Uint16Array;
-      if (command.kind === 'image') {
+      if (command.kind !== 'text') {
         const mesh = command.mesh;
         gl.enable(gl.CULL_FACE); gl.frontFace(gl.CW); gl.cullFace(gl.FRONT);
         gl.uniformMatrix4fv(gl.getUniformLocation(active, 'mvp'), false, command.mvp); gl.uniform1i(gl.getUniformLocation(active, 'source'), 0);
         attribute(active, 'position', positionBuffer, new Float32Array(mesh.vertices.flatMap(vertex => [...vertex.position])), 2, gl.FLOAT);
         attribute(active, 'packedUv', uvBuffer, new Uint16Array(mesh.vertices.flatMap(vertex => [...vertex.uvRaw])), 2, gl.UNSIGNED_SHORT, true);
+        if (command.kind === 'sprite') attribute(active, 'color', colorBuffer, new Uint8Array(mesh.vertices.flatMap(() => [...command.color])), 4, gl.UNSIGNED_BYTE, true);
         indices = new Uint16Array(mesh.indices);
       } else {
         const run = command.run;

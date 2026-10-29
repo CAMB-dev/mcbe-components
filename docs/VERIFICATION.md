@@ -2,7 +2,17 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：GuiLayer 源图文合成
+## 当前检查点：GUI sprite与展示采样
+
+120组件 / 131运行时值保持不变；GuiLayer / renderGuiLayer新增 `kind:'sprite'` 与GuiSpriteGeometry类型，实际附魔台可选 `imageRender.itemImages`。sprite为UI/Sprite Transparent / MultiColorTint Off profile，RGBA8顶点alpha仅选择ceil分支，不能当作透明度乘数。支持zoom时改用布局缩放呈现显式displayScale / reciprocal canvas scale，旧transform为fallback。公开正式13 / 13 PASS（47.4秒）和实际组件扩充后11 / 11 PASS（21.5秒）已完成，NVIDIA固定四sprite过渡的四FBO / 四React完整目标28,825,120像素RGBA0；条件原before背景不计作GUI重建。相关旧回归102 / 102 PASS，累计944unique / 939 PASS / 5预期SKIP，为多批次累计，见 [GUI_SPRITE_QA.md](GUI_SPRITE_QA.md)。
+
+完整生产源码12组合按同一747,600像素ROI：历史transform 10,155差异→当前布局zoom 7,078→zoom＋itemImages 4,928；所有新profile / book组合相同，最终MAE0.12302601658640984 / max252 / alpha0。原root / book / canvas bbox与backing不变，source23pins与250历史文件不变。残差仅三格3D hotbar 1,766 / 1,766 / 1,396；整GUI仍NOT EXACT，不由固定图层零差代替。下面920唯一用例与已测131值包 / 生产是42f25e9图文阶段的历史检查点，不认证本轮新增shader或CSS。
+
+实际React18.3.1 / 19.3.1包消费通过131值、SSR、严格TSX / ref / sprite / itemImages、CSS / assets / licenses检查，两消费者各256份dist同字节。已测 `.cache/gui-sprite-consumer-verified.tgz` SHA256 `97255a7b1d3b4b6f7405f15b6a9cb31b4cbdcbcedee810d5bfb62704edce82a3`，dist/index.js SHA256 `e62b5fe666033a9b391f7a0660e39736a133317bf635d8f20be42b48fe828e4b`；身份见 `.cache/gui-sprite-consumer-identity.json`。最终文档包以 `.cache/gui-sprite-final-pack-proof.json` 逐条比较：仅README / docs可变化，非文档条目必须同字节；实际消费认证仅通过此身份链关联。
+
+生产 `.cache/gui-sprite-production-01/{smoke,identity,FINAL}.json` / RESULT.md为47辅助检查PASS，不加正式数；8个HTTP / site入口同字节，主main-Bu--OVeg.js SHA256 `e347ce5ca76c997985e66a84ec45b959fe40474542f43b87dd5a1e3af7a9040f`。双开关四组合、source三DOM图隐藏 / count32与8可见、同section / selection / callbacks、GUI4 / GUI5、empty仅槽2 / count8、close / reopen、390局部pan及150icons通过；无durability输入，不冒称有值bar演练。page / console / render / non-cancellation network errors0；raw12 ERR_ABORTED保留，5distinct资源另HTTP200 / site字节匹配，不能称raw失败0。实际后端SwiftShader，辅助合同不认证nativeGPU / 全GUI0。
+
+## 历史检查点：GuiLayer 源图文合成
 
 API清单现为120组件＋4数据＋7函数＝131值。纯layoutGuiText与浏览器GPU renderGuiLayer、React GuiLayer已导出，内部prepared / precision helpers不公开；旧默认路径不变。公开源输入 / GPU / React最终单批17 / 17 PASS，0skip / retry / flaky，31.1秒；本机NVIDIA / D3D11固定四阶段的四FBO与四实际React完整目标共28,825,120像素严格RGBA0，全部30draw属性字节亦匹配。实际附魔台完整747,600像素ROI四组合仍10,155差异、max252、alpha0；不是整GUI认证。失败的两项测试假设与全部范围限制见 [GUI_LAYER_QA.md](GUI_LAYER_QA.md)。
 

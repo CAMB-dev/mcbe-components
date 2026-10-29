@@ -21,6 +21,34 @@ void main() {
   gl_FragColor = vec4(value.rgb * tint.rgb, (value.a * tint.a) * hudOpacity);
 }`;
 
+/** UISprite Transparent / MultiColorTint Off. Vertex alpha is a branch, not an opacity. */
+export const GUI_SPRITE_VERTEX_SHADER = `
+attribute vec2 position;
+attribute vec2 packedUv;
+attribute vec4 color;
+uniform mat4 mvp;
+varying highp vec2 uv;
+varying highp vec4 ink;
+void main() {
+  gl_Position = mvp * vec4(position, 0.0, 1.0);
+  uv = packedUv;
+  ink = color;
+}`;
+
+export const GUI_SPRITE_FRAGMENT_SHADER = `
+precision highp float;
+uniform sampler2D source;
+uniform vec4 tint;
+uniform float hudOpacity;
+varying highp vec2 uv;
+varying highp vec4 ink;
+void main() {
+  vec4 value = texture2D(source, uv);
+  vec3 rgb = value.rgb + (value.rgb * ink.rgb - value.rgb) * value.a;
+  float alpha = ink.a > 0.0 ? ceil(value.a) : value.a;
+  gl_FragColor = vec4(rgb * tint.rgb, (alpha * tint.a) * hudOpacity);
+}`;
+
 export const GUI_COPY_VERTEX_SHADER = `
 attribute vec2 position;
 varying highp vec2 uv;

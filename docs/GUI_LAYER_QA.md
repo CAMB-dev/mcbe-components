@@ -1,5 +1,7 @@
 # GuiLayer 图文合成验证
 
+本文记录42f25e9图文合成阶段的冻结证据。后续新增sprite命令、附魔台itemImages及布局zoom呈现的源码已变化；该阶段旧920用例 / 已测包身份不能直接认证新代码，最新验证见 [GUI_SPRITE_QA.md](GUI_SPRITE_QA.md)。旧数字、失败和非零测量按原范围保留。
+
 本轮新增 `GuiLayer`、`layoutGuiText`、`renderGuiLayer`，当前公共清单为120组件、4份数据、7函数，共131个运行时值。公开源输入到GPU / React的正式17项已通过；实际附魔台集成、包消费和生产检查仍分别记录，不能以固定绘制零差代替整GUI验收。旧GuiImageLayer / BitmapText / CSS默认不变。上一image-only阶段893唯一用例 / 128值包身份是历史检查点，不能套作本轮完成证明。
 
 ## 公开接口

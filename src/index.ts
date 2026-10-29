@@ -21,7 +21,7 @@ export type { GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderO
 export { layoutGuiText } from './gui-text-geometry';
 export type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout } from './gui-text-geometry';
 export { renderGuiLayer } from './gui-layer';
-export type { GuiLayerGeometryCommand, GuiLayerLayoutOptions, GuiLayerLayoutCommand, GuiLayerLayout, GuiLayerDraw, GuiLayerRenderOptions, GuiLayerRenderResult } from './gui-layer';
+export type { GuiSpriteGeometry, GuiLayerGeometryCommand, GuiLayerLayoutOptions, GuiLayerLayoutCommand, GuiLayerLayout, GuiLayerDraw, GuiLayerRenderOptions, GuiLayerRenderResult } from './gui-layer';
 export { GuiLayer } from './gui-layer-component';
 export type { GuiLayerCommand, GuiLayerProps } from './gui-layer-component';
 export { Text } from './text';

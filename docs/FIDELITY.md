@@ -2,7 +2,13 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
-## 本轮检查点：同目标源图文合成
+## 本轮检查点：GUI sprite与展示采样
+
+公开值仍120组件 / 131runtime。新sprite命令复用源image几何、按UI/Sprite Transparent原程序解释RGBA8顶点色；alpha是ceil分支选择，不等于opacity。附魔台可选itemImages只接普通PNG，保留自定义renderer与DOM语义。新布局zoom分支旨在消除互逆CSS transform的末端采样相位差，官方草案只支持布局语义，当前源码的最终像素效果仍需本轮完整对照证明。
+
+冻结图文源码的完整10,155残差被复现；raw图文 / 固定书本与最终DOM呈现的差异分开定位，双zoom私有probe先得到7,078。随后实际当前生产源码12组合完整测量确认：同747,600像素ROI从10,155→布局zoom 7,078→zoom＋itemImages 4,928，最终MAE0.12302601658640984 / max252 / alpha0，bbox / backing / 原资源未改。残差只在三格3D hotbar（1,766 / 1,766 / 1,396）；整GUI仍NOT EXACT，不声明任意3D / 动画或通用半透明都已认证。公开sprite13项、实际组件11项、React18 / 19实际包消费与生产47辅助检查分别按声明范围通过，见 [GUI_SPRITE_QA.md](GUI_SPRITE_QA.md)。
+
+## 历史检查点：同目标源图文合成
 
 当前公开120组件、4份数据、7函数，共131值；新增GuiLayer / layoutGuiText / renderGuiLayer。旧CSS / GuiImageLayer / BitmapText默认不变。公开源输入 / GPU / React正式17项已通过，30个观察文字draw的独立VB / CBV匹配与固定条件阶段四FBO / 四实际React目标28,825,120像素RGBA0分别列证。实际附魔台完整747,600像素ROI由public18的26,595 / gallery20的28,452差异像素降至四组合共同10,155，最大通道差252、alpha差异0，整GUI仍NOT EXACT。新imageRender.text需显式字体、metrics及宿主最终排版 / 截断的runeText；实际组件10项、React18 / 19真实包消费与生产38辅助检查分别通过其声明范围，不扩展为原生整GUI认证。详见 [GUI_LAYER_QA.md](GUI_LAYER_QA.md)。
 

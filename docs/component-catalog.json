@@ -82,7 +82,8 @@
         "status": "implemented",
         "fidelity": "ordered_source_image_and_packed_cell_text_public17_formal_pass_fixed_native_stages_exact_not_whole_gui_certification",
         "api": {
-          "commands": "ordered image/text source commands; no captured vertex input required",
+          "commands": "ordered image/sprite/text source commands; no captured vertex input required",
+          "sprite": "GuiSpriteGeometry extends image geometry; optional RGBA8 color, alpha selects ceil branch and is not opacity; UI/Sprite Transparent/MultiColorTint Off profile",
           "frame": "actual physical width/height + explicit guiScale",
           "text": "GuiTextFont with explicit pages/pageSizes/cellHeight/glyph metrics; global origin/fontScale/sampling/shader",
           "color": "RGBA8 vertex color separate from normalized tint and independent shadow tint",
@@ -91,7 +92,8 @@
           "state": "loading/ready/error; input or renderKey change retries",
           "details": "docs/GUI_LAYER_QA.md"
         },
-        "validation": "Public source/GPU/React final17/17 PASS; observed30draw packed VB/CBV exact; four conditional native stages across FBO and actual React full targets total28,825,120 pixels RGBA0 on testedNVIDIA/D3D11. Actual EnchantingTable adapter final10/10 PASS on SwiftShader, three compositions total2,643,089 pixels equal via same public renderer. Actual full747,600pixel native ROI remains10,155different, not wholeGUI exact; React18.3.1/19.3.1 packed131 exports and256dist entries byte-identical; scoped cumulative920 unique/915PASS/5expectedSKIP; production38auxPASS with8HTTP/site entries byte-identical; raw11ERR_ABORTED retired requests retained and5distinctresources recheckedHTTP200. AuxiliarySwiftShader does not certify nativeNVIDIA parity."
+        "validation": "Historical42f25e9 text stage: public source/GPU/React final17/17 PASS; observed30draw packed VB/CBV exact; four conditional native stages across FBO and actual React full targets total28,825,120 pixels RGBA0 on testedNVIDIA/D3D11. Actual EnchantingTable adapter final10/10 PASS on SwiftShader, three compositions total2,643,089 pixels equal via same public renderer. Actual full747,600pixel native ROI remains10,155different, not wholeGUI exact; React18.3.1/19.3.1 packed131 exports and256dist entries byte-identical; scoped cumulative920 unique/915PASS/5expectedSKIP; production38auxPASS with8HTTP/site entries byte-identical; raw11ERR_ABORTED retired requests retained and5distinctresources recheckedHTTP200. AuxiliarySwiftShader does not certify nativeNVIDIA parity.",
+        "spriteValidation": "Current sprite/layout-zoom stage: public13/13PASS, actual adapter11/11PASS; four conditional native transitions FBO+React28,825,120pixels RGBA0 on NVIDIA/D3D11. Original source48vertices XY192bytes andUV192bytes exact, not fullVB/CBV. Actual complete747600pixel ROI10155->7078zoom->4928sprite; residual only three3D cells, not wholeGUI exact. Scoped cumulative944unique/939PASS/5expectedSKIP; React18.3.1/19.3.1 actual packed131 exports and256dist entries byte-identical; production47auxPASS/8HTTPsite entries identical, raw12ERR_ABORTED retained/5distinctresources HTTP200 byte0. AuxiliarySwiftShader does not certify nativeNVIDIA parity. docs/GUI_SPRITE_QA.md"
       },
       {
         "name": "BlockPreview",
@@ -391,6 +393,7 @@
         "api": {
           "imageRender": "optional frame/origin/displayScale; default CSS unchanged",
           "imageRender.text": "optional explicit metrics {lineHeight,paintOffset} + labels/costs/runes styles; one ordered image/text target",
+          "imageRender.itemImages": "optional boolean: plain item.image in centered source16x16 game region; custom item.icon stays DOM; whole ready/failure atomic fallback",
           "runeText": "host final original-case string, already laid out/truncated; arbitrary runes ReactNode still supported",
           "validation": "new text integration/fallback final QA pending; previous image-only results historical",
           "details": "docs/GUI_LAYER_QA.md"

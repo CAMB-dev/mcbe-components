@@ -4,12 +4,13 @@ import type { PixelTexture } from './item-renderer-engine';
 import type { GuiImage, GuiImageLayerState } from './gui-image';
 import type { GuiImageBackground } from './gui-image-webgl';
 import { layoutSourceGuiLayer, renderGuiLayer } from './gui-layer';
-import type { GuiLayerDraw, GuiLayerGeometryCommand, GuiLayerLayout, GuiLayerLayoutOptions } from './gui-layer';
+import type { GuiLayerDraw, GuiLayerGeometryCommand, GuiLayerLayout, GuiLayerLayoutOptions, GuiSpriteGeometry } from './gui-layer';
 import type { GuiTextGeometry } from './gui-text-geometry';
 
 type Source = string | PixelTexture;
 export type GuiLayerCommand =
   | ({ kind: 'image' } & GuiImage)
+  | ({ kind: 'sprite'; texture: Source } & GuiSpriteGeometry)
   | ({ kind: 'text'; pages?: ReadonlyMap<number, Source> } & GuiTextGeometry);
 export interface GuiLayerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, 'children' | 'width' | 'height' | 'onError'>, Omit<GuiLayerLayoutOptions, 'commands'> {
   commands: readonly GuiLayerCommand[];
@@ -23,7 +24,7 @@ export interface GuiLayerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasEleme
 }
 
 interface SourceUse { source: Source; size?: readonly [number, number]; upload: boolean }
-type Binding = { kind: 'image'; source: number } | { kind: 'text'; pages: readonly (readonly [number, number])[] };
+type Binding = { kind: 'image' | 'sprite'; source: number } | { kind: 'text'; pages: readonly (readonly [number, number])[] };
 interface Request {
   key: number;
   descriptor: string;
@@ -85,10 +86,11 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
     const uses: SourceUse[] = [], bindings: Binding[] = [], shapes: GuiLayerGeometryCommand[] = [];
     for (let index = 0; index < options.commands.length; index++) {
       const command = options.commands[index]!;
-      if (command.kind === 'image') {
+      if (command.kind !== 'text') {
         const { rect, uvRect, nineSlice, tint, hudOpacity, scissor } = command;
-        shapes.push({ kind: 'image', rect, uvRect, nineSlice, tint, hudOpacity, scissor });
-        bindings.push({ kind: 'image', source: uses.length }); uses.push({ source: command.texture, upload: true });
+        const shape = { rect, uvRect, nineSlice, tint, hudOpacity, scissor };
+        shapes.push(command.kind === 'sprite' ? { kind: 'sprite', ...shape, color: command.color } : { kind: 'image', ...shape });
+        bindings.push({ kind: command.kind, source: uses.length }); uses.push({ source: command.texture, upload: true });
       } else {
         const { text, font, origin, fontScale, sampling, shader, color, tint, hudOpacity, shadow, scissor } = command;
         const glyphs: typeof font.glyphs = Object.fromEntries([...new Set([...text.replace(/\r\n?/g, '\n')].filter(character => character !== '\n'))].map(character => {
@@ -129,7 +131,7 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
     const frozenShapes = JSON.parse(JSON.stringify(shapes)) as GuiLayerGeometryCommand[];
     const commands: GuiLayerCommand[] = frozenShapes.map((shape, index) => {
       const binding = bindings[index]!;
-      if (shape.kind === 'image' && binding.kind === 'image') return { ...shape, texture: snapshots[binding.source]!.source };
+      if (shape.kind !== 'text' && binding.kind !== 'text' && shape.kind === binding.kind) return { ...shape, texture: snapshots[binding.source]!.source };
       if (shape.kind === 'text' && binding.kind === 'text') return { ...shape, pages: new Map(binding.pages.map(([page, source]) => [page, snapshots[source]!.source])) };
       throw new Error('GUI snapshot order mismatch.');
     });
@@ -144,7 +146,7 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
   }
 }
 
-/** A single ordered image/text framebuffer; original semantic DOM belongs to the host. */
+/** A single ordered image/sprite/text framebuffer; original semantic DOM belongs to the host. */
 export const GuiLayer = forwardRef<HTMLCanvasElement, GuiLayerProps>(function GuiLayer({ width, height, guiScale, commands, scissor, outputRect, background, label, renderKey,
   onReady, onRenderError, onRenderStateChange, className, style, ...props }, forwardedRef) {
   const previous = useRef<Request | undefined>(undefined);
@@ -198,7 +200,7 @@ export const GuiLayer = forwardRef<HTMLCanvasElement, GuiLayerProps>(function Gu
         if (typeof value !== 'string') return value;
         const bitmap = decoded.get(value); if (!bitmap) throw new Error('A used GUI texture was not decoded.'); return bitmap;
       };
-      const resolved: GuiLayerDraw[] = request.commands.map(command => command.kind === 'image' ? { ...command, texture: source(command.texture) }
+      const resolved: GuiLayerDraw[] = request.commands.map(command => command.kind !== 'text' ? { ...command, texture: source(command.texture) }
         : { ...command, pages: new Map([...command.pages!].map(([page, value]) => [page, source(value)])) });
       const result = renderGuiLayer({ ...request.frame!, commands: resolved, background: request.background, canvas: target }); dispose = result.dispose;
       closeBitmaps(); if (failed) return;
