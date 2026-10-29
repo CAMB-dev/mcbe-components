@@ -188,3 +188,49 @@ AA1 SHA为`9bab05dcc92856a120271674872f3d3c844f19a3a3b8a73e760b25f70afde07b`；A
 | `.cache/tooltip-native/independent-aa-study/aa1-vs-aa16-independent.json` | `f66c1cf3ae0d7b3adb6e1610ee8de48ed6b28eafd7a82efbaa18db49ef605609` |
 
 要进一步区分quad/UV、cache、sampler与后续处理，仍需原生draw的实际vertex/index及格式、cellBase UV、上传GlyphTexture/MIP、uniform/sampler/blend、MVP/viewport/scissor、RT/MSAA/resolve及后续读该RT的pass。当前没有这类capture；本轮无生产更改，未新增拟合、mask或阈值豁免，未把限定source/layout合同提升为native覆盖或RGBA通过。
+
+## 冻结系数的非字体 holdout
+
+本次只追加研究证据，没有生产变更、测试重跑或新增case。冻结旧27个GUI5槽位边缘的OLS系数：`phi(x)=0.00012009791061388524*x-0.07964544629766367`，以原PNG绝对X计算 `C(x)=(1-phi)*T(x)+phi*T(x-1)`，统一 `floor(channel+.5)`，不重新拟合或配准。
+
+新的五木剑原图 SHA 为 `7353df9c55cd71086a48fe33fccd4ded1c15e7e45328f01d986283ab1d8e150a`。每槽保留完整65×10黑包络与四周2physical px halo，即69×14，合计4830像素；包括四角、原始木剑underlay、混色列和alpha，masked pixels为0。底图由官方原始wood_sword、cell中心及独立观测的几何/颜色构建，不回填native像素。**被holdout的只有水平迁移系数，不是这些已观察的几何/颜色端点。**
+
+| 冻结模型 | 完整像素 | 严格不同RGBA像素 | RGB绝对差和 | 最大通道差 |
+| --- | ---: | ---: | ---: | ---: |
+| noFilter | 4830 | 220 | 5811 | 27 |
+| frozenPhase | 4830 | 48 | 97 | 1 |
+
+四个前景右侧混色列共20/20行RGBA完全匹配；五个黑色右边界仅3/5完全匹配，原X1416/1596各十行的预测RGB均比原图暗1byte。五槽完整残差为4/19/5/16/4，**不是全部0，也没有以1byte容差豁免**。旧训练为Y740、X891…1696，新图测试Y1173…1186及新图元/颜色；X主要仍在旧范围内，不能推广为新viewport或宽范围X外推证据。它未识别final blit、MVP、sampler或客户区映射，旧字体反例和阈值失败不变。
+
+## 原生draw采集准备状态
+
+只读评估时，当前进程已初始化D3D12，但未观察到WinPixGpuCapturer或RenderDoc采集模块；有界安装路径/工具清单未发现已安装PIX或RenderDoc，未搜索位置仍为未知。已安装的Visual Studio图形编辑文件不构成D3D12采集能力；[Microsoft文档](https://learn.microsoft.com/en-us/visualstudio/debugger/graphics/visual-studio-graphics-diagnostics-directx-12?view=visualstudio)明确Graphics Diagnostics不支持D3D12。模块存在不证明实际UI draw的API、sampler或blend绑定。
+
+随后仅从[Microsoft官方PIX下载页](https://devblogs.microsoft.com/pix/download/)取得2610.28安装包：505682920bytes，SHA `4f24facf17dd1e4325a57e0fd00243b3b5ff39a835d7175382ac3eee70f95a04`，Authenticode为Valid、签署方Microsoft Corporation。**安装、运行、受控重启和GPU frame capture均尚未执行，下一步采集操作仍待用户授权。** [PIX采集前提](https://devblogs.microsoft.com/pix/taking-a-capture/)要求初始化前的instrumented launch，或预加载相应采集引擎；下载成功不等于当前进程已能GPU attach，也不证明零售UWP的启动/回放必然成功。
+
+原生书本、字体draw及后续读UI target链的实际资源/状态仍未知；需要真实shader/vertex/index/uniform、glyph cache/MIP、sampler/blend、MVP/viewport/RT/MSAA及copy/resolve/blit链。这只是draw-state证据的下一步边界，不将整个项目goal标为blocked；没有安装工具、注入进程、修改权限或改变生产实现。
+
+| 新增ignored证据 | SHA256 |
+| --- | --- |
+| `.cache/global-edge-holdout/RESULT.md` | `ba33ef2ff8ecf0d1029aa2018efdc8f6420296ff7a001cfa67b5261b2a29e003` |
+| `.cache/global-edge-holdout/wood-five-frozen-phase-holdout.json` | `eb425ef29d571906f77c070ed4cbd39ed131654dec1d1e6f086d6243407f337c` |
+| `.cache/native-draw-capture-assessment/REPORT.md` | `0078973eb00f06ab0cb6a106a1b75648b3e16bec4080edf419bad891139c30ba` |
+| `.cache/native-draw-capture-assessment/assessment.json` | `7ec108f7adebd84f8adc0e5af82b0e35fd7e8364981eb011418cd11dec73662b` |
+| `.cache/native-draw-capture-assessment/pix-2610.28/download-identity.json` | `d536bd100b2573571f83081a0b2e29615a2be2e2de7f47dcdb060bb1fc41e94d` |
+
+## 后续：真实NVIDIA硬件固定profile对照
+
+本次新后端已由实际renderer/CDP核实：NVIDIA RTX3050 Laptop、driver32.0.16.1714，Chromium156.0.8078.4的headless ANGLE/D3D11 WebGL2，highp23位；自定义图形参数仅 `--use-angle=d3d11`，`chromiumSandbox:true` 且GPU sandboxed。它不是原生RenderDragon/D3D12 draw，不能证明原生per-draw设备或绑定。此为新增硬件诊断，未重跑旧SwiftShader实验或正式测试，不计新case。
+
+八个既有scale2/2.5 × point/bilinear × Bitmap/Smooth配置保持原16²完整cells、页、metrics、颜色、blend和单采样FBO，无phi、offset或调参。原64个软件产物hash不变，复制的shader/mount及生产engine/component字节均不变。原RGBA8上传和rawGPU readPixels独立于Canvas/compositor，未启用MSAA、dither、mips、额外gamma或upload premultiply；页面错误为0。
+
+固定GUI5 bilinear/Smooth的五点硬件raw sample约`.4492256045`、postSmooth约`.8393716216`，旧软件约`.450000793/.843754411`。硬件白字为184/182/184，对原生199/196/199；蓝字52/92/184，对原生56/99/200。硬件稍暗，没有消除原生差异。
+
+| 同一固定profile对原生 | 完整field：像素数 / 不同像素 / RGB差和 / max | 完整field+2px halo：像素数 / 不同像素 / RGB差和 / max | `.25/.5/.75` |
+| --- | --- | --- | --- |
+| GUI5 A | 24300 / 1517 / 55905 / 24 | 25688 / 1517 / 55905 / 24 | 0 / 0 / 5 |
+| GUI5 B | 24300 / 1521 / 57652 / 24 | 25688 / 1521 / 57652 / 24 | 0 / 0 / 5 |
+
+alpha全相同不等于RGBA相同。负控也必须保留：bilinear/Smooth GPU对double为314pixels、max5，对实际组件352pixels、max5；两个scale2.5 point配置对CPU各1019pixels、max243，field-only对独立halo渲染裁回各658pixels、max243，其余六配置field/halo裁回为0。**硬件差异不是全部仅1LSB**，也没有用UV补偿、容差或选择point替代来宣称原生一致。旧software、精度和字体反例原样保留，原生覆盖/RGBA仍为NOT EXACT；本次没有恢复native sampler/cache/MVP/RT与后续pass绑定，也没有安装或运行PIX。
+
+报告和实际完整输出均在ignored目录：`REPORT.md` SHA `498ea116187f2781e9b70fe2ddd04540dcacc92c688d51868cc60d10ebe149c9`，`summary.json` SHA `8ac346a6a9ffde5fa532fcd9afb925c677e76a17db7c198f52562eb136963937`，`result.json` SHA `18f5ed6786e27e43ea2c04e0e925d83702d0a6bbb8a8d95752523c768dfd3098`（均位于 `.cache/bitmap-hardware-diagnostic/`）。八配置保存PNG的完整field/halo、CPU/实际组件/native比较指标已重新核算，未启动新的GPU或测试run。

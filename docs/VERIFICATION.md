@@ -2,6 +2,24 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
+## 当前检查点与历史记录范围
+
+本节对应耐久条修复 `0fac3c9` 与附魔空状态修复 `7c2a50c`。当前公开值仍为 **111 个组件、3 份数据、2 个函数，共 116 项**；下方各阶段的组件数、包哈希及测试汇总是当时的历史记录，不代表当前包或单次全套运行。
+
+| 最近改动 | 已完成验证 |
+| --- | --- |
+| 耐久条核心色与黑包络 | 库存 / HUD 52/52 PASS；`.cache/durability-integration-final.json`。五木剑实际 damage/max 与原生截图有限匹配，通用绑定与完整原生边缘仍未认证 |
+| 附魔台空选项背景 | 首批27/27及最终新文件6/6，按完整标题合并为28个唯一用例全部通过；`.cache/enchanting-empty-integration.json` / `enchanting-empty-final.json`。新增6个正式用例，无空行伪按钮或动作 |
+| 展示页独立复验 | 48项辅助检查通过，不计入正式测试数；清空 / 恢复 / 关闭重开、书本显式开合、原始背景内部色、无障碍与错误检查；390px保留原尺寸并局部横滚，不能声称单帧全板可见 |
+| 实际包消费 | React18.3.1与19.3.1的116值、SSR、严格类型/ref/API及资产检查通过；两个消费者各98个dist文件与本轮构建逐字节相同 |
+| 生产预览 | `.cache/enchanting-empty-production-preview.log` PASS，页面 / 资源错误为空 |
+
+附魔空状态实际消费包 SHA256 为 `3db13169bf7fc7c94e11a13b2f8cdec888574a007d83e7bebf1da5c3e5a494ab`，其 `dist/index.js` 为 `6cfcf2395262dafc9632b35ba2c686570ee72823b5f317d52008c6537429de9d`；原包保存在 `.cache/enchanting-empty-consumer-verified.tgz`。本次追加研究与验证文档时，生产代码、导出与原件没有变化。后续文档重打包必须逐条核对非文档条目和两个实际消费者的 dist 字节，不能把旧消费报告直接移用到变化后的运行时代码。
+
+历史完整运行与最终相关范围按正式 project、文件及完整标题合并，目前 **744 个唯一用例：739 PASS、5 预期 SKIP、0 未解决合同测试失败**，不是单次744项全绿。独立研究像素数、48项展示检查和不同参数候选不作为新增正式用例。原生字体 / 书本的非零残差和完整 GUI 验收仍未解决，Goal保持进行中。
+
+以下按阶段保留原始验证记录。
+
 ## 原字图文字与提示框接入
 
 新增 `BitmapText`，当前公共值为111个组件、3份数据、2个函数，共116项。支持调用方字图、明确的字符矩形与推进、整段排版、受控采样 / shader、显式阴影、真实DOM文字及加载失败回退。`ItemTooltip.renderText` / `InventoryItem.tooltipTextRenderer` 复用同一入口，异步字图改变尺寸时提示框重新定位。源资源、公式与原生比较边界见 [NATIVE_BITMAP_FONT_QA.md](NATIVE_BITMAP_FONT_QA.md)。

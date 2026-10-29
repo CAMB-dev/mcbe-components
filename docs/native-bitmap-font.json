@@ -1671,5 +1671,385 @@
     "newFitOrPhiAdded": false,
     "nativeCoverageParityPassed": false,
     "nativeRgbaParityPassed": false
+  },
+  "nonFontFrozenEdgeHoldout": {
+    "researchOnly": true,
+    "productionChanged": false,
+    "testsRerun": false,
+    "newTestCases": 0,
+    "scope": "New non-font wooden-sword holdout of the old27-edge horizontal transfer coefficients only. Independently observed geometry/color endpoints are fixed inputs, not held-out predictions. No refit, shift, tolerance or mask.",
+    "frozenCoefficients": {
+      "slope": 0.00012009791061388524,
+      "intercept": -0.07964544629766367,
+      "coordinates": "Absolute raw native PNG X; not CSS/client coordinates.",
+      "transfer": "C(x)=(1-phi(x))*T(x)+phi(x)*T(x-1)",
+      "outputQuantization": "floor(channel+.5)"
+    },
+    "oldTraining": {
+      "edges": 27,
+      "rawY": 740,
+      "rawXRange": [
+        891,
+        1696
+      ]
+    },
+    "holdout": {
+      "nativeSha256": "7353df9c55cd71086a48fe33fccd4ded1c15e7e45328f01d986283ab1d8e150a",
+      "nativePixels": [
+        2568,
+        1400
+      ],
+      "slots": 5,
+      "eachCompletePatchPixels": [
+        69,
+        14
+      ],
+      "completePixels": 4830,
+      "haloPhysicalPixels": 2,
+      "maskedPixels": 0,
+      "rawYRangeInclusive": [
+        1173,
+        1186
+      ],
+      "originalSourceItemUnderlayRetained": true,
+      "nativePixelsReusedAsModelUnderlay": false
+    },
+    "completeAggregate": {
+      "noFilter": {
+        "pixels": 4830,
+        "changedPixels": 220,
+        "sumAbsRgb": 5811,
+        "maeRgb": 0.4010351966873706,
+        "sumAbsRgba": 5811,
+        "maeRgba": 0.3007763975155279,
+        "maxChannelError": 27
+      },
+      "frozenPhase": {
+        "pixels": 4830,
+        "changedPixels": 48,
+        "sumAbsRgb": 97,
+        "maeRgb": 0.006694271911663216,
+        "sumAbsRgba": 97,
+        "maeRgba": 0.005020703933747412,
+        "maxChannelError": 1
+      }
+    },
+    "coloredForegroundRightMixedColumns": {
+      "columns": 4,
+      "rowsPerColumn": 5,
+      "rgbaExactRows": 20,
+      "totalRows": 20,
+      "scope": "This does not make the complete patches exact."
+    },
+    "blackRightMixedColumns": {
+      "rgbaExactColumns": 3,
+      "totalColumns": 5,
+      "allTenRowsOneByteDarkerRawX": [
+        1416,
+        1596
+      ],
+      "signedRgbErrorPerRow": [
+        -1,
+        -1,
+        -1
+      ],
+      "alphaErrorPerRow": 0
+    },
+    "perSlotChangedRgbaPixels": [
+      4,
+      19,
+      5,
+      16,
+      4
+    ],
+    "limits": [
+      "TestedX largely overlaps the old training range; this tests new primitives/Y/colors, not a new viewport or broad X extrapolation.",
+      "48 changed pixels remain, maximum1channel; no tolerance converts them to zero.",
+      "No native final-blit, sampler, MVP, target/client dimensions or active draw binding is identified.",
+      "Earlier font counterexamples, thresholds and RGBA failures remain unchanged."
+    ],
+    "nativeRgbaParityPassed": false,
+    "evidenceReports": [
+      {
+        "ignoredReport": ".cache/global-edge-holdout/RESULT.md",
+        "sha256": "ba33ef2ff8ecf0d1029aa2018efdc8f6420296ff7a001cfa67b5261b2a29e003"
+      },
+      {
+        "ignoredReport": ".cache/global-edge-holdout/wood-five-frozen-phase-holdout.json",
+        "sha256": "eb425ef29d571906f77c070ed4cbd39ed131654dec1d1e6f086d6243407f337c"
+      }
+    ]
+  },
+  "nativeDrawCaptureReadiness": {
+    "date": "2026-10-29",
+    "researchOnly": true,
+    "productionChanged": false,
+    "testsRerun": false,
+    "newTestCases": 0,
+    "boundedReadOnlyAssessment": {
+      "d3d12AlreadyInitialized": true,
+      "winPixGpuCapturerObserved": false,
+      "renderDocCaptureModuleObserved": false,
+      "installedPixOrRenderDocFoundInBoundedSearch": false,
+      "unsearchedPortableOrPerUserLocations": "Unknown; no global absence claim.",
+      "visualStudioGraphicsDiagnosticsSupportsD3D12": false,
+      "graphicsToolsCapabilityState": "Unknown; read-only query required elevation.",
+      "loadedGraphicsModulesDoNotIdentifyActualUiDrawState": true
+    },
+    "subsequentPixDownload": {
+      "version": "2610.28",
+      "source": "https://download.microsoft.com/download/bce7dfb5-cf77-4e3d-b5cc-fe649d687a32/PIX-2610.28-Installer-x64.exe",
+      "discovery": "https://devblogs.microsoft.com/pix/download/",
+      "bytes": 505682920,
+      "sha256": "4f24facf17dd1e4325a57e0fd00243b3b5ff39a835d7175382ac3eee70f95a04",
+      "authenticodeStatus": "Valid",
+      "signer": "Microsoft Corporation",
+      "installed": false,
+      "executed": false,
+      "controlledRestartPerformed": false,
+      "gpuFrameCaptured": false
+    },
+    "nextStepStatus": "Installation/execution and an instrumented restart/capture are not performed and await user authorization; packaged activation and replay success are not established. This is a boundary of the draw-state evidence, not a statement that the whole project goal is blocked.",
+    "nativeBookFontAndSubsequentTargetReadBindingsKnown": false,
+    "minimumMissingEvidence": [
+      "Actual book/font draw shader, vertex/index/format, UV and constant-buffer/uniform bytes.",
+      "Bound glyph-cache/book textures and MIPs, sampler, exact RGB/separate-alpha blend, viewport/scissor and target/sample state.",
+      "All subsequent target-read copy/resolve/blit/draw/dispatch state through Present, with captured target pixels and replay identity."
+    ],
+    "primarySources": [
+      {
+        "title": "PIX Taking a Capture",
+        "url": "https://devblogs.microsoft.com/pix/taking-a-capture/"
+      },
+      {
+        "title": "PIX pixtool",
+        "url": "https://devblogs.microsoft.com/pix/pixtool/"
+      },
+      {
+        "title": "Visual Studio DirectX support",
+        "url": "https://learn.microsoft.com/en-us/visualstudio/debugger/graphics/visual-studio-graphics-diagnostics-directx-12?view=visualstudio"
+      }
+    ],
+    "evidenceReports": [
+      {
+        "ignoredReport": ".cache/native-draw-capture-assessment/REPORT.md",
+        "sha256": "0078973eb00f06ab0cb6a106a1b75648b3e16bec4080edf419bad891139c30ba"
+      },
+      {
+        "ignoredReport": ".cache/native-draw-capture-assessment/assessment.json",
+        "sha256": "7ec108f7adebd84f8adc0e5af82b0e35fd7e8364981eb011418cd11dec73662b"
+      },
+      {
+        "ignoredReport": ".cache/native-draw-capture-assessment/pix-2610.28/download-identity.json",
+        "sha256": "d536bd100b2573571f83081a0b2e29615a2be2e2de7f47dcdb060bb1fc41e94d"
+      }
+    ]
+  },
+  "hardwareGpuFollowUp": {
+    "researchOnly": true,
+    "productionChanged": false,
+    "formalTestsRerun": false,
+    "newTestCases": 0,
+    "backend": {
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3050 Laptop GPU (0x000025E2) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "driver": "32.0.16.1714",
+      "chromium": "156.0.8078.4",
+      "api": "Headless WebGL2 via ANGLE/D3D11; not native RenderDragon/D3D12",
+      "hardwareConfirmed": true,
+      "graphicsLaunch": {
+        "headless": true,
+        "chromiumSandbox": true,
+        "args": [
+          "--use-angle=d3d11"
+        ]
+      },
+      "gpuSandboxed": true,
+      "highpPrecisionBits": 23,
+      "pageErrors": []
+    },
+    "fixedInputs": {
+      "profiles": 8,
+      "scales": [
+        2,
+        2.5
+      ],
+      "sampling": [
+        "point",
+        "bilinear"
+      ],
+      "shader": [
+        "bitmap",
+        "bitmap-smooth"
+      ],
+      "originalFullCellsAndMetricsUnchanged": true,
+      "noPhiOffsetsTuningOrTolerance": true,
+      "preservedSoftwareArtifacts": 64,
+      "changedPreservedArtifacts": 0,
+      "shaderAndMountByteIdentical": true,
+      "engineAndComponentByteUnchanged": true
+    },
+    "pipeline": "Original rawRGBA8; no upload premultiplication/color conversion/mips. Single-sampleRGBA8 textureFBO, MSAA/depth/stencil/dither disabled; explicit RGB SRC_ALPHA/ONE_MINUS_SRC_ALPHA and alpha ONE/ONE_MINUS_SRC_ALPHA; raw readPixels before Canvas/compositor.",
+    "baselineGui5Profile": "s2.5-bilinear-bitmap-smooth",
+    "baselineGui5Native": [
+      {
+        "sample": "GUI5 A",
+        "fullField": {
+          "size": [
+            243,
+            100
+          ],
+          "pixels": 24300,
+          "changedPixels": 1517,
+          "absoluteRgbSum": 55905,
+          "maxChannelError": 24,
+          "alphaChangedPixels": 0,
+          "thresholds": {
+            ".25": 0,
+            ".5": 0,
+            ".75": 5
+          }
+        },
+        "fieldPlus2pxHalo": {
+          "size": [
+            247,
+            104
+          ],
+          "pixels": 25688,
+          "changedPixels": 1517,
+          "absoluteRgbSum": 55905,
+          "maxChannelError": 24,
+          "alphaChangedPixels": 0,
+          "thresholds": {
+            ".25": 0,
+            ".5": 0,
+            ".75": 5
+          }
+        }
+      },
+      {
+        "sample": "GUI5 B",
+        "fullField": {
+          "size": [
+            243,
+            100
+          ],
+          "pixels": 24300,
+          "changedPixels": 1521,
+          "absoluteRgbSum": 57652,
+          "maxChannelError": 24,
+          "alphaChangedPixels": 0,
+          "thresholds": {
+            ".25": 0,
+            ".5": 0,
+            ".75": 5
+          }
+        },
+        "fieldPlus2pxHalo": {
+          "size": [
+            247,
+            104
+          ],
+          "pixels": 25688,
+          "changedPixels": 1521,
+          "absoluteRgbSum": 57652,
+          "maxChannelError": 24,
+          "alphaChangedPixels": 0,
+          "thresholds": {
+            ".25": 0,
+            ".5": 0,
+            ".75": 5
+          }
+        }
+      }
+    ],
+    "fixedFiveSites": {
+      "whiteGpuRgb": [
+        184,
+        182,
+        184
+      ],
+      "whiteNativeRgb": [
+        199,
+        196,
+        199
+      ],
+      "blueGpuRgb": [
+        52,
+        92,
+        184
+      ],
+      "blueNativeRgb": [
+        56,
+        99,
+        200
+      ],
+      "rawSampleAllRgbaChannels": 0.44922560453414917,
+      "postSmoothAllRgbaChannels": 0.8393716216087341,
+      "oldSwiftShaderRawSampleApprox": 0.450000793,
+      "oldSwiftShaderPostSmoothApprox": 0.843754411,
+      "remainingHighThresholdMismatchEachGui5Sample": 5
+    },
+    "retainedHardwareNegativeControls": {
+      "bilinearSmoothGpuVsDouble": {
+        "changedPixels": 314,
+        "changedChannels": 632,
+        "maxChannelError": 5
+      },
+      "bilinearSmoothGpuVsActualComponent": {
+        "changedPixels": 352,
+        "changedChannels": 621,
+        "maxChannelError": 5
+      },
+      "scale2PointBitmapGpuVsDoubleAndComponent": [
+        0,
+        0,
+        0
+      ],
+      "scale2PointBitmapSmoothGpuVsDoubleAndComponent": [
+        0,
+        0,
+        0
+      ],
+      "scale2_5PointProfiles": {
+        "profiles": [
+          "s2.5-point-bitmap",
+          "s2.5-point-bitmap-smooth"
+        ],
+        "eachGpuVsDoubleAndComponent": {
+          "changedPixels": 1019,
+          "maxChannelError": 243
+        },
+        "eachFieldOnlyVsSeparatelyRenderedHaloCrop": {
+          "changedPixels": 658,
+          "maxChannelError": 243
+        },
+        "remainingSixProfilesFieldHaloChangedPixels": 0
+      },
+      "boundary": "Hardware differences are not uniformly1LSB. Nearest-boundary/viewport counterexamples are retained without coordinate compensation or selecting the point alternative as a native match."
+    },
+    "limits": [
+      "NVIDIA hardware is verified for this declared ANGLE/D3D11 diagnostic, not the native per-draw device/API/bindings.",
+      "The eight profiles reuse known native PNGs, not a new native holdout.",
+      "Native actual glyph-cache uploads, shader variant, sampler/blend, MVP/viewport/target and subsequent read chain remain unknown.",
+      "Prior SwiftShader/precision/font counterexamples and original thresholds are unchanged; native RGBA remains NOT EXACT.",
+      "No PIX installation/capture or production change is implied."
+    ],
+    "nativePerDrawDeviceOrBindingProven": false,
+    "nativeCoverageParityPassed": false,
+    "nativeRgbaParityPassed": false,
+    "evidenceReports": [
+      {
+        "ignoredReport": ".cache/bitmap-hardware-diagnostic/REPORT.md",
+        "sha256": "498ea116187f2781e9b70fe2ddd04540dcacc92c688d51868cc60d10ebe149c9"
+      },
+      {
+        "ignoredReport": ".cache/bitmap-hardware-diagnostic/summary.json",
+        "sha256": "8ac346a6a9ffde5fa532fcd9afb925c677e76a17db7c198f52562eb136963937"
+      },
+      {
+        "ignoredReport": ".cache/bitmap-hardware-diagnostic/result.json",
+        "sha256": "18f5ed6786e27e43ea2c04e0e925d83702d0a6bbb8a8d95752523c768dfd3098"
+      }
+    ]
   }
 }
