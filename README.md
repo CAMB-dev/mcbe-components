@@ -71,9 +71,9 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `RadioGroup` | **必填** `label`、`options`；`value` / `defaultValue`；`onValueChange`、`name`、`disabled`、`required`、`orientation` | 原生 fieldset/legend/radio，自动独立 name，原生方向键操作 |
 | `Slider` | **必填** `label`；`value` / `defaultValue`；`onValueChange`、`min`、`max`、`step`、`formatValue` | 原生 range，显示格式化值，支持方向键、Home、End |
 | `Combobox` | **必填** `label`、`options`；`value` / `defaultValue`、`onValueChange`、`placeholder`、`name`、`form`、`required`、`disabled`、`description`、`error` | select-only combobox，原版样式列表，当前选中与活动项分离；原生表单提交 / 校验 / reset；ref 指向可见按钮 |
-| `Select` | **必填** `label`、`options`；`description`、`error`；原生 select 属性 | 原生选择控件作为可选替代，展开列表由操作系统绘制；默认展示使用 Combobox |
+| `Select` | **必填** `label`、`options`；`description`、`error`；原生 select 属性 | 可见 trigger / popup 与 Combobox 共用 Classic 样式；ref 仍为 HTMLSelectElement，保留原生 onChange、form / reset / required / multiple |
 | `Tabs` | **必填** `label`、`items`；`value` / `defaultValue`；`onValueChange`、`orientation` | items 为 `{ value, label, content, disabled? }[]`；方向键循环，Home/End，跳过禁用项，保留面板状态，支持 RTL |
-| `Dialog` | **必填** `open`、`onOpenChange`、`title`；`description`、`footer`、`closeLabel`、`closeOnBackdrop` | Classic 灰色标题栏、深色凹陷内部、原版三态关闭图像；原生 modal dialog，Escape、遮罩关闭、焦点循环与恢复；closeOnBackdrop 默认 true |
+| `Dialog` | **必填** `open`、`onOpenChange`、`title`；`width`、`height`、`style`、`description`、`footer`、`closeLabel`、`closeOnBackdrop` | border-box 尺寸，数值为 CSS px，style 优先；root / body 默认 clip，无自动滚动；保留原生 modal、Escape、遮罩关闭及焦点管理 |
 | `Badge` | `variant`: default / success / warning / danger | 非交互标签 |
 | `Progress` | **必填** `label`；`value`、`max`、`showValue` | Classic common.progress_bar 纹理，高 10 CSS px，完整填充图按进度裁切；省略 value 为不确定进度，数值限制在 0…max；reduced motion 下静止 |
 | `Alert` | `title`；`variant`: info / success / warning / danger | danger 使用 role=alert，其余 role=status；可覆盖 role |
@@ -185,6 +185,8 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ### ComboBox 与选中态
 
+`Select` 与 `Combobox` 的可见 trigger / popup 现在共用内部 `ComboboxBase`，使用相同 Classic 皮肤、选中标记与活动态。`Select` 仍接收原生 select 的 `value` / `defaultValue` 和 `onChange`，ref 指向 `HTMLSelectElement`；底层原生控件负责表单提交、reset、required 和 multiple。多选时可见 popup 切换各项而不立即关闭，`onChange` 可读取 `event.currentTarget.selectedOptions`。`Combobox` 的 ref 仍指向可见按钮，提交回调仍为 `onValueChange`。直接赋值 `selectRef.current.value` 不会自动同步可见文案；程序更新请使用受控 `value` 属性，或在修改原生选中值后派发冒泡 `change` 事件（仅 `input` 不会更新可见文案），不应假设所有原生 imperative UI 行为都被可见层自动镜像。
+
 `Combobox` 是不可编辑的选择型组合框，支持类型前缀定位，不提供文本搜索框。展开层使用原生 Popover top layer，能够越过面板裁剪，并在 Dialog 内保持交互；需要支持 Popover 的现代浏览器。
 
 ```tsx
@@ -230,7 +232,18 @@ const [open, setOpen] = useState(false);
 </Dialog>
 ```
 
-初次焦点在关闭按钮；也可在子表单中指定原生 `autoFocus`。原生 showModal 让背景失去交互，组件额外处理 Tab 首尾循环和滚动锁定。需要浏览器原生 HTMLDialogElement 支持，目标为现代 Chromium、Firefox、Safari。标题超过可用宽度时显示省略号，完整文字仍用于可访问名称；正文与按钮区域可随内容滚动。
+初次焦点在关闭按钮；也可在子表单中指定原生 `autoFocus`。原生 showModal 让背景失去交互，组件额外处理 Tab 首尾循环和滚动锁定。需要浏览器原生 HTMLDialogElement 支持，目标为现代 Chromium、Firefox、Safari。标题超过可用宽度时显示省略号，完整文字仍用于可访问名称。`width` / `height` 指定 border-box 尺寸，数值按 CSS px，也支持 CSS 长度；`style` 中的同名尺寸优先。显式 `height`（包括 style.height / blockSize）解除默认 maxHeight，宿主应自行选择合适的屏幕尺寸。根节点和正文均默认 `overflow: clip`，不会产生自动滚动区；长内容需要显式嵌入 `ScrollArea`。
+
+```tsx
+<Dialog open={open} onOpenChange={setOpen} title="World settings"
+  width={480} height={420}>
+  <ScrollArea label="World settings content" style={{ height: '100%' }}>
+    <WorldSettings />
+  </ScrollArea>
+</Dialog>
+```
+
+关闭入口与 footer 保留在滚动区之外；使用方应为长内容分配明确可用高度。Select / Dialog 本轮契约、正式分批验证及范围见 [CONTROLS_CONSISTENCY_QA.md](docs/CONTROLS_CONSISTENCY_QA.md)。
 
 Panel 默认是 Classic 浅灰底和深灰文字，输入内容通过独立的 `--mc-input-text` 保持白色。Progress 使用通用灰色进度条模板；游戏生成世界的绿色进度 renderer 属于另一模板。逐项参考与还原范围见 FIDELITY.md。
 
@@ -276,6 +289,8 @@ ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随
 `shadeItemGlint` 输出未量化的原始 pass，`renderItemGlint` 按显式混合模式生成像素数据。原生时间、采样和混合绑定尚未提取，不会自动给 `enchanted` 物品添加动画；公式与 Canvas 透明存储边界见 [ITEM_GLINT_QA.md](docs/ITEM_GLINT_QA.md)。
 
 砂轮布局来自 grindstone_screen.json，附魔台来自 enchanting_screen.json；逐级锚点与百分比推导见 [workstation-geometry.json](docs/workstation-geometry.json)。附魔选项保留源浮点边界，不人为取整。砂轮空结果槽保留 hover / focus，通过 `aria-disabled` 与回调 guard 阻止无效领取。真实关闭按钮支持容器内部的原始键盘导航。
+
+附魔选项的三档经验粉使用原版 13×11 PNG，CSS 按整数2倍显示为 26×22；各档绿色轮廓及已烘焙数字原本不同。六个 selectable / unselectable 状态共 3,432 个 CSS 像素与原图2倍最近邻对照零差，没有重绘或统一轮廓；该结果不覆盖原生整屏和分数坐标光栅化。证据范围见 [CONTROLS_CONSISTENCY_QA.md](docs/CONTROLS_CONSISTENCY_QA.md)。
 
 `EnchantingTable` 在 `options={[]}` 或不足三条记录时仍保留三个原版 dark 背景，缺记录的行不生成 rune、dust、cost、按钮或回调。已有记录继续使用 `EnchantmentOption`。这对应源 `enchant_button_panel` 的常驻背景和独立按钮可见性绑定，并由原生空槽截图确认，不代表整页或默认书本动画已达原生零差。演示页用干净钻石剑，Clear / Restore 显式切换输入、记录及 `EnchantingBook open={0/1}`；库本身不猜附魔资格，也不据 `options` 自动开合宿主书本。
 

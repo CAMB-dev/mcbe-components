@@ -4,6 +4,10 @@
 
 当前公开117个组件、3份数据及3个渲染函数，共123项值导出；其中新增 `renderBitmapGlyphs` 为浏览器GPU函数，两个glint函数为纯纹理运算。共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen 已实现；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
 
+## 下拉框、Dialog 与经验图标
+
+Select 与 Combobox 共用 Classic 可见皮肤、popup、选中标记和活动态；两个原图皮肤回归及两组件完整区域一致性通过。Dialog 按显式 width/height/style 渲染 border-box，根节点和正文默认不滚动；长内容由宿主显式嵌入 ScrollArea。附魔经验图标仍使用六份原 PNG：三档13×11原图的绿色轮廓本来不同，当前均以26×22等比显示，六状态完整RGBA原图对照零差；不将它们重绘成同一圆形。详细范围与表单回归见 [CONTROLS_CONSISTENCY_QA.md](CONTROLS_CONSISTENCY_QA.md)。
+
 ## 实际 GPU 捕获与当前书本实现
 
 PIX已捕获本机附魔台的一帧。书本实际mesh、UV、PSO795状态与shader算术已迁入 `EnchantingBook`；新增调用方 `rendererState` 接口。实际组件在NVIDIA / ANGLE D3D11、原始矩阵与骨骼下，对该次book draw完整2570×1402目标RGBA零差；默认开合 / 翻页CPU算法仍为受控重建，在旧GUI4/5原图上仍有非零误差。此为限定draw认证，不等于整GUI、默认动画或其他GPU认证。

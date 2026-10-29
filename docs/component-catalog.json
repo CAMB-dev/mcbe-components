@@ -81,7 +81,14 @@
       },
       {
         "name": "Dialog",
-        "status": "implemented"
+        "status": "implemented",
+        "api": {
+          "dimensions": "width/height border-box; numeric CSS px or CSS lengths",
+          "precedence": "style overrides dedicated size props",
+          "explicitHeight": "disables default maxHeight",
+          "overflow": "root/body clip; caller embeds ScrollArea for scrolling"
+        },
+        "validationNote": "Scoped formal coverage closed via initial run plus parity framing-only rerun; not a single all-green run or native whole-GUI certification. docs/CONTROLS_CONSISTENCY_QA.md"
       },
       {
         "name": "Alert",
@@ -140,7 +147,19 @@
       },
       {
         "name": "Select",
-        "status": "implemented"
+        "status": "implemented",
+        "api": {
+          "visibleControl": "shared internal ComboboxBase Classic trigger/popup",
+          "ref": "HTMLSelectElement",
+          "events": "native onChange",
+          "nativeContracts": [
+            "form",
+            "reset",
+            "required",
+            "multiple"
+          ]
+        },
+        "validationNote": "Scoped formal coverage closed via initial run plus parity framing-only rerun; not a single all-green run or native whole-GUI certification. docs/CONTROLS_CONSISTENCY_QA.md"
       },
       {
         "name": "Combobox",
@@ -263,7 +282,19 @@
       },
       {
         "name": "EnchantmentOption",
-        "status": "implemented"
+        "status": "implemented",
+        "dustSource": {
+          "originalPixels": [
+            13,
+            11
+          ],
+          "cssPixels": [
+            26,
+            22
+          ],
+          "tierContoursDifferInOriginal": true,
+          "sixStateCssSourcePixelComparison": "3432 CSS pixels, zero RGBA difference; excludes native whole GUI/fractional raster"
+        }
       },
       {
         "name": "EnchantingRunes",

@@ -66,6 +66,7 @@
 - [x] 经授权安装 PIX 并采集真实附魔台GPU帧；恢复书本与tooltip字体draw的实际纹理、VB/IB、shader、矩阵、UV及混合，完整2570×1402目标在限定NVIDIA后端的条件式重放RGBA零差
 - [x] 将实际书本网格、UV及shader迁入组件，新增caller rendererState；实际组件显式捕获状态全目标RGBA零差，默认动态姿态和旧PNG非零差继续保留
 - [x] 将验证过的字体GPU绘制链迁入可复用renderBitmapGlyphs与BitmapText可选后端；真实8draw及原背景在限定NVIDIA后端全目标/字段/halo零差，组件多底色Web合同独立通过；CPU默认保留，正式新7+旧13共20项通过，123值React18/19消费通过
+- [x] 统一13处Select与Combobox可见实现，修复reset/hidden/事件兼容；Dialog按显式尺寸裁切无自动滚动；核对原版经验六图比例及不同轮廓，新增13项与相关双端回归、React18/19消费和4173生产19项检查通过
 - [ ] 完成默认字体与原生整GUI的最终合成 / Present / 窗口映射验证，并完善大量GPU文字的共享批处理和上下文预算
 - [ ] 对照游戏渲染器完善附魔书本动态算法、符文、方块 / 旗帜 / 装备预览、物品 tooltip / glint、工作站完整页面
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正

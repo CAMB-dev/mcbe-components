@@ -7,6 +7,7 @@ import type {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { Spinner } from './feedback';
+import { ComboboxBase } from './combobox';
 
 function cx(...names: (string | false | undefined)[]) { return names.filter(Boolean).join(' '); }
 function useValue<T>(value: T | undefined, defaultValue: T, onChange?: (value: T) => void) {
@@ -201,16 +202,12 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>, Fi
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select({
   label, description, error, options, id: givenId, className, 'aria-describedby': describedBy, ...props
 }, ref) {
-  const autoId = useId(); const id = givenId ?? autoId; const message = error || description;
-  return <div className={cx('mc-field', className)}>
-    <label className="mc-field__label" htmlFor={id}>{label}</label>
-    <div className="mc-select-wrap"><select {...props} id={id} ref={ref} className="mc-select"
-      aria-invalid={error ? true : props['aria-invalid']}
-      aria-describedby={cx(describedBy, !!message && `${id}-message`) || undefined}>
-      {options.map(option => <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>)}
-    </select><span className="mc-select-arrow" aria-hidden="true"/></div>
-    {message && <span id={`${id}-message`} className={cx('mc-field__description', !!error && 'mc-field__error')}>{message}</span>}
-  </div>;
+  return <ComboboxBase label={label} description={description} error={error} options={options} id={givenId} className={className}
+    nativeAdapter={{ props: { ...props, 'aria-describedby': describedBy }, ref }} name={props.name} form={props.form}
+    disabled={props.disabled} required={props.required} hidden={props.hidden} autoFocus={props.autoFocus} tabIndex={props.tabIndex}
+    title={props.title} style={props.style} dir={props.dir} lang={props.lang} accessKey={props.accessKey}
+    aria-label={props['aria-label']} aria-labelledby={props['aria-labelledby']} aria-invalid={props['aria-invalid']}
+    aria-describedby={describedBy}/>;
 });
 
 export interface TabItem { value: string; label: ReactNode; content: ReactNode; disabled?: boolean }
@@ -261,6 +258,12 @@ export interface DialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: ReactNode;
+  /** Border-box width: a number is CSS pixels; CSS lengths such as rem or calc() are supported. */
+  width?: CSSProperties['width'];
+  /** Explicit heights are not reduced to the default viewport limit. */
+  height?: CSSProperties['height'];
+  /** Inline styles take precedence over the dedicated size props. */
+  style?: CSSProperties;
   description?: ReactNode;
   children?: ReactNode;
   footer?: ReactNode;
@@ -268,7 +271,7 @@ export interface DialogProps {
   closeLabel?: string;
   closeOnBackdrop?: boolean;
 }
-export function Dialog({ open, onOpenChange, title, description, children, footer, className, closeLabel = 'Close dialog', closeOnBackdrop = true }: DialogProps) {
+export function Dialog({ open, onOpenChange, title, width, height, style, description, children, footer, className, closeLabel = 'Close dialog', closeOnBackdrop = true }: DialogProps) {
   const id = useId(); const ref = useRef<HTMLDialogElement>(null);
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
@@ -283,6 +286,7 @@ export function Dialog({ open, onOpenChange, title, description, children, foote
   }, [open, mounted]);
   if (!mounted) return null;
   return createPortal(<dialog ref={ref} className={cx('mc-dialog', className)} aria-labelledby={`${id}-title`}
+    style={{ width, height, maxHeight: height !== undefined || style?.height !== undefined || style?.blockSize !== undefined ? 'none' : undefined, ...style }}
     aria-describedby={description ? `${id}-description` : undefined}
     onCancel={event => { event.preventDefault(); onOpenChange(false); }}
     onKeyDown={event => {

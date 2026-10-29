@@ -42,6 +42,7 @@ assert.equal(dataExports.length,3);
 assert.equal(rendererFunctions.length,3);
 assert.equal(Object.keys(ui).length,123);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
+assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
 const glintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25]};
 const glintTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
@@ -227,6 +228,7 @@ import { createRef } from 'react';
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState } from 'mcbeui';
 import { BitmapText, renderBitmapGlyphs } from 'mcbeui';
+import { Select } from 'mcbeui';
 import type { BitmapTextProps, BitmapTextRenderer, BitmapTextProfile, BitmapFont, BitmapGlyph, BitmapGlyphRun, BitmapGlyphRenderOptions, BitmapGlyphRenderResult, BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, BitmapUnicodeVertex, BitmapUnicodeRun, BitmapGlyphBackground } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
 import type { AirBubbleState, BrewingSlot, CartographyMode, ScrollPosition } from 'mcbeui';
@@ -416,7 +418,8 @@ export const demo = <>
   <Slider label="Distance" defaultValue={12} min={4} max={32} onValueChange={n=>n.toFixed(0)}/>
   <RadioGroup label="Mode" options={[{value:'survival',label:'Survival'}]} />
   <Tabs label="Settings" items={items}/>
-  <Dialog open={false} onOpenChange={next=>Boolean(next)} title="World" />
+  <Select label="Native-compatible selection" name="selection" multiple defaultValue={['a']} options={[{value:'a',label:'A'}]} ref={createRef<HTMLSelectElement>()} onChange={event=>Array.from(event.currentTarget.selectedOptions,option=>option.value)}/>
+  <Dialog open={false} onOpenChange={next=>Boolean(next)} title="World" width={420} height="calc(100vh - 80px)" style={{maxWidth:'90vw'}} />
 </>;
 `);
   const tsc = join(root, 'node_modules', 'typescript', 'bin', 'tsc');

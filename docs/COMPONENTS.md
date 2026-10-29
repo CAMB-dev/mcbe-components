@@ -46,6 +46,8 @@ UI 组件接收物品、配方、进度、选择状态与操作回调；合成�
 
 Stonecutter / Loom 共用 RecipeSelectionGrid 和原生滚动视口，旗帜 / 方块预览由调用方提供 renderer。CrafterSlot 将禁用槽恢复操作与普通物品操作分开；BeaconEffect 复用真实效果按钮，金字塔等级、有效选择和支付规则由调用方控制。
 
+Select / Combobox 共用内部 ComboboxBase 的 Classic trigger / popup，Select 保留 HTMLSelectElement ref、原生 onChange 和 form / reset / required / multiple。Dialog 的 width / height 为 border-box 尺寸，style 优先；显式高度解除默认 maxHeight，root / body 默认 clip，长内容由调用方显式嵌入 ScrollArea。附魔经验粉保留三档不同的原版13×11轮廓，CSS26×22；六状态原图对照不等于原生整屏认证。详见 [CONTROLS_CONSISTENCY_QA.md](./CONTROLS_CONSISTENCY_QA.md)，Select / Dialog 本轮正式结果按首批与取景修正后的定向复跑记录，不称单次全绿。
+
 设置控件分别提供切换、搜索、导航、标签关联和物理键捕获；SettingRow 使用 render prop 将 id / aria / disabled 传给控件。Tooltip / Toast 使用原版图层，定位、关闭和计时属于明确的 Web 组合。聊天、标题与效果组件接收内容和可见状态，游戏网络、命令、计时及完整原生 renderer 不由组件库模拟。
 
 WorldList / ServerList / PackList 共享原始列表图、Image、Button 与 ScrollArea；PackCard 和 PlayerCard 也能单独使用。SettingsPanel 组合 NavigationList 与保留挂载的内容页面，LoadingScreen 复用 Spinner / Progress，AchievementToast 复用 Toast 的稳定 live region。

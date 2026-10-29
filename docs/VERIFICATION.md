@@ -2,7 +2,18 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：可复用 GPU 字体后端
+## 当前检查点：下拉框一致性与 Dialog 尺寸
+
+组件数量保持117，公共运行时值保持123。Select 与 Combobox 共用同一可见实现，保留 Select 的原生表单/ref/change 合同；Dialog 新增 width/height/style，并以 overflow:clip 按设置尺寸渲染。原版附魔经验图标的三档不同轮廓保留。合同与证据见 [CONTROLS_CONSISTENCY_QA.md](CONTROLS_CONSISTENCY_QA.md)。
+
+- 正式新增13项（Dialog5、Select6、经验图标2）全部通过；既有原图皮肤2项通过，相关desktop21 PASS/1预期SKIP、mobile22 PASS。首批65项含额外mobile6，最初两处同一取景测试失败；固定同一整数截图平面后，仅定向重跑这两项并通过，未改生产代码、容差或mask。额外mobile6作为补充，不计正式累计。首批与最终替代报告 SHA 分别为 `fb71378c74f11f0ef8dd7ebe499d53db220160a1721354f15a32932fcc6c035b`、`d17e60fbe369a2c723e665615f8395f3df31467caece5299cb79957acbef817b`。
+- 独立原探针复核 pristine reset、hidden、pointer/mouse/capture 三处修复，React及页面异常为0；六档经验原图完整3,432个CSS像素RGBA零差，未重绘轮廓。
+- React18.3.1/19.3.1实际tarball消费通过，含Select multiple/ref/原生事件和Dialog尺寸类型；受测包SHA `16e2cae985d3652e39b0f8d2d27c32b8affb64de8a2a818781bcbe9f969039b4`，JS SHA `cdd331a5790372a03e8dcd97486ee23cc440d8d1ff11c1b51076695ce87c52c0`，两消费者各102份dist逐字节一致。
+- 4173生产辅助检查19/19，13处Select统一，Dialog无滚动条、关闭与表单正常；320px视口无页面横溢出，5份入口资源与site相同，页面/控制台异常为空。用户当前IAB页也已刷新复验。
+
+历史最终结果按正式项目/文件/完整标题去重，当前812唯一用例：807 PASS、5预期SKIP、0未解决失败。此为多批次累计，不是整库单次运行，也不代表原生整GUI已逐像素验收。
+
+## 历史检查点：可复用 GPU 字体后端
 
 当前117个组件、3份数据、3个渲染函数，共123值；其中2个glint纯纹理函数，1个浏览器GPU字体函数。`BitmapText` 保留默认CPU，新增WebGL/source profile/显式背景；公开 `renderBitmapGlyphs`。API、PMA与上下文预算见 [BITMAP_GPU_QA.md](BITMAP_GPU_QA.md)。
 
