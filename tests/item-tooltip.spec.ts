@@ -71,3 +71,32 @@ test('Escape dismissal survives further mousemove until a new hover session',asy
   await page.keyboard.press('Escape');await expect(tooltip).toHaveCount(0);await page.mouse.move(box.x+24,box.y+24);await expect(tooltip).toHaveCount(0);
   await page.mouse.move(box.x+box.width+20,box.y+box.height+20);await page.mouse.move(box.x+12,box.y+12);await expect(tooltip).toBeVisible();
 });
+
+test('item text renderer reaches slot tooltips without replacing rich lore or accessible names',async({page})=>{
+  await page.goto('/calibration.html');const slot=page.getByRole('button',{name:'Custom font source',exact:true});
+  await slot.focus();const tooltip=page.getByRole('tooltip');await expect(tooltip).toBeVisible();
+  await expect(tooltip.locator('[data-font-row="name"]')).toHaveText('Rendered item');
+  await expect(tooltip.locator('[data-font-row="lore"]')).toHaveText('Rendered lore');
+  await expect(tooltip.locator('[data-font-row="lore"]')).toHaveAttribute('data-font-index','0');
+  await expect(tooltip.locator('strong[data-rich-lore]')).toHaveText('Rich lore');
+  await expect(tooltip.locator('.mc-item-tooltip__lore').last()).toHaveText('42');
+  await expect(slot).toHaveAttribute('aria-label','Custom font source');
+});
+
+test('standalone tooltip renderer overrides item rendering while preserving caller nodes',async({page})=>{
+  await page.goto('/calibration.html');await page.getByRole('button',{name:'Toggle standalone text renderer'}).click();
+  const tooltip=page.getByTestId('standalone-text-renderer');
+  await expect(tooltip.locator('[data-override-row]')).toHaveText(['Rendered item','Rendered lore']);
+  await expect(tooltip.locator('[data-font-row]')).toHaveCount(0);
+  await expect(tooltip.locator('strong[data-rich-lore]')).toHaveText('Rich lore');
+});
+
+test('focused tooltip remains within the viewport when a text renderer changes its measured size',async({page})=>{
+  await page.setViewportSize({width:320,height:400});await page.goto('/calibration.html');
+  await page.getByRole('button',{name:'Toggle growing text source'}).click();await page.mouse.move(1,1);
+  const slot=page.getByRole('button',{name:'Growing font source',exact:true});await slot.focus();
+  const tooltip=page.getByRole('tooltip');await expect(tooltip).toBeVisible();const before=await rectangle(tooltip);
+  await slot.press('g');await expect(slot).toBeFocused();
+  await expect.poll(async()=>(await rectangle(tooltip)).width-before.width).toBeGreaterThan(150);
+  await expect.poll(async()=>{const after=await rectangle(tooltip);return after.x>=8&&after.x+after.width<=312;}).toBe(true);
+});

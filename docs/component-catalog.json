@@ -13,6 +13,11 @@
         "status": "implemented"
       },
       {
+        "name": "BitmapText",
+        "status": "implemented",
+        "fidelity": "caller_owned_bitmap_atlas_controlled_reconstruction_native_sampling_unverified"
+      },
+      {
         "name": "PixelIcon",
         "status": "implemented"
       },

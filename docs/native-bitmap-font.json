@@ -1,0 +1,1055 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Native bitmap font source/geometry research; this is not a runtime font configuration or an actual component test result.",
+  "date": "2026-10-29",
+  "installedVersion": "1.26.6005.0",
+  "sourceInventory": {
+    "scope": "Installed vanilla and versioned resource_packs font registrations, archives and loose font files. External user resource packs are outside this audit.",
+    "resourcePackDirectoryCount": 75,
+    "fontArchives": [
+      {
+        "path": "data/resource_packs/vanilla/__brarchive/font.brarchive",
+        "bytes": 1254618,
+        "entries": 235,
+        "sha256": "cdb2c8dbfcea7e0967d5369ced0eb5f4a6fcded79769e4e4605c1f0b406c86bc"
+      },
+      {
+        "path": "data/resource_packs/vanilla/__brarchive/font/smooth.brarchive",
+        "bytes": 168885953,
+        "entries": 355,
+        "sha256": "8a0decdfe597b6db7d71c83b859c5151b93b3b7018e6992ec7339c7b6184f1e9"
+      },
+      {
+        "path": "data/resource_packs/vanilla/__brarchive/texts/ja_JP/font.brarchive",
+        "bytes": 645300,
+        "entries": 120,
+        "sha256": "48754e5d875061c84b85d552b96b72d6b269c352909e63e4a6106a2c0d5bfb2c"
+      },
+      {
+        "path": "data/resource_packs/vanilla/__brarchive/texts/zh_TW/font.brarchive",
+        "bytes": 2714459,
+        "entries": 118,
+        "sha256": "71a63322aacc00be89b25cc284c216b13da0216c6a0013db8ec1d223e2757e01"
+      }
+    ],
+    "looseFontRelatedFiles": 180,
+    "fontFilesOutsideVanilla": 0,
+    "localeOverrides": [
+      "ja_JP",
+      "zh_TW"
+    ],
+    "zhCnSeparateOverrideFound": false,
+    "registration": "font_metadata registers MinecraftTen(TTF),OldSmoothFont(MSDF) and Unicode fallback aliases; this does not establish the custom hover draw binding.",
+    "runtimeTtfBoundary": "Mojangles has no seven measured CJK codepoints. Installed HBUI NotoSC has coverage, but its tested design/topology differs. Availability is not binding."
+  },
+  "unicodeSource": {
+    "archive": "data/resource_packs/vanilla/__brarchive/font.brarchive",
+    "pages": [
+      {
+        "page": "00",
+        "sourceArchiveEntry": "glyph_00.png",
+        "bytes": 8136,
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "93fb46cef268a658be542e109f0c5f9e49565afe95f160027fbc95f04b03fdfc",
+        "modifications": "None",
+        "privatePreparedSha256Matches": true
+      },
+      {
+        "page": "4F",
+        "sourceArchiveEntry": "glyph_4F.png",
+        "bytes": 7208,
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "2c0c065f7fc8963875b0fb6833129291536e21d875b0f9456f09ae2949dffc00",
+        "modifications": "None",
+        "privatePreparedSha256Matches": true
+      },
+      {
+        "page": "51",
+        "sourceArchiveEntry": "glyph_51.png",
+        "bytes": 7227,
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "98d40d25b192d121c395b53e490d03e2e4cd134744e2b1a901433c5abd7dd0fc",
+        "modifications": "None",
+        "privatePreparedSha256Matches": true
+      },
+      {
+        "page": "52",
+        "sourceArchiveEntry": "glyph_52.png",
+        "bytes": 7311,
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "f22e4836a54185d0a79979e2bc7fcbf74b74ddd363925796e24027c6cd280cd1",
+        "modifications": "None",
+        "privatePreparedSha256Matches": true
+      },
+      {
+        "page": "5B",
+        "sourceArchiveEntry": "glyph_5B.png",
+        "bytes": 7295,
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "3d6dcbaff2bc677029824f498a6a297897d80927a96c697be04ef13f62a8d516",
+        "modifications": "None",
+        "privatePreparedSha256Matches": true
+      },
+      {
+        "page": "65",
+        "sourceArchiveEntry": "glyph_65.png",
+        "bytes": 8037,
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "18b5a0ffbdd77df7010e003269cbd9edadd52b67dab40d65fa7062ecac309d34",
+        "modifications": "None",
+        "privatePreparedSha256Matches": true
+      },
+      {
+        "page": "77",
+        "sourceArchiveEntry": "glyph_77.png",
+        "bytes": 7659,
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "f94350ee8b78e4e9a8230cafe2a3217fd324bb73c8893c5ac9cca33d7f178e11",
+        "modifications": "None",
+        "privatePreparedSha256Matches": true
+      },
+      {
+        "page": "94",
+        "sourceArchiveEntry": "glyph_94.png",
+        "bytes": 8322,
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "f3b707fcf6a23505bc28b394669b33cbf67819c679890f569ced82894fec02f2",
+        "modifications": "None",
+        "privatePreparedSha256Matches": true
+      }
+    ],
+    "actualGlyphs": [
+      {
+        "character": "钻",
+        "codepoint": "U+94BB",
+        "page": "94",
+        "sourceRect": [
+          176,
+          176,
+          16,
+          16
+        ],
+        "advanceAtGui2": 18,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Observed CJK cell, advance and line geometry across GUI4/5."
+      },
+      {
+        "character": "石",
+        "codepoint": "U+77F3",
+        "page": "77",
+        "sourceRect": [
+          48,
+          240,
+          16,
+          16
+        ],
+        "advanceAtGui2": 18,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Observed CJK cell, advance and line geometry across GUI4/5."
+      },
+      {
+        "character": "剑",
+        "codepoint": "U+5251",
+        "page": "52",
+        "sourceRect": [
+          16,
+          80,
+          16,
+          16
+        ],
+        "advanceAtGui2": 18,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Observed CJK cell, advance and line geometry across GUI4/5."
+      },
+      {
+        "character": "攻",
+        "codepoint": "U+653B",
+        "page": "65",
+        "sourceRect": [
+          176,
+          48,
+          16,
+          16
+        ],
+        "advanceAtGui2": 18,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Observed CJK cell, advance and line geometry across GUI4/5."
+      },
+      {
+        "character": "击",
+        "codepoint": "U+51FB",
+        "page": "51",
+        "sourceRect": [
+          176,
+          240,
+          16,
+          16
+        ],
+        "advanceAtGui2": 18,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Observed CJK cell, advance and line geometry across GUI4/5."
+      },
+      {
+        "character": "伤",
+        "codepoint": "U+4F24",
+        "page": "4F",
+        "sourceRect": [
+          64,
+          32,
+          16,
+          16
+        ],
+        "advanceAtGui2": 18,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Observed CJK cell, advance and line geometry across GUI4/5."
+      },
+      {
+        "character": "害",
+        "codepoint": "U+5BB3",
+        "page": "5B",
+        "sourceRect": [
+          48,
+          176,
+          16,
+          16
+        ],
+        "advanceAtGui2": 18,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Observed CJK cell, advance and line geometry across GUI4/5."
+      },
+      {
+        "character": "+",
+        "codepoint": "U+002B",
+        "page": "00",
+        "sourceRect": [
+          176,
+          32,
+          16,
+          16
+        ],
+        "advanceAtGui2": 9,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Observed +7 prefix; plus advance constrained by the next glyph."
+      },
+      {
+        "character": "7",
+        "codepoint": "U+0037",
+        "page": "00",
+        "sourceRect": [
+          112,
+          48,
+          16,
+          16
+        ],
+        "advanceAtGui2": 8,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Chosen split of the observed combined digit7+space advance8game; the split is not independently identified by another string."
+      },
+      {
+        "character": " ",
+        "codepoint": "U+0020",
+        "page": "00",
+        "sourceRect": [
+          0,
+          32,
+          16,
+          16
+        ],
+        "advanceAtGui2": 8,
+        "offsetAtGui2": [
+          0,
+          0
+        ],
+        "confidence": "Chosen split of the observed combined digit7+space advance8game; the split is not independently identified by another string."
+      }
+    ],
+    "sourceGrid": {
+      "atlasPixels": [
+        256,
+        256
+      ],
+      "cells": [
+        16,
+        16
+      ],
+      "cellPixels": [
+        16,
+        16
+      ],
+      "sourceTexelGamePixels": 0.5,
+      "quadGamePixels": [
+        8,
+        8
+      ],
+      "gui2Scale1CellCssPixels": [
+        16,
+        16
+      ],
+      "cjkAdvanceGame": 9,
+      "lineAdvanceGame": 10,
+      "gui2LineHeight": 20
+    },
+    "metricsBoundaries": [
+      "Only10 measured characters are configured; no inference for all Unicode, shaping, styles or combining characters.",
+      "Plus advance4.5game and the combined7+space advance8game reproduce the sample. The chosen4game/4game split is not independently isolated by another string.",
+      "Source quad/ink metrics are separate from CSS font-size, TTF ascent/bearing and right-side natural-width rounding.",
+      "The source design is strongly identified; the runtime font alias, shader and sampler binding remain unobserved."
+    ]
+  },
+  "smoothAlternative": {
+    "archiveEntries": "fontdata/remapping archive entries are zero-byte placeholders; read their loose vanilla/font/smooth counterparts.",
+    "looseRemapping": {
+      "bytes": 175104,
+      "sha256": "5c90eac33806d2d28c4259f7a677c80cadd71cca8d764f991c38d2f7980e8c3e",
+      "formatCandidate": "43776 unique little-endian u16 source/u16 target pairs",
+      "mappings": {
+        "U+94BB": "U+36A2",
+        "U+77F3": "U+2F6C",
+        "U+5251": "U+3AD4",
+        "U+653B": "U+3360",
+        "U+51FB": "U+3277",
+        "U+4F24": "U+3420",
+        "U+5BB3": "U+315B"
+      }
+    },
+    "atlasSize": [
+      1024,
+      1024
+    ],
+    "cellPixels": [
+      64,
+      64
+    ],
+    "fontdata": "1028bytes: initialuint32 0 and256float widths; correct remapped CJK entries about.9073984623.",
+    "boundary": "Correct remapping is required even to test MSDF. Common tested alpha/RGBmedian contours did not match all native topology; unobserved uniforms/materials are not exhaustively excluded."
+  },
+  "privatePreparation": {
+    "script": "scripts/use-local-unicode-sample.py",
+    "output": ".cache/local-fonts/unicode",
+    "config": "font.json",
+    "provenance": "provenance.json",
+    "alreadyPreparedPages": 8,
+    "pageHashesMatchThisRecord": true,
+    "validation": "Script validates all8 expected unchanged PNG hashes and256x256dimensions before writing.",
+    "distribution": "Caller-provided local preview only; no original atlas page is included in this public metadata or npm assets. Global open fonts are not changed."
+  },
+  "sourceDesignEvidence": {
+    "captures": [
+      {
+        "id": "A",
+        "privatePath": ".cache/tooltip-native/diamond-hover-a.png",
+        "sha256": "e208daf0c57fd85e462625cd567b5331968d0c99dc2f78eb0d34292cb163c409"
+      },
+      {
+        "id": "B",
+        "privatePath": ".cache/tooltip-native/diamond-hover-b.png",
+        "sha256": "15d3a23817bd5b2da2c22aeebc2e058d9b5ca0b22931da7ab40ecfc259216581"
+      },
+      {
+        "id": "GUI4",
+        "privatePath": ".cache/tooltip-native/diamond-gui4.png",
+        "sha256": "de2c70ca113f9f13a83fa0b4a6d6c42ebabdbb498043054822a4bcc994e99c68"
+      }
+    ],
+    "gui4Independent": {
+      "method": "Original Unicode16x16 alpha cells magnified exactly2x with nearest, at independently segmented native cell origins. No scale/translation/AA parameter search; binary comparison only, not native RGBA equality. Complete36x36 halo regions additionally retain2 pixels on every side.",
+      "characters": 7,
+      "thresholds": [
+        0.25,
+        0.5,
+        0.75
+      ],
+      "full32CellComparisons": 21,
+      "full36HaloComparisons": 21,
+      "allBinaryDifferences": 0
+    },
+    "gui5ShapeOnly": "Tight-normalized source design comparison differed0,0,1,2,2,2,3 texels; this is not a full-pixel comparison. A/B translated binary comparisons agree at all3 thresholds.",
+    "plus7Prefix": {
+      "gui4Rect": [
+        1272,
+        987,
+        1324,
+        1023
+      ],
+      "pixels": 1872,
+      "binaryDifferences": 0,
+      "method": "Full+7 composition from Unicode00 at fixed2x;2physicalpixelhalo; no per-character sampling fit.",
+      "threshold": 0.5
+    },
+    "crossScale": {
+      "gui4NameCellXStride": 36,
+      "gui5NameCellXStride": 45,
+      "gui4LineAdvance": 40,
+      "gui5LineAdvance": 50,
+      "gui4InkSizes": {
+        "U+94BB": [
+          30,
+          32
+        ],
+        "U+77F3": [
+          30,
+          30
+        ],
+        "U+5251": [
+          28,
+          32
+        ],
+        "U+653B": [
+          30,
+          32
+        ],
+        "U+51FB": [
+          30,
+          32
+        ],
+        "U+4F24": [
+          30,
+          32
+        ],
+        "U+5BB3": [
+          30,
+          32
+        ]
+      },
+      "sourcePhysicalScale": {
+        "gui4": 2,
+        "gui5": 2.5
+      },
+      "mixedEdgeBands": "Both chosen profiles have one physical mixed edge on either side; GUI4 central opaque white is1px, GUI5 is2px in this source stroke. Mixed RGB differs by about1byte across scales; no exact same-RGBA claim.",
+      "capturedAlpha": "All screenshot glyph/halo alpha bytes255. The linear coverage proxy is not a measured native glyph alpha/shader value."
+    },
+    "notCertified": "These design/geometry results are not native RGBA equality or an actual BitmapText component test."
+  },
+  "fixedReconstructionProfiles": {
+    "method": "One complete9glyph text layout with the fixed source metrics,2physicalpixelhalos and known source page identities. Full text is composited for halo predictions, so neighboring ASCII glyphs are retained. ROI sums may count overlaps more than once.",
+    "samplerChoiceBoundary": "Point for the tested integer2x scale, bilinear+BitmapSmooth for2.5x is a finite reconstruction candidate, not a recovered automatic native selector. Actual component sampling/shader must remain explicit.",
+    "withoutDiagnosticPostTransfer": [
+      {
+        "capture": "GUI4",
+        "sampling": "point",
+        "shader": "Bitmap or BitmapSmooth on binary point samples",
+        "assumedFramebufferBlend": "ONE",
+        "haloPhysicalPixelsEachSide": 2,
+        "all9GlyphRois": {
+          "pixels": 11664,
+          "strictDifferingPixels": 1459,
+          "pixelsAbove1ChannelDifference": 1260,
+          "absoluteChannelError": 46975,
+          "binaryDifference": 0
+        },
+        "cjk7GlyphRois": {
+          "pixels": 9072,
+          "strictDifferingPixels": 1234,
+          "pixelsAbove1ChannelDifference": 1115,
+          "absoluteChannelError": 43434,
+          "binaryDifference": 0
+        },
+        "maximumChannelDifference": 22
+      },
+      {
+        "capture": "A",
+        "sampling": "bilinear",
+        "shader": "BitmapSmooth",
+        "assumedFramebufferBlend": "SRC_ALPHA",
+        "haloPhysicalPixelsEachSide": 2,
+        "all9GlyphRois": {
+          "pixels": 17644,
+          "strictDifferingPixels": 1606,
+          "pixelsAbove1ChannelDifference": 1535,
+          "absoluteChannelError": 57711,
+          "binaryDifference": 0
+        },
+        "cjk7GlyphRois": {
+          "pixels": 13728,
+          "strictDifferingPixels": 1445,
+          "pixelsAbove1ChannelDifference": 1378,
+          "absoluteChannelError": 53643,
+          "binaryDifference": 0
+        },
+        "maximumChannelDifference": 24
+      },
+      {
+        "capture": "B",
+        "sampling": "bilinear",
+        "shader": "BitmapSmooth",
+        "assumedFramebufferBlend": "SRC_ALPHA",
+        "haloPhysicalPixelsEachSide": 2,
+        "all9GlyphRois": {
+          "pixels": 17644,
+          "strictDifferingPixels": 1606,
+          "pixelsAbove1ChannelDifference": 1535,
+          "absoluteChannelError": 59508,
+          "binaryDifference": 0
+        },
+        "cjk7GlyphRois": {
+          "pixels": 13728,
+          "strictDifferingPixels": 1445,
+          "pixelsAbove1ChannelDifference": 1378,
+          "absoluteChannelError": 55295,
+          "binaryDifference": 0
+        },
+        "maximumChannelDifference": 25
+      }
+    ],
+    "binaryDifferencesAcrossAll9Glyphs": 0,
+    "actualNativeBindingsUnknown": [
+      "FONT_TYPE",
+      "sampler",
+      "framebuffer blend",
+      "actual uniforms",
+      "quad interpolation and GPU rounding"
+    ],
+    "binaryComparison": {
+      "threshold": 0.5,
+      "method": "WhiteR or blueB coverage proxy normalized between background27 andforeground255. This proxy is not measured glyphalpha; screenshot alpha is255.",
+      "scope": "Zero reported only at this fixed threshold; it does not claim all3thresholds for GUI5 source-model RGBA reconstruction."
+    }
+  },
+  "sharedSamplingEvidence": {
+    "independentMethod": "Only known-endpoint straight-edge RGB measurements. No global affine/filter fit, client-rectangle guess, UI interaction, production change or glyph-design repetition. Endpoint interpolation weights are linear-color proxies constrained by byte rounding, not measured native glyph alpha.",
+    "summary": {
+      "knownEndpointXTransitions": 39,
+      "allXHaveExactlyOneMixedPhysicalColumn": true,
+      "allXWeightIntervalsAreConsistentAcrossRgbWithinByteRounding": true,
+      "retainedHardYTransitions": 168,
+      "retainedHardSlotYTransitions": 160,
+      "knownEndpointMixedYTransitions": 0,
+      "excludedYProbes": 2
+    },
+    "captureInputs": {
+      "e4": {
+        "file": ".cache/native-capture-audit/enchanting-gui4-open-native.png",
+        "sha256": "9db5c35d6d9a1cb1d1178f0db2bdf6e5adae12e11d96e8137be32792975876e8"
+      },
+      "e5": {
+        "file": ".cache/native-gui/enchanting-open-native-lossless.png",
+        "sha256": "0d58418de8fe8751481563e13e4615b6752907394d73926746d627900bf308fa"
+      },
+      "t4": {
+        "file": ".cache/tooltip-native/diamond-gui4.png",
+        "sha256": "de2c70ca113f9f13a83fa0b4a6d6c42ebabdbb498043054822a4bcc994e99c68"
+      },
+      "t5": {
+        "file": ".cache/tooltip-native/diamond-hover-a.png",
+        "sha256": "e208daf0c57fd85e462625cd567b5331968d0c99dc2f78eb0d34292cb163c409"
+      }
+    },
+    "conclusions": [
+      "Ordinary opaque panel/slot texture edges exhibit the same single physical X mixed column as both CJK and SGA glyphs. This phenomenon is not specific to the glyph shader.",
+      "The slot gray mixed value changes across the nine integer-spaced cells, so a single constant0.08/0.92 weight for every X is not supported.",
+      "NearX1260 the slot transition and SGA glyph have overlapping byte-rounding compatible weights near0.93; nearX1332..1404 slot and CJK weights overlap near0.917. These are measured endpoint comparisons, not a fitted global scale.",
+      "Every retained known-endpoint horizontal slot probe and the6 tooltip/2 CJK steps are hard Y changes without a mixed row. Excluded probes are reported separately; no conclusion is drawn where the nominal slot colors are occluded.",
+      "Evidence is compatible with a common one-dimensional horizontal resampling/subpixel transform factor. It does not distinguish a final UI postpass from per-draw shared projection plus filtering or identify the exact shader/capture mechanism."
+    ],
+    "excludedProbesAndAreas": [
+      "Panel outer black-to-world edge is not used for coverage: actual obscured world pixel is unknown.",
+      "GUI4 tooltip left corner samples around1262,929 have endpoint variations(198,197,197)/(28,12,27), so they are not treated as an exactly known198/F blend.",
+      "No1397px client height or whole-window coordinate transform is inferred."
+    ],
+    "interpretation": "39 known-endpointX transitions have one mixed physical column;168 retainedY transitions have no mixed row. Endpoint weights are byte-rounding-compatible proxies, not recovered native glyph alpha. Weight varies withX, so no constant.08/.92 universal filter is proved.",
+    "mechanismUnknown": "No distinction between final UI postpass and shared per-draw projection/filtering; no FXAA,1397client height or whole-window mapping is certified.",
+    "diagnosticPostTransfer": {
+      "status": "Research only; prohibited from production/default font rendering.",
+      "coefficientsIncludedHere": false,
+      "training": "One screen-X interpolation estimated only from27 non-text GUI5 slot transitions; no glyph or GUI4 coefficient fit.23/27 quantized samples agree,4 differ1byte.",
+      "strictRoiResults": [
+        {
+          "capture": "GUI4",
+          "sampling": "point",
+          "shader": "Bitmap or BitmapSmooth on binary point samples",
+          "assumedFramebufferBlend": "ONE",
+          "haloPhysicalPixelsEachSide": 2,
+          "all9GlyphRois": {
+            "pixels": 11664,
+            "strictDifferingPixels": 825,
+            "pixelsAbove1ChannelDifference": 172,
+            "absoluteChannelError": 1637,
+            "binaryDifference": 0
+          },
+          "cjk7GlyphRois": {
+            "pixels": 9072,
+            "strictDifferingPixels": 656,
+            "pixelsAbove1ChannelDifference": 141,
+            "absoluteChannelError": 1320,
+            "binaryDifference": 0
+          },
+          "maximumChannelDifference": 3
+        },
+        {
+          "capture": "A",
+          "sampling": "bilinear",
+          "shader": "BitmapSmooth",
+          "assumedFramebufferBlend": "SRC_ALPHA",
+          "haloPhysicalPixelsEachSide": 2,
+          "all9GlyphRois": {
+            "pixels": 17644,
+            "strictDifferingPixels": 910,
+            "pixelsAbove1ChannelDifference": 191,
+            "absoluteChannelError": 2565,
+            "binaryDifference": 0
+          },
+          "cjk7GlyphRois": {
+            "pixels": 13728,
+            "strictDifferingPixels": 791,
+            "pixelsAbove1ChannelDifference": 176,
+            "absoluteChannelError": 2349,
+            "binaryDifference": 0
+          },
+          "maximumChannelDifference": 13
+        },
+        {
+          "capture": "B",
+          "sampling": "bilinear",
+          "shader": "BitmapSmooth",
+          "assumedFramebufferBlend": "SRC_ALPHA",
+          "haloPhysicalPixelsEachSide": 2,
+          "all9GlyphRois": {
+            "pixels": 17644,
+            "strictDifferingPixels": 1031,
+            "pixelsAbove1ChannelDifference": 214,
+            "absoluteChannelError": 2734,
+            "binaryDifference": 0
+          },
+          "cjk7GlyphRois": {
+            "pixels": 13728,
+            "strictDifferingPixels": 965,
+            "pixelsAbove1ChannelDifference": 195,
+            "absoluteChannelError": 2574,
+            "binaryDifference": 0
+          },
+          "maximumChannelDifference": 13
+        }
+      ],
+      "boundary": "Diagnostic transfer reduces but does not remove strict errors; its formula is not a native viewport algorithm."
+    }
+  },
+  "shaderEquationEvidence": {
+    "material": "UI/Text",
+    "materialBytes": 201977,
+    "sha256": "02d410506a3e180781992c66839432ed425bf0506fb8d258328d21959afb2d29",
+    "variants": [
+      "Bitmap",
+      "BitmapSmooth",
+      "TrueType",
+      "MSDF"
+    ],
+    "alphaTestStates": [
+      false,
+      true
+    ],
+    "shaderModels": [
+      "Direct3D_SM40",
+      "Direct3D_SM50"
+    ],
+    "fragmentStageCombinations": 16,
+    "originalAsmCases": 7680,
+    "matchingDiscards": 2140,
+    "maxAbstractRealEquationError": 2.220446049250313e-16,
+    "formulaSummary": {
+      "Bitmap": "Clamp UV to per-cell bounds, sample RGBA, multiply vertex/Tint; alpha additionallyHudOpacity.",
+      "BitmapSmooth": "Same UV clamp; q=saturate((sampleRGBA-.3)*5);f=q*q*(3-2*q) on every channel, then the same multiplication.",
+      "TrueType": "Direct RGBA sample without Bitmap cell clamp, then the same multiplication.",
+      "MSDF": "RGBmedian fill plus separate alpha shadow andoutline operations. Not ordinary source-over; see ignored original ASM report."
+    },
+    "bounds": "Bitmap/MSDF VS passes full-cell cornerUV and separate halftexel bounds; do not shrink vertexUV by the halftexel inset.",
+    "blend": "UI/Text→UI/Fill→UI/Base serialised defaultBlend remainsUnspecified; SRC_ALPHA in the reconstruction profile is an explicit assumption.",
+    "verificationBoundary": "Original ASM interpretation against independently written abstract-real equations. Not actual draw-state capture, sampler proof, GPUfloat32/FMA emulator or screenshot equivalence."
+  },
+  "actualBitmapTextValidation": {
+    "status": "component-contracts-passed-native-raster-unresolved",
+    "componentContractPassed": true,
+    "nativeSourceLayoutContractPassed": true,
+    "nativeCoverageParityPassed": false,
+    "nativeRgbaParityPassed": false,
+    "browserComponentSuite": {
+      "report": ".cache/bitmap-text-final.json",
+      "sha256": "8bd2c9b435e3a68babbe0f2e42cc63949b479dc73f95add9dacca62eb36af806",
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "durationMs": 14904.934,
+      "scope": "Declared layout/sampling/shader/Web composition, controlled behavior, SSR, errors, readable/selectable DOM and inherited-shadow isolation; not native raster parity."
+    },
+    "independentMathAndLayoutAudit": {
+      "report": ".cache/bitmap-text-independent-qa/result.json",
+      "sha256": "2c8585c2e631383b4ecca6d5758062c4d6f6f142f0b76ea4e5afb614f1051748",
+      "sourceEngineSha256": "28184d6194ae2e1e386ff4b450fd7a2c8a9a14d51ce698c73a7362cfac7503a8",
+      "cases": 120,
+      "pixels": 15606,
+      "channels": 62424,
+      "maxFloatDifference": 2.0539125955565396e-15,
+      "mathStatus": "PASS_WITH_RECORDED_FLOAT64_HALF_ROUNDING_BOUNDARIES",
+      "byteIdentical": false,
+      "recordedChangedChannels": 27,
+      "maximumByteDifference": 1,
+      "onlyFloat64HalfRoundingTies": true,
+      "scope": "Independent original ASM plus independent union layout and declared Web source-over. The27 recorded one-byte ties remain; this is not byte-exact native GPU certification."
+    },
+    "readyDomInheritedShadow": {
+      "imageSize": [
+        24,
+        25
+      ],
+      "beforeDifferentPixels": 54,
+      "afterDifferentPixels": 0,
+      "negativeControlDifferentPixels": 54,
+      "engineChanged": false,
+      "engineSha256": "28184d6194ae2e1e386ff4b450fd7a2c8a9a14d51ce698c73a7362cfac7503a8",
+      "fixScope": "Clear inherited text-shadow on ready transparent selectable DOM text. The canvas engine is unchanged; actual canvas pixels remain the control.",
+      "images": [
+        {
+          "role": "before",
+          "path": ".cache/test-results-bitmap-shadow-before/bitmap-text-ready-selectab-5521b-nt-shadows-to-bitmap-pixels/parent-shadow-red.png",
+          "sha256": "c5b3cff5aa2cc13d4715d91c272302308caba900513b7c062b3219779092d10e"
+        },
+        {
+          "role": "control",
+          "path": ".cache/test-results-bitmap-producer/bitmap-text-ready-selectab-5521b-nt-shadows-to-bitmap-pixels/parent-shadow-control.png",
+          "sha256": "dca533d6c11321e89e92735435d1c45f06efd9d1bbe76276b29785c998bc6521"
+        },
+        {
+          "role": "after",
+          "path": ".cache/test-results-bitmap-producer/bitmap-text-ready-selectab-5521b-nt-shadows-to-bitmap-pixels/parent-shadow-red.png",
+          "sha256": "dca533d6c11321e89e92735435d1c45f06efd9d1bbe76276b29785c998bc6521"
+        },
+        {
+          "role": "forcedInheritNegativeControl",
+          "path": ".cache/test-results-bitmap-producer/bitmap-text-ready-selectab-5521b-nt-shadows-to-bitmap-pixels/parent-shadow-negative-control.png",
+          "sha256": "c5b3cff5aa2cc13d4715d91c272302308caba900513b7c062b3219779092d10e"
+        }
+      ]
+    },
+    "nativeSourceLayoutSuite": {
+      "verificationReport": ".cache/tooltip-native/independent-native-bitmap-final/independent-bitmap-verification.json",
+      "sha256": "ce55afbbb1234d63fb57e243686391877bf4007d9b041a36ffdd5e1f937203e0",
+      "run": {
+        "command": "npx playwright test --config .cache/tooltip-native/independent-native-bitmap-final/playwright.config.ts",
+        "startedAt": "2026-10-29T00:27:08.910Z",
+        "durationMs": 13596.304,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "resultDirectory": ".cache\\tooltip-native\\independent-native-bitmap-final\\results",
+        "playwrightReport": ".cache\\tooltip-native\\independent-native-bitmap-final\\report.json"
+      },
+      "gatedScope": "Source glyph/layout baseline only: complete field+2px halo at0.25 and0.5; GUI4 additionally0.75. No threshold count is treated as a tolerance.",
+      "gatedThresholds": {
+        "GUI4": [
+          0.25,
+          0.5,
+          0.75
+        ],
+        "GUI5 A": [
+          0.25,
+          0.5
+        ],
+        "GUI5 B": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisonIncludes": "Complete two-line field, all9glyphs,space,trailing linebox and separately retained2physicalpixelhalo; no glyph masks.",
+      "productionChangedToCloseNativeContract": false,
+      "addedPhiOrRegistrationOrRgbaTolerance": false,
+      "measurements": [
+        {
+          "sample": "GUI4",
+          "nativeSha256": "de2c70ca113f9f13a83fa0b4a6d6c42ebabdbb498043054822a4bcc994e99c68",
+          "nativeOrigin": [
+            1274,
+            949
+          ],
+          "fullField": {
+            "width": 194,
+            "height": 80,
+            "pixels": 15520,
+            "changedPixels": 1314,
+            "alphaChangedPixels": 0,
+            "absoluteRgbSum": 45227,
+            "rgbMae": 0.9713702749140893,
+            "maxChannelError": 22,
+            "binaryChanged": {
+              ".25": 0,
+              ".5": 0,
+              ".75": 0
+            }
+          },
+          "with2PixelHalo": {
+            "width": 198,
+            "height": 84,
+            "pixels": 16632,
+            "changedPixels": 1444,
+            "alphaChangedPixels": 0,
+            "absoluteRgbSum": 45754,
+            "rgbMae": 0.9169873336540003,
+            "maxChannelError": 22,
+            "binaryChanged": {
+              ".25": 0,
+              ".5": 0,
+              ".75": 0
+            }
+          },
+          "retained075MismatchCount": 0
+        },
+        {
+          "sample": "GUI5 A",
+          "nativeSha256": "e208daf0c57fd85e462625cd567b5331968d0c99dc2f78eb0d34292cb163c409",
+          "nativeOrigin": [
+            1268,
+            1012
+          ],
+          "fullField": {
+            "width": 243,
+            "height": 100,
+            "pixels": 24300,
+            "changedPixels": 1573,
+            "alphaChangedPixels": 0,
+            "absoluteRgbSum": 56241,
+            "rgbMae": 0.7714814814814814,
+            "maxChannelError": 24,
+            "binaryChanged": {
+              ".25": 0,
+              ".5": 0,
+              ".75": 5
+            }
+          },
+          "with2PixelHalo": {
+            "width": 247,
+            "height": 104,
+            "pixels": 25688,
+            "changedPixels": 1573,
+            "alphaChangedPixels": 0,
+            "absoluteRgbSum": 56241,
+            "rgbMae": 0.7297960137028963,
+            "maxChannelError": 24,
+            "binaryChanged": {
+              ".25": 0,
+              ".5": 0,
+              ".75": 5
+            }
+          },
+          "retained075MismatchCount": 5
+        },
+        {
+          "sample": "GUI5 B",
+          "nativeSha256": "15d3a23817bd5b2da2c22aeebc2e058d9b5ca0b22931da7ab40ecfc259216581",
+          "nativeOrigin": [
+            1291,
+            1037
+          ],
+          "fullField": {
+            "width": 243,
+            "height": 100,
+            "pixels": 24300,
+            "changedPixels": 1573,
+            "alphaChangedPixels": 0,
+            "absoluteRgbSum": 57980,
+            "rgbMae": 0.7953360768175582,
+            "maxChannelError": 24,
+            "binaryChanged": {
+              ".25": 0,
+              ".5": 0,
+              ".75": 5
+            }
+          },
+          "with2PixelHalo": {
+            "width": 247,
+            "height": 104,
+            "pixels": 25688,
+            "changedPixels": 1573,
+            "alphaChangedPixels": 0,
+            "absoluteRgbSum": 57980,
+            "rgbMae": 0.752361673414305,
+            "maxChannelError": 24,
+            "binaryChanged": {
+              ".25": 0,
+              ".5": 0,
+              ".75": 5
+            }
+          },
+          "retained075MismatchCount": 5
+        }
+      ],
+      "interpretation": "Strict RGBA parity remainsFAIL in all3 samples; GUI5 native coverage at0.75 remainsFAIL with the measured5 mismatches retained verbatim. Source/layout specPASS is not native raster parityPASS."
+    },
+    "retainedFalsifiedHypotheses": {
+      "initialRawBatch": {
+        "report": ".cache/tooltip-native/independent-native-bitmap/report.json",
+        "sha256": "5f03b6334fc961fdef9fdc5e2a4ffca94b451403e488895bf52b91d5f3b91cb0",
+        "passed": 1,
+        "failed": 2,
+        "outcome": "1PASS/2FAIL: the unproven GUI5 three-threshold-zero hypothesis was falsified. This raw batch remains unchanged."
+      },
+      "gui5Threshold075": {
+        "stillFails": true,
+        "eachCaptureDifferentPixels": 5,
+        "fieldRelativeLocations": [
+          [
+            81,
+            2
+          ],
+          [
+            76,
+            17
+          ],
+          [
+            216,
+            52
+          ],
+          [
+            226,
+            67
+          ],
+          [
+            226,
+            77
+          ]
+        ],
+        "report": ".cache/tooltip-native/independent-native-bitmap-final/independent-bitmap-verification.json",
+        "note": "The final3PASS gate is a bounded source/layout contract. It does not reclassify these measurements as native coverage success or introduce tolerance."
+      },
+      "fixedBlendAndTransfer": {
+        "reports": [
+          ".cache/font-shader-audit/BLEND_AUDIT.md",
+          ".cache/tooltip-font-research/BLEND_FALSIFICATION.md"
+        ],
+        "conclusion": "Neither fixed-source ONE blending nor the tested final or pre-sample slot-derived transfer reproduces the unresolved native corner coverage. Whole-domain failures and all3thresholds were retained; no per-glyph/per-scale refit or production phi was added.",
+        "scope": "The float blend counterfactual is not an actual component screenshot or proof of runtime blend state."
+      }
+    },
+    "finalEvidenceReferences": [
+      {
+        "path": ".cache/bitmap-text-final.json",
+        "sha256": "8bd2c9b435e3a68babbe0f2e42cc63949b479dc73f95add9dacca62eb36af806"
+      },
+      {
+        "path": ".cache/bitmap-text-independent-qa/result.json",
+        "sha256": "2c8585c2e631383b4ecca6d5758062c4d6f6f142f0b76ea4e5afb614f1051748"
+      },
+      {
+        "path": ".cache/tooltip-native/independent-native-bitmap-final/independent-bitmap-verification.json",
+        "sha256": "ce55afbbb1234d63fb57e243686391877bf4007d9b041a36ffdd5e1f937203e0"
+      },
+      {
+        "path": ".cache/tooltip-native/independent-native-bitmap-final/report.json",
+        "sha256": "4687862492a733f64a590c7f96cbfa84065d7d39ac90d5a18c1405d79254ba8c"
+      },
+      {
+        "path": ".cache/tooltip-native/independent-native-bitmap/report.json",
+        "sha256": "5f03b6334fc961fdef9fdc5e2a4ffca94b451403e488895bf52b91d5f3b91cb0"
+      },
+      {
+        "path": ".cache/bitmap-text-shadow-before.json",
+        "sha256": "cbcd114454a76ce973cf39bcf93327f617c8740cf3d03eff66211d0dc40fe905"
+      },
+      {
+        "path": ".cache/font-shader-audit/BLEND_AUDIT.md",
+        "sha256": "5b33e67c0008247fa8e5aaa6441022804b1736a9e221602125b393bc1b8e3d33"
+      },
+      {
+        "path": ".cache/tooltip-font-research/BLEND_FALSIFICATION.md",
+        "sha256": "c0e7fbe68f724a5f72d9e87f7251cda6a981c9742942cebb306bd045cf9a7e66"
+      },
+      {
+        "path": ".cache/tooltip-font-research/fixed-blend-comparison.json",
+        "sha256": "c56b70534789593c5ee4ddad63549669b8d958b7b2f88fcf3617dad91b0ef700"
+      }
+    ],
+    "remainingLimits": [
+      "Strict nativeRGBA parity fails for all3samples; GUI5.75coverage still differs at5pixels per sample.",
+      "Actual native font/material/sampler/uniform/framebuffer chain and sharedUItransfer remain unobserved.",
+      "Canvas/Web composition quantization is distinct from original ASM math and from native rasterization.",
+      "No fitted phi, glyph mask, registration optimization, arbitrary tolerance or guessed client height is part of the production/default profile.",
+      "Prepared private font remains a10character subset with8unchanged local pages; no original atlas is distributed."
+    ]
+  },
+  "evidenceReports": [
+    {
+      "ignoredReport": ".cache/tooltip-font-research/inventory.json",
+      "sha256": "c6e85ce7124e6b26532f2acbc587e02585fee4ac1163d1b19e040f612a41fd96"
+    },
+    {
+      "ignoredReport": ".cache/tooltip-font-research/locale-glyph-differences.json",
+      "sha256": "0e0fcc3a5dbb5228548fd5709dc4c641d29b8d5f25b0a6e5fd828e92c0c03387"
+    },
+    {
+      "ignoredReport": ".cache/tooltip-font-research/unicode-composite-candidates.json",
+      "sha256": "fa72c4e7895a5032391d53ed6cd6633bbbc5e82a151fb32f60be95d7187317e8"
+    },
+    {
+      "ignoredReport": ".cache/tooltip-native/independent-cjk/cjk-topology-audit.json",
+      "sha256": "11b0bdec36d2aa425625dc95a16e1f64e27054762e54235f7400b8c2d433b7d5"
+    },
+    {
+      "ignoredReport": ".cache/tooltip-native/independent-cjk/gui4-cross-scale-audit.json",
+      "sha256": "85ba91dcebee83e562ba269006ee6635d980646d7a43a0969412110c5cc9899d"
+    },
+    {
+      "ignoredReport": ".cache/tooltip-native/independent-cjk/ui-vs-glyph-straight-edge-audit.json",
+      "sha256": "21726073b8b9f453238b396e53f97739a226a8803f394f31282809b3b49634e2"
+    },
+    {
+      "ignoredReport": ".cache/font-shader-audit/formula-verification.json",
+      "sha256": "9936ff839b71310a15b6deed6ce6a0a69de14bedc2d573406bb4af0bad5ee9a4"
+    }
+  ],
+  "policy": [
+    "Do not distribute the private original atlas pages.",
+    "Do not change default global open fonts based on this profile.",
+    "Do not add diagnostic phi/screen-space transfer to production.",
+    "Do not label binarymask0 or verified shader equations as full nativeRGBA0.",
+    "Unknown runtime binding, version generalization and client coordinates remain explicit."
+  ]
+}

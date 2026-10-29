@@ -58,6 +58,31 @@ try {
     return canvas?.getAttribute('data-render-state') === 'ready' && canvas.toDataURL() !== previous;
   }, initialGlint);
   await glintExample.screenshot({ path: '.cache/preview/item-glint-controlled-phase.png' });
+  const bitmapExample = page.locator('#bitmap-text');
+  const bitmapTexts = bitmapExample.locator('.mc-bitmap-text');
+  const bitmapText = { localFontSubset: (await bitmapTexts.count()) > 0 };
+  if (bitmapText.localFontSubset) {
+    assert.equal(await bitmapTexts.count(), 2);
+    assert.deepEqual(await bitmapTexts.evaluateAll(nodes => nodes.map(node => node.getAttribute('data-render-state'))), ['ready', 'ready']);
+    assert.deepEqual(await bitmapTexts.locator('.mc-bitmap-text__text').allTextContents(), ['钻石剑', '+7 攻击伤害']);
+    await bitmapExample.screenshot({ path: '.cache/preview/bitmap-text.png' });
+    await bitmapExample.getByRole('button', { name: 'Original Unicode sword', exact: true }).hover();
+    await page.waitForFunction(() => {
+      const texts = [...document.querySelectorAll('.mc-item-tooltip .mc-bitmap-text')];
+      return texts.length === 2 && texts.every(node => node.getAttribute('data-render-state') === 'ready');
+    });
+    const bitmapTooltip = page.locator('.mc-item-tooltip');
+    assert.deepEqual(await bitmapTooltip.locator('.mc-bitmap-text__text').allTextContents(), ['钻石剑', '+7 攻击伤害']);
+    assert.equal(await bitmapTooltip.locator('[data-renderer="item-glint"]').count(), 0);
+    assert(!/durability|glint/i.test(await bitmapTooltip.textContent()));
+    await bitmapTooltip.screenshot({ path: '.cache/preview/bitmap-text-tooltip.png' });
+    bitmapText.ready = 2;
+    bitmapText.tooltipReady = 2;
+    await page.mouse.move(0, 0);
+  } else {
+    assert.match(await bitmapExample.innerText(), /optional original Unicode sample/);
+    await bitmapExample.screenshot({ path: '.cache/preview/bitmap-text-optional-font.png' });
+  }
   await page.locator('#workstations').screenshot({ path: '.cache/preview/workstations.png' });
   await page.setViewportSize({ width: 1440, height: 2000 });
   await page.locator('#processing').screenshot({ path: '.cache/preview/processing.png' });
@@ -83,7 +108,7 @@ try {
   await page.screenshot({ path: '.cache/preview/mobile-inputs.png' });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   assert.deepEqual(failures, []);
-  const result = { status: 'PASS', target: 'production site/', errors: failures, font: await page.locator('.font-note').innerText(), itemGlint: { ready: 3, controlledPhaseChanged: true }, itemTooltip: { suppliedLoreOnly: true } };
+  const result = { status: 'PASS', target: 'production site/', errors: failures, font: await page.locator('.font-note').innerText(), itemGlint: { ready: 3, controlledPhaseChanged: true }, itemTooltip: { suppliedLoreOnly: true }, bitmapText };
   await writeFile('.cache/preview/result.json', JSON.stringify(result, null, 2));
   console.log(result);
 } finally { await browser.close(); }

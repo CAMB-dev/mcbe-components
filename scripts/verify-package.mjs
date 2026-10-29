@@ -15,6 +15,8 @@ assert(!packed.files.some(file => /Mojangles[^/]*\.(ttf|otf|woff2?|ttc)$/i.test(
 assert(!packed.files.some(file => /\.(?:otf|ttf|ttc)$/i.test(file.path)), 'Optional original HBUI and game font binaries must stay outside the npm library.');
 assert(!packed.files.some(file => /loading-indicator\.gif$|animation-074ed0ba8c16bb30e36c\.gif$/i.test(file.path)), 'Private native loading GIF must stay outside the npm library.');
 assert(!packed.files.some(file => /ascii_sga\.png$/i.test(file.path)), 'User-owned SGA atlas must not enter the npm library.');
+assert(!packed.files.some(file => /(?:^|\/)glyph_(?:00|4f|51|52|5b|65|77|94)\.png$/i.test(file.path)), 'Private native Unicode atlas pages must stay outside the npm library.');
+assert(!packed.files.some(file => /(?:^|\/)local-fonts\/unicode\//i.test(file.path)), 'Local Unicode sample metrics and provenance must stay outside the npm library.');
 assert(!packed.files.some(file => /\.(?:cso|dxbc|dxil)$|\.material\.bin$/i.test(file.path)), 'Private native shader binaries must stay outside the npm library.');
 assert(!packed.files.some(file => /^(?:demo|\.cache)\//.test(file.path)), 'Demo-only game assets and local references must not enter the npm library.');
 const tarball = packed.filename;
@@ -32,10 +34,10 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
-const components = ['ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
+const components = ['BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds'];
 const rendererFunctions = ['shadeItemGlint','renderItemGlint'];
-assert.equal(components.length,110);
+assert.equal(components.length,111);
 assert.equal(dataExports.length,3);
 assert.equal(rendererFunctions.length,2);
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
@@ -50,6 +52,23 @@ assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+const bitmapFont = {pages:['/caller-owned-atlas.png'],glyphs:{A:{page:0,x:0,y:0,width:1,height:1,advance:1}},lineHeight:1};
+const bitmapMarkup = renderToString(element(ui.BitmapText,{font:bitmapFont,sampling:'point',shader:'bitmap',color:'#ffffff'},'A'));
+assert.match(bitmapMarkup,/mc-bitmap-text/);
+assert(bitmapMarkup.includes('>A</span>'));
+assert.match(bitmapMarkup,/data-render-state="loading"/);
+const itemRendererCalls=[], overrideRendererCalls=[];
+const itemTextRenderer=(text,context)=>{itemRendererCalls.push([text,context.kind,context.index]);return element('mark',{'data-item-rendered':context.kind},text);};
+const overrideTextRenderer=(text,context)=>{overrideRendererCalls.push([text,context.kind,context.index]);return element('mark',{'data-override-rendered':context.kind},text);};
+const rendererItem={name:'Consumer sword',durability:.5,tooltipTextRenderer:itemTextRenderer,lore:['Host string lore',element('strong',{'data-rich-node':'preserved',key:'rich'},'Rich node lore')]};
+const overrideMarkup=renderToString(element(ui.ItemTooltip,{item:rendererItem,renderText:overrideTextRenderer}));
+assert.deepEqual(itemRendererCalls,[]);
+assert.deepEqual(overrideRendererCalls,[['Consumer sword','name',0],['Host string lore','lore',0]]);
+assert(overrideMarkup.includes('<strong data-rich-node="preserved">Rich node lore</strong>'));
+assert(!/durability/i.test(overrideMarkup));
+const inheritedMarkup=renderToString(element(ui.ItemTooltip,{item:rendererItem}));
+assert.deepEqual(itemRendererCalls,[['Consumer sword','name',0],['Host string lore','lore',0]]);
+assert.match(inheritedMarkup,/data-item-rendered="name"/);
 const tooltipMarkup = renderToString(element(ui.ItemTooltip,{id:'consumer-tooltip',item:{name:'Consumer sword',nameColor:'#55ffff',durability:.5,lore:[element('span',{key:'enchantment',style:{color:'#aaaaaa'}},'Sharpness I')]}}));
 assert.match(tooltipMarkup,/role="tooltip"/);
 assert.match(tooltipMarkup,/id="consumer-tooltip"/);
@@ -61,6 +80,7 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
   element(ui.Checkbox, {label:'Coordinates', defaultChecked:true, name:'coordinates'}),
   element(ui.Button, {variant:'primary'}, 'Play'),
   element(ui.Text,{shadow:true},'Minecraft'),
+  element(ui.BitmapText,{font:bitmapFont,sampling:'bilinear',shader:'bitmap-smooth'},'A'),
   element(ui.InventoryGrid,{label:'Inventory',items:[{name:'Diamond',count:64}],size:9}),
   element(ui.Grindstone,{inputs:[null,null],result:null}),
   element(ui.EnchantingTable,{options:[{id:'unbreaking',label:'Unbreaking',level:3}]}),
@@ -155,7 +175,7 @@ const output = renderToString(element(ui.Panel, {title:'Settings'},
 assert.match(output, /mc-button--primary/);
 assert.match(output, /World name/);
 assert.match(output, /role="tablist"/);
-for (const className of ['mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
+for (const className of ['mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
 for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','fonts.css','mojangles.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
@@ -184,7 +204,9 @@ console.log('React '+React.version+': ESM, '+components.length+' components + '+
   await writeFile(join(consumer, 'consumer.tsx'), `
 import { createRef } from 'react';
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
-import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData } from 'mcbeui';
+import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer } from 'mcbeui';
+import { BitmapText } from 'mcbeui';
+import type { BitmapTextProps, BitmapFont, BitmapGlyph } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
 import type { AirBubbleState, BrewingSlot, CartographyMode, ScrollPosition } from 'mcbeui';
 import { BossBar, ChatMessage, ChatPanel, Scoreboard, StatusEffect, ActionBar, TitleOverlay, HeldItemTooltip } from 'mcbeui';
@@ -204,6 +226,11 @@ import type { ItemGlintSampler, ItemGlintUniforms, ItemGlintBlend, ItemGlintRend
 import type { BlockKind, BannerDye, RendererColor, BannerPatternLayer, BannerPatternId, ItemMesh, ItemMeshFace, ItemCamera, ItemLighting, Vec3, Uv, PixelTexture } from 'mcbeui';
 import { PlayerInventoryScreen, CreativeInventory, ArmorSlot, RecipeSearch, RecipeCategoryTabs, InventoryToolbar } from 'mcbeui';
 import type { ArmorSlotKind, RecipeCategory, InventoryLayout } from 'mcbeui';
+const bitmapGlyph: BitmapGlyph = {page:0,x:0,y:0,width:1,height:1,advance:1,offsetX:0,offsetY:0};
+const bitmapFont: BitmapFont = {pages:['/caller-owned-atlas.png'],glyphs:{A:bitmapGlyph},lineHeight:1};
+const bitmapProps: BitmapTextProps = {font:bitmapFont,sampling:'point',shader:'bitmap',children:'A',color:'#ffffff',shadow:{color:'#000000',offsetX:1,offsetY:1}};
+const textRenderer: ItemTooltipTextRenderer = (text,context)=><span data-kind={context.kind} data-index={context.index}>{text}</span>;
+const rendererItem: InventoryItem = {name:'A',durability:.5,lore:['A',<strong>Rich node lore</strong>],tooltipTextRenderer:textRenderer};
 const props: ButtonProps = {variant:'primary',size:'sm',type:'submit'};
 const items: TabItem[] = [{value:'game',label:'Game',content:'Survival'}];
 const enchantment: EnchantmentData = {id:'standalone',label:'Unbreaking',level:3};
@@ -314,6 +341,9 @@ export const demo = <>
   <TradingScreen tiers={tradeTiers} inputs={[null,null]} slotValidity={[true,false,true]} detailButtons={[true,true,true]} runeAtlasUrl="/caller-owned-runes.png" onDetails={slot=>String(slot)} onOfferSelect={(id,action)=>id+action} onTrade={()=>{}} ref={createRef<HTMLElement>()}/>
   <MountInventory equipment={mountEquipment} chested storageColumns={3} onEquipmentAction={(index,action)=>String(index)+action} onStorageSelectionChange={index=>index.toFixed(0)} ref={createRef<HTMLElement>()}/>
   <ItemGlint {...glintProps} onReady={()=>{}} onRenderError={error=>error.message} data-pass-alpha={glintPass?.[3]} data-pixel-width={glintPixels.width} ref={createRef<HTMLCanvasElement>()}/>
+  <BitmapText {...bitmapProps} onReady={()=>{}} onRenderError={error=>error.message} ref={createRef<HTMLSpanElement>()}/>
+  <ItemTooltip item={rendererItem} renderText={textRenderer} ref={createRef<HTMLDivElement>()}/>
+  <ItemSlot item={rendererItem}/>
   <ItemTooltip item={{name:'Consumer sword',nameColor:'#55ffff',durability:.5,lore:[<span>Sharpness I</span>]}} ref={createRef<HTMLDivElement>()}/>
   <BlockPreview block={'stone-stairs' satisfies BlockKind} model={mesh} camera={camera} lighting={lighting} onRenderError={error=>error.message} data-pixel-width={adapterTexture.width} ref={createRef<HTMLCanvasElement>()}/>
   <BannerPreview baseColor={bannerDyeColors.white} patterns={bannerLayers} fabricShading={false} ref={createRef<HTMLCanvasElement>()}/>

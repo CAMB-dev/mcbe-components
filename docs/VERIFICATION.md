@@ -2,6 +2,26 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
+## 原字图文字与提示框接入
+
+新增 `BitmapText`，当前公共值为111个组件、3份数据、2个函数，共116项。支持调用方字图、明确的字符矩形与推进、整段排版、受控采样 / shader、显式阴影、真实DOM文字及加载失败回退。`ItemTooltip.renderText` / `InventoryItem.tooltipTextRenderer` 复用同一入口，异步字图改变尺寸时提示框重新定位。源资源、公式与原生比较边界见 [NATIVE_BITMAP_FONT_QA.md](NATIVE_BITMAP_FONT_QA.md)。
+
+| 检查 | 结果与范围 |
+| --- | --- |
+| BitmapText组件 | 13/13 PASS；`.cache/bitmap-text-final.json`，布局、采样、颜色、阴影、加载、SSR、选取/无障碍、回调与取消 |
+| 提示框与库存相关 | 38/38 PASS；`.cache/bitmap-tooltip-regression.json`，包含双端6个新文字入口/尺寸变化用例 |
+| 正式pixels项目 | 16/16 PASS；`.cache/bitmap-native-integration-final.json`，13组件用例及3个可选原生来源/布局合同；约18秒 |
+| 独立数学和浏览器审计 | 120次布局/公式运行，15,606像素/62,424通道；四个浏览器样本480像素与独立控制Canvas RGBA零差，正常8bit存储舍入单独报告 |
+| ready DOM继承阴影缺陷 | 真实回归修前54像素差、修后0，负对照重新检出54；独立原字图探针367像素差降至0，不改变canvas显式阴影 |
+| 实际tarball消费 | React18.3.1 /19.3.1精确116值、111组件SSR、严格类型/ref/API、CSS/字体/材质/许可及私有字图排除均PASS；`.cache/package-verification-final.log` |
+| 生产预览 | 两段原字图与提示框内两段均ready，实际文本及无自动durability/glint检查通过，页面/资源错误为空；`.cache/bitmap-text-production-preview.log` |
+
+实际消费包SHA256为`b5db4f9ba6196a137c39c3649ef68376b1da8bc32df2c58942ef898bbde505c5`；安装到两个消费项目的`dist/index.js`均为`bc31318323a3897c9ecdf195751500168e5d5498dcb25e991b00d5df8f183ff1`。补入本验证记录后仅文档重打包，逐条验证其他包文件及两个消费者的全部dist字节相同；证明保存在`.cache/bitmap-text-final-pack-proof.json`。
+
+原生GUI4与GUI5 A/B均保留完整两行字段、空格、末尾行框及2px halo，RGBA零容差、无mask、无定位搜索。GUI4完整字段严格差异1314/15520像素，GUI5 A/B均1573/24300；加halo后分别1444/16632及1573/25688，最大通道差22/24/24。GUI5的`.75`覆盖代理阈值各有5处差异，完整RGBA也未通过。首轮三阈值全零假设得到1PASS/2FAIL，原报告留在`.cache/tooltip-native/independent-native-bitmap/report.json`；后续3PASS仅认证`.25/.5`来源/布局及GUI4额外`.75`分类，完整差异继续记录FAIL，**不是原生字体像素认证**。没有提高容差或添加拟合滤镜来取得通过。
+
+历史完整运行与最终相关范围按文件、完整标题和正式project合并，累计 **734唯一用例：729PASS、5预期SKIP、0未解决合同测试失败**，不是单次734项全绿。原生RGBA与覆盖率差异是明确未完成的验收项，不被上述合同测试数字消除。Goal继续进行。
+
 ## 物品提示与受控附魔光效
 
 新增 `ItemGlint` 及两个纯渲染函数，当前公共值为110个组件、3份数据、2个函数，共115项。原光效图及许可随包分发，私有编译材质和反汇编结果不分发。源公式、数值/整图验证和 Canvas 半透明1LSB边界见 [ITEM_GLINT_QA.md](ITEM_GLINT_QA.md)。

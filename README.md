@@ -60,6 +60,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | 组件 | 主要属性 | 行为 |
 | --- | --- | --- |
 | `Text` | `as`: span / p / h1…h4；`size`: sm / md / lg / xl；`shadow` 默认 true | 像素文字与无模糊阴影，转发 HTMLElement ref |
+| `BitmapText` | **必填** 字符串 children、`font`、`sampling`: point / bilinear、`shader`: bitmap / bitmap-smooth；可选 `scale`、具体 CSS `color`、显式 `shadow` 与回调 | 按字图矩形、advance/offset 和行高绘制；ref 为 span；保留真实 DOM 文字供读屏/复制，加载失败显示原文 |
 | `Button` | `variant`: default / primary / danger / ghost；`size`: sm / md / lg；`loading`、`fullWidth`、`startIcon`、`endIcon` | 默认 `type="button"`；loading 保留文字，禁用并设置 aria-busy；继承 button 属性 |
 | `IconButton` | Button 属性；**必填** `aria-label` | 正方形按钮，children 放图标 |
 | `Panel` | `title`、`footer`、`variant`: default / inset | Classic 浅灰九宫格面板 / 灰色凹陷面板；section，标题自动关联 aria-labelledby |
@@ -78,7 +79,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `Alert` | `title`；`variant`: info / success / warning / danger | danger 使用 role=alert，其余 role=status；可覆盖 role |
 | `Separator` | 原生 hr 属性 | 双层硬边分割线 |
 | `ItemSlot` | `item`、`label`、`image`、`count`、`selected`、`durability`、`placeholder`、`underlay`、`showTooltip`、`onSecondaryAction`；原生 button 属性 | 真实 container cell，36×36 槽位 / 32×32 物品；蓝色选中、绿色悬停、白色键盘焦点；0 为空、1 隐藏角标；underlay 在物品下方常驻，placeholder 仅空槽显示 |
-| `ItemTooltip` | **必填** `item`；div 属性 | 名称、显式 lore；耐久说明由调用方放入 lore。ItemSlot 处理鼠标跟随、键盘焦点 / Escape，并在 Dialog 内挂载提示 |
+| `ItemTooltip` | **必填** `item`；可选 `renderText(text,{kind,index})`；div 属性 | 名称、显式 lore；可继承 `item.tooltipTextRenderer`，独立 renderText 优先，富文本 lore 原样保留。ItemSlot 跟随鼠标、处理焦点/Escape，并按异步字形大小重新避让 |
 | `ItemGlint` | **必填** `imageSrc`、`uniforms`、`glintSampler`、`blend`；可选尺寸、纹理、label 与回调 | 真实附魔光效纹理与源着色公式；受控 canvas，无内置时钟或自动附魔绑定 |
 | `InventoryGrid` | **必填** `label`、`items`；`size`、`columns`、`selectedIndex` / `defaultSelectedIndex`、`onSelectionChange`、`onSlotAction` | 单一 Tab 入口，方向键 / Home / End / Ctrl+Home/End，跳过禁用项；primary / secondary 操作事件 |
 | `ItemImage` | `src`、`alt`、`imageProps`、children；span 属性 | 独立 32×32 物品区域，最近邻渲染；缺图不生成替代图案 |
@@ -277,7 +278,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **110 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 110 项（含 BlockPreview / BannerPreview / ItemGlint / InventoryToolbar），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 3 份 renderer 数据及 `shadeItemGlint` / `renderItemGlint` 两个纯渲染函数，不计组件数量；ESM 值导出共 115 项。
+当前 **111 个已实现组件**；按用户要求，以 Bedrock 原生控件和 GUI 为边界，优先拆可复用零件。[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 当前整理 111 项（含 BitmapText / BlockPreview / BannerPreview / ItemGlint / InventoryToolbar），均已有公共导出，implemented 只代表已导出，不等于 pixel-perfect 已验收。另公开 3 份 renderer 数据及 `shadeItemGlint` / `renderItemGlint` 两个纯渲染函数，不计组件数量；ESM 值导出共 116 项。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类、燃料、处理箭头、附魔选项、交易条目。
@@ -397,6 +398,24 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 
 原版字体：如已持有可用于该场景的 Mojangles 字体，可以自行接入；npm 库不包含游戏原版字体。重建控件皮肤的来源见视觉基准文档。
 
+`BitmapText` 提供原字图路径，`font` 包含 `pages` URL 数组、`glyphs` 字符映射和 `lineHeight`。每个字格明确给出 `page/x/y/width/height/advance`，可加 `offsetX/offsetY`；所有数值采用字体源坐标，`scale` 作用于完整排版。支持 Unicode code point 与显式换行，空格可使用零尺寸字格；不推断缺字、自动换行、shaping 或阴影。透明 DOM 文本保留读屏和复制，canvas 仅负责画面。
+
+```tsx
+<BitmapText font={yourFont} sampling="point" shader="bitmap"
+  color="#ffffff">钻石剑</BitmapText>
+
+<ItemSlot item={{ name: '钻石剑', lore: ['+7 攻击伤害'], image: swordUrl,
+  tooltipTextRenderer: (text, { kind }) => (
+    <BitmapText font={yourFont} sampling="point" shader="bitmap"
+      color={kind === 'name' ? '#ffffff' : '#447fff'}>{text}</BitmapText>
+  ),
+}} />
+```
+
+本机样本可执行 `python scripts/use-local-unicode-sample.py "C:/XboxGames/Minecraft for Windows/Content"` 后重启 Vite。该仓库工具只准备已测的8张原页、10字符，保存在忽略目录；它不生成完整 Unicode 字体，也不改变全局字体。启用后 `site/` 构建可能包含这些本地字图，npm 包不含它们。
+
+原生 GUI4/5 对照确认了这些 Unicode 字形和主要排版数据；实际着色器绑定、覆盖率和共同 UI 采样仍有差异。`BitmapSmooth` 的采样后 smoothstep、标准 Web source-over、源像素半 texel 夹取和 CSS 颜色的 Canvas RGBA8 解析均有明确边界。见 [NATIVE_BITMAP_FONT_QA.md](docs/NATIVE_BITMAP_FONT_QA.md)。
+
 本地展示页也可以使用自己安装的 Bedrock 字体：
 
 ```powershell
@@ -469,7 +488,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、110 个组件、3 份数据和 2 个渲染函数、类型、CSS、皮肤、字体及许可路径。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装实际 tarball，验证 ESM、SSR、111 个组件、3 份数据和 2 个渲染函数、类型、CSS、皮肤、字体及许可路径。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

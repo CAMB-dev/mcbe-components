@@ -1,4 +1,5 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, isAbsolute, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, normalizePath } from 'vite';
 
@@ -13,6 +14,7 @@ const hbuiTenPath = localFont('Minecraft-Ten-v2.otf');
 const hbuiSevenPath = localFont('Minecraft-Seven-v2.otf');
 const hbuiChinesePath = localFont('NotoSansSC-Regular.otf');
 const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loading-indicator.gif', import.meta.url));
+const nativeBitmapPath = fileURLToPath(new URL('./.cache/local-fonts/unicode/font.json', import.meta.url));
 export default defineConfig({
   base: './', build: { outDir: 'site', rollupOptions: { input: { main: fileURLToPath(new URL('./index.html', import.meta.url)), calibration: fileURLToPath(new URL('./calibration.html', import.meta.url)) } } },
   server: {
@@ -30,6 +32,25 @@ export default defineConfig({
         ? `import runeUrl from ${JSON.stringify(normalizePath(runePath) + '?url')}; export const runeAtlasUrl = runeUrl;`
         : 'export const runeAtlasUrl = undefined;';
       const parts = [runeModule];
+      // Optional measured subset; page bytes remain in ignored local storage.
+      // This does not register a global font face or invent missing glyphs.
+      let bitmapModule = 'export const nativeBitmapFont = undefined;';
+      if (existsSync(nativeBitmapPath)) {
+        const sample = JSON.parse(readFileSync(nativeBitmapPath, 'utf8')) as { pages: string[]; glyphs: object; lineHeight: number };
+        if (!Array.isArray(sample.pages) || !sample.pages.length || !sample.glyphs || !Number.isFinite(sample.lineHeight)) throw new Error('Invalid local Unicode subset; rerun use-local-unicode-sample.py.');
+        const directory = dirname(nativeBitmapPath);
+        const pages = sample.pages.map(page => {
+          if (typeof page !== 'string' || isAbsolute(page)) throw new Error('Unicode subset pages must be relative local paths.');
+          const path = resolve(directory, page), fromDirectory = relative(directory, path);
+          if (fromDirectory === '..' || fromDirectory.startsWith('../') || fromDirectory.startsWith('..\\') || isAbsolute(fromDirectory)) throw new Error('Unicode subset page is outside its local cache.');
+          return path;
+        });
+        if (pages.every(path => existsSync(path))) {
+          const imports = pages.map((path, index) => `import bitmapPage${index} from ${JSON.stringify(normalizePath(path) + '?url')};`);
+          bitmapModule = imports.join('\n') + `\nexport const nativeBitmapFont = { ...${JSON.stringify(sample)}, pages: [${pages.map((_, index) => `bitmapPage${index}`).join(',')}] };`;
+        }
+      }
+      parts.push(bitmapModule);
       parts.push(existsSync(hbuiLoadingPath)
         ? `import hbuiLoadingIndicatorUrl from ${JSON.stringify(normalizePath(hbuiLoadingPath) + '?url')}; export { hbuiLoadingIndicatorUrl };`
         : 'export const hbuiLoadingIndicatorUrl = undefined;');

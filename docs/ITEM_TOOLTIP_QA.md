@@ -75,7 +75,7 @@ nominal 外轮廓到名称 ink top/left 约 5game，包含边框、字形 bearin
 
 将满白 mask 平移 `(+5,+5)` 的探针中，818 像素落回未变的填充色；名称区没有稳定 `#3f3f3f` 灰色平台。这支持该样本未见标准 `+1game` 灰色文字阴影，`text-shadow:none` 可作为此状态候选。它不证明所有字体渲染都没有额外 shading；文字边缘有部分覆盖和小幅颜色差，不能把它们全部简化成硬像素。
 
-字体身份仍未知。原生 metadata 声明 OldSmoothFont/MSDF 与 Unicode fallback；直接使用 Unicode 16×16 glyph 页、2.5×双线性采样的探索模型没有匹配本截图，因此没有认证它、Mojangles 中文覆盖或开源 Fusion 回退为原生 CJK 字体。
+后续 GUI4/5 对照已确认已测字符的基础 Unicode 位图设计，早期2.5×双线性模型失败不能用于排除该来源。`BitmapText` 可按原字图与显式 metrics 重建，并通过 `item.tooltipTextRenderer` 接入；实际字体 alias、材质分支及最终覆盖率仍未认证。详见 [NATIVE_BITMAP_FONT_QA.md](NATIVE_BITMAP_FONT_QA.md)。开源 Fusion 与 HBUI NotoSC 的相关字形存在稳定拓扑差异，仍不作为原版字形。
 
 ## A/B 位移及严格差异
 

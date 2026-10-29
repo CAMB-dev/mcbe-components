@@ -6,4 +6,5 @@ declare module 'virtual:mcbeui-game-font' {
   export const hasHBUIChineseFont: boolean;
   export const hasHBUIFont: boolean;
   export const hbuiLoadingIndicatorUrl: string | undefined;
+  export const nativeBitmapFont: import('../src/bitmap-text').BitmapFont | undefined;
 }

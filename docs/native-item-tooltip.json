@@ -824,7 +824,7 @@
     "font": {
       "fontType": "Unknown",
       "fontSize": "Not certified independently of metrics",
-      "nativeResources": "font_metadata declares OldSmoothFont MSDF and Unicode fallbacks. Extracted Unicode glyph pages52/77/94 were considered but a simple2.5x bilinear bitmap hypothesis did not match the screenshot; do not certify those glyphs or the open Fusion fallback.",
+      "nativeResources": "Follow-up GUI4/5 whole-cell evidence identifies the measured base Unicode bitmap designs and metrics; see native-bitmap-font.json. The earlier simple2.5x bilinear model failure did not reject that source. Actual native alias/material/sampler/coverage binding remains unverified; open Fusion and HBUI Noto candidates have different measured glyph topology.",
       "limits": "No native font/texture is distributed by these metadata documents."
     }
   },

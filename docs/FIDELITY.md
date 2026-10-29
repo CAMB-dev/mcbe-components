@@ -70,6 +70,10 @@ Spinner使用原loading_spin十帧 / 10fps，Button.loading复用同组件；通
 
 ## 尚待验收
 
+`BitmapText` 新增调用方字图、逐字 advance / offset 与显式 point / bilinear、Bitmap / BitmapSmooth 配置，物品提示可通过 `tooltipTextRenderer` 复用。已测中文在本机基础 Unicode 原页中找到相同字形设计，公开 Fusion / Noto 回退不能冒充这些原字形。原页仅用于本机可选样本，不进入库包；该10字符样本不是完整 Unicode 字体。具体来源与测量见 [NATIVE_BITMAP_FONT_QA.md](NATIVE_BITMAP_FONT_QA.md)。
+
+实际组件完整字段比较：GUI4严格差异1314/15520像素，GUI5 A/B均1573/24300像素；另加2px halo后分别1444/16632及1573/25688。GUI5在`.75`覆盖代理阈值各有5处不一致。原生布局合同测试只认证已观察到的`.25/.5`分类及GUI4额外`.75`分类。最初“三阈值全零”假设的失败被保留；合同通过不能改写为原生覆盖率或RGBA零差。未将诊断滤镜、拟合偏移或未证blend带入生产。ready透明DOM文字层另已修复继承CSS阴影导致的幽灵字，显式canvas阴影仍由调用方配置。
+
 Alert、Badge、部分扩展状态以及 Panel / Dialog 的任意内容排版仍包含本项目的布局和配色选择。Progress 目前采用 common.progress_bar 模板，游戏生成世界页面使用的自定义绿色 renderer 是另一个模板。展示页是组件文档，小岛和项目图标为原创插画，物品使用真实 PNG，未复刻某个完整游戏页面。独立控件对照通过不等于整套游戏全界面零偏差。
 
 2026-10-29 已在本机 1.26.6005.0（界面显示 26.60）、简体中文、Classic GUI 5、新建单人测试世界取得附魔台打开 / 关闭 / 经验不足三张原始无损 PNG（2568×1400）。通过 Alt+PrintScreen 原始剪贴板图像存为 PNG；普通自动截图接口返回 JPEG，仅用于定位，不参与颜色验收。截图 SHA 与未遮罩区域比较见 [enchanting-renderer.json](enchanting-renderer.json) 和 [ENCHANTING_QA.md](ENCHANTING_QA.md)。书本区域仍非零差，整个附魔台及其他工作站的原生逐像素验收继续列入 GOAL。浏览器证据覆盖 Chromium 桌面 / 手机模拟，真实设备、Firefox / Safari、其他 DPR 与系统缩放仍待验证。

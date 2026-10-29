@@ -59,6 +59,8 @@ export const DurabilityBar = forwardRef<HTMLSpanElement, DurabilityBarProps>(fun
   </span>;
 });
 
+/** Optional original-atlas text rendering; existing rich lore nodes remain intact. */
+export type ItemTooltipTextRenderer = (text: string, context: { kind: 'name' | 'lore'; index: number }) => ReactNode;
 export interface InventoryItem {
   id?: string;
   name: string;
@@ -68,15 +70,16 @@ export interface InventoryItem {
   /** Remaining durability, between 0 and 1. */
   durability?: number;
   lore?: readonly ReactNode[];
+  tooltipTextRenderer?: ItemTooltipTextRenderer;
   nameColor?: string;
   enchanted?: boolean;
   disabled?: boolean;
 }
-export interface ItemTooltipProps extends HTMLAttributes<HTMLDivElement> { item: InventoryItem }
-export const ItemTooltip = forwardRef<HTMLDivElement, ItemTooltipProps>(function ItemTooltip({ item, className, ...props }, ref) {
+export interface ItemTooltipProps extends HTMLAttributes<HTMLDivElement> { item: InventoryItem; renderText?: ItemTooltipTextRenderer }
+export const ItemTooltip = forwardRef<HTMLDivElement, ItemTooltipProps>(function ItemTooltip({ item, renderText = item.tooltipTextRenderer, className, ...props }, ref) {
   return <div role="tooltip" {...props} ref={ref} className={['mc-item-tooltip', className].filter(Boolean).join(' ')}>
-    <div className="mc-item-tooltip__name" style={{ color: item.nameColor }}>{item.name}</div>
-    {item.lore?.map((line, index) => <div className="mc-item-tooltip__lore" key={index}>{line}</div>)}
+    <div className="mc-item-tooltip__name" style={{ color: item.nameColor }}>{renderText ? renderText(item.name, { kind: 'name', index: 0 }) : item.name}</div>
+    {item.lore?.map((line, index) => <div className="mc-item-tooltip__lore" key={index}>{renderText && typeof line === 'string' ? renderText(line, { kind: 'lore', index }) : line}</div>)}
   </div>;
 });
 
@@ -123,7 +126,9 @@ export const ItemSlot = forwardRef<HTMLButtonElement, ItemSlotProps>(function It
   useEffect(()=>{
     if(!tooltip) return;
     locate(); window.addEventListener('scroll',locate,true); window.addEventListener('resize',locate);
-    return ()=>{ window.removeEventListener('scroll',locate,true); window.removeEventListener('resize',locate); };
+    const observer = typeof ResizeObserver === 'undefined' ? undefined : new ResizeObserver(locate);
+    if (tooltipNode.current) observer?.observe(tooltipNode.current);
+    return ()=>{ observer?.disconnect(); window.removeEventListener('scroll',locate,true); window.removeEventListener('resize',locate); };
   },[tooltip]);
   return <>
     <button {...props} ref={element => { node.current = element; if (typeof forwardedRef === 'function') forwardedRef(element); else if (forwardedRef) forwardedRef.current = element; }}

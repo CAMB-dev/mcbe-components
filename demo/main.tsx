@@ -24,6 +24,7 @@ import { GameControlsExamples } from './game-controls-examples';
 import { TradingMountsExamples } from './trading-mounts-examples';
 import { InventoryScreensExamples } from './inventory-screens-examples';
 import { ItemGlintExamples } from './item-glint-examples';
+import { BitmapTextExamples } from './bitmap-text-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -38,6 +39,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'surfaces', name: 'Panels & dialogs', icon: 'chevron', count: '02' },
   { id: 'inventory', name: 'Inventory & slots', icon: 'chevron', count: '03' },
   { id: 'item-glint', name: 'Item glint', icon: 'chevron', count: '01' },
+  { id: 'bitmap-text', name: 'Bitmap text', icon: 'chevron', count: '01' },
   { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '07' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
@@ -68,6 +70,7 @@ const snippets: Record<string, string> = {
   feedback: `<Badge variant="success">Stable</Badge>\n<Progress label="Generating world"\n  value={64} showValue />\n<Alert variant="success" title="World saved">\n  Your adventure is ready.\n</Alert>`,
   surfaces: `<Dialog open={open} onOpenChange={setOpen}\n  title="Create new world"\n  footer={<Button variant="primary"\n    onClick={() => setOpen(false)}>Create</Button>}>\n  <TextField label="World name" />\n</Dialog>`,
   inventory: `<ItemSlot label="Diamond" count={64}\n  selected={selected === 'diamond'}\n  onClick={() => setSelected('diamond')}>\n  <img src="/your-diamond.png" alt="" />\n</ItemSlot>`,
+  'bitmap-text': `<BitmapText font={yourFont}\n  sampling="point" shader="bitmap"\n  color="#ffffff">钻石剑</BitmapText>\n// font.pages contains caller-owned atlas URLs.\n// font.glyphs supplies exact rectangles and advances.`,
   'item-glint': `<ItemGlint imageSrc="/your-diamond-sword.png"\n  uniforms={yourExplicitUniforms}\n  glintSampler="bilinear-repeat"\n  blend={{ source: 'one', destination: 'one' }} />\n// This is an explicit Web composition profile.\n// Supply captured host parameters for native calibration.`,
   typography: `import 'mcbeui/styles.css';\nimport 'mcbeui/fonts.css'; // optional, self-hosted\n\n/* Bring your own licensed original font */\n:root {\n  --mc-font: 'Mojangles', 'Monocraft',\n    'Fusion Pixel', monospace;\n}`,
   'input-states': `<TextField label="World name" error="This name is taken." />\n<TextField label="World seed" defaultValue="8675309" disabled />\n<TextField label="World ID" defaultValue="MC-0420" readOnly />`,
@@ -270,6 +273,7 @@ function App() {
       </Example>
 
       <Example id="item-glint" title="Item glint" detail="A reusable material renderer with controlled phase, original texture and explicit composition."><ItemGlintExamples/></Example>
+      <Example id="bitmap-text" title="Original bitmap text" detail="Caller-owned glyph pages, explicit metrics and sampling. The original Unicode sample preserves native glyph shapes; whole-UI edge sampling is still under calibration."><BitmapTextExamples/></Example>
 
       <Example id="workstations" title="Workstation GUIs" detail="Classic Bedrock container layouts, exposed as React components.">
         <div className="workstation-examples">
