@@ -1,9 +1,9 @@
-import { createContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import type { CSSProperties, RefObject } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import type { RefObject } from 'react';
 import { GuiImageLayer } from './gui-image';
 import type { GuiImage } from './gui-image';
 import { layoutGuiImages } from './gui-image-geometry';
-import type { GuiImageNineSlice, GuiImageRect, GuiImageRgba } from './gui-image-geometry';
+import type { GuiImageRect, GuiImageRgba } from './gui-image-geometry';
 import { GuiLayer } from './gui-layer-component';
 import type { GuiLayerCommand } from './gui-layer-component';
 import { layoutSourceGuiLayer } from './gui-layer';
@@ -11,6 +11,8 @@ import { layoutGuiText } from './gui-text-geometry';
 import type { GuiTextFont, GuiTextGeometry, GuiTextRgba8 } from './gui-text-geometry';
 import { workstationImageAssets as assets } from './workstation-image-assets';
 import type { InventoryItem } from './inventory';
+import { WorkstationImagePresentation as EnchantingImagePresentation, sourceImage as image, sourceText as textCommand, sourceItemCommands, sourceSlotPaint, resolveWorkstationFrame, layoutWorkstationWindow, workstationCanvasStyle, validateWorkstationLabelMetrics } from './workstation-source-layer';
+import type { WorkstationPresentation } from './workstation-source-layer';
 
 /** Explicit native-image layout inputs. CSS skins remain the default route. */
 export interface EnchantingTableImageRenderProfile {
@@ -42,10 +44,10 @@ export interface EnchantingTableTextRenderProfile {
   costs: EnchantingTableTextRenderStyle & { disabledColor?: GuiTextRgba8 };
   runes?: EnchantingTableTextRenderStyle;
 }
-interface Presentation { scale: number; left: number; top: number; right: number; bottom: number }
+type Presentation = WorkstationPresentation;
 // undefined means an unrelated WorkstationFrame; null means the same stable
 // EnchantingTable DOM is currently using its CSS/loading/error presentation.
-export const EnchantingImagePresentation = createContext<Presentation | null | undefined>(undefined);
+export { EnchantingImagePresentation };
 interface Option { disabled?: boolean; level: number; runeText?: string }
 interface ControlState { hover: boolean; focus: boolean; pressed: boolean; selected: boolean; disabled: boolean }
 interface VisualState { slots: ControlState[]; options: ControlState[]; close: ControlState }
@@ -101,11 +103,6 @@ function useVisualState(root: RefObject<HTMLElement | null>, enabled: boolean): 
   return state;
 }
 
-interface Asset { url: string; nineSlice?: GuiImageNineSlice }
-function image(asset: Asset, local: GuiImageRect, origin: readonly [number, number], alpha = 1): GuiImage {
-  return { texture: asset.url, rect: [local[0] + origin[0], local[1] + origin[1], local[2], local[3]],
-    nineSlice: asset.nineSlice, hudOpacity: alpha };
-}
 interface Prepared {
   images: GuiImage[]; outputRect: GuiImageRect; origin: readonly [number, number];
   commands?: GuiLayerCommand[];
@@ -123,10 +120,7 @@ const mul = (a: number, b: number) => f32(f32(a) * f32(b));
 const div = (a: number, b: number) => f32(f32(a) / f32(b));
 
 function fontOrigins(origin: readonly [number, number], metrics: EnchantingTableTextRenderProfile['metrics']) {
-  if (!metrics || !Number.isFinite(metrics.lineHeight) || f32(metrics.lineHeight) <= 0 || !Number.isFinite(f32(metrics.lineHeight))
-    || !Array.isArray(metrics.paintOffset) || metrics.paintOffset.length !== 2 || metrics.paintOffset.some(value => !Number.isFinite(value) || !Number.isFinite(f32(value)))) {
-    throw new RangeError('Explicit finite label metrics and a positive game-space lineHeight are required.');
-  }
+  validateWorkstationLabelMetrics(metrics);
   const [x, y] = origin, [paintX, paintY] = metrics.paintOffset;
   const topHeight = sub(mul(166, .5), 12), topY = add(y, 7);
   const gridWidth = sub(mul(176, .65), 8), gridHeight = add(mul(topHeight, .8), 4);
@@ -141,54 +135,24 @@ function fontOrigins(origin: readonly [number, number], metrics: EnchantingTable
       add(sub(add(add(add(gridY, mul(index, rowStride)), buttonHeight), -2), metrics.lineHeight), paintY)] as const,
   };
 }
-function textCommand(text: string, style: EnchantingTableTextRenderStyle, origin: readonly [number, number], color: GuiTextRgba8): GuiLayerCommand & { kind: 'text' } {
-  return { kind: 'text', text, font: style.font, fontScale: style.fontScale, sampling: style.sampling, shader: style.shader,
-    color: style.color ?? color, tint: style.tint, hudOpacity: style.hudOpacity, origin };
-}
 
 function prepare(profile: EnchantingTableImageRenderProfile, options: readonly Option[], state: VisualState, close: boolean, title: string, inventoryLabel: string, items: readonly (InventoryItem | null | undefined)[]): Prepared {
-  const { width, height, guiScale } = profile.frame, scale = profile.displayScale ?? 1;
+  const { width, height, guiScale } = profile.frame;
   if (profile.itemImages !== undefined && typeof profile.itemImages !== 'boolean') throw new RangeError('itemImages must be an explicit boolean.');
   if (profile.itemModels !== undefined && typeof profile.itemModels !== 'boolean') throw new RangeError('itemModels must be an explicit boolean.');
-  if (!Number.isFinite(scale) || scale <= 0 || scale > 32) throw new RangeError('Image displayScale must be positive and at most32.');
-  const origin = profile.origin ?? [(Math.ceil(width / guiScale) - 176) / 2, (Math.ceil(height / guiScale) - 166) / 2] as const;
-  if (origin.length !== 2 || origin.some(value => !Number.isFinite(value))) throw new RangeError('Image origin requires two finite game coordinates.');
+  const { origin } = resolveWorkstationFrame(profile);
   const images: GuiImage[] = [image(assets.panel, [0, 0, 176, 166], origin)];
   if (close) images.push(image(state.close.pressed ? assets.closePressed : state.close.hover || state.close.focus ? assets.closeHover : assets.close, [156, 5, 15, 7], origin));
   images.push(image(assets.cell, [60.6, 13.1, 108.4, 62.8], origin));
   // Source order places title/inventory text after the panel/close/indent and
   // before container-cell images. Keep that ordering in the shared target.
   const prefixLength = images.length;
-  slotRects.forEach((rect, index) => images.push(image(state.slots[index]?.selected ? assets.selected : assets.cell, rect, origin)));
+  const slots = sourceSlotPaint(slotRects, state.slots, origin);
+  images.push(...slots.cells);
   images.push(image(assets.lapis, [34, 48.5, 16, 16], origin));
-  slotRects.forEach(([x, y, w, h], index) => {
-    const slot = state.slots[index]; if (slot?.disabled) return;
-    if (slot?.hover) images.push(image(assets.highlight, [x + 1, y + 1, w - 2, h - 2], origin, .8));
-    // common.highlight_slot_panel draws BOTH highlight and white border in its
-    // hover control (also observed as old captured Global60/61).
-    if (slot?.hover || slot?.focus) images.push(image(assets.focus, [x, y, w, h], origin));
-  });
-  const itemImageSlots: number[] = [], itemModelSlots: number[] = [], itemSprites: GuiLayerCommand[] = [];
+  images.push(...slots.overlays);
   const beforeItemsLength = images.length;
-  if (profile.itemImages || profile.itemModels) slotRects.forEach(([x, y], index) => {
-    const item = items[index];
-    // Match ItemSlot occupancy, without inspecting custom React nodes or DOM bounds.
-    const amount = item?.count === undefined ? undefined : Number.isFinite(item.count) ? Math.max(0, Math.floor(item.count)) : 0;
-    if (!item || amount === 0) return;
-    if (profile.itemModels && item.guiModel !== undefined) {
-      const model = item.guiModel;
-      const hudOpacity = model.hudOpacity ?? 1;
-      if (!Number.isFinite(hudOpacity) || hudOpacity < 0 || hudOpacity > 1) throw new RangeError('Model hudOpacity must be normalized.');
-      itemSprites.push({ ...model, kind: 'model', origin: [x + 1 + origin[0], y + 1 + origin[1]],
-        hudOpacity: hudOpacity * (state.slots[index]?.disabled ? .5 : 1) });
-      itemModelSlots.push(index);
-      return;
-    }
-    if (!profile.itemImages || item.icon != null || typeof item.image !== 'string' || !item.image.trim()) return;
-    itemSprites.push({ kind: 'sprite', texture: item.image.trim(), rect: [x + 1 + origin[0], y + 1 + origin[1], 16, 16],
-      color: [255, 255, 255, 255], hudOpacity: state.slots[index]?.disabled ? .5 : 1 });
-    itemImageSlots.push(index);
-  });
+  const { commands: itemSprites, imageSlots: itemImageSlots, modelSlots: itemModelSlots } = sourceItemCommands(profile, slotRects, items, state.slots, origin);
   const rowHeight = 60.8 / 3;
   const row = (index: number): GuiImageRect => [61.6, 14.1 + index * rowHeight, 106.4, 60.8 * .33333333];
   for (let index = 0; index < 3; index++) images.push(image(assets.optionDark, row(index), origin));
@@ -227,29 +191,8 @@ function prepare(profile: EnchantingTableImageRenderProfile, options: readonly O
     commands.push(...images.slice(beforeDustLength).map(asImage));
   }
   const layout = commands ? layoutSourceGuiLayer({ width, height, guiScale, commands }) : layoutGuiImages({ width, height, guiScale, images });
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-  const bounds = (mvp: Float32Array, vertices: readonly { position: readonly number[] }[]) => {
-    for (const vertex of vertices) {
-      const x = ((mvp[0]! * vertex.position[0]! + mvp[4]! * vertex.position[1]! + mvp[12]!) + 1) * width / 2;
-      const y = (1 - (mvp[1]! * vertex.position[0]! + mvp[5]! * vertex.position[1]! + mvp[13]!)) * height / 2;
-      minX = Math.min(minX, x); minY = Math.min(minY, y); maxX = Math.max(maxX, x); maxY = Math.max(maxY, y);
-    }
-  };
-  if ('commands' in layout) for (const command of layout.commands) {
-    if (command.kind === 'model') for (const run of command.layout.runs) bounds(command.layout.mvp, run.mesh.vertices);
-    else if (command.kind !== 'text') bounds(layout.mvp, command.mesh.vertices);
-    else for (const run of command.layout.runs) bounds(run.mvp, run.vertices);
-  }
-  else for (const mesh of layout.meshes) bounds(layout.mvp, mesh.vertices);
-  const x = Math.max(0, Math.floor(minX) - 1), y = Math.max(0, Math.floor(minY) - 1);
-  const right = Math.min(width, Math.ceil(maxX) + 1), bottom = Math.min(height, Math.ceil(maxY) + 1);
-  if (right <= x || bottom <= y) throw new RangeError('Image panel is outside the explicit framebuffer.');
-  const outputRect: GuiImageRect = [x, y, right - x, bottom - y], k = 2 / guiScale;
-  const tx = x * k - 2 * origin[0], ty = y * k - 2 * origin[1];
-  const left = Math.floor(tx) - 1, top = Math.floor(ty) - 1;
-  const windowRight = Math.ceil(tx + outputRect[2] * k) + 1, windowBottom = Math.ceil(ty + outputRect[3] * k) + 1;
-  return { images, commands, textRunes, itemImageSlots, itemModelSlots, textLabels: profile.text !== undefined, outputRect, origin, left, top, width: windowRight - left, height: windowBottom - top, translateX: tx - left, translateY: ty - top,
-    presentation: { scale, left: Math.max(6, -left), top: Math.max(6, -top), right: Math.max(6, windowRight - 352), bottom: Math.max(6, windowBottom - 332) } };
+  return { images, commands, textRunes, itemImageSlots, itemModelSlots, textLabels: profile.text !== undefined,
+    ...layoutWorkstationWindow(profile, origin, layout) };
 }
 
 export function useEnchantingImageLayer(profile: EnchantingTableImageRenderProfile | undefined, root: RefObject<HTMLElement | null>, options: readonly Option[], close: boolean, title: string, inventoryLabel: string, items: readonly (InventoryItem | null | undefined)[]) {
@@ -273,12 +216,7 @@ export function useEnchantingImageLayer(profile: EnchantingTableImageRenderProfi
   if (!profile || !prepared) return { presentation: null, layer: null };
   if (!prepared.value) return { presentation: prepared.presentation ?? null, layer: <span className="mc-enchanting-image-error" aria-hidden="true" data-render-state="error" data-render-error={prepared.error}/> };
   const value = prepared.value;
-  const pixelScale = 2 / profile.frame.guiScale;
-  const style = { position: 'absolute', width: value.outputRect[2], height: value.outputRect[3],
-    '--mc-image-pixel-scale': pixelScale,
-    '--mc-image-translate-x': `${value.translateX}px`, '--mc-image-translate-y': `${value.translateY}px`,
-    '--mc-image-zoom-left': `${value.translateX / pixelScale}px`, '--mc-image-zoom-top': `${value.translateY / pixelScale}px`,
-  } as CSSProperties;
+  const style = workstationCanvasStyle(profile.frame.guiScale, value);
   return { presentation: value.presentation, layer: <div className="mc-enchanting-image-window" aria-hidden="true" style={{ left: value.left, top: value.top, width: value.width, height: value.height }}
     data-frame-origin-x={value.origin[0]} data-frame-origin-y={value.origin[1]} data-output-rect={value.outputRect.join(',')}
     data-item-images={value.itemImageSlots.length ? value.itemImageSlots.join(' ') : undefined}

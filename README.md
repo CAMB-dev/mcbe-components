@@ -93,7 +93,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `PlayerInventory` | `items`、`hotbar`、`label`、`hotbarLabel`、`renderText`、`selectedIndex`、`onSelectionChange`、`onSlotAction` | 27 格背包与 9 格快捷栏，共享 0…35 的选中索引 |
 | `WorkstationFrame` | **必填** `title`；`inventory`、`hotbar`、`inventoryLabel`、`renderText`、`onClose`、`closeLabel`、`onInventoryAction` | 176×166 游戏像素 Classic 容器外框，以 GUI 2 显示；窄屏局部滚动 |
 | `InventoryScreenFrame` | **必填** `title`、`book: ReactNode`、`children: ReactNode`；`layout` / `defaultLayout`: recipe-book / survival、`onLayoutChange`、`onHelp`、`onClose`、`helpLabel`、`closeLabel`、`showClose` | 共享固定 326×166 game 背包 / 工作台外框；默认 recipe-book，survival 隐藏 book 并居中右面板，ref 为 section；不适用于熔炉 compact 根布局 |
-| `Grindstone` | `inputs`: readonly [item, item]；`result`、`invalid`、`onInputAction`、`onTakeResult`；Frame 属性 | 砂轮双输入、结果、原始箭头 / 无效标记和玩家背包；结果由调用方提供 |
+| `Grindstone` | `inputs`: readonly [item, item]；`result`、`invalid`、`onInputAction`、`onTakeResult`、可选 `imageRender: GrindstoneImageRenderProfile`；Frame 属性 | 双输入 / ResultSlot / 39槽背包组合；可选whole-frame原图、显式labels / item images / models同目标。省略profile走CSS，结果规则由宿主提供；见 [GRINDSTONE_IMAGE_QA.md](docs/GRINDSTONE_IMAGE_QA.md) |
 | `EnchantingTable` | **必填** `options`，可为空数组；`item`、`lapis`、`book`、`onInputAction`、`onEnchant`、`renderText`、`imageRender?: EnchantingTableImageRenderProfile`（可选text / 显式metrics与styles、itemImages / itemModels）、`options[].runeText`；Frame 属性 | 固定三行背景；仅有记录的行提供选项/费用/动作，缺记录为 aria-hidden 非交互背景；book 支持自定义渲染 |
 | `EnchantmentOption` | **必填** `id`、`label`、`level`；`tier`: 1 / 2 / 3、`runes`、`disabled`、`buttonId`、`onEnchant`、`renderText`；button 属性 | 可独立使用的附魔选项；id 是业务 ID，buttonId 是可选 DOM id；onClick.preventDefault() 取消选择回调 |
 | `EnchantingRunes` | **必填** `text`、`atlasUrl`；`scale`: 1…4、`color` | 按原始 SGA 图集采样字形与字距；图集由调用方提供，不随 npm 捆绑 |
@@ -361,6 +361,8 @@ layoutGuiImages是纯几何路径，可用于SSR准备；renderGuiImages需要We
 
 ### 同目标原图与文字
 
+`Grindstone imageRender` 现复用同一私有工作站source helper，公开 `GrindstoneImageRenderProfile` / `GrindstoneTextRenderProfile` / `GrindstoneTextRenderStyle` 三类型，组件120 / runtime134不变。frame必需物理width / height / guiScale，origin为GLOBAL game坐标，displayScale默认1；可选text只有明确metrics与labels，无需附魔cost / rune字段。itemImages / itemModels显式开启，39槽、ResultSlot guard、计数 / 耐久 / ref / 焦点与回调保留，完整目标ready后才替换视觉。共享23原PNG / 24keys，旧18图不变。首300像素close父布局残差修正后，一个GUI5观察场景的显式source profile与原native UI完整3,603,140像素RGBA0；依赖宿主原字页、投影与另供dim .4背景，默认CSS仍非零。修后22正式合同（11新＋11旧）、旧附魔46项原profile回归、React18 / 19包与40项生产辅助检查通过。首漏检与后端条件保留，见 [GRINDSTONE_IMAGE_QA.md](docs/GRINDSTONE_IMAGE_QA.md)；本机预览入口为 `#grindstone-layer`。
+
 新增显式source model路径：公共barrel已导出纯 `layoutGuiModel` / `createGuiCuboidModel`，GuiLayer支持 `kind:'model'`，`InventoryItem.guiModel` 可由附魔台 `imageRender.itemModels` 显式消费。局部模型、原纹理、GLOBAL source origin及yaw / pitch / scale / offset / originQuantization均由调用方声明，库不提供native默认相机；旧BlockPreview CPU renderer保持原样。含纯atlas helper后为10函数 / 134runtime，公开17项、实际组件12项、React18 / 19包消费与生产65辅助检查分别按其范围通过。研究与边界见 [GUI_MODEL_QA.md](docs/GUI_MODEL_QA.md)；以下sprite检查点属于已冻结b09ff7a历史。
 
 原PNG模型的完整固定GUI仍32像素不同，不能把atlas与standalone采样域当作相同。普通原PNG＋显式packing的source atlas通过纯 `assembleGuiTextureAtlas` 或GPU装配，不采用captured atlas bitmap、Canvas2D重采样或UV epsilon；四幅实际React在同一个已观察GUI5 postUI target全3,603,140像素RGBA0，旧standalone32逐字节复现。零差使用宿主显式配置、原glyph pages与1:1呈现；不认证默认回退字体、所有GUI / camera / 动画、最终world / Present或整体目标完成。
@@ -507,6 +509,8 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 
 同一 `use-local-workstation-fonts.py` 现另生成ignored `gui-fonts.json`，由仅展示页虚拟模块提供 `nativeGuiWorkstationFonts={labels,costs,runes}`；缺失返回undefined，不是npm导出或全局font-face。它在旧七页原字节外增加一张原SGA页，共八张本机字体PNG，旧 `fonts.json` 与七张源页保持不变。新cost字典0..9仅有原alpha及advance6来源，实际原生费用只观察到1/2；SGA含95个可打印ASCII，period无墨但advance1，space零宽字格advance4，不恢复游戏符文生成 / 大小写转换 / 截断。新Composed GUI `#gui-layer` 示例可选GUI4/5、清空 / 恢复，仅此例在本机资源存在时默认启用图文层；原五处字体演示仍默认关闭。私有原页不进Git / npm，包含它们的本机site不能直接当作可公开字体包。
 
+砂轮使用独立命令 `python scripts/use-local-grindstone-fonts.py "C:/XboxGames/Minecraft for Windows/Content"`，只写ignored `.cache/local-fonts/grindstone`；加 `--check-only` 可只验不写。八个完整256² Unicode原页只覆盖“修复与祛魔物品栏”，`gui-font.json`为直接GuiTextFont；`nativeGuiGrindstoneFont`仅属本地demo虚拟模块，不是npm导出，不注册全局字体，也不覆盖旧37个字体文件。宿主必须传明确fontScale / sampling / shader与label metrics；advance18 / lineHeight20仍是带来源的候选，不自动恢复native排版。缺原资源时保留CSS；本机构建site可能包含原页，不能将其当作可公开字体包。详见 [GRINDSTONE_IMAGE_QA.md](docs/GRINDSTONE_IMAGE_QA.md)。
+
 早期 GUI4/5 字形、排版与 CPU / 软件后端反例保留在 [NATIVE_BITMAP_FONT_QA.md](docs/NATIVE_BITMAP_FONT_QA.md)。新 GPU 函数以真实捕获的8个 draw、原 API-before 背景和固定输入，在已测 NVIDIA 后端对完整 target / field＋halo 零 RGBA 差；这不认证默认 CPU、任意文字、透明 DOM 合成或完整 GUI。具体证据范围见 [BITMAP_GPU_QA.md](docs/BITMAP_GPU_QA.md)。
 
 本地展示页也可以使用自己安装的 Bedrock 字体：
@@ -581,7 +585,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装真实tarball；当前120组件 / 134值的React18.3.1 / 19.3.1消费已通过ESM、SSR、类型 / ref / model / source-atlas、CSS、皮肤、字体及许可检查，两消费者各256份dist逐字节一致。正式累计973唯一用例（968 PASS、5预期SKIP）来自多批次；相关旧126项按整文件受测GPU profile聚合，均不称单次整套全绿。详见 [VERIFICATION.md](docs/VERIFICATION.md)。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装真实tarball；当前120组件 / 134值的React18.3.1 / 19.3.1消费已通过ESM、SSR、三新Grindstone类型 / ref / model / source-atlas、39槽、23原PNG / 24keys、CSS、字体及许可检查，两消费者各256份dist逐字节一致。历史model检查点973唯一用例（968 PASS、5预期SKIP）来自多批次；本轮22项修后合同和46项旧附魔回归分别按受测范围记录，不称单次整套全绿。详见 [VERIFICATION.md](docs/VERIFICATION.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

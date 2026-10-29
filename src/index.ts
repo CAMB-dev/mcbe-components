@@ -37,7 +37,7 @@ export type { BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, Bit
 export { ItemSlot, ItemTooltip, InventoryGrid, ItemImage, ItemCount, DurabilityBar, SlotPlaceholder, ResultSlot } from './inventory';
 export type { ItemSlotProps, ItemTooltipProps, ItemTooltipTextRenderer, InventoryItem, InventoryGridProps, InventorySlotAction, ItemImageProps, ItemCountProps, DurabilityBarProps, SlotPlaceholderProps, ResultSlotProps } from './inventory';
 export { WorkstationFrame, PlayerInventory, Grindstone, EnchantingTable, EnchantmentOption } from './workstations';
-export type { WorkstationFrameProps, PlayerInventoryProps, GrindstoneProps, EnchantingTableProps, EnchantingTableImageRenderProfile, EnchantingTableTextRenderProfile, EnchantingTableTextRenderStyle, EnchantmentOptionProps, WorkstationTextRenderer, WorkstationTextContext } from './workstations';
+export type { WorkstationFrameProps, PlayerInventoryProps, GrindstoneProps, GrindstoneImageRenderProfile, GrindstoneTextRenderProfile, GrindstoneTextRenderStyle, EnchantingTableProps, EnchantingTableImageRenderProfile, EnchantingTableTextRenderProfile, EnchantingTableTextRenderStyle, EnchantmentOptionProps, WorkstationTextRenderer, WorkstationTextContext } from './workstations';
 export { EnchantingBook, EnchantingRunes } from './enchanting-book';
 export type { EnchantingBookProps, EnchantingBookRendererState, EnchantingRunesProps } from './enchanting-book';
 export { ProcessingArrow, FuelIndicator, RecipeGrid, CraftingTable, Furnace, BlastFurnace, Smoker } from './processing';

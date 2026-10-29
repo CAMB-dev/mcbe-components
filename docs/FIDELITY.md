@@ -2,7 +2,13 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
-## 本轮检查点：GUI source model
+## 当前检查点：砂轮可选原图图层
+
+Grindstone扩展三个公开profile类型，39槽与可选whole-frame原图 / labels / item images / models接入共用私有helper；120组件 / 134runtime不变，省略profile仍为CSS路线。23完整原PNG / 24keys保留旧18图身份；独立8页本机font准备不替换默认字体，不自动认证advance / baseline / sampler。
+
+首native固定场景CSS18差33,716、gallery20差37,085，显式source差300像素全部在close；首11项同renderer合同也漏父hitbox，原报告保留。close控件自身top_right[-2,2]与21→15居中得[156,5]，而非首[158,3]；校准source及普通CSS close后，NVIDIA最终source profile完整3,603,140像素和747,600 ROI逐RGBA零差。最终CSS18仍差33,476、gallery20差36,845像素，未宣称默认CSS / 字体零差。生产adapter只绘panel window，完整RT host另供实测dim .4背景、原字页和显式投影；仅认证一个GUI5观察场景，不含world / Present。修后22正式、旧附魔46项原profile回归、React包与40生产辅助检查各在其范围通过；首NVIDIA45 / 1旧色值条件保留，见 [GRINDSTONE_IMAGE_QA.md](GRINDSTONE_IMAGE_QA.md)。
+
+## 历史检查点：GUI source model
 
 新增路径以显式局部model / source texture / source origin及投影配置生成GLOBAL half XY、UNORM16 UV与RGBA8面色，进入同GuiLayer Sprite目标；旧BlockPreview CPU自动fit / lighting不替换。附魔台itemModels仅显式消费InventoryItem.guiModel，正常slot origin不从DOM量测。含纯assembleGuiTextureAtlas后为120组件 / 4数据 / 10函数共134值，React18 / 19实际包、公开17项、组件12项与生产65辅助检查按各自范围通过，见 [GUI_MODEL_QA.md](GUI_MODEL_QA.md)。
 

@@ -2,7 +2,19 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
-## 当前检查点：GUI source model
+## 当前检查点：砂轮可选原图图层
+
+公开数仍120组件 / 4数据 / 10函数共134值，新增Grindstone三个profile类型，不加runtime。shared纯准备192 old/new对象与19 source-hook SSR一致；23原PNG / 24keys、旧18图完整身份保持。字体工具只写独立私有8页cache，524,288原alpha像素解码一致不等于native字体绘制通过。
+
+首正式adapter11 / 11 PASS、18.771591秒，两完整1,206,225像素expected / actual共用public renderGuiLayer，只证source组合合同；native首300差异揭示实现 / expected共同漏close父hitbox，初绿与初残差均留存。按close自身[-2,2]布局修为[156,5]后，完整22 / 22 PASS（新11＋旧workstation-fidelity11），56.60776秒、0skip / retry / flaky / errors，191文件前后同字节。旧附魔46项在原standard SwiftShader profile单批46 / 46 PASS、73.376447秒，同样0skip / retry / flaky / errors；39pins不变。强制NVIDIA45 / 1失败原件及历史蓝165 / 软件166观察条件保留，未改测试 / shader / 容差，不称所有backend全绿。
+
+最终 `.cache/grindstone-full-gui-01/FINAL.json` 在NVIDIA / ANGLE D3D11确认显式source profile完整3,603,140像素与747,600 ROI RGBA0，`sourceProfileNativeParityPass:true`；默认CSS public18 / gallery20仍差33,476 / 36,845像素，因此三模式合取 `nativeParityPass:false` 保留。生产adapter仅绘panel window，host另供原生测得dim .4、私有八页font与显式投影，不认证world / Present / 默认字体。旧附魔四原variants另完整14,412,560像素零差，仅为一个已有GUI5场景的辅助回归；跨两native阶段64source与13旧证据不变。
+
+当前真实React18.3.1 / 19.3.1首次verify:package已通过134值、default / source / text / items / model / fallback SSR0IO、39槽、23PNG / 24keys、strict TS新3types / ref及styles / assets / license。已测 `.cache/grindstone-package-01/consumer-verified.tgz` SHA256 `6904a104cd0ebcb133afafd4a78d9ee84e946bd8d06857a04b0890b5e3ccac62`，dist/index.js SHA256 `4bf7e4383ac954f80f5f8b105d2ed817164a055553cb9b184d120132318f7c59`；两消费者各256份dist与tar / build逐字节相同。最终补文档包需另逐条确认仅README / docs变化，非文档payload同字节。
+
+`.cache/grindstone-production-01/FINAL.json` 首轮40辅助检查全部PASS，不加formal unique：39slots / labels / 六sprites / 三models / 五实际耐久条、focus / actions / guard、GUI4字回退 / GUI5恢复、paint全关DOM / 恢复、三recipe / take→empty / close / reopen / desktop与390px局部pan。8 HTTP / site entries同字节，main-EwAYoO_F.js SHA256 `5a0c653f3a521dc880119a50d8275dc93fc8b9cb279511933dfcc013472a9a60`。page / console / render / 非取消网络错误0，raw16 ERR_ABORTED保留，六个distinct字页另HTTP200 / site同字节。actual SwiftShader仅为生产组合 / 交互，详见 [GRINDSTONE_IMAGE_QA.md](GRINDSTONE_IMAGE_QA.md)。下方model阶段统计与固定0仅作其原范围历史，本轮不编新的全库累计。
+
+## 历史检查点：GUI source model
 
 本轮公共barrel新增纯函数layoutGuiModel / createGuiCuboidModel及相关类型，GuiLayer增加 `kind:'model'`，附魔台显式itemModels读取InventoryItem.guiModel。正常输入为局部模型、原纹理、GLOBAL source origin与明确yaw / pitch / scale / offset / originQuantization，不接受捕获全局vertices / MVP作正常模型。含纯assembleGuiTextureAtlas后为120组件、4数据、10函数 / 134值，React18 / 19真实包消费确认。
 

@@ -265,7 +265,10 @@ test('enchanting compact close preserves inherited source offset, complete GUI2/
   const enchanting = page.locator('#workstations .mc-enchanting'), compact = enchanting.locator('.mc-dialog__close-icon');
   const grinder = page.locator('#workstations .mc-grindstone'), ordinary = grinder.locator('.mc-dialog__close-icon');
   await expectRect(compact, await box(enchanting), { x: 156, y: 5, width: 15, height: 7 });
-  await expectRect(ordinary, await box(grinder), { x: 158, y: 3, width: 15, height: 15 });
+  // Ordinary close inherits the same control-local [-2,2], but uses21x21
+  // and a centered15x15 panel: hit[153,2,21,21], image[156,5,15,15].
+  await expectRect(grinder.locator('.mc-dialog__close'), await box(grinder), { x: 153, y: 2, width: 21, height: 21 });
+  await expectRect(ordinary, await box(grinder), { x: 156, y: 5, width: 15, height: 15 });
   await originalBackground(ordinary, ordinarySource);
   const initialStyle = await enchanting.getAttribute('style');
   // Put the whole source panel on an integer screen plane so the complete

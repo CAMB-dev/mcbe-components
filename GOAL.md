@@ -70,6 +70,8 @@
 - [x] 新增显式共享GPU字体后端，48实例仅1个Offscreen上下文，实际8draw及独立混合实例完整像素零差；正式27/27、React18/19包消费与生产40实例25项检查通过，取消/报错/最后卸载均释放资源
 - [x] 增加同目标 image / text / sprite / model 合成及显式原图 atlas 装配；固定 GUI5 附魔台观察 target 的实际 React 完整画面 RGBA 零差，依赖调用方原字页及明确观察配置，不推广成默认字体、所有 GUI、动画或跨 GPU 认证；见 docs/GUI_MODEL_QA.md
 - [x] 砂轮复用 ResultSlot，修复空数量 / 非有限数量仍触发领取的问题；新双端16项与相关40项共56/56通过，React18/19实际包通过；新增砂轮不兼容状态的原生GPU捕获与无损BMP，仅建立参考，不作为整页零差认证
+- [x] 实现Grindstone可选imageRender / 三profile类型与39槽原图组合，复用私有工作站source helper，23原PNG / 24keys保留旧图身份；独立准备砂轮8页原glyph，原默认字体不变。修后22正式合同、旧附魔46项原profile回归、React18 / 19实际包与40生产辅助检查按各自范围通过，组件120 / runtime134不变。
+- [x] 校准砂轮close自身父hitbox偏移并完成独立 / native完整target复验；保留首300像素残差与首11共同漏检。明确host原字体 / projection / 另供dim .4背景时，一个GUI5 UI target完整3,603,140像素RGBA0；默认CSS仍非零，不泛化world / Present、所有driver或所有工作站整GUI零差，见docs/GRINDSTONE_IMAGE_QA.md。
 - [ ] 完成默认字体与原生整GUI的最终合成 / Present / 窗口映射验证；共享GPU文字的draw批处理与总显存预算仍待完善
 - [ ] 对照游戏渲染器完善附魔书本动态算法、符文、方块 / 旗帜 / 装备预览、物品 tooltip / glint、工作站完整页面
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正

@@ -17,6 +17,40 @@ const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loadin
 const nativeBitmapPath = fileURLToPath(new URL('./.cache/local-fonts/unicode/font.json', import.meta.url));
 const nativeWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/fonts.json', import.meta.url));
 const nativeGuiWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/gui-fonts.json', import.meta.url));
+const nativeGuiGrindstonePath = fileURLToPath(new URL('./.cache/local-fonts/grindstone/gui-font.json', import.meta.url));
+
+function optionalGuiFontModule(path: string, exportName: string): string {
+  const unavailable = `export const ${exportName} = undefined;`;
+  if (!existsSync(path)) return unavailable;
+  const font = JSON.parse(readFileSync(path, 'utf8')) as {
+    pages: string[]; pageSizes: (128 | 256)[]; cellHeight: number; glyphs: object; lineHeight: number;
+  };
+  if (!font || !Array.isArray(font.pages) || !font.pages.length || font.pages.length > 256
+    || !font.glyphs || typeof font.glyphs !== 'object' || !Number.isFinite(font.lineHeight) || font.lineHeight <= 0
+    || !Array.isArray(font.pageSizes) || font.pageSizes.length !== font.pages.length
+    || font.pageSizes.some(size => size !== 128 && size !== 256)
+    || !Number.isSafeInteger(font.cellHeight) || font.cellHeight < 1 || font.cellHeight > Math.min(...font.pageSizes)) {
+    throw new Error('Invalid optional Grindstone GUI font; rerun use-local-grindstone-fonts.py.');
+  }
+  const directory = dirname(path);
+  const pages = font.pages.map((page, index) => {
+    if (typeof page !== 'string' || isAbsolute(page)) throw new Error('GUI font pages must be relative local paths.');
+    const target = resolve(directory, page), within = relative(directory, target);
+    if (within === '..' || within.startsWith('../') || within.startsWith('..\\') || isAbsolute(within)) {
+      throw new Error('GUI font page is outside its local cache.');
+    }
+    if (existsSync(target)) {
+      const png = readFileSync(target), size = font.pageSizes[index];
+      if (png.length < 24 || !png.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+        || png.readUInt32BE(16) !== size || png.readUInt32BE(20) !== size) throw new Error('GUI font PNG dimensions differ from pageSizes.');
+    }
+    return target;
+  });
+  if (!pages.every(page => existsSync(page))) return unavailable;
+  const names = pages.map((_, index) => `optionalGrindstonePage${index}`);
+  return pages.map((page, index) => `import ${names[index]} from ${JSON.stringify(normalizePath(page) + '?url')};`).join('\n')
+    + `\nexport const ${exportName} = { ...${JSON.stringify(font)}, pages: [${names.join(',')}] };`;
+}
 export default defineConfig({
   base: './', build: { outDir: 'site', rollupOptions: { input: { main: fileURLToPath(new URL('./index.html', import.meta.url)), calibration: fileURLToPath(new URL('./calibration.html', import.meta.url)) } } },
   server: {
@@ -117,6 +151,7 @@ export default defineConfig({
         if (complete) guiWorkstationModule = imports.join('\n') + `\nexport const nativeGuiWorkstationFonts = { ${fonts.join(',')} };`;
       }
       parts.push(guiWorkstationModule);
+      parts.push(optionalGuiFontModule(nativeGuiGrindstonePath, 'nativeGuiGrindstoneFont'));
       parts.push(existsSync(hbuiLoadingPath)
         ? `import hbuiLoadingIndicatorUrl from ${JSON.stringify(normalizePath(hbuiLoadingPath) + '?url')}; export { hbuiLoadingIndicatorUrl };`
         : 'export const hbuiLoadingIndicatorUrl = undefined;');

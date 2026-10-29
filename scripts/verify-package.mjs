@@ -107,9 +107,12 @@ const atlasMarkup=renderToString(element(ui.GuiLayer,{width:17,height:11,guiScal
 assert.match(atlasMarkup,/data-render-state="loading"/);
 assert.match(atlasMarkup,/Original source atlas/);
 const imageSsrWarnings = [], previousConsoleError = console.error;
+const ssrIoCalls = [], ssrIoNames = ['fetch','Image','createImageBitmap','OffscreenCanvas'];
+const previousSsrIo = new Map(ssrIoNames.map(name=>[name,Object.getOwnPropertyDescriptor(globalThis,name)]));
 let imageWorkstationMarkup;
 try {
   console.error=(...args)=>imageSsrWarnings.push(args.map(String).join(' '));
+  for (const name of ssrIoNames) Object.defineProperty(globalThis,name,{configurable:true,writable:true,value:function(){ssrIoCalls.push(name);throw new Error('Unexpected SSR I/O: '+name);}});
   renderToString(element(ui.EnchantingTable,{title:'Default host frame',options:[]}));
   imageWorkstationMarkup=renderToString(element(ui.EnchantingTable,{title:'Host native frame',options:[],imageRender:{frame:{width:2570,height:1402,guiScale:5},origin:[169,57.5],displayScale:2.5}}));
   const textStyle={font:packedFont,fontScale:1,sampling:'point',shader:'bitmap'};
@@ -117,7 +120,43 @@ try {
   assert.match(combined,/mc-gui-layer/);
   assert.match(combined,/data-text-labels="true"/);
   assert(!/ runeText=| imageRender=/.test(combined));
-} finally { console.error=previousConsoleError; }
+  const defaultGrindstone=renderToString(element(ui.Grindstone,{title:'Default repair frame',inputs:[null,null],result:null}));
+  const repairFrame={frame:{width:2570,height:1402,guiScale:5},origin:[169,57.5],displayScale:2.5};
+  const sourceGrindstone=renderToString(element(ui.Grindstone,{title:'Source repair frame',imageRender:repairFrame,onClose:()=>{}}));
+  const repairModelItem={name:'Caller block',icon:element('span',{'data-fallback-model':'kept'},'Caller block art'),guiModel:{model:sourceCuboid,projection:modelProjection,textureSizes:{all:[16,16]},textures:{all:{kind:'atlas',width:16,height:16,tiles:[{origin:[0,0],size:[16,16],texture:'/caller-stone.png'}]}}}};
+  const repairItems={inputs:[{name:'Caller tool',image:'/caller-tool.png',count:2,durability:.5},repairModelItem],result:{name:'Caller result',image:'/caller-result.png'}};
+  const repairText={metrics:{lineHeight:10,paintOffset:[0,1]},labels:textStyle};
+  const fullGrindstone=renderToString(element(ui.Grindstone,{...repairItems,title:'1',inventoryLabel:'1',invalid:true,imageRender:{...repairFrame,text:repairText,itemImages:true,itemModels:true}}));
+  for (const markup of [defaultGrindstone,sourceGrindstone,fullGrindstone]) {
+    assert.equal((markup.match(/class="mc-slot(?: |")/g)??[]).length,39,'Grindstone must preserve three repair slots and36 inventory/hotbar slots.');
+    assert(!/ imageRender=| guiModel=| itemImages=| itemModels=/.test(markup),'Source configuration must not leak into DOM attributes.');
+  }
+  assert(!defaultGrindstone.includes('mc-grindstone-image-layer'),'Default Grindstone keeps the CSS path.');
+  assert.match(sourceGrindstone,/mc-grindstone-image-layer/);
+  assert.match(sourceGrindstone,/data-render-state="loading"/);
+  assert.match(fullGrindstone,/data-text-labels="true"/);
+  assert.match(fullGrindstone,/data-item-images="0 2"/);
+  assert.match(fullGrindstone,/data-item-models="1"/);
+  assert.match(fullGrindstone,/data-fallback-model="kept"/);
+  assert.match(fullGrindstone,/Items cannot be combined/);
+  assert.match(fullGrindstone,/50% durability/);
+  for (const badProfile of [
+    {...repairFrame,text:{...repairText,labels:{...textStyle,fontScale:0}},itemImages:true,itemModels:true},
+    {...repairFrame,text:repairText,itemImages:true,itemModels:true},
+  ]) {
+    const fallback=renderToString(element(ui.Grindstone,{...repairItems,title:badProfile.text.labels.fontScale===0?'1':'2',inventoryLabel:'1',imageRender:badProfile}));
+    assert.match(fallback,/mc-grindstone-image-error/);
+    assert(!fallback.includes('mc-grindstone-image-layer'),'Invalid text must fall back atomically instead of painting only items/models.');
+    assert.match(fallback,/data-image-display-scale="2.5"/);
+    assert.match(fallback,/data-fallback-model="kept"/);
+    assert.equal((fallback.match(/class="mc-slot(?: |")/g)??[]).length,39);
+    assert(!/ imageRender=| guiModel=/.test(fallback));
+  }
+  assert.deepEqual(ssrIoCalls,[],'Default/source/text/item/model/fallback SSR must not fetch, decode images or allocate a GPU canvas.');
+} finally {
+  console.error=previousConsoleError;
+  for (const name of ssrIoNames) {const descriptor=previousSsrIo.get(name);if(descriptor)Object.defineProperty(globalThis,name,descriptor);else delete globalThis[name];}
+}
 assert.deepEqual(imageSsrWarnings,[],'Default and image-profile workstations must remain SSR warning-free.');
 assert.match(imageWorkstationMarkup,/Host native frame/);
 assert(!/ imageRender=/.test(imageWorkstationMarkup),'Image profile must not leak into HTML attributes.');
@@ -305,8 +344,8 @@ for (const name of ui.guiIconNames) {
 }
 const rendererManifest = JSON.parse(await readFile(new URL('docs/item-renderers-geometry.json',packageRoot),'utf8'));
 const workstationImages = JSON.parse(await readFile(new URL('docs/workstation-image-assets.json',packageRoot),'utf8'));
-assert.equal(workstationImages.assetCount,18);
-assert.equal(workstationImages.registryKeyCount,19);
+assert.equal(workstationImages.assetCount,23);
+assert.equal(workstationImages.registryKeyCount,24);
 const bundle = await readFile(new URL('dist/index.js',packageRoot),'utf8');
 const embeddedImages = new Set([...bundle.matchAll(/data:image\\/png;base64,([A-Za-z0-9+/=]+)/g)].map(match=>createHash('sha256').update(Buffer.from(match[1],'base64')).digest('hex')));
 for (const image of workstationImages.assets) assert(embeddedImages.has(image.sha256),'Packed original workstation PNG: '+image.source);
@@ -337,6 +376,7 @@ import type { GuiTextureAtlasSource, GuiTextureAtlas, GuiLayerTextureSource, Gui
 import type { GuiModelFace, GuiModelMesh, GuiModelProjection, GuiModelGeometry, GuiModelLayoutOptions, GuiModelRun, GuiModelLayout, GuiModelItem, GuiCuboidFace, GuiCuboidModelOptions } from 'mcbeui';
 import type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout, GuiSpriteGeometry, GuiLayerCommand, GuiLayerProps, GuiLayerGeometryCommand, GuiLayerLayoutOptions, GuiLayerLayoutCommand, GuiLayerLayout, GuiLayerDraw, GuiLayerRenderOptions, GuiLayerRenderResult, EnchantingTableTextRenderStyle, EnchantingTableTextRenderProfile } from 'mcbeui';
 import type { GuiImage, GuiImageLayerProps, GuiImageLayerState, GuiImageRect, GuiImageRgba, GuiImageNineSlice, GuiImageGeometry, GuiImageLayoutOptions, GuiImageVertex, GuiImageMesh, GuiImageLayout, GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderOptions, GuiImageRenderResult, EnchantingTableImageRenderProfile } from 'mcbeui';
+import type { GrindstoneImageRenderProfile, GrindstoneTextRenderProfile, GrindstoneTextRenderStyle } from 'mcbeui';
 import { Select } from 'mcbeui';
 import type { GuiIconProps, GuiIconName, BitmapTextProps, BitmapTextRenderer, BitmapTextProfile, BitmapFont, BitmapGlyph, BitmapGlyphRun, BitmapGlyphRenderOptions, BitmapGlyphRenderResult, BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, BitmapUnicodeVertex, BitmapUnicodeRun, BitmapGlyphBackground } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
@@ -451,6 +491,11 @@ export function inspectComposedLayout(layout:GuiLayerLayout):GuiLayerLayoutComma
 const layerProps: GuiLayerProps = {...layerOptions,commands:[layerCommand,spriteCommand,modelCommand],label:'Caller composed GUI',onRenderStateChange:state=>state.toUpperCase()};
 const textStyle: EnchantingTableTextRenderStyle = {font:packedFont,fontScale:1,sampling:'point',shader:'bitmap'};
 const textProfile: EnchantingTableTextRenderProfile = {metrics:{lineHeight:10,paintOffset:[0,1]},labels:textStyle,costs:{...textStyle,disabledColor:[137,94,91,255]},runes:textStyle};
+const grindstoneTextStyle: GrindstoneTextRenderStyle = {...textStyle,font:packedFont};
+const grindstoneTextProfile: GrindstoneTextRenderProfile = {metrics:{lineHeight:10,paintOffset:[0,1]},labels:grindstoneTextStyle};
+const grindstoneProfile: GrindstoneImageRenderProfile = {...imageRenderProfile,text:grindstoneTextProfile,itemImages:true,itemModels:true};
+const grindstoneAtlas: GuiTextureAtlasSource = {...sourceAtlas,width:16,height:16,tiles:[{origin:[0,0],size:[16,16],texture:'/caller-stone.png'}]};
+const grindstoneBlock: InventoryItem = {name:'Caller source block',icon:<span>Caller fallback art</span>,guiModel:{...modelItem,textures:{all:grindstoneAtlas}}};
 const glintUniforms: ItemGlintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25],tintColor:[1,1,1,1],hudOpacity:1};
 const glintSampler: ItemGlintSampler = 'point-repeat', glintBlend: ItemGlintBlend = {source:'source-alpha',destination:'one-minus-source-alpha'};
 const glintOptions: ItemGlintRenderOptions = {uniforms:glintUniforms,glintSampler,blend:glintBlend,width:1,height:1};
@@ -486,7 +531,9 @@ export const demo = <>
   <TextField label="World" name="world" ref={createRef<HTMLInputElement>()}/>
   <ItemSlot item={{name:'Diamond',count:64}} underlay={<span/>} ref={createRef<HTMLButtonElement>()}/>
   <InventoryGrid label="Inventory" items={[{name:'Diamond'}]} onSlotAction={(index,action)=>String(index)+action}/>
-  <Grindstone inputs={[null,null]} onInputAction={(index,action)=>String(index)+action}/>
+  <Grindstone inputs={[null,null]} onInputAction={(index,action)=>String(index)+action} ref={createRef<HTMLElement>()}/>
+  <Grindstone title="1" inventoryLabel="1" imageRender={grindstoneProfile} inputs={[{name:'Caller tool',image:'/caller-tool.png',count:2,durability:.5},grindstoneBlock]} result={{name:'Caller result',image:'/caller-result.png'}} onInputAction={(index,action)=>String(index)+action} onTakeResult={action=>action.toUpperCase()} onClose={()=>{}} ref={createRef<HTMLElement>()}/>
+  <Grindstone title="1" inventoryLabel="1" imageRender={{...grindstoneProfile,text:{...grindstoneTextProfile,labels:{...grindstoneTextStyle,fontScale:0}}}} inputs={[grindstoneBlock,null]} ref={createRef<HTMLElement>()}/>
   <EnchantingTable options={[{id:'unbreaking',label:'Unbreaking',level:3}]} onEnchant={id=>id.toUpperCase()}/>
   <EnchantingTable options={[{id:'unbreaking',label:'Unbreaking',level:3}]} renderText={workstationText}/>
   <EnchantingBook pageFlip={.25} lighting="calibrated" pitch={20} ref={createRef<HTMLCanvasElement>()}/>

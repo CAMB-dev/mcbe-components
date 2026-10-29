@@ -2,6 +2,8 @@
 
 当前导出 120 个组件，目录 120 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、7 个纯函数（2个glint、4个layout / model几何与assembleGuiTextureAtlas纹理装配）及3个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages / renderGuiLayer），共 134 个源运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
+本轮Grindstone新增imageRender及三个profile类型，runtime仍134、组件仍120。原frame / label / slot / item命令与ready-gated呈现提到私有shared helper，共用23完整原PNG / 24keys，旧18图字节不变。砂轮为39槽，有显式labels / itemImages / itemModels及原子CSS回退；字体用独立私有8页准备，不改变默认字体。首11合同共同漏掉close父布局，native300像素残差揭示后修正；修后22正式通过（11新＋11旧），旧附魔46项原profile回归、React18 / 19包与40项生产辅助检查通过。显式host原字体 / 投影 / dim .4背景的一个GUI5场景完整3,603,140像素native RGBA0；默认CSS仍有残差。见 [GRINDSTONE_IMAGE_QA.md](GRINDSTONE_IMAGE_QA.md)。
+
 本轮source model新增layoutGuiModel / createGuiCuboidModel两个纯函数、GuiLayer `kind:'model'`与显式itemModels适配，含纯assembleGuiTextureAtlas后为10函数 / 134值，由React18 / 19实际包确认，组件数仍120。新source模型 / 显式projection不替换旧BlockPreview CPU renderer；验证范围及更广待验收边界见 [GUI_MODEL_QA.md](GUI_MODEL_QA.md)。
 
 另已接入显式source atlas装配；它接受完整原PNG和调用方packing坐标，不接受native atlas作为普通输入，也不恢复自动packing。该固定GPU / actualGUI的验证范围单列，barrel源导出或实际包通过不代表更广像素认证。

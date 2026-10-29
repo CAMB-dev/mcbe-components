@@ -23,7 +23,7 @@ ZIP_SHA = "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
 ZIP_URL = f"https://github.com/Mojang/bedrock-samples/releases/download/{RELEASE}/bedrock-samples-{RELEASE}-full.zip"
 RAW = f"https://raw.githubusercontent.com/Mojang/bedrock-samples/{COMMIT}/"
 LICENSE_SHA = "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
-UI_FILES = ("resource_pack/ui/ui_common.json", "resource_pack/ui/enchanting_screen.json")
+UI_FILES = ("resource_pack/ui/ui_common.json", "resource_pack/ui/enchanting_screen.json", "resource_pack/ui/grindstone_screen.json")
 # key, original basename, physical dimensions, logical base, logical LTRB inset.
 SPECS = [
     ("panel", "dialog_background_opaque", (16, 16), (16, 16), 4),
@@ -41,6 +41,12 @@ SPECS = [
 ] + [
     (f"dust{state.title()}{tier}", f"dust_{state}_{tier}", (13, 11), None, None)
     for state in ("selectable", "unselectable") for tier in (1, 2, 3)
+] + [
+    ("closeNormal", "close_button_default", (15, 15), None, None),
+    ("closeNormalHover", "close_button_hover", (15, 15), None, None),
+    ("closeNormalPressed", "close_button_pressed", (15, 15), None, None),
+    ("grindstoneArrow", "arrow_large", (22, 15), None, None),
+    ("grindstoneInvalid", "crossout", (15, 15), None, None),
 ]
 
 
@@ -230,7 +236,7 @@ def generate(archive: Path, game: Path | None):
                 'highlight': 'Original 1x1 base and 1-unit insets intentionally preserve reversed center UV bands; do not clamp or substitute a 2x2 base.',
                 'dark': 'optionDark aliases optionUnselectable; permanent dark background and current unselectable/pressed overlay remain separate ordered uses.',
                 'scope': 'Public release source evidence only; no private font/shader, active installed pack-stack assertion, or whole-GUI native-fidelity claim.',
-                'installedCheck': 'Optional --game checks all 18 original PNGs against the installed vanilla base ui.brarchive; presence alone does not establish active pack stack.',
+                'installedCheck': f'Optional --game checks all {len(SPECS)} original PNGs against the installed vanilla base ui.brarchive; presence alone does not establish active pack stack.',
             },
             'assets': assets,
         }
@@ -257,7 +263,7 @@ def main():
     if stale:
         raise SystemExit('Generated files are stale: ' + ', '.join(stale))
     if args.game:
-        print('Verified 18/18 original PNG bytes against installed vanilla base ui.brarchive (not active-pack proof).')
+        print(f'Verified {len(SPECS)}/{len(SPECS)} original PNG bytes against installed vanilla base ui.brarchive (not active-pack proof).')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,17 @@
+{
+  "scope": "One complete original demo-only item PNG; no drawing or image re-encoding; not an npm runtime asset",
+  "release": "v1.26.60.5",
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "source": "resource_pack/textures/items/wood_sword.png",
+  "file": "demo/assets/grindstone/wooden_sword.png",
+  "bytes": 225,
+  "size": [
+    16,
+    16
+  ],
+  "sha256": "af0f711c51bb28d6d2c677791cbbb5f6e0a797518e959392c3d0d9027eb17243",
+  "purpose": "Original wooden-sword artwork in the source Grindstone example; durability remains separate item data",
+  "licenseFile": "demo/assets/grindstone/LICENSE.md",
+  "licenseSHA256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+  "ownership": "Original Minecraft artwork retains applicable Mojang sample terms; not relicensed by project MIT"
+}

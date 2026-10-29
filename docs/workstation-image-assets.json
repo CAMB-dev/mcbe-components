@@ -24,10 +24,15 @@
       "source": "resource_pack/ui/enchanting_screen.json",
       "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/enchanting_screen.json",
       "sha256": "c6b4ecf0120dd5c1929e855bcf92101ef40379545bf5084208a6c0e9e223e3c2"
+    },
+    {
+      "source": "resource_pack/ui/grindstone_screen.json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/grindstone_screen.json",
+      "sha256": "561147a43e96e7d96a87fbf744275d0c44c6dad4730d3da6bc20b19a08de0992"
     }
   ],
-  "assetCount": 18,
-  "registryKeyCount": 19,
+  "assetCount": 23,
+  "registryKeyCount": 24,
   "contract": {
     "encoding": "Complete original PNG bytes embedded once per unique source; no image re-encoding or CSS parsing.",
     "nineSlice": "Original JSON base_size and nineslice_size; insets are logical game units ordered left/top/right/bottom, not physical PNG pixel bands.",
@@ -35,7 +40,7 @@
     "highlight": "Original 1x1 base and 1-unit insets intentionally preserve reversed center UV bands; do not clamp or substitute a 2x2 base.",
     "dark": "optionDark aliases optionUnselectable; permanent dark background and current unselectable/pressed overlay remain separate ordered uses.",
     "scope": "Public release source evidence only; no private font/shader, active installed pack-stack assertion, or whole-GUI native-fidelity claim.",
-    "installedCheck": "Optional --game checks all 18 original PNGs against the installed vanilla base ui.brarchive; presence alone does not establish active pack stack."
+    "installedCheck": "Optional --game checks all 23 original PNGs against the installed vanilla base ui.brarchive; presence alone does not establish active pack stack."
   },
   "assets": [
     {
@@ -686,6 +691,135 @@
         {
           "source": "resource_pack/ui/enchanting_screen.json",
           "jsonPointer": "/dust_panel/controls/2/c@enchanting.dust_template/$texture_unselectable"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "closeNormal"
+      ],
+      "source": "resource_pack/textures/ui/close_button_default.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_button_default.png",
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "bytes": 163,
+      "sourceSize": [
+        15,
+        15
+      ],
+      "rgbaSha256": "e6e05d051820c9c475096e539d00671e037e686603147f839661513b06b2c144",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/close_button/$close_button_default_texture|default"
+        },
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/close_button_grey_bg@close_button/controls/0/default@common.close_button_panel/$close_button_texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "closeNormalHover"
+      ],
+      "source": "resource_pack/textures/ui/close_button_hover.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_button_hover.png",
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "bytes": 164,
+      "sourceSize": [
+        15,
+        15
+      ],
+      "rgbaSha256": "1807d5168cffaf2cb9dacc4f8cb7b2f41dfcc48b28ae9274a045e2018973a138",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/close_button/controls/1/hover@common.close_button_panel/$close_button_texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "closeNormalPressed"
+      ],
+      "source": "resource_pack/textures/ui/close_button_pressed.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_button_pressed.png",
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "bytes": 1416,
+      "sourceSize": [
+        15,
+        15
+      ],
+      "rgbaSha256": "713aede2a259790c2c9fabbb3e56b537d1d582e12582aad2e197bf4f7e2181ed",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 2
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/close_button/controls/2/pressed@common.close_button_panel/$close_button_texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "grindstoneArrow"
+      ],
+      "source": "resource_pack/textures/ui/arrow_large.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/arrow_large.png",
+      "sha256": "c0b27d51e084d0018365a94905e53e8661cf0f05448145c71402ff16844fe1b6",
+      "bytes": 157,
+      "sourceSize": [
+        22,
+        15
+      ],
+      "rgbaSha256": "3c261964d5da9ee63df705cca0758d1da88e8d9c1a390b8557e5615e53981b77",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/grindstone_screen.json",
+          "jsonPointer": "/arrow_icon/texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "grindstoneInvalid"
+      ],
+      "source": "resource_pack/textures/ui/crossout.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/crossout.png",
+      "sha256": "e6495d114d889c557948d19035a3a76ba45b9e7a75d19052eed826ea5f05ff61",
+      "bytes": 168,
+      "sourceSize": [
+        15,
+        15
+      ],
+      "rgbaSha256": "f9acaceab5a5bdd84a3d6be535dc27e72ad9b8848d98d9c6a1aee9ad80a07f73",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/grindstone_screen.json",
+          "jsonPointer": "/cross_out_icon/texture"
         }
       ]
     }

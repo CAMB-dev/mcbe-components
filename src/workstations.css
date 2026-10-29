@@ -11,11 +11,43 @@
 .mc-player-inventory .mc-inventory { display: grid; }
 .mc-player-inventory__hotbar { margin-top: 6px; }
 .mc-grindstone > .mc-slot, .mc-enchanting > .mc-slot { position: absolute; }
+.mc-grindstone > .mc-dialog__close { right: 4px; top: 4px; }
 .mc-grindstone__input { left: 86px; top: 56px; }
 .mc-grindstone__additional { left: 86px; top: 98px; }
 .mc-grindstone__result { left: 230px; top: 77px; }
 .mc-grindstone__arrow { position: absolute; left: 154px; top: 80px; width: 44px; height: 30px; background: var(--mc-skin-workstation-arrow) center / 100% 100%; }
 .mc-grindstone__invalid { position: absolute; left: 161px; top: 80px; width: 30px; height: 30px; background: var(--mc-skin-workstation-invalid) center / 100% 100%; }
+
+/* Opt-in Grindstone painting shares the existing GUI2 semantic plane. The
+   current complete canvas is the only authority for switching CSS visuals. */
+.mc-grindstone-image-layer { left: 0; top: 0; transform-origin: 0 0; transform: translate(var(--mc-image-translate-x, 0px), var(--mc-image-translate-y, 0px)) scale(var(--mc-image-pixel-scale, 1)); }
+@supports (zoom: 1) {
+  .mc-grindstone-image-layer { transform: none; zoom: var(--mc-image-pixel-scale, 1); left: var(--mc-image-zoom-left, 0px); top: var(--mc-image-zoom-top, 0px); }
+}
+.mc-grindstone-image-window { position: absolute; z-index: -1; overflow: clip; pointer-events: none; visibility: hidden; }
+.mc-grindstone-image-window:has(> .mc-grindstone-image-layer[data-render-state='ready']) { visibility: visible; }
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready'])::before,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) > .mc-slot::before,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) > .mc-slot::after,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::before,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::after { display: none; }
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) .mc-workstation__title,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) .mc-player-inventory__label,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) > .mc-grindstone__arrow,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) > .mc-grindstone__invalid,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) > .mc-dialog__close .mc-dialog__close-icon,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) > .mc-slot .mc-slot__highlight,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot__highlight { background: transparent; }
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) > .mc-dialog__close:focus-visible { outline: none; box-shadow: none; }
+.mc-grindstone:has(> .mc-grindstone-image-window[data-text-labels='true'] > .mc-grindstone-image-layer[data-render-state='ready']) .mc-workstation__title,
+.mc-grindstone:has(> .mc-grindstone-image-window[data-text-labels='true'] > .mc-grindstone-image-layer[data-render-state='ready']) .mc-player-inventory__label { color: transparent; text-shadow: none; }
+.mc-grindstone:has(> .mc-grindstone-image-window[data-text-labels='true'] > .mc-grindstone-image-layer[data-render-state='ready']) .mc-workstation__title > [aria-hidden='true'],
+.mc-grindstone:has(> .mc-grindstone-image-window[data-text-labels='true'] > .mc-grindstone-image-layer[data-render-state='ready']) .mc-player-inventory__label > [aria-hidden='true'] { visibility: hidden; }
+/* Private per-slot markers are installed only while this current whole layer
+   is ready, and removed on loading/error/disable/unmount. No DOM is replaced. */
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) .mc-slot[data-mc-source-item='image'] > .mc-slot__item > img,
+.mc-grindstone:has(> .mc-grindstone-image-window > .mc-grindstone-image-layer[data-render-state='ready']) .mc-slot[data-mc-source-item='model'] > .mc-slot__item { visibility: hidden; }
+
 .mc-enchanting .mc-workstation__title { left: 24px; top: 6px; }
 .mc-enchanting > .mc-dialog__close { right: 4px; top: 4px; height: 26px; }
 .mc-enchanting > .mc-dialog__close .mc-dialog__close-icon { height: 14px; background-image: var(--mc-skin-close-compact, var(--mc-skin-close)); }
