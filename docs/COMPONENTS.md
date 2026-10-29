@@ -1,6 +1,6 @@
 # Bedrock 组件范围
 
-当前导出 115 个组件，目录 115 项均为 implemented；另有 3 份可复用 renderer 数据和 2 个 glint 纯渲染函数，不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 117 个组件，目录 117 项均为 implemented；另有 3 份可复用 renderer 数据和 2 个 glint 纯渲染函数，不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 ## 已实现
 
@@ -8,8 +8,8 @@
 | --- | --- |
 | 文字与表面（18） | Text、BitmapText、PixelIcon、Image、NineSlice、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
 | 输入与设置（16） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、ToggleButton、SearchField、Tabs、NavigationList、SettingRow、KeybindingField |
-| 物品与容器结构（26） | ItemSlot、ItemImage、ItemCount、DurabilityBar、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、RecipeGrid、RecipeSelectionGrid、RecipeSearch、RecipeFilterToggle、RecipeBook、RecipeBookEntry、RecipeCategoryTabs、InventoryToolbar、ProcessingArrow、FuelIndicator、BrewingIndicator、BeaconEffect、TradeOffer、ArmorSlot、ResultSlot、SlotPlaceholder、CrafterSlot、ContainerFrame |
-| 工作站与容器（24） | Grindstone、EnchantingTable、CraftingTable、CraftingScreen、Furnace、BlastFurnace、Smoker、BrewingStand、Anvil、SmithingTable、Stonecutter、Loom、CartographyTable、Beacon、Chest、Hopper、Dispenser、Dropper、ShulkerBox、Crafter、TradingScreen、PlayerInventoryScreen、CreativeInventory、MountInventory |
+| 物品与容器结构（27） | ItemSlot、ItemImage、ItemCount、DurabilityBar、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、InventoryScreenFrame、RecipeGrid、RecipeSelectionGrid、RecipeSearch、RecipeFilterToggle、RecipeBook、RecipeBookEntry、RecipeCategoryTabs、InventoryToolbar、ProcessingArrow、FuelIndicator、BrewingIndicator、BeaconEffect、TradeOffer、ArmorSlot、ResultSlot、SlotPlaceholder、CrafterSlot、ContainerFrame |
+| 工作站与容器（25） | Grindstone、EnchantingTable、CraftingTable、CraftingScreen、Furnace、BlastFurnace、Smoker、BrewingStand、Anvil、SmithingTable、Stonecutter、Loom、CartographyTable、Beacon、Chest、Hopper、Dispenser、Dropper、ShulkerBox、Crafter、TradingScreen、PlayerInventoryScreen、SurvivalInventoryScreen、CreativeInventory、MountInventory |
 | 附魔部件（4） | EnchantmentOption、EnchantingRunes、EnchantingBook、ItemGlint |
 | HUD（17） | Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、BossBar、Crosshair、ChatMessage、ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip、PlayerList、TouchControls |
 | 页面与列表组合（10） | PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast |
@@ -22,7 +22,7 @@ HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 cus
 
 ## 验收边界
 
-当前目录中的 115 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 / 服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与 Web 测试通过不能替代真实游戏逐屏验收。
+当前目录中的 117 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 / 服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与 Web 测试通过不能替代真实游戏逐屏验收。
 
 ## 复用方式
 
@@ -32,7 +32,9 @@ HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 cus
 
 BrewingIndicator 拆出箭头、气泡与燃料三种完整原图裁切；酿造台组合它们与五个槽位。现代三输入锻造台、制图台复用 ItemSlot、ResultSlot、WorkstationFrame 和 PlayerInventory。ScrollArea 将原生滚动视口与受控 ScrollBar 组合，保留触屏、滚轮和文本选择。
 
-CraftingTable 继续保留可复用的原版工作台右面板；新增 CraftingScreen 将 RecipeBook、两布局 toolbar 与右面板组合为 Classic 合成屏幕，支持 recipe-book / survival。Furnace / BlastFurnace / Smoker 仍仅为原版熔炼右面板，不因此获得完整配方书屏幕。完整组合不代表所有原生状态或整屏像素已经验收。
+CraftingTable 与 PlayerInventoryScreen 保留可复用右面板；CraftingScreen / SurvivalInventoryScreen 分别组合配方书与合成 / 生存背包右面板，复用 InventoryScreenFrame 的 recipe-book / survival 工具条。公开 Frame 接收 book 与 children 两个 ReactNode 槽，两个布局均保留 326×166 game 外框；survival 仅隐藏书页并将右面板居中。内部 InventoryScreenFrameBase 不公开导出。
+
+Furnace / BlastFurnace / Smoker 仍仅为原版熔炼右面板。原生熔炉 compact 会缩成 176 game 根宽，配方书还有无 count/group 的独立分支，不能套用这个固定宽度 Frame 冒充完整熔炉屏幕。上述完整合成 / 生存组合也不代表所有原生状态或整屏像素已经验收。
 
 RecipeBook 接收宿主已筛选、展开的 entries 与受控 categoryId / query / craftableOnly，复用 RecipeSearch、RecipeCategoryTabs、RecipeFilterToggle 和 ScrollArea。RecipeBookEntry 将 craftableCount 与物品堆叠数量分开，背景 binding、group modifier 和 primary / secondary / tertiary 动作均由宿主提供；零 craftableCount 不清空物品，recipe 计算和分组展开不由组件猜测。
 
@@ -49,3 +51,5 @@ WorldList / ServerList / PackList 共享原始列表图、Image、Button 与 Scr
 BlockPreview / BannerPreview 使用 45 份官方原始 PNG / TGA 材质，网格、视角、光照和染色仍是可配置重建。bannerPatternIds（42 个原图 ID）、bannerDyeColors（16 个 Web 色彩预设）、loomPatternIds（原生截图观察的 32 个基础图案顺序）为三份数据导出；后者不作为跨版本 engine registry。
 
 InventoryToolbar 将三种背包布局与帮助 / 关闭入口拆为独立受控组件；CreativeInventory 默认包含完整 chrome，可显式 chrome=none 保留 pane。DeathScreen 默认采用当前 HBUI source profile，classic 保留 JSON UI 版本；LoadingScreen 默认采用世界加载 modal，compact 保留原组合。字体与背景场景的边界分别记录。
+
+PlayerInventoryScreen 的 needsCraftingTable 默认 false；显式启用时，由 craftingTablePreview 接入原生模型预览位置，不生成假工作台图或推算配方资格。

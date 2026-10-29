@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "demoOnly": true,
+  "excludedFromNpm": true,
+  "gameVersion": "1.26.6005.0",
+  "release": "v1.26.60.5",
+  "releaseCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "runtimePackActivationProven": false,
+  "nativeCandidateScope": {
+    "pattern": "data/resource_packs/vanilla*/__brarchive/textures/items.brarchive",
+    "archivesScanned": 24,
+    "ordering": "Lexical directory order, not runtime pack precedence"
+  },
+  "assets": [
+    {
+      "file": "demo/assets/minecraft/survival-diamond-helmet.png",
+      "source": "resource_pack/textures/items/diamond_helmet.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/items/diamond_helmet.png",
+      "sha256": "49273d96cac8596863d4569e242668426a166aae85338c1c1686c1291daaf3ec",
+      "bytes": 165,
+      "dimensions": [
+        16,
+        16
+      ],
+      "modifications": "None; unmodified original PNG bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "archive": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "diamond_helmet.png",
+          "sha256": "e0a7c9805919dc866dd5294f3017c997b4db9a4faf76c65e3c524dec28653b73",
+          "bytes": 187
+        },
+        {
+          "pack": "vanilla_1.16",
+          "archive": "data/resource_packs/vanilla_1.16/__brarchive/textures/items.brarchive",
+          "entry": "diamond_helmet.png",
+          "sha256": "49273d96cac8596863d4569e242668426a166aae85338c1c1686c1291daaf3ec",
+          "bytes": 165
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "diamond_helmet.png",
+          "sha256": "49273d96cac8596863d4569e242668426a166aae85338c1c1686c1291daaf3ec",
+          "bytes": 165
+        }
+      ],
+      "matchingInstalledPacks": [
+        "vanilla_1.16",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "demo/assets/minecraft/survival-diamond-chestplate.png",
+      "source": "resource_pack/textures/items/diamond_chestplate.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/items/diamond_chestplate.png",
+      "sha256": "1bc707eba558cd7ab58f21fd2d5f544f8d5db84f88a0d5a253f8ea3bd1f1a7f4",
+      "bytes": 202,
+      "dimensions": [
+        16,
+        16
+      ],
+      "modifications": "None; unmodified original PNG bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "archive": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "diamond_chestplate.png",
+          "sha256": "d7eb83d2a04e54a2e18f0f34c866eba076fa299ad7c54da0918d04b11a6fc866",
+          "bytes": 241
+        },
+        {
+          "pack": "vanilla_1.16",
+          "archive": "data/resource_packs/vanilla_1.16/__brarchive/textures/items.brarchive",
+          "entry": "diamond_chestplate.png",
+          "sha256": "1bc707eba558cd7ab58f21fd2d5f544f8d5db84f88a0d5a253f8ea3bd1f1a7f4",
+          "bytes": 202
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "diamond_chestplate.png",
+          "sha256": "1bc707eba558cd7ab58f21fd2d5f544f8d5db84f88a0d5a253f8ea3bd1f1a7f4",
+          "bytes": 202
+        }
+      ],
+      "matchingInstalledPacks": [
+        "vanilla_1.16",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "demo/assets/minecraft/survival-diamond-leggings.png",
+      "source": "resource_pack/textures/items/diamond_leggings.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/items/diamond_leggings.png",
+      "sha256": "c6af9c807088f61fb58b1f279e87e490d8ddb6bf15928c5074bada1fc7b70499",
+      "bytes": 177,
+      "dimensions": [
+        16,
+        16
+      ],
+      "modifications": "None; unmodified original PNG bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "archive": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "diamond_leggings.png",
+          "sha256": "1c47c7b334b5e2dfb7ba735d2c85705e82f7bd4b82723b6baf28149e3e3327dc",
+          "bytes": 203
+        },
+        {
+          "pack": "vanilla_1.16",
+          "archive": "data/resource_packs/vanilla_1.16/__brarchive/textures/items.brarchive",
+          "entry": "diamond_leggings.png",
+          "sha256": "c6af9c807088f61fb58b1f279e87e490d8ddb6bf15928c5074bada1fc7b70499",
+          "bytes": 177
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "diamond_leggings.png",
+          "sha256": "c6af9c807088f61fb58b1f279e87e490d8ddb6bf15928c5074bada1fc7b70499",
+          "bytes": 177
+        }
+      ],
+      "matchingInstalledPacks": [
+        "vanilla_1.16",
+        "vanilla_1.21.90"
+      ]
+    },
+    {
+      "file": "demo/assets/minecraft/survival-diamond-boots.png",
+      "source": "resource_pack/textures/items/diamond_boots.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/items/diamond_boots.png",
+      "sha256": "28b7a2425072e300760ef31b45dbb20c612389c73f2f885dce2e31fd1b26aa37",
+      "bytes": 175,
+      "dimensions": [
+        16,
+        16
+      ],
+      "modifications": "None; unmodified original PNG bytes",
+      "nativeCandidates": [
+        {
+          "pack": "vanilla",
+          "archive": "data/resource_packs/vanilla/__brarchive/textures/items.brarchive",
+          "entry": "diamond_boots.png",
+          "sha256": "7ced40712b46d8fee45e6da9c8b8bc084b3c05d1dc60364840f1ebbeaf6ead5c",
+          "bytes": 198
+        },
+        {
+          "pack": "vanilla_1.16",
+          "archive": "data/resource_packs/vanilla_1.16/__brarchive/textures/items.brarchive",
+          "entry": "diamond_boots.png",
+          "sha256": "28b7a2425072e300760ef31b45dbb20c612389c73f2f885dce2e31fd1b26aa37",
+          "bytes": 175
+        },
+        {
+          "pack": "vanilla_1.21.90",
+          "archive": "data/resource_packs/vanilla_1.21.90/__brarchive/textures/items.brarchive",
+          "entry": "diamond_boots.png",
+          "sha256": "28b7a2425072e300760ef31b45dbb20c612389c73f2f885dce2e31fd1b26aa37",
+          "bytes": 175
+        }
+      ],
+      "matchingInstalledPacks": [
+        "vanilla_1.16",
+        "vanilla_1.21.90"
+      ]
+    }
+  ],
+  "license": {
+    "source": "LICENSE.md",
+    "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/LICENSE.md",
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "notice": "(c) Mojang AB. All rights reserved. Files remain subject to the Minecraft End User License Agreement, not the project MIT license."
+  },
+  "boundaries": [
+    "Original armor item icons are used for a host-controlled demonstration only; no native player skin/model or crafting-table renderer is bundled.",
+    "Merged-release images differ from old vanilla base bytes and match installed vanilla_1.16 and vanilla_1.21.90 candidates. Candidate presence does not establish runtime activation or pack precedence.",
+    "The separate twenty-six-item materials manifest is unchanged."
+  ]
+}

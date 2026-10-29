@@ -2,6 +2,8 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
+当前公开117个组件、3份数据及2个函数，共122项值导出。新增共享 InventoryScreenFrame 与完整 SurvivalInventoryScreen；历史阶段的组件数量及验证结果仍按各自范围保存，不能作为本轮原生整屏验收结论。
+
 ## 本轮物品提示与附魔光效
 
 `ItemTooltip` 已取得同物品两次悬停及无提示底图三张原生无损 PNG。配对测量支持实心背景 `#1b0c1b`、平色紫边 `#2c0863`、10game 行推进和阶梯轮廓；现按这些证据重建三层轮廓，取消未观察到的默认灰文字阴影和自动耐久文案。鼠标跟随、键盘槽锚点与屏幕避让为显式 Web 行为。padding8px、CSS光标偏移和字体仍是候选；原生部分覆盖边缘、中文栅格与整提示框未达零差，不能把核心色 mask 零差扩大为完整画面零差。见 [ITEM_TOOLTIP_QA.md](ITEM_TOOLTIP_QA.md)。
@@ -51,6 +53,8 @@ UI 原始对照图缓存于忽略目录 `.cache`。97 个重建皮肤的来源�
 已删除手绘物品、假 glint 和默认书图。展示页采用官方 v1.26.60.5 full 的 26 张真实物品 / GUI PNG；逐项与本机 59 个 vanilla 目录中的基础包及版本覆盖候选比较。此前把基础包钻石剑作为最终 runtime 材质的结论已撤回：基础包与 merged 图有 22 像素差异，1.16 / 1.21.90 中存在与 merged 相同的图，但候选存在不证明运行时包激活。完整记录见 item-materials.json。SGA 原图字形 AIZ 与独立图集栅格比较 0 差异；图集不随 npm 分发。EnchantingBook 使用真材质，已修正厚页块与 UV，并参考官方 Java BookModel 的七部件结构重建；Bedrock native mesh 仍未获取；已用本机 26.60 的打开 / 关闭无损截图校准默认相机仰角与分面光照，但完整书本区域仍有残差，明确属于重建，不列入 native pixel-perfect 结论。ItemTooltip 与耐久条已有上述局部原生观察；数量基线、耐久颜色/数值算法和 disabled renderer 仍待校准。
 
 工作台从 inventory_screen.json 的 work_bench_panel_3x3 推导，熔炉 / 高炉 / 烟熏炉从炉子源面板及其继承推导。已拆出 RecipeGrid / ProcessingArrow / FuelIndicator / ResultSlot；52×52 结果槽中的物品保持 32×32。炉子输入 y=29、燃料 y=105、结果 y=59 CSS px，保留源半游戏像素位置。CraftingTable 继续提供右面板；CraftingScreen 组合 RecipeBook、书脊、双模式 InventoryToolbar 和该右面板，保留326×166逻辑根及收起布局75像素留白。RecipeBookEntry 使用宿主提供的原始背景、分组角标与独立可合成数量；红背景不等于禁用。完整组合来源和原生对照见 [CRAFTING_SCREEN_QA.md](CRAFTING_SCREEN_QA.md)。原右面板源推导及12项独立检查见 [PROCESSING_QA.md](PROCESSING_QA.md)。其中6个箭头 / 火焰裁切状态与原始PNG独立浏览器控制样本RGBA零差，只证明Chromium合成，不替代引擎ratio与裁切量化验收。
+
+生存背包与工作台的源screen选用同一个固定326×166外层，现共用 InventoryScreenFrame；SurvivalInventoryScreen 组合配方书和既有 PlayerInventoryScreen。两布局都保留固定根，survival右面板位于x75；熔炉compact会缩根至176，且book的count/group分支不同，不能用相同Frame冒充。needsCraftingTable显式状态的renderer位置来自源锚点推导，未提供模型时保留空区域，不根据输入猜测。新增22项及相关109项同批合同检查通过，仍非native整图认证，见 [SURVIVAL_INVENTORY_QA.md](SURVIVAL_INVENTORY_QA.md)。
 
 附魔经验主色与右下锚点来自原 JSON；本机 26.60 无损截图确认成功字色 #7fff1f / 阴影 #204008，失败字色 #895e5b / 阴影 #221717，已修正归一化颜色四舍五入造成的色阶偏差。GUI 5 的可见阴影偏移为 [5,5] 物理像素，对应当前 GUI 2 的 [2,2] CSS 像素；这证明该状态的颜色与位移，不推断引擎通用暗化算法。青金石槽使用不额外淡化的原始 lapis_image，在空槽与有物品时都保留于物品图下层。书本由无厚度平面改为完整封面、书脊、厚页块和翻页结构；目前开合 / 翻页控制、WebGL 正常工作检查与原生 Bedrock 像素验收仍是不同证据层级。
 

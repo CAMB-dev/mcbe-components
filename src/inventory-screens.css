@@ -16,6 +16,8 @@
 .mc-player-screen__crafting .mc-inventory-scroll { padding: 0; overflow: visible; }
 .mc-player-screen__result { position: absolute; left: 304px; top: 52px; }
 .mc-player-screen__arrow { position: absolute; left: 268px; top: 58px; width: 32px; height: 26px; background: var(--mc-inv-screen-arrow) center / 100% 100% no-repeat; image-rendering: pixelated; }
+.mc-player-screen__crafting-table { position: absolute; left: 268px; top: 57px; width: 32px; height: 32px; display: grid; place-items: center; image-rendering: pixelated; }
+.mc-player-screen__crafting-table > * { max-width: 32px; max-height: 32px; }
 .mc-player-screen__crafting-label { position: absolute; left: 162px; top: 14px; width: 132px; height: 20px; line-height: 20px; text-align: center; color: #4c4c4c; background-color: #c6c6c6; }
 .mc-inventory-toolbar { position: relative; isolation: isolate; box-sizing: border-box; width: var(--mc-inventory-toolbar-width,252px); height: 40px; image-rendering: pixelated; }
 .mc-inventory-toolbar::before { content: ''; position: absolute; z-index: -1; left: 0; top: -6px; width: 100%; height: 56px; box-sizing: border-box; border: 8px solid transparent; border-image: var(--mc-inv-screen-toolbar) 4 fill / 8px stretch; pointer-events: none; }

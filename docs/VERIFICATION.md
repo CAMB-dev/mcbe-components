@@ -4,7 +4,22 @@
 
 ## 当前检查点与历史记录范围
 
-当前新增完整 Classic 工作台组合，公开 **115 个组件、3 份数据、2 个函数，共120项值导出**。新组件为 CraftingScreen、RecipeBook、RecipeBookEntry、RecipeFilterToggle。源事实、原生截图哈希和保留边界见 [CRAFTING_SCREEN_QA.md](CRAFTING_SCREEN_QA.md)。
+当前公开 **117个组件、3份数据、2个函数，共122项值导出**。本轮新增 InventoryScreenFrame / SurvivalInventoryScreen，并保留 CraftingScreen 的API和既有右面板。源几何、可复用边界和完整证据见 [SURVIVAL_INVENTORY_QA.md](SURVIVAL_INVENTORY_QA.md)。
+
+| 本轮检查 | 结果与范围 |
+| --- | --- |
+| 新增与相关正式回归 | canonical同批109/109 PASS、0 skip/unexpected/flaky，124.857秒；新增Survival22项＋工作台23项＋既有库存64项。`.cache/survival-canonical.json`，SHA `d514c4e269cd151769101116ea157a09350bee06003635f8c1367a668843e6bb` |
+| 源布局与原图 | 十二份完整JSON parsed相等；固定326根、146书页、4书脊、176右面板及两布局工具栏；箭头/fold/空preview完整原图浏览器组合检查不等于原生整屏零差 |
+| 实际包消费 | 本轮 `npm run verify:package` 已通过React18.3.1 /19.3.1的122值、117组件SSR、严格TSX/ref/API与新增Frame CSS；实际受测包SHA `a72ce275455d47eb8b9c3f6a7b6a3f091474676e04f4b2bea92563a1ca91c248`，JS SHA `9d3fa3644aff9a25705960470f21b4a45ee83ed6c4c0b46b0a853f6971abd883`，两消费者各102份dist逐字节一致，`.cache/survival-consumer-identity.json` |
+| 展示页辅助检查 | `.cache/survival-demo-smoke.json`，真实示例材质、宿主状态与局部滚动检查，页面错误为空；不增加正式用例数 |
+| 生产展示页 | 4173提供的HTML/JS/CSS五项与site构建逐字节一致；生存背包25项、工作台13项辅助检查通过，页面错误为空；412px两界面局部横滚180px，文档宽度保持412px。辅助检查不计正式用例 |
+| 原生采集边界 | PIX已实际捕获并保存附魔台展开书本与中文钻石剑提示框的单帧，离线事件/C++导出成功；见[GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。字体/书本/整屏差异仍未解决，采集成功不等于一致性通过 |
+
+109是本轮相关范围，不是新增109项或整库单次全绿。按项目、文件及完整标题与历史最终回归合并，当前789个唯一正式用例为784 PASS、5个预期SKIP、0个未解决失败（`.cache/integration-summary.json`）；这是多批次累计。以下115/120及累计767唯一用例等保留为各自历史检查点；Goal继续进行。
+
+## 上一检查点：Classic工作台与配方书（115组件）
+
+该阶段新增完整 Classic 工作台组合，公开 **115 个组件、3 份数据、2 个函数，共120项值导出**。新组件为 CraftingScreen、RecipeBook、RecipeBookEntry、RecipeFilterToggle。源事实、原生截图哈希和保留边界见 [CRAFTING_SCREEN_QA.md](CRAFTING_SCREEN_QA.md)。
 
 | 本轮检查 | 结果与范围 |
 | --- | --- |

@@ -22,6 +22,7 @@
 @import './inventory-screens.css';
 @import './recipe-book.css';
 @import './crafting-screen.css';
+@import './inventory-screen-frame.css';
 /* mcbeui: scoped component styles; importing this file does not reset the page. */
 :root {
   --mc-font: 'Mojangles Pixel', 'MCBE Pixel', 'Mojangles', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace;

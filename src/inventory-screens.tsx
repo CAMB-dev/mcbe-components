@@ -58,6 +58,10 @@ export interface PlayerInventoryScreenProps extends Omit<WorkstationFrameProps, 
   result?: InventoryItem | null;
   playerPreview?: ReactNode;
   playerPreviewLabel?: string;
+  /** Host value of the source #needs_crafting_table binding; never inferred from the input items. */
+  needsCraftingTable?: boolean;
+  /** Caller renderer for the original 16x16 crafting-table-required region. */
+  craftingTablePreview?: ReactNode;
   onArmorAction?: (kind: ArmorSlotKind, action: InventorySlotAction) => void;
   onCraftingAction?: (index: number, action: InventorySlotAction) => void;
   onTakeResult?: (action: InventorySlotAction) => void;
@@ -252,13 +256,14 @@ export const RecipeCategoryTabs = forwardRef<HTMLDivElement, RecipeCategoryTabsP
 /** The source 176x166 survival inventory pane, without the separate native toolbar. */
 export const PlayerInventoryScreen = forwardRef<HTMLElement, PlayerInventoryScreenProps>(function PlayerInventoryScreen({
   title = 'Inventory', armor = [null, null, null, null], offhand, crafting = [], result, playerPreview,
+  needsCraftingTable = false, craftingTablePreview,
   playerPreviewLabel = 'Player preview', onArmorAction, onCraftingAction, onTakeResult, className, ...props
 }, ref) {
   const armorRefs = useRef<(HTMLButtonElement | null)[]>([]), craftingRef = useRef<HTMLDivElement>(null), offhandRef = useRef<HTMLButtonElement>(null), resultRef = useRef<HTMLButtonElement>(null);
   const navigate = (event: KeyboardEvent<HTMLButtonElement>, target: HTMLButtonElement | null | undefined) => {
     if (!target || target.disabled || event.defaultPrevented) return; event.preventDefault(); target.focus();
   };
-  return <WorkstationFrame {...props} ref={ref} title={title} className={cx('mc-player-screen', className)}>
+  return <WorkstationFrame {...props} ref={ref} title={title} className={cx('mc-player-screen', className)} data-needs-crafting-table={needsCraftingTable || undefined}>
     <div className="mc-player-screen__armor" role="group" aria-label="Armor">{armorKinds.map((kind, index) => <ArmorSlot
       ref={node => { armorRefs.current[index] = node; }} key={kind} kind={kind} item={armor[index]} label={kind}
       onClick={() => onArmorAction?.(kind, 'primary')} onSecondaryAction={() => onArmorAction?.(kind, 'secondary')}
@@ -282,7 +287,9 @@ export const PlayerInventoryScreen = forwardRef<HTMLElement, PlayerInventoryScre
         if (event.key === 'ArrowLeft' && (index === 0 || index === 2)) { const target = armorRefs.current[index === 0 ? 0 : 2]; if (target && !target.disabled) { event.preventDefault(); target.focus(); } }
         else if (event.key === 'ArrowRight' && (index === 1 || index === 3) && resultRef.current) { event.preventDefault(); resultRef.current.focus(); }
       }}/></div>
-    <span className="mc-player-screen__arrow" aria-hidden="true"/>
+    {needsCraftingTable
+      ? <span className="mc-player-screen__crafting-table" role="img" aria-label="Crafting table required" data-empty-renderer={!craftingTablePreview || undefined}>{craftingTablePreview}</span>
+      : <span className="mc-player-screen__arrow" aria-hidden="true"/>}
     <ResultSlot ref={resultRef} className="mc-player-screen__result" label="Crafting result" item={result} onTake={action => onTakeResult?.(action)}
       onKeyDown={event => { if (event.key === 'ArrowLeft') navigate(event, craftingRef.current?.querySelectorAll<HTMLButtonElement>('.mc-slot')[1]); }}/>
   </WorkstationFrame>;

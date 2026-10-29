@@ -61,3 +61,7 @@ Classic selectable / unselectable controls 均使用 `fail_runes` 的固定源�
 `tests/enchanting-renderer.spec.ts` 覆盖真实atlas哈希、WebGL非空渲染、开合与翻页受控行为、经验主字和阴影、宿主覆盖、主页面未遮罩组合、青金石underlay，以及三个可选原生PNG验收项。原生项验证PNG签名 / 哈希、完整区域改善与残差、绿字 / 红字及阈值阴影轮廓位移；用户没有这些本地PNG时明确跳过，不生成替代期望图。
 
 运行 `npx playwright test --project=pixels tests/enchanting-renderer.spec.ts`。普通构建和消费不需要本机游戏或PNG。完整数据、相机 / 光照参数与证据路径见 [enchanting-renderer.json](enchanting-renderer.json)。书本重建、费用局部证据及整个附魔台原生验收是三个不同范围。
+
+## 2026-10-29：实际 GPU 帧已取得
+
+用户授权后，已安装签名验证通过的 PIX 2610.28，并通过其图形界面采集附魔台展开书本与钻石剑中文提示框的一帧。原始 `.wpix`、字节一致分析副本、事件列表和完整 C++ 静态导出均已保存；身份与失败记录见 [GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。这更新了此前尚无 draw capture 的状态，但尚未完成逐 draw 重建，不改变上方书本非零误差及原生一致性未通过的结论。

@@ -191,6 +191,11 @@
         "status": "implemented"
       },
       {
+        "name": "InventoryScreenFrame",
+        "status": "implemented",
+        "fidelity": "fixed_inventory_workbench_source_frame_not_furnace_compact"
+      },
+      {
         "name": "RecipeGrid",
         "status": "implemented"
       },
@@ -365,6 +370,11 @@
       {
         "name": "TradingScreen",
         "status": "implemented"
+      },
+      {
+        "name": "SurvivalInventoryScreen",
+        "status": "implemented",
+        "fidelity": "source_texture_full_survival_inventory_composition_native_parity_unverified"
       },
       {
         "name": "PlayerInventoryScreen",

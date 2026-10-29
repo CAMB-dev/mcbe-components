@@ -1,0 +1,68 @@
+import { forwardRef, useState } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { InventoryToolbar } from './inventory-screens';
+
+export type InventoryScreenLayout = 'recipe-book' | 'survival';
+export interface InventoryScreenFrameProps extends Omit<HTMLAttributes<HTMLElement>, 'children' | 'title'> {
+  title: string;
+  book: ReactNode;
+  children: ReactNode;
+  layout?: InventoryScreenLayout;
+  defaultLayout?: InventoryScreenLayout;
+  onLayoutChange?: (layout: InventoryScreenLayout) => void;
+  onHelp?: () => void;
+  onClose?: () => void;
+  helpLabel?: string;
+  closeLabel?: string;
+  showClose?: boolean;
+}
+interface InventoryScreenFrameBaseProps extends InventoryScreenFrameProps {
+  /** Internal composition compatibility hook; not exposed by the public Frame. */
+  partPrefix: string;
+}
+
+const commonPrefix = 'mc-inventory-screen-frame';
+const cx = (...classes: (string | undefined | false)[]) => classes.filter(Boolean).join(' ');
+
+/** Internal shared implementation; composition modules may retain their existing part hooks. */
+export const InventoryScreenFrameBase = forwardRef<HTMLElement, InventoryScreenFrameBaseProps>(function InventoryScreenFrameBase({
+  title, book, children, layout, defaultLayout = 'recipe-book', onLayoutChange,
+  onHelp, onClose, helpLabel, closeLabel = 'Close inventory', showClose = true,
+  partPrefix, className, onKeyDown, onKeyDownCapture, ...props
+}, ref) {
+  const [internalLayout, setInternalLayout] = useState(defaultLayout);
+  const currentLayout = layout ?? internalLayout;
+  const part = (suffix: string) => cx(`${commonPrefix}${suffix}`, partPrefix !== commonPrefix && `${partPrefix}${suffix}`);
+  return <div className={part('-scroll')}><section {...props} ref={ref} aria-label={props['aria-label'] ?? title}
+    className={cx(part(''), className)} data-layout={currentLayout}
+    onKeyDownCapture={event => {
+      onKeyDownCapture?.(event);
+      if (event.defaultPrevented || event.nativeEvent.isComposing || !(event.target instanceof HTMLButtonElement)) return;
+      const target = event.key === 'ArrowRight' && event.target.dataset.category === 'search'
+        ? event.currentTarget.querySelector<HTMLButtonElement>('.mc-inventory-toolbar [data-layout="recipe-book"]')
+        : currentLayout === 'recipe-book' && event.key === 'ArrowLeft' && event.target.dataset.layout === 'recipe-book'
+          ? event.currentTarget.querySelector<HTMLButtonElement>('.mc-recipe-categories [data-category="search"]') : null;
+      if (target && !target.disabled) { event.preventDefault(); target.focus(); }
+    }}
+    onKeyDown={event => {
+      onKeyDown?.(event);
+      if (!event.defaultPrevented && !event.nativeEvent.isComposing && event.key === 'Escape' && onClose) { event.preventDefault(); onClose(); }
+    }}>
+    {currentLayout === 'recipe-book' && <>
+      <div className={part('__book')}>{book}</div>
+      <div className={part('__fold')} aria-hidden="true"/>
+    </>}
+    <div className={part('__right')}>{children}</div>
+    <InventoryToolbar className={part('__toolbar')} layouts={['recipe-book', 'survival']} value={currentLayout}
+      onValueChange={value => {
+        if (value === 'creative') return;
+        if (layout === undefined) setInternalLayout(value);
+        onLayoutChange?.(value);
+      }} onHelp={onHelp} onClose={onClose} helpLabel={helpLabel} closeLabel={closeLabel} showClose={showClose}/>
+  </section></div>;
+});
+
+/** Inventory/workbench profile: fixed 326x166 game-pixel canvas in both layouts. */
+export const InventoryScreenFrame = forwardRef<HTMLElement, InventoryScreenFrameProps>(function InventoryScreenFrame(props, ref) {
+  return <InventoryScreenFrameBase {...props} ref={ref} partPrefix={commonPrefix}/>;
+});

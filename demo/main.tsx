@@ -58,7 +58,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'achievement-toast', name: 'Achievement toast', icon: 'chevron', count: '01' },
   { id: 'game-controls', name: 'Players, touch & menus', icon: 'chevron', count: '04' },
   { id: 'trading-mounts', name: 'Trading & mounts', icon: 'chevron', count: '03' },
-  { id: 'inventory-screens', name: 'Player & creative inventory', icon: 'chevron', count: '07' },
+  { id: 'inventory-screens', name: 'Player & creative inventory', icon: 'chevron', count: '09' },
   { id: 'typography', name: 'Typography & icons', icon: 'chevron', count: '02' },
 ];
 const snippets: Record<string, string> = {
@@ -311,7 +311,7 @@ function App() {
       <SystemScreensExamples/>
       <GameControlsExamples/>
       <TradingMountsExamples notify={notify}/>
-      <Example id="inventory-screens" title="Player & creative inventory" detail="Equipment slots, recipe navigation and inventory screens."><InventoryScreensExamples notify={notify}/></Example>
+      <Example id="inventory-screens" title="Player & creative inventory" detail="Complete Survival inventory, reusable screen frame, equipment and creative panes."><InventoryScreensExamples notify={notify}/></Example>
       <Example id="scrolling" title="Scrolling" detail="Native scrolling with original Bedrock rail and handle textures.">
         <div style={{padding:24}}><ScrollArea label="Scrollable inventory notes" style={{height:180,maxWidth:480}}>
           {Array.from({length:12},(_,index)=><p key={index} style={{margin:0,padding:12}}>Inventory note {index+1} · Wheel, touch and keyboard</p>)}

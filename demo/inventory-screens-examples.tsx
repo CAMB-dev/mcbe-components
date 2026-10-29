@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ArmorSlot, CreativeInventory, InventoryToolbar, PlayerInventoryScreen, RecipeCategoryTabs, RecipeSearch } from '../src/inventory-screens';
 import type { InventoryItem } from '../src/inventory';
+import { SurvivalInventoryExamples } from './survival-inventory-examples';
 
 const image = (name: string) => new URL(`./assets/minecraft/${name}.png`, import.meta.url).href;
 const diamond: InventoryItem = { name: 'Diamond', image: image('diamond'), count: 2 };
@@ -13,6 +14,8 @@ export function InventoryScreensExamples({ notify }: { notify?: (message: string
   const [query, setQuery] = useState(''), [craftableOnly, setCraftableOnly] = useState(false), [category, setCategory] = useState('construction');
   return <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: 24, minWidth: 0 }}>
     <p>Classic JSON UI panes and real original textures. Item moves, recipe eligibility and player rendering belong to the caller.</p>
+    <SurvivalInventoryExamples notify={notify}/>
+    <div data-inventory-pane-examples style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: 24, minWidth: 0 }}>
     <div><h3>ArmorSlot</h3><div style={{ display: 'flex', gap: 8 }}>{(['helmet', 'chestplate', 'leggings', 'boots', 'offhand'] as const).map(kind => <ArmorSlot key={kind} kind={kind} onClick={() => notify?.(`${kind} slot intent`)}/>)}</div></div>
     <div><h3>RecipeSearch</h3><RecipeSearch value={query} onValueChange={setQuery} craftableOnly={craftableOnly} onCraftableOnlyChange={setCraftableOnly}/>
       <p>Query: {query || 'All recipes'} · {craftableOnly ? 'Craftable filter enabled' : 'Craftable filter disabled'}</p></div>
@@ -24,5 +27,6 @@ export function InventoryScreensExamples({ notify }: { notify?: (message: string
     <div><h3>CreativeInventory</h3><CreativeInventory items={items} hotbar={[diamond, sword]} onItemAction={(index, action) => notify?.(`${items[index]?.name}: ${action}`)}
       onLayoutChange={layout => notify?.(`Layout intent: ${layout}`)} onHelp={() => notify?.('How to play intent')}
       onHotbarAction={(index, action) => notify?.(`Hotbar ${index + 1}: ${action}`)} onClose={() => notify?.('Close creative inventory intent')}/></div>
+    </div>
   </div>;
 }

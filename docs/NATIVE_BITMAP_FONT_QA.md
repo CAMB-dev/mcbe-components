@@ -234,3 +234,7 @@ AA1 SHA为`9bab05dcc92856a120271674872f3d3c844f19a3a3b8a73e760b25f70afde07b`；A
 alpha全相同不等于RGBA相同。负控也必须保留：bilinear/Smooth GPU对double为314pixels、max5，对实际组件352pixels、max5；两个scale2.5 point配置对CPU各1019pixels、max243，field-only对独立halo渲染裁回各658pixels、max243，其余六配置field/halo裁回为0。**硬件差异不是全部仅1LSB**，也没有用UV补偿、容差或选择point替代来宣称原生一致。旧software、精度和字体反例原样保留，原生覆盖/RGBA仍为NOT EXACT；本次没有恢复native sampler/cache/MVP/RT与后续pass绑定，也没有安装或运行PIX。
 
 报告和实际完整输出均在ignored目录：`REPORT.md` SHA `498ea116187f2781e9b70fe2ddd04540dcacc92c688d51868cc60d10ebe149c9`，`summary.json` SHA `8ac346a6a9ffde5fa532fcd9afb925c677e76a17db7c198f52562eb136963937`，`result.json` SHA `18f5ed6786e27e43ea2c04e0e925d83702d0a6bbb8a8d95752523c768dfd3098`（均位于 `.cache/bitmap-hardware-diagnostic/`）。八配置保存PNG的完整field/halo、CPU/实际组件/native比较指标已重新核算，未启动新的GPU或测试run。
+
+## 2026-10-29：原生 GPU 采集状态更新
+
+前述准备和硬件诊断是各自历史检查点。用户授权后，PIX 2610.28 安装与受控重启已成功，图形界面已采集并保存含展开书本、中文钻石剑提示框的一帧；分析副本的事件列表及完整 C++ 静态导出成功。详见 [GPU_CAPTURE_QA.md](GPU_CAPTURE_QA.md)。采集文件不随组件库分发。当前逐 draw 字形绑定及最终合成仍在核验，没有据采集成功将字体 RGBA 或覆盖结论改为 EXACT，也没有更换生产采样规则。
