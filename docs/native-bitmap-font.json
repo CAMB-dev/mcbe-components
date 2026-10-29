@@ -1005,6 +1005,18 @@
       {
         "path": ".cache/tooltip-font-research/fixed-blend-comparison.json",
         "sha256": "c56b70534789593c5ee4ddad63549669b8d958b7b2f88fcf3617dad91b0ef700"
+      },
+      {
+        "path": ".cache/bitmap-native-integration-final.json",
+        "sha256": "9515471f9c0137f83c88bff4c8681faac6d0df0f158f3e11b936e4c2dce8981d"
+      },
+      {
+        "path": ".cache/package-verification-final.log",
+        "sha256": "b5945f7c67a2db00b9d62a8b4eaf6b838ca31c4234005e7a3026963ef5341baf"
+      },
+      {
+        "path": ".cache/bitmap-text-production-preview.log",
+        "sha256": "2f94811b406af0f30b92667df07bceceedd6b5bc75527b21c36bef43e99040f0"
       }
     ],
     "remainingLimits": [
@@ -1013,7 +1025,33 @@
       "Canvas/Web composition quantization is distinct from original ASM math and from native rasterization.",
       "No fitted phi, glyph mask, registration optimization, arbitrary tolerance or guessed client height is part of the production/default profile.",
       "Prepared private font remains a10character subset with8unchanged local pages; no original atlas is distributed."
-    ]
+    ],
+    "mainConfigIntegration": {
+      "report": ".cache/bitmap-native-integration-final.json",
+      "sha256": "9515471f9c0137f83c88bff4c8681faac6d0df0f158f3e11b936e4c2dce8981d",
+      "project": "pixels",
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 18315.86,
+      "scope": "One batch containing13component contracts and3bounded native source/layout cases. This does not change the retained native coverage/RGBA failures."
+    },
+    "actualPackageAndPreview": {
+      "reactConsumers": [
+        "18.3.1",
+        "19.3.1"
+      ],
+      "packageVerificationLog": ".cache/package-verification-final.log",
+      "packageVerificationSha256": "b5945f7c67a2db00b9d62a8b4eaf6b838ca31c4234005e7a3026963ef5341baf",
+      "esmSsrStylesFontsAssetsLicensesAndTypeScriptConsumer": "PASS",
+      "productionPreviewLog": ".cache/bitmap-text-production-preview.log",
+      "productionPreviewSha256": "2f94811b406af0f30b92667df07bceceedd6b5bc75527b21c36bef43e99040f0",
+      "productionPreview": "PASS",
+      "bitmapReady": 2,
+      "tooltipBitmapReady": 2,
+      "localFontSubset": true,
+      "scope": "Actual tarball consumers and production site preview, not native raster parity. No final release-tarball hash is asserted by this documentation."
+    }
   },
   "evidenceReports": [
     {

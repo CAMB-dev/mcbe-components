@@ -126,6 +126,8 @@ ready状态保留的透明可选择DOM文字曾继承父级阴影，真实24×25
 
 最终独立报告是 `.cache/tooltip-native/independent-native-bitmap-final/independent-bitmap-verification.json`，SHA `ce55afbbb1234d63fb57e243686391877bf4007d9b041a36ffdd5e1f937203e0`；原始run、初始失败报告及其指纹均在JSON中。
 
+主配置`pixels`项目随后将13组件合同与3限定原生source/layout合同同批运行，**16/16 PASS**（`.cache/bitmap-native-integration-final.json`），不改变上述native失败。实际tarball的React18.3.1/19.3.1 ESM、SSR、样式/字体/素材/许可和TypeScript consumer检查也通过；production preview中2个BitmapText及2个Tooltip bitmap均ready。包验证与preview日志SHA同样记录在JSON，未把这些检查当作原生RGBA验收或最终发布包hash。
+
 ### 已证伪的修复假设
 
 固定同一源UV/quad/metrics测试了ONE混合、既有槽位插值及采样前直接`±phi/scale`：它们未重现剩余native角点，部分组合恶化全域和三阈值误差，未按单点最小误差选出“原生绑定”。原报告分别是 `.cache/font-shader-audit/BLEND_AUDIT.md` 与 `.cache/tooltip-font-research/BLEND_FALSIFICATION.md`，完整hash已持久化。数学反事实也没有冒充实际Canvas截图结果。
