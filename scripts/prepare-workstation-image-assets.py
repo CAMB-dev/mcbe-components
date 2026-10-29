@@ -23,7 +23,17 @@ ZIP_SHA = "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
 ZIP_URL = f"https://github.com/Mojang/bedrock-samples/releases/download/{RELEASE}/bedrock-samples-{RELEASE}-full.zip"
 RAW = f"https://raw.githubusercontent.com/Mojang/bedrock-samples/{COMMIT}/"
 LICENSE_SHA = "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
-UI_FILES = ("resource_pack/ui/ui_common.json", "resource_pack/ui/enchanting_screen.json", "resource_pack/ui/grindstone_screen.json")
+BASE_UI_FILES = ("resource_pack/ui/ui_common.json", "resource_pack/ui/enchanting_screen.json", "resource_pack/ui/grindstone_screen.json")
+UI_FILES = BASE_UI_FILES + ("resource_pack/ui/anvil_screen.json", "resource_pack/ui/resource_packs_screen.json")
+# Preserve the original asset records when adding source screens: shared arrow
+# and cross PNGs must not acquire extra references in previously frozen records.
+REFERENCE_FILES = {
+    "anvilIcon": ("resource_pack/ui/anvil_screen.json",),
+    "anvilPlus": ("resource_pack/ui/anvil_screen.json",),
+    "anvilCostBackground": ("resource_pack/ui/resource_packs_screen.json",),
+    "editBox": ("resource_pack/ui/ui_common.json",),
+    "editBoxHover": ("resource_pack/ui/ui_common.json",),
+}
 # key, original basename, physical dimensions, logical base, logical LTRB inset.
 SPECS = [
     ("panel", "dialog_background_opaque", (16, 16), (16, 16), 4),
@@ -47,6 +57,12 @@ SPECS = [
     ("closeNormalPressed", "close_button_pressed", (15, 15), None, None),
     ("grindstoneArrow", "arrow_large", (22, 15), None, None),
     ("grindstoneInvalid", "crossout", (15, 15), None, None),
+] + [
+    ("anvilIcon", "anvil_icon", (15, 15), None, None),
+    ("anvilPlus", "anvil-plus", (13, 13), None, None),
+    ("anvilCostBackground", "Gray", (2, 2), (2, 2), 1),
+    ("editBox", "edit_box_indent", (6, 6), (6, 6), 2),
+    ("editBoxHover", "edit_box_indent_hover", (6, 6), (6, 6), 2),
 ]
 
 
@@ -191,7 +207,7 @@ def generate(archive: Path, game: Path | None):
                 if metadata != {'nineslice_size': expected_edge, 'base_size': list(expected_base)}:
                     raise ValueError(f'{name}: original nine-slice changed')
                 nine_slice = {'insets': [expected_edge] * 4, 'baseSize': list(expected_base)}
-            refs = [{'source': file, 'jsonPointer': pointer} for file, parsed in ui.items()
+            refs = [{'source': file, 'jsonPointer': pointer} for file, parsed in ui.items() if file in REFERENCE_FILES.get(key, BASE_UI_FILES)
                     for pointer in references(parsed, 'textures/ui/' + name)]
             if not refs:
                 raise ValueError(f'{name}: no literal original UI reference')

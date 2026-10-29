@@ -131,8 +131,9 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
     for (let index = 0; index < options.commands.length; index++) {
       const command = options.commands[index]!;
       if (command.kind === 'image' || command.kind === 'sprite') {
-        const { rect, uvRect, nineSlice, tint, hudOpacity, scissor } = command;
-        const shape = { rect, uvRect, nineSlice, tint, hudOpacity, scissor };
+        const { rect, uvRect, nineSlice, tint, hudOpacity, scissor, physicalPrecision } = command;
+        const shape = { rect, uvRect, nineSlice, tint, hudOpacity, scissor,
+          ...(physicalPrecision !== undefined ? { physicalPrecision } : {}) };
         shapes.push(command.kind === 'sprite' ? { kind: 'sprite', ...shape, color: command.color } : { kind: 'image', ...shape });
         bindings.push({ kind: command.kind, source: uses.length }); uses.push({ source: command.texture, upload: true });
       } else if (command.kind === 'model') {

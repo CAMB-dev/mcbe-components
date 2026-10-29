@@ -2,6 +2,26 @@
 
 日期：2026-10-29（Asia/Singapore）。
 
+## 当前检查点：铁砧可选原图图层
+
+Anvil实现三profile类型及四文字角色，组件120 /runtime134不变。source /demo tsc已实际通过。GuiImage实际运行18项全部通过；此前“14项”为静态声明漏参数化计数，现更正，不据声明数计算正式累计。QA /Long正常source公式对已用native image /text属性相同，另invalid cross原15²实际paint12²。原wrapper-center /arrow-cross stretch /简单enclosing clip等初始假设保留。
+
+Anvil final-02实际35 /35 PASS、82.87116秒、0skip /retry /flaky，817pins不变：13新source合同＋10旧fidelity＋desktop6 /mobile6。首33 /2失败为IMG /CSS fractional contain参考路径6px差与逐pixel断言CPU超时，原报告保留；只修独立同CSS primitive参考及聚合strict zero计数，未改source /像素阈值 /clip界。FINAL SHA256 `ec49c0abe1097a3804a614c3ed5c74db2bedd3598a0a43c974a72d9b5d05e075`。
+
+旧回归全standard首批8文件103实际102 PASS /1 FAIL、143.295891秒，817pins不变。仅GuiLayer GUI5 labels nativeFBO273px /819bytes /max4 /alpha0，而已用VB384 /CBV768 bytes相同。既定整文件规则是GuiLayer /GuiSprite用NVIDIA、其他原standard；本轮误将GuiLayer调为software，后整17在NVIDIA RTX3050 /ANGLE D3D11实际17 /17 PASS、27.036789秒。最终selected旧回归取其他七整文件86 standard＋整GuiLayer17 NVIDIA＝103通过，排除整个software GuiLayer，不挑其16PASS；与Anvil35共138独立用例、0skip /retry /flaky，分profile批次而非单backend全绿。原software102 /1观察保留，不改source /期望 /阈值。
+
+汇总 `.cache/anvil-image-independent-qa/FINAL.json` SHA256 `b9f49b5f648789f4011747e4a2ebe8ddd60c0c40f84f91321845b589f0621ddd` 与RESULT记录固定整文件selection /逐case来源，817pins各run前后及跨run相同。当前GuiLayer spec等于HEAD、最后修改commit42f25e9早于历史NVIDIA报告及规则；旧报告无spec hash这一限制仍明确，不伪造历史hash。详见 [ANVIL_IMAGE_QA.md](ANVIL_IMAGE_QA.md)。
+
+首轮三个source状态全RGBA0，invalid40像素耐久差异原报告未改；新sourceDurability按正常slot+[3,13.5]与全局端点floor候选，对齐原DOM meter并保留ready /rollback。四状态60native primitives的XY /indices /raster /RGB8一致，float CBV仍有8 /80差异，非唯一engine算法。复测四case各完整3,603,140像素和747,600 ROI RGBA0，共14,412,560完整像素；CSS18 /gallery20各case仍非零且与原actual SHA相同。有限host dim .4 /原字体 /投影 /NVIDIA条件不扩张为world /Present或默认CSS零差。
+
+耐久修复后第二次实际verify:package exit0、40.37秒：React18.3.1 /19.3.1、134值 /三新type /真input /39槽 /四角色SSR无IO /严格TS /28PNG /29keys /styles /licenses均通过；tar /build /两consumer各256dist byte0。已测 `.cache/anvil-package-durability-01/consumer-verified.tgz` SHA256 `c2736133eada9336dd6c2cda889efa9d3c3bb81b5e9817dd6804a54f46349bee`，JS SHA256 `721edbfb20e89ddde0e725b7177352e77fb7e9747eba8f473bf8e4a260796c15`。首包6ef175…在其source真实成功，后因耐久修复source改变重新验，旧成功不套为最终身份。生产首轮73辅助检查通过，不加正式138或编新全库累计；见 [ANVIL_IMAGE_QA.md](ANVIL_IMAGE_QA.md)。
+
+native canonical `.cache/anvil-full-gui-01/FINAL.json` SHA256 `ab23d289f5a0c707381e1edff46cd2b3748d3c1829660751c3e4d7375039092e` 的 `sourceProfileNativePixelParityPass:true` 与raw QA /Long保守runtime flags分别保留。总25 ERR_ABORTED、13唯一URL fresh200且原PNG bytes /RGBA0，非取消网络错误0；`allRequestsSucceeded:false`，不写全部网络成功。只有instrumented fill /blur记录实际generation1 /2，初始未记录的generation仍unknown。94source /30resource各run无变化，不能把此辅助native比较算为正式浏览器通过。
+
+生产 `.cache/anvil-production-01/FINAL.json` SHA256 `bbb4af794a4c0ac2ca6e6aff32b10e2f64db5e766d07526c1ed762ac48b45e46` 首轮73辅助checks通过、无重试，不计formal138。含39槽 /四roles /真input编辑选择 /synthetic composition fallback /long30 /GUI4-5 /五recipe guards及take→empty /三paints恢复 /close-reopen /1440与390局部pan；synthetic事件不认证Windows真实OS IME。demo empty6sprites /其他7、models3、invalid6meters /其他5，资源逐项与DOM核对，不等同四native状态数据。
+
+256dist /47site与第二包pins同字节，8 HTTP入口byte0；main-BxVOgva8.js 168,625bytes SHA256 `f1da0af363d9283e21e1bfd8437283fcf75a4e5bd2ae53c29f9a8c28a85ebd88`。27实际font URL及3distinct取消URL另GET200 /sitebyte0；raw3 ERR_ABORTED保留，page /console /render /非取消网络错误0。actual SwiftShader /Vulkan仅为生产组合 /交互，无CUA /桌面 /可见tab操作，不升级crossGPU native /active-editor像素 /任意ratio /Present认证。最终文档包须单独逐条确认仅README /docs变化、非文档payload与已测tarball相同，消费认证通过该身份链关联。
+
 ## 当前检查点：砂轮可选原图图层
 
 公开数仍120组件 / 4数据 / 10函数共134值，新增Grindstone三个profile类型，不加runtime。shared纯准备192 old/new对象与19 source-hook SSR一致；23原PNG / 24keys、旧18图完整身份保持。字体工具只写独立私有8页cache，524,288原alpha像素解码一致不等于native字体绘制通过。

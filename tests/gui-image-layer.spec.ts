@@ -64,6 +64,37 @@ test('independent scalar examples preserve whole-frame projection, source quanti
   expect(value.meshes[0]!.indices).toEqual([1, 2, 0, 0, 2, 3]);
 });
 
+test('explicit float32 physical products resolve integer boundaries without changing legacy quantization', () => {
+  const frame = { width: 2570, height: 1402, guiScale: 5 }, rect = [208.39999389648438, 19.9999999, 129.60000610351562, 12.0000001] as const;
+  const legacy = layoutGuiImages({ ...frame, images: [{ rect }] });
+  const exact = layoutGuiImages({ ...frame, images: [{ rect, physicalPrecision: 'float32' }] });
+  // Independent scalar constants straddle integer boundaries on all four axes:
+  // double products:1041.9999694824219,99.9999995,648.0000305175781,60.0000005.
+  // float32 operands/product:1042,100,648,60; floor origins and ceil extents remain unchanged.
+  expect(legacy.meshes[0]!.drawRect).toEqual([208.2, 19.8, 129.8, 12.2]);
+  expect(exact.meshes[0]!.drawRect).toEqual([208.4, 20, 129.6, 12]);
+  expect(exact.mvp).toEqual(legacy.mvp); expect(exact.projectionSize).toEqual(legacy.projectionSize);
+  expect(exact.meshes[0]!.vertices.map(vertex => vertex.uvRaw)).toEqual(legacy.meshes[0]!.vertices.map(vertex => vertex.uvRaw));
+  expect(exact.meshes[0]!.indices).toEqual(legacy.meshes[0]!.indices);
+  expect(layoutGuiImages({ ...frame, images: [{ rect, physicalPrecision: undefined }] })).toEqual(legacy);
+});
+
+test('float32 image precision rejects unknown modes and keeps typed SSR source inputs immutable', () => {
+  const rect = Object.freeze([1.99999999, 2.99999999, 4.00000001, 3.00000001] as const);
+  const image: GuiImageLayerProps['images'][number] = Object.freeze({ rect, physicalPrecision: 'float32', texture: { width: 1, height: 1, data: new Uint8ClampedArray([255, 255, 255, 255]) } });
+  const props: GuiImageLayerProps = { width: 32, height: 24, guiScale: 2, images: [image] };
+  const before = JSON.stringify(image);
+  expect(layoutGuiImages(props).meshes[0]!.drawRect).toEqual([2, 3, 4, 3]);
+  const markup = renderToStaticMarkup(createElement(GuiImageLayer, props));
+  expect(markup).toContain('data-render-state="loading"'); expect(markup).toContain('width:32px;height:24px');
+  for (const invalid of [null, 'float64', 'FLOAT32', '', 0, false, {}]) {
+    const bad = { ...props, images: [{ ...image, physicalPrecision: invalid as 'float32' }] };
+    expect(() => layoutGuiImages(bad)).toThrow(RangeError);
+    expect(renderToStaticMarkup(createElement(GuiImageLayer, bad))).toContain('width:0;height:0');
+  }
+  expect(image.physicalPrecision).toBe('float32'); expect(JSON.stringify(image)).toBe(before);
+});
+
 test('original nine-slice metadata distinguishes physical pixels and logical edges without producer manifests', async () => {
   const read = await zip(), cell = jsonc(read('resource_pack/textures/ui/cell_image.json')), dark = jsonc(read('resource_pack/textures/ui/enchanting_dark_background.json'));
   expect(cell).toMatchObject({ base_size: [5, 5], nineslice_size: 1 }); expect([(await original('cell_image')).width, (await original('cell_image')).height]).toEqual([10, 10]);

@@ -26,7 +26,7 @@ GuiIconProps 接收必填 name: GuiIconName、可选正整数 scale（默认1）
 
 生产删除三条额外粉色 invalid border / outline 规则，保留原 default / hover / keyboard-focus 表面与 aria-invalid / 描述关联。TextField、TextArea、Select 和 Combobox 的错误消息复用原 ErrorGlyph13×20，错误文字仍为可覆盖的 Web 可读性 token；源 $error_text_color 为红色，但本轮不声称所有主题token都是该原值。该消息排布属于 Web 表单适配，不是恢复的原生通用 invalid 输入框布局。仅 aria-invalid 没有错误内容时不凭空生成文案。
 
-Anvil / Smithing crossout 为源18×12 game，Grindstone 为15×15 game；同一15² PNG采用不同源使用尺寸，当前36×24 / 30×30 CSS不能统一成一种比例。Trading 的红槽原图属于另一源状态；Keybinding 的错误语义也不证明通用粉色框存在。无效结果仍用 aria-disabled 保留焦点并守卫 primary / secondary 操作；原生hover_text renderer等互动未因本次图像对照认证。
+历史Anvil /Smithing曾把18×12 game逻辑box均作为stretch paint。新Anvil invalid实际draw证明原15² cross在box内contain为12²，水平inset3；旧canonical stretch自对照不证明native比例，见 [ANVIL_IMAGE_QA.md](ANVIL_IMAGE_QA.md)。Smithing旧18×12配置未据此取得native认证，Grindstone仍15²。Trading红槽原图属于另一状态；Keybinding错误语义不证明通用粉色框存在。无效结果仍用 aria-disabled 保留焦点并守卫 primary /secondary；原生hover_text等互动未因原图对照认证。
 
 ## 本轮分项结果
 

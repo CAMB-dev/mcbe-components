@@ -18,6 +18,7 @@ const nativeBitmapPath = fileURLToPath(new URL('./.cache/local-fonts/unicode/fon
 const nativeWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/fonts.json', import.meta.url));
 const nativeGuiWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/gui-fonts.json', import.meta.url));
 const nativeGuiGrindstonePath = fileURLToPath(new URL('./.cache/local-fonts/grindstone/gui-font.json', import.meta.url));
+const nativeGuiAnvilPath = (name: string) => fileURLToPath(new URL(`./.cache/local-fonts/anvil/${name}.json`, import.meta.url));
 
 function optionalGuiFontModule(path: string, exportName: string): string {
   const unavailable = `export const ${exportName} = undefined;`;
@@ -30,7 +31,7 @@ function optionalGuiFontModule(path: string, exportName: string): string {
     || !Array.isArray(font.pageSizes) || font.pageSizes.length !== font.pages.length
     || font.pageSizes.some(size => size !== 128 && size !== 256)
     || !Number.isSafeInteger(font.cellHeight) || font.cellHeight < 1 || font.cellHeight > Math.min(...font.pageSizes)) {
-    throw new Error('Invalid optional Grindstone GUI font; rerun use-local-grindstone-fonts.py.');
+    throw new Error(`Invalid optional GUI font in ${path}; rerun its local font preparation script.`);
   }
   const directory = dirname(path);
   const pages = font.pages.map((page, index) => {
@@ -47,7 +48,7 @@ function optionalGuiFontModule(path: string, exportName: string): string {
     return target;
   });
   if (!pages.every(page => existsSync(page))) return unavailable;
-  const names = pages.map((_, index) => `optionalGrindstonePage${index}`);
+  const names = pages.map((_, index) => `${exportName}Page${index}`);
   return pages.map((page, index) => `import ${names[index]} from ${JSON.stringify(normalizePath(page) + '?url')};`).join('\n')
     + `\nexport const ${exportName} = { ...${JSON.stringify(font)}, pages: [${names.join(',')}] };`;
 }
@@ -152,6 +153,10 @@ export default defineConfig({
       }
       parts.push(guiWorkstationModule);
       parts.push(optionalGuiFontModule(nativeGuiGrindstonePath, 'nativeGuiGrindstoneFont'));
+      parts.push(optionalGuiFontModule(nativeGuiAnvilPath('labels'), 'nativeGuiAnvilLabels'));
+      parts.push(optionalGuiFontModule(nativeGuiAnvilPath('unicode'), 'nativeGuiAnvilUnicode'));
+      parts.push(optionalGuiFontModule(nativeGuiAnvilPath('ascii'), 'nativeGuiAnvilAscii'));
+      parts.push(optionalGuiFontModule(nativeGuiAnvilPath('costs'), 'nativeGuiAnvilCosts'));
       parts.push(existsSync(hbuiLoadingPath)
         ? `import hbuiLoadingIndicatorUrl from ${JSON.stringify(normalizePath(hbuiLoadingPath) + '?url')}; export { hbuiLoadingIndicatorUrl };`
         : 'export const hbuiLoadingIndicatorUrl = undefined;');

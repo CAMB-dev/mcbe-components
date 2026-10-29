@@ -12,6 +12,8 @@ export interface GuiImageNineSlice {
 export interface GuiImageGeometry {
   /** Already-evaluated global source layout; never use the expanded draw size as a child stride. */
   rect: GuiImageRect;
+  /** Opt in float32 scalar multiplication before physical floor/ceil quantization. */
+  physicalPrecision?: 'float32';
   /** Normalized source x/y/width/height; omission uses the complete original texture. */
   uvRect?: GuiImageRect;
   nineSlice?: GuiImageNineSlice;
@@ -108,6 +110,7 @@ export function layoutGuiImages(options: GuiImageLayoutOptions): GuiImageLayout 
   if (!outputRect[2] || !outputRect[3]) throw new RangeError('GUI output window must have positive dimensions.');
   const meshes = options.images.map((image: GuiImageGeometry, imageIndex: number): GuiImageMesh => {
     if (!image) throw new RangeError('A GUI image is missing.');
+    if (image.physicalPrecision !== undefined && image.physicalPrecision !== 'float32') throw new RangeError('Image physicalPrecision must be float32 or omitted.');
     sourceRect(image.rect, 'image.rect');
     const uv = image.uvRect ?? [0, 0, 1, 1]; sourceRect(uv, 'image.uvRect');
     unit(uv[0], 'uv.x'); unit(uv[1], 'uv.y');
@@ -119,8 +122,9 @@ export function layoutGuiImages(options: GuiImageLayoutOptions): GuiImageLayout 
     if (image.scissor) pixelRect(image.scissor, width, height, 'image.scissor');
     const scissor = image.scissor ? intersection(layerScissor, image.scissor) : layerScissor;
     const [x, y, w, h] = image.rect;
-    const left = Math.floor(finite(x * guiScale, 'physical x')) / guiScale, top = Math.floor(finite(y * guiScale, 'physical y')) / guiScale;
-    const drawnWidth = Math.ceil(finite(w * guiScale, 'physical width')) / guiScale, drawnHeight = Math.ceil(finite(h * guiScale, 'physical height')) / guiScale;
+    const physical = (value: number, name: string) => finite(image.physicalPrecision === 'float32' ? Math.fround(Math.fround(value) * Math.fround(guiScale)) : value * guiScale, name);
+    const left = Math.floor(physical(x, 'physical x')) / guiScale, top = Math.floor(physical(y, 'physical y')) / guiScale;
+    const drawnWidth = Math.ceil(physical(w, 'physical width')) / guiScale, drawnHeight = Math.ceil(physical(h, 'physical height')) / guiScale;
     const right = left + drawnWidth, bottom = top + drawnHeight;
     const vertices: GuiImageVertex[] = [], indices: number[] = [];
     const quad = (x0: number, y0: number, x1: number, y1: number, u0: number, v0: number, u1: number, v1: number) => {

@@ -1,6 +1,6 @@
 # 源 GUI 图像图层：API 与分阶段验收
 
-新公开 GuiImageLayer、layoutGuiImages、renderGuiImages 已接入口；当前119个组件、4份数据、5个函数，共128个运行时值。本轮底层、组件集成、包与生产已分别验收；implemented仍不等于原生整GUI认证。旧CSS / DOM路径和旧非零baseline保留，完整GUI辅助结果虽改善，仍明确非零。
+GuiImageLayer、layoutGuiImages、renderGuiImages 初始image阶段为119个组件、4份数据、5个函数，共128个运行时值；下文历史结果保留原范围。后续Anvil阶段增加可选physicalPrecision并实际运行该文件18项，当前库120组件 /134值，见 [ANVIL_IMAGE_QA.md](ANVIL_IMAGE_QA.md)。初始底层、组件集成、包与生产分别验收不等于原生整GUI认证；旧CSS /DOM与非零baseline保留。
 
 ## 坐标与纯几何 API
 
@@ -11,6 +11,7 @@
 | width / height | 实际整个framebuffer的物理整数尺寸，不从CSS宽高、DPR或窗口截图猜测 |
 | guiScale | 显式正游戏尺度 |
 | images[].rect | 已求值的GLOBAL game坐标 [x,y,w,h]，不是组件局部CSS坐标 |
+| physicalPrecision | 可选且唯一值 `'float32'`：fround(fround(value)×fround(guiScale))之后floor origin / ceil extent；省略保持既有double乘法路径，不改变旧profile默认值 |
 | uvRect | 可选归一化源矩形，默认完整原图 |
 | nineSlice | insets为逻辑game边宽，数值或[left,top,right,bottom]；baseSize为源逻辑尺寸，不是PNG物理尺寸 |
 | tint / hudOpacity | 显式归一化颜色 / 透明度，默认白和1 |

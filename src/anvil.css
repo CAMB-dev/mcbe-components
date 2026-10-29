@@ -1,6 +1,7 @@
 /* Classic anvil_screen source geometry, GUI 2. Keep the source percentages;
    final native-engine text baselines and pixel snapping need a game capture. */
 .mc-anvil > .mc-workstation__title { left: 210.4px; top: 37.94px; max-width: 259.2px; transform: translate(-50%, -100%); text-align: center; }
+.mc-anvil > .mc-dialog__close { right: 4px; top: 4px; }
 .mc-anvil__icon { position: absolute; left: 14px; top: 20.9px; width: 60px; height: 60px; background: var(--mc-skin-anvil-icon) 0 0 / 60px 60px no-repeat; }
 .mc-anvil__name-field { --mc-anvil-input-skin: var(--mc-skin-input); position: absolute; box-sizing: border-box; left: 78.8px; top: 41.46px; width: 259.2px; height: 38.64px; cursor: text; isolation: isolate; }
 .mc-anvil__name-field::before { content: ''; position: absolute; inset: 0; z-index: -1; border: 4px solid transparent; border-image: var(--mc-anvil-input-skin) 2 fill / 4px stretch; pointer-events: none; }
@@ -10,14 +11,51 @@
 .mc-anvil__name-field[data-disabled] { cursor: default; }
 .mc-anvil__name-field[data-disabled]::before { opacity: .5; }
 .mc-anvil__name-input:disabled { color: rgb(255 255 255 / .5); -webkit-text-fill-color: rgb(255 255 255 / .5); opacity: 1; cursor: default; }
-.mc-anvil__input, .mc-anvil__material, .mc-anvil__result { position: absolute; top: 92.6px; }
-.mc-anvil__input { left: 50.432px; }
-.mc-anvil__material { left: 158px; }
-.mc-anvil__result { left: 265.568px; }
+.mc-anvil__input, .mc-anvil__material, .mc-anvil__result { position: absolute; top: 94.04px; }
+.mc-anvil__input { left: 41.54px; }
+.mc-anvil__material { left: 149.108px; }
+.mc-anvil__result { left: 256.676px; }
 .mc-anvil__plus { position: absolute; left: 109.216px; top: 97.6px; width: 26px; height: 26px; background: var(--mc-skin-anvil-plus) 0 0 / 26px 26px no-repeat; }
 .mc-anvil__arrow, .mc-anvil__invalid { position: absolute; left: 211.784px; top: 98.6px; width: 36px; height: 24px; }
-.mc-anvil__arrow .mc-processing-arrow__empty { background-size: 36px 24px; }
-.mc-anvil__invalid { background: var(--mc-skin-workstation-invalid) 0 0 / 36px 24px no-repeat; }
+.mc-anvil__arrow .mc-processing-arrow__empty { background-size: contain; background-position: center; background-repeat: no-repeat; }
+.mc-anvil__invalid { background: var(--mc-skin-workstation-invalid) center / contain no-repeat; }
 .mc-anvil__cost { position: absolute; left: 338px; top: 152px; transform: translate(-100%, -100%); z-index: 2; isolation: isolate; width: max-content; white-space: nowrap; color: rgb(50% 100% 12.5%); font: 400 var(--mc-font-size)/20px var(--mc-font); text-shadow: 2px 2px rgb(12.5% 25% 3.125%); }
 .mc-anvil__cost::before { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: -1; width: 105%; height: 105%; background: var(--mc-skin-anvil-cost-background) 0 0 / 100% 100% no-repeat; opacity: .3; pointer-events: none; }
 .mc-anvil__cost[data-affordable="false"] { color: rgb(100% 35% 35%); text-shadow: 2px 2px rgb(25% 8.75% 8.75%); }
+
+/* Optional source canvas. Semantic controls and the actual input stay mounted;
+   only the current complete ready request replaces their visual paint. */
+.mc-anvil-image-layer { left: 0; top: 0; transform-origin: 0 0; transform: translate(var(--mc-image-translate-x, 0px), var(--mc-image-translate-y, 0px)) scale(var(--mc-image-pixel-scale, 1)); }
+@supports (zoom: 1) {
+  .mc-anvil-image-layer { transform: none; zoom: var(--mc-image-pixel-scale, 1); left: var(--mc-image-zoom-left, 0px); top: var(--mc-image-zoom-top, 0px); }
+}
+.mc-anvil-image-window { position: absolute; z-index: -1; overflow: clip; pointer-events: none; visibility: hidden; }
+.mc-anvil-image-window:has(> .mc-anvil-image-layer[data-render-state='ready']) { visibility: visible; }
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready'])::before,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-slot::before,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-slot::after,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::before,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot::after,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__name-field::before { display: none; }
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) .mc-workstation__title,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) .mc-player-inventory__label,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__icon,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__plus,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__invalid,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__arrow .mc-processing-arrow__empty,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__arrow .mc-processing-arrow__full,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-dialog__close .mc-dialog__close-icon,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-slot .mc-slot__highlight,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) .mc-workstation__inventory .mc-slot__highlight { background: transparent; }
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) > .mc-dialog__close:focus-visible { outline: none; box-shadow: none; }
+.mc-anvil:has(> .mc-anvil-image-window[data-text-title='true'] > .mc-anvil-image-layer[data-render-state='ready']) > .mc-workstation__title,
+.mc-anvil:has(> .mc-anvil-image-window[data-text-inventory='true'] > .mc-anvil-image-layer[data-render-state='ready']) .mc-player-inventory__label,
+.mc-anvil:has(> .mc-anvil-image-window[data-text-cost='true'] > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__cost { color: transparent; text-shadow: none; }
+.mc-anvil:has(> .mc-anvil-image-window[data-text-title='true'] > .mc-anvil-image-layer[data-render-state='ready']) > .mc-workstation__title > [aria-hidden='true'],
+.mc-anvil:has(> .mc-anvil-image-window[data-text-inventory='true'] > .mc-anvil-image-layer[data-render-state='ready']) .mc-player-inventory__label > [aria-hidden='true'] { visibility: hidden; }
+.mc-anvil:has(> .mc-anvil-image-window[data-text-cost='true'] > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__cost::before { display: none; }
+/* Focus itself restores native browser glyphs immediately; the named-control
+   state also removes source name paint for focus and IME composition. */
+.mc-anvil:has(> .mc-anvil-image-window[data-text-name='true'] > .mc-anvil-image-layer[data-render-state='ready']) > .mc-anvil__name-field > .mc-anvil__name-input:not(:focus) { color: transparent; -webkit-text-fill-color: transparent; text-shadow: none; }
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) .mc-slot[data-mc-source-item='image'] > .mc-slot__item > img,
+.mc-anvil:has(> .mc-anvil-image-window > .mc-anvil-image-layer[data-render-state='ready']) .mc-slot[data-mc-source-item='model'] > .mc-slot__item { visibility: hidden; }

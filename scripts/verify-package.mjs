@@ -152,6 +152,47 @@ try {
     assert.equal((fallback.match(/class="mc-slot(?: |")/g)??[]).length,39);
     assert(!/ imageRender=| guiModel=/.test(fallback));
   }
+  const anvilRenameLabel='Host item name';
+  const assertRenameInput=(markup,value,readOnly=false,disabled=false)=>{
+    const inputs=markup.match(/<input [^>]*>/g)??[];
+    assert.equal(inputs.length,1,'Anvil retains exactly one real HTML input.');
+    const input=inputs[0],lower=input.toLowerCase();
+    assert(input.includes('class="mc-anvil__name-input"')&&input.includes('value="'+value+'"')&&input.includes('aria-label="'+anvilRenameLabel+'"'));
+    assert(lower.includes('maxlength="30"')&&lower.includes('autocomplete="off"')&&lower.includes('spellcheck="false"'));
+    assert.equal(lower.includes(' readonly='),readOnly);assert.equal(lower.includes(' disabled='),disabled);
+  };
+  const defaultAnvil=renderToString(element(ui.Anvil,{name:'Original name',renameLabel:anvilRenameLabel,onNameChange:()=>{}}));
+  const sourceAnvil=renderToString(element(ui.Anvil,{name:'Source name',renameLabel:anvilRenameLabel,onNameChange:()=>{},imageRender:repairFrame,onClose:()=>{}}));
+  const anvilLabel={...textStyle,metrics:{lineHeight:10,paintOffset:[0,1]}};
+  const anvilText={title:anvilLabel,inventory:anvilLabel,
+    name:{...textStyle,paintOffset:[0,1],clipQuantization:'floor-min-ceil-max'},
+    cost:{...anvilLabel,color:[127,255,31,255],failureColor:[255,85,85,255],shadow:{offset:[1,1],tint:[.25,.25,.25,1]}}};
+  const anvilProfile={...repairFrame,text:anvilText,itemImages:true,itemModels:true};
+  const fullAnvil=renderToString(element(ui.Anvil,{...repairItems,title:'1',inventoryLabel:'1',name:'1',renameLabel:anvilRenameLabel,renameReadOnly:true,
+    cost:{kind:'levels',levels:1,label:'1'},invalid:true,imageRender:anvilProfile}));
+  const disabledAnvil=renderToString(element(ui.Anvil,{name:'Disabled name',renameLabel:anvilRenameLabel,renameDisabled:true,imageRender:repairFrame}));
+  for (const markup of [defaultAnvil,sourceAnvil,fullAnvil,disabledAnvil]) {
+    assert.equal((markup.match(/class="mc-slot(?: |")/g)??[]).length,39,'Anvil retains three repair slots and36 inventory/hotbar slots.');
+    assert(!/ imageRender=| guiModel=| itemImages=| itemModels=/.test(markup),'Anvil source options must not become DOM attributes.');
+  }
+  assertRenameInput(defaultAnvil,'Original name');assertRenameInput(sourceAnvil,'Source name');
+  assertRenameInput(fullAnvil,'1',true);assertRenameInput(disabledAnvil,'Disabled name',false,true);
+  assert(!defaultAnvil.includes('mc-anvil-image-layer'),'Default Anvil retains the normal CSS/input path.');
+  assert.match(sourceAnvil,/mc-anvil-image-layer/);assert.match(sourceAnvil,/data-render-state="loading"/);
+  for (const role of ['title','inventory','name','cost']) assert(fullAnvil.includes('data-text-'+role+'="true"'),'Packed Anvil source text role: '+role);
+  assert.match(fullAnvil,/data-item-images="0 2"/);assert.match(fullAnvil,/data-item-models="1"/);
+  assert.match(fullAnvil,/data-fallback-model="kept"/);assert.match(fullAnvil,/role="status"/);assert.match(fullAnvil,/Items cannot be combined/);
+  for (const bad of [
+    {profile:{...anvilProfile,text:{...anvilText,title:{...anvilLabel,metrics:{lineHeight:0,paintOffset:[0,1]}}}},name:'1'},
+    {profile:anvilProfile,name:'2'},
+  ]) {
+    const fallback=renderToString(element(ui.Anvil,{...repairItems,title:'1',inventoryLabel:'1',name:bad.name,renameLabel:anvilRenameLabel,
+      cost:{kind:'levels',levels:1,label:'1'},imageRender:bad.profile}));
+    assert.match(fallback,/mc-anvil-image-error/);assert(!fallback.includes('mc-anvil-image-layer'),'A bad Anvil text request falls back atomically, including item/model paint.');
+    assert.match(fallback,/data-image-display-scale="2.5"/);assert.match(fallback,/data-fallback-model="kept"/);
+    assert.equal((fallback.match(/class="mc-slot(?: |")/g)??[]).length,39);assertRenameInput(fallback,bad.name);
+    assert(!/ imageRender=| guiModel=/.test(fallback));
+  }
   assert.deepEqual(ssrIoCalls,[],'Default/source/text/item/model/fallback SSR must not fetch, decode images or allocate a GPU canvas.');
 } finally {
   console.error=previousConsoleError;
@@ -344,8 +385,8 @@ for (const name of ui.guiIconNames) {
 }
 const rendererManifest = JSON.parse(await readFile(new URL('docs/item-renderers-geometry.json',packageRoot),'utf8'));
 const workstationImages = JSON.parse(await readFile(new URL('docs/workstation-image-assets.json',packageRoot),'utf8'));
-assert.equal(workstationImages.assetCount,23);
-assert.equal(workstationImages.registryKeyCount,24);
+assert.equal(workstationImages.assetCount,28);
+assert.equal(workstationImages.registryKeyCount,29);
 const bundle = await readFile(new URL('dist/index.js',packageRoot),'utf8');
 const embeddedImages = new Set([...bundle.matchAll(/data:image\\/png;base64,([A-Za-z0-9+/=]+)/g)].map(match=>createHash('sha256').update(Buffer.from(match[1],'base64')).digest('hex')));
 for (const image of workstationImages.assets) assert(embeddedImages.has(image.sha256),'Packed original workstation PNG: '+image.source);
@@ -377,6 +418,7 @@ import type { GuiModelFace, GuiModelMesh, GuiModelProjection, GuiModelGeometry, 
 import type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout, GuiSpriteGeometry, GuiLayerCommand, GuiLayerProps, GuiLayerGeometryCommand, GuiLayerLayoutOptions, GuiLayerLayoutCommand, GuiLayerLayout, GuiLayerDraw, GuiLayerRenderOptions, GuiLayerRenderResult, EnchantingTableTextRenderStyle, EnchantingTableTextRenderProfile } from 'mcbeui';
 import type { GuiImage, GuiImageLayerProps, GuiImageLayerState, GuiImageRect, GuiImageRgba, GuiImageNineSlice, GuiImageGeometry, GuiImageLayoutOptions, GuiImageVertex, GuiImageMesh, GuiImageLayout, GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderOptions, GuiImageRenderResult, EnchantingTableImageRenderProfile } from 'mcbeui';
 import type { GrindstoneImageRenderProfile, GrindstoneTextRenderProfile, GrindstoneTextRenderStyle } from 'mcbeui';
+import type { AnvilImageRenderProfile, AnvilTextRenderProfile, AnvilTextRenderStyle } from 'mcbeui';
 import { Select } from 'mcbeui';
 import type { GuiIconProps, GuiIconName, BitmapTextProps, BitmapTextRenderer, BitmapTextProfile, BitmapFont, BitmapGlyph, BitmapGlyphRun, BitmapGlyphRenderOptions, BitmapGlyphRenderResult, BitmapRgba, BitmapTargetRect, BitmapAtlasQuad, BitmapAtlasRun, BitmapUnicodeVertex, BitmapUnicodeRun, BitmapGlyphBackground } from 'mcbeui';
 import { AirBar, ArmorBar, BrewingIndicator, BrewingStand, CartographyTable, Crosshair, ExperienceBar, HealthBar, Hotbar, HungerBar, ScrollArea, ScrollBar, SmithingTable } from 'mcbeui';
@@ -439,10 +481,11 @@ const mesh: ItemMesh = {faces:[face]}, camera: ItemCamera = {yaw:-30,pitch:20,pa
 const adapterTexture: PixelTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
 const imageRect: GuiImageRect = [0,0,4,4], imageColor: GuiImageRgba = [1,1,1,1];
 const imageSlice: GuiImageNineSlice = {insets:1,baseSize:[2,2]};
-const imageGeometry: GuiImageGeometry = {rect:imageRect,nineSlice:imageSlice,tint:imageColor};
+const imageGeometry: GuiImageGeometry = {rect:imageRect,nineSlice:imageSlice,tint:imageColor,physicalPrecision:'float32'};
 const imageTexture: GuiImageTexture = adapterTexture;
 const imageDraw: GuiImageDraw = {...imageGeometry,texture:imageTexture};
 const guiImage: GuiImage = {...imageGeometry,texture:'/caller-image.png'};
+const preciseImageCommand: GuiLayerCommand = {kind:'image',...guiImage};
 const imageBackground: GuiImageBackground = {kind:'solid',color:imageColor};
 export const imageOptions: GuiImageLayoutOptions = {width:17,height:11,guiScale:2,images:[imageGeometry],outputRect:[0,0,8,8]};
 export const imageLayout: GuiImageLayout = layoutGuiImages(imageOptions);
@@ -488,7 +531,7 @@ export function composedOffscreen(canvas:OffscreenCanvas):GuiLayerRenderResult {
   return renderGuiLayer({...layerOptions,commands:[layerDraw],canvas});
 }
 export function inspectComposedLayout(layout:GuiLayerLayout):GuiLayerLayoutCommand|undefined {return layout.commands[0];}
-const layerProps: GuiLayerProps = {...layerOptions,commands:[layerCommand,spriteCommand,modelCommand],label:'Caller composed GUI',onRenderStateChange:state=>state.toUpperCase()};
+const layerProps: GuiLayerProps = {...layerOptions,commands:[preciseImageCommand,layerCommand,spriteCommand,modelCommand],label:'Caller composed GUI',onRenderStateChange:state=>state.toUpperCase()};
 const textStyle: EnchantingTableTextRenderStyle = {font:packedFont,fontScale:1,sampling:'point',shader:'bitmap'};
 const textProfile: EnchantingTableTextRenderProfile = {metrics:{lineHeight:10,paintOffset:[0,1]},labels:textStyle,costs:{...textStyle,disabledColor:[137,94,91,255]},runes:textStyle};
 const grindstoneTextStyle: GrindstoneTextRenderStyle = {...textStyle,font:packedFont};
@@ -496,6 +539,14 @@ const grindstoneTextProfile: GrindstoneTextRenderProfile = {metrics:{lineHeight:
 const grindstoneProfile: GrindstoneImageRenderProfile = {...imageRenderProfile,text:grindstoneTextProfile,itemImages:true,itemModels:true};
 const grindstoneAtlas: GuiTextureAtlasSource = {...sourceAtlas,width:16,height:16,tiles:[{origin:[0,0],size:[16,16],texture:'/caller-stone.png'}]};
 const grindstoneBlock: InventoryItem = {name:'Caller source block',icon:<span>Caller fallback art</span>,guiModel:{...modelItem,textures:{all:grindstoneAtlas}}};
+const anvilTextStyle: AnvilTextRenderStyle = {...textStyle,font:packedFont};
+const anvilTextProfile: AnvilTextRenderProfile = {
+  title:{...anvilTextStyle,metrics:{lineHeight:10,paintOffset:[0,1]}},
+  inventory:{...anvilTextStyle,metrics:{lineHeight:10,paintOffset:[0,1]}},
+  name:{...anvilTextStyle,paintOffset:[0,1],clipQuantization:'floor-min-ceil-max'},
+  cost:{...anvilTextStyle,metrics:{lineHeight:10,paintOffset:[0,1]},color:[127,255,31,255],failureColor:[255,85,85,255],shadow:{offset:[1,1],tint:[.25,.25,.25,1]}},
+};
+const anvilProfile: AnvilImageRenderProfile = {...imageRenderProfile,text:anvilTextProfile,itemImages:true,itemModels:true};
 const glintUniforms: ItemGlintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25],tintColor:[1,1,1,1],hudOpacity:1};
 const glintSampler: ItemGlintSampler = 'point-repeat', glintBlend: ItemGlintBlend = {source:'source-alpha',destination:'one-minus-source-alpha'};
 const glintOptions: ItemGlintRenderOptions = {uniforms:glintUniforms,glintSampler,blend:glintBlend,width:1,height:1};
@@ -563,7 +614,10 @@ export const demo = <>
   <Furnace input={null} fuel={null} progress={.5} fuelRemaining={.5} onInputAction={(slot,action)=>slot+action}/>
   <BlastFurnace title="Blast furnace"/>
   <Smoker title="Smoker"/>
-  <Anvil name="Tool" onNameChange={name=>name.toUpperCase()} cost={{kind:'levels',levels:3}} onInputAction={(index,action)=>String(index)+action}/>
+  <Anvil name="Tool" onNameChange={name=>name.toUpperCase()} cost={{kind:'levels',levels:3}} onInputAction={(index,action)=>String(index)+action} ref={createRef<HTMLElement>()}/>
+  <Anvil title="1" inventoryLabel="1" name="1" onNameChange={value=>value.toUpperCase()} renameLabel="Caller item name" imageRender={anvilProfile} inputs={[{name:'Caller tool',image:'/caller-tool.png'},grindstoneBlock]} result={{name:'Caller result',image:'/caller-result.png'}} cost={{kind:'levels',levels:1,label:'1'}} onTakeResult={action=>action.toUpperCase()} ref={createRef<HTMLElement>()}/>
+  <Anvil name="1" renameReadOnly imageRender={{...anvilProfile,text:{name:anvilTextProfile.name}}} ref={createRef<HTMLElement>()}/>
+  <Anvil name="1" renameDisabled imageRender={{...anvilProfile,text:{title:{...anvilTextProfile.title!,metrics:{lineHeight:0,paintOffset:[0,1]}}}}} ref={createRef<HTMLElement>()}/>
   <ContainerFrame title="Container" height={332} ref={createRef<HTMLElement>()}/>
   <Chest rows={6} items={[]} onSelectionChange={index=>index.toFixed(0)} onSlotAction={(index,action)=>String(index)+action}/>
   <Hopper items={[]} inventorySelectedIndex={0} onInventorySelectionChange={index=>index.toFixed(0)}/>

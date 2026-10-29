@@ -29,10 +29,20 @@
       "source": "resource_pack/ui/grindstone_screen.json",
       "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/grindstone_screen.json",
       "sha256": "561147a43e96e7d96a87fbf744275d0c44c6dad4730d3da6bc20b19a08de0992"
+    },
+    {
+      "source": "resource_pack/ui/anvil_screen.json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/anvil_screen.json",
+      "sha256": "7a94dac7ba6d93917cb5d0c9d3e50056950441d41af2ef75636e83d5800569ae"
+    },
+    {
+      "source": "resource_pack/ui/resource_packs_screen.json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/resource_packs_screen.json",
+      "sha256": "c73819a074d90e63268f9b52e86ce32179f10989288aefdd18a66c6ba394f3ae"
     }
   ],
-  "assetCount": 23,
-  "registryKeyCount": 24,
+  "assetCount": 28,
+  "registryKeyCount": 29,
   "contract": {
     "encoding": "Complete original PNG bytes embedded once per unique source; no image re-encoding or CSS parsing.",
     "nineSlice": "Original JSON base_size and nineslice_size; insets are logical game units ordered left/top/right/bottom, not physical PNG pixel bands.",
@@ -40,7 +50,7 @@
     "highlight": "Original 1x1 base and 1-unit insets intentionally preserve reversed center UV bands; do not clamp or substitute a 2x2 base.",
     "dark": "optionDark aliases optionUnselectable; permanent dark background and current unselectable/pressed overlay remain separate ordered uses.",
     "scope": "Public release source evidence only; no private font/shader, active installed pack-stack assertion, or whole-GUI native-fidelity claim.",
-    "installedCheck": "Optional --game checks all 23 original PNGs against the installed vanilla base ui.brarchive; presence alone does not establish active pack stack."
+    "installedCheck": "Optional --game checks all 28 original PNGs against the installed vanilla base ui.brarchive; presence alone does not establish active pack stack."
   },
   "assets": [
     {
@@ -822,6 +832,207 @@
           "jsonPointer": "/cross_out_icon/texture"
         }
       ]
+    },
+    {
+      "keys": [
+        "anvilIcon"
+      ],
+      "source": "resource_pack/textures/ui/anvil_icon.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/anvil_icon.png",
+      "sha256": "5858dfc62fe01b7629dbea9a1b71bb7523c196e1418e2a075ff3fc8ec6e624a3",
+      "bytes": 402,
+      "sourceSize": [
+        15,
+        15
+      ],
+      "rgbaSha256": "6f44a57c53132a06c072b93de77c3166f53711329f7525d0ac6b6c9e6f1758f8",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/anvil_screen.json",
+          "jsonPointer": "/anvil_icon/texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "anvilPlus"
+      ],
+      "source": "resource_pack/textures/ui/anvil-plus.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/anvil-plus.png",
+      "sha256": "f162fdc2ed1785debed24173efd5d014b1bb444173bd8d719c88f138ecb9ce6f",
+      "bytes": 110,
+      "sourceSize": [
+        13,
+        13
+      ],
+      "rgbaSha256": "a1f1e4254a39cdcf7b09d8eca5b8361365e8d6d8b002716ab09e8f76b05479f3",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/anvil_screen.json",
+          "jsonPointer": "/plus_sign_icon/texture"
+        }
+      ]
+    },
+    {
+      "keys": [
+        "anvilCostBackground"
+      ],
+      "source": "resource_pack/textures/ui/Gray.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/Gray.png",
+      "sha256": "e21915e60b32df0c5bd7fa8153571c1d8899a20de2973ee92f8aab8f11c35797",
+      "bytes": 67,
+      "sourceSize": [
+        2,
+        2
+      ],
+      "rgbaSha256": "cc0fa51d4d0a97b664030be5052f3b2b69a1267f89ace4c9bbc65007566725df",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 2
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/resource_packs_screen.json",
+          "jsonPointer": "/gray_image/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseSize": [
+          2,
+          2
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/Gray.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/Gray.json",
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "editBox"
+      ],
+      "source": "resource_pack/textures/ui/edit_box_indent.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/edit_box_indent.png",
+      "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109",
+      "bytes": 126,
+      "sourceSize": [
+        6,
+        6
+      ],
+      "rgbaSha256": "a82235c78dc05688bca0fbe6319c6b58c2056e15dbdfb68fc0dd6adf1ca4ed66",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/edit_box_indent/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "baseSize": [
+          6,
+          6
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/edit_box_indent.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/edit_box_indent.json",
+        "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+        "value": {
+          "nineslice_size": 2,
+          "base_size": [
+            6,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "keys": [
+        "editBoxHover"
+      ],
+      "source": "resource_pack/textures/ui/edit_box_indent_hover.png",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/edit_box_indent_hover.png",
+      "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb",
+      "bytes": 125,
+      "sourceSize": [
+        6,
+        6
+      ],
+      "rgbaSha256": "dbbea48ddae68056875c575d4abe5a62ee4226c0f9116a66714bb595a6ac7776",
+      "rgbaEncoding": "row-major straight RGBA8, transparent RGB preserved",
+      "pngEncoding": {
+        "bitDepth": 8,
+        "colorType": 6
+      },
+      "uiReferences": [
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/edit_box_indent_hover@common.edit_box_indent/texture"
+        },
+        {
+          "source": "resource_pack/ui/ui_common.json",
+          "jsonPointer": "/transparent_edit_box_indent_hover/texture"
+        }
+      ],
+      "nineSlice": {
+        "insets": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "baseSize": [
+          6,
+          6
+        ]
+      },
+      "metadata": {
+        "source": "resource_pack/textures/ui/edit_box_indent_hover.json",
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/edit_box_indent_hover.json",
+        "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+        "value": {
+          "nineslice_size": 2,
+          "base_size": [
+            6,
+            6
+          ]
+        }
+      }
     }
   ]
 }

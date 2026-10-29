@@ -224,48 +224,48 @@
     },
     "input": {
       "gameRect": [
-        25.216,
-        46.3,
+        20.77,
+        47.02,
         18,
         18
       ],
       "cssRect": [
-        50.432,
-        92.6,
+        41.54,
+        94.04,
         36,
         36
       ]
     },
     "material": {
       "gameRect": [
-        79,
-        46.3,
+        74.554,
+        47.02,
         18,
         18
       ],
       "cssRect": [
-        158,
-        92.6,
+        149.108,
+        94.04,
         36,
         36
       ]
     },
     "result": {
       "gameRect": [
-        132.784,
-        46.3,
+        128.338,
+        47.02,
         18,
         18
       ],
       "cssRect": [
-        265.568,
-        92.6,
+        256.676,
+        94.04,
         36,
         36
       ],
       "note": "Normal18game container, not the26game furnace result."
     },
-    "slotFormula": "recipeGrid grid_dimensions[5,1] => cell26.892x16.56game. Fixed18x18 anvil_item_slot centers within cells0/2/4; inner common.container_item explicitly centers. x=20.77+column*26.892+(26.892-18)/2; y=47.02+(16.56-18)/2.",
+    "slotFormula": "recipeGrid grid_dimensions[5,1] => cell26.892x16.56game. Direct fixed18x18 anvil_item_slot wrappers occupy cell origins0/2/4: x=20.77+column*26.892; y=47.02. Only the inner common.container_item has explicit center anchors, acting within its18x18 wrapper. The prior wrapper-centering assumption is withdrawn; see verification.slotGeometryCorrection.",
     "plus": {
       "gameRect": [
         54.608,
@@ -294,7 +294,9 @@
         36,
         24
       ],
-      "formula": "Center18x12 icon in cell3. arrow_large.png physically22x15 is displayed18x12game, matching source scaling rather than the crafting-table22x15 display."
+      "formula": "Center the18x12 logical image box in cell3. Intrinsic22x15 arrow_large.png uses contain, painting17.6x12 with horizontal inset0.2. gameRect/cssRect here describe the box, not stretched artwork.",
+      "paintGameRect": [106.092,49.3,17.6,12],
+      "paintCssRect": [212.184,98.6,35.2,24]
     },
     "invalid": {
       "gameRect": [
@@ -309,7 +311,9 @@
         36,
         24
       ],
-      "source": "anvil.cross_out_icon, layer1, visibility #cross_out_icon. Underlying arrow remains present."
+      "source": "anvil.cross_out_icon, layer1, visibility #cross_out_icon. Underlying arrow remains present. Logical box18x12 contains original15x15 artwork as12x12, horizontally inset3; gameRect/cssRect are the box.",
+      "paintGameRect": [108.892,49.3,12,12],
+      "paintCssRect": [217.784,98.6,24,24]
     },
     "cost": {
       "bottomRightGameAnchor": [
@@ -356,7 +360,7 @@
     }
   },
   "typographyAndInput": {
-    "sourceNormal": "anvil.generic_label does not override font_size; common.text_edit_box sets normal. No current game capture proves the absolute normal font metrics.",
+    "sourceNormal": "anvil.generic_label does not override font_size; common.text_edit_box sets normal. Later finite captured Anvil role metrics and explicit caller profiles are documented in ANVIL_IMAGE_QA.md; no unique general normal-font selection/baseline algorithm is recovered.",
     "webProfile": "The existing library profile uses var(--mc-font-size),20px line-height and the selected --mc-font. Mojangles calibration is independent of native default font-size/baseline acceptance.",
     "editText": {
       "color": [
@@ -379,7 +383,8 @@
         4
       ],
       "formula": "common.text_edit_box centering_panel size[100%-6px,100%-4px] centered. Label minimum width100%, right_middle anchors and10game label height => centered20CSS text strip inside that clipper.",
-      "implementation": "Native input uses a20px text strip, left6px,width100%-12px vertically centered inside the full source-sized label hit area; horizontal scroll/caret are browser-native."
+      "implementation": "The semantic HTML input uses a20CSSpx text strip, left6px,width100%-12px; horizontal scroll/caret are browser behavior, not a recovered native editor.",
+      "optionalSourcePolicy": "Anvil name clipQuantization must explicitly select floor-min-ceil-max or logical-stage-floor. The latter uses float32(frame/ceilStage) per-axis ratios, float32 global-edge products and floors all four physical edges. QA/Long observed LTRB1057,400,1675,476; only these finite frames and source candidates are compared, not general engine restoration."
     },
     "disabled": {
       "textAlpha": 0.5,
@@ -419,12 +424,39 @@
   "closeButton": "Source anvil_panel inherits common.common_panel with show_close_button defaulttrue. WorkstationFrame onClose remains optional and caller-controlled; unlike the furnace/crafting right-pane profile, Anvil does not suppress it.",
   "verification": {
     "coreTypeScript": "npx tsc -p tsconfig.json --noEmit passed.",
-    "independentQa": "10/10 PASS: source-derived float geometry, normal36CSS result, name maxLength30/white/no-shadow, cost105% original black PNG alpha.3/source color/anchor and explicit focus paths. Four canonical icon/plus/arrow/invalid renders matched independently displayed original PNGs with zero differing RGBA pixels. Combined Anvil/container run18/18 passed in45.1s; native-game GPU output remains unverified."
+    "independentQa": "Historical10/10 PASS and combined Anvil/container18/18 in45.1s are retained as observed runs, not validation of the corrected slot oracle. The historical geometry oracle shared the incorrect wrapper-centering assumption. Four canonical icon/plus/arrow/invalid renders matched independently displayed original PNGs with zero differing RGBA pixels; those source/browser checks are not native whole-GUI equality.",
+    "slotGeometryCorrection": {
+      "basis": "Actual QA/Long/Empty GUI5 captures each have39 slots with9 slices and identical first-three packed bounds. QA CL852/RT136 Global67 is pinned below. They reject centered-wrapper placement. A separate CPU source-formula audit matches used XY/UV/indices/MVP with float32 physical multiplication, floor-origin/ceil-extent and half packing; this is not whole-GUI pixel or unique CPU-algorithm certification.",
+      "ledger": ".cache/anvil-native-source-01/qa/ui-draws.json",
+      "ledgerSha256": "27d5135f67464fd1b69c81bda722c8b6879a1db123f6e2a678d63d43bef7030e",
+      "packedGlobalBoundsConvention": "[minX,minY,maxX,maxY], not root-relative source rectangles",
+      "inputPackedGlobalBounds": [189.625,104.375,207.625,122.375],
+      "materialPackedGlobalBounds": [243.375,104.375,261.5,122.375],
+      "resultPackedGlobalBounds": [297.25,104.375,315.25,122.375],
+      "plusGlobal41Bounds": [223.625,106.1875,236.625,119.1875],
+      "arrowGlobal42Bounds": [275,106.8125,292.5,118.8125],
+      "note": "Packed material width18.125 remains a quantized observation, not a source-size change. Arrow logical box18x12 is distinct from contain paint17.6x12 and packed width17.5. Plus source rectangle remains unchanged. Original three-state extraction and CPU audits are separate from production pixel validation.",
+      "withdrawnGameRects": {
+        "input": [25.216,46.3,18,18],
+        "material": [79,46.3,18,18],
+        "result": [132.784,46.3,18,18]
+      },
+      "withdrawnFormula": "x=20.77+column*26.892+(26.892-18)/2; y=47.02+(16.56-18)/2. Child center anchors were incorrectly applied to the outer grid wrapper."
+    },
+    "imageAspectCorrection": {
+      "withdrawn": "Anvil arrow/cross direct18x12 stretch and historical original-PNG stretch self-comparisons did not establish native image aspect behavior. This correction does not extend to Smithing.",
+      "arrowCpuAudit": ".cache/anvil-full-gui-01/cpu-geometry-audit.json",
+      "arrowCpuAuditSha256": "0f9e735cd769a1472f89267147d12b10c3861e8ff15cecd281ee74da2d252360",
+      "invalidNativeMetrics": ".cache/anvil-native-invalid-source-01/cross-name-metrics.json",
+      "invalidNativeMetricsSha256": "a69dd58cb5366bee1ef53d14e4617c786c5e4a0bc8e9bd823c8d85675a35fc1d",
+      "invalidGlobal49PackedBounds": [277.75,106.8125,289.75,118.8125],
+      "scope": "Captured original15x15 texture/fullUV/POINT/Tint1 produces12x12 packed artwork. Normal contain in the18x12 source box supports this observation; no production FBO/full-GUI pass is asserted."
+    }
   },
   "evidenceLimits": [
     "Source geometry, texture equality, Web rendered bounds and native game GPU capture are distinct evidence levels.",
-    "Fractional percentages are retained; native engine final pixel snapping is unverified.",
+    "Fractional source percentages are retained. The finite source-formula/f32/half candidate matches observed attributes; a unique native engine snapping algorithm for arbitrary inputs is unverified.",
     "Default normal font scale, glyph baseline, selected-text/caret appearance, colored cost-shadow shader tint and the disabled edit box composite require same-state native screenshots.",
-    "Local game launch recovered on 2026-10-29. No whole native anvil screenshot acceptance is claimed."
+    "The initial source/browser study claimed no native whole-screen acceptance. Later four explicit unfocused GUI5 UI targets match complete native RGBA as scoped in ANVIL_IMAGE_QA.md; default CSS/font, arbitrary ratios, active native editing, cross-GPU and world/Present remain uncertified."
   ]
 }

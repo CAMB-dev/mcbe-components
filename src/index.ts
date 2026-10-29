@@ -43,7 +43,7 @@ export type { EnchantingBookProps, EnchantingBookRendererState, EnchantingRunesP
 export { ProcessingArrow, FuelIndicator, RecipeGrid, CraftingTable, Furnace, BlastFurnace, Smoker } from './processing';
 export type { ProcessingArrowProps, FuelIndicatorProps, RecipeGridProps, CraftingTableProps, FurnaceProps, BlastFurnaceProps, SmokerProps, FurnaceInputSlot } from './processing';
 export { Anvil } from './anvil';
-export type { AnvilProps, AnvilCost } from './anvil';
+export type { AnvilProps, AnvilCost, AnvilImageRenderProfile, AnvilTextRenderProfile, AnvilTextRenderStyle } from './anvil';
 export { ContainerFrame, Chest, Hopper, Dispenser, Dropper, ShulkerBox } from './containers';
 export type { ContainerFrameProps, NativeContainerProps, ChestProps, HopperProps, DispenserProps, DropperProps, ShulkerBoxProps } from './containers';
 export { Image, NineSlice } from './image';

@@ -50,7 +50,8 @@ function requestFor(previous: Request | undefined, options: GuiImageLayerProps):
   try {
     const layout = layoutGuiImages(options);
     if (options.renderKey !== undefined && typeof options.renderKey !== 'string' && (typeof options.renderKey !== 'number' || !Number.isFinite(options.renderKey))) throw new RangeError('renderKey must be a string or finite number.');
-    const shapes = options.images.map(({ rect, uvRect, nineSlice, tint, hudOpacity, scissor }) => ({ rect, uvRect, nineSlice, tint, hudOpacity, scissor }));
+    const shapes = options.images.map(({ rect, uvRect, nineSlice, tint, hudOpacity, scissor, physicalPrecision }) => ({ rect, uvRect, nineSlice, tint, hudOpacity, scissor,
+      ...(physicalPrecision !== undefined ? { physicalPrecision } : {}) }));
     const background = options.background;
     const descriptor = JSON.stringify({ width: options.width, height: options.height, guiScale: options.guiScale, shapes, scissor: options.scissor, outputRect: options.outputRect,
       background: background?.kind === 'texture' ? { kind: 'texture', encoding: background.encoding } : background, renderKey: options.renderKey });

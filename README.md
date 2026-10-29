@@ -113,7 +113,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `ContainerFrame` | **必填** `title`；`height`、`titleAlign`、`titleOffset`、`inventory`、`hotbar`、`inventorySelectedIndex`、`onInventorySelectionChange`、`onInventoryAction`、`onClose` | 352 CSS px 宽、可变高度容器，共享底部锚定的玩家物品栏；height / titleOffset 用 CSS px |
 | `Chest` | `rows`、`items`、`selectedIndex`、`onSelectionChange`、`onSlotAction`；容器库存属性 | 3 / 6 行箱子及 1…6 行数据驱动布局；行数取整并限制范围，非有限值回退 3 |
 | `Hopper` / `Dispenser` / `Dropper` / `ShulkerBox` | `items`、`selectedIndex`、`onSelectionChange`、`onSlotAction`；容器库存属性 | 共用存储 API，分别保留 5 / 9 / 9 / 27 格与原始面板高度；空槽允许操作回调 |
-| `Anvil` | **必填** `name`；`onNameChange`、`inputs`、`result`、`invalid`、`cost`、`renameDisabled`、`renameReadOnly`、`onInputAction`、`onTakeResult` | 原版重命名框、30 字符限制、修复槽位与费用；结果守卫空槽、无效、经验不足和过贵状态，保留焦点 |
+| `Anvil` | **必填** `name`；`onNameChange`、`inputs`、`result`、`invalid`、`cost`、`renameDisabled`、`renameReadOnly`、`onInputAction`、`onTakeResult`、可选 `imageRender: AnvilImageRenderProfile` | 真input /30字符、39槽与费用；可选源image /sprite /model及title /inventory /name /cost四文字角色，见 [ANVIL_IMAGE_QA.md](docs/ANVIL_IMAGE_QA.md) |
 | `BrewingIndicator` | `variant`: arrow / bubbles / fuel；`progress`: 0…1、`label` | 可复用的原版酿造图层；裁切完整前景，不缩放填充图 |
 | `BrewingStand` | `ingredient`、`fuel`、`bottles`、`selectedSlot`、`progress`、`bubbles`、`fuelRemaining`、`onSelectionChange`、`onSlotAction`；Frame 属性 | 酿造主面板与五个可操作槽；配方、消耗和动画时序由调用方提供 |
 | `SmithingTable` | `inputs`: readonly [template, base, addition]；`result`、`invalid`、`templateOverlay`、`baseOverlay`、`materialOverlay`、`overlayFrame`、`preview`、`onInputAction`、`onTakeResult` | 现代三输入锻造主面板，真实横向提示图集；baseOverlay / materialOverlay 默认 null，由宿主根据实际模板状态显式启用；preview 接入调用方 renderer |
@@ -186,7 +186,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 `Tabs`、`RadioGroup`、`Slider`、`Combobox` 提供 `value` / `defaultValue` 和 `onValueChange`。同一组件生命周期不要在受控与非受控模式之间切换。Tabs 的 value 必须对应未禁用项，items 的 value 必须唯一。不传 defaultValue 时，Tabs 使用首个可用项；RadioGroup 初始不选中。
 
-错误状态保留原版 default / hover / keyboard-focus 表面，移除额外粉色 invalid 边框。TextField / TextArea / Select / Combobox 的错误消息使用原13×20 ErrorGlyph 和语义关联，文字继续使用可覆盖的 Web 可读性 token；这不是原生所有输入框通用错误布局。Anvil / Smithing 的 crossout 按源18×12 game，Grindstone 按源15×15 game，同一原图不应统一成正方形；结果仍保留焦点并守卫无效操作。来源及本轮验证范围见 [GUI_ICONS_QA.md](docs/GUI_ICONS_QA.md)。
+错误状态保留原版 default / hover / keyboard-focus 表面，移除额外粉色 invalid 边框。TextField / TextArea / Select / Combobox 的错误消息使用原13×20 ErrorGlyph 和语义关联，文字继续使用可覆盖的 Web 可读性 token；这不是原生所有输入框通用错误布局。Anvil的18×12逻辑box内原15² cross实际contain为12²；Smithing旧18×12配置须另验，不套用Anvil结论。Grindstone仍15²；结果保留焦点并守卫无效操作。来源及范围见 [GUI_ICONS_QA.md](docs/GUI_ICONS_QA.md)。
 
 ### ComboBox 与选中态
 
@@ -357,7 +357,7 @@ layoutGuiImages是纯几何路径，可用于SSR准备；renderGuiImages需要We
 
 上述纹理 URL 由使用方提供。`sourceSize` / `slice` 描述 PNG 物理像素，`size` / `destinationBorder` 描述缩放前的 GUI 逻辑像素：例如 cell_image 的物理图为 10×10，逻辑 base_size 为 5×5，不能把两个尺寸混用。Image / NineSlice 的 sourceSize、slice 与 scale 必须为合法整数，非有限、负数或越界切片抛 `RangeError`；内容尺寸和目标边距可用有限逻辑值，像素验收仍要求对齐物理像素。`style` 可覆盖默认布局，但不包含在默认参数的像素证明中。
 
-`AnvilCost` 支持 `{kind:'levels', levels, affordable?, label?}` 或 `{kind:'too-expensive', label?}`；费用与可用性来自调用方，不推算游戏规则。重命名字段遵循原版模板的 `shadow:false`，费用文字保留 `shadow:true`。费用阴影色与原生 baseline / snapping 仍待实拍验证。
+`AnvilCost` 支持 `{kind:'levels', levels, affordable?, label?}` 或 `{kind:'too-expensive', label?}`；费用与可用性来自调用方，不推算游戏规则。重命名字段遵循原版模板的 `shadow:false`，费用文字保留 `shadow:true`。可选 `AnvilImageRenderProfile` / `AnvilTextRenderProfile` / `AnvilTextRenderStyle` 提供四独立文字角色与显式阴影 /clipping。耐久修复后四个观察GUI5状态各完整3,603,140像素native UI RGBA0，依赖host原字页、投影与dim .4；默认CSS仍非零。当前source React18 /19包通过；Anvil35＋旧回归103按既定整文件GPU profile共138独立用例通过，生产首轮73辅助检查通过（不计正式用例）。本机入口 `#anvil-layer`，字体准备与保留失败见 [ANVIL_IMAGE_QA.md](docs/ANVIL_IMAGE_QA.md)。
 
 ### 同目标原图与文字
 
@@ -585,7 +585,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装真实tarball；当前120组件 / 134值的React18.3.1 / 19.3.1消费已通过ESM、SSR、三新Grindstone类型 / ref / model / source-atlas、39槽、23原PNG / 24keys、CSS、字体及许可检查，两消费者各256份dist逐字节一致。历史model检查点973唯一用例（968 PASS、5预期SKIP）来自多批次；本轮22项修后合同和46项旧附魔回归分别按受测范围记录，不称单次整套全绿。详见 [VERIFICATION.md](docs/VERIFICATION.md)。
+- `npm run verify:package`：分别在 `.cache/consumer-react18` 和 `.cache/consumer-react19` 安装真实tarball；当前120组件 /134值的React18.3.1 /19.3.1消费通过ESM、SSR、三新Anvil类型 /float32 /ref /四文字角色 /真input /39槽 /model /source-atlas、28原PNG /29keys、CSS、字体及许可检查，两消费者各256dist同字节。历史model检查点973唯一用例来自多批次；当前Anvil35＋旧回归103按整文件GPU profile共138独立用例通过，另73生产辅助检查，不称单backend整套全绿。详见 [VERIFICATION.md](docs/VERIFICATION.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

@@ -90,6 +90,8 @@ source完整RGBA SHA256为 `27c903bbd4f3a52f5d7cf0cda163a44965bf0b0f7459d3f8e90a
 
 原native target的独立浏览器拷贝全RGBA0另证presentation / oracle转换一致。目标来自实际UI RT读回，alpha有102 / 255；此前BMP BGRX第四字节不能作为原RT alpha证明。原capture / BMP来源及结果guard见 [WORKSTATION_QA.md](WORKSTATION_QA.md)。
 
+静态索引元数据勘误：旧indexer误读此前GUI4的CSV，因此旧 `csvQueueEventIndex` 标签及“CSV Queue ID不等于API event index”的结论撤回。正确砂轮CSV的Global36 / 66 / 4892分别为Queue ID80 / 292 / 22223，与当前API XML一致。真实31个UI draw的API索引、两次RT112读回、原RGBA与上述零差验收不变；旧冻结报告不回写。新增 `.cache/grindstone-native-index-erratum-01/ERRATUM.md` SHA256 `d059e5cb1212972279a332b462aa39b2c85340635c0112e26701f6e89f7b0ca1`，逐条原始行与32个独立API映射见同目录 `ERRATUM.json`（SHA256 `dcef94ef0a3e230762e9f013afa4fa6abebdd45c7b46b186b029a684788b6c46`）。
+
 生产imageRender只负责panel window。完整RT比较的host另外提供原生测得的透明黑dim背景 `.4`；它是明确宿主合成输入，不是adapter自动恢复的world / Present，也不能移用为默认CSS / 默认字体零差。五durability仍为DOM组件，在有限五ratio匹配时也不能声称恢复或等同新的PSO826 material。
 
 该有限scene依赖宿主八页原Unicode glyph、明确GUI5 BitmapSmooth / bilinear / fontScale.5 / metrics、四完整原PNG atlas tiles和非唯一的显式cuboid投影候选。覆盖39槽、八CJK字、六sword sprites、三block models、五durability bars及arrow / cross / close。它不认证其他配方、语言、GUI scale、viewport、driver、动画或整个库。

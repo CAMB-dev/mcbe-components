@@ -2,6 +2,10 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
+## 当前检查点：铁砧可选原图图层
+
+Anvil新增可选imageRender /三profile类型、39槽与四文字角色，120组件 /134runtime不变。28完整原PNG /29keys及私有字体用于正常source。旧wrapper居中及arrow /cross stretch误设撤回：三槽从grid cell origin放置，18×12 box内arrow contain17.6×12、cross12²，仅更正Anvil。首invalid40像素残差由私有source耐久候选对齐修复，四GUI5状态各完整3,603,140像素及747,600 ROI RGBA0，CSS18 /gallery20仍非零；host另供dim .4、原字页与显式投影。候选非唯一，不恢复world /Present或所有编辑 /GPU。React18 /19包及按整文件GPU profile的Anvil35＋旧回归103共138项通过，生产73辅助检查通过；真实OS IME /active-editor native pixels /任意ratio /crossGPU /Present未证，见 [ANVIL_IMAGE_QA.md](ANVIL_IMAGE_QA.md)。
+
 ## 当前检查点：砂轮可选原图图层
 
 Grindstone扩展三个公开profile类型，39槽与可选whole-frame原图 / labels / item images / models接入共用私有helper；120组件 / 134runtime不变，省略profile仍为CSS路线。23完整原PNG / 24keys保留旧18图身份；独立8页本机font准备不替换默认字体，不自动认证advance / baseline / sampler。
@@ -48,7 +52,7 @@ BlockPreview新增enchanting-table，资源45→48；118组件 / 125值不变。
 
 新增GuiIcon与guiIconNames，保留旧PixelIcon。150张完整原版PNG按物理尺寸整数缩放，原字节及安装基础包身份已记录；不自动复刻所有原生使用尺寸、裁切、tint或交互状态。默认装饰及显式可访问命名属于Web接口，PNG相同不是整GUI认证；见 [gui-icons.json](gui-icons.json)。
 
-通用invalid已移除额外粉色框，沿原default / hover / focus皮肤。ErrorGlyph13×20及源$error_text_color红有出处，但把它们用于Web表单消息是语义适配，文字token保留可读配色，不能称native通用错误模板。Anvil/Smithing18×12与Grindstone15×15 crossout均为源使用尺寸，未统一图像宽高比。图标11项、invalid17项独立正式套通过，包含原图、完整表面与halo；源资产/浏览器合成结果不冒称native通用错误模板或整GUI验收。见 [GUI_ICONS_QA.md](GUI_ICONS_QA.md)。
+通用invalid已移除额外粉色框，沿原default /hover /focus皮肤。ErrorGlyph13×20及源$error_text_color红有出处，但用于Web表单是语义适配，不能称native通用错误模板。Anvil逻辑18×12内cross实际contain12²；Smithing旧18×12配置另验，Grindstone15²。历史图标11项 /invalid17项含原图、表面与halo，旧Anvil stretch自对照不认证native比例；保留历史运行，不推广整GUI，见 [GUI_ICONS_QA.md](GUI_ICONS_QA.md)。
 
 ## 可选工作站文字与整页基线
 

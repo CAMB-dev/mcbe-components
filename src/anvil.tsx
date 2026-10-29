@@ -5,6 +5,10 @@ import type { InventoryItem, InventorySlotAction } from './inventory';
 import { ProcessingArrow } from './processing';
 import { WorkstationFrame } from './workstations';
 import type { WorkstationFrameProps } from './workstations';
+import { WorkstationImagePresentation } from './workstation-source-layer';
+import { useAnvilImageLayer } from './anvil-image-layer';
+import type { AnvilImageRenderProfile } from './anvil-image-layer';
+export type { AnvilImageRenderProfile, AnvilTextRenderProfile, AnvilTextRenderStyle } from './anvil-image-layer';
 
 /** Caller-supplied game state; the component does not calculate repair costs. */
 export type AnvilCost =
@@ -22,6 +26,8 @@ export interface AnvilProps extends Omit<WorkstationFrameProps, 'title' | 'child
   result?: InventoryItem | null;
   invalid?: boolean;
   cost?: AnvilCost | null;
+  /** Optional whole-frame source visuals; the real editable input is retained. */
+  imageRender?: AnvilImageRenderProfile;
   onInputAction?: (index: 0 | 1, action: InventorySlotAction) => void;
   onTakeResult?: (action: InventorySlotAction) => void;
 }
@@ -36,8 +42,9 @@ function focusSlot(event: KeyboardEvent<HTMLButtonElement>, target: HTMLButtonEl
 export const Anvil = forwardRef<HTMLElement, AnvilProps>(function Anvil({
   title = 'Repair & Name', name, onNameChange, renameLabel = 'Item name', renameDisabled = false,
   renameReadOnly = false, inputs = [null, null], result, invalid = false, cost,
-  onInputAction, onTakeResult, className, ...props
+  onInputAction, onTakeResult, imageRender, className, ...props
 }, ref) {
+  const root = useRef<HTMLElement | null>(null);
   const inputRef = useRef<HTMLButtonElement | null>(null);
   const materialRef = useRef<HTMLButtonElement | null>(null);
   const resultRef = useRef<HTMLButtonElement | null>(null);
@@ -49,8 +56,15 @@ export const Anvil = forwardRef<HTMLElement, AnvilProps>(function Anvil({
     : validLevels && cost?.kind === 'levels'
       ? cost.label ?? `Enchantment Cost: ${Math.trunc(cost.levels)}`
       : '';
+  const sourceItems = [inputs[0], inputs[1], result, ...Array.from({ length: 27 }, (_, index) => props.inventory?.[index]),
+    ...Array.from({ length: 9 }, (_, index) => props.hotbar?.[index])];
+  const paint = useAnvilImageLayer(imageRender, root, { title, inventoryLabel: props.inventoryLabel ?? 'Inventory', name, renameDisabled, invalid,
+    close: !!props.onClose, cost: { visible: costVisible, text: costText, affordable }, items: sourceItems });
 
-  return <WorkstationFrame {...props} ref={ref} title={title} className={['mc-anvil', className].filter(Boolean).join(' ')}>
+  return <WorkstationImagePresentation.Provider value={paint.presentation}><WorkstationFrame {...props} ref={node => {
+    root.current = node; if (typeof ref === 'function') ref(node); else if (ref) ref.current = node;
+  }} title={title} className={['mc-anvil', className].filter(Boolean).join(' ')}>
+    {paint.layer}
     <span className="mc-anvil__icon" aria-hidden="true"/>
     <label className="mc-anvil__name-field" data-disabled={renameDisabled || undefined}>
       <input className="mc-anvil__name-input" aria-label={renameLabel} value={name} maxLength={30}
@@ -74,5 +88,5 @@ export const Anvil = forwardRef<HTMLElement, AnvilProps>(function Anvil({
       onKeyDown={event => { if (event.key === 'ArrowLeft') focusSlot(event, materialRef.current); }}/>
     {costVisible && <span className="mc-anvil__cost" role="status" data-cost-state={cost?.kind}
       data-affordable={affordable ? 'true' : 'false'}>{costText}</span>}
-  </WorkstationFrame>;
+  </WorkstationFrame></WorkstationImagePresentation.Provider>;
 });

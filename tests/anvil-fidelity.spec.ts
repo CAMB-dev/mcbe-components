@@ -18,7 +18,11 @@ const name={x:iconPanel.x+iconPanel.width*.2,y:iconPanel.y+iconPanel.height-icon
 const recipe={x:top.x,y:top.y+top.height*.4,width:top.width,height:top.height*.6};
 const grid={x:recipe.x+recipe.width*(1-.83)/2,y:recipe.y+recipe.height*(1-.4)/2,width:recipe.width*.83,height:recipe.height*.4};
 const cellWidth=grid.width/5;
-const slot=(column:number)=>({x:grid.x+column*cellWidth+(cellWidth-18)/2,y:grid.y+(grid.height-18)/2,width:18,height:18});
+// The fixed-size direct grid template starts at its cell origin. Only the
+// container_item child is centered inside that18x18 wrapper. Native Anvil
+// capture Global67 corroborates this scope; the previous centered-wrapper
+// oracle incorrectly propagated the child's anchors to its grid parent.
+const slot=(column:number)=>({x:grid.x+column*cellWidth,y:grid.y,width:18,height:18});
 const image=(column:number,width:number,height:number)=>({x:grid.x+column*cellWidth+(cellWidth-width)/2,y:grid.y+(grid.height-height)/2,width,height});
 const originals=[
   ['anvil_icon.png','5858dfc62fe01b7629dbea9a1b71bb7523c196e1418e2a075ff3fc8ec6e624a3',15,15],
@@ -48,6 +52,8 @@ test('native anvil formulas, textures, cost colors and explicit focus links agre
   const data=await readFile(path),count=data.readUInt32LE(8),base=16+count*256;
   const read=(name:string)=>{for(let index=0;index<count;index++){const row=16+index*256;if(data.toString('utf8',row+1,row+1+data[row]!)!==name)continue;const offset=data.readUInt32LE(row+248),size=data.readUInt32LE(row+252);return JSON.parse(data.toString('utf8',base+offset,base+offset+size));}throw new Error(`Missing original ${name}`);};
   const anvil=read('anvil_screen.json'),globals=read('_global_variables.json');expect(anvil.top_half_panel.size).toEqual(['100% - 14px','50% - 14px']);expect(anvil.recipe_grid.size).toEqual(['83%','40%']);expect(anvil.anvil_item_slot.size).toEqual([18,18]);expect(anvil['text_edit_control@common.text_edit_box'].max_length).toBe(30);
+  expect(anvil.anvil_item_slot.anchor_from).toBeUndefined();expect(anvil.anvil_item_slot.anchor_to).toBeUndefined();
+  expect(anvil.anvil_item_slot.controls[0]['container_item@common.container_item']).toMatchObject({anchor_from:'center',anchor_to:'center'});
   expect(anvil.arrow_icon.size).toEqual([18,12]);expect(anvil.cross_out_icon.size).toEqual([18,12]);expect(anvil.anvil_icon.size).toEqual([30,30]);
   const controls=anvil.recipe_grid.controls;expect(controls[0]['input_item_slot@anvil.anvil_item_slot'].$focus_override_right).toBe('anvil_material');expect(controls[2]['material_item_slot@anvil.anvil_item_slot'].$focus_override_left).toBe('anvil_input');expect(controls[2]['material_item_slot@anvil.anvil_item_slot'].$focus_override_right).toBe('anvil_result');expect(controls[4]['result_item_slot@anvil.anvil_item_slot'].$focus_override_left).toBe('anvil_material');
   expect(globals.$anvil_cost_success_text_color).toEqual([.5,1,.125]);expect(globals.$anvil_cost_fail_text_color).toEqual([1,.35,.35]);
@@ -105,8 +111,18 @@ for(const[selector,file,width,height,fixture]of [
   // left intact; this canonical plane only compares Chromium texture output.
   await target.evaluate(node=>Object.assign((node as HTMLElement).style,{position:'fixed',left:'16px',top:'16px',zIndex:'2147483647',backgroundColor:'#c6c6c6',transform:'none'}));
   const source=await readFile(new URL(`../.cache/references/${file}`,import.meta.url));
-  await page.evaluate(({url,width,height})=>{const plane=document.createElement('div');plane.id='independent-anvil-png';Object.assign(plane.style,{position:'fixed',left:'96px',top:'16px',width:`${width}px`,height:`${height}px`,background:'#c6c6c6',zIndex:'2147483647'});const img=document.createElement('img');img.src=url;Object.assign(img.style,{display:'block',width:'100%',height:'100%',imageRendering:'pixelated'});plane.append(img);document.body.append(plane);},{url:`data:image/png;base64,${source.toString('base64')}`,width,height});
-  const reference=page.locator('#independent-anvil-png');await reference.locator('img').evaluate(node=>(node as HTMLImageElement).decode());await mkdir(new URL('../.cache/anvil-qa/',import.meta.url),{recursive:true});
+  await page.evaluate(async({url,width,height,contain})=>{
+    const img=new Image();img.src=url;await img.decode();
+    const plane=document.createElement('div');plane.id='independent-anvil-png';
+    Object.assign(plane.style,{position:'fixed',left:'96px',top:'16px',width:`${width}px`,height:`${height}px`,background:'#c6c6c6',zIndex:'2147483647'});
+    // Compare original PNG sampling through the same CSS paint primitive.
+    // IMG object-fit and CSS background contain differ at fractional35.2px
+    // widths. This asset check is separate from the actual native-GUI oracle.
+    if(contain)Object.assign(plane.style,{backgroundImage:`url("${url}")`,backgroundSize:'contain',backgroundPosition:'center',backgroundRepeat:'no-repeat',imageRendering:'pixelated'});
+    else{Object.assign(img.style,{display:'block',width:'100%',height:'100%',imageRendering:'pixelated'});plane.append(img);}
+    document.body.append(plane);
+  },{url:`data:image/png;base64,${source.toString('base64')}`,width,height,contain:file==='arrow_large.png'||file==='crossout.png'});
+  const reference=page.locator('#independent-anvil-png');await mkdir(new URL('../.cache/anvil-qa/',import.meta.url),{recursive:true});
   const actual=PNG.sync.read(await target.screenshot({path:fileURLToPath(new URL(`../.cache/anvil-qa/${selector}-actual.png`,import.meta.url))})),expected=PNG.sync.read(await reference.screenshot({path:fileURLToPath(new URL(`../.cache/anvil-qa/${selector}-expected.png`,import.meta.url))}));expect([actual.width,actual.height]).toEqual([width,height]);expect([expected.width,expected.height]).toEqual([width,height]);
   let different=0;for(let index=0;index<actual.data.length;index+=4)if([0,1,2,3].some(channel=>actual.data[index+channel]!==expected.data[index+channel]))different++;expect(different,'RGBA differences against independently rendered original PNG').toBe(0);
 });

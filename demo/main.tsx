@@ -29,6 +29,7 @@ import { WorkstationTextExamples } from './workstation-text-examples';
 import { GuiIconsExamples } from './gui-icons-examples';
 import { GuiLayerExamples } from './gui-layer-examples';
 import { GrindstoneLayerExamples } from './grindstone-layer-examples';
+import { AnvilLayerExamples } from './anvil-layer-examples';
 import { ItemRenderersExamples } from './item-renderers-examples';
 import { ScrollArea } from '../src';
 
@@ -52,6 +53,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'grindstone-layer', name: 'Source Grindstone', icon: 'chevron', count: '01' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
+  { id: 'anvil-layer', name: 'Source Anvil', icon: 'chevron', count: '01' },
   { id: 'containers', name: 'Storage containers', icon: 'chevron', count: '06' },
   { id: 'brewing', name: 'Brewing', icon: 'chevron', count: '02' },
   { id: 'special-workstations', name: 'Smithing & cartography', icon: 'chevron', count: '02' },
@@ -93,6 +95,7 @@ const snippets: Record<string, string> = {
   'workstation-text': `const renderGuiText: WorkstationTextRenderer =\n  (text, context) => (\n    <BitmapText\n      {...(context.kind === 'enchantment-cost'\n        ? costTextProfile : labelTextProfile)}\n      layout="advance" style={{ display: 'block' }}>\n      {text}\n    </BitmapText>\n  );\n<EnchantingTable title="附魔台" inventoryLabel="物品栏"\n  options={options} renderText={renderGuiText} />\n// Each host profile supplies its own font, scale,\n// renderer, sampling, shader, color and shadow.`,
   processing: `<CraftingScreen\n  recipeBook={{ title: 'Recipes', entries,\n    categoryId, onCategoryChange: setCategoryId,\n    query, onQueryChange: setQuery,\n    craftableOnly, onCraftableOnlyChange: setCraftableOnly,\n    onRecipeAction: handleRecipe }}\n  crafting={{ inputs: recipeInputs, result,\n    inventory: items, onTakeResult: handleTake }} />\n// entries are filtered and flattened by your application.\n// CraftingTable also remains available as a right pane.\n<Furnace input={rawBeef} fuel={coal} result={steak}\n  progress={0.5} fuelRemaining={0.75}\n  inventory={items} onTakeResult={handleTake} />`,
   anvil: `<Anvil name={name} onNameChange={setName}\n  inputs={[item, material]} result={result}\n  cost={{kind: 'levels', levels: 3, affordable: true}}\n  onTakeResult={handleTake} />`,
+  'anvil-layer': `<Anvil name={name} onNameChange={setName}\n  inputs={[item, material]} result={result} cost={cost}\n  inventory={inventory} hotbar={hotbar}\n  imageRender={{\n    frame: { width: 2570, height: 1402, guiScale: 5 },\n    itemImages: true, itemModels: true,\n    text: yourExplicitAnvilTextProfile,\n  }} onTakeResult={handleTake} />\n// Separate styles for title, inventory, name and cost.\n// The real input handles focus, selection and composition.`,
   containers: `<Chest rows={6} items={storage} inventory={inventory}\n  selectedIndex={selected} onSelectionChange={setSelected}\n  onSlotAction={handleStorageAction} />\n<Hopper items={hopperItems} inventory={inventory} />\n// Dispenser, Dropper and ShulkerBox share the same storage API.`,
 };
 
@@ -350,6 +353,7 @@ function App() {
       <Example id="anvil" title="Anvil" detail="Original rename field, repair slots and experience cost states.">
         <AnvilExamples notify={notify}/>
       </Example>
+      <Example id="anvil-layer" title="Source Anvil" detail="Original images and optional local glyphs, with editable names and all 39 slots interactive."><AnvilLayerExamples/></Example>
 
       <Example id="containers" title="Storage containers" detail="Source-sized chests, shulker boxes, hoppers, dispensers and droppers.">
         <ContainerExamples notify={notify}/>
