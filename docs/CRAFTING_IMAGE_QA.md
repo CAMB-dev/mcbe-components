@@ -148,4 +148,6 @@ A沿用bilinear标签采样，B只将各场景已有标签的sampling改为point
 
 另一次响应身份审计在正常浏览器缓存下，按原CDP requestId读取真实完成响应，68/68与预期字节一致，未用补GET替代。旧47条空body、exit1的原报告保留；新审计不回填旧body，也不据此推断旧失败根因。见 `.cache/crafting-response-identity-audit-02/FINAL.json`，资源身份通过不等于原生像素通过。Float probe仍未消除source的4个标题点；viewport phase02的A未挂载五个正常DOM耐久条及阴影，相对完整产品基线新增2,080个差异像素，未满足继续比较条件，因此B没有执行。后续CPU准备不算修复或实测通过。
 
+后续phase04保留真实组件的DOM覆盖层，并按实际零面积CSS裁切识别无障碍提示，完成两种缓冲范围的固定对照。两场景的原生复制、完整组件基线及裁剪臂逐字节检查均通过后，才执行整帧缓冲臂；GUI4两臂相对原生仍均差160像素，GUI5均差5像素。每个场景的两臂完整RGBA逐字节相同，原始FBO共同区域也相同。因此这两组输入及当前后端下，单独扩大缓冲范围没有改善放大镜；未据此改动渲染内核，也不宣称新的组件零差。诊断记录见 `.cache/crafting-magnifier-viewport-04`，独立复验见 `.cache/crafting-next-close-01/VIEWPORT-ROOT.json`。
+
 上述结果只认证已观察输入、指定字体与NVIDIA / ANGLE D3D11路径；不泛化到所有GUI4状态、默认字体、全部Unicode、跨GPU / DPR、真实OS IME、世界合成或最终Present。后续仍需保留完整target残差并按场景限定结论。
