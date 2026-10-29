@@ -55,7 +55,7 @@ export const DurabilityBar = forwardRef<HTMLSpanElement, DurabilityBarProps>(fun
     aria-valuemin={0} aria-valuemax={max} aria-valuenow={bounded}
     aria-valuetext={props['aria-valuetext'] ?? `${Math.round(ratio*100)}%`}
     className={['mc-slot__durability',className].filter(Boolean).join(' ')}>
-    <span style={{width:`${Math.round(ratio*12)*2}px`,backgroundColor:color ?? `hsl(${Math.round(ratio*120)} 100% 50%)`}}/>
+    <span style={{width:`${Math.round(ratio*12)*2}px`,backgroundColor:color ?? `hsl(${ratio*120} 100% 50%)`}}/>
   </span>;
 });
 

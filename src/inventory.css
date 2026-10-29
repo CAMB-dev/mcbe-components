@@ -14,7 +14,7 @@
 .mc-slot__underlay { position: absolute; inset: 2px; z-index: 1; pointer-events: none; }
 .mc-slot__placeholder img, .mc-slot__placeholder svg { width: 32px; height: 32px; max-width: 100%; max-height: 100%; object-fit: contain; image-rendering: pixelated; }
 .mc-slot__count { position: absolute; z-index: 4; inset-inline-end: 0; bottom: -2px; font: 400 var(--mc-font-size)/1 var(--mc-font); text-shadow: 2px 2px #3f3f3f; pointer-events: none; }
-.mc-slot__durability { position: absolute; z-index: 3; width: 24px; height: 2px; left: 6px; top: 27px; background: #000000; box-shadow: 0 2px #000000; pointer-events: none; }
+.mc-slot__durability { position: absolute; z-index: 3; width: 24px; height: 2px; left: 6px; top: 27px; background: #000000; box-shadow: 2px 0 #000000, 0 2px #000000, 2px 2px #000000; pointer-events: none; }
 .mc-slot__durability > span { display: block; height: 2px; }
 .mc-result-slot--large { width: 52px; height: 52px; }
 .mc-result-slot--large .mc-slot__count { inset-inline-end: 8px; bottom: 6px; }

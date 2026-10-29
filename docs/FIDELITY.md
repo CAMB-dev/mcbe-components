@@ -8,6 +8,14 @@
 
 `ItemGlint` 使用原始 item glint PNG，以及本机 UIGlint SM4/SM5 中独立核对的双层 UV 和着色公式。UV、颜色、采样器、混合必须显式给定，没有默认时钟或自动 `enchanted` 绑定；原生宿主时间与实际 draw-state 仍未知。独立字节码解释器的 544 组数值、96 张完整 RGBA 输出已核对，浏览器半透明 Canvas 存储的1LSB差异也单列记录，没有反调公式抹去差异。详见 [ITEM_GLINT_QA.md](ITEM_GLINT_QA.md)。
 
+## 耐久条的源声明与原生观察
+
+`common.durability_bar` 声明 `12×1` game、中心偏移 `[0,5]` 与 `drop_shadow/is_durability/round_value=true`，没有给出颜色或 current/total 算法。本机 Classic GUI5、100%、AA16 的五木剑原始 PNG 支持最大 `12×1` 前景和 `13×2` 黑包络，右侧、下方各多 `1` game；Web 只据此补齐可见包络，不反推原生内部 shadow 图层。
+
+五把木剑的只读 Script API 已确认实际 damage=1/15/30/45/58、maxDurability=59；几何前景宽为 12/9/6/3/0 observed game，前四个核心 RGB 分别为 9,255,0 / 130,255,0 / 255,251,0 / 255,121,0。纯色核心不含边界混色列，不能用其像素数代替几何宽度；最后一个样本无饱和彩芯，不排除亚像素或完全遮挡前景。
+
+独立审计以 `r=(59-damage)/59` 和连续 `H=120r` 得到四组 Chromium Canvas 核心 RGBA 匹配；旧整数 hue 预取整只匹配一组，M60 连续候选匹配零组。Web 据此取消 hue 的整数预取整。最近整数的 `12r` 宽度匹配五组，但 M59/M60 的这五个宽度相同，且 M59 整数 damage 不命中半宽 tie；不能将 API max 等同 renderer 分母，或称通用颜色/取整算法已恢复。源逻辑 y=13.5game 保留，不能将截图地标 68/5=13.6 当成新 offset。完整证据和限制见 [NATIVE_DURABILITY_QA.md](NATIVE_DURABILITY_QA.md)；不把有限核心匹配扩大为 HUD/Pocket、其他物品/GUI scale 或整图 RGBA 零差认证。
+
 ## 参考与版本
 
 固定 Mojang 官方 [bedrock-samples commit 46ba6ea](https://github.com/Mojang/bedrock-samples/tree/46ba6ea985fb5a92d79a9419198f10dda14c199d)，资源版本 `1.26.50.4`。另只读解析本机 Bedrock `1.26.6005.0` 的 JSON UI 与纹理归档：131 个相关 UI PNG / JSON 条目与固定参考一致，差异 0。安装版本、归档 SHA256、原版布局事实见 [local-reference.json](local-reference.json)。另将官方 v1.26.60.5 full release 的 4 份工作站相关 UI JSON 与本机逐份核对，解析后完全相同；原始 SHA 见 workstation-geometry.json。这只证明所比较的条目一致，不代表全部资源或整套游戏 UI 一致。
@@ -40,7 +48,7 @@ UI 原始对照图缓存于忽略目录 `.cache`。97 个重建皮肤的来源�
 
 砂轮箭头、附魔选项默认 / hover / disabled 表面已有原始 PNG 独立对比。附魔表面 fixture 使用规范整数尺寸 216×38，仅证明皮肤解码 / 九宫格；它不替代 main 中浮点放置的未遮罩组合。另有 9 项独立源几何 / 材质 / 字距 / 导航检查，不以生产 CSS 或皮肤 manifest 反推期望。两类证据都不证明游戏 renderer 的最终像素取整。完整工作站仍待同版本 / 状态的游戏截图对比。
 
-已删除手绘物品、假 glint 和默认书图。展示页采用官方 v1.26.60.5 full 的 26 张真实物品 / GUI PNG；逐项与本机 59 个 vanilla 目录中的基础包及版本覆盖候选比较。此前把基础包钻石剑作为最终 runtime 材质的结论已撤回：基础包与 merged 图有 22 像素差异，1.16 / 1.21.90 中存在与 merged 相同的图，但候选存在不证明运行时包激活。完整记录见 item-materials.json。SGA 原图字形 AIZ 与独立图集栅格比较 0 差异；图集不随 npm 分发。EnchantingBook 使用真材质，已修正厚页块与 UV，并参考官方 Java BookModel 的七部件结构重建；Bedrock native mesh 仍未获取；已用本机 26.60 的打开 / 关闭无损截图校准默认相机仰角与分面光照，但完整书本区域仍有残差，明确属于重建，不列入 native pixel-perfect 结论。ItemTooltip、数量基线、耐久 / disabled renderer 仍待原游戏校准。
+已删除手绘物品、假 glint 和默认书图。展示页采用官方 v1.26.60.5 full 的 26 张真实物品 / GUI PNG；逐项与本机 59 个 vanilla 目录中的基础包及版本覆盖候选比较。此前把基础包钻石剑作为最终 runtime 材质的结论已撤回：基础包与 merged 图有 22 像素差异，1.16 / 1.21.90 中存在与 merged 相同的图，但候选存在不证明运行时包激活。完整记录见 item-materials.json。SGA 原图字形 AIZ 与独立图集栅格比较 0 差异；图集不随 npm 分发。EnchantingBook 使用真材质，已修正厚页块与 UV，并参考官方 Java BookModel 的七部件结构重建；Bedrock native mesh 仍未获取；已用本机 26.60 的打开 / 关闭无损截图校准默认相机仰角与分面光照，但完整书本区域仍有残差，明确属于重建，不列入 native pixel-perfect 结论。ItemTooltip 与耐久条已有上述局部原生观察；数量基线、耐久颜色/数值算法和 disabled renderer 仍待校准。
 
 工作台从 inventory_screen.json 的 work_bench_panel_3x3 推导，熔炉 / 高炉 / 烟熏炉从炉子源面板及其继承推导。已拆出 RecipeGrid / ProcessingArrow / FuelIndicator / ResultSlot；52×52 结果槽中的物品保持 32×32。炉子输入 y=29、燃料 y=105、结果 y=59 CSS px，保留源半游戏像素位置；配方书和外部 toolbar 尚未实现。源推导及 12 项独立检查见 [PROCESSING_QA.md](PROCESSING_QA.md)。其中 6 个箭头 / 火焰裁切状态与原始 PNG 独立浏览器控制样本 RGBA 零差，只证明 Chromium 合成，不替代引擎 ratio 与裁切量化验收。
 

@@ -84,7 +84,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `InventoryGrid` | **必填** `label`、`items`；`size`、`columns`、`selectedIndex` / `defaultSelectedIndex`、`onSelectionChange`、`onSlotAction` | 单一 Tab 入口，方向键 / Home / End / Ctrl+Home/End，跳过禁用项；primary / secondary 操作事件 |
 | `ItemImage` | `src`、`alt`、`imageProps`、children；span 属性 | 独立 32×32 物品区域，最近邻渲染；缺图不生成替代图案 |
 | `ItemCount` | `count`、`hideSingle`；span 属性 | 共享槽位数量角标；默认隐藏 0 / 1，拒绝非有限数量 |
-| `DurabilityBar` | **必填** `value`；`max`、`hideWhenFull`、`label`、`color` | 独立 meter，12 游戏像素宽；原生颜色 renderer 仍待验证，可提供自定义颜色 |
+| `DurabilityBar` | **必填** `value`；`max`、`hideWhenFull`、`label`、`color` | 独立 meter，前景最大 12×1 game、黑包络 13×2；连续 hue 获五木剑有限样本支持，通用算法/取整 tie 未恢复，可覆盖 color |
 | `SlotPlaceholder` | `src`、`alt`、children；span 属性 | 共享空槽占位图层；由调用方提供原始资源 |
 | `ResultSlot` | ItemSlot 属性；`available`、`size`: normal / large、`onTake` | 大结果槽 52×52，物品仍 32×32；空结果保留焦点并阻止取出操作 |
 | `PlayerInventory` | `items`、`hotbar`、`label`、`hotbarLabel`、`selectedIndex`、`onSelectionChange`、`onSlotAction` | 27 格背包与 9 格快捷栏，共享 0…35 的选中索引 |
@@ -251,7 +251,9 @@ const sword: InventoryItem = {
 
 ItemSlot 的物品图由调用方提供；26 张物品 / 类目示例 PNG 不随 npm 分发。BlockPreview / BannerPreview 另附官方方块 / 旗帜原始材质，记录见 [item-renderers-geometry.json](docs/item-renderers-geometry.json)。展示页已使用实际 PNG，来源与 SHA 见 [item-materials.json](docs/item-materials.json)：物品清单中的 26 张 PNG 均取自官方 `v1.26.60.5 full` 合并资源，并记录本机 59 个 vanilla / 版本覆盖目录中的候选。钻石剑采用与公开合并资源一致的 198-byte PNG；此前 22 像素差异来自基础包与合并资源，不能据此认定运行时最终材质。资源存在与 manifest 不证明当前激活顺序。草方块使用官方 GUI 类目图标，保留 17×17 原图的整数缩放，不冒充 native block renderer。`durability` 为剩余比例 0…1；组件显示角标、耐久和提示，并发出操作事件，不自行计算配方、附魔或搬移物品。右键 / Shift+F10 为 secondary，Enter / Space / 点击为 primary。原生 `onContextMenu` 可阻止默认 secondary 处理。
 
-槽位依据 common.container_item 重做，cell_image 的 PNG 为 10×10、逻辑 base_size 为 5×5，因此源切片为 2px、GUI 2 的显示边宽仍为 2px。普通 / 悬停 / 选中 / 聚焦已有独立原图对照。ItemTooltip 依据原生配对截图修正，中文字体与部分覆盖边缘仍非零差；数量基线、耐久色相和 disabled filter 也需继续校准。`enchanted` 仅保留数据标记，缺图时不会自绘替代物。
+槽位依据 common.container_item 重做，cell_image 的 PNG 为 10×10、逻辑 base_size 为 5×5，因此源切片为 2px、GUI 2 的显示边宽仍为 2px。普通 / 悬停 / 选中 / 聚焦已有独立原图对照。ItemTooltip 依据原生配对截图修正，中文字体与部分覆盖边缘仍非零差；数量基线和 disabled filter 也需继续校准。`enchanted` 仅保留数据标记，缺图时不会自绘替代物。
+
+耐久条的源声明为 `12×1` game、中心偏移 `[0,5]`。本机 GUI5 五把木剑的原图支持 `13×2` 黑包络，相对最大前景右侧、下方各多 `1` game；Web 保留原前景和逻辑位置，补齐可见包络。只读 Script API 已确认五把木剑实际 damage=1/15/30/45/58、maxDurability=59。以 `(59-damage)/59` 为候选比例，连续 `H=120r` 不预取整 hue，在独立 Chromium Canvas 匹配全部四组可见核心色；最近整数 `12r` 匹配五组宽度。API max 不证明 renderer 分母，五个宽度也不能区分 M59/M60；内部 shadow、通用颜色算法和取整 tie 仍未恢复，不称完整原生像素零差。详见 [NATIVE_DURABILITY_QA.md](docs/NATIVE_DURABILITY_QA.md)。
 
 `ItemGlint` 可单独使用，也可作为 ItemSlot 的 children。它带有真实 glint PNG，参数由调用方控制；下面是 Web 示例值，未认证为游戏运行时默认值：
 

@@ -156,9 +156,56 @@
       "behavior": "Nine native buttons inside a toolbar. Roving focus uses arrows/Home/End, skipping disabled items. Enter/Space activates by native click. Context menu and Shift+F10 emit secondary action only when supplied. Controlled selection changes only when the owner updates selectedIndex. No global keyboard or wheel listeners.",
       "limitations": [
         "Each HUD cell uses its corresponding original hotbar_0 through hotbar_8 PNG, not the container slot texture.",
-        "Item artwork is caller-supplied through InventoryItem; no placeholders or drawn item replacements are generated. ItemCount and DurabilityBar reuse inventory helpers. The default durability hue and shadow remain a Web approximation of a native renderer.",
+        "Item artwork is caller-supplied through InventoryItem; no placeholders or drawn item replacements are generated. ItemCount and DurabilityBar reuse inventory helpers. Native Classic GUI5 inventory observations support a13x2game black envelope under maximum12x1game foreground. API-confirmed wooden-sword damage/max values support the continuous-hue finite profile; HUD-native placement, binding denominator, rounding ties and internal shadow implementation remain unverified. See NATIVE_DURABILITY_QA.md.",
         "GUI scale is fixed at 2 for consistency with inventory overlays. World placement, native focus visuals, cooldown, lock/storage overlays and engine input mappings are outside this component."
-      ]
+      ],
+      "durabilityEvidence": {
+        "source": "hud_screen.item_durability inherits common.durability_bar; substitutes hotbar collection.",
+        "sourceForegroundGame": [
+          12,
+          1
+        ],
+        "sourceOffsetGame": [
+          0,
+          5
+        ],
+        "sourceParentGame": [
+          18,
+          18
+        ],
+        "hudOuterCellGame": [
+          20,
+          22
+        ],
+        "inventoryNativeObservationIsNotHudNativeCapture": true,
+        "nativeInventoryReport": "NATIVE_DURABILITY_QA.md",
+        "nativeInventoryBlackEnvelopeGame": [
+          13,
+          2
+        ],
+        "webGui2ForegroundCss": [
+          24,
+          2
+        ],
+        "webGui2EnvelopeCss": [
+          26,
+          4
+        ],
+        "nativeCurrentTotalUnitsColorCurveRoundRuleAndShadowImplementationRecovered": false,
+        "inventoryScriptApiEvidence": {
+          "report": "NATIVE_DURABILITY_QA.md",
+          "woodenSwordDamage": [
+            1,
+            15,
+            30,
+            45,
+            58
+          ],
+          "woodenSwordMaxDurability": 59,
+          "nativeRendererDenominatorKnown": false
+        },
+        "finiteInventoryColorProfile": "Continuous H=120*((59-damage)/59), without integer hue pre-rounding, matches four observed solid native cores in independent ChromiumCanvas and exact rational nearestRGB. It is a finite inventory profile, not native HUD or general algorithm certification."
+      }
     },
     "experience": {
       "sourceNative": {

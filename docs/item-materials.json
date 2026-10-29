@@ -1914,7 +1914,195 @@
       "dropShadow": true,
       "roundValue": true,
       "geometryDerivedFromJson": true,
-      "hueAndNativeDropShadowRendererVerified": false
+      "hueAndNativeDropShadowRendererVerified": false,
+      "isDurability": true,
+      "nativeRenderer": "progress_bar_renderer",
+      "sourceGeometryOnly": "12x1 and offset[0,5] are declared foreground geometry. Source flags do not expose color, rounding algorithm or internal shadow implementation.",
+      "nativeGui5Observation": {
+        "report": "NATIVE_DURABILITY_QA.md",
+        "version": "1.26.6005.0",
+        "captureProfile": "Classic GUI5,100%,AA16; AltPrint clipboard to Paint original PNG; no rescale",
+        "privateScreenshot": ".cache/tooltip-native/wood-five-gui5.png",
+        "screenshotSha256": "7353df9c55cd71086a48fe33fccd4ded1c15e7e45328f01d986283ab1d8e150a",
+        "screenshotPixels": [
+          2568,
+          1400
+        ],
+        "sourceLogicalForegroundOriginIn18x18SlotGame": [
+          3,
+          13.5
+        ],
+        "blackEnvelopeRelativeSlotPhysical": [
+          15,
+          68,
+          65,
+          10
+        ],
+        "blackEnvelopeSizeGame": [
+          13,
+          2
+        ],
+        "maximumObservedForegroundSizeGame": [
+          12,
+          1
+        ],
+        "extraRightAndBottomGame": [
+          1,
+          1
+        ],
+        "sourceOffsetChangedToRasterDivision": false,
+        "internalShadowImplementationRecovered": false,
+        "samples": [
+          {
+            "requestedCommandData": 1,
+            "hotbarIndex": 4,
+            "foregroundCoreRgb": [
+              9,
+              255,
+              0
+            ],
+            "foregroundGeometricWidthGame": 12,
+            "actualDamage": 1,
+            "maxDurability": 59,
+            "amount": 1,
+            "itemId": "minecraft:wooden_sword",
+            "rendererDenominator": null
+          },
+          {
+            "requestedCommandData": 15,
+            "hotbarIndex": 5,
+            "foregroundCoreRgb": [
+              130,
+              255,
+              0
+            ],
+            "foregroundGeometricWidthGame": 9,
+            "actualDamage": 15,
+            "maxDurability": 59,
+            "amount": 1,
+            "itemId": "minecraft:wooden_sword",
+            "rendererDenominator": null
+          },
+          {
+            "requestedCommandData": 30,
+            "hotbarIndex": 6,
+            "foregroundCoreRgb": [
+              255,
+              251,
+              0
+            ],
+            "foregroundGeometricWidthGame": 6,
+            "actualDamage": 30,
+            "maxDurability": 59,
+            "amount": 1,
+            "itemId": "minecraft:wooden_sword",
+            "rendererDenominator": null
+          },
+          {
+            "requestedCommandData": 45,
+            "hotbarIndex": 7,
+            "foregroundCoreRgb": [
+              255,
+              121,
+              0
+            ],
+            "foregroundGeometricWidthGame": 3,
+            "actualDamage": 45,
+            "maxDurability": 59,
+            "amount": 1,
+            "itemId": "minecraft:wooden_sword",
+            "rendererDenominator": null
+          },
+          {
+            "requestedCommandData": 58,
+            "hotbarIndex": 8,
+            "foregroundCoreRgb": null,
+            "foregroundGeometricWidthGame": 0,
+            "actualDamage": 58,
+            "maxDurability": 59,
+            "amount": 1,
+            "itemId": "minecraft:wooden_sword",
+            "rendererDenominator": null
+          }
+        ],
+        "zeroWidthLimit": "Data58 has no observed saturated foreground core. Subpixel or fully occluded fragments are not excluded.",
+        "exactCorePixelWidthsAreNotGeometricWidths": true,
+        "nativeToWebWholeRgbaZero": false,
+        "apiEvidence": {
+          "kind": "Read-only stable Script API probe, observed in two native chat parts by root",
+          "scriptApiVersion": "2.11.0",
+          "event": "/scriptevent mcbeui:durability read",
+          "privateScreenshot": ".cache/tooltip-native/wood-five-api-read.png",
+          "screenshotSha256": "1a23d078067e4e3168d9621ecff0f9d320d59f4ac15a2c50dfdf54e6294b5e44",
+          "screenshotPixels": [
+            2568,
+            1400
+          ],
+          "nativeSlotValuesKnown": true,
+          "apiMaxDurabilityIsNotRendererDenominatorProof": true,
+          "control": {
+            "hotbarIndex": 3,
+            "itemId": "minecraft:diamond_sword",
+            "actualDamage": 0,
+            "maxDurability": 1561
+          }
+        }
+      },
+      "webProfile": {
+        "ratio": "Explicit remaining value/max supplied by the caller; not a certified native current/total binding.",
+        "foregroundGui2Css": [
+          24,
+          2
+        ],
+        "observedEnvelopeReconstructionGui2Css": [
+          26,
+          4
+        ],
+        "hueAndWidthQuantization": "Continuous H=120*ratio without integer hue pre-rounding and nearest12game width are supported by the finite five-wood-sword profile; native general algorithm, binding denominator and ties remain unverified.",
+        "hideWhenFull": "Web API behavior; native visibility binding formula not recovered."
+      },
+      "finiteCandidateAudit": {
+        "source": ".cache/durability-study/independent/wood-five-candidate-audit.json",
+        "ratioHypothesis": "r=(59-actualDamage)/59; API max59 confirmed, native current/total bindings not captured.",
+        "browser": "Chromium156.0.8078.4 Canvas2D,deviceScaleFactor1",
+        "continuousHue": "H=120*r without integer hue pre-rounding; CSS hsl(H 100% 50%). HSV(S=1,V=1) is RGB-equivalent here.",
+        "continuousHueCoreCanvasMatches": {
+          "matched": 4,
+          "observedColoredSamples": 4
+        },
+        "exactRationalRgbNearestCoreMatches": {
+          "matched": 4,
+          "observedColoredSamples": 4
+        },
+        "oldIntegerRoundedHueCoreCanvasMatches": {
+          "matched": 1,
+          "observedColoredSamples": 4
+        },
+        "max60ContinuousHueCoreCanvasMatches": {
+          "matched": 0,
+          "observedColoredSamples": 4
+        },
+        "nearest12GameForegroundWidthsMatch": {
+          "matched": 5,
+          "observations": 5,
+          "gameWidths": [
+            12,
+            9,
+            6,
+            3,
+            0
+          ]
+        },
+        "widthsAloneDistinguish59From60": false,
+        "halfWidthTieRuleCertified": false,
+        "limitations": [
+          "Max59 integer damage states do not hit an exact half-logical-width tie; no tie behavior inferred.",
+          "Data58 lacks a colored core; its predicted RGB is not an observed color.",
+          "No observed color-channel half certifies generic rounding or Canvas conversion policy.",
+          "Finite solid-core and geometric-width agreement is not full native RGBA, edge sampling, shadow implementation or all-item algorithm recovery."
+        ],
+        "nativeAlgorithmRecovered": false
+      }
     },
     "layers": {
       "background": 1,
