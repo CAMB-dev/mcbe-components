@@ -40,11 +40,11 @@ const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames','npcSkinNames','npcAppearanceOptions'];
 components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage','BookPageTurnButton','SignTextSurface','SignEditor','JigsawEditor','JigsawPriorityFields','CommandBlockEditor','CommandInput','CommandOutputPanel','StructureEditor','XYZVectorInput','ServerActionForm','ServerCustomForm','NpcPortrait','NpcSkinPicker','NpcActionEditor','NpcDialogue','NpcEditor');
 const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity'];
-components.push('EmoteWheel','EmoteSlotPreview');
-assert.equal(components.length,142);
+components.push('EmoteWheel','EmoteSlotPreview','EmoteWheelScreen');
+assert.equal(components.length,143);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,159);
+assert.equal(Object.keys(ui).length,160);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -76,6 +76,17 @@ assert.equal((emoteMarkup.match(/<img[^>]*src="[^"]*emote_wheel_updated_(?:base|
 assert.match(emoteMarkup,/icon_none[.]png/);assert.match(emoteMarkup,/host-emote[.]png/);assert.match(emoteMarkup,/Packed emotes/);
 assert.equal((emoteMarkup.match(/<button/g)||[]).length,4,'Exactly four source cardinal slot buttons.');
 assert(!/ activeIndex=| slots=| inputMode=| defaultActiveIndex=/.test(emoteMarkup),'Internal wheel props do not leak to native DOM attributes.');
+const emoteCenter=markup=>markup.match(/<span[^>]*class="[^"]*mc-emote-wheel__name[^"]*"[^>]*>(.*?)<[/]span>/)?.[1];
+assert.equal(emoteCenter(emoteMarkup),'','Empty slots keep their accessible name but no synthesized visual center name.');
+const namedEmoteMarkup=renderToString(element(ui.EmoteWheel,{slots:emoteSlots,label:'Packed named emotes',activeIndex:0,centerLabel:'Explicit host center'}));
+assert.equal(emoteCenter(namedEmoteMarkup),'Explicit host center');assert.match(namedEmoteMarkup,/aria-label="Wave"/);assert(!/ centerLabel=/.test(namedEmoteMarkup));
+for(const inputMode of ['keyboard','touch','gamepad']){
+ const markup=renderToString(element(ui.EmoteWheelScreen,{slots:emoteSlots,label:'Packed emote screen',inputMode,size:[400,300],activeIndex:2,centerLabel:'',gamepadInstruction:'Host controller instruction',gamepadStartGlyph:element('span',null,'Host glyph'),gamepadStartDescription:'Host Start',gamepadExitLabel:'Host exit'}));
+ assert.match(markup,/mc-emote-wheel-screen__instruction-background/);assert.match(markup,/mc-emote-wheel-screen__change-row/);assert.match(markup,/Packed emote screen/);assert.equal(emoteCenter(markup),'');
+ assert(!/ centerLabel=| gamepadInstruction=| gamepadExitLabel=| changeEmotesVisible=| wheelRef=/.test(markup),'Screen bindings and refs do not leak into DOM attributes.');
+ if(inputMode==='gamepad'){assert.match(markup,/Host controller instruction/);assert.match(markup,/Host Start/);assert.match(markup,/Host exit/);}
+ else assert.match(markup,/Change Emotes/);
+}
 for(const content of [{kind:'empty'},{kind:'text',text:'Fallback index'},{kind:'image',src:'/host-thumbnail.png'}]){
  const markup=renderToString(element(ui.EmoteSlotPreview,{content,scale:1,'aria-label':'Packed preview'}));
  assert.match(markup,/Packed preview/);
@@ -521,7 +532,7 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -707,6 +718,8 @@ const serverCustomProps: ServerCustomFormProps = {title:'Custom',fields:serverFi
 const serverElements = <><ServerActionForm {...serverActionProps} ref={createRef<HTMLElement>()}/><ServerCustomForm {...serverCustomProps} ref={createRef<HTMLElement>()}/></>;
 import { NpcPortrait, NpcSkinPicker, NpcActionEditor, NpcDialogue, NpcEditor } from 'mcbeui';
 import { EmoteWheel, EmoteSlotPreview } from 'mcbeui';
+import { EmoteWheelScreen } from 'mcbeui';
+import type { EmoteWheelScreenProps, EmoteWheelScreenLabels, EmoteWheelScreenCloseDetail } from 'mcbeui';
 import type { EmoteIndex, EmotePreviewContent, EmoteSlot, EmoteWheelProps, EmoteSlotPreviewProps } from 'mcbeui';
 const typedEmoteIndex: EmoteIndex=2;
 const typedEmoteContent: EmotePreviewContent={kind:'text',text:'1'};
@@ -721,6 +734,9 @@ const invalidEmoteIndex: EmoteIndex=4;
 const typedEmoteProps: EmoteWheelProps={slots:typedEmoteSlots,label:'Typed wheel',size:[256,200],activeIndex:typedEmoteIndex,onActiveIndexChange:(index,detail)=>String(index)+detail.cause+detail.event.type,onActivate:(index,slot,event)=>String(index)+slot.id+event.type,onCancel:event=>event.key,hints:{keyboard:['1','2','3','4'],gamepad:{mode:'quick',faces:[<span>Up</span>,<span>Right</span>,<span>Down</span>,<span>Left</span>]}},buttonRefs:{0:createRef<HTMLButtonElement>()}};
 const typedEmotePreviewProps: EmoteSlotPreviewProps={content:typedEmoteContent,scale:2};
 const typedEmoteElements=<><EmoteWheel {...typedEmoteProps} ref={createRef<HTMLDivElement>()}/><EmoteSlotPreview {...typedEmotePreviewProps} ref={createRef<HTMLDivElement>()}/></>;
+const typedScreenLabels: Partial<EmoteWheelScreenLabels>={keyboardInstruction:'Source keyboard hint',touchInstruction:undefined};
+const typedScreenProps: EmoteWheelScreenProps={slots:typedEmoteSlots,label:'Typed screen',size:[400,300],scale:2,activeIndex:typedEmoteIndex,centerLabel:'',labels:typedScreenLabels,gamepadInstruction:'Host instructions',gamepadStartGlyph:<span>Host glyph</span>,gamepadStartDescription:'Host Start',gamepadExitLabel:'Host exit',wheelRef:createRef<HTMLDivElement>(),changeButtonRef:createRef<HTMLButtonElement>(),changeEmotesVisible:false,changeEmotesDisabled:true,onChangeEmotes:event=>event.currentTarget.name,onCloseRequest:(detail:EmoteWheelScreenCloseDetail)=>detail.reason+detail.event.type};
+const typedScreenElement=<EmoteWheelScreen {...typedScreenProps} ref={createRef<HTMLDivElement>()}/>;
 import type { NpcActionValue, NpcEditorValue, NpcEditorProps, NpcActionEditorProps, NpcDialogueProps, NpcSkinPickerProps, NpcPortraitProps } from 'mcbeui';
 import { createNpcEntity, npcSkinNames, npcAppearanceOptions } from 'mcbeui';
 import type { NpcSkinName, NpcEntityVariant, NpcEntityOptions, NpcAppearanceOption, GuiEntityCube, GuiEntityBone, GuiEntitySource, GuiNpcPortraitMaterial, GuiEntityGeometry, GuiEntityMesh, GuiEntityLayoutOptions, GuiEntityLayout } from 'mcbeui';

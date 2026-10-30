@@ -28,6 +28,8 @@ export interface EmoteWheelProps extends Omit<HTMLAttributes<HTMLDivElement>, 'c
   onActiveIndexChange?: (index: EmoteIndex | null, detail: EmoteActiveIndexChangeDetail) => void;
   onActivate?: (index: EmoteIndex, slot: Readonly<EmoteSlot>, event: SyntheticEvent) => void;
   onCancel?: (event: KeyboardEvent<HTMLDivElement>) => void;
+  /** Independent host text binding; an explicit empty string keeps it blank. */
+  centerLabel?: string;
   inputMode?: 'pointer' | 'keyboard' | 'touch' | 'gamepad';
   hints?: EmoteWheelHints;
   disabled?: boolean;
@@ -73,12 +75,13 @@ export const EmoteSlotPreview = forwardRef<HTMLDivElement, EmoteSlotPreviewProps
 
 /** Four source slots with a finite Web radial input policy, not a generic radial
  * engine or recovered game input transport. Activation is a host request only. */
-export const EmoteWheel = forwardRef<HTMLDivElement, EmoteWheelProps>(function EmoteWheel({ slots, activeIndex, defaultActiveIndex = null, onActiveIndexChange, onActivate, onCancel,
+export const EmoteWheel = forwardRef<HTMLDivElement, EmoteWheelProps>(function EmoteWheel({ slots, activeIndex, defaultActiveIndex = null, onActiveIndexChange, onActivate, onCancel, centerLabel,
   inputMode = 'pointer', hints, disabled = false, label, size = [256, 256], scale = 2, buttonRefs, className, style,
   onKeyDown, onKeyUp, onClick, onPointerDown, onPointerMove, onPointerUp, onPointerCancel, onPointerLeave, onLostPointerCapture, ...props }, forwardedRef) {
   scaleValue(scale); four(slots, 'Emote slots');
   if (!Array.isArray(size) || size.length !== 2 || ![...size].every(value => Number.isFinite(value) && value > 0 && Number.isFinite(value * scale))) throw new RangeError('Emote size requires two positive finite logical dimensions.');
   if (typeof label !== 'string' || !label.trim() || !['pointer', 'keyboard', 'touch', 'gamepad'].includes(inputMode)) throw new RangeError('Emote wheel requires an accessible label and a supported input mode.');
+  if (centerLabel !== undefined && typeof centerLabel !== 'string') throw new RangeError('Emote center label must be a string.');
   const ids = new Set<string>();
   for (const slot of slots) { if (!slot || typeof slot.id !== 'string' || !slot.id || ids.has(slot.id) || typeof slot.label !== 'string' || !slot.label.trim()) throw new RangeError('Emote slots require four unique ids and nonempty labels.'); ids.add(slot.id); previewValue(slot.preview); }
   if (hints?.keyboard !== undefined && hints.keyboard !== false) { four(hints.keyboard, 'Emote keyboard hints'); if (hints.keyboard.some(key => typeof key !== 'string')) throw new RangeError('Emote keyboard hints must be strings.'); }
@@ -161,7 +164,7 @@ export const EmoteWheel = forwardRef<HTMLDivElement, EmoteWheelProps>(function E
         onFocus={event => { setFocused(i); if (!focusOrigin.current) request(i, 'focus', event); }} onBlur={() => setFocused(null)}>
         <span className="mc-emote-wheel__preview"><EmoteSlotPreview content={slot.preview} scale={scale} label={slot.label} aria-hidden="true"/></span>
       </button>; })}
-      <Text className="mc-emote-wheel__name" shadow aria-hidden="true">{accepted === null ? '' : slots[accepted].label}</Text>
+      <Text className="mc-emote-wheel__name" shadow aria-hidden="true">{centerLabel ?? (accepted === null || slots[accepted].preview.kind === 'empty' ? '' : slots[accepted].label)}</Text>
       {inputMode === 'keyboard' && keyboard !== false && indices.map(index => <span className="mc-emote-wheel__hint mc-emote-wheel__hint--keyboard" key={index} data-emote-index={index} aria-hidden="true"><span>{keyboard[index]}</span></span>)}
       {inputMode === 'touch' && slots.map((slot, index) => <Text className="mc-emote-wheel__hint mc-emote-wheel__hint--touch" key={slot.id} data-emote-index={index} shadow aria-hidden="true">{slot.label}</Text>)}
       {inputMode === 'gamepad' && gamepad && (gamepad.mode === 'quick' && gamepad.faces ? indices.map(index => <span className="mc-emote-wheel__hint mc-emote-wheel__hint--gamepad" key={index} data-emote-index={index} aria-hidden="true">{gamepad.faces![index]}</span>)

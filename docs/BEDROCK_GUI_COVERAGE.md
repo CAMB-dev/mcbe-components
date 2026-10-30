@@ -1,6 +1,6 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库142个公开组件的**范围映射**，不是原生像素验收表。142组件包含基础控件、可复用零件及组合，不能读作142个完整游戏GUI；A类的27个文件也不代表27个完整原生流程已完成。
+这是固定官方源文件与本库143个公开组件的**范围映射**，不是原生像素验收表。143组件包含基础控件、可复用零件及组合，不能读作143个完整游戏GUI；A类的27个文件也不代表27个完整原生流程已完成。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -44,7 +44,7 @@
 
 **NPC已接入有限源族**（`npc_interact_screen.json`）：五个组合与零件保留student /worldbuilder、basic /advanced /maximized、皮肤选择和action分支，完整44项客户端合同通过；旧ServerForms37 /导航6回归与公开56辅助分别记录，不增加命名族或native认证。actor渲染、引擎权限与缓冲提交时机仍由宿主提供或待恢复，见 [NPC_QA.md](NPC_QA.md)。
 
-**EmoteWheel已接入有限源族**（`emote_wheel_screen.json`）：四槽轮盘与可复用预览保留五张完整状态原图、empty /image /text、受控选择、激活请求与键盘 /触控 /宿主 glyph 提示。21项客户端合同在 desktop /mobile 两 profile 执行，另1项原图合成检查，共42通过 /1个明确设备条件跳过；首轮触控离开事件失败保留，修后未改测试。只有该行 E→A，其他205行不变，当前组件数142。完整 screen 的 instruction /Change Emotes /outside exit 组合、原生输入路由与整页像素仍未实现或未认证，见 [EMOTE_WHEEL_QA.md](EMOTE_WHEEL_QA.md)。后续可复用实现 HowToPlay /Encyclopedia 双栏文档查看器。
+**EmoteWheel已接入有限源族**（`emote_wheel_screen.json`）：前阶段四槽轮盘 /预览的42通过 /1设备跳过与触控首败保留原身份；该阶段仅该行 E→A。现新增 `EmoteWheelScreen` 的透明框架、说明条、换装按钮行、关闭请求和方向焦点规则，视觉中心名与无障碍槽位名称独立，组件数143。新38次 Screen 合同均通过，连同未改旧43次批，共80通过 /1个明确设备条件跳过。原生空槽窗口参考促使修正中心留白，JPEG并非原始UI-pass；字体、像素栅格、引擎路由和整页严格比较仍未认证，见 [EMOTE_WHEEL_QA.md](EMOTE_WHEEL_QA.md)。206行范围状态不变，本轮只扩充该行组件映射，其他205行保持原字节。后续可复用实现 HowToPlay /Encyclopedia 双栏文档查看器。
 
 人物渲染增量提供`createNpcEntity`＋`GuiLayer`的有限NPC源模型路径和60皮肤，原生显式相机fixture下五个完整人物裁剪255,200像素严格RGBA零差，见[GUI_ENTITY_QA.md](GUI_ENTITY_QA.md)。该人物渲染增量当时不改变206行范围状态或140组件数，不认证正常自动取景、UI绑定、完整NPC GUI或其他实体引擎。
 
@@ -119,7 +119,7 @@
 |`edu_discovery_dialog.json`|discovery_dialog|0|G|—|
 |`edu_featured.json`|edu_featured|0|G|—|
 |`edu_pause_screen_pause_button.json`|edu_quit_button|0|G|—|
-|`emote_wheel_screen.json`|persona_emote|1|A|EmoteWheel、EmoteSlotPreview（仅轮盘与预览）|
+|`emote_wheel_screen.json`|persona_emote|1|A|EmoteWheelScreen、EmoteWheel、EmoteSlotPreview（源布局组合，原生像素待验）|
 |`enchanting_screen.json`|enchanting|1|A|EnchantingTable、EnchantmentOption、EnchantingBook、EnchantingRunes|
 |`enchanting_screen_pocket.json`|enchanting_pocket|0|F|—|
 |`encyclopedia_screen.json`|encyclopedia|1|E|—|

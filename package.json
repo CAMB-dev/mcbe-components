@@ -70,6 +70,7 @@
     "./server-forms.css": "./dist/server-forms.css",
     "./npc.css": "./dist/npc.css",
     "./emote-wheel.css": "./dist/emote-wheel.css",
+    "./emote-wheel-screen.css": "./dist/emote-wheel-screen.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",
