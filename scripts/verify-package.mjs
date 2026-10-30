@@ -42,10 +42,11 @@ components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage',
 const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity'];
 components.push('EmoteWheel','EmoteSlotPreview','EmoteWheelScreen');
 components.push('DocumentViewer','DocumentHeading','DocumentParagraph');
-assert.equal(components.length,146);
+components.push('PlayerPermissions','PermissionLevelSelect','PermissionToggleRow','PermissionPlayerRow');
+assert.equal(components.length,150);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,163);
+assert.equal(Object.keys(ui).length,167);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -65,6 +66,31 @@ assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+// Classic JSON permission drafts only; no preset-to-bit/cheat policy or network action.
+const packedPermissionPlayers=Object.freeze([Object.freeze({id:'alpha',name:'Caller Alpha'}),Object.freeze({id:'beta',name:'Caller Beta'})]);
+const packedPermissionOptions=Object.freeze([Object.freeze({id:'build',label:'Build'}),Object.freeze({id:'mine',label:'Mine'}),Object.freeze({id:'unbound',label:'Unknown binding'})]);
+const packedPermissionValues=Object.freeze({alpha:Object.freeze({level:'member',permissions:Object.freeze({build:true,mine:false})}),beta:Object.freeze({level:'custom',permissions:Object.freeze({build:false,mine:true})})});
+const packedPermissionSnapshot=JSON.stringify(packedPermissionValues);let permissionRequests=0;
+for(const selectedPlayerId of ['alpha','missing',null]){
+ const markup=renderToString(element(ui.PlayerPermissions,{players:packedPermissionPlayers,permissionOptions:packedPermissionOptions,label:'Packed Classic permissions',selectedPlayerId,value:packedPermissionValues,readOnly:true,templateLocked:true,templateWarning:'Caller template warning',canEditPermissions:true,kickVisible:true,banVisible:true,emptyContent:'Unknown permission state',onValueChange:()=>permissionRequests++,onSelectedPlayerIdChange:()=>permissionRequests++,onBack:()=>permissionRequests++,onKickRequest:()=>permissionRequests++,onBanRequest:()=>permissionRequests++}));
+ assert.match(markup,/data-profile="classic-json"/);assert.equal((markup.match(/role="scrollbar"/g)||[]).length,2);assert.match(markup,/Caller template warning/);
+ assert(!/ permissionOptions=| selectedPlayerId=| canEditPermissions=| templateLocked=| permissionRefs=| levelRef=/.test(markup),'Permission bindings remain private to the composition.');
+ assert(!markup.includes('data-permission-id="unbound"'),'Unknown permission keys are never painted as guessed false values.');
+ if(selectedPlayerId==='alpha'){assert.match(markup,/data-permission-id="build"/);assert.match(markup,/aria-readonly="true"/);}else assert.match(markup,/Unknown permission state/);
+}
+const packedPermissionChecks=markup=>(markup.match(/<input[^>]*>/g)||[]).filter(tag=>tag.includes('data-permission-id=')).map(tag=>[tag.match(/data-permission-id="([^"]+)"/)?.[1],tag.includes(' checked=""')]);
+for(const level of ['visitor','member','operator','custom']){
+ const roleValues={...packedPermissionValues,alpha:{...packedPermissionValues.alpha,level}};
+ const markup=renderToString(element(ui.PlayerPermissions,{players:packedPermissionPlayers,permissionOptions:packedPermissionOptions,label:'Independent permission role',value:roleValues}));
+ assert.deepEqual(packedPermissionChecks(markup),[['build',true],['mine',false]],'Rendering a role does not rewrite independent permission booleans.');
+}
+for(const context of [{worldSettings:true},{inRealm:true}]){
+ const markup=renderToString(element(ui.PermissionLevelSelect,{value:'custom',...context,labels:{label:'Caller permission level',visitor:undefined},readOnly:true}));
+ assert.match(markup,/Custom[.][.][.]/);assert(!markup.includes('data-level="custom"'),'Source context hides Custom options without coercing the accepted face.');assert.match(markup,/aria-readonly="true"/);
+}
+assert.match(renderToString(element(ui.PermissionToggleRow,{label:'Caller ability',checked:true,stateLabel:'Caller state',readOnly:true})),/Caller state/);
+assert.match(renderToString(element(ui.PermissionPlayerRow,{player:packedPermissionPlayers[0],selected:true})),/data-player-id="alpha"/);
+assert.equal(permissionRequests,0,'SSR does not issue selection, permission, Back or moderation requests.');assert.equal(JSON.stringify(packedPermissionValues),packedPermissionSnapshot);
 const documentGroups=[{id:'basics',label:'Basics',topics:[{id:'first',title:'First article',sectionTitle:'How to Play: First article',content:element(React.Fragment,null,element(ui.DocumentHeading,null,'Article heading'),element(ui.DocumentParagraph,{linePadding:6},'Live article text'))},{id:'second',title:'Second article',content:'Second content',disabled:true}]}];
 for(const value of ['first',null,'unknown']){
  const markup=renderToString(element(ui.DocumentViewer,{groups:documentGroups,label:'Packed documents',value,size:[400,300],scale:2,scrollPolicy:'preserve',emptyContent:'No article',previousHint:{label:'Previous',glyph:'Host previous'},nextHint:{label:'Next',glyph:'Host next'}}));
@@ -541,7 +567,7 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -631,6 +657,21 @@ for(const asset of documentWholeAssets){
 }
 const documentWhite=documentManifest.resources.find(asset=>asset.key==='backgroundWhite');
 assert.equal(documentWhite.entry,'resource_pack/textures/ui/permissions_player_fade_overlay.png');assert.equal(documentWhite.sha256,'5ef05eb8f2100ac885c96aced008715e1225634d327162b88625672be82547e5');
+assert(!Object.hasOwn(ui,'playerPermissionsAssets'),'Player Permissions source materials must remain private.');
+const permissionManifest=JSON.parse(await readFile(new URL('docs/player-permissions-assets.json',packageRoot),'utf8'));
+assert.equal(permissionManifest.schemaVersion,1);assert.equal(permissionManifest.fixedSource.sha256,'d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf');
+assert.equal(permissionManifest.resources.length,57);assert.equal(permissionManifest.sourceFiles.length,30);
+assert.equal(permissionManifest.sourceFiles.filter(asset=>asset.kind==='whole-png-metadata').length,22);assert.equal(permissionManifest.sourceFiles.filter(asset=>asset.kind==='whole-ui-source').length,7);
+const permissionWholeAssets=[...permissionManifest.resources,...permissionManifest.sourceFiles];
+assert.equal(permissionWholeAssets.length,87);assert.equal(new Set(permissionWholeAssets.map(asset=>asset.destination)).size,87);
+assert.deepEqual((await readdir(new URL('dist/assets/player-permissions/',packageRoot))).sort(),permissionWholeAssets.map(asset=>asset.destination.split('/').at(-1)).sort(),'All87 original permission PNG/metadata/UI/license files are retained, with no extra private resources.');
+for(const asset of permissionWholeAssets){
+ assert.match(asset.destination,/^src[/]assets[/]player-permissions[/][^/]+$/);assert(!asset.destination.includes('..'));
+ const bytes=await readFile(new URL(asset.destination.replace(/^src[/]/,'dist/'),packageRoot));
+ assert.equal(bytes.length,asset.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed whole Classic permissions source: '+asset.entry);
+}
+const permissionLicense=permissionManifest.sourceFiles.filter(asset=>asset.kind==='whole-license');assert.equal(permissionLicense.length,1);assert.equal(permissionLicense[0].bytes,222);assert.equal(permissionLicense[0].sha256,'ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d');
+assert(!permissionWholeAssets.some(asset=>/[.](?:ttf|otf|ttc|woff2?|cso|dxbc|dxil)$/i.test(asset.destination)),'Permission bank does not contain private fonts or captured shader binaries.');
 assert(!Object.hasOwn(ui,'emoteWheelAssets'),'Emote-wheel source registry must remain private.');
 const emoteManifest=JSON.parse(await readFile(new URL('docs/emote-wheel-assets.json',packageRoot),'utf8'));
 assert.equal(emoteManifest.schemaVersion,1);assert.equal(emoteManifest.resources.length,14);
@@ -772,6 +813,31 @@ const typedDocumentElements=<><DocumentViewer {...typedDocumentProps} ref={creat
 typedDocumentGroups[0].topics.push(typedDocumentTopic);
 // @ts-expect-error Scroll reset is a bounded policy.
 const badDocumentPolicy:DocumentViewerProps['scrollPolicy']='native';
+
+import { PlayerPermissions, PermissionLevelSelect, PermissionToggleRow, PermissionPlayerRow } from 'mcbeui';
+import type { PermissionLevel, PermissionLevelLabels, PermissionLevelSelectProps, PermissionToggleRowProps, PermissionPlayer, PermissionPlayerRowProps, PlayerPermissionOption, PlayerPermissionState, PlayerPermissionsValue, PlayerPermissionsChangeDetail, PlayerPermissionsLabels, PlayerPermissionsProps } from 'mcbeui';
+const typedPermissionLevel:PermissionLevel='custom';
+const typedPermissionPlayers:readonly PermissionPlayer[]=[{id:'alpha',name:'Caller Alpha',avatarSrc:'/caller-avatar.png',avatarVisible:true,localIconVisible:true,levelIcon:<span>Host icon</span>}];
+const typedPermissionOptions:readonly PlayerPermissionOption[]=[{id:'build',label:'Build',stateLabel:'Independent state'},{id:'mine',label:'Mine',disabled:true}];
+const typedPermissionState:PlayerPermissionState={level:typedPermissionLevel,permissions:{build:true,mine:false}};
+const typedPermissionValues:PlayerPermissionsValue={alpha:typedPermissionState};
+const typedPermissionLabels:Partial<PlayerPermissionsLabels>={title:'Caller permissions',back:undefined};
+const typedPermissionLevelLabels:Partial<PermissionLevelLabels>={label:'Permission level',custom:'Host Custom',visitor:undefined};
+const typedPermissionProps:PlayerPermissionsProps={players:typedPermissionPlayers,permissionOptions:typedPermissionOptions,label:'Classic permissions',selectedPlayerId:null,defaultSelectedPlayerId:null,value:typedPermissionValues,labels:typedPermissionLabels,levelLabels:typedPermissionLevelLabels,size:[400,300] as const,scale:2,readOnly:true,canEditPermissions:false,templateLocked:true,templateWarning:'Host policy',optionsVisible:true,kickVisible:true,kickEnabled:false,banVisible:true,banEnabled:false,worldSettings:true,inRealm:true,gamepad:true,gamepadBackGlyph:<span>Host controller</span>,gamepadBackText:'Back',selectorFocused:false,contentFocused:true,playersViewportRef:createRef<HTMLDivElement>(),permissionsViewportRef:createRef<HTMLDivElement>(),playerRefs:{alpha:createRef<HTMLButtonElement>()},permissionRefs:{build:createRef<HTMLInputElement>()},levelRef:createRef<HTMLButtonElement>(),onSelectedPlayerIdChange:(id,event)=>id+event.type,onValueChange:(next,detail:PlayerPermissionsChangeDetail)=>String(next[detail.playerId]?.level)+detail.reason+detail.permissionId+detail.event.type,onKickRequest:(player,event)=>player.id+event.type,onBanRequest:(player,event)=>player.id+event.type,onBack:event=>event.type,onScrollPositionChange:(pane,position)=>pane+position.scrollTop};
+const typedPermissionSelect:PermissionLevelSelectProps={value:typedPermissionLevel,defaultValue:null,worldSettings:true,inRealm:true,readOnly:true,labels:typedPermissionLevelLabels,selectedLabel:'Independent face',selectedIcon:<span>Host face icon</span>,onValueChange:(level,event)=>level+event.type};
+const typedPermissionToggle:PermissionToggleRowProps={label:'Build',checked:true,defaultChecked:false,stateLabel:'Host state',readOnly:true,onCheckedChange:(checked,event)=>String(checked)+event.currentTarget.checked};
+const typedPermissionPlayer:PermissionPlayerRowProps={player:typedPermissionPlayers[0]!,selected:true,inactive:true,onClick:event=>event.currentTarget.value};
+const typedPermissionElements=<><PlayerPermissions {...typedPermissionProps} ref={createRef<HTMLElement>()}/><PermissionLevelSelect {...typedPermissionSelect} ref={createRef<HTMLButtonElement>()}/><PermissionToggleRow {...typedPermissionToggle} ref={createRef<HTMLInputElement>()}/><PermissionPlayerRow {...typedPermissionPlayer} ref={createRef<HTMLButtonElement>()}/></>;
+// @ts-expect-error Permission roles are source branch names, not arbitrary engine role strings.
+const badPermissionLevel:PermissionLevel='owner';
+// @ts-expect-error Permission records retain boolean draft values, never string coercion.
+const badPermissionBoolean:PlayerPermissionState={level:'member',permissions:{build:'true'}};
+// @ts-expect-error Player schemas are readonly host data.
+typedPermissionPlayers.push({id:'other',name:'Other'});
+// @ts-expect-error Accepted role snapshots are readonly.
+typedPermissionState.level='operator';
+// @ts-expect-error Accepted ability snapshots are readonly.
+typedPermissionState.permissions.build=false;
 
 import type { NpcActionValue, NpcEditorValue, NpcEditorProps, NpcActionEditorProps, NpcDialogueProps, NpcSkinPickerProps, NpcPortraitProps } from 'mcbeui';
 import { createNpcEntity, npcSkinNames, npcAppearanceOptions } from 'mcbeui';

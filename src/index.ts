@@ -115,3 +115,6 @@ export type { EmoteIndex, EmotePreviewContent, EmoteSlot, EmoteActiveIndexChange
 
 export { DocumentViewer, DocumentHeading, DocumentParagraph } from './document-viewer';
 export type { DocumentTopic, DocumentGroup, DocumentHint, DocumentValueChangeDetail, DocumentScrollPosition, DocumentViewerProps, DocumentHeadingProps, DocumentParagraphProps } from './document-viewer';
+
+export { PlayerPermissions, PermissionLevelSelect, PermissionToggleRow, PermissionPlayerRow } from './player-permissions';
+export type { PermissionLevel, PermissionLevelLabels, PermissionLevelSelectProps, PermissionToggleRowProps, PermissionPlayer, PermissionPlayerRowProps, PlayerPermissionOption, PlayerPermissionState, PlayerPermissionsValue, PlayerPermissionsChangeDetail, PlayerPermissionsLabels, PlayerPermissionsProps } from './player-permissions';

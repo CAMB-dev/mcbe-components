@@ -654,6 +654,12 @@
       {"name":"EmoteWheel","status":"implemented","fidelity":"source_four_slot_whole_state_textures_web_input_policy_native_screen_validation_pending","source":"resource_pack/ui/persona_common.json and emote_wheel_screen.json, fixed v1.26.60.5","details":"docs/EMOTE_WHEEL_QA.md"},
       {"name":"EmoteSlotPreview","status":"implemented","fidelity":"source_empty_image_or_text_preview_host_thumbnail_and_validity_native_validation_pending","source":"resource_pack/ui/persona_common.json, fixed v1.26.60.5","details":"docs/EMOTE_WHEEL_QA.md"}
     ],
+    "player_permissions": [
+      {"name":"PlayerPermissions","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_json_source_composition_host_permission_drafts_not_current_oreui_or_native_certified","source":"resource_pack/ui/permissions_screen.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"},
+      {"name":"PermissionLevelSelect","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_nullable_role_dropdown_independent_of_permission_bits_client_contracts_pass_native_validation_pending","source":"resource_pack/ui/permissions_screen.json and settings_common.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"},
+      {"name":"PermissionToggleRow","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_native_checkbox_source_skin_and_independent_state_label_client_contracts_pass_native_validation_pending","source":"resource_pack/ui/permissions_screen.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"},
+      {"name":"PermissionPlayerRow","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_player_row_host_avatar_role_and_inactive_fade_client_contracts_pass_native_validation_pending","source":"resource_pack/ui/permissions_screen.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"}
+    ],
     "document_viewer": [
       {"name":"DocumentViewer","status":"implemented","fidelity":"source_grouped_dual_native_dom_viewports_host_content_and_selection_native_pixel_validation_pending","source":"resource_pack/ui/how_to_play_common.json, how_to_play_screen.json and encyclopedia_screen.json, fixed v1.26.60.5","details":"docs/DOCUMENT_VIEWER_QA.md"},
       {"name":"DocumentHeading","status":"implemented","fidelity":"source_article_header_whole_banner_semantic_dom_native_raster_validation_pending","source":"resource_pack/ui/how_to_play_common.json, fixed v1.26.60.5","details":"docs/DOCUMENT_VIEWER_QA.md"},
@@ -686,7 +692,7 @@
     ]
   },
   "publicExports": {
-    "components": 146,
+    "components": 150,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -697,7 +703,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 163,
+    "runtimeValues": 167,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 6,

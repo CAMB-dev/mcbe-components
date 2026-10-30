@@ -1,6 +1,6 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库146个公开组件的**范围映射**，不是原生像素验收表。146组件包含基础控件、可复用零件及组合，不能读作146个完整游戏GUI；A类的29个文件也不代表29个完整原生流程已完成。
+这是固定官方源文件与本库150个公开组件的**范围映射**，不是原生像素验收表。150组件包含基础控件、可复用零件及组合，不能读作150个完整游戏GUI；A类的30个文件也不代表30个完整原生流程已完成。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -10,16 +10,16 @@
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|29|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|30|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|16|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
-|E|`confirmed_missing_named_family`|10|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
+|E|`confirmed_missing_named_family`|9|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
 |G|`optional_family_unmapped`|63|可选族未建立映射：教育、平台、账户、交易等来源仍保留；服务能力由宿主负责。|
 |H|`unknown`|6|证据不足：保持未知，不强制归为已覆盖或必需新增。|
 
-## 尚缺的10个命名族
+## 尚缺的9个命名族
 
 以下表示源文件存在、该快照没有专门公开组合，不表示所有功能都须另建组件或由库接管外部服务。教育 /平台功能、通用宿主组合与Pocket仍应按产品范围单独决定。
 
@@ -29,7 +29,6 @@
 |片尾名单 /Credits|`credits_screen.json`|
 |教育沉浸式阅读器|`immersive_reader.json`|
 |邀请 /人员浏览|`invite_screen.json`|
-|玩家权限编辑|`permissions_screen.json`|
 |教育作品集 /Portfolio|`portfolio_screen.json`|
 |截图 /照片界面|`screenshot_screen.json`|
 |开始菜单 /StartMenu|`start_screen.json`|
@@ -47,6 +46,8 @@
 **双栏文档已接入有限源族**（`how_to_play_screen.json` /`encyclopedia_screen.json`）：DocumentViewer与真实复用的DocumentHeading /DocumentParagraph提供分组导航、两独立DOM滚动视口与文章结构，公开示例各有实际宿主内容。此增量仅两named行E→A，其他204行逐字保留；`how_to_play_common.json`仍是D类共享依赖，不因其中继承screen root而另算完整页面。组件数146 /运行时值163是源码实现计数；本阶段客户端 /包 /原生像素结果尚不据此推断，内容、条件和引擎路由边界见 [DOCUMENT_VIEWER_QA.md](DOCUMENT_VIEWER_QA.md)。
 
 人物渲染增量提供`createNpcEntity`＋`GuiLayer`的有限NPC源模型路径和60皮肤，原生显式相机fixture下五个完整人物裁剪255,200像素严格RGBA零差，见[GUI_ENTITY_QA.md](GUI_ENTITY_QA.md)。该人物渲染增量当时不改变206行范围状态或140组件数，不认证正常自动取景、UI绑定、完整NPC GUI或其他实体引擎。
+
+**Classic权限已接入有限源族**：PlayerPermissions /PermissionLevelSelect /PermissionToggleRow /PermissionPlayerRow使组件数增至150 /运行时值167。正式批次63通过 /2桌面触控条件跳过，公开预览12项、实际React18 /19消费通过后，仅将 `permissions_screen.json` E→有限A，其他205行逐字保留。29→30表示范围映射，不是原生整页认证。当前安装版OreUI为另一profile，Classic实现不认证其字体、响应式布局或服务流程，见 [PLAYER_PERMISSIONS_QA.md](PLAYER_PERMISSIONS_QA.md)。
 
 ## 文件与注册声明的边界
 
@@ -171,7 +172,7 @@
 |`pdp_screen.json`|pdp|1|G|—|
 |`pdp_screenshots_section.json`|pdp_screenshots|0|G|—|
 |`perf_turtle.json`|perf_turtle|0|G|—|
-|`permissions_screen.json`|permissions|1|E|—|
+|`permissions_screen.json`|permissions|1|A|PlayerPermissions、PermissionLevelSelect、PermissionToggleRow、PermissionPlayerRow（有限Classic JSON组合；当前OreUI待实现）|
 |`persona_SDL.json`|persona_sdl|0|G|—|
 |`persona_cast_character_screen.json`|persona_cast_character_screen|0|G|—|
 |`persona_common.json`|persona_common|0|D|—|

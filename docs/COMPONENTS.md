@@ -1,6 +1,8 @@
 # Bedrock 组件范围
 
-当前导出 146 个组件，目录 146 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 163 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 150 个组件，目录 150 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 167 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+
+新增Classic权限四组件已落盘，角色选择与动态boolean权限草稿独立，未知key不补false，所有授权 /Kick /Ban由宿主实现。本阶段正式63通过 /2桌面触控条件跳过、公开预览12项及React18 /19实际包消费通过；当前安装版OreUI是不同profile，不据Classic源码认证。见 [PLAYER_PERMISSIONS_QA.md](PLAYER_PERMISSIONS_QA.md)。历史DocumentViewer146组件 /163值及58通过 /1设备条件跳过保持原受测身份。
 
 书写类新增 BookReader / BookEditor / BookPage / BookPageTurnButton 与 SignTextSurface / SignEditor。Book 的30项独立客户端合同、此前138值React18 /19消费及27项公开预览辅助检查保留其范围；Sign的29项客户端合同及140值新包已通过，旧Dialog12项与修后完整导航6项分别通过，公开预览50项辅助检查通过。首批旧导航失败与修复后的范围分别保留，不合称单轮全绿或增加重复用例。五份书本及普通 /悬挂牌面采集已保存，有限混排字页与两oak背景分析完成；产品整页原生像素核验仍待进行。使用与边界见 [BOOK_QA.md](BOOK_QA.md) / [SIGN_QA.md](SIGN_QA.md)。
 
@@ -47,6 +49,7 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 | NPC对话与编辑（5） | NpcPortrait、NpcSkinPicker、NpcActionEditor、NpcDialogue、NpcEditor |
 | 表情屏幕与轮盘（3） | EmoteWheelScreen、EmoteWheel、EmoteSlotPreview |
 | 双栏文档（3） | DocumentViewer、DocumentHeading、DocumentParagraph |
+| 玩家权限Classic（4） | PlayerPermissions、PermissionLevelSelect、PermissionToggleRow、PermissionPlayerRow |
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
 

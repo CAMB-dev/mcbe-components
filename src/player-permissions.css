@@ -1,0 +1,118 @@
+/* Fixed Classic JSON profile; this is not the current OreUI permissions page. */
+.mc-player-permissions, .mc-permission-player-row, .mc-permission-toggle-row, .mc-permission-level-select, .mc-permission-level-select__popup { --mc-permissions-unit:2px; box-sizing:border-box; position:relative; color:#fff; font:400 calc(var(--mc-permissions-unit) * 10)/1 var(--mc-font,monospace); text-shadow:none; }
+.mc-player-permissions *, .mc-player-permissions *::before, .mc-player-permissions *::after, .mc-permission-player-row *, .mc-permission-toggle-row *, .mc-permission-level-select *, .mc-permission-level-select__popup * { box-sizing:border-box; }
+.mc-player-permissions [hidden], .mc-permission-level-select [hidden], .mc-permission-level-select__popup[hidden] { display:none !important; }
+.mc-player-permissions { overflow:hidden; isolation:isolate; }
+.mc-player-permissions__background { position:absolute; inset:0; background:var(--mc-permissions-background) center / 100% 100% no-repeat; opacity:.75; pointer-events:none; image-rendering:pixelated; }
+.mc-player-permissions__header { position:relative; height:calc(var(--mc-permissions-unit) * 23); }
+.mc-player-permissions__header::before { content:''; position:absolute; inset:0; border:solid transparent; border-width:0 var(--mc-permissions-unit) calc(var(--mc-permissions-unit) * 4); border-image:var(--mc-permissions-topbar) 0 1 4 1 fill / 0 var(--mc-permissions-unit) calc(var(--mc-permissions-unit) * 4) stretch; pointer-events:none; image-rendering:pixelated; }
+.mc-player-permissions__title { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:max-content; margin:0; color:rgb(30% 30% 30%); font:inherit; text-shadow:none; pointer-events:none; }
+.mc-player-permissions__back { position:absolute; left:0; top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:calc(var(--mc-permissions-unit) * 4); height:calc(var(--mc-permissions-unit) * 20); padding:0 calc(var(--mc-permissions-unit) * 2); border:0; background:none; color:rgb(30% 30% 30%); font:inherit; text-shadow:none; cursor:pointer; }
+.mc-player-permissions__back > span { width:calc(var(--mc-permissions-unit) * 4); height:calc(var(--mc-permissions-unit) * 7); position:relative; top:var(--mc-permissions-unit); background:var(--mc-permissions-chevron) center / 100% 100% no-repeat; filter:brightness(.3); image-rendering:pixelated; }
+.mc-player-permissions__back:hover:not(:disabled), .mc-player-permissions__back:focus-visible:not(:disabled) { color:#fff; }
+.mc-player-permissions__back:hover:not(:disabled) > span, .mc-player-permissions__back:focus-visible:not(:disabled) > span { filter:brightness(1); }
+.mc-player-permissions__back:disabled { cursor:default; }
+.mc-player-permissions__back:focus-visible { outline:var(--mc-permissions-unit) solid var(--mc-focus,#fff); outline-offset:calc(var(--mc-permissions-unit) * -1); }
+.mc-player-permissions__gamepad-back { position:absolute; left:var(--mc-permissions-unit); top:calc(50% - var(--mc-permissions-unit) * 6); transform:translateY(-50%); height:calc(var(--mc-permissions-unit) * 16); display:flex; align-items:center; }
+.mc-player-permissions__gamepad-back > span:first-child { display:grid; place-items:center; width:calc(var(--mc-permissions-unit) * 26); height:calc(var(--mc-permissions-unit) * 26); }
+.mc-player-permissions__body { position:absolute; left:6%; top:calc(var(--mc-permissions-unit) * 23); width:88%; height:calc(100% - var(--mc-permissions-unit) * 23); display:flex; flex-direction:column; }
+.mc-player-permissions__body-padding { height:calc(var(--mc-permissions-unit) * 4); flex:none; }
+.mc-player-permissions__ip, .mc-player-permissions__world { width:max-content; margin:0; color:#fff; font:inherit; text-shadow:none; flex:none; }
+.mc-player-permissions__main { display:flex; align-items:center; width:100%; flex:1 1 0; min-height:0; }
+.mc-player-permissions__players-pane { position:relative; width:calc(var(--mc-permissions-unit) * 154); height:95%; flex:none; min-height:0; z-index:2; }
+.mc-player-permissions__options-pane { position:relative; flex:1 1 0; min-width:0; height:95%; min-height:0; z-index:1; }
+.mc-player-permissions__players { width:100%; height:100%; }
+.mc-player-permissions__options-background { position:absolute; left:calc(var(--mc-permissions-unit) * -1); right:calc(var(--mc-permissions-unit) * -1); top:0; height:100%; border:var(--mc-permissions-unit) solid transparent; border-image:var(--mc-permissions-banner) 1 fill / var(--mc-permissions-unit) stretch; image-rendering:pixelated; }
+.mc-player-permissions__options { position:absolute; left:0; top:var(--mc-permissions-unit); width:100%; height:calc(100% - var(--mc-permissions-unit) * 2); }
+.mc-player-permissions__options-content { width:100%; padding-inline:calc(var(--mc-permissions-unit) * 10); }
+.mc-player-permissions__options-stack { width:100%; }
+.mc-player-permissions__gap-2 { height:calc(var(--mc-permissions-unit) * 2); }
+.mc-player-permissions__gap-4 { height:calc(var(--mc-permissions-unit) * 4); }
+.mc-player-permissions__gap-8 { height:calc(var(--mc-permissions-unit) * 8); }
+.mc-player-permissions__template-warning { padding:calc(var(--mc-permissions-unit) * 3) calc(var(--mc-permissions-unit) * 4); margin-bottom:calc(var(--mc-permissions-unit) * 4); border:var(--mc-permissions-unit) solid transparent; border-image:var(--mc-permissions-info) 1 fill / var(--mc-permissions-unit) stretch; overflow-wrap:anywhere; color:#fff; text-shadow:none; }
+.mc-player-permissions__options-fade, .mc-permission-player-row__fade { position:absolute; inset:0; z-index:25; background:var(--mc-permissions-white) center / 100% 100% no-repeat rgb(50% 50% 50%); background-blend-mode:multiply; opacity:.5; pointer-events:none; }
+.mc-player-permissions .mc-player-permissions__action { width:100%; height:calc(var(--mc-permissions-unit) * 28); min-height:0; padding:calc(var(--mc-permissions-unit) * 3); border:0; gap:0; background:none; color:rgb(30% 30% 30%); font:inherit; text-shadow:none; }
+.mc-player-permissions .mc-player-permissions__action::before, .mc-permission-level-select__trigger-skin { content:''; position:absolute; inset:var(--mc-permissions-unit); border:var(--mc-permissions-unit) solid transparent; border-image:var(--mc-permissions-light) 1 fill / var(--mc-permissions-unit) stretch; pointer-events:none; image-rendering:pixelated; }
+.mc-player-permissions .mc-player-permissions__action::after, .mc-permission-level-select__trigger-border { content:''; position:absolute; inset:0; border:var(--mc-permissions-unit) solid transparent; border-image:var(--mc-permissions-focus) 1 / var(--mc-permissions-unit) stretch; filter:brightness(.075); pointer-events:none; image-rendering:pixelated; }
+.mc-player-permissions .mc-player-permissions__action > .mc-button__label { max-height:calc(var(--mc-permissions-unit) * 10); overflow:hidden; text-shadow:none; }
+.mc-player-permissions .mc-player-permissions__action:hover:not(:disabled), .mc-player-permissions .mc-player-permissions__action:focus-visible:not(:disabled), .mc-player-permissions .mc-player-permissions__action:active:not(:disabled) { background:none; color:#fff; text-shadow:none; }
+.mc-player-permissions .mc-player-permissions__action:hover:not(:disabled)::before, .mc-player-permissions .mc-player-permissions__action:focus-visible:not(:disabled)::before { border-image-source:var(--mc-permissions-light-hover); }
+.mc-player-permissions .mc-player-permissions__action:hover:not(:disabled)::after, .mc-player-permissions .mc-player-permissions__action:focus-visible:not(:disabled)::after, .mc-player-permissions .mc-player-permissions__action:active:not(:disabled)::after { filter:brightness(1); }
+.mc-player-permissions .mc-player-permissions__action:active:not(:disabled)::before { border-image-source:var(--mc-permissions-light-pressed); }
+.mc-player-permissions .mc-player-permissions__action:active:not(:disabled) > .mc-button__label { transform:translateY(var(--mc-permissions-unit)); }
+.mc-player-permissions .mc-player-permissions__action:disabled { background:none; color:rgb(30% 30% 30%); cursor:default; }
+.mc-player-permissions .mc-player-permissions__action:disabled::before { border:0; border-image:none; background:var(--mc-permissions-disabled) center / 100% 100% no-repeat; }
+.mc-permission-player-row { width:100%; height:calc(var(--mc-permissions-unit) * 27); }
+.mc-permission-player-row__button { position:absolute; left:0; top:0; width:100%; height:calc(var(--mc-permissions-unit) * 28); padding:0; border:0; background:none; color:#fff; font:inherit; text-shadow:none; cursor:pointer; }
+.mc-permission-player-row__skin { position:absolute; inset:var(--mc-permissions-unit); border:var(--mc-permissions-unit) solid transparent; border-image:var(--mc-permissions-dark) 1 fill / var(--mc-permissions-unit) stretch; pointer-events:none; image-rendering:pixelated; }
+.mc-permission-player-row__button[data-selected="true"] > .mc-permission-player-row__skin { border-image-source:var(--mc-permissions-dark-checked); }
+.mc-permission-player-row__border { position:absolute; inset:0; border:var(--mc-permissions-unit) solid transparent; border-image:var(--mc-permissions-focus) 1 / var(--mc-permissions-unit) stretch; filter:brightness(.075); pointer-events:none; image-rendering:pixelated; }
+.mc-permission-player-row__content { position:absolute; left:calc(var(--mc-permissions-unit) * 3); top:calc(var(--mc-permissions-unit) * 5); width:calc(100% - var(--mc-permissions-unit) * 10); height:calc(100% - var(--mc-permissions-unit) * 10); display:flex; align-items:center; pointer-events:none; }
+.mc-permission-player-row__picture { position:relative; left:var(--mc-permissions-unit); width:calc(var(--mc-permissions-unit) * 20); height:100%; margin-right:calc(var(--mc-permissions-unit) * 4); flex:none; }
+.mc-permission-player-row__avatar { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:calc(var(--mc-permissions-unit) * 18); height:calc(var(--mc-permissions-unit) * 18); }
+.mc-permission-player-row__avatar::after { content:''; position:absolute; inset:calc(var(--mc-permissions-unit) * -1); border:var(--mc-permissions-unit) solid transparent; border-image:var(--mc-permissions-avatar-border) 1 / var(--mc-permissions-unit) stretch; filter:brightness(0); pointer-events:none; }
+.mc-permission-player-row__avatar > img { width:100%; height:100%; object-fit:fill; }
+.mc-permission-player-row__local { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:calc(var(--mc-permissions-unit) * 13); height:calc(var(--mc-permissions-unit) * 13); background:var(--mc-permissions-lan) center / 100% 100% no-repeat; image-rendering:pixelated; }
+.mc-permission-player-row__name { position:relative; top:var(--mc-permissions-unit); flex:1 1 0; min-width:0; text-align:left; overflow:hidden; color:#fff; }
+.mc-permission-player-row__level-icon { width:calc(var(--mc-permissions-unit) * 15); height:calc(var(--mc-permissions-unit) * 15); margin-right:calc(var(--mc-permissions-unit) * 4); flex:none; display:grid; place-items:center; }
+.mc-permission-player-row__level-icon > img { width:100%; height:100%; object-fit:fill; image-rendering:pixelated; }
+.mc-permission-player-row__button:hover:not(:disabled) > .mc-permission-player-row__skin { border-image-source:var(--mc-permissions-dark-hover); }
+.mc-permission-player-row__button[data-selected="true"]:hover:not(:disabled) > .mc-permission-player-row__skin { border-image-source:var(--mc-permissions-dark-checked-hover); }
+.mc-permission-player-row__button:hover:not(:disabled) > .mc-permission-player-row__border { filter:brightness(1); }
+.mc-permission-player-row__button:focus-visible { outline:var(--mc-permissions-unit) solid var(--mc-focus,#fff); outline-offset:calc(var(--mc-permissions-unit) * -2); }
+.mc-permission-player-row__button:disabled { cursor:default; }
+.mc-permission-player-row__button:disabled > .mc-permission-player-row__skin { border:0; border-image:none; background:var(--mc-permissions-disabled) center / 100% 100% no-repeat; }
+.mc-permission-toggle-row { display:flex; align-items:center; width:100%; height:calc(var(--mc-permissions-unit) * 24); }
+.mc-permission-toggle-row__label { flex:1 1 0; min-width:0; overflow-wrap:anywhere; color:#fff; }
+.mc-permission-toggle-row__state { flex:none; padding-inline:calc(var(--mc-permissions-unit) * 4); color:#fff; }
+.mc-permission-toggle-row__control { position:relative; width:calc(var(--mc-permissions-unit) * 30); height:100%; flex:none; }
+.mc-permission-toggle-row__input { position:absolute; z-index:1; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer; }
+.mc-permission-toggle-row__skin { position:absolute; inset:var(--mc-permissions-unit); background:var(--mc-permissions-off) center / 100% 100% no-repeat; pointer-events:none; image-rendering:pixelated; }
+.mc-permission-toggle-row__input:checked + .mc-permission-toggle-row__skin { background-image:var(--mc-permissions-on); }
+.mc-permission-toggle-row__input:hover:not(:disabled) + .mc-permission-toggle-row__skin { background-image:var(--mc-permissions-off-hover); }
+.mc-permission-toggle-row__input:checked:hover:not(:disabled) + .mc-permission-toggle-row__skin { background-image:var(--mc-permissions-on-hover); }
+.mc-permission-toggle-row__input:focus-visible + .mc-permission-toggle-row__skin { outline:var(--mc-permissions-unit) solid var(--mc-focus,#fff); outline-offset:var(--mc-permissions-unit); }
+.mc-permission-toggle-row__input:disabled { cursor:default; }
+.mc-permission-toggle-row__input:disabled + .mc-permission-toggle-row__skin { opacity:.5; }
+.mc-permission-level-select { width:100%; padding-bottom:calc(var(--mc-permissions-unit) * 4); }
+.mc-permission-level-select__label { display:block; margin-bottom:calc(var(--mc-permissions-unit) * 2); min-height:calc(var(--mc-permissions-unit) * 10); color:#fff; }
+.mc-permission-level-select__trigger { position:relative; width:100%; height:calc(var(--mc-permissions-unit) * 30); padding:0; border:0; background:none; color:rgb(30% 30% 30%); font:inherit; text-shadow:none; text-align:left; cursor:pointer; }
+.mc-permission-level-select__face { position:absolute; left:calc(var(--mc-permissions-unit) * 8); top:calc(var(--mc-permissions-unit) * 4); width:calc(100% - var(--mc-permissions-unit) * 16); height:calc(100% - var(--mc-permissions-unit) * 8); display:flex; align-items:center; pointer-events:none; }
+.mc-permission-level-select__icon { position:relative; top:calc(var(--mc-permissions-unit) * -1); width:calc(var(--mc-permissions-unit) * 15); height:calc(var(--mc-permissions-unit) * 15); flex:none; margin-right:calc(var(--mc-permissions-unit) * 10); display:grid; place-items:center; }
+.mc-permission-level-select__icon > img { width:100%; height:100%; object-fit:fill; image-rendering:pixelated; }
+.mc-permission-level-select__value { flex:1 1 0; min-width:0; max-height:100%; overflow:hidden; overflow-wrap:anywhere; }
+.mc-permission-level-select__arrow { flex:none; width:calc(var(--mc-permissions-unit) * 8); height:calc(var(--mc-permissions-unit) * 8); background:var(--mc-permissions-dropdown-arrow) center / 100% 100% no-repeat; image-rendering:pixelated; }
+.mc-permission-level-select__trigger:hover:not(:disabled), .mc-permission-level-select__trigger:focus-visible:not(:disabled) { color:#fff; }
+.mc-permission-level-select__trigger:hover:not(:disabled) > .mc-permission-level-select__trigger-skin, .mc-permission-level-select__trigger:focus-visible:not(:disabled) > .mc-permission-level-select__trigger-skin { border-image-source:var(--mc-permissions-light-hover); }
+.mc-permission-level-select__trigger:hover:not(:disabled) > .mc-permission-level-select__trigger-border, .mc-permission-level-select__trigger:focus-visible:not(:disabled) > .mc-permission-level-select__trigger-border { filter:brightness(1); }
+.mc-permission-level-select__trigger:focus-visible { outline:var(--mc-permissions-unit) solid var(--mc-focus,#fff); outline-offset:calc(var(--mc-permissions-unit) * -2); }
+.mc-permission-level-select__trigger:disabled { cursor:default; }
+.mc-permission-level-select__trigger:disabled > .mc-permission-level-select__trigger-skin { border:0; border-image:none; background:var(--mc-permissions-disabled) center / 100% 100% no-repeat; }
+.mc-permission-level-select__popup { z-index:1000; height:calc(var(--mc-permissions-unit) * 73.5); border:calc(var(--mc-permissions-unit) * 2) solid transparent; border-image:var(--mc-permissions-dropdown) 2 fill / calc(var(--mc-permissions-unit) * 2) stretch; overflow:visible; }
+.mc-permission-level-select__options { position:relative; top:var(--mc-permissions-unit); left:calc(var(--mc-permissions-unit) * 2); width:calc(100% - var(--mc-permissions-unit) * 4); }
+.mc-permission-level-select__option { position:relative; min-height:calc(var(--mc-permissions-unit) * 17); color:#fff; cursor:pointer; }
+.mc-permission-level-select__option-title { position:relative; display:flex; align-items:center; min-height:calc(var(--mc-permissions-unit) * 16); padding-left:calc(var(--mc-permissions-unit) * 3); }
+.mc-permission-level-select__option-icon { width:calc(var(--mc-permissions-unit) * 10); height:calc(var(--mc-permissions-unit) * 10); object-fit:fill; flex:none; image-rendering:pixelated; }
+.mc-permission-level-select__option-title > span { position:relative; top:calc(var(--mc-permissions-unit) * .5); margin-left:calc(var(--mc-permissions-unit) * 6); }
+.mc-permission-level-select__option[data-active]::before { content:''; position:absolute; inset:0; border:var(--mc-permissions-unit) solid transparent; border-image:var(--mc-permissions-focus) 1 / var(--mc-permissions-unit) stretch; pointer-events:none; }
+.mc-permission-level-select__description { display:block; width:calc(100% - var(--mc-permissions-unit) * 8); margin-left:calc(var(--mc-permissions-unit) * 4); padding-bottom:calc(var(--mc-permissions-unit) * 2); color:#fff; font:400 calc(var(--mc-permissions-unit) * 13.33)/1 var(--mc-font-smooth,system-ui,sans-serif); text-shadow:none; overflow-wrap:anywhere; }
+@media (forced-colors:active) {
+  .mc-player-permissions { color:CanvasText; background:Canvas; }
+  .mc-player-permissions__background, .mc-player-permissions__header::before, .mc-player-permissions__options-background, .mc-player-permissions__options-fade, .mc-permission-player-row__fade, .mc-permission-player-row__skin, .mc-permission-player-row__border, .mc-permission-level-select__trigger-skin, .mc-permission-level-select__trigger-border { display:none; }
+  .mc-player-permissions__header { background:Canvas; border-bottom:1px solid CanvasText; }
+  .mc-player-permissions__title, .mc-player-permissions__world, .mc-player-permissions__ip, .mc-permission-toggle-row__label, .mc-permission-toggle-row__state, .mc-permission-level-select__label { color:CanvasText; }
+  .mc-player-permissions__back, .mc-permission-player-row__button, .mc-permission-level-select__trigger, .mc-permission-level-select__trigger:is(:hover,:active,:focus-visible), .mc-player-permissions .mc-player-permissions__action, .mc-player-permissions .mc-player-permissions__action:is(:hover,:active,:focus-visible):not(:disabled) { color:ButtonText; background:ButtonFace; border:1px solid ButtonText; }
+  .mc-player-permissions__back > span { display:none; }
+  .mc-player-permissions__back::before { content:'←'; }
+  .mc-permission-player-row__name { color:ButtonText; }
+  .mc-permission-player-row__button[data-selected="true"] { border-color:Highlight; border-width:2px; }
+  .mc-player-permissions .mc-player-permissions__action::before, .mc-player-permissions .mc-player-permissions__action::after { display:none; }
+  .mc-player-permissions__template-warning, .mc-permission-level-select__popup { border-image:none; background:Canvas; color:CanvasText; border:1px solid CanvasText; }
+  .mc-permission-level-select__option, .mc-permission-level-select__description { color:CanvasText; }
+  .mc-permission-level-select__option[data-active] { outline:1px solid Highlight; }
+  .mc-permission-level-select__option[data-active]::before { display:none; }
+  .mc-permission-toggle-row__skin { background:ButtonFace !important; border:1px solid ButtonText; }
+  .mc-permission-toggle-row__input:checked + .mc-permission-toggle-row__skin::after { content:'✓'; color:ButtonText; }
+  .mc-permission-toggle-row__input:disabled + .mc-permission-toggle-row__skin { opacity:1; border-color:GrayText; }
+  .mc-permission-player-row__button:disabled, .mc-permission-level-select__trigger:disabled, .mc-player-permissions .mc-player-permissions__action:disabled { color:GrayText; }
+}
