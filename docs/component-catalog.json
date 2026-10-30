@@ -649,6 +649,10 @@
       {"name":"NpcDialogue","status":"implemented","fidelity":"source_student_and_worldbuilder_dialogue_composition_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"},
       {"name":"NpcEditor","status":"implemented","fidelity":"source_basic_advanced_and_maximized_host_state_composition_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"}
     ],
+    "emote_wheel": [
+      {"name":"EmoteWheel","status":"implemented","fidelity":"source_four_slot_whole_state_textures_web_input_policy_native_screen_validation_pending","source":"resource_pack/ui/persona_common.json and emote_wheel_screen.json, fixed v1.26.60.5","details":"docs/EMOTE_WHEEL_QA.md"},
+      {"name":"EmoteSlotPreview","status":"implemented","fidelity":"source_empty_image_or_text_preview_host_thumbnail_and_validity_native_validation_pending","source":"resource_pack/ui/persona_common.json, fixed v1.26.60.5","details":"docs/EMOTE_WHEEL_QA.md"}
+    ],
     "server_forms": [
       {"name":"ServerActionForm","status":"implemented","fidelity":"source_long_form_factory_web_composition_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"},
       {"name":"ServerCustomForm","status":"implemented","fidelity":"source_custom_form_nine_field_factory_host_typed_state_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"}
@@ -676,7 +680,7 @@
     ]
   },
   "publicExports": {
-    "components": 140,
+    "components": 142,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -687,10 +691,13 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 154,
+    "runtimeValues": 159,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
-    "dataValues": 4,
+    "dataValues": 6,
+    "npcDataValues": 2,
+    "npcRegistries": ["npcSkinNames", "npcAppearanceOptions"],
+    "pureEntityFunctions": ["createNpcEntity"],
     "guiIconDataValues": 1,
     "iconNameRegistries": [
       "guiIconNames"

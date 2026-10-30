@@ -40,10 +40,11 @@ const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames','npcSkinNames','npcAppearanceOptions'];
 components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage','BookPageTurnButton','SignTextSurface','SignEditor','JigsawEditor','JigsawPriorityFields','CommandBlockEditor','CommandInput','CommandOutputPanel','StructureEditor','XYZVectorInput','ServerActionForm','ServerCustomForm','NpcPortrait','NpcSkinPicker','NpcActionEditor','NpcDialogue','NpcEditor');
 const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity'];
-assert.equal(components.length,140);
+components.push('EmoteWheel','EmoteSlotPreview');
+assert.equal(components.length,142);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,157);
+assert.equal(Object.keys(ui).length,159);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -63,6 +64,25 @@ assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+const emoteSlots=[
+ {id:'wave',label:'Wave',preview:{kind:'text',text:'1'}},
+ {id:'clap',label:'Clap',preview:{kind:'image',src:'/host-emote.png'}},
+ {id:'empty',label:'Empty slot',preview:{kind:'empty'}},
+ {id:'dance',label:'Dance',preview:{kind:'text',text:'4'}}
+];
+const emoteMarkup=renderToString(element(ui.EmoteWheel,{slots:emoteSlots,label:'Packed emotes',activeIndex:2,inputMode:'keyboard',scale:2,size:[256,200]}));
+assert.match(emoteMarkup,/emote_wheel_updated_select_2[.]png/);
+assert.equal((emoteMarkup.match(/<img[^>]*src="[^"]*emote_wheel_updated_(?:base|select_[0-3])[.]png"/g)||[]).length,1,'One whole wheel state frame; never layer selected-frame alpha over the base.');
+assert.match(emoteMarkup,/icon_none[.]png/);assert.match(emoteMarkup,/host-emote[.]png/);assert.match(emoteMarkup,/Packed emotes/);
+assert.equal((emoteMarkup.match(/<button/g)||[]).length,4,'Exactly four source cardinal slot buttons.');
+assert(!/ activeIndex=| slots=| inputMode=| defaultActiveIndex=/.test(emoteMarkup),'Internal wheel props do not leak to native DOM attributes.');
+for(const content of [{kind:'empty'},{kind:'text',text:'Fallback index'},{kind:'image',src:'/host-thumbnail.png'}]){
+ const markup=renderToString(element(ui.EmoteSlotPreview,{content,scale:1,'aria-label':'Packed preview'}));
+ assert.match(markup,/Packed preview/);
+ if(content.kind==='empty')assert.match(markup,/icon_none[.]png/);
+ if(content.kind==='text')assert.match(markup,/Fallback index/);
+ if(content.kind==='image')assert.match(markup,/host-thumbnail[.]png/);
+}
 // Caller-selected finite camera/material inputs. These identity matrices are a
 // normal package-consumption fixture, not native recovered camera/lighting.
 const npcIdentity=()=>new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);
@@ -501,11 +521,14 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
 const packageRoot = new URL('./',import.meta.resolve('mcbeui/package.json'));
+const catalog=JSON.parse(await readFile(new URL('docs/component-catalog.json',packageRoot),'utf8'));
+assert.equal(catalog.publicExports.components,components.length);assert.equal(catalog.publicExports.runtimeValues,Object.keys(ui).length);assert.equal(catalog.publicExports.dataValues,dataExports.length);
+assert.deepEqual(Object.values(catalog.groups).flat().filter(value=>value.status==='implemented').map(value=>value.name).sort(),[...components].sort(),'Published component catalog matches actual exports.');
 const componentCatalog = JSON.parse(await readFile(new URL('docs/component-catalog.json',packageRoot),'utf8'));
 const documentedComponents = Object.values(componentCatalog.groups).flat().filter(entry=>entry.status==='implemented').map(entry=>entry.name);
 assert.deepEqual(documentedComponents.sort(),components.slice().sort(),'Packed catalog must match component exports without counting data helpers.');
@@ -574,6 +597,17 @@ for (const name of ui.guiIconNames) {
   const imageSource = markup.match(/<img[^>]+src="([^"]+)"/)[1].replaceAll('&amp;','&');
   assert.equal(createHash('sha256').update(await readFile(new URL(imageSource))).digest('hex'),asset.sha256,'Consumer GuiIcon URL: '+name);
   assert(markup.includes('role="img"'));
+}
+assert(!Object.hasOwn(ui,'emoteWheelAssets'),'Emote-wheel source registry must remain private.');
+const emoteManifest=JSON.parse(await readFile(new URL('docs/emote-wheel-assets.json',packageRoot),'utf8'));
+assert.equal(emoteManifest.schemaVersion,1);assert.equal(emoteManifest.resources.length,14);
+assert.equal(emoteManifest.textureMetadata.length,7);assert.equal(emoteManifest.sourceFiles.length,8);
+const emoteWholeAssets=[...emoteManifest.resources,...emoteManifest.textureMetadata,...emoteManifest.sourceFiles,emoteManifest.license];
+assert.equal(emoteWholeAssets.length,30);assert.equal(new Set(emoteWholeAssets.map(asset=>asset.destination)).size,30);
+assert.deepEqual((await readdir(new URL('dist/assets/emote-wheel/',packageRoot))).sort(),emoteWholeAssets.map(asset=>asset.destination.split('/').at(-1)).sort(),'Packed emote bank retains every whole original PNG, metadata, UI/lang source and license.');
+for(const asset of emoteWholeAssets){
+ const bytes=await readFile(new URL(asset.destination.replace(/^src\\//,'dist/'),packageRoot));
+ assert.equal(bytes.length,asset.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed whole emote source: '+asset.entry);
 }
 assert(!Object.hasOwn(ui,'npcImageAssets'),'NPC source registry must remain private.');
 const npcManifest=JSON.parse(await readFile(new URL('docs/npc-assets.json',packageRoot),'utf8'));
@@ -672,6 +706,21 @@ const serverActionProps: ServerActionFormProps = {title:'Actions',rows:serverRow
 const serverCustomProps: ServerCustomFormProps = {title:'Custom',fields:serverFields,value:serverValues,inputRefs:{name:createRef<HTMLInputElement>()},multiselectRefs:{multi:createRef<HTMLButtonElement>()},onValueChange:(next,detail)=>String(next[detail.id]),onSubmit:accepted=>accepted.name,onCancel:(accepted,detail)=>String(accepted.name)+detail.reason};
 const serverElements = <><ServerActionForm {...serverActionProps} ref={createRef<HTMLElement>()}/><ServerCustomForm {...serverCustomProps} ref={createRef<HTMLElement>()}/></>;
 import { NpcPortrait, NpcSkinPicker, NpcActionEditor, NpcDialogue, NpcEditor } from 'mcbeui';
+import { EmoteWheel, EmoteSlotPreview } from 'mcbeui';
+import type { EmoteIndex, EmotePreviewContent, EmoteSlot, EmoteWheelProps, EmoteSlotPreviewProps } from 'mcbeui';
+const typedEmoteIndex: EmoteIndex=2;
+const typedEmoteContent: EmotePreviewContent={kind:'text',text:'1'};
+const typedEmoteSlot: EmoteSlot={id:'wave',label:'Wave',preview:typedEmoteContent};
+const typedEmoteSlots: EmoteWheelProps['slots']=[typedEmoteSlot,{id:'clap',label:'Clap',preview:{kind:'image',src:'/host.png'}},{id:'empty',label:'Empty',preview:{kind:'empty'}},{id:'dance',label:'Dance',preview:{kind:'text',text:'4'}}];
+// @ts-expect-error Source slot tuple cannot be shortened to three entries.
+const invalidEmoteSlots: EmoteWheelProps['slots']=[typedEmoteSlot,typedEmoteSlot,typedEmoteSlot];
+// @ts-expect-error Source slot tuple is readonly.
+typedEmoteSlots[0]=typedEmoteSlot;
+// @ts-expect-error Only the four source cardinal indices are valid.
+const invalidEmoteIndex: EmoteIndex=4;
+const typedEmoteProps: EmoteWheelProps={slots:typedEmoteSlots,label:'Typed wheel',size:[256,200],activeIndex:typedEmoteIndex,onActiveIndexChange:(index,detail)=>String(index)+detail.cause+detail.event.type,onActivate:(index,slot,event)=>String(index)+slot.id+event.type,onCancel:event=>event.key,hints:{keyboard:['1','2','3','4'],gamepad:{mode:'quick',faces:[<span>Up</span>,<span>Right</span>,<span>Down</span>,<span>Left</span>]}},buttonRefs:{0:createRef<HTMLButtonElement>()}};
+const typedEmotePreviewProps: EmoteSlotPreviewProps={content:typedEmoteContent,scale:2};
+const typedEmoteElements=<><EmoteWheel {...typedEmoteProps} ref={createRef<HTMLDivElement>()}/><EmoteSlotPreview {...typedEmotePreviewProps} ref={createRef<HTMLDivElement>()}/></>;
 import type { NpcActionValue, NpcEditorValue, NpcEditorProps, NpcActionEditorProps, NpcDialogueProps, NpcSkinPickerProps, NpcPortraitProps } from 'mcbeui';
 import { createNpcEntity, npcSkinNames, npcAppearanceOptions } from 'mcbeui';
 import type { NpcSkinName, NpcEntityVariant, NpcEntityOptions, NpcAppearanceOption, GuiEntityCube, GuiEntityBone, GuiEntitySource, GuiNpcPortraitMaterial, GuiEntityGeometry, GuiEntityMesh, GuiEntityLayoutOptions, GuiEntityLayout } from 'mcbeui';

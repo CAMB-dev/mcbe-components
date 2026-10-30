@@ -338,9 +338,9 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **140 个已实现组件**，包含NpcPortrait、NpcSkinPicker、NpcActionEditor、NpcDialogue与NpcEditor；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开6份数据、11个渲染 /几何 /纹理函数，共157个运行时值：`npcAppearanceOptions`补齐原版NPC外观顺序，保留`npcSkinNames`的controller顺序及`createNpcEntity`的variant语义。新增完整15项实体合同通过，实体范围见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。此前156值包 /实体14项 /旧渲染77项、NPC布局44项 /154值包 /64项公开辅助分别保留原身份。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
+当前 **142 个已实现组件**，新增四槽 `EmoteWheel` 与可复用 `EmoteSlotPreview`；按 Bedrock 原生控件与 GUI 边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开6份数据、11个渲染 /几何 /纹理函数，共159个运行时值。表情轮盘使用五张完整原图，空槽 /图片 /文字状态、宿主受控选择与播放请求分离，范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)。此前157值 NPC 外观顺序与15项实体合同、156值包 /实体14项 /旧渲染77项、NPC布局44项 /154值包 /64项公开辅助分别保留原身份，见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
 
-[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与13个命名族缺口。140组件不是140个完整GUI；NPC人物渲染仅认证有限源模型、姿态和显式相机fixture，自动取景、引擎及原生整页仍未完成。
+[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与12个命名族缺口。142组件不是142个完整GUI；EmoteWheel尚缺完整screen组合与原生整页验收，NPC人物自动取景、引擎及原生整页也仍未完成。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -352,6 +352,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 - 结构编辑：StructureEditor复用XYZVectorInput，preview与save /load /export均由宿主实现；预览入口 `#structure-editor`，字段、能力条件及实际验收范围见 [STRUCTURE_EDITOR_QA.md](docs/STRUCTURE_EDITOR_QA.md)。
 - 服务端表单：`#server-forms`预览ServerActionForm /ServerCustomForm，提供源row /typed schema及宿主请求；独立合同、tooltip与资源范围见 [SERVER_FORMS_QA.md](docs/SERVER_FORMS_QA.md)，不实现后端协议或第三MessageForm。
 - NPC：`#npc`预览对话、basic /advanced编辑、皮肤选择、可复用action编辑与60套原版人物模型。人物槽可组合`createNpcEntity`和`GuiLayer`，相机由宿主提供；命令、URL与保存仅发请求，原生采集不等于整页像素验收。见 [NPC_QA.md](docs/NPC_QA.md) 与 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。
+- 表情轮盘：`#emote-wheel` 预览上 /右 /下 /左四槽、五种完整纹理状态、键盘 /触控提示、像素倍率及宿主拒绝选择。`EmoteSlotPreview` 可复用空槽、文字回退或调用方图片；控制器图形与实际表情播放由宿主提供。完整源 screen 组合和原生整页像素仍待验收，见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)。
 - HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示、玩家列表及触屏控制，以及暂停 / 死亡 / 设置 / 加载 / 世界 / 服务器 / 资源包 / 成就提示等组合。
 
 目录中的 GUI 由这些基础零件组合。目录范围不等于所有版本、所有平台的完整游戏界面；原生 3D renderer、游戏规则、最终像素取整与真实游戏整帧差异单独验收。
@@ -654,7 +655,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。当前140组件 /157值在React18.3.1 /19.3.1真实消费通过，含60皮肤、原版外观顺序、67份原资源和只读类型校验，见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。人物156值、NPC布局154值、ServerForms135 /149、Structure133 /147及更早包保持历史范围。
+- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。当前检查142组件 /159值、四槽轮盘 readonly tuple /ref /回调、30份完整表情轮盘源文件，以及原有60皮肤、外观顺序和67份NPC原资源。表情轮盘范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)；NPC157值在React18.3.1 /19.3.1的历史消费结果见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。人物156值、NPC布局154值、ServerForms135 /149、Structure133 /147及更早包保持历史范围。
 - `#books` 的27项生产辅助与旧6项导航回归已分别通过，覆盖真实编辑 / 签名请求 / 窄屏及既有锚点；它们不计入Book正式30项或原生像素认证，见 [BOOK_QA.md](docs/BOOK_QA.md)。
 - `#signs` 的50项公开集成辅助已通过；新Sign29项、旧Dialog12项与修后完整导航6项分批验证，保留首次导航失败及修复记录，不作为原生整页像素或真实OS IME认证，见 [SIGN_QA.md](docs/SIGN_QA.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。

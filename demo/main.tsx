@@ -40,6 +40,7 @@ import { CommandBlockExamples } from './command-block-examples';
 import { StructureEditorExamples } from './structure-editor-examples';
 import { ServerFormsExamples } from './server-forms-examples';
 import { NpcExamples } from './npc-examples';
+import { EmoteWheelExamples } from './emote-wheel-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -68,6 +69,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'structure-editor', name: 'Structure editor', icon: 'chevron', count: '02' },
   { id: 'server-forms', name: 'Server forms', icon: 'chevron', count: '02' },
   { id: 'npc', name: 'NPC dialogue & editor', icon: 'chevron', count: '05' },
+  { id: 'emote-wheel', name: 'Emote wheel', icon: 'chevron', count: '02' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'anvil-layer', name: 'Source Anvil', icon: 'chevron', count: '01' },
@@ -420,6 +422,7 @@ function App() {
       <Example id="structure-editor" title="Structure editor" detail="Save, load, corner, data and 3D export forms with reusable XYZ fields and caller-supplied previews."><StructureEditorExamples notify={notify}/></Example>
       <Example id="server-forms" title="Server forms" detail="Schema-driven action and custom forms with caller-owned values, icons and response requests."><ServerFormsExamples notify={notify}/></Example>
       <Example id="npc" title="NPC dialogue & editor" detail="Dialogue, appearance and command or URL editing with reusable portrait and action controls."><NpcExamples notify={notify}/></Example>
+      <Example id="emote-wheel" title="Emote wheel" detail="Four original wheel slices, whole state textures and reusable empty, text or host-image previews."><EmoteWheelExamples/></Example>
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

@@ -1,0 +1,651 @@
+{
+  "schemaVersion": 1,
+  "status": "SOURCE_ASSET_BANK_NATIVE_RENDERING_UNVERIFIED",
+  "fixedSource": {
+    "release": "v1.26.60.5-full",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "archiveBytes": 169569258
+  },
+  "hashNormalization": {
+    "wholeOriginalFiles": "Raw bytes, no newline normalization or image reencoding.",
+    "generatedRegistryCheck": "UTF-8 text normalizes CRLF/CR to LF only for registry comparison."
+  },
+  "resources": [
+    {
+      "key": "wheelBase",
+      "entry": "resource_pack/textures/ui/emote_wheel_updated_base.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/emote_wheel_updated_base.png",
+      "destination": "src/assets/emote-wheel/emote_wheel_updated_base.png",
+      "bytes": 796,
+      "sha256": "2fcb8d895aa748f0f6715430b312ffee939e66615c2dd09c5317acd593835868",
+      "dimensions": [
+        143,
+        143
+      ],
+      "rgbaSha256": "f0c3620496e961c1efaa0928c13ab7ef48c89c1e91fc149062c0aaa600c96cee",
+      "alphaHistogram": {
+        "0": 8846,
+        "179": 7396,
+        "230": 2025,
+        "255": 2182
+      }
+    },
+    {
+      "key": "wheelSelect0",
+      "entry": "resource_pack/textures/ui/emote_wheel_updated_select_0.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/emote_wheel_updated_select_0.png",
+      "destination": "src/assets/emote-wheel/emote_wheel_updated_select_0.png",
+      "bytes": 765,
+      "sha256": "f1dc68a70cb8d1b8138284d0a1b43b2666eb3a3823776db4d4f34115b32c54f8",
+      "dimensions": [
+        143,
+        143
+      ],
+      "rgbaSha256": "bbea745c820a05bb7ab7593eb37221b348b0956d1064e644e36afb8706bb4651",
+      "alphaHistogram": {
+        "0": 8846,
+        "179": 5547,
+        "230": 2025,
+        "242": 1849,
+        "255": 2182
+      }
+    },
+    {
+      "key": "wheelSelect1",
+      "entry": "resource_pack/textures/ui/emote_wheel_updated_select_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/emote_wheel_updated_select_1.png",
+      "destination": "src/assets/emote-wheel/emote_wheel_updated_select_1.png",
+      "bytes": 771,
+      "sha256": "79c9166fbdbdeecc32a55fa9e6cafc0b837e6eb99eff13a43931d558488d1f45",
+      "dimensions": [
+        143,
+        143
+      ],
+      "rgbaSha256": "4ac4d03081b51e573e7e2925a858ac0bf559e10fd3491f33ab321a3bedfbe69b",
+      "alphaHistogram": {
+        "0": 8846,
+        "179": 5547,
+        "230": 2025,
+        "242": 1849,
+        "255": 2182
+      }
+    },
+    {
+      "key": "wheelSelect2",
+      "entry": "resource_pack/textures/ui/emote_wheel_updated_select_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/emote_wheel_updated_select_2.png",
+      "destination": "src/assets/emote-wheel/emote_wheel_updated_select_2.png",
+      "bytes": 771,
+      "sha256": "de16e43e03d5900c3c93d4fb7f7d6f6075426ce9148427b73489eb6adc7bbfdc",
+      "dimensions": [
+        143,
+        143
+      ],
+      "rgbaSha256": "ed9758739bd2bd5d48e782a43e399c3e42995a20ad4dc4144fcc7cbd55ff575e",
+      "alphaHistogram": {
+        "0": 8846,
+        "179": 5547,
+        "230": 2025,
+        "242": 1849,
+        "255": 2182
+      }
+    },
+    {
+      "key": "wheelSelect3",
+      "entry": "resource_pack/textures/ui/emote_wheel_updated_select_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/emote_wheel_updated_select_3.png",
+      "destination": "src/assets/emote-wheel/emote_wheel_updated_select_3.png",
+      "bytes": 771,
+      "sha256": "261f230f2f065e572b479b778cfe852157f6959b304cdc663813956df997829f",
+      "dimensions": [
+        143,
+        143
+      ],
+      "rgbaSha256": "962d5de1807e22454360899787515c3c5a483070eb107ca4aa3a581f203028a4",
+      "alphaHistogram": {
+        "0": 8846,
+        "179": 5547,
+        "230": 2025,
+        "242": 1849,
+        "255": 2182
+      }
+    },
+    {
+      "key": "iconNone",
+      "entry": "resource_pack/textures/ui/icon_none.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/icon_none.png",
+      "destination": "src/assets/emote-wheel/icon_none.png",
+      "bytes": 2818,
+      "sha256": "6f976b24332308ec8e7d55539f07816a64b3b6180d6bb8c7aa29651bbc636fad",
+      "dimensions": [
+        14,
+        14
+      ],
+      "rgbaSha256": "f16176bf1aa27680d1631ec3a3c4062ed3660e43cde364bc7890ce5bd78a9f54",
+      "alphaHistogram": {
+        "0": 152,
+        "102": 44
+      }
+    },
+    {
+      "key": "black",
+      "entry": "resource_pack/textures/ui/Black.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/Black.png",
+      "destination": "src/assets/emote-wheel/Black.png",
+      "bytes": 84,
+      "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e",
+      "dimensions": [
+        2,
+        2
+      ],
+      "rgbaSha256": "cc0fa51d4d0a97b664030be5052f3b2b69a1267f89ace4c9bbc65007566725df",
+      "alphaHistogram": {
+        "255": 4
+      },
+      "nineSlice": {
+        "insets": 1,
+        "baseSize": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "key": "keyboardTooltip",
+      "entry": "resource_pack/textures/ui/keyboard_tooltip_icon.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/keyboard_tooltip_icon.png",
+      "destination": "src/assets/emote-wheel/keyboard_tooltip_icon.png",
+      "bytes": 165,
+      "sha256": "0d79d53a03317ca45ba94cff6d6f1cdd1c885f41bccee1138719487cac4658f7",
+      "dimensions": [
+        17,
+        17
+      ],
+      "rgbaSha256": "2d352a13b86ee1fd60582f841aa464da9d381ac5a2e921af75504ceb356c22ff",
+      "alphaHistogram": {
+        "0": 26,
+        "255": 263
+      },
+      "nineSlice": {
+        "insets": [
+          5,
+          3,
+          5,
+          7
+        ],
+        "baseSize": [
+          17,
+          17
+        ]
+      }
+    },
+    {
+      "key": "gamepadPlaceholder",
+      "entry": "resource_pack/textures/ui/grey_gamepad_icon_button.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/grey_gamepad_icon_button.png",
+      "destination": "src/assets/emote-wheel/grey_gamepad_icon_button.png",
+      "bytes": 184,
+      "sha256": "37c64fbecc15f62c9440d23eaab41bc4e9d08e4448bb87e6c5cfaa98aaf1d5d6",
+      "dimensions": [
+        15,
+        13
+      ],
+      "rgbaSha256": "ef27db7896d886903010cb0b202b48f8e2c1d948c548320c76b7febde113baa5",
+      "alphaHistogram": {
+        "0": 48,
+        "255": 147
+      }
+    },
+    {
+      "key": "buttonLight",
+      "entry": "resource_pack/textures/ui/button_borderless_light.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_light.png",
+      "destination": "src/assets/emote-wheel/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "dimensions": [
+        4,
+        4
+      ],
+      "rgbaSha256": "9092e39baddfeaed8a28a47ee8548451162f6b4dc50478b412720d04c55ff841",
+      "alphaHistogram": {
+        "255": 16
+      },
+      "nineSlice": {
+        "insets": 1,
+        "baseSize": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "key": "buttonLightHover",
+      "entry": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lighthover.png",
+      "destination": "src/assets/emote-wheel/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "dimensions": [
+        4,
+        4
+      ],
+      "rgbaSha256": "8bc3a14bce9cffb15dc77a3937ecad1c62de61459dce90bca6d87404ae72a084",
+      "alphaHistogram": {
+        "255": 16
+      },
+      "nineSlice": {
+        "insets": 1,
+        "baseSize": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "key": "buttonLightPressed",
+      "entry": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "destination": "src/assets/emote-wheel/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "dimensions": [
+        4,
+        4
+      ],
+      "rgbaSha256": "0883c873c08e5fc9b05494527a4dc4b7fa98d75e4d936102596fe3a3a1fb9a54",
+      "alphaHistogram": {
+        "255": 16
+      },
+      "nineSlice": {
+        "insets": 1,
+        "baseSize": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "key": "buttonLightDisabled",
+      "entry": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "destination": "src/assets/emote-wheel/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "dimensions": [
+        2,
+        2
+      ],
+      "rgbaSha256": "e67567d79bb3aa67a31d6b356994cc8e12575ac8559f4d065015cdf0b75450bd",
+      "alphaHistogram": {
+        "255": 4
+      },
+      "nineSlice": {
+        "insets": 1,
+        "baseSize": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "key": "focusWhite",
+      "entry": "resource_pack/textures/ui/focus_border_white.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/focus_border_white.png",
+      "destination": "src/assets/emote-wheel/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "rgbaSha256": "7ade542643cd10ac042f8297c694c945d49f968ae8d84775db7fccdb28f89bbb",
+      "alphaHistogram": {
+        "0": 9,
+        "255": 16
+      },
+      "nineSlice": {
+        "insets": 1,
+        "baseSize": [
+          5,
+          5
+        ]
+      }
+    }
+  ],
+  "textureMetadata": [
+    {
+      "key": "black",
+      "entry": "resource_pack/textures/ui/Black.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/Black.json",
+      "destination": "src/assets/emote-wheel/Black.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "raw": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "key": "keyboardTooltip",
+      "entry": "resource_pack/textures/ui/keyboard_tooltip_icon.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/keyboard_tooltip_icon.json",
+      "destination": "src/assets/emote-wheel/keyboard_tooltip_icon.json",
+      "bytes": 90,
+      "sha256": "586dee5e9b6d847fb01e17f2638be10e3ffad6eeee3ac514d9c52e59e02cf8d5",
+      "raw": {
+        "nineslice_size": [
+          5,
+          3,
+          5,
+          7
+        ],
+        "base_size": [
+          17,
+          17
+        ]
+      }
+    },
+    {
+      "key": "buttonLight",
+      "entry": "resource_pack/textures/ui/button_borderless_light.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_light.json",
+      "destination": "src/assets/emote-wheel/button_borderless_light.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "raw": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "key": "buttonLightHover",
+      "entry": "resource_pack/textures/ui/button_borderless_lighthover.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lighthover.json",
+      "destination": "src/assets/emote-wheel/button_borderless_lighthover.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "raw": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "key": "buttonLightPressed",
+      "entry": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lightpressed.json",
+      "destination": "src/assets/emote-wheel/button_borderless_lightpressed.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "raw": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "key": "buttonLightDisabled",
+      "entry": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/disabledButtonNoBorder.json",
+      "destination": "src/assets/emote-wheel/disabledButtonNoBorder.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "raw": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "key": "focusWhite",
+      "entry": "resource_pack/textures/ui/focus_border_white.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/focus_border_white.json",
+      "destination": "src/assets/emote-wheel/focus_border_white.json",
+      "bytes": 60,
+      "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+      "raw": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      }
+    }
+  ],
+  "sourceFiles": [
+    {
+      "key": "emoteWheelScreen",
+      "entry": "resource_pack/ui/emote_wheel_screen.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/emote_wheel_screen.json",
+      "destination": "src/assets/emote-wheel/emote_wheel_screen.json",
+      "bytes": 9641,
+      "sha256": "86b7fabf7aa1abf92ce5333d67874b325dce537208ec80a7768cc3f0935ad092",
+      "kind": "ui-source",
+      "execution": "Whole reference only; no engine or locale execution."
+    },
+    {
+      "key": "personaCommon",
+      "entry": "resource_pack/ui/persona_common.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/persona_common.json",
+      "destination": "src/assets/emote-wheel/persona_common.json",
+      "bytes": 28040,
+      "sha256": "93f347b95b5ce4d893a9ccdf5c01c1599660f0a67acb50df6a3e8cca4b152c3e",
+      "kind": "ui-source",
+      "execution": "Whole reference only; no engine or locale execution."
+    },
+    {
+      "key": "uiCommon",
+      "entry": "resource_pack/ui/ui_common.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_common.json",
+      "destination": "src/assets/emote-wheel/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "kind": "ui-source",
+      "execution": "Whole reference only; no engine or locale execution."
+    },
+    {
+      "key": "uiTemplateButtons",
+      "entry": "resource_pack/ui/ui_template_buttons.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_template_buttons.json",
+      "destination": "src/assets/emote-wheel/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "kind": "ui-source",
+      "execution": "Whole reference only; no engine or locale execution."
+    },
+    {
+      "key": "globalVariables",
+      "entry": "resource_pack/ui/_global_variables.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/_global_variables.json",
+      "destination": "src/assets/emote-wheel/_global_variables.json",
+      "bytes": 20210,
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "kind": "ui-source",
+      "execution": "Whole reference only; no engine or locale execution."
+    },
+    {
+      "key": "enUS",
+      "entry": "resource_pack/texts/en_US.lang",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/texts/en_US.lang",
+      "destination": "src/assets/emote-wheel/en_US.lang",
+      "bytes": 821977,
+      "sha256": "d5e91de45eac108c652a0ae3d660b7d5337364a962a1c31ffe925269d3b074d5",
+      "kind": "locale",
+      "execution": "Whole reference only; no engine or locale execution."
+    },
+    {
+      "key": "zhCN",
+      "entry": "resource_pack/texts/zh_CN.lang",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/texts/zh_CN.lang",
+      "destination": "src/assets/emote-wheel/zh_CN.lang",
+      "bytes": 803567,
+      "sha256": "bb7a3ebfc5d655b4f77c88fff837f7e604d2767c67e7f268c408d5e216d58c89",
+      "kind": "locale",
+      "execution": "Whole reference only; no engine or locale execution."
+    },
+    {
+      "key": "uiTemplateDialogs",
+      "entry": "resource_pack/ui/ui_template_dialogs.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_template_dialogs.json",
+      "destination": "src/assets/emote-wheel/ui_template_dialogs.json",
+      "bytes": 14238,
+      "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264",
+      "kind": "ui-source",
+      "execution": "Whole reference only; no engine or locale execution."
+    }
+  ],
+  "license": {
+    "entry": "LICENSE.md",
+    "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/LICENSE.md",
+    "destination": "src/assets/emote-wheel/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sharedLicense": {
+    "entry": "LICENSE.md",
+    "path": "src/assets/Minecraft-Sample-LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "reuse": [
+    {
+      "texture": "textures/ui/emote_wheel_updated_base",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": []
+    },
+    {
+      "texture": "textures/ui/emote_wheel_updated_select_0",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": []
+    },
+    {
+      "texture": "textures/ui/emote_wheel_updated_select_1",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": []
+    },
+    {
+      "texture": "textures/ui/emote_wheel_updated_select_2",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": []
+    },
+    {
+      "texture": "textures/ui/emote_wheel_updated_select_3",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": []
+    },
+    {
+      "texture": "textures/ui/icon_none",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": []
+    },
+    {
+      "texture": "textures/ui/Black",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": [
+        "--mc-skin-anvil-cost-background"
+      ]
+    },
+    {
+      "texture": "textures/ui/keyboard_tooltip_icon",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": []
+    },
+    {
+      "texture": "textures/ui/grey_gamepad_icon_button",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": []
+    },
+    {
+      "texture": "textures/ui/button_borderless_light",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": [
+        "--mc-skin-button-default"
+      ]
+    },
+    {
+      "texture": "textures/ui/button_borderless_lighthover",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": [
+        "--mc-skin-button-hover"
+      ]
+    },
+    {
+      "texture": "textures/ui/button_borderless_lightpressed",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": [
+        "--mc-skin-button-pressed"
+      ]
+    },
+    {
+      "texture": "textures/ui/disabledButtonNoBorder",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": [
+        "--mc-skin-button-disabled"
+      ]
+    },
+    {
+      "texture": "textures/ui/focus_border_white",
+      "existingEmbeddedExactBytes": [],
+      "existingEmbeddedFullRGBA": []
+    }
+  ],
+  "reuseQualification": "Whole decoded RGBA equality is distinct from PNG byte identity; all14 originals in this bank retain their own whole files.",
+  "wheelFrames": {
+    "sourceOrder": [
+      "top",
+      "right",
+      "bottom",
+      "left"
+    ],
+    "states": [
+      "wheelBase",
+      "wheelSelect0",
+      "wheelSelect1",
+      "wheelSelect2",
+      "wheelSelect3"
+    ],
+    "wholeStateFramesNotWedgeMasks": true,
+    "separateHoverOrDisabledImage": false
+  },
+  "summary": {
+    "wholePNG": 14,
+    "PNGBytes": 7618,
+    "wholeTextureMetadata": 7,
+    "metadataBytes": 450,
+    "wholeUISource": 6,
+    "UISourceBytes": 392554,
+    "wholeLocales": 2,
+    "localeBytes": 1625544,
+    "licenseBytes": 222,
+    "ownedFiles": 30,
+    "ownedBytes": 2026388,
+    "caseFoldedDestinationCollisions": 0
+  },
+  "rights": {
+    "owner": "Mojang AB",
+    "notice": "Original all-rights-reserved / Minecraft EULA notice retained unchanged.",
+    "codeLicenseDoesNotRelicenseAssets": true
+  },
+  "qualification": {
+    "nativePixelParityClaim": false,
+    "engineStateControllerRecovered": false,
+    "dynamicControllerGlyphBindingsRecovered": false,
+    "gamepadPlaceholderIsGenericInheritedImageOnly": true,
+    "nativePreviewThumbnailOrEmotePlaybackProvided": false,
+    "sourceJSONAndLocaleFilesAreReferenceDataOnly": true
+  }
+}

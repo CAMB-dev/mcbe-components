@@ -1,0 +1,52 @@
+.mc-emote-wheel, .mc-emote-slot-preview { --mc-emote-u:2px; --mc-emote-shadow:calc(var(--mc-emote-u) * 1) calc(var(--mc-emote-u) * 1) 0 #000; box-sizing:border-box; position:relative; color:#fff; font:400 calc(var(--mc-emote-u) * 10)/1 var(--mc-font,monospace); }
+.mc-emote-wheel *, .mc-emote-slot-preview * { box-sizing:border-box; }
+.mc-emote-wheel [hidden], .mc-emote-slot-preview [hidden] { display:none !important; }
+.mc-emote-wheel { display:grid; place-items:center; container-type:size; isolation:isolate; }
+.mc-emote-wheel__wheel { position:relative; width:var(--mc-emote-diameter); height:var(--mc-emote-diameter); touch-action:none; }
+@supports (width:1cqi) { .mc-emote-wheel__wheel { width:min(75cqi,75cqb); height:min(75cqi,75cqb); } }
+.mc-emote-wheel__frame { position:absolute; inset:0; display:block; width:100% !important; height:100% !important; pointer-events:none; image-rendering:pixelated; }
+.mc-emote-wheel__slot { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; border-radius:0; background:transparent; color:inherit; font:inherit; cursor:pointer; touch-action:none; }
+.mc-emote-wheel__slot[data-emote-index="0"] { clip-path:polygon(50% 50%,0 0,100% 0); }
+.mc-emote-wheel__slot[data-emote-index="1"] { clip-path:polygon(50% 50%,100% 0,100% 100%); }
+.mc-emote-wheel__slot[data-emote-index="2"] { clip-path:polygon(50% 50%,100% 100%,0 100%); }
+.mc-emote-wheel__slot[data-emote-index="3"] { clip-path:polygon(50% 50%,0 100%,0 0); }
+.mc-emote-wheel__slot:disabled { cursor:default; }
+.mc-emote-wheel__preview { position:absolute; width:30%; height:30%; left:50%; top:50%; transform:translate(-50%,-50%); }
+.mc-emote-wheel__slot[data-emote-index="0"] .mc-emote-wheel__preview { top:17%; }
+.mc-emote-wheel__slot[data-emote-index="1"] .mc-emote-wheel__preview { left:83%; }
+.mc-emote-wheel__slot[data-emote-index="2"] .mc-emote-wheel__preview { top:83%; }
+.mc-emote-wheel__slot[data-emote-index="3"] .mc-emote-wheel__preview { left:17%; }
+.mc-emote-wheel__slot:focus-visible .mc-emote-wheel__preview { outline:2px solid var(--mc-focus,#fff); outline-offset:2px; }
+.mc-emote-wheel__preview > .mc-emote-slot-preview { width:100%; height:100%; }
+.mc-emote-slot-preview { width:calc(var(--mc-emote-u) * 14); height:calc(var(--mc-emote-u) * 14); display:grid; place-items:center; min-width:0; min-height:0; pointer-events:none; }
+.mc-emote-slot-preview__image { display:block; width:100% !important; height:100% !important; object-fit:fill; image-rendering:pixelated; }
+.mc-emote-slot-preview .mc-emote-slot-preview__text { display:block; width:100%; height:calc(var(--mc-emote-u) * 13); color:inherit; text-align:center; font:400 calc(var(--mc-emote-u) * 15)/1 var(--mc-font,monospace); overflow-wrap:anywhere; text-shadow:var(--mc-emote-shadow); }
+.mc-emote-slot-preview__system-label { display:none; }
+.mc-emote-wheel .mc-emote-wheel__name { position:absolute; z-index:10; left:50%; top:50%; transform:translate(-50%,-50%); width:calc(var(--mc-emote-u) * 35); max-height:calc(var(--mc-emote-u) * 35); overflow:hidden; font:400 calc(var(--mc-emote-u) * 8)/1 var(--mc-font-smooth,system-ui,sans-serif); text-align:center; overflow-wrap:anywhere; text-shadow:var(--mc-emote-shadow); pointer-events:none; }
+.mc-emote-wheel__hint { position:absolute; z-index:11; display:grid; place-items:center; pointer-events:none; }
+.mc-emote-wheel__hint[data-emote-index="0"] { left:50%; top:calc(var(--mc-emote-u) * -3); transform:translate(-50%,-100%); }
+.mc-emote-wheel__hint[data-emote-index="1"] { left:calc(100% + var(--mc-emote-u) * 3); top:50%; transform:translate(0,-50%); }
+.mc-emote-wheel__hint[data-emote-index="2"] { left:50%; top:calc(100% + var(--mc-emote-u) * 3); transform:translate(-50%,0); }
+.mc-emote-wheel__hint[data-emote-index="3"] { left:calc(var(--mc-emote-u) * -3); top:50%; transform:translate(-100%,-50%); }
+.mc-emote-wheel__hint--keyboard { width:calc(var(--mc-emote-u) * 17); height:calc(var(--mc-emote-u) * 17); background:var(--mc-emote-keycap) center / 100% 100% no-repeat; image-rendering:pixelated; color:#fff; }
+.mc-emote-wheel__hint--keyboard > span { font:inherit; height:calc(var(--mc-emote-u) * 10); text-shadow:none; }
+.mc-emote-wheel .mc-emote-wheel__hint--touch { max-width:calc(var(--mc-emote-u) * 75); max-height:calc(var(--mc-emote-u) * 30); width:max-content; overflow:hidden; font:400 calc(var(--mc-emote-u) * 10)/1 var(--mc-font-smooth,system-ui,sans-serif); overflow-wrap:anywhere; text-shadow:var(--mc-emote-shadow); }
+.mc-emote-wheel__hint--touch[data-emote-index="0"], .mc-emote-wheel__hint--touch[data-emote-index="2"] { text-align:center; }
+.mc-emote-wheel__hint--touch[data-emote-index="1"] { text-align:left; }.mc-emote-wheel__hint--touch[data-emote-index="3"] { text-align:right; }
+.mc-emote-wheel__hint--gamepad { width:calc(var(--mc-emote-u) * 26); height:calc(var(--mc-emote-u) * 26); }
+.mc-emote-wheel__hint--gamepad[data-emote-index="0"] { top:calc(var(--mc-emote-u) * 3); }
+.mc-emote-wheel__hint--gamepad[data-emote-index="1"] { left:calc(100% - var(--mc-emote-u) * 3); }
+.mc-emote-wheel__hint--gamepad[data-emote-index="2"] { top:calc(100% - var(--mc-emote-u) * 3); }
+.mc-emote-wheel__hint--gamepad[data-emote-index="3"] { left:calc(var(--mc-emote-u) * 3); }
+.mc-emote-wheel__analog { position:absolute; z-index:11; left:50%; top:calc(100% + var(--mc-emote-u) * 9); transform:translate(-50%,-50%); width:calc(var(--mc-emote-u) * 26); height:calc(var(--mc-emote-u) * 26); pointer-events:none; }
+@media (forced-colors:active) {
+  .mc-emote-wheel { color:CanvasText; text-shadow:none; }
+  .mc-emote-wheel__wheel { background:Canvas; border:1px solid CanvasText; }
+  .mc-emote-wheel__frame, .mc-emote-wheel__preview .mc-emote-slot-preview__image, .mc-emote-wheel__preview .mc-emote-slot-preview__text { display:none; }
+  .mc-emote-wheel__preview .mc-emote-slot-preview__system-label { display:block; color:CanvasText; font:inherit; overflow-wrap:anywhere; }
+  .mc-emote-wheel__slot[aria-pressed="true"] .mc-emote-wheel__preview { border:2px solid Highlight; }
+  .mc-emote-wheel__slot:focus-visible .mc-emote-wheel__preview { outline-color:Highlight; }
+  .mc-emote-wheel__slot:disabled .mc-emote-wheel__preview { color:GrayText; }
+  .mc-emote-wheel .mc-emote-wheel__name, .mc-emote-wheel .mc-emote-wheel__hint--touch, .mc-emote-slot-preview .mc-emote-slot-preview__text { color:CanvasText; text-shadow:none; }
+  .mc-emote-wheel__hint--keyboard { border:1px solid ButtonText; background:ButtonFace; color:ButtonText; }
+}

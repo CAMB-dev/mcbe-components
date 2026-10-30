@@ -1,2 +1,4 @@
 * text=auto eol=lf
 *.woff2 binary
+# Original source resources are verified as whole bytes, including line endings.
+src/assets/emote-wheel/** -text
