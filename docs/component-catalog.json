@@ -642,6 +642,10 @@
         "fidelity": "source_texture_web_composition"
       }
     ],
+    "jigsaw_editor": [
+      {"name":"JigsawEditor","status":"implemented","fidelity":"source_texture_web_composition_native_page_validation_pending","source":"resource_pack/ui/jigsaw_editor_screen.json, fixed v1.26.60.5","details":"docs/JIGSAW_QA.md"},
+      {"name":"JigsawPriorityFields","status":"implemented","fidelity":"source_field_order_and_raw_draft_contract_host_resolved_priority_height","source":"resource_pack/ui/jigsaw_editor_screen.json, fixed v1.26.60.5","details":"docs/JIGSAW_QA.md"}
+    ],
     "books_and_writing": [
       {"name":"BookReader","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
       {"name":"BookEditor","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
@@ -652,7 +656,7 @@
     ]
   },
   "publicExports": {
-    "components": 126,
+    "components": 128,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -663,7 +667,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 140,
+    "runtimeValues": 142,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 4,

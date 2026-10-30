@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "fixedSource": {
+    "archive": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "scope": "Four complete original images for the source Jigsaw editor header and controls; no screenshot-derived pixels or full native-GUI certification.",
+  "resources": [
+    {
+      "key": "StoreTopBar",
+      "entry": "resource_pack/textures/ui/StoreTopBar.png",
+      "destination": "src/assets/jigsaw/StoreTopBar.png",
+      "bytes": 140,
+      "sha256": "e247c9b13bc2b67a09e8a312c7c420680899d3f6d5a1d8a6269230c9cf212a98",
+      "dimensions": [
+        3,
+        5
+      ],
+      "rgbaSha256": "67984f16524985f1a58ff9fd41354e159d6bdb5af3a2ac7a3ef8ef0a025404e7",
+      "nineSlice": {
+        "insets": [
+          1,
+          0,
+          1,
+          4
+        ],
+        "baseSize": [
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "key": "chevron_left",
+      "entry": "resource_pack/textures/ui/chevron_left.png",
+      "destination": "src/assets/jigsaw/chevron_left.png",
+      "bytes": 106,
+      "sha256": "6347595f4a317c028fc9160d3d1a7f5cb12ead3af205ce34453381705eac264b",
+      "dimensions": [
+        4,
+        7
+      ],
+      "rgbaSha256": "395311eee5e3ca0af72cabbc0a7b8c51a28f37d0e9f8fcbb2a2910b9c77ab601"
+    },
+    {
+      "key": "dialog_background_hollow_4",
+      "entry": "resource_pack/textures/ui/dialog_background_hollow_4.png",
+      "destination": "src/assets/jigsaw/dialog_background_hollow_4.png",
+      "bytes": 230,
+      "sha256": "274740b9ceed9229f6a20c46e0d840ecfb5c3b36bcff6cc9c7970e304a2b1893",
+      "dimensions": [
+        18,
+        18
+      ],
+      "rgbaSha256": "2f06941b350dc9bd1ec85997d4810a70ddc8cdde28b6d33738e11294ad0847a9",
+      "nineSlice": {
+        "insets": 8,
+        "baseSize": [
+          18,
+          18
+        ]
+      }
+    },
+    {
+      "key": "control",
+      "entry": "resource_pack/textures/ui/control.png",
+      "destination": "src/assets/jigsaw/control.png",
+      "bytes": 71,
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "dimensions": [
+        2,
+        2
+      ],
+      "rgbaSha256": "81eb2d3bce07f35376c3caa7feb306adabe65d6c8fdf04f191a3126d7b8c20ef",
+      "nineSlice": {
+        "insets": 1,
+        "baseSize": [
+          2,
+          2
+        ]
+      }
+    }
+  ],
+  "textureMetadata": [
+    {
+      "key": "StoreTopBar",
+      "entry": "resource_pack/textures/ui/StoreTopBar.json",
+      "destination": "src/assets/jigsaw/StoreTopBar.json",
+      "bytes": 91,
+      "sha256": "1ac24653297b1fa007f147c417af7c0daee24edaa9197757ae26d7b00d0532e4",
+      "raw": {
+        "nineslice_size": [
+          1,
+          0,
+          1,
+          4
+        ],
+        "base_size": [
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "key": "dialog_background_hollow_4",
+      "entry": "resource_pack/textures/ui/dialog_background_hollow_4.json",
+      "destination": "src/assets/jigsaw/dialog_background_hollow_4.json",
+      "bytes": 62,
+      "sha256": "10b8389eb1b4b9967de5aef1925851073b5d506d70c2ec32ea2064f4504902e9",
+      "raw": {
+        "nineslice_size": 8,
+        "base_size": [
+          18,
+          18
+        ]
+      }
+    },
+    {
+      "key": "control",
+      "entry": "resource_pack/textures/ui/control.json",
+      "destination": "src/assets/jigsaw/control.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "raw": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      }
+    }
+  ],
+  "license": {
+    "entry": "LICENSE.md",
+    "destination": "src/assets/jigsaw/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sharedLicense": {
+    "path": "src/assets/Minecraft-Sample-LICENSE.md",
+    "entry": "LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sourceUi": [
+    {
+      "entry": "resource_pack/ui/jigsaw_editor_screen.json",
+      "bytes": 10057,
+      "sha256": "0b80bfeab1841031a1897227c02d4bbf09b82da0e6d2041dd346be0a5e98d510",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "bundled": false
+    }
+  ],
+  "qualification": {
+    "wholePngCount": 4,
+    "wholePngBytes": 547,
+    "wholeTextureMetadataCount": 3,
+    "bundledWholeFilesIncludingLicense": 8,
+    "metadataInterpretation": "Original source units and LTRB order are preserved. StoreTopBar3x5 has L1/T0/R1/B4, CSS order0 1 4 1. The original control2x2/slice1 retains its zero-size center; no source pixels or metadata are altered.",
+    "licenseNotice": "The complete original Mojang all-rights-reserved notice and Minecraft EULA reference are retained locally and in the existing shared Minecraft-Sample-LICENSE.md. They are not the library code license.",
+    "nativeMappingVerified": false
+  }
+}

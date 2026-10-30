@@ -106,11 +106,13 @@ Book阶段新增4个runtime组件，当时124组件＋4数据＋10函数，共13
 
 ## 后续原生捕获与有限混排分析
 
-2026-10-30 已保存 GUI5 的空书、混合文本正文与空标题签名页捕获；索引为 `.cache/book-sign-native-gui5-01/root-observations.json`。三份实际 API 列表和静态 draw 索引已完成：空书23、混排30、签名46个 UI draw。当前仅混排正文做了有限字页 / 顶点分析；Book完整RT读取、空书 /签名字体解码与产品整页比较仍未完成。空标题签名页是取消前的编辑状态，不是已签名Reader样本。
+2026-10-30 已保存 GUI5 的空书、混合文本正文与空标题签名页捕获；索引为 `.cache/book-sign-native-gui5-01/root-observations.json`。三份实际 API 列表和静态 draw 索引已完成：空书23、混排30、签名46个 UI draw。该分析阶段只对混排正文做有限字页 /顶点解码，当时尚未读取Book完整RT；随后三RT输出见下文。空书 /签名字体解码与产品整页比较仍未完成，空标题签名页是取消前的编辑状态，不是已签名Reader样本。
 
 混排正文的 Latin完整纹理唯一匹配 `glyph_00.png`，中文也来自对应Unicode整页；它支持整值替代字体路径，不能解释为 default8 Latin加逐字CJK回退。31个正文glyph均为黑色，LINEAR /CLAMP；normal角色的投影约每local单位5 physical px，为两Sign large角色的一半。显式换行的第二行local Y为10，中文pens为0/9/18/27/36/45；不是据此恢复所有自动换行。该帧没有可见caret draw，因此不能将Sign绿色caret推断为Book caret颜色。
 
 来源见 `.cache/book-sign-font-selection-study-01/FINAL.json`（SHA256 `c70a52590ad762e09bdac4067410626207f7a7a3572c9fc31e130744402efba2`）及其 `BOOK-SUPPLEMENT.md`；五捕获的离线导出与索引见 `.cache/book-sign-native-gui5-analysis-01/FINAL.json`。该阶段尚未新增Book字体选择；随后正文度量及编辑布局修订见下文，不将来源分析计为产品native零差。
+
+随后 `.cache/book-native-rt-execution-01/FINAL.json` 已完成三次selected-before原生RT读取，native失败 /重试均为0；每个实际2570×1402目标的原始footprint为14,715,176字节，78个既有Book /Sign来源pin与capture字节未变。空书与混排两原生状态的完整RGBA诊断有7,437像素 /22,311 RGB字节不同，alpha无变化；差异bbox `[605,262,1180,345]` 全在原正文clip `[605,234,1215,987]`，clip外所有字节相同。这是两份原生状态之间的诊断，不是生产DOM比较或DOM整页零差；输出过程未重启游戏 /Computer Use，专用helper已退出。
 
 ## 正文与编辑布局修订
 
