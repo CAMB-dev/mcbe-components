@@ -2,7 +2,23 @@
 
 `OrePlayerPermissions`、`OrePermissionLevelSelect`、`OrePermissionToggleRow`、`OrePlayerCard` 和 `OreSwitch` 是独立的现代权限组件。它们依据本机安装版HBUI /OreUI源研究实现，保留原来的Classic四组件；源码可用不等于原生整页像素、所有运行时主题或权限服务已恢复。
 
-## 2026-10-31 页头与横向网格修正
+## 2026-10-31 选择器悬停状态与高光修正
+
+角色选择器恢复 secondary hover 的上下高光：普通状态仍为白色 `.6 / .4`，悬停状态改为 `.8 / .6`，同时使用原来的 hover 底色。源 `Ld` 使用 mousemove /mouseleave 维护 hover，click、focus 和菜单打开本身不写 hover。当前 trigger 对应保存鼠标事件状态，禁用时不进入 hover，离开时清除；切换响应式表现时重置旧 trigger 的状态。没有增加“展开即悬停”的规则，forced-colors 仍清除装饰阴影。原生输入模式、hidden /dragging 等引擎 gate 尚未恢复。
+
+本轮完整111项同批回归实际 **108通过、3个预期桌面触摸设备条件跳过、零失败 /重试**，965份输入指纹前后零漂移。新增输入历史检查覆盖键盘打开、显式鼠标事件序列、禁用与切换表现；另有54个预声明的底色 /上下高光采样，覆盖GUI1 /2 /5并保持原1/16px几何与颜色1容差。初步检查曾因GUI1进入segmented分支而找不到compact trigger，后将测试的源窗口明确固定为100u宽的tablet分支；颜色、采样位置规则及容差未改。证据 `.cache/ore-permissions-trigger-tests-01/run-01/`，初步两批记录保留。
+
+实际React18.3.1 /19.3.1包的155组件＋6数据＋11函数消费、类型与资源检查通过，新构建公开预览9项通过。公开API未变。证据 `.cache/ore-permissions-trigger-release-01/`，原生资源与字体不进入发布包。
+
+严格整页资格仍未取得。保留旧程序调用click的输入候选时，本轮 `.cache/ore-permissions-pix-browser-06/` 与05完整RGBA相同：普通页 /菜单仍有1294293 /2738409个不同像素。另独立执行真实鼠标hover→click且之后不移动指针的候选：按钮点击前hover为true，菜单出现后为false，菜单仍有2725659个不同像素。这个实际结果不能声称已匹配原生指针历史；也不能把不同输入候选的总分当作同一状态下的产品改善。证据 `.cache/ore-permissions-pix-pointer-01/`。
+
+原透明度实验的7275 /7855个新增错误集中在trigger底部反光带；大片L1退化也对应normal与hover底材混杂。强源 `.cache/ore-permissions-composite-source-01/` 与独立 `.cache/ore-permissions-alpha-regression-01/` 支持这一解释，旧回退数字保留。源modal使用黑色 `.7` 背景，未发现整组opacity；原版全局modal与页面为兄弟层，当前组件采用有界portal，结构差异本身尚不能证明合成误差的原因。
+
+当前产品下另做真实鼠标输入的统一alpha诊断A/B/A，全部41条显式rgba纳入同一变换，49份输入无漂移；普通页 /菜单各自前后A完整RGBA一致。B仍有160943 /274025个不同像素，均非零差。菜单实际hover仍被清除，不能把这批称为“已固定原生hover材质”的量化认证。产品透明度保持作者原值，证据 `.cache/ore-permissions-alpha-probe-02/run-01/`。
+
+字体另有一次只追加 `--disable-lcd-text` 的历史A/B/A。该开关定义见 [Chromium官方源码](https://chromium.googlesource.com/chromium/src/+/HEAD/content/public/common/content_switches.cc)；本机shell含相应字面量，实际owned进程命令行与CDP版本均保存。两组A守卫及05基线完整RGBA一致，B的普通页 /菜单仍有1294385 /2738189个不同像素，alpha完全不变，未消除已观察到的中文位置差。这是浏览器诊断，不能作为可部署组件修复；它对应本轮hover修改前的产品快照。首次命令行观察接口因缺少enable-automation而失败，未额外加启动flag，后改用只读owned进程CIM观察并完整执行。证据 `.cache/ore-permissions-lcd-probe-01/`、`-02/` 与 `.cache/ore-permissions-lcd-audit-01/`，不以诊断ROI替代整页评分。
+
+## 前一轮：页头与横向网格修正
 
 原版 `tO` 页头由三层组成：导航底部 `.2u` 白色 `.2` 高光、流内 `.4u` 灰条和流外 `.2u` 黑色 `.3` 阴影。本轮恢复三层，底部高光覆盖完整页头宽度，包括左右安全区外侧；装饰层不接收指针事件。安全区继续使用宿主显式提供的窗口参数。
 

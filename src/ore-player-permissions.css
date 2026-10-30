@@ -110,7 +110,7 @@
 .mc-ore-level__trigger-shine {position:relative;display:flex;align-items:center;flex:none;min-width:0;background:#d0d1d4;box-shadow:inset 0 calc(.2 * var(--mc-ore-unit)) rgba(255,255,255,.6),inset 0 calc(-.2 * var(--mc-ore-unit)) rgba(255,255,255,.4)}
 .mc-ore-level__trigger-content {position:relative;display:flex;align-items:center;flex:1;min-width:0;width:100%;height:100%;padding:0 calc(1.6 * var(--mc-ore-unit))}
 .mc-ore-level__trigger-bottom-shadow {position:absolute;display:block;left:0;right:0;bottom:0;height:calc(.4 * var(--mc-ore-unit));background:#58585a}
-.mc-ore-level__trigger:hover:not(:disabled) .mc-ore-level__trigger-shine {background:#b1b2b5}
+.mc-ore-level__trigger[data-hovered="true"]:not(:disabled) .mc-ore-level__trigger-shine {background:#b1b2b5;box-shadow:inset 0 calc(.2 * var(--mc-ore-unit)) rgba(255,255,255,.8),inset 0 calc(-.2 * var(--mc-ore-unit)) rgba(255,255,255,.6)}
 .mc-ore-level__trigger:active:not(:disabled) {margin-top:0;padding-bottom:0}
 .mc-ore-level__trigger:active:not(:disabled) .mc-ore-level__trigger-shine {box-shadow:none}
 .mc-ore-level__trigger:active:not(:disabled) .mc-ore-level__trigger-bottom-shadow {height:0}
@@ -179,7 +179,7 @@
   .mc-ore-player-permissions,.mc-ore-level,.mc-ore-permission-row,.mc-ore-player-card,.mc-ore-level__modal {background:Canvas;color:CanvasText;box-shadow:none}
   .mc-ore-player-permissions__header::before,.mc-ore-permission-row::before,.mc-ore-level::before {display:none}
   .mc-ore-player-permissions button,.mc-ore-level button,.mc-ore-level__overlay button,.mc-ore-player-card {background:ButtonFace;color:ButtonText;border-color:ButtonText;box-shadow:none}
-  .mc-ore-level__trigger-shine,.mc-ore-level__trigger-bottom-shadow,.mc-ore-level__trigger:hover:not(:disabled) .mc-ore-level__trigger-shine {background:ButtonFace;color:CanvasText;box-shadow:none}
+  .mc-ore-level__trigger-shine,.mc-ore-level__trigger-bottom-shadow,.mc-ore-level__trigger[data-hovered="true"]:not(:disabled) .mc-ore-level__trigger-shine {background:ButtonFace;color:CanvasText;box-shadow:none}
   .mc-ore-player-card[data-selected="true"],.mc-ore-level button[aria-checked="true"] {outline:var(--mc-ore-min-border) solid Highlight;outline-offset:calc(-1 * var(--mc-ore-min-border))}
   .mc-ore-player-card__subtitle,.mc-ore-permission-row__description,.mc-ore-level__description {color:CanvasText}
   .mc-ore-switch__rail {background:Canvas;border-color:ButtonText;box-shadow:none}

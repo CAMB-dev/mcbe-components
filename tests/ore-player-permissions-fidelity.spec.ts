@@ -71,6 +71,16 @@ test('source page header keeps fullwidth bottom specular strip and separate scen
   expect(checks.reduce((n,c)=>n+c.compared,0)).toBe(72);await info.attach('source-header-domains.json',{body:JSON.stringify({scope:'72 predeclared source-color samples over known host; not native wholeframe equality or engine alpha qualification',checks},null,2),contentType:'application/json'});
 });
 
+test('compact trigger source secondary hover changes both specular edges with the fill',async({page},info)=>{
+  await page.setViewportSize({width:1440,height:1000});await page.addInitScript(()=>{window.oreQAInitial={mode:'level',availableWidth:500,widgetWidth:640,viewportSize:[1279,1000],level:'member',actualArt:false}});await page.goto('/demo/ore-permissions-fixture.html');const trigger=page.locator('.mc-ore-level__trigger'),checks=[];
+  for(const guiScale of [1,2,5])for(const hovered of [false,true]){
+    await page.evaluate(guiScale=>window.oreQA.configure({guiScale,viewportSize:[100*5*guiScale,1000]}),guiScale);await page.mouse.move(1,1);if(hovered)await trigger.hover();await expect(trigger).toHaveAttribute('data-hovered',String(hovered));
+    const u=5*guiScale,b=await trigger.locator('.mc-ore-level__trigger-shine').boundingBox(),png=PNG.sync.read(await page.screenshot()),base=rgb(hovered?'b1b2b5':'d0d1d4');
+    for(const [domain,y,color]of [['fill',b!.y+2*u,base],['top specular',b!.y,mix(base,hovered?.8:.6)],['bottom specular',b!.y+b!.height-.2*u,mix(base,hovered?.6:.4)]]as const){let maxDelta=0;for(let x=0;x<3;x++){const at=(Math.floor(y)*png.width+Math.floor(b!.x+b!.width-3*u+x))*4;expect(png.data[at+3]).toBe(255);for(let c=0;c<3;c++)maxDelta=Math.max(maxDelta,Math.abs(png.data[at+c]!-color[c]!))}checks.push({guiScale,hovered,domain,compared:3,maxDelta});expect(maxDelta,JSON.stringify(checks.at(-1))).toBeLessThanOrEqual(1)}
+  }
+  expect(checks.reduce((n,c)=>n+c.compared,0)).toBe(54);await info.attach('source-trigger-hover-domains.json',{body:JSON.stringify({scope:'54 source secondary specular/fill samples across GUI1/2/5; not native wholeframe or Coherent mouse transport qualification',checks},null,2),contentType:'application/json'});
+});
+
 test('segmented selected primary and unselected secondary preserve source palettes through hover press and disabled',async({page},info)=>{
   // Source YZ/qZ assigns primary to roleOn, secondary to roleOff. Palette values
   // are pinned independently in source02 PALETTES-AND-REFERENCES, not read from CSS.
