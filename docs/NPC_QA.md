@@ -85,7 +85,7 @@ python scripts/prepare-npc-assets.py --check
 
 ## 人物渲染增量
 
-`createNpcEntity`＋`GuiLayer`现提供有限NPC原模型、folded-idle与60张原皮肤，可作为现有人物槽传入。公共组件数仍140，数据 /函数增加至156个运行时值；正常相机、自动取景和UI到variant绑定仍由宿主处理或待恢复。实体14项、相关旧渲染77项、最终156值React18 /19包与五个原生整裁剪255,200像素RGBA零差各自按实际身份记录在[GUI_ENTITY_QA.md](GUI_ENTITY_QA.md)，不替代下述NPC布局44项或完整原生GUI认证。
+`createNpcEntity`＋`GuiLayer`提供有限NPC原模型、folded-idle与60张原皮肤，可作为现有人物槽传入。`npcAppearanceOptions`按完整原行为文件提供60项外观顺序，区别于`npcSkinNames`的controller顺序，组件数仍140，数据 /函数共157个运行时值；正常相机、自动取景和实时UI到variant传输仍由宿主处理或待恢复。157值完整15项合同与React18 /19包验收，以及此前实体14项 /旧渲染77项 /156值包 /五个原生整裁剪255,200像素RGBA零差各自按实际身份记录在[GUI_ENTITY_QA.md](GUI_ENTITY_QA.md)，不替代下述NPC布局44项或完整原生GUI认证。
 
 ## 首阶段验证
 

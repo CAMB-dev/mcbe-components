@@ -4,7 +4,7 @@ import { Combobox } from '../src/combobox';
 import { GuiLayer } from '../src/gui-layer-component';
 import type { GuiLayerCommand } from '../src/gui-layer-component';
 import type { GuiNpcPortraitMaterial } from '../src/gui-entity-geometry';
-import { createNpcEntity, npcSkinNames } from '../src/npc-entity';
+import { createNpcEntity, npcAppearanceOptions } from '../src/npc-entity';
 import { workstationImageAssets } from '../src/workstation-image-assets';
 
 const identity = () => new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]);
@@ -19,7 +19,8 @@ export function NpcEntityExamples() {
   const [selected, setSelected] = useState(0), [scale, setScale] = useState(2), [retry, setRetry] = useState(0);
   const [state, setState] = useState('loading'), [error, setError] = useState('');
   const page = Math.floor(selected / 5), width = 320 * scale, height = 112 * scale;
-  const names = npcSkinNames.slice(page * 5, page * 5 + 5);
+  const choices = npcAppearanceOptions.slice(page * 5, page * 5 + 5);
+  const names = choices.map(choice => choice.skin);
   const commands = useMemo<GuiLayerCommand[]>(() => {
     const projection = new Float32Array([2/320,0,0,0, 0,-2/112,0,0, 0,0,-1/1000,0, -1,1,0,1]);
     const focus: GuiLayerCommand = {
@@ -27,20 +28,20 @@ export function NpcEntityExamples() {
       rect: [(selected % 5) * 64 + 1,1,62,110],
       nineSlice: { baseSize: workstationImageAssets.focus.sourceSize, insets: 1 },
     };
-    return [focus, ...names.map((skin, column) => {
+    return [focus, ...choices.map(({ variant }, column) => {
       const model = identity(), size = 2.3;
       model[0] = size; model[5] = size; model[10] = -size;
       model[12] = column * 64 + 32; model[13] = 37; model[14] = -500;
-      return createNpcEntity({ skin, model, view: identity(), projection,
+      return createNpcEntity({ skin: variant, model, view: identity(), projection,
         viewport: [0,0,width,height], scissor: [column * 64 * scale,0,64 * scale,height], material });
     })];
   }, [selected, scale, width, height, page]);
-  return <section data-npc-entity-examples aria-label="Original NPC models" style={{ display: 'grid', gap: 16, minWidth: 0 }}>
+  return <section data-npc-entity-examples data-npc-appearance-order="behavior-skin-list" aria-label="Original NPC models" style={{ display: 'grid', gap: 16, minWidth: 0 }}>
     <h3 style={{ margin: 0 }}>Original NPC models</h3>
-    <p style={{ margin: 0, fontSize: 12 }}>All 60 original skins use the original cuboid model and authored folded pose. This gallery supplies its own camera; Minecraft portrait fitting is still being calibrated.</p>
+    <p style={{ margin: 0, fontSize: 12 }}>All 60 original skins follow the original NPC appearance list and use the original model and folded pose. This gallery supplies its own camera; Minecraft portrait fitting is still being calibrated.</p>
     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'end', gap: 16 }}>
       <Combobox label="NPC model appearance" value={String(selected)} onValueChange={value => setSelected(Number(value))}
-        options={npcSkinNames.map((alias, index) => ({ value: String(index), label: `${index + 1} · ${alias}` }))}/>
+        options={npcAppearanceOptions.map(({ skin }, index) => ({ value: String(index), label: `${index + 1} · ${skin}` }))}/>
       <Combobox label="NPC model display scale" value={String(scale)} onValueChange={value => setScale(Number(value))}
         options={[1,2,3].map(value => ({ value: String(value), label: `${value}x` }))}/>
       <Button disabled={page === 0} onClick={() => setSelected((page - 1) * 5)}>Previous five models</Button>

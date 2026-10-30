@@ -70,4 +70,5 @@ export const npcActorSourceFiles = {
   lookAtTargetAnimation: new URL('./assets/npc-actor/look_at_target.animation.json', import.meta.url).href,
   renderController: new URL('./assets/npc-actor/npc.render_controllers.json', import.meta.url).href,
   clientEntity: new URL('./assets/npc-actor/npc.entity.json', import.meta.url).href,
+  behaviorEntity: new URL('./assets/npc-actor/npc.json', import.meta.url).href,
 } as const;

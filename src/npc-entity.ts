@@ -2,6 +2,7 @@ import geometryJson from './assets/npc-actor/npc.geo.json' with { type: 'json' }
 import animationJson from './assets/npc-actor/npc.animation.json' with { type: 'json' };
 import controllerJson from './assets/npc-actor/npc.render_controllers.json' with { type: 'json' };
 import entityJson from './assets/npc-actor/npc.entity.json' with { type: 'json' };
+import behaviorJson from './assets/npc-actor/npc.json' with { type: 'json' };
 import { npcActorSkins } from './npc-actor-assets';
 import type { NpcActorSkinAlias, NpcActorSourceVariant } from './npc-actor-assets';
 import type { GuiEntityBone, GuiEntityGeometry, GuiEntitySource, GuiNpcPortraitMaterial } from './gui-entity-geometry';
@@ -9,6 +10,7 @@ import type { GuiLayerCommand } from './gui-layer-component';
 
 export type NpcSkinName = NpcActorSkinAlias;
 export type NpcEntityVariant = NpcActorSourceVariant;
+export interface NpcAppearanceOption { readonly variant: NpcEntityVariant; readonly skin: NpcSkinName }
 export interface NpcEntityOptions extends Omit<GuiEntityGeometry, 'source' | 'bonePose'> {
   /** Original controller alias or source array index. Omitted selects its first
    * entry; this is not an engine UI collection-binding default. */
@@ -88,6 +90,23 @@ for (const [index, entry] of skinEntries.entries()) {
 freeze(skinEntries);
 /** Source controller order; these are entity aliases, not translated UI labels. */
 export const npcSkinNames: readonly NpcSkinName[] = Object.freeze(skinEntries.map(entry => entry.alias));
+
+function appearanceOptions(): readonly NpcAppearanceOption[] {
+  const entries: unknown = behaviorJson['minecraft:entity'].components['minecraft:npc'].npc_data.skin_list;
+  if (!Array.isArray(entries) || entries.length !== 60) throw new RangeError('NPC appearance options require the complete source skin list.');
+  const variants = new Set<number>(), result: NpcAppearanceOption[] = [];
+  for (let i = 0; i < entries.length; i++) {
+    if (!own(entries, String(i))) throw new RangeError('NPC appearance options must be dense.');
+    const entry: unknown = entries[i]; object(entry, 'NPC appearance entry', ['variant'], ['variant']);
+    const variant = entry.variant;
+    if (typeof variant !== 'number' || !Number.isSafeInteger(variant) || variant < 0 || variant > 59 || variants.has(variant)) throw new RangeError('NPC appearance variants must be unique source indices0..59.');
+    variants.add(variant);
+    result.push(Object.freeze({ variant: variant as NpcEntityVariant, skin: skinEntries[variant]!.alias }));
+  }
+  return Object.freeze(result);
+}
+/** Original behavior skin_list UI order. Array position is not the entity variant. */
+export const npcAppearanceOptions: readonly NpcAppearanceOption[] = appearanceOptions();
 
 function identity(): Float32Array { return new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]); }
 function multiply(a: Float32Array, b: Float32Array): Float32Array {

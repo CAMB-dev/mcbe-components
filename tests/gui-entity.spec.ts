@@ -4,8 +4,10 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { PNG } from 'pngjs';
 import { runInNewContext } from 'node:vm';
-import { GuiLayer, createNpcEntity, npcSkinNames, renderGuiLayer } from '../src';
-import type { GuiEntitySource, GuiLayerProps, GuiNpcPortraitMaterial, NpcEntityOptions } from '../src';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { GuiLayer, createNpcEntity, npcSkinNames, npcAppearanceOptions, renderGuiLayer } from '../src';
+import type { GuiEntitySource, GuiLayerProps, GuiNpcPortraitMaterial, NpcEntityOptions, NpcAppearanceOption } from '../src';
 import type { EntityFixtureOptions } from '../demo/gui-entity-fixture';
 
 // Finite authored test boxes. No captured vertices, native matrices, screenshot
@@ -107,6 +109,44 @@ test('public NPC helper maps all60 source aliases, snapshots caller matrices and
     for (const skin of [-1, 60, .5, 'npc_01', 'missing']) expect(() => createNpcEntity({ ...options, skin: skin as any })).toThrow(RangeError);
     expect(io).toBe(0);
   } finally { globalThis.fetch = fetchBefore; }
+});
+
+test('public appearance options preserve the exact whole behavior skin-list order without changing controller variants or performing IO', () => {
+  const bytes = readFileSync(new URL('../src/assets/npc-actor/npc.json', import.meta.url));
+  const controllerBytes = readFileSync(new URL('../src/assets/npc-actor/npc.render_controllers.json', import.meta.url));
+  // Fixed whole-original files independently qualify the oracle. No copied
+  // implementation array, sorting rule or renderer/compiler output is expected.
+  expect(createHash('sha256').update(bytes).digest('hex')).toBe('1dfce74b80b8603d183eae864d209256b301bc2d4901753ccf25a0ae3d1f68b4');
+  expect(createHash('sha256').update(controllerBytes).digest('hex')).toBe('e08d6fbc921b1056c02ca67dd31edf315840c40c6c80e9fe83c4bae2bea4cee7');
+  const sourceList: { variant: number }[] = JSON.parse(bytes.toString('utf8'))['minecraft:entity'].components['minecraft:npc'].npc_data.skin_list;
+  const controller: string[] = JSON.parse(controllerBytes.toString('utf8')).render_controllers['controller.render.npc'].arrays.textures['Array.skins'];
+  const controllerSkins = controller.map(value => { expect(value.startsWith('Texture.')).toBe(true); return value.slice('Texture.'.length); });
+  const previous = globalThis.fetch; let io = 0;
+  globalThis.fetch = (() => { io++; throw Error('Appearance data/factory must not fetch'); }) as typeof fetch;
+  try {
+    const readonlyOptions: readonly NpcAppearanceOption[] = npcAppearanceOptions;
+    const expectedVariants = sourceList.map(entry => { expect(Object.keys(entry)).toEqual(['variant']); return entry.variant; });
+    expect(sourceList).toHaveLength(60); expect(readonlyOptions.map(option => option.variant)).toEqual(expectedVariants);
+    expect(readonlyOptions.map(option => option.skin)).toEqual(expectedVariants.map(variant => controllerSkins[variant]));
+    expect(npcSkinNames).toEqual(controllerSkins);
+    expect(new Set(readonlyOptions.map(option => option.variant)).size).toBe(60);
+    expect([...readonlyOptions.map(option => option.variant)].sort((a, b) => a - b)).toEqual(Array.from({ length: 60 }, (_, i) => i));
+    expect(new Set(readonlyOptions.map(option => option.skin))).toEqual(new Set(controllerSkins));
+    for (const [start, length] of [[20, 15], [45, 10]] as const) {
+      expect(readonlyOptions.slice(start, start + length).map(option => option.variant)).toEqual(expectedVariants.slice(start, start + length));
+      expect(expectedVariants.slice(start, start + length)).not.toEqual(Array.from({ length }, (_, i) => start! + i));
+    }
+    expect(Object.isFrozen(readonlyOptions)).toBe(true);
+    for (const option of readonlyOptions) { expect(Object.keys(option).sort()).toEqual(['skin', 'variant']); expect(Object.isFrozen(option)).toBe(true); }
+    expect(Reflect.set(readonlyOptions, '0', { variant: 999, skin: 'missing' })).toBe(false);
+    expect(Reflect.set(readonlyOptions[0]!, 'variant', 999)).toBe(false);
+    const options: NpcEntityOptions = { model: new Float32Array(identity()), view: new Float32Array(identity()), projection: new Float32Array(projection()), viewport: [0, 0, 64, 64], material: material() };
+    for (const option of readonlyOptions) {
+      const named = createNpcEntity({ ...options, skin: option.skin }), numeric = createNpcEntity({ ...options, skin: option.variant });
+      expect(named.texture).toBe(numeric.texture); expect(named.source).toBe(numeric.source);
+    }
+    expect(io).toBe(0);
+  } finally { globalThis.fetch = previous; }
 });
 
 test('typed public SSR and invalid hidden branches validate before browser IO', () => {

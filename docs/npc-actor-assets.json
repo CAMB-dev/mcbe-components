@@ -1299,6 +1299,15 @@
       "bytes": 4766,
       "sha256": "1d88bf10621b84f9cd902308bd358da1bd8b3fe408feeb09e0114d9d16093b7b",
       "interpretation": "Whole source data only; not an engine expression interpreter."
+    },
+    {
+      "role": "behaviorEntity",
+      "entry": "behavior_pack/entities/npc.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/behavior_pack/entities/npc.json",
+      "destination": "src/assets/npc-actor/npc.json",
+      "bytes": 5098,
+      "sha256": "1dfce74b80b8603d183eae864d209256b301bc2d4901753ccf25a0ae3d1f68b4",
+      "interpretation": "Whole source data only; not an engine expression interpreter."
     }
   ],
   "license": {
@@ -1317,10 +1326,10 @@
   "summary": {
     "wholePNG": 60,
     "PNGBytes": 129797,
-    "wholeSourceJSON": 5,
-    "sourceJSONBytes": 12366,
-    "ownedFiles": 66,
-    "ownedBytes": 142385,
+    "wholeSourceJSON": 6,
+    "sourceJSONBytes": 17464,
+    "ownedFiles": 67,
+    "ownedBytes": 147483,
     "decodedTextureSize": [
       64,
       64

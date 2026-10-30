@@ -37,13 +37,13 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
 const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
-const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames','npcSkinNames'];
+const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames','npcSkinNames','npcAppearanceOptions'];
 components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage','BookPageTurnButton','SignTextSurface','SignEditor','JigsawEditor','JigsawPriorityFields','CommandBlockEditor','CommandInput','CommandOutputPanel','StructureEditor','XYZVectorInput','ServerActionForm','ServerCustomForm','NpcPortrait','NpcSkinPicker','NpcActionEditor','NpcDialogue','NpcEditor');
 const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity'];
 assert.equal(components.length,140);
-assert.equal(dataExports.length,5);
+assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,156);
+assert.equal(Object.keys(ui).length,157);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -70,6 +70,16 @@ const npcEntityOptions={model:npcIdentity(),view:npcIdentity(),projection:npcIde
   material:{kind:'npc-portrait',tileLightColor:[1,1,1,1],fogControl:[0,1,1],fogColor:[0,0,0],materialColor:[1,1,1,1],uvAnimation:[0,0,0,0],subPixelOffset:[0,0]}};
 assert.equal(ui.npcSkinNames.length,60);assert(Object.isFrozen(ui.npcSkinNames));
 assert.equal(new Set(ui.npcSkinNames).size,60);
+assert(Array.isArray(ui.npcAppearanceOptions));assert.equal(ui.npcAppearanceOptions.length,60);assert(Object.isFrozen(ui.npcAppearanceOptions));
+assert.equal(new Set(ui.npcAppearanceOptions.map(option=>option.variant)).size,60);
+for(const option of ui.npcAppearanceOptions){
+ assert.deepEqual(Object.keys(option).sort(),['skin','variant']);assert(Object.isFrozen(option));
+ assert(Number.isSafeInteger(option.variant)&&option.variant>=0&&option.variant<60);
+ assert.equal(option.skin,ui.npcSkinNames[option.variant]);
+ assert.equal(ui.createNpcEntity({...npcEntityOptions,skin:option.variant}).texture,ui.createNpcEntity({...npcEntityOptions,skin:option.skin}).texture,'Appearance variant/name factories select the same source.');
+}
+assert.throws(()=>ui.npcAppearanceOptions.push(ui.npcAppearanceOptions[0]),TypeError,'Public appearance collection stays frozen.');
+assert.throws(()=>{ui.npcAppearanceOptions[0].variant=59;},TypeError,'Public appearance records stay frozen.');
 const npcEntity=ui.createNpcEntity(npcEntityOptions);
 assert.equal(npcEntity.kind,'entity');assert.equal(npcEntity.source.profile,'npc-box64-rigid');
 assert.deepEqual(npcEntity.source.textureSize,[64,64]);assert.equal(npcEntity.source.bones.length,10);
@@ -575,12 +585,12 @@ for (const asset of [...npcManifest.resources,...npcManifest.textureMetadata,npc
  assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed whole NPC source: '+asset.entry);
 }
 const npcActorManifest=JSON.parse(await readFile(new URL('docs/npc-actor-assets.json',packageRoot),'utf8'));
-assert.equal(npcActorManifest.skins.length,60);assert.equal(npcActorManifest.sourceFiles.length,5);assert.equal(npcActorManifest.summary.ownedFiles,66);
+assert.equal(npcActorManifest.skins.length,60);assert.equal(npcActorManifest.sourceFiles.length,6);assert.equal(npcActorManifest.summary.ownedFiles,67);
 assert.deepEqual([...ui.npcSkinNames],npcActorManifest.skins.map(skin=>skin.alias),'Public NPC aliases retain complete source controller order/case.');
 const npcWholeAssets=[...npcActorManifest.skins,...npcActorManifest.sourceFiles,npcActorManifest.license];
-assert.equal(npcWholeAssets.length,66);assert.equal(new Set(npcWholeAssets.map(asset=>asset.destination)).size,66);
+assert.equal(npcWholeAssets.length,67);assert.equal(new Set(npcWholeAssets.map(asset=>asset.destination)).size,67);
 const npcAssetDirectory=new URL('dist/assets/npc-actor/',packageRoot);
-assert.deepEqual((await readdir(npcAssetDirectory)).sort(),npcWholeAssets.map(asset=>asset.destination.split('/').at(-1)).sort(),'Packed NPC bank contains exactly60 whole PNGs,5 source JSONs and the original license.');
+assert.deepEqual((await readdir(npcAssetDirectory)).sort(),npcWholeAssets.map(asset=>asset.destination.split('/').at(-1)).sort(),'Packed NPC bank contains exactly60 whole PNGs,6 source JSONs and the original license.');
 for(const asset of npcWholeAssets){
  const bytes=await readFile(new URL(asset.destination.replace(/^src\\//,'dist/'),packageRoot));
  assert.equal(bytes.length,asset.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed whole NPC actor source: '+asset.entry);
@@ -597,6 +607,24 @@ for(const [variant,skin]of npcActorManifest.skins.entries()){
 const npcSharedLicense=await readFile(new URL(npcActorManifest.sharedLicense.path.replace(/^src\\//,'dist/'),packageRoot));
 assert.equal(npcSharedLicense.length,npcActorManifest.sharedLicense.bytes);assert.equal(createHash('sha256').update(npcSharedLicense).digest('hex'),npcActorManifest.sharedLicense.sha256);
 const npcGeometryAsset=npcActorManifest.sourceFiles.find(asset=>asset.role==='geometry');
+const npcBehaviorAsset=npcActorManifest.sourceFiles.find(asset=>asset.role==='behaviorEntity');
+assert(npcBehaviorAsset);assert.equal(npcBehaviorAsset.entry,'behavior_pack/entities/npc.json');assert.equal(npcBehaviorAsset.bytes,5098);
+assert.equal(npcBehaviorAsset.sha256,'1dfce74b80b8603d183eae864d209256b301bc2d4901753ccf25a0ae3d1f68b4');
+const npcBehaviorSource=JSON.parse(await readFile(new URL(npcBehaviorAsset.destination.replace(/^src\\//,'dist/'),packageRoot),'utf8'));
+const npcSkinList=npcBehaviorSource['minecraft:entity'].components['minecraft:npc'].npc_data.skin_list;
+assert(Array.isArray(npcSkinList));assert.equal(npcSkinList.length,60);
+const npcControllerAsset=npcActorManifest.sourceFiles.find(asset=>asset.role==='renderController');assert(npcControllerAsset);
+const npcControllerSource=JSON.parse(await readFile(new URL(npcControllerAsset.destination.replace(/^src\\//,'dist/'),packageRoot),'utf8'));
+const npcControllerAliases=npcControllerSource.render_controllers['controller.render.npc'].arrays.textures['Array.skins'].map(name=>{
+ assert.equal(typeof name,'string');assert(name.startsWith('Texture.'));return name.slice('Texture.'.length);
+});
+assert.equal(npcControllerAliases.length,60);assert.deepEqual([...ui.npcSkinNames],npcControllerAliases,'npcSkinNames remains source controller order, independently of appearance UI order.');
+const npcExpectedAppearance=npcSkinList.map(entry=>{
+ assert.deepEqual(Object.keys(entry),['variant']);assert(Number.isSafeInteger(entry.variant)&&entry.variant>=0&&entry.variant<60);
+ return {variant:entry.variant,skin:npcControllerAliases[entry.variant]};
+});
+assert.equal(new Set(npcExpectedAppearance.map(option=>option.variant)).size,60);
+assert.deepEqual([...ui.npcAppearanceOptions],npcExpectedAppearance,'Appearance UI order comes from the complete packed behavior skin_list, not controller-array positions.');
 const npcSourceGeometry=JSON.parse(await readFile(new URL(npcGeometryAsset.destination.replace(/^src\\//,'dist/'),packageRoot),'utf8'))['geometry.npc'];
 assert.deepEqual(npcEntity.source.bones.map(bone=>bone.name),npcSourceGeometry.bones.map(bone=>bone.name));
 for(const [index,bone]of npcEntity.source.bones.entries()){
@@ -645,8 +673,8 @@ const serverCustomProps: ServerCustomFormProps = {title:'Custom',fields:serverFi
 const serverElements = <><ServerActionForm {...serverActionProps} ref={createRef<HTMLElement>()}/><ServerCustomForm {...serverCustomProps} ref={createRef<HTMLElement>()}/></>;
 import { NpcPortrait, NpcSkinPicker, NpcActionEditor, NpcDialogue, NpcEditor } from 'mcbeui';
 import type { NpcActionValue, NpcEditorValue, NpcEditorProps, NpcActionEditorProps, NpcDialogueProps, NpcSkinPickerProps, NpcPortraitProps } from 'mcbeui';
-import { createNpcEntity, npcSkinNames } from 'mcbeui';
-import type { NpcSkinName, NpcEntityVariant, NpcEntityOptions, GuiEntityCube, GuiEntityBone, GuiEntitySource, GuiNpcPortraitMaterial, GuiEntityGeometry, GuiEntityMesh, GuiEntityLayoutOptions, GuiEntityLayout } from 'mcbeui';
+import { createNpcEntity, npcSkinNames, npcAppearanceOptions } from 'mcbeui';
+import type { NpcSkinName, NpcEntityVariant, NpcEntityOptions, NpcAppearanceOption, GuiEntityCube, GuiEntityBone, GuiEntitySource, GuiNpcPortraitMaterial, GuiEntityGeometry, GuiEntityMesh, GuiEntityLayoutOptions, GuiEntityLayout } from 'mcbeui';
 const typedNpcSkin: NpcSkinName = 'npc_BusinessMobs_5';
 const typedNpcVariant: NpcEntityVariant = 59;
 const typedNpcNames: readonly NpcSkinName[] = npcSkinNames;
@@ -655,6 +683,15 @@ const typedNpcMaterial: GuiNpcPortraitMaterial = {kind:'npc-portrait',tileLightC
 const typedNpcOptions: NpcEntityOptions = {skin:typedNpcSkin,model:typedNpcIdentity(),view:typedNpcIdentity(),projection:typedNpcIdentity(),viewport:[0,0,64,64],scissor:[1,1,62,62],material:typedNpcMaterial};
 const typedNpcCommand: Extract<GuiLayerCommand,{kind:'entity'}> = createNpcEntity(typedNpcOptions);
 const typedNpcVariantCommand: GuiLayerCommand = createNpcEntity({...typedNpcOptions,skin:typedNpcVariant});
+const typedNpcAppearanceList: readonly NpcAppearanceOption[] = npcAppearanceOptions;
+const typedNpcAppearance: NpcAppearanceOption = typedNpcAppearanceList[0]!;
+const typedNpcAppearanceSkin: NpcSkinName = typedNpcAppearance.skin;
+const typedNpcAppearanceVariant: NpcEntityVariant = typedNpcAppearance.variant;
+const typedNpcAppearanceCommand: GuiLayerCommand = createNpcEntity({...typedNpcOptions,skin:typedNpcAppearanceVariant});
+// @ts-expect-error public appearance collection is readonly.
+typedNpcAppearanceList.push(typedNpcAppearance);
+// @ts-expect-error public appearance variant is readonly.
+typedNpcAppearance.variant=typedNpcAppearanceVariant;
 const typedNpcSource: GuiEntitySource = typedNpcCommand.source;
 const typedNpcBone: GuiEntityBone = typedNpcSource.bones[0]!;
 const typedNpcCube: GuiEntityCube = typedNpcBone.cubes[0]!;

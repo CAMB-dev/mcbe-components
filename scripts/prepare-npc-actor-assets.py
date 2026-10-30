@@ -35,6 +35,7 @@ SOURCE_FILES = {
     'lookAtTargetAnimation': 'resource_pack/animations/look_at_target.animation.json',
     'renderController': 'resource_pack/render_controllers/npc.render_controllers.json',
     'clientEntity': 'resource_pack/entity/npc.entity.json',
+    'behaviorEntity': 'behavior_pack/entities/npc.json',
 }
 
 
@@ -156,15 +157,15 @@ def records(manifest):
                 image['entry'] != f'resource_pack/textures/entity/npc/{ALIASES[i]}.png'):
             raise ValueError('Source variant/path/dimensions differ.')
     source = manifest['sourceFiles']
-    if len(source) != 5 or {r['role']: r['entry'] for r in source} != SOURCE_FILES:
-        raise ValueError('Five exact whole source description files are required.')
+    if len(source) != 6 or {r['role']: r['entry'] for r in source} != SOURCE_FILES:
+        raise ValueError('Six exact whole source description files are required.')
     license_record = manifest['license']
     if (license_record['entry'] != 'LICENSE.md' or license_record['bytes'] != 222 or
             license_record['sha256'] != LICENSE_SHA):
         raise ValueError('Original Mojang/EULA license notice is required.')
     bundled = [*images, *source, license_record]
     destinations = [str(target(record)) for record in bundled]
-    if len({p.casefold() for p in destinations}) != 66:
+    if len({p.casefold() for p in destinations}) != 67:
         raise ValueError('Case-folded output paths collide.')
     if len({r['alias'].casefold() for r in images}) != 60:
         raise ValueError('Case-folded skin aliases collide.')
@@ -222,6 +223,8 @@ def verify_source_mapping(payloads, manifest):
         raise ValueError('Client/controller source selection differs.')
     if 'geometry.npc' not in by_role['geometry']:
         raise ValueError('Original NPC source geometry missing.')
+    if by_role['behaviorEntity']['minecraft:entity']['description']['identifier'] != 'minecraft:npc':
+        raise ValueError('Original NPC behavior description differs.')
 
 
 def replace(path, data):
@@ -286,7 +289,7 @@ def main():
         payloads[record['entry']] = data
     verify_source_mapping(payloads, manifest)
     print(json.dumps({'wholePNG': 60, 'PNGBytes': sum(r['bytes'] for r in manifest['skins']),
-                      'wholeSourceJSON': 5, 'license': True, 'sharedLicense': True,
+                      'wholeSourceJSON': 6, 'license': True, 'sharedLicense': True,
                       'orderedVariantAliases': 60, 'allDecodedRGBA': [64, 64],
                       'readOnly': args.check, 'upstreamVerified': args.reference is not None,
                       'alphaThresholdApplied': False, 'mersOrPbrSupport': False,
