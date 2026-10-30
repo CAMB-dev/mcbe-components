@@ -2,6 +2,22 @@
 
 `OrePlayerPermissions`、`OrePermissionLevelSelect`、`OrePermissionToggleRow`、`OrePlayerCard` 和 `OreSwitch` 是独立的现代权限组件。它们依据本机安装版HBUI /OreUI源研究实现，保留原来的Classic四组件；源码可用不等于原生整页像素、所有运行时主题或权限服务已恢复。
 
+## 2026-10-31 原生整页对照与盒模型修正
+
+这次已取得普通页与四角色菜单的真实 PIX 帧及完整、带透明度的原始 OreUI 页面纹理，详见 [GPU采集记录](GPU_CAPTURE_QA.md)。原生输入纹理到原生 UI 层的全帧零差已经独立复核；这个结果不认证 Web 组件。活动 `core.device.display` provider 仍未读取。
+
+原始源码层级与有限原生色边界共同确认了以下修正：Switch 的 `.4u` 底带位于固定 `3.2u` 内框内部，内框包含边框；默认隐藏旁侧文字时，根的正常流高度由 `2.8u` rail 决定，绝对定位的滑块向上溢出。角色选择器的 `4u /4.2u` 高度作用于内层 shine，外框另有 `.2u` 边框、真实 `.4u` 底部 padding 和 `−.4u` 抬升 margin。详情面板恢复 `.2u` 边框。玩家卡片的角色图标容器补全 `2.4u` 宽高，支持宿主传入的 mask 节点。新增内层也保留 forced-colors 的系统颜色与阴影重置。
+
+这些修正来自保存的源码结构及预声明盒模型。固定 `u25` 候选下，原生精确色边界支持滑块总高80px、compact trigger外框120px，源码流程预测 trigger顶端235px与首权限行455px；Web修正后符合该纵向流程。候选单位与 provider 的实际值保持区分，未把这些绝对坐标硬编码到组件。现有 tablet gutter 常量保持原样，横向残差尚未解释。
+
+修正后的完整107项回归实际104通过、3个预期桌面触摸条件跳过、零失败和零重试，包含 OreUI、Classic权限与滚动条。证据 `.cache/ore-permissions-box-tests-01/run-01/`：960份前后指纹中，959份源代码、测试、资源及其他输入不变；唯一变化是测试期间更新的本QA文档，故不宣称“960份全部零漂移”。旧107及图标单独42项批次保留各自身份，不重复累计。
+
+当前修正的实际包通过 React18.3.1 /19.3.1 的155组件＋6数据＋11函数（172值）ESM、SSR、TypeScript、CSS、资源和许可验证；新构建的公开预览9项检查也全部通过，测试浏览器关闭，用户原4173服务与标签保留。证据 `.cache/ore-permissions-box-release-01/`，这些检查继续只认证公开Web合同与包消费。
+
+本机完整页面比较固定为2570×1405、宿主 `guiScale=5` 候选、原始字体与合法本机资源、Chromium headless /ANGLE D3D11、零容差且不裁切、不缩放、不遮罩。最初 base /menu 分别有1592927 /2809534个RGBA像素不同；修正后最新批次为 **1370879 /2773423个不同像素**，两个页面总像素数各3610850。严格结论均为 `DIFFERENT`，绝非整页通过。真实字体节点确认加载 Ten、Seven 和 Noto Sans SC，但不证明它们的原生栅格相同。
+
+比较仍含明确的宿主输入限制：示例头像是安装资源中的占位图，原生使用动态玩家头像；最后两项说明尚未从该首屏核准，可能影响滚动条指标。透明度取整、字体栅格、横向布局、焦点显示与这些输入差异仍待处理。旧批次和错误盒模型假设均保留，不以蒙版、增大容差或替换原生期望图来消除差异。证据分别为 `.cache/ore-permissions-pix-browser-01/` 到 `-04/`、`.cache/ore-permissions-native-geometry-audit-01/` 与 `.cache/ore-permissions-box-oracle-01/`，原生帧、字体及纹理不随库发布。
+
 ## 使用
 
 ```tsx
@@ -56,7 +72,7 @@ import 'mcbeui/styles.css';
 
 焦点框是白色 .2u inset，与accepted check和填充分开。compact默认不委托selected alias，可先focus Visitor而Operator仍checked；desktop-small显式委托selected alias。两分支初始焦点已按有限合同实现，不代表通用native focus memory已恢复。
 
-原生普通页 /角色菜单的新JPEG与退出清理记录保存在 `.cache/ore-permissions-native-02/`，未改变权限，世界已保存退出、游戏及CU已关闭；JPEG仅用于发现，不取色、不拟合比例、不作为无损RGBA期望。完整静态依据见 `.cache/ore-permissions-runtime-config-01/FACTS.json` 和 `.cache/ore-permissions-modal-source-04/REPORT.md`。实际guiScale由 `core.device.display` 及可能的local override提供，当前值未读到；保存的offset0和context默认值均不能证明运行时guiScale为5。生效safe-area /locale /主题、native字体栅格和整页RGBA仍未知。
+早期原生普通页 /角色菜单的JPEG与退出清理记录保存在 `.cache/ore-permissions-native-02/`，未改变权限，世界已保存退出、游戏及CU已关闭；JPEG仅用于发现，不取色、不拟合比例、不作为无损RGBA期望。完整静态依据见 `.cache/ore-permissions-runtime-config-01/FACTS.json` 和 `.cache/ore-permissions-modal-source-04/REPORT.md`。实际guiScale由 `core.device.display` 及可能的local override提供，当前值未读到；保存的offset0和context默认值均不能证明运行时guiScale为5。当时没有无损整页RGBA；后续取得的原生纹理与仍未通过的Web整页比较见本文最新记录。
 
 ## 字体与资源由宿主提供
 
@@ -74,9 +90,9 @@ python scripts/use-local-ore-permissions-assets.py "C:/XboxGames/Minecraft for W
 
 ## 证据与验收状态
 
-安装源的路由、默认Vanilla主题、控件 /scroll /资源依赖见 `.cache/player-permissions-hbui-study-01/`、`-02/` 与 `.cache/ore-permissions-source-03/`。私有bundle只作静态研究，不进入库或在库中执行。原窗口JPEG不是无损native UI target；目前没有本阶段完整原生页面像素证书。
+安装源的路由、默认Vanilla主题、控件 /scroll /资源依赖见 `.cache/player-permissions-hbui-study-01/`、`-02/` 与 `.cache/ore-permissions-source-03/`。私有bundle只作静态研究，不进入库或在库中执行。原窗口JPEG不是无损native UI target；后续真实PIX纹理提供了整页期望，Web仍无完整原生页面像素一致证书。
 
-当前更强源修订的完整107项同批执行：**104通过、3个预期桌面触摸设备条件跳过、零失败**，零retry /flaky，957份输入pin无漂移。正式证据为 `.cache/ore-permissions-native-tests-01/FINAL.json`；新增19DOM×两项目＋4像素项与旧65项分别保留范围，未把早期通过重复累计。
+前一轮更强源修订的完整107项同批执行：**104通过、3个预期桌面触摸设备条件跳过、零失败**，零retry /flaky，957份输入pin无漂移。正式证据为 `.cache/ore-permissions-native-tests-01/FINAL.json`；新增19DOM×两项目＋4像素项与旧65项分别保留范围，未把早期通过重复累计。本轮盒模型修正后的新批次见本文最新记录。
 
 新增overlay /bevel预定域230点中180点零差，包含两倍率fullframe overlay的50点；两个section底bevel合计50点最大通道差1，在原先≤1容差内，**不能称230点全零**。原Switch128点及segmented200点完整byte case复跑仍零差；纠正后的modal100点使用原坐标 /原容差，overlay25点最大差1、其余75点零差。header /shadow正常flow、DY父级预算、dimmest边框 /独立底边与两分支实际键盘白色inset focus也通过。均为有限源CSS合同，不是native整屏对比。
 

@@ -37,6 +37,8 @@ test('70/128rem source-window branches independently retain4/8 or3/5 columns and
     const grid=root(page).locator('.mc-ore-player-permissions__grid'),row=root(page).locator('.mc-ore-player-permissions__row'),players=root(page).locator('.mc-ore-player-permissions__players');
     const cs=await grid.evaluate(n=>({padding:parseFloat(getComputedStyle(n).paddingLeft),max:parseFloat(getComputedStyle(n).maxWidth)}));near(cs.padding,padding);near(cs.max,1280);near((await box(players)).width,(await box(row)).width*left);near(await players.evaluate(n=>parseFloat(getComputedStyle(n).paddingLeft)),gutter);
   }
+  // The panel owns the authored .2u border; minBorder is only a low-scale guard.
+  for(const [guiScale,border]of [[1,1],[2,2],[5,5]]as const){await set(page,{guiScale});const widths=await page.locator('.mc-ore-player-permissions__panel').evaluate(n=>{const c=getComputedStyle(n);return[c.borderTopWidth,c.borderRightWidth,c.borderBottomWidth,c.borderLeftWidth].map(parseFloat)});for(const width of widths)near(width,border)}
 });
 
 test('explicit safe-zone clamp round and physical bottom inset do not scale or silently fit the embedding frame',async({page})=>{
@@ -47,9 +49,10 @@ test('explicit safe-zone clamp round and physical bottom inset do not scale or s
 
 test('measured60rem widget threshold is distinct from viewport; desktop narrow uses the same true modal',async({page})=>{
   await open(page,{mode:'level',widgetWidth:800,availableWidth:600,actualArt:false});const level=page.locator('#qa-ore-level');await expect(level).toHaveAttribute('data-presentation','segmented');
-  await set(page,{availableWidth:599});await expect(level).toHaveAttribute('data-presentation','modal');near((await box(page.getByRole('button',{name:/Permission Level/}))).height,42);
+  await set(page,{availableWidth:599});await expect(level).toHaveAttribute('data-presentation','modal');near((await box(page.getByRole('button',{name:/Permission Level/}))).height,50);near((await box(page.locator('.mc-ore-level__trigger-shine'))).height,42);
+  near(await page.locator('.mc-ore-level__trigger').evaluate(n=>parseFloat(getComputedStyle(n).marginTop)),-4);near(await page.locator('.mc-ore-level__trigger').evaluate(n=>parseFloat(getComputedStyle(n).paddingBottom)),4);
   await page.locator('.mc-ore-level__trigger').click();await expect(page.getByRole('dialog')).toBeVisible();await page.keyboard.press('Escape');
-  await set(page,{viewportSize:[1279,900],availableWidth:800});await expect(level).toHaveAttribute('data-presentation','modal');near((await box(page.locator('.mc-ore-level__trigger'))).height,40);
+  await set(page,{viewportSize:[1279,900],availableWidth:800});await expect(level).toHaveAttribute('data-presentation','modal');near((await box(page.locator('.mc-ore-level__trigger'))).height,48);near((await box(page.locator('.mc-ore-level__trigger-shine'))).height,40);
   await set(page,{viewportSize:[1440,900],availableWidth:undefined,widgetWidth:500});await expect(level).toHaveAttribute('data-presentation','modal');await set(page,{widgetWidth:900});await expect(level).toHaveAttribute('data-presentation','segmented');
 });
 

@@ -12,6 +12,18 @@
 
 捕获和导出产物仅保留在 ignored 本地目录，不随组件库分发。导出的事件、原始资源和重放产生的截图须分开解释；生成程序的 swapchain 适配代码不能直接归于游戏原始命令。
 
+## 2026-10-31：OreUI 权限页与角色菜单
+
+同一安装版本通过 PIX 图形界面重新启动已有 `mcbeui GUI Reference` 测试世界，采集普通权限页和展开的四角色菜单各一帧，均为 Present-to-Present。Force D3D11On12 未启用；实际渲染进程加载 capturer `1.0.2610.28001`。仅打开、观察和关闭页面，未选择角色、切换权限位或发送邀请。测试世界已保存退出，游戏及 PIX 窗口关闭，Computer Use 已重置。
+
+原件与独立分析副本完整字节相同，分别为 `base.wpix`（422319488 bytes，SHA256 `8cf9d5cf82401a880d4b00babb6202b565a447127a11fb006e20b6d403fb3236`）及 `menu.wpix`（421010526 bytes，SHA256 `0cffacb19563d03f6ef3f27c521406b0057334e8298a860321eba3ff3ef414ba`）。两组事件表、PNG 和 C++ 静态导出均实际退出0，并由独立审计核对全部导出文件。证据位于 `.cache/ore-permissions-pix-native-01/`；生成的 C++ 未编译或执行。
+
+这次 OreUI 已经作为整页纹理输入 Minecraft，文字并未缺失。普通页输入为 R522、2570×1405 RGBA8；菜单独立追踪为 R523，同尺寸。普通页 Global14 使用 POINT/CLAMP、白色顶点和原始矩阵写入 R31（2570×1402），随后 Global26977 采样 R31 合成。原始顶点及投影证明最后3行被 scissor 裁去，未把1405行缩放为1402行。
+
+纯 CPU 解出的普通页输入前1402行，与独立 GPU 读取的 R31 **全部3603140像素、14412560 RGBA字节严格相同**，SHA256 均为 `5cc2dee1042b316b189b0b1bee8300aba06323e702baf33dd92bd1b4c7cc85c7`。没有蒙版、颜色转换、位置搜索或误差容限。原始纹理完整透明度保留；常见黑色遮罩 alpha 为127。独立复核位于 `.cache/ore-permissions-pix-independent-02/`，矩阵、shader、footprint 和限定解压记录位于 `.cache/ore-permissions-pix-geometry-01/`。
+
+这个零差结论只覆盖**原生输入纹理到原生 UI 层**。它不等于浏览器组件零差，也不证明 `core.device.display` 的活动 provider 值。合成阶段约5 physical px/game unit，与 HBUI 的 CSS rem 来源仍是不同边界。两张原生整页纹理只作本机期望数据，绝不作为组件背景、字体替代品或发布资源。
+
 ## 保留的失败与边界
 
 首次 CLI packaged launch 返回 `0x80070057`；其后 CLI attach 实际渲染 PID 返回 `PIXTOOL17`，但同一会话的 PIX 图形界面采集成功。原因尚未确定，不能据此声称零售包无法采集。

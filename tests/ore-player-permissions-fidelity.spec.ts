@@ -1,22 +1,23 @@
 import { test, expect } from '@playwright/test';
 import { PNG } from 'pngjs';
 
-// Independent source03 literal geometry/colors, on the declared content-box Web
-// mapping. These bounded 2D surface domains do not certify native HBUI rendering.
+// Independent stronger source hierarchy: fixed border-box inner contains its band.
+// This bounded Web mapping does not certify native HBUI/provider or whole-frame parity.
 const rgb=(hex:string)=>[0,2,4].map(i=>parseInt(hex.slice(i,i+2),16));
 const mix=(base:number[],white:number)=>base.map(c=>Math.round(c*(1-white)+255*white));
 const near=(a:number,b:number)=>expect(Math.abs(a-b)).toBeLessThanOrEqual(1/16);
 
-test('source switch content boxes border bevel and static thumb surface pixels retain four semantic states',async({page},info)=>{
+test('source switch nested border-box inner band and static surfaces retain four semantic states',async({page},info)=>{
   await page.addInitScript(()=>{window.oreQAInitial={mode:'switch',actualArt:false}});await page.goto('/demo/ore-permissions-fixture.html');await expect(page.getByRole('checkbox')).toBeAttached();const checks=[];
   for(const guiScale of [1,2])for(const state of [{checked:false,disabled:false,hover:false},{checked:true,disabled:false,hover:false},{checked:false,disabled:false,hover:true},{checked:true,disabled:true,hover:false}]){
     await page.evaluate(v=>window.oreQA.configure(v),{guiScale,...state});await page.mouse.move(1,1);if(state.hover)await page.locator('.mc-ore-switch').hover();
     const root=await page.locator('.mc-ore-switch').boundingBox(),face=await page.locator('.mc-ore-switch__thumb-face').boundingBox(),rail=await page.locator('.mc-ore-switch__rail').boundingBox();expect(root&&face&&rail).toBeTruthy();const u=5*guiScale;
-    near(root!.width,6*u);near(root!.height,3.2*u);near(rail!.width,6.4*u);near(rail!.height,3.2*u);near(face!.width,3.6*u);near(face!.height,3.6*u);near(face!.x-root!.x,(state.checked?3:.2)*u);near(face!.y-root!.y,-.8*u);
+    near(root!.width,6*u);near(root!.height,2.8*u);near(rail!.width,6*u);near(rail!.height,2.8*u);near(face!.width,3.2*u);near(face!.height,3.2*u);near(face!.x-root!.x,(state.checked?3:.2)*u);near(face!.y-root!.y,-.4*u);
+    const top=page.locator('.mc-ore-switch__thumb-face > .mc-ore-switch__thumb-top'),bevel=page.locator('.mc-ore-switch__thumb-face > .mc-ore-switch__thumb-bevel');await expect(top).toHaveCount(1);await expect(bevel).toHaveCount(1);near((await top.boundingBox())!.height,2.4*u);near((await bevel.boundingBox())!.height,.4*u);near((await bevel.boundingBox())!.y-face!.y,2.6*u);
     const shot=await page.screenshot(),png=PNG.sync.read(shot);let compared=0,different=0,maxDelta=0;
     const sample=(_name:string,x:number,y:number,expected:number[],height=3)=>{for(let yy=0;yy<height;yy++)for(let xx=0;xx<3;xx++){const at=(Math.floor(y+yy)*png.width+Math.floor(x+xx))*4;let bad=png.data[at+3]!==255;for(let c=0;c<3;c++){const d=Math.abs(png.data[at+c]!-expected[c]!);if(d)bad=true;maxDelta=Math.max(maxDelta,d)}compared++;if(bad)different++}};
     const fill=rgb(state.disabled?'b1b2b5':state.hover?'b1b2b5':'d0d1d4'),border=rgb(state.disabled?'58585a':'1e1e1f');
-    sample('face interior',face!.x+u,face!.y+u,fill);sample('face top border',face!.x+u,face!.y,border,1);sample('face lower bevel',face!.x+u,face!.y+3.6*u,rgb(state.disabled?'8c8d90':'58585a'),1);
+    sample('face interior',face!.x+u,face!.y+u,fill);sample('face top border',face!.x+u,face!.y,border,1);sample('face lower bevel',face!.x+u,face!.y+2.6*u,rgb(state.disabled?'8c8d90':'58585a'),1);
     // Interior strips are predeclared by the source border/specular thickness;
     // use one central pixel at scale1 where the .2rem strip is exactly one px.
     const sx=Math.floor(face!.x+u),sy=Math.floor(face!.y+.2*u),at=(sy*png.width+sx)*4,expected=mix(fill,state.hover&&!state.disabled?.8:.6);for(let c=0;c<3;c++){const d=Math.abs(png.data[at+c]!-expected[c]!);maxDelta=Math.max(maxDelta,d)}compared++;
