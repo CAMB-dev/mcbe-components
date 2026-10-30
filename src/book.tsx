@@ -11,6 +11,10 @@ import type { ClassicInputFontMode } from './classic-input-font';
 
 export type BookMode = 'pages' | 'signing';
 export type BookFontMode = ClassicInputFontMode;
+/** Independent whole-label policy. Auto routes Han page counters through the
+ * Unicode family; inherit preserves the caller's previous inherited face.
+ * This bounded Web policy is not the recovered engine locale selector. */
+export type BookPageNumberFontMode = BookFontMode | 'inherit';
 export type BookPageAction = 'edit' | 'insert-text-page' | 'delete-page' | 'move-page-left' | 'move-page-right';
 export interface BookDocumentSnapshot {
   pages: readonly string[];
@@ -93,6 +97,7 @@ export interface BookBaseProps extends Omit<HTMLAttributes<HTMLElement>, 'title'
   maxTitleLength?: number;
   onFinish?: (snapshot: BookDocumentSnapshot, detail: { reason: 'close' | 'done' | 'escape' }) => void;
   pageNumberLabel?: (oneBasedPage: number, totalLeaves: number) => string;
+  pageNumberFontMode?: BookPageNumberFontMode;
 }
 export interface BookReaderProps extends BookBaseProps {}
 type BookTextareaAttributes = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'value' | 'defaultValue' | 'onChange' | 'readOnly'>;
@@ -129,6 +134,7 @@ export interface BookPageProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
   readOnly?: boolean;
   blank?: boolean;
   pageNumber?: string;
+  pageNumberFontMode?: BookPageNumberFontMode;
   onTextChange?: (text: string, event: ChangeEvent<HTMLTextAreaElement>) => void;
   textareaRef?: Ref<HTMLTextAreaElement>;
   textareaProps?: BookTextareaAttributes;
@@ -178,6 +184,11 @@ function skinStyle(skin: BookSkinSources): CSSProperties {
     '--mc-book-crease-right': url(skin.creaseRight), '--mc-book-edge-left': url(skin.edgeLeft),
     '--mc-book-edge-right': url(skin.edgeRight), '--mc-book-hover': url(skin.hoverText),
   } as CSSProperties;
+}
+function numberFont(mode: BookPageNumberFontMode, text: string) {
+  if (mode === 'inherit') return { role: 'inherit', style: undefined } as const;
+  const role = resolveClassicInputFont(mode, text);
+  return { role, style: mode === 'auto' && role === 'latin' ? undefined : { fontFamily: classicInputFontFamily(role) } };
 }
 function buttonStyle(textures: readonly [string, string, string]): CSSProperties {
   return { '--mc-book-button-normal': url(textures[0]), '--mc-book-button-hover': url(textures[1]),
@@ -297,7 +308,7 @@ export const BookPageTurnButton = forwardRef<HTMLButtonElement, BookPageTurnButt
 });
 
 export const BookPage = forwardRef<HTMLDivElement, BookPageProps>(function BookPage({
-  side, pageIndex, text, defaultText = '', readOnly = true, blank = false, pageNumber,
+  side, pageIndex, text, defaultText = '', readOnly = true, blank = false, pageNumber, pageNumberFontMode = 'auto',
   onTextChange, textareaRef, textareaProps = {}, fontMode = 'auto', className, style, ...props
 }, ref) {
   const context = useContext(SkinContext); const geometry = useContext(GeometryContext);
@@ -305,6 +316,7 @@ export const BookPage = forwardRef<HTMLDivElement, BookPageProps>(function BookP
   const acceptedText = useRef(value); acceptedText.current = value;
   const selectedFont = resolveClassicInputFont(fontMode, value);
   const { style: inputStyle, onCompositionStart, onCompositionUpdate, onCompositionEnd } = textareaProps;
+  const counterFont = pageNumber === undefined ? undefined : numberFont(pageNumberFontMode, pageNumber);
   return <div {...props} ref={ref} data-side={side} data-page-index={pageIndex} data-blank={blank}
     data-in-book={!!context} className={['mc-book__page', className].filter(Boolean).join(' ')}
     style={{ ...(!context ? skinStyle(skins) : {}), ...style }}>
@@ -317,7 +329,7 @@ export const BookPage = forwardRef<HTMLDivElement, BookPageProps>(function BookP
       source={side === 'left' ? skin.creaseLeft : skin.creaseRight}
       width={Math.max(0, geometry.pageWidth - 40)} height={Math.max(0, geometry.pageHeight - 14)} className="mc-book__page-crease"/>
     {!blank && <div className="mc-book__page-content">
-      {pageNumber !== undefined && <div className="mc-book__page-number">{pageNumber}</div>}
+      {pageNumber !== undefined && <div className="mc-book__page-number" data-book-number-font-mode={counterFont?.role} style={counterFont?.style}>{pageNumber}</div>}
       {readOnly ? <div className="mc-book__page-text">{value}</div> :
         <div className="mc-book__text-box" data-disabled={!!textareaProps.disabled}>
           <div className="mc-book__text-center"><div className="mc-book__text-clip">
@@ -358,7 +370,7 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     title: controlledTitle, defaultTitle = '', onTitleChange,
     author: controlledAuthor, defaultAuthor = '', onAuthorChange,
     mode: controlledMode, defaultMode = 'pages', onModeChange, readOnly = !editor, disabled = false,
-    layout, skin: overrides, labels: labelOverrides, maxPageLength, maxTitleLength, onFinish, pageNumberLabel,
+    layout, skin: overrides, labels: labelOverrides, maxPageLength, maxTitleLength, onFinish, pageNumberLabel, pageNumberFontMode = 'auto',
     authorEditable = false, onSign, pageActions, onPageAction, finalizeEnabled = true, fontMode = 'auto',
     textareaProps, textareaRef, titleInputProps = {}, authorInputProps = {}, titleInputRef, authorInputRef,
     className, style, onKeyDown, ...rest } = props;
@@ -472,7 +484,7 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     return <div className="mc-book__leaf" key={index} data-side={side}>
       <BookPage side={side} pageIndex={index} text={pages[index] ?? ''} readOnly={pageReadOnly}
         fontMode={!pageReadOnly && !blank ? typeof fontMode === 'function' ? fontMode(index) : fontMode : undefined}
-        blank={blank} pageNumber={index < pages.length ? numberLabel(index + 1, pages.length) : undefined}
+        blank={blank} pageNumber={index < pages.length ? numberLabel(index + 1, pages.length) : undefined} pageNumberFontMode={pageNumberFontMode}
         textareaRef={mergedRef.callback}
         textareaProps={{ ...inputProps, disabled: disabled || inputProps.disabled, maxLength: maxPageLength ?? inputProps.maxLength,
           'aria-label': inputProps['aria-label'] ?? numberLabel(index + 1, Math.max(1, pages.length)),

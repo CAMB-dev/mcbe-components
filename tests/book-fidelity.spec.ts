@@ -678,3 +678,123 @@ test('source form-fitting footer scales its outer frame and bottom anchor indepe
     await relative(cancel, book, [(320 - pairWidth) / 2 + finalizeWidth + 10, 231 - 20, cancelWidth, 20], scale);
   }
 });
+
+test('page-number color retains packed bca387ff on Page and Editor at both scales and CanvasText in forced colors', async ({ page }) => {
+  // Saved Classic GUI5 G61–68: all48 used vertices end in bca387ff.
+  // Provenance: book-font-initial-vb-source-01/all-used-RESULT.json.
+  // This is the source foreground-color contract, not whole-UI/native-AA
+  // equality. The separately measured footer4c4c4cff is unchanged here.
+  await open(page);
+  const standalone = page.locator('#standalone .mc-book__page');
+  const pageNumber = standalone.locator('.mc-book__page-number');
+  const editorNumbers = root(page).locator('.mc-book__page-number');
+  for (const scale of [2, 5]) {
+    await page.emulateMedia({ forcedColors: 'none' });
+    await page.evaluate(scale => window.bookQA.configure({ scale, pages: ['Left', 'Right'], spreadIndex: 0, mode: 'pages' }), scale);
+    // Standalone Page accepts caller HTML/CSS styling; the compound Editor
+    // receives the same unit through its actual layout.unitScale prop.
+    await standalone.evaluate((node, scale) => {
+      if (!(node instanceof HTMLElement)) throw new Error('Expected standalone Page element');
+      node.style.setProperty('--mc-book-u', `${scale}px`);
+    }, scale);
+    await expect(pageNumber).toBeVisible(); await expect(editorNumbers).toHaveCount(2);
+    const counters = [pageNumber, editorNumbers.nth(0), editorNumbers.nth(1)];
+    for (const counter of counters) {
+      await expect(counter).toHaveCSS('font-size', `${10 * scale}px`);
+      await expect(counter).toHaveCSS('color', 'rgb(188, 163, 135)');
+      await expect(counter).toHaveCSS('-webkit-text-fill-color', 'rgb(188, 163, 135)');
+      await expect(counter).toHaveCSS('opacity', '1');
+    }
+    await page.emulateMedia({ forcedColors: 'active' });
+    const system = await page.evaluate(() => {
+      const probe = document.createElement('span'); probe.setAttribute('aria-hidden', 'true');
+      probe.style.cssText = 'position:fixed;left:-10000px;top:-10000px;color:CanvasText;-webkit-text-fill-color:CanvasText;forced-color-adjust:none';
+      document.body.append(probe);
+      const style = getComputedStyle(probe), values = { color: style.color, fill: style.webkitTextFillColor };
+      probe.remove(); return values;
+    });
+    for (const counter of counters) {
+      await expect(counter).toHaveCSS('color', system.color);
+      await expect(counter).toHaveCSS('-webkit-text-fill-color', system.fill);
+    }
+  }
+  await page.emulateMedia({ forcedColors: 'none' });
+});
+
+test('page-number font selection is independent across Editor Reader and Page without replacing input nodes or changing caret selection', async ({ page }) => {
+  // Native counter digits use the Unicode glyph00 page, independently of the
+  // body input. Han-auto here is an explicit Web policy, not a recovered
+  // engine locale predicate. The widths below are finite prepared-host hmtx
+  // checks, not native counter advance, rasterization or whole-UI equality.
+  await open(page);
+  await page.evaluate(() => window.bookQA.configure({ pages: ['Body one', 'Body two'], readerPages: ['Read only', 'Second'],
+    standaloneText: 'Standalone body', scale: 2, fontProbe: true, counterParentFamily: 'cursive',
+    editorFontMode: 'latin', standaloneFontMode: 'latin', fontModeInput: 'scalar' }));
+  const input = root(page).locator('textarea').first(), standaloneInput = page.locator('#standalone textarea');
+  const editorCounters = root(page).locator('.mc-book__page-number');
+  const readerCounter = page.locator('#secondary .mc-book__page-number').first();
+  const standaloneCounter = page.locator('#standalone .mc-book__page-number');
+  const readerBody = page.locator('#secondary .mc-book__page-text').first();
+  await expect(input).toHaveValue('Body one');
+  await expect(input).toHaveCSS('font-family', 'monospace');
+  await expect(readerBody).toHaveCSS('font-family', 'cursive');
+  for (const counter of [editorCounters.nth(0), readerCounter, standaloneCounter]) await expect(counter).toHaveCSS('font-family', 'cursive');
+  await input.focus();
+  const nodes = await page.evaluateHandle(() => {
+    const input = window.bookQA.refs.textareas.get(0)!, standalone = window.bookQA.refs.standaloneTextarea!;
+    input.setSelectionRange(2, 6, 'backward'); standalone.setSelectionRange(1, 4, 'forward');
+    return { input, standalone, editor: window.bookQA.refs.editor, reader: window.bookQA.refs.reader, page: window.bookQA.refs.page,
+      counters: [...document.querySelectorAll('#primary .mc-book__page-number,#secondary .mc-book__page-number,#standalone .mc-book__page-number')] };
+  });
+  const stable = async () => expect(await page.evaluate(saved => ({
+    input: saved.input === window.bookQA.refs.textareas.get(0), standalone: saved.standalone === window.bookQA.refs.standaloneTextarea,
+    editor: saved.editor === window.bookQA.refs.editor, reader: saved.reader === window.bookQA.refs.reader, page: saved.page === window.bookQA.refs.page,
+    counters: saved.counters.every((node, index) => node === document.querySelectorAll('#primary .mc-book__page-number,#secondary .mc-book__page-number,#standalone .mc-book__page-number')[index]),
+    focus: document.activeElement === saved.input,
+    inputSelection: [saved.input.selectionStart, saved.input.selectionEnd, saved.input.selectionDirection],
+    standaloneSelection: [saved.standalone.selectionStart, saved.standalone.selectionEnd, saved.standalone.selectionDirection],
+    values: [saved.input.value, saved.standalone.value],
+  }), nodes)).toEqual({ input: true, standalone: true, editor: true, reader: true, page: true, counters: true, focus: true,
+    inputSelection: [2, 6, 'backward'], standaloneSelection: [1, 4, 'forward'], values: ['Body one', 'Standalone body'] });
+  await page.evaluate(() => window.bookQA.configure({ pageNumberHan: true, standalonePageNumberHan: true }));
+  await expect(editorCounters.nth(0)).toHaveText('第1页'); await expect(editorCounters.nth(1)).toHaveText('第2页');
+  for (const counter of [editorCounters.nth(0), editorCounters.nth(1), standaloneCounter]) await expect(counter).toHaveCSS('font-family', 'serif');
+  await expect(readerCounter).toHaveCSS('font-family', 'cursive');
+  await expect(input).toHaveCSS('font-family', 'monospace'); await expect(readerBody).toHaveCSS('font-family', 'cursive');
+  await stable();
+  await page.evaluate(() => window.bookQA.configure({ pageNumberFontMode: 'inherit', readerPageNumberFontMode: 'unicode', standalonePageNumberFontMode: 'latin' }));
+  await expect(editorCounters.nth(0)).toHaveCSS('font-family', 'cursive');
+  await expect(readerCounter).toHaveCSS('font-family', 'serif'); await expect(standaloneCounter).toHaveCSS('font-family', 'monospace');
+  await stable();
+  await page.evaluate(() => {
+    window.bookQA.refs.textareas.get(0)!.dispatchEvent(new CompositionEvent('compositionstart', { bubbles: true, data: '中' }));
+    window.bookQA.configure({ pageNumberFontMode: 'latin', readerPageNumberFontMode: 'inherit', standalonePageNumberFontMode: 'unicode',
+      editorFontMode: 'unicode', standaloneFontMode: 'unicode' });
+  });
+  await expect(editorCounters.nth(0)).toHaveCSS('font-family', 'monospace');
+  await expect(readerCounter).toHaveCSS('font-family', 'cursive'); await expect(standaloneCounter).toHaveCSS('font-family', 'serif');
+  await expect(input).toHaveCSS('font-family', 'serif'); await expect(standaloneInput).toHaveCSS('font-family', 'serif');
+  await expect(readerBody).toHaveCSS('font-family', 'cursive'); await stable();
+  await page.evaluate(() => window.bookQA.refs.textareas.get(0)!.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: '' })));
+
+  expect(await page.evaluate(() => window.bookQA.loadCounterClassicFonts())).toBe(true);
+  await page.evaluate(() => window.bookQA.configure({ counterFontProfile: 'classic', counterParentFamily: undefined,
+    pageNumberFontMode: 'auto', readerPageNumberFontMode: 'auto', standalonePageNumberFontMode: 'auto',
+    readerPageNumberHan: true, editorFontMode: 'latin', standaloneFontMode: 'latin' }));
+  for (const counter of [editorCounters.nth(0), readerCounter, standaloneCounter]) await expect(counter).toHaveCSS('font-family', '"MCBE Classic Unicode"');
+  await expect(input).toHaveCSS('font-family', '"MCBE Classic"'); await expect(readerBody).toHaveCSS('font-family', '"MCBE Classic"');
+  const textWidth = (counter: Locator) => counter.evaluate(node => { const range = document.createRange(); range.selectNodeContents(node); return range.getBoundingClientRect().width; });
+  // Whole-source advances at20px: 第18+1(7/12)+页18, 第18+2(8/12)+页18.
+  for (const [counter, expected] of [[editorCounters.nth(0), 43], [editorCounters.nth(1), 44], [standaloneCounter, 43]] as const) {
+    await expect(counter).toHaveCSS('font-size', '20px'); expect(Math.abs(await textWidth(counter) - expected)).toBeLessThanOrEqual(.02);
+  }
+  await stable();
+  await page.evaluate(() => window.bookQA.configure({ pageNumberFontMode: 'inherit', readerPageNumberFontMode: 'latin', standalonePageNumberFontMode: 'inherit' }));
+  for (const counter of [editorCounters.nth(0), editorCounters.nth(1), readerCounter, standaloneCounter]) {
+    await expect(counter).toHaveCSS('font-family', '"MCBE Classic"'); expect(Math.abs(await textWidth(counter) - 48)).toBeLessThanOrEqual(.02);
+  }
+  await expect(input).toHaveCSS('font-family', '"MCBE Classic"'); await expect(readerBody).toHaveCSS('font-family', '"MCBE Classic"');
+  await stable();
+  expect(await page.evaluate(() => window.bookQA.events.filter(event => event.kind === 'pages' || event.kind === 'standalone'))).toEqual([]);
+  await nodes.dispose();
+});

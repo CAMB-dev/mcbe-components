@@ -24,7 +24,7 @@
 .mc-book__page-content { position:absolute; z-index:3; inset:0; }
 .mc-book__page[data-side="left"] .mc-book__page-content { transform:translateX(calc(var(--mc-book-u) * 5)); }
 .mc-book__page[data-side="right"] .mc-book__page-content { transform:translateX(calc(var(--mc-book-u) * -5)); }
-.mc-book__page-number { position:absolute; top:calc(var(--mc-book-u) * 13); left:0; width:100%; color:rgb(74% 64% 53%); text-align:center; }
+.mc-book__page-number { position:absolute; top:calc(var(--mc-book-u) * 13); left:0; width:100%; color:#bca387; text-align:center; }
 .mc-book__text-box, .mc-book__page-text { position:absolute; top:calc(var(--mc-book-u) * 23); left:calc(var(--mc-book-u) * 16); width:calc(100% - var(--mc-book-u) * 32); height:calc(100% - var(--mc-book-u) * 58); margin:0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; color:#000; font:inherit; line-height:1; text-shadow:none; white-space:pre-wrap; overflow-wrap:break-word; overflow:hidden; tab-size:4; }
 /* Preserve the outer edit hit/hover/focus box. common.centering_panel has
    insets TRBL 2/3/2/3; multiline clip_offset[0,-3] expands the clip separately.

@@ -1,0 +1,593 @@
+{
+  "schemaVersion": 1,
+  "fixedSource": {
+    "archive": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "scope": "Three missing complete originals for conditional ServerForms divider and above/below tooltip branches. Existing dialog/control/tooltip-background/infobulb/loading sources are reused.",
+  "resources": [
+    {
+      "key": "list_item_divider_line_light",
+      "entry": "resource_pack/textures/ui/list_item_divider_line_light.png",
+      "destination": "src/assets/server-forms/list_item_divider_line_light.png",
+      "bytes": 69,
+      "sha256": "e216cb729e6a91f083d1518614497c89bd0ec5757363d532d648226a330d0269",
+      "dimensions": [
+        1,
+        1
+      ],
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "key": "tooltip_default_chevron",
+      "entry": "resource_pack/textures/ui/tooltip_default_chevron.png",
+      "destination": "src/assets/server-forms/tooltip_default_chevron.png",
+      "bytes": 201,
+      "sha256": "d4e12e2d6bd98a4b149bbadbf8c35c0f10eaf936d4fdc0c1455a2cb9011bfbe8",
+      "dimensions": [
+        19,
+        13
+      ]
+    },
+    {
+      "key": "tooltip_inverted_chevron",
+      "entry": "resource_pack/textures/ui/tooltip_inverted_chevron.png",
+      "destination": "src/assets/server-forms/tooltip_inverted_chevron.png",
+      "bytes": 227,
+      "sha256": "a32ead03a3889dfcbd0e09afda750da3eb4fcfa9793c4b51d5f24b3889ff0aa9",
+      "dimensions": [
+        19,
+        13
+      ]
+    }
+  ],
+  "textureMetadata": [
+    {
+      "key": "list_item_divider_line_light",
+      "entry": "resource_pack/textures/ui/list_item_divider_line_light.json",
+      "destination": "src/assets/server-forms/list_item_divider_line_light.json",
+      "bytes": 60,
+      "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+      "raw": {
+        "nineslice_size": 1,
+        "base_size": [
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "license": {
+    "entry": "LICENSE.md",
+    "destination": "src/assets/server-forms/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sharedLicense": {
+    "path": "src/assets/Minecraft-Sample-LICENSE.md",
+    "entry": "LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sourceUi": [
+    {
+      "entry": "resource_pack/ui/server_form.json",
+      "bytes": 20532,
+      "sha256": "ca718a8626eb0d0496c1e2b3e23695d10f3220211f2d3f1260b7f2123ad48c34",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_dialogs.json",
+      "bytes": 14238,
+      "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/settings_sections/settings_common.json",
+      "bytes": 80972,
+      "sha256": "36863803c56e42d31b915aa9df13cf88cc43a528eb40c76cbf26c911ef7b3ecf",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/progress_screen.json",
+      "bytes": 72699,
+      "sha256": "2453144b1e4d98bcc56d63c014034dae50172f5e15989589a8dca2676599ee80",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "bundled": false
+    }
+  ],
+  "reusedEmbedded": {
+    "file": "src/system-screens-textures.css",
+    "cssVariable": "--mc-system-loading-waveform",
+    "entry": "resource_pack/textures/ui/loading_bar.png",
+    "bytes": 323,
+    "sha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef",
+    "dimensions": [
+      640,
+      8
+    ],
+    "copied": false
+  },
+  "reusedMetadata": {
+    "entry": "resource_pack/textures/ui/loading_bar.json",
+    "bytes": 39,
+    "sha256": "38bc67e02f506f01308a16c9be27bbe203ea6da76cd02961571801327ad5f665",
+    "raw": {
+      "base_size": [
+        640,
+        8
+      ]
+    },
+    "bundled": false
+  },
+  "dividerUsage": {
+    "factoryControlId": "divider",
+    "factories": [
+      "server_form.long_form_dynamic_buttons_panel",
+      "server_form.generated_contents"
+    ],
+    "condition": "Only instantiated for caller-supplied divider entries; not visible for every item.",
+    "inheritedNode": "settings_common.option_group_section_divider",
+    "defaultPanelSize": [
+      "100%",
+      9
+    ],
+    "imageSize": [
+      "100%",
+      1
+    ],
+    "anchor": "center"
+  },
+  "loadingUsage": {
+    "condition": "server_form dynamic button image texture='loading', with inherited #bar_animation_visible binding.",
+    "sourceCellSize": [
+      64,
+      8
+    ],
+    "serverDisplaySize": [
+      30,
+      4
+    ],
+    "serverOffset": [
+      -2,
+      16
+    ],
+    "sourceColor": [
+      0.7,
+      0.7,
+      0.7,
+      1.0
+    ],
+    "flipBook": {
+      "frameCount": 10,
+      "frameStep": 64,
+      "fps": 10,
+      "reversible": true,
+      "easing": "linear"
+    },
+    "tintBaked": false
+  },
+  "qualification": {
+    "wholePngCount": 3,
+    "wholePngBytes": 497,
+    "wholeTextureMetadataCount": 1,
+    "bundledWholeFilesIncludingLicense": 5,
+    "metadataInterpretation": "Raw nineslice1/base1x1 is preserved, not applied as a2px physical border. The uniform1pixel source is rendered as a whole stretched image; registry exposes raw metadata, not GuiImageNineSlice.",
+    "sourceDeclaredUnusedBoundary": "A factory template/control-ID declaration is conditional capability, not proof that a particular form instance displays that resource.",
+    "nativeMappingVerified": false,
+    "licenseNotice": "Complete original Mojang all-rights-reserved and EULA notice retained locally and in unchanged shared Minecraft-Sample-LICENSE.md.",
+    "genericControlBoundary": "Existing Button/TextField/Toggle/Slider/Combobox/Checkbox semantics and source skins remain delegated components. This resource audit is not native geometry/state rendering certification."
+  },
+  "tooltipUsage": {
+    "sourceNodes": [
+      "settings_common.option_generic_tooltip/top_popup",
+      "settings_common.option_generic_tooltip/bottom_popup"
+    ],
+    "condition": "Actual popup child instances exist; engine tooltip_trigger controls visibility. Nonempty text alone is not static always-visible. Web trigger/placement is an explicit host contract.",
+    "chevronSize": [
+      19,
+      13
+    ],
+    "bilinear": true,
+    "color": "No explicit color/tint on chevron image; do not infer inheritance from background color.",
+    "ignored": "$ignore_tooltip_popup_chevron default:false; settings top/bottom overrides do not change it.",
+    "above": {
+      "anchorFrom": "bottom_right",
+      "anchorTo": "bottom_right",
+      "offset": [
+        "-30%x",
+        "100%y - 3"
+      ],
+      "texture": "textures/ui/tooltip_default_chevron"
+    },
+    "below": {
+      "anchorFrom": "top_right",
+      "anchorTo": "top_right",
+      "offset": [
+        "-30%x",
+        "-100%y + 3"
+      ],
+      "texture": "textures/ui/tooltip_inverted_chevron"
+    },
+    "existingBackground": "src/feedback-textures.css --mc-feedback-tooltip is complete original tooltip_default_background9x9; source background color$f_format defaults white.",
+    "existingIcon": "src/assets/gui-icons/infobulb.png is original15x19, displayed7x11 in source; popup icon bilinear:true."
+  },
+  "reuseBoundary": {
+    "dropdownBackground": "Existing --mc-skin-dropdown is a complete5x5 reencoded PNG with identical fullRGBA to original dropdown_background, but file bytes differ. It is not claimed whole-PNG byte-equal.",
+    "nativeCertification": false
+  },
+  "reusedSourceAudit": [
+    {
+      "texture": "dialog_background_hollow_3",
+      "sourceEntry": "resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "sourceBytes": 260,
+      "sourceSha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+      "sourceSize": [
+        18,
+        33
+      ],
+      "sourceMetadata": {
+        "nineslice_size": [
+          8,
+          23,
+          8,
+          8
+        ],
+        "base_size": [
+          18,
+          33
+        ]
+      },
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/command-block/dialog_background_hollow_3.png",
+          "encoding": "whole-file"
+        },
+        {
+          "file": "src/system-screens-textures.css",
+          "line": 3,
+          "prefix": "  --mc-system-settings-frame: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [
+        {
+          "file": "src/textures.css",
+          "line": 42,
+          "prefix": "  --mc-skin-dialog: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "control",
+      "sourceEntry": "resource_pack/textures/ui/control.png",
+      "sourceBytes": 71,
+      "sourceSha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "sourceSize": [
+        2,
+        2
+      ],
+      "sourceMetadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/jigsaw/control.png",
+          "encoding": "whole-file"
+        },
+        {
+          "file": "src/system-screens-textures.css",
+          "line": 11,
+          "prefix": "  --mc-system-loading-control: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "close_button_default",
+      "sourceEntry": "resource_pack/textures/ui/close_button_default.png",
+      "sourceBytes": 163,
+      "sourceSha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "sourceSize": [
+        15,
+        15
+      ],
+      "sourceMetadata": null,
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/book/close_button_default.png",
+          "encoding": "whole-file"
+        },
+        {
+          "file": "src/workstation-image-assets.ts",
+          "line": 25,
+          "prefix": "  closeNormal: '",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "close_button_hover",
+      "sourceEntry": "resource_pack/textures/ui/close_button_hover.png",
+      "sourceBytes": 164,
+      "sourceSha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "sourceSize": [
+        15,
+        15
+      ],
+      "sourceMetadata": null,
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/book/close_button_hover.png",
+          "encoding": "whole-file"
+        },
+        {
+          "file": "src/workstation-image-assets.ts",
+          "line": 26,
+          "prefix": "  closeNormalHover: '",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [
+        {
+          "file": "src/crafting-image-assets.ts",
+          "line": 51,
+          "prefix": "  \"close_button_pressed_light\": { url: \"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/feedback-textures.css",
+          "line": 8,
+          "prefix": "  --mc-feedback-close-pressed: url(\"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/inventory-screen-textures.css",
+          "line": 41,
+          "prefix": "  --mc-inv-screen-toolbar-close-pressed: url(\"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/textures.css",
+          "line": 46,
+          "prefix": "  --mc-skin-close-hover: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "close_button_pressed",
+      "sourceEntry": "resource_pack/textures/ui/close_button_pressed.png",
+      "sourceBytes": 1416,
+      "sourceSha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "sourceSize": [
+        15,
+        15
+      ],
+      "sourceMetadata": null,
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/book/close_button_pressed.png",
+          "encoding": "whole-file"
+        },
+        {
+          "file": "src/workstation-image-assets.ts",
+          "line": 27,
+          "prefix": "  closeNormalPressed: '",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [
+        {
+          "file": "src/crafting-image-assets.ts",
+          "line": 50,
+          "prefix": "  \"close_button_hover_light\": { url: \"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/feedback-textures.css",
+          "line": 7,
+          "prefix": "  --mc-feedback-close-hover: url(\"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/inventory-screen-textures.css",
+          "line": 40,
+          "prefix": "  --mc-inv-screen-toolbar-close-hover: url(\"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/textures.css",
+          "line": 47,
+          "prefix": "  --mc-skin-close-pressed: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "loading_bar",
+      "sourceEntry": "resource_pack/textures/ui/loading_bar.png",
+      "sourceBytes": 323,
+      "sourceSha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef",
+      "sourceSize": [
+        640,
+        8
+      ],
+      "sourceMetadata": {
+        "base_size": [
+          640,
+          8
+        ]
+      },
+      "wholePngByteMatches": [
+        {
+          "file": "src/system-screens-textures.css",
+          "line": 10,
+          "prefix": "  --mc-system-loading-waveform: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "dropdown_chevron",
+      "sourceEntry": "resource_pack/textures/ui/dropdown_chevron.png",
+      "sourceBytes": 172,
+      "sourceSha256": "f661ee43ad1096cd996fdbaf33f96453f583e759da6af4bdbc5d9a843ca22ebe",
+      "sourceSize": [
+        11,
+        11
+      ],
+      "sourceMetadata": null,
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/gui-icons/dropdown-chevron.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "dropdown_chevron_up",
+      "sourceEntry": "resource_pack/textures/ui/dropdown_chevron_up.png",
+      "sourceBytes": 175,
+      "sourceSha256": "f4fae1fdd3702d011142e8e8514b8561de93f30af890022253fbae1d264db95c",
+      "sourceSize": [
+        11,
+        11
+      ],
+      "sourceMetadata": null,
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/gui-icons/dropdown-chevron-up.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "infobulb",
+      "sourceEntry": "resource_pack/textures/ui/infobulb.png",
+      "sourceBytes": 282,
+      "sourceSha256": "01338044c8434b2cb37e35517e212c54b5de8fb7eb5776c49f32d4f4219d928c",
+      "sourceSize": [
+        15,
+        19
+      ],
+      "sourceMetadata": null,
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/gui-icons/infobulb.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "tooltip_default_background",
+      "sourceEntry": "resource_pack/textures/ui/tooltip_default_background.png",
+      "sourceBytes": 158,
+      "sourceSha256": "7c71b806e3e6ff807f04668a26f3aff6d8a67d0e72db60ea2083d37ac8a31dfa",
+      "sourceSize": [
+        9,
+        9
+      ],
+      "sourceMetadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          9,
+          9
+        ]
+      },
+      "wholePngByteMatches": [
+        {
+          "file": "src/feedback-textures.css",
+          "line": 4,
+          "prefix": "  --mc-feedback-tooltip: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sameWholeRgbaDifferentPngMatches": [],
+      "byteIdentityClaim": true,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    },
+    {
+      "texture": "dropdown_background",
+      "sourceEntry": "resource_pack/textures/ui/dropdown_background.png",
+      "sourceBytes": 154,
+      "sourceSha256": "22acaa35bef8444642054c0bc3c5e0d69eb188bb8ccb26f354d59f85c2055010",
+      "sourceSize": [
+        5,
+        5
+      ],
+      "sourceMetadata": {
+        "nineslice_size": 2,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "wholePngByteMatches": [],
+      "sameWholeRgbaDifferentPngMatches": [
+        {
+          "file": "src/textures.css",
+          "line": 29,
+          "prefix": "  --mc-skin-dropdown: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "byteIdentityClaim": false,
+      "visibility": "Conditional on actual control state/entry/popup; not a claim that all resources draw in every form."
+    }
+  ],
+  "notRequiredByReviewedInheritance": [
+    "StoreTopBar",
+    "dialog_divider",
+    "dialog_background_hollow_4 (default overridden by hollow3)"
+  ]
+}

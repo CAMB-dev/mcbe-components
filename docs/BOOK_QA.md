@@ -135,9 +135,15 @@ footer按钮按源最小外框102×20、bottom对齐、随unitScale的一逻辑�
 
 `FINAL-HOSTNAV-05.json` 另建明确的previous=false /next=true宿主profile，原04数组导航fixture保留。Classic empty /mixed残差为8,206 /11,820，Unicode显式override为6,034 /9,648；各比04少7,875，仅next的120×120区域变化，其余RGBA字节相同。控件余区剩456个pencil边缘像素，其他源皮肤相同；132项选定输入pin无变化、两完整presentation guard仍0、alpha及runtime错误为0。该结果不认证默认数组导航或默认字体整页零差。
 
+后续从既有捕获的初始VB恢复48个实际页码顶点与8个footer顶点，确认RGBA分别为 `[188,163,135,255]` 与 `[76,76,76,255]`，见 `.cache/book-font-initial-vb-source-01/FINAL.json`。页码色修为 `#bca387` 后，`FINAL-COLOR-06.json` 四帧Classic empty /mixed残差为6,677 /10,291，Unicode显式override为3,752 /7,366，alpha均0、native parity仍false。仅counter红byte变化，其余RGBA相同；未使用到的WIP ServerForms预扫warning保留，不伪称所有诊断输出为0。
+
+`FINAL-COUNTER-ROUTE-07.json` 再以实际页码角色复测：默认Classic与显式override的empty均为3,752、mixed均为7,366不同像素，alpha0。Classic比06少2,925残差，实际仅counter区域5,007像素变化；explicit override相对06整帧相同，两07 profile在同scene也整帧相同。CDP确认页码各11glyph均用Unicode，footer保留各原family，字体文件字节未变；两完整guard0、130项选定输入pin不变，runtime /server错误0。没有通过ceil宽度猜测、offset或metrics拟合消除差异，完整UI仍未达到native parity。
+
 ## 正文与编辑布局修订
 
 `BookFontMode` 为 `auto | latin | unicode`。`BookEditor.fontMode` 接受一个模式或 `(pageIndex) => mode`；单独的可编辑 `BookPage` 也可指定。auto只在该页整段已接受值含Han时选择Unicode家族，是可覆盖的有限候选。显式 `textareaProps.style.fontFamily` 优先；Reader静态文字、title /author、页码与另一页不会因当前页输入而一并切换。仍保留同一个真实textarea、ref、选区、composition及受控值所有权，不以新字体角色替换输入节点。
+
+页码另有独立 `BookPageNumberFontMode = BookFontMode | 'inherit'`，Base /BookPage可给 `pageNumberFontMode`。默认auto只在完整页码label含Han时整段选Unicode，非Han保持继承；inherit显式保留旧家族，latin /unicode可强制指定。它不改变textarea fontMode，也不恢复引擎locale选择、终止advance或ceil-width规则；上述native07仅验证固定两scene与明确profile，未扩展为任意页码 /语言规则。
 
 默认页尺寸下，可编辑正文outer保留128×149逻辑单位；恢复源common居中TRBL 2/3/2/3后inner为122×145，multiline偏移 `[0,-3]` 对应独立expanded clip 122×151。normal行距仍为10逻辑单位。只读文字布局不因editable inner修订而重排，也不把观察到的全局原点当作正常输入。
 
@@ -153,4 +159,8 @@ footer按钮按源最小外框102×20、bottom对齐、随unitScale的一逻辑�
 
 后续83项首批实际82通过 /1失败：扩张synthetic 92,640像素平面的理想CPU floor期望在四个tie列有1,544差异。完整范围与首失败保留，不能遮列或放宽epsilon；改为独立source-derived CSS reference后，fresh完整83项（Book43 /Sign30 /Classic10）及另6导航全部通过，各批904项选定输入加5 harness无变化，零跳过 /重试 /flaky /report errors。完整92,640像素严格RGBA0是CSS whole-PNG参考合同，不是理想POINT或native画面认证；不把native04 /05皮肤结果与首synthetic失败混为一谈。canonical为 `.cache/book-fidelity-css-reference-03/EXECUTED-FINAL.json`。
 
-当前133组件 /147值React18 /19新包实际消费与349dist逐字节一致也通过，见 `.cache/structure-editor-root-close-01/INTEGRATION-PACKAGE-02.json`；它与83客户端、原生固定场景分别保留范围，不把SSR或独立CSS参考升格为上述仍非零的完整原生画面。
+当时133组件 /147值React18 /19新包实际消费与349dist逐字节一致也通过，见 `.cache/structure-editor-root-close-01/INTEGRATION-PACKAGE-02.json`；它与83客户端、原生固定场景分别保留范围，不把SSR或独立CSS参考升格为上述仍非零的完整原生画面。
+
+后续页码颜色 /独立字体角色的完整85项（Book45 /Sign30 /Classic10）与另6导航实际通过，927项root加5 harness前后无变化，见 `.cache/book-counter-font-07-qa/EXECUTED-FINAL.json`。85与历史83保留各自源版本，不累计重复项；其Web角色 /输入合同不改变native07仍有3,752 /7,366残差的结论。
+
+公开ServerForms /Book页码phase02完整64项辅助通过，31.142秒，当前135 /149 stage包两实际消费者的355dist逐字节一致。所测页码autoHan /forcedUnicode实际单face为Unicode，inherit /forcedLatin为Classic，各6glyph；精确父级继承且无inline override、Reader正文不变、原textarea节点 /选区及英语reset也通过。首公开53 /1的family字符串harness误判与未执行后续保留，修正后不累计旧pass；64辅助与85 /6正式回归分开，不增加原生零差范围。来源及资源 /网络边界见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。

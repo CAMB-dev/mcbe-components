@@ -2,7 +2,7 @@ import { StrictMode, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BookEditor, BookPage, BookPageTurnButton, BookReader } from '../src/book';
-import type { BookDocumentSnapshot, BookFontMode, BookMode, BookNavigationControl, BookPageAction, BookSkinSources } from '../src/book';
+import type { BookDocumentSnapshot, BookFontMode, BookMode, BookNavigationControl, BookPageAction, BookPageNumberFontMode, BookSkinSources } from '../src/book';
 import '../src/styles.css';
 import '../src/fonts.css';
 import '../src/book.css';
@@ -22,6 +22,9 @@ export interface BookQASettings {
   pageFontModes: Partial<Record<number, BookFontMode>>; pageStyleFamilies: Partial<Record<number, string>>;
   standaloneFontMode: BookFontMode; standaloneInputFamily?: string; standaloneReadOnly: boolean;
   trackFontCalls: boolean;
+  pageNumberFontMode: BookPageNumberFontMode; readerPageNumberFontMode: BookPageNumberFontMode; standalonePageNumberFontMode: BookPageNumberFontMode;
+  pageNumberHan: boolean; readerPageNumberHan: boolean; standalonePageNumberHan: boolean;
+  counterFontProfile: 'default' | 'classic'; counterParentFamily?: string;
   hostNavigation: boolean; hostPreviousAvailable: boolean; hostNextAvailable: boolean;
   mutateNavigationSnapshot: boolean; preventHostTurn: boolean;
 }
@@ -29,11 +32,18 @@ interface QAEvent { kind: string; value?: unknown; detail?: unknown }
 interface BookQA {
   mounted: boolean; events: QAEvent[]; signs: BookDocumentSnapshot[]; finishes: BookDocumentSnapshot[];
   fontModeCalls: number[];
+  loadCounterClassicFonts: () => Promise<boolean>;
   configure: (patch: Partial<BookQASettings>) => void; unmount: () => void;
   refs: { editor: HTMLElement | null; reader: HTMLElement | null; page: HTMLDivElement | null; turn: HTMLButtonElement | null; title: HTMLInputElement | null; author: HTMLInputElement | null; standaloneTextarea: HTMLTextAreaElement | null; textareas: Map<number, HTMLTextAreaElement> };
 }
 declare global { interface Window { bookQA: BookQA } }
-const qa: BookQA = { mounted: false, events: [], signs: [], finishes: [], fontModeCalls: [], configure: () => {}, unmount: () => {}, refs: { editor: null, reader: null, page: null, turn: null, title: null, author: null, standaloneTextarea: null, textareas: new Map() } };
+const qa: BookQA = { mounted: false, events: [], signs: [], finishes: [], fontModeCalls: [], loadCounterClassicFonts: async () => {
+  // Optional caller-owned QA profile: old fixture visits do not load this bridge.
+  const bridge = await import('virtual:mcbeui-game-font');
+  if (!bridge.hasClassicFonts) return false;
+  await Promise.all(['MCBE Classic', 'MCBE Classic Unicode'].map(family => document.fonts.load(`20px "${family}"`, '第1页第2页')));
+  return true;
+}, configure: () => {}, unmount: () => {}, refs: { editor: null, reader: null, page: null, turn: null, title: null, author: null, standaloneTextarea: null, textareas: new Map() } };
 window.bookQA = qa;
 const initial: BookQASettings = {
   pages: ['Leaf one', 'Leaf two', 'Leaf three', 'Leaf four', 'Leaf five'], readerPages: ['Reader one', 'Reader two', 'Reader three'],
@@ -45,6 +55,8 @@ const initial: BookQASettings = {
   actionView: 'row',
   fontProbe: false, editorFontMode: 'auto', fontModeInput: 'scalar', pageFontModes: {}, pageStyleFamilies: {},
   standaloneFontMode: 'auto', standaloneReadOnly: false, trackFontCalls: false,
+  pageNumberFontMode: 'auto', readerPageNumberFontMode: 'auto', standalonePageNumberFontMode: 'auto',
+  pageNumberHan: false, readerPageNumberHan: false, standalonePageNumberHan: false, counterFontProfile: 'default',
   hostNavigation: false, hostPreviousAvailable: false, hostNextAvailable: true,
   mutateNavigationSnapshot: false, preventHostTurn: false,
 };
@@ -84,7 +96,10 @@ function App() {
     if (settings.trackFontCalls) qa.fontModeCalls.push(index);
     return settings.pageFontModes[index] ?? settings.editorFontMode;
   };
-  const fontProbeStyle = settings.fontProbe ? { '--mc-font': 'monospace', '--mc-font-unicode': 'serif' } as CSSProperties : undefined;
+  const fontProbeStyle = (settings.counterFontProfile === 'classic'
+    ? { '--mc-font': '"MCBE Classic"', '--mc-font-unicode': '"MCBE Classic Unicode"', fontFamily: '"MCBE Classic"' }
+    : settings.fontProbe ? { '--mc-font': 'monospace', '--mc-font-unicode': 'serif' } : {}) as CSSProperties;
+  if (settings.counterParentFamily) fontProbeStyle.fontFamily = settings.counterParentFamily;
   const navigation = (target: 'editor' | 'reader'): BookNavigationControl | undefined => settings.hostNavigation ? {
     previousAvailable: settings.hostPreviousAvailable, nextAvailable: settings.hostNextAvailable,
     onTurnRequest: (direction, snapshot, event) => {
@@ -107,6 +122,7 @@ function App() {
         onClickCapture={event => { if (settings.preventHostTurn && event.target instanceof Element && event.target.closest('.mc-book__turn')) event.preventDefault(); }}
         layout={{ unitScale: settings.scale }} skin={probeSkin(settings.skinProbe)} disabled={settings.disabled} readOnly={settings.readOnly} style={fontProbeStyle}
         fontMode={fontMode}
+        pageNumberFontMode={settings.pageNumberFontMode} pageNumberLabel={settings.pageNumberHan ? number => `第${number}页` : undefined}
         maxPageLength={settings.maxPageLength} maxTitleLength={settings.maxTitleLength}
         finalizeEnabled={settings.finalizeEnabled} authorEditable={settings.authorEditable}
         titleInputRef={node => { qa.refs.title = node; }} authorInputRef={node => { qa.refs.author = node; }}
@@ -133,11 +149,12 @@ function App() {
     </section>
     <section id="secondary">{settings.showSecond && <BookReader ref={node => { readerRef.current = node; qa.refs.reader = node; }} aria-label="QA reader" style={fontProbeStyle} pages={settings.readerPages} spreadIndex={settings.readerSpread}
       navigation={navigation('reader')}
+      pageNumberFontMode={settings.readerPageNumberFontMode} pageNumberLabel={settings.readerPageNumberHan ? number => `第${number}页` : undefined}
       onClickCapture={event => { if (settings.preventHostTurn && event.target instanceof Element && event.target.closest('.mc-book__turn')) event.preventDefault(); }}
       onSpreadIndexChange={readerSpread => setSettings(previous => ({ ...previous, readerSpread }))} onFinish={onFinish}/>}</section>
     {settings.skinProbe !== 'normal' && settings.skinProbe !== 'cover-only' && <section id="skin-probe"><BookReader pages={[]} skin={probeSkin(settings.skinProbe)} aria-label="Isolated skin reader"/></section>}
     <section id="standalone">
-      <BookPage ref={node => { qa.refs.page = node; }} side="left" pageIndex={0} text={settings.standaloneText} readOnly={settings.standaloneReadOnly} pageNumber="Standalone page"
+      <BookPage ref={node => { qa.refs.page = node; }} side="left" pageIndex={0} text={settings.standaloneText} readOnly={settings.standaloneReadOnly} pageNumber={settings.standalonePageNumberHan ? '第1页' : 'Standalone page'} pageNumberFontMode={settings.standalonePageNumberFontMode}
         fontMode={settings.standaloneFontMode} style={fontProbeStyle} textareaRef={node => { qa.refs.standaloneTextarea = node; }}
         textareaProps={{ 'aria-label': 'Standalone text', ...(settings.standaloneInputFamily ? { style: { fontFamily: settings.standaloneInputFamily } } : {}) }} onTextChange={standaloneText => { qa.events.push({ kind: 'standalone', value: standaloneText }); if (settings.acceptance !== 'reject') setSettings(previous => ({ ...previous, standaloneText })); }}/>
       <BookPageTurnButton ref={node => { qa.refs.turn = node; }} direction="next" aria-label="Standalone next" onClick={() => qa.events.push({ kind: 'standalone-turn' })}/>

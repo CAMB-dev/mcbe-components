@@ -38,12 +38,12 @@ import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
 const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames'];
-components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage','BookPageTurnButton','SignTextSurface','SignEditor','JigsawEditor','JigsawPriorityFields','CommandBlockEditor','CommandInput','CommandOutputPanel','StructureEditor','XYZVectorInput');
+components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage','BookPageTurnButton','SignTextSurface','SignEditor','JigsawEditor','JigsawPriorityFields','CommandBlockEditor','CommandInput','CommandOutputPanel','StructureEditor','XYZVectorInput','ServerActionForm','ServerCustomForm');
 const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas'];
-assert.equal(components.length,133);
+assert.equal(components.length,135);
 assert.equal(dataExports.length,4);
 assert.equal(rendererFunctions.length,10);
-assert.equal(Object.keys(ui).length,147);
+assert.equal(Object.keys(ui).length,149);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -63,6 +63,11 @@ assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
 const commandDraft = { hoverNote:'Packed', command:'say packed command', blockType:'repeat', condition:'conditional', redstone:'always_on', tickDelay:'-', executeFirstTick:true, trackOutput:false };
+const packedAction = renderToString(element(ui.ServerActionForm,{title:'Packed actions',body:'Caller body',rows:[{id:'heading',type:'header',text:'Header'},{id:'hint',type:'label',text:'Hint'},{id:'line',type:'divider'},{id:'go',type:'button',text:'Go',icon:{state:'loading'}}]}));
+assert(packedAction.includes('Packed actions') && packedAction.includes('Caller body') && packedAction.includes('Go'));
+const packedFields = [{id:'hint',type:'label',text:'Hint'},{id:'header',type:'header',text:'Header'},{id:'line',type:'divider'},{id:'name',type:'input',label:'Name',tooltip:'Caller help'},{id:'on',type:'toggle',label:'On'},{id:'range',type:'slider',label:'Range',min:0,max:10,step:1},{id:'step',type:'step_slider',label:'Step',options:[{value:'a',label:'A'},{value:'b',label:'B'}]},{id:'drop',type:'dropdown',label:'Drop',options:[{value:'a',label:'A'}]},{id:'multi',type:'multiselect',label:'Multi',options:[{value:'a',label:'A'}]}];
+const packedCustom = renderToString(element(ui.ServerCustomForm,{title:'Packed custom',fields:packedFields,defaultValue:{name:'Raw -',on:true,range:3,step:'b',drop:'a',multi:['a']}}));
+assert(packedCustom.includes('Packed custom') && packedCustom.includes('Raw -') && !packedCustom.includes('NaN'));
 const packedStructure = renderToString(element(ui.StructureEditor,{defaultValue:{name:'demo:packed_structure',saveSize:{x:'-',y:'2',z:'3'}},capabilities:{dataSupport:true,export3dSupport:true,filePickingSupported:true},preview:element('p',{},'Packed caller preview')}));
 assert(packedStructure.includes('demo:packed_structure') && packedStructure.includes('Packed caller preview'));
 assert(packedStructure.includes('data-structure-vector="saveSize"') && !packedStructure.includes('NaN'));
@@ -439,7 +444,7 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -492,6 +497,15 @@ for (const asset of [...structureManifest.resources,...structureManifest.texture
   assert.equal(bytes.length,asset.bytes);
   assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed whole Structure Editor source: '+asset.entry);
 }
+assert(!Object.hasOwn(ui, 'serverFormImageAssets'), 'Server Forms source registry must stay private.');
+const serverManifest = JSON.parse(await readFile(new URL('docs/server-form-assets.json',packageRoot),'utf8'));
+assert.equal(serverManifest.resources.length,3);
+assert.equal(serverManifest.textureMetadata.length,1);
+for (const asset of [...serverManifest.resources,...serverManifest.textureMetadata,serverManifest.license]) {
+  const bytes = await readFile(new URL(asset.destination.replace(/^src\\//,'dist/'),packageRoot));
+  assert.equal(bytes.length,asset.bytes);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed whole Server Forms source: '+asset.entry);
+}
 const guiIcons = JSON.parse(await readFile(new URL('docs/gui-icons.json',packageRoot),'utf8'));
 assert.equal(ui.guiIconNames.length,150); assert(Object.isFrozen(ui.guiIconNames));
 assert.deepEqual([...ui.guiIconNames].sort(),Object.keys(guiIcons.assets).sort());
@@ -536,6 +550,15 @@ const consumerSignClose = (value: string, detail: SignCloseDetail) => value.leng
 const consumerSignProps: SignTextSurfaceProps = { variant: 'hanging', wood: 'oak', defaultValue: 'Consumer sign', textareaRef: createRef<HTMLTextAreaElement>(), onValueChange: (value, event) => value + event.currentTarget.value };
 const consumerSignModalProps: SignEditorProps = { ...consumerSignProps, defaultOpen: false, exitBehavior: 'commit', onCommit: consumerSignClose, dialogRef: createRef<HTMLDialogElement>() };
 const consumerSignElements = <><SignTextSurface {...consumerSignProps} ref={createRef<HTMLDivElement>()}/><SignEditor {...consumerSignModalProps} ref={createRef<HTMLDivElement>()}/></>;
+import { ServerActionForm, ServerCustomForm } from 'mcbeui';
+import type { ServerActionRow, ServerCustomField, ServerCustomFormValues, ServerActionFormProps, ServerCustomFormProps, BookPageNumberFontMode } from 'mcbeui';
+const serverRows: readonly ServerActionRow[] = [{id:'go',type:'button',text:'Go',icon:{state:'none'}}];
+const serverFields: readonly ServerCustomField[] = [{id:'name',type:'input',label:'Name'},{id:'step',type:'step_slider',label:'Step',options:[{value:'a',label:'A'}]},{id:'multi',type:'multiselect',label:'Multi',options:[{value:'a',label:'A'}]}];
+const serverValues: ServerCustomFormValues = {name:'Raw -',step:'a',multi:['a']};
+const serverActionProps: ServerActionFormProps = {title:'Actions',rows:serverRows,onAction:(id,detail)=>id+detail.row.text+detail.index,onCancel:detail=>detail.reason};
+const serverCustomProps: ServerCustomFormProps = {title:'Custom',fields:serverFields,value:serverValues,inputRefs:{name:createRef<HTMLInputElement>()},multiselectRefs:{multi:createRef<HTMLButtonElement>()},onValueChange:(next,detail)=>String(next[detail.id]),onSubmit:accepted=>accepted.name,onCancel:(accepted,detail)=>String(accepted.name)+detail.reason};
+const serverElements = <><ServerActionForm {...serverActionProps} ref={createRef<HTMLElement>()}/><ServerCustomForm {...serverCustomProps} ref={createRef<HTMLElement>()}/></>;
+const pageNumberMode: BookPageNumberFontMode = 'auto';
 import { StructureEditor, XYZVectorInput } from 'mcbeui';
 import type { StructureEditorValue, StructureEditorProps, XYZValue, XYZVectorInputProps, BookNavigationControl } from 'mcbeui';
 const structurePoint: XYZValue = {x:'-',y:'2',z:'3'};
@@ -561,7 +584,7 @@ import { BookReader, BookEditor, BookPage, BookPageTurnButton } from 'mcbeui';
 import type { BookReaderProps, BookEditorProps, BookDocumentSnapshot, BookLabels, BookFontMode } from 'mcbeui';
 const consumerBookSnapshot = (snapshot: BookDocumentSnapshot) => snapshot.pages.join('') + snapshot.mode;
 const consumerBookLabels: Partial<BookLabels> = { previous: 'Previous spread', next: 'Next spread' };
-const consumerBookProps: BookReaderProps = { pages: ['One', 'Two'], layout: { unitScale: 2 }, navigation:hostBookNavigation, labels: consumerBookLabels, onFinish: consumerBookSnapshot };
+const consumerBookProps: BookReaderProps = { pages: ['One', 'Two'], layout: { unitScale: 2 }, navigation:hostBookNavigation, pageNumberFontMode:pageNumberMode, labels: consumerBookLabels, onFinish: consumerBookSnapshot };
 const consumerBookFontMode: BookFontMode = 'auto';
 const consumerEditProps: BookEditorProps = { defaultPages: [], defaultTitle: 'A book', defaultAuthor: 'Player', onSign: consumerBookSnapshot, textareaRef: () => createRef<HTMLTextAreaElement>(), fontMode: index => index % 2 ? 'unicode' : consumerBookFontMode };
 const consumerBookElements = <><BookReader {...consumerBookProps} ref={createRef<HTMLElement>()}/><BookEditor {...consumerEditProps} ref={createRef<HTMLElement>()}/><BookPage side="left" text="Page" ref={createRef<HTMLDivElement>()} textareaRef={createRef<HTMLTextAreaElement>()}/><BookPageTurnButton direction="next" ref={createRef<HTMLButtonElement>()}/></>;

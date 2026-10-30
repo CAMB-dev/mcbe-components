@@ -2,7 +2,7 @@ import { useId, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { Button, Combobox, Switch, TextField } from '../src';
 import { BookEditor, BookPage, BookPageTurnButton, BookReader } from '../src/book';
-import type { BookDocumentSnapshot, BookFontMode, BookMode, BookPageAction } from '../src/book';
+import type { BookDocumentSnapshot, BookFontMode, BookMode, BookPageAction, BookPageNumberFontMode } from '../src/book';
 import '../src/book.css';
 
 const initialPages = [
@@ -35,6 +35,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   const [readOnly, setReadOnly] = useState(false), [disabled, setDisabled] = useState(false);
   const [pencilActions, setPencilActions] = useState(false);
   const [hostPageTurns, setHostPageTurns] = useState(false);
+  const [pageCounterFont, setPageCounterFont] = useState<BookPageNumberFontMode>('auto'), [chineseCounters, setChineseCounters] = useState(false);
   const [fontMode, setFontMode] = useState<BookFontMode>('auto'), [separatePageFonts, setSeparatePageFonts] = useState(false);
   const [leftFont, setLeftFont] = useState<BookFontMode | 'inherit'>('inherit'), [rightFont, setRightFont] = useState<BookFontMode | 'inherit'>('inherit');
   const [editorOpen, setEditorOpen] = useState(true), [readerOpen, setReaderOpen] = useState(true);
@@ -50,6 +51,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   const readerAuthor = readerPreset === 'signed' ? signedCopy?.author ?? '' : 'Alex';
   const currentSpread = keepSpread(spread, pages.length), currentReaderSpread = keepSpread(readerSpread, readerPages.length);
   const editable = !readOnly && !disabled;
+  const pageNumberLabel = (page: number, total: number) => chineseCounters ? `第${page}页共${total}页` : `Page ${page} of ${total}`;
 
   function pageFont(pageIndex: number): BookFontMode {
     const override = pageIndex % 2 === 0 ? leftFont : rightFont;
@@ -96,7 +98,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
     setPages([...initialPages]); setSpread(0); setTitle('River journal'); setAuthor('Alex'); setMode('pages');
     setReadOnly(false); setDisabled(false); setPencilActions(false); setHostPageTurns(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
     setSignRequest(null); setSignedCopy(null); setLeafTexts([...primitivePages]); setLeafIndex(0);
-    setFontMode('auto'); setSeparatePageFonts(false); setLeftFont('inherit'); setRightFont('inherit');
+    setFontMode('auto'); setSeparatePageFonts(false); setPageCounterFont('auto'); setChineseCounters(false); setLeftFont('inherit'); setRightFont('inherit');
     report('Book examples restored.');
   }
   function acceptSigning() {
@@ -111,6 +113,13 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
     <div style={stackStyle}>
       <p style={noteStyle}>Read a two-page spread, write in a book and quill, or reuse the individual page and turn buttons. This demo keeps your edits in memory.</p>
       <div><Button size="sm" onClick={reset}>Reset book examples</Button></div>
+      <div data-book-counter-controls style={controlsStyle}>
+        <Combobox label="Page counter font" value={pageCounterFont}
+          options={[{ value: 'auto', label: 'Auto' }, { value: 'inherit', label: 'Inherit' }, { value: 'latin', label: 'Latin' }, { value: 'unicode', label: 'Unicode' }]}
+          onValueChange={value => setPageCounterFont(value === 'inherit' || value === 'latin' || value === 'unicode' ? value : 'auto')}/>
+        <Switch label="Chinese page counters" checked={chineseCounters} onChange={event => setChineseCounters(event.target.checked)}/>
+      </div>
+      <p style={noteStyle}>These settings affect only the reader and editor page counters. Page text and editable text keep their own font settings.</p>
     </div>
 
     <section data-book-reader-example aria-labelledby={`${prefix}-reader-title`} style={stackStyle}>
@@ -123,7 +132,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
       <div role="region" aria-label="Book reader preview" tabIndex={0} style={previewStyle}>
         {readerOpen ? <BookReader aria-label="Example book reader" pages={readerPages} spreadIndex={currentReaderSpread}
           title={readerTitle} author={readerAuthor} onSpreadIndexChange={setReaderSpread}
-          pageNumberLabel={(page, total) => `Page ${page} of ${total}`}
+          pageNumberLabel={pageNumberLabel} pageNumberFontMode={pageCounterFont}
           onFinish={(_snapshot, detail) => { setReaderOpen(false); report(`Reader closed (${detail.reason}).`); }}/>
           : <p style={noteStyle}>The reader is closed. Open it to keep reading.</p>}
       </div>
@@ -178,6 +187,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
         {editorOpen ? <BookEditor aria-label="Example book and quill" pages={pages} spreadIndex={currentSpread}
           title={title} author={author} mode={mode} authorEditable readOnly={readOnly} disabled={disabled}
           fontMode={separatePageFonts ? pageFont : fontMode}
+          pageNumberLabel={pageNumberLabel} pageNumberFontMode={pageCounterFont}
           navigation={hostPageTurns ? { previousAvailable: currentSpread > 0,
             nextAvailable: !readOnly || currentSpread < lastSpread(pages.length), onTurnRequest: requestPageTurn } : undefined}
           onPagesChange={(next, detail) => { acceptPages(next); setReceipt(`Accepted text for leaf ${detail.pageIndex + 1}. ${next.length} leaves in this draft.`); }}

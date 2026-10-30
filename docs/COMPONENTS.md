@@ -1,6 +1,6 @@
 # Bedrock 组件范围
 
-当前导出 133 个组件，目录 133 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、7 个纯函数（2个glint、4个layout / model几何与assembleGuiTextureAtlas纹理装配）及3个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages / renderGuiLayer），共 147 个源运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 135 个组件，目录 135 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、7 个纯函数（2个glint、4个layout / model几何与assembleGuiTextureAtlas纹理装配）及3个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages / renderGuiLayer），共 149 个源运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 书写类新增 BookReader / BookEditor / BookPage / BookPageTurnButton 与 SignTextSurface / SignEditor。Book 的30项独立客户端合同、此前138值React18 /19消费及27项公开预览辅助检查保留其范围；Sign的29项客户端合同及140值新包已通过，旧Dialog12项与修后完整导航6项分别通过，公开预览50项辅助检查通过。首批旧导航失败与修复后的范围分别保留，不合称单轮全绿或增加重复用例。五份书本及普通 /悬挂牌面采集已保存，有限混排字页与两oak背景分析完成；产品整页原生像素核验仍待进行。使用与边界见 [BOOK_QA.md](BOOK_QA.md) / [SIGN_QA.md](SIGN_QA.md)。
 
@@ -26,6 +26,8 @@ CommandBlockEditor、CommandInput与CommandOutputPanel的source API见 [COMMAND_
 
 StructureEditor与XYZVectorInput的source API及宿主预览 /raw draft边界见 [STRUCTURE_EDITOR_QA.md](STRUCTURE_EDITOR_QA.md)。当前133 /147实际React18 /19新包、Structure32＋Command34整66项、Book83与6导航、公开64辅助分别通过；首批失败与历史范围保留，不重计相同用例，也不以原图 /静态源或SSR替代原生验收。
 
+ServerActionForm /ServerCustomForm的source API与typed schema范围见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。它们对应LongForm /CustomForm，区别于ServerList，不提供第三MessageForm或后端协议；第四完整37项与当前149值实际消费者通过，Book85 /6导航及公开64辅助各保范围。覆盖表仅更新server_form一个源族，不将相同row /field模式视为全部服务端协议恢复。
+
 | 分类 | 组件 |
 | --- | --- |
 | 文字与表面（21） | Text、BitmapText、PixelIcon、GuiIcon、Image、NineSlice、GuiImageLayer、GuiLayer、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
@@ -37,6 +39,7 @@ StructureEditor与XYZVectorInput的source API及宿主预览 /raw draft边界见
 | 页面与列表组合（10） | PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast |
 | 书本与告示牌（6） | BookReader、BookEditor、BookPage、BookPageTurnButton、SignTextSurface、SignEditor |
 | 源表单编辑（7） | JigsawEditor、JigsawPriorityFields、CommandBlockEditor、CommandInput、CommandOutputPanel、StructureEditor、XYZVectorInput |
+| 服务端表单（2） | ServerActionForm、ServerCustomForm |
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
 
@@ -56,9 +59,9 @@ HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 cus
 
 ## 验收边界
 
-当前目录中的 133 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 /服务器数据、原生预览与特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与Web测试通过不能替代真实游戏逐屏验收。
+当前目录中的 135 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 /服务器数据、原生预览与特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与Web测试通过不能替代真实游戏逐屏验收。
 
-[完整GUI覆盖清单](BEDROCK_GUI_COVERAGE.md) 提供全部206个实际UI文件、198个声明screen root /128个相关文件、八种文件状态与15个命名族缺口。133组件与24个scoped命名源文件均不等于完整原生GUI数量；共享 /可选 /未知文件也不自动要求新建组件。
+[完整GUI覆盖清单](BEDROCK_GUI_COVERAGE.md) 提供全部206个实际UI文件、198个声明screen root /128个相关文件、八种文件状态与14个命名族缺口。135组件与25个scoped命名源文件均不等于完整原生GUI数量；共享 /可选 /未知文件也不自动要求新建组件。
 
 ## 复用方式
 

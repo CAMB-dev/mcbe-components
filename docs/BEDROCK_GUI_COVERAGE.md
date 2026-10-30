@@ -1,25 +1,25 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库133个公开组件快照的**范围映射**，不是原生像素验收表。133组件包含基础控件、可复用零件及组合，不能读作133个完整游戏GUI；A类的24个文件也不代表24个完整原生流程已完成。
+这是固定官方源文件与本库135个公开组件的**范围映射**，不是原生像素验收表。135组件包含基础控件、可复用零件及组合，不能读作135个完整游戏GUI；A类的25个文件也不代表25个完整原生流程已完成。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
-本快照将全部133组件逐项对应到当时真实barrel导出与TS /TSX模块；后续版本应重新审计。文件覆盖状态不用于计算Minecraft覆盖百分比或测试通过率。
+基础审计将当时133组件逐项对应到真实barrel导出与TS /TSX模块。后续ServerForms两个组件的实际37项合同与149值包消费通过后，仅将server_form.json从E更新为A；其余205行及原审计证据保留，组件数为135。这个增量不补造新的原生认证，文件状态也不用于计算Minecraft覆盖百分比或测试通过率。
 
 ## 八种状态
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|24|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|25|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|16|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
-|E|`confirmed_missing_named_family`|15|缺少命名族：该源族确实存在，但133组件快照无对应专门公开组合；基础控件可能已有。|
+|E|`confirmed_missing_named_family`|14|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
 |G|`optional_family_unmapped`|63|可选族未建立映射：教育、平台、账户、交易等来源仍保留；服务能力由宿主负责。|
 |H|`unknown`|6|证据不足：保持未知，不强制归为已覆盖或必需新增。|
 
-## 尚缺的15个命名族
+## 尚缺的14个命名族
 
 以下表示源文件存在、该快照没有专门公开组合，不表示所有功能都须另建组件或由库接管外部服务。教育 /平台功能、通用宿主组合与Pocket仍应按产品范围单独决定。
 
@@ -36,12 +36,13 @@
 |玩家权限编辑|`permissions_screen.json`|
 |教育作品集 /Portfolio|`portfolio_screen.json`|
 |截图 /照片界面|`screenshot_screen.json`|
-|ServerForms：LongForm /CustomForm|`server_form.json`|
 |开始菜单 /StartMenu|`start_screen.json`|
 |存储管理|`storage_management.json`|
 |UGC查看器|`ugc_viewer_screen.json`|
 
-**下一优先：ServerForms**（`server_form.json`）。源内有LongForm /CustomForm的225×200组合及字段工厂；已有ServerList是服务器列表，不是服务端动态表单。此次不据此推断MessageForm、后端协议或native parity。NPC对话、EmoteWheel及可复用HowToPlay /Encyclopedia文档查看器也有明确缺口。
+**ServerForms已接入有限源族**（`server_form.json`）：ServerActionForm /ServerCustomForm提供LongForm /CustomForm的225×200组合与typed字段，区别于ServerList。当前37项客户端合同通过，不据此推断第三MessageForm、后端协议或native parity，详见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。下一批可优先评估NPC对话、EmoteWheel及共享HowToPlay /Encyclopedia文档查看器；不自动要求每个可选文件新建组件。
+
+后续公开64项辅助也已执行通过，与37正式、Book85及6导航分别记录；它不改变上述八类含义，也不增加任何文件的native像素认证。
 
 ## 文件与注册声明的边界
 
@@ -192,7 +193,7 @@
 |`scoreboards.json`|scoreboard|0|B|Scoreboard|
 |`screenshot_screen.json`|screenshot|1|E|—|
 |`select_world_screen.json`|select_world|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
-|`server_form.json`|server_form|1|E|—|
+|`server_form.json`|server_form|1|A|ServerActionForm、ServerCustomForm|
 |`settings_screen.json`|settings|15|B|SettingsPanel、SettingRow、NavigationList、KeybindingField|
 |`settings_sections/controls_section.json`|controls_section|0|C|SettingsPanel、SettingRow、Switch、Slider、KeybindingField、Combobox|
 |`settings_sections/general_section.json`|general_section|0|C|SettingsPanel、SettingRow、Switch、Slider、KeybindingField、Combobox|
@@ -264,4 +265,4 @@
 
 ## 证据与复核
 
-完整逐文件字节SHA、定义 /继承 /模板引用与映射依据保留在 `.cache/classic-full-screen-coverage-02/SOURCE-INVENTORY.json`、`FILE-COVERAGE.json`、`COMPONENT-MAP.json` 及 `REPORT.md`；本页逐行取自该冻结映射，没有省略无screen root、可选或unknown文件。固定官方源入口：[ui目录](https://github.com/Mojang/bedrock-samples/tree/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui)。
+完整逐文件字节SHA、定义 /继承 /模板引用与基础映射保留在 `.cache/classic-full-screen-coverage-02/SOURCE-INVENTORY.json`、`FILE-COVERAGE.json`、`COMPONENT-MAP.json` 及 `REPORT.md`；本页全量保留206行，仅对server_form加入已执行的ServerForms范围。该增量依据 `.cache/server-forms-independent-qa/formal-04/FINAL.json` 与 `.cache/server-forms-root-close-01/INTEGRATION-PACKAGE-05.json`。固定官方源入口：[ui目录](https://github.com/Mojang/bedrock-samples/tree/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui)。

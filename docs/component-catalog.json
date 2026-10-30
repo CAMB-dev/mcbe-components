@@ -642,6 +642,10 @@
         "fidelity": "source_texture_web_composition"
       }
     ],
+    "server_forms": [
+      {"name":"ServerActionForm","status":"implemented","fidelity":"source_long_form_factory_web_composition_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"},
+      {"name":"ServerCustomForm","status":"implemented","fidelity":"source_custom_form_nine_field_factory_host_typed_state_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"}
+    ],
     "structure_editor": [
       {"name":"StructureEditor","status":"implemented","fidelity":"source_texture_web_composition_host_preview_native_validation_pending","source":"resource_pack/ui/structure_editor_screen.json, fixed v1.26.60.5","details":"docs/STRUCTURE_EDITOR_QA.md"},
       {"name":"XYZVectorInput","status":"implemented","fidelity":"source_vertical_xyz_raw_draft_layout_contract","source":"resource_pack/ui/structure_editor_screen.json, fixed v1.26.60.5","details":"docs/STRUCTURE_EDITOR_QA.md"}
@@ -665,7 +669,7 @@
     ]
   },
   "publicExports": {
-    "components": 133,
+    "components": 135,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -676,7 +680,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 147,
+    "runtimeValues": 149,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 4,
