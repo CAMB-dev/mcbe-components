@@ -1,6 +1,6 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库155个公开组件的**范围映射**，不是原生像素验收表。155组件包含基础控件、可复用零件及组合，不能读作155个完整游戏GUI；A类的30个文件也不代表30个完整原生流程已完成。
+这是固定官方源文件与本库158个公开组件的**范围映射**，不是原生像素验收表。158组件包含基础控件、可复用零件及组合，不能读作155个完整游戏GUI；A类的31个文件也不代表30个完整原生流程已完成。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -10,22 +10,21 @@
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|30|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|31|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|16|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
-|E|`confirmed_missing_named_family`|9|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
+|E|`confirmed_missing_named_family`|8|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
 |G|`optional_family_unmapped`|63|可选族未建立映射：教育、平台、账户、交易等来源仍保留；服务能力由宿主负责。|
 |H|`unknown`|6|证据不足：保持未知，不强制归为已覆盖或必需新增。|
 
-## 尚缺的9个命名族
+## 尚缺的8个命名族
 
 以下表示源文件存在、该快照没有专门公开组合，不表示所有功能都须另建组件或由库接管外部服务。教育 /平台功能、通用宿主组合与Pocket仍应按产品范围单独决定。
 
 |命名族|实际源文件|
 |---|---|
-|教育黑板 /Chalkboard|`chalkboard_screen.json`|
 |片尾名单 /Credits|`credits_screen.json`|
 |教育沉浸式阅读器|`immersive_reader.json`|
 |邀请 /人员浏览|`invite_screen.json`|
@@ -57,6 +56,8 @@
 
 `anvil_screen.json` 等核心文件实际存在并已映射；不能以不完整ZIP目录样本推断缺源。JSON模板引用 /namespace继承也不等于ES import或已恢复引擎factory；无screen root的共享文件仍全部列入下表。
 
+**黑板族已接入有限源组合**：`ChalkboardEditor` 复用 `ChalkboardTextField` 与 `ChalkboardLock`，显式宿主尺寸、文本能力和锁状态独立，十张皮肤均复用完整原PNG。新增24项与Sign /NPC /导航80项同批104通过、984输入前后零漂移，实际React18 /19的175值包与公开12项通过。仅该行E→有限A，其余205行保持原样；不是教育后台或原生整页认证，见 [CHALKBOARD_QA.md](CHALKBOARD_QA.md)。
+
 ## 全部206文件
 
 路径均相对 `resource_pack/ui/`，保留archive真实大小写。root列是声明数；状态代码见上表，部件列仅说明已有复用入口。
@@ -84,7 +85,7 @@
 |`bundle_purchase_warning_screen.json`|bundle_purchase_warning|1|G|—|
 |`cartography_screen.json`|cartography|1|A|CartographyTable|
 |`cartography_screen_pocket.json`|cartography_pocket|0|F|—|
-|`chalkboard_screen.json`|chalkboard|1|E|—|
+|`chalkboard_screen.json`|chalkboard|1|A|ChalkboardEditor、ChalkboardTextField、ChalkboardLock（有限Classic源组合，原生整页未认证）|
 |`chat_screen.json`|chat|1|B|ChatPanel、ChatMessage|
 |`chat_settings_menu_screen.json`|chat_settings|0|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
 |`chest_screen.json`|chest|5|A|Chest、ShulkerBox、ContainerFrame|

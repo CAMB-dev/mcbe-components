@@ -1,0 +1,57 @@
+/* Complete original Classic images. Host supplies the source board dimensions and limits. */
+.mc-chalkboard-editor,.mc-chalkboard-text-field,.mc-chalkboard-lock {--mc-chalkboard-unit:2px;box-sizing:border-box;font-family:var(--mc-font,monospace);font-size:calc(10 * var(--mc-chalkboard-unit));line-height:calc(10 * var(--mc-chalkboard-unit));font-weight:normal;letter-spacing:normal;text-shadow:none}
+.mc-chalkboard-editor *,.mc-chalkboard-text-field *,.mc-chalkboard-lock * {box-sizing:border-box}
+.mc-chalkboard-editor {position:relative;isolation:isolate;overflow:visible;color:rgb(30% 30% 30%)}
+.mc-chalkboard-editor__skin {position:absolute;inset:0;pointer-events:none;border:calc(4 * var(--mc-chalkboard-unit)) solid transparent;border-image-source:var(--mc-chalkboard-panel);border-image-slice:4 fill;border-image-width:1;border-image-repeat:stretch;image-rendering:pixelated;z-index:0}
+.mc-chalkboard-editor__title {position:absolute;left:50%;top:calc(9 * var(--mc-chalkboard-unit));transform:translateX(-50%);height:calc(10 * var(--mc-chalkboard-unit));max-height:calc(10 * var(--mc-chalkboard-unit));margin:0;padding:0;font:inherit;color:rgb(30% 30% 30%);white-space:pre;text-shadow:none;z-index:4}
+.mc-chalkboard-editor__indent {position:absolute;left:calc(8 * var(--mc-chalkboard-unit));top:calc(23 * var(--mc-chalkboard-unit));width:calc(100% - 16 * var(--mc-chalkboard-unit));height:calc(100% - 31 * var(--mc-chalkboard-unit))}
+.mc-chalkboard-editor__helpers {position:absolute;inset:0;z-index:2;pointer-events:none}
+.mc-chalkboard-editor__confirm-hint {position:absolute;right:0;bottom:0;pointer-events:auto}
+.mc-chalkboard-editor .mc-chalkboard-editor__text {position:absolute;left:50%;top:0;transform:translateX(-50%);z-index:5}
+.mc-chalkboard-editor__lock {position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:calc(16 * var(--mc-chalkboard-unit));z-index:5}
+.mc-chalkboard-editor__lock[hidden] {display:none}
+.mc-chalkboard-editor__close {position:absolute;right:0;top:0;display:flex;align-items:center;justify-content:center;width:calc(21 * var(--mc-chalkboard-unit));height:calc(21 * var(--mc-chalkboard-unit));margin:0;padding:0;border:0;border-radius:0;background:transparent;color:inherit;appearance:none;cursor:pointer;z-index:6;font:inherit;text-shadow:none}
+.mc-chalkboard-editor__close[hidden] {display:none}
+.mc-chalkboard-editor__close>span {display:block;width:calc(15 * var(--mc-chalkboard-unit));height:calc(15 * var(--mc-chalkboard-unit));background-image:var(--mc-chalkboard-close);background-size:100% 100%;background-repeat:no-repeat;image-rendering:pixelated}
+.mc-chalkboard-editor__close:hover:not(:disabled)>span,.mc-chalkboard-editor__close:focus-visible:not(:disabled)>span {background-image:var(--mc-chalkboard-close-hover)}
+.mc-chalkboard-editor__close:active:not(:disabled)>span {background-image:var(--mc-chalkboard-close-pressed)}
+.mc-chalkboard-editor__close:disabled {cursor:not-allowed}
+.mc-chalkboard-editor__close:disabled>span {opacity:.5}
+.mc-chalkboard-editor__close:focus-visible {outline:calc(var(--mc-chalkboard-unit)) solid #fff;outline-offset:calc(-1 * var(--mc-chalkboard-unit))}
+.mc-chalkboard-text-field {position:relative;isolation:isolate;color:#fff;overflow:visible}
+.mc-chalkboard-text-field__skin {position:absolute;inset:0;pointer-events:none;border:calc(2 * var(--mc-chalkboard-unit)) solid transparent;border-image-source:var(--mc-chalkboard-edit);border-image-slice:2 fill;border-image-width:1;border-image-repeat:stretch;image-rendering:pixelated;z-index:0}
+.mc-chalkboard-text-field[data-enabled="true"]:hover>.mc-chalkboard-text-field__skin,.mc-chalkboard-text-field[data-enabled="true"]:focus-within>.mc-chalkboard-text-field__skin {border-image-source:var(--mc-chalkboard-edit-hover)}
+.mc-chalkboard-text-field[data-enabled="false"]>.mc-chalkboard-text-field__skin {opacity:.5}
+/* Keep the outer source edit box stable. Its common centering inset is 3x2;
+   the -3 clip offset expands only the vertical clip. Native padding preserves the label origin. */
+.mc-chalkboard-text-field__centering {position:absolute;left:calc(3 * var(--mc-chalkboard-unit));top:calc(2 * var(--mc-chalkboard-unit));width:calc(100% - 6 * var(--mc-chalkboard-unit));height:calc(100% - 4 * var(--mc-chalkboard-unit));z-index:1}
+.mc-chalkboard-text-field__clipper {position:absolute;left:0;top:calc(-3 * var(--mc-chalkboard-unit));width:100%;height:calc(100% + 6 * var(--mc-chalkboard-unit));overflow:hidden}
+.mc-chalkboard-text-field .mc-chalkboard-text-field__input {display:block;position:absolute;inset:0;width:100%;height:100%;min-width:0;min-height:0;margin:0;padding:calc(3 * var(--mc-chalkboard-unit)) 0;resize:none;border:0;border-radius:0;outline:none;background:transparent;color:#fff;opacity:1;caret-color:#fff;appearance:none;font-family:var(--mc-chalkboard-input-font,var(--mc-font,monospace));font-size:calc(10 * var(--mc-chalkboard-unit));line-height:calc(10 * var(--mc-chalkboard-unit));font-weight:normal;letter-spacing:normal;white-space:pre-wrap;overflow-wrap:break-word;text-align:left;text-shadow:none;overflow-x:hidden;overflow-y:auto;scrollbar-width:none}
+.mc-chalkboard-text-field__input::-webkit-scrollbar {display:none}
+.mc-chalkboard-text-field .mc-chalkboard-text-field__input:disabled {opacity:.5;-webkit-text-fill-color:#fff;cursor:not-allowed}
+.mc-chalkboard-lock {position:relative;display:inline-flex;align-items:flex-start;width:max-content;height:calc(16 * var(--mc-chalkboard-unit));color:rgb(30% 30% 30%);overflow:visible}
+.mc-chalkboard-lock__toggle {position:relative;flex:none;top:calc(-8 * var(--mc-chalkboard-unit));width:calc(30 * var(--mc-chalkboard-unit));height:calc(16 * var(--mc-chalkboard-unit))}
+.mc-chalkboard-lock__toggle>input {position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;opacity:0;cursor:pointer;z-index:1}
+.mc-chalkboard-lock__image {display:block;position:absolute;inset:0;background-image:var(--mc-chalkboard-off);background-size:100% 100%;background-repeat:no-repeat;image-rendering:pixelated;pointer-events:none}
+.mc-chalkboard-lock__toggle[data-checked="true"]>.mc-chalkboard-lock__image {background-image:var(--mc-chalkboard-on)}
+.mc-chalkboard-lock__toggle[data-disabled="false"]:hover>.mc-chalkboard-lock__image,.mc-chalkboard-lock__toggle[data-disabled="false"]:has(input:focus-visible)>.mc-chalkboard-lock__image {background-image:var(--mc-chalkboard-off-hover)}
+.mc-chalkboard-lock__toggle[data-checked="true"][data-disabled="false"]:hover>.mc-chalkboard-lock__image,.mc-chalkboard-lock__toggle[data-checked="true"][data-disabled="false"]:has(input:focus-visible)>.mc-chalkboard-lock__image {background-image:var(--mc-chalkboard-on-hover)}
+.mc-chalkboard-lock__toggle[data-disabled="true"]>.mc-chalkboard-lock__image {opacity:.5}
+.mc-chalkboard-lock__toggle[data-disabled="true"]>input {cursor:not-allowed}
+.mc-chalkboard-lock__toggle>input:focus-visible+.mc-chalkboard-lock__image {outline:var(--mc-chalkboard-unit) solid #fff;outline-offset:var(--mc-chalkboard-unit)}
+.mc-chalkboard-lock__label-wrap {position:relative;display:block;flex:none}
+.mc-chalkboard-lock__label-wrap>label {position:relative;display:block;left:calc(2 * var(--mc-chalkboard-unit));top:calc(3 * var(--mc-chalkboard-unit));font:inherit;color:rgb(30% 30% 30%);white-space:pre;text-shadow:none;cursor:pointer}
+@media(forced-colors:active) {
+  .mc-chalkboard-editor {background:Canvas;color:CanvasText;border:1px solid CanvasText}
+  .mc-chalkboard-editor:focus-visible {outline:1px solid Highlight}
+  .mc-chalkboard-editor__skin,.mc-chalkboard-text-field__skin,.mc-chalkboard-lock__image {display:none}
+  .mc-chalkboard-editor__title,.mc-chalkboard-lock__label-wrap>label {color:CanvasText}
+  .mc-chalkboard-text-field {background:Field;border:1px solid FieldText}
+  .mc-chalkboard-text-field .mc-chalkboard-text-field__input {color:FieldText;caret-color:FieldText}
+  .mc-chalkboard-text-field .mc-chalkboard-text-field__input:disabled {-webkit-text-fill-color:GrayText;color:GrayText;opacity:1}
+  .mc-chalkboard-text-field:focus-within {outline:1px solid Highlight}
+  .mc-chalkboard-lock__toggle>input {opacity:1;appearance:auto;position:static;width:100%;height:100%;accent-color:Highlight}
+  .mc-chalkboard-editor__close {color:ButtonText;background:ButtonFace;border:1px solid ButtonText}
+  .mc-chalkboard-editor__close>span {background:none}
+  .mc-chalkboard-editor__close::after {content:'×';font:inherit;position:absolute}
+}

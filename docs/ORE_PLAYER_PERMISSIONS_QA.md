@@ -4,6 +4,8 @@
 
 ## 2026-10-31 选择器悬停状态与高光修正
 
+后续字体行框诊断没有进入产品。三份原字体的表度量支持一个统一strut候选：纯CJK字符串外层使用Noto行框，内层保留原Ten /Seven字族且line-height为0，字号、父行高和字距不改。实际普通页 /菜单A/B/A守卫完整一致，21 /26个父矩形与行高不变；B分别有1258702 /2732633个不同像素，仍未达到整页零差，且新增3844 /1374个错误像素。有限标题 /说明的纵向墨迹证据改善，实际原生基线、全部fallback选择和栅格仍未知，不能把指标改善升级为默认字体策略。证据 `.cache/ore-permissions-font-metrics-01/`、`.cache/ore-permissions-linebox-probe-01/` 与 `.cache/ore-permissions-linebox-audit-01/`。此后黑板接入是独立组件增量，不回填为本次字体探针输入。
+
 角色选择器恢复 secondary hover 的上下高光：普通状态仍为白色 `.6 / .4`，悬停状态改为 `.8 / .6`，同时使用原来的 hover 底色。源 `Ld` 使用 mousemove /mouseleave 维护 hover，click、focus 和菜单打开本身不写 hover。当前 trigger 对应保存鼠标事件状态，禁用时不进入 hover，离开时清除；切换响应式表现时重置旧 trigger 的状态。没有增加“展开即悬停”的规则，forced-colors 仍清除装饰阴影。原生输入模式、hidden /dragging 等引擎 gate 尚未恢复。
 
 本轮完整111项同批回归实际 **108通过、3个预期桌面触摸设备条件跳过、零失败 /重试**，965份输入指纹前后零漂移。新增输入历史检查覆盖键盘打开、显式鼠标事件序列、禁用与切换表现；另有54个预声明的底色 /上下高光采样，覆盖GUI1 /2 /5并保持原1/16px几何与颜色1容差。初步检查曾因GUI1进入segmented分支而找不到compact trigger，后将测试的源窗口明确固定为100u宽的tablet分支；颜色、采样位置规则及容差未改。证据 `.cache/ore-permissions-trigger-tests-01/run-01/`，初步两批记录保留。

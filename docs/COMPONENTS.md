@@ -1,6 +1,8 @@
 # Bedrock 组件范围
 
-当前导出 155 个组件，目录 155 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 172 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 158 个组件，目录 158 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 175 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+
+新增黑板三组件保留独立可复用的真实textarea与30×16锁开关，十张原图复用，尺寸和权限由宿主提供。新增24与旧相关80项同批104通过、实际React18 /19的175值包与公开12项通过；皮肤平面严格零差不等于原生整页验收，见 [CHALKBOARD_QA.md](CHALKBOARD_QA.md)。
 
 新增OreUI权限五组件保留现代玩家卡 /说明、segmented与共用modal分支和独立开关，资源 /字体、窗口尺寸与实际权限服务由宿主提供。当前更强源修订的React18.3.1 /19.3.1实际172值包、完整107项同批104通过 /3设备跳过与新公开9项分别完成；黑 .5 overlay、.2u bevel、modal role /check /focus分离按完整源链修正，230点中50底bevel点最大差1而非全零，旧104 /103 /包 /公开记录保留原身份，不称当前原生整页或Classic覆盖表扩大；见 [ORE_PLAYER_PERMISSIONS_QA.md](ORE_PLAYER_PERMISSIONS_QA.md)。
 
@@ -53,6 +55,7 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 | 双栏文档（3） | DocumentViewer、DocumentHeading、DocumentParagraph |
 | 玩家权限Classic（4） | PlayerPermissions、PermissionLevelSelect、PermissionToggleRow、PermissionPlayerRow |
 | 玩家权限OreUI（5） | OrePlayerPermissions、OrePermissionLevelSelect、OrePermissionToggleRow、OrePlayerCard、OreSwitch |
+| 黑板编辑（3） | ChalkboardEditor、ChalkboardTextField、ChalkboardLock |
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
 

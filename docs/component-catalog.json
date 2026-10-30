@@ -661,6 +661,11 @@
       {"name":"OrePlayerCard","status":"implemented","validation":"stronger_source107_client_overlay_bevel_modal_package_public_pass_native_unverified","fidelity":"ore_source_player_card_host_avatar_subtitle_role_art_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"},
       {"name":"OreSwitch","status":"implemented","validation":"stronger_source107_client_overlay_bevel_modal_package_public_pass_native_unverified","fidelity":"ore_source_switch_geometry_host_art_native_checkbox_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"}
     ],
+    "chalkboard": [
+      {"name":"ChalkboardEditor","status":"implemented","validation":"source_client_contract_package_public_pass_native_unverified","fidelity":"classic_source_host_sized_editor_independent_edit_permission_and_lock_no_world_backend_native_unverified","source":"resource_pack/ui/chalkboard_screen.json and common/edu inheritance, fixed v1.26.60.5","details":"docs/CHALKBOARD_QA.md"},
+      {"name":"ChalkboardTextField","status":"implemented","validation":"source_client_contract_package_public_pass_native_unverified","fidelity":"native_textarea_original_six_pixel_nine_slice_common_center_and_clip_geometry_native_unverified","source":"resource_pack/ui/chalkboard_screen.json and common.multiline_text_edit_box, fixed v1.26.60.5","details":"docs/CHALKBOARD_QA.md"},
+      {"name":"ChalkboardLock","status":"implemented","validation":"source_client_contract_package_public_pass_native_unverified","fidelity":"edu_thirty_by_sixteen_toggle_row_original_textures_host_lock_label_native_unverified","source":"resource_pack/ui/chalkboard_screen.json and edu_common.slider_toggle, fixed v1.26.60.5","details":"docs/CHALKBOARD_QA.md"}
+    ],
     "player_permissions": [
       {"name":"PlayerPermissions","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_json_source_composition_host_permission_drafts_not_current_oreui_or_native_certified","source":"resource_pack/ui/permissions_screen.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"},
       {"name":"PermissionLevelSelect","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_nullable_role_dropdown_independent_of_permission_bits_client_contracts_pass_native_validation_pending","source":"resource_pack/ui/permissions_screen.json and settings_common.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"},
@@ -699,7 +704,7 @@
     ]
   },
   "publicExports": {
-    "components": 155,
+    "components": 158,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -710,7 +715,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 172,
+    "runtimeValues": 175,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 6,

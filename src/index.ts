@@ -120,4 +120,6 @@ export { PlayerPermissions, PermissionLevelSelect, PermissionToggleRow, Permissi
 export type { PermissionLevel, PermissionLevelLabels, PermissionLevelSelectProps, PermissionToggleRowProps, PermissionPlayer, PermissionPlayerRowProps, PlayerPermissionOption, PlayerPermissionState, PlayerPermissionsValue, PlayerPermissionsChangeDetail, PlayerPermissionsLabels, PlayerPermissionsProps } from './player-permissions';
 
 export { OrePlayerPermissions, OrePermissionLevelSelect, OrePermissionToggleRow, OrePlayerCard, OreSwitch } from './ore-player-permissions';
+export { ChalkboardEditor, ChalkboardTextField, ChalkboardLock } from './chalkboard';
+export type { ChalkboardFontMode, ChalkboardTextareaProps, ChalkboardLockInputProps, ChalkboardTextFieldProps, ChalkboardLockProps, ChalkboardValue, ChalkboardChangeDetail, ChalkboardCloseDetail, ChalkboardEditorProps } from './chalkboard';
 export type { OrePermissionAppearance, OrePermissionPlayer, OrePermissionOption, OrePermissionLevelLabels, OreSwitchProps, OrePermissionToggleRowProps, OrePlayerCardProps, OrePermissionLevelSelectProps, OrePermissionSafeArea, OrePlayerPermissionsLabels, OrePlayerPermissionsProps } from './ore-player-permissions';

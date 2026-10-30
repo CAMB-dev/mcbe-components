@@ -74,6 +74,7 @@
     "./document-viewer.css": "./dist/document-viewer.css",
     "./player-permissions.css": "./dist/player-permissions.css",
     "./ore-player-permissions.css": "./dist/ore-player-permissions.css",
+    "./chalkboard.css": "./dist/chalkboard.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",

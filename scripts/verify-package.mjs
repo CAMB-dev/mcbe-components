@@ -88,10 +88,11 @@ components.push('EmoteWheel','EmoteSlotPreview','EmoteWheelScreen');
 components.push('DocumentViewer','DocumentHeading','DocumentParagraph');
 components.push('PlayerPermissions','PermissionLevelSelect','PermissionToggleRow','PermissionPlayerRow');
 components.push('OrePlayerPermissions','OrePermissionLevelSelect','OrePermissionToggleRow','OrePlayerCard','OreSwitch');
-assert.equal(components.length,155);
+components.push('ChalkboardEditor','ChalkboardTextField','ChalkboardLock');
+assert.equal(components.length,158);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,172);
+assert.equal(Object.keys(ui).length,175);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -139,6 +140,16 @@ try {
  assert.throws(()=>renderToString(element(ui.OrePermissionLevelSelect,{value:'owner',viewportSize:[1440,1000]})),/permission level/);
 } finally {globalThis.fetch=oreFetch;}
 assert.equal(oreIO,0);assert.equal(oreRequests,0);assert.equal(JSON.stringify(packedOreValues),packedOreSnapshot,'Modern SSR preserves caller snapshots.');
+// Chalkboard dimensions and resolved edit permission are caller bindings; SSR never mutates or performs IO.
+const packedBoard=Object.freeze({text:['Caller board','宿主文本'].join(String.fromCharCode(10)),locked:true});const packedBoardSnapshot=JSON.stringify(packedBoard);let boardIO=0,boardRequests=0;const boardFetch=globalThis.fetch;globalThis.fetch=()=>{boardIO++;throw new Error('Packed Chalkboard SSR attempted IO.');};
+try {
+ const boardMarkup=renderToString(element(ui.ChalkboardEditor,{panelSize:[280,180],textBoxSize:[264,120],maxLength:37,title:'Caller board',textEnabled:true,lockVisible:true,lockLabel:'Caller lock',closeVisible:true,value:packedBoard,confirmHint:element('span',null,'Caller confirm'),onValueChange:()=>boardRequests++,onCloseRequest:()=>boardRequests++}));
+ assert.match(boardMarkup,/mc-chalkboard-editor/);assert.match(boardMarkup,/Caller lock/);assert.match(boardMarkup,/Caller confirm/);assert(!/<textarea[^>]*disabled/.test(boardMarkup),'Locked is not a resolved edit permission.');
+ assert.match(renderToString(element(ui.ChalkboardTextField,{size:[100,50],maxLength:1,label:'Caller field',textEnabled:true,value:'Accepted longer value'})),/Accepted longer value/);
+ assert.match(renderToString(element(ui.ChalkboardLock,{label:'Caller standalone lock',checked:true,readOnly:true})),/aria-readonly="true"/);
+ assert.throws(()=>renderToString(element(ui.ChalkboardEditor,{panelSize:[16,31],textBoxSize:[10,10],maxLength:3,title:'Bad geometry',textEnabled:true,lockVisible:false,lockLabel:'Lock',closeVisible:false})),RangeError);
+}finally{globalThis.fetch=boardFetch;}
+assert.equal(boardIO,0);assert.equal(boardRequests,0);assert.equal(JSON.stringify(packedBoard),packedBoardSnapshot);
 // Classic JSON permission drafts only; no preset-to-bit/cheat policy or network action.
 const packedPermissionPlayers=Object.freeze([Object.freeze({id:'alpha',name:'Caller Alpha'}),Object.freeze({id:'beta',name:'Caller Beta'})]);
 const packedPermissionOptions=Object.freeze([Object.freeze({id:'build',label:'Build'}),Object.freeze({id:'mine',label:'Mine'}),Object.freeze({id:'unbound',label:'Unknown binding'})]);
@@ -640,7 +651,7 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','ore-player-permissions.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','ore-player-permissions.css','chalkboard.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -887,6 +898,17 @@ typedDocumentGroups[0].topics.push(typedDocumentTopic);
 // @ts-expect-error Scroll reset is a bounded policy.
 const badDocumentPolicy:DocumentViewerProps['scrollPolicy']='native';
 
+import { ChalkboardEditor, ChalkboardTextField, ChalkboardLock } from 'mcbeui';
+import type { ChalkboardEditorProps, ChalkboardValue, ChalkboardChangeDetail, ChalkboardCloseDetail, ChalkboardTextFieldProps, ChalkboardLockProps, ChalkboardFontMode, ChalkboardTextareaProps, ChalkboardLockInputProps } from 'mcbeui';
+const typedBoardValue:ChalkboardValue={text:'Caller text',locked:true};
+const typedBoardField:ChalkboardTextFieldProps={size:[264,120],maxLength:37,label:'Caller field',textEnabled:true,value:typedBoardValue.text,fontMode:'unicode' satisfies ChalkboardFontMode,textareaProps:{name:'board',spellCheck:false} satisfies ChalkboardTextareaProps,containerRef:createRef<HTMLDivElement>(),onValueChange:(text,event)=>text+event.currentTarget.value};
+const typedBoardLock:ChalkboardLockProps={label:'Caller lock',checked:true,readOnly:true,rootProps:{'aria-label':'Caller lock row'},onCheckedChange:(checked,event)=>String(checked)+event.type};
+const typedBoardProps:ChalkboardEditorProps={panelSize:[280,180],textBoxSize:[264,120],maxLength:37,title:'Board',textEnabled:true,lockVisible:true,lockLabel:'Lock',closeVisible:true,value:typedBoardValue,defaultValue:typedBoardValue,textareaRef:createRef<HTMLTextAreaElement>(),lockRef:createRef<HTMLInputElement>(),closeRef:createRef<HTMLButtonElement>(),textFieldRef:createRef<HTMLDivElement>(),lockInputProps:{name:'lock'} satisfies ChalkboardLockInputProps,confirmHint:<span>Host confirm</span>,onValueChange:(next,detail:ChalkboardChangeDetail)=>detail.field==='text'?next.text+detail.event.currentTarget.value:String(next.locked)+detail.event.currentTarget.checked,onCloseRequest:(accepted,detail:ChalkboardCloseDetail)=>accepted.text+detail.reason+detail.event.type};
+const typedBoardElements=<><ChalkboardEditor {...typedBoardProps} ref={createRef<HTMLElement>()}/><ChalkboardTextField {...typedBoardField} ref={createRef<HTMLTextAreaElement>()}/><ChalkboardLock {...typedBoardLock} ref={createRef<HTMLInputElement>()}/></>;
+// @ts-expect-error textEnabled is an independent required resolved host binding.
+const badBoardProps:ChalkboardEditorProps={panelSize:[280,180],textBoxSize:[264,120],maxLength:37,title:'Board',lockVisible:true,lockLabel:'Lock',closeVisible:true};
+// @ts-expect-error lock value is boolean, not a server permission string.
+const badBoardValue:ChalkboardValue={text:'Caller text',locked:'operator'};
 import { OrePlayerPermissions, OrePermissionLevelSelect, OrePermissionToggleRow, OrePlayerCard, OreSwitch } from 'mcbeui';
 import type { OrePermissionAppearance, OrePermissionPlayer, OrePermissionOption, OrePermissionLevelLabels, OreSwitchProps, OrePermissionToggleRowProps, OrePlayerCardProps, OrePermissionLevelSelectProps, OrePermissionSafeArea, OrePlayerPermissionsLabels, OrePlayerPermissionsProps } from 'mcbeui';
 const typedOreAppearance:OrePermissionAppearance={guiScale:1.5,locale:'zh_CN'};

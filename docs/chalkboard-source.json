@@ -1,0 +1,313 @@
+{
+  "profile": "Bedrock Classic JSON UI, Chalkboard editor",
+  "upstreamCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "source": "resource_pack/ui/chalkboard_screen.json",
+  "sourceSHA256": "0ee3564e89dd646b13364e56aa4734990fe610b94e70a76687a702bfe799c138",
+  "nativePixelCertification": false,
+  "requiredHostLayout": {
+    "panelSize": "$text_panel_size [W,H]",
+    "textBoxSize": "$text_box_size [Tw,Th]",
+    "maxLength": "$max_input_length",
+    "title": "$chalkboard_name"
+  },
+  "requiredAcceptedState": {
+    "value": "#text_box_item_name literalmultiline",
+    "textEnabled": "#text_box_enabled independentoflocked",
+    "locked": "#locked",
+    "lockVisible": "#lock_visible",
+    "lockLabel": "#lock_label_text",
+    "closeVisible": "#close_button_visible ifreplicatingdynamiccommonpanelbinding"
+  },
+  "geometry": {
+    "root": "center/center",
+    "indent": {
+      "size": [
+        "W-16",
+        "H-31"
+      ],
+      "anchor": "top_middle",
+      "offset": [
+        0,
+        23
+      ]
+    },
+    "textarea": {
+      "size": [
+        "Tw",
+        "Th"
+      ],
+      "anchor": "top_middle",
+      "offset": [
+        0,
+        0
+      ],
+      "rootLocal": [
+        "(W-Tw)/2",
+        23
+      ],
+      "layer": 5,
+      "constrain_to_rect": false
+    },
+    "textareaCentering": {
+      "size": [
+        "Tw-6",
+        "Th-4"
+      ],
+      "centerInset": [
+        3,
+        2
+      ]
+    },
+    "textClip": {
+      "size": [
+        "100%",
+        "100%"
+      ],
+      "anchor": "left_middle",
+      "clipsChildren": true,
+      "clipOffset": [
+        0,
+        -3
+      ],
+      "labelSize": [
+        "100%",
+        "100%"
+      ],
+      "labelMinSize": [
+        "100%",
+        0
+      ],
+      "labelAnchor": "right_middle"
+    },
+    "title": {
+      "anchor": "top_middle",
+      "offset": [
+        0,
+        9
+      ],
+      "size": [
+        "default",
+        10
+      ],
+      "maxSize": [
+        "default",
+        10
+      ],
+      "color": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "shadow": false,
+      "layer": 4
+    },
+    "lock": {
+      "size": [
+        "100%c",
+        16
+      ],
+      "anchor": "bottom_middleofindent",
+      "rootBottom": "H-8",
+      "rowTop": "H-24",
+      "orientation": "horizontal",
+      "toggleSize": [
+        30,
+        16
+      ],
+      "toggleOffset": [
+        0,
+        -8
+      ],
+      "toggleImageAnchor": "top_left",
+      "labelOffset": [
+        2,
+        3
+      ],
+      "labelAnchor": "top_left",
+      "labelColor": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "intrinsicWidths": "runtimefont/content measurement; no fixedlabelwidth"
+    },
+    "close": {
+      "hitboxSize": [
+        21,
+        21
+      ],
+      "imageSize": [
+        15,
+        15
+      ],
+      "anchor": "top_right",
+      "menuTarget": "button.menu_exit",
+      "panelDefaultOffset": [
+        0,
+        0
+      ],
+      "buttonLocalDefaultOffset": [
+        -2,
+        2
+      ],
+      "qualification": "bothdefaultscopesretained; common_panelpassesits$close_button_offset; donotinheritunrelatedworkstationpackedrect"
+    }
+  },
+  "states": {
+    "textarea": "defaultindent;hover/pressedhoverindent;lockednormalindentalpha.5;whitetextlockedalpha.5;normalalpha1;normalfontsize;shadowfalse;localizefalse;enabledNewlinetrue",
+    "lock": "on/off30x16normal/hover;lockedvariantsnormaltexturesalpha.5;globalchecked#locked;globalenabled#lock_visible;wholelockvisible#lock_visible",
+    "doNotInfer": "locked doesnotderivevalue/readOnly/edit permission/world authority"
+  },
+  "inputMappings": {
+    "screenEscape": "menu_cancel→menu_exit global",
+    "multilineEscape": "menu_cancel→deselectedglobal whenhandlesdeselect;eventpriority/consumeinteractionnotnativevalidated",
+    "enter": "newlinetrue;select/okmapsselected;no savebuttondeclared",
+    "close": "menu_selectpressed/menu_okfocused→menu_exit"
+  },
+  "assets": [
+    {
+      "entry": "resource_pack/textures/ui/dialog_background_opaque.png",
+      "sha256": "45e365955de8800424ea35bfa589ca38535df6211c10d24bcde280cae09dc69f",
+      "dimensions": [
+        16,
+        16
+      ],
+      "reuse": {
+        "path": "src/workstation-image-assets.ts",
+        "key": "panel",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "45e365955de8800424ea35bfa589ca38535df6211c10d24bcde280cae09dc69f"
+      }
+    },
+    {
+      "entry": "resource_pack/textures/ui/edit_box_indent.png",
+      "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109",
+      "dimensions": [
+        6,
+        6
+      ],
+      "reuse": {
+        "path": "src/workstation-image-assets.ts",
+        "key": "editBox",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109"
+      }
+    },
+    {
+      "entry": "resource_pack/textures/ui/edit_box_indent_hover.png",
+      "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb",
+      "dimensions": [
+        6,
+        6
+      ],
+      "reuse": {
+        "path": "src/workstation-image-assets.ts",
+        "key": "editBoxHover",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb"
+      }
+    },
+    {
+      "entry": "resource_pack/textures/ui/toggle_off.png",
+      "sha256": "e3c03f72af1d8afc7617f229e4eddb6d439a02411e464e48c1bdd1f01f873962",
+      "dimensions": [
+        30,
+        16
+      ],
+      "reuse": {
+        "path": "src\\assets\\player-permissions\\toggle_off.png",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "e3c03f72af1d8afc7617f229e4eddb6d439a02411e464e48c1bdd1f01f873962"
+      }
+    },
+    {
+      "entry": "resource_pack/textures/ui/toggle_on.png",
+      "sha256": "b37762f63652856a4c735f5adf55e511e9c01744a883ec70647b97e08a1711ff",
+      "dimensions": [
+        30,
+        16
+      ],
+      "reuse": {
+        "path": "src\\assets\\npc\\toggle_on.png",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "b37762f63652856a4c735f5adf55e511e9c01744a883ec70647b97e08a1711ff"
+      }
+    },
+    {
+      "entry": "resource_pack/textures/ui/toggle_off_hover.png",
+      "sha256": "5083272d331669bde3e5c3ef14cbfd12d6660763bad23b7474c902b4fc82d056",
+      "dimensions": [
+        30,
+        16
+      ],
+      "reuse": {
+        "path": "src\\assets\\player-permissions\\toggle_off_hover.png",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "5083272d331669bde3e5c3ef14cbfd12d6660763bad23b7474c902b4fc82d056"
+      }
+    },
+    {
+      "entry": "resource_pack/textures/ui/toggle_on_hover.png",
+      "sha256": "3ce38b76a06e672c95cb8fa4892456e4deaf482c7f6a67b8e991761421fe6b8b",
+      "dimensions": [
+        30,
+        16
+      ],
+      "reuse": {
+        "path": "src\\assets\\npc\\toggle_on_hover.png",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "3ce38b76a06e672c95cb8fa4892456e4deaf482c7f6a67b8e991761421fe6b8b"
+      }
+    },
+    {
+      "entry": "resource_pack/textures/ui/close_button_default.png",
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "dimensions": [
+        15,
+        15
+      ],
+      "reuse": {
+        "path": "src\\assets\\book\\close_button_default.png",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c"
+      }
+    },
+    {
+      "entry": "resource_pack/textures/ui/close_button_hover.png",
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "dimensions": [
+        15,
+        15
+      ],
+      "reuse": {
+        "path": "src\\assets\\book\\close_button_hover.png",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877"
+      }
+    },
+    {
+      "entry": "resource_pack/textures/ui/close_button_pressed.png",
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "dimensions": [
+        15,
+        15
+      ],
+      "reuse": {
+        "path": "src\\assets\\book\\close_button_pressed.png",
+        "bytesEqual": true,
+        "rgbaEqual": true,
+        "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03"
+      }
+    }
+  ]
+}

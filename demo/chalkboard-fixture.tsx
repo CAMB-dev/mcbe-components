@@ -1,0 +1,29 @@
+import {StrictMode,useState} from 'react';
+import {createRoot} from 'react-dom/client';
+import {ChalkboardEditor,ChalkboardTextField,ChalkboardLock} from '../src/chalkboard';
+import type {ChalkboardValue} from '../src/chalkboard';
+import '../src/styles.css';
+import '../src/chalkboard.css';
+
+export interface ChalkboardQASettings {
+ mode:'editor'|'field'|'lock';value:ChalkboardValue;controlled:boolean;acceptance:'accept'|'reject'|'uppercase';
+ panelSize:readonly[number,number];textBoxSize:readonly[number,number];scale:number;maxLength:number;title:string;lockLabel:string;
+ textEnabled:boolean;lockVisible:boolean;closeVisible:boolean;disabled:boolean;readOnly:boolean;show:boolean;second:boolean;
+ hint:boolean;preventClose:boolean;preventKeys:string[];preventCaptureKeys:string[];stopCompositionPropagation:boolean;nativeTitle:string;
+}
+interface QAEvent{kind:string;value?:unknown;detail?:unknown}
+interface QA {settings:ChalkboardQASettings;events:QAEvent[];configure:(patch:Partial<ChalkboardQASettings>)=>void;unmount:()=>void;
+ refs:{root:HTMLElement|null;textarea:HTMLTextAreaElement|null;lock:HTMLInputElement|null;close:HTMLButtonElement|null;second:HTMLTextAreaElement|null}}
+declare global {interface Window{chalkboardQA:QA;chalkboardQAInitial?:Partial<ChalkboardQASettings>}}
+const initial:ChalkboardQASettings={mode:'editor',value:{text:'Alpha beta',locked:false},controlled:true,acceptance:'accept',panelSize:[280,180],textBoxSize:[264,120],scale:2,maxLength:37,title:'Host chalkboard',lockLabel:'Lock editing',textEnabled:true,lockVisible:true,closeVisible:true,disabled:false,readOnly:false,show:true,second:false,hint:false,preventClose:false,preventKeys:[],preventCaptureKeys:[],stopCompositionPropagation:false,nativeTitle:'Caller native title',...window.chalkboardQAInitial};
+const qa:QA={settings:initial,events:[],configure:()=>{},unmount:()=>{},refs:{root:null,textarea:null,lock:null,close:null,second:null}};window.chalkboardQA=qa;
+const refs={root:(n:HTMLElement|null)=>{qa.refs.root=n},textarea:(n:HTMLTextAreaElement|null)=>{qa.refs.textarea=n},lock:(n:HTMLInputElement|null)=>{qa.refs.lock=n},close:(n:HTMLButtonElement|null)=>{qa.refs.close=n},second:(n:HTMLTextAreaElement|null)=>{qa.refs.second=n}};
+function App(){const[s,set]=useState(initial);qa.settings=s;qa.configure=patch=>set(p=>({...p,...patch}));
+ const accept=(next:ChalkboardValue)=>{if(s.controlled&&s.acceptance!=='reject')set(p=>({...p,value:{...next,text:s.acceptance==='uppercase'?next.text.toUpperCase():next.text}}))};
+ const key=(event:React.KeyboardEvent,phase:'bubble'|'capture')=>{qa.events.push({kind:'key-'+phase,value:event.key});if((phase==='capture'?s.preventCaptureKeys:s.preventKeys).includes(event.key))event.preventDefault()};
+ const native={id:'chalkboard-text',title:s.nativeTitle,onInput:(e:React.FormEvent<HTMLTextAreaElement>)=>qa.events.push({kind:'native-input',value:e.currentTarget.value}),onCompositionStart:(e:React.CompositionEvent<HTMLTextAreaElement>)=>{qa.events.push({kind:'composition-start'});if(s.stopCompositionPropagation)e.stopPropagation()},onCompositionEnd:(e:React.CompositionEvent<HTMLTextAreaElement>)=>{qa.events.push({kind:'composition-end'});if(s.stopCompositionPropagation)e.stopPropagation()},onKeyDown:(e:React.KeyboardEvent<HTMLTextAreaElement>)=>key(e,'bubble'),onKeyDownCapture:(e:React.KeyboardEvent<HTMLTextAreaElement>)=>key(e,'capture')};
+ return <main><button id="chalkboard-sink">Outside chalkboard</button><div className="chalk-qa-pan"><div className="chalk-qa-host">{s.show&&(s.mode==='editor'?<ChalkboardEditor id="qa-chalkboard" ref={refs.root} panelSize={s.panelSize} textBoxSize={s.textBoxSize} maxLength={s.maxLength} title={s.title} textEnabled={s.textEnabled} lockVisible={s.lockVisible} lockLabel={s.lockLabel} closeVisible={s.closeVisible} scale={s.scale} disabled={s.disabled} readOnly={s.readOnly} textareaRef={refs.textarea} lockRef={refs.lock} closeRef={refs.close} textareaProps={native} textLabel="Chalkboard text" confirmHint={s.hint?<span data-testid="host-confirm-hint">Host confirm hint</span>:undefined} onClickCapture={e=>{if(s.preventClose)e.preventDefault()}}
+ {...(s.controlled?{value:s.value}:{defaultValue:s.value})} onValueChange={(next,detail)=>{qa.events.push({kind:'value',value:structuredClone(next),detail:{field:detail.field,eventType:detail.event.type}});accept(next)}} onCloseRequest={(value,detail)=>qa.events.push({kind:'close',value:structuredClone(value),detail:{reason:detail.reason,eventType:detail.event.type}})}/>:s.mode==='field'?<ChalkboardTextField ref={refs.textarea} containerRef={refs.root} size={s.textBoxSize} maxLength={s.maxLength} label="Chalkboard text" textEnabled={s.textEnabled} scale={s.scale} disabled={s.disabled} readOnly={s.readOnly} textareaProps={native} {...(s.controlled?{value:s.value.text}:{defaultValue:s.value.text})} onValueChange={(text,event)=>{const next={...s.value,text};qa.events.push({kind:'value',value:next,detail:{field:'text',eventType:event.type}});accept(next)}}/>:<ChalkboardLock ref={refs.lock} label={s.lockLabel} scale={s.scale} disabled={s.disabled} readOnly={s.readOnly} {...(s.controlled?{checked:s.value.locked}:{defaultChecked:s.value.locked})} onCheckedChange={(locked,event)=>{const next={...s.value,locked};qa.events.push({kind:'value',value:next,detail:{field:'locked',eventType:event.type}});accept(next)}}/>)}</div></div>
+ {s.second&&<div className="chalk-qa-pan"><ChalkboardTextField size={[120,70]} maxLength={20} label="Second chalkboard" textEnabled scale={1} defaultValue="Second seed" ref={refs.second} onValueChange={value=>qa.events.push({kind:'second',value})}/></div>}
+ <output id="chalkboard-events">{JSON.stringify(qa.events)}</output></main>}
+const host=createRoot(document.getElementById('chalkboard-qa-root')!);qa.unmount=()=>host.unmount();host.render(new URLSearchParams(location.search).has('strict')?<StrictMode><App/></StrictMode>:<App/>);
