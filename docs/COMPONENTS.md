@@ -2,7 +2,7 @@
 
 当前导出 155 个组件，目录 155 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 172 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
-新增OreUI权限五组件保留现代玩家卡 /说明、segmented与共用modal分支和独立开关，资源 /字体、窗口尺寸与实际权限服务由宿主提供。当前phase03 React18.3.1 /19.3.1实际172值包、完整104项同批101通过 /3设备跳过与公开run03的9项分别完成；实际截图揭示的selected hover灰色覆盖已窄修并补200点palette回归，旧103跨批 /包 /公开记录保留原身份，不称当前原生整页或Classic覆盖表扩大；见 [ORE_PLAYER_PERMISSIONS_QA.md](ORE_PLAYER_PERMISSIONS_QA.md)。
+新增OreUI权限五组件保留现代玩家卡 /说明、segmented与共用modal分支和独立开关，资源 /字体、窗口尺寸与实际权限服务由宿主提供。当前更强源修订的React18.3.1 /19.3.1实际172值包、完整107项同批104通过 /3设备跳过与新公开9项分别完成；黑 .5 overlay、.2u bevel、modal role /check /focus分离按完整源链修正，230点中50底bevel点最大差1而非全零，旧104 /103 /包 /公开记录保留原身份，不称当前原生整页或Classic覆盖表扩大；见 [ORE_PLAYER_PERMISSIONS_QA.md](ORE_PLAYER_PERMISSIONS_QA.md)。
 
 新增Classic权限四组件已落盘，角色选择与动态boolean权限草稿独立，未知key不补false，所有授权 /Kick /Ban由宿主实现。本阶段正式63通过 /2桌面触控条件跳过、公开预览12项及React18 /19实际包消费通过；当前安装版OreUI是不同profile，不据Classic源码认证。见 [PLAYER_PERMISSIONS_QA.md](PLAYER_PERMISSIONS_QA.md)。历史DocumentViewer146组件 /163值及58通过 /1设备条件跳过保持原受测身份。
 

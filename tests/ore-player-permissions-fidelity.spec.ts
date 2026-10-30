@@ -30,8 +30,27 @@ test('source modal black70percent overlay and row border base selected hover pal
   const sample=(png:PNG,x:number,y:number,expected:number[],name:string)=>{let maxDelta=0;for(let yy=0;yy<5;yy++)for(let xx=0;xx<5;xx++){const at=((Math.floor(y)+yy)*png.width+Math.floor(x)+xx)*4;expect(png.data[at+3]).toBe(255);for(let c=0;c<3;c++)maxDelta=Math.max(maxDelta,Math.abs(png.data[at+c]!-expected[c]!))}checks.push({name,compared:25,maxDelta});expect(maxDelta,name).toBeLessThanOrEqual(1)};
   let shot=await page.screenshot(),png=PNG.sync.read(shot);sample(png,2,2,[5,10,14],'source black alpha.7 over host16/32/48');
   const dialog=await page.getByRole('dialog').boundingBox();expect(dialog!.width).toBeLessThanOrEqual(476+1/16);
-  for(const [id,color]of [['visitor','58585a'],['member','313233']]as const){const b=await page.locator(`[data-ore-level="${id}"]`).boundingBox();near(b!.height,48);sample(png,b!.x+b!.width-40,b!.y+20,rgb(color),`${id} source fill`)}
+  // Source04 closes qm neutral header + separate shadow, and FY neutral60
+  // border.dimmest. These are new facts, not screenshot-derived expectations.
+  await expect(page.locator('.mc-ore-level__modal-header')).toHaveCSS('background-color','rgb(72, 73, 74)');await expect(page.locator('.mc-ore-level__modal-header-shadow')).toHaveCSS('height','2px');await expect(page.locator('.mc-ore-level__modal-header-shadow')).toHaveCSS('background-color','rgb(49, 50, 51)');await expect(page.locator('[data-ore-level="visitor"]')).toHaveCSS('border-left-color','rgb(140, 141, 144)');await expect(page.locator('.mc-ore-level__menu-bottom-rule')).toHaveCSS('border-bottom-width','2px');await expect(page.locator('.mc-ore-level__menu-bottom-rule')).toHaveCSS('border-bottom-color','rgb(140, 141, 144)');
+  // Stronger source04 closes FY/DY role neutral60 without a selected token:
+  // accepted Member adds its check only. The previous pressed-color assumption
+  // is preserved in the phase04 byte snapshot, not treated as native evidence.
+  for(const [id,color]of [['visitor','58585a'],['member','58585a']]as const){const b=await page.locator(`[data-ore-level="${id}"]`).boundingBox();near(b!.height,48);sample(png,b!.x+b!.width-40,b!.y+20,rgb(color),`${id} source fill`)}
   await page.locator('[data-ore-level="visitor"]').hover();shot=await page.screenshot();png=PNG.sync.read(shot);const b=await page.locator('[data-ore-level="visitor"]').boundingBox();sample(png,b!.x+b!.width-40,b!.y+20,rgb('48494a'),'source hover fill');await info.attach('ore-modal-surfaces.png',{body:shot,contentType:'image/png'});await info.attach('source-modal-domains.json',{body:JSON.stringify({checks,scope:'100 predeclared flat source pixels; not native full-screen parity'},null,2),contentType:'application/json'});
+});
+
+test('source fullframe black50percent overlay and both ordinary section bevels preserve source alpha and point2rem thickness',async({page},info)=>{
+  await page.setViewportSize({width:1440,height:1000});await page.addInitScript(()=>{window.oreQAInitial={actualArt:false,size:[1000,700],viewportSize:[1440,1000]}});await page.goto('/demo/ore-permissions-fixture.html');await expect(page.locator('#qa-ore-screen')).toBeAttached();
+  const checks:{guiScale:number;part:string;domain:string;compared:number;different:number;maxDelta:number}[]=[];
+  for(const guiScale of [2,3]){await page.evaluate(guiScale=>window.oreQA.configure({guiScale}),guiScale);await page.mouse.move(1,1);const u=5*guiScale,t=.2*u,frame=await page.locator('#qa-ore-screen').boundingBox(),shot=await page.screenshot(),pagePNG=PNG.sync.read(shot);expect(frame).not.toBeNull();
+    const sample=(png:PNG,x:number,y:number,width:number,height:number,color:number[],part:string,domain:string)=>{let different=0,maxDelta=0;for(let yy=0;yy<height;yy++)for(let xx=0;xx<width;xx++){const at=((Math.floor(y)+yy)*png.width+Math.floor(x)+xx)*4;expect(png.data[at+3]).toBe(255);let bad=false;for(let c=0;c<3;c++){const d=Math.abs(png.data[at+c]!-color[c]!);maxDelta=Math.max(maxDelta,d);if(d)bad=true}if(bad)different++}checks.push({guiScale,part,domain,compared:width*height,different,maxDelta})};
+    // The source gutters leave this declared left strip clear. Host background
+    // is fixed16/32/48; only the root's black.5 overlay is composed here.
+    sample(pagePNG,frame!.x+4,frame!.y+4.8*u+u,5,5,[8,16,24],'fullframe','black50 over host16/32/48');await info.attach(`ore-full-overlay-${guiScale}.png`,{body:shot,contentType:'image/png'});
+    for(const [part,selector]of [['row','[data-permission-id="build"]'],['level','.mc-ore-level']]as const){const bytes=await page.locator(selector).screenshot(),png=PNG.sync.read(bytes),base=rgb('48494a');sample(png,10,0,5,t,mix(base,.1),part,'top white.1 exactly.2u');sample(png,10,t,5,2,base,part,'below top strip');sample(png,10,png.height-t,5,t,base.map(c=>Math.round(c*.7)),part,'bottom black.3 exactly.2u');sample(png,10,png.height-t-2,5,2,base,part,'above bottom strip');await info.attach(`ore-section-${part}-${guiScale}.png`,{body:bytes,contentType:'image/png'})}
+  }
+  await info.attach('source-overlay-bevel-domains.json',{body:JSON.stringify({source:'runtime FACTS backgroundAndRow + original gm/um CSS .2rem nonthin overlays',scope:'230 predeclared flat source CSS pixels at u10/u15. JPEG/native screenshot pixels are not reference inputs.',checks},null,2),contentType:'application/json'});expect(checks.reduce((n,c)=>n+c.compared,0)).toBe(230);for(const c of checks)expect(c.maxDelta,JSON.stringify(c)).toBeLessThanOrEqual(1);
 });
 
 test('segmented selected primary and unselected secondary preserve source palettes through hover press and disabled',async({page},info)=>{

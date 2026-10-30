@@ -92,11 +92,21 @@ test('modal makes external body siblings inert, traps focus, roves without commi
   await trigger.click();for(let i=0;i<8;i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(n=>n.contains(document.activeElement))).toBe(true)}await page.keyboard.press('Escape');await expect(trigger).toBeFocused();expect(await page.locator('#ore-before').evaluate(n=>(n as HTMLElement).inert)).toBe(false);
 });
 
+test('source desktop-small focuses accepted role while compact defaults to first enabled without changing the check',async({page})=>{
+  await page.setViewportSize({width:1440,height:1000});await open(page,{mode:'level',availableWidth:500,widgetWidth:640,viewportSize:[1440,1000],level:'operator',accept:false,actualArt:false});
+  // Source GZ explicitly requests selected focus; compact jZ omits it. The
+  // first-enabled fallback is the bounded Web policy corroborated by the native
+  // compact observation, not a recovered universal engine focus-memory rule.
+  for(const [viewportSize,focus]of [[[1440,1000],'operator'],[[1279,1000],'visitor']]as const){await set(page,{viewportSize});await page.locator('.mc-ore-level__trigger').focus();await page.keyboard.press('Enter');await expect(page.getByRole('dialog')).toBeVisible();await expect(role(page,focus)).toBeFocused();await expect(role(page,'operator')).toHaveAttribute('aria-checked','true');await expect(role(page,focus)).toHaveCSS('background-color','rgb(88, 88, 90)');expect(await role(page,focus).evaluate(n=>{const s=getComputedStyle(n,'::after');return{visible:n.matches(':focus-visible'),border:s.borderTopWidth,color:s.borderTopColor,edges:[s.top,s.right,s.bottom,s.left],outline:getComputedStyle(n).outlineStyle}})).toEqual({visible:true,border:'2px',color:'rgb(255, 255, 255)',edges:['0px','0px','0px','0px'],outline:'none'});expect(await events(page,'level')).toHaveLength(0);await page.keyboard.press('Escape');await expect(page.locator('.mc-ore-level__trigger')).toBeFocused()}
+});
+
 test('long modal remains bounded and scrollable after resize; compact trigger does not invent platform glyphs',async({page})=>{
   await page.setViewportSize({width:800,height:600});await open(page,{mode:'level',viewportSize:[800,600],availableWidth:400,widgetWidth:480,longText:true,actualArt:false});await page.locator('.mc-ore-level__trigger').click();const dialog=page.getByRole('dialog');expect((await box(dialog)).width).toBeLessThanOrEqual(476+1/16);await expect(dialog.getByRole('radio')).toHaveCount(4);await page.setViewportSize({width:600,height:400});await set(page,{viewportSize:[600,400]});expect((await box(dialog)).height).toBeLessThanOrEqual(400);expect(await dialog.locator('.mc-ore-scroll__viewport').evaluate(n=>n.scrollHeight>=n.clientHeight)).toBe(true);
   // Source DY measures the unsnapped parent, then quantizes only overflow.
-  // At u10 the source chrome is24 wrapper +48 header +4 border physical px.
-  for(const height of [160,100]){await page.setViewportSize({width:600,height});await set(page,{viewportSize:[600,height]});const capacity=height-24-48-4,cap=Math.max(0,Math.floor(capacity/48)*48-24);await expect.poll(async()=>parseFloat(await dialog.locator('.mc-ore-level__menu-quantized').evaluate(n=>getComputedStyle(n).maxHeight))).toBe(cap);near((await box(dialog.locator('.mc-ore-level__menu-bound'))).height,capacity);near((await box(dialog.locator('.mc-ore-scroll__viewport'))).height,cap)}
+  // Source04 qm has a separate normal-flow .2u lower-shadow sibling. At u10:
+  // chrome24 wrapper +48 header +2 shadow +4 border physical px. BY's separate
+  // final .2u rule remains in natural rows; it does not subtract capacity twice.
+  for(const height of [160,100]){await page.setViewportSize({width:600,height});await set(page,{viewportSize:[600,height]});const capacity=height-24-48-2-4,cap=Math.max(0,Math.floor(capacity/48)*48-24);await expect.poll(async()=>parseFloat(await dialog.locator('.mc-ore-level__menu-quantized').evaluate(n=>getComputedStyle(n).maxHeight))).toBe(cap);near((await box(dialog.locator('.mc-ore-level__menu-bound'))).height,capacity);near((await box(dialog.locator('.mc-ore-scroll__viewport'))).height,cap)}
   await page.keyboard.press('Escape');await expect(dialog).toBeHidden();
 });
 

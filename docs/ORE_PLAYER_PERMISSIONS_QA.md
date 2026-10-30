@@ -48,6 +48,16 @@ import 'mcbeui/styles.css';
 
 `scrollInputMode="mouse" | "touch"` 是宿主显式选择的呈现 /输入策略，不侦测或恢复引擎当前输入模式。鼠标滚动条、非鼠标overlay thumb、sidebar的floating分支与真实overflow视口分别处理；原生滚动条隐藏和辅助技术键盘支持属于Web适配，不据源声明推断所有平台已一致。
 
+## 更强源链修正与运行时边界
+
+根frame使用neutral50的黑色 .5 overlay叠加宿主场景，保留不透明子控件，不给整组件设置opacity .5。普通权限行与角色selector的Zf wrapper有顶部白 .1 /底部黑 .3 bevel，各厚 .2u，作为绝对覆盖层不占布局；源未传thin，不应改成base1 /minBorder宽度。示例背景色只是宿主场景输入，不是原生世界画面的复制。
+
+角色modal的header为neutral `#48494a`，下方 `#313233` shadow条高 .2u并进入正常flow；外框和body为 `#1e1e1f`。菜单neutral60行普通填充 `#58585a`、hover `#48494a`、pressed `#313233`，dimmest边框 `#8c8d90`，还有BY独立 .2u底边。这个role没有selected /focused填充token：已选项只显示check，不强制pressed填充。旧selected `#313233`期望被更完整源链推翻，现普通selected应为 `#58585a`；这属于source oracle纠正，没有改采样坐标或放宽容差。
+
+焦点框是白色 .2u inset，与accepted check和填充分开。compact默认不委托selected alias，可先focus Visitor而Operator仍checked；desktop-small显式委托selected alias。两分支初始焦点已按有限合同实现，不代表通用native focus memory已恢复。
+
+原生普通页 /角色菜单的新JPEG与退出清理记录保存在 `.cache/ore-permissions-native-02/`，未改变权限，世界已保存退出、游戏及CU已关闭；JPEG仅用于发现，不取色、不拟合比例、不作为无损RGBA期望。完整静态依据见 `.cache/ore-permissions-runtime-config-01/FACTS.json` 和 `.cache/ore-permissions-modal-source-04/REPORT.md`。实际guiScale由 `core.device.display` 及可能的local override提供，当前值未读到；保存的offset0和context默认值均不能证明运行时guiScale为5。生效safe-area /locale /主题、native字体栅格和整页RGBA仍未知。
+
 ## 字体与资源由宿主提供
 
 库不附带现代原版角色图、头像、Ten /Seven /Noto字体或HBUI bundle。`roleIcons`、`backIcon`、`dropdownIcons:{close,check,chevron}`、`toggleIcons:{on,off,thumb}` 接受宿主React节点；独立LevelSelect使用 `icons` /`dropdownIcons`，PlayerCard支持avatar /avatarSrc，Switch支持onIcon /offIcon /thumbIcon。未提供时不伪造原图。源码研究观察到的13个完整本机图像仅用于可选私有预览，不转存公开assets。
@@ -66,9 +76,21 @@ python scripts/use-local-ore-permissions-assets.py "C:/XboxGames/Minecraft for W
 
 安装源的路由、默认Vanilla主题、控件 /scroll /资源依赖见 `.cache/player-permissions-hbui-study-01/`、`-02/` 与 `.cache/ore-permissions-source-03/`。私有bundle只作静态研究，不进入库或在库中执行。原窗口JPEG不是无损native UI target；目前没有本阶段完整原生页面像素证书。
 
-当前155组件 /6数据 /11函数，共172值，已通过React18.3.1与19.3.1实际tar安装后的ESM、SSR、strict TypeScript、样式、资源与许可门禁。新5组件 /11类型、host图标与字体输入、refs和原有150组件检查均保留；当前phase03 CSS的已验证tar身份为 `eb940c8dc2414dae6d7c2ca16a5660bd316bc3b8ab45901708a3ce8bf0254e51`，记录见 `.cache/ore-permissions-root-01/package-02.log`。这不是文档定稿后重新打包的预告身份。
+当前更强源修订的完整107项同批执行：**104通过、3个预期桌面触摸设备条件跳过、零失败**，零retry /flaky，957份输入pin无漂移。正式证据为 `.cache/ore-permissions-native-tests-01/FINAL.json`；新增19DOM×两项目＋4像素项与旧65项分别保留范围，未把早期通过重复累计。
 
-当前phase03完整104项在同一批次执行：**101通过、3个预期桌面触摸设备条件跳过、零失败**，零retry /flaky，948份输入pin无漂移。新批次包含新增palette回归及原有合同 /两项像素oracle完整复跑，见 `.cache/ore-permissions-tests-01/FINAL-02.json` 与 `phase04/run-04/`。
+新增overlay /bevel预定域230点中180点零差，包含两倍率fullframe overlay的50点；两个section底bevel合计50点最大通道差1，在原先≤1容差内，**不能称230点全零**。原Switch128点及segmented200点完整byte case复跑仍零差；纠正后的modal100点使用原坐标 /原容差，overlay25点最大差1、其余75点零差。header /shadow正常flow、DY父级预算、dimmest边框 /独立底边与两分支实际键盘白色inset focus也通过。均为有限源CSS合同，不是native整屏对比。
+
+新包在React18.3.1与19.3.1实际安装后通过155组件＋6数据＋11函数（172值）的ESM、SSR、strict TypeScript、样式、资源和许可门禁，日志 `.cache/ore-permissions-native-root-01/package-01.log`。验证tar `.cache/ore-permissions-native-root-01/mcbeui-ore-native-verified.tgz` 的SHA为 `d9779fb0532a717a0b3280b4ed2ccf124576e598b10b3a4f3f75ce5783ef5f02`，最终文档包仍需另做同payload比较。
+
+新公开预览完整9项通过，见 `.cache/ore-permissions-native-root-01/public-01/FINAL.json`：实际source alpha .5、header `#48494a`、checked Operator普通 `#58585a`及selected Custom hover绿色均验证；390窄屏边界、键盘 /受控交互与Ten标题13glyph /Seven正文5glyph真实字体检查通过。页面 /HTTP /请求及控制台错误0，测试浏览器关闭，用户4173保留；本轮9项不累计旧公开批次。实际字体的有限节点证据不证明全部文字或native栅格一致。
+
+### 修订前历史
+
+旧104 /103及其包 /公开预览、既有1b916f3交付身份均保留原文件，不转作新TSX /CSS资格。此前缺少role-specific selected token的完整继承分析，旧selected填充测试并不因此成为正确的原生期望。
+
+此前155组件 /6数据 /11函数，共172值，已通过React18.3.1与19.3.1实际tar安装后的ESM、SSR、strict TypeScript、样式、资源与许可门禁。新5组件 /11类型、host图标与字体输入、refs和原有150组件检查均保留；此前phase03 CSS的已验证tar身份为 `eb940c8dc2414dae6d7c2ca16a5660bd316bc3b8ab45901708a3ce8bf0254e51`，记录见 `.cache/ore-permissions-root-01/package-02.log`。这不是文档定稿后重新打包的预告身份。
+
+此前phase03完整104项在同一批次执行：**101通过、3个预期桌面触摸设备条件跳过、零失败**，零retry /flaky，948份输入pin无漂移。新批次包含新增palette回归及原有合同 /两项像素oracle完整复跑，见 `.cache/ore-permissions-tests-01/FINAL-02.json` 与 `phase04/run-04/`。
 
 实际公开截图发现selected segmented按钮hover被generic hover选择器覆盖成灰色；phase03窄修CSS的selected /disabled /pressed优先级，TSX、fixture与旧两像素oracle不变。这是真实产品状态样式缺口，不是测试fixture失败。新增八状态×25点共200点源palette比较均差0 /最大通道差0，文字色也通过；原Switch八状态128点仍差0，原modal100点中overlay25点最大差1、其余75点差0均本批复跑。这些是有限取样合同，不是完整控件或原生页面零差。
 
@@ -78,6 +100,6 @@ python scripts/use-local-ore-permissions-assets.py "C:/XboxGames/Minecraft for W
 
 修复前公开构建run02完整9项通过，见 `.cache/ore-permissions-root-01/public-02/FINAL.json`。CDP实际确认标题13glyph使用自定义Minecraft Ten v2、正文5glyph使用Minecraft Seven v2；真实checkbox /受控拒绝、角色modal焦点恢复、动作标志与390窄屏无document横溢均通过。页面 /控制台 /HTTP /请求错误为0，测试浏览器关闭，用户4173预览保留。这是有限节点字体与公开Web合同，不认证所有中文fallback或完整字形栅格。
 
-当前phase03公开构建run03完整9项通过，见 `.cache/ore-permissions-root-01/public-03/FINAL.json`。在原step7额外实际hover已接受Custom，断言背景为源primary绿色 `rgb(42,100,28)`，并保存正确绿色截图。Ten标题13glyph /Seven正文5glyph的实际自定义字体检查、其余交互 /窄屏 /错误门禁全部重跑通过；测试浏览器已关闭，4173用户预览保留。这与旧run02分开记录。
+此前phase03公开构建run03完整9项通过，见 `.cache/ore-permissions-root-01/public-03/FINAL.json`。在原step7额外实际hover已接受Custom，断言背景为源primary绿色 `rgb(42,100,28)`，并保存正确绿色截图。Ten标题13glyph /Seven正文5glyph的实际自定义字体检查、其余交互 /窄屏 /错误门禁全部重跑通过；测试浏览器已关闭，4173用户预览保留。这与旧run02分开记录。
 
 公开首轮4项后把dialog的scrollHeight242大于clientHeight240误判为滚动条，失败记录保留。布局probe确认48高header＋192高rows正合240；源透明padding伸入2px边框，dialog为overflow visible，真正滚动视口未溢出且原生chrome隐藏。复验改核边界包含关系、overflow与真实viewport，没有调整产品、像素期望或容差。现有Classic150 /167及Document146 /163阶段保持各自历史身份，不累加为本轮通过数。完整原生页面、运行时主题 /盒模型、实际引擎输入与后端服务仍未认证。

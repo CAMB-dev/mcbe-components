@@ -40,7 +40,7 @@ export function OrePlayerPermissionsExamples() {
       <Switch label="Accept OreUI requests" checked={accept} onChange={event => setAccept(event.target.checked)}/>
       <Switch label="Allow OreUI edits" checked={editable} onChange={event => setEditable(event.target.checked)}/>
     </div>
-    <div ref={host} style={{ minWidth: 0, maxWidth: '100%' }} data-testid="ore-permissions-preview-host">
+    <div ref={host} style={{ minWidth: 0, maxWidth: '100%', background: '#46657a' }} data-testid="ore-permissions-preview-host">
       <OrePlayerPermissions label="Example OreUI player permissions" viewportSize={viewport} guiScale={scale}
         players={names.map((name, i) => ({ id: `ore-player-${i}`, name, avatarSrc: oreDemoAssets.avatarSrc, isHosting: i === 0 }))}
         permissionOptions={options} value={value} selectedPlayerId={selected} roleIcons={oreRoleIcons} backIcon={oreDemoAssets.back}
