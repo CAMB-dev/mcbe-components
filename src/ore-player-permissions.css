@@ -14,7 +14,8 @@
 }
 .mc-ore-player-permissions {position:relative;isolation:isolate;overflow:hidden;background:rgba(0,0,0,.5)}
 .mc-ore-player-permissions__surface {position:absolute;inset:0;display:flex;flex-direction:column;min-width:0;min-height:0}
-.mc-ore-player-permissions__header {position:relative;flex:none;padding-top:var(--mc-ore-safe-top);background:#e6e8eb;color:#1e1e1f;box-shadow:0 calc(.2 * var(--mc-ore-unit)) 0 #b1b2b5;z-index:3}
+.mc-ore-player-permissions__header {position:relative;flex:none;padding-top:var(--mc-ore-safe-top);background:#e6e8eb;color:#1e1e1f;box-shadow:0 calc(.2 * var(--mc-ore-unit)) 0 rgba(0,0,0,.3);z-index:3}
+.mc-ore-player-permissions__header::before {content:"";position:absolute;left:0;right:0;bottom:calc(.4 * var(--mc-ore-unit));height:calc(.2 * var(--mc-ore-unit));z-index:1;pointer-events:none;background:rgba(255,255,255,.2)}
 .mc-ore-player-permissions__nav {height:calc(4.4 * var(--mc-ore-unit));display:flex;align-items:center;justify-content:center;padding:0 calc(6 * var(--mc-ore-unit));margin-left:var(--mc-ore-safe-left);margin-right:var(--mc-ore-safe-right);position:relative}
 .mc-ore-player-permissions__nav h1 {margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--mc-ore-ten,"Minecraft Ten v2"),var(--mc-ore-fallback);font-size:calc(2 * var(--mc-ore-unit));line-height:calc(2.4 * var(--mc-ore-unit));font-weight:normal}
 .mc-ore-player-permissions__header-strip {height:calc(.4 * var(--mc-ore-unit));background:#b1b2b5}
@@ -25,8 +26,8 @@
 .mc-ore-player-permissions__back img,.mc-ore-player-permissions__back svg {max-width:100%;max-height:100%}
 .mc-ore-player-permissions__back-icon {display:flex;align-items:center;justify-content:center;width:calc(.8 * var(--mc-ore-unit));height:calc(1.6 * var(--mc-ore-unit));flex:none}
 .mc-ore-player-permissions__body {flex:1;min-height:0;position:relative;margin-left:var(--mc-ore-safe-left);margin-right:var(--mc-ore-safe-right)}
-.mc-ore-player-permissions__grid {height:100%;max-width:calc(128 * var(--mc-ore-unit));margin:0 auto;padding:calc(.8 * var(--mc-ore-unit)) calc(2.4 * var(--mc-ore-unit)) 0}
-.mc-ore-player-permissions__row {height:100%;display:flex;margin:0 calc(-.8 * var(--mc-ore-unit))}
+.mc-ore-player-permissions__grid {height:100%;display:flex;flex:1;flex-direction:column;align-items:center;max-width:100%;margin:0 auto;padding:calc(.8 * var(--mc-ore-unit)) calc(2.4 * var(--mc-ore-unit)) 0}
+.mc-ore-player-permissions__row {height:100%;display:flex;flex:0 1 auto;flex-wrap:wrap;width:100%;max-width:calc(128 * var(--mc-ore-unit));margin:0 calc(-.8 * var(--mc-ore-unit))}
 .mc-ore-player-permissions__players,.mc-ore-player-permissions__permissions {min-width:0;min-height:0;height:100%;padding:0 calc(.8 * var(--mc-ore-unit));display:flex;flex-direction:column}
 .mc-ore-player-permissions__players {width:33.3333333333%}
 .mc-ore-player-permissions__permissions {width:66.6666666667%}
@@ -176,7 +177,7 @@
 }
 @media(forced-colors:active) {
   .mc-ore-player-permissions,.mc-ore-level,.mc-ore-permission-row,.mc-ore-player-card,.mc-ore-level__modal {background:Canvas;color:CanvasText;box-shadow:none}
-  .mc-ore-permission-row::before,.mc-ore-level::before {display:none}
+  .mc-ore-player-permissions__header::before,.mc-ore-permission-row::before,.mc-ore-level::before {display:none}
   .mc-ore-player-permissions button,.mc-ore-level button,.mc-ore-level__overlay button,.mc-ore-player-card {background:ButtonFace;color:ButtonText;border-color:ButtonText;box-shadow:none}
   .mc-ore-level__trigger-shine,.mc-ore-level__trigger-bottom-shadow,.mc-ore-level__trigger:hover:not(:disabled) .mc-ore-level__trigger-shine {background:ButtonFace;color:CanvasText;box-shadow:none}
   .mc-ore-player-card[data-selected="true"],.mc-ore-level button[aria-checked="true"] {outline:var(--mc-ore-min-border) solid Highlight;outline-offset:calc(-1 * var(--mc-ore-min-border))}

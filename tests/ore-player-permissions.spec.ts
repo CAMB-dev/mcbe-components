@@ -35,8 +35,10 @@ test('70/128rem source-window branches independently retain4/8 or3/5 columns and
   await open(page,{actualArt:false});
   for(const [w,branch,padding,gutter,left] of [[1279,'tablet',16,4,1/3],[1280,'desktop',24,8,1/3],[699,'narrow',8,2,3/8],[700,'tablet',16,4,1/3]] as const){await set(page,{viewportSize:[w,900]});await expect(root(page)).toHaveAttribute('data-breakpoint',branch);
     const grid=root(page).locator('.mc-ore-player-permissions__grid'),row=root(page).locator('.mc-ore-player-permissions__row'),players=root(page).locator('.mc-ore-player-permissions__players');
-    const cs=await grid.evaluate(n=>({padding:parseFloat(getComputedStyle(n).paddingLeft),max:parseFloat(getComputedStyle(n).maxWidth)}));near(cs.padding,padding);near(cs.max,1280);near((await box(players)).width,(await box(row)).width*left);near(await players.evaluate(n=>parseFloat(getComputedStyle(n).paddingLeft)),gutter);
+    const cs=await grid.evaluate(n=>{const c=getComputedStyle(n);return{padding:parseFloat(c.paddingLeft),max:c.maxWidth,display:c.display,align:c.alignItems,direction:c.flexDirection}});near(cs.padding,padding);expect(cs).toMatchObject({max:'100%',display:'flex',align:'center',direction:'column'});near(await row.evaluate(n=>parseFloat(getComputedStyle(n).maxWidth)),1280);near((await box(players)).width,(await box(row)).width*left);near(await players.evaluate(n=>parseFloat(getComputedStyle(n).paddingLeft)),gutter);
   }
+  // The 128u cap belongs to the centered row, including when the wide host exceeds it.
+  for(const guiScale of [1,2,5]){await set(page,{viewportSize:[2570,1405],size:[2570,1405],guiScale});const u=5*guiScale,padding=(2570/u>=128?2.4:1.6)*u,g=await box(root(page).locator('.mc-ore-player-permissions__grid')),r=await box(root(page).locator('.mc-ore-player-permissions__row'));near(r.width,Math.min(g.width-2*padding,128*u));near(r.x,g.x+(g.width-r.width)/2)}
   // The panel owns the authored .2u border; minBorder is only a low-scale guard.
   for(const [guiScale,border]of [[1,1],[2,2],[5,5]]as const){await set(page,{guiScale});const widths=await page.locator('.mc-ore-player-permissions__panel').evaluate(n=>{const c=getComputedStyle(n);return[c.borderTopWidth,c.borderRightWidth,c.borderBottomWidth,c.borderLeftWidth].map(parseFloat)});for(const width of widths)near(width,border)}
 });

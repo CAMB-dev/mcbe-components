@@ -2,7 +2,19 @@
 
 `OrePlayerPermissions`、`OrePermissionLevelSelect`、`OrePermissionToggleRow`、`OrePlayerCard` 和 `OreSwitch` 是独立的现代权限组件。它们依据本机安装版HBUI /OreUI源研究实现，保留原来的Classic四组件；源码可用不等于原生整页像素、所有运行时主题或权限服务已恢复。
 
-## 2026-10-31 原生整页对照与盒模型修正
+## 2026-10-31 页头与横向网格修正
+
+原版 `tO` 页头由三层组成：导航底部 `.2u` 白色 `.2` 高光、流内 `.4u` 灰条和流外 `.2u` 黑色 `.3` 阴影。本轮恢复三层，底部高光覆盖完整页头宽度，包括左右安全区外侧；装饰层不接收指针事件。安全区继续使用宿主显式提供的窗口参数。
+
+网格原始父链确认 `AR` 为 flex column /居中，Row 使用 `width:100%`、换行和 `flex:0 1 auto`；128u 最大宽度属于 Row。现在恢复这些关系，原 desktop /tablet /narrow gutter 常量不变。固定2570px、宿主 `guiScale=5` 候选下，源码预声明预测的玩家列表x50、右面板x880及内部角色容器x885与Web测量一致。原路由没有传 `fullHeight`；当前 `height:100%` 保留为既有Web宿主适配，不宣称恢复了原生纵向布局或实际provider。
+
+本轮完整108项同批回归实际 **105通过、3个预期桌面触摸设备条件跳过、零失败 /重试**，962份输入指纹前后零漂移。新增页头72个预声明采样跨GUI1 /2 /5和安全区分支，保持原几何容差1/16px、颜色容差1；行上限测试也覆盖宽宿主的GUI1 /2 /5。实际React18.3.1 /19.3.1包的172值消费及新构建公开预览9项均通过。证据 `.cache/ore-permissions-header-grid-tests-01/run-01/`、`.cache/ore-permissions-header-grid-release-01/`。
+
+同一份原始2570×1405整页、同一候选参数与严格零容差比较，本轮普通页 /菜单仍分别有 **1294293 /2738409个RGBA像素不同**。两者均为 `DIFFERENT`，不是原生整页认证。来源与布局证据为 `.cache/ore-permissions-header-source-01/`、`.cache/ore-permissions-grid-source-01/`、`.cache/ore-permissions-pix-browser-05/`。此前各批次仍保留原始身份。
+
+另做本地诊断实验：仅将所有显式 `rgba()` 作者透明度统一按 `floor(255×alpha)/255` 变换，保持RGB、字体、几何、图片与其余CSS不变。普通页和菜单各自A/B/A实际执行，前后A的全部RGBA一致；B仍有160943 /286775个不同像素。该实验支持透明度量化假设，但不能唯一证明引擎内部混合机制，也没有进入产品CSS。实际provider、字体栅格、动态头像和末两项宿主文案等限制仍在，不能用诊断结果代替当前组件的整页结果。证据 `.cache/ore-permissions-alpha-probe-01/run-01/`，本机原生输入及字体均不发布。
+
+## 前一轮：原生整页对照与盒模型修正
 
 这次已取得普通页与四角色菜单的真实 PIX 帧及完整、带透明度的原始 OreUI 页面纹理，详见 [GPU采集记录](GPU_CAPTURE_QA.md)。原生输入纹理到原生 UI 层的全帧零差已经独立复核；这个结果不认证 Web 组件。活动 `core.device.display` provider 仍未读取。
 

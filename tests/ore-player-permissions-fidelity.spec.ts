@@ -54,6 +54,23 @@ test('source fullframe black50percent overlay and both ordinary section bevels p
   await info.attach('source-overlay-bevel-domains.json',{body:JSON.stringify({source:'runtime FACTS backgroundAndRow + original gm/um CSS .2rem nonthin overlays',scope:'230 predeclared flat source CSS pixels at u10/u15. JPEG/native screenshot pixels are not reference inputs.',checks},null,2),contentType:'application/json'});expect(checks.reduce((n,c)=>n+c.compared,0)).toBe(230);for(const c of checks)expect(c.maxDelta,JSON.stringify(c)).toBeLessThanOrEqual(1);
 });
 
+test('source page header keeps fullwidth bottom specular strip and separate scene bevel across safe zones',async({page},info)=>{
+  await page.setViewportSize({width:1440,height:1000});await page.addInitScript(()=>{window.oreQAInitial={actualArt:false,size:[1000,700],viewportSize:[1440,1000]}});await page.goto('/demo/ore-permissions-fixture.html');await expect(page.locator('#qa-ore-screen')).toBeAttached();
+  const checks:{guiScale:number;safe:boolean;domain:string;compared:number;maxDelta:number}[]=[];
+  // Independent tO/neutral20 source: nav4.4u, bottom white.2 edge.2u,
+  // in-flow gray strip.4u, then external black.3 edge over root black.5.
+  for(const guiScale of [1,2,5])for(const safe of [false,true]){
+    await page.evaluate(v=>window.oreQA.configure(v),{guiScale,safeArea:{x:safe?.9:1,y:safe?.9:1,positionX:0,positionY:0}});await page.mouse.move(1,1);
+    const u=5*guiScale,top=safe?50:0,frame=await page.locator('#qa-ore-screen').boundingBox(),header=await page.locator('.mc-ore-player-permissions__header').boundingBox();near(header!.height,top+4.8*u);
+    const shot=await page.screenshot(),png=PNG.sync.read(shot);
+    for(const [domain,y,color]of [['nav background',top+u,[230,232,235]],['fullwidth bottom specular',top+4.2*u,mix([230,232,235],.2)],['gray flow strip',top+4.4*u,[177,178,181]],['outside scene bevel',top+4.8*u,[16,32,48].map(c=>Math.round(c*.5*.7))]]as const){
+      let maxDelta=0;for(let xx=0;xx<3;xx++){const at=(Math.floor(frame!.y+y)*png.width+Math.floor(frame!.x+4+xx))*4;expect(png.data[at+3]).toBe(255);for(let c=0;c<3;c++)maxDelta=Math.max(maxDelta,Math.abs(png.data[at+c]!-color[c]!))}checks.push({guiScale,safe,domain,compared:3,maxDelta});expect(maxDelta,`${guiScale}/${safe}/${domain}`).toBeLessThanOrEqual(1);
+    }
+    await info.attach(`ore-header-${guiScale}-${safe}.png`,{body:shot,contentType:'image/png'});
+  }
+  expect(checks.reduce((n,c)=>n+c.compared,0)).toBe(72);await info.attach('source-header-domains.json',{body:JSON.stringify({scope:'72 predeclared source-color samples over known host; not native wholeframe equality or engine alpha qualification',checks},null,2),contentType:'application/json'});
+});
+
 test('segmented selected primary and unselected secondary preserve source palettes through hover press and disabled',async({page},info)=>{
   // Source YZ/qZ assigns primary to roleOn, secondary to roleOff. Palette values
   // are pinned independently in source02 PALETTES-AND-REFERENCES, not read from CSS.
