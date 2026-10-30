@@ -115,6 +115,18 @@ export function layoutWorkstationWindow(profile: WorkstationImageProfile, origin
   };
   if ('commands' in layout) for (const command of layout.commands) {
     if (command.kind === 'model') for (const run of command.layout.runs) bounds(command.layout.mvp, run.mesh.vertices);
+    else if (command.kind === 'entity') {
+      // A 3D viewport can clip perspective geometry; never project it with the
+      // separate 2D UI matrix. Its physical clip is a conservative paint bound.
+      const { viewport, scissor } = command.layout;
+      const x0 = Math.max(viewport[0], scissor[0]), y0 = Math.max(viewport[1], scissor[1]);
+      const x1 = Math.min(viewport[0] + viewport[2], scissor[0] + scissor[2]);
+      const y1 = Math.min(viewport[1] + viewport[3], scissor[1] + scissor[3]);
+      if (x1 > x0 && y1 > y0) {
+        minX = Math.min(minX, x0); minY = Math.min(minY, y0);
+        maxX = Math.max(maxX, x1); maxY = Math.max(maxY, y1);
+      }
+    }
     else if (command.kind !== 'text') bounds(layout.mvp, command.mesh.vertices);
     else for (const run of command.layout.runs) bounds(run.mvp, run.vertices, run.scissor);
   }

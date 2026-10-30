@@ -9,6 +9,7 @@ import { layoutSourceGuiLayer, renderGuiLayer } from './gui-layer';
 import type { GuiLayerDraw, GuiLayerGeometryCommand, GuiLayerLayout, GuiLayerLayoutOptions, GuiSpriteGeometry } from './gui-layer';
 import type { GuiTextGeometry } from './gui-text-geometry';
 import type { GuiModelGeometry } from './gui-model-geometry';
+import type { GuiEntityGeometry, GuiEntitySource } from './gui-entity-geometry';
 import { validateGuiTextureAtlasLayout } from './gui-texture-atlas';
 import type { GuiLayerTexture, GuiLayerTextureSource, GuiTextureAtlas, GuiTextureAtlasSource } from './gui-texture-atlas';
 
@@ -18,6 +19,7 @@ export type GuiLayerCommand =
   | ({ kind: 'image'; texture: Source } & Omit<GuiImage, 'texture'>)
   | ({ kind: 'sprite'; texture: Source } & GuiSpriteGeometry)
   | ({ kind: 'model'; textures: Readonly<Record<string, Source>> } & GuiModelGeometry)
+  | ({ kind: 'entity'; texture: LeafSource } & GuiEntityGeometry)
   | ({ kind: 'text'; pages?: ReadonlyMap<number, LeafSource> } & GuiTextGeometry);
 export interface GuiLayerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, 'children' | 'width' | 'height' | 'onError'>, Omit<GuiLayerLayoutOptions, 'commands'> {
   commands: readonly GuiLayerCommand[];
@@ -32,6 +34,7 @@ export interface GuiLayerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasEleme
 
 interface SourceUse { source: Source; size?: readonly [number, number]; upload: boolean; leafOnly?: boolean }
 type Binding = { kind: 'image' | 'sprite'; source: number }
+  | { kind: 'entity'; source?: number }
   | { kind: 'model'; textures: readonly (readonly [string, number])[] }
   | { kind: 'text'; pages: readonly (readonly [number, number])[] };
 interface Request {
@@ -131,6 +134,7 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
     if (options.renderKey !== undefined && typeof options.renderKey !== 'string' && (typeof options.renderKey !== 'number' || !Number.isFinite(options.renderKey))) throw new RangeError('renderKey must be a string or finite number.');
     validateBackground(options.background, options.width, options.height);
     const uses: SourceUse[] = [], bindings: Binding[] = [], shapes: GuiLayerGeometryCommand[] = [];
+    const entitySources = new Map<GuiEntitySource, GuiEntitySource>();
     for (let index = 0; index < options.commands.length; index++) {
       const command = options.commands[index]!;
       if (command.kind === 'image' || command.kind === 'sprite') {
@@ -139,6 +143,26 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
           ...(physicalPrecision !== undefined ? { physicalPrecision } : {}) };
         shapes.push(command.kind === 'sprite' ? { kind: 'sprite', ...shape, color: command.color } : { kind: 'image', ...shape });
         bindings.push({ kind: command.kind, source: uses.length }); uses.push({ source: command.texture, upload: true });
+      } else if (command.kind === 'entity') {
+        let source = entitySources.get(command.source);
+        if (!source) {
+          source = { profile: command.source.profile, textureSize: [...command.source.textureSize], bones: command.source.bones.map(bone => ({
+            name: bone.name, parent: bone.parent, pivot: [...bone.pivot], visible: bone.visible,
+            cubes: bone.cubes.map(cube => ({ origin: [...cube.origin], size: [...cube.size], uv: [...cube.uv], inflate: cube.inflate })),
+          })) };
+          entitySources.set(command.source, source);
+        }
+        shapes.push({ kind: 'entity', source, bonePose: Object.fromEntries(Object.getOwnPropertyNames(command.bonePose).map(name => [name, new Float32Array(command.bonePose[name]!)])),
+          model: new Float32Array(command.model), view: new Float32Array(command.view), projection: new Float32Array(command.projection),
+          viewport: [...command.viewport], scissor: command.scissor && [...command.scissor], material: { kind: command.material.kind,
+            tileLightColor: [...command.material.tileLightColor], fogControl: [...command.material.fogControl], fogColor: [...command.material.fogColor],
+            materialColor: [...command.material.materialColor], uvAnimation: [...command.material.uvAnimation], subPixelOffset: [...command.material.subPixelOffset] } });
+        const entry = layout.commands[index]!;
+        if (entry.kind !== 'entity') throw new Error('GUI entity source order mismatch.');
+        if (entry.layout.mesh.indices.length) {
+          if (isAtlas(command.texture)) throw new RangeError('An NPC entity requires one original leaf skin texture.');
+          bindings.push({ kind: 'entity', source: uses.length }); uses.push({ source: command.texture, size: [64, 64], upload: true, leafOnly: true });
+        } else bindings.push({ kind: 'entity' });
       } else if (command.kind === 'model') {
         const { model, origin, projection, textureSizes, tint, hudOpacity, scissor } = command;
         shapes.push({ kind: 'model', model: { faces: model.faces.map(face => ({
@@ -186,16 +210,23 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
     }
     const background = options.background;
     if (background?.kind === 'texture') uses.push({ source: background.texture, size: [options.width, options.height], upload: false });
+    const hasEntity = shapes.some(shape => shape.kind === 'entity');
     const descriptor = JSON.stringify({ width: options.width, height: options.height, guiScale: options.guiScale, shapes, bindings, outputRect: options.outputRect, scissor: options.scissor,
-      background: background?.kind === 'texture' ? { kind: 'texture', encoding: background.encoding } : background, renderKey: options.renderKey });
+      background: background?.kind === 'texture' ? { kind: 'texture', encoding: background.encoding } : background, renderKey: options.renderKey },
+    hasEntity ? (_key, value: unknown) => typeof value === 'number' && Object.is(value, -0) ? '__gui_layer_negative_zero__' : value : undefined);
     const compared = new WeakMap<object, WeakSet<object>>();
     if (previous?.descriptor === descriptor && uses.length === previous.uses.length && uses.every((use, index) => sameSource(previous.uses[index]?.source, use.source, compared))) return previous;
     const resources = budget(uses), copied = new Map<PixelTexture, PixelTexture>(), atlasCopies = new Map<GuiTextureAtlasSource, GuiTextureAtlasSource>();
     const snapshots = uses.map((use): SourceUse => ({ ...use, source: snapshotSource(use.source, copied, atlasCopies), size: use.size && [...use.size] }));
-    const frozenShapes = JSON.parse(JSON.stringify(shapes)) as GuiLayerGeometryCommand[];
+    // Entity shapes already own deep source/Float32Array snapshots. JSON is a
+    // descriptor only: reconstructing matrices from it loses type and -0 bits.
+    const frozenShapes = (hasEntity ? shapes.map(shape => shape.kind === 'entity' ? shape : JSON.parse(JSON.stringify(shape)))
+      : JSON.parse(JSON.stringify(shapes))) as GuiLayerGeometryCommand[];
     const commands: GuiLayerCommand[] = frozenShapes.map((shape, index) => {
       const binding = bindings[index]!;
       if ((shape.kind === 'image' || shape.kind === 'sprite') && (binding.kind === 'image' || binding.kind === 'sprite') && shape.kind === binding.kind) return { ...shape, texture: snapshots[binding.source]!.source };
+      if (shape.kind === 'entity' && binding.kind === 'entity') return { ...shape, texture: binding.source === undefined
+        ? (options.commands[index] as Extract<GuiLayerCommand, { kind: 'entity' }>).texture : snapshots[binding.source]!.source as LeafSource };
       if (shape.kind === 'model' && binding.kind === 'model') return { ...shape, textures: Object.fromEntries(binding.textures.map(([key, source]) => [key, snapshots[source]!.source])) };
       if (shape.kind === 'text' && binding.kind === 'text') return { ...shape, pages: new Map(binding.pages.map(([page, source]) => [page, snapshots[source]!.source as LeafSource])) };
       throw new Error('GUI snapshot order mismatch.');
@@ -286,9 +317,16 @@ export const GuiLayer = forwardRef<HTMLCanvasElement, GuiLayerProps>(function Gu
         if (!atlas) { atlas = { kind: 'atlas', width: value.width, height: value.height, tiles: value.tiles.map(tile => ({ origin: tile.origin, texture: leaf(tile.texture) })) }; assembled.set(value, atlas); }
         return atlas;
       };
-      const resolved: GuiLayerDraw[] = request.commands.map(command => command.kind === 'image' || command.kind === 'sprite' ? { ...command, texture: source(command.texture) }
-        : command.kind === 'model' ? { ...command, textures: Object.fromEntries(Object.entries(command.textures).map(([key, value]) => [key, source(value)])) }
-          : { ...command, pages: new Map([...command.pages!].map(([page, value]) => [page, leaf(value)])) });
+      const resolved: GuiLayerDraw[] = [];
+      request.commands.forEach((command, index) => {
+        if (command.kind === 'entity') {
+          const entry = request.layout!.commands[index]!;
+          if (entry.kind !== 'entity') throw new Error('GUI entity snapshot order mismatch.');
+          if (entry.layout.mesh.indices.length) resolved.push({ ...command, texture: leaf(command.texture) });
+        } else if (command.kind === 'image' || command.kind === 'sprite') resolved.push({ ...command, texture: source(command.texture) });
+        else if (command.kind === 'model') resolved.push({ ...command, textures: Object.fromEntries(Object.entries(command.textures).map(([key, value]) => [key, source(value)])) });
+        else resolved.push({ ...command, pages: new Map([...command.pages!].map(([page, value]) => [page, leaf(value)])) });
+      });
       const result = renderGuiLayer({ ...request.frame!, commands: resolved, background: request.background, canvas: target }); dispose = result.dispose;
       closeBitmaps(); if (failed) return;
       setState({ key: request.key, status: 'ready' });

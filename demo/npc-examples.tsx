@@ -5,6 +5,7 @@ import { Combobox } from '../src/combobox';
 import { NpcDialogue, NpcEditor } from '../src/npc';
 import type { NpcActionError, NpcActionValue, NpcDialogueAction, NpcEditorPage, NpcEditorValue, NpcSkin } from '../src/npc';
 import '../src/npc.css';
+import { NpcEntityExamples } from './npc-entity-examples';
 
 function initialActions(): NpcActionValue[] {
   return [
@@ -165,6 +166,7 @@ export function NpcExamples({ notify }: { notify: (message: string) => void }) {
     <details data-npc-accepted-draft><summary>Current accepted NPC draft</summary><pre style={code}>{JSON.stringify(value, null, 2)}</pre></details>
     {draftRequest && <details data-npc-draft-request><summary>Last draft request</summary><pre style={code}>{JSON.stringify(draftRequest, null, 2)}</pre></details>}
     {request && <details data-npc-request><summary>Last action or navigation request</summary><pre style={code}>{JSON.stringify(request, null, 2)}</pre></details>}
+    <NpcEntityExamples/>
     <pre style={code}><code>{'const [draft, setDraft] = useState<NpcEditorValue>(initialDraft);\nconst [page, setPage] = useState<NpcEditorPage>(\'basic\');\n\n<NpcEditor value={draft} onValueChange={setDraft}\n  page={page} onPageChange={setPage} skins={skins}\n  actor={<p>Application actor preview</p>}\n  onClose={keepLocalDraft} />\n<NpcDialogue value={draft.dialogue} actions={studentButtons}\n  onAction={recordLocalRequest} />'}</code></pre>
   </section>;
 }

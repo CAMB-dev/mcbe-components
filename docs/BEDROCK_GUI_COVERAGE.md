@@ -45,6 +45,8 @@
 
 **NPC已接入有限源族**（`npc_interact_screen.json`）：五个组合与零件保留student /worldbuilder、basic /advanced /maximized、皮肤选择和action分支，完整44项客户端合同通过；旧ServerForms37 /导航6回归与公开56辅助分别记录，不增加命名族或native认证。actor渲染、引擎权限与缓冲提交时机仍由宿主提供或待恢复，见 [NPC_QA.md](NPC_QA.md)。下一批可评估EmoteWheel及共享HowToPlay /Encyclopedia文档查看器，不自动要求每个可选文件新建组件。
 
+人物渲染增量提供`createNpcEntity`＋`GuiLayer`的有限NPC源模型路径和60皮肤，原生显式相机fixture下五个完整人物裁剪255,200像素严格RGBA零差，见[GUI_ENTITY_QA.md](GUI_ENTITY_QA.md)。这不改变206行范围状态或140组件数，不认证正常自动取景、UI绑定、完整NPC GUI或其他实体引擎。
+
 ## 文件与注册声明的边界
 
 `_ui_defs.json` 列出202条路径：201条与archive大小写完全匹配，另有 `ui/persona_sdl.json` 仅唯一casefold匹配实际 `ui/persona_SDL.json`。这是大小写差异，不是缺失GUI；跨平台运行时如何处理未测试。实际文件中有5个未被exact列出：`_global_variables.json`、`_ui_defs.json`、`gamepad_layout_screen.json`、`persona_SDL.json`、`test_anims_screen.json`，不据此判定无用或必需新组件。

@@ -1,0 +1,1450 @@
+{
+  "schemaVersion": 1,
+  "status": "SOURCE_ASSET_BANK_RENDERER_UNVERIFIED",
+  "fixedSource": {
+    "release": "v1.26.60.5-full",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "archiveBytes": 169569258,
+    "repository": "https://github.com/Mojang/bedrock-samples"
+  },
+  "hashNormalization": {
+    "originalPNGJSONLicense": "Raw whole bytes; never newline-normalized, cropped or reencoded.",
+    "generatedRegistryCheck": "UTF-8 text with CRLF/CR normalized to LF by Python read_text; not a source binary hash."
+  },
+  "selection": {
+    "controller": "controller.render.npc",
+    "expression": "Array.skins[query.variant]",
+    "geometry": "Geometry.default",
+    "orderedAliases": 60,
+    "firstLegacyTenIndices": [
+      0,
+      9
+    ],
+    "uiCollectionToVariantTransportRecovered": false,
+    "outOfRangeVariantPolicy": "Unknown; caller must resolve explicitly."
+  },
+  "skins": [
+    {
+      "variantArrayIndex": 0,
+      "alias": "npc_1",
+      "entry": "resource_pack/textures/entity/npc/npc_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_1.png",
+      "destination": "src/assets/npc-actor/npc_1.png",
+      "bytes": 1935,
+      "sha256": "0a730bec44120889b514928487260f53346c148ff1e7187cbd21f8eeaaea068c",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "36a76381251777115c9f1caf7db8a6e120165ab025009001428488d4f4af5121",
+      "alphaHistogram": {
+        "0": 2341,
+        "255": 1755
+      }
+    },
+    {
+      "variantArrayIndex": 1,
+      "alias": "npc_2",
+      "entry": "resource_pack/textures/entity/npc/npc_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_2.png",
+      "destination": "src/assets/npc-actor/npc_2.png",
+      "bytes": 1785,
+      "sha256": "a3186bb84e6860778b82d81fbefd96b65d4fe58309628ca350ec3ae045190fde",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "bad8666e90b1b24f5432ed09da2fa5e815cf0389ee82f981dad400b33b04dfef",
+      "alphaHistogram": {
+        "0": 2341,
+        "255": 1755
+      }
+    },
+    {
+      "variantArrayIndex": 2,
+      "alias": "npc_3",
+      "entry": "resource_pack/textures/entity/npc/npc_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_3.png",
+      "destination": "src/assets/npc-actor/npc_3.png",
+      "bytes": 1997,
+      "sha256": "453ae8c0c86fe3e2145fce5b0e2d2f7c6e9a98c2d483340ec33ef926ac3918d5",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "db9fa49037367f535e8c7548b42dccea4875064b3f09367addf5a566633abd22",
+      "alphaHistogram": {
+        "0": 2341,
+        "255": 1755
+      }
+    },
+    {
+      "variantArrayIndex": 3,
+      "alias": "npc_4",
+      "entry": "resource_pack/textures/entity/npc/npc_4.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_4.png",
+      "destination": "src/assets/npc-actor/npc_4.png",
+      "bytes": 1732,
+      "sha256": "f9fd606394e80fd40d12ebb5ede33385deb2b2f856005076b0a1bbbcfa07ef38",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "adc195fcdc310484e318f26400940f90e775c7780a499968c6131e0afc6ef5c5",
+      "alphaHistogram": {
+        "0": 2341,
+        "255": 1755
+      }
+    },
+    {
+      "variantArrayIndex": 4,
+      "alias": "npc_5",
+      "entry": "resource_pack/textures/entity/npc/npc_5.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_5.png",
+      "destination": "src/assets/npc-actor/npc_5.png",
+      "bytes": 1800,
+      "sha256": "bb23f6c368753a3fdfb66c9ebe538d2622f051b16bf89db8865953b75e214aa1",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "ea334b3021a997daeeae16b031000424cb02156b35544bc85fe9112326adcd1a",
+      "alphaHistogram": {
+        "0": 2341,
+        "255": 1755
+      }
+    },
+    {
+      "variantArrayIndex": 5,
+      "alias": "npc_6",
+      "entry": "resource_pack/textures/entity/npc/npc_6.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_6.png",
+      "destination": "src/assets/npc-actor/npc_6.png",
+      "bytes": 2199,
+      "sha256": "bd04cf6fe0de055875d26702b84da41d770cfc9353b42bda801b40aeae7f0fad",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "aede4ca746d810323bc236a2956a2e07d24f89659c73b48f538a9d91bfb7eeb2",
+      "alphaHistogram": {
+        "0": 2073,
+        "1": 3,
+        "12": 8,
+        "13": 25,
+        "14": 4,
+        "25": 3,
+        "255": 1980
+      }
+    },
+    {
+      "variantArrayIndex": 6,
+      "alias": "npc_7",
+      "entry": "resource_pack/textures/entity/npc/npc_7.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_7.png",
+      "destination": "src/assets/npc-actor/npc_7.png",
+      "bytes": 2140,
+      "sha256": "8570cdd9e921a6d7e8b3c958c515b6e585b19cf2a0c0abc2616c2a13c982e531",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "b7dafb81522a1885589b54edb37f38f902ecac96e16efea9a9a359a8f56defdf",
+      "alphaHistogram": {
+        "0": 1936,
+        "255": 2160
+      }
+    },
+    {
+      "variantArrayIndex": 7,
+      "alias": "npc_8",
+      "entry": "resource_pack/textures/entity/npc/npc_8.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_8.png",
+      "destination": "src/assets/npc-actor/npc_8.png",
+      "bytes": 1987,
+      "sha256": "5dbfb205a7a753b3e0cbceb90ff4e7b4db86cf7a2c90c34e775cba95471ab568",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "f729eb9578e7971e0a63976c0bf05174df27295f31c1d8db32071e41077ff8cc",
+      "alphaHistogram": {
+        "0": 1837,
+        "1": 1,
+        "2": 2,
+        "12": 4,
+        "13": 16,
+        "14": 3,
+        "23": 7,
+        "25": 17,
+        "27": 3,
+        "48": 2,
+        "255": 2204
+      }
+    },
+    {
+      "variantArrayIndex": 8,
+      "alias": "npc_9",
+      "entry": "resource_pack/textures/entity/npc/npc_9.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_9.png",
+      "destination": "src/assets/npc-actor/npc_9.png",
+      "bytes": 2151,
+      "sha256": "2a70b9f7bb173a0991914fb966f55d630fee23bbb1834d4c67b8baf20b97457f",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "473a1e69a36efbb6d636eba1788d9cb9c029da2bd7b34a7d7c932125e7416cd8",
+      "alphaHistogram": {
+        "0": 1914,
+        "255": 2182
+      }
+    },
+    {
+      "variantArrayIndex": 9,
+      "alias": "npc_10",
+      "entry": "resource_pack/textures/entity/npc/npc_10.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_10.png",
+      "destination": "src/assets/npc-actor/npc_10.png",
+      "bytes": 1986,
+      "sha256": "2a6b470e8a7e9a75cf1db6b8d70c8944fff00541f7aa2dc1fd83151e0e1aff74",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "f82365e763debdb861516c551d0b2a22a6c00b2552ec250cba94ce3d3bdeddd2",
+      "alphaHistogram": {
+        "0": 2236,
+        "255": 1860
+      }
+    },
+    {
+      "variantArrayIndex": 10,
+      "alias": "npc_scientist_1",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_1.png",
+      "destination": "src/assets/npc-actor/npc_scientist_1.png",
+      "bytes": 1409,
+      "sha256": "8c9e7620004395bea8680b8e0100182770849c4e4434fe1fa048b09f6f940d7b",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 3,
+      "rgbaSha256": "bc3fc8eaed362938d6c9dadd90d65dfe1e9ae7a3a9c60d7b3c1c1e7be95db3cd",
+      "alphaHistogram": {
+        "0": 2221,
+        "255": 1875
+      }
+    },
+    {
+      "variantArrayIndex": 11,
+      "alias": "npc_scientist_2",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_2.png",
+      "destination": "src/assets/npc-actor/npc_scientist_2.png",
+      "bytes": 1662,
+      "sha256": "24e22e514c3bb4eb14e95b1e583870873dc057f3e7d83e6ae0353a36367fbd41",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 3,
+      "rgbaSha256": "a168b7fa45b3cece8c45b53e91b98593b56d043ca9425ea0cb2fcaa6ee75f1f6",
+      "alphaHistogram": {
+        "0": 1802,
+        "255": 2294
+      }
+    },
+    {
+      "variantArrayIndex": 12,
+      "alias": "npc_scientist_3",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_3.png",
+      "destination": "src/assets/npc-actor/npc_scientist_3.png",
+      "bytes": 1798,
+      "sha256": "c6dbbf533349b6f0ed50b290c86bd51a6488c149af1dfd5294313a0b269e5a7d",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 3,
+      "rgbaSha256": "365caa64bcb3a19eaeb8085a10112c87863485685ab3797e24bbe46d264c3332",
+      "alphaHistogram": {
+        "0": 1724,
+        "255": 2372
+      }
+    },
+    {
+      "variantArrayIndex": 13,
+      "alias": "npc_scientist_4",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_4.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_4.png",
+      "destination": "src/assets/npc-actor/npc_scientist_4.png",
+      "bytes": 1674,
+      "sha256": "f2fe0e376784be9028041cef02b22e3dff8604100e49cb898911a6ff9f72e82a",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 3,
+      "rgbaSha256": "5a705fe6a54c360f35dcb16e4b1d10aedd75057737a521a36fcaa36f57d58f23",
+      "alphaHistogram": {
+        "0": 1718,
+        "1": 1,
+        "2": 2,
+        "12": 4,
+        "13": 16,
+        "14": 3,
+        "23": 7,
+        "25": 17,
+        "27": 3,
+        "48": 2,
+        "255": 2323
+      }
+    },
+    {
+      "variantArrayIndex": 14,
+      "alias": "npc_scientist_5",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_5.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_5.png",
+      "destination": "src/assets/npc-actor/npc_scientist_5.png",
+      "bytes": 1509,
+      "sha256": "f60679253dce930989869df8672764822741648b7c5b35b679cba38434a530da",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 3,
+      "rgbaSha256": "2c83367538614d38b25158f11db59bb907cc41ff957a4b78e9a3102f6f6528da",
+      "alphaHistogram": {
+        "0": 1822,
+        "255": 2274
+      }
+    },
+    {
+      "variantArrayIndex": 15,
+      "alias": "npc_scientist_6",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_6.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_6.png",
+      "destination": "src/assets/npc-actor/npc_scientist_6.png",
+      "bytes": 4548,
+      "sha256": "2eb8d62cdc2e83d06cc2b0723783b8898ca8c0fbbbb31cee1f4365f8585ebce5",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "a9219f7349952f980c8cf71883437138af6ac3bce47a77330a787f7b678d6a84",
+      "alphaHistogram": {
+        "0": 1838,
+        "255": 2258
+      }
+    },
+    {
+      "variantArrayIndex": 16,
+      "alias": "npc_scientist_7",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_7.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_7.png",
+      "destination": "src/assets/npc-actor/npc_scientist_7.png",
+      "bytes": 2075,
+      "sha256": "4461e8d6c695e5d1713ec23064dd3d36fd3c6b0a9fe6c92f7dfc9965cd07e8d1",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 3,
+      "rgbaSha256": "aa67dea6bf94a0e5a5deb71995db99bd968c27c2c385bccda438b516d337b4b3",
+      "alphaHistogram": {
+        "0": 1932,
+        "255": 2164
+      }
+    },
+    {
+      "variantArrayIndex": 17,
+      "alias": "npc_scientist_8",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_8.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_8.png",
+      "destination": "src/assets/npc-actor/npc_scientist_8.png",
+      "bytes": 2078,
+      "sha256": "3cd0359dfdc67a71c0da6bc08281002e2995162a88af41543ece1d947e270f13",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 3,
+      "rgbaSha256": "40d0c21de5361136672688679ece0db0a988f13dbe1fee7fd21bd082da5552ad",
+      "alphaHistogram": {
+        "0": 1878,
+        "255": 2218
+      }
+    },
+    {
+      "variantArrayIndex": 18,
+      "alias": "npc_scientist_9",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_9.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_9.png",
+      "destination": "src/assets/npc-actor/npc_scientist_9.png",
+      "bytes": 834,
+      "sha256": "e137f62c83948745ab37611491eb7efdf22526c51d24e715507c91e2ac591a23",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 3,
+      "rgbaSha256": "dff1b03dfd192a793e1325d22d3a31bd9a403da2a7afae80818f3ec0db2ec0c2",
+      "alphaHistogram": {
+        "0": 2430,
+        "255": 1666
+      }
+    },
+    {
+      "variantArrayIndex": 19,
+      "alias": "npc_scientist_10",
+      "entry": "resource_pack/textures/entity/npc/npc_scientist_10.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_scientist_10.png",
+      "destination": "src/assets/npc-actor/npc_scientist_10.png",
+      "bytes": 720,
+      "sha256": "bb9ba1eb117615fff55b8db4b16fe1f8d8290be678e7b4004168eb04e07cf141",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 3,
+      "rgbaSha256": "72299025711c8dd5fd592dd12a58d13b8a5393598bf151f2d03f6c25aff03b68",
+      "alphaHistogram": {
+        "0": 2430,
+        "255": 1666
+      }
+    },
+    {
+      "variantArrayIndex": 20,
+      "alias": "npc_apiary_1",
+      "entry": "resource_pack/textures/entity/npc/npc_apiary_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_apiary_1.png",
+      "destination": "src/assets/npc-actor/npc_apiary_1.png",
+      "bytes": 1750,
+      "sha256": "4d49ddbda47f3cb1b175ff021d063fd498c6aaad8b298ad9fba726f10daf6632",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "94ada6155e249c27af3ba96101fc1cc5be50ee5768ee42f3bb7b54b9fab19df9",
+      "alphaHistogram": {
+        "0": 2091,
+        "255": 2005
+      }
+    },
+    {
+      "variantArrayIndex": 21,
+      "alias": "npc_apiary_2",
+      "entry": "resource_pack/textures/entity/npc/npc_apiary_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_apiary_2.png",
+      "destination": "src/assets/npc-actor/npc_apiary_2.png",
+      "bytes": 1805,
+      "sha256": "aeb8780b58cd4deac927548cabf8dae18610ffb827d8df1bf67c39c7d960d4df",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "768f16e34a49b59f91d0c5ec385421c3ddf7a8bd6903e4e84e33d92188341c09",
+      "alphaHistogram": {
+        "0": 1932,
+        "255": 2164
+      }
+    },
+    {
+      "variantArrayIndex": 22,
+      "alias": "npc_apiary_3",
+      "entry": "resource_pack/textures/entity/npc/npc_apiary_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_apiary_3.png",
+      "destination": "src/assets/npc-actor/npc_apiary_3.png",
+      "bytes": 1537,
+      "sha256": "28f52800c347126f80f3983334730b591cc7305ed79f58e3087fecdaada3ed5b",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "6fa48f1faab793f06a9a5b8007d4a9ab54b0e2993c2924cfc1ccbc3761324082",
+      "alphaHistogram": {
+        "0": 2035,
+        "255": 2061
+      }
+    },
+    {
+      "variantArrayIndex": 23,
+      "alias": "npc_apiary_4",
+      "entry": "resource_pack/textures/entity/npc/npc_apiary_4.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_apiary_4.png",
+      "destination": "src/assets/npc-actor/npc_apiary_4.png",
+      "bytes": 1410,
+      "sha256": "010195fd1734ce1485581568fc1ea0bf08f698d0164b07d6753f3185db5a851f",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "ee128d557af566251dc6b195596e444ad113e2c645ac810125267e6577d541b0",
+      "alphaHistogram": {
+        "0": 1821,
+        "255": 2275
+      }
+    },
+    {
+      "variantArrayIndex": 24,
+      "alias": "npc_apiary_5",
+      "entry": "resource_pack/textures/entity/npc/npc_apiary_5.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_apiary_5.png",
+      "destination": "src/assets/npc-actor/npc_apiary_5.png",
+      "bytes": 1576,
+      "sha256": "e14e73af339bf7d6d072ababe4e80a50f7db71f0047a4ee7cc419605b664ab94",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "e8535d52fcc7ec903e971c7c8b327c95d6057ce1b62ebfd4bd6d83e45d708e28",
+      "alphaHistogram": {
+        "0": 2164,
+        "255": 1932
+      }
+    },
+    {
+      "variantArrayIndex": 25,
+      "alias": "npc_teacher_1",
+      "entry": "resource_pack/textures/entity/npc/npc_teacher_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_teacher_1.png",
+      "destination": "src/assets/npc-actor/npc_teacher_1.png",
+      "bytes": 1418,
+      "sha256": "6429496df174715690891b1a32e96335ca563c2c23ef79c6dda88b04c31779e2",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "f298027fc9a06424481e325e908c4c66e7a17df1d2cabfa9150dc86fcc3da004",
+      "alphaHistogram": {
+        "0": 1806,
+        "255": 2290
+      }
+    },
+    {
+      "variantArrayIndex": 26,
+      "alias": "npc_teacher_2",
+      "entry": "resource_pack/textures/entity/npc/npc_teacher_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_teacher_2.png",
+      "destination": "src/assets/npc-actor/npc_teacher_2.png",
+      "bytes": 1416,
+      "sha256": "4051310aebca4adf0ef30df9263c0258e966858d49fa20364b374f0db0a0b5db",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "c72539543d75ced557978813f87fcd2efe19e06352ad7ca379372b66fc73c1ad",
+      "alphaHistogram": {
+        "0": 2250,
+        "255": 1846
+      }
+    },
+    {
+      "variantArrayIndex": 27,
+      "alias": "npc_teacher_3",
+      "entry": "resource_pack/textures/entity/npc/npc_teacher_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_teacher_3.png",
+      "destination": "src/assets/npc-actor/npc_teacher_3.png",
+      "bytes": 2043,
+      "sha256": "3cf889f0d4480362c3a1e7389927e6980c998b368d846eb68e2b61055f210b88",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "750b8c34f4af68c6d88a88eef4169f8da2590ddec76bed5f8ce6c10d6a2147b4",
+      "alphaHistogram": {
+        "0": 2180,
+        "36": 4,
+        "255": 1912
+      }
+    },
+    {
+      "variantArrayIndex": 28,
+      "alias": "npc_teacher_4",
+      "entry": "resource_pack/textures/entity/npc/npc_teacher_4.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_teacher_4.png",
+      "destination": "src/assets/npc-actor/npc_teacher_4.png",
+      "bytes": 1550,
+      "sha256": "ff3fda537dd4c51c887d71a3af4410237e2c787bcb6407c2bba6bb5f61f21519",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "5f754a5441847fd6cb03e63772f6c5a9f1d01dec936a320b19b311263e4d0fd5",
+      "alphaHistogram": {
+        "0": 2443,
+        "255": 1653
+      }
+    },
+    {
+      "variantArrayIndex": 29,
+      "alias": "npc_teacher_5",
+      "entry": "resource_pack/textures/entity/npc/npc_teacher_5.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_teacher_5.png",
+      "destination": "src/assets/npc-actor/npc_teacher_5.png",
+      "bytes": 1626,
+      "sha256": "c635ad34567b862b8ea56478faf5676f489709adad5a6f586f30ec8ccd143b20",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "0e707f65a9ae85916daf53538087cc64641feadf6ff98668d6f4a9c041e43d6b",
+      "alphaHistogram": {
+        "0": 1858,
+        "255": 2238
+      }
+    },
+    {
+      "variantArrayIndex": 30,
+      "alias": "npc_construction_1",
+      "entry": "resource_pack/textures/entity/npc/npc_construction_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_construction_1.png",
+      "destination": "src/assets/npc-actor/npc_construction_1.png",
+      "bytes": 2913,
+      "sha256": "8938dce1a9330a38f09ff706433fcde64836118c1b8840c6d18dfe3723167c6b",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "f071de2fb5b845ed043ac43ebf985aeffc9c524676c5096e5dc1ecf9aac3437a",
+      "alphaHistogram": {
+        "0": 1941,
+        "128": 2,
+        "255": 2153
+      }
+    },
+    {
+      "variantArrayIndex": 31,
+      "alias": "npc_construction_2",
+      "entry": "resource_pack/textures/entity/npc/npc_construction_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_construction_2.png",
+      "destination": "src/assets/npc-actor/npc_construction_2.png",
+      "bytes": 2910,
+      "sha256": "14a514d26d5367003b5d7169496f7bbeca67ee385ab8ce7b76ea8145c1081533",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "8ea1c78c12ef9a1da046090934b657f58937d01787153277c70b609dfe2d834c",
+      "alphaHistogram": {
+        "0": 1884,
+        "255": 2212
+      }
+    },
+    {
+      "variantArrayIndex": 32,
+      "alias": "npc_construction_3",
+      "entry": "resource_pack/textures/entity/npc/npc_construction_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_construction_3.png",
+      "destination": "src/assets/npc-actor/npc_construction_3.png",
+      "bytes": 3124,
+      "sha256": "4fb3e6a106d7b9f4d49fb93ed5dd6a9c88d5efd5edc88fe17fe415404510ed65",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "d6706013c1e3955c13ff446577614d75a0764dd69f20e3c995a959022e293dc2",
+      "alphaHistogram": {
+        "0": 1937,
+        "255": 2159
+      }
+    },
+    {
+      "variantArrayIndex": 33,
+      "alias": "npc_construction_4",
+      "entry": "resource_pack/textures/entity/npc/npc_construction_4.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_construction_4.png",
+      "destination": "src/assets/npc-actor/npc_construction_4.png",
+      "bytes": 3229,
+      "sha256": "368f09dd787f7c4b5a16ba2a7ff73090049994765b09e9863bdb33571a86fdf3",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "6d159cbf7eda8aabde82e2028aceeade4b1d303af94c08ee22d7960d073f793a",
+      "alphaHistogram": {
+        "0": 1975,
+        "128": 2,
+        "255": 2119
+      }
+    },
+    {
+      "variantArrayIndex": 34,
+      "alias": "npc_construction_5",
+      "entry": "resource_pack/textures/entity/npc/npc_construction_5.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_construction_5.png",
+      "destination": "src/assets/npc-actor/npc_construction_5.png",
+      "bytes": 2531,
+      "sha256": "e12c78934d37fba0b61106a9ea24108af9584ca74bae692caae8afe2915eaa7a",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "46877fe9265d34a548b02ea358fed5a06fea5a34a1ae3b9ff52a81d795063cf7",
+      "alphaHistogram": {
+        "0": 2065,
+        "255": 2031
+      }
+    },
+    {
+      "variantArrayIndex": 35,
+      "alias": "npc_Agriculture_1",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_1.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_1.png",
+      "bytes": 2562,
+      "sha256": "8e44adc7effe10c98ffde4914d825c96bf4fc1113eb9e79551abb4f6ae55ea60",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "b345a0da79c7b4a71c1e40282040a9014f6dc14d9aafbdfd57f3ee0307f30a03",
+      "alphaHistogram": {
+        "0": 2043,
+        "255": 2053
+      }
+    },
+    {
+      "variantArrayIndex": 36,
+      "alias": "npc_Agriculture_2",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_2.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_2.png",
+      "bytes": 2065,
+      "sha256": "95ca25eabf97a8a215392cca39e67ecdf601f83bf56f5be4c2742209b884d24c",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "e252f34ffb218e93f50d3a6b47e56099e069ae6c46ee53808b41c470f33fd68a",
+      "alphaHistogram": {
+        "0": 1691,
+        "255": 2405
+      }
+    },
+    {
+      "variantArrayIndex": 37,
+      "alias": "npc_Agriculture_3",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_3.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_3.png",
+      "bytes": 2166,
+      "sha256": "f39bf72c05cafabb9e61afa02d55bf7dc4e11f3a9bebab15730967bd7b0fbf17",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "826ab421562db0c5fc9b81fe6fdfcdea6aa0b1ef3b1e68330a9abd77dc1471f3",
+      "alphaHistogram": {
+        "0": 1671,
+        "255": 2425
+      }
+    },
+    {
+      "variantArrayIndex": 38,
+      "alias": "npc_Agriculture_4",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_4.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_4.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_4.png",
+      "bytes": 2990,
+      "sha256": "e526ff5ab36b90d79f2bfe7e7dbd989e08a9b3f5767e11d379b0968015a34f92",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "8b947883b5f4815255b51195e012df23759ac96e6d0ccfa5622e741e28b6c860",
+      "alphaHistogram": {
+        "0": 1856,
+        "255": 2240
+      }
+    },
+    {
+      "variantArrayIndex": 39,
+      "alias": "npc_Agriculture_5",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_5.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_5.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_5.png",
+      "bytes": 2480,
+      "sha256": "35f6f7ce5ededf8dbf29de76d2de69c546daa64d536de9275c89eec5a349b410",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "bcef455cf38ba8218403a3f8f1516e6001314953ed7279f2a81243f362c89e4f",
+      "alphaHistogram": {
+        "0": 1871,
+        "255": 2225
+      }
+    },
+    {
+      "variantArrayIndex": 40,
+      "alias": "npc_Agriculture_6",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_6.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_6.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_6.png",
+      "bytes": 3535,
+      "sha256": "b1823608fcda5e62788fbc3fbc4ba0885bc8a20c5ada70954aa23fbff7f26630",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "d0732655cc4ef71c454c5ea2612b41d011ebb6e5838932b075cf479f2693b12e",
+      "alphaHistogram": {
+        "0": 1898,
+        "255": 2198
+      }
+    },
+    {
+      "variantArrayIndex": 41,
+      "alias": "npc_Agriculture_7",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_7.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_7.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_7.png",
+      "bytes": 2133,
+      "sha256": "808a8338f43110bec40d225825bfeebd45f6c4d940fd649dc5533acc684ae02b",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "fdb8e6ad8f59e35bd8d59b3f5e39390af08a3192d7bf1db9b4b30d398fb0ffd0",
+      "alphaHistogram": {
+        "0": 2053,
+        "255": 2043
+      }
+    },
+    {
+      "variantArrayIndex": 42,
+      "alias": "npc_Agriculture_8",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_8.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_8.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_8.png",
+      "bytes": 2237,
+      "sha256": "e440edf1e62ff3e89121435e5b79c5579de4dad8a562f0addd5464c0aa1c2481",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "bcc488f8ce35c7fa931f70fbbc822f67e51435e81ffc5806e20be3ec63cce6b5",
+      "alphaHistogram": {
+        "0": 1774,
+        "255": 2322
+      }
+    },
+    {
+      "variantArrayIndex": 43,
+      "alias": "npc_Agriculture_9",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_9.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_9.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_9.png",
+      "bytes": 2638,
+      "sha256": "803b8b2c7d7bdc849395ce1caefeeb1898fdffcf854af482ddb331d67fb653c2",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "b6ed701e10dcd0b7a8467663e58157d42fa2407177fbf9179dbbfd5ae838be4c",
+      "alphaHistogram": {
+        "0": 2192,
+        "255": 1904
+      }
+    },
+    {
+      "variantArrayIndex": 44,
+      "alias": "npc_Agriculture_10",
+      "entry": "resource_pack/textures/entity/npc/npc_Agriculture_10.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Agriculture_10.png",
+      "destination": "src/assets/npc-actor/npc_Agriculture_10.png",
+      "bytes": 2198,
+      "sha256": "ce8c62cda2ee73ae80d1b5751b138a26d4dddc104e7412fc4842c1f1f38c52a1",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "5aee28959394b91764b36f734a04131f4d56b6f00127a455171c2b46c15c92eb",
+      "alphaHistogram": {
+        "0": 1944,
+        "255": 2152
+      }
+    },
+    {
+      "variantArrayIndex": 45,
+      "alias": "npc_BusinessMobs_1",
+      "entry": "resource_pack/textures/entity/npc/npc_BusinessMobs_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_BusinessMobs_1.png",
+      "destination": "src/assets/npc-actor/npc_BusinessMobs_1.png",
+      "bytes": 4403,
+      "sha256": "392cd127b663414974db8ca3c4b1a27d9dc53be9ce2abbbe1148c2b3ec6c3e89",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "d7edccc15700e15ced5c9d004e77dc94d6894301d3899f43e805e9a9da702aa5",
+      "alphaHistogram": {
+        "0": 1816,
+        "255": 2280
+      }
+    },
+    {
+      "variantArrayIndex": 46,
+      "alias": "npc_BusinessMobs_2",
+      "entry": "resource_pack/textures/entity/npc/npc_BusinessMobs_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_BusinessMobs_2.png",
+      "destination": "src/assets/npc-actor/npc_BusinessMobs_2.png",
+      "bytes": 3459,
+      "sha256": "c919a0fa1c5c7bfcd609d6402bc8abbe51c105078fdf0585156955148d1600c0",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "71ec3fc142d826cf633c22ed45693ea5d0c03e7b4473854d304f3c5b450ba4fe",
+      "alphaHistogram": {
+        "0": 1745,
+        "255": 2351
+      }
+    },
+    {
+      "variantArrayIndex": 47,
+      "alias": "npc_BusinessMobs_3",
+      "entry": "resource_pack/textures/entity/npc/npc_BusinessMobs_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_BusinessMobs_3.png",
+      "destination": "src/assets/npc-actor/npc_BusinessMobs_3.png",
+      "bytes": 3770,
+      "sha256": "106d31444a59437f7f0a0db0e5aa30e86c013893e8a401df7c0bf4ea1504dcf6",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "bc3dec47c3c4ac20dfcb1e67ffcb1a7480eb2800cc7970debe4fe92fb797fa0f",
+      "alphaHistogram": {
+        "0": 1962,
+        "255": 2134
+      }
+    },
+    {
+      "variantArrayIndex": 48,
+      "alias": "npc_BusinessMobs_4",
+      "entry": "resource_pack/textures/entity/npc/npc_BusinessMobs_4.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_BusinessMobs_4.png",
+      "destination": "src/assets/npc-actor/npc_BusinessMobs_4.png",
+      "bytes": 2057,
+      "sha256": "ad7709ee35b8a8a49bf8a49fa1092c090407b89e3b5279de5872766e95dd3987",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "c51228186e68223bca825c9868435db270b929e6860dd6637d28ef056ac04ced",
+      "alphaHistogram": {
+        "0": 1960,
+        "255": 2136
+      }
+    },
+    {
+      "variantArrayIndex": 49,
+      "alias": "npc_BusinessMobs_5",
+      "entry": "resource_pack/textures/entity/npc/npc_BusinessMobs_5.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_BusinessMobs_5.png",
+      "destination": "src/assets/npc-actor/npc_BusinessMobs_5.png",
+      "bytes": 2428,
+      "sha256": "c794be0bc70dc08c28ec160c5b78b029b064df47ca55131d349c6b4ba999a8c2",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "e0cafe98392064b0368e3d85e6fcd92027842e9d264babe31db974e3ed968466",
+      "alphaHistogram": {
+        "0": 1720,
+        "77": 198,
+        "255": 2178
+      }
+    },
+    {
+      "variantArrayIndex": 50,
+      "alias": "npc_EverydayBusiness_1",
+      "entry": "resource_pack/textures/entity/npc/npc_EverydayBusiness_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_EverydayBusiness_1.png",
+      "destination": "src/assets/npc-actor/npc_EverydayBusiness_1.png",
+      "bytes": 2400,
+      "sha256": "3ae4f02cdbc3432f4779041e6a894df93fa901f9bf084dca3f88a53eeed66b38",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "7247fe0deda2f787421f44d4c8baf9272c861eff0988b7d3c93a80cc95da096d",
+      "alphaHistogram": {
+        "0": 1701,
+        "255": 2395
+      }
+    },
+    {
+      "variantArrayIndex": 51,
+      "alias": "npc_EverydayBusiness_2",
+      "entry": "resource_pack/textures/entity/npc/npc_EverydayBusiness_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_EverydayBusiness_2.png",
+      "destination": "src/assets/npc-actor/npc_EverydayBusiness_2.png",
+      "bytes": 1658,
+      "sha256": "05899464b1a0562666e21f20b57d0119cd5f66353b552a06afaed59fbdd2a5c9",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "aa1f65039a4450b2e3387d6ce0a81a3b0acbfecaa2a56eff31b59aac2835cb79",
+      "alphaHistogram": {
+        "0": 2017,
+        "204": 278,
+        "255": 1801
+      }
+    },
+    {
+      "variantArrayIndex": 52,
+      "alias": "npc_EverydayBusiness_3",
+      "entry": "resource_pack/textures/entity/npc/npc_EverydayBusiness_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_EverydayBusiness_3.png",
+      "destination": "src/assets/npc-actor/npc_EverydayBusiness_3.png",
+      "bytes": 2590,
+      "sha256": "573b3892f5889a3ef3c3c52131ae4ecc2806614b71d1959d9fa996cbb0910c3e",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "1c6966ad9ff4e39c697ff365313143d6bce56dceb949c8a1e7a2f1967c6ee772",
+      "alphaHistogram": {
+        "0": 1880,
+        "255": 2216
+      }
+    },
+    {
+      "variantArrayIndex": 53,
+      "alias": "npc_EverydayBusiness_4",
+      "entry": "resource_pack/textures/entity/npc/npc_EverydayBusiness_4.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_EverydayBusiness_4.png",
+      "destination": "src/assets/npc-actor/npc_EverydayBusiness_4.png",
+      "bytes": 2288,
+      "sha256": "681c0a1614736983d5ff22ac24247fdda7caaac90a6d6584cb98ce8bbdaa6af2",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "8f2ca9e5c2f697d41130c0dcbe31c9c62f8bdaaa6c1b677fac8bdac853ffaa42",
+      "alphaHistogram": {
+        "0": 2117,
+        "255": 1979
+      }
+    },
+    {
+      "variantArrayIndex": 54,
+      "alias": "npc_EverydayBusiness_5",
+      "entry": "resource_pack/textures/entity/npc/npc_EverydayBusiness_5.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_EverydayBusiness_5.png",
+      "destination": "src/assets/npc-actor/npc_EverydayBusiness_5.png",
+      "bytes": 2803,
+      "sha256": "d309597c9f41b58a045b33ff2af9836ea23831e66a1f14b33bca0596739ae023",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "798c48d7672cf5faddf3450294c81ad88da7a86f55b08ede95c69dee3f720a76",
+      "alphaHistogram": {
+        "0": 2105,
+        "255": 1991
+      }
+    },
+    {
+      "variantArrayIndex": 55,
+      "alias": "npc_Kiosk_1",
+      "entry": "resource_pack/textures/entity/npc/npc_Kiosk_1.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Kiosk_1.png",
+      "destination": "src/assets/npc-actor/npc_Kiosk_1.png",
+      "bytes": 1526,
+      "sha256": "9c13f4bebd6d966aa2ecf8c63568f74f75aa7c15b7835d7cfa93e403c591bb84",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "3de1ce0ffeca6aad8d84cf31b98e3eb06bf6d28d6af6a6fa305ed9cbecc1a5c1",
+      "alphaHistogram": {
+        "0": 2496,
+        "255": 1600
+      }
+    },
+    {
+      "variantArrayIndex": 56,
+      "alias": "npc_Kiosk_2",
+      "entry": "resource_pack/textures/entity/npc/npc_Kiosk_2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Kiosk_2.png",
+      "destination": "src/assets/npc-actor/npc_Kiosk_2.png",
+      "bytes": 1258,
+      "sha256": "e0571d8133b7b2f0345d394841f9293c57ad59e346dd05230b564b8ae04a291c",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "e5499a47af9558fa81f716c96639d63895194ed98acd1cfd4320d2f87844b6ac",
+      "alphaHistogram": {
+        "0": 2938,
+        "255": 1158
+      }
+    },
+    {
+      "variantArrayIndex": 57,
+      "alias": "npc_Kiosk_3",
+      "entry": "resource_pack/textures/entity/npc/npc_Kiosk_3.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Kiosk_3.png",
+      "destination": "src/assets/npc-actor/npc_Kiosk_3.png",
+      "bytes": 1246,
+      "sha256": "972c66f0b8d30baf06bd7a3a7e5f173bae8e14e2b4392195c484c65d1e075d2a",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "782967ec67e499498bdf4f36f683e08cbb77181f383c13e4f12ef00329eb2558",
+      "alphaHistogram": {
+        "0": 3317,
+        "255": 779
+      }
+    },
+    {
+      "variantArrayIndex": 58,
+      "alias": "npc_Kiosk_4",
+      "entry": "resource_pack/textures/entity/npc/npc_Kiosk_4.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Kiosk_4.png",
+      "destination": "src/assets/npc-actor/npc_Kiosk_4.png",
+      "bytes": 2175,
+      "sha256": "ea6d84c091beb8ac709977d1a8d91ff7370f23048155e49a7a479b9083400dee",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "f628eb4b233b7c86bad11790855005ca637347f2bd526521eceae47968373512",
+      "alphaHistogram": {
+        "0": 1870,
+        "255": 2226
+      }
+    },
+    {
+      "variantArrayIndex": 59,
+      "alias": "npc_Kiosk_5",
+      "entry": "resource_pack/textures/entity/npc/npc_Kiosk_5.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/entity/npc/npc_Kiosk_5.png",
+      "destination": "src/assets/npc-actor/npc_Kiosk_5.png",
+      "bytes": 1875,
+      "sha256": "c52ff4ce3181f9d6bd9b186a91aae543f345947595f10331ed73ec9a84d205e1",
+      "dimensions": [
+        64,
+        64
+      ],
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "rgbaSha256": "fc8ce94e6e812403e9e0f440ca84bc25b43362cf571d939190559f20e2c6d4cf",
+      "alphaHistogram": {
+        "0": 2238,
+        "255": 1858
+      }
+    }
+  ],
+  "sourceFiles": [
+    {
+      "role": "geometry",
+      "entry": "resource_pack/models/entity/npc.geo.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/models/entity/npc.geo.json",
+      "destination": "src/assets/npc-actor/npc.geo.json",
+      "bytes": 3360,
+      "sha256": "1adf6f88efda2151b6c385d0f1a2717d49e0de8246990ec03eb60a7e22ee082d",
+      "interpretation": "Whole source data only; not an engine expression interpreter."
+    },
+    {
+      "role": "npcAnimations",
+      "entry": "resource_pack/animations/npc.animation.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/animations/npc.animation.json",
+      "destination": "src/assets/npc-actor/npc.animation.json",
+      "bytes": 1039,
+      "sha256": "2f596e20bfa51dde8c68aa99c2a6b8f006f868bc457a3cb8f6d5fd8a2e2461af",
+      "interpretation": "Whole source data only; not an engine expression interpreter."
+    },
+    {
+      "role": "lookAtTargetAnimation",
+      "entry": "resource_pack/animations/look_at_target.animation.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/animations/look_at_target.animation.json",
+      "destination": "src/assets/npc-actor/look_at_target.animation.json",
+      "bytes": 310,
+      "sha256": "57a19d59216b0bb56331756c37cbd7cebfdd66841b31191ecfa14a34fb36bfe9",
+      "interpretation": "Whole source data only; not an engine expression interpreter."
+    },
+    {
+      "role": "renderController",
+      "entry": "resource_pack/render_controllers/npc.render_controllers.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/render_controllers/npc.render_controllers.json",
+      "destination": "src/assets/npc-actor/npc.render_controllers.json",
+      "bytes": 2891,
+      "sha256": "e08d6fbc921b1056c02ca67dd31edf315840c40c6c80e9fe83c4bae2bea4cee7",
+      "interpretation": "Whole source data only; not an engine expression interpreter."
+    },
+    {
+      "role": "clientEntity",
+      "entry": "resource_pack/entity/npc.entity.json",
+      "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/entity/npc.entity.json",
+      "destination": "src/assets/npc-actor/npc.entity.json",
+      "bytes": 4766,
+      "sha256": "1d88bf10621b84f9cd902308bd358da1bd8b3fe408feeb09e0114d9d16093b7b",
+      "interpretation": "Whole source data only; not an engine expression interpreter."
+    }
+  ],
+  "license": {
+    "entry": "LICENSE.md",
+    "sourceUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/LICENSE.md",
+    "destination": "src/assets/npc-actor/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sharedLicense": {
+    "path": "src/assets/Minecraft-Sample-LICENSE.md",
+    "entry": "LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "summary": {
+    "wholePNG": 60,
+    "PNGBytes": 129797,
+    "wholeSourceJSON": 5,
+    "sourceJSONBytes": 12366,
+    "ownedFiles": 66,
+    "ownedBytes": 142385,
+    "decodedTextureSize": [
+      64,
+      64
+    ],
+    "sourcePNGEncodings": {
+      "RGBA8": 51,
+      "indexed8": 9
+    },
+    "caseFoldedAliasCollisions": 0,
+    "caseFoldedSourcePathCollisions": 0,
+    "caseFoldedOutputPathCollisions": 0,
+    "sourceCasePreserved": true,
+    "alphaHistogram": {
+      "0": 122753,
+      "1": 5,
+      "2": 4,
+      "12": 16,
+      "13": 57,
+      "14": 10,
+      "23": 14,
+      "25": 37,
+      "27": 6,
+      "36": 4,
+      "48": 4,
+      "77": 198,
+      "128": 4,
+      "204": 278,
+      "255": 122370
+    },
+    "partialAlphaSkins": [
+      {
+        "alias": "npc_6",
+        "alphaValues": [
+          1,
+          12,
+          13,
+          14,
+          25
+        ],
+        "pixels": 43
+      },
+      {
+        "alias": "npc_8",
+        "alphaValues": [
+          1,
+          2,
+          12,
+          13,
+          14,
+          23,
+          25,
+          27,
+          48
+        ],
+        "pixels": 55
+      },
+      {
+        "alias": "npc_scientist_4",
+        "alphaValues": [
+          1,
+          2,
+          12,
+          13,
+          14,
+          23,
+          25,
+          27,
+          48
+        ],
+        "pixels": 55
+      },
+      {
+        "alias": "npc_teacher_3",
+        "alphaValues": [
+          36
+        ],
+        "pixels": 4
+      },
+      {
+        "alias": "npc_construction_1",
+        "alphaValues": [
+          128
+        ],
+        "pixels": 2
+      },
+      {
+        "alias": "npc_construction_4",
+        "alphaValues": [
+          128
+        ],
+        "pixels": 2
+      },
+      {
+        "alias": "npc_BusinessMobs_5",
+        "alphaValues": [
+          77
+        ],
+        "pixels": 198
+      },
+      {
+        "alias": "npc_EverydayBusiness_2",
+        "alphaValues": [
+          204
+        ],
+        "pixels": 278
+      }
+    ],
+    "partialAlphaPixels": 637
+  },
+  "notBundled": {
+    "MERSMaps": 60,
+    "textureSetDescriptions": 60,
+    "qualification": "Excluded from this color-only source bank; no PBR/MERS material or animation execution support is claimed."
+  },
+  "rights": {
+    "owner": "Mojang",
+    "notice": "Original all-rights-reserved / Minecraft EULA notice retained unchanged.",
+    "codeLicenseDoesNotRelicenseAssets": true
+  },
+  "qualification": {
+    "nativeMappingVerified": false,
+    "cameraPoseLightingRecovered": false,
+    "rendererOrMolangEngineProvided": false,
+    "publicExportsAdded": false,
+    "sourceArrayDoesNotCertifyNativeUIReachability": true
+  }
+}

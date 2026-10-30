@@ -83,6 +83,10 @@ python scripts/prepare-npc-assets.py --check
 
 两个Advanced fit状态均观察到301单位卡片 /Add Command宽度；源可能对应隐藏bar参与尺寸或touch contained分支，尚不能决定引擎自动收起规则。实现采用有限Web策略：fit时不留空轨、卡片301；overflow时预留9单位槽位、卡片292。帮助文案按源intrinsic wrapper居中，并计入未绘制TTS边框的+5尺寸参与；两行正常10+12+10自然得到32，再由父尺寸37居中，Add Command顶部76，不固定帮助高度来凑截图。该Web布局及fit /overflow切换已经本轮验证；原生溢出状态、教育换行和单命令卡片106高度的完整规则仍未恢复。
 
+## 人物渲染增量
+
+`createNpcEntity`＋`GuiLayer`现提供有限NPC原模型、folded-idle与60张原皮肤，可作为现有人物槽传入。公共组件数仍140，数据 /函数增加至156个运行时值；正常相机、自动取景和UI到variant绑定仍由宿主处理或待恢复。实体14项、相关旧渲染77项、最终156值React18 /19包与五个原生整裁剪255,200像素RGBA零差各自按实际身份记录在[GUI_ENTITY_QA.md](GUI_ENTITY_QA.md)，不替代下述NPC布局44项或完整原生GUI认证。
+
 ## 首阶段验证
 
 第二完整批44项全部通过（18 desktop /18 mobile /8 pixels），35.736005秒，0 skip /retry /flaky /reportErrors，797个选定输入前后字节不变。覆盖独立展开在普通局部横向滚动下的按钮可点击性、同一textarea ref与selection、Teacher关闭位置[302,1]和展开正文309×169、Picker独立原点与Editor的父布局偏移，以及readOnly与字体监听清理。8,892个完整POINT平面RGBA像素零差属于Web源图 /布局合同，不是Minecraft原生整页认证。

@@ -338,9 +338,9 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **140 个已实现组件**，包含NpcPortrait、NpcSkinPicker、NpcActionEditor、NpcDialogue与NpcEditor；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开4份数据、10个渲染 /几何 /纹理函数，共154个运行时值。NPC原生布局校准后的44项客户端合同、React18 /19实际包消费及64项公开辅助检查已通过，旧阶段保留各自受测身份，见 [NPC_QA.md](docs/NPC_QA.md)。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
+当前 **140 个已实现组件**，包含NpcPortrait、NpcSkinPicker、NpcActionEditor、NpcDialogue与NpcEditor；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开5份数据、11个渲染 /几何 /纹理函数，共156个运行时值：本轮增加npcSkinNames和createNpcEntity，实际React18 /19包消费、新实体14项合同与旧渲染77项回归通过，实体范围见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。此前NPC布局44项合同、154值实际包消费与64项公开辅助保留原身份。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
 
-[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与13个命名族缺口。140组件不是140个完整GUI；NPC仅新增有限对话 /编辑源族范围，不认证引擎、人物renderer或原生整页。
+[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与13个命名族缺口。140组件不是140个完整GUI；NPC人物渲染仅认证有限源模型、姿态和显式相机fixture，自动取景、引擎及原生整页仍未完成。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -351,7 +351,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 - 命令方块：CommandBlockEditor复用CommandInput与CommandOutputPanel；宿主提供模式、历史快照与可用条件，Paste只发请求，命令不执行。预览入口 `#command-block`，使用与验证范围见 [COMMAND_BLOCK_QA.md](docs/COMMAND_BLOCK_QA.md)。
 - 结构编辑：StructureEditor复用XYZVectorInput，preview与save /load /export均由宿主实现；预览入口 `#structure-editor`，字段、能力条件及实际验收范围见 [STRUCTURE_EDITOR_QA.md](docs/STRUCTURE_EDITOR_QA.md)。
 - 服务端表单：`#server-forms`预览ServerActionForm /ServerCustomForm，提供源row /typed schema及宿主请求；独立合同、tooltip与资源范围见 [SERVER_FORMS_QA.md](docs/SERVER_FORMS_QA.md)，不实现后端协议或第三MessageForm。
-- NPC：`#npc`预览对话、basic /advanced编辑、皮肤选择与可复用action编辑，见 [NPC_QA.md](docs/NPC_QA.md)。皮肤选择正常pack默认五列，可由宿主覆盖；人物renderer由宿主提供，命令、URL与保存仅发请求，原生采集不等于整页像素验收。
+- NPC：`#npc`预览对话、basic /advanced编辑、皮肤选择、可复用action编辑与60套原版人物模型。人物槽可组合`createNpcEntity`和`GuiLayer`，相机由宿主提供；命令、URL与保存仅发请求，原生采集不等于整页像素验收。见 [NPC_QA.md](docs/NPC_QA.md) 与 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。
 - HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示、玩家列表及触屏控制，以及暂停 / 死亡 / 设置 / 加载 / 世界 / 服务器 / 资源包 / 成就提示等组合。
 
 目录中的 GUI 由这些基础零件组合。目录范围不等于所有版本、所有平台的完整游戏界面；原生 3D renderer、游戏规则、最终像素取整与真实游戏整帧差异单独验收。
@@ -397,6 +397,8 @@ layoutGuiImages是纯几何路径，可用于SSR准备；renderGuiImages需要We
 新增显式source model路径：公共barrel已导出纯 `layoutGuiModel` / `createGuiCuboidModel`，GuiLayer支持 `kind:'model'`，`InventoryItem.guiModel` 可由附魔台 `imageRender.itemModels` 显式消费。局部模型、原纹理、GLOBAL source origin及yaw / pitch / scale / offset / originQuantization均由调用方声明，库不提供native默认相机；旧BlockPreview CPU renderer保持原样。含纯atlas helper后为10函数 / 134runtime，公开17项、实际组件12项、React18 / 19包消费与生产65辅助检查分别按其范围通过。研究与边界见 [GUI_MODEL_QA.md](docs/GUI_MODEL_QA.md)；以下sprite检查点属于已冻结b09ff7a历史。
 
 原PNG模型的完整固定GUI仍32像素不同，不能把atlas与standalone采样域当作相同。普通原PNG＋显式packing的source atlas通过纯 `assembleGuiTextureAtlas` 或GPU装配，不采用captured atlas bitmap、Canvas2D重采样或UV epsilon；四幅实际React在同一个已观察GUI5 postUI target全3,603,140像素RGBA0，旧standalone32逐字节复现。零差使用宿主显式配置、原glyph pages与1:1呈现；不认证默认回退字体、所有GUI / camera / 动画、最终world / Present或整体目标完成。
+
+`createNpcEntity(options)`从原版骨骼 /cuboid /box UV及60张完整皮肤生成`GuiLayer`的entity命令，`npcSkinNames`按源controller顺序提供alias。宿主必须传model /view /projection、物理viewport与material；可覆盖完整bonePose，省略则使用有限source folded-idle，不自动取景。生成命令可交给`GuiLayer`，再作为`NpcPortrait.actor`或其他NPC人物槽传入。独立NVIDIA /D3D11批在显式捕获camera /material fixture下，五个完整裁剪共255,200像素严格RGBA零差；正常UI相机、其他角色和整GUI仍未认证。完整用法与边界见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。
 
 上一sprite检查点增加 `kind:'sprite'` 命令与 `GuiSpriteGeometry` 类型，仍使用GuiLayer / renderGuiLayer，无新增runtime导出。它使用UI/Sprite Transparent / MultiColorTint Off profile，`color` 为RGBA8顶点字节；alpha只选择纹理alpha的ceil分支，**不是透明度乘数**，整体透明度由归一化tint alpha / hudOpacity表达。旧image命令保持UI/Blit。`EnchantingTable imageRender.itemImages` 可选把普通 `item.image` 送入同目标，自定义React icon / 3D renderer、数量 / 耐久与语义保持DOM。显式displayScale的呈现支持时采用布局zoom，fallback保留transform。独立公开13项、实际组件11项、React18 / 19包消费与生产47辅助检查分别通过；固定完整747,600像素ROI仍有4,928像素不同，仅在三格3D hotbar。详见 [GUI_SPRITE_QA.md](docs/GUI_SPRITE_QA.md)；下面图文17项和10,155残差是上一冻结阶段。
 
@@ -652,7 +654,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。NPC布局修订及展开恢复修复后的140组件 /154值已在React18.3.1 /19.3.1真实消费通过，见 [NPC_QA.md](docs/NPC_QA.md)。ServerForms135 /149、Structure133 /147及更早包保持历史范围。
+- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。当前140组件 /156值在React18.3.1 /19.3.1真实消费通过，含60皮肤、66份原资源及跨realm矩阵校验，见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。NPC布局154值、ServerForms135 /149、Structure133 /147及更早包保持历史范围。
 - `#books` 的27项生产辅助与旧6项导航回归已分别通过，覆盖真实编辑 / 签名请求 / 窄屏及既有锚点；它们不计入Book正式30项或原生像素认证，见 [BOOK_QA.md](docs/BOOK_QA.md)。
 - `#signs` 的50项公开集成辅助已通过；新Sign29项、旧Dialog12项与修后完整导航6项分批验证，保留首次导航失败及修复记录，不作为原生整页像素或真实OS IME认证，见 [SIGN_QA.md](docs/SIGN_QA.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。

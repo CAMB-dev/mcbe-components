@@ -8,6 +8,8 @@ import type { GuiLayerPreparedCommand, GuiLayerPreparedResult } from './gui-laye
 import { layoutGuiModel } from './gui-model-geometry';
 import type { GuiModelGeometry, GuiModelLayout } from './gui-model-geometry';
 import type { GuiLayerTexture } from './gui-texture-atlas';
+import { compileGuiEntitySource, layoutGuiEntity } from './gui-entity-geometry';
+import type { GuiEntityGeometry, GuiEntityLayout, GuiEntityMesh, GuiEntitySource } from './gui-entity-geometry';
 
 /** UI/Sprite Transparent, MultiColorTint Off source geometry. Other material passes are not implied. */
 export interface GuiSpriteGeometry extends GuiImageGeometry {
@@ -18,6 +20,7 @@ export type GuiLayerGeometryCommand =
   | ({ kind: 'image' } & GuiImageGeometry)
   | ({ kind: 'sprite' } & GuiSpriteGeometry)
   | ({ kind: 'model' } & GuiModelGeometry)
+  | ({ kind: 'entity' } & GuiEntityGeometry)
   | ({ kind: 'text' } & GuiTextGeometry);
 export interface GuiLayerLayoutOptions extends Omit<GuiImageLayoutOptions, 'images'> {
   commands: readonly GuiLayerGeometryCommand[];
@@ -26,6 +29,7 @@ export type GuiLayerLayoutCommand =
   | { kind: 'image'; mesh: GuiImageMesh }
   | { kind: 'sprite'; mesh: GuiImageMesh; color: GuiTextRgba8 }
   | { kind: 'model'; layout: GuiModelLayout }
+  | { kind: 'entity'; layout: GuiEntityLayout }
   | { kind: 'text'; layout: GuiTextLayout };
 export interface GuiLayerLayout extends Omit<GuiImageLayout, 'meshes'> {
   /** Ordered source commands. Each text layout owns its separate paint-origin MVP. */
@@ -35,6 +39,7 @@ export type GuiLayerDraw =
   | ({ kind: 'image'; texture: GuiLayerTexture } & Omit<GuiImageDraw, 'texture'>)
   | ({ kind: 'sprite'; texture: GuiLayerTexture } & GuiSpriteGeometry)
   | ({ kind: 'model'; textures: Readonly<Record<string, GuiLayerTexture>> } & GuiModelGeometry)
+  | ({ kind: 'entity'; texture: GuiImageTexture } & GuiEntityGeometry)
   | ({ kind: 'text'; pages: ReadonlyMap<number, GuiImageTexture> } & GuiTextGeometry);
 export interface GuiLayerRenderOptions extends Omit<GuiLayerLayoutOptions, 'commands'> {
   commands: readonly GuiLayerDraw[];
@@ -49,11 +54,12 @@ export interface GuiLayerRenderResult extends GuiLayerPreparedResult {
 /** Internal source adapter, also used for SSR/loading preparation. It performs no IO or GPU work. */
 export function layoutSourceGuiLayer(options: GuiLayerLayoutOptions): GuiLayerLayout {
   if (!Array.isArray(options.commands) || options.commands.length > 4096) throw new RangeError('A bounded GUI command array is required.');
-  for (const command of options.commands) if (!command || (command.kind !== 'image' && command.kind !== 'sprite' && command.kind !== 'model' && command.kind !== 'text')) throw new RangeError('Unsupported GUI layer command.');
+  for (const command of options.commands) if (!command || (command.kind !== 'image' && command.kind !== 'sprite' && command.kind !== 'model' && command.kind !== 'entity' && command.kind !== 'text')) throw new RangeError('Unsupported GUI layer command.');
   const imageCommands = options.commands.filter((command): command is Extract<GuiLayerGeometryCommand, { kind: 'image' | 'sprite' }> => command.kind === 'image' || command.kind === 'sprite');
   const { meshes, ...frame } = layoutGuiImages({ ...options, images: imageCommands });
   const commands: GuiLayerLayoutCommand[] = [];
   let imageIndex = 0, vertices = 0, indices = 0, runs = 0;
+  const entities = new Map<GuiEntitySource, GuiEntityMesh>(); let entityCount = 0;
   for (const command of options.commands) {
     if (command.kind === 'image' || command.kind === 'sprite') {
       const mesh = meshes[imageIndex++]!;
@@ -68,6 +74,14 @@ export function layoutSourceGuiLayer(options: GuiLayerLayoutOptions): GuiLayerLa
         outputRect: options.outputRect, scissor: intersect(options.scissor, command.scissor, options.width, options.height) });
       commands.push({ kind: 'model', layout });
       for (const run of layout.runs) { vertices += run.mesh.vertices.length; indices += run.mesh.indices.length; runs++; }
+    } else if (command.kind === 'entity') {
+      if (++entityCount > 64) throw new RangeError('A GUI layer supports at most 64 entity commands.');
+      let mesh = entities.get(command.source);
+      if (!mesh) { mesh = compileGuiEntitySource(command.source); entities.set(command.source, mesh); }
+      const layout = layoutGuiEntity({ ...command, width: options.width, height: options.height, guiScale: options.guiScale,
+        outputRect: options.outputRect, scissor: intersect(options.scissor, command.scissor, options.width, options.height) }, mesh);
+      commands.push({ kind: 'entity', layout });
+      vertices += layout.mesh.positions.length / 3; indices += layout.mesh.indices.length; runs++;
     } else {
       const layout = layoutGuiText({ ...command, width: options.width, height: options.height, guiScale: options.guiScale,
         outputRect: options.outputRect, scissor: intersect(options.scissor, command.scissor, options.width, options.height) });
@@ -99,6 +113,11 @@ export function renderGuiLayer(options: GuiLayerRenderOptions): GuiLayerRenderRe
     const entry = layout.commands[index]!;
     if (command.kind === 'image' && entry.kind === 'image') commands.push({ kind: 'image', mesh: entry.mesh, mvp: layout.mvp, texture: command.texture });
     else if (command.kind === 'sprite' && entry.kind === 'sprite') commands.push({ kind: 'sprite', mesh: entry.mesh, mvp: layout.mvp, texture: command.texture, color: entry.color });
+    else if (command.kind === 'entity' && entry.kind === 'entity') {
+      if (!entry.layout.mesh.indices.length) return;
+      if (!command.texture || command.texture.width !== 64 || command.texture.height !== 64) throw new RangeError('An NPC entity requires one complete 64 by 64 texture.');
+      commands.push({ kind: 'entity', texture: command.texture, layout: entry.layout });
+    }
     else if (command.kind === 'model' && entry.kind === 'model') {
       if (!command.textures || typeof command.textures !== 'object' || Array.isArray(command.textures)) throw new RangeError('A model requires an explicit decoded texture record.');
       for (const run of entry.layout.runs) {

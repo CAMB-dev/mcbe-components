@@ -21,6 +21,7 @@ export type { GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderO
 export { layoutGuiText } from './gui-text-geometry';
 export type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout } from './gui-text-geometry';
 export { layoutGuiModel, createGuiCuboidModel } from './gui-model-geometry';
+export type { GuiEntityCube, GuiEntityBone, GuiEntitySource, GuiNpcPortraitMaterial, GuiEntityGeometry, GuiEntityMesh, GuiEntityLayoutOptions, GuiEntityLayout } from './gui-entity-geometry';
 export type { GuiModelFace, GuiModelMesh, GuiModelProjection, GuiModelGeometry, GuiModelLayoutOptions, GuiModelRun, GuiModelLayout, GuiModelItem, GuiCuboidFace, GuiCuboidModelOptions } from './gui-model-geometry';
 export { assembleGuiTextureAtlas } from './gui-texture-atlas';
 export type { GuiTextureAtlasSource, GuiTextureAtlas, GuiLayerTextureSource, GuiLayerTexture } from './gui-texture-atlas';
@@ -104,4 +105,6 @@ export { ServerActionForm, ServerCustomForm } from './server-forms';
 export type { ServerFormCancelDetail, ServerFormOption, ServerActionIcon, ServerActionRow, ServerActionDetail, ServerActionFormProps, ServerCustomField, ServerCustomEditableField, ServerCustomValue, ServerCustomFormValues, ServerCustomChangeDetail, ServerFormInputProps, ServerCustomFormProps } from './server-forms';
 
 export { NpcPortrait, NpcSkinPicker, NpcActionEditor, NpcDialogue, NpcEditor } from './npc';
+export { createNpcEntity, npcSkinNames } from './npc-entity';
+export type { NpcEntityOptions, NpcSkinName, NpcEntityVariant } from './npc-entity';
 export type { NpcPortraitProps, NpcSkin, NpcSkinChangeDetail, NpcSkinPageDetail, NpcSkinPickerProps, NpcActionKind, NpcActionValue, NpcActionField, NpcActionChangeDetail, NpcActionError, NpcActionState, NpcNativeInputProps, NpcNativeTextareaProps, NpcNavigationDetail, NpcLabels, NpcActionEditorProps, NpcDialogueAction, NpcDialogueActionDetail, NpcDialogueLayout, NpcDialogueProps, NpcEditorPage, NpcEditorValue, NpcEditorChangeDetail, NpcEditorProps } from './npc';
