@@ -36,6 +36,7 @@ import { ItemRenderersExamples } from './item-renderers-examples';
 import { BookExamples } from './book-examples';
 import { SignExamples } from './sign-demo';
 import { JigsawExamples } from './jigsaw-examples';
+import { CommandBlockExamples } from './command-block-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -60,6 +61,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'books', name: 'Books & writing', icon: 'chevron', count: '04' },
   { id: 'signs', name: 'Signs', icon: 'chevron', count: '02' },
   { id: 'jigsaw', name: 'Jigsaw editor', icon: 'chevron', count: '02' },
+  { id: 'command-block', name: 'Command blocks', icon: 'chevron', count: '03' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'anvil-layer', name: 'Source Anvil', icon: 'chevron', count: '01' },
@@ -83,6 +85,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'gui-icons', name: 'GUI icons', icon: 'chevron', count: '150' },
 ];
 const snippets: Record<string, string> = {
+  'command-block': `import { CommandBlockEditor, CommandInput, CommandOutputPanel } from 'mcbeui';\n\n<CommandBlockEditor value={draft} onValueChange={setDraft}\n  expanded={expanded} onExpandedChange={setExpanded}\n  previousOutput={output} onPasteRequest={requestPaste}\n  onClose={closeEditor} />\n<CommandInput value={command} onValueChange={setCommand} />\n<CommandOutputPanel previousOutput={output} />`,
   jigsaw: `import { JigsawEditor, JigsawPriorityFields } from 'mcbeui';\n\n<JigsawEditor value={draft} onValueChange={setDraft}\n  onDone={saveDraft} onHelp={showHelp} />\n<JigsawPriorityFields defaultValue={{\n  selectionPriority: '0', placementPriority: '-1'\n}} />\n// Values remain editable strings; the host validates and saves them.`,
   signs: `import { SignTextSurface, SignEditor } from 'mcbeui';\n\n<SignTextSurface variant="regular" wood="oak"\n  value={text} onValueChange={setText} />\n<SignEditor open={open} onOpenChange={setOpen}\n  variant="hanging" wood="cherry"\n  value={text} onValueChange={setText} />\n// Outside and Escape request a close.\n// The host accepts text changes and chooses its exit policy.`,
   books: `import { BookReader, BookEditor } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<BookReader pages={['First leaf', 'Second leaf']} />\n<BookEditor defaultPages={['A new adventure']}\n  defaultAuthor="Player"\n  onSign={snapshot => saveBook(snapshot)} />\n// spreadIndex addresses a pair of leaf pages.\n// The host accepts structural page edits and persists signed books.`,
@@ -404,6 +407,7 @@ function App() {
       <Example id="books" title="Books & writing" detail="Two-page reading, editable pages and a signing cover with original textures."><BookExamples notify={notify}/></Example>
       <Example id="signs" title="Signs" detail="Regular and hanging signs with original textures and real text input."><SignExamples notify={notify}/></Example>
       <Example id="jigsaw" title="Jigsaw editor" detail="Bedrock identifier fields, priorities and joint type with reusable form controls."><JigsawExamples notify={notify}/></Example>
+      <Example id="command-block" title="Command blocks" detail="Block modes, expandable command input and previous output using reusable controls."><CommandBlockExamples notify={notify}/></Example>
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

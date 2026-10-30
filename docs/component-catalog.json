@@ -642,6 +642,11 @@
         "fidelity": "source_texture_web_composition"
       }
     ],
+    "command_blocks": [
+      {"name":"CommandBlockEditor","status":"implemented","fidelity":"source_texture_web_composition_native_page_validation_pending","source":"resource_pack/ui/command_block_screen.json, fixed v1.26.60.5","details":"docs/COMMAND_BLOCK_QA.md"},
+      {"name":"CommandInput","status":"implemented","fidelity":"source_input_layout_single_native_textarea_host_expansion_contract","source":"resource_pack/ui/command_block_screen.json, fixed v1.26.60.5","details":"docs/COMMAND_BLOCK_QA.md"},
+      {"name":"CommandOutputPanel","status":"implemented","fidelity":"source_output_layout_host_history_and_tracking_callbacks","source":"resource_pack/ui/command_block_screen.json, fixed v1.26.60.5","details":"docs/COMMAND_BLOCK_QA.md"}
+    ],
     "jigsaw_editor": [
       {"name":"JigsawEditor","status":"implemented","fidelity":"source_texture_web_composition_native_page_validation_pending","source":"resource_pack/ui/jigsaw_editor_screen.json, fixed v1.26.60.5","details":"docs/JIGSAW_QA.md"},
       {"name":"JigsawPriorityFields","status":"implemented","fidelity":"source_field_order_and_raw_draft_contract_host_resolved_priority_height","source":"resource_pack/ui/jigsaw_editor_screen.json, fixed v1.26.60.5","details":"docs/JIGSAW_QA.md"}
@@ -656,7 +661,7 @@
     ]
   },
   "publicExports": {
-    "components": 128,
+    "components": 131,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -667,7 +672,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 142,
+    "runtimeValues": 145,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 4,

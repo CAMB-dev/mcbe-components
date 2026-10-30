@@ -93,3 +93,6 @@ export type { SignVariant, SignWood, SignFontMode, SignTextureInput, SignSourceG
 
 export { JigsawEditor, JigsawPriorityFields } from './jigsaw';
 export type { JigsawJointMode, JigsawIdentifierField, JigsawPriorityField, JigsawTextField, JigsawField, JigsawPriorities, JigsawValue, JigsawChangeDetail, JigsawPriorityChangeDetail, JigsawInputProps, JigsawLabels, JigsawPriorityFieldsProps, JigsawCancelDetail, JigsawEditorProps } from './jigsaw';
+
+export { CommandBlockEditor, CommandInput, CommandOutputPanel } from './command-block';
+export type { CommandBlockType, CommandBlockCondition, CommandBlockRedstone, CommandBlockValue, CommandBlockField, CommandBlockChangeDetail, CommandExpansionDetail, CommandInputProps, CommandPreviousInfo, CommandOutputPanelProps, CommandBlockLabels, CommandBlockCloseDetail, CommandBlockEditorProps } from './command-block';

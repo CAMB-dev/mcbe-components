@@ -65,8 +65,15 @@
 .mc-book__author label { flex:none; color:#aaa; }
 .mc-book__warning { position:absolute; z-index:2; top:calc(var(--mc-book-u) * 86); left:calc(var(--mc-book-u) * 15); width:calc(100% - var(--mc-book-u) * 30); margin:0; line-height:1; overflow-wrap:break-word; }
 .mc-book[data-mode="signing"] .mc-book__close { right:calc((var(--mc-book-width) - var(--mc-book-cover-width,var(--mc-book-page-width))) / 2 + var(--mc-book-u) * 5); top:calc(var(--mc-book-u) * 5); }
-.mc-book__footer { min-height:calc(var(--mc-book-u) * 24); display:flex; justify-content:center; align-items:center; gap:calc(var(--mc-book-u) * 10); }
-.mc-book__footer .mc-button { min-width:calc(var(--mc-book-u) * 100); font:inherit; }
+.mc-book__footer { min-height:calc(var(--mc-book-u) * 24); display:flex; justify-content:center; align-items:flex-end; gap:calc(var(--mc-book-u) * 10); }
+/* Source form-fitting chain: normal label10 + content6 + image2 + focus2.
+   The inner image has minimum width100; its outer focus frame is102x20.
+   book_buttons_panel is bottom-anchored, independent of the generic Button. */
+.mc-book__footer .mc-button { --mc-edge:var(--mc-book-u); min-width:calc(var(--mc-book-u) * 102); min-height:calc(var(--mc-book-u) * 20); height:calc(var(--mc-book-u) * 20); padding:calc(var(--mc-book-u) * 4); font:inherit; line-height:1; white-space:nowrap; }
+.mc-book__footer .mc-button::before { border-width:var(--mc-book-u); border-image-width:var(--mc-book-u); }
+.mc-book .mc-book__footer .mc-button[data-book-action] { text-shadow:none; }
+.mc-book__footer .mc-button:active:not(:disabled) > * { transform:translateY(var(--mc-book-u)); }
+.mc-book__footer .mc-button:focus-visible { outline:none; border-color:#fff; }
 .mc-book__status { position:absolute; width:1px; height:1px; margin:-1px; padding:0; border:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 @media (forced-colors:active) {
   .mc-book__text, .mc-book__page-text, .mc-book__cover-input, .mc-book__page-number, .mc-book__title-label, .mc-book__warning, .mc-book__author label { color:CanvasText; -webkit-text-fill-color:CanvasText; }
@@ -74,6 +81,7 @@
   .mc-book__surface, .mc-book__cover, .mc-book__page[data-in-book="false"] { background:Canvas; color:CanvasText; outline:1px solid CanvasText; }
   .mc-book__image-button:focus-visible, .mc-book__text-box:has(.mc-book__text:focus-visible), .mc-book__cover-input:focus-visible { outline:2px solid Highlight; box-shadow:none; }
   .mc-book__text-box:hover:not([data-disabled="true"]) { border-image:none; }
+  .mc-book__footer .mc-button:focus-visible { outline:2px solid Highlight; outline-offset:2px; }
   .mc-book__image-button, .mc-book__image-button:hover:not(:disabled), .mc-book__image-button:focus-visible:not(:disabled), .mc-book__image-button:active:not(:disabled) { forced-color-adjust:auto; background:ButtonFace; border:1px solid ButtonText; color:ButtonText; filter:none; }
   .mc-book__image-button::after { content:attr(aria-label); display:block; font:12px/1 sans-serif; overflow:hidden; }
   .mc-book__turn[data-direction="previous"]::after, .mc-book__page-action--move-page-left::after { content:'←'; }

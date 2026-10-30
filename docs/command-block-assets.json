@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "fixedSource": {
+    "archive": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "scope": "Six additional whole official images for the Command Block source UI; existing icon/close/control sources are reused without duplicate delivery. No native-pixel certification.",
+  "resources": [
+    {
+      "key": "dialog_background_hollow_3",
+      "entry": "resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "destination": "src/assets/command-block/dialog_background_hollow_3.png",
+      "bytes": 260,
+      "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+      "dimensions": [
+        18,
+        33
+      ],
+      "rgbaSha256": "4c44fa4825a7099a23f295bc3e243d6ca0aab927f01f3096e499854391dce00a",
+      "nineSlice": {
+        "insets": [
+          8,
+          23,
+          8,
+          8
+        ],
+        "baseSize": [
+          18,
+          33
+        ]
+      }
+    },
+    {
+      "key": "dialog_divider",
+      "entry": "resource_pack/textures/ui/dialog_divider.png",
+      "destination": "src/assets/command-block/dialog_divider.png",
+      "bytes": 90,
+      "sha256": "c9f4386d5bfcbdad6de9e74a9b297e597bece3b1529222e40cdccda164164318",
+      "dimensions": [
+        3,
+        1
+      ],
+      "rgbaSha256": "85bc6099db15d8885fa370c07b6f9397c9b5cdb70f8fe85b76a99bbfdf85f29b",
+      "nineSlice": {
+        "insets": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "baseSize": [
+          3,
+          1
+        ]
+      }
+    },
+    {
+      "key": "minimize",
+      "entry": "resource_pack/textures/ui/minimize.png",
+      "destination": "src/assets/command-block/minimize.png",
+      "bytes": 184,
+      "sha256": "55666883992a80192747ec30d61cfe946e3a3b6ea0063b7c654647ffbe2ff946",
+      "dimensions": [
+        16,
+        16
+      ],
+      "rgbaSha256": "c0f0c5ca42467f527d759e0a505d46adddb35b340e5207a26592b2d5188fe5d3"
+    },
+    {
+      "key": "minimizeHover",
+      "entry": "resource_pack/textures/ui/minimizeHover.png",
+      "destination": "src/assets/command-block/minimizeHover.png",
+      "bytes": 125,
+      "sha256": "c32e96da35ea761b8743601000c1c3367639088cf64e0279609161552aa817f9",
+      "dimensions": [
+        16,
+        16
+      ],
+      "rgbaSha256": "6880da7e4376a682dfdd6ee4dcb317020eb77780b54f21fa88c7658b4005a34e"
+    },
+    {
+      "key": "minimizePress",
+      "entry": "resource_pack/textures/ui/minimizePress.png",
+      "destination": "src/assets/command-block/minimizePress.png",
+      "bytes": 130,
+      "sha256": "65f6e269fd369b67d93a92e46e08613c76a17ed6541d31e09ee671cf476620d0",
+      "dimensions": [
+        16,
+        16
+      ],
+      "rgbaSha256": "b06a69fd3210b6a0b0965d183e9e0dac2f550a8dea5b9d7796c0872b89d01d9a"
+    },
+    {
+      "key": "arrowRight",
+      "entry": "resource_pack/textures/ui/arrowRight.png",
+      "destination": "src/assets/command-block/arrowRight.png",
+      "bytes": 1142,
+      "sha256": "4b7d2d5d5f7beed2eeeeebac93637b16ea1282c2796ecec8a27565fe07ac1b6f",
+      "dimensions": [
+        8,
+        8
+      ],
+      "rgbaSha256": "fad2425a2dfbe49da3e0f4d0788222c896bb3a9ef0dacd1b2f51f71ddb73ed41"
+    }
+  ],
+  "textureMetadata": [
+    {
+      "key": "dialog_background_hollow_3",
+      "entry": "resource_pack/textures/ui/dialog_background_hollow_3.json",
+      "destination": "src/assets/command-block/dialog_background_hollow_3.json",
+      "bytes": 94,
+      "sha256": "36700ca1326d14a269b2052c27d95115200897bee9c27b4d36e75fe893973415",
+      "raw": {
+        "nineslice_size": [
+          8,
+          23,
+          8,
+          8
+        ],
+        "base_size": [
+          18,
+          33
+        ]
+      }
+    },
+    {
+      "key": "dialog_divider",
+      "entry": "resource_pack/textures/ui/dialog_divider.json",
+      "destination": "src/assets/command-block/dialog_divider.json",
+      "bytes": 91,
+      "sha256": "f342670cc0ebf56ca4697da1710f0a41660bf3bbb357537a3a2e69779290230a",
+      "raw": {
+        "nineslice_size": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "base_size": [
+          3,
+          1
+        ]
+      }
+    }
+  ],
+  "license": {
+    "entry": "LICENSE.md",
+    "destination": "src/assets/command-block/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sharedLicense": {
+    "path": "src/assets/Minecraft-Sample-LICENSE.md",
+    "entry": "LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "reusedOriginals": [
+    {
+      "key": "paste",
+      "entry": "resource_pack/textures/ui/paste.png",
+      "path": "src/assets/gui-icons/paste.png",
+      "bytes": 190,
+      "sha256": "84073c88b30c7a5ac3f644476d05fd704a9695d5f6b91d128fa3232e72ad0280",
+      "dimensions": [
+        12,
+        12
+      ],
+      "copied": false,
+      "registry": "wholeGuiIcon"
+    },
+    {
+      "key": "plus",
+      "entry": "resource_pack/textures/ui/plus.png",
+      "path": "src/assets/gui-icons/plus.png",
+      "bytes": 123,
+      "sha256": "965fa4c152e09cdd8d61ead15b5eb2ecefd9e1c78cd49a9b652b84b78bf55f9f",
+      "dimensions": [
+        11,
+        11
+      ],
+      "copied": false,
+      "registry": "wholeGuiIcon"
+    },
+    {
+      "key": "close_button_default",
+      "entry": "resource_pack/textures/ui/close_button_default.png",
+      "path": "src/assets/book/close_button_default.png",
+      "bytes": 163,
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "dimensions": [
+        15,
+        15
+      ],
+      "copied": false,
+      "registry": "bookAssets"
+    },
+    {
+      "key": "close_button_hover",
+      "entry": "resource_pack/textures/ui/close_button_hover.png",
+      "path": "src/assets/book/close_button_hover.png",
+      "bytes": 164,
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "dimensions": [
+        15,
+        15
+      ],
+      "copied": false,
+      "registry": "bookAssets"
+    },
+    {
+      "key": "close_button_pressed",
+      "entry": "resource_pack/textures/ui/close_button_pressed.png",
+      "path": "src/assets/book/close_button_pressed.png",
+      "bytes": 1416,
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "dimensions": [
+        15,
+        15
+      ],
+      "copied": false,
+      "registry": "bookAssets"
+    },
+    {
+      "key": "control",
+      "entry": "resource_pack/textures/ui/control.png",
+      "path": "src/assets/jigsaw/control.png",
+      "bytes": 71,
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "dimensions": [
+        2,
+        2
+      ],
+      "copied": false,
+      "registry": "jigsawImageAssets"
+    }
+  ],
+  "sourceUi": [
+    {
+      "entry": "resource_pack/ui/command_block_screen.json",
+      "bytes": 37370,
+      "sha256": "096add8ce9ced4de5da048411a0fcce42f712da2973d53fe70d9e95dc2a77514",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "bundled": false
+    }
+  ],
+  "qualification": {
+    "wholePngCount": 6,
+    "wholePngBytes": 1931,
+    "wholeTextureMetadataCount": 2,
+    "bundledWholeFilesIncludingLicense": 9,
+    "metadataInterpretation": "Original source logical LTRB arrays/base sizes are retained: hollow3[8,23,8,8]/18x33 and divider[1,0,1,0]/3x1. No image resizing or re-encoding.",
+    "licenseNotice": "Complete original Mojang all-rights-reserved notice and Minecraft EULA reference retained locally, with existing shared Minecraft-Sample-LICENSE.md unchanged. Original images are not licensed as library source code.",
+    "nativeMappingVerified": false
+  }
+}

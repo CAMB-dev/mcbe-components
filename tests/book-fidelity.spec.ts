@@ -572,3 +572,34 @@ test('book common multiline layout: inner centering, expanded clip and normal li
   await relative(readerLeaf.locator('.mc-book__page-text'), readerLeaf, [5 + 16, 23, 128, 149], 2);
   await expect(readerLeaf.locator('.mc-book__text-box,.mc-book__text-clip,textarea')).toHaveCount(0);
 });
+
+// Book source min[100,0] applies to the inner image, not the outer control.
+// common_buttons label10 + content6 + image2 + focus2 =>102x20 outer minimum.
+// book_buttons_panel anchors to the bottom of the nominal231-unit parent.
+test('source form-fitting footer scales its outer frame and bottom anchor independently of generic Button', async ({ page }) => {
+  await open(page);
+  for (const scale of [2, 5]) {
+    await page.evaluate(scale => window.bookQA.configure({ scale, pages: ['Left', 'Right'], mode: 'pages', readOnly: false, disabled: false }), scale);
+    const book = root(page), button = book.locator('[data-book-action="sign-open"]');
+    await relative(button, book, [(320 - 102) / 2, 231 - 20, 102, 20], scale);
+    const styles = await button.evaluate(node => {
+      const style = getComputedStyle(node), image = getComputedStyle(node, '::before');
+      return { border: style.borderLeftWidth, skinBorder: image.borderLeftWidth, skinWidth: image.borderImageWidth, shadow: style.textShadow };
+    });
+    expect(styles).toEqual({ border: `${scale}px`, skinBorder: `${scale}px`, skinWidth: `${scale}px`, shadow: 'none' });
+    await page.evaluate(() => window.bookQA.configure({ mode: 'signing' }));
+    // Source102 is a minimum, not a fixed width for arbitrary localized text.
+    // Predict each intrinsic width from the active host font plus the source
+    // content6/image2/focus2 insets, without measuring its rendered box.
+    const fittedWidth = async (button: Locator) => button.evaluate((node, scale) => {
+      const canvas = document.createElement('canvas'), context = canvas.getContext('2d')!;
+      context.font = getComputedStyle(node).font;
+      return Math.max(102 * scale, context.measureText(node.textContent ?? '').width + 10 * scale) / scale;
+    }, scale);
+    const finalize = book.locator('[data-book-action="finalize"]'), cancel = book.locator('[data-book-action="sign-cancel"]');
+    const finalizeWidth = await fittedWidth(finalize), cancelWidth = await fittedWidth(cancel);
+    const pairWidth = finalizeWidth + 10 + cancelWidth;
+    await relative(finalize, book, [(320 - pairWidth) / 2, 231 - 20, finalizeWidth, 20], scale);
+    await relative(cancel, book, [(320 - pairWidth) / 2 + finalizeWidth + 10, 231 - 20, cancelWidth, 20], scale);
+  }
+});

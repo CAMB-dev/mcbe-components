@@ -16,13 +16,17 @@ CPU研究的128个正文glyph实例涉及51个不同字符（25个ASCII、26个�
 
 公开预览首批实际只执行7项，6通过 /1失败：Welcome样本6个Han使用了MCBE CJK fallback，尚未执行后续native宽度检查。报告 `.cache/book-sign-typography-public-01/FINAL.json`（SHA256 `d79d5a7cc38e900462f547081991cd7ee28e55b6a3f5bcf0121178d4748ea23b`）保留；有限字体原本允许fallback，但该样本不满足整值Unicode face的严格示例目标。本轮选择补齐实际示例字符，不采用放宽断言的备选方案。
 
-可复现字符corpus `scripts/book-sign-font-characters.txt` 含两个Book /Sign demo实际字符串与明确native样本所需21个Han字符，排除注释。相对194字集缺12字，私有输出已扩为206 /206 /95（507 mapped）；脚本默认189清单、度量规则和UI不因此改变。独立 `.cache/classic-demo-glyph-extension-independent-01/FINAL.json`（SHA256 `8aa9823cbb74e6a1d5f7c58ff9fcf2ba6143a956966249778a56d5a8bd6cb2c4`）实际重开字体核实：旧483字形base /COLR /hmtx /源metadata /vertical完全不变，新12Han的12,288原cell采样零差；47原页保留，只增完整glyph_56为第48页，134份其他字体及archive不变。按公开corpus的唯一一次check-only实际exit0 /9.521秒，active5文件SHA与mtimeNs不变。
+206阶段的可复现corpus `scripts/book-sign-font-characters.txt` 当时含两个Book /Sign demo与native样本所需21个Han，排除注释。相对194字集缺12字，输出扩为206 /206 /95（507 mapped）；脚本默认189清单、度量规则和UI未因此改变。独立 `.cache/classic-demo-glyph-extension-independent-01/FINAL.json`（SHA256 `8aa9823cbb74e6a1d5f7c58ff9fcf2ba6143a956966249778a56d5a8bd6cb2c4`）核实旧483字形base /COLR /hmtx /源metadata /vertical不变，新12Han的12,288原cell采样零差；47原页保留，只增glyph_56为第48页，134份其他字体及archive不变。当时corpus的唯一一次check-only实际exit0 /9.521秒，active5文件SHA与mtimeNs不变。
 
-206字集已实际完整重验79/79（Book39 /Sign30 /Classic10），84.256286秒，零跳过 /重试 /flaky /report errors，747项选定输入加5 harness共752 pins不变；三face实际206 /206 /95均加载。7幅240×48源POINT平面80,640像素严格RGBA0，固定host x8 /baseline24、不遮罩 /拟合；Book原翻页13,824像素另计。canonical `.cache/book-font-role-qa-01/formal-206-01/FINAL.json` SHA256 `efdebb158b97c01c2998b46785929088711d60a1631a1c61465ca4f17abbf936`。整6项旧导航在此profile另通过，26.321183秒；不重计旧Dialog或194同项。当前React18.3.1 /19.3.1实际包消费也通过140值 /SSR /新类型及factory /strict TypeScript /样式 /资源 /许可，日志 `package-verification-206.log` 位于 `.cache/book-sign-typography-close-01`。最终文档包仍须另做非文档身份比较，不预填其未执行结果。
+206字集已实际完整重验79/79（Book39 /Sign30 /Classic10），84.256286秒，零跳过 /重试 /flaky /report errors，747项选定输入加5 harness共752 pins不变；三face实际206 /206 /95均加载。7幅240×48源POINT平面80,640像素严格RGBA0，固定host x8 /baseline24、不遮罩 /拟合；Book原翻页13,824像素另计。canonical `.cache/book-font-role-qa-01/formal-206-01/FINAL.json` SHA256 `efdebb158b97c01c2998b46785929088711d60a1631a1c61465ca4f17abbf936`。整6项旧导航在此profile另通过，26.321183秒；不重计旧Dialog或194同项。当时React18.3.1 /19.3.1实际包消费也通过140值 /SSR /新类型及factory /strict TypeScript /样式 /资源 /许可，日志 `package-verification-206.log` 位于 `.cache/book-sign-typography-close-01`。文档包另做非文档身份比较，不借此改变历史消费者范围。
 
 公开03批37/37辅助检查通过，20.477秒，三私有face真实加载，747输入 /327dist /59site前后不变。真实Book逐页 /Sign整值Unicode家族、输入身份 /选区 /合成composition /只读禁用 /重开 /portal /窄屏均检查；严格single-Unicode gate未放宽。Book已知混排Canvas advance231 CSS px在244内容宽内，Sign为236 /240；这只是有限浏览器度量，不是native自动换行或RGBA比较。记录 `.cache/book-sign-typography-public-03/RESULT.json`，页面 /consoleError /HTTPerror /requestfailure为0，4条整页ReadPixels性能warning保留。旧01首败保留，02未执行；补字后的成功不回写旧失败。
 
 该corpus不包含字体二进制或字形艺术，也不代表其他demo /任意Unicode覆盖。37项辅助不加入79正式；私有字体仍不进npm，native Smooth /AA、精确clip下边、全95ASCII宽度、未知字符对、caret与完整DOM原生栅格均未认证。
+
+后续Book实际组件比较暴露页码 /签名标签还需“共第签页”四字，当前corpus明确扩为25个Han，输出210 /210 /95共515 mapped，默认189清单与度量策略不变。独立 `.cache/book-ui-font-independent-01/FINAL.json` 实核旧507字形 /度量不变，新增四字4,096原cell采样零差，仅增完整glyph_98为第49页，134份其他字体及archive不变。
+
+实际postFont比较的CDP确认所测两页码与footer节点均只使用其Classic /Unicode face，旧MCBE CJK fallback在这些有限节点上消失；但四个完整native目标仍有48,661 /52,275 /46,489 /50,103不同像素。来源为 `.cache/book-native-component-compare-01/FINAL-FONT-03.json`，详细分区见 [BOOK_QA.md](BOOK_QA.md)。这是新字集独立审计与实际有限比较，不套用旧206证据或声称all-Unicode /整GUI通过。
 
 ## 三个face与有限字符集
 

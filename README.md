@@ -114,6 +114,9 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `SignEditor` | Surface属性、open / defaultOpen、onOpenChange、exitBehavior、onCloseRequest / onCommit / onCancel、dialogRef | 原生dialog编辑层；宿主处理关闭请求与持久化，Enter保留换行，不自动写世界 |
 | `JigsawEditor` | value / defaultValue、onValueChange、size / scale、jointEnabled、labels、onDone / onHelp / onCancel、各字段inputRefs | 源表单组合：六个字符串draft与接点开关；宿主验证signed int32及方块标识符，不执行世界生成。见 [JIGSAW_QA.md](docs/JIGSAW_QA.md) |
 | `JigsawPriorityFields` | value / defaultValue、onValueChange、fieldHeight、scale、inputProps / inputRefs | 可复用选择 /放置优先级fieldset；保留负号与临时draft，源wrapper16与默认host行高32分别说明 |
+| `CommandBlockEditor` | value / defaultValue、onValueChange、expanded、previousOutput / previousInfo、独立enabled flags、onClose / onPasteRequest | 源双栏表单，8字段由宿主接受；不执行命令或直接读取剪贴板。见 [COMMAND_BLOCK_QA.md](docs/COMMAND_BLOCK_QA.md) |
+| `CommandInput` | command的value / defaultValue、onValueChange、expanded / onExpandedChange、textareaProps / ref、onPasteRequest | compact / expanded共享一个真实textarea，Enter不执行，composition期间保留输入身份 |
+| `CommandOutputPanel` | previousOutput / previousInfo、trackOutput / onTrackOutputChange、trackOutputEnabled、outputRef | 可复用只读输出与独立历史模式快照；track开关不清空输出 |
 | `Furnace` / `BlastFurnace` / `Smoker` | `input`、`fuel`、`result`、`progress`、`fuelRemaining`、`onInputAction`、`onTakeResult`；容器库存属性 | 共用原版熔炼右面板，原始浮点槽位布局、火焰与进度裁切；游戏规则由使用方提供 |
 | `PixelIcon` | **必填** `name`；`size`，默认 20 | 16×16 原创 SVG 图标，默认装饰性 aria-hidden，图标按钮须提供标签 |
 | `Image` | **必填** `src`、`alt`、`sourceSize`；`size`、`scale`；img 属性 | PNG 物理尺寸与 GUI 逻辑尺寸分离，静态 SSR，无加载后测量；空 alt 表示装饰图 |
@@ -328,7 +331,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **128 个已实现组件**，新增JigsawEditor与可复用优先级字段；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开4份数据、10个渲染 /几何 /纹理函数，共142个ESM运行时值，Jigsaw27项客户端合同及React18 /19新包消费已通过。书写字体阶段的126 /140与79项合同、37项辅助检查保留原范围；implemented不等于所有GUI已pixel-perfect验收，历史model973唯一用例等也不作为本轮累计。
+当前 **131 个已实现组件**，新增CommandBlockEditor及可复用命令输入 /输出部件；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开4份数据、10个渲染 /几何 /纹理函数，共145个ESM运行时值，Command的tint修正后33项客户端合同及React18 /19新包消费已通过。Jigsaw128 /142与书写126 /140阶段保留原范围；implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -336,6 +339,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 - 书本：BookReader / BookEditor支持受控plain pages和零起点spread；BookPage / BookPageTurnButton可单独复用。`#books`提供预览，book.css可独立导入；签名只提供宿主快照，不重复触发关闭或写游戏世界，详见 [BOOK_QA.md](docs/BOOK_QA.md)。
 - 告示牌：SignTextSurface / SignEditor支持普通与悬挂牌面、真实textarea及宿主关闭请求；两oak原图身份已获原生draw支持，其余木种关联和含Han整段Unicode字体选择仍有候选边界，产品原生整页验收待完成，见 [SIGN_QA.md](docs/SIGN_QA.md)。
 - 拼图编辑：JigsawEditor提供六个字符串draft与接点开关，JigsawPriorityFields可单独复用；宿主验证signed int32并处理Done /Help /Back，不执行世界生成。预览入口 `#jigsaw`，使用与验收范围见 [JIGSAW_QA.md](docs/JIGSAW_QA.md)。
+- 命令方块：CommandBlockEditor复用CommandInput与CommandOutputPanel；宿主提供模式、历史快照与可用条件，Paste只发请求，命令不执行。预览入口 `#command-block`，使用与验证范围见 [COMMAND_BLOCK_QA.md](docs/COMMAND_BLOCK_QA.md)。
 - HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示、玩家列表及触屏控制，以及暂停 / 死亡 / 设置 / 加载 / 世界 / 服务器 / 资源包 / 成就提示等组合。
 
 目录中的 GUI 由这些基础零件组合。目录范围不等于所有版本、所有平台的完整游戏界面；原生 3D renderer、游戏规则、最终像素取整与真实游戏整帧差异单独验收。
@@ -509,7 +513,7 @@ python scripts/prepare-classic-fonts.py "PATH/TO/font.brarchive" --text-file scr
 python scripts/prepare-classic-fonts.py "PATH/TO/font.brarchive" --text-file scripts/book-sign-font-characters.txt --check-only
 ```
 
-该corpus只覆盖两demo的明确字串；206扩集已通过独立字形 /旧字集等价审计及运行时 /公开重验，原194批次与首个fallback失败保留其范围，未推广到任意Unicode。
+该corpus当前为25个Han，含页码 /签名标签新增“共第签页”；210私有字集已独立审计，实际所测页码 /footer的字形fallback消失，完整Book画面仍有残差。此前206结果保留原范围，不推广到任意Unicode，见 [BOOK_QA.md](docs/BOOK_QA.md)。
 
 导入 `mcbeui/classic-fonts.css`，在html根添加 `mc-classic-fonts`，使Input与portal Dialog继承同一字体；局部scope不会自动覆盖document.body portal。该CSS只有scope与字号令牌，不带font-face或字体数据。
 
@@ -636,7 +640,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。当前Jigsaw阶段128组件 /142值已在React18.3.1 /19.3.1真实消费通过；字体 /布局126 /140及更早包保持历史范围，见 [JIGSAW_QA.md](docs/JIGSAW_QA.md) / [SIGN_QA.md](docs/SIGN_QA.md) / [BOOK_QA.md](docs/BOOK_QA.md)。
+- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。当前Command阶段131组件 /145值已在React18.3.1 /19.3.1真实消费通过；Jigsaw128 /142、字体 /布局126 /140及更早包保持历史范围，见 [COMMAND_BLOCK_QA.md](docs/COMMAND_BLOCK_QA.md) / [JIGSAW_QA.md](docs/JIGSAW_QA.md)。
 - `#books` 的27项生产辅助与旧6项导航回归已分别通过，覆盖真实编辑 / 签名请求 / 窄屏及既有锚点；它们不计入Book正式30项或原生像素认证，见 [BOOK_QA.md](docs/BOOK_QA.md)。
 - `#signs` 的50项公开集成辅助已通过；新Sign29项、旧Dialog12项与修后完整导航6项分批验证，保留首次导航失败及修复记录，不作为原生整页像素或真实OS IME认证，见 [SIGN_QA.md](docs/SIGN_QA.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。

@@ -1,6 +1,6 @@
 # Bedrock 组件范围
 
-当前导出 128 个组件，目录 128 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、7 个纯函数（2个glint、4个layout / model几何与assembleGuiTextureAtlas纹理装配）及3个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages / renderGuiLayer），共 142 个源运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 131 个组件，目录 131 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、7 个纯函数（2个glint、4个layout / model几何与assembleGuiTextureAtlas纹理装配）及3个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages / renderGuiLayer），共 145 个源运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 书写类新增 BookReader / BookEditor / BookPage / BookPageTurnButton 与 SignTextSurface / SignEditor。Book 的30项独立客户端合同、此前138值React18 /19消费及27项公开预览辅助检查保留其范围；Sign的29项客户端合同及140值新包已通过，旧Dialog12项与修后完整导航6项分别通过，公开预览50项辅助检查通过。首批旧导航失败与修复后的范围分别保留，不合称单轮全绿或增加重复用例。五份书本及普通 /悬挂牌面采集已保存，有限混排字页与两oak背景分析完成；产品整页原生像素核验仍待进行。使用与边界见 [BOOK_QA.md](BOOK_QA.md) / [SIGN_QA.md](SIGN_QA.md)。
 
@@ -22,6 +22,8 @@ Anvil阶段接入可选imageRender /三个profile类型、39槽及title /invento
 
 JigsawEditor与可复用JigsawPriorityFields保留六字段draft和宿主验证 /操作边界；完整27项客户端合同与128 /142值React18 /19实际包消费已通过。优先级原wrapper16 /host32、joint Web映射与原生未验界限见 [JIGSAW_QA.md](JIGSAW_QA.md)，旧126 /140验证不扩写为该阶段结果。
 
+CommandBlockEditor、CommandInput与CommandOutputPanel的source API见 [COMMAND_BLOCK_QA.md](COMMAND_BLOCK_QA.md)：分别复用完整表单、同一真实textarea展开及独立输出快照；Cancel /track两个body flag与Header Close分开，不执行世界命令或直接读取剪贴板。glyph tint修正后的33项客户端合同、新样式包实际消费及新公开61项辅助通过；80项书写回归 /6导航保留其未改源的原范围。原32 /公开02的61为before-tint历史，不重计旧批或转移为原生GUI认证。
+
 | 分类 | 组件 |
 | --- | --- |
 | 文字与表面（21） | Text、BitmapText、PixelIcon、GuiIcon、Image、NineSlice、GuiImageLayer、GuiLayer、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
@@ -32,7 +34,7 @@ JigsawEditor与可复用JigsawPriorityFields保留六字段draft和宿主验证 
 | HUD（17） | Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、BossBar、Crosshair、ChatMessage、ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip、PlayerList、TouchControls |
 | 页面与列表组合（10） | PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast |
 | 书本与告示牌（6） | BookReader、BookEditor、BookPage、BookPageTurnButton、SignTextSurface、SignEditor |
-| 源表单编辑（2） | JigsawEditor、JigsawPriorityFields |
+| 源表单编辑（5） | JigsawEditor、JigsawPriorityFields、CommandBlockEditor、CommandInput、CommandOutputPanel |
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
 
@@ -52,7 +54,7 @@ HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 cus
 
 ## 验收边界
 
-当前目录中的 128 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。命令方块、结构 / XYZ 等组合仍待实现；游戏规则、世界 /服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与Web测试通过不能替代真实游戏逐屏验收。
+当前目录中的 131 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。结构 / XYZ 等组合仍待实现；游戏规则、世界 /服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与Web测试通过不能替代真实游戏逐屏验收。
 
 ## 复用方式
 

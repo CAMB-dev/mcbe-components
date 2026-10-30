@@ -114,6 +114,21 @@ Book阶段新增4个runtime组件，当时124组件＋4数据＋10函数，共13
 
 随后 `.cache/book-native-rt-execution-01/FINAL.json` 已完成三次selected-before原生RT读取，native失败 /重试均为0；每个实际2570×1402目标的原始footprint为14,715,176字节，78个既有Book /Sign来源pin与capture字节未变。空书与混排两原生状态的完整RGBA诊断有7,437像素 /22,311 RGB字节不同，alpha无变化；差异bbox `[605,262,1180,345]` 全在原正文clip `[605,234,1215,987]`，clip外所有字节相同。这是两份原生状态之间的诊断，不是生产DOM比较或DOM整页零差；输出过程未重启游戏 /Computer Use，专用helper已退出。
 
+### 实际组件与原生参考的残差
+
+随后对完整2570×1402目标做实际组件比较，结果仍未达到native parity。两个完整原生presentation guard的RGBA差异为0，不能把guard成功转移成DOM成功。`.cache/book-native-component-compare-01/FINAL.json` 保留基准，`FINAL-FOOTER-02.json` 保留按源链 /native VB修正footer后的独立阶段：
+
+|正文profile /状态|基准差异像素|footer修正后|补四字后|
+|---|---:|---:|---:|
+|Classic /empty|73,299|54,547|48,661|
+|Classic /mixed|76,913|58,161|52,275|
+|Unicode override /empty|72,146|53,394|46,489|
+|Unicode override /mixed|75,760|57,008|50,103|
+
+footer按钮按源最小外框102×20、bottom对齐、随unitScale的一逻辑边框及无shadow修正；长文案仍按实际字体文本宽＋10逻辑insets自适应，不固定压成102宽。四组alpha差异均从14,000降为0，footer差异20,369→1,617，footer之外每字节不变。
+
+新增“共第签页”的210私有字集独立审计通过后，`FINAL-FONT-03.json` 以真实NVIDIA /D3D11 /DPR1再次完成四个完整目标比较。CDP确认所测页码11glyph与footer2glyph均只使用各自Classic或Unicode face，原MCBE CJK fallback在这些节点上实际消失；变化仅在两页码band与footer，其余字节相同。footer残差进一步降为497；两页码band仍为Classic 3,738＋3,515 /Unicode 2,740＋2,341，皮肤 /controls余区40,911与mixed正文3,614残差保留。两个完整presentation guard仍RGBA0，125个选定输入pin无变化，native parity仍为false；字符补齐不等于通用Unicode或整GUI通过。
+
 ## 正文与编辑布局修订
 
 `BookFontMode` 为 `auto | latin | unicode`。`BookEditor.fontMode` 接受一个模式或 `(pageIndex) => mode`；单独的可编辑 `BookPage` 也可指定。auto只在该页整段已接受值含Han时选择Unicode家族，是可覆盖的有限候选。显式 `textareaProps.style.fontFamily` 优先；Reader静态文字、title /author、页码与另一页不会因当前页输入而一并切换。仍保留同一个真实textarea、ref、选区、composition及受控值所有权，不以新字体角色替换输入节点。
@@ -124,6 +139,8 @@ Book阶段新增4个runtime组件，当时124组件＋4数据＋10函数，共13
 
 旧30项与其旧geometry期望属于上面保留的历史版本；源继承与native证据揭示的旧几何断言已明确修订，不能宣称新源由旧30项原样通过。194字集先完成79项，随后公开首批6通过 /1失败揭示Welcome样本实际fallback；本轮选择补齐两demo字符，保留失败及尚未执行的后续检查。
 
-最终206字集完整79/79通过，其中Book39项（另Sign30 /Classic10），84.256286秒，零跳过 /重试 /flaky，752项选定输入pin不变；原翻页13,824像素仍为严格RGBA0宿主合同。canonical `.cache/book-font-role-qa-01/formal-206-01/FINAL.json` SHA256 `efdebb158b97c01c2998b46785929088711d60a1631a1c61465ca4f17abbf936`；整6项旧导航另通过，不重计旧Dialog或194同项。当前React18.3.1 /19.3.1实际消费者通过140值、SSR、新BookFontMode /逐页factory、strict TypeScript与样式资源；日志 `.cache/book-sign-typography-close-01/package-verification-206.log`。
+当时206字集完整79/79通过，其中Book39项（另Sign30 /Classic10），84.256286秒，零跳过 /重试 /flaky，752项选定输入pin不变；原翻页13,824像素仍为严格RGBA0宿主合同。canonical `.cache/book-font-role-qa-01/formal-206-01/FINAL.json` SHA256 `efdebb158b97c01c2998b46785929088711d60a1631a1c61465ca4f17abbf936`；整6项旧导航另通过，不重计旧Dialog或194同项。当时React18.3.1 /19.3.1实际消费者通过140值、SSR、新BookFontMode /逐页factory、strict TypeScript与样式资源；日志 `.cache/book-sign-typography-close-01/package-verification-206.log`。
 
 公开03首个补字后完整批37/37辅助通过，20.477秒，三face真实加载，747输入 /327dist /59site无变化，严格整值Unicode家族检查未放宽。Book实际已知混排advance231 CSS px在244内容宽内；真实输入 /选择、逐页覆盖、composition、只读禁用、签名角色隔离和窄屏也检查。报告 `.cache/book-sign-typography-public-03/RESULT.json`，准备命令及字体范围见 [CLASSIC_FONTS_QA.md](CLASSIC_FONTS_QA.md)。37项不加入79正式，旧01失败与未执行02保留；完整默认字体栅格、精确clip量化、真实OS IME与Present仍未认证。
+
+当前210字集与footer修订已完成整80项回归（Book40 /Sign30 /Classic10）及另6项旧导航，零跳过 /重试 /flaky /report errors，892项选定输入加5 harness均不变；见 `.cache/command-book-regression-01/FINAL.json`。新增footer case实际覆盖scale2 /5、pages /signing与长文案自适应。首80批为79通过 /1失败：新case误将最小102固定套到长英文label；改用独立测量activefont文本＋源10 insets预测intrinsic后fresh80通过，产品、旧79项与0.02几何容差未改。首报告保留，不累加重复通过项。当前实际React18.3.1 /19.3.1包为131组件 /145值，日志 `.cache/command-block-root-close-01/package-verification.log`。本轮Command公开61项辅助也已通过，其范围见 [COMMAND_BLOCK_QA.md](COMMAND_BLOCK_QA.md)，不增加Book原生像素覆盖或替代上述仍非零的完整画面比较。
