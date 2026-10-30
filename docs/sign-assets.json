@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 1,
+  "fixedSource": {
+    "archive": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3"
+  },
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "scope": "Complete official Sign source-bank images. Filename-to-wood mapping and oak defaults are explicit source candidates,not native runtime certification.",
+  "binding": "sign_background.texture and hanging_sign_background.texture use dynamic$sign_texture.",
+  "candidateDefault": {
+    "wood": "oak",
+    "regular": "sign",
+    "hanging": "hanging_sign",
+    "nativeVerified": false
+  },
+  "resources": [
+    {
+      "key": "sign",
+      "entry": "resource_pack/textures/ui/sign.png",
+      "destination": "src/assets/sign/sign.png",
+      "bytes": 345,
+      "sha256": "340fdeb4a3b49ee2002a876cd2fab724d96f92b795bb24455ebd81a1d4ed3afa",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "hanging_sign",
+      "entry": "resource_pack/textures/ui/hanging_sign.png",
+      "destination": "src/assets/sign/hanging_sign.png",
+      "bytes": 423,
+      "sha256": "0e01fadd553227cefa81e1d3caebfd5ff85afe1f4e66cf4b932611bbb275d77c",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "sign_acacia",
+      "entry": "resource_pack/textures/ui/sign_acacia.png",
+      "destination": "src/assets/sign/sign_acacia.png",
+      "bytes": 328,
+      "sha256": "493f9a358c8e25ba92cc9ec0b139c53cb5d224c627118aacb96a5bdd6e21351d",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "sign_birch",
+      "entry": "resource_pack/textures/ui/sign_birch.png",
+      "destination": "src/assets/sign/sign_birch.png",
+      "bytes": 341,
+      "sha256": "6f70b64e6d4b5c2312465730988ced6a4397eda9b92d1479b09eb0f369192ca7",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "sign_jungle",
+      "entry": "resource_pack/textures/ui/sign_jungle.png",
+      "destination": "src/assets/sign/sign_jungle.png",
+      "bytes": 308,
+      "sha256": "6f08d20d3b66bd43dccea852c53e0bbe8e3ae249f52276dfcc9eec1e4bcc321b",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "sign_darkoak",
+      "entry": "resource_pack/textures/ui/sign_darkoak.png",
+      "destination": "src/assets/sign/sign_darkoak.png",
+      "bytes": 315,
+      "sha256": "330f3ca22f0c630eca2a76f2470df21bb2a289f7465a492a182b15b25d27be11",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "sign_spruce",
+      "entry": "resource_pack/textures/ui/sign_spruce.png",
+      "destination": "src/assets/sign/sign_spruce.png",
+      "bytes": 316,
+      "sha256": "e40c2291e34dd73f4856beeab2eef0fd5ede298feda0092454a3d81afa3287dd",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "sign_warped",
+      "entry": "resource_pack/textures/ui/sign_warped.png",
+      "destination": "src/assets/sign/sign_warped.png",
+      "bytes": 407,
+      "sha256": "1b6fe1b4dba2502b5dacda55eae0f7d8e92d1b0fd147ecd378b345145d4eb451",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "sign_crimson",
+      "entry": "resource_pack/textures/ui/sign_crimson.png",
+      "destination": "src/assets/sign/sign_crimson.png",
+      "bytes": 405,
+      "sha256": "969760cbd18c1122c000dabe05acbf7bd1d3d77a3c46572caca558fb90e396f9",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "bamboo_sign",
+      "entry": "resource_pack/textures/ui/bamboo_sign.png",
+      "destination": "src/assets/sign/bamboo_sign.png",
+      "bytes": 441,
+      "sha256": "3bb328ee96114ef2fe05bf36b975daf11d35b10a3fc3b4cae9cd80a65cb0f4dc",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "mangrove_sign",
+      "entry": "resource_pack/textures/ui/mangrove_sign.png",
+      "destination": "src/assets/sign/mangrove_sign.png",
+      "bytes": 233,
+      "sha256": "fc4e1c333d6eda2b467b95ccf0c582b0449512306d4d351a7f96627ecb76c1b3",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "cherry_sign",
+      "entry": "resource_pack/textures/ui/cherry_sign.png",
+      "destination": "src/assets/sign/cherry_sign.png",
+      "bytes": 317,
+      "sha256": "8ee22aff89d4c624c014989409866fd2bedb3140351ebcc395a4a203e2f28c78",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "pale_oak_sign",
+      "entry": "resource_pack/textures/ui/pale_oak_sign.png",
+      "destination": "src/assets/sign/pale_oak_sign.png",
+      "bytes": 218,
+      "sha256": "88737cd44cc824c80da2f3d346a81c550e88044e5862498281e7a6dcdd43c008",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "poplar_sign",
+      "entry": "resource_pack/textures/ui/poplar_sign.png",
+      "destination": "src/assets/sign/poplar_sign.png",
+      "bytes": 243,
+      "sha256": "aa8fc3b7862f6ec1057245ecf73415ea2f36d798e8dfe4cda676e8abbf2bbb75",
+      "dimensions": [
+        24,
+        12
+      ]
+    },
+    {
+      "key": "hanging_sign_birch",
+      "entry": "resource_pack/textures/ui/hanging_sign_birch.png",
+      "destination": "src/assets/sign/hanging_sign_birch.png",
+      "bytes": 452,
+      "sha256": "176735888bd9018b584d24d4d9f7a6f9421b6921fe9127c147c4271cdddea907",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_cherry",
+      "entry": "resource_pack/textures/ui/hanging_sign_cherry.png",
+      "destination": "src/assets/sign/hanging_sign_cherry.png",
+      "bytes": 395,
+      "sha256": "1f2b4032972b07f6983693da6961eb2b5d5d8a09df9e13e67cb92cc230b6467d",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_bamboo",
+      "entry": "resource_pack/textures/ui/hanging_sign_bamboo.png",
+      "destination": "src/assets/sign/hanging_sign_bamboo.png",
+      "bytes": 474,
+      "sha256": "8f36be03167d28ad38d7e26eb0fa4d2b1c598b8507ace781b6a6bc5c032c41d3",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_jungle",
+      "entry": "resource_pack/textures/ui/hanging_sign_jungle.png",
+      "destination": "src/assets/sign/hanging_sign_jungle.png",
+      "bytes": 502,
+      "sha256": "eb9abcd43fde8ab131b0250c99a341e2eed28e2c632f8834e469994b52794be5",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_darkoak",
+      "entry": "resource_pack/textures/ui/hanging_sign_darkoak.png",
+      "destination": "src/assets/sign/hanging_sign_darkoak.png",
+      "bytes": 391,
+      "sha256": "6083bda509c0d737f16f8de9bcee55a536769d1095cb5932306eb3a19d3104be",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_warped",
+      "entry": "resource_pack/textures/ui/hanging_sign_warped.png",
+      "destination": "src/assets/sign/hanging_sign_warped.png",
+      "bytes": 450,
+      "sha256": "a5ce5664938d4cf48419428d2b94bc395a8440b9ec97f2ae3ef95964d6a832a9",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_pale_oak",
+      "entry": "resource_pack/textures/ui/hanging_sign_pale_oak.png",
+      "destination": "src/assets/sign/hanging_sign_pale_oak.png",
+      "bytes": 220,
+      "sha256": "7b30da3d8c52845aace0d657718abfabc3d9c568b342f710ac4c032e8e3bc4e8",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_acacia",
+      "entry": "resource_pack/textures/ui/hanging_sign_acacia.png",
+      "destination": "src/assets/sign/hanging_sign_acacia.png",
+      "bytes": 405,
+      "sha256": "ac70733a909d7126ba1df161fbd82fefd15fa751923cb376ec270570fc00f566",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_mangrove",
+      "entry": "resource_pack/textures/ui/hanging_sign_mangrove.png",
+      "destination": "src/assets/sign/hanging_sign_mangrove.png",
+      "bytes": 406,
+      "sha256": "6de6bd1d0be1f6fe94787611b93941d5fddfb17ab7bee552f140550945961f69",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_poplar",
+      "entry": "resource_pack/textures/ui/hanging_sign_poplar.png",
+      "destination": "src/assets/sign/hanging_sign_poplar.png",
+      "bytes": 265,
+      "sha256": "7e63b0e77e91287f1a91a60382eab399ba0ac402d0695c677d92d2e88b6db7c7",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_spruce",
+      "entry": "resource_pack/textures/ui/hanging_sign_spruce.png",
+      "destination": "src/assets/sign/hanging_sign_spruce.png",
+      "bytes": 417,
+      "sha256": "8423f90663445566703dbdaff2a488f7b8d051a3f87ccb40a31c9c0332b3e1d9",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "key": "hanging_sign_crimson",
+      "entry": "resource_pack/textures/ui/hanging_sign_crimson.png",
+      "destination": "src/assets/sign/hanging_sign_crimson.png",
+      "bytes": 455,
+      "sha256": "432f2b542ea5779ac625462d1157e046089eb470a4230403724a858740c554a2",
+      "dimensions": [
+        16,
+        16
+      ]
+    }
+  ],
+  "textureMetadata": [],
+  "license": {
+    "entry": "LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "destination": "src/assets/sign/LICENSE.md"
+  },
+  "sourceUi": [
+    {
+      "entry": "resource_pack/ui/sign_screen.json",
+      "bytes": 4012,
+      "sha256": "93e8647009c4544d46ddf3453f6a5ee54274e1efdae9fbfdb0d60f3c7895bbc6"
+    },
+    {
+      "entry": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    },
+    {
+      "entry": "resource_pack/ui/_global_variables.json",
+      "bytes": 20210,
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b"
+    }
+  ],
+  "unknown": [
+    "Actual default/wood controller mapping",
+    "Final background fit/viewport andGUI sampling",
+    "Native font routing mechanism,dye/glow andinputline policies"
+  ],
+  "sourceGeometry": {
+    "regular": {
+      "backgroundSize": [
+        192,
+        93
+      ],
+      "backgroundOffset": [
+        -1,
+        -5
+      ],
+      "editorSize": [
+        185,
+        90
+      ]
+    },
+    "hanging": {
+      "backgroundSize": [
+        287,
+        143
+      ],
+      "backgroundOffset": [
+        0,
+        -32
+      ],
+      "editorSize": [
+        126,
+        90
+      ]
+    },
+    "baseEditorOffset": [
+      0,
+      5
+    ],
+    "alignment": "center",
+    "fontSizeSourceName": "large",
+    "constrain_to_rect": false,
+    "inputSourceMaxLength": 32500,
+    "screenDim": 0.4
+  },
+  "observedDefaultIdentity": {
+    "scope": "Only two observed oak GUI5 samples;does not establish13wood/frontback/default binding algorithm or complete native rendering.",
+    "regular": {
+      "nativeResource": 582,
+      "source": "sign",
+      "wholeRGBA": [
+        24,
+        12
+      ]
+    },
+    "hanging": {
+      "nativeResource": 431,
+      "source": "hanging_sign",
+      "wholeRGBA": [
+        16,
+        16
+      ]
+    },
+    "evidence": ".cache/book-sign-native-gui5-analysis-01/BACKGROUND-IDENTITY.json",
+    "evidenceSha256": "b363f3945c8c17b1d2952b01d07a00a927ba69ad23c2b2604cb50392079b60b8",
+    "sampling": "POINT/CLAMP/fullUV/no nine-slice",
+    "sourceContain": "regular186x93;hanging143x143 normal contain candidate. Actual hanging packed width143.125 is not fitted into CSS."
+  }
+}

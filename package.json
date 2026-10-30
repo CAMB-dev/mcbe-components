@@ -63,6 +63,7 @@
     "./crafting-screen.css": "./dist/crafting-screen.css",
     "./inventory-screen-frame.css": "./dist/inventory-screen-frame.css",
     "./book.css": "./dist/book.css",
+    "./sign.css": "./dist/sign.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",

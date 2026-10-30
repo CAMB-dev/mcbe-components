@@ -88,7 +88,7 @@ python scripts/prepare-book-assets.py --check
 
 ## 验证状态
 
-本轮新增4个runtime组件，当前124组件＋4数据＋10函数，共138个运行时值。`#books` 提供Reader、Editor、独立页与按钮的应用内预览；可见示例或SSR输出本身不等于最终客户端验收。
+Book阶段新增4个runtime组件，当时124组件＋4数据＋10函数，共138个运行时值。`#books` 提供Reader、Editor、独立页与按钮的应用内预览；以下结果保留该阶段范围，不因后续Sign增至140值而重新累计。
 
 独立完整第二批30/30通过（12 desktop、12 mobile、6 pixels），36.589420秒，零跳过 / 重试 / flaky，172项渲染及测试输入前后无变化。真实textarea的输入 / 选择 / ref、受控拒绝、空页 / 奇数页、移除正在composition的页、签名快照、排他pencil、禁用、强制颜色和键盘焦点均覆盖；composition事件合同不等于真实OS IME认证。原报告及范围见 `.cache/book-independent-qa/FINAL.json`。
 
@@ -103,3 +103,11 @@ python scripts/prepare-book-assets.py --check
 旧导航6/6另在最新生产site通过，20.7秒、零重试，核对新section未破坏既有anchors、字体布局变化、滚动和侧栏搜索。日志及报告在 `.cache/book-root-close-01/navigation.log` / `navigation-report.json`。这些生产与导航结果认证Web交互和集成，不增加原生像素覆盖范围。
 
 原始素材与Web合同均不认证完整游戏画面。祖先百分比clamp、默认字体换行、caret / IME像素、安装版活动路由、原生签名和最终Present均保留为后续工作；未声称native0或全部Classic页面覆盖。
+
+## 后续原生捕获与有限混排分析
+
+2026-10-30 已保存 GUI5 的空书、混合文本正文与空标题签名页捕获；索引为 `.cache/book-sign-native-gui5-01/root-observations.json`。三份实际 API 列表和静态 draw 索引已完成：空书23、混排30、签名46个 UI draw。当前仅混排正文做了有限字页 / 顶点分析；Book完整RT读取、空书 /签名字体解码与产品整页比较仍未完成。空标题签名页是取消前的编辑状态，不是已签名Reader样本。
+
+混排正文的 Latin完整纹理唯一匹配 `glyph_00.png`，中文也来自对应Unicode整页；它支持整值替代字体路径，不能解释为 default8 Latin加逐字CJK回退。31个正文glyph均为黑色，LINEAR /CLAMP；normal角色的投影约每local单位5 physical px，为两Sign large角色的一半。显式换行的第二行local Y为10，中文pens为0/9/18/27/36/45；不是据此恢复所有自动换行。该帧没有可见caret draw，因此不能将Sign绿色caret推断为Book caret颜色。
+
+来源见 `.cache/book-sign-font-selection-study-01/FINAL.json`（SHA256 `c70a52590ad762e09bdac4067410626207f7a7a3572c9fc31e130744402efba2`）及其 `BOOK-SUPPLEMENT.md`；五捕获的离线导出与索引见 `.cache/book-sign-native-gui5-analysis-01/FINAL.json`。精确字体切换谓词与native advance尚未恢复，宿主Unicode Latin宽度仍与该捕获不同；当前Book未因此新增自动字体选择或改字号来拟合样本。上述是来源分析，不追加Book正式用例数或产品native零差声明。

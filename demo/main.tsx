@@ -34,6 +34,7 @@ import { CraftingLayerExamples } from './crafting-layer-examples';
 import { AnvilLayerExamples } from './anvil-layer-examples';
 import { ItemRenderersExamples } from './item-renderers-examples';
 import { BookExamples } from './book-examples';
+import { SignExamples } from './sign-demo';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -56,6 +57,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'grindstone-layer', name: 'Source Grindstone', icon: 'chevron', count: '01' },
   { id: 'crafting-layer', name: 'Source Crafting', icon: 'chevron', count: '01' },
   { id: 'books', name: 'Books & writing', icon: 'chevron', count: '04' },
+  { id: 'signs', name: 'Signs', icon: 'chevron', count: '02' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'anvil-layer', name: 'Source Anvil', icon: 'chevron', count: '01' },
@@ -79,6 +81,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'gui-icons', name: 'GUI icons', icon: 'chevron', count: '150' },
 ];
 const snippets: Record<string, string> = {
+  signs: `import { SignTextSurface, SignEditor } from 'mcbeui';\n\n<SignTextSurface variant="regular" wood="oak"\n  value={text} onValueChange={setText} />\n<SignEditor open={open} onOpenChange={setOpen}\n  variant="hanging" wood="cherry"\n  value={text} onValueChange={setText} />\n// Outside and Escape request a close.\n// The host accepts text changes and chooses its exit policy.`,
   books: `import { BookReader, BookEditor } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<BookReader pages={['First leaf', 'Second leaf']} />\n<BookEditor defaultPages={['A new adventure']}\n  defaultAuthor="Player"\n  onSign={snapshot => saveBook(snapshot)} />\n// spreadIndex addresses a pair of leaf pages.\n// The host accepts structural page edits and persists signed books.`,
   scrolling: `<ScrollArea label="Inventory notes" style={{height:180}}>\n  <YourScrollableContent/>\n</ScrollArea>\n// ScrollBar is also available as a controlled primitive.`,
   buttons: `import { Button, PixelIcon } from 'mcbeui';\n\n<Button variant="primary"\n  startIcon={<PixelIcon name="plus" />}\n  onClick={() => createWorld()}>\n  Create new world\n</Button>`,
@@ -187,6 +190,7 @@ function App() {
     // section, including ones whose sidebar links are filtered by search.
     const sections = [...document.querySelectorAll<HTMLElement>('main section[id]')].filter(section => ids.has(section.id));
     let frame = 0, cancelled = false;
+    let selected = sections[0]?.id;
     const update = () => {
       frame = 0; if (cancelled || !sections.length) return;
       const padding = Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
@@ -198,10 +202,15 @@ function App() {
         // the reading line; tall sections stay active after their heading exits.
         // Native scrolling rounds its offset to a CSS pixel even when font
         // metrics leave a fractional target edge just past that reading line.
-        if (Math.floor(rect.top - padding - margin) <= 0 && rect.top >= closest) { current = section.id; closest = rect.top; }
+        const anchorDistance = Math.floor(rect.top - padding - margin);
+        // Keep the current section through a one-pixel retreat from its
+        // rounded fragment anchor. This does not select the next section early.
+        const atReadingLine = anchorDistance <= 0 || (section.id === selected && anchorDistance === 1);
+        if (atReadingLine && rect.top >= closest) { current = section.id; closest = rect.top; }
       }
       const scrolling = document.scrollingElement;
       if (scrolling && scrolling.scrollHeight > window.innerHeight && Math.ceil(window.scrollY + window.innerHeight) >= scrolling.scrollHeight) current = sections[sections.length - 1]!.id;
+      selected = current;
       setActive(previous => previous === current ? previous : current);
     };
     const schedule = () => { if (!cancelled && !frame) frame = requestAnimationFrame(update); };
@@ -390,6 +399,7 @@ function App() {
       <Example id="grindstone-layer" title="Source Grindstone" detail="Original images, item models and optional local glyphs with all 39 slots interactive."><GrindstoneLayerExamples/></Example>
       <Example id="crafting-layer" title="Source Crafting" detail="A complete recipe book and workbench, with source images, model fallbacks and 46 interactive slots."><CraftingLayerExamples/></Example>
       <Example id="books" title="Books & writing" detail="Two-page reading, editable pages and a signing cover with original textures."><BookExamples notify={notify}/></Example>
+      <Example id="signs" title="Signs" detail="Regular and hanging signs with original textures and real text input."><SignExamples notify={notify}/></Example>
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

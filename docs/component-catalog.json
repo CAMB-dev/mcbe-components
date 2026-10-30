@@ -643,14 +643,16 @@
       }
     ],
     "books_and_writing": [
-      {"name":"BookReader","status":"implemented","fidelity":"source_texture_web_composition_pending_native_book_capture","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
-      {"name":"BookEditor","status":"implemented","fidelity":"source_texture_web_composition_pending_native_book_capture","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
-      {"name":"BookPage","status":"implemented","fidelity":"source_texture_web_composition_pending_native_book_capture","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
-      {"name":"BookPageTurnButton","status":"implemented","fidelity":"source_texture_web_composition_pending_native_book_capture","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"}
+      {"name":"BookReader","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
+      {"name":"BookEditor","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
+      {"name":"BookPage","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
+      {"name":"BookPageTurnButton","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
+      {"name":"SignTextSurface","status":"implemented","fidelity":"source_texture_web_composition_client_verified_native_texture_draw_analysis_whole_ui_pixels_pending","source":"resource_pack/ui/sign_screen.json, fixed v1.26.60.5","details":"docs/SIGN_QA.md"},
+      {"name":"SignEditor","status":"implemented","fidelity":"source_texture_web_composition_client_verified_native_texture_draw_analysis_whole_ui_pixels_pending","source":"resource_pack/ui/sign_screen.json, fixed v1.26.60.5","details":"docs/SIGN_QA.md"}
     ]
   },
   "publicExports": {
-    "components": 124,
+    "components": 126,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -661,7 +663,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 138,
+    "runtimeValues": 140,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 4,

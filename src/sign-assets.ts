@@ -1,0 +1,31 @@
+// Complete original sources. See docs/sign-assets.json and assets/sign/LICENSE.md.
+// Wood/default associations are explicit candidates,not native-certified bindings.
+export const signAssets = {
+  sign: { src: new URL('./assets/sign/sign.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  hanging_sign: { src: new URL('./assets/sign/hanging_sign.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  sign_acacia: { src: new URL('./assets/sign/sign_acacia.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  sign_birch: { src: new URL('./assets/sign/sign_birch.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  sign_jungle: { src: new URL('./assets/sign/sign_jungle.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  sign_darkoak: { src: new URL('./assets/sign/sign_darkoak.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  sign_spruce: { src: new URL('./assets/sign/sign_spruce.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  sign_warped: { src: new URL('./assets/sign/sign_warped.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  sign_crimson: { src: new URL('./assets/sign/sign_crimson.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  bamboo_sign: { src: new URL('./assets/sign/bamboo_sign.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  mangrove_sign: { src: new URL('./assets/sign/mangrove_sign.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  cherry_sign: { src: new URL('./assets/sign/cherry_sign.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  pale_oak_sign: { src: new URL('./assets/sign/pale_oak_sign.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  poplar_sign: { src: new URL('./assets/sign/poplar_sign.png', import.meta.url).href, sourceSize: [24, 12] as const },
+  hanging_sign_birch: { src: new URL('./assets/sign/hanging_sign_birch.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_cherry: { src: new URL('./assets/sign/hanging_sign_cherry.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_bamboo: { src: new URL('./assets/sign/hanging_sign_bamboo.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_jungle: { src: new URL('./assets/sign/hanging_sign_jungle.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_darkoak: { src: new URL('./assets/sign/hanging_sign_darkoak.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_warped: { src: new URL('./assets/sign/hanging_sign_warped.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_pale_oak: { src: new URL('./assets/sign/hanging_sign_pale_oak.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_acacia: { src: new URL('./assets/sign/hanging_sign_acacia.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_mangrove: { src: new URL('./assets/sign/hanging_sign_mangrove.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_poplar: { src: new URL('./assets/sign/hanging_sign_poplar.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_spruce: { src: new URL('./assets/sign/hanging_sign_spruce.png', import.meta.url).href, sourceSize: [16, 16] as const },
+  hanging_sign_crimson: { src: new URL('./assets/sign/hanging_sign_crimson.png', import.meta.url).href, sourceSize: [16, 16] as const },
+} as const;
+export type SignAssetName = keyof typeof signAssets;

@@ -1,8 +1,12 @@
 # Bedrock 组件范围
 
-Anvil当前接入可选imageRender /三个profile类型、39槽及title /inventory /name /cost四独立文字角色，导出总数仍120组件 /134runtime。28完整原PNG /29keys与本机私有字体用于正常source输入。有限host profile四GUI5状态完整native UI target RGBA0，首invalid40像素耐久残差保留；修后React18 /19包通过；Anvil35＋旧回归103按整文件GPU profile共138独立用例通过，生产首轮73辅助检查通过，各项证据保留受测范围，见 [ANVIL_IMAGE_QA.md](ANVIL_IMAGE_QA.md)。
+当前导出 126 个组件，目录 126 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、7 个纯函数（2个glint、4个layout / model几何与assembleGuiTextureAtlas纹理装配）及3个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages / renderGuiLayer），共 140 个源运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
-当前导出 120 个组件，目录 120 项均为 implemented；另有 4 份数据（3份 renderer 数据与 guiIconNames 图标名称目录）、7 个纯函数（2个glint、4个layout / model几何与assembleGuiTextureAtlas纹理装配）及3个浏览器GPU函数（renderBitmapGlyphs / renderGuiImages / renderGuiLayer），共 134 个源运行时值导出；这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+书写类新增 BookReader / BookEditor / BookPage / BookPageTurnButton 与 SignTextSurface / SignEditor。Book 的30项独立客户端合同、此前138值React18 /19消费及27项公开预览辅助检查保留其范围；Sign的29项客户端合同及140值新包已通过，旧Dialog12项与修后完整导航6项分别通过，公开预览50项辅助检查通过。首批旧导航失败与修复后的范围分别保留，不合称单轮全绿或增加重复用例。五份书本及普通 /悬挂牌面采集已保存，有限混排字页与两oak背景分析完成；产品整页原生像素核验仍待进行。使用与边界见 [BOOK_QA.md](BOOK_QA.md) / [SIGN_QA.md](SIGN_QA.md)。
+
+以下历史阶段的120组件 /134值验证保留原受测范围，不扩充为新增书写组件的验证：
+
+Anvil阶段接入可选imageRender /三个profile类型、39槽及title /inventory /name /cost四独立文字角色，当时导出总数为120组件 /134runtime。28完整原PNG /29keys与本机私有字体用于正常source输入。有限host profile四GUI5状态完整native UI target RGBA0，首invalid40像素耐久残差保留；修后React18 /19包通过；Anvil35＋旧回归103按整文件GPU profile共138独立用例通过，生产首轮73辅助检查通过，各项证据保留受测范围，见 [ANVIL_IMAGE_QA.md](ANVIL_IMAGE_QA.md)。
 
 本轮Grindstone新增imageRender及三个profile类型，runtime仍134、组件仍120。原frame / label / slot / item命令与ready-gated呈现提到私有shared helper，共用23完整原PNG / 24keys，旧18图字节不变。砂轮为39槽，有显式labels / itemImages / itemModels及原子CSS回退；字体用独立私有8页准备，不改变默认字体。首11合同共同漏掉close父布局，native300像素残差揭示后修正；修后22正式通过（11新＋11旧），旧附魔46项原profile回归、React18 / 19包与40项生产辅助检查通过。显式host原字体 / 投影 / dim .4背景的一个GUI5场景完整3,603,140像素native RGBA0；默认CSS仍有残差。见 [GRINDSTONE_IMAGE_QA.md](GRINDSTONE_IMAGE_QA.md)。
 
@@ -23,6 +27,7 @@ Anvil当前接入可选imageRender /三个profile类型、39槽及title /invento
 | 附魔部件（4） | EnchantmentOption、EnchantingRunes、EnchantingBook、ItemGlint |
 | HUD（17） | Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、BossBar、Crosshair、ChatMessage、ChatPanel、Scoreboard、StatusEffect、ActionBar、TitleOverlay、HeldItemTooltip、PlayerList、TouchControls |
 | 页面与列表组合（10） | PauseMenu、SettingsPanel、WorldList、ServerList、PlayerCard、PackList、PackCard、DeathScreen、LoadingScreen、AchievementToast |
+| 书本与告示牌（6） | BookReader、BookEditor、BookPage、BookPageTurnButton、SignTextSurface、SignEditor |
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
 
@@ -42,7 +47,7 @@ HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 cus
 
 ## 验收边界
 
-当前目录中的 120 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 / 服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与 Web 测试通过不能替代真实游戏逐屏验收。
+当前目录中的 126 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。命令方块、结构 / XYZ 与拼图编辑等组合仍待实现；游戏规则、世界 / 服务器数据、原生角色和特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与 Web 测试通过不能替代真实游戏逐屏验收。
 
 ## 复用方式
 

@@ -110,6 +110,8 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `BookEditor` | Reader基础属性、`onPagesChange`、`mode` / `defaultMode`、`onSign`、`onPageAction`、textarea / input属性与ref | 真实书与笔编辑与签名快照；宿主处理页结构、持久化和关闭，不自动分页或写入世界 |
 | `BookPage` | 必填`side`；text / defaultText、readOnly、blank、pageNumber、`onTextChange`、textareaRef | 可复用单页，编辑时保留真实textarea；ref为div |
 | `BookPageTurnButton` | 必填`direction`: previous / next；available、textures、button属性 | 原图24单位翻页按钮；不可用时隐藏且禁用，ref为button |
+| `SignTextSurface` | variant、wood / texture、value / defaultValue、onValueChange、scale / geometry、textareaProps / textareaRef、fontMode | 普通 / 悬挂原图牌面与真实多行输入，可独立复用；根ref为div。见 [SIGN_QA.md](docs/SIGN_QA.md) |
+| `SignEditor` | Surface属性、open / defaultOpen、onOpenChange、exitBehavior、onCloseRequest / onCommit / onCancel、dialogRef | 原生dialog编辑层；宿主处理关闭请求与持久化，Enter保留换行，不自动写世界 |
 | `Furnace` / `BlastFurnace` / `Smoker` | `input`、`fuel`、`result`、`progress`、`fuelRemaining`、`onInputAction`、`onTakeResult`；容器库存属性 | 共用原版熔炼右面板，原始浮点槽位布局、火焰与进度裁切；游戏规则由使用方提供 |
 | `PixelIcon` | **必填** `name`；`size`，默认 20 | 16×16 原创 SVG 图标，默认装饰性 aria-hidden，图标按钮须提供标签 |
 | `Image` | **必填** `src`、`alt`、`sourceSize`；`size`、`scale`；img 属性 | PNG 物理尺寸与 GUI 逻辑尺寸分离，静态 SSR，无加载后测量；空 alt 表示装饰图 |
@@ -324,12 +326,13 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **124 个已实现组件**，本轮新增BookReader / BookEditor及两个可复用书页零件；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开4份数据、10个渲染 / 几何 / 纹理函数，共138个ESM运行时值。Book的30项独立客户端合同及138值React18 / 19实际包消费分别通过；implemented仍不等于所有GUI已pixel-perfect验收。此前134值包及历史model阶段973唯一用例（968 PASS、5预期SKIP）保留原范围，不作为新Book的测试累计。
+当前 **126 个已实现组件**，本轮新增可复用SignTextSurface与SignEditor；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开4份数据、10个渲染 / 几何 / 纹理函数，共140个ESM运行时值。Sign的29项独立客户端合同及140值React18 /19实际包消费已通过；Book的30项客户端合同与138值包保留其原范围。implemented仍不等于所有GUI已pixel-perfect验收；此前134值包及历史model阶段973唯一用例（968 PASS、5预期SKIP）不作为本轮测试累计。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
 - GUI：已有附魔台、砂轮、完整 Classic 合成 / 生存背包屏幕、工作台与熔炉族主面板、铁砧、酿造台、现代锻造台、制图台、切石机、织布机、信标、合成器、箱子族、漏斗、发射器、投掷器、交易、玩家 / 创造 / 坐骑背包及共享配方搜索 / 分类部件。
 - 书本：BookReader / BookEditor支持受控plain pages和零起点spread；BookPage / BookPageTurnButton可单独复用。`#books`提供预览，book.css可独立导入；签名只提供宿主快照，不重复触发关闭或写游戏世界，详见 [BOOK_QA.md](docs/BOOK_QA.md)。
+- 告示牌：SignTextSurface / SignEditor支持普通与悬挂牌面、真实textarea及宿主关闭请求；两oak原图身份已获原生draw支持，其余木种关联和含Han整段Unicode字体选择仍有候选边界，产品原生整页验收待完成，见 [SIGN_QA.md](docs/SIGN_QA.md)。
 - HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示、玩家列表及触屏控制，以及暂停 / 死亡 / 设置 / 加载 / 世界 / 服务器 / 资源包 / 成就提示等组合。
 
 目录中的 GUI 由这些基础零件组合。目录范围不等于所有版本、所有平台的完整游戏界面；原生 3D renderer、游戏规则、最终像素取整与真实游戏整帧差异单独验收。
@@ -619,8 +622,9 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：把真实tarball分别安装至React18 / 19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。本轮124组件 /138值已在React18.3.1 /19.3.1真实消费通过，含Book SSR、类型 / refs / labels、book.css及41份原始资源；旧阶段包和测试数字保持历史范围，见 [BOOK_QA.md](docs/BOOK_QA.md) / [VERIFICATION.md](docs/VERIFICATION.md)。
+- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。当前126组件 /140值已在React18.3.1 /19.3.1真实消费通过；Book及更早包的数字保持历史范围，见 [SIGN_QA.md](docs/SIGN_QA.md) / [BOOK_QA.md](docs/BOOK_QA.md) / [VERIFICATION.md](docs/VERIFICATION.md)。
 - `#books` 的27项生产辅助与旧6项导航回归已分别通过，覆盖真实编辑 / 签名请求 / 窄屏及既有锚点；它们不计入Book正式30项或原生像素认证，见 [BOOK_QA.md](docs/BOOK_QA.md)。
+- `#signs` 的50项公开集成辅助已通过；新Sign29项、旧Dialog12项与修后完整导航6项分批验证，保留首次导航失败及修复记录，不作为原生整页像素或真实OS IME认证，见 [SIGN_QA.md](docs/SIGN_QA.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
 
 ## 许可

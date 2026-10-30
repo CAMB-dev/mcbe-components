@@ -1,0 +1,11 @@
+/* Sign gallery layout only; sign materials and text geometry belong to the components. */
+.sign-demo { display:grid; grid-template-columns:minmax(0,1fr); gap:20px; padding:24px; min-width:0; }
+.sign-demo__controls { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr)); gap:16px; align-items:end; min-width:0; }
+.sign-demo__actions { display:flex; flex-wrap:wrap; align-items:center; gap:16px; min-width:0; }
+.sign-demo__preview { min-width:0; max-width:100%; overflow-x:auto; padding:32px 16px; }
+.sign-demo__surface-space { width:max-content; }
+.sign-demo__note { display:block; margin:0; font-size:12px; overflow-wrap:anywhere; }
+.sign-demo__saved { min-width:0; font-size:12px; }
+.sign-demo__saved pre, .sign-demo__code { max-width:100%; margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font-size:12px; }
+.sign-demo__saved pre { margin-top:12px; }
+@media (max-width:640px) { .sign-demo { padding:16px; } }

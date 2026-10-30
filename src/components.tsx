@@ -9,6 +9,7 @@ import { createPortal } from 'react-dom';
 import { Spinner } from './feedback';
 import { ComboboxBase } from './combobox';
 import { GuiIcon } from './gui-icon';
+import { lockModalScroll as lockScroll } from './modal-scroll-lock';
 
 function cx(...names: (string | false | undefined)[]) { return names.filter(Boolean).join(' '); }
 function useValue<T>(value: T | undefined, defaultValue: T, onChange?: (value: T) => void) {
@@ -17,24 +18,6 @@ function useValue<T>(value: T | undefined, defaultValue: T, onChange?: (value: T
     if (value === undefined) setInternal(next);
     onChange?.(next);
   }] as const;
-}
-
-const scrollLocks = new WeakMap<Document, { count: number; overflow: string }>();
-function lockScroll(doc: Document) {
-  let state = scrollLocks.get(doc);
-  if (!state) {
-    state = { count: 0, overflow: doc.documentElement.style.overflow };
-    scrollLocks.set(doc, state);
-    doc.documentElement.style.overflow = 'hidden';
-  }
-  state.count++;
-  return () => {
-    const current = scrollLocks.get(doc);
-    if (current && --current.count === 0) {
-      doc.documentElement.style.overflow = current.overflow;
-      scrollLocks.delete(doc);
-    }
-  };
 }
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
