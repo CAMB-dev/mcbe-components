@@ -68,6 +68,7 @@
     "./command-block.css": "./dist/command-block.css",
     "./structure-editor.css": "./dist/structure-editor.css",
     "./server-forms.css": "./dist/server-forms.css",
+    "./npc.css": "./dist/npc.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",

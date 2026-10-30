@@ -1,0 +1,735 @@
+{
+  "schemaVersion": 1,
+  "fixedSource": {
+    "archive": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "scope": "Ten missing complete source images for reachable NPC interaction/editor branches; existing whole resources or explicitly recorded reencoded RGBA-equivalent skins are reused.",
+  "resources": [
+    {
+      "key": "back_button_default",
+      "entry": "resource_pack/textures/ui/back_button_default.png",
+      "destination": "src/assets/npc/back_button_default.png",
+      "bytes": 161,
+      "sha256": "ede3778556c75a258f65a44302efdca198edbf167ccb1fd63db2a338836f25f0",
+      "dimensions": [
+        15,
+        15
+      ],
+      "rgbaSha256": "1bcb52206b2025700932cb5253b7c24de2e8161a245f05bc9af27472860ebd34"
+    },
+    {
+      "key": "back_button_hover",
+      "entry": "resource_pack/textures/ui/back_button_hover.png",
+      "destination": "src/assets/npc/back_button_hover.png",
+      "bytes": 166,
+      "sha256": "6687db0752fb8515005c0ae894d46801596e388d1bf841f2bc8a872db3057eb3",
+      "dimensions": [
+        15,
+        15
+      ],
+      "rgbaSha256": "f547c0425923a96ef0d15741221ca9867e63878405e553b4b476c1d1d164f6b4"
+    },
+    {
+      "key": "back_button_pressed",
+      "entry": "resource_pack/textures/ui/back_button_pressed.png",
+      "destination": "src/assets/npc/back_button_pressed.png",
+      "bytes": 168,
+      "sha256": "e41aab8770a86c1f56aaca1ac5a844a092397bbcb607775173b686e9988ca752",
+      "dimensions": [
+        15,
+        15
+      ],
+      "rgbaSha256": "70b8b25b6c55a05de34cd776e1fd45067f8e37c32fe1be16ac2cc9f41bee9910"
+    },
+    {
+      "key": "dialog_bubble",
+      "entry": "resource_pack/textures/ui/dialog_bubble.png",
+      "destination": "src/assets/npc/dialog_bubble.png",
+      "bytes": 261,
+      "sha256": "ad047b13bafab8d4af7b57e8d36bc74ddf727da17cbc7e69d5c824d5bdd1d554",
+      "dimensions": [
+        17,
+        18
+      ],
+      "rgbaSha256": "3edc77d3c9efde3016c1ee4522fe55644ad394f1ecbfa253e34d04d23666f6b2",
+      "nineSlice": {
+        "insets": [
+          8,
+          7,
+          6,
+          6
+        ],
+        "baseSize": [
+          17,
+          18
+        ]
+      }
+    },
+    {
+      "key": "dialog_bubble_point",
+      "entry": "resource_pack/textures/ui/dialog_bubble_point.png",
+      "destination": "src/assets/npc/dialog_bubble_point.png",
+      "bytes": 245,
+      "sha256": "865789438222328b737a5fc8c1662f24f334062f596c3d1f1904cb283ae3b27f",
+      "dimensions": [
+        16,
+        18
+      ],
+      "rgbaSha256": "dd6af1fa552fb2c45124591e93abf9d27f14b8e2293bdba7fc2b1c97758fc9f2"
+    },
+    {
+      "key": "trash_default",
+      "entry": "resource_pack/textures/ui/trash_default.png",
+      "destination": "src/assets/npc/trash_default.png",
+      "bytes": 181,
+      "sha256": "4931525ef5366df2cdedf35c526ad0a22cc5b9ab2b0f07fd79d16a9f89880ec3",
+      "dimensions": [
+        16,
+        16
+      ],
+      "rgbaSha256": "da7e75c8eb572baa80ddef57fe4d5cbe730805c1d9cecfc4f572e0154ea53882"
+    },
+    {
+      "key": "background_indent_no_top",
+      "entry": "resource_pack/textures/ui/background_indent_no_top.png",
+      "destination": "src/assets/npc/background_indent_no_top.png",
+      "bytes": 99,
+      "sha256": "8edb761296c690704873a97eb55cedf8bc33282abd97d1571fbba74fea028ab2",
+      "dimensions": [
+        3,
+        2
+      ],
+      "rgbaSha256": "65f66a88dca41e682db022142689a3ff938ae4b35c7d061872a29e9212f23e20",
+      "nineSlice": {
+        "insets": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "baseSize": [
+          3,
+          2
+        ]
+      }
+    },
+    {
+      "key": "immersive_reader",
+      "entry": "resource_pack/textures/ui/immersive_reader.png",
+      "destination": "src/assets/npc/immersive_reader.png",
+      "bytes": 229,
+      "sha256": "afdb8dbfda225fd18bf4feee56ba775377df4b23a9b6f6f97a93b2e6710c5ea2",
+      "dimensions": [
+        19,
+        19
+      ],
+      "rgbaSha256": "ac227a24ffb777da532bbce50f5469d0c2545c5c6e19ab6adf34d88b5b1c3a20"
+    },
+    {
+      "key": "toggle_on",
+      "entry": "resource_pack/textures/ui/toggle_on.png",
+      "destination": "src/assets/npc/toggle_on.png",
+      "bytes": 167,
+      "sha256": "b37762f63652856a4c735f5adf55e511e9c01744a883ec70647b97e08a1711ff",
+      "dimensions": [
+        30,
+        16
+      ],
+      "rgbaSha256": "ca4d3d8e1535d756f000b08fa6218453d8e11aa2c549546abb83f28140958af8"
+    },
+    {
+      "key": "toggle_on_hover",
+      "entry": "resource_pack/textures/ui/toggle_on_hover.png",
+      "destination": "src/assets/npc/toggle_on_hover.png",
+      "bytes": 225,
+      "sha256": "3ce38b76a06e672c95cb8fa4892456e4deaf482c7f6a67b8e991761421fe6b8b",
+      "dimensions": [
+        30,
+        16
+      ],
+      "rgbaSha256": "f1a7a0413c112534013dba78e9beb1878ff6113d7aa2eac0d9784eda08422e9c"
+    }
+  ],
+  "textureMetadata": [
+    {
+      "key": "dialog_bubble",
+      "entry": "resource_pack/textures/ui/dialog_bubble.json",
+      "destination": "src/assets/npc/dialog_bubble.json",
+      "bytes": 65,
+      "sha256": "9f53562fde16b26a52bfc2fc35f8f406c4725a2858b29c1e4091d0519383139e",
+      "raw": {
+        "nineslice_size": [
+          8,
+          7,
+          6,
+          6
+        ],
+        "base_size": [
+          17,
+          18
+        ]
+      }
+    },
+    {
+      "key": "background_indent_no_top",
+      "entry": "resource_pack/textures/ui/background_indent_no_top.json",
+      "destination": "src/assets/npc/background_indent_no_top.json",
+      "bytes": 71,
+      "sha256": "1ee2011337f92c63f0da6ccf9b141d6e4b5143be1613aa8d22508c4ddb2f7432",
+      "raw": {
+        "nineslice_size": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "base_size": [
+          3,
+          2
+        ]
+      }
+    }
+  ],
+  "license": {
+    "entry": "LICENSE.md",
+    "destination": "src/assets/npc/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sharedLicense": {
+    "path": "src/assets/Minecraft-Sample-LICENSE.md",
+    "entry": "LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sourceUi": [
+    {
+      "entry": "resource_pack/ui/npc_interact_screen.json",
+      "bytes": 46878,
+      "sha256": "70ade43c1ae88ef6a3ca779bc149c1e4c5f15fa995b526832247aa70ef8a4d58",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/ui_edu_common.json",
+      "bytes": 68229,
+      "sha256": "5d125ff357e7f3fec63e451a2fdb5721c0f18b05e40d59ebc7522ef62b95b210",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_dialogs.json",
+      "bytes": 14238,
+      "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/settings_sections/settings_common.json",
+      "bytes": 80972,
+      "sha256": "36863803c56e42d31b915aa9df13cf88cc43a528eb40c76cbf26c911ef7b3ecf",
+      "bundled": false
+    },
+    {
+      "entry": "resource_pack/ui/immersive_reader.json",
+      "bytes": 6543,
+      "sha256": "365fbc4612c86a13839c257f8a01b04bd086905f1a648c14dd85eeb0bc5837d3",
+      "bundled": false
+    }
+  ],
+  "reusedSourceAudit": [
+    {
+      "texture": "Banners",
+      "entry": "resource_pack/textures/ui/Banners.png",
+      "sourceBytes": 82,
+      "sourceSha256": "41c874a8ffb72a40b0404c6955388aed577aabc74118729336604c376689748f",
+      "sourceSize": [
+        4,
+        4
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/advanced-workstation-textures.css",
+          "line": 5,
+          "prefix": "  --mc-advanced-banners: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "texture": "chevron_left",
+      "entry": "resource_pack/textures/ui/chevron_left.png",
+      "sourceBytes": 106,
+      "sourceSha256": "6347595f4a317c028fc9160d3d1a7f5cb12ead3af205ce34453381705eac264b",
+      "sourceSize": [
+        4,
+        7
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/gui-icons/chevron-left.png",
+          "encoding": "whole-file"
+        },
+        {
+          "file": "src/assets/jigsaw/chevron_left.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "chevron_right",
+      "entry": "resource_pack/textures/ui/chevron_right.png",
+      "sourceBytes": 121,
+      "sourceSha256": "732a483709001177452adce7907faeef09655b4787ba90e5e3af397f972ddb68",
+      "sourceSize": [
+        4,
+        7
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/gui-icons/chevron-right.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "dialog_background_opaque",
+      "entry": "resource_pack/textures/ui/dialog_background_opaque.png",
+      "sourceBytes": 186,
+      "sourceSha256": "45e365955de8800424ea35bfa589ca38535df6211c10d24bcde280cae09dc69f",
+      "sourceSize": [
+        16,
+        16
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/workstation-image-assets.ts",
+          "line": 7,
+          "prefix": "  panel: '",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "rgbaOnlyMatches": [
+        {
+          "file": "src/textures.css",
+          "line": 41,
+          "prefix": "  --mc-skin-panel: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sourceMetadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          16,
+          16
+        ]
+      }
+    },
+    {
+      "texture": "minimize",
+      "entry": "resource_pack/textures/ui/minimize.png",
+      "sourceBytes": 184,
+      "sourceSha256": "55666883992a80192747ec30d61cfe946e3a3b6ea0063b7c654647ffbe2ff946",
+      "sourceSize": [
+        16,
+        16
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/command-block/minimize.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "minimizeHover",
+      "entry": "resource_pack/textures/ui/minimizeHover.png",
+      "sourceBytes": 125,
+      "sourceSha256": "c32e96da35ea761b8743601000c1c3367639088cf64e0279609161552aa817f9",
+      "sourceSize": [
+        16,
+        16
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/command-block/minimizeHover.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "minimizePress",
+      "entry": "resource_pack/textures/ui/minimizePress.png",
+      "sourceBytes": 130,
+      "sourceSha256": "65f6e269fd369b67d93a92e46e08613c76a17ed6541d31e09ee671cf476620d0",
+      "sourceSize": [
+        16,
+        16
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/command-block/minimizePress.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "plus",
+      "entry": "resource_pack/textures/ui/plus.png",
+      "sourceBytes": 123,
+      "sourceSha256": "965fa4c152e09cdd8d61ead15b5eb2ecefd9e1c78cd49a9b652b84b78bf55f9f",
+      "sourceSize": [
+        11,
+        11
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/gui-icons/plus.png",
+          "encoding": "whole-file"
+        },
+        {
+          "file": "src/game-list-textures.css",
+          "line": 16,
+          "prefix": "  --mc-list-plus: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "trash_hover",
+      "entry": "resource_pack/textures/ui/trash_hover.png",
+      "sourceBytes": 179,
+      "sourceSha256": "3fa17ecc575f5f0c940e6f5ec1c6be71841ab285b17f9010dac2671ee14d8547",
+      "sourceSize": [
+        16,
+        16
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/book/trash_hover.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "trash_pressed",
+      "entry": "resource_pack/textures/ui/trash_pressed.png",
+      "sourceBytes": 186,
+      "sourceSha256": "cd3d86db98985b34f6b0834f3e18fbcdbbbac2a0588775f26af76eb4d0f72d55",
+      "sourceSize": [
+        16,
+        16
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/book/trash_pressed.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "WarningGlyph",
+      "entry": "resource_pack/textures/ui/WarningGlyph.png",
+      "sourceBytes": 152,
+      "sourceSha256": "e5c481628adec8b4e60aff01b26b330dc2433a87e5534454d17a77c5e404afba",
+      "sourceSize": [
+        13,
+        20
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/gui-icons/warning-glyph.png",
+          "encoding": "whole-file"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "focus_border_white",
+      "entry": "resource_pack/textures/ui/focus_border_white.png",
+      "sourceBytes": 105,
+      "sourceSha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "sourceSize": [
+        5,
+        5
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/game-control-textures.css",
+          "line": 8,
+          "prefix": "  --mc-game-texture-pause-border: url(\"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/game-list-textures.css",
+          "line": 8,
+          "prefix": "  --mc-list-screenshot-focus: url(\"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/game-list-textures.css",
+          "line": 9,
+          "prefix": "  --mc-list-focus: url(\"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/game-list-textures.css",
+          "line": 19,
+          "prefix": "  --mc-list-player-border: url(\"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/inventory-screen-textures.css",
+          "line": 35,
+          "prefix": "  --mc-inv-screen-toolbar-border: url(\"",
+          "encoding": "embedded-complete-PNG"
+        },
+        {
+          "file": "src/workstation-image-assets.ts",
+          "line": 10,
+          "prefix": "  focus: '",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "texture": "dialog_background_hollow_3",
+      "entry": "resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "sourceBytes": 260,
+      "sourceSha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+      "sourceSize": [
+        18,
+        33
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/command-block/dialog_background_hollow_3.png",
+          "encoding": "whole-file"
+        },
+        {
+          "file": "src/system-screens-textures.css",
+          "line": 3,
+          "prefix": "  --mc-system-settings-frame: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "rgbaOnlyMatches": [
+        {
+          "file": "src/textures.css",
+          "line": 42,
+          "prefix": "  --mc-skin-dialog: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sourceMetadata": {
+        "nineslice_size": [
+          8,
+          23,
+          8,
+          8
+        ],
+        "base_size": [
+          18,
+          33
+        ]
+      }
+    },
+    {
+      "texture": "control",
+      "entry": "resource_pack/textures/ui/control.png",
+      "sourceBytes": 71,
+      "sourceSha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "sourceSize": [
+        2,
+        2
+      ],
+      "wholePngByteMatches": [
+        {
+          "file": "src/assets/jigsaw/control.png",
+          "encoding": "whole-file"
+        },
+        {
+          "file": "src/system-screens-textures.css",
+          "line": 11,
+          "prefix": "  --mc-system-loading-control: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "rgbaOnlyMatches": [],
+      "sourceMetadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "texture": "ScrollHandle",
+      "entry": "resource_pack/textures/ui/ScrollHandle.png",
+      "sourceBytes": 89,
+      "sourceSha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a",
+      "sourceSize": [
+        3,
+        5
+      ],
+      "wholePngByteMatches": [],
+      "rgbaOnlyMatches": [
+        {
+          "file": "src/textures.css",
+          "line": 97,
+          "prefix": "  --mc-skin-scroll-thumb: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sourceMetadata": {
+        "nineslice_size": [
+          1,
+          2,
+          1,
+          2
+        ],
+        "base_size": [
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "texture": "ScrollRail",
+      "entry": "resource_pack/textures/ui/ScrollRail.png",
+      "sourceBytes": 70,
+      "sourceSha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be",
+      "sourceSize": [
+        1,
+        1
+      ],
+      "wholePngByteMatches": [],
+      "rgbaOnlyMatches": [
+        {
+          "file": "src/textures.css",
+          "line": 96,
+          "prefix": "  --mc-skin-scroll-track: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sourceMetadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "texture": "toggle_off",
+      "entry": "resource_pack/textures/ui/toggle_off.png",
+      "sourceBytes": 7234,
+      "sourceSha256": "e3c03f72af1d8afc7617f229e4eddb6d439a02411e464e48c1bdd1f01f873962",
+      "sourceSize": [
+        30,
+        16
+      ],
+      "wholePngByteMatches": [],
+      "rgbaOnlyMatches": [
+        {
+          "file": "src/textures.css",
+          "line": 23,
+          "prefix": "  --mc-skin-switch-off: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sourceMetadata": null
+    },
+    {
+      "texture": "toggle_off_hover",
+      "entry": "resource_pack/textures/ui/toggle_off_hover.png",
+      "sourceBytes": 7657,
+      "sourceSha256": "5083272d331669bde3e5c3ef14cbfd12d6660763bad23b7474c902b4fc82d056",
+      "sourceSize": [
+        30,
+        16
+      ],
+      "wholePngByteMatches": [],
+      "rgbaOnlyMatches": [
+        {
+          "file": "src/textures.css",
+          "line": 25,
+          "prefix": "  --mc-skin-switch-off-hover: url(\"",
+          "encoding": "embedded-complete-PNG"
+        }
+      ],
+      "sourceMetadata": null
+    }
+  ],
+  "usage": {
+    "backStates": "Actual advanced/editor return-button route; minimize states use existing Command Block originals.",
+    "bubble": "Student interaction message bubble; source display width222 with full resolvedheight.",
+    "point": "Separate original16x18 tail, right-middle anchor and sourceoffset[-222px+1px,0].",
+    "banners": "Existing Banners is skinpicker/model-window decoration only; it is not a character portrait.",
+    "portrait": "actor_portrait_renderer is a host-provided 3D/ReactNode slot for skin previews and message model; no portrait PNG is generated or guessed.",
+    "conditional": "Worldbuilder/student, education, advanced/editor state and data bindings decide actual controls; declarations do not imply every resource is visible in every NPC view.",
+    "trash": "edu_common.photo_trash_button displays11x12; original default16x16 is new, hover/pressed16x16 reuse complete Book originals.",
+    "notification": "NPC EmptyUri/InvalidUri branches both explicitly select edu inline_notification statewarning with existing WarningGlyph13x20; declared info/update/error assets are not claimed used by these two instances.",
+    "immersiveReader": "Conditional education + not-worldbuilder + #im_reader_button_visible; original19x19 shown in NPC18x18 override. Requires a host request callback, not an implemented reading service.",
+    "toggle": "Edu slider toggle checked/checked-hover use original30x16 on images; existing off/off-hover reencoded images have identical full RGBA but different PNG bytes."
+  },
+  "qualification": {
+    "wholePngCount": 10,
+    "wholePngBytes": 1902,
+    "wholeTextureMetadataCount": 2,
+    "bundledWholeFilesIncludingLicense": 13,
+    "sourceInsetsOrder": "LTRB",
+    "nativeMappingVerified": false,
+    "educationDependencyAudit": "Actual delete button and two warning branches are resolved; other base notification enum states remain uninstantiated by these NPC overrides.",
+    "licenseNotice": "Original Mojang all-rights-reserved and Minecraft EULA notice retained locally and referenced in unchanged shared Minecraft-Sample-LICENSE.md.",
+    "encodingBoundary": "ScrollHandle/ScrollRail and toggle off/off-hover are fullRGBA-equivalent existing reencoded sources, not whole-PNG byte-identical or browser color-management certification.",
+    "optionalContext": "Actor portraits and skins are host3D slots. Education reading service and controller/gamepad context remain explicit host integration, not fake portraits or guessed icon mappings."
+  }
+}

@@ -39,6 +39,7 @@ import { JigsawExamples } from './jigsaw-examples';
 import { CommandBlockExamples } from './command-block-examples';
 import { StructureEditorExamples } from './structure-editor-examples';
 import { ServerFormsExamples } from './server-forms-examples';
+import { NpcExamples } from './npc-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -66,6 +67,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'command-block', name: 'Command blocks', icon: 'chevron', count: '03' },
   { id: 'structure-editor', name: 'Structure editor', icon: 'chevron', count: '02' },
   { id: 'server-forms', name: 'Server forms', icon: 'chevron', count: '02' },
+  { id: 'npc', name: 'NPC dialogue & editor', icon: 'chevron', count: '05' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'anvil-layer', name: 'Source Anvil', icon: 'chevron', count: '01' },
@@ -89,6 +91,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'gui-icons', name: 'GUI icons', icon: 'chevron', count: '150' },
 ];
 const snippets: Record<string, string> = {
+  npc: `import { NpcDialogue, NpcEditor } from 'mcbeui';\n\n<NpcDialogue title="Villager guide" value={dialogue}\n  actor={actorPortrait} actions={actions} onAction={requestAction} />\n<NpcEditor value={draft} onValueChange={setDraft}\n  skins={skins} actor={actorPortrait} onClose={closeEditor} />`,
   'server-forms': `import { ServerActionForm, ServerCustomForm } from 'mcbeui';\n\n<ServerActionForm title="Choose an action" rows={rows}\n  onAction={requestAction} onCancel={closeForm} />\n<ServerCustomForm title="Preferences" fields={fields}\n  value={values} onValueChange={setValues}\n  onSubmit={requestSubmit} onCancel={closeForm} />`,
   'structure-editor': `import { StructureEditor, XYZVectorInput } from 'mcbeui';\n\n<StructureEditor value={draft} onValueChange={setDraft}\n  preview={preview} onAction={handleAction} />\n<XYZVectorInput label="Position" value={position}\n  onValueChange={setPosition} />`,
   'command-block': `import { CommandBlockEditor, CommandInput, CommandOutputPanel } from 'mcbeui';\n\n<CommandBlockEditor value={draft} onValueChange={setDraft}\n  expanded={expanded} onExpandedChange={setExpanded}\n  previousOutput={output} onPasteRequest={requestPaste}\n  onClose={closeEditor} />\n<CommandInput value={command} onValueChange={setCommand} />\n<CommandOutputPanel previousOutput={output} />`,
@@ -416,6 +419,7 @@ function App() {
       <Example id="command-block" title="Command blocks" detail="Block modes, expandable command input and previous output using reusable controls."><CommandBlockExamples notify={notify}/></Example>
       <Example id="structure-editor" title="Structure editor" detail="Save, load, corner, data and 3D export forms with reusable XYZ fields and caller-supplied previews."><StructureEditorExamples notify={notify}/></Example>
       <Example id="server-forms" title="Server forms" detail="Schema-driven action and custom forms with caller-owned values, icons and response requests."><ServerFormsExamples notify={notify}/></Example>
+      <Example id="npc" title="NPC dialogue & editor" detail="Dialogue, appearance and command or URL editing with reusable portrait and action controls."><NpcExamples notify={notify}/></Example>
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

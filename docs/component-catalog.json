@@ -642,6 +642,13 @@
         "fidelity": "source_texture_web_composition"
       }
     ],
+    "npc": [
+      {"name":"NpcPortrait","status":"implemented","fidelity":"source_clip_geometry_host_actor_renderer_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"},
+      {"name":"NpcSkinPicker","status":"implemented","fidelity":"source_skin_grid_host_collection_and_page_state_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"},
+      {"name":"NpcActionEditor","status":"implemented","fidelity":"source_command_and_url_fields_host_draft_and_expansion_contract_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"},
+      {"name":"NpcDialogue","status":"implemented","fidelity":"source_student_and_worldbuilder_dialogue_composition_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"},
+      {"name":"NpcEditor","status":"implemented","fidelity":"source_basic_advanced_and_maximized_host_state_composition_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"}
+    ],
     "server_forms": [
       {"name":"ServerActionForm","status":"implemented","fidelity":"source_long_form_factory_web_composition_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"},
       {"name":"ServerCustomForm","status":"implemented","fidelity":"source_custom_form_nine_field_factory_host_typed_state_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"}
@@ -669,7 +676,7 @@
     ]
   },
   "publicExports": {
-    "components": 135,
+    "components": 140,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -680,7 +687,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 149,
+    "runtimeValues": 154,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 4,

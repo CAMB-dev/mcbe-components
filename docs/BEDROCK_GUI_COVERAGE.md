@@ -1,25 +1,25 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库135个公开组件的**范围映射**，不是原生像素验收表。135组件包含基础控件、可复用零件及组合，不能读作135个完整游戏GUI；A类的25个文件也不代表25个完整原生流程已完成。
+这是固定官方源文件与本库140个公开组件的**范围映射**，不是原生像素验收表。140组件包含基础控件、可复用零件及组合，不能读作140个完整游戏GUI；A类的26个文件也不代表26个完整原生流程已完成。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
-基础审计将当时133组件逐项对应到真实barrel导出与TS /TSX模块。后续ServerForms两个组件的实际37项合同与149值包消费通过后，仅将server_form.json从E更新为A；其余205行及原审计证据保留，组件数为135。这个增量不补造新的原生认证，文件状态也不用于计算Minecraft覆盖百分比或测试通过率。
+基础审计将当时133组件逐项对应到真实barrel导出与TS /TSX模块。ServerForms两个组件的实际37项合同与149值包消费通过后，仅将server_form.json从E更新为A。后续NPC五组件完整44项客户端合同通过，再仅将npc_interact_screen.json从E更新为A，相对前一快照其余205行逐字保留，当前组件数140。NPC154值React18 /19新包与56项公开辅助亦已通过；这两个增量不补造原生认证，文件状态也不用于计算Minecraft覆盖百分比或测试通过率。
 
 ## 八种状态
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|25|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|26|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|16|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
-|E|`confirmed_missing_named_family`|14|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
+|E|`confirmed_missing_named_family`|13|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
 |G|`optional_family_unmapped`|63|可选族未建立映射：教育、平台、账户、交易等来源仍保留；服务能力由宿主负责。|
 |H|`unknown`|6|证据不足：保持未知，不强制归为已覆盖或必需新增。|
 
-## 尚缺的14个命名族
+## 尚缺的13个命名族
 
 以下表示源文件存在、该快照没有专门公开组合，不表示所有功能都须另建组件或由库接管外部服务。教育 /平台功能、通用宿主组合与Pocket仍应按产品范围单独决定。
 
@@ -32,7 +32,6 @@
 |玩法文档 /HowToPlay|`how_to_play_screen.json`|
 |教育沉浸式阅读器|`immersive_reader.json`|
 |邀请 /人员浏览|`invite_screen.json`|
-|NPC对话 /编辑|`npc_interact_screen.json`|
 |玩家权限编辑|`permissions_screen.json`|
 |教育作品集 /Portfolio|`portfolio_screen.json`|
 |截图 /照片界面|`screenshot_screen.json`|
@@ -40,9 +39,11 @@
 |存储管理|`storage_management.json`|
 |UGC查看器|`ugc_viewer_screen.json`|
 
-**ServerForms已接入有限源族**（`server_form.json`）：ServerActionForm /ServerCustomForm提供LongForm /CustomForm的225×200组合与typed字段，区别于ServerList。当前37项客户端合同通过，不据此推断第三MessageForm、后端协议或native parity，详见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。下一批可优先评估NPC对话、EmoteWheel及共享HowToPlay /Encyclopedia文档查看器；不自动要求每个可选文件新建组件。
+**ServerForms已接入有限源族**（`server_form.json`）：ServerActionForm /ServerCustomForm提供LongForm /CustomForm的225×200组合与typed字段，区别于ServerList。37项客户端合同通过，不据此推断第三MessageForm、后端协议或native parity，详见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。
 
 后续公开64项辅助也已执行通过，与37正式、Book85及6导航分别记录；它不改变上述八类含义，也不增加任何文件的native像素认证。
+
+**NPC已接入有限源族**（`npc_interact_screen.json`）：五个组合与零件保留student /worldbuilder、basic /advanced /maximized、皮肤选择和action分支，完整44项客户端合同通过；旧ServerForms37 /导航6回归与公开56辅助分别记录，不增加命名族或native认证。actor渲染、引擎权限与缓冲提交时机仍由宿主提供或待恢复，见 [NPC_QA.md](NPC_QA.md)。下一批可评估EmoteWheel及共享HowToPlay /Encyclopedia文档查看器，不自动要求每个可选文件新建组件。
 
 ## 文件与注册声明的边界
 
@@ -158,7 +159,7 @@
 |`marketplace_sdl/sdl_text_row.json`|sdl_text_row|0|D|—|
 |`mob_effect_screen.json`|mob_effect|1|B|StatusEffect|
 |`non_xbl_user_management_screen.json`|non_xbl_user_management|1|G|—|
-|`npc_interact_screen.json`|npc_interact|1|E|—|
+|`npc_interact_screen.json`|npc_interact|1|A|NpcPortrait、NpcSkinPicker、NpcActionEditor、NpcDialogue、NpcEditor|
 |`online_safety_screen.json`|online_safety|2|G|—|
 |`pack_settings_screen.json`|pack_settings|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
 |`panorama_screen.json`|panorama|0|G|—|
@@ -265,4 +266,4 @@
 
 ## 证据与复核
 
-完整逐文件字节SHA、定义 /继承 /模板引用与基础映射保留在 `.cache/classic-full-screen-coverage-02/SOURCE-INVENTORY.json`、`FILE-COVERAGE.json`、`COMPONENT-MAP.json` 及 `REPORT.md`；本页全量保留206行，仅对server_form加入已执行的ServerForms范围。该增量依据 `.cache/server-forms-independent-qa/formal-04/FINAL.json` 与 `.cache/server-forms-root-close-01/INTEGRATION-PACKAGE-05.json`。固定官方源入口：[ui目录](https://github.com/Mojang/bedrock-samples/tree/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui)。
+完整逐文件字节SHA、定义 /继承 /模板引用与基础映射保留在 `.cache/classic-full-screen-coverage-02/SOURCE-INVENTORY.json`、`FILE-COVERAGE.json`、`COMPONENT-MAP.json` 及 `REPORT.md`；本页全量保留206行，增量只含server_form与npc_interact_screen的有限实现范围。ServerForms依据 `.cache/server-forms-independent-qa/formal-04/FINAL.json` 与 `.cache/server-forms-root-close-01/INTEGRATION-PACKAGE-05.json`；NPC依据 `.cache/npc-independent-qa-01/formal-02/FINAL.json`、`.cache/npc-root-close-01/PACKAGE-01.json` 与 `.cache/npc-public-01/production-01/FINAL.json`，三者分别记录合同、实际包消费及公开预览。固定官方源入口：[ui目录](https://github.com/Mojang/bedrock-samples/tree/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui)。
