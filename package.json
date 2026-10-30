@@ -73,6 +73,7 @@
     "./emote-wheel-screen.css": "./dist/emote-wheel-screen.css",
     "./document-viewer.css": "./dist/document-viewer.css",
     "./player-permissions.css": "./dist/player-permissions.css",
+    "./ore-player-permissions.css": "./dist/ore-player-permissions.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",

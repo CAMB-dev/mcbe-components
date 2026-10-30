@@ -1,6 +1,6 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库150个公开组件的**范围映射**，不是原生像素验收表。150组件包含基础控件、可复用零件及组合，不能读作150个完整游戏GUI；A类的30个文件也不代表30个完整原生流程已完成。
+这是固定官方源文件与本库155个公开组件的**范围映射**，不是原生像素验收表。155组件包含基础控件、可复用零件及组合，不能读作155个完整游戏GUI；A类的30个文件也不代表30个完整原生流程已完成。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -48,6 +48,8 @@
 人物渲染增量提供`createNpcEntity`＋`GuiLayer`的有限NPC源模型路径和60皮肤，原生显式相机fixture下五个完整人物裁剪255,200像素严格RGBA零差，见[GUI_ENTITY_QA.md](GUI_ENTITY_QA.md)。该人物渲染增量当时不改变206行范围状态或140组件数，不认证正常自动取景、UI绑定、完整NPC GUI或其他实体引擎。
 
 **Classic权限已接入有限源族**：PlayerPermissions /PermissionLevelSelect /PermissionToggleRow /PermissionPlayerRow使组件数增至150 /运行时值167。正式批次63通过 /2桌面触控条件跳过，公开预览12项、实际React18 /19消费通过后，仅将 `permissions_screen.json` E→有限A，其他205行逐字保留。29→30表示范围映射，不是原生整页认证。当前安装版OreUI为另一profile，Classic实现不认证其字体、响应式布局或服务流程，见 [PLAYER_PERMISSIONS_QA.md](PLAYER_PERMISSIONS_QA.md)。
+
+**OreUI权限是独立profile，未扩充Classic范围状态**：新增五组件使源码总数155 /172，基于安装版HBUI源的角色 /卡片 /说明与响应式分支，当前phase03 React18 /19实际包、完整104项同批101通过 /3设备跳过与公开run03的9项分别通过，selected hover源palette回归仍保持有限Web合同范围。固定ZIP的全部206行与此前Classic表逐字相同，`permissions_screen.json`的有限A只依据Classic已验范围，不代表现代OreUI或native整页已完成；现代资源 /字体与权限服务仍为宿主依赖，见 [ORE_PLAYER_PERMISSIONS_QA.md](ORE_PLAYER_PERMISSIONS_QA.md)。
 
 ## 文件与注册声明的边界
 

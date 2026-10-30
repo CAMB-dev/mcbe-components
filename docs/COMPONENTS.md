@@ -1,6 +1,8 @@
 # Bedrock 组件范围
 
-当前导出 150 个组件，目录 150 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 167 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 155 个组件，目录 155 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 172 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+
+新增OreUI权限五组件保留现代玩家卡 /说明、segmented与共用modal分支和独立开关，资源 /字体、窗口尺寸与实际权限服务由宿主提供。当前phase03 React18.3.1 /19.3.1实际172值包、完整104项同批101通过 /3设备跳过与公开run03的9项分别完成；实际截图揭示的selected hover灰色覆盖已窄修并补200点palette回归，旧103跨批 /包 /公开记录保留原身份，不称当前原生整页或Classic覆盖表扩大；见 [ORE_PLAYER_PERMISSIONS_QA.md](ORE_PLAYER_PERMISSIONS_QA.md)。
 
 新增Classic权限四组件已落盘，角色选择与动态boolean权限草稿独立，未知key不补false，所有授权 /Kick /Ban由宿主实现。本阶段正式63通过 /2桌面触控条件跳过、公开预览12项及React18 /19实际包消费通过；当前安装版OreUI是不同profile，不据Classic源码认证。见 [PLAYER_PERMISSIONS_QA.md](PLAYER_PERMISSIONS_QA.md)。历史DocumentViewer146组件 /163值及58通过 /1设备条件跳过保持原受测身份。
 
@@ -50,6 +52,7 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 | 表情屏幕与轮盘（3） | EmoteWheelScreen、EmoteWheel、EmoteSlotPreview |
 | 双栏文档（3） | DocumentViewer、DocumentHeading、DocumentParagraph |
 | 玩家权限Classic（4） | PlayerPermissions、PermissionLevelSelect、PermissionToggleRow、PermissionPlayerRow |
+| 玩家权限OreUI（5） | OrePlayerPermissions、OrePermissionLevelSelect、OrePermissionToggleRow、OrePlayerCard、OreSwitch |
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
 

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -21,6 +22,49 @@ assert(!packed.files.some(file => /(?:^|\/)default8(?:_[12])?\.png$/i.test(file.
 assert(!packed.files.some(file => /(?:^|\/)local-fonts\/unicode\//i.test(file.path)), 'Local Unicode sample metrics and provenance must stay outside the npm library.');
 assert(!packed.files.some(file => /\.(?:cso|dxbc|dxil)$|\.material\.bin$/i.test(file.path)), 'Private native shader binaries must stay outside the npm library.');
 assert(!packed.files.some(file => /^(?:demo|\.cache)\//.test(file.path)), 'Demo-only game assets and local references must not enter the npm library.');
+// Known installed OreUI inputs are host-private. Check payload identity even if
+// renamed, and decoded inline resources as well as filenames. No private bytes
+// or machine-local paths are stored in this verifier.
+const privateOreResourceHashes = new Set([
+  "93e0cb5945ef2269b2ccaa8a20f35d16a304fe00abb7b8df1baeedbcc293c5ea",
+  "878da56bc0bfb8fd8d91f81f7a26833f422f130534dcaffd4623516f2bd7b4e2",
+  "1361cddb111bd73e907ea9d053f1db72546dc2625d41e568f64f53cd72343987",
+  "dd68aea834f5d64008465aa51564f715f45ae1bbc005d036ae1ddab382dec395",
+  "3ac46d75d4fe3aae7412d18e09047b70073a8e779488f72560c09f8c474fecc6",
+  "1dd0c122794d0ac5c504e853143e078bd295f24b3a0d6ddd23dba2ca70b6e815",
+  "8c37936063c7c8ab747a939e13833894f9edc80dd41b98874ca8f3938a33c32f",
+  "410f13fa3da564e72f029cb17ed3912610b2cd6881163ce515fb50719bfa1a81",
+  "f98a65f40260be3b232a766c43764e381104673fb217b9c13a3dc02a2b1250bb",
+  "93eb7b1d429dee7e96872d8be885c4fd7b7bd839da0840b61a2837901ffd691b",
+  "e92c03ccd433f175ec1842c7b077c9492f12e4576f9d482c9714122bd1398ced",
+  "5522c1ce9a4d53702cc3906a7c080f50c78d9c83f1e5207839a03de9b209630c",
+  "97c85e4f1bc270d804123731e089a8960472380305a2277c29e91c0dcb076f31",
+  "c3f86c09969be4abb9797f71b160f5debb4a7cf2753a7e6a78e440f5fddf72f6",
+  "137dda4d1f90e14afeae77b6b9002bdf25615295f7ae1bfb9d3ae6a7bb82cd9c",
+  "9e7efe423b6cc8a1c1fa92756bd181675cffa51a4728bce386b0081cad1bb979",
+  "04fb7a7ea41955c53cf51c0e6dc9e0928b29b7a8150fdcd83d04765742528ab5",
+  "e0097d6d3811a68e3730a4ac70821015c86d002b8ef4c81a0cc5002764586cb3",
+  "5c2fda186f2dc06d3947a2518fad3137c18f96ab837b80ddd9a4f7fa8e9c0f91",
+  "3175909945fe1ec269705fa9bd735774bcbf30b16111cf846f9e46a5222e131b",
+  "8adba96d834dd787fb3cd64071d69c73403732a47ae71f3fa23b648119eedd98",
+  "d1aebd460585d4a9793fe28c2b80c604983715d139be998fcfcd228db544e4dc",
+  "fa1fb229c2a598948e69429cfe17e5289faffbce3da7b3c0000d87e7b9e5ff40",
+  "eb60e6c039372648610c76da88d9cee029feef38f2a1fe3c4975c24d0cc3d47c",
+  "44d4d8da98052275ecca16e03f9aa46ddd29e3c560d0fcae60b87a012fe574c7",
+  "a38c0b4d4fc96e276b52572535c692bb53bfb4db0008928431521e6569145713",
+  "b4efc9b2c1ae0b96df100cf3cedbb5f19502fcda7f0491767410ecb844ef9257",
+  "2f405a864a112f18425972643c95d5976b4fbfb3aca414143011da76bb6b5083"
+]);
+assert(!packed.files.some(file => /permission-(?:visitor|member|operator|custom)@0[.]5x[.]icon-|(?:Minecraft-(?:Ten|Seven)|NotoSansSC-Regular)-[0-9a-f]+[.](?:otf|woff2?)$|(?:no-player-profile|arrowBack(?:Disabled)?|crossWhite|checkWhite|onImage|offImage|online-badge)-[0-9a-f]+[.]png|chevron-down@0[.]5x[.]icon-|(?:^|\/)(?:local-ore|hbui)(?:\/|$)/i.test(file.path)), 'Private modern role icons, fonts and HBUI resources must remain host-owned.');
+for (const file of packed.files) {
+  const bytes = await readFile(join(root, file.path));
+  assert(!privateOreResourceHashes.has(createHash('sha256').update(bytes).digest('hex')), 'Private OreUI whole source/resource leaked under a packed filename: '+file.path);
+  if (/[.](?:js|mjs|json|css|html|map|md)$/i.test(file.path)) {
+    for (const match of bytes.toString('utf8').matchAll(/data:[^,\s"'()]+;base64,([A-Za-z0-9+/=]+)/g)) {
+      assert(!privateOreResourceHashes.has(createHash('sha256').update(Buffer.from(match[1], 'base64')).digest('hex')), 'Private OreUI resource leaked as inline data: '+file.path);
+    }
+  }
+}
 const tarball = packed.filename;
 const tarPath = join(root, tarball);
 for (const major of [18, 19]) {
@@ -43,10 +87,11 @@ const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyph
 components.push('EmoteWheel','EmoteSlotPreview','EmoteWheelScreen');
 components.push('DocumentViewer','DocumentHeading','DocumentParagraph');
 components.push('PlayerPermissions','PermissionLevelSelect','PermissionToggleRow','PermissionPlayerRow');
-assert.equal(components.length,150);
+components.push('OrePlayerPermissions','OrePermissionLevelSelect','OrePermissionToggleRow','OrePlayerCard','OreSwitch');
+assert.equal(components.length,155);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,167);
+assert.equal(Object.keys(ui).length,172);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -66,6 +111,34 @@ assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+// Modern OreUI components consume host labels/artwork; SSR performs no IO or requests.
+const packedOrePlayers=Object.freeze([Object.freeze({id:'ore-alpha',name:'Caller Ore Alpha',avatar:element('span',null,'Host avatar')}),Object.freeze({id:'ore-beta',name:'Caller Ore Beta',isHosting:true})]);
+const packedOreOptions=Object.freeze([Object.freeze({id:'build',title:'Build blocks',description:'Caller build description'}),Object.freeze({id:'mine',title:'Mine blocks'}),Object.freeze({id:'unbound',title:'Unknown caller ability'})]);
+const packedOreValues=Object.freeze({'ore-alpha':Object.freeze({level:'custom',permissions:Object.freeze({build:true,mine:false})})});
+const packedOreSnapshot=JSON.stringify(packedOreValues);let oreRequests=0,oreIO=0;
+const oreFetch=globalThis.fetch;globalThis.fetch=()=>{oreIO++;throw new Error('Packed OreUI SSR attempted IO.');};
+try {
+ for(const [viewportSize,breakpoint] of [[[1440,1000],'desktop'],[[500,800],'tablet'],[[300,800],'narrow']]){
+  const markup=renderToString(element(ui.OrePlayerPermissions,{label:'Caller modern permissions',scrollInputMode:'touch',players:packedOrePlayers,permissionOptions:packedOreOptions,value:packedOreValues,selectedPlayerId:'ore-alpha',viewportSize,guiScale:1,locale:'zh_CN',roleIcons:{custom:element('span',null,'Host role')},dropdownIcons:{close:element('span',null,'Host close'),check:element('span',null,'Host check'),chevron:element('span',null,'Host chevron')},toggleIcons:{on:element('span',null,'Host on'),off:element('span',null,'Host off'),thumb:element('span',null,'Host thumb')},backIcon:element('span',null,'Host back'),canKickPlayer:true,kickVisible:true,readOnly:true,templateWarning:'Caller policy',onValueChange:()=>oreRequests++,onSelectedPlayerIdChange:()=>oreRequests++,onBack:()=>oreRequests++,onKickRequest:()=>oreRequests++}));
+  assert.match(markup,/mc-ore-player-permissions/);assert(markup.includes('data-breakpoint="'+breakpoint+'"'));assert.match(markup,/Host avatar/);assert.match(markup,/Caller build description/);assert.match(markup,/Caller policy/);assert.match(markup,/aria-readonly="true"/);
+  assert(!/ viewportSize=| permissionOptions=| roleIcons=| canKickPlayer=| guiScale=/.test(markup),'OreUI source bindings must not leak as DOM attributes.');
+  assert.equal((markup.match(/data-permission-id="build"/g)||[]).length,1);
+ }
+ const empty=renderToString(element(ui.OrePlayerPermissions,{label:'Unknown caller',players:packedOrePlayers,permissionOptions:packedOreOptions,value:packedOreValues,selectedPlayerId:null,viewportSize:[1440,1000],emptyContent:'No accepted player'}));assert.match(empty,/No accepted player/);
+ for(const availableWidth of [200,600]){
+  const markup=renderToString(element(ui.OrePermissionLevelSelect,{value:'custom',viewportSize:[1440,1000],availableWidth,labels:{title:'Caller level',customDescription:'Caller custom explanation'},icons:{custom:element('span',null,'Caller role icon')},dropdownIcons:{chevron:element('span',null,'Caller chevron')},readOnly:true}));
+  assert(markup.includes('data-presentation="'+(availableWidth>=300?'segmented':'modal')+'"'));assert.match(markup,/Caller custom explanation/);
+ }
+ for(const level of ['visitor','member','operator','custom']){
+  const markup=renderToString(element(ui.OrePlayerPermissions,{label:'Independent modern state',players:packedOrePlayers,permissionOptions:packedOreOptions,value:{...packedOreValues,'ore-alpha':{...packedOreValues['ore-alpha'],level}},selectedPlayerId:'ore-alpha',viewportSize:[1440,1000]}));
+  const bits=[...markup.matchAll(/data-permission-id="(?:build|mine)"[^]*?<input([^>]+)>/g)].map(match=>match[1].includes('checked=""'));assert.deepEqual(bits,[true,false],'Modern roles do not synthesize permission presets.');
+ }
+ assert.match(renderToString(element(ui.OreSwitch,{'aria-label':'Caller switch',checked:true,readOnly:true,thumbIcon:element('span',null,'Host thumb')})),/Host thumb/);
+ assert.match(renderToString(element(ui.OrePermissionToggleRow,{title:'Caller permission row',description:'Caller row description',checked:false,readOnly:true})),/Caller row description/);
+ assert.match(renderToString(element(ui.OrePlayerCard,{player:packedOrePlayers[0],selected:true,subtitle:'Host subtitle',levelIcon:element('span',null,'Host card role')})),/Host subtitle/);
+ assert.throws(()=>renderToString(element(ui.OrePermissionLevelSelect,{value:'owner',viewportSize:[1440,1000]})),/permission level/);
+} finally {globalThis.fetch=oreFetch;}
+assert.equal(oreIO,0);assert.equal(oreRequests,0);assert.equal(JSON.stringify(packedOreValues),packedOreSnapshot,'Modern SSR preserves caller snapshots.');
 // Classic JSON permission drafts only; no preset-to-bit/cheat policy or network action.
 const packedPermissionPlayers=Object.freeze([Object.freeze({id:'alpha',name:'Caller Alpha'}),Object.freeze({id:'beta',name:'Caller Beta'})]);
 const packedPermissionOptions=Object.freeze([Object.freeze({id:'build',label:'Build'}),Object.freeze({id:'mine',label:'Mine'}),Object.freeze({id:'unbound',label:'Unknown binding'})]);
@@ -567,7 +640,7 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','ore-player-permissions.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -814,6 +887,30 @@ typedDocumentGroups[0].topics.push(typedDocumentTopic);
 // @ts-expect-error Scroll reset is a bounded policy.
 const badDocumentPolicy:DocumentViewerProps['scrollPolicy']='native';
 
+import { OrePlayerPermissions, OrePermissionLevelSelect, OrePermissionToggleRow, OrePlayerCard, OreSwitch } from 'mcbeui';
+import type { OrePermissionAppearance, OrePermissionPlayer, OrePermissionOption, OrePermissionLevelLabels, OreSwitchProps, OrePermissionToggleRowProps, OrePlayerCardProps, OrePermissionLevelSelectProps, OrePermissionSafeArea, OrePlayerPermissionsLabels, OrePlayerPermissionsProps } from 'mcbeui';
+const typedOreAppearance:OrePermissionAppearance={guiScale:1.5,locale:'zh_CN'};
+const typedOrePlayers:readonly OrePermissionPlayer[]=[{id:'ore-alpha',name:'Host name',avatar:<span>Host avatar</span>,avatarSrc:'/host-avatar.png',subtitle:'Host role',levelIcon:<span>Host icon</span>,isHosting:false}];
+const typedOreOptions:readonly OrePermissionOption[]=[{id:'build',title:'Build',description:'Host description'}];
+const typedOreSafeArea:OrePermissionSafeArea={x:.95,y:.95,positionX:0,positionY:0};
+const typedOreLabels:Partial<OrePlayerPermissionsLabels>={title:'Modern permissions',back:undefined};
+const typedOreLevelLabels:Partial<OrePermissionLevelLabels>={title:'Role',customDescription:'Host custom policy',visitor:undefined};
+const typedOreProps:OrePlayerPermissionsProps={...typedOreAppearance,label:'Modern host permissions',scrollInputMode:'touch',players:typedOrePlayers,permissionOptions:typedOreOptions,viewportSize:[1440,1000] as const,size:[700,700] as const,safeArea:typedOreSafeArea,extraBottomInset:10,selectedPlayerId:'ore-alpha',defaultSelectedPlayerId:null,value:{'ore-alpha':{level:'custom',permissions:{build:true}}},labels:typedOreLabels,levelLabels:typedOreLevelLabels,roleIcons:{custom:<span>Host role art</span>},dropdownIcons:{close:<span>Close</span>,check:<span>Check</span>,chevron:<span>Chevron</span>},toggleIcons:{on:<span>On</span>,off:<span>Off</span>,thumb:<span>Thumb</span>},backIcon:<span>Host back art</span>,disabledLevels:['operator'],canEditPermissions:true,canKickPlayer:true,kickVisible:true,kickEnabled:false,readOnly:true,templateWarning:'Host warning',errorContent:undefined,emptyContent:'No player',playersViewportRef:createRef<HTMLDivElement>(),permissionsViewportRef:createRef<HTMLDivElement>(),playerRefs:{'ore-alpha':createRef<HTMLButtonElement>()},permissionRefs:{build:createRef<HTMLInputElement>()},levelRef:createRef<HTMLDivElement>(),levelTriggerRef:createRef<HTMLButtonElement>(),onSelectedPlayerIdChange:(id,event)=>id+event.type,onValueChange:(next,detail)=>String(next[detail.playerId]?.level)+detail.reason,onBack:event=>event.type,onKickRequest:(player,event)=>player.id+event.type};
+const typedOreSelect:OrePermissionLevelSelectProps={...typedOreAppearance,value:'custom',defaultValue:null,viewportSize:[1440,1000],availableWidth:500,labels:typedOreLevelLabels,icons:{custom:<span>Host icon</span>},dropdownIcons:{close:<span>Close</span>,check:<span>Check</span>,chevron:<span>Chevron</span>},disabledLevels:['operator'],triggerRef:createRef<HTMLButtonElement>(),optionRefs:{custom:createRef<HTMLButtonElement>()},onValueChange:(level,event)=>level+event.type};
+const typedOreSwitch:OreSwitchProps={...typedOreAppearance,'aria-label':'Host switch',checked:true,defaultChecked:false,thumbIcon:<span>Host thumb</span>,onIcon:<span>On</span>,offIcon:<span>Off</span>,onCheckedChange:(checked,event)=>String(checked)+event.currentTarget.checked};
+const typedOreRow:OrePermissionToggleRowProps={...typedOreAppearance,title:'Build',description:'Host description',checked:true,inputRef:createRef<HTMLInputElement>(),inputProps:{name:'host-build','aria-label':'Build'},onCheckedChange:(checked,event)=>String(checked)+event.type};
+const typedOreCard:OrePlayerCardProps={...typedOreAppearance,player:typedOrePlayers[0]!,selected:true,subtitle:'Host subtitle',levelIcon:<span>Host icon</span>};
+const typedOreElements=<><OrePlayerPermissions {...typedOreProps} ref={createRef<HTMLElement>()}/><OrePermissionLevelSelect {...typedOreSelect} ref={createRef<HTMLDivElement>()}/><OrePermissionToggleRow {...typedOreRow} ref={createRef<HTMLDivElement>()}/><OrePlayerCard {...typedOreCard} ref={createRef<HTMLButtonElement>()}/><OreSwitch {...typedOreSwitch} ref={createRef<HTMLInputElement>()}/></>;
+// @ts-expect-error Modern window breakpoint requires explicit source-window dimensions.
+const missingOreViewport:OrePlayerPermissionsProps={label:'Missing window',players:typedOrePlayers,permissionOptions:typedOreOptions};
+// @ts-expect-error Scroll mode is an explicit finite host input.
+const invalidOreScrollMode:OrePlayerPermissionsProps['scrollInputMode']='gamepad';
+// @ts-expect-error Modern accepted switch values remain booleans.
+const invalidOreChecked:OreSwitchProps={checked:'true'};
+// @ts-expect-error Host schemas remain readonly.
+typedOrePlayers.push({id:'other',name:'Other'});
+// @ts-expect-error Modern permission levels reuse the finite role union.
+const invalidOreRole:OrePermissionLevelSelectProps={value:'owner',viewportSize:[1440,1000]};
 import { PlayerPermissions, PermissionLevelSelect, PermissionToggleRow, PermissionPlayerRow } from 'mcbeui';
 import type { PermissionLevel, PermissionLevelLabels, PermissionLevelSelectProps, PermissionToggleRowProps, PermissionPlayer, PermissionPlayerRowProps, PlayerPermissionOption, PlayerPermissionState, PlayerPermissionsValue, PlayerPermissionsChangeDetail, PlayerPermissionsLabels, PlayerPermissionsProps } from 'mcbeui';
 const typedPermissionLevel:PermissionLevel='custom';

@@ -43,6 +43,7 @@ import { NpcExamples } from './npc-examples';
 import { EmoteWheelExamples } from './emote-wheel-examples';
 import { DocumentViewerExamples } from './document-viewer-examples';
 import { PlayerPermissionsExamples } from './player-permissions-examples';
+import { OrePlayerPermissionsExamples } from './ore-player-permissions-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -74,6 +75,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'emote-wheel', name: 'Emote wheel', icon: 'chevron', count: '03' },
   { id: 'documents', name: 'How to Play & encyclopedia', icon: 'chevron', count: '03' },
   { id: 'player-permissions', name: 'Player permissions · Classic', icon: 'chevron', count: '04' },
+  { id: 'ore-player-permissions', name: 'Player permissions · OreUI', icon: 'chevron', count: '05' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'anvil-layer', name: 'Source Anvil', icon: 'chevron', count: '01' },
@@ -429,6 +431,7 @@ function App() {
       <Example id="emote-wheel" title="Emote wheel" detail="Transparent screen, source instruction and action rows, plus the reusable four-slot wheel and previews."><EmoteWheelExamples/></Example>
       <Example id="documents" title="How to Play & encyclopedia" detail="Shared source frame, grouped topic navigation, independent scrolling and reusable article pieces."><DocumentViewerExamples/></Example>
       <Example id="player-permissions" title="Player permissions · Classic" detail="Source player rows, role choices and permission toggles. Current OreUI is a separate profile."><PlayerPermissionsExamples/></Example>
+      <Example id="ore-player-permissions" title="Player permissions · OreUI" detail="Modern player cards, adaptive role menu and permission switches."><OrePlayerPermissionsExamples/></Example>
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

@@ -7,6 +7,8 @@ declare module 'virtual:mcbeui-game-font' {
   export const hasHBUIChineseFont: boolean;
   export const hasHBUIFont: boolean;
   export const hbuiLoadingIndicatorUrl: string | undefined;
+  export const orePermissionRoleImages: Record<'visitor' | 'member' | 'operator' | 'custom', string> | undefined;
+  export const orePermissionAssets: Record<'avatar' | 'back' | 'backDisabled' | 'close' | 'check' | 'chevron' | 'switchOn' | 'switchOff' | 'onlineBadge', string> | undefined;
   export const nativeBitmapFont: import('../src/bitmap-text').BitmapFont | undefined;
   export const nativeGuiGrindstoneFont: import('../src/gui-text-geometry').GuiTextFont | undefined;
   export const nativeGuiAnvilLabels: import('../src/gui-text-geometry').GuiTextFont | undefined;

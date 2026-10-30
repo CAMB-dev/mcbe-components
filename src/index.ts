@@ -118,3 +118,6 @@ export type { DocumentTopic, DocumentGroup, DocumentHint, DocumentValueChangeDet
 
 export { PlayerPermissions, PermissionLevelSelect, PermissionToggleRow, PermissionPlayerRow } from './player-permissions';
 export type { PermissionLevel, PermissionLevelLabels, PermissionLevelSelectProps, PermissionToggleRowProps, PermissionPlayer, PermissionPlayerRowProps, PlayerPermissionOption, PlayerPermissionState, PlayerPermissionsValue, PlayerPermissionsChangeDetail, PlayerPermissionsLabels, PlayerPermissionsProps } from './player-permissions';
+
+export { OrePlayerPermissions, OrePermissionLevelSelect, OrePermissionToggleRow, OrePlayerCard, OreSwitch } from './ore-player-permissions';
+export type { OrePermissionAppearance, OrePermissionPlayer, OrePermissionOption, OrePermissionLevelLabels, OreSwitchProps, OrePermissionToggleRowProps, OrePlayerCardProps, OrePermissionLevelSelectProps, OrePermissionSafeArea, OrePlayerPermissionsLabels, OrePlayerPermissionsProps } from './ore-player-permissions';

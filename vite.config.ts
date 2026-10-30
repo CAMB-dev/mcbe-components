@@ -15,6 +15,7 @@ const hbuiTenPath = localFont('Minecraft-Ten-v2.otf');
 const hbuiSevenPath = localFont('Minecraft-Seven-v2.otf');
 const hbuiChinesePath = localFont('NotoSansSC-Regular.otf');
 const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loading-indicator.gif', import.meta.url));
+const orePermissionsDirectory = fileURLToPath(new URL('./.cache/local-ore-permissions/', import.meta.url));
 const nativeBitmapPath = fileURLToPath(new URL('./.cache/local-fonts/unicode/font.json', import.meta.url));
 const nativeWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/fonts.json', import.meta.url));
 const nativeGuiWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/gui-fonts.json', import.meta.url));
@@ -100,6 +101,43 @@ export default defineConfig({
         ? `import runeUrl from ${JSON.stringify(normalizePath(runePath) + '?url')}; export const runeAtlasUrl = runeUrl;`
         : 'export const runeAtlasUrl = undefined;';
       const parts = [runeModule];
+      // Optional original OreUI art stays in ignored local storage and the demo.
+      // Library components receive URLs from their host and import none of it.
+      const oreRoles = ['visitor', 'member', 'operator', 'custom'] as const;
+      const oreMetadata = resolve(orePermissionsDirectory, 'provenance.json');
+      let oreRoleModule = 'export const orePermissionRoleImages = undefined;';
+      if (existsSync(oreMetadata) && oreRoles.every(role => existsSync(resolve(orePermissionsDirectory, `${role}.png`)))) {
+        const provenance = JSON.parse(readFileSync(oreMetadata, 'utf8')) as { resources: { role: string; sha256: string }[] };
+        for (const role of oreRoles) {
+          const bytes = readFileSync(resolve(orePermissionsDirectory, `${role}.png`));
+          const record = provenance.resources?.find(item => item.role === role);
+          if (!record || createHash('sha256').update(bytes).digest('hex') !== record.sha256
+            || bytes.length < 24 || !bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+            || bytes.readUInt32BE(16) !== 12 || bytes.readUInt32BE(20) !== 12) {
+            throw new Error('Local OreUI permission icons differ from prepared originals; rerun scripts/use-local-ore-permissions-assets.py.');
+          }
+        }
+        oreRoleModule = oreRoles.map(role => `import oreRole${role} from ${JSON.stringify(normalizePath(resolve(orePermissionsDirectory, `${role}.png`)) + '?url')};`).join('\n')
+          + `\nexport const orePermissionRoleImages = { ${oreRoles.map(role => `${role}: oreRole${role}`).join(', ')} };`;
+      }
+      parts.push(oreRoleModule);
+      const oreAssetKeys = ['avatar', 'back', 'backDisabled', 'close', 'check', 'chevron', 'switchOn', 'switchOff', 'onlineBadge'] as const;
+      let oreAssetsModule = 'export const orePermissionAssets = undefined;';
+      if (existsSync(oreMetadata) && oreAssetKeys.every(key => existsSync(resolve(orePermissionsDirectory, `${key}.png`)))) {
+        const provenance = JSON.parse(readFileSync(oreMetadata, 'utf8')) as { resources: { role: string; sha256: string; width: number; height: number }[] };
+        for (const key of oreAssetKeys) {
+          const bytes = readFileSync(resolve(orePermissionsDirectory, `${key}.png`));
+          const record = provenance.resources?.find(item => item.role === key);
+          if (!record || bytes.length < 24 || !bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+            || createHash('sha256').update(bytes).digest('hex') !== record.sha256
+            || bytes.readUInt32BE(16) !== record.width || bytes.readUInt32BE(20) !== record.height) {
+            throw new Error('Local OreUI permission assets differ from prepared originals; rerun scripts/use-local-ore-permissions-assets.py.');
+          }
+        }
+        oreAssetsModule = oreAssetKeys.map(key => `import oreAsset${key} from ${JSON.stringify(normalizePath(resolve(orePermissionsDirectory, `${key}.png`)) + '?url')};`).join('\n')
+          + `\nexport const orePermissionAssets = { ${oreAssetKeys.map(key => `${key}: oreAsset${key}`).join(', ')} };`;
+      }
+      parts.push(oreAssetsModule);
       // Optional measured subset; page bytes remain in ignored local storage.
       // This does not register a global font face or invent missing glyphs.
       let bitmapModule = 'export const nativeBitmapFont = undefined;';
