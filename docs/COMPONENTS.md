@@ -1,10 +1,12 @@
 # Bedrock 组件范围
 
-当前导出 143 个组件，目录 143 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 160 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 146 个组件，目录 146 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 163 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 书写类新增 BookReader / BookEditor / BookPage / BookPageTurnButton 与 SignTextSurface / SignEditor。Book 的30项独立客户端合同、此前138值React18 /19消费及27项公开预览辅助检查保留其范围；Sign的29项客户端合同及140值新包已通过，旧Dialog12项与修后完整导航6项分别通过，公开预览50项辅助检查通过。首批旧导航失败与修复后的范围分别保留，不合称单轮全绿或增加重复用例。五份书本及普通 /悬挂牌面采集已保存，有限混排字页与两oak背景分析完成；产品整页原生像素核验仍待进行。使用与边界见 [BOOK_QA.md](BOOK_QA.md) / [SIGN_QA.md](SIGN_QA.md)。
 
 后续正文度量 /编辑布局修订不新增runtime：Book editable逐页字体模式与Sign共用有限Han候选，恢复common居中 /clip分离和normal /large行距；Reader静态与签名title /author保持独立。25不同ASCII及26个宽字 /非ASCII共128正文实例的CPU quad关系相符、两caret仍各差1game。公开样本fallback促使补齐两demo字符，最终206字集完整79项（Book39 /Sign30 /Classic10）、React18 /19新包及37项公开辅助检查通过，整6项导航另通过；194批与公开首败保留，不重计相同用例。旧几何断言按源与native证据明确纠正，完整native DOM栅格仍未认证。
+
+新增双栏文档三组件复用真实导航与正文独立视口，HowToPlay /Encyclopedia 使用两种有限宿主内容示例；`sectionTitle`、受控主题、焦点和滚动策略分别管理。原图材料 / API与未验范围见 [DOCUMENT_VIEWER_QA.md](DOCUMENT_VIEWER_QA.md)，不提供完整手册或引擎条件解析。
 
 以下历史阶段的120组件 /134值验证保留原受测范围，不扩充为新增书写组件的验证：
 
@@ -44,6 +46,7 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 | 服务端表单（2） | ServerActionForm、ServerCustomForm |
 | NPC对话与编辑（5） | NpcPortrait、NpcSkinPicker、NpcActionEditor、NpcDialogue、NpcEditor |
 | 表情屏幕与轮盘（3） | EmoteWheelScreen、EmoteWheel、EmoteSlotPreview |
+| 双栏文档（3） | DocumentViewer、DocumentHeading、DocumentParagraph |
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
 

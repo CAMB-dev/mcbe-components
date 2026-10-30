@@ -41,10 +41,11 @@ const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiI
 components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage','BookPageTurnButton','SignTextSurface','SignEditor','JigsawEditor','JigsawPriorityFields','CommandBlockEditor','CommandInput','CommandOutputPanel','StructureEditor','XYZVectorInput','ServerActionForm','ServerCustomForm','NpcPortrait','NpcSkinPicker','NpcActionEditor','NpcDialogue','NpcEditor');
 const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity'];
 components.push('EmoteWheel','EmoteSlotPreview','EmoteWheelScreen');
-assert.equal(components.length,143);
+components.push('DocumentViewer','DocumentHeading','DocumentParagraph');
+assert.equal(components.length,146);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,160);
+assert.equal(Object.keys(ui).length,163);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -64,6 +65,14 @@ assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+const documentGroups=[{id:'basics',label:'Basics',topics:[{id:'first',title:'First article',sectionTitle:'How to Play: First article',content:element(React.Fragment,null,element(ui.DocumentHeading,null,'Article heading'),element(ui.DocumentParagraph,{linePadding:6},'Live article text'))},{id:'second',title:'Second article',content:'Second content',disabled:true}]}];
+for(const value of ['first',null,'unknown']){
+ const markup=renderToString(element(ui.DocumentViewer,{groups:documentGroups,label:'Packed documents',value,size:[400,300],scale:2,scrollPolicy:'preserve',emptyContent:'No article',previousHint:{label:'Previous',glyph:'Host previous'},nextHint:{label:'Next',glyph:'Host next'}}));
+ assert.match(markup,/mc-document-viewer/);assert.match(markup,/data-variant="document"/);assert.match(markup,/permissions_player_fade_overlay[.]png/);
+ assert.equal((markup.match(/role="tabpanel"/g)||[]).length,2);assert.equal((markup.match(/role="scrollbar"/g)||[]).length,2);
+ assert(!/ groups=| scrollPolicy=| previousHint=| navigationViewportRef=/.test(markup),'Document bindings remain private to composition.');
+ if(value==='first'){assert.match(markup,/aria-selected="true"/);assert.match(markup,/How to Play: First article/);}else assert.match(markup,/No article/);
+}
 const emoteSlots=[
  {id:'wave',label:'Wave',preview:{kind:'text',text:'1'}},
  {id:'clap',label:'Clap',preview:{kind:'image',src:'/host-emote.png'}},
@@ -532,7 +541,7 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -609,6 +618,19 @@ for (const name of ui.guiIconNames) {
   assert.equal(createHash('sha256').update(await readFile(new URL(imageSource))).digest('hex'),asset.sha256,'Consumer GuiIcon URL: '+name);
   assert(markup.includes('role="img"'));
 }
+assert(!Object.hasOwn(ui,'documentViewerAssets'),'Document source registry must remain private.');
+const documentManifest=JSON.parse(await readFile(new URL('docs/document-viewer-assets.json',packageRoot),'utf8'));
+assert.equal(documentManifest.schemaVersion,1);assert.equal(documentManifest.resources.length,28);assert.equal(documentManifest.textureMetadata.length,14);assert.equal(documentManifest.sourceFiles.length,8);
+const documentWholeAssets=[...documentManifest.resources,...documentManifest.textureMetadata,...documentManifest.sourceFiles,documentManifest.license];
+assert.equal(documentWholeAssets.length,51);assert.equal(new Set(documentWholeAssets.map(asset=>asset.destination)).size,51);
+assert.deepEqual((await readdir(new URL('dist/assets/document-viewer/',packageRoot))).sort(),documentWholeAssets.map(asset=>asset.destination.split('/').at(-1)).sort());
+for(const asset of documentWholeAssets){
+ assert(asset.destination.startsWith('src/assets/document-viewer/'));assert(!asset.destination.includes('..'));
+ const bytes=await readFile(new URL(asset.destination.replace(/^src[/]/,'dist/'),packageRoot));
+ assert.equal(bytes.length,asset.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed whole document source: '+asset.entry);
+}
+const documentWhite=documentManifest.resources.find(asset=>asset.key==='backgroundWhite');
+assert.equal(documentWhite.entry,'resource_pack/textures/ui/permissions_player_fade_overlay.png');assert.equal(documentWhite.sha256,'5ef05eb8f2100ac885c96aced008715e1225634d327162b88625672be82547e5');
 assert(!Object.hasOwn(ui,'emoteWheelAssets'),'Emote-wheel source registry must remain private.');
 const emoteManifest=JSON.parse(await readFile(new URL('docs/emote-wheel-assets.json',packageRoot),'utf8'));
 assert.equal(emoteManifest.schemaVersion,1);assert.equal(emoteManifest.resources.length,14);
@@ -737,6 +759,20 @@ const typedEmoteElements=<><EmoteWheel {...typedEmoteProps} ref={createRef<HTMLD
 const typedScreenLabels: Partial<EmoteWheelScreenLabels>={keyboardInstruction:'Source keyboard hint',touchInstruction:undefined};
 const typedScreenProps: EmoteWheelScreenProps={slots:typedEmoteSlots,label:'Typed screen',size:[400,300],scale:2,activeIndex:typedEmoteIndex,centerLabel:'',labels:typedScreenLabels,gamepadInstruction:'Host instructions',gamepadStartGlyph:<span>Host glyph</span>,gamepadStartDescription:'Host Start',gamepadExitLabel:'Host exit',wheelRef:createRef<HTMLDivElement>(),changeButtonRef:createRef<HTMLButtonElement>(),changeEmotesVisible:false,changeEmotesDisabled:true,onChangeEmotes:event=>event.currentTarget.name,onCloseRequest:(detail:EmoteWheelScreenCloseDetail)=>detail.reason+detail.event.type};
 const typedScreenElement=<EmoteWheelScreen {...typedScreenProps} ref={createRef<HTMLDivElement>()}/>;
+import { DocumentViewer, DocumentHeading, DocumentParagraph } from 'mcbeui';
+import type { DocumentTopic, DocumentGroup, DocumentHint, DocumentValueChangeDetail, DocumentScrollPosition, DocumentViewerProps, DocumentHeadingProps, DocumentParagraphProps } from 'mcbeui';
+const typedDocumentTopic:DocumentTopic={id:'start',title:'Start',sectionTitle:'How to Play: Start',content:<><DocumentHeading>Heading</DocumentHeading><DocumentParagraph linePadding={6}>Text</DocumentParagraph></>,showArrow:true};
+const typedDocumentGroups:readonly DocumentGroup[]=[{id:'group',label:'Group',topics:[typedDocumentTopic]}];
+const typedDocumentHint:DocumentHint={label:'Previous',glyph:<span>Host glyph</span>,description:'Previous'};
+const typedDocumentProps:DocumentViewerProps={groups:typedDocumentGroups,label:'Manual',value:null,defaultValue:null,previousHint:typedDocumentHint,navigationViewportRef:createRef<HTMLDivElement>(),contentViewportRef:createRef<HTMLDivElement>(),topicRefs:{start:createRef<HTMLButtonElement>()},size:[400,300] as const,scale:2,scrollPolicy:'preserve',onValueChange:(id,detail:DocumentValueChangeDetail)=>id+detail.reason+detail.event.type,onScrollPositionChange:(pane,position:DocumentScrollPosition)=>pane+position.scrollTop+position.topicId,onBack:event=>event.type};
+const typedDocumentHeadingProps:DocumentHeadingProps={scale:2,children:'Heading'};
+const typedDocumentParagraphProps:DocumentParagraphProps={scale:2,linePadding:12,children:'Text'};
+const typedDocumentElements=<><DocumentViewer {...typedDocumentProps} ref={createRef<HTMLElement>()}/><DocumentHeading {...typedDocumentHeadingProps} ref={createRef<HTMLHeadingElement>()}/><DocumentParagraph {...typedDocumentParagraphProps} ref={createRef<HTMLParagraphElement>()}/></>;
+// @ts-expect-error Topic collections are readonly.
+typedDocumentGroups[0].topics.push(typedDocumentTopic);
+// @ts-expect-error Scroll reset is a bounded policy.
+const badDocumentPolicy:DocumentViewerProps['scrollPolicy']='native';
+
 import type { NpcActionValue, NpcEditorValue, NpcEditorProps, NpcActionEditorProps, NpcDialogueProps, NpcSkinPickerProps, NpcPortraitProps } from 'mcbeui';
 import { createNpcEntity, npcSkinNames, npcAppearanceOptions } from 'mcbeui';
 import type { NpcSkinName, NpcEntityVariant, NpcEntityOptions, NpcAppearanceOption, GuiEntityCube, GuiEntityBone, GuiEntitySource, GuiNpcPortraitMaterial, GuiEntityGeometry, GuiEntityMesh, GuiEntityLayoutOptions, GuiEntityLayout } from 'mcbeui';

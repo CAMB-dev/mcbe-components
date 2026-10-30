@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document viewer source contract fixture</title>
+    <style>
+      body { margin: 0; background: #3c648c; }
+      main { padding: 16px; box-sizing: border-box; }
+      .document-qa-host { width: max-content; margin: 16px auto; }
+      output { display: block; max-width: 100%; overflow-wrap: anywhere; }
+    </style>
+  </head>
+  <body>
+    <main><button id="document-before">Before document</button><div id="document-qa-root"></div><button id="document-after">After document</button></main>
+    <script type="module" src="./document-viewer-fixture.tsx"></script>
+  </body>
+</html>

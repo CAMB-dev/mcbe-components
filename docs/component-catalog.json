@@ -654,6 +654,11 @@
       {"name":"EmoteWheel","status":"implemented","fidelity":"source_four_slot_whole_state_textures_web_input_policy_native_screen_validation_pending","source":"resource_pack/ui/persona_common.json and emote_wheel_screen.json, fixed v1.26.60.5","details":"docs/EMOTE_WHEEL_QA.md"},
       {"name":"EmoteSlotPreview","status":"implemented","fidelity":"source_empty_image_or_text_preview_host_thumbnail_and_validity_native_validation_pending","source":"resource_pack/ui/persona_common.json, fixed v1.26.60.5","details":"docs/EMOTE_WHEEL_QA.md"}
     ],
+    "document_viewer": [
+      {"name":"DocumentViewer","status":"implemented","fidelity":"source_grouped_dual_native_dom_viewports_host_content_and_selection_native_pixel_validation_pending","source":"resource_pack/ui/how_to_play_common.json, how_to_play_screen.json and encyclopedia_screen.json, fixed v1.26.60.5","details":"docs/DOCUMENT_VIEWER_QA.md"},
+      {"name":"DocumentHeading","status":"implemented","fidelity":"source_article_header_whole_banner_semantic_dom_native_raster_validation_pending","source":"resource_pack/ui/how_to_play_common.json, fixed v1.26.60.5","details":"docs/DOCUMENT_VIEWER_QA.md"},
+      {"name":"DocumentParagraph","status":"implemented","fidelity":"source_article_paragraph_width_and_line_padding_host_resolved_text_native_raster_validation_pending","source":"resource_pack/ui/how_to_play_common.json, fixed v1.26.60.5","details":"docs/DOCUMENT_VIEWER_QA.md"}
+    ],
     "server_forms": [
       {"name":"ServerActionForm","status":"implemented","fidelity":"source_long_form_factory_web_composition_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"},
       {"name":"ServerCustomForm","status":"implemented","fidelity":"source_custom_form_nine_field_factory_host_typed_state_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"}
@@ -681,7 +686,7 @@
     ]
   },
   "publicExports": {
-    "components": 143,
+    "components": 146,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -692,7 +697,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 160,
+    "runtimeValues": 163,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 6,

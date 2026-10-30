@@ -2,3 +2,6 @@
 *.woff2 binary
 # Original source resources are verified as whole bytes, including line endings.
 src/assets/emote-wheel/** -text
+src/assets/document-viewer/** -text
+# This unchanged upstream JSON intentionally ends with a blank line.
+src/assets/document-viewer/_global_variables.json whitespace=-blank-at-eof

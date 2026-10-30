@@ -119,6 +119,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `CommandOutputPanel` | previousOutput / previousInfo、trackOutput / onTrackOutputChange、trackOutputEnabled、outputRef | 可复用只读输出与独立历史模式快照；track开关不清空输出 |
 | `StructureEditor` | value / defaultValue、onValueChange、capabilities、visibility / enabled、onAction / onCancel、preview / onPreviewTurn | 源结构表单与宿主预览槽；所有保存 /加载 /导出和世界操作由宿主实现。见 [STRUCTURE_EDITOR_QA.md](docs/STRUCTURE_EDITOR_QA.md) |
 | `XYZVectorInput` | 必填label；value / defaultValue、onValueChange、maxLength、inputProps / inputRefs | 可复用XYZ真实文本input；保留raw draft，不解析坐标或钳制数值，root ref为fieldset |
+| `DocumentViewer` / `DocumentHeading` / `DocumentParagraph` | groups / label、value / defaultValue、sectionTitle、scrollPolicy、双 viewport refs、提示与返回请求；标题 /段落可独立复用 | HowToPlay /Encyclopedia 源双栏组合与真实可选文字，size / scale由宿主提供；见 [DOCUMENT_VIEWER_QA.md](docs/DOCUMENT_VIEWER_QA.md) |
 | `ServerActionForm` | 必填title / rows；body、onAction、onCancel、icon状态 | 四种源row的动作表单；不发服务器响应，区别于ServerList。见 [SERVER_FORMS_QA.md](docs/SERVER_FORMS_QA.md) |
 | `ServerCustomForm` | 必填title / fields；typed value / defaultValue、onValueChange / onSubmit、字段refs / tooltip | 九种schema field及独立展开 /选择状态；宿主接受数据，不实现后端协议 |
 | `NpcDialogue` / `NpcEditor` | value / defaultValue、onValueChange、宿主权限 /page状态、actor /skins /actions、关闭 /动作回调 | student对话与worldbuilder多分支编辑，命令 /URL /世界操作均由宿主执行，见 [NPC_QA.md](docs/NPC_QA.md) |
@@ -338,9 +339,9 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **143 个已实现组件**，表情族含完整 `EmoteWheelScreen`、四槽 `EmoteWheel` 与可复用 `EmoteSlotPreview`；按 Bedrock 原生控件与 GUI 边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开6份数据、11个渲染 /几何 /纹理函数，共160个运行时值。表情屏幕复用原轮盘，加入透明框架、说明条与 Change Emotes 行；视觉名称和无障碍槽位标签分离，空槽中心默认留白，范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)。此前142组件 /159值轮盘、157值 NPC 外观顺序与15项实体合同、156值包 /实体14项 /旧渲染77项、NPC布局44项 /154值包 /64项公开辅助分别保留原身份，见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
+当前 **146 个已实现组件**，表情族含完整 `EmoteWheelScreen`、四槽 `EmoteWheel` 与可复用 `EmoteSlotPreview`；按 Bedrock 原生控件与 GUI 边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开6份数据、11个渲染 /几何 /纹理函数，共163个运行时值。新增双栏文档 `DocumentViewer` / `DocumentHeading` / `DocumentParagraph`，使用与范围见 [DOCUMENT_VIEWER_QA.md](docs/DOCUMENT_VIEWER_QA.md)。表情屏幕复用原轮盘，加入透明框架、说明条与 Change Emotes 行；视觉名称和无障碍槽位标签分离，空槽中心默认留白，范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)。此前142组件 /159值轮盘、157值 NPC 外观顺序与15项实体合同、156值包 /实体14项 /旧渲染77项、NPC布局44项 /154值包 /64项公开辅助分别保留原身份，见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
 
-[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与12个命名族缺口。143组件不是143个完整GUI；表情屏幕已补源布局组合，原生整页像素仍未验收，NPC人物自动取景、引擎及原生整页也仍未完成。
+[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与10个命名族缺口。146组件不是146个完整GUI；表情屏幕已补源布局组合，原生整页像素仍未验收，NPC人物自动取景、引擎及原生整页也仍未完成。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -352,6 +353,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 - 结构编辑：StructureEditor复用XYZVectorInput，preview与save /load /export均由宿主实现；预览入口 `#structure-editor`，字段、能力条件及实际验收范围见 [STRUCTURE_EDITOR_QA.md](docs/STRUCTURE_EDITOR_QA.md)。
 - 服务端表单：`#server-forms`预览ServerActionForm /ServerCustomForm，提供源row /typed schema及宿主请求；独立合同、tooltip与资源范围见 [SERVER_FORMS_QA.md](docs/SERVER_FORMS_QA.md)，不实现后端协议或第三MessageForm。
 - NPC：`#npc`预览对话、basic /advanced编辑、皮肤选择、可复用action编辑与60套原版人物模型。人物槽可组合`createNpcEntity`和`GuiLayer`，相机由宿主提供；命令、URL与保存仅发请求，原生采集不等于整页像素验收。见 [NPC_QA.md](docs/NPC_QA.md) 与 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。
+- 双栏文档：`#documents`提供 HowToPlay /Encyclopedia 两种实际内容示例；独立导航 /正文滚动、受控主题与可复用标题 /段落，翻译、输入提示和条件内容由宿主提供。见 [DOCUMENT_VIEWER_QA.md](docs/DOCUMENT_VIEWER_QA.md)，不代表完整原生手册或整页像素认证。
 - 表情轮盘：`#emote-wheel` 可切换完整屏幕 /轮盘、中文 /英文、混合 /全空槽、显示倍率及宿主接受 /拒绝。`EmoteWheelScreen` 含源布局说明条、Change Emotes 与关闭请求，`centerLabel` 独立接入动态视觉名称；控制器文字 /图形与实际播放由宿主提供。原生整页像素仍待验收，见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)。
 - HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示、玩家列表及触屏控制，以及暂停 / 死亡 / 设置 / 加载 / 世界 / 服务器 / 资源包 / 成就提示等组合。
 
@@ -664,7 +666,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。当前检查143组件 /160值、完整表情屏幕文案 /ref /关闭回调、轮盘 readonly tuple /centerLabel、30份完整源文件，以及原有60皮肤、外观顺序和67份NPC原资源。表情轮盘范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)；NPC157值在React18.3.1 /19.3.1的历史消费结果见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。此前142 /159轮盘、人物156值、NPC布局154值、ServerForms135 /149、Structure133 /147及更早包保持历史范围。
+- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。此前表情阶段检查143组件 /160值、完整表情屏幕文案 /ref /关闭回调、轮盘 readonly tuple /centerLabel、30份完整源文件，以及原有60皮肤、外观顺序和67份NPC原资源。表情轮盘范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)；NPC157值在React18.3.1 /19.3.1的历史消费结果见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。此前142 /159轮盘、人物156值、NPC布局154值、ServerForms135 /149、Structure133 /147及更早包保持历史范围。
 - `#books` 的27项生产辅助与旧6项导航回归已分别通过，覆盖真实编辑 / 签名请求 / 窄屏及既有锚点；它们不计入Book正式30项或原生像素认证，见 [BOOK_QA.md](docs/BOOK_QA.md)。
 - `#signs` 的50项公开集成辅助已通过；新Sign29项、旧Dialog12项与修后完整导航6项分批验证，保留首次导航失败及修复记录，不作为原生整页像素或真实OS IME认证，见 [SIGN_QA.md](docs/SIGN_QA.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。

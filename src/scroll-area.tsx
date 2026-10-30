@@ -2,7 +2,8 @@ import { forwardRef, useCallback, useEffect, useId, useRef, useState } from 'rea
 import type { CSSProperties, HTMLAttributes, Ref } from 'react';
 
 export type ScrollOrientation = 'vertical' | 'horizontal';
-export type ScrollVariant = 'default' | 'container';
+/** document uses the five-unit Classic manual rail; pane-specific margins belong to its frame. */
+export type ScrollVariant = 'default' | 'container' | 'document';
 const nonnegative = (value: number) => Number.isFinite(value) ? Math.max(0,value) : 0;
 const bounded = (value: number, max: number) => Math.min(nonnegative(value),max);
 function guiScale(scale: number) {
@@ -49,8 +50,8 @@ export const ScrollBar = forwardRef<HTMLDivElement, ScrollBarProps>(function Scr
   const extent=Math.min(length,Math.max(minimum,length*ratio)),travel=Math.max(0,length-extent);
   const thumbOffset=maximum>0 ? offset/maximum*travel : 0;
   const visualOffset=reverse ? travel-thumbOffset : thumbOffset;
-  const vertical=orientation==='vertical',padding=2*scale,cross=(variant==='container' ? 6 : 8)*scale;
-  const controlCross=4*scale,thumbCross=(variant==='container' ? 4 : 5)*scale,trackCross=(variant==='container' ? 4 : 3)*scale;
+  const vertical=orientation==='vertical',padding=(variant==='document' ? 0 : 2)*scale,cross=(variant==='document' ? 5 : variant==='container' ? 6 : 8)*scale;
+  const controlCross=(variant==='document' ? 5 : 4)*scale,thumbCross=(variant==='container' ? 4 : 5)*scale,trackCross=(variant==='container' ? 4 : 3)*scale;
   const update = (next: number) => { const result=bounded(next,maximum); if (!blocked && result!==offset) onValueChange(result); };
   const release = (element: HTMLDivElement) => {
     const pointer=drag.current;drag.current=null;setDragging(false);

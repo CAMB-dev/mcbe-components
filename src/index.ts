@@ -112,3 +112,6 @@ export { EmoteWheel, EmoteSlotPreview } from './emote-wheel';
 export { EmoteWheelScreen } from './emote-wheel-screen';
 export type { EmoteWheelScreenProps, EmoteWheelScreenLabels, EmoteWheelScreenCloseDetail } from './emote-wheel-screen';
 export type { EmoteIndex, EmotePreviewContent, EmoteSlot, EmoteActiveIndexChangeDetail, EmoteWheelHints, EmoteWheelProps, EmoteSlotPreviewProps } from './emote-wheel';
+
+export { DocumentViewer, DocumentHeading, DocumentParagraph } from './document-viewer';
+export type { DocumentTopic, DocumentGroup, DocumentHint, DocumentValueChangeDetail, DocumentScrollPosition, DocumentViewerProps, DocumentHeadingProps, DocumentParagraphProps } from './document-viewer';

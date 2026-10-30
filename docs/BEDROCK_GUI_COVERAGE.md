@@ -1,6 +1,6 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库143个公开组件的**范围映射**，不是原生像素验收表。143组件包含基础控件、可复用零件及组合，不能读作143个完整游戏GUI；A类的27个文件也不代表27个完整原生流程已完成。
+这是固定官方源文件与本库146个公开组件的**范围映射**，不是原生像素验收表。146组件包含基础控件、可复用零件及组合，不能读作146个完整游戏GUI；A类的29个文件也不代表29个完整原生流程已完成。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -10,16 +10,16 @@
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|27|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|29|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|16|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
-|E|`confirmed_missing_named_family`|12|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
+|E|`confirmed_missing_named_family`|10|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
 |G|`optional_family_unmapped`|63|可选族未建立映射：教育、平台、账户、交易等来源仍保留；服务能力由宿主负责。|
 |H|`unknown`|6|证据不足：保持未知，不强制归为已覆盖或必需新增。|
 
-## 尚缺的12个命名族
+## 尚缺的10个命名族
 
 以下表示源文件存在、该快照没有专门公开组合，不表示所有功能都须另建组件或由库接管外部服务。教育 /平台功能、通用宿主组合与Pocket仍应按产品范围单独决定。
 
@@ -27,8 +27,6 @@
 |---|---|
 |教育黑板 /Chalkboard|`chalkboard_screen.json`|
 |片尾名单 /Credits|`credits_screen.json`|
-|百科文档 /Encyclopedia|`encyclopedia_screen.json`|
-|玩法文档 /HowToPlay|`how_to_play_screen.json`|
 |教育沉浸式阅读器|`immersive_reader.json`|
 |邀请 /人员浏览|`invite_screen.json`|
 |玩家权限编辑|`permissions_screen.json`|
@@ -44,7 +42,9 @@
 
 **NPC已接入有限源族**（`npc_interact_screen.json`）：五个组合与零件保留student /worldbuilder、basic /advanced /maximized、皮肤选择和action分支，完整44项客户端合同通过；旧ServerForms37 /导航6回归与公开56辅助分别记录，不增加命名族或native认证。actor渲染、引擎权限与缓冲提交时机仍由宿主提供或待恢复，见 [NPC_QA.md](NPC_QA.md)。
 
-**EmoteWheel已接入有限源族**（`emote_wheel_screen.json`）：前阶段四槽轮盘 /预览的42通过 /1设备跳过与触控首败保留原身份；该阶段仅该行 E→A。现新增 `EmoteWheelScreen` 的透明框架、说明条、换装按钮行、关闭请求和方向焦点规则，视觉中心名与无障碍槽位名称独立，组件数143。新38次 Screen 合同均通过，连同未改旧43次批，共80通过 /1个明确设备条件跳过。原生空槽窗口参考促使修正中心留白，JPEG并非原始UI-pass；字体、像素栅格、引擎路由和整页严格比较仍未认证，见 [EMOTE_WHEEL_QA.md](EMOTE_WHEEL_QA.md)。206行范围状态不变，本轮只扩充该行组件映射，其他205行保持原字节。后续可复用实现 HowToPlay /Encyclopedia 双栏文档查看器。
+**EmoteWheel已接入有限源族**（`emote_wheel_screen.json`）：前阶段四槽轮盘 /预览的42通过 /1设备跳过与触控首败保留原身份；该阶段仅该行 E→A。现新增 `EmoteWheelScreen` 的透明框架、说明条、换装按钮行、关闭请求和方向焦点规则，视觉中心名与无障碍槽位名称独立，组件数143。新38次 Screen 合同均通过，连同未改旧43次批，共80通过 /1个明确设备条件跳过。原生空槽窗口参考促使修正中心留白，JPEG并非原始UI-pass；字体、像素栅格、引擎路由和整页严格比较仍未认证，见 [EMOTE_WHEEL_QA.md](EMOTE_WHEEL_QA.md)。206行范围状态不变，本轮只扩充该行组件映射，其他205行保持原字节。
+
+**双栏文档已接入有限源族**（`how_to_play_screen.json` /`encyclopedia_screen.json`）：DocumentViewer与真实复用的DocumentHeading /DocumentParagraph提供分组导航、两独立DOM滚动视口与文章结构，公开示例各有实际宿主内容。此增量仅两named行E→A，其他204行逐字保留；`how_to_play_common.json`仍是D类共享依赖，不因其中继承screen root而另算完整页面。组件数146 /运行时值163是源码实现计数；本阶段客户端 /包 /原生像素结果尚不据此推断，内容、条件和引擎路由边界见 [DOCUMENT_VIEWER_QA.md](DOCUMENT_VIEWER_QA.md)。
 
 人物渲染增量提供`createNpcEntity`＋`GuiLayer`的有限NPC源模型路径和60皮肤，原生显式相机fixture下五个完整人物裁剪255,200像素严格RGBA零差，见[GUI_ENTITY_QA.md](GUI_ENTITY_QA.md)。该人物渲染增量当时不改变206行范围状态或140组件数，不认证正常自动取景、UI绑定、完整NPC GUI或其他实体引擎。
 
@@ -122,7 +122,7 @@
 |`emote_wheel_screen.json`|persona_emote|1|A|EmoteWheelScreen、EmoteWheel、EmoteSlotPreview（源布局组合，原生像素待验）|
 |`enchanting_screen.json`|enchanting|1|A|EnchantingTable、EnchantmentOption、EnchantingBook、EnchantingRunes|
 |`enchanting_screen_pocket.json`|enchanting_pocket|0|F|—|
-|`encyclopedia_screen.json`|encyclopedia|1|E|—|
+|`encyclopedia_screen.json`|encyclopedia|1|A|DocumentViewer、DocumentHeading、DocumentParagraph（有限宿主百科内容组合，原生像素待验）|
 |`expanded_skin_pack_screen.json`|expanded_skin_pack|1|G|—|
 |`feed_common.json`|feed_common|0|D|—|
 |`file_upload_screen.json`|file_upload|1|B|LoadingScreen、Progress|
@@ -140,7 +140,7 @@
 |`horse_screen_pocket.json`|horse_pocket|0|F|—|
 |`host_options_screen.json`|host_options|0|H|—|
 |`how_to_play_common.json`|how_to_play_common|2|D|—|
-|`how_to_play_screen.json`|how_to_play|1|E|—|
+|`how_to_play_screen.json`|how_to_play|1|A|DocumentViewer、DocumentHeading、DocumentParagraph（有限宿主玩法内容组合，原生像素待验）|
 |`hud_crosshair_overlay.json`|hud_crosshair|1|B|Crosshair|
 |`hud_screen.json`|hud|1|B|Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、BossBar、Crosshair、ActionBar、TitleOverlay、TouchControls、HeldItemTooltip、PlayerList|
 |`immersive_reader.json`|im_reader|1|E|—|
@@ -269,4 +269,4 @@
 
 ## 证据与复核
 
-完整逐文件字节SHA、定义 /继承 /模板引用与基础映射保留在 `.cache/classic-full-screen-coverage-02/SOURCE-INVENTORY.json`、`FILE-COVERAGE.json`、`COMPONENT-MAP.json` 及 `REPORT.md`；本页全量保留206行，增量仅将server_form、npc_interact_screen和emote_wheel_screen接入有限命名族范围。EmoteWheel的受测范围见 `EMOTE_WHEEL_QA.md` 与 `.cache/emote-wheel-tests-01/formal-02`，不增加原生像素认证。ServerForms依据 `.cache/server-forms-independent-qa/formal-04/FINAL.json` 与 `.cache/server-forms-root-close-01/INTEGRATION-PACKAGE-05.json`；NPC依据 `.cache/npc-independent-qa-01/formal-02/FINAL.json`、`.cache/npc-root-close-01/PACKAGE-01.json` 与 `.cache/npc-public-01/production-01/FINAL.json`，三者分别记录合同、实际包消费及公开预览。固定官方源入口：[ui目录](https://github.com/Mojang/bedrock-samples/tree/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui)。
+完整逐文件字节SHA、定义 /继承 /模板引用与基础映射保留在 `.cache/classic-full-screen-coverage-02/SOURCE-INVENTORY.json`、`FILE-COVERAGE.json`、`COMPONENT-MAP.json` 及 `REPORT.md`；本页全量保留206行，增量将server_form、npc_interact_screen、emote_wheel_screen以及HowToPlay /Encyclopedia接入有限命名族范围。EmoteWheel的受测范围见 `EMOTE_WHEEL_QA.md` 与 `.cache/emote-wheel-tests-01/formal-02`，不增加原生像素认证。ServerForms依据 `.cache/server-forms-independent-qa/formal-04/FINAL.json` 与 `.cache/server-forms-root-close-01/INTEGRATION-PACKAGE-05.json`；NPC依据 `.cache/npc-independent-qa-01/formal-02/FINAL.json`、`.cache/npc-root-close-01/PACKAGE-01.json` 与 `.cache/npc-public-01/production-01/FINAL.json`，三者分别记录合同、实际包消费及公开预览。固定官方源入口：[ui目录](https://github.com/Mojang/bedrock-samples/tree/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui)。
