@@ -27,6 +27,7 @@
 @import './sign.css';
 @import './jigsaw.css';
 @import './command-block.css';
+@import './structure-editor.css';
 /* mcbeui: scoped component styles; importing this file does not reset the page. */
 :root {
   --mc-font: 'Mojangles Pixel', 'MCBE Pixel', 'Mojangles', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace;

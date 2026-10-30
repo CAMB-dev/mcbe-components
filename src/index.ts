@@ -87,7 +87,7 @@ export type { InventoryScreenFrameProps, InventoryScreenLayout } from './invento
 export { SurvivalInventoryScreen } from './survival-inventory-screen';
 export type { SurvivalInventoryScreenProps } from './survival-inventory-screen';
 export { BookReader, BookEditor, BookPage, BookPageTurnButton } from './book';
-export type { BookMode, BookFontMode, BookPageAction, BookDocumentSnapshot, BookLayoutProfile, BookSkinSources, BookLabels, BookPagesChangeDetail, BookNavigationDetail, BookBaseProps, BookReaderProps, BookEditorProps, BookPageProps, BookPageTurnButtonProps } from './book';
+export type { BookMode, BookFontMode, BookPageAction, BookDocumentSnapshot, BookLayoutProfile, BookSkinSources, BookLabels, BookPagesChangeDetail, BookNavigationDetail, BookNavigationControl, BookBaseProps, BookReaderProps, BookEditorProps, BookPageProps, BookPageTurnButtonProps } from './book';
 export { SignTextSurface, SignEditor } from './sign';
 export type { SignVariant, SignWood, SignFontMode, SignTextureInput, SignSourceGeometry, SignTextSurfaceProps, SignCloseReason, SignCloseDetail, SignExitBehavior, SignEditorProps } from './sign';
 
@@ -96,3 +96,6 @@ export type { JigsawJointMode, JigsawIdentifierField, JigsawPriorityField, Jigsa
 
 export { CommandBlockEditor, CommandInput, CommandOutputPanel } from './command-block';
 export type { CommandBlockType, CommandBlockCondition, CommandBlockRedstone, CommandBlockValue, CommandBlockField, CommandBlockChangeDetail, CommandExpansionDetail, CommandInputProps, CommandPreviousInfo, CommandOutputPanelProps, CommandBlockLabels, CommandBlockCloseDetail, CommandBlockEditorProps } from './command-block';
+
+export { StructureEditor, XYZVectorInput } from './structure-editor';
+export type { XYZValue, XYZAxis, XYZInputProps, XYZChangeDetail, XYZVectorInputProps, StructureEditorMode, StructureVectorField, StructureTextField, StructureBooleanField, StructureEditorValue, StructureEditorField, StructureInputField, StructureEditorChangeDetail, StructureEditorAction, StructureEditorCapabilities, StructureEditorVisibility, StructureEditorLabels, StructurePreviewTurnDetail, StructureEditorCancelDetail, StructureEditorProps } from './structure-editor';

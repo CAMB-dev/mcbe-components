@@ -2,7 +2,7 @@ import { StrictMode, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BookEditor, BookPage, BookPageTurnButton, BookReader } from '../src/book';
-import type { BookDocumentSnapshot, BookFontMode, BookMode, BookPageAction, BookSkinSources } from '../src/book';
+import type { BookDocumentSnapshot, BookFontMode, BookMode, BookNavigationControl, BookPageAction, BookSkinSources } from '../src/book';
 import '../src/styles.css';
 import '../src/fonts.css';
 import '../src/book.css';
@@ -22,6 +22,8 @@ export interface BookQASettings {
   pageFontModes: Partial<Record<number, BookFontMode>>; pageStyleFamilies: Partial<Record<number, string>>;
   standaloneFontMode: BookFontMode; standaloneInputFamily?: string; standaloneReadOnly: boolean;
   trackFontCalls: boolean;
+  hostNavigation: boolean; hostPreviousAvailable: boolean; hostNextAvailable: boolean;
+  mutateNavigationSnapshot: boolean; preventHostTurn: boolean;
 }
 interface QAEvent { kind: string; value?: unknown; detail?: unknown }
 interface BookQA {
@@ -43,6 +45,8 @@ const initial: BookQASettings = {
   actionView: 'row',
   fontProbe: false, editorFontMode: 'auto', fontModeInput: 'scalar', pageFontModes: {}, pageStyleFamilies: {},
   standaloneFontMode: 'auto', standaloneReadOnly: false, trackFontCalls: false,
+  hostNavigation: false, hostPreviousAvailable: false, hostNextAvailable: true,
+  mutateNavigationSnapshot: false, preventHostTurn: false,
 };
 // Independent transparent whole PNGs, generated from zero RGBA bytes without
 // Canvas2D; dimensions intentionally match the original sources they replace.
@@ -56,7 +60,8 @@ const clear = {
   close: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAEElEQVR4AWMYBaNgFAwmAAADkwABsNU+9QAAAABJRU5ErkJggg==',
 };
 // Known nonuniform source texels [x,y*9,255-x,255] over the whole110x14 image.
-// This isolates the public skin's tile-period contract; it is not game artwork.
+// This isolates captured Book's nine-slice stretch contract, including its
+// collapsed source middle row; it is synthetic test data, not game artwork.
 const creasePattern = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG4AAAAOCAYAAADOrymhAAAAq0lEQVR4Ae3BwQnAMAADMRnyyf4DX+coRBo1mUwmk8lkMplMJpPJZDKZTCaTyWQymUwmk8lkMplMJpPJZDKZTCaTyWQymUwmk8lkMplMJpPJZDKZTCaTyWQymUwmk8lkMplMJpPJZDKZTCaTyWQymUwmk8lkMplMJpPjen7ouJ4fOq7nh47r+aHjen7ouJ4fOq7nh47r+aHjen7ouJ4fOq7nh47r+aHjen7oA5Wgb6kAtSvFAAAAAElFTkSuQmCC';
 function probeSkin(mode: BookQASettings['skinProbe']): Partial<BookSkinSources> | undefined {
   if (mode === 'normal') return undefined;
@@ -80,6 +85,16 @@ function App() {
     return settings.pageFontModes[index] ?? settings.editorFontMode;
   };
   const fontProbeStyle = settings.fontProbe ? { '--mc-font': 'monospace', '--mc-font-unicode': 'serif' } as CSSProperties : undefined;
+  const navigation = (target: 'editor' | 'reader'): BookNavigationControl | undefined => settings.hostNavigation ? {
+    previousAvailable: settings.hostPreviousAvailable, nextAvailable: settings.hostNextAvailable,
+    onTurnRequest: (direction, snapshot, event) => {
+      qa.events.push({ kind: 'host-turn', value: target, detail: { direction, snapshot: structuredClone(snapshot), eventType: event.type, buttonDirection: event.currentTarget.dataset.direction } });
+      if (settings.mutateNavigationSnapshot) {
+        Reflect.set(snapshot.pages, '0', 'Host mutated snapshot');
+        snapshot.title = 'Host mutated title'; snapshot.spreadIndex = 99;
+      }
+    },
+  } : undefined;
   const onFinish = (snapshot: BookDocumentSnapshot, detail: unknown) => { qa.finishes.push(structuredClone(snapshot)); qa.events.push({ kind: 'finish', value: snapshot, detail }); };
   qa.mounted = true;
   return <main data-skin-probe={settings.skinProbe} data-pages={JSON.stringify(settings.pages)}>
@@ -88,6 +103,8 @@ function App() {
       {settings.showFirst && <BookEditor ref={node => { editorRef.current = node; qa.refs.editor = node; }} aria-label="QA editor"
         {...(settings.controlled ? { pages: settings.pages } : { defaultPages: settings.pages })}
         spreadIndex={settings.spreadIndex} title={settings.title} author={settings.author} mode={settings.mode}
+        navigation={navigation('editor')}
+        onClickCapture={event => { if (settings.preventHostTurn && event.target instanceof Element && event.target.closest('.mc-book__turn')) event.preventDefault(); }}
         layout={{ unitScale: settings.scale }} skin={probeSkin(settings.skinProbe)} disabled={settings.disabled} readOnly={settings.readOnly} style={fontProbeStyle}
         fontMode={fontMode}
         maxPageLength={settings.maxPageLength} maxTitleLength={settings.maxTitleLength}
@@ -115,6 +132,8 @@ function App() {
         onSign={snapshot => { qa.signs.push(structuredClone(snapshot)); qa.events.push({ kind: 'sign', value: snapshot }); }} onFinish={onFinish}/>}
     </section>
     <section id="secondary">{settings.showSecond && <BookReader ref={node => { readerRef.current = node; qa.refs.reader = node; }} aria-label="QA reader" style={fontProbeStyle} pages={settings.readerPages} spreadIndex={settings.readerSpread}
+      navigation={navigation('reader')}
+      onClickCapture={event => { if (settings.preventHostTurn && event.target instanceof Element && event.target.closest('.mc-book__turn')) event.preventDefault(); }}
       onSpreadIndexChange={readerSpread => setSettings(previous => ({ ...previous, readerSpread }))} onFinish={onFinish}/>}</section>
     {settings.skinProbe !== 'normal' && settings.skinProbe !== 'cover-only' && <section id="skin-probe"><BookReader pages={[]} skin={probeSkin(settings.skinProbe)} aria-label="Isolated skin reader"/></section>}
     <section id="standalone">

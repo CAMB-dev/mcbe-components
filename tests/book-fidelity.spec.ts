@@ -385,7 +385,7 @@ test('nominal spread/pages, spine, turn and close anchors follow independent Cla
   for (const [x, y] of [[60, 60], [160, 100], [260, 160]] as const) expect(rgba(actual, x * 2 + 1, y * 2 + 1)).toEqual(rgba(original, 14, 14));
 });
 
-test('page decorations/text retain their own anchors plus opposite content offsets', async ({ page }) => {
+test('page decorations/text retain source anchors and captured Book crease uses nine-slice stretch', async ({ page }, testInfo) => {
   await open(page);
   for (const side of ['left', 'right'] as const) {
     const leaf = root(page).locator(`.mc-book__page[data-side="${side}"]`);
@@ -412,23 +412,98 @@ test('page decorations/text retain their own anchors plus opposite content offse
   await expect(isolated).toBeVisible();
   const original = PNG.sync.read(await readFile(new URL('../src/assets/book/book_pagecrease_left.png', import.meta.url)));
   const actual = await skinPixels(isolated);
-  // Page crease x40+border7 gives center start47. Source110-2*7=96
-  // logical texels; destination center120-2*7=106. The actual source's
-  // center row is uniform, so these points prove filling, not its period.
-  expect(rgba(actual, 137 * 2 + 1, 60 * 2 + 1)).toEqual(rgba(original, 97, 7));
-  expect(rgba(actual, 147 * 2 + 1, 60 * 2 + 1)).toEqual(rgba(original, 11, 7));
+  // Native G51/52 each contain nine affine quads with POINT/CLAMP sampling.
+  // The original tiled:true metadata does not produce repeats in these Book
+  // draws: center96 source texels stretch over106 logical destination units.
+  // The real middle row is uniform; these samples establish fill only.
+  expect(rgba(actual, 137 * 2 + 1, 60 * 2 + 1)).toEqual(rgba(original, 89, 7));
+  expect(rgba(actual, 147 * 2 + 1, 60 * 2 + 1)).toEqual(rgba(original, 98, 7));
   await page.evaluate(() => window.bookQA.configure({ skinProbe: 'crease-pattern' }));
   await expect(page.locator('main')).toHaveAttribute('data-skin-probe', 'crease-pattern');
   const pattern = await skinPixels(isolated);
-  let differingPixels = 0;
-  for (let x = 0; x < 106 * 2; x++) {
-    const sourceX = 7 + Math.floor(x / 2) % 96;
-    const expected = [sourceX, 7 * 9, 255 - sourceX, 255];
-    if (!rgba(pattern, 47 * 2 + x, 60 * 2 + 1).every((channel, index) => channel === expected[index])) differingPixels++;
+  // Independent CSS whole-PNG reference: fixed source110x14/cuts7 and
+  // destination120x193 at scale2. Absolute pixel background sizes/offsets
+  // express each source window, without reading the production helper/styles.
+  // This is a CSS host contract, not an ideal/native POINT raster oracle:
+  // exact texel-boundary ties need not match a JavaScript floor calculation.
+  const referenceSource = new PNG({ width: 110, height: 14 });
+  for (let y = 0; y < 14; y++) for (let x = 0; x < 110; x++) {
+    referenceSource.data.set([x, y * 9, 255 - x, 255], (y * 110 + x) * 4);
   }
-  // Nonuniform synthetic110x14 validates the entire96+10 tail period
-  // without deriving the expected positions from the production skin helper.
-  expect(differingPixels, '212 physical pixels across independently specified center strip').toBe(0);
+  const sourceUrl = `data:image/png;base64,${PNG.sync.write(referenceSource).toString('base64')}`;
+  await page.evaluate(async sourceUrl => {
+    document.getElementById('crease-css-reference')?.remove();
+    const image = new Image(); image.src = sourceUrl; await image.decode();
+    const host = document.createElement('div'); host.id = 'crease-css-reference';
+    host.style.cssText = 'position:fixed;left:8px;top:8px;width:240px;height:386px;pointer-events:none;z-index:99999';
+    const sourceX = [0, 7, 103, 110], sourceY = [0, 7, 7, 14];
+    const destinationX = [0, 14, 226, 240], destinationY = [0, 14, 372, 386];
+    for (let row = 0; row < 3; row++) for (let column = 0; column < 3; column++) {
+      const sx = sourceX[column]!, sy = sourceY[row]!;
+      const sw = sourceX[column + 1]! - sx, sh = Math.max(1, sourceY[row + 1]! - sy);
+      const left = destinationX[column]!, top = destinationY[row]!;
+      const width = destinationX[column + 1]! - left, height = destinationY[row + 1]! - top;
+      const cell = document.createElement('div');
+      cell.style.cssText = `position:absolute;left:${left}px;top:${top}px;width:${width}px;height:${height}px;background-repeat:no-repeat;image-rendering:pixelated`;
+      cell.style.backgroundImage = `url("${sourceUrl}")`;
+      cell.style.backgroundSize = `${110 * width / sw}px ${14 * height / sh}px`;
+      cell.style.backgroundPosition = `${-sx * width / sw}px ${-sy * height / sh}px`;
+      host.append(cell);
+    }
+    document.body.append(host);
+  }, sourceUrl);
+  const referenceBytes = await page.locator('#crease-css-reference').screenshot({ caret: 'initial' });
+  await page.locator('#crease-css-reference').evaluate(node => node.remove());
+  const reference = PNG.sync.read(referenceBytes); expect([reference.width, reference.height]).toEqual([240, 386]);
+  let differingPixels = 0;
+  const differingColumns: Record<number, number> = {};
+  for (let y = 0; y < 193 * 2; y++) for (let x = 0; x < 120 * 2; x++) {
+    const expected = rgba(reference, x, y);
+    if (!rgba(pattern, 40 * 2 + x, 5 * 2 + y).every((channel, index) => channel === expected[index])) {
+      differingPixels++; differingColumns[x] = (differingColumns[x] ?? 0) + 1;
+    }
+  }
+  await testInfo.attach('crease-actual-full-surface', { body: PNG.sync.write(pattern), contentType: 'image/png' });
+  await testInfo.attach('crease-independent-css-whole-png-reference', { body: referenceBytes, contentType: 'image/png' });
+  await testInfo.attach('crease-css-contract', { body: Buffer.from(JSON.stringify({ width: 240, height: 386, pixels: 92640, differingPixels, differingColumns,
+    scope: 'Whole-PNG source-derived CSS reference; no native/ideal POINT tie claim, mask, skipped column, epsilon or tolerance.' })), contentType: 'application/json' });
+  expect(differingPixels, 'complete240x386 independent CSS whole-PNG nine-slice stretch reference').toBe(0);
+});
+
+test('page content offsets shift row and pencil hit regions while whole pencil artwork uses contain', async ({ page }) => {
+  await open(page);
+  const original = await readFile(new URL('../src/assets/book/book_edit_default.png', import.meta.url));
+  const source = PNG.sync.read(original); expect([source.width, source.height]).toEqual([18, 16]);
+  for (const scale of [2, 5]) {
+    await page.evaluate(scale => window.bookQA.configure({ scale, pages: ['Left', 'Right'], spreadIndex: 0, mode: 'pages', actions: true, actionView: 'row', readOnly: false, disabled: false }), scale);
+    for (const side of ['left', 'right'] as const) {
+      const leaf = root(page).locator(`.mc-book__leaf[data-side="${side}"]`);
+      const row = await box(leaf.locator('.mc-book__page-actions')), parent = await box(leaf);
+      // Source page_content_panel supplies opposite[+5,0]/[-5,0] offsets.
+      expect(Math.abs(row.x + row.width / 2 - parent.x - (80 + (side === 'left' ? 5 : -5)) * scale)).toBeLessThanOrEqual(.02);
+    }
+    await page.evaluate(() => window.bookQA.configure({ actionView: 'edit' }));
+    await page.mouse.move(0, 0);
+    for (const side of ['left', 'right'] as const) {
+      const leaf = root(page).locator(`.mc-book__leaf[data-side="${side}"]`), pencil = leaf.locator('[data-book-action="edit"]');
+      // Source edit_page19x18, bottom_middle offset[0,-16], inside the
+      // shifted content panel. Preserve the hitbox independently of its art.
+      await relative(pencil, leaf, [(160 - 19) / 2 + (side === 'left' ? 5 : -5), 207 - 16 - 18, 19, 18], scale);
+      await expect(pencil).toHaveCSS('background-size', 'contain');
+      await expect(pencil).toHaveCSS('background-position', '50% 50%');
+      await expect(pencil).toHaveCSS('background-repeat', 'no-repeat');
+      await expect(pencil).toHaveCSS('image-rendering', 'pixelated');
+      const background = await pencil.evaluate(node => getComputedStyle(node).backgroundImage);
+      const rawUrl = background.slice(4, -1), url = rawUrl.startsWith('"') ? JSON.parse(rawUrl) as string : rawUrl;
+      if (url.startsWith('data:')) expect(Buffer.from(url.slice(url.indexOf(',') + 1), 'base64')).toEqual(original);
+      else { const response = await page.request.get(url); expect(response.ok()).toBe(true); expect(await response.body()).toEqual(original); }
+      // Ordinary contain yields19x(19*16/18) artwork centered in19x18.
+      // Native float/floor/half endpoint quantization is deliberately absent.
+      const fit = Math.min(19 / source.width, 18 / source.height);
+      expect(fit * source.width).toBe(19);
+      expect(fit * source.height).toBeCloseTo(16.88888888888889, 10);
+    }
+  }
 });
 
 test('both24-square turn buttons use whole original default/hover/pressed pixels with no press displacement', async ({ page }, testInfo) => {

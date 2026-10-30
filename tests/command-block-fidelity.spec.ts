@@ -118,3 +118,20 @@ test('whole original Plus pixels multiply source default hover and locked tints 
   }
   await testInfo.attach('whole-plus-source-tint-css-host-contract',{body:JSON.stringify({sourceSHA256:digest,sourceSize:[11,11],proofs,scope:'Independent whole original PNG plus explicit source .3/1/.7 CSS brightness reference at integer2x on black. Full RGBA0, not merely computed-filter assertions. Browser CSS quantization is the declared host contract; native vertex/shader quantization and whole GUI pixel identity are not certified.'}),contentType:'application/json'});
 });
+
+test('first tick retains normal10 label plus16 toggle and inherited4 footer before separate2 tick delay spacer',async({page},testInfo)=>{
+  // Source: command option_label_execute_on_first_tick + settings.option_toggle
+  // desktop one_line_layout -> option_generic_core/control(min16) + trailing4.
+  // The following offset_tick_delay2 is an independent source sibling. This
+  // does not redefine previous-output's explicit32x12 option wrapper.
+  await open(page,{viewportSize:[400,300]});const root=page.locator('#command-editor-host .mc-command-block'),group=root.locator('.mc-command-block__first-tick'),proofs=[];
+  for(const scale of[2,3]){
+    await configure(page,{scale});await expect(root).toHaveCSS('width',`${400*scale}px`);
+    const wrapper=(await group.boundingBox())!,label=(await group.locator('.mc-choice__text').boundingBox())!,toggle=(await group.locator('.mc-switch').boundingBox())!,ticks=(await root.locator('.mc-command-block__ticks').boundingBox())!;
+    expect(label.height/scale).toBe(10);expect(toggle.height/scale).toBe(16);expect((toggle.y-label.y)/scale).toBe(10);
+    expect(wrapper.height/scale).toBe(30);expect((wrapper.y+wrapper.height-toggle.y-toggle.height)/scale).toBe(4);expect((ticks.y-wrapper.y-wrapper.height)/scale).toBe(2);
+    expect(await group.evaluate((node,scale)=>({padding:getComputedStyle(node).paddingBottom,margin:getComputedStyle(node).marginBottom,scale}),scale)).toEqual({padding:`${4*scale}px`,margin:`${2*scale}px`,scale});
+    proofs.push({scale,label:label.height/scale,toggle:toggle.height/scale,inheritedFooter:4,wrapper:wrapper.height/scale,nextIndependentGap:(ticks.y-wrapper.y-wrapper.height)/scale});
+  }
+  await testInfo.attach('first-tick-complete-source-stack',{body:JSON.stringify({proofs,scope:'Complete static source inheritance with explicit normal-label10 host metric. Original toggle image remains16 high; source trailing4 is distinct from following2 spacer. Not native pixel geometry certification.'}),contentType:'application/json'});
+});

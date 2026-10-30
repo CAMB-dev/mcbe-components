@@ -642,6 +642,10 @@
         "fidelity": "source_texture_web_composition"
       }
     ],
+    "structure_editor": [
+      {"name":"StructureEditor","status":"implemented","fidelity":"source_texture_web_composition_host_preview_native_validation_pending","source":"resource_pack/ui/structure_editor_screen.json, fixed v1.26.60.5","details":"docs/STRUCTURE_EDITOR_QA.md"},
+      {"name":"XYZVectorInput","status":"implemented","fidelity":"source_vertical_xyz_raw_draft_layout_contract","source":"resource_pack/ui/structure_editor_screen.json, fixed v1.26.60.5","details":"docs/STRUCTURE_EDITOR_QA.md"}
+    ],
     "command_blocks": [
       {"name":"CommandBlockEditor","status":"implemented","fidelity":"source_texture_web_composition_native_page_validation_pending","source":"resource_pack/ui/command_block_screen.json, fixed v1.26.60.5","details":"docs/COMMAND_BLOCK_QA.md"},
       {"name":"CommandInput","status":"implemented","fidelity":"source_input_layout_single_native_textarea_host_expansion_contract","source":"resource_pack/ui/command_block_screen.json, fixed v1.26.60.5","details":"docs/COMMAND_BLOCK_QA.md"},
@@ -661,7 +665,7 @@
     ]
   },
   "publicExports": {
-    "components": 131,
+    "components": 133,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -672,7 +676,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 145,
+    "runtimeValues": 147,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 4,

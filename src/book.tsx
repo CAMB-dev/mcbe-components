@@ -1,7 +1,7 @@
 import { createContext, forwardRef, useCallback, useContext, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import type {
   ButtonHTMLAttributes, ChangeEvent, CSSProperties, HTMLAttributes, InputHTMLAttributes,
-  Ref, TextareaHTMLAttributes,
+  Ref, MouseEvent, TextareaHTMLAttributes,
 } from 'react';
 import { Button } from './components';
 import { bookAssets } from './book-assets';
@@ -60,6 +60,15 @@ export interface BookNavigationDetail {
   reason: 'previous' | 'next' | 'programmatic';
   previousSpreadIndex: number;
 }
+/** Independent source visibility bindings for documents whose navigation is
+ * managed by the host (for example, an editor that can append empty spreads).
+ * Supplying this object delegates both arrows to onTurnRequest; no pages are
+ * fabricated and the default finite-array navigation is not run. */
+export interface BookNavigationControl {
+  previousAvailable: boolean;
+  nextAvailable: boolean;
+  onTurnRequest: (direction: 'previous' | 'next', accepted: BookDocumentSnapshot, event: MouseEvent<HTMLButtonElement>) => void;
+}
 export interface BookBaseProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'children' | 'onChange'> {
   pages?: readonly string[];
   defaultPages?: readonly string[];
@@ -67,6 +76,7 @@ export interface BookBaseProps extends Omit<HTMLAttributes<HTMLElement>, 'title'
   spreadIndex?: number;
   defaultSpreadIndex?: number;
   onSpreadIndexChange?: (index: number, detail: BookNavigationDetail) => void;
+  navigation?: BookNavigationControl;
   title?: string;
   defaultTitle?: string;
   onTitleChange?: (title: string) => void;
@@ -229,13 +239,12 @@ function skinAxes(asset: BookAsset, width: number, height: number) {
     ys: axis(Math.max(0, height), asset.height, metadata.base_size[1], top, bottom) };
 }
 function skinPatchCount(asset: BookAsset, width: number, height: number) {
-  const { metadata, xs, ys } = skinAxes(asset, width, height);
+  const { xs, ys } = skinAxes(asset, width, height);
   let count = 0;
   for (let row = 0; row < 3; row++) for (let column = 0; column < 3; column++) {
     const x = xs[column]!; const y = ys[row]!;
     if (!x.length || !y.length) continue;
-    count += Math.ceil(x.length / (metadata.tiled && column === 1 && x.logical > 0 ? x.logical : x.length)) *
-      Math.ceil(y.length / (metadata.tiled && row === 1 && y.logical > 0 ? y.logical : y.length));
+    count++;
   }
   return count;
 }
@@ -243,12 +252,14 @@ function skinPatchCount(asset: BookAsset, width: number, height: number) {
 /** Bounded private mapping of the original metadata, not a JSON UI renderer.
  * CSS border-image drops zero-size source centers. The source art has opaque
  * seam texels there, so retain a clamped boundary texel and stretch that axis.
- * Positive tiled center axes repeat at their original logical size; partial
- * final tiles clip, rather than squeeze. Every patch references the whole PNG. */
+ * The captured Classic Book image draws use one stretched quad per slice,
+ * including edge/crease centers, despite companion metadata.tiled=true.
+ * Keep that raw metadata as provenance; do not infer a repeat period from it.
+ * This is a bounded Book-style mapping. Every patch references the whole PNG. */
 function BookSkin({ asset, source, width, height, className }: {
   asset: BookAsset; source: string; width: number; height: number; className: string;
 }) {
-  const { metadata, xs, ys } = skinAxes(asset, width, height);
+  const { xs, ys } = skinAxes(asset, width, height);
   if (skinPatchCount(asset, width, height) > 4096) throw new RangeError('Book skin exceeds the 4096 patch budget.');
   const patches = [];
   const unit = (value: number) => `calc(var(--mc-book-u, 2px) * ${value})`;
@@ -258,8 +269,8 @@ function BookSkin({ asset, source, width, height, className }: {
     const sx = x.pixels > 0 ? x.source : Math.max(0, Math.min(asset.width - 1, Math.floor(x.source)));
     const sy = y.pixels > 0 ? y.source : Math.max(0, Math.min(asset.height - 1, Math.floor(y.source)));
     const sw = x.pixels || 1; const sh = y.pixels || 1;
-    const tileWidth = metadata.tiled && column === 1 && x.logical > 0 ? x.logical : x.length;
-    const tileHeight = metadata.tiled && row === 1 && y.logical > 0 ? y.logical : y.length;
+    const tileWidth = x.length;
+    const tileHeight = y.length;
     const columns = Math.ceil(x.length / tileWidth); const rows = Math.ceil(y.length / tileHeight);
     for (let ty = 0; ty < rows; ty++) for (let tx = 0; tx < columns; tx++) {
       patches.push(<span className="mc-book__skin-clip" key={`${row}-${column}-${ty}-${tx}`} style={{
@@ -343,7 +354,7 @@ export const BookPage = forwardRef<HTMLDivElement, BookPageProps>(function BookP
 
 function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: boolean; rootRef: Ref<HTMLElement> }) {
   const { pages: controlledPages, defaultPages = [], onPagesChange,
-    spreadIndex: controlledSpread, defaultSpreadIndex = 0, onSpreadIndexChange,
+    spreadIndex: controlledSpread, defaultSpreadIndex = 0, onSpreadIndexChange, navigation,
     title: controlledTitle, defaultTitle = '', onTitleChange,
     author: controlledAuthor, defaultAuthor = '', onAuthorChange,
     mode: controlledMode, defaultMode = 'pages', onModeChange, readOnly = !editor, disabled = false,
@@ -415,6 +426,13 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     const next = clamp(index); if (next === spread) return;
     if (button.ownerDocument.activeElement === button) setFocusRequest({ index: next, button });
     setSpread(next); onSpreadIndexChange?.(next, { reason, previousSpreadIndex: spread });
+  };
+  const turn = (direction: 'previous' | 'next', event: MouseEvent<HTMLButtonElement>) => {
+    if (event.defaultPrevented || blocked()) return;
+    if (navigation) {
+      if (!(direction === 'previous' ? navigation.previousAvailable : navigation.nextAvailable)) return;
+      navigation.onTurnRequest(direction, snapshot(), event);
+    } else navigate(spread + (direction === 'previous' ? -1 : 1), direction, event.currentTarget);
   };
   const changeMode = (next: BookMode, reason: 'sign-open' | 'sign-cancel', button: HTMLButtonElement) => {
     if (blocked()) return;
@@ -507,10 +525,10 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
         <BookSkin asset={bookAssets.book_back} source={skin.background} width={geometry.width} height={geometry.height} className="mc-book__back"/>
         <div className="mc-book__spine" aria-hidden="true"/>
         <div className="mc-book__spread">{renderPage('left', spread * 2)}{renderPage('right', spread * 2 + 1)}</div>
-        <BookPageTurnButton direction="previous" aria-label={labels.previous} available={spread > 0}
-          disabled={disabled || composing} onClick={event => navigate(spread - 1, 'previous', event.currentTarget)}/>
-        <BookPageTurnButton direction="next" aria-label={labels.next} available={spread < lastSpread}
-          disabled={disabled || composing} onClick={event => navigate(spread + 1, 'next', event.currentTarget)}/>
+        <BookPageTurnButton direction="previous" aria-label={labels.previous} available={navigation ? navigation.previousAvailable : spread > 0}
+          disabled={disabled || composing} onClick={event => turn('previous', event)}/>
+        <BookPageTurnButton direction="next" aria-label={labels.next} available={navigation ? navigation.nextAvailable : spread < lastSpread}
+          disabled={disabled || composing} onClick={event => turn('next', event)}/>
       </div>
       <div className="mc-book__cover" hidden={mode !== 'signing'}>
         <BookSkin asset={bookAssets.book_cover} source={skin.cover} width={geometry.coverWidth} height={geometry.coverHeight} className="mc-book__cover-back"/>

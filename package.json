@@ -66,6 +66,7 @@
     "./sign.css": "./dist/sign.css",
     "./jigsaw.css": "./dist/jigsaw.css",
     "./command-block.css": "./dist/command-block.css",
+    "./structure-editor.css": "./dist/structure-editor.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",

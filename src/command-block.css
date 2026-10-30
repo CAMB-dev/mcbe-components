@@ -40,7 +40,7 @@
 .mc-command-block__type-select .mc-combobox-trigger { padding-left:calc(var(--mc-command-u) * 29); }
 .mc-command-block__type-icon { position:absolute; left:calc(var(--mc-command-u) * 8); top:calc(var(--mc-command-u) * 18.5); width:calc(var(--mc-command-u) * 17); height:calc(var(--mc-command-u) * 17); pointer-events:none; }
 .mc-command-block__type-icon > * { width:100% !important; height:100% !important; }
-.mc-command-block__first-tick { display:flex; flex-direction:column; align-items:flex-start; min-height:0; gap:0; margin-bottom:calc(var(--mc-command-u) * 2); font:inherit; text-shadow:none; }
+.mc-command-block__first-tick { display:flex; flex-direction:column; align-items:flex-start; min-height:0; gap:0; padding-bottom:calc(var(--mc-command-u) * 4); margin-bottom:calc(var(--mc-command-u) * 2); font:inherit; text-shadow:none; }
 .mc-command-block__first-tick .mc-choice__text { height:calc(var(--mc-command-u) * 10); font:inherit; }
 .mc-command-block__first-tick .mc-switch { width:calc(var(--mc-command-u) * 30); height:calc(var(--mc-command-u) * 16); }
 .mc-command-block__ticks > .mc-field__label { padding-left:calc(var(--mc-command-u) * 2); height:calc(var(--mc-command-u) * 10); }

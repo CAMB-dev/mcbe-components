@@ -78,3 +78,5 @@ python scripts/prepare-command-block-assets.py --check
 Book80项与6项导航的受测源 /字体 /BookCSS未变，原范围见 `.cache/command-book-regression-01/FINAL.json`，不称为tint后重新执行。公开 `#command-block` 新03完整61/61辅助通过，29.905秒，893输入 /346dist /59site前后无变化，59个实际HTTP站点响应逐字节匹配；11张原图的实际CSS绑定 /img来源字节相同，真实英文textarea的CDP字体仅MCBE Classic。原02整批保留，不叠加成122项，也不将公开资源检查称为新增tint像素认证。
 
 公开03的page /consoleError /HTTP /request错误及取消均为0，4条整页ReadPixels性能warning保留，报告 `.cache/command-block-public-focused-03/FINAL.json`。33正式、80回归、6导航与新61辅助各保原范围；最终文档包需另做非文档身份验证，不预先声称完成。
+
+后续source链核对补回first-tick option的generic尾spacer4：标题10＋switch16＋尾4共30，另有后续gap2。此CSS修订不改变字段API；当前Command34项随第二完整66项（另Structure32）实际通过，55.333951秒，零失败 /跳过 /重试 /flaky，909项selected输入无变化。首62 /4保留，canonical `.cache/structure-editor-independent-qa/formal-02/FINAL.json`；上述33 /公开03仍属修订前范围，不重计为新纵向位置证书。当前133 /147新源码02包的React18 /19实际消费及349dist逐字节一致也通过，见 `.cache/structure-editor-root-close-01/INTEGRATION-PACKAGE-02.json`。

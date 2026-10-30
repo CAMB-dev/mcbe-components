@@ -358,3 +358,59 @@ test('book font role: typed Page/Editor refs and SSR preserve bounded whole-valu
     expect([nativeRef.current, pageRef.current, editorRef.current]).toEqual([null, null, null]); expect(fetches).toBe(0); expect(warnings).toEqual([]);
   } finally { globalThis.fetch = previousFetch; console.error = previousError; }
 });
+
+test('host navigation exposes independent arrows and immutable accepted requests without default array navigation', async ({ page }) => {
+  await open(page, { pages: ['One', 'Two'], readerPages: ['Reader one', 'Reader two'], spreadIndex: 0, readerSpread: 0,
+    hostNavigation: true, hostPreviousAvailable: false, hostNextAvailable: true, mutateNavigationSnapshot: true });
+  const book = editor(page), next = turn(page, 'next'), previous = turn(page, 'previous');
+  const requests = () => page.evaluate(() => window.bookQA.events.filter(event => event.kind === 'host-turn'));
+  const numbers = await book.locator('.mc-book__page-number').allTextContents();
+  await expect(next).toBeVisible(); await expect(next).toBeEnabled();
+  await expect(previous).toBeHidden(); await expect(previous).toBeDisabled();
+  await next.click(); await next.click();
+  const expected = { kind: 'host-turn', value: 'editor', detail: { direction: 'next', eventType: 'click', buttonDirection: 'next',
+    snapshot: { pages: ['One', 'Two'], title: 'QA journal', author: 'Alex', spreadIndex: 0, mode: 'pages' } } };
+  expect(await requests()).toEqual([expected, expected]);
+  await expect(book).toHaveAttribute('data-spread-index', '0');
+  await expect(book.getByRole('textbox', { name: 'Leaf 1', exact: true })).toHaveValue('One');
+  await expect(book.getByRole('textbox', { name: 'Leaf 2', exact: true })).toHaveValue('Two');
+  await expect(book.locator('textarea')).toHaveCount(2);
+  expect(await book.locator('.mc-book__page-number').allTextContents()).toEqual(numbers);
+  expect(await page.evaluate(() => window.bookQA.events.filter(event => event.kind === 'spread' || event.kind === 'pages'))).toEqual([]);
+
+  await configure(page, { hostNextAvailable: false });
+  for (const button of [previous, next]) {
+    await expect(button).toBeHidden(); await expect(button).toBeDisabled();
+    await expect(button).toHaveAttribute('aria-hidden', 'true'); await expect(button).toHaveAttribute('tabindex', '-1');
+    await button.evaluate(node => { if (!(node instanceof HTMLButtonElement)) throw new Error('Expected real button'); node.click(); });
+  }
+  expect(await requests()).toHaveLength(2);
+  await configure(page, { hostPreviousAvailable: true, hostNextAvailable: true, preventHostTurn: true });
+  await next.click(); expect(await requests()).toHaveLength(2);
+  await configure(page, { preventHostTurn: false, disabled: true });
+  await expect(next).toBeDisabled();
+  await next.evaluate(node => { if (!(node instanceof HTMLButtonElement)) throw new Error('Expected real button'); node.click(); });
+  expect(await requests()).toHaveLength(2);
+  await configure(page, { disabled: false });
+  const input = book.getByRole('textbox', { name: 'Leaf 1', exact: true });
+  await input.focus(); await input.dispatchEvent('compositionstart', { data: '' });
+  await expect(next).toBeDisabled();
+  await next.evaluate(node => { if (!(node instanceof HTMLButtonElement)) throw new Error('Expected real button'); node.click(); });
+  expect(await requests()).toHaveLength(2);
+  await input.dispatchEvent('compositionend', { data: '' }); await expect(next).toBeEnabled();
+
+  await turn(page, 'previous', '#secondary').click();
+  expect(await requests()).toEqual([expected, expected, { kind: 'host-turn', value: 'reader', detail: {
+    direction: 'previous', eventType: 'click', buttonDirection: 'previous',
+    snapshot: { pages: ['Reader one', 'Reader two'], title: '', author: '', spreadIndex: 0, mode: 'pages' },
+  } }]);
+  await expect(page.locator('#secondary .mc-book')).toHaveAttribute('data-spread-index', '0');
+  await expect(page.locator('#secondary .mc-book__page-text')).toHaveText(['Reader one', 'Reader two']);
+  // Removing the explicit host contract restores the existing finite-array
+  // policy: neither two-leaf book has another spread. No leaf was fabricated.
+  await configure(page, { hostNavigation: false });
+  for (const parent of ['#primary', '#secondary']) for (const direction of ['previous', 'next']) {
+    await expect(turn(page, direction, parent)).toHaveAttribute('data-available', 'false');
+    await expect(turn(page, direction, parent)).toBeHidden();
+  }
+});

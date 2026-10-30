@@ -38,6 +38,8 @@ export function Journal() {
 
 可受控的字段包括pages、spreadIndex、title、author和Editor的mode；对应default属性提供非受控初值。`onSpreadIndexChange` 另给previousSpreadIndex及previous / next原因。受控值以宿主接纳后的props为准；`title` / `author` 默认空字符串，`authorEditable` 默认false。组件不根据title猜测持久化状态，不修改宿主页数组。
 
+可选 `navigation: BookNavigationControl` 显式提供 `previousAvailable`、`nextAvailable` 和 `onTurnRequest(direction, acceptedSnapshot, event)`。一旦传入，两箭头仅在对应available时报告宿主请求，不执行默认数组导航、不自动append；宿主自行接受请求并更新pages /spread。省略时保留既有有限数组行为。该接口对应源独立 `#next_page_button_active` 等可用性输入，不把数组长度当作恢复的游戏控制器公式。
+
 ## 编辑、签名与宿主动作
 
 `BookReader` 始终只读。Editor默认可编辑，`readOnly` 显示只读页，`disabled` 阻止交互。`textareaProps` 可为对象或按pageIndex返回的函数，`textareaRef(pageIndex)` 可取得对应真实textarea；`titleInputProps` / `authorInputProps` 及各自ref控制封面输入。根ref为section的HTMLElement。`maxPageLength` / `maxTitleLength` 是宿主声明的HTML长度限制，按UTF-16 code units计，不是恢复原游戏的换行或分页算法。
@@ -78,7 +80,7 @@ export function ReusableLeaf() {
 
 `layout` 可明确给spreadSize、pageSize、unitScale及resolvedMaxSize；后者是宿主已解析的逻辑上限，不是百分比祖先布局 / 引擎clamp的模拟器。未传时保留名义尺寸，窄屏容器可自行安排局部横滚；不把自动响应式缩小当作原版规则。
 
-32张完整原PNG、8份原始纹理metadata和上游LICENSE的逐文件来源见 [book-assets.json](book-assets.json)，来源固定commit `15701fa9c13923f12662984c32c124327e40e3d3`。没有裁切重编码或使用捕获像素。原metadata的base_size、nineslice_size、tiled与物理PNG尺寸分别保留；例如spine物理8×1而base8×2，不能修改原图或套用不可能的物理切片来消除差异。退化中心及重复铺图已按下述有限Web合同独立核对，仍不作为原生整页认证。
+32张完整原PNG、8份原始纹理metadata和上游LICENSE的逐文件来源见 [book-assets.json](book-assets.json)，来源固定commit `15701fa9c13923f12662984c32c124327e40e3d3`。没有裁切重编码或使用捕获像素。原metadata的base_size、nineslice_size、tiled与物理PNG尺寸分别保留；例如spine物理8×1而base8×2，不能修改原图或套用不可能的物理切片来消除差异。早期Web合同曾将metadata的tiled解释为运行时repeat；后续实际G49–52 skin draw证据支持单9-quad stretch，因此仅修正运行时呈现，原metadata不改。旧重复铺图测试保留历史范围，不作为native还原证明。
 
 ```powershell
 python scripts/prepare-book-assets.py --check
@@ -118,16 +120,20 @@ Book阶段新增4个runtime组件，当时124组件＋4数据＋10函数，共13
 
 随后对完整2570×1402目标做实际组件比较，结果仍未达到native parity。两个完整原生presentation guard的RGBA差异为0，不能把guard成功转移成DOM成功。`.cache/book-native-component-compare-01/FINAL.json` 保留基准，`FINAL-FOOTER-02.json` 保留按源链 /native VB修正footer后的独立阶段：
 
-|正文profile /状态|基准差异像素|footer修正后|补四字后|
-|---|---:|---:|---:|
-|Classic /empty|73,299|54,547|48,661|
-|Classic /mixed|76,913|58,161|52,275|
-|Unicode override /empty|72,146|53,394|46,489|
-|Unicode override /mixed|75,760|57,008|50,103|
+|正文profile /状态|基准差异像素|footer修正后|补四字后|skin修正后|
+|---|---:|---:|---:|---:|
+|Classic /empty|73,299|54,547|48,661|16,081|
+|Classic /mixed|76,913|58,161|52,275|19,695|
+|Unicode override /empty|72,146|53,394|46,489|13,909|
+|Unicode override /mixed|75,760|57,008|50,103|17,523|
 
 footer按钮按源最小外框102×20、bottom对齐、随unitScale的一逻辑边框及无shadow修正；长文案仍按实际字体文本宽＋10逻辑insets自适应，不固定压成102宽。四组alpha差异均从14,000降为0，footer差异20,369→1,617，footer之外每字节不变。
 
 新增“共第签页”的210私有字集独立审计通过后，`FINAL-FONT-03.json` 以真实NVIDIA /D3D11 /DPR1再次完成四个完整目标比较。CDP确认所测页码11glyph与footer2glyph均只使用各自Classic或Unicode face，原MCBE CJK fallback在这些节点上实际消失；变化仅在两页码band与footer，其余字节相同。footer残差进一步降为497；两页码band仍为Classic 3,738＋3,515 /Unicode 2,740＋2,341，皮肤 /controls余区40,911与mixed正文3,614残差保留。两个完整presentation guard仍RGBA0，125个选定输入pin无变化，native parity仍为false；字符补齐不等于通用Unicode或整GUI通过。
+
+随后 `FINAL-SKIN-04.json` 在相同fixture与未改navigation配置下完成四帧复测，每帧比03少32,580不同像素、alpha仍0。皮肤区域本身全部相同，skin /controls余区剩8,331，其中next箭头7,875、pencil456；该分区成功不等于整页通过。pencil宿主动作布局另按page_content的±5偏移、19×18 hitbox与18×16 contain图面更正。
+
+`FINAL-HOSTNAV-05.json` 另建明确的previous=false /next=true宿主profile，原04数组导航fixture保留。Classic empty /mixed残差为8,206 /11,820，Unicode显式override为6,034 /9,648；各比04少7,875，仅next的120×120区域变化，其余RGBA字节相同。控件余区剩456个pencil边缘像素，其他源皮肤相同；132项选定输入pin无变化、两完整presentation guard仍0、alpha及runtime错误为0。该结果不认证默认数组导航或默认字体整页零差。
 
 ## 正文与编辑布局修订
 
@@ -143,4 +149,8 @@ footer按钮按源最小外框102×20、bottom对齐、随unitScale的一逻辑�
 
 公开03首个补字后完整批37/37辅助通过，20.477秒，三face真实加载，747输入 /327dist /59site无变化，严格整值Unicode家族检查未放宽。Book实际已知混排advance231 CSS px在244内容宽内；真实输入 /选择、逐页覆盖、composition、只读禁用、签名角色隔离和窄屏也检查。报告 `.cache/book-sign-typography-public-03/RESULT.json`，准备命令及字体范围见 [CLASSIC_FONTS_QA.md](CLASSIC_FONTS_QA.md)。37项不加入79正式，旧01失败与未执行02保留；完整默认字体栅格、精确clip量化、真实OS IME与Present仍未认证。
 
-当前210字集与footer修订已完成整80项回归（Book40 /Sign30 /Classic10）及另6项旧导航，零跳过 /重试 /flaky /report errors，892项选定输入加5 harness均不变；见 `.cache/command-book-regression-01/FINAL.json`。新增footer case实际覆盖scale2 /5、pages /signing与长文案自适应。首80批为79通过 /1失败：新case误将最小102固定套到长英文label；改用独立测量activefont文本＋源10 insets预测intrinsic后fresh80通过，产品、旧79项与0.02几何容差未改。首报告保留，不累加重复通过项。当前实际React18.3.1 /19.3.1包为131组件 /145值，日志 `.cache/command-block-root-close-01/package-verification.log`。本轮Command公开61项辅助也已通过，其范围见 [COMMAND_BLOCK_QA.md](COMMAND_BLOCK_QA.md)，不增加Book原生像素覆盖或替代上述仍非零的完整画面比较。
+此前210字集与footer修订完成整80项回归（Book40 /Sign30 /Classic10）及另6项旧导航，零跳过 /重试 /flaky /report errors，892项选定输入加5 harness均不变；见 `.cache/command-book-regression-01/FINAL.json`。新增footer case覆盖scale2 /5、pages /signing与长文案自适应。首80批79通过 /1失败的新case误将最小102固定套到长英文label；改用独立测量activefont文本＋源10 insets预测intrinsic后fresh80通过，产品、旧79项与0.02容差未改。其145值包及Command公开61辅助保留当时范围。
+
+后续83项首批实际82通过 /1失败：扩张synthetic 92,640像素平面的理想CPU floor期望在四个tie列有1,544差异。完整范围与首失败保留，不能遮列或放宽epsilon；改为独立source-derived CSS reference后，fresh完整83项（Book43 /Sign30 /Classic10）及另6导航全部通过，各批904项选定输入加5 harness无变化，零跳过 /重试 /flaky /report errors。完整92,640像素严格RGBA0是CSS whole-PNG参考合同，不是理想POINT或native画面认证；不把native04 /05皮肤结果与首synthetic失败混为一谈。canonical为 `.cache/book-fidelity-css-reference-03/EXECUTED-FINAL.json`。
+
+当前133组件 /147值React18 /19新包实际消费与349dist逐字节一致也通过，见 `.cache/structure-editor-root-close-01/INTEGRATION-PACKAGE-02.json`；它与83客户端、原生固定场景分别保留范围，不把SSR或独立CSS参考升格为上述仍非零的完整原生画面。

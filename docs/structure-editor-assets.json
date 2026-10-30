@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "fixedSource": {
+    "archive": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "scope": "One complete original Rotate PNG for Structure Editor; existing Jigsaw, Command Block and Crafting original resources are reused without duplicate delivery.",
+  "resources": [
+    {
+      "key": "Rotate",
+      "entry": "resource_pack/textures/ui/Rotate.png",
+      "destination": "src/assets/structure-editor/Rotate.png",
+      "bytes": 160,
+      "sha256": "535929d122ca84391115ebf92431ed47daaae747e61d03764cc3a9a30b04b502",
+      "dimensions": [
+        45,
+        7
+      ]
+    }
+  ],
+  "textureMetadata": [],
+  "sourcePresentation": {
+    "sourceNode": "structure_editor.rotation_arrows",
+    "sourceTexture": "textures/ui/Rotate",
+    "actualPngSize": [
+      45,
+      7
+    ],
+    "displaySize": [
+      45,
+      7
+    ],
+    "sizeOrigin": "Original PNG intrinsic dimensions; the source image node has no explicit size property.",
+    "color": [
+      0.6,
+      0.6,
+      0.6
+    ],
+    "tintBakedIntoPng": false,
+    "visibleBinding": "#rotation_arrows_visible"
+  },
+  "license": {
+    "entry": "LICENSE.md",
+    "destination": "src/assets/structure-editor/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sharedLicense": {
+    "path": "src/assets/Minecraft-Sample-LICENSE.md",
+    "entry": "LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sourceUi": [
+    {
+      "entry": "resource_pack/ui/structure_editor_screen.json",
+      "bytes": 57023,
+      "sha256": "4794210e68573a05678797cb708a584bb840bf9106bf5adc8bbe62e80c4de62a",
+      "bundled": false
+    }
+  ],
+  "reusePolicy": {
+    "registryModules": [
+      "src/jigsaw-image-assets.ts",
+      "src/command-block-image-assets.ts",
+      "src/crafting-image-assets.ts"
+    ],
+    "additionalCopies": 0,
+    "note": "This bank adds only Rotate; existing complete source surfaces and controls remain owned by their current registries."
+  },
+  "qualification": {
+    "wholePngCount": 1,
+    "wholePngBytes": 160,
+    "wholeTextureMetadataCount": 0,
+    "bundledWholeFilesIncludingLicense": 2,
+    "companionMetadataExistsInFixedZip": false,
+    "nativeMappingVerified": false,
+    "licenseNotice": "Complete original Mojang all-rights-reserved notice and EULA reference retained locally; existing shared Minecraft-Sample-LICENSE.md remains unchanged."
+  }
+}

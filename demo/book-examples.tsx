@@ -34,6 +34,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   const [mode, setMode] = useState<BookMode>('pages');
   const [readOnly, setReadOnly] = useState(false), [disabled, setDisabled] = useState(false);
   const [pencilActions, setPencilActions] = useState(false);
+  const [hostPageTurns, setHostPageTurns] = useState(false);
   const [fontMode, setFontMode] = useState<BookFontMode>('auto'), [separatePageFonts, setSeparatePageFonts] = useState(false);
   const [leftFont, setLeftFont] = useState<BookFontMode | 'inherit'>('inherit'), [rightFont, setRightFont] = useState<BookFontMode | 'inherit'>('inherit');
   const [editorOpen, setEditorOpen] = useState(true), [readerOpen, setReaderOpen] = useState(true);
@@ -57,6 +58,20 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   function acceptPages(next: readonly string[]) {
     setPages([...next]); setSpread(previous => keepSpread(previous, next.length)); setSignRequest(null);
   }
+  function requestPageTurn(direction: 'previous' | 'next', accepted: BookDocumentSnapshot) {
+    const nextSpread = Math.max(0, accepted.spreadIndex + (direction === 'next' ? 1 : -1));
+    const beyondDraft = nextSpread > lastSpread(accepted.pages.length);
+    if (readOnly && beyondDraft) return;
+    const next = [...accepted.pages];
+    if (beyondDraft) {
+      while (next.length < nextSpread * 2 + 2) next.push('');
+      setPages(next); setSignRequest(null);
+    }
+    setSpread(nextSpread);
+    report(beyondDraft
+      ? `Demo host added ${next.length - accepted.pages.length} blank leaves and opened spread ${nextSpread + 1}.`
+      : `Demo host opened spread ${nextSpread + 1}.`);
+  }
   function pageAction(action: BookPageAction, pageIndex: number) {
     if (!editable || pageIndex < 0 || pageIndex >= pages.length) return;
     if (action === 'edit') {
@@ -79,7 +94,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   }
   function reset() {
     setPages([...initialPages]); setSpread(0); setTitle('River journal'); setAuthor('Alex'); setMode('pages');
-    setReadOnly(false); setDisabled(false); setPencilActions(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
+    setReadOnly(false); setDisabled(false); setPencilActions(false); setHostPageTurns(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
     setSignRequest(null); setSignedCopy(null); setLeafTexts([...primitivePages]); setLeafIndex(0);
     setFontMode('auto'); setSeparatePageFonts(false); setLeftFont('inherit'); setRightFont('inherit');
     report('Book examples restored.');
@@ -129,6 +144,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
         <Combobox label="Page actions" value={pencilActions ? 'pencil' : 'row'} disabled={!editable}
           options={[{ value: 'row', label: 'Page action row' }, { value: 'pencil', label: 'Edit pencil' }]}
           onValueChange={value => setPencilActions(value === 'pencil')}/>
+        <Switch label="Host-managed page turns" checked={hostPageTurns} onChange={event => setHostPageTurns(event.target.checked)}/>
         <Switch label="Read-only editor" checked={readOnly} onChange={event => { setReadOnly(event.target.checked); setSignRequest(null); }}/>
         <Switch label="Disable editor" checked={disabled} onChange={event => setDisabled(event.target.checked)}/>
         <Button size="sm" disabled={editorOpen} onClick={() => setEditorOpen(true)}>Open editor</Button>
@@ -162,6 +178,8 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
         {editorOpen ? <BookEditor aria-label="Example book and quill" pages={pages} spreadIndex={currentSpread}
           title={title} author={author} mode={mode} authorEditable readOnly={readOnly} disabled={disabled}
           fontMode={separatePageFonts ? pageFont : fontMode}
+          navigation={hostPageTurns ? { previousAvailable: currentSpread > 0,
+            nextAvailable: !readOnly || currentSpread < lastSpread(pages.length), onTurnRequest: requestPageTurn } : undefined}
           onPagesChange={(next, detail) => { acceptPages(next); setReceipt(`Accepted text for leaf ${detail.pageIndex + 1}. ${next.length} leaves in this draft.`); }}
           onSpreadIndexChange={setSpread} onTitleChange={value => { setTitle(value); setSignRequest(null); }}
           onAuthorChange={value => { setAuthor(value); setSignRequest(null); }}
@@ -175,6 +193,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
           : <p style={noteStyle}>The editor is closed. Your draft is kept until Reset.</p>}
       </div>
       <p style={noteStyle} data-book-editor-position>{pages.length} leaves · spread {currentSpread + 1} · {mode === 'signing' ? 'signing cover' : 'pages'} · {disabled ? 'disabled' : readOnly ? 'read-only' : 'editable'}.</p>
+      {hostPageTurns && <p style={noteStyle} data-book-host-navigation>Page turns are managed by this demo host. Moving past the editable draft adds blank leaves only when you request the next spread. Read-only navigation stays within existing pages.</p>}
       <p style={noteStyle}>The page toolbar edits this ordinary list: insert a blank leaf, delete, or move a leaf one position left or right. Signing sends a request; accepting it below creates a read-only demo copy.</p>
       {signRequest && <div data-book-sign-request style={stackStyle}>
         <p style={noteStyle}>Requested: “{signRequest.title}” · {signRequest.author} · {signRequest.pages.length} leaves.</p>
