@@ -27,7 +27,8 @@ export interface NpcSkinPickerProps extends Omit<HTMLAttributes<HTMLDivElement>,
   onValueChange?: (id: string, detail: NpcSkinChangeDetail) => void;
   page?: number; defaultPage?: number;
   onPageChange?: (page: number, detail: NpcSkinPageDetail) => void;
-  /** Host-resolved source grid dimensions. Source declares a bound grid, not a fixed count. */
+  /** Host-resolved grid dimensions. Five default columns follow the observed normal pack;
+   * the source grid binding is not a globally recovered count. */
   columns?: number; rows?: number;
   cycleVisible?: boolean;
   disabled?: boolean; readOnly?: boolean;
@@ -114,7 +115,7 @@ export const NpcPortrait = forwardRef<HTMLDivElement, NpcPortraitProps>(function
 });
 
 /** Paged source grid with stable caller skin IDs; grid dimensions are a host resolution. */
-export const NpcSkinPicker = forwardRef<HTMLDivElement, NpcSkinPickerProps>(function NpcSkinPicker({ skins, value, defaultValue, onValueChange, page: controlledPage, defaultPage = 0, onPageChange, columns = 4, rows = 1, cycleVisible, disabled = false, readOnly = false, previousLabel = defaults.skinPrevious, nextLabel = defaults.skinNext, onSkinHover, buttonRefs, scale = 2, className, style, ...props }, ref) {
+export const NpcSkinPicker = forwardRef<HTMLDivElement, NpcSkinPickerProps>(function NpcSkinPicker({ skins, value, defaultValue, onValueChange, page: controlledPage, defaultPage = 0, onPageChange, columns = 5, rows = 1, cycleVisible, disabled = false, readOnly = false, previousLabel = defaults.skinPrevious, nextLabel = defaults.skinNext, onSkinHover, buttonRefs, scale = 2, className, style, ...props }, ref) {
   scaleValue(scale); unique(skins); if (![columns, rows].every(n => Number.isSafeInteger(n) && n > 0) || columns * rows > 256) throw new RangeError('NPC skin grid dimensions must be positive integers with at most 256 cells.');
   const [selected, setSelected] = useDraft(value, () => defaultValue === undefined ? skins[0]?.id ?? null : defaultValue), [requestedPage, setPage] = useDraft(controlledPage, () => defaultPage);
   if (!Number.isSafeInteger(requestedPage) || requestedPage < 0) throw new RangeError('NPC skin page must be a nonnegative safe integer.');
@@ -247,9 +248,9 @@ export const NpcEditor = forwardRef<HTMLElement, NpcEditorProps>(function NpcEdi
           <div className="mc-npc-editor__advanced-button"><Button disabled={disabled} onClick={event => requestPage('advanced', { reason: 'button', event })}>{labels.advanced}</Button></div>
         </div>
         <ScrollArea className="mc-npc-editor__advanced" hidden={!advancedVisible && maximized === null} scale={scale} label={labels.advanced} viewportRef={advancedViewportRef}
-          viewportProps={{ ...advancedViewportProps, tabIndex: maximized !== null ? -1 : advancedViewportProps?.tabIndex, style: { ...advancedViewportProps?.style, ...(maximized !== null ? { overflow: 'visible' } : {}) } }} contentProps={{ className: 'mc-npc-editor__advanced-content' }}>
+          viewportProps={{ ...advancedViewportProps, tabIndex: maximized !== null ? -1 : advancedViewportProps?.tabIndex, style: { ...advancedViewportProps?.style, ...(maximized !== null ? { overflowX: 'visible', overflowY: 'visible' } : {}) } }} contentProps={{ className: 'mc-npc-editor__advanced-content' }}>
           <div className="mc-npc-editor__advanced-stack"><div className="mc-npc-editor__help" hidden={!helpVisible || maximized !== null}>
-            <div hidden={!educationEdition}><p>{labels.urlHelpA}</p><p>{labels.urlHelpB}</p></div><div><p>{labels.commandHelpA}</p><p>{labels.commandHelpB}</p></div>
+            <div className="mc-npc-editor__help-column mc-npc-editor__help-column--url" hidden={!educationEdition}><div className="mc-npc-editor__help-text"><p>{labels.urlHelpA}</p><p>{labels.urlHelpB}</p></div></div><div className="mc-npc-editor__help-column"><div className="mc-npc-editor__help-text"><p>{labels.commandHelpA}</p><p>{labels.commandHelpB}</p></div></div>
           </div><div className="mc-npc-editor__middle-pad" hidden={maximized !== null}/><div className="mc-npc-editor__actions">{draft.actions.map(action => <div key={action.id} className="mc-npc-editor__action" hidden={actionStates[action.id]?.visible === false || maximized !== null && maximized !== action.id}>
             <NpcActionEditor value={action} state={actionStates[action.id]} commandsEnabled={commandsEnabled} maximized={maximized === action.id} disabled={disabled} readOnly={readOnly} labels={labels} scale={scale}
               textareaProps={actionTextareaProps?.[action.id]} textareaRef={actionTextareaRefs?.[action.id]} buttonNameRef={actionButtonNameRefs?.[action.id]}

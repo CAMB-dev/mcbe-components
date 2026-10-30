@@ -11,7 +11,7 @@ export interface NpcQASettings {
   action:NpcActionValue;actionControlled:boolean;actionMaximized:boolean;actionMaxControlled:boolean;
   dialogue:string;dialogueControlled:boolean;worldBuilder:boolean;dialogueActions:NpcDialogueAction[];
   skins:Omit<NpcSkin,'actor'>[];pickerValue:string|null;pickerControlled:boolean;pickerPage:number;pickerPageControlled:boolean;acceptSkinPage:boolean;editorSkinPage:number;
-  columns:number;rows:number;cycleVisible:boolean;disabled:boolean;readOnly:boolean;educationEdition:boolean;commandsEnabled:boolean;addButtonsEnabled:boolean;helpVisible:boolean;
+  columns?:number;rows:number;cycleVisible:boolean;disabled:boolean;readOnly:boolean;educationEdition:boolean;commandsEnabled:boolean;addButtonsEnabled:boolean;helpVisible:boolean;
   actionState:NpcActionState;actionStates:Record<string,NpcActionState>;pageVisibility:Partial<Record<NpcEditorPage,boolean>>;
   closeVisible:boolean;closeEnabled:boolean;scale:number;size:readonly[number,number];dialogueWidth:number;
   showEditor:boolean;showAction:boolean;showDialogue:boolean;showPicker:boolean;showPortrait:boolean;showSecond:boolean;actorVisible:boolean;portraitVariant:'skin'|'dialogue';
@@ -34,7 +34,7 @@ const initial:NpcQASettings={value:{name:'QA NPC',dialogue:'Hello traveller',ski
   maximizedActionId:null,maxControlled:true,acceptMax:true,action:{...command,id:'standalone'},actionControlled:true,actionMaximized:false,actionMaxControlled:true,
   dialogue:'Hello traveller',dialogueControlled:true,worldBuilder:true,dialogueActions:[{id:'talk',label:'Talk',kind:'command'},{id:'visit',label:'Visit',kind:'url'},{id:'locked',label:'Locked',disabled:true}],
   skins:Array.from({length:9},(_,index)=>({id:`skin-${index}`,label:`Skin ${index}`,disabled:index===7})),pickerValue:'skin-0',pickerControlled:true,pickerPage:0,pickerPageControlled:true,acceptSkinPage:true,editorSkinPage:0,
-  columns:4,rows:1,cycleVisible:true,disabled:false,readOnly:false,educationEdition:true,commandsEnabled:true,addButtonsEnabled:true,helpVisible:true,actionState:{},actionStates:{},pageVisibility:{},closeVisible:true,closeEnabled:true,
+  rows:1,cycleVisible:true,disabled:false,readOnly:false,educationEdition:true,commandsEnabled:true,addButtonsEnabled:true,helpVisible:true,actionState:{},actionStates:{},pageVisibility:{},closeVisible:true,closeEnabled:true,
   scale:2,size:[325,200],dialogueWidth:320,showEditor:true,showAction:false,showDialogue:false,showPicker:false,showPortrait:false,showSecond:false,actorVisible:true,portraitVariant:'skin',preventEscape:false,stopCompositionPropagation:false,nativeTitle:'Caller NPC native title',labels:{},readerVisible:true,dialogueLayout:{}};
 const initialSettings:NpcQASettings={...initial,...window.npcQAInitial};
 const qa:NpcQA={mounted:false,settings:initialSettings,events:[],snapshots:[],configure:()=>{},unmount:()=>{},refs:{editor:null,action:null,dialogue:null,picker:null,portrait:null,name:null,editorDialogue:null,actionText:null,actionButtonName:null,dialogueText:null,actionTexts:{},buttonNames:{},skinButtons:{},pickerButtons:{},dialogueButtons:{},advancedViewport:null,dialogueViewport:null,standaloneViewport:null}};window.npcQA=qa;

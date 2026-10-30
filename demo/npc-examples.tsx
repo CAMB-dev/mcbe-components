@@ -41,7 +41,7 @@ export function NpcExamples({ notify }: { notify: (message: string) => void }) {
   const report = (message: string) => { setReceipt(message); notify(message); };
   const skins: NpcSkin[] = Array.from({ length: 6 }, (_, index) => ({
     id: `host-${index + 1}`, label: `Appearance ${index + 1}`,
-    actor: <span style={{ fontSize: 8 * scale, lineHeight: 1 }}>Host {index + 1}</span>,
+    actor: <span style={{ display: 'grid', placeContent: 'center', height: '100%', fontSize: 8 * scale, lineHeight: 1 }}>Host {index + 1}</span>,
   }));
   const selectedSkin = skins.find(skin => skin.id === value.skinId);
   const actor = <div data-npc-host-actor aria-label="Application actor placeholder" style={{ display: 'grid', placeContent: 'center', height: '100%', gap: 4, padding: 4, color: '#fff', textAlign: 'center', overflowWrap: 'anywhere', fontSize: 8 * scale, lineHeight: 1 }}>
@@ -130,7 +130,7 @@ export function NpcExamples({ notify }: { notify: (message: string) => void }) {
       <p style={note}>Edit the name and appearance in Basic, change the dialogue, or add URL and command rows in Advanced. The three command toggles are independent; student buttons remain a separate collection.</p>
       <div role="region" aria-label="NPC editor preview" tabIndex={0} style={preview}>
         {editorOpen ? <NpcEditor value={value} page={page} size={[width, height]} scale={scale} dialogueWidth={width}
-          skins={skins} actor={actor} skinPage={skinPage} skinColumns={3} skinRows={1} cycleVisible
+          skins={skins} actor={actor} skinPage={skinPage} cycleVisible
           disabled={disabled} readOnly={readOnly} educationEdition={education} commandsEnabled={commandsEnabled} addButtonsEnabled={addEnabled}
           maximizedActionId={maximizedId} actionStates={{ 'guide-url': { errorStatus: urlWarning } }} aria-label="Example NPC editor"
           onValueChange={(next, detail) => {

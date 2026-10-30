@@ -338,7 +338,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **140 个已实现组件**，新增NpcPortrait、NpcSkinPicker、NpcActionEditor、NpcDialogue与NpcEditor；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开4份数据、10个渲染 /几何 /纹理函数，共154个运行时值。NPC44项客户端合同、React18 /19实际新包消费及56项公开辅助检查已通过；旧ServerForms37项与6导航另作回归，历史阶段保留原范围。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
+当前 **140 个已实现组件**，包含NpcPortrait、NpcSkinPicker、NpcActionEditor、NpcDialogue与NpcEditor；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开4份数据、10个渲染 /几何 /纹理函数，共154个运行时值。NPC原生布局校准后的44项客户端合同、React18 /19实际包消费及64项公开辅助检查已通过，旧阶段保留各自受测身份，见 [NPC_QA.md](docs/NPC_QA.md)。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
 
 [完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与13个命名族缺口。140组件不是140个完整GUI；NPC仅新增有限对话 /编辑源族范围，不认证引擎、人物renderer或原生整页。
 
@@ -351,7 +351,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 - 命令方块：CommandBlockEditor复用CommandInput与CommandOutputPanel；宿主提供模式、历史快照与可用条件，Paste只发请求，命令不执行。预览入口 `#command-block`，使用与验证范围见 [COMMAND_BLOCK_QA.md](docs/COMMAND_BLOCK_QA.md)。
 - 结构编辑：StructureEditor复用XYZVectorInput，preview与save /load /export均由宿主实现；预览入口 `#structure-editor`，字段、能力条件及实际验收范围见 [STRUCTURE_EDITOR_QA.md](docs/STRUCTURE_EDITOR_QA.md)。
 - 服务端表单：`#server-forms`预览ServerActionForm /ServerCustomForm，提供源row /typed schema及宿主请求；独立合同、tooltip与资源范围见 [SERVER_FORMS_QA.md](docs/SERVER_FORMS_QA.md)，不实现后端协议或第三MessageForm。
-- NPC：`#npc`预览对话、basic /advanced编辑、皮肤选择与可复用action编辑，见 [NPC_QA.md](docs/NPC_QA.md)；人物由宿主提供，命令、URL与保存仅发请求。
+- NPC：`#npc`预览对话、basic /advanced编辑、皮肤选择与可复用action编辑，见 [NPC_QA.md](docs/NPC_QA.md)。皮肤选择正常pack默认五列，可由宿主覆盖；人物renderer由宿主提供，命令、URL与保存仅发请求，原生采集不等于整页像素验收。
 - HUD 与页面组合：已有快捷栏、生命 / 饥饿 / 护甲 / 氧气 / 经验 / Boss 条、准星、聊天、计分板、效果、标题和手持提示、玩家列表及触屏控制，以及暂停 / 死亡 / 设置 / 加载 / 世界 / 服务器 / 资源包 / 成就提示等组合。
 
 目录中的 GUI 由这些基础零件组合。目录范围不等于所有版本、所有平台的完整游戏界面；原生 3D renderer、游戏规则、最终像素取整与真实游戏整帧差异单独验收。
@@ -652,7 +652,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。当前NPC阶段140组件 /154值已在React18.3.1 /19.3.1真实消费通过，见 [NPC_QA.md](docs/NPC_QA.md)；ServerForms135 /149、Structure133 /147及更早包保持历史范围。
+- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。NPC布局修订及展开恢复修复后的140组件 /154值已在React18.3.1 /19.3.1真实消费通过，见 [NPC_QA.md](docs/NPC_QA.md)。ServerForms135 /149、Structure133 /147及更早包保持历史范围。
 - `#books` 的27项生产辅助与旧6项导航回归已分别通过，覆盖真实编辑 / 签名请求 / 窄屏及既有锚点；它们不计入Book正式30项或原生像素认证，见 [BOOK_QA.md](docs/BOOK_QA.md)。
 - `#signs` 的50项公开集成辅助已通过；新Sign29项、旧Dialog12项与修后完整导航6项分批验证，保留首次导航失败及修复记录，不作为原生整页像素或真实OS IME认证，见 [SIGN_QA.md](docs/SIGN_QA.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。
