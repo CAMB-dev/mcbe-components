@@ -4,7 +4,7 @@
 
 新增黑板三组件保留独立可复用的真实textarea与30×16锁开关，十张原图复用，尺寸和权限由宿主提供。新增24与旧相关80项同批104通过、实际React18 /19的175值包与公开12项通过；皮肤平面严格零差不等于原生整页验收，见 [CHALKBOARD_QA.md](CHALKBOARD_QA.md)。
 
-新增OreUI权限五组件保留现代玩家卡 /说明、segmented与共用modal分支和独立开关，资源 /字体、窗口尺寸与实际权限服务由宿主提供。当前更强源修订的React18.3.1 /19.3.1实际172值包、完整107项同批104通过 /3设备跳过与新公开9项分别完成；黑 .5 overlay、.2u bevel、modal role /check /focus分离按完整源链修正，230点中50底bevel点最大差1而非全零，旧104 /103 /包 /公开记录保留原身份，不称当前原生整页或Classic覆盖表扩大；见 [ORE_PLAYER_PERMISSIONS_QA.md](ORE_PLAYER_PERMISSIONS_QA.md)。
+OreUI权限五组件保留现代玩家卡 /说明、segmented与共用modal分支和独立开关，资源 /字体、窗口尺寸与实际权限服务由宿主提供。四个文字组件增加可选textLineBox汉字行框，默认primary保持旧版结构和画面；真实prop整页A/B/A已复现有限字体实验，仍非原生整页零差。新正式123项同批120通过 /3设备跳过、974份输入零漂移，ReactNode与真实标签 /ref /受控拒绝 /modal焦点均覆盖；旧批次保留原身份，不据此扩大Classic覆盖表，见 [ORE_PLAYER_PERMISSIONS_QA.md](ORE_PLAYER_PERMISSIONS_QA.md)。
 
 新增Classic权限四组件已落盘，角色选择与动态boolean权限草稿独立，未知key不补false，所有授权 /Kick /Ban由宿主实现。本阶段正式63通过 /2桌面触控条件跳过、公开预览12项及React18 /19实际包消费通过；当前安装版OreUI是不同profile，不据Classic源码认证。见 [PLAYER_PERMISSIONS_QA.md](PLAYER_PERMISSIONS_QA.md)。历史DocumentViewer146组件 /163值及58通过 /1设备条件跳过保持原受测身份。
 

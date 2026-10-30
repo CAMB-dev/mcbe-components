@@ -2,9 +2,39 @@
 
 `OrePlayerPermissions`、`OrePermissionLevelSelect`、`OrePermissionToggleRow`、`OrePlayerCard` 和 `OreSwitch` 是独立的现代权限组件。它们依据本机安装版HBUI /OreUI源研究实现，保留原来的Classic四组件；源码可用不等于原生整页像素、所有运行时主题或权限服务已恢复。
 
+## 可选汉字行框
+
+四个有文字的组件支持 `textLineBox="primary" | "fallback"`，类型为 `OrePermissionTextAppearance`。默认 `primary` 保持原来的文字结构和字体行框。`OreSwitch` 没有此选项。
+
+`fallback` 是应用显式选择的字体度量适配：仅对组件管理的、含 U+3400–U+9FFF 汉字的纯字符串，把实际文字父元素的字体族设为 `--mc-ore-fallback`，内层行内 span 恢复原 Ten /Seven 字体栈并设置 `line-height:0`。字号、父元素行高、字距和透明度保持原值。页头使用 Ten，正文使用 Seven，回退顺序由现有 `locale` 决定。拉丁字母纯字符串、ReactNode 富文本、图标及输入控件保持原结构；不会遍历、展平或改写应用提供的元素。
+
+该选项不加载、检测或重写字体。应用应提供所需字体，使用 `--mc-ore-ten` / `--mc-ore-seven` 定义主字族，并核对实际 locale 回退字体及多行排版。没有原字体时仍可渲染和交互，但公共系统回退的度量与原版可能不同。包含假名、韩文或扩展区汉字而没有上述范围汉字的字符串不触发此适配；这不是通用语言自动检测。富文本的行框由应用自行管理。页面会把同一选项传给玩家卡、角色选择器、权限行和角色弹窗。
+
+```tsx
+<OrePlayerPermissions
+  {...hostProps}
+  locale="zh_CN"
+  textLineBox="fallback"
+/>
+```
+
+`hostProps` 为下方使用示例中的必需宿主数据。这一策略以原字体的统一表度量及整页实验为依据，不使用逐标签位置补偿、字号缩小或误差遮罩。它是有限的 Web 字体适配，尚未认证原生运行时的行框策略或整页像素一致。公开 `#ore-player-permissions` 可切换中文示例和两种行框，中文文案为应用示例文案，不冒称所有原版翻译。
+
+实现后的新一批正式回归共123项，实际 **120通过、3个预期桌面触摸条件跳过、零失败 /重试**，974份输入指纹前后零漂移。包含新增6项分别在桌面 /移动执行，以及原OreUI像素、Classic权限和滚动条回归；不与准备阶段的SSR两项或旧批次重复累计。新增检查覆盖GUI1 /2 /5下长中文与中英混排、缺少原主字族时的可用性、真实标签 /输入 /富文本ref、受控拒绝、切换策略时弹窗按钮与焦点保留、非法参数及SSR零IO。纯假名、韩文、扩展区汉字和富文本数组 /fragment的门槛也明确检查。证据 `.cache/ore-permissions-linebox-tests-01/run-01/`。
+
+独立审查另以真实React SSR对照旧HEAD，9组默认 /显式primary输出逐字节一致，8组有限opt-in合同通过。新增CSS只有三个规则、仅设置font-family与内层line-height，旧Switch运行体保持不变。证据 `.cache/ore-permissions-linebox-review-01/`；实际浏览器结论仍以上述新批次为准。页头h1保留Ten，角色弹窗h2按原有继承保留Seven；准备阶段曾把后者错误声明为Ten，已在执行浏览器之前按旧CSS修正并留档，产品未因此改字体。
+
+真实组件接入后，普通页和菜单各自执行primary /fallback /primary三次独立浏览器对照。固定原始2570×1405整张R522 /R523、GUI5候选、DPR1及ANGLE D3D11；严格RGBA零容差，无裁切、缩放或遮罩。两组primary前后完整RGBA零差，且均与旧06基线零差；fallback也与旧诊断B完整RGBA零差。普通页primary /fallback分别仍有1294293 /1258702个不同像素，菜单为2738409 /2732633，全部结论仍为 `DIFFERENT`。这证明真实prop复现有限实验，没有把实验的整体改善、3844 /1374个新增错误像素或局部退化改称全面改善。所有共同文字父矩形、字号、父行高与字距保持原值，66份输入指纹无漂移。实际三份原OTF响应body逐哈希命中，并单独记录inner glyphface；父节点字体查询因inner包裹而为空不代表字体丢失。证据 `.cache/ore-permissions-linebox-product-02/run-01/`。
+
+首轮product-01在正式截图前因观察器误把七份Vite字体URL导出JavaScript模块当作字体二进制而停止，失败及trace保留。第二轮只修观察器：每个响应保留MIME、request类型、完整哈希和文件魔数，模块严格分类，未知响应报错；真正字体二进制仍必须匹配冻结原件，Ten /Seven /Noto每份都要求真实HTTP body命中。没有改组件、原字体、图像目标、布局、透明度或像素判定。新浏览器及临时5294服务均已关闭，原4173预览保留，Computer Use未开启。
+
+应用通过任意逐元素 `font-family` 覆盖源字族时，应保留primary并自行验证，或通过上述Ten /Seven角色变量配置。此实现不会读取DOM computed font再复制到React树；因此不承诺自动保留未知的外部逐元素字体规则。公开系统回退、多语言、引擎实际provider、动态头像和完整字体栅格等边界仍然存在。
+
+公开预览还修正了一处独立的演示页CSS泄漏：原全局 `h1 > span` 把fallback页头内层染成首页的绿色，全局h1阴影也进入组件。现将四处首页标题规则限定在 `.hero h1`，所有属性值保留，库源码不变。第一轮9项交互检查虽通过，截图复核仍发现问题；新增颜色 /阴影检查先真实复现绿色错误，再对修正后的新构建检查。此前组件回归与整页原生对照的fixture均未加载这份演示页CSS，不用那些证据冒称验证了新CSS。
+
 ## 2026-10-31 选择器悬停状态与高光修正
 
-后续字体行框诊断没有进入产品。三份原字体的表度量支持一个统一strut候选：纯CJK字符串外层使用Noto行框，内层保留原Ten /Seven字族且line-height为0，字号、父行高和字距不改。实际普通页 /菜单A/B/A守卫完整一致，21 /26个父矩形与行高不变；B分别有1258702 /2732633个不同像素，仍未达到整页零差，且新增3844 /1374个错误像素。有限标题 /说明的纵向墨迹证据改善，实际原生基线、全部fallback选择和栅格仍未知，不能把指标改善升级为默认字体策略。证据 `.cache/ore-permissions-font-metrics-01/`、`.cache/ore-permissions-linebox-probe-01/` 与 `.cache/ore-permissions-linebox-audit-01/`。此后黑板接入是独立组件增量，不回填为本次字体探针输入。
+以下为采用显式 opt-in 之前的历史字体行框诊断，默认策略至今仍未改变。三份原字体的表度量支持一个统一strut候选：纯CJK字符串外层使用Noto行框，内层保留原Ten /Seven字族且line-height为0，字号、父行高和字距不改。实际普通页 /菜单A/B/A守卫完整一致，21 /26个父矩形与行高不变；B分别有1258702 /2732633个不同像素，仍未达到整页零差，且新增3844 /1374个错误像素。有限标题 /说明的纵向墨迹证据改善，实际原生基线、全部fallback选择和栅格仍未知，不能把指标改善升级为默认字体策略。证据 `.cache/ore-permissions-font-metrics-01/`、`.cache/ore-permissions-linebox-probe-01/` 与 `.cache/ore-permissions-linebox-audit-01/`。此后黑板接入是独立组件增量，不回填为本次字体探针输入。
 
 角色选择器恢复 secondary hover 的上下高光：普通状态仍为白色 `.6 / .4`，悬停状态改为 `.8 / .6`，同时使用原来的 hover 底色。源 `Ld` 使用 mousemove /mouseleave 维护 hover，click、focus 和菜单打开本身不写 hover。当前 trigger 对应保存鼠标事件状态，禁用时不进入 hover，离开时清除；切换响应式表现时重置旧 trigger 的状态。没有增加“展开即悬停”的规则，forced-colors 仍清除装饰阴影。原生输入模式、hidden /dragging 等引擎 gate 尚未恢复。
 

@@ -171,6 +171,11 @@
 .mc-ore-scroll__thumb::after {content:"";position:absolute;left:calc(-.2 * var(--mc-ore-unit));right:calc(-.2 * var(--mc-ore-unit));height:calc(.2 * var(--mc-ore-unit));bottom:calc(-.4 * var(--mc-ore-unit));background:rgba(0,0,0,.2)}
 .mc-ore-scroll__touch {position:absolute;pointer-events:none;right:calc(.2 * var(--mc-ore-unit));width:calc(.8 * var(--mc-ore-unit));background:#aaa;opacity:0;transition:opacity 2s linear}
 .mc-ore-scroll__touch[data-active="true"] {opacity:.9;transition:none}
+/* Explicit host opt-in for the bounded plain-string Han linebox candidate.
+   The existing text parent owns the fallback strut; glyph roles stay on the inner inline span. */
+.mc-ore-text-linebox[data-ore-text-linebox="fallback"] {font-family:var(--mc-ore-fallback)}
+.mc-ore-text-linebox>.mc-ore-text-linebox__ink {font-family:var(--mc-ore-seven,"Minecraft Seven v2"),var(--mc-ore-fallback);line-height:0}
+.mc-ore-text-linebox>.mc-ore-text-linebox__ink[data-ore-linebox-ink="ten"] {font-family:var(--mc-ore-ten,"Minecraft Ten v2"),var(--mc-ore-fallback)}
 @media(prefers-reduced-motion:reduce) {
   .mc-ore-switch__thumb[data-motion] {animation:none;left:0;right:auto;margin-left:calc(-.2 * var(--mc-ore-unit))}
   .mc-ore-switch[data-checked="true"] .mc-ore-switch__thumb[data-motion] {left:calc(2.4 * var(--mc-ore-unit));margin-left:calc(.2 * var(--mc-ore-unit))}

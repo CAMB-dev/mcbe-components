@@ -137,6 +137,10 @@ try {
  assert.match(renderToString(element(ui.OreSwitch,{'aria-label':'Caller switch',checked:true,readOnly:true,thumbIcon:element('span',null,'Host thumb')})),/Host thumb/);
  assert.match(renderToString(element(ui.OrePermissionToggleRow,{title:'Caller permission row',description:'Caller row description',checked:false,readOnly:true})),/Caller row description/);
  assert.match(renderToString(element(ui.OrePlayerCard,{player:packedOrePlayers[0],selected:true,subtitle:'Host subtitle',levelIcon:element('span',null,'Host card role')})),/Host subtitle/);
+ const oreHanMarkup=renderToString(element(ui.OrePermissionToggleRow,{title:'建造 Build',description:'宿主说明',locale:'zh_CN',textLineBox:'fallback',checked:false}));
+ assert.match(oreHanMarkup,/建造 Build/);assert.match(oreHanMarkup,/宿主说明/);assert(oreHanMarkup.includes('data-ore-text-linebox="fallback"'));assert(!/ textLineBox=/.test(oreHanMarkup),'Text policy is not a DOM attribute.');
+ assert(!renderToString(element(ui.OrePermissionToggleRow,{title:'建造 Build',locale:'zh_CN'})).includes('data-ore-text-linebox='),'Default text structure remains primary.');
+ assert.throws(()=>renderToString(element(ui.OrePermissionToggleRow,{title:'Host',textLineBox:'automatic'})),TypeError);
  assert.throws(()=>renderToString(element(ui.OrePermissionLevelSelect,{value:'owner',viewportSize:[1440,1000]})),/permission level/);
 } finally {globalThis.fetch=oreFetch;}
 assert.equal(oreIO,0);assert.equal(oreRequests,0);assert.equal(JSON.stringify(packedOreValues),packedOreSnapshot,'Modern SSR preserves caller snapshots.');
@@ -910,8 +914,14 @@ const badBoardProps:ChalkboardEditorProps={panelSize:[280,180],textBoxSize:[264,
 // @ts-expect-error lock value is boolean, not a server permission string.
 const badBoardValue:ChalkboardValue={text:'Caller text',locked:'operator'};
 import { OrePlayerPermissions, OrePermissionLevelSelect, OrePermissionToggleRow, OrePlayerCard, OreSwitch } from 'mcbeui';
-import type { OrePermissionAppearance, OrePermissionPlayer, OrePermissionOption, OrePermissionLevelLabels, OreSwitchProps, OrePermissionToggleRowProps, OrePlayerCardProps, OrePermissionLevelSelectProps, OrePermissionSafeArea, OrePlayerPermissionsLabels, OrePlayerPermissionsProps } from 'mcbeui';
+import type { OrePermissionAppearance, OrePermissionTextLineBox, OrePermissionTextAppearance, OrePermissionPlayer, OrePermissionOption, OrePermissionLevelLabels, OreSwitchProps, OrePermissionToggleRowProps, OrePlayerCardProps, OrePermissionLevelSelectProps, OrePermissionSafeArea, OrePlayerPermissionsLabels, OrePlayerPermissionsProps } from 'mcbeui';
 const typedOreAppearance:OrePermissionAppearance={guiScale:1.5,locale:'zh_CN'};
+const typedOreLineBox:OrePermissionTextLineBox='fallback';
+const typedOreText:OrePermissionTextAppearance={...typedOreAppearance,textLineBox:typedOreLineBox};
+// @ts-expect-error The line-box contract is a finite host choice.
+const invalidOreText:OrePermissionTextAppearance={textLineBox:'automatic'};
+// @ts-expect-error The icon-only switch does not own text line boxes.
+const switchTextPolicy:OreSwitchProps={textLineBox:'fallback'};
 const typedOrePlayers:readonly OrePermissionPlayer[]=[{id:'ore-alpha',name:'Host name',avatar:<span>Host avatar</span>,avatarSrc:'/host-avatar.png',subtitle:'Host role',levelIcon:<span>Host icon</span>,isHosting:false}];
 const typedOreOptions:readonly OrePermissionOption[]=[{id:'build',title:'Build',description:'Host description'}];
 const typedOreSafeArea:OrePermissionSafeArea={x:.95,y:.95,positionX:0,positionY:0};
@@ -920,7 +930,7 @@ const typedOreLevelLabels:Partial<OrePermissionLevelLabels>={title:'Role',custom
 const typedOreProps:OrePlayerPermissionsProps={...typedOreAppearance,label:'Modern host permissions',scrollInputMode:'touch',players:typedOrePlayers,permissionOptions:typedOreOptions,viewportSize:[1440,1000] as const,size:[700,700] as const,safeArea:typedOreSafeArea,extraBottomInset:10,selectedPlayerId:'ore-alpha',defaultSelectedPlayerId:null,value:{'ore-alpha':{level:'custom',permissions:{build:true}}},labels:typedOreLabels,levelLabels:typedOreLevelLabels,roleIcons:{custom:<span>Host role art</span>},dropdownIcons:{close:<span>Close</span>,check:<span>Check</span>,chevron:<span>Chevron</span>},toggleIcons:{on:<span>On</span>,off:<span>Off</span>,thumb:<span>Thumb</span>},backIcon:<span>Host back art</span>,disabledLevels:['operator'],canEditPermissions:true,canKickPlayer:true,kickVisible:true,kickEnabled:false,readOnly:true,templateWarning:'Host warning',errorContent:undefined,emptyContent:'No player',playersViewportRef:createRef<HTMLDivElement>(),permissionsViewportRef:createRef<HTMLDivElement>(),playerRefs:{'ore-alpha':createRef<HTMLButtonElement>()},permissionRefs:{build:createRef<HTMLInputElement>()},levelRef:createRef<HTMLDivElement>(),levelTriggerRef:createRef<HTMLButtonElement>(),onSelectedPlayerIdChange:(id,event)=>id+event.type,onValueChange:(next,detail)=>String(next[detail.playerId]?.level)+detail.reason,onBack:event=>event.type,onKickRequest:(player,event)=>player.id+event.type};
 const typedOreSelect:OrePermissionLevelSelectProps={...typedOreAppearance,value:'custom',defaultValue:null,viewportSize:[1440,1000],availableWidth:500,labels:typedOreLevelLabels,icons:{custom:<span>Host icon</span>},dropdownIcons:{close:<span>Close</span>,check:<span>Check</span>,chevron:<span>Chevron</span>},disabledLevels:['operator'],triggerRef:createRef<HTMLButtonElement>(),optionRefs:{custom:createRef<HTMLButtonElement>()},onValueChange:(level,event)=>level+event.type};
 const typedOreSwitch:OreSwitchProps={...typedOreAppearance,'aria-label':'Host switch',checked:true,defaultChecked:false,thumbIcon:<span>Host thumb</span>,onIcon:<span>On</span>,offIcon:<span>Off</span>,onCheckedChange:(checked,event)=>String(checked)+event.currentTarget.checked};
-const typedOreRow:OrePermissionToggleRowProps={...typedOreAppearance,title:'Build',description:'Host description',checked:true,inputRef:createRef<HTMLInputElement>(),inputProps:{name:'host-build','aria-label':'Build'},onCheckedChange:(checked,event)=>String(checked)+event.type};
+const typedOreRow:OrePermissionToggleRowProps={...typedOreText,title:'Build',description:'Host description',checked:true,inputRef:createRef<HTMLInputElement>(),inputProps:{name:'host-build','aria-label':'Build'},onCheckedChange:(checked,event)=>String(checked)+event.type};
 const typedOreCard:OrePlayerCardProps={...typedOreAppearance,player:typedOrePlayers[0]!,selected:true,subtitle:'Host subtitle',levelIcon:<span>Host icon</span>};
 const typedOreElements=<><OrePlayerPermissions {...typedOreProps} ref={createRef<HTMLElement>()}/><OrePermissionLevelSelect {...typedOreSelect} ref={createRef<HTMLDivElement>()}/><OrePermissionToggleRow {...typedOreRow} ref={createRef<HTMLDivElement>()}/><OrePlayerCard {...typedOreCard} ref={createRef<HTMLButtonElement>()}/><OreSwitch {...typedOreSwitch} ref={createRef<HTMLInputElement>()}/></>;
 // @ts-expect-error Modern window breakpoint requires explicit source-window dimensions.
