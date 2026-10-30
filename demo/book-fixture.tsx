@@ -1,7 +1,8 @@
 import { StrictMode, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BookEditor, BookPage, BookPageTurnButton, BookReader } from '../src/book';
-import type { BookDocumentSnapshot, BookMode, BookPageAction, BookSkinSources } from '../src/book';
+import type { BookDocumentSnapshot, BookFontMode, BookMode, BookPageAction, BookSkinSources } from '../src/book';
 import '../src/styles.css';
 import '../src/fonts.css';
 import '../src/book.css';
@@ -17,15 +18,20 @@ export interface BookQASettings {
   skinProbe: 'normal' | 'back-only' | 'crease-only' | 'cover-only' | 'crease-pattern';
   asyncNavigation: boolean;
   actionView: 'row' | 'edit';
+  fontProbe: boolean; editorFontMode: BookFontMode; fontModeInput: 'scalar' | 'per-page';
+  pageFontModes: Partial<Record<number, BookFontMode>>; pageStyleFamilies: Partial<Record<number, string>>;
+  standaloneFontMode: BookFontMode; standaloneInputFamily?: string; standaloneReadOnly: boolean;
+  trackFontCalls: boolean;
 }
 interface QAEvent { kind: string; value?: unknown; detail?: unknown }
 interface BookQA {
   mounted: boolean; events: QAEvent[]; signs: BookDocumentSnapshot[]; finishes: BookDocumentSnapshot[];
+  fontModeCalls: number[];
   configure: (patch: Partial<BookQASettings>) => void; unmount: () => void;
-  refs: { editor: HTMLElement | null; reader: HTMLElement | null; page: HTMLDivElement | null; turn: HTMLButtonElement | null; title: HTMLInputElement | null; author: HTMLInputElement | null; textareas: Map<number, HTMLTextAreaElement> };
+  refs: { editor: HTMLElement | null; reader: HTMLElement | null; page: HTMLDivElement | null; turn: HTMLButtonElement | null; title: HTMLInputElement | null; author: HTMLInputElement | null; standaloneTextarea: HTMLTextAreaElement | null; textareas: Map<number, HTMLTextAreaElement> };
 }
 declare global { interface Window { bookQA: BookQA } }
-const qa: BookQA = { mounted: false, events: [], signs: [], finishes: [], configure: () => {}, unmount: () => {}, refs: { editor: null, reader: null, page: null, turn: null, title: null, author: null, textareas: new Map() } };
+const qa: BookQA = { mounted: false, events: [], signs: [], finishes: [], fontModeCalls: [], configure: () => {}, unmount: () => {}, refs: { editor: null, reader: null, page: null, turn: null, title: null, author: null, standaloneTextarea: null, textareas: new Map() } };
 window.bookQA = qa;
 const initial: BookQASettings = {
   pages: ['Leaf one', 'Leaf two', 'Leaf three', 'Leaf four', 'Leaf five'], readerPages: ['Reader one', 'Reader two', 'Reader three'],
@@ -35,6 +41,8 @@ const initial: BookQASettings = {
   stopCompositionPropagation: false, preventEscape: false,
   skinProbe: 'normal', asyncNavigation: false,
   actionView: 'row',
+  fontProbe: false, editorFontMode: 'auto', fontModeInput: 'scalar', pageFontModes: {}, pageStyleFamilies: {},
+  standaloneFontMode: 'auto', standaloneReadOnly: false, trackFontCalls: false,
 };
 // Independent transparent whole PNGs, generated from zero RGBA bytes without
 // Canvas2D; dimensions intentionally match the original sources they replace.
@@ -67,6 +75,11 @@ function App() {
   qa.configure = patch => setSettings(previous => ({ ...previous, ...patch }));
   const accepted = (text: string) => settings.acceptance === 'uppercase' ? text.toUpperCase() : text;
   const pageActions = (_index: number): Partial<Record<BookPageAction, boolean>> => ({ edit: settings.actionView === 'edit', 'insert-text-page': true, 'delete-page': true, 'move-page-left': true, 'move-page-right': true });
+  const fontMode: BookFontMode | ((index: number) => BookFontMode) = settings.fontModeInput === 'scalar' ? settings.editorFontMode : index => {
+    if (settings.trackFontCalls) qa.fontModeCalls.push(index);
+    return settings.pageFontModes[index] ?? settings.editorFontMode;
+  };
+  const fontProbeStyle = settings.fontProbe ? { '--mc-font': 'monospace', '--mc-font-unicode': 'serif' } as CSSProperties : undefined;
   const onFinish = (snapshot: BookDocumentSnapshot, detail: unknown) => { qa.finishes.push(structuredClone(snapshot)); qa.events.push({ kind: 'finish', value: snapshot, detail }); };
   qa.mounted = true;
   return <main data-skin-probe={settings.skinProbe} data-pages={JSON.stringify(settings.pages)}>
@@ -75,11 +88,13 @@ function App() {
       {settings.showFirst && <BookEditor ref={node => { editorRef.current = node; qa.refs.editor = node; }} aria-label="QA editor"
         {...(settings.controlled ? { pages: settings.pages } : { defaultPages: settings.pages })}
         spreadIndex={settings.spreadIndex} title={settings.title} author={settings.author} mode={settings.mode}
-        layout={{ unitScale: settings.scale }} skin={probeSkin(settings.skinProbe)} disabled={settings.disabled} readOnly={settings.readOnly}
+        layout={{ unitScale: settings.scale }} skin={probeSkin(settings.skinProbe)} disabled={settings.disabled} readOnly={settings.readOnly} style={fontProbeStyle}
+        fontMode={fontMode}
         maxPageLength={settings.maxPageLength} maxTitleLength={settings.maxTitleLength}
         finalizeEnabled={settings.finalizeEnabled} authorEditable={settings.authorEditable}
         titleInputRef={node => { qa.refs.title = node; }} authorInputRef={node => { qa.refs.author = node; }}
         textareaProps={index => ({ 'aria-label': `Leaf ${index + 1}`,
+          ...(settings.pageStyleFamilies[index] ? { style: { fontFamily: settings.pageStyleFamilies[index] } } : {}),
           onCompositionStart: event => { qa.events.push({ kind: 'composition-start', value: index }); if (settings.stopCompositionPropagation) event.stopPropagation(); },
           onCompositionEnd: event => { qa.events.push({ kind: 'composition-end', value: index }); if (settings.stopCompositionPropagation) event.stopPropagation(); },
           onKeyDown: event => { if (settings.preventEscape && event.key === 'Escape') event.preventDefault(); },
@@ -99,12 +114,13 @@ function App() {
         {...(settings.actions ? { pageActions, onPageAction: (action: BookPageAction, pageIndex: number) => qa.events.push({ kind: 'page-action', value: action, detail: pageIndex }) } : {})}
         onSign={snapshot => { qa.signs.push(structuredClone(snapshot)); qa.events.push({ kind: 'sign', value: snapshot }); }} onFinish={onFinish}/>}
     </section>
-    <section id="secondary">{settings.showSecond && <BookReader ref={node => { readerRef.current = node; qa.refs.reader = node; }} aria-label="QA reader" pages={settings.readerPages} spreadIndex={settings.readerSpread}
+    <section id="secondary">{settings.showSecond && <BookReader ref={node => { readerRef.current = node; qa.refs.reader = node; }} aria-label="QA reader" style={fontProbeStyle} pages={settings.readerPages} spreadIndex={settings.readerSpread}
       onSpreadIndexChange={readerSpread => setSettings(previous => ({ ...previous, readerSpread }))} onFinish={onFinish}/>}</section>
     {settings.skinProbe !== 'normal' && settings.skinProbe !== 'cover-only' && <section id="skin-probe"><BookReader pages={[]} skin={probeSkin(settings.skinProbe)} aria-label="Isolated skin reader"/></section>}
     <section id="standalone">
-      <BookPage ref={node => { qa.refs.page = node; }} side="left" pageIndex={0} text={settings.standaloneText} readOnly={false} pageNumber="Standalone page"
-        textareaProps={{ 'aria-label': 'Standalone text' }} onTextChange={standaloneText => { qa.events.push({ kind: 'standalone', value: standaloneText }); if (settings.acceptance !== 'reject') setSettings(previous => ({ ...previous, standaloneText })); }}/>
+      <BookPage ref={node => { qa.refs.page = node; }} side="left" pageIndex={0} text={settings.standaloneText} readOnly={settings.standaloneReadOnly} pageNumber="Standalone page"
+        fontMode={settings.standaloneFontMode} style={fontProbeStyle} textareaRef={node => { qa.refs.standaloneTextarea = node; }}
+        textareaProps={{ 'aria-label': 'Standalone text', ...(settings.standaloneInputFamily ? { style: { fontFamily: settings.standaloneInputFamily } } : {}) }} onTextChange={standaloneText => { qa.events.push({ kind: 'standalone', value: standaloneText }); if (settings.acceptance !== 'reject') setSettings(previous => ({ ...previous, standaloneText })); }}/>
       <BookPageTurnButton ref={node => { qa.refs.turn = node; }} direction="next" aria-label="Standalone next" onClick={() => qa.events.push({ kind: 'standalone-turn' })}/>
       <BookPageTurnButton direction="previous" aria-label="Standalone previous"/>
     </section>

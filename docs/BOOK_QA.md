@@ -110,4 +110,18 @@ Book阶段新增4个runtime组件，当时124组件＋4数据＋10函数，共13
 
 混排正文的 Latin完整纹理唯一匹配 `glyph_00.png`，中文也来自对应Unicode整页；它支持整值替代字体路径，不能解释为 default8 Latin加逐字CJK回退。31个正文glyph均为黑色，LINEAR /CLAMP；normal角色的投影约每local单位5 physical px，为两Sign large角色的一半。显式换行的第二行local Y为10，中文pens为0/9/18/27/36/45；不是据此恢复所有自动换行。该帧没有可见caret draw，因此不能将Sign绿色caret推断为Book caret颜色。
 
-来源见 `.cache/book-sign-font-selection-study-01/FINAL.json`（SHA256 `c70a52590ad762e09bdac4067410626207f7a7a3572c9fc31e130744402efba2`）及其 `BOOK-SUPPLEMENT.md`；五捕获的离线导出与索引见 `.cache/book-sign-native-gui5-analysis-01/FINAL.json`。精确字体切换谓词与native advance尚未恢复，宿主Unicode Latin宽度仍与该捕获不同；当前Book未因此新增自动字体选择或改字号来拟合样本。上述是来源分析，不追加Book正式用例数或产品native零差声明。
+来源见 `.cache/book-sign-font-selection-study-01/FINAL.json`（SHA256 `c70a52590ad762e09bdac4067410626207f7a7a3572c9fc31e130744402efba2`）及其 `BOOK-SUPPLEMENT.md`；五捕获的离线导出与索引见 `.cache/book-sign-native-gui5-analysis-01/FINAL.json`。该阶段尚未新增Book字体选择；随后正文度量及编辑布局修订见下文，不将来源分析计为产品native零差。
+
+## 正文与编辑布局修订
+
+`BookFontMode` 为 `auto | latin | unicode`。`BookEditor.fontMode` 接受一个模式或 `(pageIndex) => mode`；单独的可编辑 `BookPage` 也可指定。auto只在该页整段已接受值含Han时选择Unicode家族，是可覆盖的有限候选。显式 `textareaProps.style.fontFamily` 优先；Reader静态文字、title /author、页码与另一页不会因当前页输入而一并切换。仍保留同一个真实textarea、ref、选区、composition及受控值所有权，不以新字体角色替换输入节点。
+
+默认页尺寸下，可编辑正文outer保留128×149逻辑单位；恢复源common居中TRBL 2/3/2/3后inner为122×145，multiline偏移 `[0,-3]` 对应独立expanded clip 122×151。normal行距仍为10逻辑单位。只读文字布局不因editable inner修订而重排，也不把观察到的全局原点当作正常输入。
+
+这些布局来自 `.cache/book-sign-text-layout-study-01/FINAL.json`（SHA256 `30419c47e187dd3c86aeb1627b3a3c701d1dabd00878a865c6214b82d95c491c`）的有限源 /native CPU对照。Unicode printable ASCII的advance与bearing新策略见 [CLASSIC_FONTS_QA.md](CLASSIC_FONTS_QA.md)：25不同ASCII及有限宽字 /非ASCII的128正文实例几何相符，caret两例仍失败，不能扩展成全部字符 /caret /换行恢复。
+
+旧30项与其旧geometry期望属于上面保留的历史版本；源继承与native证据揭示的旧几何断言已明确修订，不能宣称新源由旧30项原样通过。194字集先完成79项，随后公开首批6通过 /1失败揭示Welcome样本实际fallback；本轮选择补齐两demo字符，保留失败及尚未执行的后续检查。
+
+最终206字集完整79/79通过，其中Book39项（另Sign30 /Classic10），84.256286秒，零跳过 /重试 /flaky，752项选定输入pin不变；原翻页13,824像素仍为严格RGBA0宿主合同。canonical `.cache/book-font-role-qa-01/formal-206-01/FINAL.json` SHA256 `efdebb158b97c01c2998b46785929088711d60a1631a1c61465ca4f17abbf936`；整6项旧导航另通过，不重计旧Dialog或194同项。当前React18.3.1 /19.3.1实际消费者通过140值、SSR、新BookFontMode /逐页factory、strict TypeScript与样式资源；日志 `.cache/book-sign-typography-close-01/package-verification-206.log`。
+
+公开03首个补字后完整批37/37辅助通过，20.477秒，三face真实加载，747输入 /327dist /59site无变化，严格整值Unicode家族检查未放宽。Book实际已知混排advance231 CSS px在244内容宽内；真实输入 /选择、逐页覆盖、composition、只读禁用、签名角色隔离和窄屏也检查。报告 `.cache/book-sign-typography-public-03/RESULT.json`，准备命令及字体范围见 [CLASSIC_FONTS_QA.md](CLASSIC_FONTS_QA.md)。37项不加入79正式，旧01失败与未执行02保留；完整默认字体栅格、精确clip量化、真实OS IME与Present仍未认证。

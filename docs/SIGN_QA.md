@@ -1,6 +1,6 @@
 # 普通与悬挂告示牌
 
-`SignTextSurface` 用于复用牌面及真实多行输入，`SignEditor` 提供编辑窗口的打开、焦点和关闭请求。两者使用完整原图；不添加通用 Dialog 标题、关闭按钮或 Panel 外框。独立客户端合同及 React 18 / 19 新包消费已通过，原生整页像素尚未验收。
+`SignTextSurface` 用于复用牌面及真实多行输入，`SignEditor` 提供编辑窗口的打开、焦点和关闭请求。两者使用完整原图；不添加通用 Dialog 标题、关闭按钮或 Panel 外框。正文度量 /编辑布局及206有限字集已通过客户端合同、实际包消费与公开辅助检查，原生整页像素尚未验收。
 
 ## 使用
 
@@ -57,7 +57,15 @@ function Example() {
 
 两份已观察 oak GUI5 捕获的完整背景 RGBA 分别唯一匹配 `sign.png` 与 `hanging_sign.png`，使用 POINT / CLAMP / full UV。其余木种关联、默认选择与正反面算法仍是宿主绑定候选；源 `$sign_texture`、文本及颜色仍含动态绑定。素材与这两帧身份不证明染料、发光规则或全部活动路由已恢复。字体、换行、基线、光标、物理裁切与产品整页原生像素仍需独立验证。
 
-有限 regular GUI5 捕获的 CPU draw 分析支持 24×12 原图在 192×93 逻辑盒内 contain 后绘制为 186×93；源盒与实际绘制尺寸不应混用。悬挂 square 原图普通 contain 为 143×143，实际 packed 宽 143.125 保留为量化观察，不拟合进 CSS。两帧 large 字体投影为每 local 单位 10 physical px，不能推广为所有 GUI scale 的默认字体算法。混合文本中的 Latin 实际来自完整 glyph_00 页，中文使用对应 Unicode 页，而非 default8；本地宿主字体的 Latin advance 与已观察原生度量仍不同，因此 auto 的整段家族选择不保证相同换行。输入默认绿色 caret `#00ff00` 对应两帧 draw 的 RGBA [0,255,0,255]；浏览器 caret 栅格、全部 Unicode 和完整页面仍未因此认证。
+有限 regular GUI5 捕获的 CPU draw 分析支持 24×12 原图在 192×93 逻辑盒内 contain 后绘制为 186×93；源盒与实际绘制尺寸不应混用。悬挂 square 原图普通 contain 为 143×143，实际 packed 宽 143.125 保留为量化观察，不拟合进 CSS。两帧 large 字体投影为每 local 单位 10 physical px，不能推广为所有 GUI scale 的默认字体算法。混合文本中的 Latin 实际来自完整 glyph_00 页，中文使用对应 Unicode 页，而非 default8；旧宿主字体Latin度量的差异推动了下述新策略，但不能据有限正文关系宣称相同的任意换行。输入默认绿色 caret `#00ff00` 对应两帧 draw 的 RGBA [0,255,0,255]；浏览器 caret 栅格、全部 Unicode 和完整页面仍未因此认证。
+
+本轮保留185×90 /126×90外框，恢复源TRBL 2/3/2/3居中区域为179×86 /120×86；multiline clip独立扩展为92高。large的字号与行距均为20逻辑单位，替代旧1.2行距。显式Classic900 /−100声明提供派生的−1逻辑baseline修正，普通未声明profile为0；在Classic scope内换用自定义 /fallback字体时，可将 `--mc-sign-baseline-correction:0` 与相应字体 /行高令牌一起覆盖，组件不自动识别其真实metrics。
+
+布局依据 `.cache/book-sign-text-layout-study-01/FINAL.json`，新Unicode正文度量范围见 [CLASSIC_FONTS_QA.md](CLASSIC_FONTS_QA.md)。
+
+194字集先完成79项；公开首批6通过 /1失败揭示Book样本的实际fallback后，按两demo字符corpus补齐为206，旧结果和首败保留。最终完整79/79（Sign30 /Book39 /Classic10）通过，84.256286秒，实际Classic分支与206 /206 /95三face加载，752项选定输入pin不变；canonical `.cache/book-font-role-qa-01/formal-206-01/FINAL.json`。React18.3.1 /19.3.1实际140值包消费、新类型 /SSR /样式资源也通过，日志 `.cache/book-sign-typography-close-01/package-verification-206.log`。
+
+公开03补字后完整37项辅助通过，20.477秒；Sign已知混排advance236 CSS px在240内容宽内，40px字 /行距、Classic baseline令牌、inner /clip及portal均实际检查，未放宽single-Unicode gate。747输入 /327dist /59site不变，page /consoleError /HTTPerror /requestfailure为0，4条ReadPixels性能warning保留。报告 `.cache/book-sign-typography-public-03/RESULT.json`；37项不加入79正式，字体准备与有限范围见 [CLASSIC_FONTS_QA.md](CLASSIC_FONTS_QA.md)。后述29项与50项公开批属于初始Sign历史，不冒作新几何的原样通过或完整DOM原生栅格验收。
 
 素材保留 Mojang 的原许可与 Minecraft EULA 条款，不随库代码改为 MIT。原版字页和采集画面不作为 npm 图片素材分发。
 

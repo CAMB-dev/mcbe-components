@@ -4,6 +4,8 @@
 
 书写类新增 BookReader / BookEditor / BookPage / BookPageTurnButton 与 SignTextSurface / SignEditor。Book 的30项独立客户端合同、此前138值React18 /19消费及27项公开预览辅助检查保留其范围；Sign的29项客户端合同及140值新包已通过，旧Dialog12项与修后完整导航6项分别通过，公开预览50项辅助检查通过。首批旧导航失败与修复后的范围分别保留，不合称单轮全绿或增加重复用例。五份书本及普通 /悬挂牌面采集已保存，有限混排字页与两oak背景分析完成；产品整页原生像素核验仍待进行。使用与边界见 [BOOK_QA.md](BOOK_QA.md) / [SIGN_QA.md](SIGN_QA.md)。
 
+后续正文度量 /编辑布局修订不新增runtime：Book editable逐页字体模式与Sign共用有限Han候选，恢复common居中 /clip分离和normal /large行距；Reader静态与签名title /author保持独立。25不同ASCII及26个宽字 /非ASCII共128正文实例的CPU quad关系相符、两caret仍各差1game。公开样本fallback促使补齐两demo字符，最终206字集完整79项（Book39 /Sign30 /Classic10）、React18 /19新包及37项公开辅助检查通过，整6项导航另通过；194批与公开首败保留，不重计相同用例。旧几何断言按源与native证据明确纠正，完整native DOM栅格仍未认证。
+
 以下历史阶段的120组件 /134值验证保留原受测范围，不扩充为新增书写组件的验证：
 
 Anvil阶段接入可选imageRender /三个profile类型、39槽及title /inventory /name /cost四独立文字角色，当时导出总数为120组件 /134runtime。28完整原PNG /29keys与本机私有字体用于正常source输入。有限host profile四GUI5状态完整native UI target RGBA0，首invalid40像素耐久残差保留；修后React18 /19包通过；Anvil35＋旧回归103按整文件GPU profile共138独立用例通过，生产首轮73辅助检查通过，各项证据保留受测范围，见 [ANVIL_IMAGE_QA.md](ANVIL_IMAGE_QA.md)。

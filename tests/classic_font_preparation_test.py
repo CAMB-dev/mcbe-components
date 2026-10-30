@@ -1,7 +1,7 @@
-"""Synthetic-only regression for the original empty COLR paint-layer bug.
+"""Synthetic regressions for COLR contours, offsets and metric policies.
 
 Run: python -m unittest discover -s tests -p classic_font_preparation_test.py
-Requires fontTools and Brotli; no Minecraft archive, fonts, PNGs or browser.
+Requires fontTools, Brotli and Pillow; no Minecraft archive, fonts or browser.
 """
 from copy import deepcopy
 from io import BytesIO
@@ -21,6 +21,7 @@ if LOCAL_PYTHON.is_dir():
 
 from fontTools.pens.pointInsidePen import PointInsidePen
 from fontTools.ttLib import TTFont
+from PIL import Image
 
 
 specification = importlib.util.spec_from_file_location(
@@ -114,6 +115,89 @@ class ClassicFontPreparationTest(unittest.TestCase):
         second, _ = preparation.make_font(self.family, self.records)
         self.assertEqual(self.raw, second)
         self.assertEqual(self.records, before)
+
+    def test_reopened_base_and_colr_apply_signed_horizontal_offsets(self):
+        records = deepcopy(self.records[:2])
+        records[0]['offsetUnits'] = [-100, 0]
+        records[1]['offsetUnits'] = [125, -100]
+        raw, _ = preparation.make_font('Synthetic Signed Offsets', records)
+        font = TTFont(BytesIO(raw))
+        self.addCleanup(font.close)
+        expected = {
+            'u0041': {'bounds': (-100, 500, 200, 800), 'hmtx': (400, -100),
+                      'ink': (50, 750), 'outside': (250, 750)},
+            'u0049': {'bounds': (175, 750, 225, 900), 'hmtx': (200, 175),
+                      'ink': (200, 825), 'outside': (75, 825)},
+        }
+        glyph_set = font.getGlyphSet()
+        for base, fixture in expected.items():
+            paint = font['COLR'].ColorLayers[base][0].name
+            for name in (base, paint):
+                with self.subTest(glyph=name):
+                    glyph = font['glyf'][name]
+                    self.assertEqual((glyph.xMin, glyph.yMin, glyph.xMax, glyph.yMax), fixture['bounds'])
+                    self.assertEqual(font['hmtx'].metrics[name], fixture['hmtx'])
+                    for point, inside in ((fixture['ink'], True), (fixture['outside'], False)):
+                        pen = PointInsidePen(glyph_set, point, evenOdd=False)
+                        glyph_set[name].draw(pen)
+                        self.assertEqual(pen.getResult(), inside)
+            self.assertEqual(font['glyf'][base].getCoordinates(font['glyf']),
+                             font['glyf'][paint].getCoordinates(font['glyf']))
+
+    def test_unicode_policy_round_trip_uses_source_bounds_and_preserves_legacy(self):
+        # Deliberately off-centre, project-owned source pixels: A has three ink
+        # columns, I only one, and the wide punctuation occupies two columns.
+        images = {name: Image.new('RGBA', size) for name, size in (
+            ('default8.png', (128, 128)), ('glyph_00.png', (256, 256)), ('glyph_FF.png', (256, 256)))}
+        for character, columns in (('A', (3, 4, 5)), ('I', (6,)), ('：', (7, 8))):
+            code = ord(character); image = images[f'glyph_{code >> 8:02X}.png']
+            for x in columns:
+                for y in (2, 3, 4):
+                    image.putpixel((code % 16 * 16 + x, code % 256 // 16 * 16 + y), (255, 255, 255, 255))
+        for x in (2, 3, 4):
+            images['default8.png'].putpixel((8 + x, 48 + 3), (255, 255, 255, 255))
+        source_before = {key: image.tobytes() for key, image in images.items()}
+        manifest = {'observedAdvances': {'default8': {}, 'unicode': {'：': {'advanceSource': 17}}},
+                    'hostAdvanceOverrides': {'unicode': {' ': {'advanceSource': 8}}}}
+        generated = {}
+        for policy in ('legacy-host', 'body-bounds-v1'):
+            records = [preparation.glyph(c, 'unicode', images, manifest, unicode_metrics=policy)
+                       for c in ('A', 'I', ' ', '：')]
+            raw, _ = preparation.make_font('Synthetic Metric Policy', records)
+            font = TTFont(BytesIO(raw)); self.addCleanup(font.close)
+            generated[policy] = font
+            self.assertEqual(records[0]['sourceCell'], [16, 64, 16, 16])
+            self.assertEqual(records[0]['inkBounds'], [3, 2, 6, 5])
+        expected = {
+            'legacy-host': {'u0041': ((400, 150), (150, 550, 300, 700)),
+                            'u0049': ((450, 300), (300, 550, 350, 700)),
+                            'u0020': ((400, 0), None), 'uFF1A': ((850, 350), (350, 550, 450, 700))},
+            'body-bounds-v1': {'u0041': ((250, 50), (50, 550, 200, 700)),
+                               'u0049': ((150, 50), (50, 550, 100, 700)),
+                               'u0020': ((400, 0), None), 'uFF1A': ((900, 350), (350, 550, 450, 700))},
+        }
+        for policy, glyphs in expected.items():
+            font = generated[policy]
+            for base, (metric, bounds) in glyphs.items():
+                paint = font['COLR'].ColorLayers[base][0].name
+                for name in (base, paint):
+                    with self.subTest(policy=policy, glyph=name):
+                        self.assertEqual(font['hmtx'].metrics[name], metric)
+                        glyph = font['glyf'][name]
+                        if bounds is None:
+                            self.assertEqual(glyph.numberOfContours, 0)
+                        else:
+                            self.assertEqual((glyph.xMin, glyph.yMin, glyph.xMax, glyph.yMax), bounds)
+        d8 = [preparation.glyph('A', 'default8', images, manifest, unicode_metrics=policy)
+              for policy in ('legacy-host', 'body-bounds-v1')]
+        self.assertEqual(d8[0], d8[1])
+        self.assertEqual((d8[0]['advanceUnits'], d8[0]['offsetUnits']), (600, [0, -300]))
+        self.assertEqual({key: image.tobytes() for key, image in images.items()}, source_before)
+
+    def test_non_bmp_and_controls_still_rejected_before_font_generation(self):
+        for text in ('\U0001f642', '\t', '\ud800'):
+            with self.subTest(text=repr(text)), self.assertRaises(ValueError):
+                preparation.characters({'unicodeCharacters': []}, [text], [])
 
     def test_source_input_boundary_and_external_hardlink_stays_read_only(self):
         with tempfile.TemporaryDirectory() as directory:

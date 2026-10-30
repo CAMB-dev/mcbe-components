@@ -25,10 +25,18 @@
 .mc-book__page[data-side="left"] .mc-book__page-content { transform:translateX(calc(var(--mc-book-u) * 5)); }
 .mc-book__page[data-side="right"] .mc-book__page-content { transform:translateX(calc(var(--mc-book-u) * -5)); }
 .mc-book__page-number { position:absolute; top:calc(var(--mc-book-u) * 13); left:0; width:100%; color:rgb(74% 64% 53%); text-align:center; }
-.mc-book__text, .mc-book__page-text { position:absolute; top:calc(var(--mc-book-u) * 23); left:calc(var(--mc-book-u) * 16); width:calc(100% - var(--mc-book-u) * 32); height:calc(100% - var(--mc-book-u) * 58); margin:0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; color:#000; font:inherit; line-height:1; text-shadow:none; white-space:pre-wrap; overflow-wrap:break-word; overflow:hidden; tab-size:4; }
-.mc-book__text { resize:none; appearance:none; }
-.mc-book__text:hover:not(:disabled), .mc-book__cover-input:hover:not(:disabled):not(:read-only) { border-image:var(--mc-book-hover) 1 fill / var(--mc-book-u) stretch; }
-.mc-book__text:focus-visible, .mc-book__cover-input:focus-visible { outline:var(--mc-book-u) solid #564332; outline-offset:var(--mc-book-u); }
+.mc-book__text-box, .mc-book__page-text { position:absolute; top:calc(var(--mc-book-u) * 23); left:calc(var(--mc-book-u) * 16); width:calc(100% - var(--mc-book-u) * 32); height:calc(100% - var(--mc-book-u) * 58); margin:0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; color:#000; font:inherit; line-height:1; text-shadow:none; white-space:pre-wrap; overflow-wrap:break-word; overflow:hidden; tab-size:4; }
+/* Preserve the outer edit hit/hover/focus box. common.centering_panel has
+   insets TRBL 2/3/2/3; multiline clip_offset[0,-3] expands the clip separately.
+   Padding inside the full clip-sized native textarea retains the inner label
+   origin and the 10-unit normal line advance. Exact native clip rounding is unproven. */
+.mc-book__text-box { overflow:visible; }
+.mc-book__text-center { position:absolute; inset:calc(var(--mc-book-u) * 2) calc(var(--mc-book-u) * 3); }
+.mc-book__text-clip { position:absolute; left:0; top:calc(var(--mc-book-u) * -3); width:100%; height:calc(100% + var(--mc-book-u) * 6); overflow:hidden; }
+.mc-book__text { position:absolute; inset:0; width:100%; height:100%; margin:0; padding:calc(var(--mc-book-u) * 3) 0; border:0; border-radius:0; background:transparent; box-shadow:none; color:#000; font:inherit; line-height:calc(var(--mc-book-u) * 10); text-shadow:none; white-space:pre-wrap; overflow-wrap:break-word; overflow:hidden; tab-size:4; resize:none; appearance:none; font-family:var(--mc-book-input-font,inherit); }
+.mc-book__text-box:hover:not([data-disabled="true"]), .mc-book__cover-input:hover:not(:disabled):not(:read-only) { border-image:var(--mc-book-hover) 1 fill / var(--mc-book-u) stretch; }
+.mc-book__text-box:has(.mc-book__text:focus-visible), .mc-book__cover-input:focus-visible { outline:var(--mc-book-u) solid #564332; outline-offset:var(--mc-book-u); }
+.mc-book__text:focus-visible { outline:none; }
 .mc-book__text:disabled { color:#000; opacity:1; -webkit-text-fill-color:#000; }
 .mc-book__image-button { display:block; margin:0; padding:0; border:0; border-radius:0; background-color:transparent; background-image:var(--mc-book-button-normal); background-position:center; background-size:100% 100%; background-repeat:no-repeat; box-shadow:none; transform:none; image-rendering:pixelated; appearance:none; cursor:pointer; }
 .mc-book__image-button:hover:not(:disabled), .mc-book__image-button:focus-visible:not(:disabled) { background-image:var(--mc-book-button-hover); }
@@ -64,7 +72,8 @@
   .mc-book__text, .mc-book__page-text, .mc-book__cover-input, .mc-book__page-number, .mc-book__title-label, .mc-book__warning, .mc-book__author label { color:CanvasText; -webkit-text-fill-color:CanvasText; }
   .mc-book__back, .mc-book__cover-back, .mc-book__spine, .mc-book__page-edge, .mc-book__page-crease { display:none; }
   .mc-book__surface, .mc-book__cover, .mc-book__page[data-in-book="false"] { background:Canvas; color:CanvasText; outline:1px solid CanvasText; }
-  .mc-book__image-button:focus-visible, .mc-book__text:focus-visible, .mc-book__cover-input:focus-visible { outline:2px solid Highlight; box-shadow:none; }
+  .mc-book__image-button:focus-visible, .mc-book__text-box:has(.mc-book__text:focus-visible), .mc-book__cover-input:focus-visible { outline:2px solid Highlight; box-shadow:none; }
+  .mc-book__text-box:hover:not([data-disabled="true"]) { border-image:none; }
   .mc-book__image-button, .mc-book__image-button:hover:not(:disabled), .mc-book__image-button:focus-visible:not(:disabled), .mc-book__image-button:active:not(:disabled) { forced-color-adjust:auto; background:ButtonFace; border:1px solid ButtonText; color:ButtonText; filter:none; }
   .mc-book__image-button::after { content:attr(aria-label); display:block; font:12px/1 sans-serif; overflow:hidden; }
   .mc-book__turn[data-direction="previous"]::after, .mc-book__page-action--move-page-left::after { content:'←'; }

@@ -6,8 +6,11 @@ import type {
 import { Button } from './components';
 import { bookAssets } from './book-assets';
 import type { BookAsset } from './book-assets';
+import { classicInputFontFamily, resolveClassicInputFont } from './classic-input-font';
+import type { ClassicInputFontMode } from './classic-input-font';
 
 export type BookMode = 'pages' | 'signing';
+export type BookFontMode = ClassicInputFontMode;
 export type BookPageAction = 'edit' | 'insert-text-page' | 'delete-page' | 'move-page-left' | 'move-page-right';
 export interface BookDocumentSnapshot {
   pages: readonly string[];
@@ -97,6 +100,10 @@ export interface BookEditorProps extends BookBaseProps {
   pageActions?: (pageIndex: number) => Readonly<Partial<Record<BookPageAction, boolean>>>;
   onPageAction?: (action: BookPageAction, pageIndex: number) => void;
   finalizeEnabled?: boolean;
+  /** Each actual page textarea selects one family for its whole value. Auto is
+   * only the observed Han-trigger candidate; native advances/wrapping remain
+   * unverified. An explicit textareaProps.style.fontFamily takes precedence. */
+  fontMode?: BookFontMode | ((pageIndex: number) => BookFontMode);
   textareaProps?: BookTextareaAttributes | ((pageIndex: number) => BookTextareaAttributes);
   textareaRef?: (pageIndex: number) => Ref<HTMLTextAreaElement> | undefined;
   titleInputProps?: BookInputAttributes;
@@ -115,6 +122,8 @@ export interface BookPageProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
   onTextChange?: (text: string, event: ChangeEvent<HTMLTextAreaElement>) => void;
   textareaRef?: Ref<HTMLTextAreaElement>;
   textareaProps?: BookTextareaAttributes;
+  /** Only the editable textarea is affected; read-only page text is unchanged. */
+  fontMode?: BookFontMode;
 }
 export interface BookPageTurnButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   direction: 'previous' | 'next';
@@ -278,10 +287,13 @@ export const BookPageTurnButton = forwardRef<HTMLButtonElement, BookPageTurnButt
 
 export const BookPage = forwardRef<HTMLDivElement, BookPageProps>(function BookPage({
   side, pageIndex, text, defaultText = '', readOnly = true, blank = false, pageNumber,
-  onTextChange, textareaRef, textareaProps = {}, className, style, ...props
+  onTextChange, textareaRef, textareaProps = {}, fontMode = 'auto', className, style, ...props
 }, ref) {
   const context = useContext(SkinContext); const geometry = useContext(GeometryContext);
   const skin = context ?? skins; const [value, setValue] = useValue(text, defaultText);
+  const acceptedText = useRef(value); acceptedText.current = value;
+  const selectedFont = resolveClassicInputFont(fontMode, value);
+  const { style: inputStyle, onCompositionStart, onCompositionUpdate, onCompositionEnd } = textareaProps;
   return <div {...props} ref={ref} data-side={side} data-page-index={pageIndex} data-blank={blank}
     data-in-book={!!context} className={['mc-book__page', className].filter(Boolean).join(' ')}
     style={{ ...(!context ? skinStyle(skins) : {}), ...style }}>
@@ -296,11 +308,34 @@ export const BookPage = forwardRef<HTMLDivElement, BookPageProps>(function BookP
     {!blank && <div className="mc-book__page-content">
       {pageNumber !== undefined && <div className="mc-book__page-number">{pageNumber}</div>}
       {readOnly ? <div className="mc-book__page-text">{value}</div> :
+        <div className="mc-book__text-box" data-disabled={!!textareaProps.disabled}>
+          <div className="mc-book__text-center"><div className="mc-book__text-clip">
         <textarea {...textareaProps} ref={textareaRef} value={value}
           spellCheck={textareaProps.spellCheck ?? false}
+          data-book-font-mode={selectedFont} data-book-font-policy={fontMode === 'auto' ? 'whole-value-han-candidate' : 'caller'}
+          style={{ '--mc-book-input-font': classicInputFontFamily(selectedFont), ...inputStyle } as CSSProperties}
           className={['mc-book__text', textareaProps.className].filter(Boolean).join(' ')}
           aria-label={textareaProps['aria-label'] ?? `Page ${(pageIndex ?? 0) + 1}`}
-          onChange={event => { setValue(event.currentTarget.value); onTextChange?.(event.currentTarget.value, event); }}/>
+          onChange={event => { setValue(event.currentTarget.value); onTextChange?.(event.currentTarget.value, event); }}
+          onCompositionStart={event => {
+            const role = resolveClassicInputFont(fontMode, event.currentTarget.value);
+            event.currentTarget.style.setProperty('--mc-book-input-font', classicInputFontFamily(role));
+            event.currentTarget.dataset.bookComposingFontMode = role;
+            onCompositionStart?.(event);
+          }}
+          onCompositionUpdate={event => {
+            const role = resolveClassicInputFont(fontMode, event.currentTarget.value);
+            event.currentTarget.style.setProperty('--mc-book-input-font', classicInputFontFamily(role));
+            event.currentTarget.dataset.bookComposingFontMode = role;
+            onCompositionUpdate?.(event);
+          }}
+          onCompositionEnd={event => {
+            event.currentTarget.style.setProperty('--mc-book-input-font', classicInputFontFamily(resolveClassicInputFont(fontMode, acceptedText.current)));
+            delete event.currentTarget.dataset.bookComposingFontMode;
+            onCompositionEnd?.(event);
+          }}/>
+          </div></div>
+        </div>
       }
     </div>}
   </div>;
@@ -313,7 +348,7 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     author: controlledAuthor, defaultAuthor = '', onAuthorChange,
     mode: controlledMode, defaultMode = 'pages', onModeChange, readOnly = !editor, disabled = false,
     layout, skin: overrides, labels: labelOverrides, maxPageLength, maxTitleLength, onFinish, pageNumberLabel,
-    authorEditable = false, onSign, pageActions, onPageAction, finalizeEnabled = true,
+    authorEditable = false, onSign, pageActions, onPageAction, finalizeEnabled = true, fontMode = 'auto',
     textareaProps, textareaRef, titleInputProps = {}, authorInputProps = {}, titleInputRef, authorInputRef,
     className, style, onKeyDown, ...rest } = props;
   const [pages, setPages] = useValue(controlledPages, defaultPages);
@@ -398,6 +433,7 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     const activeComposition = composition.current.size > 0 && inputs.current.has(index) &&
       composition.current.has(inputs.current.get(index)!);
     const blank = index >= pages.length && !virtual && !activeComposition;
+    const pageReadOnly = (!editor || readOnly) && !activeComposition;
     const inputProps = typeof textareaProps === 'function' ? textareaProps(index) : textareaProps ?? {};
     const externalRef = textareaRef?.(index);
     const slot = side === 'left' ? 0 : 1;
@@ -416,7 +452,8 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     const allowed = { ...defaults, ...predicates };
     const pencil = !structural ? allowed.edit : predicates?.edit === true;
     return <div className="mc-book__leaf" key={index} data-side={side}>
-      <BookPage side={side} pageIndex={index} text={pages[index] ?? ''} readOnly={(!editor || readOnly) && !activeComposition}
+      <BookPage side={side} pageIndex={index} text={pages[index] ?? ''} readOnly={pageReadOnly}
+        fontMode={!pageReadOnly && !blank ? typeof fontMode === 'function' ? fontMode(index) : fontMode : undefined}
         blank={blank} pageNumber={index < pages.length ? numberLabel(index + 1, pages.length) : undefined}
         textareaRef={mergedRef.callback}
         textareaProps={{ ...inputProps, disabled: disabled || inputProps.disabled, maxLength: maxPageLength ?? inputProps.maxLength,

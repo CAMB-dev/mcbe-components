@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { Image } from './image';
 import { signAssets } from './sign-assets';
 import { lockModalScroll } from './modal-scroll-lock';
+import { resolveClassicInputFont, classicInputFontFamily } from './classic-input-font';
 
 export type SignVariant = 'regular' | 'hanging';
 export type SignWood = 'oak' | 'spruce' | 'birch' | 'jungle' | 'acacia' | 'dark-oak' | 'mangrove' | 'cherry' | 'bamboo' | 'crimson' | 'warped' | 'pale-oak' | 'poplar';
@@ -97,13 +98,6 @@ function useText(value: string | undefined, defaultValue: string, onChange: Sign
   };
   return [accepted, change] as const;
 }
-function resolvedFont(mode: SignFontMode, text: string): 'latin' | 'unicode' {
-  return mode === 'auto' ? (/\p{Script=Han}/u.test(text) ? 'unicode' : 'latin') : mode;
-}
-function fontFamily(mode: 'latin' | 'unicode') {
-  return mode === 'unicode' ? 'var(--mc-font-unicode,"MCBE CJK","Fusion Pixel",monospace)' : 'var(--mc-font,monospace)';
-}
-
 /** Complete original image + one real textarea. Logical source defaults and
  * candidate font/texture routing are not a native pixel certification. */
 export const SignTextSurface = forwardRef<HTMLDivElement, SignTextSurfaceProps>(function SignTextSurface({
@@ -120,7 +114,7 @@ export const SignTextSurface = forwardRef<HTMLDivElement, SignTextSurfaceProps>(
   const [text, change] = useText(value, defaultValue, onValueChange);
   const acceptedText = useRef(text);
   acceptedText.current = text;
-  const selectedFont = resolvedFont(fontMode, text);
+  const selectedFont = resolveClassicInputFont(fontMode, text);
   const selectedTexture = texture ?? candidates[wood][variant === 'hanging' ? 1 : 0];
   const g = resolvedGeometry(variant, geometry);
   const fit = Math.min(g.backgroundSize[0] / selectedTexture.sourceSize[0], g.backgroundSize[1] / selectedTexture.sourceSize[1]);
@@ -132,10 +126,12 @@ export const SignTextSurface = forwardRef<HTMLDivElement, SignTextSurfaceProps>(
     '--mc-sign-u': `${scale}px`, '--mc-sign-scale': scale, width: g.editorSize[0] * scale, height: g.editorSize[1] * scale,
     ...style,
   } as CSSProperties;
-  const fieldStyle: CSSProperties = {
+  const editorStyle: CSSProperties = {
     left: g.editorOffset[0] * scale, top: g.editorOffset[1] * scale,
     width: g.editorSize[0] * scale, height: g.editorSize[1] * scale,
-    '--mc-sign-font': fontFamily(selectedFont),
+  };
+  const fieldStyle: CSSProperties = {
+    '--mc-sign-font': classicInputFontFamily(selectedFont),
     ...(textColor !== undefined ? { color: textColor } : {}), ...(textShadow !== undefined ? { textShadow } : {}), ...inputStyle,
   } as CSSProperties;
   return <div {...props} ref={ref} className={['mc-sign-surface', className].filter(Boolean).join(' ')} style={rootStyle}
@@ -147,6 +143,9 @@ export const SignTextSurface = forwardRef<HTMLDivElement, SignTextSurfaceProps>(
       size={[imageSize[0] * scale, imageSize[1] * scale]} alt="" draggable={false}
       style={{ left: ((g.editorSize[0] - imageSize[0]) / 2 + g.editorOffset[0] + g.backgroundOffset[0]) * scale,
         top: ((g.editorSize[1] - imageSize[1]) / 2 + g.editorOffset[1] + g.backgroundOffset[1]) * scale }}/>
+    <div className="mc-sign-surface__editor" data-sign-editor-box="" style={editorStyle}>
+      <div className="mc-sign-surface__centering" data-sign-centering="">
+        <div className="mc-sign-surface__clipper" data-sign-clipper="">
     <textarea {...inputProps} ref={textareaRef} id={inputProps.id ?? id} aria-label={inputProps['aria-label'] ?? label}
       className={['mc-sign-surface__input', inputClassName].filter(Boolean).join(' ')} style={fieldStyle}
       value={text} onChange={event => change(event.currentTarget.value, event)} disabled={disabled} readOnly={readOnly}
@@ -154,22 +153,25 @@ export const SignTextSurface = forwardRef<HTMLDivElement, SignTextSurfaceProps>(
       onCompositionStart={event => {
         // Presentation only: do not set React text state/re-render a controlled
         // textarea merely to inspect its still-unaccepted composition text.
-        const mode = resolvedFont(fontMode, event.currentTarget.value);
-        event.currentTarget.style.setProperty('--mc-sign-font', fontFamily(mode));
+        const mode = resolveClassicInputFont(fontMode, event.currentTarget.value);
+        event.currentTarget.style.setProperty('--mc-sign-font', classicInputFontFamily(mode));
         event.currentTarget.dataset.signComposingFontMode = mode;
         onCompositionStart?.(event);
       }}
       onCompositionUpdate={event => {
-        const mode = resolvedFont(fontMode, event.currentTarget.value);
-        event.currentTarget.style.setProperty('--mc-sign-font', fontFamily(mode));
+        const mode = resolveClassicInputFont(fontMode, event.currentTarget.value);
+        event.currentTarget.style.setProperty('--mc-sign-font', classicInputFontFamily(mode));
         event.currentTarget.dataset.signComposingFontMode = mode;
         onCompositionUpdate?.(event);
       }}
       onCompositionEnd={event => {
-        event.currentTarget.style.setProperty('--mc-sign-font', fontFamily(resolvedFont(fontMode, acceptedText.current)));
+        event.currentTarget.style.setProperty('--mc-sign-font', classicInputFontFamily(resolveClassicInputFont(fontMode, acceptedText.current)));
         delete event.currentTarget.dataset.signComposingFontMode;
         onCompositionEnd?.(event);
       }}/>
+        </div>
+      </div>
+    </div>
   </div>;
 });
 

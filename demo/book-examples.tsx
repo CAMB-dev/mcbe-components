@@ -2,7 +2,7 @@ import { useId, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { Button, Combobox, Switch, TextField } from '../src';
 import { BookEditor, BookPage, BookPageTurnButton, BookReader } from '../src/book';
-import type { BookDocumentSnapshot, BookMode, BookPageAction } from '../src/book';
+import type { BookDocumentSnapshot, BookFontMode, BookMode, BookPageAction } from '../src/book';
 import '../src/book.css';
 
 const initialPages = [
@@ -10,6 +10,11 @@ const initialPages = [
   'Day two\n\nThe bridge is ready. Bring a few torches for the return journey.',
   'Day three\n\nLeave this last page open for the next adventure.',
 ];
+const fontRolePages = ['Latin leaf\n\nA lantern marks the river path.', 'Mixed leaf\n\nWelcome! 欢迎来到村庄', '村庄花园\n\n请随手关门'];
+const fontOptions: readonly { value: BookFontMode; label: string }[] = [
+  { value: 'auto', label: 'Auto · whole-page Han candidate' }, { value: 'latin', label: 'Latin' }, { value: 'unicode', label: 'Unicode' },
+];
+const fontModeFrom = (value: string): BookFontMode => value === 'latin' || value === 'unicode' ? value : 'auto';
 const twoReaderPages = ['A quiet morning\n\nThe garden is ready for planting.', 'Before sunset\n\nRemember to close the gate.'];
 const primitivePages = ['This leaf is a reusable BookPage. Try editing this short note.', 'The page-turn buttons are reusable too. Turn back to keep writing.'];
 const stackStyle: CSSProperties = { display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: 16, minWidth: 0 };
@@ -29,6 +34,8 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   const [mode, setMode] = useState<BookMode>('pages');
   const [readOnly, setReadOnly] = useState(false), [disabled, setDisabled] = useState(false);
   const [pencilActions, setPencilActions] = useState(false);
+  const [fontMode, setFontMode] = useState<BookFontMode>('auto'), [separatePageFonts, setSeparatePageFonts] = useState(false);
+  const [leftFont, setLeftFont] = useState<BookFontMode | 'inherit'>('inherit'), [rightFont, setRightFont] = useState<BookFontMode | 'inherit'>('inherit');
   const [editorOpen, setEditorOpen] = useState(true), [readerOpen, setReaderOpen] = useState(true);
   const [readerPreset, setReaderPreset] = useState('three'), [readerSpread, setReaderSpread] = useState(0);
   const [signRequest, setSignRequest] = useState<BookDocumentSnapshot | null>(null);
@@ -43,6 +50,10 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   const currentSpread = keepSpread(spread, pages.length), currentReaderSpread = keepSpread(readerSpread, readerPages.length);
   const editable = !readOnly && !disabled;
 
+  function pageFont(pageIndex: number): BookFontMode {
+    const override = pageIndex % 2 === 0 ? leftFont : rightFont;
+    return override === 'inherit' ? fontMode : override;
+  }
   function acceptPages(next: readonly string[]) {
     setPages([...next]); setSpread(previous => keepSpread(previous, next.length)); setSignRequest(null);
   }
@@ -70,6 +81,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
     setPages([...initialPages]); setSpread(0); setTitle('River journal'); setAuthor('Alex'); setMode('pages');
     setReadOnly(false); setDisabled(false); setPencilActions(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
     setSignRequest(null); setSignedCopy(null); setLeafTexts([...primitivePages]); setLeafIndex(0);
+    setFontMode('auto'); setSeparatePageFonts(false); setLeftFont('inherit'); setRightFont('inherit');
     report('Book examples restored.');
   }
   function acceptSigning() {
@@ -124,9 +136,32 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
         <Button size="sm" disabled={!editable} onClick={() => { const next = [...pages, '']; acceptPages(next); setSpread(lastSpread(next.length)); setEditorOpen(true); setMode('pages'); report(`Added leaf ${next.length}.`); }}>Add blank leaf</Button>
         <Button size="sm" disabled={!editable || !pages.length} onClick={() => { acceptPages([]); setMode('pages'); report('The draft is empty. Add a leaf to start writing again.'); }}>Empty draft</Button>
       </div>
+      <div data-book-font-controls style={stackStyle}>
+        <div style={controlsStyle}>
+          <Combobox label="Editable page font" value={fontMode} options={fontOptions} disabled={!editable}
+            onValueChange={value => setFontMode(fontModeFrom(value))}/>
+          <Switch label="Override left and right page fonts" checked={separatePageFonts} disabled={!editable}
+            onChange={event => setSeparatePageFonts(event.target.checked)}/>
+          <Button size="sm" disabled={!editable} onClick={() => {
+            acceptPages(fontRolePages); setSpread(0); setMode('pages'); setEditorOpen(true);
+            setLeafTexts(fontRolePages.slice(0, 2)); setLeafIndex(0);
+            report('Loaded Latin and mixed Latin/Han editable page samples.');
+          }}>Load font role sample</Button>
+        </div>
+        {separatePageFonts && <div style={controlsStyle}>
+          <Combobox label="Left page font" value={leftFont} disabled={!editable}
+            options={[{ value: 'inherit', label: 'Use shared role' }, ...fontOptions]}
+            onValueChange={value => setLeftFont(value === 'inherit' ? 'inherit' : fontModeFrom(value))}/>
+          <Combobox label="Right page font" value={rightFont} disabled={!editable}
+            options={[{ value: 'inherit', label: 'Use shared role' }, ...fontOptions]}
+            onValueChange={value => setRightFont(value === 'inherit' ? 'inherit' : fontModeFrom(value))}/>
+        </div>}
+        <p style={noteStyle}>These roles affect editable page text; the shared role also applies to the reusable leaf below. Auto selects one family for a whole page containing Han. Font routing remains a candidate; native advances and wrapping are unverified.</p>
+      </div>
       <div role="region" aria-label="Book editor preview" tabIndex={0} style={previewStyle}>
         {editorOpen ? <BookEditor aria-label="Example book and quill" pages={pages} spreadIndex={currentSpread}
           title={title} author={author} mode={mode} authorEditable readOnly={readOnly} disabled={disabled}
+          fontMode={separatePageFonts ? pageFont : fontMode}
           onPagesChange={(next, detail) => { acceptPages(next); setReceipt(`Accepted text for leaf ${detail.pageIndex + 1}. ${next.length} leaves in this draft.`); }}
           onSpreadIndexChange={setSpread} onTitleChange={value => { setTitle(value); setSignRequest(null); }}
           onAuthorChange={value => { setAuthor(value); setSignRequest(null); }}
@@ -149,21 +184,21 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
         </div>
       </div>}
       <output role="status" aria-label="Book action receipt" data-book-demo-receipt style={{ ...noteStyle, display: 'block' }}>{receipt}</output>
-      <pre style={codeStyle}><code>{'<BookEditor pages={pages} onPagesChange={next => setPages([...next])}\n  title={title} onTitleChange={setTitle}\n  mode={mode} onModeChange={setMode}\n  onSign={snapshot => setSignRequest(snapshot)} />'}</code></pre>
+      <pre style={codeStyle}><code>{'<BookEditor pages={pages} onPagesChange={next => setPages([...next])}\n  title={title} onTitleChange={setTitle}\n  mode={mode} onModeChange={setMode}\n  fontMode="auto"\n  onSign={snapshot => setSignRequest(snapshot)} />'}</code></pre>
     </section>
 
     <section data-book-primitives-example aria-labelledby={`${prefix}-primitives-title`} style={stackStyle}>
       <h3 id={`${prefix}-primitives-title`} style={{ margin: 0 }}>Reusable page and page-turn buttons</h3>
       <div role="region" aria-label="Reusable book page preview" tabIndex={0} style={previewStyle}>
         <div style={{ display: 'flex', alignItems: 'end', gap: 16, width: 'max-content' }}>
-          <BookPage side={leafIndex === 0 ? 'left' : 'right'} pageIndex={leafIndex} text={leafTexts[leafIndex] ?? ''} readOnly={false}
+          <BookPage side={leafIndex === 0 ? 'left' : 'right'} pageIndex={leafIndex} text={leafTexts[leafIndex] ?? ''} readOnly={false} fontMode={fontMode}
             pageNumber={`Leaf ${leafIndex + 1} of ${leafTexts.length}`} textareaProps={{ 'aria-label': `Reusable leaf ${leafIndex + 1}`, spellCheck: false }}
             onTextChange={text => setLeafTexts(previous => previous.map((value, index) => index === leafIndex ? text : value))}/>
           <BookPageTurnButton style={{ position: 'static', flex: 'none' }} direction="previous" available={leafIndex > 0} aria-label="Previous reusable leaf" onClick={() => setLeafIndex(index => Math.max(0, index - 1))}/>
           <BookPageTurnButton style={{ position: 'static', flex: 'none' }} direction="next" available={leafIndex < leafTexts.length - 1} aria-label="Next reusable leaf" onClick={() => setLeafIndex(index => Math.min(leafTexts.length - 1, index + 1))}/>
         </div>
       </div>
-      <pre style={codeStyle}><code>{'<BookPage side="left" text={text} readOnly={false}\n  onTextChange={setText} pageNumber="Leaf 1" />\n<BookPageTurnButton direction="next" available={hasNext}\n  onClick={nextLeaf} aria-label="Next leaf" />'}</code></pre>
+      <pre style={codeStyle}><code>{'<BookPage side="left" text={text} readOnly={false} fontMode="auto"\n  onTextChange={setText} pageNumber="Leaf 1" />\n<BookPageTurnButton direction="next" available={hasNext}\n  onClick={nextLeaf} aria-label="Next leaf" />'}</code></pre>
     </section>
   </section>;
 }

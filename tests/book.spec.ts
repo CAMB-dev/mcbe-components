@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
-import { createElement } from 'react';
+import { createElement, createRef } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { BookEditor, BookPage, BookPageTurnButton, BookReader } from '../src/book';
 import type { BookQASettings } from '../demo/book-fixture';
@@ -272,4 +272,89 @@ test('SSR renders ordinary book semantics with no network or warnings', () => {
     }
     expect(fetches).toBe(0); expect(warnings).toEqual([]);
   } finally { console.error = previousError; globalThis.fetch = previousFetch; }
+});
+
+test('book font role: each editable leaf selects one whole-value family and forced roles preserve native selection/ref', async ({ page }) => {
+  await open(page, { fontProbe: true, pages: ['Alpha beta', 'A中B'], editorFontMode: 'auto' });
+  const left = editor(page).getByRole('textbox', { name: 'Leaf 1', exact: true });
+  const right = editor(page).getByRole('textbox', { name: 'Leaf 2', exact: true });
+  await expect(left).toHaveCSS('font-family', 'monospace'); await expect(right).toHaveCSS('font-family', 'serif');
+  await expect(left).toHaveAttribute('data-book-font-mode', 'latin'); await expect(right).toHaveAttribute('data-book-font-mode', 'unicode');
+  await expect(right).toHaveAttribute('data-book-font-policy', 'whole-value-han-candidate');
+  await left.evaluate(node => { (window as unknown as { bookFontLeft: Node }).bookFontLeft = node; (node as HTMLTextAreaElement).setSelectionRange(6, 10); });
+  await right.evaluate(node => { (window as unknown as { bookFontRight: Node }).bookFontRight = node; });
+  await left.focus(); await left.pressSequentially('中');
+  await expect(left).toHaveValue('Alpha 中'); await expect(left).toHaveCSS('font-family', 'serif');
+  expect(await left.evaluate(node => [(node as HTMLTextAreaElement).selectionStart, (node as HTMLTextAreaElement).selectionEnd])).toEqual([7, 7]);
+  await configure(page, { pages: ['Latin accepted', 'A中B'] }); await expect(left).toHaveCSS('font-family', 'monospace');
+  await left.evaluate(node => (node as HTMLTextAreaElement).setSelectionRange(1, 4));
+  await configure(page, { editorFontMode: 'unicode' }); await expect(left).toHaveCSS('font-family', 'serif');
+  await expect(left).toHaveAttribute('data-book-font-policy', 'caller');
+  expect(await left.evaluate(node => [(node as HTMLTextAreaElement).selectionStart, (node as HTMLTextAreaElement).selectionEnd])).toEqual([1, 4]);
+  await configure(page, { fontModeInput: 'per-page', pageFontModes: { 0: 'unicode', 1: 'latin' } });
+  await expect(left).toHaveCSS('font-family', 'serif'); await expect(right).toHaveCSS('font-family', 'monospace');
+  await expect(right).toHaveValue('A中B');
+  await configure(page, { pageStyleFamilies: { 0: 'cursive' } }); await expect(left).toHaveCSS('font-family', 'cursive');
+  expect(await left.evaluate(node => ({ same: node === (window as unknown as { bookFontLeft: Node }).bookFontLeft, ref: node === window.bookQA.refs.textareas.get(0), tag: node.tagName }))).toEqual({ same: true, ref: true, tag: 'TEXTAREA' });
+  expect(await right.evaluate(node => node === (window as unknown as { bookFontRight: Node }).bookFontRight)).toBe(true);
+  await configure(page, { pages: ['Only leaf'], editorFontMode: 'auto', pageFontModes: {}, pageStyleFamilies: {}, trackFontCalls: true });
+  await page.evaluate(() => { window.bookQA.fontModeCalls.length = 0; });
+  await configure(page, { editorFontMode: 'latin' }); await expect(left).toHaveCSS('font-family', 'monospace');
+  const calls = await page.evaluate(() => window.bookQA.fontModeCalls);
+  expect(calls.length).toBeGreaterThan(0); expect([...new Set(calls)]).toEqual([0]);
+});
+
+test('book font role: rejected controlled text and synthetic preedit update only temporary family, never value/selection/node', async ({ page }) => {
+  await open(page, { fontProbe: true, pages: ['Latin accepted', '右页'], acceptance: 'reject', stopCompositionPropagation: true });
+  const left = editor(page).getByRole('textbox', { name: 'Leaf 1', exact: true }), right = editor(page).getByRole('textbox', { name: 'Leaf 2', exact: true });
+  await left.fill('Rejected 汉'); await expect(left).toHaveValue('Latin accepted'); await expect(left).toHaveCSS('font-family', 'monospace');
+  await expect(right).toHaveCSS('font-family', 'serif');
+  await left.evaluate(node => { (window as unknown as { preeditBookNode: Node }).preeditBookNode = node; });
+  await left.focus(); await left.dispatchEvent('compositionstart', { data: '' });
+  await expect(action(page, 'close')).toBeDisabled();
+  // Native prototype setter supplies a synthetic browser preedit value. It
+  // bypasses no React internals and is not an OS IME/advance certification.
+  await left.evaluate(node => {
+    Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(node, 'Latin 汉 preedit');
+    (node as HTMLTextAreaElement).setSelectionRange(7, 7);
+  });
+  await left.dispatchEvent('compositionupdate', { data: '汉' });
+  await expect(left).toHaveCSS('font-family', 'serif'); await expect(left).toHaveValue('Latin 汉 preedit');
+  await expect(left).toHaveAttribute('data-book-composing-font-mode', 'unicode');
+  await expect(left).toHaveAttribute('data-book-font-mode', 'latin');
+  expect(await left.evaluate(node => [(node as HTMLTextAreaElement).selectionStart, (node as HTMLTextAreaElement).selectionEnd])).toEqual([7, 7]);
+  // The font update itself preserved the browser preedit. Now dispatch the
+  // native input event so ordinary React controlled rejection may restore it.
+  await left.dispatchEvent('input', { bubbles: true, inputType: 'insertCompositionText', data: '汉', isComposing: true });
+  await expect(left).toHaveValue('Latin accepted');
+  await left.dispatchEvent('compositionend', { data: '汉' });
+  await expect(action(page, 'close')).toBeEnabled();
+  await expect(left).toHaveCSS('font-family', 'monospace');
+  expect(await left.getAttribute('data-book-composing-font-mode')).toBeNull();
+  await expect(left).toHaveValue('Latin accepted'); await expect(left).toHaveCSS('font-family', 'monospace');
+  await expect(right).toHaveValue('右页'); await expect(right).toHaveCSS('font-family', 'serif');
+  expect(await left.evaluate(node => ({ same: node === (window as unknown as { preeditBookNode: Node }).preeditBookNode, ref: node === window.bookQA.refs.textareas.get(0) }))).toEqual({ same: true, ref: true });
+  expect(await page.evaluate(() => window.bookQA.events.filter(event => event.kind.startsWith('composition')).map(event => event.kind))).toEqual(['composition-start', 'composition-end']);
+});
+
+test('book font role: typed Page/Editor refs and SSR preserve bounded whole-value markers without IO or static Reader routing', () => {
+  const nativeRef = createRef<HTMLTextAreaElement>(), pageRef = createRef<HTMLDivElement>(), editorRef = createRef<HTMLElement>();
+  const previousFetch = globalThis.fetch, previousError = console.error; let fetches = 0; const warnings: unknown[][] = [];
+  globalThis.fetch = (() => { fetches++; throw new Error('Book font role SSR must not fetch'); }) as typeof fetch;
+  console.error = (...values: unknown[]) => warnings.push(values);
+  try {
+    const editable = renderToStaticMarkup(createElement(BookPage, { ref: pageRef, textareaRef: nativeRef, side: 'left', text: 'Latin 汉', readOnly: false, fontMode: 'auto' }));
+    expect(editable).toContain('data-book-font-mode="unicode"'); expect(editable).toContain('data-book-font-policy="whole-value-han-candidate"');
+    const forced = renderToStaticMarkup(createElement(BookPage, { side: 'left', text: '汉', readOnly: false, fontMode: 'latin', textareaProps: { style: { fontFamily: 'cursive' } } }));
+    expect(forced).toContain('data-book-font-mode="latin"'); expect(forced).toContain('font-family:cursive');
+    for (const node of [createElement(BookReader, { pages: ['汉', 'Latin'] }), createElement(BookPage, { side: 'left', text: '汉', readOnly: true, fontMode: 'unicode' })]) {
+      const html = renderToStaticMarkup(node); expect(html).not.toContain('data-book-font-mode='); expect(html).not.toContain('<textarea');
+    }
+    const calls: number[] = [];
+    const book = renderToStaticMarkup(createElement(BookEditor, { ref: editorRef, pages: ['Only leaf 汉'], textareaRef: () => nativeRef,
+      fontMode: index => { calls.push(index); return 'unicode'; } }));
+    expect(book).toContain('data-book-font-mode="unicode"'); expect(calls).toEqual([0]);
+    expect(book).not.toMatch(/\sfontmode=/i); expect(book).not.toContain('[object Object]');
+    expect([nativeRef.current, pageRef.current, editorRef.current]).toEqual([null, null, null]); expect(fetches).toBe(0); expect(warnings).toEqual([]);
+  } finally { globalThis.fetch = previousFetch; console.error = previousError; }
 });

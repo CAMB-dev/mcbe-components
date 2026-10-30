@@ -33,9 +33,12 @@ function hasPreparedClassicFonts(): boolean {
   if (!existsSync(metadataPath) || !classicFontEntries.every(entry => existsSync(resolve(classicFontDirectory, entry.file)))) return false;
   const metadata = JSON.parse(readFileSync(metadataPath, 'utf8')) as {
     schemaVersion: number; em: number; fontSize: number;
+    unicodeMetrics?: { version?: string };
     families: Record<string, { family: string; file: string; sha256: string }>;
   };
-  if (metadata.schemaVersion !== 1 || metadata.em !== 1000 || metadata.fontSize !== 20 || !metadata.families) {
+  const supportedMetrics = metadata.schemaVersion === 1
+    || (metadata.schemaVersion === 2 && metadata.unicodeMetrics?.version === 'body-bounds-v1');
+  if (!supportedMetrics || metadata.em !== 1000 || metadata.fontSize !== 20 || !metadata.families) {
     throw new Error('Invalid local Classic fonts; rerun scripts/prepare-classic-fonts.py.');
   }
   for (const entry of classicFontEntries) {

@@ -107,8 +107,8 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `RecipeBookEntry` | **必填** `entry: RecipeBookItem`；`onRecipeAction(id, action)`、槽位按钮属性 | entry 提供 item / preview、craftableCount、backgroundImage / backgroundSlice、modifier；零可制作数保留物品，不可制作颜色不自动禁用；primary / secondary / tertiary 操作，ref 为 button |
 | `RecipeFilterToggle` | `craftableOnly` / `defaultCraftableOnly`、`onCraftableOnlyChange`、`label`、`disabled`、`readOnly` | 可独立复用的可制作筛选按钮，aria-pressed 表达状态；ref 为 button，不自行过滤集合 |
 | `BookReader` | `pages` / `defaultPages`、`spreadIndex` / `defaultSpreadIndex`、title / author、layout / skin / labels、`onFinish` | 双页只读书本；spread从0开始，奇数末页右侧留空，ref为section；见 [BOOK_QA.md](docs/BOOK_QA.md) |
-| `BookEditor` | Reader基础属性、`onPagesChange`、`mode` / `defaultMode`、`onSign`、`onPageAction`、textarea / input属性与ref | 真实书与笔编辑与签名快照；宿主处理页结构、持久化和关闭，不自动分页或写入世界 |
-| `BookPage` | 必填`side`；text / defaultText、readOnly、blank、pageNumber、`onTextChange`、textareaRef | 可复用单页，编辑时保留真实textarea；ref为div |
+| `BookEditor` | Reader基础属性、`onPagesChange`、`mode` / `defaultMode`、`onSign`、`onPageAction`、fontMode /逐页factory、textarea / input属性与ref | 真实书与笔编辑与签名快照；宿主处理页结构、持久化和关闭，不自动分页或写入世界 |
+| `BookPage` | 必填`side`；text / defaultText、readOnly、blank、pageNumber、`onTextChange`、textareaRef、fontMode | 可复用单页，编辑时保留真实textarea；字体角色只作用当前编辑页，ref为div |
 | `BookPageTurnButton` | 必填`direction`: previous / next；available、textures、button属性 | 原图24单位翻页按钮；不可用时隐藏且禁用，ref为button |
 | `SignTextSurface` | variant、wood / texture、value / defaultValue、onValueChange、scale / geometry、textareaProps / textareaRef、fontMode | 普通 / 悬挂原图牌面与真实多行输入，可独立复用；根ref为div。见 [SIGN_QA.md](docs/SIGN_QA.md) |
 | `SignEditor` | Surface属性、open / defaultOpen、onOpenChange、exitBehavior、onCloseRequest / onCommit / onCancel、dialogRef | 原生dialog编辑层；宿主处理关闭请求与持久化，Enter保留换行，不自动写世界 |
@@ -326,7 +326,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **126 个已实现组件**，本轮新增可复用SignTextSurface与SignEditor；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开4份数据、10个渲染 / 几何 / 纹理函数，共140个ESM运行时值。Sign的29项独立客户端合同及140值React18 /19实际包消费已通过；Book的30项客户端合同与138值包保留其原范围。implemented仍不等于所有GUI已pixel-perfect验收；此前134值包及历史model阶段973唯一用例（968 PASS、5预期SKIP）不作为本轮测试累计。
+当前 **126 个已实现组件**，包含可复用SignTextSurface与SignEditor；按Bedrock原生控件与GUI边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开4份数据、10个渲染 / 几何 / 纹理函数，共140个ESM运行时值。书写字体 /编辑布局的206有限字集已通过79项客户端合同、React18 /19实际包消费及37项公开辅助检查，历史批次保留原范围。implemented仍不等于所有GUI已pixel-perfect验收，此前134值包及历史model阶段973唯一用例（968 PASS、5预期SKIP）不作为本轮测试累计。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -497,6 +497,17 @@ python scripts/prepare-classic-fonts.py --check-only
 
 输出位于ignored `.cache/local-fonts/classic`：MCBE Classic /Unicode /ASCII三face，默认189 /189 /95glyph，覆盖95可打印ASCII及94个demo中文 /全角字符。将自己有权使用的WOFF2复制到应用并登记同名font-face，原字体不随npm分发。
 
+准备工具默认使用版本化 `body-bounds-v1` Unicode正文度量；需复现旧字体可传 `--unicode-metrics legacy-host`。Book编辑页与Sign可显式选auto /latin /unicode；auto是含Han整值切换候选，不代表通用引擎算法或完整原生字体栅格。详见 [BOOK_QA.md](docs/BOOK_QA.md)、[SIGN_QA.md](docs/SIGN_QA.md) 与 [CLASSIC_FONTS_QA.md](docs/CLASSIC_FONTS_QA.md)。
+
+Book /Sign两demo的字符范围另有可复现文本；使用自己的固定来源archive准备，再以相同参数内存复验：
+
+```sh
+python scripts/prepare-classic-fonts.py "PATH/TO/font.brarchive" --text-file scripts/book-sign-font-characters.txt
+python scripts/prepare-classic-fonts.py "PATH/TO/font.brarchive" --text-file scripts/book-sign-font-characters.txt --check-only
+```
+
+该corpus只覆盖两demo的明确字串；206扩集已通过独立字形 /旧字集等价审计及运行时 /公开重验，原194批次与首个fallback失败保留其范围，未推广到任意Unicode。
+
 导入 `mcbeui/classic-fonts.css`，在html根添加 `mc-classic-fonts`，使Input与portal Dialog继承同一字体；局部scope不会自动覆盖document.body portal。该CSS只有scope与字号令牌，不带font-face或字体数据。
 
 demo提供Classic /本机Mojangles /开放字体切换。原cell字体仍有浏览器与游戏的AA、基线、阴影及长输入差异；有限字集不代表全Unicode或pixel perfect。追加字符、行高与详细验证见 [CLASSIC_FONTS_QA.md](docs/CLASSIC_FONTS_QA.md)。
@@ -622,7 +633,7 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 - `npm run typecheck`：库、展示页、测试 TypeScript 检查。
 - `npm test`：桌面 Chromium 与手机模拟的组件 / ComboBox 交互，以及 DPR=1 的精确皮肤像素对比；自动检查并缓存固定 commit 的参考文件。
 - `npm run test:pixels`：独立运行原始 PNG 对比，要求 0 个差异像素；对照图与 JSON 在 `.cache/pixel-comparison`。
-- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。当前126组件 /140值已在React18.3.1 /19.3.1真实消费通过；Book及更早包的数字保持历史范围，见 [SIGN_QA.md](docs/SIGN_QA.md) / [BOOK_QA.md](docs/BOOK_QA.md) / [VERIFICATION.md](docs/VERIFICATION.md)。
+- `npm run verify:package`：把真实tarball分别安装至React18 /19消费者，检查ESM、SSR、strict TypeScript、样式、资源与许可。本轮字体 /布局修订的126组件 /140值已在React18.3.1 /19.3.1真实消费通过；Book及更早包的数字保持历史范围，见 [SIGN_QA.md](docs/SIGN_QA.md) / [BOOK_QA.md](docs/BOOK_QA.md) / [VERIFICATION.md](docs/VERIFICATION.md)。
 - `#books` 的27项生产辅助与旧6项导航回归已分别通过，覆盖真实编辑 / 签名请求 / 窄屏及既有锚点；它们不计入Book正式30项或原生像素认证，见 [BOOK_QA.md](docs/BOOK_QA.md)。
 - `#signs` 的50项公开集成辅助已通过；新Sign29项、旧Dialog12项与修后完整导航6项分批验证，保留首次导航失败及修复记录，不作为原生整页像素或真实OS IME认证，见 [SIGN_QA.md](docs/SIGN_QA.md)。
 - 自动无障碍检查不等于人工屏幕阅读器认证；尚未覆盖真实手机设备、Firefox 和 Safari。

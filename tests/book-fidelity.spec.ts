@@ -393,7 +393,14 @@ test('page decorations/text retain their own anchors plus opposite content offse
     await relative(leaf.locator('.mc-book__page-crease'), leaf, [side === 'left' ? 40 : 0, (207 - (207 - 14)) / 2 - 2, 160 - 40, 207 - 14]);
     // Raw source: edge [100%-7,100%-16] anchored left/right middle, offsets [+/-7,-1].
     await relative(leaf.locator('.mc-book__page-edge'), leaf, [side === 'left' ? 7 : 0, (207 - (207 - 16)) / 2 - 1, 160 - 7, 207 - 16]);
-    await relative(leaf.locator('textarea'), leaf, [(160 - (160 - 32)) / 2 + (side === 'left' ? 5 : -5), 23, 160 - 32, 207 - 58]);
+    // Retire the old textarea==outer edit-box assumption. book.page_text is
+    // 128x149, but common.text_edit_box contributes centering insets3/2;
+    // multiline clip_offset[0,-3] expands the distinct clipping rectangle.
+    const outerX = (160 - (160 - 32)) / 2 + (side === 'left' ? 5 : -5);
+    await relative(leaf.locator('.mc-book__text-box'), leaf, [outerX, 23, 160 - 32, 207 - 58]);
+    await relative(leaf.locator('.mc-book__text-center'), leaf, [outerX + 3, 23 + 2, 160 - 32 - 6, 207 - 58 - 4]);
+    await relative(leaf.locator('.mc-book__text-clip'), leaf, [outerX + 3, 23 + 2 - 3, 160 - 32 - 6, 207 - 58 - 4 + 6]);
+    await relative(leaf.locator('textarea'), leaf, [outerX + 3, 23 + 2 - 3, 160 - 32 - 6, 207 - 58 - 4 + 6]);
     const number = await box(leaf.locator('.mc-book__page-number')), parent = await box(leaf);
     expect(number.y - parent.y).toBe(13 * 2);
     expect(number.x + number.width / 2 - parent.x).toBe((80 + (side === 'left' ? 5 : -5)) * 2);
@@ -492,4 +499,76 @@ test('explicit unitScale and narrow host retain nominal geometry and inert bound
   await expect(previous).toHaveAttribute('tabindex', '-1'); await expect(previous).toHaveAttribute('aria-hidden', 'true');
   // Hidden/inert keeps24x24 source allocation; no invented disabled texture/translation.
   expect(await previous.evaluate(node => [getComputedStyle(node).width, getComputedStyle(node).height, getComputedStyle(node).transform])).toEqual(['24px', '24px', 'none']);
+});
+
+test('book font role: standalone editable Page routes the whole value while explicit input family wins and static text stays unchanged', async ({ page }) => {
+  await open(page);
+  await page.evaluate(() => window.bookQA.configure({ fontProbe: true, standaloneText: 'Only Latin', standaloneFontMode: 'auto' }));
+  const leaf = page.locator('#standalone .mc-book__page'), input = leaf.locator('textarea');
+  await expect(input).toHaveCSS('font-family', 'monospace');
+  const localGeometry = async () => {
+    const parent = await box(leaf), field = await box(input);
+    return [field.x - parent.x, field.y - parent.y, field.width, field.height, parent.width, parent.height];
+  };
+  const original = await localGeometry();
+  await input.evaluate(node => { (window as unknown as { standaloneFontNode: Node }).standaloneFontNode = node; });
+  await input.fill('A中B'); await expect(input).toHaveCSS('font-family', 'serif'); await expect(input).toHaveValue('A中B');
+  await expect(input).toHaveAttribute('data-book-font-mode', 'unicode');
+  await page.evaluate(() => window.bookQA.configure({ standaloneFontMode: 'latin' })); await expect(input).toHaveCSS('font-family', 'monospace');
+  await page.evaluate(() => window.bookQA.configure({ standaloneText: 'ASCII', standaloneFontMode: 'unicode' })); await expect(input).toHaveCSS('font-family', 'serif');
+  await page.evaluate(() => window.bookQA.configure({ standaloneInputFamily: 'cursive' })); await expect(input).toHaveCSS('font-family', 'cursive');
+  expect(await localGeometry()).toEqual(original);
+  expect(await input.evaluate(node => ({ same: node === (window as unknown as { standaloneFontNode: Node }).standaloneFontNode, ref: node === window.bookQA.refs.standaloneTextarea }))).toEqual({ same: true, ref: true });
+  await page.evaluate(() => window.bookQA.configure({ standaloneReadOnly: true }));
+  await expect(leaf.locator('textarea')).toHaveCount(0);
+  await expect(leaf.locator('.mc-book__page-text')).toHaveCSS('font-family', 'monospace');
+  await expect(leaf.locator('.mc-book__page-number')).toHaveCSS('font-family', 'monospace');
+  expect(await page.evaluate(() => window.bookQA.refs.standaloneTextarea)).toBeNull();
+});
+
+test('book font role: editable Han family never spills into the other page, static Reader, page numbers or signing title/author', async ({ page }) => {
+  await open(page);
+  await page.evaluate(() => window.bookQA.configure({ fontProbe: true, pages: ['Latin left', 'Latin right'], readerPages: ['Reader 汉', 'Reader Latin'], title: 'Title 汉', author: '作者' }));
+  const book = root(page), left = book.getByRole('textbox', { name: 'Leaf 1', exact: true }), right = book.getByRole('textbox', { name: 'Leaf 2', exact: true });
+  await expect(left).toHaveCSS('font-family', 'monospace'); await expect(right).toHaveCSS('font-family', 'monospace');
+  const unaffected = async () => page.evaluate(() => {
+    const selectors = ['#primary .mc-book__page-number', '#secondary .mc-book__page-text', '#secondary .mc-book__page-number', '#primary .mc-book__title-input input', '#primary .mc-book__author input', '#primary .mc-book__turn'];
+    return selectors.map(selector => ({ selector, styles: [...document.querySelectorAll(selector)].map(node => { const style = getComputedStyle(node); return { family: style.fontFamily, size: style.fontSize, lineHeight: style.lineHeight, shadow: style.textShadow, weight: style.fontWeight }; }) }));
+  });
+  const before = await unaffected();
+  await left.fill('Mixed 汉 text'); await expect(left).toHaveCSS('font-family', 'serif');
+  await expect(left).toHaveValue('Mixed 汉 text'); await expect(right).toHaveValue('Latin right'); await expect(right).toHaveCSS('font-family', 'monospace');
+  expect(await unaffected()).toEqual(before);
+  for (const readerText of await page.locator('#secondary .mc-book__page-text').all()) await expect(readerText).toHaveCSS('font-family', 'monospace');
+  await page.evaluate(() => window.bookQA.configure({ mode: 'signing' }));
+  await expect(book.locator('.mc-book__title-input input')).toBeVisible();
+  await expect(book.locator('.mc-book__title-input input')).toHaveCSS('font-family', 'monospace');
+  await expect(book.locator('.mc-book__author input')).toHaveCSS('font-family', 'monospace');
+  // The same explicitly supplied host families prove CSS role isolation only.
+  // This makes no claim about native advances, glyph shader or pixel equality.
+  expect(await unaffected()).toEqual(before);
+});
+
+test('book common multiline layout: inner centering, expanded clip and normal line advance scale independently of static Reader text', async ({ page }) => {
+  await open(page);
+  for (const scale of [1, 2]) {
+    await page.evaluate(scale => window.bookQA.configure({ scale, fontProbe: true, pages: ['Line one\nLine two', '另一页'], readerPages: ['Reader text', '静态页面'] }), scale);
+    const leaf = root(page).locator('.mc-book__page[data-side="left"]');
+    const outer = leaf.locator('.mc-book__text-box'), center = leaf.locator('.mc-book__text-center'), clip = leaf.locator('.mc-book__text-clip'), input = leaf.locator('textarea');
+    await relative(outer, leaf, [5 + 16, 23, 128, 149], scale);
+    await relative(center, outer, [3, 2, 128 - 6, 149 - 4], scale);
+    await relative(clip, center, [0, -3, 128 - 6, 149 - 4 + 6], scale);
+    await relative(input, clip, [0, 0, 128 - 6, 149 - 4 + 6], scale);
+    await expect(clip).toHaveCSS('overflow', 'hidden');
+    await expect(input).toHaveCSS('padding-top', `${3 * scale}px`); await expect(input).toHaveCSS('padding-bottom', `${3 * scale}px`);
+    await expect(input).toHaveCSS('padding-left', '0px'); await expect(input).toHaveCSS('padding-right', '0px');
+    await expect(input).toHaveCSS('font-size', `${10 * scale}px`); await expect(input).toHaveCSS('line-height', `${10 * scale}px`);
+    expect(await input.evaluate(node => { const style = getComputedStyle(node); return node.clientHeight - Number.parseFloat(style.paddingTop) - Number.parseFloat(style.paddingBottom); })).toBe((149 - 4) * scale);
+    // Native Book's selected clip width610/GUI5 corroborates122logical.
+    // No captured root origin, bottom raster rule or glyph ink fit is used.
+    expect((await box(clip)).width / scale).toBe(610 / 5);
+  }
+  const readerLeaf = page.locator('#secondary .mc-book__page[data-side="left"]');
+  await relative(readerLeaf.locator('.mc-book__page-text'), readerLeaf, [5 + 16, 23, 128, 149], 2);
+  await expect(readerLeaf.locator('.mc-book__text-box,.mc-book__text-clip,textarea')).toHaveCount(0);
 });

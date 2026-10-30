@@ -1,4 +1,4 @@
-import { StrictMode, useState } from 'react';
+import { StrictMode, useEffect, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Dialog } from '../src';
@@ -7,6 +7,7 @@ import type { SignCloseDetail, SignEditorProps, SignTextSurfaceProps, SignSource
 import '../src/styles.css';
 import '../src/fonts.css';
 import '../src/sign.css';
+import '../src/classic-fonts.css';
 
 export interface SignFixtureSettings {
   value: string; variant: SignVariant; wood: SignWood; scale: number;
@@ -20,10 +21,13 @@ export interface SignFixtureSettings {
   showSurface: boolean; showEditor: boolean; editorAutoFocus: boolean;
   genericOpen: boolean; geometry?: Partial<SignSourceGeometry>;
   texture?: SignTextureInput; textColor?: CSSProperties['color']; textShadow?: CSSProperties['textShadow'];
+  fontProfile: 'default' | 'classic'; customInputFamily?: string;
+  baselineCorrection?: number; fontSizeOverride?: number; lineHeightOverride?: number;
 }
 interface SignFixtureEvent { kind: string; value?: unknown; detail?: unknown }
 interface SignFixtureQA {
   mounted: boolean; settings: SignFixtureSettings; events: SignFixtureEvent[];
+  hasClassicFonts: boolean; classicStatus: 'unrequested' | 'loading' | 'ready' | 'missing' | 'error';
   pendingClose: { value: string; detail: SignCloseDetail } | null;
   configure: (patch: Partial<SignFixtureSettings>) => void;
   resolveClose: (accept: boolean) => void; remount: () => void; unmount: () => void;
@@ -36,15 +40,26 @@ const initial: SignFixtureSettings = {
   controlled: true, controlledOpen: true, acceptance: 'accept', open: false, disabled: false, readOnly: false, maxLength: 32500,
   closeOnOutside: true, exitBehavior: 'request', rejectClose: false, rejectOpenChange: false, rejectCommit: false,
   rejectCancel: false, asyncClose: false, preventEscape: false, stopCompositionPropagation: false,
-  showSurface: true, showEditor: true, editorAutoFocus: true, genericOpen: false,
+  showSurface: true, showEditor: true, editorAutoFocus: true, genericOpen: false, fontProfile: 'default',
 };
 const qa: SignFixtureQA = {
-  mounted: false, settings: initial, events: [], pendingClose: null, configure: () => {}, resolveClose: () => {}, remount: () => {}, unmount: () => {},
+  mounted: false, settings: initial, events: [], hasClassicFonts: false, classicStatus: 'unrequested', pendingClose: null, configure: () => {}, resolveClose: () => {}, remount: () => {}, unmount: () => {},
   refs: { surface: null, editor: null, textarea: null, editorTextarea: null, dialog: null },
 };
 window.signQA = qa;
 function App() {
   const [settings, setSettings] = useState(initial), [mountKey, setMountKey] = useState(0);
+  const [classicReady, setClassicReady] = useState(false);
+  // Explicit probe only: preserve the default29-test font environment.
+  useEffect(() => {
+    if (settings.fontProfile !== 'classic' || classicReady) return;
+    let active = true; qa.classicStatus = 'loading';
+    void import('virtual:mcbeui-game-font').then(bridge => {
+      if (!active) return; qa.hasClassicFonts = bridge.hasClassicFonts;
+      qa.classicStatus = bridge.hasClassicFonts ? 'ready' : 'missing'; setClassicReady(true);
+    }).catch(() => { if (active) qa.classicStatus = 'error'; });
+    return () => { active = false; };
+  }, [settings.fontProfile, classicReady]);
   qa.mounted = true; qa.settings = settings;
   qa.configure = patch => setSettings(previous => ({ ...previous, ...patch }));
   qa.remount = () => setMountKey(previous => previous + 1);
@@ -64,6 +79,7 @@ function App() {
     return {
       id: owner === 'surface' ? 'sign-surface-text' : 'sign-editor-text',
       'aria-label': owner === 'surface' ? 'QA surface text' : 'QA editor text', spellCheck: false,
+      ...(settings.customInputFamily ? { style: { fontFamily: settings.customInputFamily } } : {}),
       onCompositionStart: event => { qa.events.push({ kind: 'composition-start', detail: { owner } }); if (settings.stopCompositionPropagation) event.stopPropagation(); },
       onCompositionEnd: event => { qa.events.push({ kind: 'composition-end', detail: { owner } }); if (settings.stopCompositionPropagation) event.stopPropagation(); },
       onKeyDown: event => { if (settings.preventEscape && event.key === 'Escape') event.preventDefault(); },
@@ -73,6 +89,12 @@ function App() {
     variant: settings.variant, wood: settings.wood, scale: settings.scale, fontMode: settings.fontMode, backgroundFit: settings.backgroundFit,
     disabled: settings.disabled, readOnly: settings.readOnly, maxLength: settings.maxLength,
     texture: settings.texture, geometry: settings.geometry, textColor: settings.textColor, textShadow: settings.textShadow,
+    className: settings.fontProfile === 'classic' ? 'mc-classic-fonts' : undefined,
+    style: {
+      ...(settings.baselineCorrection !== undefined ? { '--mc-sign-baseline-correction': settings.baselineCorrection } : {}),
+      ...(settings.fontSizeOverride !== undefined ? { '--mc-sign-font-size': `${settings.fontSizeOverride}px` } : {}),
+      ...(settings.lineHeightOverride !== undefined ? { '--mc-sign-line-height': `${settings.lineHeightOverride}px` } : {}),
+    } as CSSProperties,
     ...(settings.controlled ? { value: settings.value } : { defaultValue: settings.value }),
   };
   return <main id="sign-qa-main" data-settings={JSON.stringify(settings)}>

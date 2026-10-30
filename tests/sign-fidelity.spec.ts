@@ -181,14 +181,24 @@ async function open(page: Page, patch: Partial<SignFixtureSettings> = {}) {
 }
 const surface = (page: Page) => page.locator('#sign-surface-host');
 async function geometry(page: Page, expected: { editor: readonly [number, number]; offset: readonly [number, number]; background: readonly [number, number]; backgroundOffset: readonly [number, number] }, scale: number) {
-  const root = surface(page), frame = await box(root), input = await box(root.locator('textarea')), image = await box(root.locator('.mc-sign-surface__background'));
+  const root = surface(page), frame = await box(root), outer = await box(root.locator('.mc-sign-surface__editor')),
+    center = await box(root.locator('.mc-sign-surface__centering')), clip = await box(root.locator('.mc-sign-surface__clipper')),
+    input = await box(root.locator('textarea')), image = await box(root.locator('.mc-sign-surface__background'));
   expect([frame.width, frame.height]).toEqual(expected.editor.map(size => size * scale));
-  expect([input.width, input.height]).toEqual(expected.editor.map(size => size * scale));
-  expect(Math.abs(input.x + input.width / 2 - frame.x - frame.width / 2 - expected.offset[0] * scale)).toBeLessThanOrEqual(.02);
-  expect(Math.abs(input.y + input.height / 2 - frame.y - frame.height / 2 - expected.offset[1] * scale)).toBeLessThanOrEqual(.02);
+  // The old test incorrectly equated the native textarea with the declared
+  // outer edit box. common.centering_panel insets3/2 and multiline clip_offset
+  // [0,-3] are separate source rectangles, corroborated by native179/120 widths.
+  expect([outer.width, outer.height]).toEqual(expected.editor.map(size => size * scale));
+  expect(Math.abs(outer.x + outer.width / 2 - frame.x - frame.width / 2 - expected.offset[0] * scale)).toBeLessThanOrEqual(.02);
+  expect(Math.abs(outer.y + outer.height / 2 - frame.y - frame.height / 2 - expected.offset[1] * scale)).toBeLessThanOrEqual(.02);
+  expect([center.width, center.height]).toEqual([(expected.editor[0] - 6) * scale, (expected.editor[1] - 4) * scale]);
+  expect(Math.abs(center.x - outer.x - 3 * scale)).toBeLessThanOrEqual(.02); expect(Math.abs(center.y - outer.y - 2 * scale)).toBeLessThanOrEqual(.02);
+  expect([clip.width, clip.height]).toEqual([(expected.editor[0] - 6) * scale, (expected.editor[1] - 4 + 6) * scale]);
+  expect(Math.abs(clip.x - center.x)).toBeLessThanOrEqual(.02); expect(Math.abs(clip.y - center.y + 3 * scale)).toBeLessThanOrEqual(.02);
+  expect(input).toEqual(clip);
   expect([image.width, image.height]).toEqual(expected.background.map(size => size * scale));
-  expect(Math.abs(image.x + image.width / 2 - input.x - input.width / 2 - expected.backgroundOffset[0] * scale)).toBeLessThanOrEqual(.02);
-  expect(Math.abs(image.y + image.height / 2 - input.y - input.height / 2 - expected.backgroundOffset[1] * scale)).toBeLessThanOrEqual(.02);
+  expect(Math.abs(image.x + image.width / 2 - outer.x - outer.width / 2 - expected.backgroundOffset[0] * scale)).toBeLessThanOrEqual(.02);
+  expect(Math.abs(image.y + image.height / 2 - outer.y - outer.height / 2 - expected.backgroundOffset[1] * scale)).toBeLessThanOrEqual(.02);
 }
 
 test('all26 original full PNG sources and license retain independent upstream SHA/dimensions', async () => {
@@ -275,4 +285,54 @@ test('explicit host geometry/stretch/color/font controls retain a chrome-free su
   });
   for (const layer of dim.layers) if (layer.alpha > 0) expect(layer.rgb).toEqual([0, 0, 0]);
   expect(dim.alpha).toBeCloseTo(.4, 8);
+});
+
+test('Sign large source line/clip geometry distinguishes generic padding from loaded Classic baseline and explicit caller opt-out', async ({ page }, testInfo) => {
+  await open(page, { value: 'QA\nQA', fontProfile: 'default', fontMode: 'latin' });
+  const input = surface(page).locator('textarea'), center = surface(page).locator('.mc-sign-surface__centering'), clip = surface(page).locator('.mc-sign-surface__clipper');
+  for (const scale of [1, 2]) {
+    await configure(page, { scale });
+    await expect(input).toHaveCSS('font-size', `${20 * scale}px`); await expect(input).toHaveCSS('line-height', `${20 * scale}px`);
+    await expect(input).toHaveCSS('padding-top', `${3 * scale}px`); await expect(input).toHaveCSS('padding-bottom', `${3 * scale}px`);
+    await expect(input).toHaveCSS('padding-left', '0px'); await expect(input).toHaveCSS('padding-right', '0px');
+    await expect(clip).toHaveCSS('overflow', 'hidden');
+    const outer = await box(surface(page).locator('.mc-sign-surface__editor')), inner = await box(center), clipping = await box(clip);
+    expect([inner.width, inner.height]).toEqual([(185 - 6) * scale, (90 - 4) * scale]);
+    expect([clipping.width, clipping.height]).toEqual([(185 - 6) * scale, (90 - 4 + 6) * scale]);
+    expect(Math.abs(inner.x - outer.x - 3 * scale)).toBeLessThanOrEqual(.02); expect(Math.abs(clipping.y - outer.y - (2 - 3) * scale)).toBeLessThanOrEqual(.02);
+  }
+  // Native large-role newline delta100physical/GUI5 proves20logical advance;
+  // regular895/5 and hanging600/5 corroborate179/120 logical clip widths.
+  expect((await box(clip)).width / 2).toBe(895 / 5);
+  await configure(page, { variant: 'hanging' }); expect((await box(clip)).width / 2).toBe(600 / 5);
+  const localClip = async () => { const frame = await box(surface(page)), value = await box(clip); return [value.x - frame.x, value.y - frame.y, value.width, value.height]; };
+  const before = await localClip();
+  await configure(page, { fontProfile: 'classic', variant: 'hanging', scale: 2 });
+  await expect.poll(() => page.evaluate(() => window.signQA.classicStatus)).toMatch(/^(ready|missing|error)$/);
+  const classicAvailable = await page.evaluate(() => window.signQA.hasClassicFonts);
+  const outcome = { genericSourceGeometry: 'passed', classicAvailable, classicProfile: 'not-executed-missing-private-fonts' };
+  if (classicAvailable) {
+    const loaded = await page.evaluate(async () => {
+      await document.fonts.load('40px "MCBE Classic"', 'QA'); await document.fonts.load('40px "MCBE Classic Unicode"', '+7'); await document.fonts.ready;
+      return [...document.fonts].filter(face => ['MCBE Classic', 'MCBE Classic Unicode'].includes(face.family.replace(/^['"]|['"]$/g, ''))).map(face => ({ family: face.family, status: face.status }));
+    });
+    expect(loaded).toHaveLength(2); expect(loaded.every(face => face.status === 'loaded')).toBe(true);
+    await expect(input).toHaveCSS('padding-top', '4px'); await expect(input).toHaveCSS('padding-bottom', '8px');
+    await expect(input).toHaveCSS('font-size', '40px'); await expect(input).toHaveCSS('line-height', '40px');
+    await expect(input).toHaveCSS('font-family', /MCBE Classic/);
+    expect(await localClip()).toEqual(before);
+    // All three actual Classic faces declare900/-100 with construction800.
+    // large20 natural baseline18 vs desired1+8*2=17 =>−1 logical correction.
+    outcome.classicProfile = 'loaded-declared-profile-css-contract-passed';
+  } else {
+    expect(await page.evaluate(() => window.signQA.classicStatus)).toBe('missing');
+    testInfo.annotations.push({ type: 'optional-classic-fonts', description: 'Generic assertions ran; private Classic profile branch unavailable.' });
+  }
+  await configure(page, { customInputFamily: 'monospace', baselineCorrection: 0, fontSizeOverride: 31, lineHeightOverride: 35 });
+  await expect(input).toHaveCSS('font-family', 'monospace'); await expect(input).toHaveCSS('font-size', '31px'); await expect(input).toHaveCSS('line-height', '35px');
+  await expect(input).toHaveCSS('padding-top', '6px'); await expect(input).toHaveCSS('padding-bottom', '6px');
+  expect(await localClip()).toEqual(before);
+  await testInfo.attach('source-layout-and-declared-classic-css-profile', { body: JSON.stringify(outcome, null, 2), contentType: 'application/json' });
+  // This verifies declared CSS geometry/profile behavior. The exact native
+  // clip bottom raster, glyph AA, wrapping and whole DOM pixels remain unproved.
 });

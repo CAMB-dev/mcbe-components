@@ -1,6 +1,28 @@
 # Classic DOM字体：来源、显式作用域与分阶段验证
 
-本轮增加从用户原font.brarchive准备有限Classic COLR字体的本机工具，以及可选 `mcbeui/classic-fonts.css`；不将原字体编入公共npm，不自动恢复游戏字体选择 /布局 /Smooth shader。2026-10-30本地收尾：首批134列项中133通过 /1旧预期skip；最终normal-line受影响16项通过，React18 /19实际包经公共payload同字节链关联，最终生产147辅助检查通过。各批版本范围分开，不称最终字体全134重跑或整GUI pixel perfect。
+初始Classic阶段增加从用户原font.brarchive准备有限COLR字体的本机工具，以及可选 `mcbeui/classic-fonts.css`；不将原字体编入公共npm，不自动恢复游戏字体选择 /布局 /Smooth shader。当时首批134列项中133通过 /1旧预期skip，normal-line受影响16项通过，React18 /19实际包经公共payload同字节链关联，生产147辅助检查通过。以下历史批次不自动认证后续字体和编辑布局修订。
+
+## Book / Sign正文度量修订
+
+本轮工具默认使用显式版本 `body-bounds-v1`：原Unicode printable ASCII的非空alpha横界为 `[L,R)` 时，advance取 `R-L+2`、源X偏移取 `1-L`；完整16×16字格和原像素保留，偏移同时应用于base和COLR paint轮廓。default8分支不变，space8源像素仍是声明的宿主策略；非ASCII不套用普遍alpha裁宽，CJK /全角保留full-cell＋2候选。可用 `--unicode-metrics legacy-host` 复现此前三face及旧metrics，历史原件不回写。
+
+CPU研究的128个正文glyph实例涉及51个不同字符（25个ASCII、26个宽字 /非ASCII），以每run pen从零开始直接对照quad位置为零差；全角冒号18的有限字符串约束也保留，不代表95个ASCII或通用Unicode已原生验收。两条Sign caret预测各差1game单位，保留失败，不添加专用补偿。旧“相邻quad左边delta就是advance”的解释遗漏bearing；例如窄I /1会同时改变偏移。space与terminal独立拆分、任意文本、所有脚本及引擎selector仍未恢复。
+
+来源研究 `.cache/font-advance-bearing-study-01/FINAL.json`（SHA256 `2a6d5c61c4c6a832bad94829dcd5cfa16a3991877e4b25514db5cf6e0a753a34`）和独立 `.cache/unicode-metrics-independent-01/FINAL.json`（SHA256 `d57b499266d0b89abacc501dbcef3f2214833c8398c88695e5c6812604153c99`）只认证有限CPU几何关系，不沿用旧字体的通过结论。
+
+初次修后产物由 `.cache/classic-native-metrics-01/FINAL.json` 和独立 `.cache/classic-body-bounds-independent-01/FINAL.json`（SHA256 `411fde6fb94eccac7638082dc0322efeaf2669f49cc8dbf05afe128f46716623`）实际核验。当时字集补“像素字测试”五字，三face为194 /194 /95，共483；默认清单仍是下表189 /189 /95。47整原页、186,496个base＋COLR源cell中心采样零差，19个重叠Unicode ASCII轮廓仅做规则允许的X平移，94项重叠advance改变；default8与vertical模型不变。legacy同环境5文件逐字节复现，历史备份只有3WOFF＋metrics这4文件字节相同，provenance环境记录不同并单列；134份其他字体文件未改。
+
+194阶段的79项、导航6项及React18 /19包实际通过，原报告 `.cache/book-font-role-qa-01/FINAL.json` 与当时package日志保留原范围；后续扩集不覆写这些结果，也不重复累计相同用例。
+
+公开预览首批实际只执行7项，6通过 /1失败：Welcome样本6个Han使用了MCBE CJK fallback，尚未执行后续native宽度检查。报告 `.cache/book-sign-typography-public-01/FINAL.json`（SHA256 `d79d5a7cc38e900462f547081991cd7ee28e55b6a3f5bcf0121178d4748ea23b`）保留；有限字体原本允许fallback，但该样本不满足整值Unicode face的严格示例目标。本轮选择补齐实际示例字符，不采用放宽断言的备选方案。
+
+可复现字符corpus `scripts/book-sign-font-characters.txt` 含两个Book /Sign demo实际字符串与明确native样本所需21个Han字符，排除注释。相对194字集缺12字，私有输出已扩为206 /206 /95（507 mapped）；脚本默认189清单、度量规则和UI不因此改变。独立 `.cache/classic-demo-glyph-extension-independent-01/FINAL.json`（SHA256 `8aa9823cbb74e6a1d5f7c58ff9fcf2ba6143a956966249778a56d5a8bd6cb2c4`）实际重开字体核实：旧483字形base /COLR /hmtx /源metadata /vertical完全不变，新12Han的12,288原cell采样零差；47原页保留，只增完整glyph_56为第48页，134份其他字体及archive不变。按公开corpus的唯一一次check-only实际exit0 /9.521秒，active5文件SHA与mtimeNs不变。
+
+206字集已实际完整重验79/79（Book39 /Sign30 /Classic10），84.256286秒，零跳过 /重试 /flaky /report errors，747项选定输入加5 harness共752 pins不变；三face实际206 /206 /95均加载。7幅240×48源POINT平面80,640像素严格RGBA0，固定host x8 /baseline24、不遮罩 /拟合；Book原翻页13,824像素另计。canonical `.cache/book-font-role-qa-01/formal-206-01/FINAL.json` SHA256 `efdebb158b97c01c2998b46785929088711d60a1631a1c61465ca4f17abbf936`。整6项旧导航在此profile另通过，26.321183秒；不重计旧Dialog或194同项。当前React18.3.1 /19.3.1实际包消费也通过140值 /SSR /新类型及factory /strict TypeScript /样式 /资源 /许可，日志 `package-verification-206.log` 位于 `.cache/book-sign-typography-close-01`。最终文档包仍须另做非文档身份比较，不预填其未执行结果。
+
+公开03批37/37辅助检查通过，20.477秒，三私有face真实加载，747输入 /327dist /59site前后不变。真实Book逐页 /Sign整值Unicode家族、输入身份 /选区 /合成composition /只读禁用 /重开 /portal /窄屏均检查；严格single-Unicode gate未放宽。Book已知混排Canvas advance231 CSS px在244内容宽内，Sign为236 /240；这只是有限浏览器度量，不是native自动换行或RGBA比较。记录 `.cache/book-sign-typography-public-03/RESULT.json`，页面 /consoleError /HTTPerror /requestfailure为0，4条整页ReadPixels性能warning保留。旧01首败保留，02未执行；补字后的成功不回写旧失败。
+
+该corpus不包含字体二进制或字形艺术，也不代表其他demo /任意Unicode覆盖。37项辅助不加入79正式；私有字体仍不进npm，native Smooth /AA、精确clip下边、全95ASCII宽度、未知字符对、caret与完整DOM原生栅格均未认证。
 
 ## 三个face与有限字符集
 
@@ -14,7 +36,7 @@
 
 每个face的space是有advance的合法空glyph，非空paint分别188 /188 /94。default8完整8×12 cell及原y offset−3保留，Unicode完整16² cell转换为独立原texel轮廓，不从截图 /capture mesh拟合、不trim字格或重采样源图。COLR foreground layer使用当前文字颜色；原白色binaryalpha单元与重新打开字体后的base /实际paint轮廓分别检查，不只检查cmap /advance或外观空壳。
 
-当前字体内部host模型为EM1000、建议20px字 /metadata lineHeight20：glyph construction baseline仍8game /800units，typographic ascent /descent另为900 /−100（9 /1game），Win metrics900 /100；两者不能混作同一baseline。它不是主题对所有控件的line-box指令。native相邻pen仅在有限ledger已观察字上标记来源，其余advance是host候选。space /digit7独立advance、terminal拆分、通用Unicode宽度算法仍未恢复，源像素一致不证明浏览器Smooth /AA一致。
+当前字体内部host模型为EM1000、建议20px字 /metadata lineHeight20：glyph construction baseline仍8game /800units，typographic ascent /descent另为900 /−100（9 /1game），Win metrics900 /100；两者不能混作同一baseline。它不是主题对所有控件的line-box指令。native相邻pen仅在有限ledger已观察字上标记来源，其余advance是host候选。独立space /terminal拆分与通用Unicode宽度算法仍未恢复，源像素一致不证明浏览器Smooth /AA一致。
 
 ### 已有native的Unicode“+7 ”约束
 
@@ -35,10 +57,16 @@ Unicode修正为plus hmtx450units；digit7选400、space保持400，即CSS20的9
 ```sh
 python scripts/prepare-classic-fonts.py
 python scripts/prepare-classic-fonts.py --check-only
+python scripts/prepare-classic-fonts.py --unicode-metrics legacy-host --check-only
 # 也可传用户自己的固定来源archive路径；输出仍只在项目cache。
 python scripts/prepare-classic-fonts.py "C:/XboxGames/Minecraft for Windows/Content/data/resource_packs/vanilla/__brarchive/font.brarchive" --characters "示例"
 python scripts/prepare-classic-fonts.py --text-file "my-ui-text.txt"
+# 复现Book /Sign两个demo的明确字符范围：
+python scripts/prepare-classic-fonts.py "PATH/TO/font.brarchive" --text-file scripts/book-sign-font-characters.txt
+python scripts/prepare-classic-fonts.py "PATH/TO/font.brarchive" --text-file scripts/book-sign-font-characters.txt --check-only
 ```
+
+`--check-only` 使用相同字符范围只在内存验证；`--unicode-metrics legacy-host` 可与相同输入组合复现旧度量政策，但新增字符会改变输出字集，不能据此承诺与不含这些字符的旧字体整文件相同。
 
 输出仅ignored `.cache/local-fonts/classic` 的三WOFF2、font-metrics.json与provenance.json。`--characters` / `--text-file` 追加有限字符，不改默认清单；UTF8文件最多1MiB，unique字符最多4096，CR /LF分隔，TAB /其他控制字符 /非BMP /缺源页或不支持cell显式拒绝。每requested cell必须白色可见墨与binaryalpha，非白 /partial alpha /不支持空cell拒绝，不静默改图或补字。`--check-only` 内存构建验证，不写文件或更新时间。
 

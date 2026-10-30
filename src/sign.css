@@ -2,7 +2,13 @@
    candidates. Complete original textures, no generic Panel or textarea bevel. */
 .mc-sign-surface { --mc-sign-u:2px; position:relative; display:inline-block; flex:none; box-sizing:border-box; isolation:isolate; overflow:visible; vertical-align:middle; }
 .mc-sign-surface__background { position:absolute; z-index:0; max-width:none; max-height:none; user-select:none; image-rendering:pixelated; }
-.mc-sign-surface__input { appearance:none; position:absolute; z-index:1; box-sizing:border-box; min-width:0; min-height:0; margin:0; padding:calc(var(--mc-sign-u) * 2) calc(var(--mc-sign-u) * 3); border:0; border-radius:0; background:transparent; box-shadow:none; resize:none; overflow:hidden; font-family:var(--mc-sign-font,var(--mc-font,monospace)); font-size:var(--mc-sign-font-size,calc(var(--mc-font-size-lg,36px) * var(--mc-sign-scale,2) / 2)); font-weight:400; line-height:1.2; color:var(--mc-sign-text-color,#000); caret-color:var(--mc-sign-caret-color,#00ff00); text-align:center; text-shadow:var(--mc-sign-text-shadow,none); white-space:pre-wrap; overflow-wrap:break-word; }
+.mc-sign-surface__editor { position:absolute; z-index:1; box-sizing:border-box; }
+.mc-sign-surface__centering { position:absolute; inset:calc(var(--mc-sign-u) * 2) calc(var(--mc-sign-u) * 3); }
+.mc-sign-surface__clipper { position:absolute; left:0; top:calc(var(--mc-sign-u) * -3); width:100%; height:calc(100% + var(--mc-sign-u) * 6); overflow:hidden; }
+/* Keep source clip expansion distinct from font paint. Only the declared
+   Classic profile supplies the -1 logical baseline correction; other fonts
+   keep symmetric3/3 padding or an explicit caller override. */
+.mc-sign-surface__input { appearance:none; position:absolute; inset:0; box-sizing:border-box; width:100%; height:100%; min-width:0; min-height:0; margin:0; padding:calc(var(--mc-sign-u) * (3 + var(--mc-sign-baseline-correction,0))) 0 calc(var(--mc-sign-u) * (3 - var(--mc-sign-baseline-correction,0))); border:0; border-radius:0; background:transparent; box-shadow:none; resize:none; overflow:hidden; font-family:var(--mc-sign-font,var(--mc-font,monospace)); font-size:var(--mc-sign-font-size,calc(var(--mc-sign-u) * 20)); font-weight:400; line-height:var(--mc-sign-line-height,calc(var(--mc-sign-u) * 20)); color:var(--mc-sign-text-color,#000); caret-color:var(--mc-sign-caret-color,#00ff00); text-align:center; text-shadow:var(--mc-sign-text-shadow,none); white-space:pre-wrap; overflow-wrap:break-word; }
 .mc-sign-surface__input:focus { outline:none; } /* The observed active input uses its green caret, without a frame. */
 .mc-sign-surface__input:disabled { opacity:.5; cursor:not-allowed; }
 .mc-sign-editor { position:fixed; inset:0; box-sizing:border-box; width:100%; max-width:none; height:100%; max-height:none; margin:0; padding:0; border:0; border-radius:0; background:transparent; color:inherit; overflow:hidden; overscroll-behavior:contain; }

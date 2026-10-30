@@ -11,5 +11,8 @@
   --mc-font-size-lg: 40px;
   --mc-font-size-xl: 60px;
   --mc-title-size: 40px;
+  /* Sign large-role baseline for the declared Classic900/-100 profile only.
+     Custom/fallback metrics can opt out with --mc-sign-baseline-correction:0. */
+  --mc-sign-baseline-correction: -1;
   font-family: var(--mc-font);
 }

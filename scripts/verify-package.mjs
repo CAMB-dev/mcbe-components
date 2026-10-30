@@ -66,6 +66,8 @@ const consumerBookReader = renderToString(element(ui.BookReader, { pages: ['Leaf
 assert(consumerBookReader.includes('Odd leaf') && !consumerBookReader.includes('Leaf one'));
 const consumerBookEditor = renderToString(element(ui.BookEditor, { defaultPages: [], defaultAuthor: 'Consumer' }));
 assert(consumerBookEditor.includes('<textarea') && consumerBookEditor.includes('data-page-index="0"'));
+const consumerBookFontRoles = renderToString(element(ui.BookEditor, { defaultPages: ['Latin', 'Latin 像素'], fontMode: index => index === 0 ? 'latin' : 'unicode' }));
+assert(consumerBookFontRoles.includes('data-book-font-mode="latin"') && consumerBookFontRoles.includes('data-book-font-mode="unicode"'));
 const consumerBookCover = renderToString(element(ui.BookEditor, { defaultPages: ['Draft'], defaultMode: 'signing', defaultTitle: 'Consumer title', defaultAuthor: 'Consumer' }));
 assert(consumerBookCover.includes('value="Consumer title"'));
 assert(renderToString(element(ui.BookPageTurnButton, { direction: 'previous', available: false })).includes('disabled'));
@@ -493,11 +495,12 @@ const consumerSignProps: SignTextSurfaceProps = { variant: 'hanging', wood: 'oak
 const consumerSignModalProps: SignEditorProps = { ...consumerSignProps, defaultOpen: false, exitBehavior: 'commit', onCommit: consumerSignClose, dialogRef: createRef<HTMLDialogElement>() };
 const consumerSignElements = <><SignTextSurface {...consumerSignProps} ref={createRef<HTMLDivElement>()}/><SignEditor {...consumerSignModalProps} ref={createRef<HTMLDivElement>()}/></>;
 import { BookReader, BookEditor, BookPage, BookPageTurnButton } from 'mcbeui';
-import type { BookReaderProps, BookEditorProps, BookDocumentSnapshot, BookLabels } from 'mcbeui';
+import type { BookReaderProps, BookEditorProps, BookDocumentSnapshot, BookLabels, BookFontMode } from 'mcbeui';
 const consumerBookSnapshot = (snapshot: BookDocumentSnapshot) => snapshot.pages.join('') + snapshot.mode;
 const consumerBookLabels: Partial<BookLabels> = { previous: 'Previous spread', next: 'Next spread' };
 const consumerBookProps: BookReaderProps = { pages: ['One', 'Two'], layout: { unitScale: 2 }, labels: consumerBookLabels, onFinish: consumerBookSnapshot };
-const consumerEditProps: BookEditorProps = { defaultPages: [], defaultTitle: 'A book', defaultAuthor: 'Player', onSign: consumerBookSnapshot, textareaRef: () => createRef<HTMLTextAreaElement>() };
+const consumerBookFontMode: BookFontMode = 'auto';
+const consumerEditProps: BookEditorProps = { defaultPages: [], defaultTitle: 'A book', defaultAuthor: 'Player', onSign: consumerBookSnapshot, textareaRef: () => createRef<HTMLTextAreaElement>(), fontMode: index => index % 2 ? 'unicode' : consumerBookFontMode };
 const consumerBookElements = <><BookReader {...consumerBookProps} ref={createRef<HTMLElement>()}/><BookEditor {...consumerEditProps} ref={createRef<HTMLElement>()}/><BookPage side="left" text="Page" ref={createRef<HTMLDivElement>()} textareaRef={createRef<HTMLTextAreaElement>()}/><BookPageTurnButton direction="next" ref={createRef<HTMLButtonElement>()}/></>;
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState, WorkstationTextContext, WorkstationTextRenderer } from 'mcbeui';

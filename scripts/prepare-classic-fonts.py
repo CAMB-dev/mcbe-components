@@ -1,7 +1,8 @@
 """Build caller-owned Classic DOM fonts from pinned original bitmap cells.
 
 python scripts/prepare-classic-fonts.py [FONT_BRARCHIVE] [--characters TEXT]
-    [--text-file UTF8_FILE] [--check-only]
+    [--text-file UTF8_FILE] [--unicode-metrics body-bounds-v1|legacy-host]
+    [--check-only]
 Requires fontTools, Brotli and Pillow (a local .cache/python installation is also
 supported). Only .cache/local-fonts/classic is written. No font is registered.
 These are finite source-derived host fonts for20px; native shader/AA/RGBA and
@@ -28,6 +29,22 @@ MAX_CHARACTERS = 4096
 FAMILIES = {'classic': ('MCBE Classic', 'MCBE-Classic.woff2'),
             'unicode': ('MCBE Classic Unicode', 'MCBE-Classic-Unicode.woff2'),
             'ascii': ('MCBE Classic ASCII', 'MCBE-Classic-ASCII.woff2')}
+UNICODE_METRIC_POLICIES = ('body-bounds-v1', 'legacy-host')
+
+
+def body_metric_policy():
+    return {'version': 'body-bounds-v1',
+            'printableAscii': 'Nonblank U+0021..U+007E: advanceSource=alphaWidth+2; offsetSourceX=1-alphaLeft. Original16cell/mask and Y remain unchanged.',
+            'space': '8source chosen host policy; old seven+space16source constraint is joint, not independent terminal proof.',
+            'nonAscii': 'No alpha trim beyond printableASCII. U+0100..U+FFFF retain full16cell+2source candidate with zeroXoffset, including fullwidth colon18; U+0080..U+00FF retain legacy host metrics.',
+            'default8': 'Unchanged source metrics, offsets and outlines.',
+            'finiteValidation': {'distinctPrintableAscii': 25, 'bodyGlyphInstances': 128,
+                                 'bodyQuadPositionDifferences': 0, 'caretInstances': 2,
+                                 'caretQuadPositionDifferences': 2, 'caretDifferenceGameUnitsEach': 1},
+            'notCertified': ['Unseen character/pair metrics', 'Independent space/terminal advances',
+                             'Native kerning or general Unicode width algorithm', 'Native caret placement',
+                             'Native automatic font routing', 'Shader/AA/RGBA or arbitrary DOM wrapping'],
+            'historicalObservations': 'The unchanged manifest records adjacent quad-origin deltas. They need not equal pen advances when source bearings differ; fullwidthcolon17 is retained only by legacy-host.'}
 
 
 def require(condition, message):
@@ -179,7 +196,8 @@ def decode_pages(entries):
     return images, pins
 
 
-def glyph(character, kind, images, manifest):
+def glyph(character, kind, images, manifest, unicode_metrics='body-bounds-v1'):
+    require(unicode_metrics in UNICODE_METRIC_POLICIES, 'Unsupported Unicode metric policy.')
     code = ord(character)
     if kind == 'default8':
         name, width, height, unit, offset_y = 'default8.png', 8, 12, 100, -300
@@ -201,10 +219,24 @@ def glyph(character, kind, images, manifest):
                 ink.append((column, row))
         mask.append(line)
     require(ink or character == ' ', f'No supported visible source glyph: U+{code:04X} in {name}')
+    left = min((point[0] for point in ink), default=0)
     right = max((point[0] + 1 for point in ink), default=0)
+    offset_x = 0
     observed = manifest['observedAdvances'][kind].get(character)
     host_override = manifest.get('hostAdvanceOverrides', {}).get(kind, {}).get(character)
-    if host_override:
+    if kind == 'unicode' and unicode_metrics == 'body-bounds-v1' and 33 <= code <= 126:
+        advance = right - left + 2
+        offset_x = (1 - left) * unit
+        provenance = {'kind': 'source-body-bounds-candidate', 'policy': 'body-bounds-v1',
+                      'method': 'Original alphaWidth+2source advance and1-alphaLeft sourceXoffset; whole16cell preserved.',
+                      'offsetSourceX': 1 - left,
+                      'note': 'Finite25ASCII/128body-instance geometry validation; unobserved pairs, terminals, caret and native engine width algorithm are not certified.'}
+    elif kind == 'unicode' and unicode_metrics == 'body-bounds-v1' and code >= 256:
+        advance = width + 2
+        provenance = {'kind': 'source-cell-candidate', 'policy': 'body-bounds-v1',
+                      'method': 'Full source16cell+2; no alpha trimming or Xoffset for this host branch.',
+                      'note': 'Finite Han/fullwidthcolon geometry is compatible; arbitrary nonASCII scripts and native engine width classes are not recovered.'}
+    elif host_override:
         advance = host_override['advanceSource']
         provenance = {'kind': 'host-candidate', **host_override,
                       'method': 'Chosen split of a measured combined advance; individual widths unproved'}
@@ -222,7 +254,7 @@ def glyph(character, kind, images, manifest):
                       'note': 'Unmeasured host advance; source pixels do not prove native spacing, terminals or arbitrary string layout.'}
     bounds = [min(p[0] for p in ink), min(p[1] for p in ink), max(p[0] for p in ink) + 1, max(p[1] for p in ink) + 1] if ink else None
     return {'character': character, 'codepoint': f'U+{code:04X}', 'sourceKind': kind, 'sourceEntry': name,
-            'sourceCell': [x, y, width, height], 'texelUnits': unit, 'offsetUnits': [0, offset_y],
+            'sourceCell': [x, y, width, height], 'texelUnits': unit, 'offsetUnits': [offset_x, offset_y],
             'advanceSource': advance, 'advanceUnits': int(advance * unit), 'advanceCss20': advance * unit / 50,
             'advanceProvenance': provenance, 'inkBounds': bounds, 'inkPixels': len(ink), 'mask': mask}
 
@@ -237,7 +269,8 @@ def make_font(family, records):
     names = ['.notdef'] + [f'u{ord(record["character"]):04X}' for record in records]
     for name, record in zip(names[1:], records):
         pen, xs = TTGlyphPen(None), []
-        unit, offset_y = record['texelUnits'], record['offsetUnits'][1]
+        unit = record['texelUnits']
+        offset_x, offset_y = record['offsetUnits']
         for y, line in enumerate(record['mask']):
             x = 0
             while x < len(line):
@@ -247,7 +280,7 @@ def make_font(family, records):
                 end = x + 1
                 while end < len(line) and line[end]:
                     end += 1
-                left, right = x * unit, end * unit
+                left, right = x * unit + offset_x, end * unit + offset_x
                 top = 800 - offset_y - y * unit
                 bottom = top - unit
                 pen.moveTo((left, bottom)); pen.lineTo((left, top)); pen.lineTo((right, top)); pen.lineTo((right, bottom)); pen.closePath()
@@ -290,7 +323,8 @@ def make_font(family, records):
                 polygons.append(list(coordinates[start:end + 1])); start = end + 1
             for y, line in enumerate(record['mask']):
                 for x, source in enumerate(line):
-                    px = (x + .5) * record['texelUnits']; py = 800 - record['offsetUnits'][1] - (y + .5) * record['texelUnits']
+                    px = (x + .5) * record['texelUnits'] + record['offsetUnits'][0]
+                    py = 800 - record['offsetUnits'][1] - (y + .5) * record['texelUnits']
                     winding = 0
                     for polygon in polygons:
                         for (x1, y1), (x2, y2) in zip(polygon, polygon[1:] + polygon[:1]):
@@ -305,6 +339,8 @@ def make_font(family, records):
 
 
 def prepare(args):
+    unicode_metrics = args.unicode_metrics
+    require(unicode_metrics in UNICODE_METRIC_POLICIES, 'Unsupported Unicode metric policy.')
     fonts_root, destination = output_directory()
     archive_input = source_input_path(args.archive, destination, 'Original archive')
     text_files = [source_input_path(path, destination, 'Text input') for path in args.text_file]
@@ -332,8 +368,8 @@ def prepare(args):
     require(ascii_metadata == {'ascii_character_height': 12, 'ascii_character_y_offset': -3, 'ascii_extended': True}, 'Unexpected original default8 metadata.')
     require(json.loads(entries['font_metadata.json']).get('version') == 1, 'Unexpected original font metadata.')
     images, page_pins = decode_pages(entries)
-    ascii_records = [glyph(chr(code), 'default8', images, manifest) for code in range(32, 127)]
-    unicode_records = [glyph(c, 'unicode', images, manifest) for c in wanted]
+    ascii_records = [glyph(chr(code), 'default8', images, manifest, unicode_metrics) for code in range(32, 127)]
+    unicode_records = [glyph(c, 'unicode', images, manifest, unicode_metrics) for c in wanted]
     records = {'ascii': ascii_records, 'unicode': unicode_records,
                'classic': ascii_records + [record for record in unicode_records if ord(record['character']) >= 127]}
     outputs, family_metadata = {}, {}
@@ -352,6 +388,9 @@ def prepare(args):
                     'shadowPolicy': 'Foreground only. Supply shared hard CSS shadow roles; no fixed shadow is baked into the font.',
                     'fallbackBoundary': 'Only listed characters are covered. Caller text additions require source cells and explicit advance provenance. Browser/system fallback is not native coverage.',
                     'notCertified': ['Space/digit7 independent advances or terminal split', 'General Unicode/CJK/Latin width algorithm', 'GUI5 bilinear+BitmapSmooth nonlinear alpha/RGBA', 'Browser/DPR/IME/selection/line-box layout', 'Arbitrary text fallback or native automatic whole-run font binding']}
+    if unicode_metrics == 'body-bounds-v1':
+        font_metrics['schemaVersion'] = 2
+        font_metrics['unicodeMetrics'] = body_metric_policy()
     outputs['font-metrics.json'] = json_bytes(font_metrics)
     provenance = {'schemaVersion': 1, 'status': 'Source-only private generated font resources; no automatic registration',
                   'distribution': 'Original-derived artwork is caller-owned; output stays ignored, outside Git/npm/public assets. Enabling a local site font may embed these private resources.',
@@ -367,6 +406,10 @@ def prepare(args):
                                  'model': 'Uniform1+8+1 host normal-line model; source glyph coordinates/advances are independent of typographic ascender. Native unique line selection and every control remain unproved.'},
                   'preservedExistingFonts': {'count': len(original_fonts), 'excludedOutputDirectory': '.cache/local-fonts/classic', 'allBytesUnchanged': True, 'filesBeforeAndAfter': original_fonts},
                   'outputs': [{'file': name, 'bytes': len(raw), 'sha256': sha(raw)} for name, raw in sorted(outputs.items())]}
+    if unicode_metrics == 'body-bounds-v1':
+        provenance['schemaVersion'] = 2
+        provenance['unicodeMetrics'] = body_metric_policy()
+        provenance['pixelValidation'] += ' Source-cell center samples include the declared horizontal outline offset for both base and COLR paint.'
     outputs['provenance.json'] = json_bytes(provenance)
     require(old_fonts(fonts_root, destination) == original_fonts, 'Previous font files changed during validation; no output written.')
     require(sha(read_file(archive_path, MAX_FILE_BYTES)[1]) == manifest['sourceArchiveSha256'], 'Original archive changed during preparation; no output written.')
@@ -389,6 +432,8 @@ def main():
     parser.add_argument('archive', nargs='?', default=str(DEFAULT_ARCHIVE), help='Caller-owned original font.brarchive (read-only).')
     parser.add_argument('--characters', action='append', default=[], help='Append characters to the finite default set; repeatable, no normalization.')
     parser.add_argument('--text-file', action='append', default=[], help='Append UTF8 text-file characters; CR/LF are separators, TAB/other controls are rejected.')
+    parser.add_argument('--unicode-metrics', choices=UNICODE_METRIC_POLICIES, default='body-bounds-v1',
+                        help='Versioned Unicode host metrics (default: body-bounds-v1); legacy-host reproduces the previous producer. Neither recovers all native engine metrics.')
     parser.add_argument('--check-only', action='store_true', help='Build and validate all font bytes in memory without writing files or changing mtimes.')
     args = parser.parse_args()
     try:
