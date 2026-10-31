@@ -1,6 +1,6 @@
 import { forwardRef, useRef } from 'react';
 import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, KeyboardEvent, ReactNode, Ref, SyntheticEvent } from 'react';
-import { classicModalTab, deferClassicEvent, useClassicLayoutEffect, useClassicModal, useClassicNodeRef } from './classic-screen-lifecycle';
+import { classicModalTab, deferClassicEvent, deferClassicRequest, useClassicLayoutEffect, useClassicModal, useClassicNodeRef } from './classic-screen-lifecycle';
 import { immersiveReaderAssets } from './ugc-reader-assets';
 
 /** Independent source controller bindings; none is inferred from another flag. */
@@ -91,7 +91,7 @@ function eventBlocked(event: SyntheticEvent<HTMLElement>) {
 }
 function request(detail: ImmersiveReaderActionDetail, valid: () => boolean, handler: ImmersiveReaderActionHandler | undefined) {
   if (!handler || eventBlocked(detail.event)) return;
-  deferClassicEvent(detail.event, detail.control, event => {
+  deferClassicRequest(detail.event, detail.control, event => {
     if (!eventBlocked(event)) handler({ ...detail, event });
   }, () => !detail.control.closest('[hidden],[inert]') && valid());
 }

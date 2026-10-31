@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "SOURCE_WEB_ACTUAL_PACKAGE_AND_PUBLIC_VERIFIED_NATIVE_UNVERIFIED",
+  "status": "SHARED_REQUEST_TASK_FORMAL132_ACTUAL_PACKAGE_INSTALLED4_PUBLIC30_TWO_PHASES_VERIFIED_NATIVE_UNVERIFIED",
   "source": {
     "release": "v1.26.60.5-full",
     "repository": "https://github.com/Mojang/bedrock-samples",
@@ -379,26 +379,185 @@
   },
   "sharedLifecycle": {
     "helperPath": "src/classic-screen-lifecycle.ts",
-    "helperSHA256": "21b6e7a80be4768438307f2acf67bbcd4d4d06871571983556af7ec1b61caf55",
+    "helperSHA256": "26314ad30cbe0641624db6b379c386178f17095dee7e926a8c9e4afd7b82767d",
     "refAdapter": "Returns void to React18/19; caller callback cleanup stored and executed internally; native object/callback refs remain distinct.",
-    "dispatch": "Deferred after ancestor/native preventDefault; stable owner currentTarget and original event methods.",
     "modal": "Explicit Web opt-in, default false; inert/scroll-lock/top owner/Tab/focus restoration adaptation, not native screen flags.",
-    "cpuEvidence": {
-      "path": ".cache/classic-screen-lifecycle-review-01/rev03/FINAL.json",
-      "sha256": "2064a1249faeb69813cd832847653640c22f8ab7aea8d7a3d82b99c03ab4fd55",
-      "scope": "16 finite CPU model cases plus SSR, not actual browser/mount/default Tab qualification"
-    },
-    "history": "Original three lifecycle counterexamples and subsequent combined-boundary failure remain in older cache reports; corrected model success does not erase their identity.",
-    "mountedBrowser": {
-      "executions": 16,
-      "phase": {
-        "path": ".cache/ugc-reader-tests-01/run-01/RESULT.json",
-        "sha256": "7f3b3c302d24c70c3ed24863af620e5539a21ded252af46288ad27fe99ed041f"
-      },
-      "scope": "8 lifecycle cases on desktop/mobile, only shared helper used by these two new families"
-    }
+    "dispatch": "Private deferClassicRequest schedules an ownerDocument.defaultView setTimeout(0), then runs the existing guarded snapshot helper after native propagation. Portfolio uses aliases of these same private functions.",
+    "earlyKeyboardBoundary": "Default-sensitive modal Tab and UGC grid Arrow/Home/End retain deferClassicEvent microtasks. No late-document keyboard-veto guarantee is inferred for those early focus/default operations.",
+    "gestureScope": "Native onClick remains synchronous and runs before deferred library request callbacks, so the host can use gesture-sensitive APIs there. Deferred callbacks provide no SDK transient-user-activation guarantee.",
+    "currentQualification": "sharedRequestTimingRevision",
+    "historicalCpuAndMountedEvidenceScope": "Original cpuEvidence/mountedBrowser fields retain their older source identity under sharedLifecycleHistory14d."
   },
   "qualification": {
+    "status": "QUALIFIED_SHARED_REQUEST_TASK_WEB_ONLY_NATIVE_UNVERIFIED",
+    "details": "sharedRequestTimingRevision",
+    "formalBrowserExecuted": true,
+    "actualPackagePassed": true,
+    "installedFourCombinationsPassed": true,
+    "publicBrowserExecuted": true,
+    "nativeWholeGUIParity": false,
+    "coverageChangedByThisMetadata": false,
+    "formal": {
+      "result": {
+        "path": ".cache/classic-dispatch-tests-01/run-01/RESULT.json",
+        "sha256": "377bccaf2ed9b282d963b6170860506f72330330c2e6f93f20cd5fa4d6722f3f"
+      },
+      "qualification": {
+        "path": ".cache/classic-dispatch-qualified-01/QUALIFICATION.json",
+        "sha256": "ade2d934f9daaf943e1fbb49a63aa5c6c468bb3e4d112d9919ed2011c725c21d"
+      },
+      "report": {
+        "path": ".cache/classic-dispatch-tests-01/run-01/report.json",
+        "sha256": "8e8bb259065a12036b7262b742b1e3770897bf83b94c6189fc84aa1b40ecc2b6"
+      },
+      "pins": {
+        "path": ".cache/classic-dispatch-tests-01/run-01/PINS-BEFORE.json",
+        "sha256": "ce95b6df2680b0b05027b0f98986f4c23c38ba4fdc49bf9632989a4977fa5214"
+      },
+      "singleBatch": true,
+      "passed": 132,
+      "skipped": 0,
+      "flaky": 0,
+      "drift": 0,
+      "behavior": 114,
+      "pixel": 18,
+      "newTrustedExecutions": 8,
+      "existingExecutions": 124,
+      "navigationAddedToCount": 0
+    },
+    "materialPlanes": {
+      "planes": 138,
+      "pixels": 3969420,
+      "RGBApixelDifferences": 0,
+      "scope": "Complete finite source/Web material planes; unchanged rendering/assets. Not native font or whole-GUI parity."
+    },
+    "actualPackage": {
+      "result": {
+        "path": ".cache/classic-dispatch-package-01/RESULT.json",
+        "sha256": "e7ff771c3d490ad45f9107c786902b831c38574a96d75681fd2a1ac268f4ae5d"
+      },
+      "tar": {
+        "path": ".cache/classic-dispatch-package-01/classic-dispatch-verified.tgz",
+        "sha256": "0907bc04cb12f65274af6d7fd9a9fe34f5e8f7e22db79ac1fbdb39cb25dc2b88",
+        "bytes": 5537450
+      },
+      "indexSHA256": "f38bb1f4b6481fac834de3b3cc56c3989d3ccfd9728ee61be09fbcadf7b792ff",
+      "React": [
+        "18.3.1",
+        "19.3.1"
+      ],
+      "runtimeValues": 200,
+      "components": 183,
+      "scope": "Fresh actual200 runtime/183 components package after fixed shared request dispatch; all existing runtime/types/SSR480sourceURL/font/license guards executed. Installed browser remains separately root-qualified."
+    },
+    "installedBrowser": {
+      "result": {
+        "path": ".cache/classic-dispatch-installed-02/FINAL.json",
+        "sha256": "f93625d86c6c085da1e5dd0b6d8af2056761169c0fa78c3840030699edbbf9db"
+      },
+      "inputs": {
+        "path": ".cache/classic-dispatch-installed-browser-02/INPUTS.json",
+        "sha256": "7326d89fd910dc7cfdd14a342b198acf169c66b0a3bde5622282ee1b2d9de9d2"
+      },
+      "actualCombinations": [
+        "React18/dev",
+        "React18/production",
+        "React19/dev",
+        "React19/production"
+      ],
+      "passed": 4,
+      "drift": 0
+    },
+    "public": {
+      "result": {
+        "path": ".cache/classic-dispatch-public-02/FINAL.json",
+        "sha256": "5ccd6eac8b0d669f14a15b2f945960e26677e7abca248d7c68068597ba1af7ea"
+      },
+      "phases": [
+        {
+          "path": ".cache/classic-dispatch-public-01/portfolio/FINAL.json",
+          "sha256": "fae90e223ae4f08c968bfc6ba385ebc10519077ee26143bef0671007ce3217bd",
+          "checks": 16,
+          "pins": {
+            "path": ".cache/classic-dispatch-public-01/portfolio/PINS-BEFORE.json",
+            "sha256": "68347dfcd83f327ea520d7eea1d3b5582621fb289cc0902dd9d05f21a54c672d"
+          }
+        },
+        {
+          "path": ".cache/classic-dispatch-public-02/ugc-reader/FINAL.json",
+          "sha256": "91399a65e5b154650d97d5bfe79ade44d776d304c268f91991d32e6e1acd04ce",
+          "checks": 14,
+          "pins": {
+            "path": ".cache/classic-dispatch-public-02/ugc-reader/PINS.json",
+            "sha256": "821a42b5bd94c58739c2df2488bc029a6bb577a8914ad17260398eac2b16f174"
+          }
+        }
+      ],
+      "distinctChecks": 30,
+      "single30GreenRun": false,
+      "identicalCommonPins": 1092,
+      "trustedDocumentVetoes": 3,
+      "trustedPositiveControls": 3,
+      "scope": "Public host behavior/status and exact original material transport, not callback entry/exact count, native whole GUI, GPU fonts, SDK or OS IME certification."
+    },
+    "finalDocOnlyTarProductIdentityPostApplyRequired": true
+  },
+  "unknowns": [
+    "native WebView renderer/property-bag schema/service SDK/auth/speech",
+    "native source %c/%cm and title/hidden-child measurement",
+    "GUI scale/safezone/input/pause flags",
+    "native default fonts/AA/shadow/linebox",
+    "book atlas and animation/reset/event clocks",
+    "engine modal focus/input bridge/screen stack",
+    "native entire UI framebuffer"
+  ],
+  "familyTypeCount": 10,
+  "screenSource": {
+    "template": "common.base_screen",
+    "screenContent": "im_reader.immersive_reader_screen_content",
+    "backgroundTemplate": "common.screen_background",
+    "globalCancelMapping": {
+      "from": "button.menu_cancel",
+      "to": "button.menu_exit"
+    },
+    "baseDefaults": {
+      "useLoadingBars": true,
+      "isFullScreenLayout": false,
+      "safezoneScreenMatrixLayer": 2
+    },
+    "entryExitAnimations": {
+      "easing": "out_cubic",
+      "pushSecondsFromFixedGlobals": 0.4,
+      "popSecondsFromFixedGlobals": 0.4,
+      "customExitPopOffset": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          "-100%"
+        ]
+      ],
+      "customEntrancePushOffset": [
+        [
+          0,
+          "-100%"
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "nativeClockOrScreenCloseNotRecovered": true
+    },
+    "runtimeFlagsNotInferred": [
+      "GUI scale",
+      "actual safezone",
+      "pause/render-game-behind/steal-input/modal provider"
+    ]
+  },
+  "qualificationHistory14d": {
     "canonicalSource": {
       "path": ".cache/immersive-reader-source-01/FINAL.json",
       "sha256": "0598864c94f2f3fade67b6c32439c49aa9313df3798b519f240b1deea8ec49eb",
@@ -571,59 +730,217 @@
       }
     }
   },
-  "unknowns": [
-    "native WebView renderer/property-bag schema/service SDK/auth/speech",
-    "native source %c/%cm and title/hidden-child measurement",
-    "GUI scale/safezone/input/pause flags",
-    "native default fonts/AA/shadow/linebox",
-    "book atlas and animation/reset/event clocks",
-    "engine modal focus/input bridge/screen stack",
-    "native entire UI framebuffer"
-  ],
-  "familyTypeCount": 10,
-  "screenSource": {
-    "template": "common.base_screen",
-    "screenContent": "im_reader.immersive_reader_screen_content",
-    "backgroundTemplate": "common.screen_background",
-    "globalCancelMapping": {
-      "from": "button.menu_cancel",
-      "to": "button.menu_exit"
+  "statusHistory14d": "SOURCE_WEB_ACTUAL_PACKAGE_AND_PUBLIC_VERIFIED_NATIVE_UNVERIFIED",
+  "sharedRequestTimingRevision": {
+    "status": "QUALIFIED_SHARED_REQUEST_TASK_WEB_ONLY_NATIVE_UNVERIFIED",
+    "baselineCommit": "14d90242b82066f487e18cbd2562e2c6c6001beb",
+    "sourcePins": {
+      "src/classic-screen-lifecycle.ts": "26314ad30cbe0641624db6b379c386178f17095dee7e926a8c9e4afd7b82767d",
+      "src/portfolio-event.ts": "d6fd548873af4b63c50d73a00ba48ad25b0f6ec5eecbeb58422ab87504522d2b",
+      "src/ugc-viewer.tsx": "1d76836befef94e9f875b321765c6996e000f88f970eb53a6590c985df3fe91b",
+      "src/immersive-reader.tsx": "f2c709ba0436cbb711307aa7ffca8db3df432edf7ea04d519c2e80e38c1039c7",
+      "src/portfolio.tsx": "e5b9c0e0e93d95ab41557b042492832d5f6eb09f4becf6a0ea28a4d19586babd"
     },
-    "baseDefaults": {
-      "useLoadingBars": true,
-      "isFullScreenLayout": false,
-      "safezoneScreenMatrixLayer": 2
+    "semantics": {
+      "requestBoundary": "Private deferClassicRequest schedules an ownerDocument.defaultView setTimeout(0), then runs the existing guarded snapshot helper after native propagation. Portfolio uses aliases of these same private functions.",
+      "earlyKeyboardBoundary": "Default-sensitive modal Tab and UGC grid Arrow/Home/End retain deferClassicEvent microtasks. No late-document keyboard-veto guarantee is inferred for those early focus/default operations.",
+      "settlement": "UGC query and Portfolio caption schedule request before same-owner draft settlement; current formal, installed and public controlled edit contracts passed.",
+      "portfolioReaderRelay": "Reader activation is guarded and relayed directly inside its already deferred request; it does not add a second request task.",
+      "nativeHandlers": "Native onClick remains synchronous and runs before deferred library request callbacks, so the host can use gesture-sensitive APIs there. Deferred callbacks provide no SDK transient-user-activation guarantee.",
+      "validityScope": "Guards cover the implemented React state, identity, active/connected node, readOnly/disabled/visibility/capacity conditions. Arbitrary direct DOM mutation and native property changes are unsupported and are not promised to cancel pending requests.",
+      "limits": "No change to public API, rendering, styles, assets, font rasterization, native provider/controller services, or full native GUI qualification."
     },
-    "entryExitAnimations": {
-      "easing": "out_cubic",
-      "pushSecondsFromFixedGlobals": 0.4,
-      "popSecondsFromFixedGlobals": 0.4,
-      "customExitPopOffset": [
-        [
-          0,
-          0
-        ],
-        [
-          0,
-          "-100%"
-        ]
+    "countsUnchanged": {
+      "components": 183,
+      "runtimeValues": 200,
+      "coverageRows": 206
+    },
+    "formal": {
+      "result": {
+        "path": ".cache/classic-dispatch-tests-01/run-01/RESULT.json",
+        "sha256": "377bccaf2ed9b282d963b6170860506f72330330c2e6f93f20cd5fa4d6722f3f"
+      },
+      "qualification": {
+        "path": ".cache/classic-dispatch-qualified-01/QUALIFICATION.json",
+        "sha256": "ade2d934f9daaf943e1fbb49a63aa5c6c468bb3e4d112d9919ed2011c725c21d"
+      },
+      "report": {
+        "path": ".cache/classic-dispatch-tests-01/run-01/report.json",
+        "sha256": "8e8bb259065a12036b7262b742b1e3770897bf83b94c6189fc84aa1b40ecc2b6"
+      },
+      "pins": {
+        "path": ".cache/classic-dispatch-tests-01/run-01/PINS-BEFORE.json",
+        "sha256": "ce95b6df2680b0b05027b0f98986f4c23c38ba4fdc49bf9632989a4977fa5214"
+      },
+      "singleBatch": true,
+      "passed": 132,
+      "skipped": 0,
+      "flaky": 0,
+      "drift": 0,
+      "behavior": 114,
+      "pixel": 18,
+      "newTrustedExecutions": 8,
+      "existingExecutions": 124,
+      "navigationAddedToCount": 0
+    },
+    "materials": {
+      "planes": 138,
+      "pixels": 3969420,
+      "RGBApixelDifferences": 0,
+      "scope": "Complete finite source/Web material planes; unchanged rendering/assets. Not native font or whole-GUI parity."
+    },
+    "actualPackage": {
+      "result": {
+        "path": ".cache/classic-dispatch-package-01/RESULT.json",
+        "sha256": "e7ff771c3d490ad45f9107c786902b831c38574a96d75681fd2a1ac268f4ae5d"
+      },
+      "tar": {
+        "path": ".cache/classic-dispatch-package-01/classic-dispatch-verified.tgz",
+        "sha256": "0907bc04cb12f65274af6d7fd9a9fe34f5e8f7e22db79ac1fbdb39cb25dc2b88",
+        "bytes": 5537450
+      },
+      "indexSHA256": "f38bb1f4b6481fac834de3b3cc56c3989d3ccfd9728ee61be09fbcadf7b792ff",
+      "React": [
+        "18.3.1",
+        "19.3.1"
       ],
-      "customEntrancePushOffset": [
-        [
-          0,
-          "-100%"
-        ],
-        [
-          0,
-          0
-        ]
-      ],
-      "nativeClockOrScreenCloseNotRecovered": true
+      "runtimeValues": 200,
+      "components": 183,
+      "scope": "Fresh actual200 runtime/183 components package after fixed shared request dispatch; all existing runtime/types/SSR480sourceURL/font/license guards executed. Installed browser remains separately root-qualified."
     },
-    "runtimeFlagsNotInferred": [
-      "GUI scale",
-      "actual safezone",
-      "pause/render-game-behind/steal-input/modal provider"
-    ]
+    "installed": {
+      "result": {
+        "path": ".cache/classic-dispatch-installed-02/FINAL.json",
+        "sha256": "f93625d86c6c085da1e5dd0b6d8af2056761169c0fa78c3840030699edbbf9db"
+      },
+      "inputs": {
+        "path": ".cache/classic-dispatch-installed-browser-02/INPUTS.json",
+        "sha256": "7326d89fd910dc7cfdd14a342b198acf169c66b0a3bde5622282ee1b2d9de9d2"
+      },
+      "actualCombinations": [
+        "React18/dev",
+        "React18/production",
+        "React19/dev",
+        "React19/production"
+      ],
+      "passed": 4,
+      "drift": 0
+    },
+    "public": {
+      "result": {
+        "path": ".cache/classic-dispatch-public-02/FINAL.json",
+        "sha256": "5ccd6eac8b0d669f14a15b2f945960e26677e7abca248d7c68068597ba1af7ea"
+      },
+      "phases": [
+        {
+          "path": ".cache/classic-dispatch-public-01/portfolio/FINAL.json",
+          "sha256": "fae90e223ae4f08c968bfc6ba385ebc10519077ee26143bef0671007ce3217bd",
+          "checks": 16,
+          "pins": {
+            "path": ".cache/classic-dispatch-public-01/portfolio/PINS-BEFORE.json",
+            "sha256": "68347dfcd83f327ea520d7eea1d3b5582621fb289cc0902dd9d05f21a54c672d"
+          }
+        },
+        {
+          "path": ".cache/classic-dispatch-public-02/ugc-reader/FINAL.json",
+          "sha256": "91399a65e5b154650d97d5bfe79ade44d776d304c268f91991d32e6e1acd04ce",
+          "checks": 14,
+          "pins": {
+            "path": ".cache/classic-dispatch-public-02/ugc-reader/PINS.json",
+            "sha256": "821a42b5bd94c58739c2df2488bc029a6bb577a8914ad17260398eac2b16f174"
+          }
+        }
+      ],
+      "distinctChecks": 30,
+      "single30GreenRun": false,
+      "identicalCommonPins": 1092,
+      "trustedDocumentVetoes": 3,
+      "trustedPositiveControls": 3,
+      "scope": "Public host behavior/status and exact original material transport, not callback entry/exact count, native whole GUI, GPU fonts, SDK or OS IME certification."
+    },
+    "resolvedBacklog": {
+      "families": [
+        "UGC",
+        "ImmersiveReader"
+      ],
+      "kind": "late_document_native_veto_timing",
+      "status": "RESOLVED_FOR_CURRENT_FROZEN_REQUEST_CHANNELS_AND_ACTUAL_PACKAGE",
+      "limit": "Not a promise for early default-sensitive keyboard operations, arbitrary direct DOM/native-property mutation, deferred SDK user activation, or native GUI parity."
+    },
+    "history": {
+      "priorQualifications": "Original14d and earlier formal/material/package/public records retained below as historical source revisions; no old failure erased or retrospectively passed.",
+      "oldActualPackageDefect": {
+        "path": ".cache/classic-dispatch-baseline-01/RESULT.json",
+        "sha256": "ff1410f72fde21a48cdc485b5766f8902ebf73487b3a407a18e9b8c91a199fe8",
+        "status": "VERIFIED_OLD_ACTUAL_PACKAGE_TRUSTED_DOCUMENT_VETO_DEFECT",
+        "oldIndexSha256": "e0f11c68fd56ea2844413bed80209d4854fd8cb46938630b4938a8ca28464c4f",
+        "channels": [
+          "ugc-item",
+          "ugc-close",
+          "ugc-card",
+          "reader-activate",
+          "reader-retry"
+        ],
+        "trustedLateDocumentLeaks": 5,
+        "scriptVetoControlsWithRequests": 0,
+        "positiveControlsEachExactlyOnce": 5,
+        "errors": 0,
+        "interpretation": "Actual immutable previously qualified package failure; script clicks are diagnostic controls and do not replace trusted input."
+      },
+      "installedObserverFailure": {
+        "result": {
+          "path": ".cache/classic-dispatch-installed-01/FINAL.json",
+          "sha256": "cfb288f744f93a3e182600990eee83a65bdb70eec2eff134b642d20efaa8812e"
+        },
+        "failed": 4,
+        "cause": "Observer omitted serialized event method results; assertions/contracts/product unchanged. Corrected observer then executed all four actual combinations. This is separate from the old e0f trusted native-input product bug."
+      },
+      "publicSelectorFailure": {
+        "result": {
+          "path": ".cache/classic-dispatch-public-01/FINAL.json",
+          "sha256": "16cdd2a2dc3f52142d25babe52516e452c83c1ec9df2c7afbd12701f07859e93"
+        },
+        "passed": 29,
+        "failed": 1,
+        "cause": "Reader status locator matched both loading div and host receipt paragraph; Reader trusted step had not executed. Only two host receipt selectors narrowed to p[role=status][aria-live=polite]. All14 UGC/Reader checks rerun; unchanged Portfolio16 retained.",
+        "correction": {
+          "path": ".cache/classic-dispatch-public-02/PRECONDITIONS.json",
+          "sha256": "d2667a4f60cae2953eb4559da792297bfee0243f1e91a39bd877666465ebaf91"
+        }
+      }
+    },
+    "sourceCpuOnly": {
+      "producer": {
+        "path": ".cache/classic-dispatch-implementation-01/FINAL.json",
+        "sha256": "bf347dc0331fb8909bcfe37b81999c909e4e5a367e886e91f0b24d7fac078af2"
+      },
+      "independentReview": {
+        "path": ".cache/classic-dispatch-implementation-review-01/FINAL.json",
+        "sha256": "8576b3694654772c8bcb472dcd6c39dcf9e9a09af74064872444c2b12c317f99"
+      }
+    },
+    "finalDocOnlyTarProductIdentityPostApplyRequired": true,
+    "nativeWholeGUIParity": false
+  },
+  "sharedLifecycleHistory14d": {
+    "helperPath": "src/classic-screen-lifecycle.ts",
+    "helperSHA256": "21b6e7a80be4768438307f2acf67bbcd4d4d06871571983556af7ec1b61caf55",
+    "refAdapter": "Returns void to React18/19; caller callback cleanup stored and executed internally; native object/callback refs remain distinct.",
+    "dispatch": "Deferred after ancestor/native preventDefault; stable owner currentTarget and original event methods.",
+    "modal": "Explicit Web opt-in, default false; inert/scroll-lock/top owner/Tab/focus restoration adaptation, not native screen flags.",
+    "cpuEvidence": {
+      "path": ".cache/classic-screen-lifecycle-review-01/rev03/FINAL.json",
+      "sha256": "2064a1249faeb69813cd832847653640c22f8ab7aea8d7a3d82b99c03ab4fd55",
+      "scope": "16 finite CPU model cases plus SSR, not actual browser/mount/default Tab qualification"
+    },
+    "history": "Original three lifecycle counterexamples and subsequent combined-boundary failure remain in older cache reports; corrected model success does not erase their identity.",
+    "mountedBrowser": {
+      "executions": 16,
+      "phase": {
+        "path": ".cache/ugc-reader-tests-01/run-01/RESULT.json",
+        "sha256": "7f3b3c302d24c70c3ed24863af620e5539a21ded252af46288ad27fe99ed041f"
+      },
+      "scope": "8 lifecycle cases on desktop/mobile, only shared helper used by these two new families"
+    }
   }
 }

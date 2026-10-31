@@ -134,7 +134,8 @@ export function classicModalTab(event: KeyboardEvent<HTMLElement>, boundary: HTM
   else if (!event.shiftKey && (current === nodes.at(-1) || !nodes.includes(current as HTMLElement))) { event.preventDefault(); nodes[0]!.focus(); }
 }
 
-/** Dispatch after ancestor vetoes, retaining an honest, stable currentTarget. */
+/** Early/default-sensitive checkpoint for keyboard navigation and focus.
+ * Retains a stable currentTarget; later native listeners may run afterward. */
 export function deferClassicEvent<T extends HTMLElement, E extends SyntheticEvent<T>>(
   event: E, owner: T, run: (snapshot: E) => void, active: () => boolean = () => true,
 ) {
@@ -151,4 +152,21 @@ export function deferClassicEvent<T extends HTMLElement, E extends SyntheticEven
     };
     run(snapshot);
   });
+}
+
+/** Capture the owner window before React clears currentTarget. No task is
+ * scheduled by importing this module or rendering a screen. */
+export function scheduleClassicTask(owner: HTMLElement, run: () => void): void {
+  const view = owner.ownerDocument.defaultView;
+  if (view) view.setTimeout(run, 0);
+  else setTimeout(run, 0);
+}
+
+/** Host requests wait until native propagation ends, then use the unchanged
+ * checkpoint guard and event snapshot. Trusted clicks may checkpoint earlier. */
+export function deferClassicRequest<T extends HTMLElement, E extends SyntheticEvent<T>>(
+  event: E, owner: T, run: (snapshot: E) => void, active: () => boolean = () => true,
+): void {
+  event.persist();
+  scheduleClassicTask(owner, () => deferClassicEvent(event, owner, run, active));
 }

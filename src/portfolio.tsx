@@ -266,7 +266,8 @@ export const Portfolio = forwardRef<HTMLElement, PortfolioProps>(function Portfo
           <ImmersiveReaderButton {...own(buttonProps, 'reader')} label={labels.reader} size={geometry.readerButtonSize} scale={scale}
             className={`mc-portfolio__reader ${own(buttonProps, 'reader')?.className ?? ''}`} data-portfolio-action="reader" hidden={!state.exportVisible || own(buttonProps, 'reader')?.hidden}
             disabled={disabled || own(buttonProps, 'reader')?.disabled} readOnly={readOnly}
-            onActivate={detail => request('reader', detail.event)} />
+            onActivate={detail => { if (!detail.event.defaultPrevented && !detail.event.nativeEvent.defaultPrevented && root.current?.contains(detail.control) && visible('reader') && !blockedControl(detail.control))
+              onAction?.({ action: 'reader', target: targets.reader, event: detail.event, control: detail.control, bindings: state, side: undefined, leaf: undefined }); }} />
         </div>
       </div>
       <PortfolioPicker {...picker} className={`mc-portfolio__picker ${picker.className ?? ''}`} size={geometry.pickerSize} scale={scale} hidden={!state.picking} disabled={disabled} readOnly={readOnly}

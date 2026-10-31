@@ -7,7 +7,7 @@ import { Button } from './components';
 import { Image } from './image';
 import { ScrollArea } from './scroll-area';
 import { classicInputFontFamily, resolveClassicInputFont } from './classic-input-font';
-import { classicModalTab, deferClassicEvent, useClassicLayoutEffect, useClassicModal, useClassicNodeRef } from './classic-screen-lifecycle';
+import { classicModalTab, deferClassicEvent, deferClassicRequest, scheduleClassicTask, useClassicLayoutEffect, useClassicModal, useClassicNodeRef } from './classic-screen-lifecycle';
 import { ugcReaderAssets } from './ugc-reader-assets';
 
 /** Physical whole original image supplied by the host, including its actual dimensions. */
@@ -145,7 +145,7 @@ const Owner = createContext<{ defer: boolean; blocked: boolean; readOnly: boolea
 function dispatchAction(event: SyntheticEvent<HTMLElement>, handler?: UGCActionHandler, active: () => boolean = () => true) {
   const action = actions.get(event.nativeEvent); if (!action) return; actions.delete(event.nativeEvent);
   const owner = event.currentTarget, { valid, ...detail } = action;
-  deferClassicEvent(event, owner, snapshotEvent => handler?.({ ...detail, event: snapshotEvent }), () => active() && (valid?.() ?? true));
+  deferClassicRequest(event, owner, snapshotEvent => handler?.({ ...detail, event: snapshotEvent }), () => active() && (valid?.() ?? true));
 }
 
 /** Host-resolved, whole images stay real native nodes across URL replacement. */
@@ -207,13 +207,13 @@ export const UGCViewer = forwardRef<HTMLElement, UGCViewerProps>(function UGCVie
     const change = pending.current.get(event.nativeEvent);
     if (change && event.type === 'change') {
       pending.current.delete(event.nativeEvent);
-      deferClassicEvent(event, event.currentTarget, snapshotEvent => {
+      deferClassicRequest(event, event.currentTarget, snapshotEvent => {
         if (given === undefined) setLocal(change.next);
         onQueryChange?.(change.next, { event: snapshotEvent, input: change.input });
       }, () => live.current.active && !live.current.readOnly);
       // Presentation-only settlement; action dispatch uses the shared bridge above.
       const settle = () => { if (root.current && editVersion.current === change.version) setEditDraft(null); };
-      (event.currentTarget.ownerDocument.defaultView?.queueMicrotask.bind(event.currentTarget.ownerDocument.defaultView) ?? queueMicrotask)(settle);
+      scheduleClassicTask(event.currentTarget, settle);
     }
     const action = actions.get(event.nativeEvent);
     if (action?.action === 'item') actions.set(event.nativeEvent, { ...action, index: visibleItems.findIndex(item => item.id === action.item?.id), query });
