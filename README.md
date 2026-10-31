@@ -1,6 +1,6 @@
 # mcbeui
 
-React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素字体、硬边倒角、绿色交互状态、原生表单与键盘操作。首版采用 **Bedrock Classic / JSON UI** 作为方向，非 Ore UI。
+React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素字体、硬边倒角、绿色交互状态、原生表单与键盘操作。以 **Bedrock Classic / JSON UI** 为主体，另提供独立的部分 OreUI 组件。
 
 > 这是独立粉丝项目，与 Mojang、Microsoft 无关联。开源替代字体和 Web 布局与游戏存在差异；未声称整套 UI 与任何游戏版本零像素偏差。视觉来源与差异见 [FIDELITY.md](docs/FIDELITY.md)。
 
@@ -26,6 +26,8 @@ npm pack          # mcbeui-0.1.0.tgz
 ```sh
 npm install /absolute/path/to/mcbeui-0.1.0.tgz
 ```
+
+组件模块引用的公开 PNG / TGA / JSON 保持原始字节，以绝对 `data:` URL 随库构建内联，避免消费项目依赖优化后丢失素材路径；原文件、metadata 和许可仍保留在包内。使用 CSP 的宿主需按所用组件允许 `data:` 图片与材质读取。可选本机游戏字体和私有素材仍由宿主自行提供。
 
 ```tsx
 import { useState } from 'react';
@@ -119,6 +121,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `CommandOutputPanel` | previousOutput / previousInfo、trackOutput / onTrackOutputChange、trackOutputEnabled、outputRef | 可复用只读输出与独立历史模式快照；track开关不清空输出 |
 | `StructureEditor` | value / defaultValue、onValueChange、capabilities、visibility / enabled、onAction / onCancel、preview / onPreviewTurn | 源结构表单与宿主预览槽；所有保存 /加载 /导出和世界操作由宿主实现。见 [STRUCTURE_EDITOR_QA.md](docs/STRUCTURE_EDITOR_QA.md) |
 | `XYZVectorInput` | 必填label；value / defaultValue、onValueChange、maxLength、inputProps / inputRefs | 可复用XYZ真实文本input；保留raw draft，不解析坐标或钳制数值，root ref为fieldset |
+| `StartMenu` / `StartMenuTitle` / `StartMenuActionStack` / `StartMenuAuxiliaryActions` / `StartMenuProfile` / `StartMenuFooter` | 固定命名分支、五种标题布局、显式included /visible /enabled、宿主场景与角色渲染器 | Classic开始页与六个可复用零件，实际字体 /渲染器 /服务由宿主接入；见 [START_MENU_QA.md](docs/START_MENU_QA.md) |
 | `OrePlayerPermissions` / `OrePermissionLevelSelect` / `OrePermissionToggleRow` / `OrePlayerCard` / `OreSwitch` | 显式viewportSize / guiScale、mouse或touch滚动模式、独立角色与权限草稿、host图标 /字体 /请求；文字组件可选textLineBox | 现代OreUI源组合，窗口与widget断点分别计算，窄widget与非desktop共用modal；汉字行框可显式选择fallback度量，默认保留primary。不执行授权或Kick，未认证原生整页。见 [ORE_PLAYER_PERMISSIONS_QA.md](docs/ORE_PLAYER_PERMISSIONS_QA.md) |
 | `ChalkboardEditor` / `ChalkboardTextField` / `ChalkboardLock` | 必填宿主尺寸 /长度 /标题，独立文本编辑能力、锁状态与锁标签，真实 textarea /checkbox | 原版黑板面板、可复用文字框与30×16开关；不实现世界存储或教育权限服务。见 [CHALKBOARD_QA.md](docs/CHALKBOARD_QA.md) |
 | `PlayerPermissions` / `PermissionLevelSelect` / `PermissionToggleRow` / `PermissionPlayerRow` | players / permissionOptions、选中玩家与值分别受控、nullable角色、动态boolean草稿、独立动作标志与真实refs | 固定Classic权限组合，角色不重写权限位；Kick /Ban只发宿主请求，当前OreUI是不同布局。见 [PLAYER_PERMISSIONS_QA.md](docs/PLAYER_PERMISSIONS_QA.md) |
@@ -342,9 +345,11 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 ## 完整组件范围
 
-当前 **158 个已实现组件**，表情族含完整 `EmoteWheelScreen`、四槽 `EmoteWheel` 与可复用 `EmoteSlotPreview`；按 Bedrock 原生控件与 GUI 边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开6份数据、11个渲染 /几何 /纹理函数，共175个源运行时值。新增黑板族包含 `ChalkboardEditor`、`ChalkboardTextField` 与 `ChalkboardLock`，几何与状态由宿主显式提供，见 [CHALKBOARD_QA.md](docs/CHALKBOARD_QA.md)。新增OreUI五组件的使用与资源边界见 [ORE_PLAYER_PERMISSIONS_QA.md](docs/ORE_PLAYER_PERMISSIONS_QA.md)，该历史阶段更强源修订的React18.3.1 /19.3.1实际172值包通过，完整107项同批104通过 /3设备条件跳过，新公开9项另通过；背景透明、bevel和modal选中 /焦点按源修正，不等于运行时guiScale或原生整页认证。新增Classic权限四组件已落盘，角色与权限位独立、后端操作由宿主处理，正式63通过 /2桌面触控条件跳过、公开预览12项及React18 /19实际包验证已通过；使用及OreUI边界见 [PLAYER_PERMISSIONS_QA.md](docs/PLAYER_PERMISSIONS_QA.md)。历史DocumentViewer146组件 /163值与58通过 /1设备条件跳过保持原身份。新增双栏文档 `DocumentViewer` / `DocumentHeading` / `DocumentParagraph`，使用与范围见 [DOCUMENT_VIEWER_QA.md](docs/DOCUMENT_VIEWER_QA.md)。表情屏幕复用原轮盘，加入透明框架、说明条与 Change Emotes 行；视觉名称和无障碍槽位标签分离，空槽中心默认留白，范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)。此前142组件 /159值轮盘、157值 NPC 外观顺序与15项实体合同、156值包 /实体14项 /旧渲染77项、NPC布局44项 /154值包 /64项公开辅助分别保留原身份，见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
+开始菜单新增六个公开部分：正式97项中96通过、1设备条件跳过，12个完整Web源平面共193,355像素RGBA零差；React18 /19实际181值包和默认Vite开发 /生产四场景通过。37个完整PNG与可选公开字体、TGA绘制分别验证，原生整页 /角色 /panorama仍待验，见 [START_MENU_QA.md](docs/START_MENU_QA.md)。
 
-[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与8个命名族缺口。158组件不是158个完整GUI；表情屏幕已补源布局组合，原生整页像素仍未验收，NPC人物自动取景、引擎及原生整页也仍未完成。
+当前 **164 个已实现组件**，表情族含完整 `EmoteWheelScreen`、四槽 `EmoteWheel` 与可复用 `EmoteSlotPreview`；按 Bedrock 原生控件与 GUI 边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开6份数据、11个渲染 /几何 /纹理函数，共181个源运行时值。新增黑板族包含 `ChalkboardEditor`、`ChalkboardTextField` 与 `ChalkboardLock`，几何与状态由宿主显式提供，见 [CHALKBOARD_QA.md](docs/CHALKBOARD_QA.md)。新增OreUI五组件的使用与资源边界见 [ORE_PLAYER_PERMISSIONS_QA.md](docs/ORE_PLAYER_PERMISSIONS_QA.md)，该历史阶段更强源修订的React18.3.1 /19.3.1实际172值包通过，完整107项同批104通过 /3设备条件跳过，新公开9项另通过；背景透明、bevel和modal选中 /焦点按源修正，不等于运行时guiScale或原生整页认证。新增Classic权限四组件已落盘，角色与权限位独立、后端操作由宿主处理，正式63通过 /2桌面触控条件跳过、公开预览12项及React18 /19实际包验证已通过；使用及OreUI边界见 [PLAYER_PERMISSIONS_QA.md](docs/PLAYER_PERMISSIONS_QA.md)。历史DocumentViewer146组件 /163值与58通过 /1设备条件跳过保持原身份。新增双栏文档 `DocumentViewer` / `DocumentHeading` / `DocumentParagraph`，使用与范围见 [DOCUMENT_VIEWER_QA.md](docs/DOCUMENT_VIEWER_QA.md)。表情屏幕复用原轮盘，加入透明框架、说明条与 Change Emotes 行；视觉名称和无障碍槽位标签分离，空槽中心默认留白，范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)。此前142组件 /159值轮盘、157值 NPC 外观顺序与15项实体合同、156值包 /实体14项 /旧渲染77项、NPC布局44项 /154值包 /64项公开辅助分别保留原身份，见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
+
+[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与8个命名族缺口。164组件不是164个完整GUI；表情屏幕已补源布局组合，原生整页像素仍未验收，NPC人物自动取景、引擎及原生整页也仍未完成。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -356,6 +361,7 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 - 结构编辑：StructureEditor复用XYZVectorInput，preview与save /load /export均由宿主实现；预览入口 `#structure-editor`，字段、能力条件及实际验收范围见 [STRUCTURE_EDITOR_QA.md](docs/STRUCTURE_EDITOR_QA.md)。
 - 服务端表单：`#server-forms`预览ServerActionForm /ServerCustomForm，提供源row /typed schema及宿主请求；独立合同、tooltip与资源范围见 [SERVER_FORMS_QA.md](docs/SERVER_FORMS_QA.md)，不实现后端协议或第三MessageForm。
 - NPC：`#npc`预览对话、basic /advanced编辑、皮肤选择、可复用action编辑与60套原版人物模型。人物槽可组合`createNpcEntity`和`GuiLayer`，相机由宿主提供；命令、URL与保存仅发请求，原生采集不等于整页像素验收。见 [NPC_QA.md](docs/NPC_QA.md) 与 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。
+- 开始菜单：`#start-menu`展示六个Classic组合 /零件、普通与新玩家 /试用分支和独立账号操作；场景、角色与服务由应用提供，见 [START_MENU_QA.md](docs/START_MENU_QA.md)。
 - 现代玩家权限：`#ore-player-permissions`展示独立OreUI五组件；`guiScale` /窗口 /输入模式显式传入，原版13图和现代字体仅可选本机准备，npm不附带。用法、准备命令和有限验收范围见 [ORE_PLAYER_PERMISSIONS_QA.md](docs/ORE_PLAYER_PERMISSIONS_QA.md)。
 - 玩家权限：`#player-permissions`为Classic JSON profile，四个真实组合 /零件支持动态玩家与权限草稿、独立角色 /动作和双滚动视口；不是当前OreUI页面，见 [PLAYER_PERMISSIONS_QA.md](docs/PLAYER_PERMISSIONS_QA.md)。
 - 双栏文档：`#documents`提供 HowToPlay /Encyclopedia 两种实际内容示例；独立导航 /正文滚动、受控主题与可复用标题 /段落，翻译、输入提示和条件内容由宿主提供。见 [DOCUMENT_VIEWER_QA.md](docs/DOCUMENT_VIEWER_QA.md)，不代表完整原生手册或整页像素认证。

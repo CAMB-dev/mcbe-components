@@ -1,0 +1,737 @@
+{
+  "schemaVersion": 1,
+  "status": "FIXED_SOURCE02_CLIENT_PACKAGE_INSTALLED_CONSUMER_AND_PUBLIC_VERIFIED_NATIVE_UNVERIFIED",
+  "fixedSource": {
+    "release": "v1.26.60.5-full",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "archiveBytes": 169569258,
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "uiFilesReverified": 206,
+    "startEntry": "resource_pack/ui/start_screen.json",
+    "startBytes": 82605,
+    "startSHA256": "96ca12f45bd8a0251ddf2a7a6deaea11b14c921dfbd9592c73f46ff8bc611089"
+  },
+  "sourceFiles": [
+    {
+      "entry": "resource_pack/ui/edu_featured.json",
+      "bytes": 1168,
+      "sha256": "2885975586618b63a6ff0d62f50da3c9643ddb044050a0b8ef663c8e714cea83"
+    },
+    {
+      "entry": "resource_pack/ui/gameplay_common.json",
+      "bytes": 31382,
+      "sha256": "9bc3d2651100e15c3f969f679685ac736c3c3a49139a678c9612dc28a07cfd30"
+    },
+    {
+      "entry": "resource_pack/ui/popup_dialog.json",
+      "bytes": 27268,
+      "sha256": "571ad6ff20301043e0d08afa90b868232d6ef6052a213a7b28897a87cc8421e5"
+    },
+    {
+      "entry": "resource_pack/ui/start_screen.json",
+      "bytes": 82605,
+      "sha256": "96ca12f45bd8a0251ddf2a7a6deaea11b14c921dfbd9592c73f46ff8bc611089"
+    },
+    {
+      "entry": "resource_pack/ui/storage_management.json",
+      "bytes": 96900,
+      "sha256": "af9ee7e9ddb55a8e85990ea389d568cf701bba31140176d8307f557923e58f76"
+    },
+    {
+      "entry": "resource_pack/ui/storage_management_popup.json",
+      "bytes": 11331,
+      "sha256": "45bb8423325c233e530ae8b179155ab03a07e6706238f02d345e8fcc0a867e3d"
+    },
+    {
+      "entry": "resource_pack/ui/store_common.json",
+      "bytes": 396906,
+      "sha256": "306f9f7e4bf69ebdeb3cccf4a76cc01aa26102d96273623ae5d7f99d81006557"
+    },
+    {
+      "entry": "resource_pack/ui/ui_art_assets_common.json",
+      "bytes": 6731,
+      "sha256": "f6085c9aa28ed04057e1ff83a90620dc024ab43e72166e2949bfde938c1fce3a"
+    },
+    {
+      "entry": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    },
+    {
+      "entry": "resource_pack/ui/ui_friendsbutton.json",
+      "bytes": 14851,
+      "sha256": "2f61b7a72aca6d1d7ffedc1acc6da99d7bc05fc8b0ec7e6f6e165bd3ff37e49c"
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96"
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_dialogs.json",
+      "bytes": 14238,
+      "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264"
+    }
+  ],
+  "sourceGraphScope": {
+    "startNamedDefinitions": 104,
+    "resolvedCandidates": 324,
+    "sharedSourceFiles": 12,
+    "candidateGraphIsConservativeNotAllMounted": true,
+    "sourceJSONExecutedByLibrary": false
+  },
+  "parts": [
+    {
+      "component": "StartMenu",
+      "kind": "composition",
+      "logicalFrame": "Explicit host safe-content [W,H]",
+      "flow": [
+        "12%H top padding",
+        "title outer height",
+        "fill1",
+        "included+visible action groups",
+        "fill2 containing controller helpers",
+        "10 bottom padding"
+      ],
+      "fill": "Equal nonnegative Web remaining-space shares",
+      "friends": {
+        "anchor": "top_right",
+        "offset": [
+          -5,
+          5
+        ]
+      },
+      "background": "Host renderer; no concrete Start panorama declaration"
+    },
+    {
+      "component": "StartMenuTitle",
+      "kind": "title",
+      "profiles": [
+        {
+          "id": "win10",
+          "sourceTemplate": "common_art.title_panel_win10",
+          "authoredSize": [
+            "55%",
+            "18.85%x"
+          ],
+          "authoredOffset": [
+            0,
+            "10%"
+          ],
+          "panelAnchors": [
+            "top_middle",
+            "top_middle"
+          ],
+          "webResolvedSize": [
+            "L=.55W",
+            "T=0.1885L"
+          ],
+          "webResolvedOffset": [
+            0,
+            "0.1T"
+          ],
+          "imagePolicy": {
+            "sourceHasKeepRatioLiteral": false,
+            "sourceHasImageAnchorLiteral": false,
+            "wholeImage": [
+              1937,
+              333
+            ],
+            "webFit": "contain",
+            "webAlignment": "center"
+          },
+          "nativeQualification": "Only ordinary title mapping has bounded WGC observation support; not native fullRGBA or runtime scale."
+        },
+        {
+          "id": "osx",
+          "sourceTemplate": "common_art.title_panel_osx",
+          "authoredSize": [
+            "55%",
+            "19.37%x"
+          ],
+          "authoredOffset": [
+            0,
+            "10%"
+          ],
+          "panelAnchors": [
+            "top_middle",
+            "top_middle"
+          ],
+          "webResolvedSize": [
+            "L=.55W",
+            "T=0.1937L"
+          ],
+          "webResolvedOffset": [
+            0,
+            "0.1T"
+          ],
+          "imagePolicy": {
+            "sourceHasKeepRatioLiteral": false,
+            "sourceHasImageAnchorLiteral": false,
+            "wholeImage": [
+              1937,
+              333
+            ],
+            "webFit": "contain",
+            "webAlignment": "center"
+          },
+          "nativeQualification": "Only ordinary title mapping has bounded WGC observation support; not native fullRGBA or runtime scale."
+        },
+        {
+          "id": "pocket-console",
+          "sourceTemplate": "common_art.title_panel_pocket",
+          "authoredSize": [
+            "55%",
+            "18.85%x"
+          ],
+          "authoredOffset": [
+            0,
+            "5%"
+          ],
+          "panelAnchors": [
+            "top_middle",
+            "top_middle"
+          ],
+          "webResolvedSize": [
+            "L=.55W",
+            "T=0.1885L"
+          ],
+          "webResolvedOffset": [
+            0,
+            "0.05T"
+          ],
+          "imagePolicy": {
+            "sourceHasKeepRatioLiteral": false,
+            "sourceHasImageAnchorLiteral": false,
+            "wholeImage": [
+              1937,
+              333
+            ],
+            "webFit": "contain",
+            "webAlignment": "center"
+          },
+          "nativeQualification": "Only ordinary title mapping has bounded WGC observation support; not native fullRGBA or runtime scale."
+        },
+        {
+          "id": "education-desktop",
+          "sourceTemplate": "common_art.title_panel_edu_desktop",
+          "authoredSize": [
+            "100%",
+            62
+          ],
+          "authoredOffset": [
+            0,
+            "2.5%"
+          ],
+          "authoredInnerSize": [
+            "380%y",
+            48
+          ],
+          "webResolvedSize": [
+            "W",
+            62
+          ],
+          "webResolvedInnerSize": [
+            182.4,
+            48
+          ],
+          "webResolvedOffset": [
+            0,
+            "0.025*62"
+          ],
+          "logoRequiredFromHost": true,
+          "distinctSplashProfile": true,
+          "nativeQualification": "Not qualified by ordinary WGC observation."
+        },
+        {
+          "id": "education-mobile",
+          "sourceTemplate": "common_art.title_panel_edu_mobile",
+          "authoredSize": [
+            "100%",
+            62
+          ],
+          "authoredOffset": [
+            0,
+            "2.5%"
+          ],
+          "authoredInnerSize": [
+            "380%y",
+            48
+          ],
+          "webResolvedSize": [
+            "W",
+            62
+          ],
+          "webResolvedInnerSize": [
+            182.4,
+            48
+          ],
+          "webResolvedOffset": [
+            0,
+            "0.025*62"
+          ],
+          "logoRequiredFromHost": true,
+          "distinctSplashProfile": true,
+          "nativeQualification": "Not qualified by ordinary WGC observation."
+        }
+      ],
+      "layoutOverride": "Explicit outer width,height,offset; does not change separate Education inner box",
+      "visualOffsetDoesNotAddFlowHeight": true
+    },
+    {
+      "component": "StartMenuActionStack",
+      "kind": "actions",
+      "width": 150,
+      "rowHeight": 32,
+      "mainButtonHitbox": [
+        148,
+        30
+      ],
+      "ordinaryInnerSkin": [
+        146,
+        28
+      ],
+      "trialSplitColumns": [
+        75,
+        75
+      ],
+      "trialSplitButton": [
+        73,
+        30
+      ],
+      "newPlayer": {
+        "trialInfoHeight": 32,
+        "independentSpacer": [
+          20,
+          20
+        ],
+        "getStartedRowHeight": 32,
+        "mainMenuRowHeight": 32
+      }
+    },
+    {
+      "component": "StartMenuAuxiliaryActions",
+      "kind": "left_auxiliary",
+      "anchor": "bottom_left",
+      "size": [
+        "W/2-75",
+        "content"
+      ],
+      "offset": [
+        0,
+        "-.10H"
+      ],
+      "upperPads": [
+        5,
+        5
+      ],
+      "upperRowX": "5% of parent",
+      "standardSignIn": {
+        "size": [
+          94,
+          25
+        ],
+        "maxWidth": "95%",
+        "precedingPad": 5
+      },
+      "nxPsSignIn": {
+        "size": [
+          "90%-6",
+          32
+        ],
+        "independentGamertagHeight": 16
+      },
+      "lower": {
+        "rowHeight": 32,
+        "iconFrame": [
+          28,
+          32
+        ],
+        "iconButton": [
+          24,
+          24
+        ],
+        "precedingPad": 3,
+        "profileAPrecedingPad": 5
+      },
+      "gathering": "Independent state,badge,caption,button and alpha"
+    },
+    {
+      "component": "StartMenuProfile",
+      "kind": "right_profile",
+      "anchor": "bottom_right",
+      "size": [
+        "W/2-75",
+        124
+      ],
+      "offset": [
+        0,
+        "-.10H-4"
+      ],
+      "viewer": {
+        "height": "fill remainder",
+        "offset": [
+          0,
+          -16
+        ],
+        "paperDollHeight": "parent-10",
+        "portraitOffset": [
+          0,
+          -22
+        ],
+        "portraitAnchor": "bottom_middle",
+        "nameTagBox": [
+          8,
+          8
+        ]
+      },
+      "controls": {
+        "centeringRowHeight": 24,
+        "contentHeight": 25,
+        "dressingTextExtraWidth": 2,
+        "dressingPressedAlpha": 0.65,
+        "educationDressingGlyph": [
+          25,
+          25
+        ],
+        "accountSwitch": [
+          25,
+          25
+        ]
+      },
+      "profileButtonContent": {
+        "height": 24,
+        "gamerpicFrame": [
+          18,
+          18
+        ],
+        "gamerpicOffset": [
+          -2,
+          0
+        ],
+        "fallbackAlex": [
+          16,
+          16
+        ],
+        "middleGap": 2,
+        "labelTopPad": 4,
+        "rightPad": 6
+      }
+    },
+    {
+      "component": "StartMenuFooter",
+      "kind": "footer",
+      "size": [
+        "W-2",
+        10
+      ],
+      "anchor": "bottom_middle",
+      "offset": [
+        0,
+        -1
+      ],
+      "copyright": "left",
+      "version": "right within50% width panel",
+      "development": "center, separately included/visible",
+      "labelBackgroundAlpha": 0.6
+    }
+  ],
+  "normalNamedRowOrder": [
+    "play",
+    "featuredWorld",
+    "trialSettingsStore",
+    "educationLesson",
+    "educationFeatured",
+    "settingsEditions",
+    "settings",
+    "realms",
+    "educationUnlock",
+    "store",
+    "buyGame",
+    "editions"
+  ],
+  "controlState": {
+    "includedFalse": "Source ignored; omit construction and ref",
+    "visibleFalse": "Constructed Web node/ref retained, display:none removes flow/paint/interaction",
+    "enabledFalse": "Geometry retained, action disabled",
+    "webVisibilityMappingScope": "Only this bounded Start composition; not a generic invisible-flow rule",
+    "rootVisibleFalse": "Root hidden without changing its declared style dimensions",
+    "normalNewPlayerAndLegacyChildren": "Independent resolved host state, no account inference"
+  },
+  "actions": {
+    "knownSourceTargets": [
+      "button.ai_lesson_crafter",
+      "button.controller_select",
+      "button.edu_feedback",
+      "button.edu_resources",
+      "button.external_browser_button",
+      "button.external_browser_popup_close",
+      "button.featured_category",
+      "button.feedback_button_pressed",
+      "button.gathering",
+      "button.launch_editions",
+      "button.manage_account",
+      "button.menu_achievements",
+      "button.menu_buy_game",
+      "button.menu_cancel",
+      "button.menu_exit",
+      "button.menu_get_started",
+      "button.menu_inbox",
+      "button.menu_offline",
+      "button.menu_ok",
+      "button.menu_profile",
+      "button.menu_realms",
+      "button.menu_select",
+      "button.menu_servers",
+      "button.menu_settings",
+      "button.menu_store",
+      "button.open_main_menu",
+      "button.signin",
+      "button.to_profile_screen",
+      "button.turn_doll"
+    ],
+    "mainMenuLocalTarget": "button.open_main_menu",
+    "playTarget": "Caller resolves dynamic $play_button_target",
+    "publicActionAndTarget": "Typed host routing data, not engine authenticity validation or execution",
+    "dispatch": "Native leaf then public part/root veto; integrated root dispatches once",
+    "exit": "Explicit canQuit plus clean non-IME Escape",
+    "offline": "Display-only helper; no inferred controller_select transport"
+  },
+  "hostRendererDependencies": [
+    "panorama/background",
+    "splash/font/animation",
+    "paper-doll/persona/camera",
+    "name-tag and gamerpic",
+    "Play/Store GIF frames and clock",
+    "dynamic banners and badges",
+    "controller hints",
+    "Education missing imagery"
+  ],
+  "bellSourceLiterals": {
+    "states": {
+      "0": "Caller animatedBell renderer",
+      "1": "Static bell",
+      "2": "Mail"
+    },
+    "frames": 28,
+    "frameStep": 8,
+    "fps": 10,
+    "looping": false,
+    "frameStepInterpretationRecovered": false,
+    "unread": [
+      7,
+      8
+    ],
+    "unreadClockAutomatic": false
+  },
+  "artReferences": {
+    "manifest": "docs/start-menu-assets.json",
+    "wholePNGReferences": 37,
+    "sixMissing": [
+      {
+        "key": "eduGreenTile",
+        "texture": "textures/ui/edu_green_tile"
+      },
+      {
+        "key": "eduFeedback",
+        "texture": "textures/ui/feedback"
+      },
+      {
+        "key": "eduFeedbackHover",
+        "texture": "textures/ui/feedback_hover"
+      },
+      {
+        "key": "externalLink",
+        "texture": "textures/ui/icon_external_link"
+      },
+      {
+        "key": "eduTitle",
+        "texture": "textures/ui/title_edu"
+      },
+      {
+        "key": "eduPreviewTitle",
+        "texture": "textures/ui/title_edu_preview"
+      }
+    ],
+    "educationLogosPublic": false,
+    "rawDisabled3x3": {
+      "entry": "resource_pack/textures/ui/disabledButton.png",
+      "size": [
+        3,
+        3
+      ],
+      "rawSlice": 2,
+      "overlappingInsetSums": true,
+      "publicPhysicalNineSliceInterpretation": false,
+      "use": "store_error_content declaration, not all normal runtime states",
+      "productInstantiated": false,
+      "normalLockedButtonResource": false
+    },
+    "normalLockedButton": {
+      "key": "buttonDisabled",
+      "entry": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "size": [
+        2,
+        2
+      ],
+      "rgbaEachTexel": [
+        117,
+        117,
+        117,
+        255
+      ],
+      "rawSlice": 1,
+      "rawBaseSize": [
+        2,
+        2
+      ],
+      "sourceBinding": "common_buttons locked texture",
+      "webUniformCenterFill": true,
+      "nativeSliceAlgorithmRecovered": false
+    }
+  },
+  "qualification": {
+    "sourceGeometryLiteralVsWebResolverSeparate": true,
+    "ordinaryWGCObservedWindow": [
+      2560,
+      1440
+    ],
+    "WGCIsBoundedSupportForTitleSelfHeightContainAndHiddenFlow": true,
+    "runtimeGuiProviderRead": false,
+    "nativeFullRGBA": false,
+    "newBrowserResults": "PASS: four actual installed React18/19 x ordinary Vite dev/production consumers; source formal97 and public14 remain separate scopes.",
+    "newPackageResults": "PASS: actual React18.3.1/19.3.1 installed181exports, SSR/types/raw assets/licenses/401 original-byte inline gate.",
+    "allEducationTrialAndLegacyStatesNativeCertified": false,
+    "coverageStatusChangedByMetadata": {
+      "entry": "resource_pack/ui/start_screen.json",
+      "previous": "E confirmed_missing_named_family",
+      "current": "A implemented_named_family_scoped",
+      "basis": "Actual source-client, package, installed-browser and public qualification; not a draft-only assertion",
+      "other205RowsUnchanged": true,
+      "nativePixelCertification": false
+    },
+    "privateNativeFramesOrFontsCopied": false
+  },
+  "license": {
+    "entry": "LICENSE.md",
+    "destination": "src/assets/start-menu/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "validation": {
+    "sourceFreeze": {
+      "phase": "02",
+      "module": "src/start-menu.tsx",
+      "moduleSHA256": "696be13c01f88d4ba69871fff0a0e6a2cc781d1649142579d86cf4b9377b656a",
+      "style": "src/start-menu.css",
+      "styleSHA256": "5508964d5abd5dc73d5dd1657da8ef3fd0485b2a3aade6e65cc250b8764383d7"
+    },
+    "formal": {
+      "report": ".cache/start-menu-tests-01/run-01/RESULT.json",
+      "listed": 97,
+      "passed": 96,
+      "expectedDeviceSkipped": 1,
+      "failed": 0,
+      "pinCount": 987,
+      "pinDrift": 0,
+      "includesOldControlsAndNavigation": true,
+      "preflight34NotAddedAgain": true,
+      "precedesDeliveryCompilerFix": true,
+      "sourceGeometryUnchangedByDeliveryFix": true
+    },
+    "sourcePlanes": {
+      "count": 12,
+      "pixels": 193355,
+      "different": 0,
+      "maxDelta": 0,
+      "scope": "Whole explicit source paint planes on declared Web host, not native GUI"
+    },
+    "delivery": {
+      "failureReport": ".cache/start-menu-package-browser-02/run-01/FINAL.json",
+      "failure": "TSUP relative static URLs fail under actual installed Vite dependency optimization",
+      "cpuReference": ".cache/library-asset-inline-01/FINAL.json",
+      "cpuVerifiedSourceReferences": 401,
+      "counts": {
+        "PNG": 356,
+        "TGA": 39,
+        "JSON": 6
+      },
+      "wholeByteMatch": true,
+      "scope": "401 all-library finite static reference identities are CPU evidence; installed browser separately covers its actual declared images/TGA/factory/fonts/interactions.",
+      "pipeline": "Dedicated Vite library output with original-byte dataURL assets",
+      "previousFontFixtureFailure": {
+        "report": ".cache/start-menu-package-browser-03/run-01/FINAL.json",
+        "cases": 4,
+        "reason": "Fixture imported only styles.css but required optional font faces to load; corrected to import fonts.css with short Latin/CJK sample, product/expected gates unchanged"
+      },
+      "actualPackage": {
+        "log": ".cache/start-menu-release-01/package-inline-03.log",
+        "reactVersions": [
+          "18.3.1",
+          "19.3.1"
+        ],
+        "components": 164,
+        "dataValues": 6,
+        "functions": 11,
+        "runtimeValues": 181,
+        "ssrAndStrictTypes": true,
+        "rawAssetLicenseAndInlineGates": true,
+        "testedTarSHA256": "136703d086f84caace98d8248f104e7bc4800bca61536ac430dea4d307dcee85"
+      },
+      "actualInstalledBrowser": {
+        "report": ".cache/start-menu-package-browser-04/run-01/FINAL.json",
+        "reportSHA256": "1efc711e11250f38b7daf4e7124ea3e67aae2eff322a7eb571180a4a920a31bf",
+        "cases": 4,
+        "matrix": [
+          "React18 dev",
+          "React18 production",
+          "React19 dev",
+          "React19 production"
+        ],
+        "passed": 4,
+        "pins": 1724,
+        "pinDrift": 0,
+        "perCase": {
+          "decodedDOMImages": 43,
+          "wholeManifestPNGIdentities": 37,
+          "wholeTGAFetches": 2,
+          "bannerCanvas": [
+            40,
+            80
+          ],
+          "bannerNontransparentPixels": 3200,
+          "npcFactoryBones": 10,
+          "hostIntents": true,
+          "loadedFonts": [
+            "MCBE CJK",
+            "MCBE Pixel",
+            "Monocraft"
+          ],
+          "fontHTTPBytesMatch": true
+        },
+        "originalSixJSONHTTPParse": "Dev-only standalone request evidence; not factory IO",
+        "dataURLIsNotHTTP": true,
+        "doesNotClaimAll401ReferencesRuntimeExercised": true,
+        "browserAndOwnServersClosed": true
+      }
+    },
+    "public": {
+      "beforeOptionalProfileFix": {
+        "report": ".cache/start-menu-release-01/public-01/FINAL.json",
+        "passed": 13
+      },
+      "afterOptionalProfileFix": {
+        "report": ".cache/start-menu-release-01/public-02/FINAL.json",
+        "passed": 14
+      },
+      "current": {
+        "report": ".cache/start-menu-release-01/public-03/FINAL.json",
+        "passed": 14,
+        "browserClosed": true
+      },
+      "source02Unchanged": true,
+      "previousRunsNotAddedToCurrentCount": true
+    }
+  }
+}

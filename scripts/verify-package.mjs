@@ -11,6 +11,7 @@ assert(npmCli, 'Run with npm run verify:package so the current npm CLI can be re
 const npm = (args, cwd = root) => execFileSync(process.execPath, [npmCli, ...args], { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 // Build first, then test the actual packed files rather than source aliases.
 npm(['run', 'build']);
+execFileSync(process.execPath, [join(root, 'scripts', 'verify-inline-assets.mjs')], { cwd: root, stdio: 'inherit' });
 const packed = JSON.parse(npm(['pack', '--ignore-scripts', '--json']))[0];
 assert(!packed.files.some(file => /Mojangles[^/]*\.(ttf|otf|woff2?|ttc)$/i.test(file.path)), 'Local proprietary font must not enter the npm library.');
 assert(!packed.files.some(file => /MCBE-Classic(?:-Unicode|-ASCII)?\.woff2$/i.test(file.path)), 'Local original-derived Classic fonts must stay outside the npm library.');
@@ -89,10 +90,11 @@ components.push('DocumentViewer','DocumentHeading','DocumentParagraph');
 components.push('PlayerPermissions','PermissionLevelSelect','PermissionToggleRow','PermissionPlayerRow');
 components.push('OrePlayerPermissions','OrePermissionLevelSelect','OrePermissionToggleRow','OrePlayerCard','OreSwitch');
 components.push('ChalkboardEditor','ChalkboardTextField','ChalkboardLock');
-assert.equal(components.length,158);
+components.push('StartMenu','StartMenuTitle','StartMenuActionStack','StartMenuAuxiliaryActions','StartMenuProfile','StartMenuFooter');
+assert.equal(components.length,164);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,175);
+assert.equal(Object.keys(ui).length,181);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -112,6 +114,10 @@ assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+const packedPngUrl = async asset => 'data:image/png;base64,' + (await readFile(new URL('./assets/' + asset, import.meta.resolve('mcbeui')))).toString('base64');
+const documentBannerUrl = await packedPngUrl('document-viewer/permissions_player_fade_overlay.png');
+const emptyEmoteUrl = await packedPngUrl('emote-wheel/icon_none.png');
+const wheelStateUrls = await Promise.all(['base','select_0','select_1','select_2','select_3'].map(state => packedPngUrl('emote-wheel/emote_wheel_updated_' + state + '.png')));
 // Modern OreUI components consume host labels/artwork; SSR performs no IO or requests.
 const packedOrePlayers=Object.freeze([Object.freeze({id:'ore-alpha',name:'Caller Ore Alpha',avatar:element('span',null,'Host avatar')}),Object.freeze({id:'ore-beta',name:'Caller Ore Beta',isHosting:true})]);
 const packedOreOptions=Object.freeze([Object.freeze({id:'build',title:'Build blocks',description:'Caller build description'}),Object.freeze({id:'mine',title:'Mine blocks'}),Object.freeze({id:'unbound',title:'Unknown caller ability'})]);
@@ -144,6 +150,30 @@ try {
  assert.throws(()=>renderToString(element(ui.OrePermissionLevelSelect,{value:'owner',viewportSize:[1440,1000]})),/permission level/);
 } finally {globalThis.fetch=oreFetch;}
 assert.equal(oreIO,0);assert.equal(oreRequests,0);assert.equal(JSON.stringify(packedOreValues),packedOreSnapshot,'Modern SSR preserves caller snapshots.');
+// Resolved Classic Start snapshots and renderer seams never invoke account/world/browser services during SSR.
+const packedStartOn=Object.freeze({included:true,visible:true,enabled:true});
+const packedStartHidden=Object.freeze({...packedStartOn,visible:false});
+const packedStartButton=(action,label)=>Object.freeze({state:packedStartOn,action,label,target:'button.host_'+action});
+const packedStartActions={normal:{state:packedStartOn,rows:{play:{state:packedStartOn,button:packedStartButton('play','Caller Play')},settings:{state:packedStartOn,button:packedStartButton('settings','Caller Settings')}}},newPlayer:{state:packedStartHidden,rows:{trialSpacerIncluded:false,getStarted:{state:packedStartOn,button:packedStartButton('get-started','Caller Get Started')},mainMenu:{state:packedStartOn,button:packedStartButton('main-menu','Caller Main Menu')}}}};
+const packedStartAuxiliary={state:packedStartOn,upper:{state:packedStartHidden,signInProfile:'standard',signIn:packedStartButton('sign-in','Caller Sign In'),gamertag:{state:packedStartHidden,text:'Caller player'}},lower:{state:packedStartOn,inbox:{button:packedStartButton('inbox','Caller Inbox'),iconState:2,unread:{state:packedStartOn}}}};
+const packedStartProfile={viewer:{state:packedStartOn,portrait:{state:packedStartOn,content:element('span',null,'Caller portrait renderer')}},controls:{state:packedStartOn,dressingRoom:{button:packedStartButton('dressing-room','Caller Dressing Room'),profile:'text'}}};
+const packedStartFooter={copyright:'Caller copyright',version:'Caller version',development:{state:packedStartHidden,text:'Caller development'}};
+const packedStartProps={label:'Caller Classic Start',size:[400,240],visible:true,canQuit:true,title:{profile:'win10'},actions:packedStartActions,auxiliary:packedStartAuxiliary,profile:packedStartProfile,footer:packedStartFooter};
+const packedStartSnapshot=JSON.stringify(packedStartProps);let startIO=0,startRequests=0;const startFetch=globalThis.fetch;globalThis.fetch=()=>{startIO++;throw Error('Start SSR attempted IO');};
+try{
+ const markup=renderToString(element(ui.StartMenu,{...packedStartProps,onAction:()=>startRequests++,onExitRequest:()=>startRequests++}));
+ for(const text of ['mc-start-menu','Caller Play','Caller portrait renderer','Caller version','Caller Inbox'])assert(markup.includes(text),'Packed Start missing '+text);
+ assert(!/ canQuit=| titleProfile=| guiScale=/.test(markup));
+ for(const profile of ['win10','osx','pocket-console'])assert(renderToString(element(ui.StartMenuTitle,{size:[400,240],profile})).includes('mc-start-title'));
+ for(const profile of ['education-desktop','education-mobile'])assert(renderToString(element(ui.StartMenuTitle,{size:[400,240],profile,logoContent:element('span',null,'Caller education artwork')})).includes('Caller education artwork'));
+ assert(renderToString(element(ui.StartMenuActionStack,packedStartActions)).includes('Caller Settings'));
+ assert(renderToString(element(ui.StartMenuAuxiliaryActions,{...packedStartAuxiliary,size:[400,240]})).includes('Caller Inbox'));
+ assert(renderToString(element(ui.StartMenuProfile,{...packedStartProfile,size:[400,240]})).includes('Caller Dressing Room'));
+ assert(renderToString(element(ui.StartMenuFooter,{...packedStartFooter,width:398})).includes('Caller copyright'));
+ assert.throws(()=>renderToString(element(ui.StartMenuTitle,{size:[400,240],profile:'education-desktop'})),/logo|artwork|education/i);
+ assert.throws(()=>renderToString(element(ui.StartMenu,{...packedStartProps,scale:0})),RangeError);
+}finally{globalThis.fetch=startFetch;}
+assert.equal(startIO,0);assert.equal(startRequests,0);assert.equal(JSON.stringify(packedStartProps),packedStartSnapshot,'Start SSR keeps caller presentation snapshots intact.');
 // Chalkboard dimensions and resolved edit permission are caller bindings; SSR never mutates or performs IO.
 const packedBoard=Object.freeze({text:['Caller board','宿主文本'].join(String.fromCharCode(10)),locked:true});const packedBoardSnapshot=JSON.stringify(packedBoard);let boardIO=0,boardRequests=0;const boardFetch=globalThis.fetch;globalThis.fetch=()=>{boardIO++;throw new Error('Packed Chalkboard SSR attempted IO.');};
 try {
@@ -182,7 +212,7 @@ assert.equal(permissionRequests,0,'SSR does not issue selection, permission, Bac
 const documentGroups=[{id:'basics',label:'Basics',topics:[{id:'first',title:'First article',sectionTitle:'How to Play: First article',content:element(React.Fragment,null,element(ui.DocumentHeading,null,'Article heading'),element(ui.DocumentParagraph,{linePadding:6},'Live article text'))},{id:'second',title:'Second article',content:'Second content',disabled:true}]}];
 for(const value of ['first',null,'unknown']){
  const markup=renderToString(element(ui.DocumentViewer,{groups:documentGroups,label:'Packed documents',value,size:[400,300],scale:2,scrollPolicy:'preserve',emptyContent:'No article',previousHint:{label:'Previous',glyph:'Host previous'},nextHint:{label:'Next',glyph:'Host next'}}));
- assert.match(markup,/mc-document-viewer/);assert.match(markup,/data-variant="document"/);assert.match(markup,/permissions_player_fade_overlay[.]png/);
+ assert.match(markup,/mc-document-viewer/);assert.match(markup,/data-variant="document"/);assert(markup.includes(documentBannerUrl),'Document banner retains its original packed bytes.');
  assert.equal((markup.match(/role="tabpanel"/g)||[]).length,2);assert.equal((markup.match(/role="scrollbar"/g)||[]).length,2);
  assert(!/ groups=| scrollPolicy=| previousHint=| navigationViewportRef=/.test(markup),'Document bindings remain private to composition.');
  if(value==='first'){assert.match(markup,/aria-selected="true"/);assert.match(markup,/How to Play: First article/);}else assert.match(markup,/No article/);
@@ -194,9 +224,9 @@ const emoteSlots=[
  {id:'dance',label:'Dance',preview:{kind:'text',text:'4'}}
 ];
 const emoteMarkup=renderToString(element(ui.EmoteWheel,{slots:emoteSlots,label:'Packed emotes',activeIndex:2,inputMode:'keyboard',scale:2,size:[256,200]}));
-assert.match(emoteMarkup,/emote_wheel_updated_select_2[.]png/);
-assert.equal((emoteMarkup.match(/<img[^>]*src="[^"]*emote_wheel_updated_(?:base|select_[0-3])[.]png"/g)||[]).length,1,'One whole wheel state frame; never layer selected-frame alpha over the base.');
-assert.match(emoteMarkup,/icon_none[.]png/);assert.match(emoteMarkup,/host-emote[.]png/);assert.match(emoteMarkup,/Packed emotes/);
+assert(emoteMarkup.includes(wheelStateUrls[3]),'Selected wheel retains original packed bytes.');
+assert.equal((emoteMarkup.match(/<img[^>]*>/g)||[]).filter(tag => wheelStateUrls.some(url => tag.includes('src="'+url+'"'))).length,1,'One whole wheel state frame; never layer selected-frame alpha over the base.');
+assert(emoteMarkup.includes(emptyEmoteUrl));assert.match(emoteMarkup,/host-emote[.]png/);assert.match(emoteMarkup,/Packed emotes/);
 assert.equal((emoteMarkup.match(/<button/g)||[]).length,4,'Exactly four source cardinal slot buttons.');
 assert(!/ activeIndex=| slots=| inputMode=| defaultActiveIndex=/.test(emoteMarkup),'Internal wheel props do not leak to native DOM attributes.');
 const emoteCenter=markup=>markup.match(/<span[^>]*class="[^"]*mc-emote-wheel__name[^"]*"[^>]*>(.*?)<[/]span>/)?.[1];
@@ -213,7 +243,7 @@ for(const inputMode of ['keyboard','touch','gamepad']){
 for(const content of [{kind:'empty'},{kind:'text',text:'Fallback index'},{kind:'image',src:'/host-thumbnail.png'}]){
  const markup=renderToString(element(ui.EmoteSlotPreview,{content,scale:1,'aria-label':'Packed preview'}));
  assert.match(markup,/Packed preview/);
- if(content.kind==='empty')assert.match(markup,/icon_none[.]png/);
+ if(content.kind==='empty')assert(markup.includes(emptyEmoteUrl));
  if(content.kind==='text')assert.match(markup,/Fallback index/);
  if(content.kind==='image')assert.match(markup,/host-thumbnail[.]png/);
 }
@@ -243,7 +273,7 @@ assert(Object.values(npcEntity.bonePose).every(matrix=>matrix instanceof Float32
 for(const [variant,skin]of ui.npcSkinNames.entries()){
   const aliasCommand=ui.createNpcEntity({...npcEntityOptions,skin}),variantCommand=ui.createNpcEntity({...npcEntityOptions,skin:variant});
   assert.equal(aliasCommand.texture,variantCommand.texture,'Strict original alias/source-index mapping: '+skin);
-  assert.equal(typeof aliasCommand.texture,'string');assert.equal(new URL(aliasCommand.texture).protocol,'file:');
+  assert.equal(typeof aliasCommand.texture,'string');assert(aliasCommand.texture.startsWith('data:image/png;base64,'),'Bundled NPC textures must remain deployable after dependency optimization.');
 }
 assert.equal(npcEntity.texture,ui.createNpcEntity({...npcEntityOptions,skin:ui.npcSkinNames[0]}).texture);
 for(const skin of [-1,60,1.5,'NPC_1','npc_1.png',' npc_1','1'])assert.throws(()=>ui.createNpcEntity({...npcEntityOptions,skin}),RangeError);
@@ -655,11 +685,19 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','ore-player-permissions.css','chalkboard.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','ore-player-permissions.css','chalkboard.css','start-menu.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
 const packageRoot = new URL('./',import.meta.resolve('mcbeui/package.json'));
+const startAssets=JSON.parse(await readFile(new URL('docs/start-menu-assets.json',packageRoot),'utf8'));
+assert.equal(startAssets.resources.length,37);assert.equal(startAssets.missing.length,6);
+assert(!Object.hasOwn(ui,'startMenuAssets'),'Private Start image registry must not be a root export.');
+for(const resource of [...startAssets.referencedWholeFiles,{path:startAssets.license.destination,sha256:startAssets.license.sha256,bytes:startAssets.license.bytes}]){
+ const relative=resource.path.replace(/^src[/]/,'dist/');const bytes=await readFile(new URL(relative,packageRoot));
+ assert.equal(bytes.length,resource.bytes,relative);assert.equal(createHash('sha256').update(bytes).digest('hex'),resource.sha256,relative);
+}
+assert(startAssets.resources.find(resource=>resource.key==='title').dimensions.join('x')==='1937x333');
 const catalog=JSON.parse(await readFile(new URL('docs/component-catalog.json',packageRoot),'utf8'));
 assert.equal(catalog.publicExports.components,components.length);assert.equal(catalog.publicExports.runtimeValues,Object.keys(ui).length);assert.equal(catalog.publicExports.dataValues,dataExports.length);
 assert.deepEqual(Object.values(catalog.groups).flat().filter(value=>value.status==='implemented').map(value=>value.name).sort(),[...components].sort(),'Published component catalog matches actual exports.');
@@ -729,7 +767,8 @@ for (const name of ui.guiIconNames) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'Packed GUI icon: '+name);
   const markup = renderToString(element(ui.GuiIcon,{name,scale:2,label:name}));
   const imageSource = markup.match(/<img[^>]+src="([^"]+)"/)[1].replaceAll('&amp;','&');
-  assert.equal(createHash('sha256').update(await readFile(new URL(imageSource))).digest('hex'),asset.sha256,'Consumer GuiIcon URL: '+name);
+  assert(imageSource.startsWith('data:image/png;base64,'),'Published GuiIcon URL must survive dependency relocation.');
+  assert.equal(createHash('sha256').update(Buffer.from(imageSource.slice('data:image/png;base64,'.length),'base64')).digest('hex'),asset.sha256,'Consumer GuiIcon URL: '+name);
   assert(markup.includes('role="img"'));
 }
 assert(!Object.hasOwn(ui,'documentViewerAssets'),'Document source registry must remain private.');
@@ -794,9 +833,9 @@ for(const asset of npcWholeAssets){
 for(const [variant,skin]of npcActorManifest.skins.entries()){
  assert.equal(skin.variantArrayIndex,variant);assert.deepEqual(skin.dimensions,[64,64]);
  for(const selected of [skin.alias,variant]){
-  const command=ui.createNpcEntity({...npcEntityOptions,skin:selected}),url=new URL(command.texture);
-  assert.equal(url.href,new URL(skin.destination.replace(/^src\\//,'dist/'),packageRoot).href,'Installed NPC URL must preserve the exact source filename/case.');
-  const bytes=await readFile(url);assert.equal(bytes.length,skin.bytes);
+  const command=ui.createNpcEntity({...npcEntityOptions,skin:selected});
+  assert(command.texture.startsWith('data:image/png;base64,'),'Installed NPC URL is an absolute original-byte image, independent of the optimized JavaScript location.');
+  const bytes=Buffer.from(command.texture.slice('data:image/png;base64,'.length),'base64');assert.equal(bytes.length,skin.bytes);
   assert.equal(createHash('sha256').update(bytes).digest('hex'),skin.sha256,'Installed helper source PNG: '+skin.alias);
  }
 }
@@ -902,6 +941,40 @@ typedDocumentGroups[0].topics.push(typedDocumentTopic);
 // @ts-expect-error Scroll reset is a bounded policy.
 const badDocumentPolicy:DocumentViewerProps['scrollPolicy']='native';
 
+import { StartMenu, StartMenuTitle, StartMenuActionStack, StartMenuAuxiliaryActions, StartMenuProfile, StartMenuFooter } from 'mcbeui';
+import type { StartMenuControlState, StartMenuFrame, StartMenuTitleProfile, StartMenuActionId, StartMenuActionDetail, StartMenuActionHandler, StartMenuImageSource, StartMenuButton, StartMenuDynamicBanner, StartMenuButtonArt, StartMenuButtonRow, StartMenuArtButtonRow, StartMenuStoreRow, StartMenuNormalRows, StartMenuNewPlayerRows, StartMenuActionStackProps, StartMenuTitleProps, StartMenuInbox, StartMenuProfileButton, StartMenuGathering, StartMenuAuxiliaryActionsProps, StartMenuPortraitRequest, StartMenuProfileProps, StartMenuFooterProps, StartMenuExternalPopup, StartMenuProps } from 'mcbeui';
+const typedStartState:StartMenuControlState={included:true,visible:true,enabled:true};
+const typedStartFrame:StartMenuFrame={size:[400,240],scale:2};
+const typedStartTitleProfile:StartMenuTitleProfile='win10';
+const typedStartImage:StartMenuImageSource={src:'/caller.png',sourceSize:[16,16],alt:'Caller art'};
+const typedStartId:StartMenuActionId='play';
+const typedStartAction:StartMenuActionHandler=(detail:StartMenuActionDetail)=>detail.target+detail.action+detail.button.tagName+detail.event.currentTarget.tagName;
+const typedStartButton:StartMenuButton={state:typedStartState,label:'Caller Play',action:typedStartId,target:'button.host_play',ref:createRef<HTMLButtonElement>(),nativeProps:{onClick:event=>event.preventDefault()}};
+const typedStartBanner:StartMenuDynamicBanner={state:typedStartState,image:typedStartImage,insets:[1,2,3,4],text:'Caller banner'};
+const typedStartArt:StartMenuButtonArt={state:typedStartState,normalBackground:<span>Caller frame</span>,hoverForeground:<span>Caller hover art</span>,label:'Caller art label'};
+const typedStartRow:StartMenuButtonRow={state:typedStartState,button:typedStartButton};
+const typedStartArtRow:StartMenuArtButtonRow={...typedStartRow,art:typedStartArt,banner:typedStartBanner};
+const typedStartStore:StartMenuStoreRow={...typedStartArtRow,newOffersBadge:{state:typedStartState,label:<span>Caller tag</span>}};
+const typedStartNormal:StartMenuNormalRows={play:typedStartArtRow,settings:typedStartRow,store:typedStartStore};
+const typedStartNewPlayer:StartMenuNewPlayerRows={trialSpacerIncluded:false,getStarted:typedStartRow,mainMenu:typedStartRow};
+const typedStartActions:StartMenuActionStackProps={normal:{state:typedStartState,rows:typedStartNormal},newPlayer:{state:{...typedStartState,visible:false},rows:typedStartNewPlayer},onAction:typedStartAction};
+const typedStartTitle:StartMenuTitleProps={...typedStartFrame,profile:typedStartTitleProfile,splash:<span>Caller splash renderer</span>};
+const typedStartInbox:StartMenuInbox={button:typedStartButton,iconState:0,animatedBell:<span>Caller animation frame</span>,unread:{state:typedStartState}};
+const typedStartProfileButton:StartMenuProfileButton={button:typedStartButton,showGamerpic:true,gamerpic:<span>Caller gamerpic</span>};
+const typedStartGathering:StartMenuGathering={state:typedStartState,badge:{state:typedStartState,content:<span>Caller event art</span>},caption:'Caller event',button:typedStartButton};
+const typedStartAux:StartMenuAuxiliaryActionsProps={...typedStartFrame,state:typedStartState,gathering:typedStartGathering,upper:{state:typedStartState,signInProfile:'nx-ps',signIn:typedStartButton,gamertag:{state:typedStartState,text:'Caller gamertag'}},lower:{state:typedStartState,inbox:typedStartInbox,profileA:typedStartProfileButton},onAction:typedStartAction};
+const typedStartPortrait=(detail:StartMenuPortraitRequest)=>String(detail.deltaX)+detail.phase+detail.event.type;
+const typedStartProfile:StartMenuProfileProps={...typedStartFrame,viewer:{state:typedStartState,portrait:{state:typedStartState,content:<span>Caller portrait</span>},onTurnRequest:typedStartPortrait},controls:{state:typedStartState,dressingRoom:{button:typedStartButton,profile:'text'},profileB:typedStartProfileButton}};
+const typedStartFooter:StartMenuFooterProps={width:398,copyright:'Caller copyright',version:'Caller version',development:{state:typedStartState,text:'Caller dev'}};
+const typedStartPopup:StartMenuExternalPopup={state:typedStartState,title:'Caller confirmation',body:'Caller explanation',close:{state:typedStartState,label:'Close'},externalButton:typedStartButton,backButton:typedStartButton,layout:{panelSize:[230,220],bodyWidth:214},onCloseRequest:event=>event.preventDefault()};
+const typedStart:StartMenuProps={...typedStartFrame,label:'Caller Start',visible:true,canQuit:true,title:typedStartTitle,actions:typedStartActions,auxiliary:typedStartAux,profile:typedStartProfile,footer:typedStartFooter,externalPopup:typedStartPopup,onAction:typedStartAction,onExitRequest:event=>event.preventDefault()};
+const typedStartParts=<><StartMenu {...typedStart} ref={createRef<HTMLElement>()}/><StartMenuTitle {...typedStartTitle} ref={createRef<HTMLDivElement>()}/><StartMenuActionStack {...typedStartActions} ref={createRef<HTMLDivElement>()}/><StartMenuAuxiliaryActions {...typedStartAux} ref={createRef<HTMLDivElement>()}/><StartMenuProfile {...typedStartProfile} ref={createRef<HTMLDivElement>()}/><StartMenuFooter {...typedStartFooter} ref={createRef<HTMLDivElement>()}/></>;
+// @ts-expect-error No platform inference fills in the required title profile.
+const missingStartProfile:StartMenuTitleProps={size:[400,240]};
+// @ts-expect-error Runtime presentation states remain distinct and explicit.
+const incompleteStartState:StartMenuControlState={visible:true};
+// @ts-expect-error No unknown engine input enum is accepted as an action id.
+const invalidStartAction:StartMenuActionId='automatic';
 import { ChalkboardEditor, ChalkboardTextField, ChalkboardLock } from 'mcbeui';
 import type { ChalkboardEditorProps, ChalkboardValue, ChalkboardChangeDetail, ChalkboardCloseDetail, ChalkboardTextFieldProps, ChalkboardLockProps, ChalkboardFontMode, ChalkboardTextareaProps, ChalkboardLockInputProps } from 'mcbeui';
 const typedBoardValue:ChalkboardValue={text:'Caller text',locked:true};

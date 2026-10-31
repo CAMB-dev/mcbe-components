@@ -75,6 +75,7 @@
     "./player-permissions.css": "./dist/player-permissions.css",
     "./ore-player-permissions.css": "./dist/ore-player-permissions.css",
     "./chalkboard.css": "./dist/chalkboard.css",
+    "./start-menu.css": "./dist/start-menu.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",
@@ -84,7 +85,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.demo.json --noEmit",
-    "build": "npm run typecheck && tsup && node scripts/copy-assets.mjs && vite build",
+    "build": "npm run typecheck && tsup --dts-only && vite build --config vite.library.config.ts && node scripts/copy-assets.mjs && vite build",
     "pretest": "node scripts/fetch-references.mjs",
     "test": "playwright test",
     "test:pixels": "node scripts/fetch-references.mjs && playwright test --project=pixels",

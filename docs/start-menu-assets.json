@@ -1,0 +1,2324 @@
+{
+  "schemaVersion": 1,
+  "fixedSource": {
+    "archive": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "scope": "Finite37 whole PNG references:24 Start/CommonArt literals,8 used common button skins,1 actual inherited NewOffers tag,4 actual ExternalPopup common hollow1/close dependencies. Conservative shared-storage closure excluded. Six missing exact resources remain caller-owned unknowns.",
+  "resources": [
+    {
+      "key": "black",
+      "texture": "textures/ui/Black",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/Black.png",
+      "destination": "src/assets/emote-wheel/Black.png",
+      "bytes": 84,
+      "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e",
+      "dimensions": [
+        2,
+        2
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.copyright",
+          "pointer": "/controls/1/label_background/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              "100%sm + 4px",
+              "100%sm + 2px"
+            ],
+            "offset": [
+              -1,
+              -1
+            ],
+            "anchor_from": "top_left",
+            "anchor_to": "top_left"
+          },
+          "inheritedFrom": null
+        },
+        {
+          "node": "start.development_version",
+          "pointer": "/controls/1/label_background/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              "100%sm + 2px",
+              "100%sm + 2px"
+            ],
+            "anchor_from": "center",
+            "anchor_to": "center"
+          },
+          "inheritedFrom": null
+        },
+        {
+          "node": "start.version",
+          "pointer": "/controls/1/label_background/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              "100%sm + 2px",
+              "100%sm + 2px"
+            ],
+            "offset": [
+              1,
+              -1
+            ],
+            "anchor_from": "top_right",
+            "anchor_to": "top_right"
+          },
+          "inheritedFrom": null
+        },
+        {
+          "node": "start.trial_info",
+          "pointer": "/controls/1/label_background/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              "100%sm + 10px",
+              "100%sm + 10px"
+            ],
+            "anchor_from": "center",
+            "anchor_to": "center"
+          },
+          "inheritedFrom": null
+        },
+        {
+          "node": "common_art.title_panel_edu_desktop",
+          "pointer": "/controls/0/banner_control/controls/1/drop_shadow/texture",
+          "sourceFile": "resource_pack/ui/ui_art_assets_common.json",
+          "declaredGeometry": {
+            "size": [
+              "100%",
+              1
+            ],
+            "offset": [
+              0,
+              1
+            ],
+            "anchor_from": "bottom_middle",
+            "anchor_to": "bottom_middle"
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.copyright",
+          "pointer": "/controls/1/label_background/texture"
+        },
+        {
+          "node": "start.development_version",
+          "pointer": "/controls/1/label_background/texture"
+        },
+        {
+          "node": "start.version",
+          "pointer": "/controls/1/label_background/texture"
+        },
+        {
+          "node": "start.trial_info",
+          "pointer": "/controls/1/label_background/texture"
+        },
+        {
+          "node": "common_art.title_panel_edu_desktop",
+          "pointer": "/controls/0/banner_control/controls/1/drop_shadow/texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/Black.json",
+        "destination": "src/assets/emote-wheel/Black.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      },
+      "disposition": "existing-bank whole-byte reuse",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "errorGlyph",
+      "texture": "textures/ui/ErrorGlyph",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/ErrorGlyph.png",
+      "destination": "src/assets/gui-icons/error-glyph.png",
+      "bytes": 148,
+      "sha256": "1b274eea56592b90fcb3ce90f112d2cea9d4f1a31536fd7eeb8a432c740e1c1e",
+      "dimensions": [
+        13,
+        20
+      ],
+      "displaySize": [
+        15,
+        15
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.store_error_image",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              15,
+              15
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.store_error_image",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "key": "feedback",
+      "texture": "textures/ui/Feedback",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/Feedback.png",
+      "destination": "src/assets/gui-icons/feedback.png",
+      "bytes": 239,
+      "sha256": "62470352282f5d58dce2432324c5e54b2bacde6350c6472a3375266b68021e53",
+      "dimensions": [
+        32,
+        32
+      ],
+      "displaySize": [
+        16,
+        16
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.feedback_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              16,
+              16
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.feedback_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "key": "achievements",
+      "texture": "textures/ui/achievements",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/achievements.png",
+      "destination": "src/assets/gui-icons/achievements.png",
+      "bytes": 338,
+      "sha256": "9258092b1ea5febac5135b2d13406e23ed90703b4a489a775a60febbb2cabdc9",
+      "dimensions": [
+        11,
+        15
+      ],
+      "displaySize": [
+        16,
+        16
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.achievements_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              16,
+              16
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.achievements_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "key": "bellRinging",
+      "texture": "textures/ui/bell_ringing",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/bell_ringing.png",
+      "destination": "src/assets/start-menu/bell_ringing.png",
+      "bytes": 1207,
+      "sha256": "2a19a13a140a9ae0ba66f95f3079ce37ebf4defaae835b8447b6d1c73b7c9061",
+      "dimensions": [
+        448,
+        16
+      ],
+      "displaySize": [
+        16,
+        16
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.inbox_bell_animated_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              16,
+              16
+            ],
+            "uv": "@start.inbox_bell_animation",
+            "uv_size": [
+              16,
+              16
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.inbox_bell_animated_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy",
+      "animation": {
+        "raw": {
+          "anim_type": "flip_book",
+          "initial_uv": [
+            0,
+            0
+          ],
+          "frame_count": 28,
+          "frame_step": 8,
+          "fps": 10,
+          "play_event": "inbox_bell_animation_start",
+          "reset_event": "inbox_bell_animation_reset",
+          "looping": false
+        },
+        "interpretation": "Frame-step8/phase mapping not qualified. Only unchanged complete448x16 source texture is supplied; no native animation reconstructed."
+      }
+    },
+    {
+      "key": "buttonDark",
+      "texture": "textures/ui/button_borderless_dark",
+      "scope": "used common light/dark/disabled/focus button skins",
+      "entry": "resource_pack/textures/ui/button_borderless_dark.png",
+      "destination": "src/assets/player-permissions/button_borderless_dark.png",
+      "bytes": 137,
+      "sha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "dimensions": [
+        4,
+        4
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_buttons.dark_button_assets",
+          "pointer": "/$default_button_texture|default",
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common.button"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_buttons.dark_button_assets",
+          "pointer": "/$default_button_texture|default"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_dark.json",
+        "destination": "src/assets/player-permissions/button_borderless_dark.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "disposition": "existing-bank whole-byte reuse",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "buttonDarkHover",
+      "texture": "textures/ui/button_borderless_darkhover",
+      "scope": "used common light/dark/disabled/focus button skins",
+      "entry": "resource_pack/textures/ui/button_borderless_darkhover.png",
+      "destination": "src/assets/player-permissions/button_borderless_darkhover.png",
+      "bytes": 151,
+      "sha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b",
+      "dimensions": [
+        4,
+        4
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_buttons.dark_button_assets",
+          "pointer": "/$hover_button_texture|default",
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common.button"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_buttons.dark_button_assets",
+          "pointer": "/$hover_button_texture|default"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_darkhover.json",
+        "destination": "src/assets/player-permissions/button_borderless_darkhover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "disposition": "existing-bank whole-byte reuse",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "buttonDarkPressed",
+      "texture": "textures/ui/button_borderless_darkpressed",
+      "scope": "used common light/dark/disabled/focus button skins",
+      "entry": "resource_pack/textures/ui/button_borderless_darkpressed.png",
+      "destination": "src/assets/player-permissions/button_borderless_darkpressed.png",
+      "bytes": 145,
+      "sha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532",
+      "dimensions": [
+        4,
+        4
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_buttons.dark_button_assets",
+          "pointer": "/$pressed_button_texture|default",
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common.button"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_buttons.dark_button_assets",
+          "pointer": "/$pressed_button_texture|default"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_darkpressed.json",
+        "destination": "src/assets/player-permissions/button_borderless_darkpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "disposition": "existing-bank whole-byte reuse",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "buttonLight",
+      "texture": "textures/ui/button_borderless_light",
+      "scope": "used common light/dark/disabled/focus button skins",
+      "entry": "resource_pack/textures/ui/button_borderless_light.png",
+      "destination": "src/assets/document-viewer/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "dimensions": [
+        4,
+        4
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$default_button_texture|default",
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common.button"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$default_button_texture|default"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_light.json",
+        "destination": "src/assets/document-viewer/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "disposition": "existing-bank whole-byte reuse",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "buttonLightHover",
+      "texture": "textures/ui/button_borderless_lighthover",
+      "scope": "used common light/dark/disabled/focus button skins",
+      "entry": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "destination": "src/assets/document-viewer/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "dimensions": [
+        4,
+        4
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$hover_button_texture|default",
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common.button"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$hover_button_texture|default"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "destination": "src/assets/document-viewer/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "disposition": "existing-bank whole-byte reuse",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "buttonLightPressed",
+      "texture": "textures/ui/button_borderless_lightpressed",
+      "scope": "used common light/dark/disabled/focus button skins",
+      "entry": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "destination": "src/assets/document-viewer/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "dimensions": [
+        4,
+        4
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$pressed_button_texture|default",
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common.button"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$pressed_button_texture|default"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "destination": "src/assets/document-viewer/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "disposition": "existing-bank whole-byte reuse",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "closeDefault",
+      "texture": "textures/ui/close_button_default",
+      "scope": "actual ExternalPopup common hollow1/close dependency",
+      "entry": "resource_pack/textures/ui/close_button_default.png",
+      "destination": "src/assets/book/close_button_default.png",
+      "bytes": 163,
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "dimensions": [
+        15,
+        15
+      ],
+      "displaySize": [
+        21,
+        21
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "common.close_button",
+          "pointer": "/$close_button_default_texture|default",
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "declaredGeometry": {
+            "size": [
+              21,
+              21
+            ],
+            "offset": "$close_button_offset",
+            "anchor_from": "top_right",
+            "anchor_to": "top_right"
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common.close_button",
+          "pointer": "/$close_button_default_texture|default"
+        }
+      ],
+      "metadata": null,
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "key": "closeHover",
+      "texture": "textures/ui/close_button_hover",
+      "scope": "actual ExternalPopup common hollow1/close dependency",
+      "entry": "resource_pack/textures/ui/close_button_hover.png",
+      "destination": "src/assets/book/close_button_hover.png",
+      "bytes": 164,
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "dimensions": [
+        15,
+        15
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common.close_button",
+          "pointer": "/controls/1/hover@common.close_button_panel/$close_button_texture",
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "declaredGeometry": {},
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common.close_button",
+          "pointer": "/controls/1/hover@common.close_button_panel/$close_button_texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "key": "closePressed",
+      "texture": "textures/ui/close_button_pressed",
+      "scope": "actual ExternalPopup common hollow1/close dependency",
+      "entry": "resource_pack/textures/ui/close_button_pressed.png",
+      "destination": "src/assets/book/close_button_pressed.png",
+      "bytes": 1416,
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "dimensions": [
+        15,
+        15
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common.close_button",
+          "pointer": "/controls/2/pressed@common.close_button_panel/$close_button_texture",
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "declaredGeometry": {},
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common.close_button",
+          "pointer": "/controls/2/pressed@common.close_button_panel/$close_button_texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "key": "dialogHollow1",
+      "texture": "textures/ui/dialog_background_hollow_1",
+      "scope": "actual ExternalPopup common hollow1/close dependency",
+      "entry": "resource_pack/textures/ui/dialog_background_hollow_1.png",
+      "destination": "src/assets/start-menu/dialog_background_hollow_1.png",
+      "bytes": 364,
+      "sha256": "b18ab5da2bbdd12ca861962251603c555edee5479984366e836748d2e5702eb0",
+      "dimensions": [
+        18,
+        101
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common.dialog_background_hollow_1",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "dialog_background_hollow_common"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common.dialog_background_hollow_1",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/dialog_background_hollow_1.json",
+        "destination": "src/assets/start-menu/dialog_background_hollow_1.json",
+        "bytes": 96,
+        "sha256": "8c304b546103f6ecd0989cd55866194dbf195c78ea6959585c1e3fcd036bd837",
+        "raw": {
+          "nineslice_size": [
+            8,
+            23,
+            8,
+            76
+          ],
+          "base_size": [
+            18,
+            101
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "disabledButton",
+      "texture": "textures/ui/disabledButton",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/disabledButton.png",
+      "destination": "src/assets/start-menu/disabledButton.png",
+      "bytes": 88,
+      "sha256": "fdec1a2c4f6266e1e7c47887c2c292033c002b0046bacae670e3474177fa6e97",
+      "dimensions": [
+        3,
+        3
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.store_error_content",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {},
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.store_error_content",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/disabledButton.json",
+        "destination": "src/assets/start-menu/disabledButton.json",
+        "bytes": 60,
+        "sha256": "134a5c07632c3170963613013dacf31392a0ff0388391760148720c9ecee777d",
+        "raw": {
+          "nineslice_size": 2,
+          "base_size": [
+            3,
+            3
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": false,
+      "sliceQualification": "Unchanged source metadata has overlapping inset sums. Raw source-only; no clamping or public physical nine-slice interpretation is supplied."
+    },
+    {
+      "key": "buttonDisabled",
+      "texture": "textures/ui/disabledButtonNoBorder",
+      "scope": "used common light/dark/disabled/focus button skins",
+      "entry": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "destination": "src/assets/document-viewer/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "dimensions": [
+        2,
+        2
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$locked_button_texture|default",
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common.button"
+        },
+        {
+          "node": "common_buttons.dark_button_assets",
+          "pointer": "/$locked_button_texture|default",
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common.button"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$locked_button_texture|default"
+        },
+        {
+          "node": "common_buttons.dark_button_assets",
+          "pointer": "/$locked_button_texture|default"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "destination": "src/assets/document-viewer/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      },
+      "disposition": "existing-bank whole-byte reuse",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "flyout",
+      "texture": "textures/ui/flyout",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/flyout.png",
+      "destination": "src/assets/start-menu/flyout.png",
+      "bytes": 4251,
+      "sha256": "cc3daa59e9831c6b39460caa65283b8972bccbde43adccc2270ff4c4392e84ca",
+      "dimensions": [
+        21,
+        15
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.gathering_caption",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              "100%c + 6px",
+              "100%c + 12px"
+            ],
+            "anchor_from": "bottom_middle",
+            "anchor_to": "bottom_middle",
+            "keep_ratio": false
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.gathering_caption",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/flyout.json",
+        "destination": "src/assets/start-menu/flyout.json",
+        "bytes": 76,
+        "sha256": "2ae713b6c2b2922e981996993e991f0594defb61c15c5fea6ba075da696b41a4",
+        "raw": {
+          "nineslice_size": [
+            12,
+            1,
+            1,
+            9
+          ],
+          "base_size": [
+            21,
+            15
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "focusWhite",
+      "texture": "textures/ui/focus_border_white",
+      "scope": "used common light/dark/disabled/focus button skins",
+      "entry": "resource_pack/textures/ui/focus_border_white.png",
+      "destination": "src/assets/document-viewer/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_buttons.focus_border",
+          "pointer": "/$focus_border_texture|default",
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "declaredGeometry": {
+            "size": "$focus_border_size"
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_buttons.focus_border",
+          "pointer": "/$focus_border_texture|default"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/focus_border_white.json",
+        "destination": "src/assets/document-viewer/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      },
+      "disposition": "existing-bank whole-byte reuse",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "hangar",
+      "texture": "textures/ui/hangar",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/hangar.png",
+      "destination": "src/assets/start-menu/hangar.png",
+      "bytes": 157,
+      "sha256": "0a757e12c238251d97fb5c1b48caabc9ca89a45074dc988ed851dc8e5ba56eda",
+      "dimensions": [
+        32,
+        16
+      ],
+      "displaySize": [
+        32,
+        16
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.change_skin_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              32,
+              16
+            ],
+            "anchor_from": "left_middle",
+            "anchor_to": "left_middle"
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.change_skin_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "key": "alex",
+      "texture": "textures/ui/icon_alex",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/icon_alex.png",
+      "destination": "src/assets/start-menu/icon_alex.png",
+      "bytes": 314,
+      "sha256": "21ff712ac49fe7b0f932378d60485313f3153074faed4527b714b2b1a1b07f31",
+      "dimensions": [
+        24,
+        24
+      ],
+      "displaySize": [
+        16,
+        16
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.alex_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              16,
+              16
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.alex_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "key": "bell",
+      "texture": "textures/ui/icon_bell",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/icon_bell.png",
+      "destination": "src/assets/start-menu/icon_bell.png",
+      "bytes": 1751,
+      "sha256": "370a69a73d1f4c44afc28aa2fe4060745fe82a20c350f81f294c8931628b1f2b",
+      "dimensions": [
+        16,
+        16
+      ],
+      "displaySize": [
+        16,
+        16
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.inbox_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              16,
+              16
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.inbox_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "key": "mail",
+      "texture": "textures/ui/icon_mail",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/icon_mail.png",
+      "destination": "src/assets/gui-icons/icon-mail.png",
+      "bytes": 196,
+      "sha256": "4fbad75859fb93bcc3516619f103f368cc3fffc25d373051363519cc6bb359ed",
+      "dimensions": [
+        16,
+        16
+      ],
+      "displaySize": [
+        16,
+        16
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.inbox_icon_mail",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              16,
+              16
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.inbox_icon_mail",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "key": "invite",
+      "texture": "textures/ui/invite_base",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/invite_base.png",
+      "destination": "src/assets/start-menu/invite_base.png",
+      "bytes": 233,
+      "sha256": "31033fa84bd1d29cd2d37d12e0e11fd4b53b82976bf736a4eddbff5645140a6c",
+      "dimensions": [
+        20,
+        20
+      ],
+      "displaySize": [
+        20,
+        20
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.invite_notification_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              20,
+              20
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.invite_notification_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "key": "inviteNumberBackground",
+      "texture": "textures/ui/invite_number_background",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/invite_number_background.png",
+      "destination": "src/assets/start-menu/invite_number_background.png",
+      "bytes": 137,
+      "sha256": "3b5971f66286b93fdf7b764e6ff969c4d64ea9cdc842984a75490fd45b2adf56",
+      "dimensions": [
+        4,
+        4
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.notification_button_text_background",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {},
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.notification_button_text_background",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/invite_number_background.json",
+        "destination": "src/assets/book/book_texteditbox_hover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "newOffers",
+      "texture": "textures/ui/newOffersIcon",
+      "scope": "Start new_offers_icon inherited common_store.new_offer_icon/tag",
+      "entry": "resource_pack/textures/ui/newOffersIcon.png",
+      "destination": "src/assets/start-menu/newOffersIcon.png",
+      "bytes": 135,
+      "sha256": "ac9ea85c3ebb03f4997cb6c40c129c52ddce241eebf18546353d68a7e3872665",
+      "dimensions": [
+        21,
+        15
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_store.new_offer_icon",
+          "pointer": "/$tag_texture",
+          "sourceFile": "resource_pack/ui/store_common.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common_store.tag"
+        },
+        {
+          "node": "common_store.tag",
+          "pointer": "/$tag_texture|default",
+          "sourceFile": "resource_pack/ui/store_common.json",
+          "declaredGeometry": {
+            "size": [
+              "100%c + 4px",
+              15
+            ]
+          },
+          "inheritedFrom": null
+        },
+        {
+          "node": "common_store.tag",
+          "pointer": "/$tag_texture|default",
+          "sourceFile": "resource_pack/ui/store_common.json",
+          "declaredGeometry": {
+            "size": [
+              "100%c + 4px",
+              15
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_store.new_offer_icon",
+          "pointer": "/$tag_texture"
+        },
+        {
+          "node": "common_store.tag",
+          "pointer": "/$tag_texture|default"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/newOffersIcon.json",
+        "destination": "src/assets/start-menu/newOffersIcon.json",
+        "bytes": 76,
+        "sha256": "468413f467056851854698e08b424e390ed541d035948c452261426e84152374",
+        "raw": {
+          "nineslice_size": [
+            10,
+            1,
+            1,
+            5
+          ],
+          "base_size": [
+            21,
+            15
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "preview",
+      "texture": "textures/ui/previewIcon",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/previewIcon.png",
+      "destination": "src/assets/start-menu/previewIcon.png",
+      "bytes": 170,
+      "sha256": "295192e77eba9a3bf44986f150db7dfd7a94f561ce2d1473e3aaced93fc7eab2",
+      "dimensions": [
+        21,
+        15
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.new_tag",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              "100%c + 4px",
+              15
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.new_tag",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/previewIcon.json",
+        "destination": "src/assets/start-menu/newOffersIcon.json",
+        "bytes": 76,
+        "sha256": "468413f467056851854698e08b424e390ed541d035948c452261426e84152374",
+        "raw": {
+          "nineslice_size": [
+            10,
+            1,
+            1,
+            5
+          ],
+          "base_size": [
+            21,
+            15
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "profile",
+      "texture": "textures/ui/profile_glyph_combined",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/profile_glyph_combined.png",
+      "destination": "src/assets/start-menu/profile_glyph_combined.png",
+      "bytes": 213,
+      "sha256": "7e2da4a743a169c6b4128df03ae2536d74a9ad74ba7f081e5a3ddb0bfd79154d",
+      "dimensions": [
+        11,
+        12
+      ],
+      "displaySize": [
+        11,
+        12
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.manage_accounts_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              11,
+              12
+            ],
+            "anchor_from": "center",
+            "anchor_to": "center"
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.manage_accounts_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "key": "realmsDefault",
+      "texture": "textures/ui/realms_button_borderless_default",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/realms_button_borderless_default.png",
+      "destination": "src/assets/start-menu/realms_button_borderless_default.png",
+      "bytes": 138,
+      "sha256": "72d18ea9ee2660d1fede6e716af6484e1e75444a2fd5a7c49be3358b178ec7f6",
+      "dimensions": [
+        3,
+        3
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.realms_button",
+          "pointer": "/$default_button_texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "start.main_button_dark"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.realms_button",
+          "pointer": "/$default_button_texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/realms_button_borderless_default.json",
+        "destination": "src/assets/document-viewer/HowToPlayDivider.json",
+        "bytes": 60,
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            3,
+            3
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "realmsHover",
+      "texture": "textures/ui/realms_button_borderless_hover",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/realms_button_borderless_hover.png",
+      "destination": "src/assets/start-menu/realms_button_borderless_hover.png",
+      "bytes": 137,
+      "sha256": "fce7185c34718f11920631f8bde069edefaf39a2e8afa2101f36d9d54ec74f41",
+      "dimensions": [
+        3,
+        3
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.realms_button",
+          "pointer": "/$hover_button_texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "start.main_button_dark"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.realms_button",
+          "pointer": "/$hover_button_texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/realms_button_borderless_hover.json",
+        "destination": "src/assets/document-viewer/HowToPlayDivider.json",
+        "bytes": 60,
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            3,
+            3
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "realmsPressed",
+      "texture": "textures/ui/realms_button_borderless_hover_pressed",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/realms_button_borderless_hover_pressed.png",
+      "destination": "src/assets/start-menu/realms_button_borderless_hover_pressed.png",
+      "bytes": 138,
+      "sha256": "ce24b51251b50a784365f4b301cbc33560a459f66938720873d9a23bef7f5287",
+      "dimensions": [
+        3,
+        3
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.realms_button",
+          "pointer": "/$pressed_button_texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "start.main_button_dark"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.realms_button",
+          "pointer": "/$pressed_button_texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/realms_button_borderless_hover_pressed.json",
+        "destination": "src/assets/document-viewer/HowToPlayDivider.json",
+        "bytes": 60,
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            3,
+            3
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "redDot",
+      "texture": "textures/ui/red_dot",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/red_dot.png",
+      "destination": "src/assets/start-menu/red_dot.png",
+      "bytes": 111,
+      "sha256": "ea53d39a689565663e74950c377167b0f20a7ddc92a08b5ee9baba259ed98193",
+      "dimensions": [
+        7,
+        8
+      ],
+      "displaySize": [
+        7,
+        8
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.unread_notification_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              7,
+              8
+            ],
+            "anchor_from": "top_right",
+            "anchor_to": "top_right"
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.unread_notification_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "key": "saleRibbon",
+      "texture": "textures/ui/saleribbon",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/saleribbon.png",
+      "destination": "src/assets/start-menu/saleribbon.png",
+      "bytes": 218,
+      "sha256": "79875ee658bbc1ade6fe88d19bbbc50d38362b5bf5c29b198fd7fc73c43187a9",
+      "dimensions": [
+        15,
+        15
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.sale_ribbon_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {},
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.sale_ribbon_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": {
+        "entry": "resource_pack/textures/ui/saleribbon.json",
+        "destination": "src/assets/start-menu/saleribbon.json",
+        "bytes": 84,
+        "sha256": "3b588fb20534b1630ca1e4825b53eb484cc24e3212c93434f9c0c2b9b14d28fd",
+        "raw": {
+          "nineslice_size": [
+            5,
+            5,
+            6,
+            8
+          ],
+          "base_size": [
+            15,
+            15
+          ]
+        }
+      },
+      "disposition": "new whole-byte copy",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "title",
+      "texture": "textures/ui/title",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/title.png",
+      "destination": "src/assets/start-menu/title.png",
+      "bytes": 86796,
+      "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662",
+      "dimensions": [
+        1937,
+        333
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "common_art.title_image",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/ui_art_assets_common.json",
+          "declaredGeometry": {},
+          "inheritedFrom": null
+        },
+        {
+          "node": "common_art.title_panel_win10",
+          "pointer": "/size",
+          "sourceFile": "resource_pack/ui/ui_art_assets_common.json",
+          "declaredGeometry": {
+            "size": [
+              "55%",
+              "18.85%x"
+            ],
+            "offset": [
+              0,
+              "10%"
+            ],
+            "anchor_from": "top_middle",
+            "anchor_to": "top_middle"
+          },
+          "inheritedFrom": null
+        },
+        {
+          "node": "common_art.title_panel_pocket",
+          "pointer": "/size",
+          "sourceFile": "resource_pack/ui/ui_art_assets_common.json",
+          "declaredGeometry": {
+            "size": [
+              "55%",
+              "18.85%x"
+            ],
+            "offset": [
+              0,
+              "5%"
+            ],
+            "anchor_from": "top_middle",
+            "anchor_to": "top_middle"
+          },
+          "inheritedFrom": null
+        },
+        {
+          "node": "common_art.title_panel_osx",
+          "pointer": "/size",
+          "sourceFile": "resource_pack/ui/ui_art_assets_common.json",
+          "declaredGeometry": {
+            "size": [
+              "55%",
+              "19.37%x"
+            ],
+            "offset": [
+              0,
+              "10%"
+            ],
+            "anchor_from": "top_middle",
+            "anchor_to": "top_middle"
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "common_art.title_image",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "key": "underlineFocus",
+      "texture": "textures/ui/underline_focus",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/underline_focus.png",
+      "destination": "src/assets/start-menu/underline_focus.png",
+      "bytes": 85,
+      "sha256": "2195dcbf031628c32d97555379c210b3b5a70c463920d44809799c2c4e7790e3",
+      "dimensions": [
+        1,
+        1
+      ],
+      "displaySize": null,
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.main_menu_button",
+          "pointer": "/controls/1/hover/controls/0/label_hover@common.single_line_label/$underline_control/0/underline_hover@common.underline/$texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common_buttons.underline_button"
+        },
+        {
+          "node": "start.main_menu_button",
+          "pointer": "/controls/2/pressed/controls/0/label_pressed@common.single_line_label/$underline_control/0/underline_pressed@common.underline/$texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {},
+          "inheritedFrom": "common_buttons.underline_button"
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.main_menu_button",
+          "pointer": "/controls/1/hover/controls/0/label_hover@common.single_line_label/$underline_control/0/underline_hover@common.underline/$texture"
+        },
+        {
+          "node": "start.main_menu_button",
+          "pointer": "/controls/2/pressed/controls/0/label_pressed@common.single_line_label/$underline_control/0/underline_pressed@common.underline/$texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "key": "update",
+      "texture": "textures/ui/update",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/update.png",
+      "destination": "src/assets/start-menu/update.png",
+      "bytes": 212,
+      "sha256": "d41d558937398fa35826f8220b8a170b2710c3e3e8ea37df952dc00641ffc246",
+      "dimensions": [
+        11,
+        21
+      ],
+      "displaySize": [
+        11,
+        21
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.update_prompt_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              11,
+              21
+            ],
+            "anchor_from": "top_right",
+            "anchor_to": "top_right"
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.update_prompt_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "key": "xbox",
+      "texture": "textures/ui/xbox4",
+      "scope": "direct Start/CommonArt",
+      "entry": "resource_pack/textures/ui/xbox4.png",
+      "destination": "src/assets/start-menu/xbox4.png",
+      "bytes": 1255,
+      "sha256": "1a84471e4810c2a1b47704b2bbda5dafde66a974a17cbabecc24a49ce52fa90f",
+      "dimensions": [
+        27,
+        27
+      ],
+      "displaySize": [
+        27,
+        27
+      ],
+      "sourceDisplayGeometry": [
+        {
+          "node": "start.Xbox_icon",
+          "pointer": "/texture",
+          "sourceFile": "resource_pack/ui/start_screen.json",
+          "declaredGeometry": {
+            "size": [
+              27,
+              27
+            ]
+          },
+          "inheritedFrom": null
+        }
+      ],
+      "sourceUses": [
+        {
+          "node": "start.Xbox_icon",
+          "pointer": "/texture"
+        }
+      ],
+      "metadata": null,
+      "disposition": "new whole-byte copy"
+    }
+  ],
+  "missing": [
+    {
+      "key": "eduGreenTile",
+      "texture": "textures/ui/edu_green_tile",
+      "reason": "No exact whole PNG in pinned public release. Caller resource required; no visual substitute.",
+      "sourceUses": [
+        {
+          "node": "common_art.title_panel_edu_desktop",
+          "pointer": "/controls/0/banner_control/controls/0/banner/texture"
+        }
+      ]
+    },
+    {
+      "key": "eduFeedback",
+      "texture": "textures/ui/feedback",
+      "reason": "No exact whole PNG in pinned public release. Caller resource required; no visual substitute.",
+      "sourceUses": [
+        {
+          "node": "start.feedback_icon_edu",
+          "pointer": "/$feedback_texture"
+        }
+      ]
+    },
+    {
+      "key": "eduFeedbackHover",
+      "texture": "textures/ui/feedback_hover",
+      "reason": "No exact whole PNG in pinned public release. Caller resource required; no visual substitute.",
+      "sourceUses": [
+        {
+          "node": "start.feedback_icon_edu",
+          "pointer": "/variables/0/$feedback_texture"
+        }
+      ]
+    },
+    {
+      "key": "externalLink",
+      "texture": "textures/ui/icon_external_link",
+      "reason": "No exact whole PNG in pinned public release. Caller resource required; no visual substitute.",
+      "sourceUses": [
+        {
+          "node": "start.edu_ai_lesson_crafter_button_content",
+          "pointer": "/controls/1/padded_icon@common.empty_panel/controls/0/icon/texture"
+        },
+        {
+          "node": "start.external_browser_button_content",
+          "pointer": "/controls/2/external_link_icon/texture"
+        }
+      ]
+    },
+    {
+      "key": "eduTitle",
+      "texture": "textures/ui/title_edu",
+      "reason": "No exact whole PNG in pinned public release. Caller resource required; no visual substitute.",
+      "sourceUses": [
+        {
+          "node": "common_art.title_image_edu",
+          "pointer": "/variables/0/$title_texture"
+        }
+      ]
+    },
+    {
+      "key": "eduPreviewTitle",
+      "texture": "textures/ui/title_edu_preview",
+      "reason": "No exact whole PNG in pinned public release. Caller resource required; no visual substitute.",
+      "sourceUses": [
+        {
+          "node": "common_art.title_image_edu",
+          "pointer": "/variables/1/$title_texture"
+        }
+      ]
+    }
+  ],
+  "license": {
+    "entry": "LICENSE.md",
+    "destination": "src/assets/start-menu/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "physicalDimensionsPolicy": "dimensions/sourceSize are the complete PNG pixel extent; displaySize/sourceDisplayGeometry describe separate declared source logical geometry. No aspect-fit or native-renderer assertion.",
+  "slicePolicy": "Raw metadata retained unchanged; nineslice_size is logical LTRB and base_size remains upstream. Not a newly inferred physical slicing contract.",
+  "newFiles": [
+    {
+      "path": "src/assets/start-menu/bell_ringing.png",
+      "bytes": 1207,
+      "sha256": "2a19a13a140a9ae0ba66f95f3079ce37ebf4defaae835b8447b6d1c73b7c9061"
+    },
+    {
+      "path": "src/assets/start-menu/dialog_background_hollow_1.png",
+      "bytes": 364,
+      "sha256": "b18ab5da2bbdd12ca861962251603c555edee5479984366e836748d2e5702eb0"
+    },
+    {
+      "path": "src/assets/start-menu/dialog_background_hollow_1.json",
+      "bytes": 96,
+      "sha256": "8c304b546103f6ecd0989cd55866194dbf195c78ea6959585c1e3fcd036bd837"
+    },
+    {
+      "path": "src/assets/start-menu/disabledButton.png",
+      "bytes": 88,
+      "sha256": "fdec1a2c4f6266e1e7c47887c2c292033c002b0046bacae670e3474177fa6e97"
+    },
+    {
+      "path": "src/assets/start-menu/disabledButton.json",
+      "bytes": 60,
+      "sha256": "134a5c07632c3170963613013dacf31392a0ff0388391760148720c9ecee777d"
+    },
+    {
+      "path": "src/assets/start-menu/flyout.png",
+      "bytes": 4251,
+      "sha256": "cc3daa59e9831c6b39460caa65283b8972bccbde43adccc2270ff4c4392e84ca"
+    },
+    {
+      "path": "src/assets/start-menu/flyout.json",
+      "bytes": 76,
+      "sha256": "2ae713b6c2b2922e981996993e991f0594defb61c15c5fea6ba075da696b41a4"
+    },
+    {
+      "path": "src/assets/start-menu/hangar.png",
+      "bytes": 157,
+      "sha256": "0a757e12c238251d97fb5c1b48caabc9ca89a45074dc988ed851dc8e5ba56eda"
+    },
+    {
+      "path": "src/assets/start-menu/icon_alex.png",
+      "bytes": 314,
+      "sha256": "21ff712ac49fe7b0f932378d60485313f3153074faed4527b714b2b1a1b07f31"
+    },
+    {
+      "path": "src/assets/start-menu/icon_bell.png",
+      "bytes": 1751,
+      "sha256": "370a69a73d1f4c44afc28aa2fe4060745fe82a20c350f81f294c8931628b1f2b"
+    },
+    {
+      "path": "src/assets/start-menu/invite_base.png",
+      "bytes": 233,
+      "sha256": "31033fa84bd1d29cd2d37d12e0e11fd4b53b82976bf736a4eddbff5645140a6c"
+    },
+    {
+      "path": "src/assets/start-menu/invite_number_background.png",
+      "bytes": 137,
+      "sha256": "3b5971f66286b93fdf7b764e6ff969c4d64ea9cdc842984a75490fd45b2adf56"
+    },
+    {
+      "path": "src/assets/start-menu/newOffersIcon.png",
+      "bytes": 135,
+      "sha256": "ac9ea85c3ebb03f4997cb6c40c129c52ddce241eebf18546353d68a7e3872665"
+    },
+    {
+      "path": "src/assets/start-menu/newOffersIcon.json",
+      "bytes": 76,
+      "sha256": "468413f467056851854698e08b424e390ed541d035948c452261426e84152374"
+    },
+    {
+      "path": "src/assets/start-menu/previewIcon.png",
+      "bytes": 170,
+      "sha256": "295192e77eba9a3bf44986f150db7dfd7a94f561ce2d1473e3aaced93fc7eab2"
+    },
+    {
+      "path": "src/assets/start-menu/profile_glyph_combined.png",
+      "bytes": 213,
+      "sha256": "7e2da4a743a169c6b4128df03ae2536d74a9ad74ba7f081e5a3ddb0bfd79154d"
+    },
+    {
+      "path": "src/assets/start-menu/realms_button_borderless_default.png",
+      "bytes": 138,
+      "sha256": "72d18ea9ee2660d1fede6e716af6484e1e75444a2fd5a7c49be3358b178ec7f6"
+    },
+    {
+      "path": "src/assets/start-menu/realms_button_borderless_hover.png",
+      "bytes": 137,
+      "sha256": "fce7185c34718f11920631f8bde069edefaf39a2e8afa2101f36d9d54ec74f41"
+    },
+    {
+      "path": "src/assets/start-menu/realms_button_borderless_hover_pressed.png",
+      "bytes": 138,
+      "sha256": "ce24b51251b50a784365f4b301cbc33560a459f66938720873d9a23bef7f5287"
+    },
+    {
+      "path": "src/assets/start-menu/red_dot.png",
+      "bytes": 111,
+      "sha256": "ea53d39a689565663e74950c377167b0f20a7ddc92a08b5ee9baba259ed98193"
+    },
+    {
+      "path": "src/assets/start-menu/saleribbon.png",
+      "bytes": 218,
+      "sha256": "79875ee658bbc1ade6fe88d19bbbc50d38362b5bf5c29b198fd7fc73c43187a9"
+    },
+    {
+      "path": "src/assets/start-menu/saleribbon.json",
+      "bytes": 84,
+      "sha256": "3b588fb20534b1630ca1e4825b53eb484cc24e3212c93434f9c0c2b9b14d28fd"
+    },
+    {
+      "path": "src/assets/start-menu/title.png",
+      "bytes": 86796,
+      "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662"
+    },
+    {
+      "path": "src/assets/start-menu/underline_focus.png",
+      "bytes": 85,
+      "sha256": "2195dcbf031628c32d97555379c210b3b5a70c463920d44809799c2c4e7790e3"
+    },
+    {
+      "path": "src/assets/start-menu/update.png",
+      "bytes": 212,
+      "sha256": "d41d558937398fa35826f8220b8a170b2710c3e3e8ea37df952dc00641ffc246"
+    },
+    {
+      "path": "src/assets/start-menu/xbox4.png",
+      "bytes": 1255,
+      "sha256": "1a84471e4810c2a1b47704b2bbda5dafde66a974a17cbabecc24a49ce52fa90f"
+    },
+    {
+      "path": "src/assets/start-menu/LICENSE.md",
+      "bytes": 222,
+      "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+    }
+  ],
+  "referencedWholeFiles": [
+    {
+      "path": "src/assets/emote-wheel/Black.png",
+      "bytes": 84,
+      "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/emote-wheel/Black.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/gui-icons/error-glyph.png",
+      "bytes": 148,
+      "sha256": "1b274eea56592b90fcb3ce90f112d2cea9d4f1a31536fd7eeb8a432c740e1c1e",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/gui-icons/feedback.png",
+      "bytes": 239,
+      "sha256": "62470352282f5d58dce2432324c5e54b2bacde6350c6472a3375266b68021e53",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/gui-icons/achievements.png",
+      "bytes": 338,
+      "sha256": "9258092b1ea5febac5135b2d13406e23ed90703b4a489a775a60febbb2cabdc9",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/start-menu/bell_ringing.png",
+      "bytes": 1207,
+      "sha256": "2a19a13a140a9ae0ba66f95f3079ce37ebf4defaae835b8447b6d1c73b7c9061",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/player-permissions/button_borderless_dark.png",
+      "bytes": 137,
+      "sha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/player-permissions/button_borderless_dark.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/player-permissions/button_borderless_darkhover.png",
+      "bytes": 151,
+      "sha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/player-permissions/button_borderless_darkhover.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/player-permissions/button_borderless_darkpressed.png",
+      "bytes": 145,
+      "sha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/player-permissions/button_borderless_darkpressed.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/document-viewer/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/document-viewer/button_borderless_light.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/document-viewer/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/document-viewer/button_borderless_lighthover.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/document-viewer/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/document-viewer/button_borderless_lightpressed.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/book/close_button_default.png",
+      "bytes": 163,
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/book/close_button_hover.png",
+      "bytes": 164,
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/book/close_button_pressed.png",
+      "bytes": 1416,
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/start-menu/dialog_background_hollow_1.png",
+      "bytes": 364,
+      "sha256": "b18ab5da2bbdd12ca861962251603c555edee5479984366e836748d2e5702eb0",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/dialog_background_hollow_1.json",
+      "bytes": 96,
+      "sha256": "8c304b546103f6ecd0989cd55866194dbf195c78ea6959585c1e3fcd036bd837",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/disabledButton.png",
+      "bytes": 88,
+      "sha256": "fdec1a2c4f6266e1e7c47887c2c292033c002b0046bacae670e3474177fa6e97",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/disabledButton.json",
+      "bytes": 60,
+      "sha256": "134a5c07632c3170963613013dacf31392a0ff0388391760148720c9ecee777d",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/document-viewer/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/document-viewer/disabledButtonNoBorder.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/start-menu/flyout.png",
+      "bytes": 4251,
+      "sha256": "cc3daa59e9831c6b39460caa65283b8972bccbde43adccc2270ff4c4392e84ca",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/flyout.json",
+      "bytes": 76,
+      "sha256": "2ae713b6c2b2922e981996993e991f0594defb61c15c5fea6ba075da696b41a4",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/document-viewer/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/document-viewer/focus_border_white.json",
+      "bytes": 60,
+      "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/start-menu/hangar.png",
+      "bytes": 157,
+      "sha256": "0a757e12c238251d97fb5c1b48caabc9ca89a45074dc988ed851dc8e5ba56eda",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/icon_alex.png",
+      "bytes": 314,
+      "sha256": "21ff712ac49fe7b0f932378d60485313f3153074faed4527b714b2b1a1b07f31",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/icon_bell.png",
+      "bytes": 1751,
+      "sha256": "370a69a73d1f4c44afc28aa2fe4060745fe82a20c350f81f294c8931628b1f2b",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/gui-icons/icon-mail.png",
+      "bytes": 196,
+      "sha256": "4fbad75859fb93bcc3516619f103f368cc3fffc25d373051363519cc6bb359ed",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/start-menu/invite_base.png",
+      "bytes": 233,
+      "sha256": "31033fa84bd1d29cd2d37d12e0e11fd4b53b82976bf736a4eddbff5645140a6c",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/invite_number_background.png",
+      "bytes": 137,
+      "sha256": "3b5971f66286b93fdf7b764e6ff969c4d64ea9cdc842984a75490fd45b2adf56",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/book/book_texteditbox_hover.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/start-menu/newOffersIcon.png",
+      "bytes": 135,
+      "sha256": "ac9ea85c3ebb03f4997cb6c40c129c52ddce241eebf18546353d68a7e3872665",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/newOffersIcon.json",
+      "bytes": 76,
+      "sha256": "468413f467056851854698e08b424e390ed541d035948c452261426e84152374",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/previewIcon.png",
+      "bytes": 170,
+      "sha256": "295192e77eba9a3bf44986f150db7dfd7a94f561ce2d1473e3aaced93fc7eab2",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/profile_glyph_combined.png",
+      "bytes": 213,
+      "sha256": "7e2da4a743a169c6b4128df03ae2536d74a9ad74ba7f081e5a3ddb0bfd79154d",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/realms_button_borderless_default.png",
+      "bytes": 138,
+      "sha256": "72d18ea9ee2660d1fede6e716af6484e1e75444a2fd5a7c49be3358b178ec7f6",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/document-viewer/HowToPlayDivider.json",
+      "bytes": 60,
+      "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "disposition": "existing-bank whole-byte reuse"
+    },
+    {
+      "path": "src/assets/start-menu/realms_button_borderless_hover.png",
+      "bytes": 137,
+      "sha256": "fce7185c34718f11920631f8bde069edefaf39a2e8afa2101f36d9d54ec74f41",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/realms_button_borderless_hover_pressed.png",
+      "bytes": 138,
+      "sha256": "ce24b51251b50a784365f4b301cbc33560a459f66938720873d9a23bef7f5287",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/red_dot.png",
+      "bytes": 111,
+      "sha256": "ea53d39a689565663e74950c377167b0f20a7ddc92a08b5ee9baba259ed98193",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/saleribbon.png",
+      "bytes": 218,
+      "sha256": "79875ee658bbc1ade6fe88d19bbbc50d38362b5bf5c29b198fd7fc73c43187a9",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/saleribbon.json",
+      "bytes": 84,
+      "sha256": "3b588fb20534b1630ca1e4825b53eb484cc24e3212c93434f9c0c2b9b14d28fd",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/title.png",
+      "bytes": 86796,
+      "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/underline_focus.png",
+      "bytes": 85,
+      "sha256": "2195dcbf031628c32d97555379c210b3b5a70c463920d44809799c2c4e7790e3",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/update.png",
+      "bytes": 212,
+      "sha256": "d41d558937398fa35826f8220b8a170b2710c3e3e8ea37df952dc00641ffc246",
+      "disposition": "new whole-byte copy"
+    },
+    {
+      "path": "src/assets/start-menu/xbox4.png",
+      "bytes": 1255,
+      "sha256": "1a84471e4810c2a1b47704b2bbda5dafde66a974a17cbabecc24a49ce52fa90f",
+      "disposition": "new whole-byte copy"
+    }
+  ],
+  "sourceUsageQualification": "Exact source declarations and finite actual template dependencies only. Availability does not mean every image is instantiated or drawn in a given runtime branch. In particular store_error_content is declaration-only in the inspected normal Start composition."
+}

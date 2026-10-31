@@ -1,6 +1,10 @@
 # Bedrock 组件范围
 
-当前导出 158 个组件，目录 158 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 175 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+新增开始菜单六组件覆盖固定的普通 /新玩家 /试用 /教育 /旧版按钮组、五种标题布局与账号 /角色 /页脚组合；使用已解析宿主状态和渲染槽位。实际浏览器与包验证范围见 [START_MENU_QA.md](START_MENU_QA.md)，不据源码实现宣称原生整页验收。
+
+当前导出 164 个组件，目录 164 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 181 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+
+开始菜单新增六个公开部分：正式97项中96通过、1设备条件跳过，12个完整Web源平面共193,355像素RGBA零差；React18 /19实际181值包和默认Vite开发 /生产四场景通过。37个完整PNG与可选公开字体、TGA绘制分别验证，原生整页 /角色 /panorama仍待验，见 [START_MENU_QA.md](START_MENU_QA.md)。
 
 新增黑板三组件保留独立可复用的真实textarea与30×16锁开关，十张原图复用，尺寸和权限由宿主提供。新增24与旧相关80项同批104通过、实际React18 /19的175值包与公开12项通过；皮肤平面严格零差不等于原生整页验收，见 [CHALKBOARD_QA.md](CHALKBOARD_QA.md)。
 
@@ -54,6 +58,7 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 | 表情屏幕与轮盘（3） | EmoteWheelScreen、EmoteWheel、EmoteSlotPreview |
 | 双栏文档（3） | DocumentViewer、DocumentHeading、DocumentParagraph |
 | 玩家权限Classic（4） | PlayerPermissions、PermissionLevelSelect、PermissionToggleRow、PermissionPlayerRow |
+| 开始菜单（6） | StartMenu、StartMenuTitle、StartMenuActionStack、StartMenuAuxiliaryActions、StartMenuProfile、StartMenuFooter |
 | 玩家权限OreUI（5） | OrePlayerPermissions、OrePermissionLevelSelect、OrePermissionToggleRow、OrePlayerCard、OreSwitch |
 | 黑板编辑（3） | ChalkboardEditor、ChalkboardTextField、ChalkboardLock |
 

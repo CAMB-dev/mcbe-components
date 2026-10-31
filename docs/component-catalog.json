@@ -661,6 +661,14 @@
       {"name":"OrePlayerCard","status":"implemented","validation":"linebox123_120pass_3skip_default_rgba_preserved_native_unverified","fidelity":"ore_source_player_card_host_avatar_subtitle_role_art_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"},
       {"name":"OreSwitch","status":"implemented","validation":"stronger_source107_client_overlay_bevel_modal_package_public_pass_native_unverified","fidelity":"ore_source_switch_geometry_host_art_native_checkbox_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"}
     ],
+    "start_menu": [
+      {"name":"StartMenu","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
+      {"name":"StartMenuTitle","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
+      {"name":"StartMenuActionStack","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
+      {"name":"StartMenuAuxiliaryActions","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
+      {"name":"StartMenuProfile","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
+      {"name":"StartMenuFooter","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"}
+    ],
     "chalkboard": [
       {"name":"ChalkboardEditor","status":"implemented","validation":"source_client_contract_package_public_pass_native_unverified","fidelity":"classic_source_host_sized_editor_independent_edit_permission_and_lock_no_world_backend_native_unverified","source":"resource_pack/ui/chalkboard_screen.json and common/edu inheritance, fixed v1.26.60.5","details":"docs/CHALKBOARD_QA.md"},
       {"name":"ChalkboardTextField","status":"implemented","validation":"source_client_contract_package_public_pass_native_unverified","fidelity":"native_textarea_original_six_pixel_nine_slice_common_center_and_clip_geometry_native_unverified","source":"resource_pack/ui/chalkboard_screen.json and common.multiline_text_edit_box, fixed v1.26.60.5","details":"docs/CHALKBOARD_QA.md"},
@@ -704,7 +712,7 @@
     ]
   },
   "publicExports": {
-    "components": 158,
+    "components": 164,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -715,7 +723,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 175,
+    "runtimeValues": 181,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 6,
