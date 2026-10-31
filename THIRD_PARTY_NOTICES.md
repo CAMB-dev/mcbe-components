@@ -156,3 +156,8 @@ UGC Viewer and Immersive Reader reuse 21 unchanged complete original PNGs from t
 
 
 Portfolio reuses 17 unchanged complete original PNG bodies from existing banks and adds six whole original PNGs (book binding/frame and four photo corners), two unmodified texture-metadata JSONs and the original Mojang license from the same fixed public Bedrock sample release. Its 23 semantic material keys and 12 raw metadata descriptions are recorded in `docs/portfolio-assets.json`; the upstream notice remains at `src/assets/portfolio/LICENSE.md`. The dormant header_bar definition is not bundled. The nine missing Portfolio page-turn/conversion state textures and the unresolved screenshot-frame texture remain explicit host-supplied resources, with no drawn or silently aliased replacements. These Mojang resources retain their upstream terms and the Minecraft EULA, separately from this project's MIT code; no private fonts, native captures or runtime service providers are distributed.
+
+
+## Classic Invite interface materials
+
+The private Invite registry references 58 whole original images and 31 exact metadata entries from the fixed Mojang bedrock-samples v1.26.60.5 archive. Existing byte-identical resources are reused; 15 whole PNGs, seven deduplicated metadata files and the original LICENSE.md are added under src/assets/invite (copied to dist/assets/invite). See docs/invite-assets.json for exact original paths and hashes. These resources retain their upstream rights and are not relicensed by the library code license. Missing platform_icon and dynamic account/profile/controller visuals are host inputs; no replacement art or native provider is supplied.

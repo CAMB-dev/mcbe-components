@@ -661,6 +661,13 @@
       {"name":"OrePlayerCard","status":"implemented","validation":"linebox123_120pass_3skip_default_rgba_preserved_native_unverified","fidelity":"ore_source_player_card_host_avatar_subtitle_role_art_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"},
       {"name":"OreSwitch","status":"implemented","validation":"stronger_source107_client_overlay_bevel_modal_package_public_pass_native_unverified","fidelity":"ore_source_switch_geometry_host_art_native_checkbox_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"}
     ],
+    "invite": [
+      {"name":"InviteScreen","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"},
+      {"name":"InvitePersonRow","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"},
+      {"name":"InviteCategory","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"},
+      {"name":"InvitePagination","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"},
+      {"name":"InviteFooter","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"}
+    ],
     "portfolio": [
       {"name":"Portfolio","status":"implemented","validation":"source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified","source":"resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5","details":"docs/PORTFOLIO_QA.md"},
       {"name":"PortfolioPhoto","status":"implemented","validation":"source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified","source":"resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5","details":"docs/PORTFOLIO_QA.md"},
@@ -741,7 +748,7 @@
     ]
   },
   "publicExports": {
-    "components": 183,
+    "components": 188,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -752,7 +759,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 200,
+    "runtimeValues": 205,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 6,

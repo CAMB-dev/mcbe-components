@@ -1,0 +1,4 @@
+.mc-invite-skin { display:block; position:absolute; inset:0; pointer-events:none; background-repeat:no-repeat; image-rendering:pixelated; }
+.mc-invite-skin__clip { display:block; position:absolute; overflow:hidden; }
+.mc-invite-skin__patch { display:block; position:absolute; inset:0; background-repeat:no-repeat; image-rendering:pixelated; }
+@media (forced-colors:active) { .mc-invite-skin { display:none; } }

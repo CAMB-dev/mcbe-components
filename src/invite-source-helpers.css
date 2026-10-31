@@ -1,0 +1,10 @@
+/* Dormant profiles: explicit host boxes, no default InviteScreen mount. */
+.mc-invite-source-helper,
+.mc-invite-unknown-source { display:inline-block; position:relative; vertical-align:top; box-sizing:border-box; overflow:visible; }
+.mc-invite-source-helper[hidden] { display:none; }
+.mc-invite-source-helper__background { display:block; position:absolute; }
+.mc-invite-source-helper__text { display:block; position:absolute; left:0; top:0; z-index:5; color:#fff; text-shadow:none; white-space:pre-wrap; font-weight:normal; }
+.mc-invite-source-helper__text--loading { left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; }
+.mc-invite-source-helper__offline { display:block; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); image-rendering:pixelated; }
+.mc-invite-source-helper__hover { display:block; position:absolute; inset:0; overflow:visible; z-index:30; pointer-events:none; }
+.mc-invite-source-helper__inherited { display:block; position:absolute; inset:0; }

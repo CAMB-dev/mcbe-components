@@ -1,0 +1,1644 @@
+{
+  "status": "FINITE_SOURCE_WEB_FORMAL_PACKAGE_INSTALLED_PUBLIC_VERIFIED_NATIVE_UNVERIFIED",
+  "source": {
+    "edition": "Bedrock Classic / JSON UI",
+    "release": "v1.26.60.5-full",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "zipBytes": 169569258,
+    "zipSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "file": "resource_pack/ui/invite_screen.json",
+    "bytes": 60750,
+    "sha256": "2c7d0ef61efd0f69d8966dc1f5f10b52e0ac8ff740aaa23f4b13fac6cd33e2d0",
+    "original": {
+      "path": ".cache/invite-source-independent-01/RAWFILES/resource_pack/ui/invite_screen.json",
+      "sha256": "2c7d0ef61efd0f69d8966dc1f5f10b52e0ac8ff740aaa23f4b13fac6cd33e2d0"
+    }
+  },
+  "inventory": {
+    "ownDefinitions": 92,
+    "ownNestedControls": 160,
+    "ownBindingSites": 41,
+    "ownButtonMappingSites": 5,
+    "ownVariableSites": 196,
+    "ownConditionalStateSites": 17,
+    "authoredTokenNames": 129,
+    "conservativeClosureNodes": 218,
+    "conservativeResolvedNodes": 212,
+    "conservativeRootReachableNames": 207,
+    "warning": "Syntax/graph counts, not native mounted controls, runtime platform branches or public export counts.",
+    "evidence": {
+      "FINAL.json": {
+        "path": ".cache/invite-source-independent-01/FINAL.json",
+        "sha256": "8629708f13dc6ee36d4ec4d695a376c488b3741965052cffae4943c1595045ec"
+      },
+      "RAWFILES.json": {
+        "path": ".cache/invite-source-independent-01/RAWFILES.json",
+        "sha256": "a2c6eeb4f53fa04a2617efe58cd45d3912f43b0e82d3b844d391de8a43937d6b"
+      },
+      "GROUPS.json": {
+        "path": ".cache/invite-source-independent-01/GROUPS.json",
+        "sha256": "d0e6524e426a48b3f26cbe9223e9c9dec8e30ebfd1bae6e5e225e65bd29ab63f"
+      },
+      "CLAUSES.json": {
+        "path": ".cache/invite-source-independent-01/CLAUSES.json",
+        "sha256": "a7df8b4ca9bf978cbc8a0c0ad95780cb8e81a3e975ae501ac7d63026f51d759e"
+      },
+      "RESOURCES.json": {
+        "path": ".cache/invite-source-independent-01/RESOURCES.json",
+        "sha256": "44a21e0901e1deeef29df984392f6d8b8e0209a66f7676a4db0088980ced87f8"
+      },
+      "ROOT-REACHABILITY.json": {
+        "path": ".cache/invite-source-independent-01/ROOT-REACHABILITY.json",
+        "sha256": "87b5e226799e894656ce14268596127255b92d6fcc1b52ccc6fd5c39db04ea01"
+      }
+    },
+    "specEvidence": {
+      "SPEC.md": {
+        "path": ".cache/invite-component-spec-01/SPEC.md",
+        "sha256": "d915d22a6ed667f7b108de9411465fa4c753e32c3866d5e2dbf1d15705bc73c8"
+      },
+      "INVENTORY.json": {
+        "path": ".cache/invite-component-spec-01/INVENTORY.json",
+        "sha256": "694b0617fcf7add47a34a94a635a436092b5b8f8093fb53958b6e4d1c8bd3142"
+      },
+      "INVENTORY-SUMMARY.json": {
+        "path": ".cache/invite-component-spec-01/INVENTORY-SUMMARY.json",
+        "sha256": "a64b98764c8ae3cb51f838f0214bd8453acdc1ed55419edf770d75b64396ad4c"
+      },
+      "CLAUSEMAP.json": {
+        "path": ".cache/invite-component-spec-01/CLAUSEMAP.json",
+        "sha256": "d6967b3c42c70749446bea894cd032def510ca93c3c8b6bf745f6b79223f187a"
+      },
+      "CANDIDATE-TYPES.ts": {
+        "path": ".cache/invite-component-spec-01/CANDIDATE-TYPES.ts",
+        "sha256": "dbcbb144b2b79404286530b7811d7a37a6fab5128c4d70325d8fc3a6cae7cce5"
+      }
+    }
+  },
+  "definitions": [
+    {
+      "name": "invite.account_link_icon",
+      "sourceKey": "account_link_icon",
+      "line": 79,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.account_link_image",
+      "sourceKey": "account_link_image",
+      "line": 50,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.add_friend_button",
+      "sourceKey": "add_friend_button@common_buttons.light_content_button_control_content",
+      "line": 1873,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.add_member_button",
+      "sourceKey": "add_member_button@common_buttons.light_content_button_control_content",
+      "line": 1929,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.black_border",
+      "sourceKey": "black_border",
+      "line": 10,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.black_border_hover",
+      "sourceKey": "black_border_hover@invite.black_border",
+      "line": 15,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.checkbox_panel",
+      "sourceKey": "checkbox_panel",
+      "line": 253,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.checked_hover_panel",
+      "sourceKey": "checked_hover_panel@invite.checkbox_panel",
+      "line": 305,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.checked_locked_image",
+      "sourceKey": "checked_locked_image@common.checkbox_image",
+      "line": 30,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.checked_locked_panel",
+      "sourceKey": "checked_locked_panel@invite.checkbox_panel",
+      "line": 283,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.checked_panel",
+      "sourceKey": "checked_panel@invite.checkbox_panel",
+      "line": 261,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.frame_label",
+      "sourceKey": "frame_label@invite.label",
+      "line": 1372,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_background",
+      "sourceKey": "friend_background@invite.black_border",
+      "line": 380,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_background_borderless",
+      "sourceKey": "friend_background_borderless@invite.grey_borderless_locked",
+      "line": 388,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_background_hover",
+      "sourceKey": "friend_background_hover@invite.black_border_hover",
+      "line": 384,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_button_test",
+      "sourceKey": "friend_button_test@invite.msa_friend_button",
+      "line": 1708,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_grid_current_game_label",
+      "sourceKey": "friend_grid_current_game_label@invite.friend_label",
+      "line": 352,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_grid_third_party_tag",
+      "sourceKey": "friend_grid_third_party_tag@invite.friend_label",
+      "line": 366,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_grid_xbl_gamertag",
+      "sourceKey": "friend_grid_xbl_gamertag@invite.friend_label",
+      "line": 338,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_label",
+      "sourceKey": "friend_label",
+      "line": 331,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_linked_account_grid_item_template",
+      "sourceKey": "friend_linked_account_grid_item_template",
+      "line": 1068,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friend_panel",
+      "sourceKey": "friend_panel",
+      "line": 1382,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.friends_category",
+      "sourceKey": "friends_category",
+      "line": 1311,
+      "plannedOwner": "InviteCategory",
+      "exposure": "public source component"
+    },
+    {
+      "name": "invite.friends_pagination_controls",
+      "sourceKey": "friends_pagination_controls",
+      "line": 1238,
+      "plannedOwner": "InvitePagination",
+      "exposure": "public source component"
+    },
+    {
+      "name": "invite.gamepad_helpers",
+      "sourceKey": "gamepad_helpers",
+      "line": 2095,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.gamerpic",
+      "sourceKey": "gamerpic",
+      "line": 105,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.gamerpic_panel",
+      "sourceKey": "gamerpic_panel",
+      "line": 135,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.grey_borderless_locked",
+      "sourceKey": "grey_borderless_locked@invite.black_border",
+      "line": 25,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.horizontal_button_stack_panel",
+      "sourceKey": "horizontal_button_stack_panel",
+      "line": 2009,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.horizontal_invite_panel",
+      "sourceKey": "horizontal_invite_panel@common_dialogs.main_panel_one_button",
+      "line": 1762,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.hover_friend_button",
+      "sourceKey": "hover_friend_button",
+      "line": 392,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.invite_button_content",
+      "sourceKey": "invite_button_content",
+      "line": 1824,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.invite_button_content_hover",
+      "sourceKey": "invite_button_content_hover@invite.invite_button_content",
+      "line": 1864,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.invite_button_content_locked",
+      "sourceKey": "invite_button_content_locked@invite.invite_button_content",
+      "line": 1870,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.invite_button_content_pressed",
+      "sourceKey": "invite_button_content_pressed@invite.invite_button_content",
+      "line": 1867,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.invite_party_panel",
+      "sourceKey": "invite_party_panel",
+      "line": 1656,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.invite_screen",
+      "sourceKey": "invite_screen@common.base_screen",
+      "line": 2113,
+      "plannedOwner": "InviteScreen",
+      "exposure": "public source component"
+    },
+    {
+      "name": "invite.invite_screen_content",
+      "sourceKey": "invite_screen_content",
+      "line": 2125,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.left_arrow_image",
+      "sourceKey": "left_arrow_image",
+      "line": 38,
+      "plannedOwner": "InvitePagination",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.linked_friend_button",
+      "sourceKey": "linked_friend_button@common.checkbox",
+      "line": 921,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.linked_friend_button_layout",
+      "sourceKey": "linked_friend_button_layout",
+      "line": 585,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.linked_hover_friend_button",
+      "sourceKey": "linked_hover_friend_button",
+      "line": 411,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.loading_friends",
+      "sourceKey": "loading_friends@invite.panel_text",
+      "line": 64,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.msa_friend_button",
+      "sourceKey": "msa_friend_button@common.checkbox",
+      "line": 768,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.msa_friend_button_layout",
+      "sourceKey": "msa_friend_button_layout",
+      "line": 429,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.msa_friend_grid_item_template",
+      "sourceKey": "msa_friend_grid_item_template",
+      "line": 998,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.no_platform_friends_frame_label",
+      "sourceKey": "no_platform_friends_frame_label@invite.frame_label",
+      "line": 1754,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.no_xbox_live_friends_frame_label",
+      "sourceKey": "no_xbox_live_friends_frame_label@invite.frame_label",
+      "line": 1741,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.offline_image",
+      "sourceKey": "offline_image@invite.status_image",
+      "line": 226,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.offline_linked_account_friend_grid_item",
+      "sourceKey": "offline_linked_account_friend_grid_item@invite.friend_linked_account_grid_item_template",
+      "line": 1108,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.offline_linked_account_friend_list_grid",
+      "sourceKey": "offline_linked_account_friend_list_grid",
+      "line": 1220,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.offline_platform_friend_grid_item",
+      "sourceKey": "offline_platform_friend_grid_item@invite.platform_friend_grid_item_template",
+      "line": 1125,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.offline_platform_friend_list_grid",
+      "sourceKey": "offline_platform_friend_list_grid",
+      "line": 1184,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.offline_xbox_live_friend_grid_item",
+      "sourceKey": "offline_xbox_live_friend_grid_item@invite.msa_friend_grid_item_template",
+      "line": 1087,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.offline_xbox_live_friend_list_grid",
+      "sourceKey": "offline_xbox_live_friend_list_grid",
+      "line": 1148,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.online_image",
+      "sourceKey": "online_image@invite.status_image",
+      "line": 214,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.online_indicator",
+      "sourceKey": "online_indicator",
+      "line": 238,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.online_linked_account_friend_grid_item",
+      "sourceKey": "online_linked_account_friend_grid_item@invite.friend_linked_account_grid_item_template",
+      "line": 1096,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.online_linked_account_friend_list_grid",
+      "sourceKey": "online_linked_account_friend_list_grid",
+      "line": 1202,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.online_platform_friend_grid_item",
+      "sourceKey": "online_platform_friend_grid_item@invite.platform_friend_grid_item_template",
+      "line": 1120,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.online_platform_friend_list_grid",
+      "sourceKey": "online_platform_friend_list_grid",
+      "line": 1166,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.online_xbox_live_friend_grid_item",
+      "sourceKey": "online_xbox_live_friend_grid_item@invite.msa_friend_grid_item_template",
+      "line": 1078,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.online_xbox_live_friend_list_grid",
+      "sourceKey": "online_xbox_live_friend_list_grid",
+      "line": 1130,
+      "plannedOwner": "InviteCategory",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.panel_text",
+      "sourceKey": "panel_text",
+      "line": 55,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.platform_friend_button",
+      "sourceKey": "platform_friend_button@common.checkbox",
+      "line": 845,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.platform_friend_button_layout",
+      "sourceKey": "platform_friend_button_layout",
+      "line": 484,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.platform_friend_grid_item_template",
+      "sourceKey": "platform_friend_grid_item_template",
+      "line": 1058,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.platform_icon",
+      "sourceKey": "platform_icon",
+      "line": 19,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.platform_icon_panel",
+      "sourceKey": "platform_icon_panel",
+      "line": 189,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.profile_button",
+      "sourceKey": "profile_button@common_buttons.light_content_button_control_content",
+      "line": 1976,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.profile_button_content",
+      "sourceKey": "profile_button_content",
+      "line": null,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.profile_button_content_hover",
+      "sourceKey": "profile_button_content_hover@invite.profile_button_content",
+      "line": 1919,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.profile_button_content_locked",
+      "sourceKey": "profile_button_content_locked@invite.profile_button_content",
+      "line": 1925,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.profile_button_content_pressed",
+      "sourceKey": "profile_button_content_pressed@invite.profile_button_content",
+      "line": 1922,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.progress_bar_and_scrolling_content_panel",
+      "sourceKey": "progress_bar_and_scrolling_content_panel",
+      "line": 1712,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.right_arrow_image",
+      "sourceKey": "right_arrow_image",
+      "line": 44,
+      "plannedOwner": "InvitePagination",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.scrolling_area",
+      "sourceKey": "scrolling_area@common.scrolling_panel",
+      "line": 1812,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.scrolling_content_stack",
+      "sourceKey": "scrolling_content_stack",
+      "line": 1387,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.send_button",
+      "sourceKey": "send_button@common_buttons.light_content_button_control_content",
+      "line": 1946,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.status_image",
+      "sourceKey": "status_image",
+      "line": 209,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.template_linked_friend_button_layout",
+      "sourceKey": "template_linked_friend_button_layout",
+      "line": 742,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.template_msa_friend_button_layout",
+      "sourceKey": "template_msa_friend_button_layout",
+      "line": 724,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.template_platform_friend_button_layout",
+      "sourceKey": "template_platform_friend_button_layout",
+      "line": 733,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.third_party_profile_pic",
+      "sourceKey": "third_party_profile_pic",
+      "line": 117,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.third_party_profile_pic_panel",
+      "sourceKey": "third_party_profile_pic_panel",
+      "line": 172,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.unchecked_hover_panel",
+      "sourceKey": "unchecked_hover_panel@invite.checkbox_panel",
+      "line": 316,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.unchecked_locked_image",
+      "sourceKey": "unchecked_locked_image@common.checkbox_image",
+      "line": 34,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.unchecked_locked_panel",
+      "sourceKey": "unchecked_locked_panel@invite.checkbox_panel",
+      "line": 294,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.unchecked_panel",
+      "sourceKey": "unchecked_panel@invite.checkbox_panel",
+      "line": 272,
+      "plannedOwner": "InvitePersonRow",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.vertical_buttons_bottom_panel",
+      "sourceKey": "vertical_buttons_bottom_panel",
+      "line": 2081,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.vertical_buttons_top_panel",
+      "sourceKey": "vertical_buttons_top_panel",
+      "line": 2062,
+      "plannedOwner": "InviteFooter",
+      "exposure": "private source-profile layer/helper"
+    },
+    {
+      "name": "invite.vertical_invite_panel",
+      "sourceKey": "vertical_invite_panel@common_dialogs.main_panel_two_buttons",
+      "line": 1778,
+      "plannedOwner": "InviteScreen",
+      "exposure": "private source-profile layer/helper"
+    }
+  ],
+  "groups": [
+    {
+      "collection": "online_platform_friends",
+      "gridDefinition": "invite.online_platform_friend_list_grid",
+      "gridDimensionBinding": "#online_platform_friend_grid_dimension",
+      "toggleName": "toggle_platform_invite_online",
+      "rawGrid": {
+        "type": "grid",
+        "grid_item_template": "online_platform_friend_grid_item",
+        "grid_dimension_binding": "#online_platform_friend_grid_dimension",
+        "collection_name": "$collection_name",
+        "$toggle_invite_name": "toggle_platform_invite_online",
+        "anchor_to": "top_left",
+        "anchor_from": "top_left",
+        "layer": 2,
+        "size": [
+          "100%",
+          "default"
+        ],
+        "offset": [
+          3,
+          0
+        ],
+        "bindings": [
+          {
+            "binding_name": "#online_platform_friend_grid_dimension"
+          }
+        ]
+      }
+    },
+    {
+      "collection": "online_linked_account_friends",
+      "gridDefinition": "invite.online_linked_account_friend_list_grid",
+      "gridDimensionBinding": "#online_linked_account_friend_grid_dimension",
+      "toggleName": "toggle_linked_account_invite_online",
+      "rawGrid": {
+        "type": "grid",
+        "grid_item_template": "online_linked_account_friend_grid_item",
+        "grid_dimension_binding": "#online_linked_account_friend_grid_dimension",
+        "collection_name": "$collection_name",
+        "$toggle_invite_name": "toggle_linked_account_invite_online",
+        "anchor_to": "top_left",
+        "anchor_from": "top_left",
+        "layer": 2,
+        "size": [
+          "100%",
+          "default"
+        ],
+        "offset": [
+          3,
+          0
+        ],
+        "bindings": [
+          {
+            "binding_name": "#online_linked_account_friend_grid_dimension"
+          }
+        ]
+      }
+    },
+    {
+      "collection": "online_xbox_live_friends",
+      "gridDefinition": "invite.online_xbox_live_friend_list_grid",
+      "gridDimensionBinding": "#online_xbox_live_friend_grid_dimension",
+      "toggleName": "toggle_xbox_live_invite_online",
+      "rawGrid": {
+        "type": "grid",
+        "grid_item_template": "online_xbox_live_friend_grid_item",
+        "grid_dimension_binding": "#online_xbox_live_friend_grid_dimension",
+        "collection_name": "$collection_name",
+        "$toggle_invite_name": "toggle_xbox_live_invite_online",
+        "anchor_to": "top_left",
+        "anchor_from": "top_left",
+        "layer": 2,
+        "size": [
+          "100%",
+          "default"
+        ],
+        "offset": [
+          3,
+          0
+        ],
+        "bindings": [
+          {
+            "binding_name": "#online_xbox_live_friend_grid_dimension"
+          }
+        ]
+      }
+    },
+    {
+      "collection": "offline_platform_friends",
+      "gridDefinition": "invite.offline_platform_friend_list_grid",
+      "gridDimensionBinding": "#offline_platform_friend_grid_dimension",
+      "toggleName": "toggle_platform_invite_offline",
+      "rawGrid": {
+        "type": "grid",
+        "grid_item_template": "offline_platform_friend_grid_item",
+        "grid_dimension_binding": "#offline_platform_friend_grid_dimension",
+        "collection_name": "$collection_name",
+        "$toggle_invite_name": "toggle_platform_invite_offline",
+        "anchor_to": "top_left",
+        "anchor_from": "top_left",
+        "layer": 2,
+        "size": [
+          "100%",
+          "default"
+        ],
+        "offset": [
+          3,
+          0
+        ],
+        "bindings": [
+          {
+            "binding_name": "#offline_platform_friend_grid_dimension"
+          }
+        ]
+      }
+    },
+    {
+      "collection": "offline_linked_account_friends",
+      "gridDefinition": "invite.offline_linked_account_friend_list_grid",
+      "gridDimensionBinding": "#offline_linked_account_friend_grid_dimension",
+      "toggleName": "toggle_linked_account_invite_offline",
+      "rawGrid": {
+        "type": "grid",
+        "grid_item_template": "offline_linked_account_friend_grid_item",
+        "grid_dimension_binding": "#offline_linked_account_friend_grid_dimension",
+        "collection_name": "$collection_name",
+        "$toggle_invite_name": "toggle_linked_account_invite_offline",
+        "anchor_to": "top_left",
+        "anchor_from": "top_left",
+        "layer": 2,
+        "size": [
+          "100%",
+          "default"
+        ],
+        "offset": [
+          3,
+          0
+        ],
+        "bindings": [
+          {
+            "binding_name": "#offline_linked_account_friend_grid_dimension"
+          }
+        ]
+      }
+    },
+    {
+      "collection": "offline_xbox_live_friends",
+      "gridDefinition": "invite.offline_xbox_live_friend_list_grid",
+      "gridDimensionBinding": "#offline_xbox_live_friend_grid_dimension",
+      "toggleName": "toggle_xbox_live_invite_offline",
+      "rawGrid": {
+        "type": "grid",
+        "grid_item_template": "offline_xbox_live_friend_grid_item",
+        "grid_dimension_binding": "#offline_xbox_live_friend_grid_dimension",
+        "collection_name": "$collection_name",
+        "$toggle_invite_name": "toggle_xbox_live_invite_offline",
+        "anchor_to": "top_left",
+        "anchor_from": "top_left",
+        "layer": 2,
+        "size": [
+          "100%",
+          "default"
+        ],
+        "offset": [
+          3,
+          0
+        ],
+        "bindings": [
+          {
+            "binding_name": "#offline_xbox_live_friend_grid_dimension"
+          }
+        ]
+      }
+    }
+  ],
+  "sourceRules": {
+    "vertical": "use_vertical_button_stack_panel and (not is_inviting_to_realm or can_manage_members)",
+    "desktopFrame": [
+      317,
+      "availableHeight - 10"
+    ],
+    "pocketFrame": [
+      "availableWidth * 0.703215",
+      "availableHeight - 4"
+    ],
+    "bodies": {
+      "horizontal": [
+        "frameWidth - 16",
+        "frameHeight - 65"
+      ],
+      "vertical": [
+        "frameWidth - 16",
+        "frameHeight - 99"
+      ],
+      "offset": [
+        0,
+        23
+      ]
+    },
+    "addFriendIncluded": "!isInvitingToRealm && supportsAddFriend",
+    "addMemberIncluded": "canManageMembers",
+    "sendEnabled": "Not inferred from selected count",
+    "rowSizes": {
+      "xboxLiveAndPlatform": [
+        "parentWidth - 7",
+        30
+      ],
+      "linkedAccount": [
+        "parentWidth - 7",
+        56
+      ],
+      "checkbox": [
+        10,
+        10
+      ],
+      "profile": [
+        20,
+        20
+      ],
+      "profileInner": [
+        18,
+        18
+      ],
+      "platform": [
+        15,
+        15
+      ],
+      "platformInner": [
+        13,
+        13
+      ],
+      "statusOriginal": [
+        7,
+        7
+      ],
+      "statusAuthoredBox": [
+        8,
+        8
+      ]
+    },
+    "crossPlatformEnabled": "Only linked-account/Xbox wrappers; platform stays independent",
+    "crossPlatformHeaders": "Xbox visibility specifically, not linked OR",
+    "independentBindings": [
+      "six categoryVisible values",
+      "noPlatformFriendsVisible",
+      "noXboxLiveFriendsVisible",
+      "noXboxLiveFriendsText",
+      "isLoading",
+      "findCrossPlatformFriendsEnabled",
+      "sendButtonText",
+      "gamepadHelperVisible",
+      "buttonADescription",
+      "closeButtonVisible",
+      "isPartySystemAvailable",
+      "canInviteToParty"
+    ],
+    "party": {
+      "panel": [
+        "96%",
+        40
+      ],
+      "control": [
+        64,
+        32
+      ],
+      "image": [
+        30,
+        16
+      ],
+      "imageAnchor": "top_left",
+      "controlAnchor": "right_middle",
+      "controlOffset": [
+        15,
+        7
+      ],
+      "toggle": "invite_to_party",
+      "state": "#invite_to_party",
+      "option": "#invite_to_party_binding",
+      "enabled": "#can_invite_to_party"
+    },
+    "pagination": {
+      "independent": [
+        "included",
+        "visible",
+        "previousEnabled",
+        "nextEnabled",
+        "counterLabel"
+      ],
+      "previous": "common_buttons.light_glyph_button",
+      "next": "common_buttons.light_content_button",
+      "arrows": [
+        7,
+        9
+      ],
+      "sourceSize": [
+        "100%y",
+        "100%"
+      ],
+      "finiteWebSquare": [
+        30,
+        30
+      ],
+      "actionsDoNot": [
+        "fetch",
+        "increment page",
+        "clear selection",
+        "compute counter"
+      ]
+    },
+    "scroll": {
+      "pane": [
+        "W - 2",
+        "H"
+      ],
+      "offset": [
+        1,
+        0
+      ],
+      "scrollbar": [
+        5,
+        "H - 4"
+      ],
+      "padRight": 1,
+      "padLeft": 0,
+      "background": false,
+      "warning": "Authored inner scroll control remains; browser default scrollbar hidden, outer frame explicit finite size."
+    },
+    "loading": {
+      "originalStrip": [
+        640,
+        8
+      ],
+      "viewport": [
+        64,
+        8
+      ],
+      "frameCount": 10,
+      "step": 64,
+      "fps": 10,
+      "reversible": true,
+      "nativeTimingQualified": false
+    },
+    "checkboxStates": [
+      "checked",
+      "unchecked",
+      "checked-hover",
+      "unchecked-hover",
+      "checked-locked",
+      "unchecked-locked",
+      "checked-locked-hover",
+      "unchecked-locked-hover"
+    ],
+    "checkboxBackground": "Normal mainbanners for checked/unchecked and hover; locked-hover reuses dedicated locked glyphs",
+    "frameLexicalScope": "common.common_panel dynamic hollow1/2 remain common, not same-named common_dialogs internals",
+    "text": "Source normal/description0.8 and explicit shadow=false retained; native font selector, advances, wrapping and AA unknown",
+    "grid": "Explicit nonnegative integer columns/rows and finite product; records fit capacity, ids unique per scope; cellWidth>7 or RangeError, no negative-cell repair.",
+    "footerTwoAdds": "Both included controls retained; horizontal source-two-adds-zero-fill Send width may be0 and is not given fabricated clickable width; vertical source-two-adds-overlay is explicitly marked.",
+    "unknownLabel": "Root frame_label renders only authored own label properties under finite-web-own-label-properties, retains unresolved invite.label; no recovered inherited font/default layout.",
+    "shadow": "Authored false where specified; A-helper description true uses explicitly declared one-logical-pixel Classic Web shadow. Native text rendering unqualified."
+  },
+  "actionTargets": [
+    "button.add_friend",
+    "button.add_member",
+    "button.send_invites",
+    "button.view_profile",
+    "button.previous_friends_page",
+    "button.next_friends_page",
+    "button.menu_exit"
+  ],
+  "selectionProvenance": {
+    "binding": "#toggle_invite_state",
+    "authoredPressedButtonName": "button.menu_friend_select",
+    "caveat": "Static common.toggle routes menu_select/menu_ok to themselves; not proof it consumes this variable as native social transport."
+  },
+  "resources": {
+    "auditedLiteralKeysIncludingSharedDefaults": 59,
+    "availablePNGIdentities": 58,
+    "directLiteralKeys": [
+      {
+        "texture": "textures/ui/MainBannersHover",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/MainBannersHover.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/MainBannersHover.png",
+            "bytes": 80,
+            "sha256": "c8e899024b825e2baae02b4588e1182d3812019f621859856b045bfc50c41488",
+            "decodedSize": [
+              3,
+              3
+            ],
+            "rawMetadata": {
+              "path": "resource_pack/textures/ui/MainBannersHover.json",
+              "bytes": 60,
+              "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+              "value": {
+                "nineslice_size": 1,
+                "base_size": [
+                  3,
+                  3
+                ]
+              },
+              "cachePath": ".cache/invite-source-independent-01/RAWASSETS/resource_pack/textures/ui/MainBannersHover.json"
+            },
+            "wholeByteReuse": []
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/arrow_l_default",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/arrow_l_default.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/arrow_l_default.png",
+            "bytes": 1132,
+            "sha256": "2930e3d4bff0fa83d0cf13bb3f4c0e30542e41e50b604a19e83c472a614c9369",
+            "decodedSize": [
+              7,
+              9
+            ],
+            "wholeByteReuse": []
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/arrow_r_default",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/arrow_r_default.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/arrow_r_default.png",
+            "bytes": 97,
+            "sha256": "6aeb95fcac2611b74fa003e8de6ac561a6d320512200f1da7d794ad41a5719d3",
+            "decodedSize": [
+              7,
+              9
+            ],
+            "wholeByteReuse": []
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/checkbox_check_locked",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/checkbox_check_locked.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/checkbox_check_locked.png",
+            "bytes": 137,
+            "sha256": "31e32a1cdacc7c4798341f9fc29fe24976ba96585f4d160d2a2e9c555482eae6",
+            "decodedSize": [
+              10,
+              10
+            ],
+            "wholeByteReuse": []
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/checkbox_space_locked",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/checkbox_space_locked.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/checkbox_space_locked.png",
+            "bytes": 104,
+            "sha256": "0afd9228fe07e34a3aedc944c3ad8f09b14a05f387b64069623d693f74a9b8b9",
+            "decodedSize": [
+              10,
+              10
+            ],
+            "wholeByteReuse": []
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/control",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/control.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/control.png",
+            "bytes": 71,
+            "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+            "decodedSize": [
+              2,
+              2
+            ],
+            "rawMetadata": {
+              "path": "resource_pack/textures/ui/control.json",
+              "bytes": 60,
+              "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+              "value": {
+                "nineslice_size": 1,
+                "base_size": [
+                  2,
+                  2
+                ]
+              },
+              "cachePath": ".cache/invite-source-independent-01/RAWASSETS/resource_pack/textures/ui/control.json"
+            },
+            "wholeByteReuse": [
+              "src/assets/jigsaw/control.png"
+            ]
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/disabledButtonNoBorder",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/disabledButtonNoBorder.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+            "bytes": 88,
+            "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+            "decodedSize": [
+              2,
+              2
+            ],
+            "rawMetadata": {
+              "path": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+              "bytes": 60,
+              "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+              "value": {
+                "nineslice_size": 1,
+                "base_size": [
+                  2,
+                  2
+                ]
+              },
+              "cachePath": ".cache/invite-source-independent-01/RAWASSETS/resource_pack/textures/ui/disabledButtonNoBorder.json"
+            },
+            "wholeByteReuse": [
+              "src/assets/document-viewer/disabledButtonNoBorder.png",
+              "src/assets/emote-wheel/disabledButtonNoBorder.png",
+              "src/assets/player-permissions/disabledButtonNoBorder.png"
+            ]
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/mainbanners",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/mainbanners.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/mainbanners.png",
+            "bytes": 80,
+            "sha256": "eb517774e883832c233bf2c57c7eac4d58fdbc5302c6b30b046fd84c96d94547",
+            "decodedSize": [
+              3,
+              3
+            ],
+            "rawMetadata": {
+              "path": "resource_pack/textures/ui/mainbanners.json",
+              "bytes": 60,
+              "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+              "value": {
+                "nineslice_size": 1,
+                "base_size": [
+                  3,
+                  3
+                ]
+              },
+              "cachePath": ".cache/invite-source-independent-01/RAWASSETS/resource_pack/textures/ui/mainbanners.json"
+            },
+            "wholeByteReuse": []
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/offline",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/offline.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/offline.png",
+            "bytes": 124,
+            "sha256": "a05d38826a76ff5abb58f3f6c1a38fb1975cc1dcd5d6be336f7b73c359c7aec9",
+            "decodedSize": [
+              7,
+              7
+            ],
+            "wholeByteReuse": []
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/online",
+        "status": "available-exact",
+        "exactImagePaths": [
+          "resource_pack/textures/ui/online.png"
+        ],
+        "images": [
+          {
+            "path": "resource_pack/textures/ui/online.png",
+            "bytes": 116,
+            "sha256": "e2782521b081320bc3785780e409b64bc8cbd22799207f532bb54398f0f91094",
+            "decodedSize": [
+              7,
+              7
+            ],
+            "wholeByteReuse": []
+          }
+        ]
+      },
+      {
+        "texture": "textures/ui/platform_icon",
+        "status": "absent-all-audited-image-extensions",
+        "exactImagePaths": [],
+        "images": []
+      }
+    ],
+    "missingPlatformIcon": {
+      "texture": "textures/ui/platform_icon",
+      "references": [
+        {
+          "definition": "invite.platform_icon",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/platform_icon/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "exactImagePaths": [],
+      "caseFoldImagePaths": [],
+      "status": "absent-all-audited-image-extensions",
+      "images": []
+    },
+    "wholeOriginalOnly": true,
+    "exactCaseAndMetadataRetained": true,
+    "materialQualification": false
+  },
+  "dormantHelpers": [
+    "black_border_hover",
+    "friend_background_hover",
+    "friend_background_borderless",
+    "grey_borderless_locked",
+    "hover_friend_button",
+    "linked_hover_friend_button",
+    "loading_friends",
+    "offline_image",
+    "panel_text",
+    "friend_button_test"
+  ],
+  "unresolvedSourceClauses": {
+    "localizationCandidates": [
+      "invite.OfflineFriends",
+      "invite.OnlineFriends",
+      "invite.title",
+      "invite.titleRealms"
+    ],
+    "nestedAliasCandidate": [
+      "invite.friend_button_layout"
+    ],
+    "authoredUnresolvedParent": [
+      "invite.label"
+    ]
+  },
+  "hostSeams": [
+    "profile_image_renderer and opaque profile_image_options",
+    "third-party texture/file_system resolution",
+    "missing platform_icon",
+    "controller face-icon artwork/descriptions",
+    "localized strings and provider flags",
+    "friends/account/authentication/profile lookup",
+    "pagination fetching",
+    "invites/realm/party/profile actions"
+  ],
+  "webPolicyBoundaries": [
+    "Finite profile/layout/scale must be explicit; not native absolute placement",
+    "owner-window shared request task after synchronous native handlers; deferred callbacks do not guarantee SDK user activation",
+    "early default-sensitive keyboard behavior is separate",
+    "HTML checkbox readOnly alone does not prevent native toggling",
+    "Arbitrary direct DOM/native-property mutation is not a cancellation guarantee",
+    "No automatic backdrop dismissal",
+    "No native controller polling/provider inference"
+  ],
+  "qualification": {
+    "sourceInventoryRead": true,
+    "productionAPIReviewed": true,
+    "publicExampleStrictSourceAliasTypecheck": {
+      "passed": true,
+      "result": {
+        "path": ".cache/invite-docs-final-prep-01/EXAMPLE-TC.json",
+        "sha256": "699befaa72b22f644069c1c1ae88f1ea01299efa23ee5f3499379fa021ddb6f7"
+      }
+    },
+    "sourceAliasTypecheckIsNotInstalledPackage": true,
+    "formal": {
+      "summary": {
+        "path": ".cache/invite-qualification-01/SUMMARY.json",
+        "sha256": "e003736d2cfe47de60e555a4f434af4e23c5e2acabe9918e78473508ca0c6db1"
+      },
+      "distinctInviteCases": 106,
+      "single106GreenRun": false,
+      "phases": [
+        {
+          "path": ".cache/invite-tests-01/run-02/RESULT.json",
+          "sha256": "8bbbbc1f25c01cb669199a962a08df67bf7a37ef3f48df4ea8b3c4a85cf3a230",
+          "passed": 105,
+          "failed": 1
+        },
+        {
+          "path": ".cache/invite-tests-01/run-06/RESULT.json",
+          "sha256": "abadd8545aa84c4659ab102e7e561c708a11d991d2b04d364cd33577b0119c67",
+          "passed": 1,
+          "failed": 0
+        }
+      ],
+      "retainedLegacy": {
+        "distinctCases": 16,
+        "portfolioMaterialCases": 10,
+        "navigationCases": 6,
+        "phase": ".cache/invite-tests-01/run-01",
+        "unchangedLegacySourcePins": 765
+      },
+      "distinctCombined": 122,
+      "single122GreenRun": false,
+      "failedHistories": [
+        {
+          "path": ".cache/invite-tests-01/run-01/RESULT.json",
+          "sha256": "14c03265b6b1bd31080cc3fad5dcc36823086e3505b52a21ae0eca6210b11a9f"
+        },
+        {
+          "path": ".cache/invite-tests-01/run-05/RESULT.json",
+          "sha256": "cbd547695ed0999aeafad0b48512da108ed478d0a776d464d6275f9a40a25a2d"
+        }
+      ],
+      "collectionOnlyFailures": [
+        "run-03 grep matched full title incorrectly; browser never started",
+        "run-04 singular test-count parser; browser never started"
+      ],
+      "productChangedBetweenRun02And06": false,
+      "onlyPaginationTestBodyChanged": true
+    },
+    "materials": {
+      "wholeOriginalWebPlanes": 200,
+      "pixels": 11473278,
+      "RGBApixelDifferences": 0,
+      "referenceProbes": {
+        "count": 6,
+        "pixels": 1536,
+        "originalMinecraftMaterials": false
+      },
+      "fractionalMeasurements": {
+        "count": 4,
+        "certifiedRGBA": false,
+        "scope": "Natural fractional linked profile raster measurements only; not qualification"
+      },
+      "glyphOnly": "Image layers only; no native text/font claim"
+    },
+    "actualPackage": {
+      "result": {
+        "path": ".cache/invite-package-01/RESULT.json",
+        "sha256": "a1e90a08e2d790732b953f02b0d7de3661f5b0e21b595abdc20d717d077fa73f"
+      },
+      "tar": {
+        "path": ".cache/invite-package-01/invite-verified.tgz",
+        "sha256": "18ff7911707fe361af3e00653acd2ab8756c87516e9289dc38d8764ecdcaa102",
+        "bytes": 5661864
+      },
+      "indexSHA256": "ec82a8a55e3ea6d42458bc472e006b9354aece45a185bf9d72b53e6c2607b275",
+      "React": [
+        "18.3.1",
+        "19.3.1"
+      ],
+      "components": 188,
+      "dataValues": 6,
+      "functions": 11,
+      "runtimeValues": 205,
+      "inviteSSRPerPeer": 25,
+      "negativeTypesPerPeer": 6,
+      "wholeOriginals": 58,
+      "rawMetadata": 31,
+      "inlinePayloads": {
+        "total": 522,
+        "PNG": 477,
+        "TGA": 39,
+        "JSON": 6
+      }
+    },
+    "installed": {
+      "passed": true,
+      "result": {
+        "path": ".cache/invite-installed-02/FINAL.json",
+        "sha256": "d3cef12cc726c66e9f25dec5ec4d57de8e992ec979d87b67ea0b1f301d1cf602"
+      },
+      "inputs": {
+        "path": ".cache/invite-installed-browser-02/INPUTS.json",
+        "sha256": "d1b45501ea11c5ee0c4e258357f2aa61ec627ae893a322e3883eb86144246783"
+      },
+      "fourCombinations": 4,
+      "contractGroupsPerCombination": 12,
+      "history": {
+        "path": ".cache/invite-installed-01/FINAL.json",
+        "sha256": "0031f2bda8bff96cd7390175d544777cbdb2dd6c858133568b9c7717d817f113",
+        "failed": 4,
+        "reason": "Normal Playwright click refused aria-disabled readonly input; observation-method failure, not proof that product passed."
+      }
+    },
+    "public": {
+      "passed": true,
+      "result": {
+        "path": ".cache/invite-public-01/FINAL.json",
+        "sha256": "9732a8244178b9e26f7b36271abe22725bf6f8af01bc17b9a99911e023e3df36"
+      },
+      "checks": 17,
+      "scope": "Real demo host behavior/status, native image transport and local viewport bounds; no callback entry/exact-count/nativeGUI certification."
+    },
+    "nativeReference": false,
+    "nativeWholeGUIParity": false,
+    "coveragePromotionReady": true,
+    "candidateCoverageChangeOnly": "invite_screen.json E to finiteA; other205 rows byte-identical; A38/E1 is scope mapping, not goal complete",
+    "finalDocOnlyTarProductIdentityRequired": true,
+    "postQualificationWhitespaceCleanup": {
+      "proof": {
+        "path": ".cache/invite-format-01/FINAL.json",
+        "sha256": "4d5f8ecc3e86beadeaea7f4f5edb093f96af34b1ac31335043cf3443d6a059b3"
+      },
+      "sourceChanges": [
+        {
+          "path": "src/invite-footer.tsx",
+          "before": "dbe77a19cbd5c09f4d6add5df7f4114ac53035e2f8749130160d3e16ce5990bd",
+          "after": "3f7ea602e33c629f8d6610451fa9180c107b73d844a9eee0f6fcadf525cab357"
+        },
+        {
+          "path": "src/invite-person-row.tsx",
+          "before": "d633a2293207cdace7a43bffb2fa2f22b59775b2064bd13394762e779bc16d38",
+          "after": "da1893abef0701de7d41ceed8644fb68fdf36177b46b48daa65d7b31460395b8"
+        },
+        {
+          "path": "src/invite-types.ts",
+          "before": "7be212b89ca9bb1e2e750cf595aa6bdc535343789d8dc6cdd8c1cfa4cb7f21fc",
+          "after": "e528821b9256f8b62b4909d18669a7d0fe6ed9f0b809500a059a4ca9733b4af5"
+        }
+      ],
+      "actualTypecheckAndBuild": true,
+      "distFiles": 696,
+      "byteIdenticalDistFiles": 695,
+      "allExecutableDeclarationStyleResourceBytesIdentical": true,
+      "sourcemapOnlyDifference": {
+        "file": "dist/index.js.map",
+        "onlyChangedKey": "sourcesContent",
+        "sources": [
+          "../src/invite-person-row.tsx",
+          "../src/invite-footer.tsx"
+        ],
+        "allMappingsAndOtherKeysIdentical": true
+      },
+      "scope": "Final cleanup of trailing whitespace/EOF blank lines. Same tested executable, types, styles and resources; regenerated map differs only in two sourcesContent strings. Not a new behavioral or native run."
+    }
+  },
+  "components": [
+    "InviteScreen",
+    "InvitePersonRow",
+    "InviteCategory",
+    "InvitePagination",
+    "InviteFooter"
+  ],
+  "API": {
+    "types": {
+      "path": "src/invite-types.ts",
+      "sha256": "e528821b9256f8b62b4909d18669a7d0fe6ed9f0b809500a059a4ca9733b4af5"
+    },
+    "status": "Actual public source exports five components and invite-types; example strict source-alias check recorded separately from real installed package verifier.",
+    "example": ".cache/invite-docs-final-prep-01/invite-example.tsx",
+    "nativeRefs": "Actual checkbox/button refs and native props; fixed type/checked/disabled/geometry reserved.",
+    "selection": "Scoped collection+itemId; selected and party value controlled/uncontrolled with explicit valid host request; off-page keys retained.",
+    "platformIcons": "visible false or visible true with host renderer tagged host-supplied-missing-platform-icon",
+    "controllers": "Explicit original fromButtonId and destination/scope only; no hardware polling or recovered provider focus.",
+    "publicBarrel": {
+      "path": "src/index.ts",
+      "sha256": "ad7ef38d78de007732a465b8a24c559d0a4ee01ed4d60956faf6affe3488110f"
+    }
+  },
+  "privateHelpers": {
+    "variants": [
+      "black_border_hover",
+      "friend_background_hover",
+      "friend_background_borderless",
+      "grey_borderless_locked",
+      "hover_friend_button",
+      "linked_hover_friend_button",
+      "loading_friends",
+      "offline_image",
+      "panel_text",
+      "friend_button_test"
+    ],
+    "defaultMounted": false,
+    "file": "src/invite-source-helpers.tsx",
+    "unknownSlots": [
+      "invite.label",
+      "invite.friend_button_layout"
+    ],
+    "customHoverRenderer": "Host-required hover_text_renderer",
+    "diagnosticMsaLayout": "Host-resolved inherited MSA source",
+    "caveat": "No public component count added for ten private source profiles."
+  }
+}

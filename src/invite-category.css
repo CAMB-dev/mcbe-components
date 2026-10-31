@@ -1,0 +1,5 @@
+.mc-invite-category { position:relative; box-sizing:border-box; margin:0; padding:0; border:0; }
+.mc-invite-category[hidden] { display:none!important; }
+.mc-invite-category__grid { position:relative; }
+.mc-invite-category__cell { position:absolute; box-sizing:border-box; }
+.mc-invite-category__padding { height:calc(4 * var(--mc-invite-unit)); }

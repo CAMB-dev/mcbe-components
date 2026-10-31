@@ -1,0 +1,7 @@
+.mc-invite-pagination { position:relative; box-sizing:border-box; margin:0; padding:0; border:0; color:#4c4c4c; font-family:var(--mc-font,monospace); font-size:calc(10 * var(--mc-invite-unit)); font-weight:400; line-height:calc(10 * var(--mc-invite-unit)); text-shadow:none; }
+.mc-invite-pagination[hidden] { display:none!important; }
+.mc-invite-pagination__padding { height:calc(4 * var(--mc-invite-unit)); }
+.mc-invite-pagination__controls { display:flex; flex-direction:row; align-items:center; height:calc(30 * var(--mc-invite-unit)); }
+.mc-invite-pagination__controls>button { flex:none; }
+.mc-invite-pagination__counter { display:flex; flex:none; align-items:center; justify-content:center; height:100%; white-space:pre-wrap; overflow:hidden; text-align:center; text-shadow:none; }
+.mc-invite-pagination__divider { height:var(--mc-invite-unit); background-repeat:repeat-x; opacity:.6; image-rendering:pixelated; pointer-events:none; }

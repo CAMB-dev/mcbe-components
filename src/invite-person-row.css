@@ -1,0 +1,25 @@
+@import './invite-controls.css';
+.mc-invite-person{position:relative;isolation:isolate;box-sizing:border-box;color:white;font-size:calc(10 * var(--mc-invite-unit));line-height:calc(10 * var(--mc-invite-unit));text-shadow:none;--mc-text-shadow:none;--mc-dark-text-shadow:none}
+.mc-invite-person[hidden]{display:none!important}
+.mc-invite-person__select-area{position:absolute;left:0;top:0;display:block;cursor:pointer;isolation:isolate}
+.mc-invite-person__selection{position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;opacity:0;z-index:5;cursor:inherit}
+.mc-invite-person__visual{position:absolute;inset:0;display:block;pointer-events:none;overflow:clip}
+.mc-invite-person__check,.mc-invite-person__profile,.mc-invite-person__link,.mc-invite-person__platform,.mc-invite-person__online,.mc-invite-person__text{position:absolute!important;display:block;box-sizing:border-box;pointer-events:none}
+.mc-invite-person__check{display:none!important;z-index:2;image-rendering:pixelated}
+.mc-invite-person__select-area[data-checked=false][data-locked=false] .mc-invite-person__check--unchecked,.mc-invite-person__select-area[data-checked=true][data-locked=false] .mc-invite-person__check--checked,.mc-invite-person__select-area[data-checked=false][data-locked=true] .mc-invite-person__check--unchecked-locked,.mc-invite-person__select-area[data-checked=true][data-locked=true] .mc-invite-person__check--checked-locked{display:block!important}
+.mc-invite-person__select-area[data-checked][data-locked]:is(:hover,:has(input:focus-visible)) .mc-invite-person__check{display:none!important}
+.mc-invite-person__select-area[data-checked=false][data-locked=false]:is(:hover,:has(input:focus-visible)) .mc-invite-person__check--unchecked-hover,.mc-invite-person__select-area[data-checked=true][data-locked=false]:is(:hover,:has(input:focus-visible)) .mc-invite-person__check--checked-hover,.mc-invite-person__select-area[data-checked=false][data-locked=true]:is(:hover,:has(input:focus-visible)) .mc-invite-person__check--unchecked-locked-hover,.mc-invite-person__select-area[data-checked=true][data-locked=true]:is(:hover,:has(input:focus-visible)) .mc-invite-person__check--checked-locked-hover{display:block!important}
+.mc-invite-person__select-area:has(input:focus-visible){outline:var(--mc-invite-unit) solid white;outline-offset:0}
+.mc-invite-person__select-area[data-locked=true]{color:rgb(30% 30% 30%);cursor:default}
+.mc-invite-person__profile{z-index:1}
+.mc-invite-person__profile-content{position:absolute;display:block;overflow:clip}
+.mc-invite-person__profile-content>.mc-image{width:100%!important;height:100%!important;object-fit:fill;image-rendering:pixelated}
+.mc-invite-person__online{z-index:3;image-rendering:pixelated}
+.mc-invite-person__text{z-index:1;white-space:pre-wrap;overflow-wrap:anywhere;overflow:hidden;color:inherit;font:inherit;text-shadow:none}
+.mc-invite-person__profile-button{position:absolute!important}
+@media(forced-colors:active){.mc-invite-person{color:CanvasText}.mc-invite-person__select-area{background:Canvas;border:1px solid CanvasText;color:CanvasText!important}.mc-invite-person__check{display:none!important}.mc-invite-person__selection{appearance:auto;opacity:1;width:24px;height:24px;inset:auto;left:0;top:0}.mc-invite-person__select-area:has(input:focus-visible){outline:2px solid Highlight}}
+
+.mc-invite-person__background{position:absolute;display:block;pointer-events:none}
+
+@media(forced-colors:active){.mc-invite-person__selection{opacity:1!important;width:24px!important;height:24px!important;inset:auto!important;left:0!important;top:0!important}}
+@media(forced-colors:active){.mc-invite-person__check{visibility:hidden!important}}

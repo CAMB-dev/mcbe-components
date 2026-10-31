@@ -1,0 +1,2333 @@
+{
+  "canonicalZipSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "assets": [
+    {
+      "key": "MainBannersHover",
+      "original": {
+        "path": "resource_pack/textures/ui/MainBannersHover.png",
+        "bytes": 80,
+        "sha256": "c8e899024b825e2baae02b4588e1182d3812019f621859856b045bfc50c41488",
+        "decoded": {
+          "width": 3,
+          "height": 3,
+          "rgbaBytes": 36,
+          "rgbaSha256": "8c372b295bc83224c50d5a0a1080e6f99dd23897e2552c3ed6d18172ccfcd1fa",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "invite.black_border_hover",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/black_border_hover@invite.black_border/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/game-control-textures.css",
+        "imageSha256": "c8e899024b825e2baae02b4588e1182d3812019f621859856b045bfc50c41488",
+        "bodyBytes": 80
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/MainBannersHover.json",
+        "bytes": 60,
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            3,
+            3
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/HowToPlayDivider.json"
+      }
+    },
+    {
+      "key": "ScrollHandle",
+      "original": {
+        "path": "resource_pack/textures/ui/ScrollHandle.png",
+        "bytes": 89,
+        "sha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a",
+        "decoded": {
+          "width": 3,
+          "height": 5,
+          "rgbaBytes": 60,
+          "rgbaSha256": "23e048c7db98b28dbc07da918345224b49fc83354e2648d29aee77fd86b67bd5",
+          "rgbaPixelColors": 4
+        }
+      },
+      "references": [
+        {
+          "definition": "common.scrollbar_box_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/scrollbar_box_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/document-viewer/ScrollHandle.png",
+        "sha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/ScrollHandle.json",
+        "bytes": 91,
+        "sha256": "08856911c52b8d9e90c4906df474bf3785813187971a0d2b57b0d3a7e82c4a77",
+        "value": {
+          "nineslice_size": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "base_size": [
+            3,
+            5
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/ScrollHandle.json"
+      }
+    },
+    {
+      "key": "ScrollRail",
+      "original": {
+        "path": "resource_pack/textures/ui/ScrollRail.png",
+        "bytes": 70,
+        "sha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be",
+        "decoded": {
+          "width": 1,
+          "height": 1,
+          "rgbaBytes": 4,
+          "rgbaSha256": "8a65b09d36586541c661b43551bb76c14cfa032d0610061e6b6bc67f3c0afa3d",
+          "rgbaPixelColors": 1
+        }
+      },
+      "references": [
+        {
+          "definition": "common.scroll_indent_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/scroll_indent_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/document-viewer/ScrollRail.png",
+        "sha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/ScrollRail.json",
+        "bytes": 60,
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/ScrollRail.json"
+      }
+    },
+    {
+      "key": "arrow_l_default",
+      "original": {
+        "path": "resource_pack/textures/ui/arrow_l_default.png",
+        "bytes": 1132,
+        "sha256": "2930e3d4bff0fa83d0cf13bb3f4c0e30542e41e50b604a19e83c472a614c9369",
+        "decoded": {
+          "width": 7,
+          "height": 9,
+          "rgbaBytes": 252,
+          "rgbaSha256": "296b35c2eed833f9bd5e709bf3da842e807d2ffecc41d128953c50a628dd9b20",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "invite.left_arrow_image",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/left_arrow_image/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/arrow_l_default.png",
+        "sha256": "2930e3d4bff0fa83d0cf13bb3f4c0e30542e41e50b604a19e83c472a614c9369"
+      }
+    },
+    {
+      "key": "arrow_r_default",
+      "original": {
+        "path": "resource_pack/textures/ui/arrow_r_default.png",
+        "bytes": 97,
+        "sha256": "6aeb95fcac2611b74fa003e8de6ac561a6d320512200f1da7d794ad41a5719d3",
+        "decoded": {
+          "width": 7,
+          "height": 9,
+          "rgbaBytes": 252,
+          "rgbaSha256": "0e4eab3fadd0b3c19f677c48a7f0c941ab14a2b3efa59c1c1d9a7b83c880ff80",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "invite.right_arrow_image",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/right_arrow_image/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/arrow_r_default.png",
+        "sha256": "6aeb95fcac2611b74fa003e8de6ac561a6d320512200f1da7d794ad41a5719d3"
+      }
+    },
+    {
+      "key": "bundle_item_background",
+      "original": {
+        "path": "resource_pack/textures/ui/bundle_item_background.png",
+        "bytes": 117,
+        "sha256": "bbbfc25d4b7bc0b3536f9e402b07e80ac97311c9ee40c6cdcbcdd01aa2a7091b",
+        "decoded": {
+          "width": 18,
+          "height": 18,
+          "rgbaBytes": 1296,
+          "rgbaSha256": "568d89d59cd94005c52e0dbce070f3dc7caaa2b0cb208963eded97a934d9ff17",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "gameplay.bundle_cell_image",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_cell_image/controls/0/background_panel/controls/0/item_background/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/bundle_item_background.png",
+        "sha256": "bbbfc25d4b7bc0b3536f9e402b07e80ac97311c9ee40c6cdcbcdd01aa2a7091b"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/bundle_item_background.json",
+        "bytes": 62,
+        "sha256": "0e05d79d153de228bef19b8a33fb09c928b23ddbe899f8065bbdf0108400cc44",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            18,
+            18
+          ]
+        },
+        "mode": "new-original-whole-metadata",
+        "selectedPath": "src/assets/invite/bundle_item_background.json"
+      }
+    },
+    {
+      "key": "button_borderless_light",
+      "original": {
+        "path": "resource_pack/textures/ui/button_borderless_light.png",
+        "bytes": 131,
+        "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+        "decoded": {
+          "width": 4,
+          "height": 4,
+          "rgbaBytes": 64,
+          "rgbaSha256": "9092e39baddfeaed8a28a47ee8548451162f6b4dc50478b412720d04c55ff841",
+          "rgbaPixelColors": 6
+        }
+      },
+      "references": [
+        {
+          "definition": "common_buttons.light_button_assets",
+          "path": "resource_pack/ui/ui_template_buttons.json",
+          "pointer": "/light_button_assets@common.button/$default_button_texture|default",
+          "property": "$default_button_texture|default",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/document-viewer/button_borderless_light.png",
+        "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/book/book_texteditbox_hover.json"
+      }
+    },
+    {
+      "key": "button_borderless_lighthover",
+      "original": {
+        "path": "resource_pack/textures/ui/button_borderless_lighthover.png",
+        "bytes": 85,
+        "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+        "decoded": {
+          "width": 4,
+          "height": 4,
+          "rgbaBytes": 64,
+          "rgbaSha256": "8bc3a14bce9cffb15dc77a3937ecad1c62de61459dce90bca6d87404ae72a084",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "common_buttons.light_button_assets",
+          "path": "resource_pack/ui/ui_template_buttons.json",
+          "pointer": "/light_button_assets@common.button/$hover_button_texture|default",
+          "property": "$hover_button_texture|default",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/document-viewer/button_borderless_lighthover.png",
+        "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/book/book_texteditbox_hover.json"
+      }
+    },
+    {
+      "key": "button_borderless_lightpressed",
+      "original": {
+        "path": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+        "bytes": 84,
+        "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+        "decoded": {
+          "width": 4,
+          "height": 4,
+          "rgbaBytes": 64,
+          "rgbaSha256": "0883c873c08e5fc9b05494527a4dc4b7fa98d75e4d936102596fe3a3a1fb9a54",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "common_buttons.light_button_assets",
+          "path": "resource_pack/ui/ui_template_buttons.json",
+          "pointer": "/light_button_assets@common.button/$pressed_button_texture|default",
+          "property": "$pressed_button_texture|default",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/document-viewer/button_borderless_lightpressed.png",
+        "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/book/book_texteditbox_hover.json"
+      }
+    },
+    {
+      "key": "cell_image",
+      "original": {
+        "path": "resource_pack/textures/ui/cell_image.png",
+        "bytes": 135,
+        "sha256": "296e3d0ba9640efcd2902aa9c191f544b09bdbb8f4585d39a6c030e0ae3fc023",
+        "decoded": {
+          "width": 10,
+          "height": 10,
+          "rgbaBytes": 400,
+          "rgbaSha256": "4e747a609f3fe75826eed0947f26c549d71119eef5ad82143b1c4b05163c577b",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "common.cell_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/cell_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/workstation-image-assets.ts",
+        "imageSha256": "296e3d0ba9640efcd2902aa9c191f544b09bdbb8f4585d39a6c030e0ae3fc023",
+        "bodyBytes": 135
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/cell_image.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/focus_border_white.json"
+      }
+    },
+    {
+      "key": "cell_image_lock",
+      "original": {
+        "path": "resource_pack/textures/ui/cell_image_lock.png",
+        "bytes": 147,
+        "sha256": "3970ff5f9630bd9d805a9e997f16f4d241b73e97c1b722b8ba48167d0ab7aa79",
+        "decoded": {
+          "width": 5,
+          "height": 5,
+          "rgbaBytes": 100,
+          "rgbaSha256": "70910078257b34320afe0a4e6965bafcbee291a0cec5423e68006e3dad0de2c0",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "common.item_lock_cell_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/item_lock_cell_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/cell_image_lock.png",
+        "sha256": "3970ff5f9630bd9d805a9e997f16f4d241b73e97c1b722b8ba48167d0ab7aa79"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/cell_image_lock.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/focus_border_white.json"
+      }
+    },
+    {
+      "key": "checkbox_check",
+      "original": {
+        "path": "resource_pack/textures/ui/checkbox_check.png",
+        "bytes": 149,
+        "sha256": "8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062",
+        "decoded": {
+          "width": 10,
+          "height": 10,
+          "rgbaBytes": 400,
+          "rgbaSha256": "882c25e69fd2306307346518ebb7a116de98e6e5452d8c1c4d826195bb13657c",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.checkbox_checked_state",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/checkbox_checked_state@toggle_state_template/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "common.checked_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/checked_image@checkbox_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/player-permissions/checkbox_check.png",
+        "sha256": "8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062"
+      }
+    },
+    {
+      "key": "checkbox_checkDisabled",
+      "original": {
+        "path": "resource_pack/textures/ui/checkbox_checkDisabled.png",
+        "bytes": 149,
+        "sha256": "8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062",
+        "decoded": {
+          "width": 10,
+          "height": 10,
+          "rgbaBytes": 400,
+          "rgbaSha256": "882c25e69fd2306307346518ebb7a116de98e6e5452d8c1c4d826195bb13657c",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.checkbox_checked_locked_state",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/checkbox_checked_locked_state@checkbox_checked_state/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/player-permissions/checkbox_check.png",
+        "sha256": "8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062"
+      }
+    },
+    {
+      "key": "checkbox_checkHover",
+      "original": {
+        "path": "resource_pack/textures/ui/checkbox_checkHover.png",
+        "bytes": 152,
+        "sha256": "29b33214de8a4621a2b882eaeb5adcce22053e97669cac459bf167a70bdec8c2",
+        "decoded": {
+          "width": 10,
+          "height": 10,
+          "rgbaBytes": 400,
+          "rgbaSha256": "a43a07c9aadb21fdaed9de04a651ef13d77c46f86b11ea91f3b373418bc2f9d9",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.checkbox_checked_hover_state",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/checkbox_checked_hover_state@checkbox_checked_state/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "common.checked_hover_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/checked_hover_image@checkbox_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/player-permissions/checkbox_checkHover.png",
+        "sha256": "29b33214de8a4621a2b882eaeb5adcce22053e97669cac459bf167a70bdec8c2"
+      }
+    },
+    {
+      "key": "checkbox_check_locked",
+      "original": {
+        "path": "resource_pack/textures/ui/checkbox_check_locked.png",
+        "bytes": 137,
+        "sha256": "31e32a1cdacc7c4798341f9fc29fe24976ba96585f4d160d2a2e9c555482eae6",
+        "decoded": {
+          "width": 10,
+          "height": 10,
+          "rgbaBytes": 400,
+          "rgbaSha256": "c83c3d3c5c23144819030f298a1eae6e9dac395c07d50612b2952e3d193e06e1",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "invite.checked_locked_image",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/checked_locked_image@common.checkbox_image/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/checkbox_check_locked.png",
+        "sha256": "31e32a1cdacc7c4798341f9fc29fe24976ba96585f4d160d2a2e9c555482eae6"
+      }
+    },
+    {
+      "key": "checkbox_space",
+      "original": {
+        "path": "resource_pack/textures/ui/checkbox_space.png",
+        "bytes": 129,
+        "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014",
+        "decoded": {
+          "width": 10,
+          "height": 10,
+          "rgbaBytes": 400,
+          "rgbaSha256": "825e188c6531e366a1eaa74b06995a03199a0a592dbae82fea6d0d09f076c417",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.checkbox_unchecked_state",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/checkbox_unchecked_state@toggle_state_template/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "common.unchecked_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/unchecked_image@checkbox_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/player-permissions/checkbox_space.png",
+        "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014"
+      }
+    },
+    {
+      "key": "checkbox_spaceDisabled",
+      "original": {
+        "path": "resource_pack/textures/ui/checkbox_spaceDisabled.png",
+        "bytes": 129,
+        "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014",
+        "decoded": {
+          "width": 10,
+          "height": 10,
+          "rgbaBytes": 400,
+          "rgbaSha256": "825e188c6531e366a1eaa74b06995a03199a0a592dbae82fea6d0d09f076c417",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.checkbox_unchecked_locked_state",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/checkbox_unchecked_locked_state@toggle_state_template/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/player-permissions/checkbox_space.png",
+        "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014"
+      }
+    },
+    {
+      "key": "checkbox_spaceHover",
+      "original": {
+        "path": "resource_pack/textures/ui/checkbox_spaceHover.png",
+        "bytes": 126,
+        "sha256": "bd5babf3900537bda4f887be0cd22abbaea656959d32b88517d3943e5d95c0a6",
+        "decoded": {
+          "width": 10,
+          "height": 10,
+          "rgbaBytes": 400,
+          "rgbaSha256": "0d97a84d0645f7381af3c0f1ade38798375045b9257a89ccbb8bc30b3506dc2f",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.checkbox_unchecked_hover_state",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/checkbox_unchecked_hover_state@checkbox_unchecked_state/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "common.unchecked_hover_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/unchecked_hover_image@checkbox_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/player-permissions/checkbox_spaceHover.png",
+        "sha256": "bd5babf3900537bda4f887be0cd22abbaea656959d32b88517d3943e5d95c0a6"
+      }
+    },
+    {
+      "key": "checkbox_space_locked",
+      "original": {
+        "path": "resource_pack/textures/ui/checkbox_space_locked.png",
+        "bytes": 104,
+        "sha256": "0afd9228fe07e34a3aedc944c3ad8f09b14a05f387b64069623d693f74a9b8b9",
+        "decoded": {
+          "width": 10,
+          "height": 10,
+          "rgbaBytes": 400,
+          "rgbaSha256": "8936dcba302835415f4c4bc3f0d6c2d476806c025a6456432872c10facb5197f",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "invite.unchecked_locked_image",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/unchecked_locked_image@common.checkbox_image/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/checkbox_space_locked.png",
+        "sha256": "0afd9228fe07e34a3aedc944c3ad8f09b14a05f387b64069623d693f74a9b8b9"
+      }
+    },
+    {
+      "key": "close_button_default",
+      "original": {
+        "path": "resource_pack/textures/ui/close_button_default.png",
+        "bytes": 163,
+        "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+        "decoded": {
+          "width": 15,
+          "height": 15,
+          "rgbaBytes": 900,
+          "rgbaSha256": "e6e05d051820c9c475096e539d00671e037e686603147f839661513b06b2c144",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.close_button",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/close_button/$close_button_default_texture|default",
+          "property": "$close_button_default_texture|default",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/book/close_button_default.png",
+        "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c"
+      }
+    },
+    {
+      "key": "close_button_default_compact",
+      "original": {
+        "path": "resource_pack/textures/ui/close_button_default_compact.png",
+        "bytes": 89,
+        "sha256": "b7ca516ea2456c220b058c35261423da2784a582724f1a38e447d07170c74f6e",
+        "decoded": {
+          "width": 15,
+          "height": 7,
+          "rgbaBytes": 420,
+          "rgbaSha256": "2352de42d5f4848ca7474a184e20a7b637828345bddbf5a78a4b99fa3dc58b9f",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.compact_close_button",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/compact_close_button@close_button/controls/0/default@common.close_button_panel/$close_button_texture",
+          "property": "$close_button_texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/workstation-image-assets.ts",
+        "imageSha256": "b7ca516ea2456c220b058c35261423da2784a582724f1a38e447d07170c74f6e",
+        "bodyBytes": 89
+      }
+    },
+    {
+      "key": "close_button_default_light",
+      "original": {
+        "path": "resource_pack/textures/ui/close_button_default_light.png",
+        "bytes": 160,
+        "sha256": "c0a7413ccebff8c8cf6868b6bd5310d4638ce24fa1969f7bd70cce4dce4b09e0",
+        "decoded": {
+          "width": 15,
+          "height": 15,
+          "rgbaBytes": 900,
+          "rgbaSha256": "382f51fc41cfc427e8c5f33f619f6bf179004b5f226ebee60c0e3221667339d5",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "gameplay.bundle_tooltip",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_tooltip/controls/1/header_stack/controls/1/close_button@common.close_button/controls/0/default@common.close_button_panel/$close_button_texture",
+          "property": "$close_button_texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/crafting-image-assets.ts",
+        "imageSha256": "c0a7413ccebff8c8cf6868b6bd5310d4638ce24fa1969f7bd70cce4dce4b09e0",
+        "bodyBytes": 160
+      }
+    },
+    {
+      "key": "close_button_hover",
+      "original": {
+        "path": "resource_pack/textures/ui/close_button_hover.png",
+        "bytes": 164,
+        "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+        "decoded": {
+          "width": 15,
+          "height": 15,
+          "rgbaBytes": 900,
+          "rgbaSha256": "1807d5168cffaf2cb9dacc4f8cb7b2f41dfcc48b28ae9274a045e2018973a138",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.close_button",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/close_button/controls/1/hover@common.close_button_panel/$close_button_texture",
+          "property": "$close_button_texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/book/close_button_hover.png",
+        "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877"
+      }
+    },
+    {
+      "key": "close_button_hover_compact",
+      "original": {
+        "path": "resource_pack/textures/ui/close_button_hover_compact.png",
+        "bytes": 122,
+        "sha256": "44858d92895e520b679a5848f623287dd645a4ba841862db89e82291843daefe",
+        "decoded": {
+          "width": 15,
+          "height": 7,
+          "rgbaBytes": 420,
+          "rgbaSha256": "8dd896cd1025fd5eefcc81193c9bdf511780258da97e5c51297f42a83f839edc",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.compact_close_button",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/compact_close_button@close_button/controls/1/hover@common.close_button_panel/$close_button_texture",
+          "property": "$close_button_texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/workstation-image-assets.ts",
+        "imageSha256": "44858d92895e520b679a5848f623287dd645a4ba841862db89e82291843daefe",
+        "bodyBytes": 122
+      }
+    },
+    {
+      "key": "close_button_hover_light",
+      "original": {
+        "path": "resource_pack/textures/ui/close_button_hover_light.png",
+        "bytes": 1416,
+        "sha256": "5bbbba3c8e947a973b8a9773a298fe674b11e7009410d5dc9ec01db02be9431d",
+        "decoded": {
+          "width": 15,
+          "height": 15,
+          "rgbaBytes": 900,
+          "rgbaSha256": "713aede2a259790c2c9fabbb3e56b537d1d582e12582aad2e197bf4f7e2181ed",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "gameplay.bundle_tooltip",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_tooltip/controls/1/header_stack/controls/1/close_button@common.close_button/controls/1/hover@common.close_button_panel/$close_button_texture",
+          "property": "$close_button_texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/crafting-image-assets.ts",
+        "imageSha256": "5bbbba3c8e947a973b8a9773a298fe674b11e7009410d5dc9ec01db02be9431d",
+        "bodyBytes": 1416
+      }
+    },
+    {
+      "key": "close_button_pressed",
+      "original": {
+        "path": "resource_pack/textures/ui/close_button_pressed.png",
+        "bytes": 1416,
+        "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+        "decoded": {
+          "width": 15,
+          "height": 15,
+          "rgbaBytes": 900,
+          "rgbaSha256": "713aede2a259790c2c9fabbb3e56b537d1d582e12582aad2e197bf4f7e2181ed",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.close_button",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/close_button/controls/2/pressed@common.close_button_panel/$close_button_texture",
+          "property": "$close_button_texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/book/close_button_pressed.png",
+        "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03"
+      }
+    },
+    {
+      "key": "close_button_pressed_compact",
+      "original": {
+        "path": "resource_pack/textures/ui/close_button_pressed_compact.png",
+        "bytes": 1412,
+        "sha256": "117ba209b844afe932ae0319f1b3cbfbba5d37a0eda4cf7099930771f7e4f45c",
+        "decoded": {
+          "width": 15,
+          "height": 7,
+          "rgbaBytes": 420,
+          "rgbaSha256": "2fd2db4b7b1945806422af3db2155d58c39dede6ba1aaf0536dcb248410254f4",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.compact_close_button",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/compact_close_button@close_button/controls/2/pressed@common.close_button_panel/$close_button_texture",
+          "property": "$close_button_texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/workstation-image-assets.ts",
+        "imageSha256": "117ba209b844afe932ae0319f1b3cbfbba5d37a0eda4cf7099930771f7e4f45c",
+        "bodyBytes": 1412
+      }
+    },
+    {
+      "key": "close_button_pressed_light",
+      "original": {
+        "path": "resource_pack/textures/ui/close_button_pressed_light.png",
+        "bytes": 139,
+        "sha256": "1ca7a00fa243eec0cfcb489214ed7eab4dc88838edada5a2f9933216ac5d098b",
+        "decoded": {
+          "width": 15,
+          "height": 15,
+          "rgbaBytes": 900,
+          "rgbaSha256": "1807d5168cffaf2cb9dacc4f8cb7b2f41dfcc48b28ae9274a045e2018973a138",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "gameplay.bundle_tooltip",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_tooltip/controls/1/header_stack/controls/1/close_button@common.close_button/controls/2/pressed@common.close_button_panel/$close_button_texture",
+          "property": "$close_button_texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/crafting-image-assets.ts",
+        "imageSha256": "1ca7a00fa243eec0cfcb489214ed7eab4dc88838edada5a2f9933216ac5d098b",
+        "bodyBytes": 139
+      }
+    },
+    {
+      "key": "container_weight_bar_fill",
+      "original": {
+        "path": "resource_pack/textures/ui/container_weight_bar_fill.png",
+        "bytes": 94,
+        "sha256": "10cfb8174fadadd84cb4ef0842ed0386cd506efce40c159b5df7665b5040d628",
+        "decoded": {
+          "width": 6,
+          "height": 6,
+          "rgbaBytes": 144,
+          "rgbaSha256": "b0da15c4a686303b632017e2a4d883a10035e25dfe00b77a6fa82e07d18b2fa2",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "gameplay.bundle_tooltip",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_tooltip/controls/2/wrapper/controls/0/vertical_layout_stack/controls/1/horisontal_layout_stack/controls/0/body_stack/controls/1/lower_wrap/controls/0/lower_stack/controls/1/footer_panel/controls/0/weight_bar/controls/1/weight_bar_fill/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/container_weight_bar_fill.png",
+        "sha256": "10cfb8174fadadd84cb4ef0842ed0386cd506efce40c159b5df7665b5040d628"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/container_weight_bar_fill.json",
+        "bytes": 91,
+        "sha256": "e229a268dc866bb975d7014f58a2cac84ecbb551d29222d36b20da96213662ca",
+        "value": {
+          "nineslice_size": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "base_size": [
+            6,
+            6
+          ]
+        },
+        "mode": "new-original-whole-metadata",
+        "selectedPath": "src/assets/invite/container_weight_bar_fill.json"
+      }
+    },
+    {
+      "key": "container_weight_bar_full",
+      "original": {
+        "path": "resource_pack/textures/ui/container_weight_bar_full.png",
+        "bytes": 94,
+        "sha256": "7076a7a034067d7dfff4d74f92c413251e8bbc4897cbc484c234b66b044660d4",
+        "decoded": {
+          "width": 6,
+          "height": 6,
+          "rgbaBytes": 144,
+          "rgbaSha256": "cebed2266e4f2433daf2929be10edd7f53d87b1055a9bb42079499e39f338f94",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "gameplay.bundle_tooltip",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_tooltip/controls/2/wrapper/controls/0/vertical_layout_stack/controls/1/horisontal_layout_stack/controls/0/body_stack/controls/1/lower_wrap/controls/0/lower_stack/controls/1/footer_panel/controls/0/weight_bar/controls/2/weight_bar_full/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/container_weight_bar_full.png",
+        "sha256": "7076a7a034067d7dfff4d74f92c413251e8bbc4897cbc484c234b66b044660d4"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/container_weight_bar_full.json",
+        "bytes": 91,
+        "sha256": "e229a268dc866bb975d7014f58a2cac84ecbb551d29222d36b20da96213662ca",
+        "value": {
+          "nineslice_size": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "base_size": [
+            6,
+            6
+          ]
+        },
+        "mode": "new-whole-byte-metadata-reuse",
+        "selectedPath": "src/assets/invite/container_weight_bar_fill.json"
+      }
+    },
+    {
+      "key": "control",
+      "original": {
+        "path": "resource_pack/textures/ui/control.png",
+        "bytes": 71,
+        "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+        "decoded": {
+          "width": 2,
+          "height": 2,
+          "rgbaBytes": 16,
+          "rgbaSha256": "81eb2d3bce07f35376c3caa7feb306adabe65d6c8fdf04f191a3126d7b8c20ef",
+          "rgbaPixelColors": 1
+        }
+      },
+      "references": [
+        {
+          "definition": "common_dialogs.background_image",
+          "path": "resource_pack/ui/ui_template_dialogs.json",
+          "pointer": "/background_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "invite.account_link_image",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/account_link_image/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        },
+        {
+          "definition": "common.dialog_background_hollow_common",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/dialog_background_hollow_common@dialog_background_common/$dialog_background_texture|default",
+          "property": "$dialog_background_texture|default",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "common_dialogs.dialog_background_hollow_common",
+          "path": "resource_pack/ui/ui_template_dialogs.json",
+          "pointer": "/dialog_background_hollow_common@common_dialogs.dialog_background_common/$dialog_background_texture|default",
+          "property": "$dialog_background_texture|default",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/jigsaw/control.png",
+        "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/control.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/disabledButtonNoBorder.json"
+      }
+    },
+    {
+      "key": "dialog_background_hollow_1",
+      "original": {
+        "path": "resource_pack/textures/ui/dialog_background_hollow_1.png",
+        "bytes": 364,
+        "sha256": "b18ab5da2bbdd12ca861962251603c555edee5479984366e836748d2e5702eb0",
+        "decoded": {
+          "width": 18,
+          "height": 101,
+          "rgbaBytes": 7272,
+          "rgbaSha256": "dbc0e37a0b5bdd3a36e5cee11d97fbd7d9177e127cf0cde76a600c80d4603ff6",
+          "rgbaPixelColors": 7
+        }
+      },
+      "references": [
+        {
+          "definition": "common.dialog_background_hollow_1",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/dialog_background_hollow_1@dialog_background_hollow_common/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "common_dialogs.dialog_background_hollow_1",
+          "path": "resource_pack/ui/ui_template_dialogs.json",
+          "pointer": "/dialog_background_hollow_1@common_dialogs.dialog_background_hollow_common/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/start-menu/dialog_background_hollow_1.png",
+        "sha256": "b18ab5da2bbdd12ca861962251603c555edee5479984366e836748d2e5702eb0"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/dialog_background_hollow_1.json",
+        "bytes": 96,
+        "sha256": "8c304b546103f6ecd0989cd55866194dbf195c78ea6959585c1e3fcd036bd837",
+        "value": {
+          "nineslice_size": [
+            8,
+            23,
+            8,
+            76
+          ],
+          "base_size": [
+            18,
+            101
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/start-menu/dialog_background_hollow_1.json"
+      }
+    },
+    {
+      "key": "dialog_background_hollow_2",
+      "original": {
+        "path": "resource_pack/textures/ui/dialog_background_hollow_2.png",
+        "bytes": 314,
+        "sha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f",
+        "decoded": {
+          "width": 18,
+          "height": 67,
+          "rgbaBytes": 4824,
+          "rgbaSha256": "814fd54c0359e5f628d7b701e992bf277492344cdad3c66d1881f397437a3220",
+          "rgbaPixelColors": 7
+        }
+      },
+      "references": [
+        {
+          "definition": "common.dialog_background_hollow_2",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/dialog_background_hollow_2@dialog_background_hollow_common/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "common_dialogs.dialog_background_hollow_2",
+          "path": "resource_pack/ui/ui_template_dialogs.json",
+          "pointer": "/dialog_background_hollow_2@common_dialogs.dialog_background_hollow_common/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/storage-management/dialog_background_hollow_2.png",
+        "sha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/dialog_background_hollow_2.json",
+        "bytes": 95,
+        "sha256": "584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40",
+        "value": {
+          "nineslice_size": [
+            8,
+            23,
+            8,
+            42
+          ],
+          "base_size": [
+            18,
+            67
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/storage-management/dialog_background_hollow_2.json"
+      }
+    },
+    {
+      "key": "dialog_background_hollow_4",
+      "original": {
+        "path": "resource_pack/textures/ui/dialog_background_hollow_4.png",
+        "bytes": 230,
+        "sha256": "274740b9ceed9229f6a20c46e0d840ecfb5c3b36bcff6cc9c7970e304a2b1893",
+        "decoded": {
+          "width": 18,
+          "height": 18,
+          "rgbaBytes": 1296,
+          "rgbaSha256": "2f06941b350dc9bd1ec85997d4810a70ddc8cdde28b6d33738e11294ad0847a9",
+          "rgbaPixelColors": 7
+        }
+      },
+      "references": [
+        {
+          "definition": "common.dialog_background_common",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/dialog_background_common/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/jigsaw/dialog_background_hollow_4.png",
+        "sha256": "274740b9ceed9229f6a20c46e0d840ecfb5c3b36bcff6cc9c7970e304a2b1893"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/dialog_background_hollow_4.json",
+        "bytes": 62,
+        "sha256": "10b8389eb1b4b9967de5aef1925851073b5d506d70c2ec32ea2064f4504902e9",
+        "value": {
+          "nineslice_size": 8,
+          "base_size": [
+            18,
+            18
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/jigsaw/dialog_background_hollow_4.json"
+      }
+    },
+    {
+      "key": "dialog_background_opaque",
+      "original": {
+        "path": "resource_pack/textures/ui/dialog_background_opaque.png",
+        "bytes": 186,
+        "sha256": "45e365955de8800424ea35bfa589ca38535df6211c10d24bcde280cae09dc69f",
+        "decoded": {
+          "width": 16,
+          "height": 16,
+          "rgbaBytes": 1024,
+          "rgbaSha256": "066fd1c24c8aff3da7c9867bfe4afd0223501457d986631bfd60f66e6bfe481b",
+          "rgbaPixelColors": 5
+        }
+      },
+      "references": [
+        {
+          "definition": "common.dialog_background_opaque",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/dialog_background_opaque@dialog_background_common/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/workstation-image-assets.ts",
+        "imageSha256": "45e365955de8800424ea35bfa589ca38535df6211c10d24bcde280cae09dc69f",
+        "bodyBytes": 186
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/dialog_background_opaque.json",
+        "bytes": 62,
+        "sha256": "f5e0d63d8b595601b0a643fa5417813186c09da1fbe0b8341ab387cfda773222",
+        "value": {
+          "nineslice_size": 4,
+          "base_size": [
+            16,
+            16
+          ]
+        },
+        "mode": "new-original-whole-metadata",
+        "selectedPath": "src/assets/invite/dialog_background_opaque.json"
+      }
+    },
+    {
+      "key": "dialog_divider",
+      "original": {
+        "path": "resource_pack/textures/ui/dialog_divider.png",
+        "bytes": 90,
+        "sha256": "c9f4386d5bfcbdad6de9e74a9b297e597bece3b1529222e40cdccda164164318",
+        "decoded": {
+          "width": 3,
+          "height": 1,
+          "rgbaBytes": 12,
+          "rgbaSha256": "85bc6099db15d8885fa370c07b6f9397c9b5cdb70f8fe85b76a99bbfdf85f29b",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "common.dialog_divider",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/dialog_divider/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/command-block/dialog_divider.png",
+        "sha256": "c9f4386d5bfcbdad6de9e74a9b297e597bece3b1529222e40cdccda164164318"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/dialog_divider.json",
+        "bytes": 91,
+        "sha256": "f342670cc0ebf56ca4697da1710f0a41660bf3bbb357537a3a2e69779290230a",
+        "value": {
+          "nineslice_size": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "base_size": [
+            3,
+            1
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/command-block/dialog_divider.json"
+      }
+    },
+    {
+      "key": "disabledButtonNoBorder",
+      "original": {
+        "path": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+        "bytes": 88,
+        "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+        "decoded": {
+          "width": 2,
+          "height": 2,
+          "rgbaBytes": 16,
+          "rgbaSha256": "e67567d79bb3aa67a31d6b356994cc8e12575ac8559f4d065015cdf0b75450bd",
+          "rgbaPixelColors": 1
+        }
+      },
+      "references": [
+        {
+          "definition": "common_buttons.light_button_assets",
+          "path": "resource_pack/ui/ui_template_buttons.json",
+          "pointer": "/light_button_assets@common.button/$locked_button_texture|default",
+          "property": "$locked_button_texture|default",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "invite.grey_borderless_locked",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/grey_borderless_locked@invite.black_border/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/document-viewer/disabledButtonNoBorder.png",
+        "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/disabledButtonNoBorder.json"
+      }
+    },
+    {
+      "key": "divider3",
+      "original": {
+        "path": "resource_pack/textures/ui/divider3.png",
+        "bytes": 99,
+        "sha256": "9d3316beada658b7da2a477b9f1c63710e1246e56328ae9e145f81ab5adbb3d9",
+        "decoded": {
+          "width": 1,
+          "height": 1,
+          "rgbaBytes": 4,
+          "rgbaSha256": "7fe54f71ee1eef6acc7769e08bae819c3163a4c535959ce0693a6ed6fdb70deb",
+          "rgbaPixelColors": 1
+        }
+      },
+      "references": [
+        {
+          "definition": "common.horizontal_divider",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/horizontal_divider/controls/0/divider_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/divider3.png",
+        "sha256": "9d3316beada658b7da2a477b9f1c63710e1246e56328ae9e145f81ab5adbb3d9"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/divider3.json",
+        "bytes": 60,
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/ScrollRail.json"
+      }
+    },
+    {
+      "key": "effect_background",
+      "original": {
+        "path": "resource_pack/textures/ui/effect_background.png",
+        "bytes": 267,
+        "sha256": "46ae567772738afaac986020724da72ca09362d4168fe949d6967baaa07f8d48",
+        "decoded": {
+          "width": 120,
+          "height": 32,
+          "rgbaBytes": 15360,
+          "rgbaSha256": "ea06cc92f8a486adb2a1cf31cc88c32b15a45d566af620477040ab779546034a",
+          "rgbaPixelColors": 8
+        }
+      },
+      "references": [
+        {
+          "definition": "common.base_screen",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/base_screen/controls/1/loading_bars_background/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/advanced-workstation-textures.css",
+        "imageSha256": "46ae567772738afaac986020724da72ca09362d4168fe949d6967baaa07f8d48",
+        "bodyBytes": 267
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/effect_background.json",
+        "bytes": 63,
+        "sha256": "5133a8798ce81bc57f372d3f2f6ef962b167122ea1073fb56154517704493229",
+        "value": {
+          "nineslice_size": 4,
+          "base_size": [
+            120,
+            32
+          ]
+        },
+        "mode": "new-original-whole-metadata",
+        "selectedPath": "src/assets/invite/effect_background.json"
+      }
+    },
+    {
+      "key": "empty_stack_progress_bar",
+      "original": {
+        "path": "resource_pack/textures/ui/empty_stack_progress_bar.png",
+        "bytes": 178,
+        "sha256": "2bcb3f86d803335afebd62f29be11bd6e6cc3f7130bcfc4d5679a47f04610474",
+        "decoded": {
+          "width": 66,
+          "height": 12,
+          "rgbaBytes": 3168,
+          "rgbaSha256": "05e2197b62c5f16326cd13c4d22e5d56b7ba9fb11ae208986f9088f868acf08e",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "gameplay.bundle_tooltip",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_tooltip/controls/2/wrapper/controls/0/vertical_layout_stack/controls/1/horisontal_layout_stack/controls/0/body_stack/controls/1/lower_wrap/controls/0/lower_stack/controls/1/footer_panel/controls/0/weight_bar/controls/3/weight_bar_border/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/empty_stack_progress_bar.png",
+        "sha256": "2bcb3f86d803335afebd62f29be11bd6e6cc3f7130bcfc4d5679a47f04610474"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/empty_stack_progress_bar.json",
+        "bytes": 93,
+        "sha256": "a572a133f78173da827f56e6aacf37fe6db4a7e990334c9dd0198dd9b8a93aa9",
+        "value": {
+          "nineslice_size": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "base_size": [
+            66,
+            12
+          ]
+        },
+        "mode": "new-original-whole-metadata",
+        "selectedPath": "src/assets/invite/empty_stack_progress_bar.json"
+      }
+    },
+    {
+      "key": "focus_border_white",
+      "original": {
+        "path": "resource_pack/textures/ui/focus_border_white.png",
+        "bytes": 105,
+        "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+        "decoded": {
+          "width": 5,
+          "height": 5,
+          "rgbaBytes": 100,
+          "rgbaSha256": "7ade542643cd10ac042f8297c694c945d49f968ae8d84775db7fccdb28f89bbb",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.white_border_slot",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/white_border_slot/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "common_buttons.focus_border",
+          "path": "resource_pack/ui/ui_template_buttons.json",
+          "pointer": "/focus_border/$focus_border_texture|default",
+          "property": "$focus_border_texture|default",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "gameplay.bundle_cell_image",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_cell_image/controls/1/highlight_panel/controls/1/bundle_selected_item_background_border_white/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/document-viewer/focus_border_white.png",
+        "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/focus_border_white.json"
+      }
+    },
+    {
+      "key": "highlight_slot",
+      "original": {
+        "path": "resource_pack/textures/ui/highlight_slot.png",
+        "bytes": 120,
+        "sha256": "a4e5b1b1cd05ef340fcb32fdc4a763ec22fdaa085f2defa1ac9ae514a220201b",
+        "decoded": {
+          "width": 1,
+          "height": 1,
+          "rgbaBytes": 4,
+          "rgbaSha256": "0d624c0806ab06488ec754436d56b6268ffeb556b69b699212e0ad0b29e7e120",
+          "rgbaPixelColors": 1
+        }
+      },
+      "references": [
+        {
+          "definition": "common.highlight_slot",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/highlight_slot/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/workstation-image-assets.ts",
+        "imageSha256": "a4e5b1b1cd05ef340fcb32fdc4a763ec22fdaa085f2defa1ac9ae514a220201b",
+        "bodyBytes": 120
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/highlight_slot.json",
+        "bytes": 60,
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/ScrollRail.json"
+      }
+    },
+    {
+      "key": "item_lock_red",
+      "original": {
+        "path": "resource_pack/textures/ui/item_lock_red.png",
+        "bytes": 163,
+        "sha256": "3a3b8878eb0f68ad0c18c60a17cf79521c06b0b43e35d212f527ade026c760cd",
+        "decoded": {
+          "width": 16,
+          "height": 16,
+          "rgbaBytes": 1024,
+          "rgbaSha256": "4ee6d3c7cf427e47cfe1d3af99421df8eb913a2485a4f4fa5f06cd1a21f8ccbb",
+          "rgbaPixelColors": 5
+        }
+      },
+      "references": [
+        {
+          "definition": "common.container_item_lock_red",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/container_item_lock_red/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/item_lock_red.png",
+        "sha256": "3a3b8878eb0f68ad0c18c60a17cf79521c06b0b43e35d212f527ade026c760cd"
+      }
+    },
+    {
+      "key": "item_lock_yellow",
+      "original": {
+        "path": "resource_pack/textures/ui/item_lock_yellow.png",
+        "bytes": 184,
+        "sha256": "035746004bc103c155e5913e61ebe11558138293718380a3b98444a892d7a452",
+        "decoded": {
+          "width": 16,
+          "height": 16,
+          "rgbaBytes": 1024,
+          "rgbaSha256": "282058843f092648cef3c27ba26b9396b75d47fb0dba332aa1794ddc54a18366",
+          "rgbaPixelColors": 4
+        }
+      },
+      "references": [
+        {
+          "definition": "common.container_item_lock_yellow",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/container_item_lock_yellow/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/item_lock_yellow.png",
+        "sha256": "035746004bc103c155e5913e61ebe11558138293718380a3b98444a892d7a452"
+      }
+    },
+    {
+      "key": "loading_bar",
+      "original": {
+        "path": "resource_pack/textures/ui/loading_bar.png",
+        "bytes": 323,
+        "sha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef",
+        "decoded": {
+          "width": 640,
+          "height": 8,
+          "rgbaBytes": 20480,
+          "rgbaSha256": "04dd4ed3756a10e10914b4a91882eeafc6116e98319218212f605a4c5cac1ee8",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "common_store.progress_loading_bars",
+          "path": "resource_pack/ui/store_common.json",
+          "pointer": "/progress_loading_bars/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "play.progress_loading_bars",
+          "path": "resource_pack/ui/play_screen.json",
+          "pointer": "/progress_loading_bars/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/storage-assets.ts",
+        "imageSha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef",
+        "bodyBytes": 323
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/loading_bar.json",
+        "bytes": 39,
+        "sha256": "38bc67e02f506f01308a16c9be27bbe203ea6da76cd02961571801327ad5f665",
+        "value": {
+          "base_size": [
+            640,
+            8
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/storage-management/loading_bar.json"
+      }
+    },
+    {
+      "key": "mainbanners",
+      "original": {
+        "path": "resource_pack/textures/ui/mainbanners.png",
+        "bytes": 80,
+        "sha256": "eb517774e883832c233bf2c57c7eac4d58fdbc5302c6b30b046fd84c96d94547",
+        "decoded": {
+          "width": 3,
+          "height": 3,
+          "rgbaBytes": 36,
+          "rgbaSha256": "64c60a3eda67687bfa420fc46d4fa1ce7e8a5ca55cbcc63ea2bcd32c1d5c3e8b",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "invite.black_border",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/black_border/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        },
+        {
+          "definition": "invite.scrolling_content_stack",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/scrolling_content_stack/controls/5/crossplatform_disabled_panel/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/mainbanners.png",
+        "sha256": "eb517774e883832c233bf2c57c7eac4d58fdbc5302c6b30b046fd84c96d94547"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/mainbanners.json",
+        "bytes": 60,
+        "sha256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            3,
+            3
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/HowToPlayDivider.json"
+      }
+    },
+    {
+      "key": "offline",
+      "original": {
+        "path": "resource_pack/textures/ui/offline.png",
+        "bytes": 124,
+        "sha256": "a05d38826a76ff5abb58f3f6c1a38fb1975cc1dcd5d6be336f7b73c359c7aec9",
+        "decoded": {
+          "width": 7,
+          "height": 7,
+          "rgbaBytes": 196,
+          "rgbaSha256": "babb1c437f27881226cff935baaf9cd88acc84f46273ebebf53f2c40b3039083",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "invite.offline_image",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/offline_image@invite.status_image/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/game-list-textures.css",
+        "imageSha256": "a05d38826a76ff5abb58f3f6c1a38fb1975cc1dcd5d6be336f7b73c359c7aec9",
+        "bodyBytes": 124
+      }
+    },
+    {
+      "key": "online",
+      "original": {
+        "path": "resource_pack/textures/ui/online.png",
+        "bytes": 116,
+        "sha256": "e2782521b081320bc3785780e409b64bc8cbd22799207f532bb54398f0f91094",
+        "decoded": {
+          "width": 7,
+          "height": 7,
+          "rgbaBytes": 196,
+          "rgbaSha256": "5d1dc72f0441de8540aebc66f5232854d2b9a8bd1d88ef5a1bf599469a3db3d6",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "invite.online_image",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/online_image@invite.status_image/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/game-list-textures.css",
+        "imageSha256": "e2782521b081320bc3785780e409b64bc8cbd22799207f532bb54398f0f91094",
+        "bodyBytes": 116
+      }
+    },
+    {
+      "key": "pocket_ui_highlight_selected_slot",
+      "original": {
+        "path": "resource_pack/textures/ui/pocket_ui_highlight_selected_slot.png",
+        "bytes": 475,
+        "sha256": "59909e979328ea00f94225c1153a87c713d0481faa65574257332bd310007ebe",
+        "decoded": {
+          "width": 16,
+          "height": 16,
+          "rgbaBytes": 1024,
+          "rgbaSha256": "b23b277e439598d86306bbb9be1ab3d5c9304410f172a182c20dc578217362de",
+          "rgbaPixelColors": 55
+        }
+      },
+      "references": [
+        {
+          "definition": "common.slot_selected",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/slot_selected/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/crafting-image-assets.ts",
+        "imageSha256": "59909e979328ea00f94225c1153a87c713d0481faa65574257332bd310007ebe",
+        "bodyBytes": 475
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/pocket_ui_highlight_selected_slot.json",
+        "bytes": 62,
+        "sha256": "c685de5f221d9f72b503c3f1177187fcd2ed5f4ef144a40f1e10b15c734bab69",
+        "value": {
+          "nineslice_size": 5,
+          "base_size": [
+            16,
+            16
+          ]
+        },
+        "mode": "new-original-whole-metadata",
+        "selectedPath": "src/assets/invite/pocket_ui_highlight_selected_slot.json"
+      }
+    },
+    {
+      "key": "pocket_ui_highlight_slot",
+      "original": {
+        "path": "resource_pack/textures/ui/pocket_ui_highlight_slot.png",
+        "bytes": 670,
+        "sha256": "57e84fc08ca19e8eb4ba10e5729db6e38c27319e4fafc472fdac37fe575ed4ae",
+        "decoded": {
+          "width": 24,
+          "height": 24,
+          "rgbaBytes": 2304,
+          "rgbaSha256": "bdc5c4b0ca7580d6835428dfd8029e50a9c4b0432d17af0d5bd3e5822ea2d22a",
+          "rgbaPixelColors": 70
+        }
+      },
+      "references": [
+        {
+          "definition": "common.pocket_ui_highlight_slot",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/pocket_ui_highlight_slot/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/pocket_ui_highlight_slot.png",
+        "sha256": "57e84fc08ca19e8eb4ba10e5729db6e38c27319e4fafc472fdac37fe575ed4ae"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/pocket_ui_highlight_slot.json",
+        "bytes": 62,
+        "sha256": "463e8c1989e7fb7ece23c5f87ed339a4a628f5284b8717bca854149d587071a1",
+        "value": {
+          "nineslice_size": 4,
+          "base_size": [
+            24,
+            24
+          ]
+        },
+        "mode": "new-original-whole-metadata",
+        "selectedPath": "src/assets/invite/pocket_ui_highlight_slot.json"
+      }
+    },
+    {
+      "key": "purpleBorder",
+      "original": {
+        "path": "resource_pack/textures/ui/purpleBorder.png",
+        "bytes": 147,
+        "sha256": "0f75fafa1e465f5dee14f26c31d046cc23d0a8a603b58d04e32f71cad2409e39",
+        "decoded": {
+          "width": 16,
+          "height": 16,
+          "rgbaBytes": 1024,
+          "rgbaSha256": "ddc6b94e287fd46b7ef5c38f9fffb340cde9c1d004efcded95e6a75c84645a41",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "common.item_panel_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/item_panel_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "gameplay.bundle_tooltip",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_tooltip/controls/0/background/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "new-original-whole-png",
+      "selected": {
+        "path": "src/assets/invite/purpleBorder.png",
+        "sha256": "0f75fafa1e465f5dee14f26c31d046cc23d0a8a603b58d04e32f71cad2409e39"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/purpleBorder.json",
+        "bytes": 62,
+        "sha256": "f5e0d63d8b595601b0a643fa5417813186c09da1fbe0b8341ab387cfda773222",
+        "value": {
+          "nineslice_size": 4,
+          "base_size": [
+            16,
+            16
+          ]
+        },
+        "mode": "new-whole-byte-metadata-reuse",
+        "selectedPath": "src/assets/invite/dialog_background_opaque.json"
+      }
+    },
+    {
+      "key": "recipe_book_touch_cell_selected",
+      "original": {
+        "path": "resource_pack/textures/ui/recipe_book_touch_cell_selected.png",
+        "bytes": 118,
+        "sha256": "95743c4386456a219bdaaec2893cb0cee5de0810e15560a184854c797efa9267",
+        "decoded": {
+          "width": 4,
+          "height": 4,
+          "rgbaBytes": 64,
+          "rgbaSha256": "f2d17a625e367a35394a583c34d5179b2c9639d8c12eae854911b85b9f927602",
+          "rgbaPixelColors": 3
+        }
+      },
+      "references": [
+        {
+          "definition": "common.cell_image_selected",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/cell_image_selected/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        },
+        {
+          "definition": "gameplay.bundle_selected_item_background",
+          "path": "resource_pack/ui/gameplay_common.json",
+          "pointer": "/bundle_selected_item_background/controls/1/bundle_selected_item_background_colour/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-embedded-whole-body",
+      "selected": {
+        "path": "src/workstation-image-assets.ts",
+        "imageSha256": "95743c4386456a219bdaaec2893cb0cee5de0810e15560a184854c797efa9267",
+        "bodyBytes": 118
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/recipe_book_touch_cell_selected.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/book/book_texteditbox_hover.json"
+      }
+    },
+    {
+      "key": "square_image_border_white",
+      "original": {
+        "path": "resource_pack/textures/ui/square_image_border_white.png",
+        "bytes": 105,
+        "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+        "decoded": {
+          "width": 5,
+          "height": 5,
+          "rgbaBytes": 100,
+          "rgbaSha256": "7ade542643cd10ac042f8297c694c945d49f968ae8d84775db7fccdb28f89bbb",
+          "rgbaPixelColors": 2
+        }
+      },
+      "references": [
+        {
+          "definition": "common.non_interact_focus_border",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/non_interact_focus_border/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/document-viewer/focus_border_white.png",
+        "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/square_image_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/focus_border_white.json"
+      }
+    },
+    {
+      "key": "toggle_off",
+      "original": {
+        "path": "resource_pack/textures/ui/toggle_off.png",
+        "bytes": 7234,
+        "sha256": "e3c03f72af1d8afc7617f229e4eddb6d439a02411e464e48c1bdd1f01f873962",
+        "decoded": {
+          "width": 30,
+          "height": 16,
+          "rgbaBytes": 1920,
+          "rgbaSha256": "40d8a3a6feea8a94a47d808042e704a48ce39694118c0c89b867e1f66123aedd",
+          "rgbaPixelColors": 7
+        }
+      },
+      "references": [
+        {
+          "definition": "settings_common.option_toggle_off",
+          "path": "resource_pack/ui/settings_sections/settings_common.json",
+          "pointer": "/option_toggle_off@settings_common.option_toggle_state_template/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/player-permissions/toggle_off.png",
+        "sha256": "e3c03f72af1d8afc7617f229e4eddb6d439a02411e464e48c1bdd1f01f873962"
+      }
+    },
+    {
+      "key": "toggle_off_hover",
+      "original": {
+        "path": "resource_pack/textures/ui/toggle_off_hover.png",
+        "bytes": 7657,
+        "sha256": "5083272d331669bde3e5c3ef14cbfd12d6660763bad23b7474c902b4fc82d056",
+        "decoded": {
+          "width": 30,
+          "height": 16,
+          "rgbaBytes": 1920,
+          "rgbaSha256": "dc0055b3162749d5a97870b362e87a25b4315268e880064dcfe69d6d2727b3d8",
+          "rgbaPixelColors": 7
+        }
+      },
+      "references": [
+        {
+          "definition": "settings_common.option_toggle_off_hover",
+          "path": "resource_pack/ui/settings_sections/settings_common.json",
+          "pointer": "/option_toggle_off_hover@settings_common.option_toggle_state_template/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/player-permissions/toggle_off_hover.png",
+        "sha256": "5083272d331669bde3e5c3ef14cbfd12d6660763bad23b7474c902b4fc82d056"
+      }
+    },
+    {
+      "key": "toggle_on",
+      "original": {
+        "path": "resource_pack/textures/ui/toggle_on.png",
+        "bytes": 167,
+        "sha256": "b37762f63652856a4c735f5adf55e511e9c01744a883ec70647b97e08a1711ff",
+        "decoded": {
+          "width": 30,
+          "height": 16,
+          "rgbaBytes": 1920,
+          "rgbaSha256": "ca4d3d8e1535d756f000b08fa6218453d8e11aa2c549546abb83f28140958af8",
+          "rgbaPixelColors": 7
+        }
+      },
+      "references": [
+        {
+          "definition": "settings_common.option_toggle_on",
+          "path": "resource_pack/ui/settings_sections/settings_common.json",
+          "pointer": "/option_toggle_on@settings_common.option_toggle_state_template/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/npc/toggle_on.png",
+        "sha256": "b37762f63652856a4c735f5adf55e511e9c01744a883ec70647b97e08a1711ff"
+      }
+    },
+    {
+      "key": "toggle_on_hover",
+      "original": {
+        "path": "resource_pack/textures/ui/toggle_on_hover.png",
+        "bytes": 225,
+        "sha256": "3ce38b76a06e672c95cb8fa4892456e4deaf482c7f6a67b8e991761421fe6b8b",
+        "decoded": {
+          "width": 30,
+          "height": 16,
+          "rgbaBytes": 1920,
+          "rgbaSha256": "f1a7a0413c112534013dba78e9beb1878ff6113d7aa2eac0d9784eda08422e9c",
+          "rgbaPixelColors": 7
+        }
+      },
+      "references": [
+        {
+          "definition": "settings_common.option_toggle_on_hover",
+          "path": "resource_pack/ui/settings_sections/settings_common.json",
+          "pointer": "/option_toggle_on_hover@settings_common.option_toggle_state_template/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/npc/toggle_on_hover.png",
+        "sha256": "3ce38b76a06e672c95cb8fa4892456e4deaf482c7f6a67b8e991761421fe6b8b"
+      }
+    },
+    {
+      "key": "touchScrollBox",
+      "original": {
+        "path": "resource_pack/textures/ui/touchScrollBox.png",
+        "bytes": 863,
+        "sha256": "86743f082bc3cdfbe4971aad9491069f4338576ec6ad9a23dddac614d5148efe",
+        "decoded": {
+          "width": 1,
+          "height": 1,
+          "rgbaBytes": 4,
+          "rgbaSha256": "4565d82e73c5ec14b9c261c0eae745a730550cf5e1747c5fbabb38336b8dcdfe",
+          "rgbaPixelColors": 1
+        }
+      },
+      "references": [
+        {
+          "definition": "common.touch_scrollbar_box_image",
+          "path": "resource_pack/ui/ui_common.json",
+          "pointer": "/touch_scrollbar_box_image/texture",
+          "property": "texture",
+          "scope": "conservative inherited/shared candidate; not proof mounted"
+        }
+      ],
+      "mode": "existing-physical-whole-byte",
+      "selected": {
+        "path": "src/assets/document-viewer/touchScrollBox.png",
+        "sha256": "86743f082bc3cdfbe4971aad9491069f4338576ec6ad9a23dddac614d5148efe"
+      },
+      "rawMetadata": {
+        "path": "resource_pack/textures/ui/touchScrollBox.json",
+        "bytes": 60,
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "mode": "existing-whole-byte-metadata",
+        "selectedPath": "src/assets/document-viewer/ScrollRail.json"
+      }
+    }
+  ],
+  "missing": [
+    {
+      "texture": "textures/ui/platform_icon",
+      "references": [
+        {
+          "definition": "invite.platform_icon",
+          "path": "resource_pack/ui/invite_screen.json",
+          "pointer": "/platform_icon/texture",
+          "property": "texture",
+          "scope": "direct Invite authored literal"
+        }
+      ],
+      "exactImagePaths": [],
+      "caseFoldImagePaths": [],
+      "status": "absent-all-audited-image-extensions",
+      "images": []
+    }
+  ],
+  "license": {
+    "originalPath": "LICENSE.md",
+    "selectedPath": "src/assets/invite/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "newPhysicalFiles": [
+    "src/assets/invite/arrow_l_default.png",
+    "src/assets/invite/arrow_r_default.png",
+    "src/assets/invite/bundle_item_background.png",
+    "src/assets/invite/bundle_item_background.json",
+    "src/assets/invite/cell_image_lock.png",
+    "src/assets/invite/checkbox_check_locked.png",
+    "src/assets/invite/checkbox_space_locked.png",
+    "src/assets/invite/container_weight_bar_fill.png",
+    "src/assets/invite/container_weight_bar_fill.json",
+    "src/assets/invite/container_weight_bar_full.png",
+    "src/assets/invite/dialog_background_opaque.json",
+    "src/assets/invite/divider3.png",
+    "src/assets/invite/effect_background.json",
+    "src/assets/invite/empty_stack_progress_bar.png",
+    "src/assets/invite/empty_stack_progress_bar.json",
+    "src/assets/invite/item_lock_red.png",
+    "src/assets/invite/item_lock_yellow.png",
+    "src/assets/invite/mainbanners.png",
+    "src/assets/invite/pocket_ui_highlight_selected_slot.json",
+    "src/assets/invite/pocket_ui_highlight_slot.png",
+    "src/assets/invite/pocket_ui_highlight_slot.json",
+    "src/assets/invite/purpleBorder.png",
+    "src/assets/invite/LICENSE.md"
+  ],
+  "scope": "Whole originals and exact raw metadata; conservative shared candidates are not all default mounts. Dynamic platform/profile/controller providers remain caller-owned; no native whole-GUI claim."
+}

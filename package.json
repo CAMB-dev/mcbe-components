@@ -4,9 +4,14 @@
   "description": "Minecraft Bedrock inspired pixel UI components for React and TypeScript.",
   "type": "module",
   "license": "MIT",
-  "repository": { "type": "git", "url": "git+https://github.com/CAMB-dev/mcbe-components.git" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CAMB-dev/mcbe-components.git"
+  },
   "homepage": "https://github.com/CAMB-dev/mcbe-components#readme",
-  "bugs": { "url": "https://github.com/CAMB-dev/mcbe-components/issues" },
+  "bugs": {
+    "url": "https://github.com/CAMB-dev/mcbe-components/issues"
+  },
   "sideEffects": [
     "**/*.css"
   ],
@@ -84,11 +89,20 @@
     "./portfolio-parts.css": "./dist/portfolio-parts.css",
     "./portfolio-picker.css": "./dist/portfolio-picker.css",
     "./portfolio-skin.css": "./dist/portfolio-skin.css",
+    "./invite.css": "./dist/invite.css",
+    "./invite-skin.css": "./dist/invite-skin.css",
+    "./invite-controls.css": "./dist/invite-controls.css",
+    "./invite-person-row.css": "./dist/invite-person-row.css",
+    "./invite-pagination.css": "./dist/invite-pagination.css",
+    "./invite-category.css": "./dist/invite-category.css",
+    "./invite-footer.css": "./dist/invite-footer.css",
+    "./invite-screen.css": "./dist/invite-screen.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",
     "./fonts/*": "./dist/fonts/*",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./invite-source-helpers.css": "./dist/invite-source-helpers.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
