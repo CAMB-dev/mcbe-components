@@ -1,8 +1,10 @@
 # Bedrock 组件范围
 
+本轮新增UGCViewer /UGCItemCard与ImmersiveReader /ImmersiveReaderButton，当前177组件 /194运行时值。正式首74项67通过 /7方法失败保留，修正后14项12通过 /2只读断言失败，再修后2项通过；74个不同用例按各自最新方法均已验证，其中68项新增、6项相关导航，不合称单轮74全绿。42个完整源材质平面共1,986,950像素RGBA零差。React18.3.1 /19.3.1实际包的类型 /SSR /资源和默认Vite开发 /生产四组合通过，公开页12项通过。宿主White候选、静态reader图标、字体 /默认锚点 /provider /原生整页仍未认证。使用见 [UGC_VIEWER_QA.md](UGC_VIEWER_QA.md) / [IMMERSIVE_READER_QA.md](IMMERSIVE_READER_QA.md)。
+
 新增存储管理八组件覆盖Settings内容区、分类与条目、操作托盘、选择footer及依赖 /分享弹窗；截图闪光层独立复用，图像与时钟由宿主提供。使用与实际验证范围见 [STORAGE_QA.md](STORAGE_QA.md) 和 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)，不据源码实现宣称原生整页验收。
 
-当前导出 173 个组件，目录 173 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 190 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 177 个组件，目录 177 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 194 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 新增存储管理八组件与截图闪光层，当前173组件 /190运行时值。Storage首99项94通过、1设备跳过、4比较方法失败保留，修正参照后8项材质复验通过：19完整平面、160,301像素RGBA零差；28项行为通过。Screenshot17项、公开14项和实际React18 /19默认Vite开发 /生产四场景分别通过。原生整页、默认锚点、材质解析与引擎provider仍未认证，见 [STORAGE_QA.md](STORAGE_QA.md) 与 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)。
 

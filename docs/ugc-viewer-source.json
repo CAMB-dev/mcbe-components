@@ -1,0 +1,484 @@
+{
+  "schemaVersion": 1,
+  "status": "SOURCE_WEB_ACTUAL_PACKAGE_AND_PUBLIC_VERIFIED_NATIVE_UNVERIFIED",
+  "source": {
+    "release": "v1.26.60.5-full",
+    "repository": "https://github.com/Mojang/bedrock-samples",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "archiveBytes": 169569258,
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "familySource": {
+    "path": "resource_pack/ui/ugc_viewer_screen.json",
+    "bytes": 6670,
+    "sha256": "06cf78b9540eaa8d04c700007b68ce80e8afda468b6ef4718dbf36bda5cc126e",
+    "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ugc_viewer_screen.json",
+    "wholeOriginal": true
+  },
+  "definitions": 12,
+  "sourceInventoryScope": {
+    "indexedUIFiles": 206,
+    "conservativeClosureNodes": 181,
+    "closureNotAllMountedOrAssetPublicationList": true
+  },
+  "wholeDependencies": [
+    {
+      "path": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_common.json",
+      "wholeOriginal": true
+    },
+    {
+      "path": "resource_pack/ui/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_template_buttons.json",
+      "wholeOriginal": true
+    },
+    {
+      "path": "resource_pack/ui/ui_template_dialogs.json",
+      "bytes": 14238,
+      "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_template_dialogs.json",
+      "wholeOriginal": true
+    },
+    {
+      "path": "resource_pack/ui/_global_variables.json",
+      "bytes": 20210,
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/_global_variables.json",
+      "wholeOriginal": true
+    },
+    {
+      "path": "resource_pack/ui/_ui_defs.json",
+      "bytes": 7470,
+      "sha256": "b4f7f25b6ee4246b3582eb78a031ecc93793fdb2cf09f77b886d73f4038cb270",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/_ui_defs.json",
+      "wholeOriginal": true
+    }
+  ],
+  "components": [
+    {
+      "name": "UGCViewer",
+      "ref": "HTMLElement section"
+    },
+    {
+      "name": "UGCItemCard",
+      "ref": "HTMLButtonElement; containerRef is a separate cell wrapper"
+    }
+  ],
+  "publicTypes": [
+    "UGCImageSource",
+    "UGCImageFrameMaterial",
+    "UGCItem",
+    "UGCActionDetail",
+    "UGCActionHandler",
+    "UGCItemCardProps",
+    "UGCQueryChangeDetail",
+    "UGCSearchInputProps",
+    "UGCViewerProps"
+  ],
+  "module": {
+    "path": "src/ugc-viewer.tsx",
+    "sha256": "9b257182bb8e00b4b27e375f3fc880ea0053357f1af69807b98e0202218fdf71",
+    "style": "src/ugc-viewer.css",
+    "styleSHA256": "2c4e3277e122fde1378b98033b99fc16cf04397c88d48131b36cc7e3f1f0ba9c",
+    "publicImport": "mcbeui",
+    "styleImport": "mcbeui/ugc-viewer.css",
+    "aggregateStyle": "mcbeui/styles.css"
+  },
+  "geometry": {
+    "availableFrameDefault": [
+      384,
+      234
+    ],
+    "scaleDefault": 2,
+    "panelSizeWeb": [
+      "min(availableW-4,380)",
+      "min(availableH-4,230)"
+    ],
+    "sourceMaximum": [
+      380,
+      230
+    ],
+    "title": {
+      "offset": [
+        0,
+        9
+      ],
+      "height": 10,
+      "shadow": false,
+      "color": [
+        0.3,
+        0.3,
+        0.3
+      ]
+    },
+    "body": {
+      "size": [
+        "panelW-16",
+        "panelH-31"
+      ],
+      "top": 23,
+      "stack": [
+        "padding2",
+        "search20",
+        "gap1",
+        "scrollFill",
+        "bottom1"
+      ]
+    },
+    "search": {
+      "width": "bodyW-4",
+      "height": 20,
+      "centering": [
+        "fieldW-6",
+        "fieldH-4"
+      ],
+      "sourceMaxLength": 14,
+      "sourceTextType": "ExtendedASCII",
+      "DOMLengthPolicy": "UTF-16 maxLength14; do not infer native counting or strip Unicode/IME",
+      "normalShadow": false,
+      "placeholder": {
+        "wholeIcon": [
+          16,
+          16
+        ],
+        "iconOffset": [
+          0,
+          1
+        ],
+        "textOffset": [
+          18,
+          0
+        ],
+        "alpha": 0.5,
+        "textColor": [
+          0.851,
+          0.851,
+          0.851
+        ],
+        "onlyEmptyDisplay": true
+      }
+    },
+    "mouseScroll": {
+      "leftPadding": 0,
+      "column": 6,
+      "rightPadding": 2,
+      "reserved": 8,
+      "railDisplayWidth": 3,
+      "thumbDisplayWidth": 5,
+      "verticalInset": 2
+    },
+    "touchScroll": {
+      "contained": true,
+      "width": 4,
+      "externalReservation": 0,
+      "track": false,
+      "thumbDefaultVisible": false,
+      "nativeClockPhysicsUnknown": true
+    },
+    "grid": {
+      "sourceCellWidth": "33.33%",
+      "sourceCellHeight": "56.25%x+15",
+      "webColumns": 3,
+      "maxGridItems": "Required nonnegative integer, explicit host first-N mapping",
+      "nativeHorizontalRescaleAndCapacityProviderUnknown": true,
+      "contentWidth": "viewportW-2"
+    },
+    "card": {
+      "button": "cell-2 each axis",
+      "newUIButtonContent": "button-6 each axis",
+      "ugcContent": "parent-2 each axis",
+      "finalContent": "cell-10 each axis",
+      "stateBacking": "button-2 each axis",
+      "labelHeight": "default natural current Web font, or explicit labelHeight; not literal10 source",
+      "labelColor": [
+        1,
+        1,
+        1
+      ],
+      "worldFrame": [
+        "177.78%y",
+        "100%"
+      ],
+      "worldFrameAnchor": "bottom_middle",
+      "image": "frame-2 each axis",
+      "pressedOffset": [
+        0,
+        1
+      ],
+      "defaultAndLockedBorderColor": [
+        0.075,
+        0.075,
+        0.075
+      ],
+      "hoverAndPressedBorderColor": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "states": {
+    "query": "Controlled/defaultQuery; callback request only, no engine search or filesystem",
+    "items": "Host accepted collection, unique own-property IDs including prototype names",
+    "hidden": "Keyed subtree retained, display none Web adaptation",
+    "readOnly": "Blocks query/item requests; exit remains allowed",
+    "disabled": "Blocks source business actions/query; an explicit modal still owns its focus boundary",
+    "closeVisible": "X only; Escape independent of X visibility but controlled by closeEnabled",
+    "deferredValidity": "Root/node/ID/readOnly/disabled/hidden/max capacity rechecked at dispatch; old removed/reidentified leaf requests dropped",
+    "snapshot": "Accepted original item/query retained; copied descriptor/nested image fields, opaque ReactNode/function identities retained",
+    "fontMode": "auto/latin/unicode is bounded Classic Han host policy, not native text-type recovery"
+  },
+  "actions": [
+    {
+      "action": "item",
+      "target": "button.ugc_item"
+    },
+    {
+      "action": "close",
+      "target": "button.menu_exit",
+      "reason": [
+        "button",
+        "escape"
+      ]
+    }
+  ],
+  "requiredMaterial": {
+    "prop": "imageFrameMaterial",
+    "shape": {
+      "src": "nonempty host whole URL",
+      "sourceSize": "positive physical integer pair"
+    },
+    "exactSource": "textures/ui/White",
+    "exactSourceResolved": false,
+    "lowercaseCandidate": {
+      "size": [
+        15,
+        15
+      ],
+      "whiteTexels": 121,
+      "blackTexels": 104,
+      "nativeAliasVerified": false
+    },
+    "noDefaultCropOrGeneratedWhite": true,
+    "imageContentPrecedesImage": true
+  },
+  "assets": {
+    "manifest": "docs/ugc-reader-assets.json",
+    "manifestSHA256": "7b62f25ed8375e9f509902a2c1817c069b2684cc0e76f16f0acce45b6bd4915d",
+    "semanticPNGKeys": 21,
+    "rawMetadata": 16,
+    "physicalExistingPNG": 19,
+    "embeddedOnlyPNG": 2,
+    "newPhysicalFiles": 0,
+    "oldPhysicalBankFiles": 580,
+    "oldPhysicalBankDrift": 0,
+    "license": "Original Mojang license / Minecraft EULA; not MIT-relicensed artwork",
+    "whiteExactUppercaseResolved": false,
+    "missingBookAnimationTexture": true,
+    "familySubsetKeys": 17
+  },
+  "sharedLifecycle": {
+    "helperPath": "src/classic-screen-lifecycle.ts",
+    "helperSHA256": "21b6e7a80be4768438307f2acf67bbcd4d4d06871571983556af7ec1b61caf55",
+    "refAdapter": "Returns void to React18/19; caller callback cleanup stored and executed internally; native object/callback refs remain distinct.",
+    "dispatch": "Deferred after ancestor/native preventDefault; stable owner currentTarget and original event methods.",
+    "modal": "Explicit Web opt-in, default false; inert/scroll-lock/top owner/Tab/focus restoration adaptation, not native screen flags.",
+    "cpuEvidence": {
+      "path": ".cache/classic-screen-lifecycle-review-01/rev03/FINAL.json",
+      "sha256": "2064a1249faeb69813cd832847653640c22f8ab7aea8d7a3d82b99c03ab4fd55",
+      "scope": "16 finite CPU model cases plus SSR, not actual browser/mount/default Tab qualification"
+    },
+    "history": "Original three lifecycle counterexamples and subsequent combined-boundary failure remain in older cache reports; corrected model success does not erase their identity.",
+    "mountedBrowser": {
+      "executions": 16,
+      "phase": {
+        "path": ".cache/ugc-reader-tests-01/run-01/RESULT.json",
+        "sha256": "7f3b3c302d24c70c3ed24863af620e5539a21ded252af46288ad27fe99ed041f"
+      },
+      "scope": "8 lifecycle cases on desktop/mobile, only shared helper used by these two new families"
+    }
+  },
+  "qualification": {
+    "currentProducer": {
+      "path": ".cache/ugc-implementation-01/FINAL-v03.json",
+      "sha256": "e711dfa660ea1d12f08e886f221356df2beb91d36e0179386baf639c6d386055",
+      "scope": "Current v03:17 SSR/static groups, prior8+new19 CPU handler model groups; not actual mount"
+    },
+    "independentSource": {
+      "path": ".cache/ugc-independent-study-01/FINAL-v02.json",
+      "sha256": "160bb8993f3e5987f4087aef1fa6bb203b0b05312cff43c04e7cd63d96a29d42",
+      "scope": "Source literals/whole assets, explicit Web arithmetic; correction of initial White uniform assumption retained"
+    },
+    "independentImplementationV03": {
+      "path": ".cache/ugc-implementation-independent-review-01/rev03/FINAL.json",
+      "sha256": "cf3a06ee6b678e492f4445d3e2ac3caaa762aef55517a2356e24db9a056208df"
+    },
+    "exploratoryPublic": {
+      "path": ".cache/ugc-reader-public-inspect-01/RESULT.json",
+      "sha256": "1161903a6eff72e55e45396e5aec7fa1afb27a81319e416a2345678a232ea39d",
+      "scope": "Exploratory old UGC v02/Reader rev02 only: 1440/390 four rendered screenshots, no page horizontal overflow/error/drift; not current formal interaction/material/package/native proof"
+    },
+    "plannedNewFormalCases": 68,
+    "formalExecuted": true,
+    "actualPackagePassed": true,
+    "formalPublicInteractionsPassed": true,
+    "nativeWholeGUIParity": false,
+    "coverageChangedByThisMetadata": true,
+    "privateFramesOrFontsCopied": false,
+    "documentationExampleStrictSourceTypecheck": {
+      "passed": true,
+      "scope": "Current public source barrel paths, not actual npm installed consumer"
+    },
+    "formal": {
+      "scope": "74 distinct cases qualified across retained phases, not a single green74 run;68 new plus6 related navigation",
+      "phases": [
+        {
+          "phase": "run-01",
+          "path": ".cache/ugc-reader-tests-01/run-01/report.json",
+          "sha256": "4f05c6be0b0e9ae8b59d119e31225f4dbb2edfe22e7c367c275385bbc4cd62b1",
+          "stats": {
+            "startTime": "2026-10-31T02:54:54.560Z",
+            "duration": 204780.431,
+            "expected": 67,
+            "skipped": 0,
+            "unexpected": 7,
+            "flaky": 0
+          },
+          "cases": 74
+        },
+        {
+          "phase": "run-02",
+          "path": ".cache/ugc-reader-tests-01/run-02/report.json",
+          "sha256": "89e2385a45959351831709b378a597f7acc4e22e32449398827d4a4d07e1ee3b",
+          "stats": {
+            "startTime": "2026-10-31T12:39:33.154Z",
+            "duration": 34068.18,
+            "expected": 12,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          },
+          "cases": 14
+        },
+        {
+          "phase": "run-03",
+          "path": ".cache/ugc-reader-tests-01/run-03/report.json",
+          "sha256": "23639a18dea3d796cce6f0140991a33f6c208537003f20b905cb4b31edace5c9",
+          "stats": {
+            "startTime": "2026-10-31T12:40:41.926Z",
+            "duration": 8449.31,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "cases": 2
+        }
+      ],
+      "materials": {
+        "wholePlanes": 42,
+        "pixels": 1986950,
+        "RGBApixelDifferences": 0,
+        "scope": "Complete original source/Web planes at explicit integer origins, not native wholeGUI"
+      },
+      "summary": {
+        "path": ".cache/ugc-reader-qualification-01/SUMMARY.json",
+        "sha256": "68be08c469b2e778a36839c93e88c08190ae5750793d36f6ba106ee2248b63d0"
+      }
+    },
+    "actualPackage": {
+      "path": ".cache/ugc-reader-package-01/RESULT.json",
+      "sha256": "29c9d095812dda3fd5beb8aca0ca205bcf7efeacc3f8c95ecb5363f7bacafe8e",
+      "tar": {
+        "path": ".cache/ugc-reader-package-01/ugc-reader-verified.tgz",
+        "sha256": "231f2ffcfe715a50a5bd3b8a75185ab291913f8de8dd7e1b5f8946adfceae9b3",
+        "bytes": 5463514
+      },
+      "indexSHA256": "b80db4bfd96f5d22dcecf48efbb43b1f3dbc47490f5f17ca4ec260cc70fc41af",
+      "React": [
+        "18.3.1",
+        "19.3.1"
+      ]
+    },
+    "installedBrowser": {
+      "scope": "Actual ordinary Vite React18/19 dev from phase01 and production from fresh phase03; prior hostPNG fixture failures retained",
+      "cases": [
+        {
+          "major": 18,
+          "phase": "dev",
+          "status": "PASS",
+          "checks": 13,
+          "resources": 21,
+          "browserClosed": true,
+          "serverClosed": true
+        },
+        {
+          "major": 19,
+          "phase": "dev",
+          "status": "PASS",
+          "checks": 13,
+          "resources": 21,
+          "browserClosed": true,
+          "serverClosed": true
+        },
+        {
+          "major": 18,
+          "phase": "production",
+          "status": "PASS",
+          "checks": 13,
+          "resources": 21,
+          "browserClosed": true,
+          "serverClosed": true
+        },
+        {
+          "major": 19,
+          "phase": "production",
+          "status": "PASS",
+          "checks": 13,
+          "resources": 21,
+          "browserClosed": true,
+          "serverClosed": true
+        }
+      ],
+      "evidence": [
+        {
+          "path": ".cache/ugc-reader-installed-browser-01/run-01/FINAL.json",
+          "sha256": "75bd9f307cf0fb379634c95056f5a722d9dea6f8d4110e17d7dca8a9f405cbec"
+        },
+        {
+          "path": ".cache/ugc-reader-installed-browser-02/run-01/FINAL.json",
+          "sha256": "fcddca610b9aa8f461d2f0d525b049fca66d91314404aaec4f07a65e3ef2e352"
+        },
+        {
+          "path": ".cache/ugc-reader-installed-browser-03/run-01/FINAL.json",
+          "sha256": "a90395e48994cae737a7370d01ee6c93fde5ab040b6a4762cc37f41edb61855a"
+        }
+      ]
+    },
+    "public": {
+      "path": ".cache/ugc-reader-public-02/FINAL.json",
+      "sha256": "285b4a214bc4ae5a3fe63c85609abd4fd5195e5ef0566813766a43d12ea768a3",
+      "checks": 12,
+      "priorMethodFailure": {
+        "path": ".cache/ugc-reader-public-01/FINAL.json",
+        "sha256": "fe62b1b6c7e224d277fd7e69f3890fae7ff88df7fff2afa1955a986b560ebec2"
+      }
+    }
+  },
+  "unknowns": [
+    "native default anchors/font metrics/AA",
+    "grid horizontal rescaling and %x engine operator",
+    "maximum-grid provider semantics",
+    "native text filtering/length/controller",
+    "image texture filesystem and query backend",
+    "White exact runtime mapping",
+    "native GUI scale/safezone",
+    "touch inertia/fade timing",
+    "native entire UI framebuffer"
+  ],
+  "familyTypeCount": 9
+}

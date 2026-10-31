@@ -1,0 +1,1138 @@
+{
+  "version": 1,
+  "source": {
+    "repository": "https://github.com/Mojang/bedrock-samples",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "scope": "Finite UGC / Immersive Reader actual source branches; no native rendering certification",
+  "counts": {
+    "semanticKeys": 21,
+    "ugcSubsetKeys": 17,
+    "readerSubsetKeys": 9,
+    "wholePNG": 21,
+    "rawMetadata": 16,
+    "physicalExistingPNG": 19,
+    "embeddedOnlyPNG": 2,
+    "newPhysicalFiles": 0
+  },
+  "license": {
+    "existingPath": "src/assets/Minecraft-Sample-LICENSE.md",
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "bytes": 222,
+    "terms": "Original Mojang license / Minecraft EULA; not MIT-relicensed artwork"
+  },
+  "resources": [
+    {
+      "key": "dialogHollow3",
+      "scope": [
+        "ugc",
+        "reader"
+      ],
+      "sourceUse": "common.dialog_background_hollow_3@common.dialog_background_hollow_common",
+      "path": "resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "bytes": 260,
+      "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+      "dimensions": [
+        18,
+        33
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/dialog_background_hollow_3.json",
+        "bytes": 94,
+        "sha256": "36700ca1326d14a269b2052c27d95115200897bee9c27b4d36e75fe893973415",
+        "raw": {
+          "nineslice_size": [
+            8,
+            23,
+            8,
+            8
+          ],
+          "base_size": [
+            18,
+            33
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/command-block/dialog_background_hollow_3.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/command-block/dialog_background_hollow_3.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/system-screens-textures.css",
+          "line": 3,
+          "cssVariable": "--mc-system-settings-frame",
+          "bytes": 260
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/command-block/dialog_background_hollow_3.png', import.meta.url).href",
+      "existingDestination": "src/assets/command-block/dialog_background_hollow_3.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "control",
+      "scope": [
+        "ugc",
+        "reader"
+      ],
+      "sourceUse": "common.dialog_background_hollow_common/control; common_dialogs.background_image",
+      "path": "resource_pack/textures/ui/control.png",
+      "bytes": 71,
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "dimensions": [
+        2,
+        2
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/control.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/disabledButtonNoBorder.json",
+          "src/assets/document-viewer/permissions_player_fade_overlay.json",
+          "src/assets/emote-wheel/Black.json",
+          "src/assets/emote-wheel/disabledButtonNoBorder.json",
+          "src/assets/jigsaw/control.json",
+          "src/assets/player-permissions/disabledButtonNoBorder.json",
+          "src/assets/player-permissions/permissions_player_fade_overlay.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/jigsaw/control.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/system-screens-textures.css",
+          "line": 11,
+          "cssVariable": "--mc-system-loading-control",
+          "bytes": 71
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/jigsaw/control.png', import.meta.url).href",
+      "existingDestination": "src/assets/jigsaw/control.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "closeNormal",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common.close_button default",
+      "path": "resource_pack/textures/ui/close_button_default.png",
+      "bytes": 163,
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "dimensions": [
+        15,
+        15
+      ],
+      "metadata": null,
+      "existingWholeFiles": [
+        "src/assets/book/close_button_default.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/workstation-image-assets.ts",
+          "line": 25,
+          "cssVariable": null,
+          "bytes": 163
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/book/close_button_default.png', import.meta.url).href",
+      "existingDestination": "src/assets/book/close_button_default.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "closeHover",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common.close_button hover",
+      "path": "resource_pack/textures/ui/close_button_hover.png",
+      "bytes": 164,
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "dimensions": [
+        15,
+        15
+      ],
+      "metadata": null,
+      "existingWholeFiles": [
+        "src/assets/book/close_button_hover.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/workstation-image-assets.ts",
+          "line": 26,
+          "cssVariable": null,
+          "bytes": 164
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/book/close_button_hover.png', import.meta.url).href",
+      "existingDestination": "src/assets/book/close_button_hover.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "closePressed",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common.close_button pressed",
+      "path": "resource_pack/textures/ui/close_button_pressed.png",
+      "bytes": 1416,
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "dimensions": [
+        15,
+        15
+      ],
+      "metadata": null,
+      "existingWholeFiles": [
+        "src/assets/book/close_button_pressed.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/workstation-image-assets.ts",
+          "line": 27,
+          "cssVariable": null,
+          "bytes": 1416
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/book/close_button_pressed.png', import.meta.url).href",
+      "existingDestination": "src/assets/book/close_button_pressed.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "darkNormal",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common_buttons.dark_button_assets $default_button_texture",
+      "path": "resource_pack/textures/ui/button_borderless_dark.png",
+      "bytes": 137,
+      "sha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/button_borderless_dark.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_texteditbox_hover.json",
+          "src/assets/document-viewer/banners_no_border.json",
+          "src/assets/document-viewer/button_borderless_light.json",
+          "src/assets/document-viewer/button_borderless_lighthover.json",
+          "src/assets/document-viewer/button_borderless_lightpressed.json",
+          "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+          "src/assets/emote-wheel/button_borderless_light.json",
+          "src/assets/emote-wheel/button_borderless_lighthover.json",
+          "src/assets/emote-wheel/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/Banners.json",
+          "src/assets/player-permissions/button_borderless_dark.json",
+          "src/assets/player-permissions/button_borderless_darkhover.json",
+          "src/assets/player-permissions/button_borderless_darkpressed.json",
+          "src/assets/player-permissions/button_borderless_darkpressednohover.json",
+          "src/assets/player-permissions/button_borderless_light.json",
+          "src/assets/player-permissions/button_borderless_lighthover.json",
+          "src/assets/player-permissions/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/button_borderless_lightpressednohover.json",
+          "src/assets/player-permissions/text_label_box.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/player-permissions/button_borderless_dark.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/game-control-textures.css",
+          "line": 3,
+          "cssVariable": "--mc-game-texture-dark-default",
+          "bytes": 137
+        },
+        {
+          "path": "src/game-list-textures.css",
+          "line": 3,
+          "cssVariable": "--mc-list-dark",
+          "bytes": 137
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/player-permissions/button_borderless_dark.png', import.meta.url).href",
+      "existingDestination": "src/assets/player-permissions/button_borderless_dark.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "darkHover",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common_buttons.dark_button_assets $hover_button_texture",
+      "path": "resource_pack/textures/ui/button_borderless_darkhover.png",
+      "bytes": 151,
+      "sha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/button_borderless_darkhover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_texteditbox_hover.json",
+          "src/assets/document-viewer/banners_no_border.json",
+          "src/assets/document-viewer/button_borderless_light.json",
+          "src/assets/document-viewer/button_borderless_lighthover.json",
+          "src/assets/document-viewer/button_borderless_lightpressed.json",
+          "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+          "src/assets/emote-wheel/button_borderless_light.json",
+          "src/assets/emote-wheel/button_borderless_lighthover.json",
+          "src/assets/emote-wheel/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/Banners.json",
+          "src/assets/player-permissions/button_borderless_dark.json",
+          "src/assets/player-permissions/button_borderless_darkhover.json",
+          "src/assets/player-permissions/button_borderless_darkpressed.json",
+          "src/assets/player-permissions/button_borderless_darkpressednohover.json",
+          "src/assets/player-permissions/button_borderless_light.json",
+          "src/assets/player-permissions/button_borderless_lighthover.json",
+          "src/assets/player-permissions/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/button_borderless_lightpressednohover.json",
+          "src/assets/player-permissions/text_label_box.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/player-permissions/button_borderless_darkhover.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/game-control-textures.css",
+          "line": 4,
+          "cssVariable": "--mc-game-texture-dark-hover",
+          "bytes": 151
+        },
+        {
+          "path": "src/game-list-textures.css",
+          "line": 4,
+          "cssVariable": "--mc-list-dark-hover",
+          "bytes": 151
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/player-permissions/button_borderless_darkhover.png', import.meta.url).href",
+      "existingDestination": "src/assets/player-permissions/button_borderless_darkhover.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "darkPressed",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common_buttons.dark_button_assets $pressed_button_texture",
+      "path": "resource_pack/textures/ui/button_borderless_darkpressed.png",
+      "bytes": 145,
+      "sha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/button_borderless_darkpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_texteditbox_hover.json",
+          "src/assets/document-viewer/banners_no_border.json",
+          "src/assets/document-viewer/button_borderless_light.json",
+          "src/assets/document-viewer/button_borderless_lighthover.json",
+          "src/assets/document-viewer/button_borderless_lightpressed.json",
+          "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+          "src/assets/emote-wheel/button_borderless_light.json",
+          "src/assets/emote-wheel/button_borderless_lighthover.json",
+          "src/assets/emote-wheel/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/Banners.json",
+          "src/assets/player-permissions/button_borderless_dark.json",
+          "src/assets/player-permissions/button_borderless_darkhover.json",
+          "src/assets/player-permissions/button_borderless_darkpressed.json",
+          "src/assets/player-permissions/button_borderless_darkpressednohover.json",
+          "src/assets/player-permissions/button_borderless_light.json",
+          "src/assets/player-permissions/button_borderless_lighthover.json",
+          "src/assets/player-permissions/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/button_borderless_lightpressednohover.json",
+          "src/assets/player-permissions/text_label_box.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/player-permissions/button_borderless_darkpressed.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/game-control-textures.css",
+          "line": 5,
+          "cssVariable": "--mc-game-texture-dark-pressed",
+          "bytes": 145
+        },
+        {
+          "path": "src/game-list-textures.css",
+          "line": 5,
+          "cssVariable": "--mc-list-dark-pressed",
+          "bytes": 145
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/player-permissions/button_borderless_darkpressed.png', import.meta.url).href",
+      "existingDestination": "src/assets/player-permissions/button_borderless_darkpressed.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "buttonDisabled",
+      "scope": [
+        "ugc",
+        "reader"
+      ],
+      "sourceUse": "common_buttons.dark_button_assets/light_button_assets $locked_button_texture",
+      "path": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "dimensions": [
+        2,
+        2
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/disabledButtonNoBorder.json",
+          "src/assets/document-viewer/permissions_player_fade_overlay.json",
+          "src/assets/emote-wheel/Black.json",
+          "src/assets/emote-wheel/disabledButtonNoBorder.json",
+          "src/assets/jigsaw/control.json",
+          "src/assets/player-permissions/disabledButtonNoBorder.json",
+          "src/assets/player-permissions/permissions_player_fade_overlay.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/document-viewer/disabledButtonNoBorder.png",
+        "src/assets/emote-wheel/disabledButtonNoBorder.png",
+        "src/assets/player-permissions/disabledButtonNoBorder.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/game-list-textures.css",
+          "line": 6,
+          "cssVariable": "--mc-list-disabled",
+          "bytes": 88
+        },
+        {
+          "path": "src/inventory-screen-textures.css",
+          "line": 34,
+          "cssVariable": "--mc-inv-screen-toolbar-locked",
+          "bytes": 88
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/document-viewer/disabledButtonNoBorder.png', import.meta.url).href",
+      "existingDestination": "src/assets/document-viewer/disabledButtonNoBorder.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "focusWhite",
+      "scope": [
+        "ugc",
+        "reader"
+      ],
+      "sourceUse": "common_buttons.focus_border $focus_border_texture",
+      "path": "resource_pack/textures/ui/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/focus_border_white.json",
+          "src/assets/emote-wheel/focus_border_white.json",
+          "src/assets/player-permissions/focus_border_white.json",
+          "src/assets/player-permissions/square_image_border_white.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/document-viewer/focus_border_white.png",
+        "src/assets/emote-wheel/focus_border_white.png",
+        "src/assets/player-permissions/focus_border_white.png",
+        "src/assets/player-permissions/square_image_border_white.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/game-control-textures.css",
+          "line": 8,
+          "cssVariable": "--mc-game-texture-pause-border",
+          "bytes": 105
+        },
+        {
+          "path": "src/game-list-textures.css",
+          "line": 8,
+          "cssVariable": "--mc-list-screenshot-focus",
+          "bytes": 105
+        },
+        {
+          "path": "src/game-list-textures.css",
+          "line": 9,
+          "cssVariable": "--mc-list-focus",
+          "bytes": 105
+        },
+        {
+          "path": "src/game-list-textures.css",
+          "line": 19,
+          "cssVariable": "--mc-list-player-border",
+          "bytes": 105
+        },
+        {
+          "path": "src/inventory-screen-textures.css",
+          "line": 35,
+          "cssVariable": "--mc-inv-screen-toolbar-border",
+          "bytes": 105
+        },
+        {
+          "path": "src/workstation-image-assets.ts",
+          "line": 10,
+          "cssVariable": null,
+          "bytes": 105
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/document-viewer/focus_border_white.png', import.meta.url).href",
+      "existingDestination": "src/assets/document-viewer/focus_border_white.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "editNormal",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common.text_edit_box $text_background_default; locked alpha .5",
+      "path": "resource_pack/textures/ui/edit_box_indent.png",
+      "bytes": 126,
+      "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109",
+      "dimensions": [
+        6,
+        6
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/edit_box_indent.json",
+        "bytes": 60,
+        "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+        "raw": {
+          "nineslice_size": 2,
+          "base_size": [
+            6,
+            6
+          ]
+        },
+        "existingWholeFiles": []
+      },
+      "existingWholeFiles": [],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/inventory-screen-textures.css",
+          "line": 16,
+          "cssVariable": "--mc-inv-screen-search",
+          "bytes": 126
+        },
+        {
+          "path": "src/workstation-image-assets.ts",
+          "line": 33,
+          "cssVariable": null,
+          "bytes": 126
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "workstationImageAssets.editBox.url",
+      "existingDestination": null,
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "editHover",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common.text_edit_box $text_background_hover; pressed same",
+      "path": "resource_pack/textures/ui/edit_box_indent_hover.png",
+      "bytes": 125,
+      "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb",
+      "dimensions": [
+        6,
+        6
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/edit_box_indent_hover.json",
+        "bytes": 60,
+        "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+        "raw": {
+          "nineslice_size": 2,
+          "base_size": [
+            6,
+            6
+          ]
+        },
+        "existingWholeFiles": []
+      },
+      "existingWholeFiles": [],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/inventory-screen-textures.css",
+          "line": 17,
+          "cssVariable": "--mc-inv-screen-search-hover",
+          "bytes": 125
+        },
+        {
+          "path": "src/workstation-image-assets.ts",
+          "line": 34,
+          "cssVariable": null,
+          "bytes": 125
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "workstationImageAssets.editBoxHover.url",
+      "existingDestination": null,
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "search",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "ugc_viewer.place_holder_control/search_icon size16x16 alpha.5 offset0,1",
+      "path": "resource_pack/textures/ui/magnifyingGlass.png",
+      "bytes": 328,
+      "sha256": "f7981e0ddec7fa63165ce4ecc7530800be9083232325fc580688cc10e6e29e49",
+      "dimensions": [
+        16,
+        16
+      ],
+      "metadata": null,
+      "existingWholeFiles": [
+        "src/assets/gui-icons/search.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/crafting-image-assets.ts",
+          "line": 28,
+          "cssVariable": null,
+          "bytes": 328
+        },
+        {
+          "path": "src/inventory-screen-textures.css",
+          "line": 12,
+          "cssVariable": "--mc-inv-screen-category-search",
+          "bytes": 328
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/gui-icons/search.png', import.meta.url).href",
+      "existingDestination": "src/assets/gui-icons/search.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "scrollTrack",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common.scroll_indent_image; UGC $show_background false does not hide track",
+      "path": "resource_pack/textures/ui/ScrollRail.png",
+      "bytes": 70,
+      "sha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be",
+      "dimensions": [
+        1,
+        1
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/ScrollRail.json",
+        "bytes": 60,
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/ScrollRail.json",
+          "src/assets/document-viewer/touchScrollBox.json",
+          "src/assets/player-permissions/ScrollRail.json",
+          "src/assets/player-permissions/touchScrollBox.json",
+          "src/assets/server-forms/list_item_divider_line_light.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/document-viewer/ScrollRail.png",
+        "src/assets/player-permissions/ScrollRail.png"
+      ],
+      "embeddedWholeBodies": [],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/document-viewer/ScrollRail.png', import.meta.url).href",
+      "existingDestination": "src/assets/document-viewer/ScrollRail.png",
+      "rawMetadataUse": "Preserved source fields; overlapping 1x1 cuts are metadata-only",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "scrollThumb",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common.scrollbar_box_image",
+      "path": "resource_pack/textures/ui/ScrollHandle.png",
+      "bytes": 89,
+      "sha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a",
+      "dimensions": [
+        3,
+        5
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/ScrollHandle.json",
+        "bytes": 91,
+        "sha256": "08856911c52b8d9e90c4906df474bf3785813187971a0d2b57b0d3a7e82c4a77",
+        "raw": {
+          "nineslice_size": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "base_size": [
+            3,
+            5
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/ScrollHandle.json",
+          "src/assets/player-permissions/ScrollHandle.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/document-viewer/ScrollHandle.png",
+        "src/assets/player-permissions/ScrollHandle.png"
+      ],
+      "embeddedWholeBodies": [],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/document-viewer/ScrollHandle.png', import.meta.url).href",
+      "existingDestination": "src/assets/document-viewer/ScrollHandle.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "touchScrollThumb",
+      "scope": [
+        "ugc"
+      ],
+      "sourceUse": "common.touch_scrollbar_box_image; default scroll_box_visible_touch false",
+      "path": "resource_pack/textures/ui/touchScrollBox.png",
+      "bytes": 863,
+      "sha256": "86743f082bc3cdfbe4971aad9491069f4338576ec6ad9a23dddac614d5148efe",
+      "dimensions": [
+        1,
+        1
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/touchScrollBox.json",
+        "bytes": 60,
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/ScrollRail.json",
+          "src/assets/document-viewer/touchScrollBox.json",
+          "src/assets/player-permissions/ScrollRail.json",
+          "src/assets/player-permissions/touchScrollBox.json",
+          "src/assets/server-forms/list_item_divider_line_light.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/document-viewer/touchScrollBox.png",
+        "src/assets/player-permissions/touchScrollBox.png"
+      ],
+      "embeddedWholeBodies": [],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/document-viewer/touchScrollBox.png', import.meta.url).href",
+      "existingDestination": "src/assets/document-viewer/touchScrollBox.png",
+      "rawMetadataUse": "Preserved source fields; overlapping 1x1 cuts are metadata-only",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "reader",
+      "scope": [
+        "reader"
+      ],
+      "sourceUse": "im_reader.reader_button_contents image; parent16x16/content10x10",
+      "path": "resource_pack/textures/ui/immersive_reader.png",
+      "bytes": 229,
+      "sha256": "afdb8dbfda225fd18bf4feee56ba775377df4b23a9b6f6f97a93b2e6710c5ea2",
+      "dimensions": [
+        19,
+        19
+      ],
+      "metadata": null,
+      "existingWholeFiles": [
+        "src/assets/npc/immersive_reader.png"
+      ],
+      "embeddedWholeBodies": [],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/npc/immersive_reader.png', import.meta.url).href",
+      "existingDestination": "src/assets/npc/immersive_reader.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "screenBackground",
+      "scope": [
+        "reader",
+        "ugc"
+      ],
+      "sourceUse": "common.base_screen screen_background alpha .75; visibility remains host/source binding",
+      "path": "resource_pack/textures/ui/screen_background.png",
+      "bytes": 80,
+      "sha256": "e612514247e30fdaf71b8ab025ca2162c2ac18816b648b73c4ac7a1f441d13ab",
+      "dimensions": [
+        1,
+        1
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/screen_background.json",
+        "bytes": 60,
+        "sha256": "0c675190fa587a78c4c1ba6f133668bb487f4ceb8f82c84781cabfafdac02e1c",
+        "raw": {
+          "nineslice_size": 0,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/player-permissions/screen_background.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/player-permissions/screen_background.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/game-control-textures.css",
+          "line": 10,
+          "cssVariable": "--mc-game-texture-screen-background",
+          "bytes": 80
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/player-permissions/screen_background.png', import.meta.url).href",
+      "existingDestination": "src/assets/player-permissions/screen_background.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "lightNormal",
+      "scope": [
+        "reader"
+      ],
+      "sourceUse": "common_buttons.light_button_assets $default_button_texture",
+      "path": "resource_pack/textures/ui/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_texteditbox_hover.json",
+          "src/assets/document-viewer/banners_no_border.json",
+          "src/assets/document-viewer/button_borderless_light.json",
+          "src/assets/document-viewer/button_borderless_lighthover.json",
+          "src/assets/document-viewer/button_borderless_lightpressed.json",
+          "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+          "src/assets/emote-wheel/button_borderless_light.json",
+          "src/assets/emote-wheel/button_borderless_lighthover.json",
+          "src/assets/emote-wheel/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/Banners.json",
+          "src/assets/player-permissions/button_borderless_dark.json",
+          "src/assets/player-permissions/button_borderless_darkhover.json",
+          "src/assets/player-permissions/button_borderless_darkpressed.json",
+          "src/assets/player-permissions/button_borderless_darkpressednohover.json",
+          "src/assets/player-permissions/button_borderless_light.json",
+          "src/assets/player-permissions/button_borderless_lighthover.json",
+          "src/assets/player-permissions/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/button_borderless_lightpressednohover.json",
+          "src/assets/player-permissions/text_label_box.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/document-viewer/button_borderless_light.png",
+        "src/assets/emote-wheel/button_borderless_light.png",
+        "src/assets/player-permissions/button_borderless_light.png"
+      ],
+      "embeddedWholeBodies": [
+        {
+          "path": "src/crafting-image-assets.ts",
+          "line": 42,
+          "cssVariable": null,
+          "bytes": 131
+        },
+        {
+          "path": "src/inventory-screen-textures.css",
+          "line": 30,
+          "cssVariable": "--mc-inv-screen-toolbar-off",
+          "bytes": 131
+        }
+      ],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/document-viewer/button_borderless_light.png', import.meta.url).href",
+      "existingDestination": "src/assets/document-viewer/button_borderless_light.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "lightHover",
+      "scope": [
+        "reader"
+      ],
+      "sourceUse": "common_buttons.light_button_assets $hover_button_texture",
+      "path": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_texteditbox_hover.json",
+          "src/assets/document-viewer/banners_no_border.json",
+          "src/assets/document-viewer/button_borderless_light.json",
+          "src/assets/document-viewer/button_borderless_lighthover.json",
+          "src/assets/document-viewer/button_borderless_lightpressed.json",
+          "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+          "src/assets/emote-wheel/button_borderless_light.json",
+          "src/assets/emote-wheel/button_borderless_lighthover.json",
+          "src/assets/emote-wheel/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/Banners.json",
+          "src/assets/player-permissions/button_borderless_dark.json",
+          "src/assets/player-permissions/button_borderless_darkhover.json",
+          "src/assets/player-permissions/button_borderless_darkpressed.json",
+          "src/assets/player-permissions/button_borderless_darkpressednohover.json",
+          "src/assets/player-permissions/button_borderless_light.json",
+          "src/assets/player-permissions/button_borderless_lighthover.json",
+          "src/assets/player-permissions/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/button_borderless_lightpressednohover.json",
+          "src/assets/player-permissions/text_label_box.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/document-viewer/button_borderless_lighthover.png",
+        "src/assets/emote-wheel/button_borderless_lighthover.png",
+        "src/assets/player-permissions/button_borderless_lighthover.png"
+      ],
+      "embeddedWholeBodies": [],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/document-viewer/button_borderless_lighthover.png', import.meta.url).href",
+      "existingDestination": "src/assets/document-viewer/button_borderless_lighthover.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    },
+    {
+      "key": "lightPressed",
+      "scope": [
+        "reader"
+      ],
+      "sourceUse": "common_buttons.light_button_assets $pressed_button_texture",
+      "path": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "path": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_texteditbox_hover.json",
+          "src/assets/document-viewer/banners_no_border.json",
+          "src/assets/document-viewer/button_borderless_light.json",
+          "src/assets/document-viewer/button_borderless_lighthover.json",
+          "src/assets/document-viewer/button_borderless_lightpressed.json",
+          "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+          "src/assets/emote-wheel/button_borderless_light.json",
+          "src/assets/emote-wheel/button_borderless_lighthover.json",
+          "src/assets/emote-wheel/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/Banners.json",
+          "src/assets/player-permissions/button_borderless_dark.json",
+          "src/assets/player-permissions/button_borderless_darkhover.json",
+          "src/assets/player-permissions/button_borderless_darkpressed.json",
+          "src/assets/player-permissions/button_borderless_darkpressednohover.json",
+          "src/assets/player-permissions/button_borderless_light.json",
+          "src/assets/player-permissions/button_borderless_lighthover.json",
+          "src/assets/player-permissions/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/button_borderless_lightpressednohover.json",
+          "src/assets/player-permissions/text_label_box.json"
+        ]
+      },
+      "existingWholeFiles": [
+        "src/assets/document-viewer/button_borderless_lightpressed.png",
+        "src/assets/emote-wheel/button_borderless_lightpressed.png",
+        "src/assets/player-permissions/button_borderless_lightpressed.png"
+      ],
+      "embeddedWholeBodies": [],
+      "proposedNewPhysicalPNG": false,
+      "registryExpression": "new URL('./assets/document-viewer/button_borderless_lightpressed.png', import.meta.url).href",
+      "existingDestination": "src/assets/document-viewer/button_borderless_lightpressed.png",
+      "rawMetadataUse": "Unmodified raw source fields",
+      "physicalNewFiles": 0
+    }
+  ],
+  "missing": [
+    {
+      "key": "imageFrameWhite",
+      "sourceTexture": "textures/ui/White",
+      "scope": "ugc",
+      "exact": [],
+      "casefoldCandidates": [
+        {
+          "path": "resource_pack/textures/ui/white.png",
+          "sha256": "e666f27bda2c08c810a18b699397f8f0df5ffee87157a14bb96157e4a6b27fc3",
+          "bytes": 132,
+          "existingWholeFiles": [],
+          "embeddedWholeBodies": [
+            {
+              "path": "src/crafting-image-assets.ts",
+              "line": 66,
+              "cssVariable": null,
+              "bytes": 132
+            },
+            {
+              "path": "src/inventory-screen-textures.css",
+              "line": 25,
+              "cssVariable": "--mc-inv-screen-white",
+              "bytes": 132
+            }
+          ]
+        }
+      ],
+      "policy": "Caller-supplied exact resource; no implicit alias or substitute. Casefold candidate is not a runtime identity proof."
+    },
+    {
+      "key": "readerBookAnimation",
+      "sourceTexture": "textures/ui/book_animation",
+      "scope": "reader",
+      "exact": [],
+      "casefoldCandidates": [],
+      "policy": "Caller-supplied exact resource; no implicit alias or substitute. Casefold candidate is not a runtime identity proof."
+    }
+  ],
+  "boundaries": [
+    "Uppercase White is an unresolved runtime resource; lowercase white.png is only a casefold candidate, never a default alias.",
+    "book_animation original is missing; host supplies the resource/renderer without fabricated fallback.",
+    "Source dimensions, PNG dimensions, nine-slice metadata and engine behavior are separate contracts.",
+    "The common hollow3 branch inherits common.dialog_background_hollow_common; do not substitute the same-named common_dialogs composition.",
+    "Whole-image reuse is not proof of native font, sampler, animation timing, or final RGBA parity."
+  ]
+}

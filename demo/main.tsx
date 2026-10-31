@@ -48,6 +48,8 @@ import { ChalkboardExamples } from './chalkboard-examples';
 import { StartMenuExamples } from './start-menu-examples';
 import { StorageExamples } from './storage-examples';
 import { ScreenshotExamples } from './screenshot-examples';
+import { UGCExamples } from './ugc-examples';
+import { ImmersiveReaderExamples } from './immersive-reader-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -84,6 +86,8 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'start-menu', name: 'Classic start menu', icon: 'chevron', count: '06' },
   { id: 'storage-management', name: 'Storage management', icon: 'chevron', count: '08' },
   { id: 'screenshot-flash', name: 'Screenshot flash', icon: 'chevron', count: '01' },
+  { id: 'ugc-viewer', name: 'UGC viewer', icon: 'chevron', count: '02' },
+  { id: 'immersive-reader', name: 'Immersive Reader', icon: 'chevron', count: '02' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'anvil-layer', name: 'Source Anvil', icon: 'chevron', count: '01' },
@@ -444,6 +448,8 @@ function App() {
       <Example id="start-menu" title="Classic start menu" detail="Platform titles, source action groups, account controls and reusable footer."><StartMenuExamples/></Example>
       <Example id="storage-management" title="Storage management" detail="Source categories, selection, item actions and dependency dialogs with explicit host data."><StorageExamples/></Example>
       <Example id="screenshot-flash" title="Screenshot flash" detail="A reusable source overlay with a host-supplied image, duration and controlled clock."><ScreenshotExamples/></Example>
+      <Example id="ugc-viewer" title="UGC viewer" detail="Source search, scrolling collection and reusable content cards with caller-resolved images."><UGCExamples/></Example>
+      <Example id="immersive-reader" title="Immersive Reader" detail="Independent source loading, error and running states with a persistent host renderer."><ImmersiveReaderExamples/></Example>
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

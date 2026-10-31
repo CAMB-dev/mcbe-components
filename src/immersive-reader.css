@@ -1,0 +1,53 @@
+/* Fixed-source im_reader composition. Explicit host frame and popup resolution;
+   native safezone/font/provider, transition clock and webview services remain host-owned. */
+.mc-immersive-reader,.mc-immersive-reader-button { --mc-reader-unit:2px; box-sizing:border-box; font-family:var(--mc-font,monospace); }
+.mc-immersive-reader { position:relative; isolation:isolate; overflow:hidden; font-size:calc(10 * var(--mc-reader-unit)); line-height:calc(10 * var(--mc-reader-unit)); color:white; }
+.mc-immersive-reader [hidden],.mc-immersive-reader[hidden],.mc-immersive-reader-button[hidden] { display:none!important; }
+.mc-immersive-reader__screen-background { position:absolute; inset:0; background:var(--mc-reader-screenBackground) center / 100% 100%; opacity:.75; image-rendering:pixelated; pointer-events:none; z-index:0; }
+.mc-immersive-reader__available { position:absolute; z-index:1; }
+.mc-immersive-reader__popup { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); isolation:isolate; }
+.mc-immersive-reader__popup-fill { position:absolute; inset:calc(4 * var(--mc-reader-unit)); background:var(--mc-reader-control) center / 100% 100%; opacity:.8; image-rendering:pixelated; pointer-events:none; z-index:-2; }
+.mc-immersive-reader__popup-skin { position:absolute; inset:0; box-sizing:border-box; border-style:solid; border-color:transparent; border-width:calc(23 * var(--mc-reader-unit)) calc(8 * var(--mc-reader-unit)) calc(8 * var(--mc-reader-unit)); border-image:var(--mc-reader-dialogHollow3) 23 8 8 8 fill / calc(23 * var(--mc-reader-unit)) calc(8 * var(--mc-reader-unit)) calc(8 * var(--mc-reader-unit)) stretch; image-rendering:pixelated; pointer-events:none; z-index:-1; }
+.mc-immersive-reader__header { position:absolute; left:50%; top:calc(13 * var(--mc-reader-unit)); width:max-content; height:0; color:rgb(30% 30% 30%); text-align:center; }
+.mc-immersive-reader__header>span { display:block; width:max-content; transform:translate(-50%,-50%); white-space:pre; }
+.mc-immersive-reader__contents { position:absolute; left:50%; top:calc(23 * var(--mc-reader-unit)); width:calc(244 * var(--mc-reader-unit)); height:calc(116 * var(--mc-reader-unit)); transform:translateX(-50%); }
+.mc-immersive-reader__plane { position:absolute; left:50%; top:50%; width:calc(236 * var(--mc-reader-unit)); height:calc(108 * var(--mc-reader-unit)); transform:translate(-50%,-50%); }
+.mc-immersive-reader__padding-sibling { position:absolute; left:50%; top:50%; width:calc(8 * var(--mc-reader-unit)); height:calc(8 * var(--mc-reader-unit)); transform:translate(-50%,-50%); pointer-events:none; }
+.mc-immersive-reader__loading,.mc-immersive-reader__error { position:absolute; inset:0; display:flex; flex-direction:column; }
+.mc-immersive-reader__loading-visual { flex:none; align-self:center; width:calc(64 * var(--mc-reader-unit)); height:calc(64 * var(--mc-reader-unit)); }
+.mc-immersive-reader__loading-label { flex:none; align-self:center; text-align:center; color:white; }
+.mc-immersive-reader__loading-space { flex:1 1 0; min-height:0; }
+.mc-immersive-reader__loading-cancel,.mc-immersive-reader__error-buttons { flex:none; height:calc(18 * var(--mc-reader-unit)); }
+/* Smooth is a separate source role. This explicit Web sans fallback is not a
+   recovered native font; hosts may provide the original face through the token. */
+.mc-immersive-reader__error-text { flex:1 1 0; min-height:0; min-width:0; max-width:100%; align-self:center; color:white; font-family:var(--mc-reader-smooth-font,var(--mc-smooth-font,Arial,sans-serif)); font-size:calc(12 * var(--mc-reader-unit)); line-height:normal; white-space:pre-wrap; overflow-wrap:break-word; }
+.mc-immersive-reader__retry-row { display:flex; height:100%; }
+.mc-immersive-reader__retry-row>.mc-immersive-reader__text-button { width:0; flex:1 1 0; }
+.mc-immersive-reader__retry-gap { flex:none; width:calc(2 * var(--mc-reader-unit)); }
+.mc-immersive-reader__ok { height:100%; }
+.mc-immersive-reader__text-button,.mc-immersive-reader-button { --mc-reader-current-image:var(--mc-reader-lightNormal); position:relative; isolation:isolate; display:flex; justify-content:center; align-items:center; flex:none; width:100%; height:100%; min-width:0; min-height:0; margin:0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; color:rgb(30% 30% 30%); font:inherit; text-shadow:none; cursor:pointer; touch-action:manipulation; }
+.mc-immersive-reader__text-button::before,.mc-immersive-reader-button__background { content:""; position:absolute; inset:var(--mc-reader-unit); box-sizing:border-box; border:var(--mc-reader-unit) solid transparent; border-image:var(--mc-reader-current-image) 1 fill / var(--mc-reader-unit) stretch; image-rendering:pixelated; pointer-events:none; z-index:-1; }
+.mc-immersive-reader__text-button>span { display:block; max-width:calc(100% - 6 * var(--mc-reader-unit)); max-height:calc(10 * var(--mc-reader-unit)); font-size:calc(10 * var(--mc-reader-unit)); line-height:calc(10 * var(--mc-reader-unit)); text-align:center; text-shadow:none; overflow-wrap:anywhere; }
+.mc-immersive-reader__text-button:is(:hover,:focus-visible):not(:disabled),.mc-immersive-reader-button:is(:hover,:focus-visible):not(:disabled):not([aria-disabled="true"]) { --mc-reader-current-image:var(--mc-reader-lightHover); color:white; }
+.mc-immersive-reader__text-button:active:not(:disabled),.mc-immersive-reader-button:active:not(:disabled):not([aria-disabled="true"]) { --mc-reader-current-image:var(--mc-reader-lightPressed); color:white; }
+.mc-immersive-reader__text-button:active:not(:disabled)>span,.mc-immersive-reader-button:active:not(:disabled):not([aria-disabled="true"]) .mc-immersive-reader-button__content>img { transform:translateY(var(--mc-reader-unit)); }
+.mc-immersive-reader__text-button:disabled,.mc-immersive-reader-button:is(:disabled,[aria-disabled="true"]) { --mc-reader-current-image:var(--mc-reader-buttonDisabled); color:rgb(30% 30% 30%); cursor:default; }
+.mc-immersive-reader__text-button:disabled::before,.mc-immersive-reader-button:is(:disabled,[aria-disabled="true"])>.mc-immersive-reader-button__background { border:0; border-image:none; background:var(--mc-reader-buttonDisabled) center / 100% 100%; }
+.mc-immersive-reader__text-button:focus-visible { outline:0; }
+.mc-immersive-reader__webview { position:absolute; inset:0; z-index:1; }
+.mc-immersive-reader-button { font-size:calc(10 * var(--mc-reader-unit)); line-height:calc(10 * var(--mc-reader-unit)); }
+.mc-immersive-reader-button__focus { position:absolute; inset:0; box-sizing:border-box; border:var(--mc-reader-unit) solid transparent; border-image:var(--mc-reader-focusWhite) 1 / var(--mc-reader-unit) stretch; filter:brightness(.075); image-rendering:pixelated; pointer-events:none; }
+.mc-immersive-reader-button:is(:hover,:focus-visible,:active):not(:disabled):not([aria-disabled="true"]) .mc-immersive-reader-button__focus { filter:none; }
+.mc-immersive-reader-button__content { display:block; position:absolute; inset:calc(3 * var(--mc-reader-unit)); pointer-events:none; }
+/* Whole image fills the declared content box; no crop or inferred keep_ratio. */
+.mc-immersive-reader-button__content>img { display:block; width:100%; height:100%; object-fit:fill; image-rendering:pixelated; }
+.mc-immersive-reader-button:focus-visible { outline:0; }
+@media (forced-colors:active) {
+  .mc-immersive-reader { color:CanvasText; background:Canvas; }
+  .mc-immersive-reader__screen-background,.mc-immersive-reader__popup-fill,.mc-immersive-reader__popup-skin,.mc-immersive-reader__text-button::before,.mc-immersive-reader-button__background,.mc-immersive-reader-button__focus { display:none; }
+  .mc-immersive-reader__popup { border:1px solid CanvasText; background:Canvas; }
+  .mc-immersive-reader__header,.mc-immersive-reader__loading-label,.mc-immersive-reader__error-text { color:CanvasText; }
+  .mc-immersive-reader__text-button,.mc-immersive-reader-button { border:1px solid ButtonText; background:ButtonFace; color:ButtonText; }
+  .mc-immersive-reader__text-button:disabled,.mc-immersive-reader-button:is(:disabled,[aria-disabled="true"]) { color:GrayText; border-color:GrayText; }
+  .mc-immersive-reader__text-button:focus-visible,.mc-immersive-reader-button:focus-visible { outline:2px solid Highlight; outline-offset:-2px; }
+}

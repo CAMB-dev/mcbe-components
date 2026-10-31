@@ -661,6 +661,14 @@
       {"name":"OrePlayerCard","status":"implemented","validation":"linebox123_120pass_3skip_default_rgba_preserved_native_unverified","fidelity":"ore_source_player_card_host_avatar_subtitle_role_art_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"},
       {"name":"OreSwitch","status":"implemented","validation":"stronger_source107_client_overlay_bevel_modal_package_public_pass_native_unverified","fidelity":"ore_source_switch_geometry_host_art_native_checkbox_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"}
     ],
+    "ugc_viewer": [
+      {"name":"UGCViewer","status":"implemented","validation":"source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"classic_source_search_grid_explicit_host_material_and_web_grid_mapping_native_unverified","source":"resource_pack/ui/ugc_viewer_screen.json, fixed v1.26.60.5","details":"docs/UGC_VIEWER_QA.md"},
+      {"name":"UGCItemCard","status":"implemented","validation":"source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"classic_source_nested_content_button_host_image_and_intrinsic_web_label_metrics_native_unverified","source":"resource_pack/ui/ugc_viewer_screen.json, fixed v1.26.60.5","details":"docs/UGC_VIEWER_QA.md"}
+    ],
+    "immersive_reader": [
+      {"name":"ImmersiveReader","status":"implemented","validation":"source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"independent_source_bindings_host_webview_loading_visual_and_explicit_popup_resolution_native_unverified","source":"resource_pack/ui/immersive_reader.json, fixed v1.26.60.5","details":"docs/IMMERSIVE_READER_QA.md"},
+      {"name":"ImmersiveReaderButton","status":"implemented","validation":"source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"source_content_button_whole_original_glyph_explicit_host_activation_native_unverified","source":"resource_pack/ui/immersive_reader.json, fixed v1.26.60.5","details":"docs/IMMERSIVE_READER_QA.md"}
+    ],
     "storage_management": [
       {"name":"StorageManagement","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
       {"name":"StorageToolbar","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
@@ -725,7 +733,7 @@
     ]
   },
   "publicExports": {
-    "components": 173,
+    "components": 177,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -736,7 +744,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 190,
+    "runtimeValues": 194,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 6,

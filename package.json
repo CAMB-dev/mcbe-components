@@ -78,6 +78,8 @@
     "./start-menu.css": "./dist/start-menu.css",
     "./storage-management.css": "./dist/storage-management.css",
     "./screenshot-flash.css": "./dist/screenshot-flash.css",
+    "./ugc-viewer.css": "./dist/ugc-viewer.css",
+    "./immersive-reader.css": "./dist/immersive-reader.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",

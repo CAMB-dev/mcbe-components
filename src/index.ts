@@ -131,3 +131,8 @@ export type { StorageControlState, StorageImageSource, StorageLocation, StorageC
 
 export { ScreenshotFlash } from './screenshot-flash';
 export type { ScreenshotFlashTrigger, ScreenshotFlashEasing, ScreenshotFlashControl, ScreenshotFlashImage, ScreenshotFlashFinishedDetail, ScreenshotFlashProps } from './screenshot-flash';
+
+export { UGCViewer, UGCItemCard } from './ugc-viewer';
+export type { UGCImageSource, UGCImageFrameMaterial, UGCItem, UGCActionDetail, UGCActionHandler, UGCItemCardProps, UGCQueryChangeDetail, UGCSearchInputProps, UGCViewerProps } from './ugc-viewer';
+export { ImmersiveReader, ImmersiveReaderButton } from './immersive-reader';
+export type { ImmersiveReaderBindings, ImmersiveReaderLabels, ImmersiveReaderPopupLayout, ImmersiveReaderAction, ImmersiveReaderTextAction, ImmersiveReaderActionDetail, ImmersiveReaderActionHandler, ImmersiveReaderNativeButtonProps, ImmersiveReaderButtonProps, ImmersiveReaderProps } from './immersive-reader';

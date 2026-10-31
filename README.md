@@ -351,9 +351,9 @@ SGA 的 AIZ 样本已通过原图逐像素对照；这不证明 native renderer 
 
 开始菜单新增六个公开部分：正式97项中96通过、1设备条件跳过，12个完整Web源平面共193,355像素RGBA零差；React18 /19实际181值包和默认Vite开发 /生产四场景通过。37个完整PNG与可选公开字体、TGA绘制分别验证，原生整页 /角色 /panorama仍待验，见 [START_MENU_QA.md](docs/START_MENU_QA.md)。
 
-当前 **173 个已实现组件**，表情族含完整 `EmoteWheelScreen`、四槽 `EmoteWheel` 与可复用 `EmoteSlotPreview`；按 Bedrock 原生控件与 GUI 边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开6份数据、11个渲染 /几何 /纹理函数，共190个源运行时值。新增黑板族包含 `ChalkboardEditor`、`ChalkboardTextField` 与 `ChalkboardLock`，几何与状态由宿主显式提供，见 [CHALKBOARD_QA.md](docs/CHALKBOARD_QA.md)。新增OreUI五组件的使用与资源边界见 [ORE_PLAYER_PERMISSIONS_QA.md](docs/ORE_PLAYER_PERMISSIONS_QA.md)，该历史阶段更强源修订的React18.3.1 /19.3.1实际172值包通过，完整107项同批104通过 /3设备条件跳过，新公开9项另通过；背景透明、bevel和modal选中 /焦点按源修正，不等于运行时guiScale或原生整页认证。新增Classic权限四组件已落盘，角色与权限位独立、后端操作由宿主处理，正式63通过 /2桌面触控条件跳过、公开预览12项及React18 /19实际包验证已通过；使用及OreUI边界见 [PLAYER_PERMISSIONS_QA.md](docs/PLAYER_PERMISSIONS_QA.md)。历史DocumentViewer146组件 /163值与58通过 /1设备条件跳过保持原身份。新增双栏文档 `DocumentViewer` / `DocumentHeading` / `DocumentParagraph`，使用与范围见 [DOCUMENT_VIEWER_QA.md](docs/DOCUMENT_VIEWER_QA.md)。表情屏幕复用原轮盘，加入透明框架、说明条与 Change Emotes 行；视觉名称和无障碍槽位标签分离，空槽中心默认留白，范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)。此前142组件 /159值轮盘、157值 NPC 外观顺序与15项实体合同、156值包 /实体14项 /旧渲染77项、NPC布局44项 /154值包 /64项公开辅助分别保留原身份，见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
+当前 **177 个已实现组件**，表情族含完整 `EmoteWheelScreen`、四槽 `EmoteWheel` 与可复用 `EmoteSlotPreview`；按 Bedrock 原生控件与 GUI 边界拆分，[组件清单](docs/COMPONENTS.md) 与 [component-catalog.json](docs/component-catalog.json) 记录具体范围。另公开6份数据、11个渲染 /几何 /纹理函数，共194个源运行时值。新增黑板族包含 `ChalkboardEditor`、`ChalkboardTextField` 与 `ChalkboardLock`，几何与状态由宿主显式提供，见 [CHALKBOARD_QA.md](docs/CHALKBOARD_QA.md)。新增OreUI五组件的使用与资源边界见 [ORE_PLAYER_PERMISSIONS_QA.md](docs/ORE_PLAYER_PERMISSIONS_QA.md)，该历史阶段更强源修订的React18.3.1 /19.3.1实际172值包通过，完整107项同批104通过 /3设备条件跳过，新公开9项另通过；背景透明、bevel和modal选中 /焦点按源修正，不等于运行时guiScale或原生整页认证。新增Classic权限四组件已落盘，角色与权限位独立、后端操作由宿主处理，正式63通过 /2桌面触控条件跳过、公开预览12项及React18 /19实际包验证已通过；使用及OreUI边界见 [PLAYER_PERMISSIONS_QA.md](docs/PLAYER_PERMISSIONS_QA.md)。历史DocumentViewer146组件 /163值与58通过 /1设备条件跳过保持原身份。新增双栏文档 `DocumentViewer` / `DocumentHeading` / `DocumentParagraph`，使用与范围见 [DOCUMENT_VIEWER_QA.md](docs/DOCUMENT_VIEWER_QA.md)。表情屏幕复用原轮盘，加入透明框架、说明条与 Change Emotes 行；视觉名称和无障碍槽位标签分离，空槽中心默认留白，范围见 [EMOTE_WHEEL_QA.md](docs/EMOTE_WHEEL_QA.md)。此前142组件 /159值轮盘、157值 NPC 外观顺序与15项实体合同、156值包 /实体14项 /旧渲染77项、NPC布局44项 /154值包 /64项公开辅助分别保留原身份，见 [GUI_ENTITY_QA.md](docs/GUI_ENTITY_QA.md)。implemented不等于所有GUI已pixel-perfect验收，历史用例不作为本轮累计。
 
-[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与5个命名族缺口。173组件不是173个完整GUI；表情屏幕已补源布局组合，原生整页像素仍未验收，NPC人物自动取景、引擎及原生整页也仍未完成。
+[完整GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md) 列出固定官方源的全部206个UI文件、八种范围状态与3个命名族缺口。177组件不是177个完整GUI；表情屏幕已补源布局组合，原生整页像素仍未验收，NPC人物自动取景、引擎及原生整页也仍未完成。
 
 - 基础控件：文本、图片 / 九宫格、按钮、输入、选择、设置行、标签页、弹窗、提示、滚动区域。
 - 容器零件：槽位、物品图 / 数量 / 耐久、背包网格、配方格 / 搜索 / 分类 / 配方书条目与筛选、燃料、处理箭头、附魔选项、交易条目。
@@ -689,3 +689,6 @@ Dialog 使用 portal 到 document.body，局部容器令牌不会自动传入：
 ## 许可
 
 代码 MIT；开放字体 SIL OFL 1.1。像素图标、小岛和品牌方块是原创展示插画；物品、GUI 与书本素材的来源及权利说明见 THIRD_PARTY_NOTICES.md，它们不因代码的 MIT 许可而改变归属。Minecraft 名称属于其各自权利人。
+
+
+本轮新增UGCViewer /UGCItemCard与ImmersiveReader /ImmersiveReaderButton，当前177组件 /194运行时值。正式首74项67通过 /7方法失败保留，修正后14项12通过 /2只读断言失败，再修后2项通过；74个不同用例按各自最新方法均已验证，其中68项新增、6项相关导航，不合称单轮74全绿。42个完整源材质平面共1,986,950像素RGBA零差。React18.3.1 /19.3.1实际包的类型 /SSR /资源和默认Vite开发 /生产四组合通过，公开页12项通过。宿主White候选、静态reader图标、字体 /默认锚点 /provider /原生整页仍未认证。使用与明确宿主接口见 [UGC_VIEWER_QA.md](docs/UGC_VIEWER_QA.md) 和 [IMMERSIVE_READER_QA.md](docs/IMMERSIVE_READER_QA.md)。
