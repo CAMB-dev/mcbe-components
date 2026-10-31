@@ -1,5 +1,7 @@
 # Current checkpoint — Invite / 2026-11-01
 
+Invite implementation committed/pushed d94e01a34d3b7d0cc221ab7fd00176f8c35b14cc, clean proof `.cache/invite-release-02/FINAL.json`; additional `.cache/invite-release-02/CLEANUP-SUPPLEMENT.json` confirms actual formal5297 and all4173/5290–5299 absent. A subsequent documentation-only correction fixes the older README paragraph's stale current183/200 to188/205. Current final package is `.cache/invite-release-03/invite-final.tgz`, SHAdedc68bf74e7de580ecc9d9a3522f783d752fb8bd55522be77ba3a0522b07b83,5,666,289bytes; same tested ec82 index/runtime/types/styles/assets with declared map-only difference. Six-doc review03 SHA1db255c97da6a818bc787fa24e80e1a26704dcee5144061cc312cdb2dc8da3f9. Final follow-up commit/clean/remote proof belongs `.cache/invite-release-03/FINAL.json`; no guessed new commit hash in tracked handoff.
+
 Goal ACTIVE, unlimited. The original all-Bedrock component/native pixel goal is incomplete. Before this scoped change main/origin were646ead4dcc8440b82e51fd968891a4786ab7ba5a. New commit/remote/clean proof belongs in `.cache/invite-release-02/FINAL.json` after commit/push, not as a guessed hash here.
 
 ## Authority and environment
