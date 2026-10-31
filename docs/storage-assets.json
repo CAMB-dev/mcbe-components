@@ -1,0 +1,2515 @@
+{
+  "schemaVersion": 1,
+  "fixedSource": {
+    "archive": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "scope": "Only assets requested by the eight actual Storage parts; not the71-PNG study closure. Root touchScrollBox, source inactive sorting/search/footer-share, category fallback pictures and category button icons are not bundled here.",
+  "sourceStudy": {
+    "path": ".cache/storage-assets-study-01/FINAL.json",
+    "sha256": "c1e3d03e64cc9a8becbfbe1d78ffedd1d575a2121a4d7991bf08fcf70fcac01e"
+  },
+  "resources": [
+    {
+      "key": "lightNormal",
+      "texture": "textures/ui/button_borderless_light",
+      "entry": "resource_pack/textures/ui/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "dimensions": [
+        4,
+        4
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/button_borderless_light.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/button_borderless_light.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_light.json",
+        "destination": "src/assets/document-viewer/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.light_assets",
+          "pointer": "/$default_button_texture|default",
+          "declaredProperty": "$default_button_texture|default",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "default"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.light_assets"
+          ]
+        },
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$default_button_texture|default",
+          "declaredProperty": "$default_button_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "common_buttons.light_text_button",
+            "common_buttons.light_button_assets"
+          ]
+        },
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$default_texture|default",
+          "declaredProperty": "$default_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "lightHover",
+      "texture": "textures/ui/button_borderless_lighthover",
+      "entry": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "dimensions": [
+        4,
+        4
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/button_borderless_lighthover.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/button_borderless_lighthover.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "destination": "src/assets/document-viewer/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.light_assets",
+          "pointer": "/$hover_button_texture|default",
+          "declaredProperty": "$hover_button_texture|default",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "default",
+            "hover"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.light_assets"
+          ]
+        },
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$hover_button_texture|default",
+          "declaredProperty": "$hover_button_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "hover"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "common_buttons.light_text_button",
+            "common_buttons.light_button_assets"
+          ]
+        },
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$pressed_texture|default",
+          "declaredProperty": "$pressed_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "pressed"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "lightPressed",
+      "texture": "textures/ui/button_borderless_lightpressed",
+      "entry": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "dimensions": [
+        4,
+        4
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/button_borderless_lightpressed.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/button_borderless_lightpressed.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "destination": "src/assets/document-viewer/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.light_assets",
+          "pointer": "/$pressed_button_texture|default",
+          "declaredProperty": "$pressed_button_texture|default",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "default",
+            "pressed"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.light_assets"
+          ]
+        },
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$pressed_button_texture|default",
+          "declaredProperty": "$pressed_button_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "pressed"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "common_buttons.light_text_button",
+            "common_buttons.light_button_assets"
+          ]
+        },
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$pressed_no_hover_texture|default",
+          "declaredProperty": "$pressed_no_hover_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "hover",
+            "pressed"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "lightDisabled",
+      "texture": "textures/ui/disabledButtonNoBorder",
+      "entry": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "dimensions": [
+        2,
+        2
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/disabledButtonNoBorder.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/disabledButtonNoBorder.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "destination": "src/assets/document-viewer/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.light_assets",
+          "pointer": "/$locked_button_texture|default",
+          "declaredProperty": "$locked_button_texture|default",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "default",
+            "locked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.light_assets"
+          ]
+        },
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$locked_button_texture|default",
+          "declaredProperty": "$locked_button_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "locked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "common_buttons.light_text_button",
+            "common_buttons.light_button_assets"
+          ]
+        },
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$locked_texture|default",
+          "declaredProperty": "$locked_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "locked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "focusWhite",
+      "texture": "textures/ui/focus_border_white",
+      "entry": "resource_pack/textures/ui/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/focus_border_white.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/focus_border_white.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/focus_border_white.json",
+        "destination": "src/assets/document-viewer/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.common_main_button",
+          "pointer": "/controls/1/border/variables/1/$border_texture",
+          "declaredProperty": "$border_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/controls/1/border/ignored",
+              "field": "ignored",
+              "value": "$ignore_border"
+            },
+            {
+              "pointer": "/controls/1/border/variables/1/requires",
+              "field": "requires",
+              "value": "($button_state = hover)"
+            }
+          ],
+          "referencePath": [
+            "storage_management.common_main_button"
+          ]
+        },
+        {
+          "node": "common_buttons.focus_border",
+          "pointer": "/$focus_border_texture|default",
+          "declaredProperty": "$focus_border_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "focus"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.sub_item_blank_button",
+            "common_buttons.new_ui_button_panel",
+            "common_buttons.focus_border"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "categoryUnchecked",
+      "texture": "textures/ui/button_borderless_light",
+      "entry": "resource_pack/textures/ui/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "dimensions": [
+        4,
+        4
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/button_borderless_light.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/button_borderless_light.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_light.json",
+        "destination": "src/assets/document-viewer/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.light_assets",
+          "pointer": "/$default_button_texture|default",
+          "declaredProperty": "$default_button_texture|default",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "default"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.light_assets"
+          ]
+        },
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$default_button_texture|default",
+          "declaredProperty": "$default_button_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "common_buttons.light_text_button",
+            "common_buttons.light_button_assets"
+          ]
+        },
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$default_texture|default",
+          "declaredProperty": "$default_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "categoryChecked",
+      "texture": "textures/ui/button_borderless_lightpressednohover",
+      "entry": "resource_pack/textures/ui/button_borderless_lightpressednohover.png",
+      "bytes": 155,
+      "sha256": "c3e928f9c58b6cf42399686ba71f5656de59a2dadcdd6cee9b26111ec5200c52",
+      "dimensions": [
+        4,
+        4
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/button_borderless_lightpressednohover.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/button_borderless_lightpressednohover.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_lightpressednohover.json",
+        "destination": "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$hover_texture|default",
+          "declaredProperty": "$hover_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "hover"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "categoryUncheckedHover",
+      "texture": "textures/ui/button_borderless_lighthover",
+      "entry": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "dimensions": [
+        4,
+        4
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/button_borderless_lighthover.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/button_borderless_lighthover.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "destination": "src/assets/document-viewer/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.light_assets",
+          "pointer": "/$hover_button_texture|default",
+          "declaredProperty": "$hover_button_texture|default",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "default",
+            "hover"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.light_assets"
+          ]
+        },
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$hover_button_texture|default",
+          "declaredProperty": "$hover_button_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "hover"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "common_buttons.light_text_button",
+            "common_buttons.light_button_assets"
+          ]
+        },
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$pressed_texture|default",
+          "declaredProperty": "$pressed_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "pressed"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "categoryCheckedHover",
+      "texture": "textures/ui/button_borderless_lightpressed",
+      "entry": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "dimensions": [
+        4,
+        4
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/button_borderless_lightpressed.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/button_borderless_lightpressed.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "destination": "src/assets/document-viewer/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.light_assets",
+          "pointer": "/$pressed_button_texture|default",
+          "declaredProperty": "$pressed_button_texture|default",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "default",
+            "pressed"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.light_assets"
+          ]
+        },
+        {
+          "node": "common_buttons.light_button_assets",
+          "pointer": "/$pressed_button_texture|default",
+          "declaredProperty": "$pressed_button_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "pressed"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "common_buttons.light_text_button",
+            "common_buttons.light_button_assets"
+          ]
+        },
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$pressed_no_hover_texture|default",
+          "declaredProperty": "$pressed_no_hover_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "hover",
+            "pressed"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "gray",
+      "texture": "textures/ui/Gray",
+      "entry": "resource_pack/textures/ui/Gray.png",
+      "bytes": 67,
+      "sha256": "e21915e60b32df0c5bd7fa8153571c1d8899a20de2973ee92f8aab8f11c35797",
+      "dimensions": [
+        2,
+        2
+      ],
+      "urlExpression": "workstationImageAssets.anvilCostBackground.url",
+      "delivery": "existing-private-registry-url",
+      "destination": null,
+      "metadata": {
+        "entry": "resource_pack/textures/ui/Gray.json",
+        "destination": "src/assets/document-viewer/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.common_main_button",
+          "pointer": "/$background_texture",
+          "declaredProperty": "$background_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.common_main_button"
+          ]
+        },
+        {
+          "node": "storage_management.grey_button",
+          "pointer": "/$background_texture",
+          "declaredProperty": "$background_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.grey_button"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "existingImportedWholeMatch": {
+        "module": "src/workstation-image-assets.ts",
+        "key": "anvilCostBackground",
+        "wholeSHA": "e21915e60b32df0c5bd7fa8153571c1d8899a20de2973ee92f8aab8f11c35797"
+      },
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "black",
+      "texture": "textures/ui/Black",
+      "entry": "resource_pack/textures/ui/Black.png",
+      "bytes": 84,
+      "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e",
+      "dimensions": [
+        2,
+        2
+      ],
+      "urlExpression": "new URL('./assets/emote-wheel/Black.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/emote-wheel/Black.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/Black.json",
+        "destination": "src/assets/emote-wheel/Black.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.common_main_button",
+          "pointer": "/controls/1/border/variables/0/$border_texture",
+          "declaredProperty": "$border_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/controls/1/border/ignored",
+              "field": "ignored",
+              "value": "$ignore_border"
+            },
+            {
+              "pointer": "/controls/1/border/variables/0/requires",
+              "field": "requires",
+              "value": "($button_state = default)"
+            }
+          ],
+          "referencePath": [
+            "storage_management.common_main_button"
+          ]
+        },
+        {
+          "node": "popup_dialog.black_tint_image",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management_popup.storage_dependency_modal",
+            "popup_dialog.modal_input_panel",
+            "popup_dialog.black_tint_image"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "worldRowDark",
+      "texture": "textures/ui/button_borderless_dark",
+      "entry": "resource_pack/textures/ui/button_borderless_dark.png",
+      "bytes": 137,
+      "sha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "dimensions": [
+        4,
+        4
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/button_borderless_dark.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/button_borderless_dark.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/button_borderless_dark.json",
+        "destination": "src/assets/player-permissions/button_borderless_dark.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.world_item_text",
+          "pointer": "/$background_texture",
+          "declaredProperty": "$background_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.world_item_text"
+          ]
+        },
+        {
+          "node": "storage_management.sub_item_blank_button",
+          "pointer": "/$new_ui_button_texture",
+          "declaredProperty": "$new_ui_button_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.sub_item_blank_button"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "checkboxCheck",
+      "texture": "textures/ui/checkbox_check",
+      "entry": "resource_pack/textures/ui/checkbox_check.png",
+      "bytes": 149,
+      "sha256": "8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062",
+      "dimensions": [
+        10,
+        10
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/checkbox_check.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/checkbox_check.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.delete_checkbox",
+          "pointer": "/controls/0/selected_checkbox_image@common.checkbox_image/$checked_image",
+          "declaredProperty": "$checked_image",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "checked",
+            "selected"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.delete_checkbox"
+          ]
+        },
+        {
+          "node": "common.checkbox_checked_state",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "checked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "settings_common.option_dropdown",
+            "settings_common.option_dropdown_control",
+            "common.dropdown",
+            "common.checkbox",
+            "common.checkbox_checked_state"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "checkboxSpace",
+      "texture": "textures/ui/checkbox_space",
+      "entry": "resource_pack/textures/ui/checkbox_space.png",
+      "bytes": 129,
+      "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014",
+      "dimensions": [
+        10,
+        10
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/checkbox_space.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/checkbox_space.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.delete_checkbox",
+          "pointer": "/controls/0/selected_checkbox_image@common.checkbox_image/variables/1/$checked_image",
+          "declaredProperty": "$checked_image",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "checked",
+            "selected"
+          ],
+          "guards": [
+            {
+              "pointer": "/controls/0/selected_checkbox_image@common.checkbox_image/variables/1/requires",
+              "field": "requires",
+              "value": "(not $checked_state and $button_state = default)"
+            }
+          ],
+          "referencePath": [
+            "storage_management.delete_checkbox"
+          ]
+        },
+        {
+          "node": "common.checkbox_unchecked_state",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "checked",
+            "unchecked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "settings_common.option_dropdown",
+            "settings_common.option_dropdown_control",
+            "common.dropdown",
+            "common.checkbox",
+            "common.checkbox_unchecked_state"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "checkboxCheckHover",
+      "texture": "textures/ui/checkbox_checkHover",
+      "entry": "resource_pack/textures/ui/checkbox_checkHover.png",
+      "bytes": 152,
+      "sha256": "29b33214de8a4621a2b882eaeb5adcce22053e97669cac459bf167a70bdec8c2",
+      "dimensions": [
+        10,
+        10
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/checkbox_checkHover.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/checkbox_checkHover.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.delete_checkbox",
+          "pointer": "/controls/0/selected_checkbox_image@common.checkbox_image/variables/0/$checked_image",
+          "declaredProperty": "$checked_image",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "checked",
+            "selected"
+          ],
+          "guards": [
+            {
+              "pointer": "/controls/0/selected_checkbox_image@common.checkbox_image/variables/0/requires",
+              "field": "requires",
+              "value": "($checked_state and $button_state = hover)"
+            }
+          ],
+          "referencePath": [
+            "storage_management.delete_checkbox"
+          ]
+        },
+        {
+          "node": "common.checkbox_checked_hover_state",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "hover",
+            "checked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "settings_common.option_dropdown",
+            "settings_common.option_dropdown_control",
+            "common.dropdown",
+            "common.checkbox",
+            "common.checkbox_checked_hover_state"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "checkboxSpaceHover",
+      "texture": "textures/ui/checkbox_spaceHover",
+      "entry": "resource_pack/textures/ui/checkbox_spaceHover.png",
+      "bytes": 126,
+      "sha256": "bd5babf3900537bda4f887be0cd22abbaea656959d32b88517d3943e5d95c0a6",
+      "dimensions": [
+        10,
+        10
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/checkbox_spaceHover.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/checkbox_spaceHover.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.delete_checkbox",
+          "pointer": "/controls/0/selected_checkbox_image@common.checkbox_image/variables/2/$checked_image",
+          "declaredProperty": "$checked_image",
+          "scope": "direct-family-declaration",
+          "stateHints": [
+            "checked",
+            "selected"
+          ],
+          "guards": [
+            {
+              "pointer": "/controls/0/selected_checkbox_image@common.checkbox_image/variables/2/requires",
+              "field": "requires",
+              "value": "(not $checked_state and $button_state = hover)"
+            }
+          ],
+          "referencePath": [
+            "storage_management.delete_checkbox"
+          ]
+        },
+        {
+          "node": "common.checkbox_unchecked_hover_state",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "hover",
+            "checked",
+            "unchecked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "settings_common.option_dropdown",
+            "settings_common.option_dropdown_control",
+            "common.dropdown",
+            "common.checkbox",
+            "common.checkbox_unchecked_hover_state"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "defaultIndent",
+      "texture": "textures/ui/default_indent",
+      "entry": "resource_pack/textures/ui/default_indent.png",
+      "bytes": 120,
+      "sha256": "35f98c105d7eb71519be92e9afd5c7cbd8239dd1addf40bb4a79fad472d5e395",
+      "dimensions": [
+        5,
+        5
+      ],
+      "urlExpression": "embeddedPngUrls.defaultIndent",
+      "delivery": "inline-whole-existing-css-png",
+      "destination": null,
+      "metadata": {
+        "entry": "resource_pack/textures/ui/default_indent.json",
+        "destination": "src/assets/document-viewer/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.main_content_panel",
+          "pointer": "/controls/0/panel/controls/2/image_panel/controls/0/image_border/variables/0/$image_border_texture",
+          "declaredProperty": "$image_border_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/controls/0/panel/controls/2/image_panel/visible",
+              "field": "visible",
+              "value": "$image_visible"
+            },
+            {
+              "pointer": "/controls/0/panel/controls/2/image_panel/controls/0/image_border/variables/0/requires",
+              "field": "requires",
+              "value": "($button_state = default)"
+            }
+          ],
+          "referencePath": [
+            "storage_management.main_content_panel"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "existingEmbeddedWholeMatches": [
+        {
+          "path": "src/game-list-textures.css",
+          "utf16Offset": 1030,
+          "bytes": 120,
+          "sha256": "35f98c105d7eb71519be92e9afd5c7cbd8239dd1addf40bb4a79fad472d5e395",
+          "cssVariable": "--mc-list-indent"
+        }
+      ],
+      "duplicateEncodedBody": true,
+      "newPhysicalPNG": false,
+      "deliveryReason": "Existing exact complete original is CSS-only, with no importable runtime URL symbol. A finite original byte-for-byte data URL is repeated for typed private image use; this is not a newly discovered or re-encoded asset.",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "worldScreenshotFocus",
+      "texture": "textures/ui/world_screenshot_focus_border",
+      "entry": "resource_pack/textures/ui/world_screenshot_focus_border.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "urlExpression": "new URL('./assets/document-viewer/focus_border_white.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/document-viewer/focus_border_white.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/world_screenshot_focus_border.json",
+        "destination": "src/assets/document-viewer/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.main_content_panel",
+          "pointer": "/controls/0/panel/controls/2/image_panel/controls/0/image_border/variables/1/$image_border_texture",
+          "declaredProperty": "$image_border_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/controls/0/panel/controls/2/image_panel/visible",
+              "field": "visible",
+              "value": "$image_visible"
+            },
+            {
+              "pointer": "/controls/0/panel/controls/2/image_panel/controls/0/image_border/variables/1/requires",
+              "field": "requires",
+              "value": "($button_state = hover)"
+            }
+          ],
+          "referencePath": [
+            "storage_management.main_content_panel"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "arrowDown",
+      "texture": "textures/ui/arrowDown",
+      "entry": "resource_pack/textures/ui/arrowDown.png",
+      "bytes": 1169,
+      "sha256": "b95f69c158c8c8c1bb7df278abf8edb86c12e8de9d99f00877c4ebcdeaa17be6",
+      "dimensions": [
+        8,
+        8
+      ],
+      "urlExpression": "new URL('./assets/storage-management/arrowDown.png', import.meta.url).href",
+      "delivery": "new-whole-png",
+      "destination": "src/assets/storage-management/arrowDown.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.main_item_text",
+          "pointer": "/$text_controls/2/arrow_down/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/$text_controls/2/arrow_down/visible",
+              "field": "visible",
+              "value": true
+            }
+          ],
+          "referencePath": [
+            "storage_management.main_item_text"
+          ]
+        },
+        {
+          "node": "storage_management.legacy_world_main_item_text",
+          "pointer": "/$text_controls/2/arrow_down/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/$text_controls/2/arrow_down/visible",
+              "field": "visible",
+              "value": true
+            }
+          ],
+          "referencePath": [
+            "storage_management.legacy_world_main_item_text"
+          ]
+        },
+        {
+          "node": "storage_management.retailtopreview_world_main_item_text",
+          "pointer": "/$text_controls/2/arrow_down/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/$text_controls/2/arrow_down/visible",
+              "field": "visible",
+              "value": true
+            }
+          ],
+          "referencePath": [
+            "storage_management.retailtopreview_world_main_item_text"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "arrowRight",
+      "texture": "textures/ui/arrowRight",
+      "entry": "resource_pack/textures/ui/arrowRight.png",
+      "bytes": 1142,
+      "sha256": "4b7d2d5d5f7beed2eeeeebac93637b16ea1282c2796ecec8a27565fe07ac1b6f",
+      "dimensions": [
+        8,
+        8
+      ],
+      "urlExpression": "new URL('./assets/command-block/arrowRight.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/command-block/arrowRight.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.main_item_text",
+          "pointer": "/$text_controls/3/arrow_right/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.main_item_text"
+          ]
+        },
+        {
+          "node": "storage_management.legacy_world_main_item_text",
+          "pointer": "/$text_controls/3/arrow_right/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.legacy_world_main_item_text"
+          ]
+        },
+        {
+          "node": "storage_management.retailtopreview_world_main_item_text",
+          "pointer": "/$text_controls/3/arrow_right/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.retailtopreview_world_main_item_text"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "multiselect",
+      "texture": "textures/ui/multiselection",
+      "entry": "resource_pack/textures/ui/multiselection.png",
+      "bytes": 174,
+      "sha256": "cfacf43834fadd6fb85c4add4940ea549d42ab3db2aa96c760eb91edb471ba40",
+      "dimensions": [
+        26,
+        21
+      ],
+      "urlExpression": "new URL('./assets/storage-management/multiselection.png', import.meta.url).href",
+      "delivery": "new-whole-png",
+      "destination": "src/assets/storage-management/multiselection.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.storage_header_panel",
+          "pointer": "/controls/0/header_wrapper/controls/0/header_panel/controls/7/panel/controls/0/multiselect_button@common_toggles.light_image_toggle/$button_texture",
+          "declaredProperty": "$button_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "invertedMultiselect",
+      "texture": "textures/ui/invertedmultiselecticon",
+      "entry": "resource_pack/textures/ui/invertedmultiselecticon.png",
+      "bytes": 278,
+      "sha256": "4380b3795d9e6aae6b972e55861796bfd3b14c3a64b3bd6b7916617a85682383",
+      "dimensions": [
+        26,
+        21
+      ],
+      "urlExpression": "new URL('./assets/storage-management/invertedmultiselecticon.png', import.meta.url).href",
+      "delivery": "new-whole-png",
+      "destination": "src/assets/storage-management/invertedmultiselecticon.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.generic_button",
+          "pointer": "/controls/0/picture/variables/0/$button_texture",
+          "declaredProperty": "$button_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/controls/0/picture/variables/0/requires",
+              "field": "requires",
+              "value": "($toggle_checked or $toggle_checked_hover)"
+            }
+          ],
+          "referencePath": [
+            "storage_management.generic_button"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "trayBanners",
+      "texture": "textures/ui/Banners",
+      "entry": "resource_pack/textures/ui/Banners.png",
+      "bytes": 82,
+      "sha256": "41c874a8ffb72a40b0404c6955388aed577aabc74118729336604c376689748f",
+      "dimensions": [
+        4,
+        4
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/Banners.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/Banners.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/Banners.json",
+        "destination": "src/assets/player-permissions/Banners.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.resource_toggle",
+          "pointer": "/controls/1/item_button_panel/controls/0/y_sizing_panel/controls/0/border/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/controls/1/item_button_panel/visible",
+              "field": "visible",
+              "value": false
+            }
+          ],
+          "referencePath": [
+            "storage_management.resource_toggle"
+          ]
+        },
+        {
+          "node": "storage_management_popup.dependency_sub_item",
+          "pointer": "/controls/0/border/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management_popup.dependency_sub_item"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "lock",
+      "texture": "textures/ui/lock",
+      "entry": "resource_pack/textures/ui/lock.png",
+      "bytes": 95,
+      "sha256": "fa54afb188ed482b1f6cd63c3bf433f767c67f8c5094df92a11ab838776c2322",
+      "dimensions": [
+        8,
+        8
+      ],
+      "urlExpression": "new URL('./assets/gui-icons/lock.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/gui-icons/lock.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.lock_icon",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.lock_icon"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "warning",
+      "texture": "textures/ui/WarningGlyph",
+      "entry": "resource_pack/textures/ui/WarningGlyph.png",
+      "bytes": 152,
+      "sha256": "e5c481628adec8b4e60aff01b26b330dc2433a87e5534454d17a77c5e404afba",
+      "dimensions": [
+        13,
+        20
+      ],
+      "urlExpression": "new URL('./assets/gui-icons/warning-glyph.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/gui-icons/warning-glyph.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.main_item_text",
+          "pointer": "/$text_controls/0/glyph_and_name/controls/2/glyph_warning@storage_management.base_glyph/$glyph_texture",
+          "declaredProperty": "$glyph_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.main_item_text"
+          ]
+        },
+        {
+          "node": "storage_management.pack_description_sub_item",
+          "pointer": "/$text_controls/0/panel/controls/1/glyphs_and_version/controls/0/glyph_warning@storage_management.base_glyph/$glyph_texture",
+          "declaredProperty": "$glyph_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.pack_description_sub_item"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "error",
+      "texture": "textures/ui/ErrorGlyph",
+      "entry": "resource_pack/textures/ui/ErrorGlyph.png",
+      "bytes": 148,
+      "sha256": "1b274eea56592b90fcb3ce90f112d2cea9d4f1a31536fd7eeb8a432c740e1c1e",
+      "dimensions": [
+        13,
+        20
+      ],
+      "urlExpression": "new URL('./assets/gui-icons/error-glyph.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/gui-icons/error-glyph.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.main_item_text",
+          "pointer": "/$text_controls/0/glyph_and_name/controls/3/glyph_error@storage_management.base_glyph/$glyph_texture",
+          "declaredProperty": "$glyph_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.main_item_text"
+          ]
+        },
+        {
+          "node": "storage_management.pack_description_sub_item",
+          "pointer": "/$text_controls/0/panel/controls/1/glyphs_and_version/controls/1/glyph_error@storage_management.base_glyph/$glyph_texture",
+          "declaredProperty": "$glyph_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.pack_description_sub_item"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "updateGlyph",
+      "texture": "textures/ui/UpdateGlyph",
+      "entry": "resource_pack/textures/ui/UpdateGlyph.png",
+      "bytes": 148,
+      "sha256": "74cc87e0d1d258db4592cacdc908d6bdc74f95429c914bfddccc4abca1059a52",
+      "dimensions": [
+        13,
+        20
+      ],
+      "urlExpression": "new URL('./assets/gui-icons/update-glyph.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/gui-icons/update-glyph.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.main_item_text",
+          "pointer": "/$text_controls/0/glyph_and_name/controls/4/glyph_update@storage_management.base_glyph/$glyph_texture",
+          "declaredProperty": "$glyph_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.main_item_text"
+          ]
+        },
+        {
+          "node": "storage_management.pack_description_sub_item",
+          "pointer": "/$text_controls/0/panel/controls/1/glyphs_and_version/controls/2/glyph_update@storage_management.base_glyph/$glyph_texture",
+          "declaredProperty": "$glyph_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.pack_description_sub_item"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    },
+    {
+      "key": "dialogHollow2",
+      "texture": "textures/ui/dialog_background_hollow_2",
+      "entry": "resource_pack/textures/ui/dialog_background_hollow_2.png",
+      "bytes": 314,
+      "sha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f",
+      "dimensions": [
+        18,
+        67
+      ],
+      "urlExpression": "new URL('./assets/storage-management/dialog_background_hollow_2.png', import.meta.url).href",
+      "delivery": "new-whole-png",
+      "destination": "src/assets/storage-management/dialog_background_hollow_2.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/dialog_background_hollow_2.json",
+        "destination": "src/assets/storage-management/dialog_background_hollow_2.json",
+        "bytes": 95,
+        "sha256": "584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40",
+        "raw": {
+          "nineslice_size": [
+            8,
+            23,
+            8,
+            42
+          ],
+          "base_size": [
+            18,
+            67
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "common.dialog_background_hollow_2",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management_popup.storage_dependency_modal",
+            "common.dialog_background_hollow_2"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "control",
+      "texture": "textures/ui/control",
+      "entry": "resource_pack/textures/ui/control.png",
+      "bytes": 71,
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "dimensions": [
+        2,
+        2
+      ],
+      "urlExpression": "new URL('./assets/jigsaw/control.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/jigsaw/control.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/control.json",
+        "destination": "src/assets/jigsaw/control.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "common.dialog_background_hollow_common",
+          "pointer": "/$dialog_background_texture|default",
+          "declaredProperty": "$dialog_background_texture|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management_popup.storage_dependency_modal",
+            "common.dialog_background_hollow_2",
+            "common.dialog_background_hollow_common"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "progressEmpty",
+      "texture": "textures/ui/experiencebarempty",
+      "entry": "resource_pack/textures/ui/experiencebarempty.png",
+      "bytes": 180,
+      "sha256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0",
+      "dimensions": [
+        13,
+        5
+      ],
+      "urlExpression": "embeddedPngUrls.progressEmpty",
+      "delivery": "inline-whole-existing-css-png",
+      "destination": null,
+      "metadata": {
+        "entry": "resource_pack/textures/ui/experiencebarempty.json",
+        "destination": "src/assets/storage-management/experiencebarempty.json",
+        "bytes": 92,
+        "sha256": "de67894f88e78223fa154d60fbd826da1349d35dbfe3b0d8dae5d6365161243f",
+        "raw": {
+          "nineslice_size": [
+            6,
+            1,
+            6,
+            1
+          ],
+          "base_size": [
+            13,
+            5
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "popup_dialog.empty_progress_bar_icon",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management_popup.sharing_popup_content",
+            "popup_dialog.progress_dialog_popup",
+            "popup_dialog.progress_content",
+            "popup_dialog.progress_bar_icon",
+            "popup_dialog.empty_progress_bar_icon"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "literal-inheritance-or-control-dependency",
+      "existingEmbeddedWholeMatches": [
+        {
+          "path": "src/hud-textures.css",
+          "utf16Offset": 25855,
+          "bytes": 180,
+          "sha256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0",
+          "cssVariable": "--mc-hud-texture-experience-empty"
+        },
+        {
+          "path": "src/system-screens-textures.css",
+          "utf16Offset": 1714,
+          "bytes": 180,
+          "sha256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0",
+          "cssVariable": "--mc-system-loading-empty"
+        }
+      ],
+      "duplicateEncodedBody": true,
+      "newPhysicalPNG": false,
+      "deliveryReason": "Existing exact complete original is CSS-only, with no importable runtime URL symbol. A finite original byte-for-byte data URL is repeated for typed private image use; this is not a newly discovered or re-encoded asset.",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "progressFull",
+      "texture": "textures/ui/experiencebarfull",
+      "entry": "resource_pack/textures/ui/experiencebarfull.png",
+      "bytes": 103,
+      "sha256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1",
+      "dimensions": [
+        13,
+        5
+      ],
+      "urlExpression": "embeddedPngUrls.progressFull",
+      "delivery": "inline-whole-existing-css-png",
+      "destination": null,
+      "metadata": {
+        "entry": "resource_pack/textures/ui/experiencebarfull.json",
+        "destination": "src/assets/storage-management/experiencebarfull.json",
+        "bytes": 92,
+        "sha256": "8ec618d73df58faa04e6ce31c88b77d88d6af1c2ae30d290eb25b57aa4601876",
+        "raw": {
+          "nineslice_size": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "base_size": [
+            13,
+            5
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "popup_dialog.full_progress_bar_icon",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management_popup.sharing_popup_content",
+            "popup_dialog.progress_dialog_popup",
+            "popup_dialog.progress_content",
+            "popup_dialog.progress_bar_icon",
+            "popup_dialog.full_progress_bar_icon"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "literal-inheritance-or-control-dependency",
+      "existingEmbeddedWholeMatches": [
+        {
+          "path": "src/hud-textures.css",
+          "utf16Offset": 26163,
+          "bytes": 103,
+          "sha256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1",
+          "cssVariable": "--mc-hud-texture-experience-full"
+        },
+        {
+          "path": "src/system-screens-textures.css",
+          "utf16Offset": 2014,
+          "bytes": 103,
+          "sha256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1",
+          "cssVariable": "--mc-system-loading-full"
+        }
+      ],
+      "duplicateEncodedBody": true,
+      "newPhysicalPNG": false,
+      "deliveryReason": "Existing exact complete original is CSS-only, with no importable runtime URL symbol. A finite original byte-for-byte data URL is repeated for typed private image use; this is not a newly discovered or re-encoded asset.",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "progressNub",
+      "texture": "textures/ui/experiencenub",
+      "entry": "resource_pack/textures/ui/experiencenub.png",
+      "bytes": 160,
+      "sha256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55",
+      "dimensions": [
+        11,
+        5
+      ],
+      "urlExpression": "embeddedPngUrls.progressNub",
+      "delivery": "inline-whole-existing-css-png",
+      "destination": null,
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "popup_dialog.progress_bar_nub",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management_popup.sharing_popup_content",
+            "popup_dialog.progress_dialog_popup",
+            "popup_dialog.progress_content",
+            "popup_dialog.progress_bar_icon",
+            "popup_dialog.progress_bar_nub"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "literal-inheritance-or-control-dependency",
+      "existingEmbeddedWholeMatches": [
+        {
+          "path": "src/hud-textures.css",
+          "utf16Offset": 26370,
+          "bytes": 160,
+          "sha256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55",
+          "cssVariable": "--mc-hud-texture-experience-nub"
+        },
+        {
+          "path": "src/system-screens-textures.css",
+          "utf16Offset": 2213,
+          "bytes": 160,
+          "sha256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55",
+          "cssVariable": "--mc-system-loading-nub"
+        }
+      ],
+      "duplicateEncodedBody": true,
+      "newPhysicalPNG": false,
+      "deliveryReason": "Existing exact complete original is CSS-only, with no importable runtime URL symbol. A finite original byte-for-byte data URL is repeated for typed private image use; this is not a newly discovered or re-encoded asset."
+    },
+    {
+      "key": "loadingBar",
+      "texture": "textures/ui/loading_bar",
+      "entry": "resource_pack/textures/ui/loading_bar.png",
+      "bytes": 323,
+      "sha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef",
+      "dimensions": [
+        640,
+        8
+      ],
+      "urlExpression": "embeddedPngUrls.loadingBar",
+      "delivery": "inline-whole-existing-css-png",
+      "destination": null,
+      "metadata": {
+        "entry": "resource_pack/textures/ui/loading_bar.json",
+        "destination": "src/assets/storage-management/loading_bar.json",
+        "bytes": 39,
+        "sha256": "38bc67e02f506f01308a16c9be27bbe203ea6da76cd02961571801327ad5f665",
+        "raw": {
+          "base_size": [
+            640,
+            8
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "storage_management.storage_main_item_legacy_world_toggle",
+          "pointer": "/controls/1/contentPanel/controls/6/loading_legacy_worlds_panel@play.label_background/controls/2/progress_loading_bars/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_legacy_world_toggle"
+          ]
+        },
+        {
+          "node": "storage_management.storage_main_item_retailtopreview_world_toggle",
+          "pointer": "/controls/1/contentPanel/controls/6/loading_retailtopreview_worlds_panel@play.label_background/controls/2/progress_loading_bars/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_retailtopreview_world_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family",
+      "existingEmbeddedWholeMatches": [
+        {
+          "path": "src/system-screens-textures.css",
+          "utf16Offset": 2493,
+          "bytes": 323,
+          "sha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef",
+          "cssVariable": "--mc-system-loading-waveform"
+        }
+      ],
+      "duplicateEncodedBody": true,
+      "newPhysicalPNG": false,
+      "deliveryReason": "Existing exact complete original is CSS-only, with no importable runtime URL symbol. A finite original byte-for-byte data URL is repeated for typed private image use; this is not a newly discovered or re-encoded asset."
+    },
+    {
+      "key": "dropdownBackground",
+      "texture": "textures/ui/dropdown_background",
+      "entry": "resource_pack/textures/ui/dropdown_background.png",
+      "bytes": 154,
+      "sha256": "22acaa35bef8444642054c0bc3c5e0d69eb188bb8ccb26f354d59f85c2055010",
+      "dimensions": [
+        5,
+        5
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/dropdown_background.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/dropdown_background.png",
+      "metadata": {
+        "entry": "resource_pack/textures/ui/dropdown_background.json",
+        "destination": "src/assets/player-permissions/dropdown_background.json",
+        "bytes": 60,
+        "sha256": "1d82150272c4986b2833fe7edb1267b9d82b6d8bba1ffbdc3abffbcc3d290f01",
+        "raw": {
+          "nineslice_size": 2,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      },
+      "sourceUses": [
+        {
+          "node": "common.dropdown_background",
+          "pointer": "/texture",
+          "declaredProperty": "texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "settings_common.option_dropdown",
+            "settings_common.option_dropdown_control",
+            "common.dropdown_background"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate",
+      "publicNineSliceCompatible": true
+    },
+    {
+      "key": "dropdownChevron",
+      "texture": "textures/ui/dropdown_chevron",
+      "entry": "resource_pack/textures/ui/dropdown_chevron.png",
+      "bytes": 172,
+      "sha256": "f661ee43ad1096cd996fdbaf33f96453f583e759da6af4bdbc5d9a843ca22ebe",
+      "dimensions": [
+        11,
+        11
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/dropdown_chevron.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/dropdown_chevron.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$default_chevron|default",
+          "declaredProperty": "$default_chevron|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        },
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$default_chevron_nohover|default",
+          "declaredProperty": "$default_chevron_nohover|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "hover"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate"
+    },
+    {
+      "key": "dropdownChevronHover",
+      "texture": "textures/ui/chevron_white_down",
+      "entry": "resource_pack/textures/ui/chevron_white_down.png",
+      "bytes": 136,
+      "sha256": "44535c4efb28008a1fff518e34c040652bd1e6edafcf5e47e89b1e8fa82c6bdd",
+      "dimensions": [
+        11,
+        11
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/chevron_white_down.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/chevron_white_down.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "common_toggles.light_template_toggle",
+          "pointer": "/$default_chevron_hover|default",
+          "declaredProperty": "$default_chevron_hover|default",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "default",
+            "hover"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_main_item_toggle",
+            "common_toggles.light_ui_toggle",
+            "common_toggles.light_template_toggle"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate"
+    },
+    {
+      "key": "radioOff",
+      "texture": "textures/ui/radio_off",
+      "entry": "resource_pack/textures/ui/radio_off.png",
+      "bytes": 129,
+      "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014",
+      "dimensions": [
+        10,
+        10
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/radio_off.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/radio_off.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "settings_common.radio_visuals_unchecked",
+          "pointer": "/$radio_texture",
+          "declaredProperty": "$radio_texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "checked",
+            "unchecked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "general_section.file_storage_location_content",
+            "settings_common.radio_with_label",
+            "settings_common.radio_with_label_core",
+            "settings_common.radio_visuals_unchecked"
+          ]
+        },
+        {
+          "node": "settings_common.radio_visuals_unchecked_locked",
+          "pointer": "/$radio_texture",
+          "declaredProperty": "$radio_texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "locked",
+            "checked",
+            "unchecked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "general_section.file_storage_location_content",
+            "settings_common.radio_with_label",
+            "settings_common.radio_with_label_core",
+            "settings_common.radio_visuals_unchecked_locked"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate"
+    },
+    {
+      "key": "radioOn",
+      "texture": "textures/ui/radio_on",
+      "entry": "resource_pack/textures/ui/radio_on.png",
+      "bytes": 163,
+      "sha256": "9f89aee03e8573999bc835495d4cea6bb7705f4011cf9e0fae86df62ac91a813",
+      "dimensions": [
+        10,
+        10
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/radio_on.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/radio_on.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "settings_common.radio_visuals_checked",
+          "pointer": "/$radio_texture",
+          "declaredProperty": "$radio_texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "checked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "general_section.file_storage_location_content",
+            "settings_common.radio_with_label",
+            "settings_common.radio_with_label_core",
+            "settings_common.radio_visuals_checked"
+          ]
+        },
+        {
+          "node": "settings_common.radio_visuals_checked_locked",
+          "pointer": "/$radio_texture",
+          "declaredProperty": "$radio_texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "locked",
+            "checked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "general_section.file_storage_location_content",
+            "settings_common.radio_with_label",
+            "settings_common.radio_with_label_core",
+            "settings_common.radio_visuals_checked_locked"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate"
+    },
+    {
+      "key": "radioOffHover",
+      "texture": "textures/ui/radio_off_hover",
+      "entry": "resource_pack/textures/ui/radio_off_hover.png",
+      "bytes": 126,
+      "sha256": "bd5babf3900537bda4f887be0cd22abbaea656959d32b88517d3943e5d95c0a6",
+      "dimensions": [
+        10,
+        10
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/radio_off_hover.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/radio_off_hover.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "settings_common.radio_visuals_unchecked_hover",
+          "pointer": "/$radio_texture",
+          "declaredProperty": "$radio_texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "hover",
+            "checked",
+            "unchecked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "general_section.file_storage_location_content",
+            "settings_common.radio_with_label",
+            "settings_common.radio_with_label_core",
+            "settings_common.radio_visuals_unchecked_hover"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate"
+    },
+    {
+      "key": "radioOnHover",
+      "texture": "textures/ui/radio_on_hover",
+      "entry": "resource_pack/textures/ui/radio_on_hover.png",
+      "bytes": 157,
+      "sha256": "4aaa602b5428d97827c8242c0193b28f5641b38e37d0313f712612475d627d3a",
+      "dimensions": [
+        10,
+        10
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/radio_on_hover.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/radio_on_hover.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "settings_common.radio_visuals_checked_hover",
+          "pointer": "/$radio_texture",
+          "declaredProperty": "$radio_texture",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [
+            "hover",
+            "checked"
+          ],
+          "guards": [],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "general_section.file_storage_location_content",
+            "settings_common.radio_with_label",
+            "settings_common.radio_with_label_core",
+            "settings_common.radio_visuals_checked_hover"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate"
+    },
+    {
+      "key": "dropdownSelectedBackground",
+      "texture": "textures/ui/dropDownSelectBG",
+      "entry": "resource_pack/textures/ui/dropDownSelectBG.png",
+      "bytes": 69,
+      "sha256": "dda80223416cd6d050a44a88eda0dee7c28600e0b85aef936f8d836949e08e78",
+      "dimensions": [
+        1,
+        1
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/dropDownSelectBG.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/dropDownSelectBG.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "settings_common.radio_visuals",
+          "pointer": "/variables/0/$highlight_image",
+          "declaredProperty": "$highlight_image",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/variables/0/requires",
+              "field": "requires",
+              "value": "$selected"
+            }
+          ],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "general_section.file_storage_location_content",
+            "settings_common.radio_with_label",
+            "settings_common.radio_with_label_core",
+            "settings_common.radio_visuals_unchecked",
+            "settings_common.radio_visuals"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate"
+    },
+    {
+      "key": "dropdownHoverBackground",
+      "texture": "textures/ui/dropDownHoverBG",
+      "entry": "resource_pack/textures/ui/dropDownHoverBG.png",
+      "bytes": 69,
+      "sha256": "fdb875e1b090cb2dbedbf1c9ffe730d0c92d8eb6bed8a786fd38a7fa3d88f607",
+      "dimensions": [
+        1,
+        1
+      ],
+      "urlExpression": "new URL('./assets/player-permissions/dropDownHoverBG.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/player-permissions/dropDownHoverBG.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "settings_common.radio_visuals",
+          "pointer": "/variables/1/$highlight_image",
+          "declaredProperty": "$highlight_image",
+          "scope": "shared-static-or-variable-candidate",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/variables/1/requires",
+              "field": "requires",
+              "value": "$hovered"
+            }
+          ],
+          "referencePath": [
+            "storage_management.storage_header_panel",
+            "general_section.file_storage_location_content",
+            "settings_common.radio_with_label",
+            "settings_common.radio_with_label_core",
+            "settings_common.radio_visuals_unchecked",
+            "settings_common.radio_visuals"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "scoped-template-or-content-candidate"
+    },
+    {
+      "key": "deleteGlyph",
+      "texture": "textures/ui/trash",
+      "entry": "resource_pack/textures/ui/trash.png",
+      "bytes": 199,
+      "sha256": "43a57e20e6e1e045ffdc008ae1982004a610482d31a76811cb44d6f3e608e376",
+      "dimensions": [
+        13,
+        17
+      ],
+      "displaySize": [
+        15,
+        17
+      ],
+      "sourceDisplayGeometry": {
+        "node": "storage_management.resource_toggle",
+        "pointer": "/controls/1/item_button_panel/controls/0/y_sizing_panel/controls/0/border/controls/0/button_panel/controls/4/delete_button@storage_management.sub_item_tray_button/$glyph_size",
+        "value": [
+          15,
+          17
+        ]
+      },
+      "urlExpression": "new URL('./assets/gui-icons/trash.png', import.meta.url).href",
+      "delivery": "existing-bank-whole-url",
+      "destination": "src/assets/gui-icons/trash.png",
+      "metadata": null,
+      "sourceUses": [
+        {
+          "node": "storage_management.resource_toggle",
+          "pointer": "/controls/1/item_button_panel/controls/0/y_sizing_panel/controls/0/border/controls/0/button_panel/controls/4/delete_button@storage_management.sub_item_tray_button/$button_texture",
+          "declaredProperty": "$button_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/controls/1/item_button_panel/visible",
+              "field": "visible",
+              "value": false
+            }
+          ],
+          "referencePath": [
+            "storage_management.resource_toggle"
+          ]
+        },
+        {
+          "node": "storage_management.dropdown_button_content",
+          "pointer": "/controls/0/image_panel/controls/0/icon/texture",
+          "declaredProperty": "texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [],
+          "referencePath": [
+            "storage_management.dropdown_button_content"
+          ]
+        }
+      ],
+      "sourceReferenceTier": "direct-family"
+    }
+  ],
+  "missing": [
+    {
+      "key": "generateUpdate",
+      "texture": "textures/gui/newgui/storage/update",
+      "defaultArtwork": null,
+      "exactMissing": true,
+      "casefoldCandidates": [],
+      "sourceUses": [
+        {
+          "node": "storage_management.resource_toggle",
+          "pointer": "/controls/1/item_button_panel/controls/0/y_sizing_panel/controls/0/border/controls/0/button_panel/controls/2/generate_texture_list_panel/controls/1/generate_texture_list_button@storage_management.sub_item_tray_button/$button_texture",
+          "declaredProperty": "$button_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/controls/1/item_button_panel/visible",
+              "field": "visible",
+              "value": false
+            },
+            {
+              "pointer": "/controls/1/item_button_panel/controls/0/y_sizing_panel/controls/0/border/controls/0/button_panel/controls/2/generate_texture_list_panel/controls/1/generate_texture_list_button@storage_management.sub_item_tray_button/ignored",
+              "field": "ignored",
+              "value": "($is_publish or not ($panel_prefix = resource)"
+            }
+          ],
+          "referencePath": [
+            "storage_management.resource_toggle"
+          ]
+        }
+      ],
+      "delivery": "explicit host artwork slot; no generated replacement"
+    },
+    {
+      "key": "windowsShare",
+      "texture": "textures/ui/windowsshare",
+      "defaultArtwork": null,
+      "exactMissing": true,
+      "casefoldCandidates": [],
+      "sourceUses": [
+        {
+          "node": "storage_management.resource_toggle",
+          "pointer": "/controls/1/item_button_panel/controls/0/y_sizing_panel/controls/0/border/controls/0/button_panel/controls/6/share_panel/controls/1/share_button@storage_management.sub_item_tray_button/$button_texture",
+          "declaredProperty": "$button_texture",
+          "scope": "direct-family-declaration",
+          "stateHints": [],
+          "guards": [
+            {
+              "pointer": "/controls/1/item_button_panel/visible",
+              "field": "visible",
+              "value": false
+            }
+          ],
+          "referencePath": [
+            "storage_management.resource_toggle"
+          ]
+        }
+      ],
+      "delivery": "explicit host artwork slot; no generated replacement"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "src/assets/storage-management/arrowDown.png",
+      "bytes": 1169,
+      "sha256": "b95f69c158c8c8c1bb7df278abf8edb86c12e8de9d99f00877c4ebcdeaa17be6"
+    },
+    {
+      "path": "src/assets/storage-management/multiselection.png",
+      "bytes": 174,
+      "sha256": "cfacf43834fadd6fb85c4add4940ea549d42ab3db2aa96c760eb91edb471ba40"
+    },
+    {
+      "path": "src/assets/storage-management/invertedmultiselecticon.png",
+      "bytes": 278,
+      "sha256": "4380b3795d9e6aae6b972e55861796bfd3b14c3a64b3bd6b7916617a85682383"
+    },
+    {
+      "path": "src/assets/storage-management/dialog_background_hollow_2.png",
+      "bytes": 314,
+      "sha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f"
+    },
+    {
+      "path": "src/assets/storage-management/dialog_background_hollow_2.json",
+      "bytes": 95,
+      "sha256": "584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40"
+    },
+    {
+      "path": "src/assets/storage-management/experiencebarempty.json",
+      "bytes": 92,
+      "sha256": "de67894f88e78223fa154d60fbd826da1349d35dbfe3b0d8dae5d6365161243f"
+    },
+    {
+      "path": "src/assets/storage-management/experiencebarfull.json",
+      "bytes": 92,
+      "sha256": "8ec618d73df58faa04e6ce31c88b77d88d6af1c2ae30d290eb25b57aa4601876"
+    },
+    {
+      "path": "src/assets/storage-management/loading_bar.json",
+      "bytes": 39,
+      "sha256": "38bc67e02f506f01308a16c9be27bbe203ea6da76cd02961571801327ad5f665"
+    },
+    {
+      "path": "src/assets/storage-management/LICENSE.md",
+      "bytes": 222,
+      "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+    }
+  ],
+  "license": {
+    "entry": "LICENSE.md",
+    "destination": "src/assets/storage-management/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "deliveryQualification": "Five finite dataURL bodies duplicate complete originals already in CSS, for lack of importable runtime URL symbols. Gray imports the existing private workstation URL. Physical bank URLs are otherwise preferred. No image decode/encode, crop, guessed art or native pixels are used.",
+  "categoryStateMapping": {
+    "unchecked": "button_borderless_light",
+    "checked": "button_borderless_lightpressednohover",
+    "uncheckedHover": "button_borderless_lighthover",
+    "checkedHover": "button_borderless_lightpressed",
+    "locked": "disabledButtonNoBorder"
+  },
+  "radioLocked": "Uses normal radio_off/radio_on original PNG plus source alpha.5; no separate locked bitmap exists.",
+  "renderingDeclarations": {
+    "progressNubTiled": true,
+    "loadingBar": {
+      "completePNG": [
+        640,
+        8
+      ],
+      "uvSize": [
+        64,
+        8
+      ],
+      "sourceAnimation": "play.bar_animation",
+      "frameCount": 10,
+      "frameStep": 64,
+      "fps": 10,
+      "nativeClockRecovered": false
+    },
+    "dialogFillAlpha": 0.98
+  },
+  "rawMetadataQualification": "Original logical LTRB/base metadata is preserved; helper provided only when sums are compatible. Raw1x1 touch/rail overlap resources are not introduced as normal public nine-slice images."
+}

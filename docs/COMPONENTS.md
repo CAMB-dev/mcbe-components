@@ -1,8 +1,10 @@
 # Bedrock 组件范围
 
-新增开始菜单六组件覆盖固定的普通 /新玩家 /试用 /教育 /旧版按钮组、五种标题布局与账号 /角色 /页脚组合；使用已解析宿主状态和渲染槽位。实际浏览器与包验证范围见 [START_MENU_QA.md](START_MENU_QA.md)，不据源码实现宣称原生整页验收。
+新增存储管理八组件覆盖Settings内容区、分类与条目、操作托盘、选择footer及依赖 /分享弹窗；截图闪光层独立复用，图像与时钟由宿主提供。使用与实际验证范围见 [STORAGE_QA.md](STORAGE_QA.md) 和 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)，不据源码实现宣称原生整页验收。
 
-当前导出 164 个组件，目录 164 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 181 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 173 个组件，目录 173 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 190 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+
+新增存储管理八组件与截图闪光层，当前173组件 /190运行时值。Storage首99项94通过、1设备跳过、4比较方法失败保留，修正参照后8项材质复验通过：19完整平面、160,301像素RGBA零差；28项行为通过。Screenshot17项、公开14项和实际React18 /19默认Vite开发 /生产四场景分别通过。原生整页、默认锚点、材质解析与引擎provider仍未认证，见 [STORAGE_QA.md](STORAGE_QA.md) 与 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)。
 
 开始菜单新增六个公开部分：正式97项中96通过、1设备条件跳过，12个完整Web源平面共193,355像素RGBA零差；React18 /19实际181值包和默认Vite开发 /生产四场景通过。37个完整PNG与可选公开字体、TGA绘制分别验证，原生整页 /角色 /panorama仍待验，见 [START_MENU_QA.md](START_MENU_QA.md)。
 
@@ -59,6 +61,8 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 | 双栏文档（3） | DocumentViewer、DocumentHeading、DocumentParagraph |
 | 玩家权限Classic（4） | PlayerPermissions、PermissionLevelSelect、PermissionToggleRow、PermissionPlayerRow |
 | 开始菜单（6） | StartMenu、StartMenuTitle、StartMenuActionStack、StartMenuAuxiliaryActions、StartMenuProfile、StartMenuFooter |
+| 存储管理（8） | StorageManagement、StorageToolbar、StorageCategory、StorageItem、StorageItemActions、StorageSelectionFooter、StorageDependencyDialog、StorageSharingProgress |
+| 截图闪光（1） | ScreenshotFlash |
 | 玩家权限OreUI（5） | OrePlayerPermissions、OrePermissionLevelSelect、OrePermissionToggleRow、OrePlayerCard、OreSwitch |
 | 黑板编辑（3） | ChalkboardEditor、ChalkboardTextField、ChalkboardLock |
 

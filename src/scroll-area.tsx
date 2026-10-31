@@ -3,7 +3,7 @@ import type { CSSProperties, HTMLAttributes, Ref } from 'react';
 
 export type ScrollOrientation = 'vertical' | 'horizontal';
 /** document uses the five-unit Classic manual rail; pane-specific margins belong to its frame. */
-export type ScrollVariant = 'default' | 'container' | 'document';
+export type ScrollVariant = 'default' | 'container' | 'document' | 'touch';
 const nonnegative = (value: number) => Number.isFinite(value) ? Math.max(0,value) : 0;
 const bounded = (value: number, max: number) => Math.min(nonnegative(value),max);
 function guiScale(scale: number) {
@@ -31,12 +31,14 @@ export interface ScrollBarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ch
   step?: number;
   /** Minimum thumb extent in logical GUI pixels; defaults to 5. */
   minThumbSize?: number;
+  /** Accepted thumb visibility. The source touch profile defaults to hidden and has no track. */
+  thumbVisible?: boolean;
 }
 
 /** A controlled scrollbar. The associated content remains a native scroll container. */
 export const ScrollBar = forwardRef<HTMLDivElement, ScrollBarProps>(function ScrollBar({
   value,max,pageSize,onValueChange,label,controls,orientation='vertical',variant='default',scale=2,disabled=false,
-  step=15*scale,minThumbSize=5,className,style,onKeyDown,onPointerDown,onPointerMove,onPointerUp,onPointerCancel,onLostPointerCapture,tabIndex,...props
+  step=15*scale,minThumbSize=5,thumbVisible=variant!=='touch',className,style,onKeyDown,onPointerDown,onPointerMove,onPointerUp,onPointerCancel,onLostPointerCapture,tabIndex,...props
 }, forwardedRef) {
   guiScale(scale);
   const node=useRef<HTMLDivElement | null>(null),thumb=useRef<HTMLSpanElement>(null);
@@ -44,14 +46,14 @@ export const ScrollBar = forwardRef<HTMLDivElement, ScrollBarProps>(function Scr
   const wheel=useRef<(event:WheelEvent)=>void>(()=>{});
   const [length,setLength]=useState(0),[dragging,setDragging]=useState(false),[reverse,setReverse]=useState(false);
   const maximum=nonnegative(max),page=nonnegative(pageSize),offset=bounded(value,maximum);
-  const blocked=disabled || maximum===0 || page===0;
+  const blocked=disabled || maximum===0 || page===0 || props.hidden || (variant==='touch' && !thumbVisible);
   const minimum=(Number.isFinite(minThumbSize) && minThumbSize>0 ? minThumbSize : 5)*scale;
   const ratio=maximum+page>0 ? page/(maximum+page) : 1;
   const extent=Math.min(length,Math.max(minimum,length*ratio)),travel=Math.max(0,length-extent);
   const thumbOffset=maximum>0 ? offset/maximum*travel : 0;
   const visualOffset=reverse ? travel-thumbOffset : thumbOffset;
-  const vertical=orientation==='vertical',padding=(variant==='document' ? 0 : 2)*scale,cross=(variant==='document' ? 5 : variant==='container' ? 6 : 8)*scale;
-  const controlCross=(variant==='document' ? 5 : 4)*scale,thumbCross=(variant==='container' ? 4 : 5)*scale,trackCross=(variant==='container' ? 4 : 3)*scale;
+  const vertical=orientation==='vertical',padding=(variant==='document' || variant==='touch' ? 0 : 2)*scale,cross=(variant==='touch' ? 4 : variant==='document' ? 5 : variant==='container' ? 6 : 8)*scale;
+  const controlCross=(variant==='document' ? 5 : 4)*scale,thumbCross=(variant==='container' || variant==='touch' ? 4 : 5)*scale,trackCross=(variant==='container' ? 4 : 3)*scale;
   const update = (next: number) => { const result=bounded(next,maximum); if (!blocked && result!==offset) onValueChange(result); };
   const release = (element: HTMLDivElement) => {
     const pointer=drag.current;drag.current=null;setDragging(false);
@@ -86,6 +88,7 @@ export const ScrollBar = forwardRef<HTMLDivElement, ScrollBarProps>(function Scr
   useEffect(()=>{ if (blocked && node.current) release(node.current); },[blocked]);
   const pointerPosition=(event:{clientX:number;clientY:number})=>vertical ? event.clientY : event.clientX;
   return <div {...props} ref={element=>{node.current=element;assignRef(forwardedRef,element);}}
+    hidden={props.hidden || (variant==='touch' && !thumbVisible)}
     role="scrollbar" aria-label={props['aria-label'] ?? label} aria-controls={controls} aria-orientation={orientation}
     aria-valuemin={0} aria-valuemax={maximum} aria-valuenow={offset} aria-disabled={blocked || undefined}
     tabIndex={blocked ? -1 : tabIndex ?? 0} data-orientation={orientation} data-variant={variant} data-disabled={blocked || undefined} data-dragging={dragging || undefined}
@@ -121,7 +124,7 @@ export const ScrollBar = forwardRef<HTMLDivElement, ScrollBarProps>(function Scr
     onPointerCancel={event=>{onPointerCancel?.(event);if (drag.current?.id===event.pointerId) release(event.currentTarget);}}
     onLostPointerCapture={event=>{onLostPointerCapture?.(event);if (drag.current?.id===event.pointerId) {drag.current=null;setDragging(false);}}}>
     <span className="mc-scrollbar__track" aria-hidden="true" style={vertical ? {left:padding+(controlCross-trackCross)/2,width:trackCross} : {top:padding+(controlCross-trackCross)/2,height:trackCross}}/>
-    <span ref={thumb} className="mc-scrollbar__thumb" aria-hidden="true" style={vertical
+    <span ref={thumb} className="mc-scrollbar__thumb" aria-hidden="true" hidden={!thumbVisible} style={vertical
       ? {left:padding+(controlCross-thumbCross)/2,width:thumbCross,top:visualOffset,height:length>0 ? extent : `${ratio*100}%`}
       : {top:padding+(controlCross-thumbCross)/2,height:thumbCross,left:visualOffset,width:length>0 ? extent : `${ratio*100}%`}}/>
   </div>;
@@ -133,6 +136,10 @@ export interface ScrollAreaProps extends Omit<HTMLAttributes<HTMLDivElement>, 'o
   variant?: ScrollVariant;
   scale?: number;
   scrollbarVisibility?: 'auto' | 'always';
+  /** Minimum thumb size in logical units; the existing five-unit clamp is a Web policy. */
+  minThumbSize?: number;
+  /** Source touch thumb defaults to hidden; host snapshots can explicitly enable it. */
+  thumbVisible?: boolean;
   /** Accessible name for the native viewport and its scrollbar controls. */
   label?: string;
   viewportRef?: Ref<HTMLDivElement>;
@@ -150,7 +157,7 @@ function setOffset(element:HTMLElement,orientation:ScrollOrientation,value:numbe
 
 /** Native overflow for wheel, touch, focus and text selection; custom source-backed bars. */
 export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(function ScrollArea({
-  orientation='vertical',variant='default',scale=2,scrollbarVisibility='auto',label='Scrollable content',viewportRef,viewportProps={},contentProps={},onScrollPositionChange,children,className,...props
+  orientation='vertical',variant='default',scale=2,scrollbarVisibility='auto',minThumbSize,thumbVisible,label='Scrollable content',viewportRef,viewportProps={},contentProps={},onScrollPositionChange,children,className,...props
 }, ref) {
   guiScale(scale);
   const generated=useId(),viewportId=viewportProps.id ?? `mc-scroll-${generated}`;
@@ -178,7 +185,7 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(function S
   },[measure,orientation,props.dir]);
   const scroll=(axis:ScrollOrientation,value:number)=>{if (viewport.current) {setOffset(viewport.current,axis,value);measure();}};
   const vertical=orientation!=='horizontal',horizontal=orientation!=='vertical';
-  return <div {...props} ref={ref} className={['mc-scroll-area',className].filter(Boolean).join(' ')} data-orientation={orientation}>
+  return <div {...props} ref={ref} className={['mc-scroll-area',className].filter(Boolean).join(' ')} data-orientation={orientation} data-variant={variant}>
     <div {...viewportProps} id={viewportId} ref={viewportCallback} role={viewportProps.role ?? 'region'} aria-label={viewportProps['aria-label'] ?? label} tabIndex={viewportProps.tabIndex ?? 0}
       className={['mc-scroll-area__viewport',viewportProps.className].filter(Boolean).join(' ')}
       style={{overflowX:horizontal ? 'auto' : 'hidden',overflowY:vertical ? 'auto' : 'hidden',...viewportProps.style}}
@@ -193,7 +200,7 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(function S
       }}>
       <div {...contentProps} ref={content} className={['mc-scroll-area__content',contentProps.className].filter(Boolean).join(' ')}>{children}</div>
     </div>
-    {vertical && <ScrollBar label={`${label}: vertical`} controls={viewportId} orientation="vertical" variant={variant} scale={scale} value={metrics.y} max={metrics.maxY} pageSize={metrics.height} onValueChange={value=>scroll('vertical',value)} hidden={scrollbarVisibility==='auto' && metrics.maxY===0}/>}
-    {horizontal && <ScrollBar label={`${label}: horizontal`} controls={viewportId} orientation="horizontal" dir={metrics.rtl ? 'rtl' : 'ltr'} variant={variant} scale={scale} value={metrics.x} max={metrics.maxX} pageSize={metrics.width} onValueChange={value=>scroll('horizontal',value)} hidden={scrollbarVisibility==='auto' && metrics.maxX===0}/>}
+    {vertical && <ScrollBar label={`${label}: vertical`} controls={viewportId} orientation="vertical" variant={variant} scale={scale} minThumbSize={minThumbSize} thumbVisible={thumbVisible} value={metrics.y} max={metrics.maxY} pageSize={metrics.height} onValueChange={value=>scroll('vertical',value)} hidden={scrollbarVisibility==='auto' && metrics.maxY===0}/>}
+    {horizontal && <ScrollBar label={`${label}: horizontal`} controls={viewportId} orientation="horizontal" dir={metrics.rtl ? 'rtl' : 'ltr'} variant={variant} scale={scale} minThumbSize={minThumbSize} thumbVisible={thumbVisible} value={metrics.x} max={metrics.maxX} pageSize={metrics.width} onValueChange={value=>scroll('horizontal',value)} hidden={scrollbarVisibility==='auto' && metrics.maxX===0}/>}
   </div>;
 });

@@ -57,8 +57,21 @@ const privateOreResourceHashes = new Set([
   "2f405a864a112f18425972643c95d5976b4fbfb3aca414143011da76bb6b5083"
 ]);
 assert(!packed.files.some(file => /permission-(?:visitor|member|operator|custom)@0[.]5x[.]icon-|(?:Minecraft-(?:Ten|Seven)|NotoSansSC-Regular)-[0-9a-f]+[.](?:otf|woff2?)$|(?:no-player-profile|arrowBack(?:Disabled)?|crossWhite|checkWhite|onImage|offImage|online-badge)-[0-9a-f]+[.]png|chevron-down@0[.]5x[.]icon-|(?:^|\/)(?:local-ore|hbui)(?:\/|$)/i.test(file.path)), 'Private modern role icons, fonts and HBUI resources must remain host-owned.');
+// The old181-value package already included lowercase15px white.png through
+// these two Crafting sources. This is not a Screenshot material default. Pin
+// the existing source content (LF normalization only, for Git checkout EOLs)
+// rather than globally blacklisting an otherwise legitimate original PNG.
+for (const [file, expectedLfSHA] of [
+  ['src/crafting-image-assets.ts','3536ef49513b833d1ae6e8568b57c95ffa7c96026d5560c3067811d612d1b4e1'],
+  ['src/inventory-screen-textures.css','a61f22c010846d26422e9ea8178a5ebca77bbdd6178f2e6c06af51846397e7e8'],
+]) {
+  const source = (await readFile(join(root,file),'utf8')).replace(/\r\n/g,'\n');
+  assert.equal(createHash('sha256').update(source).digest('hex'),expectedLfSHA,'Existing lowercase White source provenance: '+file);
+}
+assert(!packed.files.some(file => /(?:^|[/])screenshot-assets(?:[/]|$)/.test(file.path)), 'Screenshot demo specimens must not become a packed asset bank.');
 for (const file of packed.files) {
   const bytes = await readFile(join(root, file.path));
+  if (/^dist[/]assets[/]/.test(file.path)) assert.notEqual(createHash('sha256').update(bytes).digest('hex'),'e666f27bda2c08c810a18b699397f8f0df5ffee87157a14bb96157e4a6b27fc3','Unresolved White specimen must not be introduced as a new physical library asset: '+file.path);
   assert(!privateOreResourceHashes.has(createHash('sha256').update(bytes).digest('hex')), 'Private OreUI whole source/resource leaked under a packed filename: '+file.path);
   if (/[.](?:js|mjs|json|css|html|map|md)$/i.test(file.path)) {
     for (const match of bytes.toString('utf8').matchAll(/data:[^,\s"'()]+;base64,([A-Za-z0-9+/=]+)/g)) {
@@ -91,10 +104,11 @@ components.push('PlayerPermissions','PermissionLevelSelect','PermissionToggleRow
 components.push('OrePlayerPermissions','OrePermissionLevelSelect','OrePermissionToggleRow','OrePlayerCard','OreSwitch');
 components.push('ChalkboardEditor','ChalkboardTextField','ChalkboardLock');
 components.push('StartMenu','StartMenuTitle','StartMenuActionStack','StartMenuAuxiliaryActions','StartMenuProfile','StartMenuFooter');
-assert.equal(components.length,164);
+components.push('StorageManagement','StorageToolbar','StorageCategory','StorageItem','StorageItemActions','StorageSelectionFooter','StorageDependencyDialog','StorageSharingProgress','ScreenshotFlash');
+assert.equal(components.length,173);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,181);
+assert.equal(Object.keys(ui).length,190);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -381,8 +395,10 @@ assert.match(atlasMarkup,/data-render-state="loading"/);
 assert.match(atlasMarkup,/Original source atlas/);
 const imageSsrWarnings = [], previousConsoleError = console.error;
 const ssrIoCalls = [], ssrIoNames = ['fetch','Image','createImageBitmap','OffscreenCanvas'];
+ssrIoNames.push('ResizeObserver','MutationObserver','requestAnimationFrame','cancelAnimationFrame','matchMedia');
 const previousSsrIo = new Map(ssrIoNames.map(name=>[name,Object.getOwnPropertyDescriptor(globalThis,name)]));
-let imageWorkstationMarkup;
+let imageWorkstationMarkup, packedStorageMarkup;
+let storageEffects=0;
 try {
   console.error=(...args)=>imageSsrWarnings.push(args.map(String).join(' '));
   for (const name of ssrIoNames) Object.defineProperty(globalThis,name,{configurable:true,writable:true,value:function(){ssrIoCalls.push(name);throw new Error('Unexpected SSR I/O: '+name);}});
@@ -515,6 +531,77 @@ try {
     assertCraftingSsr(fallback);assert.match(fallback,/mc-crafting-image-error/);assert(!fallback.includes('mc-crafting-image-layer'),'Invalid Crafting text falls back atomically rather than painting a partial item/model layer.');
     assert.match(fallback,/data-fallback-model="kept"/);
   }
+  // Installed Storage/Screenshot seams: SSR must neither mutate snapshots nor run browser services.
+  const storageOn=Object.freeze({included:true,visible:true,enabled:true});
+  const storageControl=Object.freeze({state:storageOn,label:'Caller storage action',target:'button.host_storage',ref:()=>{storageEffects++;},nativeProps:{'aria-label':'Caller storage action'}});
+  const storageControls=Object.freeze({generateTextureList:storageControl,delete:storageControl,share:storageControl,dependencies:storageControl});
+  const storageItem=Object.freeze({id:'host-item',name:'Caller storage item',sizeText:'Host 12 MB',state:storageOn,image:{src:'/host-storage.png',sourceSize:[16,16]},checkboxVisible:true,optionsVisible:true,optionsModal:true,lockVisible:true,signals:{warning:true,error:true,update:true},actions:storageControls});
+  const storageToolbar=Object.freeze({state:storageOn,location:{state:storageOn,label:'Caller location',externalLabel:'External',appdataLabel:'Application'},clearCache:storageControl,clearLayoutCache:storageControl,clearDownloadCache:storageControl,clearScreenshotsCache:storageControl,deleteLocalScreenshots:storageControl,multiselect:{state:storageOn,label:'Caller multiselect',ref:()=>{storageEffects++;}}});
+  const storageMigration=Object.freeze({sync:storageControl,description:'Caller migration',conversionDescription:'Caller conversion',conversionVisible:true,loadingVisible:true,loadingLabel:'Caller loading',loadingFrame:9});
+  const storageCategories=['world','world-template','resource','behavior','skin','cache'].map(kind=>({id:kind,kind,label:'Caller '+kind,sizeText:'Host size',state:storageOn,items:[{...storageItem,id:'item-'+kind}]}));
+  const storageLegacy={id:'legacy',kind:'legacy-world',label:'Caller legacy',sizeText:'Host size',state:storageOn,items:[],migration:storageMigration};
+  const storagePreview={...storageLegacy,id:'preview',kind:'retail-to-preview-world'};
+  const storageValue={location:'external',multiselect:true,expandedIds:storageCategories.map(category=>category.id).concat(['legacy','preview','orphan']),selectedIds:['item-world','orphan']};
+  const storagePopupButton={...storageControl,target:'button.host_resolved',rect:[0,0,150,30]};
+  const storageGroups=[{id:'dependency',item:storageItem,breakLabel:'Caller used by',dependents:[{...storageItem,id:'dependent'}],remove:storageControl}];
+  const storageDependency={open:true,frame:[400,300],profile:'desktop',title:'Caller dependencies',description:'Caller dependency details',groups:storageGroups,continueButton:storagePopupButton,cancelButton:{...storagePopupButton,rect:[170,0,150,30]},continueScrollLabel:'Caller scroll to continue',continueReady:false,viewportRef:()=>{storageEffects++;}};
+  const storageSharing={open:true,frame:[400,300],title:'Caller sharing',currentLabel:'Caller current',totalLabel:'Caller total',progressLabel:'Caller progress',progress:.25,button:storageControl};
+  const storageProps={size:[400,300],label:'Caller storage region',state:storageOn,standardVisible:true,categoryPanelVisible:true,toolbar:storageToolbar,categories:storageCategories,legacyWorlds:storageLegacy,retailToPreviewWorlds:storagePreview,deleteControl:storageControl,value:storageValue,inputMode:'touch',touchThumbVisible:true,minThumbSize:7,onAction:()=>{storageEffects++;},onValueChange:()=>{storageEffects++;},ref:()=>{storageEffects++;}};
+  const freezeStorage=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.values(value).forEach(freezeStorage);Object.freeze(value);}return value;};
+  [storageProps,storageDependency,storageSharing].forEach(freezeStorage);
+  const storageBefore=JSON.stringify([storageProps,storageDependency,storageSharing]);
+  packedStorageMarkup=renderToString(element(ui.StorageManagement,storageProps));
+  assert.match(packedStorageMarkup,/role="region"/);assert.match(packedStorageMarkup,/aria-label="Caller storage region"/);
+  assert.match(packedStorageMarkup,/data-storage-item-id="item-world"/);assert.match(packedStorageMarkup,/type="checkbox"/);assert.match(packedStorageMarkup,/aria-expanded="true"/);
+  for(const category of [...storageCategories,storageLegacy,storagePreview])assert(packedStorageMarkup.includes('data-kind="'+category.kind+'"'));
+  const storageSsrCases=[
+    ['StorageToolbar',{...storageToolbar,value:storageValue,locationRef:()=>{storageEffects++;}},'mc-storage-toolbar'],
+    ['StorageCategory',{category:storageCategories[0],expanded:true,selectedIds:storageValue.selectedIds,toggleRef:()=>{storageEffects++;}},'mc-storage-category'],
+    ['StorageItem',{item:storageItem,kind:'world',selected:true,selectionRef:()=>{storageEffects++;},selectionProps:{'aria-label':'Caller selected item'}},'mc-storage-item'],
+    ['StorageItemActions',{width:300,itemId:'host-item',controls:storageControls,visible:true,modal:true},'mc-storage-item-actions'],
+    ['StorageSelectionFooter',{visible:true,deleteControl:storageControl},'mc-storage-selection-footer'],
+    ['StorageDependencyDialog',storageDependency,'mc-storage-dependency'],
+    ['StorageSharingProgress',storageSharing,'mc-storage-sharing'],
+  ];
+  for(const [name,props,marker]of storageSsrCases){
+    const markup=renderToString(element(ui[name],{...props,onAction:()=>{storageEffects++;},ref:()=>{storageEffects++;}}));
+    assert(markup.includes(marker),'Installed SSR '+name);
+    assert(!/ (?:state|categories|controls|continueButton|cancelButton|touchThumbVisible|minThumbSize|onAction)=/.test(markup),'Resolved Storage props do not leak into HTML.');
+    if(name==='StorageDependencyDialog'||name==='StorageSharingProgress'){assert.match(markup,/role="dialog"/);assert.match(markup,/aria-modal="true"/);}
+    if(name==='StorageSharingProgress'){assert.match(markup,/role="progressbar"/);assert.match(markup,/aria-valuenow="25"/);}
+    if(name==='StorageItem')assert.match(markup,/aria-label="Caller selected item"/);
+  }
+  const readonlyStorage=renderToString(element(ui.StorageManagement,{...storageProps,readOnly:true,disabled:true}));
+  assert.match(readonlyStorage,/aria-readonly="true"/);assert.match(readonlyStorage,/disabled=""/);
+  assert.equal(renderToString(element(ui.StorageManagement,{...storageProps,state:{...storageOn,included:false}})),'');
+  for(const bad of [
+    ()=>element(ui.StorageCategory,{category:{...storageLegacy,migration:undefined}}),
+    ()=>element(ui.StorageManagement,{...storageProps,legacyWorlds:{...storageLegacy,kind:'cache'}}),
+    ()=>element(ui.StorageManagement,{...storageProps,state:{visible:true,enabled:true}}),
+    ()=>element(ui.StorageDependencyDialog,{...storageDependency,continueButton:storageControl}),
+    ()=>element(ui.StorageDependencyDialog,{...storageDependency,continueButton:{...storagePopupButton,target:undefined}}),
+    ()=>element(ui.StorageSharingProgress,{...storageSharing,progress:1.1}),
+    ()=>element(ui.StorageManagement,{...storageProps,inputMode:'wheel'}),
+    ()=>element(ui.StorageManagement,{...storageProps,minThumbSize:0}),
+  ])assert.throws(()=>renderToString(bad()),'Invalid required Storage inputs must fail before browser I/O.');
+  assert.equal(JSON.stringify([storageProps,storageDependency,storageSharing]),storageBefore,'Storage SSR preserves accepted input, hidden/orphan IDs and host geometry.');
+  const flashImage=Object.freeze({src:'/host-resolved-White.png',sourceSize:Object.freeze([15,15])});
+  const flashProps=Object.freeze({size:Object.freeze([320,180]),scale:2,durationMs:400,flashImage,trigger:'host-capture',onFinished:()=>{storageEffects++;},ref:()=>{storageEffects++;}});
+  const flashBefore=JSON.stringify(flashProps);
+  const flashMarkup=renderToString(element(ui.ScreenshotFlash,flashProps));
+  assert.match(flashMarkup,/aria-hidden="true"/);assert.match(flashMarkup,/tabindex="-1"/);assert.match(flashMarkup,/pointer-events:none/);assert.match(flashMarkup,/data-alpha="1"/);
+  assert.match(flashMarkup,/mc-screenshot-flash__background/);assert.match(flashMarkup,/src="\\/host-resolved-White.png"/);assert.match(flashMarkup,/width="15" height="15"/);
+  assert.equal((flashMarkup.match(/<img /g)??[]).length,2,'Only the source feed and explicit host material are rendered.');
+  assert(!flashMarkup.includes('white-candidate.png'),'Screenshot must not resolve the demo specimen implicitly.');
+  assert(!/ (?:durationMs|flashImage|control|trigger)=/.test(flashMarkup),'Screenshot controls must not leak into HTML.');
+  for(const [control,alpha]of [[{kind:'alpha',value:.25},.25],[{kind:'progress',value:.5},.96875],[{kind:'progress',value:1},0]]){
+    const markup=renderToString(element(ui.ScreenshotFlash,{...flashProps,size:'parent',scale:undefined,control}));
+    assert(markup.includes('data-alpha="'+alpha+'"'));assert.match(markup,/mc-screenshot-flash__background/);
+  }
+  for(const state of [{trigger:null},{visible:false},{cancelled:true},{hidden:true}])assert(!renderToString(element(ui.ScreenshotFlash,{...flashProps,...state})).includes('<img'),'Inactive flash has no material image but retains an inert root.');
+  for(const invalid of [{durationMs:undefined},{durationMs:-1},{flashImage:undefined},{flashImage:{src:'',sourceSize:[15,15]}},{size:'parent'},{control:{kind:'progress',value:2}}])assert.throws(()=>renderToString(element(ui.ScreenshotFlash,{...flashProps,...invalid})));
+  assert.equal(JSON.stringify(flashProps),flashBefore);assert.equal(storageEffects,0,'SSR calls no host requests, finish callbacks, or DOM refs.');
+
   assert.deepEqual(ssrIoCalls,[],'Default/source/text/item/model/fallback SSR must not fetch, decode images or allocate a GPU canvas.');
 } finally {
   console.error=previousConsoleError;
@@ -685,11 +772,63 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','ore-player-permissions.css','chalkboard.css','start-menu.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','ore-player-permissions.css','chalkboard.css','start-menu.css','storage-management.css','screenshot-flash.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
 const packageRoot = new URL('./',import.meta.resolve('mcbeui/package.json'));
+
+assert(!Object.hasOwn(ui,'storageAssets'),'Storage material registry must remain private.');
+const storageManifest=JSON.parse(await readFile(new URL('docs/storage-assets.json',packageRoot),'utf8'));
+assert.equal(storageManifest.schemaVersion,1);
+assert.equal(storageManifest.fixedSource.sha256,'d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf');
+const expectedStorageImages=[["lightNormal",131,"313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376"],["lightHover",85,"e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8"],["lightPressed",84,"47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983"],["lightDisabled",88,"5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f"],["focusWhite",105,"bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"],["categoryUnchecked",131,"313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376"],["categoryChecked",155,"c3e928f9c58b6cf42399686ba71f5656de59a2dadcdd6cee9b26111ec5200c52"],["categoryUncheckedHover",85,"e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8"],["categoryCheckedHover",84,"47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983"],["gray",67,"e21915e60b32df0c5bd7fa8153571c1d8899a20de2973ee92f8aab8f11c35797"],["black",84,"492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e"],["worldRowDark",137,"fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548"],["checkboxCheck",149,"8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062"],["checkboxSpace",129,"73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014"],["checkboxCheckHover",152,"29b33214de8a4621a2b882eaeb5adcce22053e97669cac459bf167a70bdec8c2"],["checkboxSpaceHover",126,"bd5babf3900537bda4f887be0cd22abbaea656959d32b88517d3943e5d95c0a6"],["defaultIndent",120,"35f98c105d7eb71519be92e9afd5c7cbd8239dd1addf40bb4a79fad472d5e395"],["worldScreenshotFocus",105,"bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"],["arrowDown",1169,"b95f69c158c8c8c1bb7df278abf8edb86c12e8de9d99f00877c4ebcdeaa17be6"],["arrowRight",1142,"4b7d2d5d5f7beed2eeeeebac93637b16ea1282c2796ecec8a27565fe07ac1b6f"],["multiselect",174,"cfacf43834fadd6fb85c4add4940ea549d42ab3db2aa96c760eb91edb471ba40"],["invertedMultiselect",278,"4380b3795d9e6aae6b972e55861796bfd3b14c3a64b3bd6b7916617a85682383"],["trayBanners",82,"41c874a8ffb72a40b0404c6955388aed577aabc74118729336604c376689748f"],["lock",95,"fa54afb188ed482b1f6cd63c3bf433f767c67f8c5094df92a11ab838776c2322"],["warning",152,"e5c481628adec8b4e60aff01b26b330dc2433a87e5534454d17a77c5e404afba"],["error",148,"1b274eea56592b90fcb3ce90f112d2cea9d4f1a31536fd7eeb8a432c740e1c1e"],["updateGlyph",148,"74cc87e0d1d258db4592cacdc908d6bdc74f95429c914bfddccc4abca1059a52"],["dialogHollow2",314,"eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f"],["control",71,"7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab"],["progressEmpty",180,"531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0"],["progressFull",103,"91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1"],["progressNub",160,"c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55"],["loadingBar",323,"703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef"],["dropdownBackground",154,"22acaa35bef8444642054c0bc3c5e0d69eb188bb8ccb26f354d59f85c2055010"],["dropdownChevron",172,"f661ee43ad1096cd996fdbaf33f96453f583e759da6af4bdbc5d9a843ca22ebe"],["dropdownChevronHover",136,"44535c4efb28008a1fff518e34c040652bd1e6edafcf5e47e89b1e8fa82c6bdd"],["radioOff",129,"73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014"],["radioOn",163,"9f89aee03e8573999bc835495d4cea6bb7705f4011cf9e0fae86df62ac91a813"],["radioOffHover",126,"bd5babf3900537bda4f887be0cd22abbaea656959d32b88517d3943e5d95c0a6"],["radioOnHover",157,"4aaa602b5428d97827c8242c0193b28f5641b38e37d0313f712612475d627d3a"],["dropdownSelectedBackground",69,"dda80223416cd6d050a44a88eda0dee7c28600e0b85aef936f8d836949e08e78"],["dropdownHoverBackground",69,"fdb875e1b090cb2dbedbf1c9ffe730d0c92d8eb6bed8a786fd38a7fa3d88f607"],["deleteGlyph",199,"43a57e20e6e1e045ffdc008ae1982004a610482d31a76811cb44d6f3e608e376"]];
+assert.deepEqual(storageManifest.resources.map(asset=>[asset.key,asset.bytes,asset.sha256]),expectedStorageImages,'All43 authored material identities retain complete original bytes.');
+const expectedStorageNewFiles=[{"path":"src/assets/storage-management/arrowDown.png","bytes":1169,"sha256":"b95f69c158c8c8c1bb7df278abf8edb86c12e8de9d99f00877c4ebcdeaa17be6"},{"path":"src/assets/storage-management/multiselection.png","bytes":174,"sha256":"cfacf43834fadd6fb85c4add4940ea549d42ab3db2aa96c760eb91edb471ba40"},{"path":"src/assets/storage-management/invertedmultiselecticon.png","bytes":278,"sha256":"4380b3795d9e6aae6b972e55861796bfd3b14c3a64b3bd6b7916617a85682383"},{"path":"src/assets/storage-management/dialog_background_hollow_2.png","bytes":314,"sha256":"eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f"},{"path":"src/assets/storage-management/dialog_background_hollow_2.json","bytes":95,"sha256":"584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40"},{"path":"src/assets/storage-management/experiencebarempty.json","bytes":92,"sha256":"de67894f88e78223fa154d60fbd826da1349d35dbfe3b0d8dae5d6365161243f"},{"path":"src/assets/storage-management/experiencebarfull.json","bytes":92,"sha256":"8ec618d73df58faa04e6ce31c88b77d88d6af1c2ae30d290eb25b57aa4601876"},{"path":"src/assets/storage-management/loading_bar.json","bytes":39,"sha256":"38bc67e02f506f01308a16c9be27bbe203ea6da76cd02961571801327ad5f665"},{"path":"src/assets/storage-management/LICENSE.md","bytes":222,"sha256":"ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"}];
+assert.deepEqual(storageManifest.newFiles,expectedStorageNewFiles);
+assert.equal(storageManifest.newFiles.length,9);assert.equal(storageManifest.newFiles.reduce((sum,file)=>sum+file.bytes,0),2475);
+assert.deepEqual((await readdir(new URL('dist/assets/storage-management/',packageRoot))).sort(),expectedStorageNewFiles.map(file=>file.path.split('/').at(-1)).sort(),'Only the9 approved whole files enter the new physical Storage bank.');
+const storageRuntimeUrls=new Map([...packedStorageMarkup.replaceAll('&quot;','"').matchAll(/--mc-storage-([A-Za-z0-9]+):url\\("([^"]+)"\\)/g)].map(match=>[match[1],match[2]]));
+assert.deepEqual([...storageRuntimeUrls.keys()].sort(),expectedStorageImages.map(asset=>asset[0]).sort(),'SSR exposes every actual private registry URL without exporting the registry.');
+const storageReadUrl=async url=>url.startsWith('data:image/png;base64,')?Buffer.from(url.slice('data:image/png;base64,'.length),'base64'):readFile(new URL(url));
+const checkStorageFile=async(asset,path)=>{
+ assert(/^src[/]assets[/]/.test(path)&&!path.includes('..'),'Storage asset path must stay inside the public bank.');
+ const bytes=await readFile(new URL(path.replace(/^src[/]/,'dist/'),packageRoot));
+ assert.equal(bytes.length,asset.bytes,path);assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,path);return bytes;
+};
+for(const file of storageManifest.newFiles)await checkStorageFile(file,file.path);
+let storageInlineCount=0;
+for(const asset of storageManifest.resources){
+ const runtime=await storageReadUrl(storageRuntimeUrls.get(asset.key));
+ assert.equal(runtime.length,asset.bytes,asset.key);assert.equal(createHash('sha256').update(runtime).digest('hex'),asset.sha256,'Installed Storage URL whole-byte identity: '+asset.key);
+ assert.equal(runtime.readUInt32BE(16),asset.dimensions[0]);assert.equal(runtime.readUInt32BE(20),asset.dimensions[1]);
+ if(asset.destination)assert.deepEqual(await checkStorageFile(asset,asset.destination),runtime,'Physical original and installed registry agree: '+asset.key);
+ if(asset.metadata?.destination)await checkStorageFile(asset.metadata,asset.metadata.destination);
+ if(asset.delivery==='inline-whole-existing-css-png'){
+  storageInlineCount++;assert.equal(asset.newPhysicalPNG,false);
+  assert(asset.existingEmbeddedWholeMatches.length>0);
+  for(const match of asset.existingEmbeddedWholeMatches){
+   const css=await readFile(new URL(match.path.replace(/^src[/]/,'dist/'),packageRoot),'utf8');
+   // A data URI contains its own semicolon, so locate its complete base64 body in the full stylesheet.
+   assert(css.includes(match.cssVariable+':'));
+   const bodies=[...css.matchAll(/data:image[/]png;base64,([A-Za-z0-9+/=]+)/g)].map(found=>Buffer.from(found[1],'base64'));
+   assert(bodies.some(body=>body.equals(runtime)),'Whole inline original remains byte-identical to its existing stylesheet: '+asset.key);
+  }
+ }
+}
+assert.equal(storageInlineCount,5);
+const screenshotManifest=JSON.parse(await readFile(new URL('docs/screenshot-flash-source.json',packageRoot),'utf8'));
+assert.equal(screenshotManifest.source.sha256,'123aa4b7cc34f80de987dbed8221045d6a26a6e810a47d863a27ec5b2ec1c810');
+assert.equal(screenshotManifest.source.definitions,4);
+assert.equal(screenshotManifest.flashMaterial.libraryDefault,null);assert.equal(screenshotManifest.flashMaterial.exactFixedArchiveImage,false);
+assert.equal(screenshotManifest.flashMaterial.casefoldCandidate.runtimeAliasCertified,false);
+assert.equal(screenshotManifest.flashMaterial.casefoldCandidate.notAddedToScreenshotAssetBank,true);
+assert.equal(screenshotManifest.flashMaterial.casefoldCandidate.notDefaultScreenshotTexture,true);
+assert.deepEqual(screenshotManifest.flashMaterial.casefoldCandidate.existingLegacyEmbeddings.map(entry=>entry.path),['src/crafting-image-assets.ts','src/inventory-screen-textures.css']);
+const screenshotBackground=await readFile(new URL(screenshotManifest.background.productionReuse.replace(/^src[/]/,'dist/'),packageRoot));
+assert.equal(screenshotBackground.length,71);assert.equal(createHash('sha256').update(screenshotBackground).digest('hex'),'7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab');
+assert.equal(screenshotManifest.background.sourceAlpha,.8);
+
 const startAssets=JSON.parse(await readFile(new URL('docs/start-menu-assets.json',packageRoot),'utf8'));
 assert.equal(startAssets.resources.length,37);assert.equal(startAssets.missing.length,6);
 assert(!Object.hasOwn(ui,'startMenuAssets'),'Private Start image registry must not be a root export.');
@@ -892,6 +1031,73 @@ console.log('React '+React.version+': ESM, '+components.length+' components + '+
   console.log(execFileSync(process.execPath, ['smoke.mjs'], { cwd: consumer, encoding: 'utf8' }).trim());
   await writeFile(join(consumer, 'consumer.tsx'), `
 import { createRef } from 'react';
+import { StorageManagement, StorageToolbar, StorageCategory, StorageItem, StorageItemActions, StorageSelectionFooter, StorageDependencyDialog, StorageSharingProgress, ScreenshotFlash } from 'mcbeui';
+import type { StorageControlState, StorageImageSource, StorageLocation, StorageCategoryKind, StorageSignals, StorageAction, StorageToolbarValue, StorageManagementValue, StorageActionDetail, StorageActionHandler, StorageActionControl, StorageItemActionControls, StorageItemMetadata, StorageItemData, StorageMigrationState, StorageCategoryData, StorageMigrationCategoryData, StorageChangeDetail, StorageToolbarOptions, StorageToolbarProps, StorageItemActionsProps, StorageSelectionInputProps, StorageItemProps, StorageCategoryProps, StorageSelectionFooterProps, StorageDependencyGroup, StorageResolvedPopupButton, StorageDependencyDialogProps, StorageSharingProgressProps, StorageManagementProps, ScreenshotFlashTrigger, ScreenshotFlashEasing, ScreenshotFlashControl, ScreenshotFlashImage, ScreenshotFlashFinishedDetail, ScreenshotFlashProps } from 'mcbeui';
+const typedStorageState:StorageControlState={included:true,visible:true,enabled:true};
+const typedStorageImage:StorageImageSource={src:'/host-storage.png',sourceSize:[16,16],alt:'Caller image'};
+const typedStorageLocation:StorageLocation='external';
+const typedStorageKind:StorageCategoryKind='world';
+const typedStorageSignals:StorageSignals={warning:true,error:false,update:true};
+const typedStorageAction:StorageAction='delete-item';
+const typedStorageHandler:StorageActionHandler=(detail:StorageActionDetail)=>{const target:HTMLElement=detail.event.currentTarget;return detail.action+detail.target+target.id+String(detail.value?.selectedIds.length);};
+const typedStorageControl:StorageActionControl={state:typedStorageState,label:'Host action',target:'button.host',ref:createRef<HTMLButtonElement>(),nativeProps:{onClick:event=>{const button:HTMLButtonElement=event.currentTarget;button.focus();event.preventDefault();}}};
+const typedStorageControls:StorageItemActionControls={generateTextureList:typedStorageControl,delete:typedStorageControl,share:typedStorageControl,dependencies:typedStorageControl};
+const typedStorageMetadata:StorageItemMetadata={id:'caller-world',name:'Caller world',sizeText:'12 MB',state:typedStorageState,image:typedStorageImage,signals:typedStorageSignals,lockVisible:true};
+const typedStorageItem:StorageItemData={...typedStorageMetadata,checkboxVisible:true,optionsVisible:true,optionsModal:true,actions:typedStorageControls};
+const typedStorageMigration:StorageMigrationState={sync:typedStorageControl,description:'Host description',conversionDescription:'Host conversion',conversionVisible:false,loadingVisible:true,loadingLabel:'Host loading',loadingFrame:3};
+const typedStorageCategory:StorageCategoryData={id:'worlds',kind:'world',label:'Worlds',sizeText:'12 MB',state:typedStorageState,items:[typedStorageItem],signals:typedStorageSignals};
+const typedStorageLegacy:StorageMigrationCategoryData&{readonly kind:'legacy-world'}={...typedStorageCategory,id:'legacy',kind:'legacy-world',items:[],migration:typedStorageMigration};
+const typedStoragePreview:StorageMigrationCategoryData&{readonly kind:'retail-to-preview-world'}={...typedStorageLegacy,id:'preview',kind:'retail-to-preview-world'};
+const typedStorageToolbarValue:StorageToolbarValue={location:typedStorageLocation,multiselect:true};
+const typedStorageValue:StorageManagementValue={...typedStorageToolbarValue,expandedIds:['worlds','orphan'],selectedIds:['caller-world','orphan']};
+const typedStorageChange=(next:StorageManagementValue,detail:StorageChangeDetail)=>{const current:HTMLElement=detail.event.currentTarget;return next.selectedIds.length+current.childElementCount+detail.field.length;};
+const typedStorageOptions:StorageToolbarOptions={state:typedStorageState,location:{state:typedStorageState,label:'Location',externalLabel:'External',appdataLabel:'Application'},clearCache:typedStorageControl,clearLayoutCache:typedStorageControl,clearDownloadCache:typedStorageControl,clearScreenshotsCache:typedStorageControl,deleteLocalScreenshots:typedStorageControl,multiselect:{state:typedStorageState,label:'Select multiple',ref:createRef<HTMLInputElement>()}};
+const typedStorageToolbarProps:StorageToolbarProps={...typedStorageOptions,value:typedStorageToolbarValue,onValueChange:(next,detail)=>next.location+detail.event.currentTarget.id,locationRef:createRef<HTMLButtonElement>(),inputMode:'touch',touchThumbVisible:true,minThumbSize:6,onAction:typedStorageHandler};
+const typedStorageSelectionProps:StorageSelectionInputProps={'aria-label':'Host item selection',onChange:event=>{const input:HTMLInputElement=event.currentTarget;return input.checked;}};
+const typedStorageItemProps:StorageItemProps={item:typedStorageItem,kind:typedStorageKind,selected:true,selectionProps:typedStorageSelectionProps,selectionRef:createRef<HTMLInputElement>(),onSelectedChange:(selected,event)=>String(selected)+event.currentTarget.id,onAction:typedStorageHandler};
+const typedStorageCategoryProps:StorageCategoryProps={category:typedStorageCategory,expanded:true,selectedIds:typedStorageValue.selectedIds,onExpandedChange:(next,event)=>String(next)+event.currentTarget.id,onSelectedIdsChange:(ids,id,event)=>ids.join(',')+id+event.currentTarget.id,toggleRef:createRef<HTMLButtonElement>(),itemRefs:{'caller-world':createRef<HTMLDivElement>()},selectionRefs:{'caller-world':createRef<HTMLInputElement>()}};
+const typedStorageTrayProps:StorageItemActionsProps={width:300,itemId:'caller-world',controls:typedStorageControls,visible:true,modal:true,onAction:typedStorageHandler};
+const typedStorageFooterProps:StorageSelectionFooterProps={visible:true,deleteControl:typedStorageControl,onAction:typedStorageHandler};
+const typedStorageGroup:StorageDependencyGroup={id:'dependency',item:typedStorageMetadata,breakLabel:'Used by',dependents:[{...typedStorageMetadata,id:'dependent'}],remove:typedStorageControl};
+const typedStoragePopup:StorageResolvedPopupButton={...typedStorageControl,target:'host.resolved_continue',rect:[0,0,150,30]};
+const typedStorageDependencyProps:StorageDependencyDialogProps={open:true,frame:[400,300],profile:'desktop',title:'Dependencies',description:'Host description',groups:[typedStorageGroup],continueButton:typedStoragePopup,cancelButton:{...typedStoragePopup,target:'host.resolved_cancel',rect:[170,0,150,30]},continueScrollLabel:'Scroll to continue',continueReady:false,onReachedEndChange:ready=>Boolean(ready),continueScrollRef:createRef<HTMLButtonElement>(),viewportRef:createRef<HTMLDivElement>(),inputMode:'touch',touchThumbVisible:true,minThumbSize:6,onAction:typedStorageHandler};
+const typedStorageSharingProps:StorageSharingProgressProps={open:true,frame:[400,300],title:'Sharing',currentLabel:'Current',totalLabel:'Total',progressLabel:'Host progress',progress:.5,button:typedStorageControl,onAction:typedStorageHandler};
+const typedStorageManagementProps:StorageManagementProps={size:[400,300],label:'Storage',state:typedStorageState,standardVisible:true,categoryPanelVisible:true,toolbar:typedStorageOptions,categories:[typedStorageCategory],legacyWorlds:typedStorageLegacy,retailToPreviewWorlds:typedStoragePreview,deleteControl:typedStorageControl,value:typedStorageValue,onValueChange:typedStorageChange,onAction:typedStorageHandler,viewportRef:createRef<HTMLDivElement>(),toolbarRef:createRef<HTMLDivElement>(),footerRef:createRef<HTMLDivElement>(),locationRef:createRef<HTMLButtonElement>(),categoryRefs:{worlds:createRef<HTMLElement>()},itemRefs:{'caller-world':createRef<HTMLDivElement>()},selectionRefs:{'caller-world':createRef<HTMLInputElement>()},dependencyDialog:typedStorageDependencyProps,sharingProgress:typedStorageSharingProps,inputMode:'touch',touchThumbVisible:true,minThumbSize:6,readOnly:true};
+const typedFlashTrigger:ScreenshotFlashTrigger='host-frame';
+const typedFlashEasing:ScreenshotFlashEasing=progress=>progress;
+const typedFlashControl:ScreenshotFlashControl={kind:'progress',value:.5};
+const typedFlashImage:ScreenshotFlashImage={src:'/runtime-resolved-White.png',sourceSize:[15,15]};
+const typedFlashFinished=(detail:ScreenshotFlashFinishedDetail)=>detail.trigger+detail.mode+detail.elapsedMs+String(detail.reducedMotion);
+const typedFlashProps:ScreenshotFlashProps={size:[320,180],scale:2,durationMs:500,flashImage:typedFlashImage,trigger:typedFlashTrigger,easing:typedFlashEasing,control:typedFlashControl,onFinished:typedFlashFinished,motion:'animate',onClick:event=>{const node:HTMLDivElement=event.currentTarget;return node.id;}};
+export const storageAndScreenshotConsumer=<>
+  <StorageManagement {...typedStorageManagementProps} ref={createRef<HTMLElement>()}/>
+  <StorageToolbar {...typedStorageToolbarProps} ref={createRef<HTMLDivElement>()}/>
+  <StorageCategory {...typedStorageCategoryProps} ref={createRef<HTMLElement>()}/>
+  <StorageItem {...typedStorageItemProps} ref={createRef<HTMLDivElement>()}/>
+  <StorageItemActions {...typedStorageTrayProps} ref={createRef<HTMLDivElement>()}/>
+  <StorageSelectionFooter {...typedStorageFooterProps} ref={createRef<HTMLDivElement>()}/>
+  <StorageDependencyDialog {...typedStorageDependencyProps} ref={createRef<HTMLDivElement>()}/>
+  <StorageSharingProgress {...typedStorageSharingProps} ref={createRef<HTMLDivElement>()}/>
+  <ScreenshotFlash {...typedFlashProps} ref={createRef<HTMLDivElement>()}/>
+  <ScreenshotFlash durationMs={0} flashImage={typedFlashImage} size="parent" trigger={null} ref={node=>{if(node)node.dataset.consumer='host';}}/>
+  <ScrollArea variant="touch" minThumbSize={6} thumbVisible={false} viewportRef={createRef<HTMLDivElement>()} label="Touch content">Host content</ScrollArea>
+  <ScrollBar variant="touch" minThumbSize={6} thumbVisible value={1} max={10} pageSize={5} controls="caller-scroll-content" onValueChange={value=>value.toFixed(0)} label="Touch bar" ref={createRef<HTMLDivElement>()}/>
+</>;
+// @ts-expect-error A migration branch cannot be given a standard category kind.
+const invalidStorageMigration:StorageManagementProps={...typedStorageManagementProps,legacyWorlds:{...typedStorageLegacy,kind:'world'}};
+// @ts-expect-error Unrecovered popup target and rectangle are both required host input.
+const invalidStoragePopup:StorageResolvedPopupButton={state:typedStorageState,label:'Missing geometry'};
+// @ts-expect-error Even with a rectangle, an explicit host-resolved target is required.
+const invalidStoragePopupTarget:StorageResolvedPopupButton={state:typedStorageState,label:'Missing target',rect:[0,0,150,30]};
+// @ts-expect-error Even with a target, an explicit host-resolved rectangle is required.
+const invalidStoragePopupRect:StorageResolvedPopupButton={state:typedStorageState,label:'Missing rectangle',target:'host.target'};
+// @ts-expect-error Parent coordinates are already resolved; scale is forbidden.
+const invalidParentFlash:ScreenshotFlashProps={size:'parent',scale:2,durationMs:500,flashImage:typedFlashImage,trigger:1};
+// @ts-expect-error Source/global files define no duration default.
+const invalidFlashDuration:ScreenshotFlashProps={size:[320,180],flashImage:typedFlashImage,trigger:1};
+// @ts-expect-error No implicit White material or casefold alias is supplied by the library.
+const invalidFlashImage:ScreenshotFlashProps={size:[320,180],durationMs:500,trigger:1};
+
 import { SignEditor, SignTextSurface } from 'mcbeui';
 import type { SignEditorProps, SignTextSurfaceProps, SignCloseDetail } from 'mcbeui';
 const consumerSignClose = (value: string, detail: SignCloseDetail) => value.length > 0 && detail.reason === 'escape';

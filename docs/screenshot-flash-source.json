@@ -1,0 +1,157 @@
+{
+  "officialVersion": "v1.26.60.5",
+  "archive": {
+    "entry": ".cache\\references\\bedrock-samples-v1.26.60.5-full.zip",
+    "bytes": 169569258,
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "source": {
+    "entry": "resource_pack/ui/screenshot_screen.json",
+    "bytes": 1201,
+    "sha256": "123aa4b7cc34f80de987dbed8221045d6a26a6e810a47d863a27ec5b2ec1c810",
+    "definitions": 4,
+    "literal": {
+      "namespace": "screenshot",
+      "anim_screenshot_flash": {
+        "anim_type": "alpha",
+        "easing": "in_expo",
+        "duration": "$screenshot_flash_anim_duration",
+        "from": 1.0,
+        "to": 0
+      },
+      "screenshot_flash_image": {
+        "type": "image",
+        "size": [
+          "100%",
+          "100%"
+        ],
+        "layer": 6,
+        "texture": "textures/ui/White",
+        "alpha": "@screenshot.anim_screenshot_flash"
+      },
+      "screenshot_screen@common.base_screen": {
+        "$default_text_color": "$light_button_default_text_color",
+        "$screen_content": "screenshot.screenshot_screen_content"
+      },
+      "screenshot_screen_content@common.common_panel": {
+        "type": "panel",
+        "controls": [
+          {
+            "transparent_background@feed_common.transparent_background": {}
+          },
+          {
+            "screenshot_flash@screenshot.screenshot_flash_image": {}
+          }
+        ]
+      }
+    }
+  },
+  "dependencies": [
+    {
+      "entry": "resource_pack/ui/feed_common.json",
+      "sha256": "860811a7a111650c9909f73af51fb8d4bfc4b070a08c395ace35ee1f73b734e7",
+      "selectedDefinition": {
+        "type": "image",
+        "texture": "textures/ui/control",
+        "size": [
+          "100%",
+          "100%"
+        ],
+        "alpha": 0.8
+      }
+    },
+    {
+      "entry": "resource_pack/ui/_global_variables.json",
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "screenshotDurationDefaultPresent": false
+    }
+  ],
+  "background": {
+    "entry": "resource_pack/textures/ui/control.png",
+    "bytes": 71,
+    "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+    "size": [
+      2,
+      2
+    ],
+    "rgba": [
+      9,
+      9,
+      9,
+      255
+    ],
+    "sourceAlpha": 0.8,
+    "productionReuse": "src/assets/jigsaw/control.png",
+    "metadata": {
+      "entry": "resource_pack/textures/ui/control.json",
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "literal": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      }
+    }
+  },
+  "flashMaterial": {
+    "authoredTexture": "textures/ui/White",
+    "exactFixedArchiveImage": false,
+    "requiredHostProp": "flashImage:{src,sourceSize}",
+    "libraryDefault": null,
+    "casefoldCandidate": {
+      "entry": "resource_pack/textures/ui/white.png",
+      "bytes": 132,
+      "sha256": "e666f27bda2c08c810a18b699397f8f0df5ffee87157a14bb96157e4a6b27fc3",
+      "size": [
+        15,
+        15
+      ],
+      "rgbaHistogram": {
+        "0,0,0,255": 104,
+        "255,255,255,255": 121
+      },
+      "runtimeAliasCertified": false,
+      "demoOnly": "demo/screenshot-assets/white-candidate.png",
+      "notAddedToScreenshotAssetBank": true,
+      "notDefaultScreenshotTexture": true,
+      "existingLegacyEmbeddings": [
+        {
+          "path": "src/crafting-image-assets.ts",
+          "sourceKey": "white",
+          "wholePNGBytes": 132,
+          "wholePNGSHA256": "e666f27bda2c08c810a18b699397f8f0df5ffee87157a14bb96157e4a6b27fc3"
+        },
+        {
+          "path": "src/inventory-screen-textures.css",
+          "cssVariable": "--mc-inv-screen-white",
+          "wholePNGBytes": 132,
+          "wholePNGSHA256": "e666f27bda2c08c810a18b699397f8f0df5ffee87157a14bb96157e4a6b27fc3"
+        }
+      ],
+      "existingLegacyQualification": "The same complete lowercase PNG was already embedded by Crafting and inventory CSS in the preceding181-value package. It is not globally excluded from npm; Screenshot adds no physical bank copy and never resolves it as a default material.",
+      "licenseEntry": "LICENSE.md",
+      "licenseSHA256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+    }
+  },
+  "webContract": {
+    "duration": "Required explicit durationMs;finite nonnegative,zero is an immediate client completion. No native default.",
+    "timeline": "rAF/performance monotonic clock;duration and easing snapshot per activation;trigger changes or hide/cancel then resume create a new activation.",
+    "easing": "web-in-expo standard exponential-in with exact0/1 endpoints,not cubic-bezier and not recovered native in_expo. linear/pure bounded caller function supported.",
+    "controlled": "alpha or progress values0..1;no RAF/reduced-motion override;completion once per activation even if controlled values rewind.",
+    "finish": "Alpha0 and onFinished once;source background/root remain until host null/hide/cancel. No screen-close or capture/save side effects.",
+    "motion": "system/animate/skip applies only to automatic mode,not a native behavior claim.",
+    "frame": "Required explicit logical size/positive integer scale or parent CSS frame;parent uses CSS inset,not ResizeObserver.",
+    "accessibility": "Decorative aria-hidden,nonfocusable and pointer-events none.",
+    "materialReadiness": "Host supplies a runtime-resolved image and owns readiness;clock does not fetch/resolve native identifiers.",
+    "ref": "The internal merged ref always returns void for React18/19. Returned caller cleanup is stored and called once on detach/replacement/ref change,with no extra caller null;ordinary callbacks receive null and object refs are cleared. SSR does not mount refs."
+  },
+  "notImplemented": [
+    "camera",
+    "screenshot backend",
+    "image saving or export",
+    "native White texture resolution",
+    "native curve/time/provider and screen-stack transport",
+    "whole native GUI pixel equivalence"
+  ]
+}

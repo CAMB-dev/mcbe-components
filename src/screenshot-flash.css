@@ -1,0 +1,9 @@
+/* Source Screenshot screen visuals only. The host supplies the unresolved White material. */
+.mc-screenshot-flash {position:relative;isolation:isolate;box-sizing:border-box;overflow:hidden;pointer-events:none}
+.mc-screenshot-flash[hidden] {display:none}
+.mc-screenshot-flash>.mc-screenshot-flash__background,.mc-screenshot-flash>.mc-screenshot-flash__image {display:block;position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;object-fit:fill;image-rendering:pixelated;pointer-events:none;user-select:none}
+/* feed_common.transparent_background is an opaque control.png image at alpha .8. */
+.mc-screenshot-flash__background {z-index:0;opacity:.8}
+.mc-screenshot-flash__image {z-index:6}
+/* Reduced-motion policy is handled by the automatic clock only. Controlled
+   alpha/progress must remain independent of CSS media-query overrides. */

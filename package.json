@@ -76,6 +76,8 @@
     "./ore-player-permissions.css": "./dist/ore-player-permissions.css",
     "./chalkboard.css": "./dist/chalkboard.css",
     "./start-menu.css": "./dist/start-menu.css",
+    "./storage-management.css": "./dist/storage-management.css",
+    "./screenshot-flash.css": "./dist/screenshot-flash.css",
     "./fonts.css": "./dist/fonts.css",
     "./mojangles.css": "./dist/mojangles.css",
     "./classic-fonts.css": "./dist/classic-fonts.css",

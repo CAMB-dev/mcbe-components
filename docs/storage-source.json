@@ -1,0 +1,650 @@
+{
+  "schemaVersion": 1,
+  "status": "FIXED_CLASSIC_SOURCE_WEB_MATERIAL_PACKAGE_AND_INSTALLED_CLIENT_QUALIFIED_NATIVE_UNVERIFIED",
+  "fixedSource": {
+    "release": "v1.26.60.5-full",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "archiveBytes": 169569258,
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "uiFilesReverified": 206
+  },
+  "sourceFiles": [
+    {
+      "entry": "resource_pack/ui/gameplay_common.json",
+      "bytes": 31382,
+      "sha256": "9bc3d2651100e15c3f969f679685ac736c3c3a49139a678c9612dc28a07cfd30"
+    },
+    {
+      "entry": "resource_pack/ui/play_screen.json",
+      "bytes": 246577,
+      "sha256": "10b1cab24aeee5cb5a875255bb6ffe266ca4056394c05f1c4d99b8cc56cf805a"
+    },
+    {
+      "entry": "resource_pack/ui/popup_dialog.json",
+      "bytes": 27268,
+      "sha256": "571ad6ff20301043e0d08afa90b868232d6ef6052a213a7b28897a87cc8421e5"
+    },
+    {
+      "entry": "resource_pack/ui/progress_screen.json",
+      "bytes": 72699,
+      "sha256": "2453144b1e4d98bcc56d63c014034dae50172f5e15989589a8dca2676599ee80"
+    },
+    {
+      "entry": "resource_pack/ui/settings_sections/general_section.json",
+      "bytes": 394128,
+      "sha256": "b3e6d9bd1bcb90c90f3b8404de2217cb73b58d37777317c96635683d4dd1e584"
+    },
+    {
+      "entry": "resource_pack/ui/settings_sections/settings_common.json",
+      "bytes": 80972,
+      "sha256": "36863803c56e42d31b915aa9df13cf88cc43a528eb40c76cbf26c911ef7b3ecf"
+    },
+    {
+      "entry": "resource_pack/ui/storage_management.json",
+      "bytes": 96900,
+      "sha256": "af9ee7e9ddb55a8e85990ea389d568cf701bba31140176d8307f557923e58f76"
+    },
+    {
+      "entry": "resource_pack/ui/storage_management_popup.json",
+      "bytes": 11331,
+      "sha256": "45bb8423325c233e530ae8b179155ab03a07e6706238f02d345e8fcc0a867e3d"
+    },
+    {
+      "entry": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96"
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_toggles.json",
+      "bytes": 47106,
+      "sha256": "efe2bf9fab47aa5e29d7116a2aa705a964a42b0ef86c947c4e46188be9ac2a01"
+    }
+  ],
+  "evidence": {
+    "canonicalSHA256": "224201a3e6fe74d8cef2048fa23666ac0c0851e2079a5c66d1eb0efa8d3904e5",
+    "independentSHA256": "f27e1b41a825384caae1971e39ff10d1e8a51d3ad1d6f61153ce52abf2a84bc2",
+    "assetImplementationSHA256": "61d2fcdffa50294a5288ab886d8b8070fe8db0f4e1bfdf44b05f86fd043f57d7"
+  },
+  "sourceScope": {
+    "storageDefinitions": 48,
+    "storagePopupDefinitions": 11,
+    "focusedCandidateDefinitions": 232,
+    "focusedSourceFiles": 11,
+    "candidateClosureIsNotAllMounted": true,
+    "settingsHostedNotIndependentScreen": true,
+    "actualMount": "Settings section_content_panels: Storage header then main, both within fill scroller; section_footer_panels outside",
+    "settingsContentArea": {
+      "anchor": "top_right",
+      "offset": [
+        -1,
+        21
+      ],
+      "size": [
+        "60%-8",
+        "100%-19"
+      ]
+    },
+    "defaultInactive": [
+      "commented sorting/grouping/filter/search instances",
+      "footer Share ignored:true",
+      "declared storage_scroll_panel not mounted"
+    ]
+  },
+  "parts": [
+    {
+      "component": "StorageManagement",
+      "kind": "settings_content_composition",
+      "frame": "Explicit resolved Settings content [W,H]",
+      "mainScroll": "Fill-height, header and body together",
+      "footer": "Outside main scroller"
+    },
+    {
+      "component": "StorageToolbar",
+      "kind": "header",
+      "size": [
+        "W-4",
+        "content+4"
+      ],
+      "offset": [
+        0,
+        2
+      ],
+      "actionButton": [
+        "100%",
+        30
+      ],
+      "actionOffset": [
+        -1,
+        -2
+      ],
+      "actionParentHeight": "content+2",
+      "multiselectRow": {
+        "height": 32,
+        "iconWidth": 26,
+        "textOffsetX": 30
+      },
+      "locationChoices": [
+        "external",
+        "appdata"
+      ],
+      "locationChoicesAreNotFilesystemOperations": true
+    },
+    {
+      "component": "StorageCategory",
+      "kind": "vertical_category",
+      "toggleHeight": 30,
+      "toggleContentSize": [
+        "W-6",
+        "100%"
+      ],
+      "trailingPadding": 2,
+      "labelStackWidth": "65%",
+      "labelOffset": [
+        4,
+        5
+      ],
+      "sizeBottomLeftOffset": [
+        4,
+        -5
+      ],
+      "arrowSize": [
+        8,
+        8
+      ],
+      "arrowRightOffset": [
+        -10,
+        0
+      ]
+    },
+    {
+      "component": "StorageItem",
+      "kind": "source_item_variants",
+      "rowHeights": {
+        "world": 30,
+        "world-template": 30,
+        "resource": 40,
+        "behavior": 40,
+        "skin": 30,
+        "cache": 40,
+        "legacy-world": 30,
+        "retail-to-preview-world": 30,
+        "dependency": 32,
+        "dependent": 25
+      },
+      "checkbox": {
+        "slotWidth": 20,
+        "sourceImageSize": [
+          10,
+          10
+        ],
+        "imageOffset": [
+          1,
+          0
+        ]
+      },
+      "worldImageContainer": [
+        47,
+        30
+      ],
+      "worldImageBorder": [
+        39,
+        24
+      ],
+      "worldInnerImage": [
+        37,
+        22
+      ],
+      "packImageContainer": [
+        42,
+        40
+      ],
+      "selectionDoesNotImplyGreenSkin": true,
+      "metadataIgnoredVisibleAndCompactVersionBranches": "Independent source state preserved in frozen implementation; staged behavior/material and installed-client qualification recorded separately, not native branch coverage"
+    },
+    {
+      "component": "StorageItemActions",
+      "kind": "inline_six_slot_tray",
+      "heightResolver": "Y=24+.03W",
+      "cellSide": "Y-6",
+      "cells": 6,
+      "gaps": {
+        "count": 5,
+        "width": 2
+      },
+      "horizontalInsets": [
+        4,
+        4
+      ],
+      "borderWidth": "6Y-18",
+      "buttonStackOffset": [
+        4,
+        2
+      ],
+      "unsupportedSlots": "Keep source blank cells, not packed visible-only icons",
+      "modalBinding": "Explicit host-resolved inline/gamepad policy, not all Settings is modal"
+    },
+    {
+      "component": "StorageSelectionFooter",
+      "kind": "outside_scroll",
+      "size": [
+        "W-5",
+        32
+      ],
+      "deleteButtonHeight": 30,
+      "visibleBinding": "standardVisible and accepted multiselect",
+      "bulkShare": "Ignored true, not active default source"
+    },
+    {
+      "component": "StorageDependencyDialog",
+      "kind": "popup_factory",
+      "desktopSize": [
+        372,
+        218
+      ],
+      "availableFrameSize": [
+        "W-4",
+        "H-4"
+      ],
+      "background": "dialog_background_hollow_2",
+      "fillAlpha": 0.98,
+      "sourceCloseButton": false,
+      "listArea": {
+        "size": [
+          "W-16",
+          "H-55"
+        ],
+        "offset": [
+          2,
+          0
+        ],
+        "scroller": [
+          "100%-3",
+          "90%"
+        ]
+      },
+      "buttonHolder": {
+        "size": [
+          "W-14",
+          30
+        ],
+        "anchor": "bottom_middle",
+        "offset": [
+          0,
+          -7
+        ]
+      },
+      "unresolvedBases": [
+        "popup_dialog.modal_first_button",
+        "popup_dialog.modal_second_button"
+      ],
+      "childRectsAndTargets": "Explicit host input, no guessed half-width source claim",
+      "continueGate": "Host continueReady override or declared Web reached-end fallback",
+      "dependencyBlock": {
+        "topPadding": 4,
+        "dependencyRowHeight": 32,
+        "breakLabelHeight": 12,
+        "dependentRowHeight": 25,
+        "removeRegionHeight": 32,
+        "bottomPadding": 2,
+        "betweenBlocks": 10
+      },
+      "continueSiblings": [
+        "disabled-left",
+        "left",
+        "right"
+      ],
+      "continueScrollRef": "Real disabled-left button ref, distinct from left Continue"
+    },
+    {
+      "component": "StorageSharingProgress",
+      "kind": "sharing_popup_factory",
+      "panelSize": [
+        268,
+        95
+      ],
+      "background": "dialog_background_hollow_2",
+      "sourceNoClose": true,
+      "progress": "Web visible fraction0..1; native progress_percentage/clip_ratio mapping host-owned",
+      "originalProgressNineSlice": "Raw source metadata and cap-preserving Web composition in CPU-frozen implementation, not native progress mapping"
+    }
+  ],
+  "factoryMap": [
+    {
+      "source": "world",
+      "api": "world",
+      "item": "world_sub_text"
+    },
+    {
+      "source": "world_template",
+      "api": "world-template",
+      "item": "world_template_sub_text"
+    },
+    {
+      "source": "resource",
+      "api": "resource",
+      "item": "pack_description_sub_item"
+    },
+    {
+      "source": "behavior",
+      "api": "behavior",
+      "item": "pack_description_sub_item"
+    },
+    {
+      "source": "skin",
+      "api": "skin",
+      "item": "basic_sub_item"
+    },
+    {
+      "source": "cache",
+      "api": "cache",
+      "item": "texture_icon_sub_item"
+    }
+  ],
+  "migration": {
+    "independent": [
+      "legacy-world",
+      "retail-to-preview-world"
+    ],
+    "syncHeight": 30,
+    "loadingMinHeight": 39,
+    "loadingWindow": [
+      64,
+      8
+    ],
+    "loadingOffset": [
+      0,
+      24
+    ],
+    "hostFrameRange": [
+      0,
+      9
+    ],
+    "sourceClockRecovered": false
+  },
+  "scrollProfiles": {
+    "settingsMouse": {
+      "leftPadding": 1,
+      "bar": 5,
+      "rightPadding": 2,
+      "reservation": 8
+    },
+    "dependencyMouse": {
+      "leftPadding": 2,
+      "bar": 5,
+      "rightPadding": 2,
+      "reservation": 9
+    },
+    "touch": {
+      "overlayWidth": 4,
+      "contained": true,
+      "mouseTrack": false,
+      "defaultThumbVisible": false,
+      "inputModeHostResolved": true
+    },
+    "sharedValidation": {
+      "report": ".cache/storage-shared-scroll-tests-01/run-01/RESULT.json",
+      "listed": 38,
+      "passed": 37,
+      "expectedDeviceSkip": 1,
+      "pins": 963,
+      "drift": 0,
+      "thumbPlanes": 12,
+      "comparedPixels": 4480,
+      "rgbaDifferent": 0,
+      "scope": "Shared ScrollArea Web source-texel contract; not new Storage composition or native certification"
+    }
+  },
+  "stateAndActions": {
+    "state": [
+      "included",
+      "visible",
+      "enabled"
+    ],
+    "acceptedValue": [
+      "location",
+      "multiselect",
+      "expandedIds",
+      "selectedIds"
+    ],
+    "checkboxOptionsExpansionAndLocksIndependent": true,
+    "hiddenDisabledOrphanIdsRetainedInSnapshots": true,
+    "requestVeto": "Caller/native and public part/root bubbling before a single request",
+    "nativeIgnoredVisibilityFootprintAlgorithmRecovered": false,
+    "destructiveBackendImplemented": false,
+    "explicitHostOwned": [
+      "filesystem/package/NBT reads",
+      "formatted size/date/version/name strings",
+      "dependency graph and authorization",
+      "delete/cache/share/import/sync operations",
+      "engine callbacks and data-provider state"
+    ]
+  },
+  "assets": {
+    "manifest": "docs/storage-assets.json",
+    "newWholeFiles": 9,
+    "newBytes": 2475,
+    "old571PhysicalFilesUnchangedInAssetPhase": true,
+    "signalsUpdateGlyphAvailable": true,
+    "missing": [
+      {
+        "key": "generateUpdate",
+        "texture": "textures/gui/newgui/storage/update"
+      },
+      {
+        "key": "windowsShare",
+        "texture": "textures/ui/windowsshare"
+      }
+    ],
+    "noFakeOriginalArt": true,
+    "codeLicenseDoesNotRelicenseSourceAssets": true,
+    "phase01SemanticKeys": 42,
+    "phase02": {
+      "semanticKeys": 43,
+      "sourceTexturePaths": 40,
+      "distinctWholePNGSHA": 37,
+      "newKey": "deleteGlyph",
+      "entry": "resource_pack/textures/ui/trash.png",
+      "existingPublicFile": "src/assets/gui-icons/trash.png",
+      "wholePixelSize": [
+        13,
+        17
+      ],
+      "sourceDisplaySize": [
+        15,
+        17
+      ],
+      "newPhysicalFiles": 0,
+      "existing42EntryBytesExact": true,
+      "finalReport": ".cache/storage-assets-implementation-01/phase02/FINAL.json",
+      "finalSHA256": "59fb4cb0fceb7c715e91d95e48408613e5cde9615d5ac264bd5f76de7d14727b"
+    }
+  },
+  "qualification": {
+    "sourceAndAssetsCPUOnly": false,
+    "productSourceStillUnderReview": false,
+    "newFormalPackagePublic": "Staged qualification: initial99=94PASS+1deviceSKIP+4FAIL retained; corrected material8PASS separately; actual React18/19 package, public14aux and four installed dev/production clients PASS. Not one all-green99 cohort or native parity.",
+    "globalNewComponentCountNotCertifiedHere": true,
+    "nativeAttempt": {
+      "report": ".cache/storage-native-01/RESULT.json",
+      "outcome": "NO_USABLE_NATIVE_REFERENCE",
+      "twoBlackWGCFramesNotSavedAsOracle": true,
+      "oneActivationRetry": true,
+      "ownedGameStopped": true,
+      "computerUseReset": true,
+      "storageWorldAccountInputs": false
+    },
+    "nativeLayoutFontProviderOrWholeRGBA": false,
+    "coverageChangedByThisMetadata": false,
+    "privateSourceOrNativeFrameCopied": false,
+    "sourceCPUFreeze": {
+      "report": ".cache/storage-implementation-01/FINAL.json",
+      "sha256": "8cb2de46daa1960e6212c3c1bbc79716384e0731200c0717e7d2b1f122d94495",
+      "publicComponents": 8,
+      "publicTypes": 30,
+      "ssrStaticGroups": 18,
+      "scope": "CPU source only, not actual browser/package",
+      "moduleSHA256": "9a11e511d56c49036c7187292c79266345c60128e29816baf7992333c5ebc509",
+      "styleSHA256": "80fad4b6e2e5691cd2edcd5e332fdcc7d9adbc8c9c46cf280108864e36c303ea"
+    },
+    "formalStages": {
+      "initial": {
+        "report": ".cache/storage-tests-01/run-01/RESULT.json",
+        "listed": 99,
+        "passed": 94,
+        "expectedDeviceSkipped": 1,
+        "failed": 4,
+        "pins": 1014,
+        "drift": 0,
+        "storageBehaviorExecutionsPassed": 28
+      },
+      "materialRetest": {
+        "report": ".cache/storage-tests-01/pixels-02/RESULT.json",
+        "passed": 8,
+        "failed": 0,
+        "pins": 991,
+        "drift": 0,
+        "productSourceUnchanged": true,
+        "planesReport": ".cache/storage-tests-01/pixels-02/PLANES.json",
+        "wholePlanes": 19,
+        "pixels": 160301,
+        "rgbaDifferent": 0
+      },
+      "notASingle99AllGreenRun": true,
+      "oldFailuresRetained": true,
+      "duplicateMaterialPassesNotAddedAsNewUniqueCases": true
+    },
+    "package": {
+      "report": ".cache/storage-release-01/PACKAGE.json",
+      "log": ".cache/storage-root-01/package-02.log",
+      "status": "PASS",
+      "reactVersions": [
+        "18.3.1",
+        "19.3.1"
+      ],
+      "runtimeValues": 190,
+      "components": 173,
+      "dataExports": 6,
+      "functions": 11,
+      "wholeFiles": 774,
+      "distFiles": 649,
+      "installedConsumerAndBuildByteDifference": 0,
+      "wholeSourceAssetReferences": 439,
+      "tarSHA256": "e859946cf1cc9fbb70700e93682642312278ab786ab636c049eae3d791bf7b8c",
+      "initialGuardFalsePositiveRetained": true,
+      "initialGuardCorrection": "Existing Crafting/inventory CSS whole White candidate is not a newly added Screenshot default asset; native White alias remains unverified.",
+      "finalDocumentationOnlyPackRequiresIndependentPayloadComparison": true
+    },
+    "publicPreview": {
+      "report": ".cache/storage-public-01/FINAL.json",
+      "passedAuxiliaryChecks": 14,
+      "formalCountAddition": 0,
+      "browserClosed": true,
+      "pageConsoleRequestErrors": 0,
+      "nativeParity": false
+    },
+    "installedClients": {
+      "report": ".cache/storage-installed-browser-01/run-01/FINAL.json",
+      "passedCases": 4,
+      "profiles": [
+        "React18 dev",
+        "React18 production",
+        "React19 dev",
+        "React19 production"
+      ],
+      "pins": 1906,
+      "drift": 0,
+      "storageWholeMaterialBindingsPerCase": 43,
+      "checks": [
+        "controlled checkbox reject/accept and parent veto",
+        "location two-radio reject/accept",
+        "inline tray and copied action snapshot",
+        "dependency read-end, focus and inert",
+        "dual Continue host rect and cancel/focus restoration",
+        "sharing normalized fraction",
+        "Screenshot alpha/progress and real pointer passthrough",
+        "actual RAF finish once and retained feed background",
+        "cancel without finish",
+        "actual React18/19 ref replacement/unmount cleanup exactly once"
+      ],
+      "allBrowsersAndServersFinallyClosed": true,
+      "pageConsoleRequestErrors": 0,
+      "dataURLIdentityIsNotHTTP": true,
+      "nativeParity": false
+    },
+    "coverageQualification": {
+      "changedByParentAfterActualQualification": [
+        "storage_management",
+        "screenshot"
+      ],
+      "changedRows": 2,
+      "otherRowsUnchanged": 204,
+      "totalRows": 206,
+      "limitedA": 34,
+      "E": 5,
+      "basis": "Source composition plus staged Web materials, actual installed package/client and public checks; not native wholeGUI, engine behavior or automatic provider recovery."
+    }
+  },
+  "referencePolicy": {
+    "checkbox": {
+      "sourceSlot": [
+        20,
+        10
+      ],
+      "sourceImage": [
+        10,
+        10
+      ],
+      "sourceOffset": [
+        1,
+        0
+      ],
+      "webResolvedImageX": 6,
+      "webFormula": "(20-10)/2+1",
+      "sourceAnchorLiteral": false,
+      "nativeDefaultAnchorKnown": false
+    },
+    "pointSampling": {
+      "referenceFormula": "floor((x+0.5)*sourceWidth/destinationWidth)",
+      "primarySource": "https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-coordinates",
+      "wholeTrashSource": [
+        13,
+        17
+      ],
+      "wholeTrashDisplay": [
+        15,
+        17
+      ],
+      "scope": "Pixel-center reference model; not proof of universal browser/native sampler"
+    },
+    "hollow2": {
+      "fullPlane": [
+        372,
+        218
+      ],
+      "siblingPaintRemovedForIsolation": true,
+      "noMaskOrCrop": true
+    },
+    "sharing": {
+      "dpr": 1,
+      "sourceDomHeight": 5,
+      "oldHostHeight": 350,
+      "oldGlobalY": 217.5,
+      "oldScreenshotHeight": 6,
+      "separateIntegralHostHeight": 351,
+      "integralGlobalY": 218,
+      "newScreenshotSize": [
+        248,
+        5
+      ],
+      "oldFailureRetained": true,
+      "noCroppedRow": true
+    },
+    "independentCPU": ".cache/storage-fidelity-triage-independent-01/FINAL-v02.json",
+    "liveDiagnostic": ".cache/storage-root-01/triage-live-01/RESULT.json"
+  }
+}

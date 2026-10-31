@@ -661,6 +661,19 @@
       {"name":"OrePlayerCard","status":"implemented","validation":"linebox123_120pass_3skip_default_rgba_preserved_native_unverified","fidelity":"ore_source_player_card_host_avatar_subtitle_role_art_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"},
       {"name":"OreSwitch","status":"implemented","validation":"stronger_source107_client_overlay_bevel_modal_package_public_pass_native_unverified","fidelity":"ore_source_switch_geometry_host_art_native_checkbox_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"}
     ],
+    "storage_management": [
+      {"name":"StorageManagement","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
+      {"name":"StorageToolbar","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
+      {"name":"StorageCategory","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
+      {"name":"StorageItem","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
+      {"name":"StorageItemActions","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
+      {"name":"StorageSelectionFooter","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
+      {"name":"StorageDependencyDialog","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
+      {"name":"StorageSharingProgress","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"}
+    ],
+    "screenshot_flash": [
+      {"name":"ScreenshotFlash","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"source_overlay_required_host_material_duration_and_explicit_web_clock_native_unverified","source":"resource_pack/ui/screenshot_screen.json, fixed v1.26.60.5","details":"docs/SCREENSHOT_FLASH_QA.md"}
+    ],
     "start_menu": [
       {"name":"StartMenu","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
       {"name":"StartMenuTitle","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
@@ -712,7 +725,7 @@
     ]
   },
   "publicExports": {
-    "components": 164,
+    "components": 173,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -723,7 +736,7 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 181,
+    "runtimeValues": 190,
     "pureTextureFunctions": ["assembleGuiTextureAtlas"],
     "countsAreNotPixelCertification": true,
     "dataValues": 6,

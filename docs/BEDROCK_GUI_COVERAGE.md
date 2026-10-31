@@ -1,6 +1,6 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库164个公开组件的**范围映射**，不是原生像素验收表。164组件包含基础控件、可复用零件及组合，不能读作164个完整游戏GUI；A类的32个文件也不代表32个完整原生流程已完成。
+这是固定官方源文件与本库173个公开组件的**范围映射**，不是原生像素验收表。173组件包含基础控件、可复用零件及组合，不能读作173个完整游戏GUI；A类的34个文件也不代表34个完整原生流程已完成。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -10,16 +10,16 @@
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|32|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|34|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|16|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
-|E|`confirmed_missing_named_family`|7|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
+|E|`confirmed_missing_named_family`|5|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
 |G|`optional_family_unmapped`|63|可选族未建立映射：教育、平台、账户、交易等来源仍保留；服务能力由宿主负责。|
 |H|`unknown`|6|证据不足：保持未知，不强制归为已覆盖或必需新增。|
 
-## 尚缺的7个命名族
+## 尚缺的5个命名族
 
 以下表示源文件存在、该快照没有专门公开组合，不表示所有功能都须另建组件或由库接管外部服务。教育 /平台功能、通用宿主组合与Pocket仍应按产品范围单独决定。
 
@@ -29,8 +29,6 @@
 |教育沉浸式阅读器|`immersive_reader.json`|
 |邀请 /人员浏览|`invite_screen.json`|
 |教育作品集 /Portfolio|`portfolio_screen.json`|
-|截图 /照片界面|`screenshot_screen.json`|
-|存储管理|`storage_management.json`|
 |UGC查看器|`ugc_viewer_screen.json`|
 
 **ServerForms已接入有限源族**（`server_form.json`）：ServerActionForm /ServerCustomForm提供LongForm /CustomForm的225×200组合与typed字段，区别于ServerList。37项客户端合同通过，不据此推断第三MessageForm、后端协议或native parity，详见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。
@@ -58,6 +56,8 @@
 **黑板族已接入有限源组合**：`ChalkboardEditor` 复用 `ChalkboardTextField` 与 `ChalkboardLock`，显式宿主尺寸、文本能力和锁状态独立，十张皮肤均复用完整原PNG。新增24项与Sign /NPC /导航80项同批104通过、984输入前后零漂移，实际React18 /19的175值包与公开12项通过。仅该行E→有限A，其余205行保持原样；不是教育后台或原生整页认证，见 [CHALKBOARD_QA.md](CHALKBOARD_QA.md)。
 
 **开始菜单已接入有限源组合**：`StartMenu` 与五个可独立使用的部分保留normal /new-player /trial等显式宿主分支。正式97项中96通过、1个设备条件跳过；12个完整源绘制平面共193,355像素严格RGBA零差，属于Web源期望。实际181值包的React18 /19 ESM、SSR和类型消费通过，默认Vite开发与生产消费四场景亦通过，包含37张完整PNG、TGA绘制和可选公开字体。仅 `start_screen.json` E→有限A，其他205行不变；panorama、角色、引擎绑定和完整原生整页仍未认证，详见 [START_MENU_QA.md](START_MENU_QA.md)。
+
+**存储管理与截图闪光已接入有限源组合**：八个Storage部分对应Settings内容区、独立分类 /条目 /操作 /选择footer与两类popup；ScreenshotFlash仅对应源闪光覆盖层，图像与时钟由宿主提供。173组件 /190运行时值的实际React18 /19包与默认Vite开发 /生产四场景通过，Source /Web行为、材质与公开页结果见 [STORAGE_QA.md](STORAGE_QA.md) 和 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)。仅两行E→有限A，其余204行不变；不认证存储服务、原生White材质 /时钟 /锚点或整页像素。
 
 ## 全部206文件
 
@@ -200,7 +200,7 @@
 |`resource_packs_screen.json`|resource_packs|0|B|PackList、PackCard|
 |`safe_zone_screen.json`|safe_zone|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
 |`scoreboards.json`|scoreboard|0|B|Scoreboard|
-|`screenshot_screen.json`|screenshot|1|E|—|
+|`screenshot_screen.json`|screenshot|1|A|ScreenshotFlash（有限源闪光层，显式宿主材质与时钟，原生未认证）|
 |`select_world_screen.json`|select_world|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
 |`server_form.json`|server_form|1|A|ServerActionForm、ServerCustomForm|
 |`settings_screen.json`|settings|15|B|SettingsPanel、SettingRow、NavigationList、KeybindingField|
@@ -222,7 +222,7 @@
 |`start_screen.json`|start|1|A|StartMenu、StartMenuTitle、StartMenuActionStack、StartMenuAuxiliaryActions、StartMenuProfile、StartMenuFooter（有限Classic源组合，原生整页未认证）|
 |`stonecutter_screen.json`|stonecutter|1|A|Stonecutter|
 |`stonecutter_screen_pocket.json`|stonecutter_pocket|0|F|—|
-|`storage_management.json`|storage_management|0|E|—|
+|`storage_management.json`|storage_management|0|A|StorageManagement、StorageToolbar、StorageCategory、StorageItem、StorageItemActions、StorageSelectionFooter、StorageDependencyDialog、StorageSharingProgress（有限Settings源内容组合，原生未认证）|
 |`storage_management_popup.json`|storage_management_popup|0|H|—|
 |`storage_migration_common.json`|storage_migration_common|0|D|—|
 |`storage_migration_generic_screen.json`|storage_migration_generic|1|G|—|

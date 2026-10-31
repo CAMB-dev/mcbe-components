@@ -46,6 +46,8 @@ import { PlayerPermissionsExamples } from './player-permissions-examples';
 import { OrePlayerPermissionsExamples } from './ore-player-permissions-examples';
 import { ChalkboardExamples } from './chalkboard-examples';
 import { StartMenuExamples } from './start-menu-examples';
+import { StorageExamples } from './storage-examples';
+import { ScreenshotExamples } from './screenshot-examples';
 import { ScrollArea } from '../src';
 
 const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
@@ -80,6 +82,8 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'ore-player-permissions', name: 'Player permissions · OreUI', icon: 'chevron', count: '05' },
   { id: 'chalkboard', name: 'Chalkboard editor', icon: 'chevron', count: '03' },
   { id: 'start-menu', name: 'Classic start menu', icon: 'chevron', count: '06' },
+  { id: 'storage-management', name: 'Storage management', icon: 'chevron', count: '08' },
+  { id: 'screenshot-flash', name: 'Screenshot flash', icon: 'chevron', count: '01' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
   { id: 'anvil', name: 'Anvil', icon: 'chevron', count: '01' },
   { id: 'anvil-layer', name: 'Source Anvil', icon: 'chevron', count: '01' },
@@ -438,6 +442,8 @@ function App() {
       <Example id="ore-player-permissions" title="Player permissions · OreUI" detail="Modern player cards, adaptive role menu and permission switches."><OrePlayerPermissionsExamples/></Example>
       <Example id="chalkboard" title="Chalkboard editor" detail="Host-sized writing panel with an independent text field and lock control."><ChalkboardExamples/></Example>
       <Example id="start-menu" title="Classic start menu" detail="Platform titles, source action groups, account controls and reusable footer."><StartMenuExamples/></Example>
+      <Example id="storage-management" title="Storage management" detail="Source categories, selection, item actions and dependency dialogs with explicit host data."><StorageExamples/></Example>
+      <Example id="screenshot-flash" title="Screenshot flash" detail="A reusable source overlay with a host-supplied image, duration and controlled clock."><ScreenshotExamples/></Example>
 
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

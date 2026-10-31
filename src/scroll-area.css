@@ -18,9 +18,17 @@
 .mc-scrollbar__thumb::before { content: ''; position: absolute; inset: 0; pointer-events: none; border: solid transparent; border-width: var(--mc-scroll-thumb-edge-y) var(--mc-scroll-edge); border-image: var(--mc-skin-scroll-thumb) 2 1 2 1 fill / var(--mc-scroll-thumb-edge-y) var(--mc-scroll-edge) stretch; image-rendering: pixelated; }
 .mc-scrollbar[data-variant="container"] > .mc-scrollbar__track { background: none; border: var(--mc-scroll-edge) solid transparent; border-image: var(--mc-skin-scroll-container-track) 1 fill / var(--mc-scroll-edge) stretch; }
 .mc-scrollbar[data-variant="container"] > .mc-scrollbar__thumb::before { border-image-source: var(--mc-skin-scroll-container-thumb); border-image-slice: 1 fill; }
+.mc-scroll-area[data-variant="touch"] { position: relative; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+.mc-scroll-area[data-variant="touch"] > .mc-scrollbar[data-orientation="vertical"] { position: absolute; grid-area: auto; inset: 0 0 0 auto; }
+.mc-scroll-area[data-variant="touch"] > .mc-scrollbar[data-orientation="horizontal"] { position: absolute; grid-area: auto; inset: auto 0 0 0; }
+.mc-scrollbar[data-variant="touch"] > .mc-scrollbar__track { display: none; }
+/* Original uniform 1x1 touch texel. Preserve its bytes without inventing a
+   clamped nine-slice for the source's overlapping one-unit raw insets. */
+.mc-scrollbar[data-variant="touch"] > .mc-scrollbar__thumb::before { border: 0; border-image: none; background: url('./assets/document-viewer/touchScrollBox.png') center / 100% 100% no-repeat; }
+.mc-scrollbar__thumb[hidden] { display: none; }
 .mc-scrollbar[data-dragging] > .mc-scrollbar__thumb { cursor: grabbing; }
 .mc-scrollbar[data-disabled] > .mc-scrollbar__thumb { cursor: default; }
 @media (forced-colors: active) {
   .mc-scrollbar__track, .mc-scrollbar[data-variant="container"] > .mc-scrollbar__track { background: Canvas; border: 1px solid CanvasText; border-image: none; }
-  .mc-scrollbar__thumb::before { border: 1px solid ButtonText; border-image: none; background: ButtonFace; }
+  .mc-scrollbar__thumb::before, .mc-scrollbar[data-variant="touch"] > .mc-scrollbar__thumb::before { border: 1px solid ButtonText; border-image: none; background: ButtonFace; }
 }
