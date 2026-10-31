@@ -91,7 +91,7 @@ export function StorageExamples() {
       <Button disabled={disabled || readOnly || size[0] < 268} onClick={() => setSharingOpen(true)}>Sharing progress preview</Button>
       <Combobox label="Sharing progress fraction" value={progress} onValueChange={setProgress} options={[{ value: '0', label: '0%' }, { value: '0.4', label: '40%' }, { value: '1', label: '100%' }]}/>
     </div>
-    <div ref={host} style={{ minWidth: 0, maxWidth: 840, position: 'relative' }}>
+    <div ref={host} style={{ minWidth: 0, maxWidth: 840, position: 'relative', overflowX: 'auto' }}>
       <StorageManagement label="Storage contents" size={size} scale={scale} state={shown} standardVisible categoryPanelVisible
         toolbar={toolbar} categories={categories} value={value} inputMode={inputMode} touchThumbVisible={touchThumb}
         legacyWorlds={migration('legacy-world', 'legacy')}

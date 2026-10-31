@@ -1,0 +1,844 @@
+{
+  "schemaVersion": 1,
+  "status": "LIBRARY_SAME_46BEHAVIOR07_10PIXELS06_6NAV08_AUDITED_PREVIEW_HOSTS_NEW_PUBLIC_VERIFIED_NATIVE_UNVERIFIED",
+  "source": {
+    "repository": "https://github.com/Mojang/bedrock-samples",
+    "release": "v1.26.60.5-full",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "archiveBytes": 169569258,
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "familySource": {
+    "path": "resource_pack/ui/portfolio_screen.json",
+    "bytes": 26550,
+    "sha256": "6482640c97b4367f51060c86c283cc3099a8bbde90f21e89691e72af4192a672",
+    "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/portfolio_screen.json",
+    "wholeOriginal": true,
+    "definitions": 58,
+    "verifiedInheritanceChains": 13
+  },
+  "wholeDependencies": [
+    {
+      "path": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "wholeOriginal": true,
+      "name": "ui_common.json"
+    },
+    {
+      "path": "resource_pack/ui/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "wholeOriginal": true,
+      "name": "ui_template_buttons.json"
+    },
+    {
+      "path": "resource_pack/ui/ui_edu_common.json",
+      "bytes": 68229,
+      "sha256": "5d125ff357e7f3fec63e451a2fdb5721c0f18b05e40d59ebc7522ef62b95b210",
+      "wholeOriginal": true,
+      "name": "ui_edu_common.json"
+    },
+    {
+      "path": "resource_pack/ui/immersive_reader.json",
+      "bytes": 6543,
+      "sha256": "365fbc4612c86a13839c257f8a01b04bd086905f1a648c14dd85eeb0bc5837d3",
+      "wholeOriginal": true,
+      "name": "immersive_reader.json"
+    },
+    {
+      "path": "resource_pack/ui/_global_variables.json",
+      "bytes": 20210,
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "wholeOriginal": true,
+      "name": "_global_variables.json"
+    }
+  ],
+  "publicComponentsProposed": [
+    "Portfolio",
+    "PortfolioPhoto",
+    "PortfolioCaptionField",
+    "PortfolioPicker",
+    "PortfolioPickerItem",
+    "PortfolioPageTurnButton"
+  ],
+  "sourceBindings": {
+    "viewingAndPickingIndependent": true,
+    "validViewingPickingCombinations": [
+      [
+        false,
+        false
+      ],
+      [
+        false,
+        true
+      ],
+      [
+        true,
+        false
+      ],
+      [
+        true,
+        true
+      ]
+    ],
+    "twoExplicitLeaves": true,
+    "perLeafPhotoVisibleIndependentOfActionFlags": true,
+    "globalFlags": [
+      "previousVisible",
+      "nextVisible",
+      "leftPhotoVisible",
+      "rightPhotoVisible",
+      "exportVisible",
+      "noPhotosAlertVisible"
+    ],
+    "pageLabels": "Explicit accepted source text; no automatic photo count or native paging provider",
+    "pickerRows": "Explicit row IDs, cells with IDs and visibility, optionaldisabled; dividerVisible independent for each row; factory counts mapped to hostarray lengths, no hardcoded2columns",
+    "caption": {
+      "binding": "#text_box_item_name",
+      "textColorBinding": "#edit_box_text_color",
+      "maxLength": 1000,
+      "WebLengthPolicy": "Native textarea UTF-16 maxLength; no Unicode stripping or recovered native counting/filter claim",
+      "newlines": true,
+      "alignment": "center",
+      "shadow": false,
+      "normalIndent": "transparent source panel",
+      "hoverFocusBorderRGBA": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "lockedIndent": "common.edit_box_indent",
+      "containerSize": "85% x22",
+      "clipperReduction": [
+        6,
+        4
+      ]
+    }
+  },
+  "sourceGeometry": {
+    "bookSize": [
+      320,
+      207
+    ],
+    "pageSize": [
+      160,
+      207
+    ],
+    "contentMaxHeight": 231,
+    "bookOffset": [
+      0,
+      -10
+    ],
+    "photo": "75% x100%x; offset[0,-2]",
+    "photoLayers": {
+      "screenshot": 1,
+      "frame": 2,
+      "caption": 3,
+      "corners": 4
+    },
+    "corners": {
+      "size": [
+        19,
+        19
+      ],
+      "tl": [
+        -1,
+        -1
+      ],
+      "tr": [
+        1,
+        -1
+      ],
+      "bl": [
+        -1,
+        1
+      ],
+      "br": [
+        1,
+        1
+      ]
+    },
+    "captionInstanceOverridesTemplateLayer100": true,
+    "numberLabel": "25% xdefault; left/right middle with ±50%x andY-88",
+    "emptyLabel": "Independent left-side25% label, no automatic mirrored right label",
+    "pageButtons": {
+      "size": [
+        24,
+        24
+      ],
+      "previousOffset": [
+        6,
+        -8
+      ],
+      "nextOffset": [
+        -6,
+        -8
+      ]
+    },
+    "trash": {
+      "size": [
+        18,
+        18
+      ],
+      "leftOffset": [
+        "22%-50%x",
+        -11
+      ],
+      "rightOffset": [
+        "-28%+50%x",
+        -11
+      ]
+    },
+    "convert": {
+      "size": [
+        18,
+        18
+      ],
+      "leftOffset": [
+        "28%-50%x",
+        -9
+      ],
+      "rightOffset": [
+        "-22%+50%x",
+        -9
+      ]
+    },
+    "bottomTextButtons": {
+      "size": [
+        110,
+        20
+      ],
+      "addX": "-65%x",
+      "exportX": "65%x",
+      "pressedContentOffset": [
+        0,
+        1
+      ]
+    },
+    "readerInstanceSize": [
+      "100%y",
+      "100%sm"
+    ],
+    "picker": {
+      "size": [
+        225,
+        231
+      ],
+      "paneSize": [
+        209,
+        201
+      ],
+      "paneOffset": [
+        8,
+        21
+      ],
+      "closeSize": [
+        14,
+        14
+      ],
+      "closeOffset": [
+        -7,
+        7
+      ],
+      "cellSize": [
+        100,
+        100
+      ],
+      "previewSize": [
+        92,
+        92
+      ],
+      "buttonSize": [
+        92,
+        92
+      ],
+      "rowWidth": "100%+4",
+      "rowHeight": "100%cm",
+      "slotWidth": "fill",
+      "dividerHeight": 11,
+      "dividerImageHeight": 1,
+      "dividerAlpha": 0.05
+    }
+  },
+  "finiteWebPolicies": {
+    "nominal": "320x231 content; centred320x207 bookY2 afteroffset-10; bottom320x207 footerY24; own-X percentage mapping declared Web interpretation",
+    "resolved": "Explicit content/book/page/offset/footer/picker/reader dimensions; no automatic native safezone/cap evaluator",
+    "picker": "Explicit rows with100logicalstride, evenlyfilled columns and centredviewport+4 row; hidden content preservesfactoryslot. Threecolumn demonstration may clip100-unit cells, ratherthan invent an auto-fit algorithm",
+    "headerHeight": "Required host resolution of native child-sum/default-font height; demo12",
+    "readerButtonSize": "Required host resolution of source%sm/%y; demo20x20, not inherited16x16 proof",
+    "input": "One native textarea node retained; controlledaccept/veto,IME/newlines/selection subject to formalbrowser qualification",
+    "readOnly": {
+      "allowed": [
+        "previous",
+        "next",
+        "export",
+        "close",
+        "escape"
+      ],
+      "blocked": [
+        "caption",
+        "pick",
+        "add",
+        "delete-left",
+        "delete-right",
+        "convert-left",
+        "convert-right",
+        "reader"
+      ]
+    },
+    "escape": "One explicit Web route Escape->menu_exit. Source Xglobalmenu_cancel->close_button andscreenmenu_cancel->menu_exit priority remains unknown",
+    "modal": "Web-only optional focus/inert/scroll adaptation; engine screen stack/input bridge unknown",
+    "keyboardFocus": "Visible white/black perimeters are declared Web accessibility adaptations; caption source hover border remainsRGBA0",
+    "skinMetadata": "Raw logicalbase->physical mapping with boundarytexel fallback for degeneratecentres is explicitWeb, not a native sampler/material certificate",
+    "requestTiming": {
+      "helper": "src/portfolio-event.ts",
+      "scope": "Portfolio-only postdispatch request and caption settlement; latest62 identities comprise behavior46 in07, material10 in06 and navigation6 in08, with new installed4 and public16 verified",
+      "intent": "Wait a postdispatch task before the shared snapshot/active/veto bridge because trusted native dispatch may checkpoint microtasks before later document listeners",
+      "modalTab": "Existing shared microtask containment remains separate to prevent native Tab default movement",
+      "sharedOldFamilies": "UGC and Reader unchanged; known late-document native-veto timing limitation remains a separate backlog, not fixed or recertified here",
+      "behaviorObservation": "Only behavior receipt reads get task barriers between06 and07; library/fixture/pixel oracle unchanged. Subsequent two preview-only host inline style changes require navigation08 and fresh public verification, not a library product rebuild."
+    }
+  },
+  "actions": {
+    "previous": "button.portfolio_page_prev",
+    "next": "button.portfolio_page_next",
+    "delete-left": "button.portfolio_delete_photo_left",
+    "delete-right": "button.portfolio_delete_photo_right",
+    "convert-left": "button.portfolio_convert_left",
+    "convert-right": "button.portfolio_convert_right",
+    "add": "button.portfolio_add_photo",
+    "export": "button.portfolio_export",
+    "pick": "button.picked",
+    "close": "button.close_button",
+    "escape": "button.menu_exit",
+    "reader": "button.immersive_reader"
+  },
+  "colors": {
+    "body": [
+      0.74,
+      0.64,
+      0.53
+    ],
+    "pageNumber": [
+      0.74,
+      0.64,
+      0.53
+    ],
+    "closeDefault": [
+      0,
+      0,
+      0
+    ],
+    "caption": "Required host global#edit_box_text_color; demoblack not inferred frombody",
+    "nativeQuantizationUnverified": true
+  },
+  "assets": {
+    "manifest": "docs/portfolio-assets.json",
+    "manifestSHA256": "ac9daa336340a9e1a73194c5a06d8a0a470a55b4b1f8d8ecbc2404e43a71b0af",
+    "semanticKeys": 23,
+    "wholePNG": 23,
+    "physicalExistingPNG": 16,
+    "embeddedOnlyPNG": 1,
+    "newPhysicalPNG": 6,
+    "rawMetadata": 12,
+    "newPhysicalMetadata": 2,
+    "newLicenseFiles": 1,
+    "newPhysicalFiles": 9,
+    "oldPhysicalBankFiles": 580,
+    "oldPhysicalBankDrift": 0,
+    "sourceMetadataMismatch": "book_spine physical8x1/rawbase8x2 preserved",
+    "dormantHeaderBarNotMounted": true,
+    "missingEveryExtensionAndCase": [
+      "textures/ui/portfolio_convertpicture_default",
+      "textures/ui/portfolio_convertpicture_hover",
+      "textures/ui/portfolio_convertpicture_pressed",
+      "textures/ui/portfolio_pageleft_default",
+      "textures/ui/portfolio_pageleft_hover",
+      "textures/ui/portfolio_pageleft_pressed",
+      "textures/ui/portfolio_pageright_default",
+      "textures/ui/portfolio_pageright_hover",
+      "textures/ui/portfolio_pageright_pressed"
+    ],
+    "dynamicFrameUnresolved": true,
+    "exactUppercaseWhiteResolved": false,
+    "license": "Original Mojang license / Minecraft EULA; artwork not MIT-relicensed",
+    "implementationEvidence": {
+      "path": ".cache/portfolio-assets-implementation-01/FINAL.json",
+      "sha256": "24b1bac62b5a2f9b39e0e3536e71871d170df425c70668321466295c6f0068b6"
+    }
+  },
+  "demo": {
+    "path": "demo/portfolio-examples.tsx",
+    "hostMaterials": [
+      {
+        "role": "thumbnail",
+        "path": "demo/assets/game-lists/default_world.png",
+        "scope": "Complete existing original128x128 thumbnail reused for six host records",
+        "bytes": 20897,
+        "sha256": "d1ea2e0920619595a419a380cedaa23341123eed3a501da0e63eb22745b59ee8",
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      {
+        "role": "frame",
+        "path": "src/assets/document-viewer/focus_border_white.png",
+        "scope": "Complete original5x5 transparent-centre focus art explicitly supplied by host; not native $screenshot_frame_texture",
+        "bytes": 105,
+        "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+        "dimensions": [
+          5,
+          5
+        ]
+      },
+      {
+        "role": "divider",
+        "path": "demo/screenshot-assets/white-candidate.png",
+        "scope": "Complete original15x15 lowercase casefold candidate including104black and121white texels; native uppercase mapping unknown",
+        "bytes": 132,
+        "sha256": "e666f27bda2c08c810a18b699397f8f0df5ffee87157a14bb96157e4a6b27fc3",
+        "dimensions": [
+          15,
+          15
+        ]
+      },
+      {
+        "role": "host-left-default",
+        "path": "src/assets/book/book_pageleft_default.png",
+        "scope": "Different complete original Book art explicitly supplied by demo host; not a missing Portfolio source image",
+        "bytes": 1981,
+        "sha256": "05eb7c5428b5017adb52289684ac22b22477975746d1b6ebd2249a65682f7242",
+        "dimensions": [
+          24,
+          24
+        ]
+      },
+      {
+        "role": "host-left-hover",
+        "path": "src/assets/book/book_pageleft_hover.png",
+        "scope": "Different complete original Book art explicitly supplied by demo host; not a missing Portfolio source image",
+        "bytes": 762,
+        "sha256": "d85322b62542800f687aeca2914263043d310aa85f0d16d1c2534b0992f75345",
+        "dimensions": [
+          24,
+          24
+        ]
+      },
+      {
+        "role": "host-left-pressed",
+        "path": "src/assets/book/book_pageleft_pressed.png",
+        "scope": "Different complete original Book art explicitly supplied by demo host; not a missing Portfolio source image",
+        "bytes": 763,
+        "sha256": "bd0b403c54f2be0c6abe9050e4d79fdcd8a0c3d036d711015ec7146cd5a7d8d1",
+        "dimensions": [
+          24,
+          24
+        ]
+      },
+      {
+        "role": "host-right-default",
+        "path": "src/assets/book/book_pageright_default.png",
+        "scope": "Different complete original Book art explicitly supplied by demo host; not a missing Portfolio source image",
+        "bytes": 1991,
+        "sha256": "5131dd0d2bac6dc947d5a813d12dffddfa0084a2fa57c7e50f3ef52168b398af",
+        "dimensions": [
+          24,
+          24
+        ]
+      },
+      {
+        "role": "host-right-hover",
+        "path": "src/assets/book/book_pageright_hover.png",
+        "scope": "Different complete original Book art explicitly supplied by demo host; not a missing Portfolio source image",
+        "bytes": 690,
+        "sha256": "9da83307cca13d435090f5ff7d0813cacd39ba308a14db97fd2b9b87dba82090",
+        "dimensions": [
+          24,
+          24
+        ]
+      },
+      {
+        "role": "host-right-pressed",
+        "path": "src/assets/book/book_pageright_pressed.png",
+        "scope": "Different complete original Book art explicitly supplied by demo host; not a missing Portfolio source image",
+        "bytes": 688,
+        "sha256": "5800fd45b04796e9ff270d74993ea2b64b93c1aec20ed3112ae8b1285319c56e",
+        "dimensions": [
+          24,
+          24
+        ]
+      }
+    ],
+    "recordCount": 6,
+    "actionApplicationInitially": false,
+    "onlyLocalHostResponses": [
+      "navigation",
+      "visibility",
+      "picker-selection",
+      "captionacceptance"
+    ],
+    "noCameraFilesystemExportConversionOrReadingService": true,
+    "scalePolicy": "Host2xonlywhenavailablewidth>=768; otherwise1x, nominal320unitscontainedinlocalhorizontal scroller",
+    "nominalFrame": "Widthmax320/min384resolvedfromhost; height250",
+    "readerSize": [
+      20,
+      20
+    ],
+    "headerHeight": 12,
+    "frameSource": "Complete transparentcentre focusimage, distinctfromunresolvednativeframe",
+    "dividerTexels": {
+      "white": 121,
+      "black": 104
+    },
+    "allSixReusablePiecesInstantiated": true,
+    "previewHostFollowup": {
+      "audit": {
+        "path": ".cache/portfolio-root-01/PREVIEW-HOST-FIX.json",
+        "sha256": "93102f3686db0f574cbf8a5b864f7915e50e13756c0c020a81470f56b38e2522"
+      },
+      "exactAudit": {
+        "path": ".cache/portfolio-docs-final-prep-04/DEMO-HOST-AUDIT.json",
+        "sha256": "a9cdd2632efecd9bd1ba131f2ceeafd477ff721079504daffeb53863f9c3b70c"
+      },
+      "files": [
+        {
+          "path": "demo/storage-examples.tsx",
+          "beforeSHA256": "f7a6e4643e49ea0df14964a4aeec61b008627eaa02db3aba0ae50dab06a47d10",
+          "afterSHA256": "a7898e16ba11a4b05b9bf8ea5cc697f7006c24c5696069a397e6a590c251515e"
+        },
+        {
+          "path": "demo/start-menu-examples.tsx",
+          "beforeSHA256": "912ffb7452311adc7c3a159682eebfbfb21c5e1762db3f0076462f5562a9a7e9",
+          "afterSHA256": "ed24f043e378c1424a20e0c1f5d238cae284a8e70b8d0efa698ed463fc2c6b62"
+        }
+      ],
+      "actualCurrentPublicPassed": true,
+      "actualNewNavigationProofValidated": true,
+      "libraryChanged": false,
+      "materialsChanged": false,
+      "PortfolioFixtureChanged": false,
+      "pixelOracleChanged": false,
+      "allOtherDemoFilesUnchanged": true,
+      "demoNotPacked": true,
+      "newLibraryBuildRequired": false
+    }
+  },
+  "evidence": {
+    "independentSource": {
+      "path": ".cache/portfolio-independent-01/FINAL.json",
+      "sha256": "9a36b6a70518dc672783ba19548060cd9a02995ac11fc9ce71f4b9d8202ff083"
+    },
+    "clauses": {
+      "path": ".cache/portfolio-independent-01/PORTFOLIO-CLAUSES.json",
+      "sha256": "725deb556954d172ae4de4f9b981d21dba48289bc911ba7853359e1bcdc286f6"
+    },
+    "inheritance": {
+      "path": ".cache/portfolio-independent-01/INHERITANCE-CLAUSES.json",
+      "sha256": "19ad831f90fe7e3779b8aec1c974a62d44877b2a68374a1397074e41db61f784"
+    },
+    "sourceReport": {
+      "path": ".cache/portfolio-independent-01/REPORT.md",
+      "sha256": "b96531b9df399f06a366a22471d80594cfe7b56ead56c43442f3cff7d55b8302"
+    },
+    "strictSourceExample": {
+      "path": ".cache/portfolio-public-prep-01/TYPECHECK-PUBLIC.json",
+      "sha256": "9af28d569d9c7b61bd6e177857168972df93c732408162a896cc07adb2159c11"
+    }
+  },
+  "implementationReadPins": {
+    "scope": "Current postdispatch library pins verified unchanged across06/07/08 and fresh public observation; only the two audited demo hosts differ",
+    "files": [
+      {
+        "path": "src/portfolio.tsx",
+        "sha256": "325fc46c3c31daef92e4a48277e6b92bd5a9aae5bacda17cc83347c541ffc5d6"
+      },
+      {
+        "path": "src/portfolio.css",
+        "sha256": "b5d3f2d11d2dee309d743d31ba458b941df64e4d92fb63222729245d470e00d2"
+      },
+      {
+        "path": "src/portfolio-parts.tsx",
+        "sha256": "2130b747243542575f046de82aa82e571fc73b52d54b63332ecd54684c0a8032"
+      },
+      {
+        "path": "src/portfolio-parts.css",
+        "sha256": "8a9e823a5deed343a68223afa2160288b5e187e2880af301aeb3f7e50a04c777"
+      },
+      {
+        "path": "src/portfolio-picker.tsx",
+        "sha256": "35cb2d7c67cb89bd83f665080c2ddd7f0accfadaaba27500fa55cb88c8b5fbff"
+      },
+      {
+        "path": "src/portfolio-picker.css",
+        "sha256": "1c5555fa7e60ec53d33b243ea2d35d64b4ecab64aeaa286c5685083ccfdcd042"
+      },
+      {
+        "path": "src/portfolio-skin.tsx",
+        "sha256": "6e036161d414e02c86486abea4d6343db10342162f7c3f7cc2b0dcd194755f08"
+      },
+      {
+        "path": "src/portfolio-skin.css",
+        "sha256": "126ddec5fc6b4a84692abc9d41a2e54960d894257688f6364118cfc3cc4ee620"
+      },
+      {
+        "path": "src/portfolio-assets.ts",
+        "sha256": "31814d5e2bc3730d4a8bc238b28095dd5efd1946ccc653509f8cf39feb640a94"
+      },
+      {
+        "path": "src/portfolio-event.ts",
+        "sha256": "a488cf7c2f7a29f74be9d91129a410b3c8562c0aafe9e0fcbbcd9322440560a8"
+      },
+      {
+        "path": "src/classic-screen-lifecycle.ts",
+        "sha256": "21b6e7a80be4768438307f2acf67bbcd4d4d06871571983556af7ec1b61caf55"
+      }
+    ]
+  },
+  "qualification": {
+    "sourceAndAssetStudyPassed": true,
+    "ownedDemoAndGuideSourceAliasStrictTypecheck": true,
+    "publicRootBarrelVerified": false,
+    "publicRootSourceTypeExportsVerified": true,
+    "formalBrowserExecuted": true,
+    "actualPackagePassed": true,
+    "publicBrowserExecuted": true,
+    "nativeWholeGUIParity": false,
+    "coverageChangedByThisMetadata": true,
+    "privateFramesOrFontsCopied": false,
+    "currentTwoPhaseFormal62Pending": false,
+    "newNavigation08Pending": false,
+    "finalDocOnlyTarProductIdentityPostApplyRequired": true,
+    "currentQualifiedPhases": {
+      "baseline": {
+        "path": ".cache/portfolio-tests-01/run-06/RESULT.json",
+        "sha256": "1d338fe56a9b85bba9b47090813953a91d30c2284a6d3f7eee4f13c6190126d0",
+        "report": {
+          "path": ".cache/portfolio-tests-01/run-06/report.json",
+          "sha256": "43910ba9a191471098489f482b0c57260eca5c5c92543f07436512dd3614a52a"
+        },
+        "pins": {
+          "path": ".cache/portfolio-tests-01/run-06/PINS-BEFORE.json",
+          "sha256": "ba5e87f73d6e7c6bb1910c5c2c65a9d71abcd7a52d3756493f72deae1c8f786c"
+        },
+        "pass": 50,
+        "fail": 12,
+        "pixelExecutions": 10,
+        "navigationExecutions": 6
+      },
+      "behavior": {
+        "path": ".cache/portfolio-tests-01/run-07/RESULT.json",
+        "sha256": "732522e3ccaecb4bd05c386b621ca59c396649e8036de321634bc9ba6f69cdd9",
+        "report": {
+          "path": ".cache/portfolio-tests-01/run-07/report.json",
+          "sha256": "50f37857a63221fb2667f95447892882b48b1552b27788b8826ed45d76aa2b36"
+        },
+        "pins": {
+          "path": ".cache/portfolio-tests-01/run-07/PINS-BEFORE.json",
+          "sha256": "6f36758f87bc0c83aadeaff394337ec2b296fa702a0ac3d3f1f1df65c5a22363"
+        },
+        "pass": 46,
+        "fail": 0
+      },
+      "navigation": {
+        "path": ".cache/portfolio-tests-01/run-08/RESULT.json",
+        "sha256": "674fb024c7c43c50fcf8451c81ed21a6f3ea53cabb0c600b8a41ce02899de6d0",
+        "report": {
+          "path": ".cache/portfolio-tests-01/run-08/report.json",
+          "sha256": "4e43c488b42ec788df2710284ea1c47e3f26dd16d714794948e8d798a44f1ef9"
+        },
+        "pins": {
+          "path": ".cache/portfolio-tests-01/run-08/PINS-BEFORE.json",
+          "sha256": "db2b5f8e69b529876106b2203ebbba440656ffba5e2d2b49b9edbce6f266711b"
+        },
+        "pass": 6,
+        "fail": 0
+      },
+      "distinct": 62,
+      "Portfolio": 56,
+      "relatedNavigation": 6,
+      "sameLibrarySource": true,
+      "sameFixturesAndPixelOracles": true,
+      "allOtherDemosUnchangedExceptTwoAuditedHosts": true,
+      "mergeExact46BehaviorAnd6NavigationIdentitySubsets": true,
+      "single62Green": false
+    },
+    "formalLedger": {
+      "path": ".cache/portfolio-tests-03/QUALIFICATION.json",
+      "sha256": "bcf5cb64f6cfabc922d2e689718f81a83e39033c96f56b4461824a1625717424"
+    },
+    "materialPlanes": {
+      "count": 96,
+      "pixels": 1982470,
+      "RGBApixelDifferences": 0,
+      "currentPixelExecutions": 10,
+      "sourcePhase": "run-06",
+      "sameSourceAsBehaviorRun07": true,
+      "scope": "完整原版PNG与原始base_size／九宫格元数据保留，包括physical8×1／raw8×2书脊。私有skin采用像素中心floor POINT，wholeIMG采用独立坐标图确认的Chromium最近邻边界下取样。隔离验证单位二维平移，保留none／非none变换上下文并归零平移，将完整目标置于(24,24)，逐RGBA零容差并检查焦点、活动态与精确恢复。认证范围为96个具名Web材质平面；原生字体、整页、provider与缺失Portfolio材质仍待验收。"
+    },
+    "actualPackage": {
+      "path": ".cache/portfolio-package-02/RESULT.json",
+      "sha256": "b23d41074ad25fa117966a1685fa4ba2c1239a82aeb0a3fe2181b9010f87771d",
+      "tar": {
+        "path": ".cache/portfolio-package-02/portfolio-verified.tgz",
+        "sha256": "353008e3e3aecdeb8f9462ca7f4cee0f7dddb8366fbdc31a22b3aa250361556e",
+        "bytes": 5526952
+      },
+      "indexSHA256": "e0f11c68fd56ea2844413bed80209d4854fd8cb46938630b4938a8ca28464c4f",
+      "React": [
+        "18.3.1",
+        "19.3.1"
+      ]
+    },
+    "installedBrowser": {
+      "path": ".cache/portfolio-installed-02/FINAL.json",
+      "sha256": "110478aae5b86c93a72dc48568501dccee7da4b65cd0dbe5d89008b9d926f7dc",
+      "inputs": {
+        "path": ".cache/portfolio-installed-browser-03/INPUTS.json",
+        "sha256": "412440fc93094689d173fb055d1708ff8bb14a69306b52b2ddf2b2b0cc859aff"
+      }
+    },
+    "public": {
+      "path": ".cache/portfolio-public-03/FINAL.json",
+      "sha256": "16d4b04a57306bbc20cb32adc334ef58c29b586b902e5b22233bfc733af059c1"
+    },
+    "history": [
+      {
+        "path": ".cache/portfolio-tests-01/run-01/RESULT.json",
+        "sha256": "b40729008b435021121ce40cd18b04588b8cbd7684ae01e56318786a6b68c5d0",
+        "stats": {
+          "startTime": "2026-10-31T13:27:16.243Z",
+          "duration": 100388.341,
+          "expected": 52,
+          "skipped": 0,
+          "unexpected": 8,
+          "flaky": 0
+        },
+        "status": "FAIL"
+      },
+      {
+        "path": ".cache/portfolio-tests-01/run-02/RESULT.json",
+        "sha256": "112289a2fa8b8a69e090e59ed7409385dc34d467256e42a0e90903620635eb65",
+        "stats": {
+          "startTime": "2026-10-31T13:47:46.405Z",
+          "duration": 34521.964,
+          "expected": 11,
+          "skipped": 0,
+          "unexpected": 3,
+          "flaky": 0
+        },
+        "status": "FAIL"
+      },
+      {
+        "path": ".cache/portfolio-tests-01/run-03/RESULT.json",
+        "sha256": "7ca6314a58e201c4f314fcf5ad1899105198eceb495e79abb5182857206a92b4",
+        "stats": {
+          "startTime": "2026-10-31T14:22:39.893Z",
+          "duration": 11098.413,
+          "expected": 2,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "status": "PACKAGE_OR_TEST_PHASE_PASS"
+      },
+      {
+        "path": ".cache/portfolio-tests-01/run-04/RESULT.json",
+        "sha256": "daf7cbfe2f9729f2b5a90db382f47ba32965d64527a5fc25c4782532cd46e16d",
+        "stats": {
+          "startTime": "2026-10-31T14:38:46.829Z",
+          "duration": 22942.671,
+          "expected": 7,
+          "skipped": 0,
+          "unexpected": 3,
+          "flaky": 0
+        },
+        "status": "FAIL"
+      },
+      {
+        "path": ".cache/portfolio-tests-01/run-05/RESULT.json",
+        "sha256": "14758763f874dc0ac34b086fd5e670b9899c1481b7632e3e6e5654906a98b4bb",
+        "stats": {
+          "startTime": "2026-10-31T14:45:33.349Z",
+          "duration": 28186.181,
+          "expected": 10,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "status": "PACKAGE_OR_TEST_PHASE_PASS"
+      },
+      {
+        "path": ".cache/portfolio-package-01/RESULT.json",
+        "sha256": "e9a737cbb2618972ad37ae7a62a706b5befde503924ca4b2782e08a2c7acad07",
+        "stats": null,
+        "status": "PACKAGE_OR_TEST_PHASE_PASS",
+        "scope": "Old package smoke/type PASS does not override subsequent actual4FAIL product"
+      },
+      {
+        "path": ".cache/portfolio-installed-01/FINAL.json",
+        "sha256": "c7704b3bc112746d4bbefc89ca361b6156da0abccb969ed93237bf1d1ad9e7d0",
+        "stats": null,
+        "status": "FAIL",
+        "scope": "Old actual4FAIL mounted product; genuine trusted-document timing defect retained"
+      },
+      {
+        "path": ".cache/portfolio-tests-01/run-06/RESULT.json",
+        "sha256": "1d338fe56a9b85bba9b47090813953a91d30c2284a6d3f7eee4f13c6190126d0",
+        "stats": {
+          "startTime": "2026-10-31T15:06:47.634Z",
+          "duration": 114223.836,
+          "expected": 50,
+          "skipped": 0,
+          "unexpected": 12,
+          "flaky": 0
+        },
+        "status": "FAIL"
+      },
+      {
+        "path": ".cache/portfolio-public-01/FINAL.json",
+        "sha256": "5b64292a12ccce82390e87a62ae2f1daafc6cf456e02e2622361ff43772dfe30",
+        "stats": null,
+        "status": "FAIL"
+      },
+      {
+        "path": ".cache/portfolio-public-02/FINAL.json",
+        "sha256": "07b57a770b5af7641055c8a6fd438fd53e36ccf0ebbb368f7bc8df54c29e7e11",
+        "stats": null,
+        "status": "FAIL"
+      }
+    ],
+    "rejectedOldProduct": {
+      "tar": {
+        "path": ".cache/portfolio-package-01/portfolio-verified.tgz",
+        "sha256": "47d8af21716f8f2b1cd6453d64cf37acd7b8dbec73356a08883f161dbab9d892",
+        "bytes": 5526439
+      },
+      "indexSHA256": "e89912551b556663efa7d83527571b0dafa99b9084a4eae1dbfbca024b102d89",
+      "reason": "Real mounted trusted-document native veto defect; package-only smoke/type success does not qualify the old browser product"
+    },
+    "sourceAndMethodHistory": "原首60项52通过／8失败，修正14项11通过／3失败，beforeinput两项通过，保留变换的材质10项7通过／3失败，保留变换上下文并归零平移的10项通过，所有记录保留。旧47d8包的类型／SSR通过后，实际安装四组合均暴露document原生取消晚于微任务请求的真实缺陷，旧e899索引已退役。本轮新增Portfolio私有owner-window任务边界，caption草稿随后结算，Reader转交统一request；Tab和共享UGC／Reader helper不变。修复后62项首轮50通过／12个早读断言失败，按任务屏障复验全部46行为通过；同源码06的10材质与两处已审计demo host局部滚动修正后08的6导航，按精确身份覆盖62个不同合同。新353008包／e0f11索引通过React18／19类型、SSR、资源及实际开发／生产四组合。公开首轮选择器歧义、次轮14通过／1个320px整页溢出失败均保留；收窄弹层归属并修复两处demo host后公开16项通过。共享UGC／Reader的document晚期取消仍为独立待办。"
+  },
+  "unknowns": [
+    "native default anchors andmax-size/%x/%cm/%sm evaluation",
+    "caption nativefilter/lengthunit/fontAA/caret/linebox",
+    "screenshot path/filesystem/provider anddynamicframe resolution",
+    "nine missing Portfolio state images",
+    "exact uppercaseWhite nativealias",
+    "native safezone/GUIscale/controller/screenstack/Escapepriority",
+    "Reader WebView/propertybag/SDK/auth/speech",
+    "complete native Portfolio framebuffer"
+  ],
+  "knownOutOfScopeLimitations": [
+    {
+      "families": [
+        "UGC",
+        "ImmersiveReader"
+      ],
+      "kind": "late_document_native_veto_timing",
+      "status": "Unchanged known separate backlog; not fixed or recertified in this cohort"
+    }
+  ]
+}

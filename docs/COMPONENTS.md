@@ -1,10 +1,12 @@
 # Bedrock 组件范围
 
-本轮新增UGCViewer /UGCItemCard与ImmersiveReader /ImmersiveReaderButton，当前177组件 /194运行时值。正式首74项67通过 /7方法失败保留，修正后14项12通过 /2只读断言失败，再修后2项通过；74个不同用例按各自最新方法均已验证，其中68项新增、6项相关导航，不合称单轮74全绿。42个完整源材质平面共1,986,950像素RGBA零差。React18.3.1 /19.3.1实际包的类型 /SSR /资源和默认Vite开发 /生产四组合通过，公开页12项通过。宿主White候选、静态reader图标、字体 /默认锚点 /provider /原生整页仍未认证。使用见 [UGC_VIEWER_QA.md](UGC_VIEWER_QA.md) / [IMMERSIVE_READER_QA.md](IMMERSIVE_READER_QA.md)。
+本轮新增Portfolio、PortfolioPhoto、PortfolioCaptionField、PortfolioPicker、PortfolioPickerItem与PortfolioPageTurnButton六个组件，当前183组件 /200运行时值。当前62个不同合同按实际受检阶段验证：46项行为来自同源07批，10项材质来自同源06批，6项导航在两个预览host修复后由08批重跑。06批50通过 /12收据断言失败及所有更早失败均保留；不累加重复执行、不称单轮62全绿。完全相同产品的06批10项材质检查通过，96个完整源／Web平面共1,982,470像素RGBA零差；07只重跑行为，保留该材质来源与具名Web采样合同。新的React18.3.1 /19.3.1实际183组件 /200运行时值包通过ESM、类型、SSR、原图、字体和许可证检查，身份区别于旧mounted4FAIL包；新包的默认Vite React18 /19开发／生产四实际安装组合通过；两项明确demo-host修复后的新site公开页16项通过，1440／390截图与320本地滚动边界分别记录；旧公开选择器失败和14通过 /1全页溢出失败保留。九张Portfolio三态图、截图frame／provider、精确大写White、默认锚点／字体和原生整页仍未认证。使用见 [PORTFOLIO_QA.md](PORTFOLIO_QA.md)。
+
+UGC阶段新增UGCViewer /UGCItemCard与ImmersiveReader /ImmersiveReaderButton，当时177组件 /194运行时值。正式首74项67通过 /7方法失败保留，修正后14项12通过 /2只读断言失败，再修后2项通过；74个不同用例按各自最新方法均已验证，其中68项新增、6项相关导航，不合称单轮74全绿。42个完整源材质平面共1,986,950像素RGBA零差。React18.3.1 /19.3.1实际包的类型 /SSR /资源和默认Vite开发 /生产四组合通过，公开页12项通过。宿主White候选、静态reader图标、字体 /默认锚点 /provider /原生整页仍未认证。使用见 [UGC_VIEWER_QA.md](UGC_VIEWER_QA.md) / [IMMERSIVE_READER_QA.md](IMMERSIVE_READER_QA.md)。
 
 新增存储管理八组件覆盖Settings内容区、分类与条目、操作托盘、选择footer及依赖 /分享弹窗；截图闪光层独立复用，图像与时钟由宿主提供。使用与实际验证范围见 [STORAGE_QA.md](STORAGE_QA.md) 和 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)，不据源码实现宣称原生整页验收。
 
-当前导出 177 个组件，目录 177 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 194 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前导出 183 个组件，目录 183 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 200 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 新增存储管理八组件与截图闪光层，当前173组件 /190运行时值。Storage首99项94通过、1设备跳过、4比较方法失败保留，修正参照后8项材质复验通过：19完整平面、160,301像素RGBA零差；28项行为通过。Screenshot17项、公开14项和实际React18 /19默认Vite开发 /生产四场景分别通过。原生整页、默认锚点、材质解析与引擎provider仍未认证，见 [STORAGE_QA.md](STORAGE_QA.md) 与 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)。
 

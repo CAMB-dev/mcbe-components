@@ -41,6 +41,7 @@
 @import './screenshot-flash.css';
 @import './ugc-viewer.css';
 @import './immersive-reader.css';
+@import './portfolio.css';
 /* mcbeui: scoped component styles; importing this file does not reset the page. */
 :root {
   --mc-font: 'Mojangles Pixel', 'MCBE Pixel', 'Mojangles', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace;
@@ -319,3 +320,4 @@
   .mc-choice__input:checked + .mc-checkbox, .mc-choice__input:checked + .mc-radio, .mc-choice__input:checked + .mc-switch, .mc-tab[aria-selected='true'] { outline: 2px solid Highlight; }
   .mc-choice__input:checked + .mc-checkbox::after, .mc-choice__input:checked + .mc-radio::after, .mc-progress__fill { background: Highlight; }
 }
+

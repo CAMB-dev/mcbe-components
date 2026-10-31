@@ -79,7 +79,7 @@ export function StartMenuExamples() {
     <p style={{ margin: 0, fontSize: 12 }}>Source-sized Classic frame: {size.join(' × ')} units at {scale}×. Use 1× for a complete narrow preview. The background and player portrait are application renderer slots; this example leaves the portrait empty. Education titles require application-supplied artwork.</p>
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'start' }}>
       <div><p style={{ fontSize: 12 }}>Reusable action stack</p><StartMenuActionStack {...actions} scale={1} onAction={detail => setStatus(`Standalone ${detail.action} requested.`)}/></div>
-      <div style={{ width: 300, maxWidth: '100%' }}><p style={{ fontSize: 12 }}>Reusable footer</p><StartMenuFooter {...footer} width={300} scale={1}/></div>
+      <div style={{ width: 300, maxWidth: '100%', minWidth: 0, overflowX: 'auto' }}><p style={{ fontSize: 12 }}>Reusable footer</p><StartMenuFooter {...footer} width={300} scale={1}/></div>
     </div>
   </div>;
 }

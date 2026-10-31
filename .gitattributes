@@ -4,6 +4,7 @@
 src/assets/emote-wheel/** -text
 src/assets/document-viewer/** -text
 src/assets/player-permissions/** -text
+src/assets/portfolio/** -text
 # This unchanged upstream JSON intentionally ends with a blank line.
 src/assets/document-viewer/_global_variables.json whitespace=-blank-at-eof
 src/assets/player-permissions/_global_variables.json whitespace=-blank-at-eof

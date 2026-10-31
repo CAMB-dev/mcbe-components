@@ -136,3 +136,10 @@ export { UGCViewer, UGCItemCard } from './ugc-viewer';
 export type { UGCImageSource, UGCImageFrameMaterial, UGCItem, UGCActionDetail, UGCActionHandler, UGCItemCardProps, UGCQueryChangeDetail, UGCSearchInputProps, UGCViewerProps } from './ugc-viewer';
 export { ImmersiveReader, ImmersiveReaderButton } from './immersive-reader';
 export type { ImmersiveReaderBindings, ImmersiveReaderLabels, ImmersiveReaderPopupLayout, ImmersiveReaderAction, ImmersiveReaderTextAction, ImmersiveReaderActionDetail, ImmersiveReaderActionHandler, ImmersiveReaderNativeButtonProps, ImmersiveReaderButtonProps, ImmersiveReaderProps } from './immersive-reader';
+
+export { Portfolio } from './portfolio';
+export type { PortfolioSide, PortfolioLeaf, PortfolioBindings, PortfolioLayoutResolution, PortfolioAction, PortfolioActionTarget, PortfolioActionDetail, PortfolioLeafCaptionDetail, PortfolioLabels, PortfolioProps } from './portfolio';
+export { PortfolioCaptionField, PortfolioPhoto, PortfolioPickerItem, PortfolioPageTurnButton } from './portfolio-parts';
+export type { PortfolioImageSource, PortfolioStateImages, PortfolioCaptionChangeDetail, PortfolioCaptionFieldProps, PortfolioPhotoProps, PortfolioPickDetail, PortfolioPickerItemProps, PortfolioPageDirection, PortfolioPageTurnDetail, PortfolioPageTurnButtonProps } from './portfolio-parts';
+export { PortfolioPicker } from './portfolio-picker';
+export type { PortfolioPickerCell, PortfolioPickerRow, PortfolioPickerActionDetail, PortfolioPickerProps } from './portfolio-picker';

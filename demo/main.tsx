@@ -48,6 +48,7 @@ import { ChalkboardExamples } from './chalkboard-examples';
 import { StartMenuExamples } from './start-menu-examples';
 import { StorageExamples } from './storage-examples';
 import { ScreenshotExamples } from './screenshot-examples';
+import { PortfolioExamples } from './portfolio-examples';
 import { UGCExamples } from './ugc-examples';
 import { ImmersiveReaderExamples } from './immersive-reader-examples';
 import { ScrollArea } from '../src';
@@ -86,6 +87,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'start-menu', name: 'Classic start menu', icon: 'chevron', count: '06' },
   { id: 'storage-management', name: 'Storage management', icon: 'chevron', count: '08' },
   { id: 'screenshot-flash', name: 'Screenshot flash', icon: 'chevron', count: '01' },
+  { id: 'portfolio', name: 'Portfolio', icon: 'chevron', count: '06' },
   { id: 'ugc-viewer', name: 'UGC viewer', icon: 'chevron', count: '02' },
   { id: 'immersive-reader', name: 'Immersive Reader', icon: 'chevron', count: '02' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
@@ -448,6 +450,7 @@ function App() {
       <Example id="start-menu" title="Classic start menu" detail="Platform titles, source action groups, account controls and reusable footer."><StartMenuExamples/></Example>
       <Example id="storage-management" title="Storage management" detail="Source categories, selection, item actions and dependency dialogs with explicit host data."><StorageExamples/></Example>
       <Example id="screenshot-flash" title="Screenshot flash" detail="A reusable source overlay with a host-supplied image, duration and controlled clock."><ScreenshotExamples/></Example>
+      <Example id="portfolio" title="Portfolio" detail="Original two-leaf photo layout, native caption fields and explicit picker factories with caller-owned materials."><PortfolioExamples/></Example>
       <Example id="ugc-viewer" title="UGC viewer" detail="Source search, scrolling collection and reusable content cards with caller-resolved images."><UGCExamples/></Example>
       <Example id="immersive-reader" title="Immersive Reader" detail="Independent source loading, error and running states with a persistent host renderer."><ImmersiveReaderExamples/></Example>
 

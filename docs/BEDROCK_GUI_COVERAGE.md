@@ -1,6 +1,6 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库177个公开组件的**范围映射**，不是原生像素验收表。177组件包含基础控件、可复用零件及组合，不能读作177个完整游戏GUI；A类的36个文件也不代表36个完整原生流程已完成。
+这是固定官方源文件与本库183个公开组件的**范围映射**，不是原生像素验收表。183组件包含基础控件、可复用零件及组合，不能读作183个完整游戏GUI；A类的37个文件也不代表37个完整原生流程已完成。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -10,16 +10,16 @@
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|36|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|37|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|16|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
-|E|`confirmed_missing_named_family`|3|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
+|E|`confirmed_missing_named_family`|2|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
 |G|`optional_family_unmapped`|63|可选族未建立映射：教育、平台、账户、交易等来源仍保留；服务能力由宿主负责。|
 |H|`unknown`|6|证据不足：保持未知，不强制归为已覆盖或必需新增。|
 
-## 尚缺的3个命名族
+## 尚缺的2个命名族
 
 以下表示源文件存在、该快照没有专门公开组合，不表示所有功能都须另建组件或由库接管外部服务。教育 /平台功能、通用宿主组合与Pocket仍应按产品范围单独决定。
 
@@ -27,7 +27,6 @@
 |---|---|
 |片尾名单 /Credits|`credits_screen.json`|
 |邀请 /人员浏览|`invite_screen.json`|
-|教育作品集 /Portfolio|`portfolio_screen.json`|
 
 **ServerForms已接入有限源族**（`server_form.json`）：ServerActionForm /ServerCustomForm提供LongForm /CustomForm的225×200组合与typed字段，区别于ServerList。37项客户端合同通过，不据此推断第三MessageForm、后端协议或native parity，详见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。
 
@@ -183,7 +182,7 @@
 |`playfab_sign_in_conflict_help_qr.json`|playfab_sign_in_conflict_help_qr|1|G|—|
 |`pocket_containers.json`|pocket_containers|0|B|ContainerFrame|
 |`popup_dialog.json`|popup_dialog|0|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
-|`portfolio_screen.json`|portfolio|1|E|—|
+|`portfolio_screen.json`|portfolio|1|A|Portfolio /PortfolioPhoto /PortfolioCaptionField /PortfolioPicker /PortfolioPickerItem /PortfolioPageTurnButton；显式宿主布局 /截图 /缺失三态材质，native未认证|
 |`progress_screen.json`|progress|15|B|LoadingScreen、Progress|
 |`rating_prompt.json`|rating_prompt|1|G|—|
 |`realmsPlus_sections/realmsPlus_purchase_warning_screen.json`|realmsPlus_purchase_warning|1|G|—|
@@ -275,4 +274,7 @@
 完整逐文件字节SHA、定义 /继承 /模板引用与基础映射保留在 `.cache/classic-full-screen-coverage-02/SOURCE-INVENTORY.json`、`FILE-COVERAGE.json`、`COMPONENT-MAP.json` 及 `REPORT.md`；本页全量保留206行，增量将server_form、npc_interact_screen、emote_wheel_screen以及HowToPlay /Encyclopedia接入有限命名族范围。EmoteWheel的受测范围见 `EMOTE_WHEEL_QA.md` 与 `.cache/emote-wheel-tests-01/formal-02`，不增加原生像素认证。ServerForms依据 `.cache/server-forms-independent-qa/formal-04/FINAL.json` 与 `.cache/server-forms-root-close-01/INTEGRATION-PACKAGE-05.json`；NPC依据 `.cache/npc-independent-qa-01/formal-02/FINAL.json`、`.cache/npc-root-close-01/PACKAGE-01.json` 与 `.cache/npc-public-01/production-01/FINAL.json`，三者分别记录合同、实际包消费及公开预览。固定官方源入口：[ui目录](https://github.com/Mojang/bedrock-samples/tree/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui)。
 
 
-**UGC与沉浸式阅读器已接入有限源组合**：本轮新增UGCViewer /UGCItemCard与ImmersiveReader /ImmersiveReaderButton，当前177组件 /194运行时值。正式首74项67通过 /7方法失败保留，修正后14项12通过 /2只读断言失败，再修后2项通过；74个不同用例按各自最新方法均已验证，其中68项新增、6项相关导航，不合称单轮74全绿。42个完整源材质平面共1,986,950像素RGBA零差。React18.3.1 /19.3.1实际包的类型 /SSR /资源和默认Vite开发 /生产四组合通过，公开页12项通过。宿主White候选、静态reader图标、字体 /默认锚点 /provider /原生整页仍未认证。仅这两行E→有限A，其余204行保持原样；尚缺Credits /Invite /Portfolio。局部Web材料及包合格不代表原生整页完成，见 [UGC_VIEWER_QA.md](UGC_VIEWER_QA.md) 与 [IMMERSIVE_READER_QA.md](IMMERSIVE_READER_QA.md)。
+**UGC与沉浸式阅读器已接入有限源组合**：UGC阶段新增UGCViewer /UGCItemCard与ImmersiveReader /ImmersiveReaderButton，当时177组件 /194运行时值。正式首74项67通过 /7方法失败保留，修正后14项12通过 /2只读断言失败，再修后2项通过；74个不同用例按各自最新方法均已验证，其中68项新增、6项相关导航，不合称单轮74全绿。42个完整源材质平面共1,986,950像素RGBA零差。React18.3.1 /19.3.1实际包的类型 /SSR /资源和默认Vite开发 /生产四组合通过，公开页12项通过。宿主White候选、静态reader图标、字体 /默认锚点 /provider /原生整页仍未认证。仅这两行E→有限A，其余204行保持原样；尚缺Credits /Invite /Portfolio。局部Web材料及包合格不代表原生整页完成，见 [UGC_VIEWER_QA.md](UGC_VIEWER_QA.md) 与 [IMMERSIVE_READER_QA.md](IMMERSIVE_READER_QA.md)。
+
+
+**Portfolio已接入有限源组合**：本轮新增Portfolio、PortfolioPhoto、PortfolioCaptionField、PortfolioPicker、PortfolioPickerItem与PortfolioPageTurnButton六个组件，当前183组件 /200运行时值。当前62个不同合同按实际受检阶段验证：46项行为来自同源07批，10项材质来自同源06批，6项导航在两个预览host修复后由08批重跑。06批50通过 /12收据断言失败及所有更早失败均保留；不累加重复执行、不称单轮62全绿。完全相同产品的06批10项材质检查通过，96个完整源／Web平面共1,982,470像素RGBA零差；07只重跑行为，保留该材质来源与具名Web采样合同。新的React18.3.1 /19.3.1实际183组件 /200运行时值包通过ESM、类型、SSR、原图、字体和许可证检查，身份区别于旧mounted4FAIL包；新包的默认Vite React18 /19开发／生产四实际安装组合通过；两项明确demo-host修复后的新site公开页16项通过，1440／390截图与320本地滚动边界分别记录；旧公开选择器失败和14通过 /1全页溢出失败保留。九张Portfolio三态图、截图frame／provider、精确大写White、默认锚点／字体和原生整页仍未认证。只有portfolio_screen.json该行E→有限A，其余205行保持原字节。尚缺Credits /Invite；A类与183组件均不构成原生整页认证，详见 [PORTFOLIO_QA.md](PORTFOLIO_QA.md)。

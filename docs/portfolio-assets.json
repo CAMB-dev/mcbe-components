@@ -1,0 +1,987 @@
+{
+  "version": 1,
+  "source": {
+    "repository": "https://github.com/Mojang/bedrock-samples",
+    "release": "v1.26.60.5",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "scope": "Finite Portfolio viewing and picking branches with selected inherited common caption/buttons/scroll and reusable Reader button; not native rendering or service certification",
+  "counts": {
+    "semanticKeys": 23,
+    "wholePNG": 23,
+    "physicalExistingPNG": 16,
+    "embeddedOnlyPNG": 1,
+    "newPhysicalPNG": 6,
+    "rawMetadata": 12,
+    "newPhysicalMetadata": 2,
+    "newLicenseFiles": 1,
+    "newPhysicalFiles": 9
+  },
+  "license": {
+    "path": "src/assets/portfolio/LICENSE.md",
+    "upstreamPath": "LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "terms": "Original Mojang license / Minecraft EULA; not MIT-relicensed artwork"
+  },
+  "sourceFiles": [
+    {
+      "path": "resource_pack/ui/portfolio_screen.json",
+      "bytes": 26550,
+      "sha256": "6482640c97b4367f51060c86c283cc3099a8bbde90f21e89691e72af4192a672",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/portfolio_screen.json"
+    },
+    {
+      "path": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_common.json"
+    },
+    {
+      "path": "resource_pack/ui/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_template_buttons.json"
+    },
+    {
+      "path": "resource_pack/ui/ui_edu_common.json",
+      "bytes": 68229,
+      "sha256": "5d125ff357e7f3fec63e451a2fdb5721c0f18b05e40d59ebc7522ef62b95b210",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_edu_common.json"
+    },
+    {
+      "path": "resource_pack/ui/immersive_reader.json",
+      "bytes": 6543,
+      "sha256": "365fbc4612c86a13839c257f8a01b04bd086905f1a648c14dd85eeb0bc5837d3",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/immersive_reader.json"
+    },
+    {
+      "path": "resource_pack/ui/_global_variables.json",
+      "bytes": 20210,
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/_global_variables.json"
+    }
+  ],
+  "resources": [
+    {
+      "key": "book_binding",
+      "sourceUse": "portfolio.book_background / book_binding@portfolio.book_binding",
+      "path": "resource_pack/textures/ui/book_binding.png",
+      "bytes": 97,
+      "sha256": "a8aa7c69d1916831f315143b231c0a75c3e8ed37885b3e02c5ac6d07d1c3b513",
+      "dimensions": [
+        5,
+        2
+      ],
+      "decodedRGBA": {
+        "sha256": "2f47a3f43dcc895c32c7ec46c9c1b2db05667a99bafee78720633fd0fd2e200d",
+        "bytes": 40,
+        "pixels": 10,
+        "alphaDistribution": {
+          "255": 10
+        },
+        "distinctRGBA": 6
+      },
+      "destination": "src/assets/portfolio/book_binding.png",
+      "delivery": "new-whole-original-physical",
+      "metadata": {
+        "bytes": 91,
+        "sha256": "00a184d61eaec29f001c440a8af9a44e20182bf9270af8a8d467fdbb10c927d0",
+        "raw": {
+          "nineslice_size": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "base_size": [
+            5,
+            2
+          ]
+        },
+        "existingWholeFiles": [],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/book_binding.json",
+        "destination": "src/assets/portfolio/book_binding.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/book_binding.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/book_binding.png"
+    },
+    {
+      "key": "book_frame",
+      "sourceUse": "portfolio.book_background.texture and portfolio.pick_panel.texture",
+      "path": "resource_pack/textures/ui/book_frame.png",
+      "bytes": 635,
+      "sha256": "161556489468a5f8d2040c03ca3ec9fffe849196e73243d1371c703fc6b01036",
+      "dimensions": [
+        42,
+        42
+      ],
+      "decodedRGBA": {
+        "sha256": "b01965c3554390d3845670944d2ce90d4c7aca53f0ae008ab618f27d250a2839",
+        "bytes": 7056,
+        "pixels": 1764,
+        "alphaDistribution": {
+          "0": 72,
+          "255": 1692
+        },
+        "distinctRGBA": 49
+      },
+      "destination": "src/assets/portfolio/book_frame.png",
+      "delivery": "new-whole-original-physical",
+      "metadata": {
+        "bytes": 63,
+        "sha256": "4ff7e55ca1035bae25e749e7104fc55a7d08bdcb00d316b179ce3d35d0956ead",
+        "raw": {
+          "nineslice_size": 21,
+          "base_size": [
+            42,
+            42
+          ]
+        },
+        "existingWholeFiles": [],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/book_frame.json",
+        "destination": "src/assets/portfolio/book_frame.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/book_frame.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/book_frame.png"
+    },
+    {
+      "key": "book_spine",
+      "sourceUse": "portfolio.book_background / top_spine,bottom_spine@portfolio.book_spine",
+      "path": "resource_pack/textures/ui/book_spine.png",
+      "bytes": 97,
+      "sha256": "574abad8bc565244e99d69a522ef8c9cd030604fc6b52d08e773c2c4fb0c50ba",
+      "dimensions": [
+        8,
+        1
+      ],
+      "decodedRGBA": {
+        "sha256": "0a46d8f86251024f8f093090ad296b8d71760bbef593bc7222a387293392d489",
+        "bytes": 32,
+        "pixels": 8,
+        "alphaDistribution": {
+          "255": 8
+        },
+        "distinctRGBA": 3
+      },
+      "existingDestination": "src/assets/book/book_spine.png",
+      "delivery": "existing-whole-original-physical",
+      "metadata": {
+        "bytes": 76,
+        "sha256": "86694989347928ead15ba47f2e912dc1cfbbd999aa963c543cb010289ae648a7",
+        "raw": {
+          "nineslice_size": [
+            4,
+            1,
+            4,
+            1
+          ],
+          "base_size": [
+            8,
+            2
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_spine.json"
+        ],
+        "physicalBaseMismatch": true,
+        "path": "resource_pack/textures/ui/book_spine.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/book_spine.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/book_spine.png"
+    },
+    {
+      "key": "book_trash_default",
+      "sourceUse": "portfolio.photo_trash_button_left/right@edu_common.photo_trash_button / default@portfolio.trash_default",
+      "path": "resource_pack/textures/ui/book_trash_default.png",
+      "bytes": 182,
+      "sha256": "ebadf8235a65ee290c18a862c538b6700f67ac65a480576d7853fda57ad19671",
+      "dimensions": [
+        16,
+        16
+      ],
+      "decodedRGBA": {
+        "sha256": "e566570995858d1476a48144c73334c6da90c05417bc9595bd730796f414b496",
+        "bytes": 1024,
+        "pixels": 256,
+        "alphaDistribution": {
+          "0": 177,
+          "255": 79
+        },
+        "distinctRGBA": 3
+      },
+      "existingDestination": "src/assets/book/book_trash_default.png",
+      "delivery": "existing-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/book_trash_default.png"
+    },
+    {
+      "key": "close_button_default",
+      "sourceUse": "portfolio.close_button / default@portfolio.close_button_default",
+      "path": "resource_pack/textures/ui/close_button_default.png",
+      "bytes": 163,
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "dimensions": [
+        15,
+        15
+      ],
+      "decodedRGBA": {
+        "sha256": "e6e05d051820c9c475096e539d00671e037e686603147f839661513b06b2c144",
+        "bytes": 900,
+        "pixels": 225,
+        "alphaDistribution": {
+          "0": 216,
+          "255": 9
+        },
+        "distinctRGBA": 2
+      },
+      "existingDestination": "src/assets/book/close_button_default.png",
+      "delivery": "existing-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_button_default.png"
+    },
+    {
+      "key": "close_button_hover",
+      "sourceUse": "portfolio.close_button / hover@portfolio.close_button_hover",
+      "path": "resource_pack/textures/ui/close_button_hover.png",
+      "bytes": 164,
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "dimensions": [
+        15,
+        15
+      ],
+      "decodedRGBA": {
+        "sha256": "1807d5168cffaf2cb9dacc4f8cb7b2f41dfcc48b28ae9274a045e2018973a138",
+        "bytes": 900,
+        "pixels": 225,
+        "alphaDistribution": {
+          "255": 225
+        },
+        "distinctRGBA": 2
+      },
+      "existingDestination": "src/assets/book/close_button_hover.png",
+      "delivery": "existing-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_button_hover.png"
+    },
+    {
+      "key": "close_button_pressed",
+      "sourceUse": "portfolio.close_button / pressed@portfolio.close_button_pressed",
+      "path": "resource_pack/textures/ui/close_button_pressed.png",
+      "bytes": 1416,
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "dimensions": [
+        15,
+        15
+      ],
+      "decodedRGBA": {
+        "sha256": "713aede2a259790c2c9fabbb3e56b537d1d582e12582aad2e197bf4f7e2181ed",
+        "bytes": 900,
+        "pixels": 225,
+        "alphaDistribution": {
+          "255": 225
+        },
+        "distinctRGBA": 2
+      },
+      "existingDestination": "src/assets/book/close_button_pressed.png",
+      "delivery": "existing-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/close_button_pressed.png"
+    },
+    {
+      "key": "photo_corner_bl",
+      "sourceUse": "portfolio.photo_item and portfolio.page_photo / photo_corner_bl",
+      "path": "resource_pack/textures/ui/photo_corner_bl.png",
+      "bytes": 148,
+      "sha256": "8b30ce01626375e38c1930ff81428d52918b426b391c40b4dd46d5efca812868",
+      "dimensions": [
+        19,
+        19
+      ],
+      "decodedRGBA": {
+        "sha256": "20eecad6ed56519046287231e8135d1ad67e1e89d2ec86478ba43c9a835e7494",
+        "bytes": 1444,
+        "pixels": 361,
+        "alphaDistribution": {
+          "0": 199,
+          "255": 162
+        },
+        "distinctRGBA": 11
+      },
+      "destination": "src/assets/portfolio/photo_corner_bl.png",
+      "delivery": "new-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/photo_corner_bl.png"
+    },
+    {
+      "key": "photo_corner_br",
+      "sourceUse": "portfolio.photo_item and portfolio.page_photo / photo_corner_br",
+      "path": "resource_pack/textures/ui/photo_corner_br.png",
+      "bytes": 157,
+      "sha256": "fbb5480c38cbf14b279d934a3865ca6950706a2f678d9d2fc4214464e4f108aa",
+      "dimensions": [
+        19,
+        19
+      ],
+      "decodedRGBA": {
+        "sha256": "49732061882b497ff4cc2545c186dc64d6a9bef273221a45c2ce5a393de02fdc",
+        "bytes": 1444,
+        "pixels": 361,
+        "alphaDistribution": {
+          "0": 199,
+          "255": 162
+        },
+        "distinctRGBA": 11
+      },
+      "destination": "src/assets/portfolio/photo_corner_br.png",
+      "delivery": "new-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/photo_corner_br.png"
+    },
+    {
+      "key": "photo_corner_tl",
+      "sourceUse": "portfolio.photo_item and portfolio.page_photo / photo_corner_tl",
+      "path": "resource_pack/textures/ui/photo_corner_tl.png",
+      "bytes": 162,
+      "sha256": "1b0073035aca07f2bfbd29490d978439f1c41e7f81b17c924eeb0a367b915575",
+      "dimensions": [
+        19,
+        19
+      ],
+      "decodedRGBA": {
+        "sha256": "7b3b3b1bb28a99262240dc2f65bb37730d8b2d4188c1d44feb03c4d138ec10bf",
+        "bytes": 1444,
+        "pixels": 361,
+        "alphaDistribution": {
+          "0": 199,
+          "255": 162
+        },
+        "distinctRGBA": 11
+      },
+      "destination": "src/assets/portfolio/photo_corner_tl.png",
+      "delivery": "new-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/photo_corner_tl.png"
+    },
+    {
+      "key": "photo_corner_tr",
+      "sourceUse": "portfolio.photo_item and portfolio.page_photo / photo_corner_tr",
+      "path": "resource_pack/textures/ui/photo_corner_tr.png",
+      "bytes": 151,
+      "sha256": "93a5705968503ccbab8936f3699813c844d8af99999cf3312630a4bc64c16372",
+      "dimensions": [
+        19,
+        19
+      ],
+      "decodedRGBA": {
+        "sha256": "ed89db0d405ef257aec414e0d4bed5faa37062cacb9e39a234ad720b66543b8d",
+        "bytes": 1444,
+        "pixels": 361,
+        "alphaDistribution": {
+          "0": 199,
+          "255": 162
+        },
+        "distinctRGBA": 11
+      },
+      "destination": "src/assets/portfolio/photo_corner_tr.png",
+      "delivery": "new-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/photo_corner_tr.png"
+    },
+    {
+      "key": "trash_hover",
+      "sourceUse": "portfolio.photo_trash_button_left/right / hover@portfolio.trash_hover",
+      "path": "resource_pack/textures/ui/trash_hover.png",
+      "bytes": 179,
+      "sha256": "3fa17ecc575f5f0c940e6f5ec1c6be71841ab285b17f9010dac2671ee14d8547",
+      "dimensions": [
+        16,
+        16
+      ],
+      "decodedRGBA": {
+        "sha256": "0023ec4cc2f5832d615949e54424fcec09584b328ac9e8450ec2fbbd14c48683",
+        "bytes": 1024,
+        "pixels": 256,
+        "alphaDistribution": {
+          "0": 16,
+          "255": 240
+        },
+        "distinctRGBA": 3
+      },
+      "existingDestination": "src/assets/book/trash_hover.png",
+      "delivery": "existing-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/trash_hover.png"
+    },
+    {
+      "key": "trash_pressed",
+      "sourceUse": "portfolio.photo_trash_button_left/right / pressed@portfolio.trash_pressed",
+      "path": "resource_pack/textures/ui/trash_pressed.png",
+      "bytes": 186,
+      "sha256": "cd3d86db98985b34f6b0834f3e18fbcdbbbac2a0588775f26af76eb4d0f72d55",
+      "dimensions": [
+        16,
+        16
+      ],
+      "decodedRGBA": {
+        "sha256": "778e13fd76635a181f0f0217c9804123c1c80de4263ec67a0032c0e04bd29d83",
+        "bytes": 1024,
+        "pixels": 256,
+        "alphaDistribution": {
+          "0": 16,
+          "255": 240
+        },
+        "distinctRGBA": 3
+      },
+      "existingDestination": "src/assets/book/trash_pressed.png",
+      "delivery": "existing-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/trash_pressed.png"
+    },
+    {
+      "key": "button_borderless_light",
+      "sourceUse": "portfolio.export_button/add_photo_button@common_buttons.light_text_button and im_content_button@im_reader.reader_button@common_buttons.light_content_button default",
+      "path": "resource_pack/textures/ui/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "dimensions": [
+        4,
+        4
+      ],
+      "decodedRGBA": {
+        "sha256": "9092e39baddfeaed8a28a47ee8548451162f6b4dc50478b412720d04c55ff841",
+        "bytes": 64,
+        "pixels": 16,
+        "alphaDistribution": {
+          "255": 16
+        },
+        "distinctRGBA": 6
+      },
+      "existingDestination": "src/assets/document-viewer/button_borderless_light.png",
+      "delivery": "existing-whole-original-physical",
+      "metadata": {
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_texteditbox_hover.json",
+          "src/assets/document-viewer/banners_no_border.json",
+          "src/assets/document-viewer/button_borderless_light.json",
+          "src/assets/document-viewer/button_borderless_lighthover.json",
+          "src/assets/document-viewer/button_borderless_lightpressed.json",
+          "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+          "src/assets/emote-wheel/button_borderless_light.json",
+          "src/assets/emote-wheel/button_borderless_lighthover.json",
+          "src/assets/emote-wheel/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/Banners.json",
+          "src/assets/player-permissions/button_borderless_dark.json",
+          "src/assets/player-permissions/button_borderless_darkhover.json",
+          "src/assets/player-permissions/button_borderless_darkpressed.json",
+          "src/assets/player-permissions/button_borderless_darkpressednohover.json",
+          "src/assets/player-permissions/button_borderless_light.json",
+          "src/assets/player-permissions/button_borderless_lighthover.json",
+          "src/assets/player-permissions/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/button_borderless_lightpressednohover.json",
+          "src/assets/player-permissions/text_label_box.json"
+        ],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/button_borderless_light.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_light.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_light.png"
+    },
+    {
+      "key": "button_borderless_lighthover",
+      "sourceUse": "same selected inherited common_buttons.light_button_assets hover",
+      "path": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "dimensions": [
+        4,
+        4
+      ],
+      "decodedRGBA": {
+        "sha256": "8bc3a14bce9cffb15dc77a3937ecad1c62de61459dce90bca6d87404ae72a084",
+        "bytes": 64,
+        "pixels": 16,
+        "alphaDistribution": {
+          "255": 16
+        },
+        "distinctRGBA": 3
+      },
+      "existingDestination": "src/assets/document-viewer/button_borderless_lighthover.png",
+      "delivery": "existing-whole-original-physical",
+      "metadata": {
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_texteditbox_hover.json",
+          "src/assets/document-viewer/banners_no_border.json",
+          "src/assets/document-viewer/button_borderless_light.json",
+          "src/assets/document-viewer/button_borderless_lighthover.json",
+          "src/assets/document-viewer/button_borderless_lightpressed.json",
+          "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+          "src/assets/emote-wheel/button_borderless_light.json",
+          "src/assets/emote-wheel/button_borderless_lighthover.json",
+          "src/assets/emote-wheel/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/Banners.json",
+          "src/assets/player-permissions/button_borderless_dark.json",
+          "src/assets/player-permissions/button_borderless_darkhover.json",
+          "src/assets/player-permissions/button_borderless_darkpressed.json",
+          "src/assets/player-permissions/button_borderless_darkpressednohover.json",
+          "src/assets/player-permissions/button_borderless_light.json",
+          "src/assets/player-permissions/button_borderless_lighthover.json",
+          "src/assets/player-permissions/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/button_borderless_lightpressednohover.json",
+          "src/assets/player-permissions/text_label_box.json"
+        ],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lighthover.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lighthover.png"
+    },
+    {
+      "key": "button_borderless_lightpressed",
+      "sourceUse": "same selected inherited common_buttons.light_button_assets pressed",
+      "path": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "dimensions": [
+        4,
+        4
+      ],
+      "decodedRGBA": {
+        "sha256": "0883c873c08e5fc9b05494527a4dc4b7fa98d75e4d936102596fe3a3a1fb9a54",
+        "bytes": 64,
+        "pixels": 16,
+        "alphaDistribution": {
+          "255": 16
+        },
+        "distinctRGBA": 3
+      },
+      "existingDestination": "src/assets/document-viewer/button_borderless_lightpressed.png",
+      "delivery": "existing-whole-original-physical",
+      "metadata": {
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/book/book_texteditbox_hover.json",
+          "src/assets/document-viewer/banners_no_border.json",
+          "src/assets/document-viewer/button_borderless_light.json",
+          "src/assets/document-viewer/button_borderless_lighthover.json",
+          "src/assets/document-viewer/button_borderless_lightpressed.json",
+          "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+          "src/assets/emote-wheel/button_borderless_light.json",
+          "src/assets/emote-wheel/button_borderless_lighthover.json",
+          "src/assets/emote-wheel/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/Banners.json",
+          "src/assets/player-permissions/button_borderless_dark.json",
+          "src/assets/player-permissions/button_borderless_darkhover.json",
+          "src/assets/player-permissions/button_borderless_darkpressed.json",
+          "src/assets/player-permissions/button_borderless_darkpressednohover.json",
+          "src/assets/player-permissions/button_borderless_light.json",
+          "src/assets/player-permissions/button_borderless_lighthover.json",
+          "src/assets/player-permissions/button_borderless_lightpressed.json",
+          "src/assets/player-permissions/button_borderless_lightpressednohover.json",
+          "src/assets/player-permissions/text_label_box.json"
+        ],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lightpressed.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lightpressed.png"
+    },
+    {
+      "key": "disabledButtonNoBorder",
+      "sourceUse": "same selected inherited common_buttons.light_button_assets locked",
+      "path": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "dimensions": [
+        2,
+        2
+      ],
+      "decodedRGBA": {
+        "sha256": "e67567d79bb3aa67a31d6b356994cc8e12575ac8559f4d065015cdf0b75450bd",
+        "bytes": 16,
+        "pixels": 4,
+        "alphaDistribution": {
+          "255": 4
+        },
+        "distinctRGBA": 1
+      },
+      "existingDestination": "src/assets/document-viewer/disabledButtonNoBorder.png",
+      "delivery": "existing-whole-original-physical",
+      "metadata": {
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/disabledButtonNoBorder.json",
+          "src/assets/document-viewer/permissions_player_fade_overlay.json",
+          "src/assets/emote-wheel/Black.json",
+          "src/assets/emote-wheel/disabledButtonNoBorder.json",
+          "src/assets/jigsaw/control.json",
+          "src/assets/player-permissions/disabledButtonNoBorder.json",
+          "src/assets/player-permissions/permissions_player_fade_overlay.json"
+        ],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/disabledButtonNoBorder.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/disabledButtonNoBorder.png"
+    },
+    {
+      "key": "focus_border_white",
+      "sourceUse": "common_buttons.new_ui_button_panel / focus_border; portfolio.text_edit_box_hover_indent forces RGBA0",
+      "path": "resource_pack/textures/ui/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "decodedRGBA": {
+        "sha256": "7ade542643cd10ac042f8297c694c945d49f968ae8d84775db7fccdb28f89bbb",
+        "bytes": 100,
+        "pixels": 25,
+        "alphaDistribution": {
+          "0": 9,
+          "255": 16
+        },
+        "distinctRGBA": 2
+      },
+      "existingDestination": "src/assets/document-viewer/focus_border_white.png",
+      "delivery": "existing-whole-original-physical",
+      "metadata": {
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/focus_border_white.json",
+          "src/assets/emote-wheel/focus_border_white.json",
+          "src/assets/player-permissions/focus_border_white.json",
+          "src/assets/player-permissions/square_image_border_white.json"
+        ],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/focus_border_white.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/focus_border_white.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/focus_border_white.png"
+    },
+    {
+      "key": "immersive_reader",
+      "sourceUse": "portfolio.im_content_button@im_reader.reader_button / im_reader.reader_button_contents",
+      "path": "resource_pack/textures/ui/immersive_reader.png",
+      "bytes": 229,
+      "sha256": "afdb8dbfda225fd18bf4feee56ba775377df4b23a9b6f6f97a93b2e6710c5ea2",
+      "dimensions": [
+        19,
+        19
+      ],
+      "decodedRGBA": {
+        "sha256": "ac227a24ffb777da532bbce50f5469d0c2545c5c6e19ab6adf34d88b5b1c3a20",
+        "bytes": 1444,
+        "pixels": 361,
+        "alphaDistribution": {
+          "0": 205,
+          "255": 156
+        },
+        "distinctRGBA": 5
+      },
+      "existingDestination": "src/assets/npc/immersive_reader.png",
+      "delivery": "existing-whole-original-physical",
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/immersive_reader.png"
+    },
+    {
+      "key": "edit_box_indent",
+      "sourceUse": "portfolio.text_edit_control@common.multiline_text_edit_box / locked/edit_box_indent@common.edit_box_indent only",
+      "path": "resource_pack/textures/ui/edit_box_indent.png",
+      "bytes": 126,
+      "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109",
+      "dimensions": [
+        6,
+        6
+      ],
+      "decodedRGBA": {
+        "sha256": "a82235c78dc05688bca0fbe6319c6b58c2056e15dbdfb68fc0dd6adf1ca4ed66",
+        "bytes": 144,
+        "pixels": 36,
+        "alphaDistribution": {
+          "255": 36
+        },
+        "distinctRGBA": 4
+      },
+      "delivery": "existing-whole-original-embedded",
+      "existingModule": "src/ugc-reader-assets.ts",
+      "existingExpression": "ugcReaderAssets.editNormal.url",
+      "upstreamExistingModule": "src/workstation-image-assets.ts",
+      "upstreamExistingExpression": "workstationImageAssets.editBox.url",
+      "metadata": {
+        "bytes": 60,
+        "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+        "raw": {
+          "nineslice_size": 2,
+          "base_size": [
+            6,
+            6
+          ]
+        },
+        "existingWholeFiles": [],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/edit_box_indent.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/edit_box_indent.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/edit_box_indent.png"
+    },
+    {
+      "key": "ScrollRail",
+      "sourceUse": "portfolio.pick_panel / scroll@common.scrolling_panel / common.scroll_box_indent",
+      "path": "resource_pack/textures/ui/ScrollRail.png",
+      "bytes": 70,
+      "sha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be",
+      "dimensions": [
+        1,
+        1
+      ],
+      "decodedRGBA": {
+        "sha256": "8a65b09d36586541c661b43551bb76c14cfa032d0610061e6b6bc67f3c0afa3d",
+        "bytes": 4,
+        "pixels": 1,
+        "alphaDistribution": {
+          "255": 1
+        },
+        "distinctRGBA": 1
+      },
+      "existingDestination": "src/assets/document-viewer/ScrollRail.png",
+      "delivery": "existing-whole-original-physical",
+      "metadata": {
+        "bytes": 60,
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/ScrollRail.json",
+          "src/assets/document-viewer/touchScrollBox.json",
+          "src/assets/player-permissions/ScrollRail.json",
+          "src/assets/player-permissions/touchScrollBox.json",
+          "src/assets/server-forms/list_item_divider_line_light.json"
+        ],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/ScrollRail.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/ScrollRail.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/ScrollRail.png"
+    },
+    {
+      "key": "ScrollHandle",
+      "sourceUse": "portfolio.pick_panel / scroll@common.scrolling_panel / common.scrollbar_box_image mouse branch",
+      "path": "resource_pack/textures/ui/ScrollHandle.png",
+      "bytes": 89,
+      "sha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a",
+      "dimensions": [
+        3,
+        5
+      ],
+      "decodedRGBA": {
+        "sha256": "23e048c7db98b28dbc07da918345224b49fc83354e2648d29aee77fd86b67bd5",
+        "bytes": 60,
+        "pixels": 15,
+        "alphaDistribution": {
+          "255": 15
+        },
+        "distinctRGBA": 4
+      },
+      "existingDestination": "src/assets/document-viewer/ScrollHandle.png",
+      "delivery": "existing-whole-original-physical",
+      "metadata": {
+        "bytes": 91,
+        "sha256": "08856911c52b8d9e90c4906df474bf3785813187971a0d2b57b0d3a7e82c4a77",
+        "raw": {
+          "nineslice_size": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "base_size": [
+            3,
+            5
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/ScrollHandle.json",
+          "src/assets/player-permissions/ScrollHandle.json"
+        ],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/ScrollHandle.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/ScrollHandle.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/ScrollHandle.png"
+    },
+    {
+      "key": "touchScrollBox",
+      "sourceUse": "portfolio.pick_panel / scroll@common.scrolling_panel / common.touch_scrollbar_box_image touch branch",
+      "path": "resource_pack/textures/ui/touchScrollBox.png",
+      "bytes": 863,
+      "sha256": "86743f082bc3cdfbe4971aad9491069f4338576ec6ad9a23dddac614d5148efe",
+      "dimensions": [
+        1,
+        1
+      ],
+      "decodedRGBA": {
+        "sha256": "4565d82e73c5ec14b9c261c0eae745a730550cf5e1747c5fbabb38336b8dcdfe",
+        "bytes": 4,
+        "pixels": 1,
+        "alphaDistribution": {
+          "255": 1
+        },
+        "distinctRGBA": 1
+      },
+      "existingDestination": "src/assets/document-viewer/touchScrollBox.png",
+      "delivery": "existing-whole-original-physical",
+      "metadata": {
+        "bytes": 60,
+        "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+        "raw": {
+          "nineslice_size": 1,
+          "base_size": [
+            1,
+            1
+          ]
+        },
+        "existingWholeFiles": [
+          "src/assets/document-viewer/ScrollRail.json",
+          "src/assets/document-viewer/touchScrollBox.json",
+          "src/assets/player-permissions/ScrollRail.json",
+          "src/assets/player-permissions/touchScrollBox.json",
+          "src/assets/server-forms/list_item_divider_line_light.json"
+        ],
+        "physicalBaseMismatch": false,
+        "path": "resource_pack/textures/ui/touchScrollBox.json",
+        "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/touchScrollBox.json"
+      },
+      "fixedURL": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/touchScrollBox.png"
+    }
+  ],
+  "missingTextures": [
+    {
+      "path": "resource_pack/textures/ui/portfolio_convertpicture_default",
+      "allExtensionVariants": [],
+      "casefoldPNGs": [],
+      "requiredHostResource": true,
+      "generatedOrAliasedDefault": false
+    },
+    {
+      "path": "resource_pack/textures/ui/portfolio_convertpicture_hover",
+      "allExtensionVariants": [],
+      "casefoldPNGs": [],
+      "requiredHostResource": true,
+      "generatedOrAliasedDefault": false
+    },
+    {
+      "path": "resource_pack/textures/ui/portfolio_convertpicture_pressed",
+      "allExtensionVariants": [],
+      "casefoldPNGs": [],
+      "requiredHostResource": true,
+      "generatedOrAliasedDefault": false
+    },
+    {
+      "path": "resource_pack/textures/ui/portfolio_pageleft_default",
+      "allExtensionVariants": [],
+      "casefoldPNGs": [],
+      "requiredHostResource": true,
+      "generatedOrAliasedDefault": false
+    },
+    {
+      "path": "resource_pack/textures/ui/portfolio_pageleft_hover",
+      "allExtensionVariants": [],
+      "casefoldPNGs": [],
+      "requiredHostResource": true,
+      "generatedOrAliasedDefault": false
+    },
+    {
+      "path": "resource_pack/textures/ui/portfolio_pageleft_pressed",
+      "allExtensionVariants": [],
+      "casefoldPNGs": [],
+      "requiredHostResource": true,
+      "generatedOrAliasedDefault": false
+    },
+    {
+      "path": "resource_pack/textures/ui/portfolio_pageright_default",
+      "allExtensionVariants": [],
+      "casefoldPNGs": [],
+      "requiredHostResource": true,
+      "generatedOrAliasedDefault": false
+    },
+    {
+      "path": "resource_pack/textures/ui/portfolio_pageright_hover",
+      "allExtensionVariants": [],
+      "casefoldPNGs": [],
+      "requiredHostResource": true,
+      "generatedOrAliasedDefault": false
+    },
+    {
+      "path": "resource_pack/textures/ui/portfolio_pageright_pressed",
+      "allExtensionVariants": [],
+      "casefoldPNGs": [],
+      "requiredHostResource": true,
+      "generatedOrAliasedDefault": false
+    }
+  ],
+  "unresolved": {
+    "screenshotFrame": "Required caller material for unresolved $screenshot_frame_texture; only2 usages in all206 UI files,0 definitions; no substitution from Book cover/frame",
+    "screenshotImage": "Caller screenshot URL/content; filesystem provider/pathcollection not a library I/O service",
+    "pagePreviousStates": "Required host whole default/hover/pressed states or explicit host visual, no replacement with non-portfolio book_pageleft art",
+    "pageNextStates": "Required host whole states; no drawn/recolored/generated arrows",
+    "convertStates": "Required host whole states; no invented convert glyph",
+    "nativeMaterialEvaluation": "Not certified by raw metadata, PNG dimensions or RGBA identity"
+  },
+  "dormantDefinitionsNotBundled": [
+    {
+      "definition": "portfolio.header_panel",
+      "texture": "textures/ui/header_bar",
+      "reason": "No reference in screen-root control tree; existence is not a mount requirement"
+    }
+  ],
+  "limits": [
+    "24 textures cover direct14 plus10 selected inherited light buttons/reader glyph/caption locked indent/focus/scroll branches. This is not full conservative screen/root dependency closure.",
+    "Header_bar directdefinition is dormant: header_panel has no control reference from portfolio screen root; do not mount it merely because it exists. Retain available art witness separately; exclude from mounted texture set unless a public standalone header is intentionally provided.",
+    "Caption normal indent is transparent panel; hover/pressed uses focus_border_white with explicit RGBA0. Locked caption uses common.edit_box_indent only. No normal/hover edit-box skin default.",
+    "book_spine physical8x1/rawbase8x2 mismatch must stay raw; metadata may not be naively applied as physical nine-slice source contract.",
+    "Global body/page number RGB[.74,.64,.53], close defaultRGB[0,0,0]; no global screenshotframe exists.",
+    "Book_binding and frame/corners source whole images only; preserve sourcelayer/color and fractional geometry independently.",
+    "Actual source.PNG wholebytes and decodedRGBA are verified. No GPU/browser/native/art redrawing/build/pack/install and no tracked edits."
+  ]
+}
