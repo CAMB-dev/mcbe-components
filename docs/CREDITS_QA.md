@@ -76,7 +76,7 @@ Skip为form-fitting light text源链，bottom-right offset−8,−8，visible由
 
 七个已证实mounted缺陷：parent input资格撤回；宿主action移除control；内容替换却使用旧短layout完成；从controlled-source返回时错误累计期间时长；含冒号的不同factory身份发生通知碰撞；原生传播期间移除keyboard policy；host callback期间移除policy。修复与回归保留原身份。另有纯model shape检查初次7PASS／1FAIL，问题是非null panel漏写button字段时被当默认值；修后8PASS，不能混称第八个mounted缺陷。早期layout CPU的copy/accessor/来源范围/换行问题和checker自身run边界假设纠正也保留各自记录；独立core24与fallback9组是纯CPU资格，不是native字体路由。
 
-原生边缘字格追加研究的三个候选仍给出相同空ó，缺350个native前景像素；四个完整行holdout失败保留。它没有恢复native lookup／sampler／shader，也不是可发布的native字体映射。logo41,344差异、全部旧97份分析artifact、第三PNG未捕到Skip均不删除。
+此前三个第一图集边缘候选给出相同空ó，缺350个native前景像素；该阶段和四个完整行holdout失败保留。它没有恢复native lookup／sampler／shader。后续新增原始分页数据的独立限定预测见下文；logo41,344差异、旧分析artifact和第三PNG未捕到Skip均保留。
 
 ### 受检功能包、实际安装与展示页
 
@@ -97,6 +97,16 @@ source主展示页本轮9项通过、1223pins零漂移，root查看1440／390截
 最终catalog改为已验状态后另构建展示页：entry仅改变三个publication与三个validation字符串，另外71份文件（含CSS、字体、其他JavaScript、材质及calibration）字节相同。最终新entry的启动／Code及字体运输／Canvas两项smoke再次PASS；这两项不是新的不同合同，不将它们加进原built9的唯一计数。该最终构建关系见SITE-EQUIVALENCE与public04，运行时库index／声明／样式／资源未改变。
 
 后续字体有界候选仍未晋升：只让ó走原glyph_00的两种固定混排分别有448／354个mask差；Mojangles em10 mono的14个ink拓扑虽吻合，保留原空列的固定paint仍500差，灰度128候选250差。纯源对源95ASCII统一转换只74个同时满足形状与真实字距，因此未把它用于ó或四个native holdout。没有删除空列、逐字拟合或把拓扑吻合当位置／RGB认证。
+
+## 原始分页字格的限定预测（2026-11-01）
+
+同一本机原始`font.brarchive`还包含完整的`default8_1.png`和`default8_2.png`。它们都是128×128，与第一张图的字格排列不同。原`default8.json`写有字高12、Y偏移−3和`ascii_extended:true`，但没有直接声明引擎怎样选择分页。源文件字节与行／字格分析见`.cache/credits-native-default-pages-01/FINAL.json`，SHA256 `50e5d05fe619cdab988de6b73f9a5c8884273ae302612ae9fdeb905b744bd800`。
+
+新的候选使用每页16列×10个完整行、共160格：CP437 byte除以160选择页，余数选择整格。其协议先冻结，再执行源门槛和native比较；没有采用失败的TTF转换。CP437162选择原`default8_1.png`的`[16,0,8,12]`，完整字格含14个ink像素、bbox`[0,2,5,10]`，按此前相同的alpha右边界＋1规则得到字距6。95个可打印ASCII及å／ö仍取原第一页，源像素与字距不变。
+
+对原来的`Carlos Lidón`整行，固定字格原点`[648,819]`、physical scale5、ROI`[648,821,1100,59]`及minRGB75／通道差≤2的同一前景分割门槛，得到**0差异、0缺失、0额外**，双方均3175个前景像素。新的源字距自行预测末尾n位于933，没有沿用旧模型从native测得的后缀位置，也未调整图形、空列、位置、字距、字号或阈值。
+
+该阶段168个先前证据文件／FINAL的hash保持不变，14条独立第三图holdout的源字格也未改变，四个旧失败仍是3725／70／5／1405。结果只证明新增原始分页候选解释了这一固定整行的前景形状；没有新增原生采集，也没有证明唯一引擎索引、RGB、阴影、sampler、shader、vignette、其他文字或整屏。协议与完整结果见`.cache/credits-native-pagination-01/FINAL.json`，SHA256 `303d86e5e44db7892bf39ab51c3938ba3680b5a684b009e3b04ece7547ca55b5`。
 
 ### 范围映射与最终身份
 

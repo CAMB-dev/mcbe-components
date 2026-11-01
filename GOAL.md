@@ -7,7 +7,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前124个组件含新增BookReader / BookEditor / BookPage / BookPageTurnButton；另有4个数据、10个渲染 / 几何 / 纹理函数，共138个值导出。docs/component-catalog.json记录具体边界；Book独立30项客户端合同与138值React18 /19实际消费已分别通过，implemented仍不代表原生像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前193个公共组件、6个数据和12个渲染 / 几何 / 纹理函数，共211个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -20,7 +20,20 @@
 - 像素级还原是目标；只有固定游戏版本、屏幕、GUI scale、语言、DPR 和原版字体，逐像素对比之后才能声称零偏差。开放字体的字宽差异必须公开记录。
 - npm pack 后在独立消费项目验证导入、类型、CSS 及字体路径。发布到注册表不在本任务范围。
 
-## 进度
+## 当前验收快照（2026-11-01）
+
+- 公共入口及受检功能包为193组件 /211运行时值。最近完成MobEffectScreen /MobEffectRow，复用33个原图图标、真实滚动与源材质；修复聚焦导致外层移位与末行不可达问题。最近组件增量提交为`73259ac`。
+- MobEffect正式Node10项通过；34个不同桌面 /移动合同为首轮32通过、两个指针用例按可见宿主尺寸修订后2项通过，不称一次34全绿。六个原背景Web平面201,600个RGBA像素严格零差，只覆盖背景采样。
+- 同一功能tar实际React18.3.1 /19.3.1消费、严格声明及默认Vite开发 /生产四组合通过；source /built展示页分别验证。详见[Mob Effect验证](docs/MOB_EFFECT_QA.md)，前一Credits及其他族保留各自独立记录，不累加为当前全套通过率。
+- 新增原始default8分页候选，使固定Carlos整行的前景mask从缺350像素降为0；位置 /比例 /ROI /阈值未改。已提供可选私有位图准备工具，保留原始页与显式候选规则；它不认证其他文字、RGB /阴影、引擎路由或整屏，详见[字体记录](docs/CLASSIC_BITMAP_FONT_QA.md)。
+- 固定206个官方UI文件的范围映射为A40 /B15 /C34 /D32 /E0 /F16 /G63 /H6。A仅表示有限专门组合，不是整文件或原生认证；共享依赖也不要求一文件一个组件。详见[GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md)。
+- [ ] 继续补齐有真实依据的部分GUI、可复用控件和分支，保留服务由宿主提供的边界；当前优先研究Chat Screen与15种Progress源路由，未实现的分支继续保持未完成。
+- [ ] 校准原版字体选择 /字形度量 /阴影 /shader、书本及模型、工作站完整页面；严格保留固定版本 /语言 /GUI scale /DPR和独立原生画面的对比，不以Web背景或同一渲染器自比替代。
+- [ ] 完成剩余Pocket /可选平台 /未知来源的判定及可实现视觉范围。完整目标保持进行中，不由组件数量或E0判断完成。
+
+## 历史分批进度
+
+以下数字、勾选和包身份属于各自当时的验证范围；当前范围与未完成项以上述快照和对应QA为准。
 
 - [x] 建立目标，确认 React + TypeScript
 - [x] 查找官方纹理参考与开源中英文字体
@@ -84,7 +97,7 @@
 - [x] 完成source06石切机minY8的有限独立C对照：完整原TGA URL与RGBA control先逐字节相同，再只改四个局部Y，完整原生残差11,626→11,450、index32为2,078→1,902、alpha0；176个旧差异消除、无新增、57个双方仍错点改变，其余35格和补集全同。公开demo共享source / 真实fallback构造已完成实际build及首轮52项辅助检查，GUI2 / 4 / 5实际source34 / DOM2和回退节点身份保留；不计新增正式case，也不把私有C残差作为新公开整页认证，body lighting / 动画phase / native整体模型和Present未完成。
 - [x] 实现普通Classic书本BookReader / BookEditor，并拆出BookPage / BookPageTurnButton：plain pages与spread、真实textarea、宿主签名快照和结构操作意图；32原PNG / 8metadata保留上游许可，124组件 /138值已导出。独立完整第二批30/30及React18 /19新138值实际tarball消费通过，首批28/2键盘焦点失败保留；六项像素合同仅属Web DOM / CSS / POINT。公开#books的27项辅助及旧6项导航分别通过，首辅助runner完成17后误定位Switch的失败保留、不累计，仍不宣称native0。见docs/BOOK_QA.md。
 - [ ] 继续校准Book祖先百分比clamp、字体换行、caret / IME、安装版活动路由与原生完整书本画面；不以原图SSR、Web像素合同或名义尺寸替代原生验收。
-- [ ] 补齐其余四类Classic组合及可复用零件：普通 / 悬挂告示牌编辑、命令方块、结构编辑 / XYZ字段、拼图编辑。固定官方v1.26.60.5 JSON已确认来源缺口，但未证明安装版完整对象、活动路由或原生截图；不计入当前124组件，也不因catalog已implemented判为完成。
+- [x] 已建立普通 /悬挂告示牌、命令方块、结构编辑 /XYZ及拼图编辑的专门组合与零件，公共入口和实际React18 /19包消费包含这些组件。各自有限合同见Sign /Command Block /Structure /Jigsaw QA；这只完成源码组件范围，不证明安装版活动路由或原生整屏。
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
 
-Goal 保持进行中：首版组件库已实现，严格的游戏画面对照验收尚未完成。当前可通过 `npm run preview -- --port 4173` 打开展示页。
+Goal保持进行中：组件库及有限验证分批推进，严格的游戏画面对照验收尚未完成。需要预览时可运行`npm run preview -- --port 4173`；预览服务与Computer Use按需开启，用完关闭。

@@ -29,6 +29,8 @@ npm install /absolute/path/to/mcbeui-0.1.0.tgz
 
 组件模块引用的公开 PNG / TGA / JSON 保持原始字节，以绝对 `data:` URL 随库构建内联，避免消费项目依赖优化后丢失素材路径；原文件、metadata 和许可仍保留在包内。使用 CSP 的宿主需按所用组件允许 `data:` 图片与材质读取。可选本机游戏字体和私有素材仍由宿主自行提供。
 
+已有原始游戏字体档案的宿主，可使用可选的[分页位图准备工具](docs/CLASSIC_BITMAP_FONT_QA.md)生成`BitmapText`／Credits字体描述表。原图保留在本机私有缓存，默认字体不变；候选分页规则与单行原生前景mask验证的限制均单独记录。
+
 ```tsx
 import { useState } from 'react';
 import { Button, Panel, Switch, TextField } from 'mcbeui';
