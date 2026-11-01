@@ -16,7 +16,7 @@ import {ProgressResourceDialog, planProgressResourceDialog} from './progress-pac
 import type {ProgressResourceRawSelection} from './progress-packs';
 import type {ProgressIndicatorsProps} from './progress-indicators';
 import type {ProgressActionTarget, ProgressScreenModel, ProgressScreenAnimation} from './progress-types';
-import {classicModalTab, deferClassicRequest, scheduleClassicTask, useClassicLayoutEffect, useClassicModal, useClassicNodeRef} from './classic-screen-lifecycle';
+import {classicModalOwnsInput, classicModalTab, deferClassicRequest, scheduleClassicTask, useClassicLayoutEffect, useClassicModal, useClassicNodeRef} from './classic-screen-lifecycle';
 
 export type ProgressModalLayer = 'resource'|'conflict';
 /** Logical host requests; no physical gamepad mapping is inferred. */
@@ -147,7 +147,7 @@ function Session({input,forwardedRef}:{input:Inputs;forwardedRef:Ref<HTMLElement
   useClassicModal(modalBoundary,modalTarget,visible);
   useClassicLayoutEffect(()=>{const node=focusBeforeSwitch.current;focusBeforeSwitch.current=null;if(node&&available(node)&&modalTarget.current?.contains(node))node.focus({preventScroll:true});});
   useClassicLayoutEffect(()=>()=>{latest.current=null;generation.current++;},[]);
-  const live=()=>{const now=latest.current;return now?.snapshot.open&&!now.snapshot.nativeProps?.hidden&&!now.snapshot.disabled&&root.current?.isConnected?now:null;};
+  const live=()=>{const now=latest.current;return now?.snapshot.open&&!now.snapshot.nativeProps?.hidden&&!now.snapshot.disabled&&root.current?.isConnected&&classicModalOwnsInput(modalBoundary.current)?now:null;};
   const active=(control:HTMLElement)=>{const now=live(),b=now&&boundary(now.top);return !!now&&!!b&&b.contains(control)&&available(control)&&!b.closest('[inert]');};
   const escapeSpec=(now:Plan):Action=>now.top==='resource'?{target:'modal.escape',sourceControl:'progress.'+now.resource!.props.popup.factoryId,instanceId:now.resource!.props.popup.instanceId,layer:'resource'}:now.top==='conflict'?{target:'button.close_edu_cloud_conflict_resolution_popup',sourceControl:'edu_common.edu_cloud_conflict_resolution_popup',instanceId:now.conflict!.instanceId,layer:'conflict'}:{target:'button.menu_exit',sourceControl:'progress.'+now.route.route,layer:'base'};
   const queue=(raw:ProgressRawRequest,exit=false,focusRequired=false):boolean=>{
@@ -180,7 +180,10 @@ function Session({input,forwardedRef}:{input:Inputs;forwardedRef:Ref<HTMLElement
     return true;
   };
   const escape=(event?:Event)=>{const now=live(),control=now&&target(now.top);return !!now&&!!control&&queue({...escapeSpec(now),control,event,origin:event?'keyboard':'host-controller'},true);};
-  const controller:ProgressControllerHandle={request(command){
+  // These helpers read committed refs; the session's imperative handle stays
+  // stable across controlled data/callback updates and ref consumers' renders.
+  const controller=useRef<ProgressControllerHandle|null>(null);
+  if(!controller.current)controller.current={request(command){
     if(command!=='button.menu_cancel'&&command!=='activate-focused-web')throw new TypeError('Unknown Progress logical controller command');
     if(command==='button.menu_cancel')return escape();
     const now=live(),node=root.current?.ownerDocument.activeElement;
@@ -188,7 +191,7 @@ function Session({input,forwardedRef}:{input:Inputs;forwardedRef:Ref<HTMLElement
     const action=now.actions.find(a=>a.layer===now.top&&node.getAttribute('data-source-control')===a.sourceControl&&node.getAttribute('data-source-target')===a.target&&node.getAttribute('data-progress-instance')===(a.instanceId??null));
     return !!action&&queue({...action,control:node as HTMLElement,origin:'host-controller'},false,true);
   }};
-  useClassicLayoutEffect(()=>{attachController(controller);return()=>{attachController(null);};});
+  useClassicLayoutEffect(()=>{attachController(controller.current);return()=>{attachController(null);};},[attachController]);
   const keydown=(event:KeyboardEvent<HTMLElement>)=>{
     latest.current?.snapshot.nativeProps?.onKeyDown?.(event);
     if(event.defaultPrevented||event.nativeEvent.defaultPrevented||event.nativeEvent.isComposing||event.nativeEvent.keyCode===229)return;

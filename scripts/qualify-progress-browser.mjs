@@ -49,7 +49,8 @@ return <><div id="controls">{['screen','resource','simple','cloud','conflict'].m
 <ui.ProgressCloudPanel key="cloud" ref={refs.ProgressCloudPanel} snapshot={{...p,open:stage==='cloud',cloud:{...p.cloud,uploadError:true,linkVisible:false}}} kind="upload" imageClipPolicy="visible-fraction-web"/>
 <ui.ProgressCloudConflictDialog key="conflict" ref={refs.ProgressCloudConflictDialog} snapshot={{...p,open:stage==='conflict',conflictPopup:conflict}}/>
 <output id="requests">{log.join('|')}</output></>}
-createRoot(document.getElementById('root')).render(<App/>);`;
+if(location.pathname.endsWith('/progress-owner-fixture.html'))import('./owner');
+else createRoot(document.getElementById('root')).render(<App/>);`;
 const browser=await chromium.launch();
 try{
  for(const [major,version]of [[18,'18.3.1'],[19,'19.3.1']]){
@@ -57,6 +58,18 @@ try{
   await writeFile(path.join(cwd,'package.json'),JSON.stringify({name:'progress-browser-consumer',version:'1.0.0',private:true,type:'module'},null,2));
   await writeFile(path.join(cwd,'INSTALL.log'),execute([npm,'install','--ignore-scripts','--no-audit','--no-fund','--prefer-offline',tar,'react@'+version,'react-dom@'+version],cwd));
   await copyFile(path.join(root,'scripts/fixtures/progress-package/model.ts'),path.join(cwd,'model.ts'));
+  await copyFile(path.join(root,'scripts/fixtures/file-transmission-package/model.ts'),path.join(cwd,'file-model.ts'));
+  // The same public call-site regression is exercised against the installed
+  // package, not a source alias. Default Vite's SPA path loads the owner chunk.
+  let owner=await readFile(path.join(root,'demo/progress-owner-fixture.tsx'),'utf8');
+  owner=owner.replaceAll("from '../src'","from 'mcbeui'")
+    .replace("import {makeProgressScreenProps} from '../tests/fixtures/progress-profile';","import {makeProgressProps as makeProgressScreenProps} from './model';")
+    .replace("from '../tests/fixtures/file-transmission-profile'","from './file-model'")
+    .replaceAll("'../src/progress-screen.css'","'mcbeui/progress-screen.css'")
+    .replaceAll("'../src/file-transmission.css'","'mcbeui/file-transmission.css'");
+  owner="import {version as ownerPeerVersion} from 'react';Object.assign(window,{progressOwnerPeer:ownerPeerVersion});\n"+owner;
+  assert(!owner.includes("from '../src'")&&!owner.includes('../tests/fixtures/'),'Owner fixture must consume only the installed public API');
+  await writeFile(path.join(cwd,'owner.tsx'),owner);
   await writeFile(path.join(cwd,'main.tsx'),app);
   await writeFile(path.join(cwd,'index.html'),'<!doctype html><html lang="en"><meta charset="utf-8"><title>Installed Progress</title><style>body{margin:0;background:#203040;color:white;font-family:"MCBE Pixel","MCBE CJK",monospace}button{font:inherit}#root{position:relative}</style><div id="root"></div><script type="module" src="/main.tsx"></script></html>');
   for(const production of [false,true]){
@@ -67,7 +80,8 @@ try{
     await page.goto(handle.url);await page.waitForFunction(()=>window.progressInstalled?.refs.ProgressScreen.current);
     await page.evaluate(async()=>{await document.fonts.load('10px "MCBE Pixel"','Loading');await document.fonts.load('12px "MCBE CJK"','加载');await document.fonts.ready;});
     const metadata=await page.evaluate(()=>({react:window.progressInstalled.react,runtimeValues:window.progressInstalled.runtimeValues,refs:Object.fromEntries(Object.entries(window.progressInstalled.refs).map(([k,r])=>[k,!!r.current?.isConnected])),fonts:[...document.fonts].filter(f=>['MCBE Pixel','MCBE CJK'].includes(f.family)).map(f=>({family:f.family,status:f.status}))}));
-    assert.equal(metadata.react,version);assert.equal(metadata.runtimeValues,220);assert(Object.values(metadata.refs).every(Boolean));assert.equal(metadata.fonts.length,2);assert(metadata.fonts.every(f=>f.status==='loaded'));
+    const installedCatalog=JSON.parse(await readFile(path.join(cwd,'node_modules/mcbeui/docs/component-catalog.json'),'utf8'));
+    assert.equal(metadata.react,version);assert.equal(metadata.runtimeValues,installedCatalog.publicExports.runtimeValues);assert(Object.values(metadata.refs).every(Boolean));assert.equal(metadata.fonts.length,2);assert(metadata.fonts.every(f=>f.status==='loaded'));
     const toggle=page.locator('[data-progress-part="pack-grids"] input[name="optional_resourcepacks"]').first(),before=await toggle.isChecked();await toggle.click();await page.waitForFunction(previous=>document.querySelector('[data-progress-part="pack-grids"] input[name="optional_resourcepacks"]').checked!==previous,before);
     for(const stage of ['screen','resource','simple','cloud','conflict']){
      await page.locator('#open-'+stage).click();
@@ -78,7 +92,12 @@ try{
     const log=await page.evaluate(()=>window.progressInstalled.log);assert.deepEqual(log,['button.menu_exit','modal.escape','modal.escape','button.menu_exit','button.close_edu_cloud_conflict_resolution_popup']);
     await page.screenshot({path:path.join(out,`react${major}-${production?'production':'development'}.png`)});
     assert.deepEqual(errors,[]);assert.deepEqual(badHTTP,[]);
-    receipt.matrix.push({major,production,status:'PASS',metadata,actions:log,errors,badHTTP,scope:'Default Vite with actual npm-installed tar and peer; six mounted refs, controlled selection, real fonts, five source actions including both resource factory bases. No source alias, optimizer override, or native GUI claim.'});
+    const ownerReport=path.join(out,`owner-react${major}-${production?'production':'development'}.json`),ownerConfig=path.join(cwd,'owner.config.ts');
+    await writeFile(ownerConfig,`import{defineConfig,devices}from'@playwright/test';export default defineConfig({testDir:${JSON.stringify(path.join(root,'tests'))},testMatch:'progress-owner.spec.ts',workers:1,retries:0,reporter:[['json',{outputFile:${JSON.stringify(ownerReport)}}]],outputDir:${JSON.stringify(path.join(out,`owner-react${major}-${production?'production':'development'}-artifacts`))},use:{...devices['Desktop Chrome'],baseURL:${JSON.stringify(handle.url)},trace:'retain-on-failure',screenshot:'only-on-failure'}});`);
+    const ownerLog=execFileSync(process.execPath,[path.join(root,'node_modules/playwright/cli.js'),'test','--config',ownerConfig],{cwd:root,encoding:'utf8',maxBuffer:16*1024*1024,windowsHide:true,env:{...process.env,MCBEUI_PROGRESS_OWNER_REACT:version}});
+    await writeFile(path.join(out,`owner-react${major}-${production?'production':'development'}.log`),ownerLog);
+    const ownerResult=JSON.parse(await readFile(ownerReport,'utf8'));assert.equal(ownerResult.stats.expected,5);assert.equal(ownerResult.stats.unexpected,0);
+    receipt.matrix.push({major,production,status:'PASS',metadata,actions:log,ownerRegression:{react:version,tests:ownerResult.stats.expected,report:ownerReport},errors,badHTTP,scope:'Default Vite with actual npm-installed tar/peer; six mounted refs, controlled selection, real fonts, five source actions, plus five actual controller identity/state-setter/latest-state/session/nested-owner regressions. No source alias, optimizer override or native GUI claim.'});
    }finally{await context.close();await handle.stop();await writeFile(path.join(out,'RESULT.json'),JSON.stringify(receipt,null,2));}
   }
  }

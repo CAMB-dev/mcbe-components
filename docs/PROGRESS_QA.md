@@ -66,3 +66,7 @@ native 默认字体及glyph／AA／shadow；`%c/%cm/%sm/default`和safezone／an
 最终portal生产批 `demo-portal-built-01.json` 为8通过／1个新增测试选择器失败；其八项包含桌面与Pixel7完整画布、实际字体、十五routes、受控parts、触屏画布外退出／返焦，以及闭／world状态原始Axe均为空。限定source layers后，`demo-portal-source-03.json` 与 `demo-portal-built-02.json` 各1项实际通过：1440×700自动使用1×，双factory按冲突→资源→base三次退出，资源行内部click仍改变受控选择。没有把不同批次写成一次九项全绿。
 
 测试记录限制：portal缓存配置最初为source／built复用了outputDir，后一次运行清理了早期失败的trace／截图；原JSON报告及具体错误仍保留。其他独立API／material／package报告不受影响。后续配置必须同时分离report与outputDir。
+
+## Controller 修复阶段
+
+205／223公开入口中的ProgressScreen已修复state-setter引用循环、更新时句柄更换及宿主嵌套modal抢占。原失败／分步验证、同批50项及实际React18／19默认工具链回归见[PROGRESS_CONTROLLER_QA.md](PROGRESS_CONTROLLER_QA.md)。本页先前202／220数值与tar hash属于首次公开阶段历史；不能用旧tar为本次运行时代码背书，也不增加原生像素资格。

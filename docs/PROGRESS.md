@@ -104,3 +104,9 @@ import 'mcbeui/progress-screen.css';
 展示页将全部十五入口保留在选项中。选择 Realms 时若没有背景输入，会提示先选择本地完整图片；链接默认不显示，提供图标后才能启用。本地图片不会上传或变换成新材质，也不因此获得原生身份认证。
 
 原始纹理的局部逐像素测试、源结构验证、实际浏览器交互验证、包消费验证各有独立范围。有限 Web 背景 gradient、intrinsic/default 字体求值、动画相位、引擎 custom renderer 及完整原生界面的字体栅格仍未资格。公开 API 和可运行展示不等于原生整页已达到 pixel perfect。
+
+## Controller 的引用生命周期
+
+同一个已提交source session中，controller句柄身份稳定，可直接使用React state setter作为controllerRef；普通文字／比例／回调更新不会释放重挂句柄。runKey、route或实际content导致session替换时会创建新句柄，关闭时暂停接收请求；session替换或卸载后，旧句柄失效。保存的句柄仍读取最新focus、readonly／disabled、动作目标和宿主回调。
+
+只有实际文档顶层Web模态所有者可以请求动作。宿主将另一模态portal到Progress根内时，外层即使本身没有inert，也不能抢占退出。资格、原失败与新回归见[PROGRESS_CONTROLLER_QA.md](PROGRESS_CONTROLLER_QA.md)；这不宣称原版引擎factory仲裁已恢复。

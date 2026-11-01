@@ -112,3 +112,5 @@ Goal保持进行中：组件库及有限验证分批推进，严格的游戏画�
 - File transmission私有源组合已实现：FileTransmissionScreen／FileTransmissionPanel／FileTransferProgress，268×95窗口、十个独立显隐、精确按钮目标、显式stack测量及原图进度材质。CPU10项与真实浏览器9项同批各通过；三预冻结bar平面RGBA0，frame的原混合假设7560差异保留，独立标量校准后的完整Web平面另记0，不能冒充blind/native认证。公开组件仍202／220，public API／包／展示资格待做，见docs/FILE_TRANSMISSION_IMPLEMENTATION_QA.md。
 
 - [x] FileTransmission三组件公开接入：FileTransmissionScreen／FileTransmissionPanel／FileTransferProgress，精简3字体／7测量／5文案profile、十个独立显隐、原图268×95窗口与248×5条；公开数205组件／223值。13CPU／SSR、公开源9项、实际两peer各24SSR＋types／assets／CSS、默认Vite四组合、生产桌面／Pixel7同批10项通过。三个盲测bar平面0与观察后校准frame0分开记录，原7560差异保留；native／完整base-screen引擎／服务未认证，见docs/FILE_TRANSMISSION_QA.md。
+
+- [x] 修复ProgressScreen controllerRef使用React state setter的更新循环及普通数据更新时的句柄抖动；增加真实top-modal所有权，阻止嵌套宿主portal中的外层旧句柄抢占。先实际复现3失败并最小化setter复现，分步修复后5个新调用点与既有回归同批50项通过；实际React18／19默认开发／生产四组合各5项重复通过。公共数仍205／223，原生像素资格不变，见docs/PROGRESS_CONTROLLER_QA.md。
