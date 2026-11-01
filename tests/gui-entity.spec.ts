@@ -175,6 +175,16 @@ test('one true3D box has an independently predicted opaque physical bbox and act
   const depths = await page.evaluate(() => window.guiEntityQA.counters.depths); expect(depths).toHaveLength(1); expect(depths[0]).toMatchObject({ depth: 24, stencil: 8 });
 });
 
+test('top-left raster origin keeps entity viewport, depth, post-entity image, scissors and cropped presentation', async ({ page }, info) => {
+  await open(page);
+  const options = frame([entity({ viewport: [8, 4, 32, 48], scissor: [21, 20, 6, 20] }),
+    { kind: 'image', rect: [4, 30, 6, 5], texture: { width: 1, height: 1, rgba: [0, 0, 255, 255] } }], { rasterOrigin: 'top-left' });
+  const expected = field(); rectangle(expected, 64, [21, 22, 6, 12], [255, 0, 0, 255]); rectangle(expected, 64, [4, 30, 6, 5], [0, 0, 255, 255]);
+  const value = await render(page, options); await equal(info, 'top-left-entity-viewport', value.data, expected); await equal(info, 'top-left-entity-live', value.live, expected);
+  const outputRect = [5, 18, 30, 20] as const, expectedCrop = crop(expected, 64, outputRect);
+  const cropped = await render(page, { ...options, outputRect }); await equal(info, 'top-left-entity-crop', cropped.data, expectedCrop); await equal(info, 'top-left-entity-crop-live', cropped.live, expectedCrop);
+});
+
 test('named final bone matrices are independent of key/source ordering and are not parent-multiplied twice', async ({ page }, info) => {
   await open(page); const root = { name: 'parent', pivot: [0, 0, 0] as const, visible: false, cubes: [] }, child = { ...source().bones[0]!, name: 'child', parent: 'parent' };
   const src: GuiEntitySource = { profile: 'npc-box64-rigid', textureSize: [64, 64], bones: [root, child] };

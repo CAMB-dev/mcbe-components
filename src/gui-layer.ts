@@ -46,6 +46,8 @@ export interface GuiLayerRenderOptions extends Omit<GuiLayerLayoutOptions, 'comm
   background?: GuiImageBackground;
   canvas?: HTMLCanvasElement | OffscreenCanvas;
   output?: 'framebuffer' | 'straight-alpha';
+  /** Historical WebGL rasterization by default; top-left reflects the offscreen raster target, preserving source coordinates. */
+  rasterOrigin?: 'webgl' | 'top-left';
 }
 export interface GuiLayerRenderResult extends GuiLayerPreparedResult {
   layout: GuiLayerLayout;
@@ -138,6 +140,6 @@ export function renderGuiLayer(options: GuiLayerRenderOptions): GuiLayerRenderRe
     }
   });
   const result = renderPreparedGuiLayer({ width: options.width, height: options.height, commands,
-    outputRect: layout.outputRect, scissor: options.scissor, background: options.background, canvas: options.canvas, output: options.output });
+    outputRect: layout.outputRect, scissor: options.scissor, background: options.background, canvas: options.canvas, output: options.output, rasterOrigin: options.rasterOrigin });
   return { ...result, layout };
 }

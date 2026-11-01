@@ -72,12 +72,12 @@ test('non-square original model texture and Sprite alpha branch produce independ
  const value=await render(page,options);await prove(info,'non-square-model-fbo',value.data,expected,{renderer:value.renderer});await prove(info,'non-square-model-live',value.live,expected);await mount(page,options);await prove(info,'non-square-model-react',(await raw(page)).data,expected);
 });
 
-test('model faces keep caller order, separate byte color and layer scissor across material switches',async({page},info)=>{
+for (const rasterOrigin of ['webgl', 'top-left'] as const) test(`model faces keep caller order, separate byte color and layer scissor across material switches (${rasterOrigin})`,async({page},info)=>{
  await open(page);const first=model(pixel([200,150,90,255]));first.model.faces[0].color=[128,255,255,255];
  const second={...model(pixel([10,100,200,255])),origin:[5,7]};
  const fontPage=new PNG({width:128,height:128});fill(fontPage.data,128,[0,0,8,8],[255,255,255,255]);
  const text={kind:'text',text:'A',font:{pages:['unused-font'],pageSizes:[128],cellHeight:8,lineHeight:8,glyphs:{A:{page:0,x:0,y:0,width:8,height:8,advance:8}}},pages:[[0,texture(fontPage)]],origin:[8,1],fontScale:1,sampling:'point',shader:'bitmap',color:[0,255,0,255]};
- const options={width:16,height:12,guiScale:1,scissor:[1,1,12,9],commands:[{kind:'image',rect:[0,0,16,12],texture:pixel([3,9,27,255])},first,text,{kind:'sprite',rect:[4,3,4,5],texture:pixel([30,60,90,128]),color:[255,255,255,255]},second]};
+ const options={width:16,height:12,guiScale:1,rasterOrigin,scissor:[1,1,12,9],commands:[{kind:'image',rect:[0,0,16,12],texture:pixel([3,9,27,255])},first,text,{kind:'sprite',rect:[4,3,4,5],texture:pixel([30,60,90,128]),color:[255,255,255,255]},second]};
  const expected=new Uint8Array(16*12*4);fill(expected,16,[1,1,12,9],[3,9,27,255]);fill(expected,16,[2,3,4,3],[100,150,90,255]);fill(expected,16,[8,1,5,8],[0,255,0,255]);fill(expected,16,[4,3,4,5],[30,60,90,255]);fill(expected,16,[5,4,4,3],[10,100,200,255]);
  const value=await render(page,options);await prove(info,'ordered-model-sprite-image',value.data,expected);
  const crop=await render(page,{...options,outputRect:[2,2,10,8]});const expectedCrop=new Uint8Array(10*8*4);for(let y=0;y<8;y++)expectedCrop.set(expected.subarray(((y+2)*16+2)*4,((y+2)*16+12)*4),y*10*4);await prove(info,'model-whole-frame-crop',crop.data,expectedCrop);await mount(page,{...options,outputRect:[2,2,10,8]});await prove(info,'model-react-crop',(await raw(page)).data,expectedCrop);

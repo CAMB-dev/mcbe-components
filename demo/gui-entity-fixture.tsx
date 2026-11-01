@@ -10,6 +10,7 @@ export interface EntityFixtureOptions {
   commands: any[]; outputRect?: readonly [number, number, number, number];
   scissor?: readonly [number, number, number, number]; renderKey?: string | number;
   label?: string; background?: any;
+  rasterOrigin?: GuiLayerProps['rasterOrigin'];
 }
 function pixels(value: any): any {
   if (typeof value === 'string' || value?.kind === 'atlas') return value;

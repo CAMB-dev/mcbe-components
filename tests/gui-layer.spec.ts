@@ -112,6 +112,45 @@ test('layer and command scissors intersect, and physical crop keeps the complete
   const local = await render(page, { width: 24, height: 20, guiScale: 1, scissor: [4, 3, 12, 10], commands: [text({ origin: [2, 2], scissor: [6, 1, 10, 8] })] }); const localExpected = field(24, 20); rect(localExpected, 24, [2, 2, 8, 8], [255, 255, 255, 255], [6, 3, 10, 6]); equal(local.data, localExpected);
 });
 
+test('top-left raster origin includes a half-pixel top edge and policy-only React updates repaint upright', async ({ page }, info) => {
+  await open(page);
+  // Physical floor gives1373/5 game units, then float16 packs274.6 to274.5.
+  // The resulting edge is exactly at physical1372.5, a pixel center.
+  const options = { width: 64, height: 1402, guiScale: 5,
+    background: { kind: 'solid', color: [0, 0, 1, 1] },
+    commands: [{ kind: 'image', rect: [0, 274.6, 12.8, 64], texture: pixel([255, 0, 0, 255]) }] };
+  const expected = field(64, 1402); rect(expected, 64, [0, 0, 64, 1402], [0, 0, 255, 255]);
+  rect(expected, 64, [0, 1372, 64, 30], [255, 0, 0, 255]);
+  const prior = field(64, 1402); rect(prior, 64, [0, 0, 64, 1402], [0, 0, 255, 255]);
+  rect(prior, 64, [0, 1373, 64, 29], [255, 0, 0, 255]);
+  equal((await render(page, options)).data, prior);
+  equal((await render(page, { ...options, rasterOrigin: 'webgl' })).data, prior);
+  const value = await render(page, { ...options, rasterOrigin: 'top-left' });
+  await prove(info, 'top-left-half-pixel-edge', value.data, expected, { renderer: value.renderer }); equal(value.live, expected);
+  await mount(page, options); equal((await raw(page)).data, prior);
+  await page.evaluate(() => { window.guiLayerQA.saved = window.guiLayerQA.ref; });
+  await mount(page, { ...options, rasterOrigin: 'top-left' }); equal((await raw(page)).data, expected);
+  expect(await page.evaluate(() => window.guiLayerQA.saved === window.guiLayerQA.ref)).toBe(false);
+  expect(await page.locator('canvas').getAttribute('rasterorigin')).toBeNull();
+});
+
+test('top-left raster origin preserves asymmetric initial pixels, text culling, scissor and cropped live presentation', async ({ page }, info) => {
+  await open(page);
+  const expected = field(24, 20);
+  for (let y = 0; y < 20; y++) for (let x = 0; x < 24; x++) expected.set([x * 7, y * 9, (x + y) * 3, 255], (y * 24 + x) * 4);
+  const background = { kind: 'texture', encoding: 'straight-alpha', texture: { width: 24, height: 20, rgba: Buffer.from(expected).toString('base64') } };
+  const options = { width: 24, height: 20, guiScale: 1, rasterOrigin: 'top-left', background, scissor: [2, 3, 18, 14],
+    commands: [{ kind: 'image', rect: [1, 2, 6, 5], texture: pixel([120, 80, 20, 255]), scissor: [3, 1, 12, 8] },
+      text({ origin: [10, 8], color: [20, 240, 90, 255] })] };
+  rect(expected, 24, [3, 3, 4, 4], [120, 80, 20, 255]); rect(expected, 24, [10, 8, 8, 8], [20, 240, 90, 255]);
+  const full = await render(page, options); await prove(info, 'top-left-initial-and-text', full.data, expected); equal(full.live, expected);
+  const outputRect = [5, 4, 15, 13], crop = field(15, 13);
+  for (let y = 0; y < 13; y++) crop.set(expected.subarray(((y + 4) * 24 + 5) * 4, ((y + 4) * 24 + 20) * 4), y * 15 * 4);
+  const cropped = await render(page, { ...options, outputRect }); equal(cropped.data, crop); equal(cropped.live, crop);
+  await mount(page, { ...options, outputRect }); equal((await raw(page)).data, crop);
+  expect(await page.evaluate(o => { try { window.guiLayerQA.render({ ...o, rasterOrigin: 'invalid' }); return false; } catch { return true; } }, options)).toBe(true);
+});
+
 test('blank full-cell periods draw no invented ink while advance-only spaces retain their pen width', async ({ page }) => {
   await open(page); const image = new PNG({ width: 128, height: 128 }); rect(image.data, 128, [0, 0, 8, 8], [255, 255, 255, 255]);
   const font: GuiTextFont = { ...font8(), glyphs: { ...font8().glyphs, '.': { page: 0, x: 8, y: 0, width: 8, height: 8, advance: 1 }, B: { page: 0, x: 0, y: 0, width: 8, height: 8, advance: 6 }, ' ': { page: 0, x: 0, y: 0, width: 0, height: 0, advance: 4 } } };

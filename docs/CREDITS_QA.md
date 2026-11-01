@@ -1,5 +1,7 @@
 # Credits：实际数据渲染、播放器与有限源／Web验证（有限源／Web资格）
 
+2026-11-02 后续：[底层栅格原点验证](GUI_LAYER_RASTER_ORIGIN_QA.md)在指定D3D11后端使捕获的背景整平面RGBA零差，SwiftShader保留80像素差异。它使用内部prepared网格边界，不证明公开Credits源布局或整页已还原；下文旧CPU1530残差仍作为原阶段结果保留。
+
 状态为**SOURCE_WEB_PACKAGE_INSTALLED_SOURCE_AND_BUILT_DEMO_QUALIFIED_NATIVE_UNVERIFIED**。当前实际barrel与受检功能包为191组件／209值，含CreditsScreen、CreditsRoll、CreditsSkipButton及纯layoutCredits。包、React18／19实际安装消费及source／built展示页已按具名阶段验证。最终仅文档tar及Git部署身份待root操作。覆盖表仅Credits一行E→有限A，A39／E0不代表所有Minecraft GUI或native完成。
 
 ## 已确认的源与实际数据

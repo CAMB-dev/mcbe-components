@@ -6,7 +6,7 @@ import { inspectGuiLayerTga } from './gui-layer-tga';
 import type { GuiImage, GuiImageLayerState } from './gui-image';
 import type { GuiImageBackground, GuiImageTexture } from './gui-image-webgl';
 import { layoutSourceGuiLayer, renderGuiLayer } from './gui-layer';
-import type { GuiLayerDraw, GuiLayerGeometryCommand, GuiLayerLayout, GuiLayerLayoutOptions, GuiSpriteGeometry } from './gui-layer';
+import type { GuiLayerDraw, GuiLayerGeometryCommand, GuiLayerLayout, GuiLayerLayoutOptions, GuiLayerRenderOptions, GuiSpriteGeometry } from './gui-layer';
 import type { GuiTextGeometry } from './gui-text-geometry';
 import type { GuiModelGeometry } from './gui-model-geometry';
 import type { GuiEntityGeometry, GuiEntitySource } from './gui-entity-geometry';
@@ -24,6 +24,8 @@ export type GuiLayerCommand =
 export interface GuiLayerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, 'children' | 'width' | 'height' | 'onError'>, Omit<GuiLayerLayoutOptions, 'commands'> {
   commands: readonly GuiLayerCommand[];
   background?: GuiImageBackground;
+  /** Same explicit offscreen raster-origin policy as renderGuiLayer. */
+  rasterOrigin?: GuiLayerRenderOptions['rasterOrigin'];
   label?: string;
   /** Changing this value explicitly retries failed/lost requests with a fresh canvas. */
   renderKey?: string | number;
@@ -44,7 +46,7 @@ interface Request {
   commands: readonly GuiLayerCommand[];
   background?: GuiImageBackground;
   layout?: GuiLayerLayout;
-  frame?: Omit<GuiLayerLayoutOptions, 'commands'>;
+  frame?: Omit<GuiLayerLayoutOptions, 'commands'> & Pick<GuiLayerRenderOptions, 'rasterOrigin'>;
   /** Unique used URL resources, with declared source dimensions where applicable. */
   urls: ReadonlyMap<string, readonly [number, number] | undefined>;
   knownPixels: number;
@@ -131,6 +133,7 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
   const key = (previous?.key ?? 0) + 1;
   try {
     const layout = layoutSourceGuiLayer(options);
+    if (options.rasterOrigin !== undefined && options.rasterOrigin !== 'webgl' && options.rasterOrigin !== 'top-left') throw new RangeError('Unsupported GUI raster origin.');
     if (options.renderKey !== undefined && typeof options.renderKey !== 'string' && (typeof options.renderKey !== 'number' || !Number.isFinite(options.renderKey))) throw new RangeError('renderKey must be a string or finite number.');
     validateBackground(options.background, options.width, options.height);
     const uses: SourceUse[] = [], bindings: Binding[] = [], shapes: GuiLayerGeometryCommand[] = [];
@@ -211,7 +214,7 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
     const background = options.background;
     if (background?.kind === 'texture') uses.push({ source: background.texture, size: [options.width, options.height], upload: false });
     const hasEntity = shapes.some(shape => shape.kind === 'entity');
-    const descriptor = JSON.stringify({ width: options.width, height: options.height, guiScale: options.guiScale, shapes, bindings, outputRect: options.outputRect, scissor: options.scissor,
+    const descriptor = JSON.stringify({ width: options.width, height: options.height, guiScale: options.guiScale, rasterOrigin: options.rasterOrigin, shapes, bindings, outputRect: options.outputRect, scissor: options.scissor,
       background: background?.kind === 'texture' ? { kind: 'texture', encoding: background.encoding } : background, renderKey: options.renderKey },
     hasEntity ? (_key, value: unknown) => typeof value === 'number' && Object.is(value, -0) ? '__gui_layer_negative_zero__' : value : undefined);
     const compared = new WeakMap<object, WeakSet<object>>();
@@ -233,7 +236,7 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
     });
     const clear = background?.kind === 'texture' ? { ...background, texture: snapshots[snapshots.length - 1]!.source as PixelTexture }
       : background?.kind === 'solid' ? { ...background, color: [...background.color] as typeof background.color } : background;
-    const frame = { width: options.width, height: options.height, guiScale: options.guiScale,
+    const frame = { width: options.width, height: options.height, guiScale: options.guiScale, rasterOrigin: options.rasterOrigin,
       scissor: options.scissor && [...options.scissor] as typeof options.scissor, outputRect: [...layout.outputRect] as typeof layout.outputRect };
     return { key, descriptor, uses: snapshots, commands, background: clear, layout: { ...layout, outputRect: frame.outputRect }, frame, ...resources };
   } catch (reason) {
@@ -243,10 +246,10 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
 }
 
 /** A single ordered image/sprite/text framebuffer; original semantic DOM belongs to the host. */
-export const GuiLayer = forwardRef<HTMLCanvasElement, GuiLayerProps>(function GuiLayer({ width, height, guiScale, commands, scissor, outputRect, background, label, renderKey,
+export const GuiLayer = forwardRef<HTMLCanvasElement, GuiLayerProps>(function GuiLayer({ width, height, guiScale, commands, scissor, outputRect, background, rasterOrigin, label, renderKey,
   onReady, onRenderError, onRenderStateChange, className, style, ...props }, forwardedRef) {
   const previous = useRef<Request | undefined>(undefined);
-  const request = prepare(previous.current, { width, height, guiScale, commands, scissor, outputRect, background, renderKey }); previous.current = request;
+  const request = prepare(previous.current, { width, height, guiScale, commands, scissor, outputRect, background, rasterOrigin, renderKey }); previous.current = request;
   const canvas = useRef<HTMLCanvasElement | null>(null), callbacks = useRef({ onReady, onRenderError, onRenderStateChange }); callbacks.current = { onReady, onRenderError, onRenderStateChange };
   const setCanvas = useCallback((node: HTMLCanvasElement | null) => {
     canvas.current = node;

@@ -1,5 +1,7 @@
 # GuiLayer 图文合成验证
 
+2026-11-02：可选离屏 `rasterOrigin` 及 Credits 捕获背景的指定D3D11后端整平面验证见 [GUI_LAYER_RASTER_ORIGIN_QA.md](GUI_LAYER_RASTER_ORIGIN_QA.md)。这是新的有限范围，原阶段记录保留。
+
 本文记录42f25e9图文合成阶段的冻结证据。后续新增sprite命令、附魔台itemImages及布局zoom呈现的源码已变化；该阶段旧920用例 / 已测包身份不能直接认证新代码，最新验证见 [GUI_SPRITE_QA.md](GUI_SPRITE_QA.md)。旧数字、失败和非零测量按原范围保留。
 
 再后的source model / 显式source atlas阶段见 [GUI_MODEL_QA.md](GUI_MODEL_QA.md)；该阶段增加函数与输入合同，不能沿用本文旧包身份。

@@ -42,6 +42,8 @@ export interface GuiLayerPreparedOptions {
   background?: GuiImageBackground;
   canvas?: HTMLCanvasElement | OffscreenCanvas;
   output?: 'framebuffer' | 'straight-alpha';
+  /** Opt-in top-first offscreen rasterization. Input geometry and returned pixels stay top-first in both modes. */
+  rasterOrigin?: 'webgl' | 'top-left';
 }
 export interface GuiLayerPreparedResult extends PixelTexture {
   alphaMode: 'premultiplied' | 'straight';
@@ -92,6 +94,7 @@ function texture(value: GuiLayerTexture, name: string): void {
   validateGuiTextureAtlasLayout(value.width, value.height, metadata);
 }
 function validate(options: GuiLayerPreparedOptions): GuiImageRect {
+  if (options.rasterOrigin !== undefined && options.rasterOrigin !== 'webgl' && options.rasterOrigin !== 'top-left') throw new RangeError('Unsupported GUI raster origin.');
   integer(options.width, 1, 8192, 'width'); integer(options.height, 1, 8192, 'height');
   if (options.width * options.height > 16777216) throw new RangeError('GUI layer framebuffer exceeds its pixel budget.');
   if (!Array.isArray(options.commands) || options.commands.length > 4096) throw new RangeError('A bounded prepared command array is required.');
@@ -196,6 +199,7 @@ function validate(options: GuiLayerPreparedOptions): GuiImageRect {
  */
 export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLayerPreparedResult {
   const [cropX, cropY, width, height] = validate(options);
+  const topFirst = options.rasterOrigin === 'top-left';
   if (!options.canvas && typeof document === 'undefined') throw new Error('Prepared GUI rendering requires an explicit browser canvas.');
   const canvas = options.canvas ?? document.createElement('canvas');
   if (options.commands.some(command => command.kind === 'entity')) {
@@ -212,6 +216,10 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
   let successful = false, disposed = false;
   const dispose = () => { if (!disposed) { disposed = true; gl.getExtension('WEBGL_lose_context')?.loseContext(); } };
   const program = (vertex: string, fragment: string) => {
+    // Reflect the completed clip position, after every material's source math.
+    // The final copy uses this too, presenting the top-first target upright.
+    if (topFirst) vertex = vertex.replace(/\bvoid\s+main\s*\(\s*\)/, 'void guiLayerSourceMain()')
+      + '\nvoid main() { guiLayerSourceMain(); gl_Position.y = -gl_Position.y; }\n';
     const active = gl.createProgram(); if (!active) throw new Error('Unable to allocate a GUI layer program.'); programs.push(active);
     for (const [type, source] of [[gl.VERTEX_SHADER, vertex], [gl.FRAGMENT_SHADER, fragment]] as const) {
       const shader = gl.createShader(type); if (!shader) throw new Error('Unable to allocate a GUI layer shader.'); shaders.push(shader);
@@ -251,7 +259,7 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
       initial = new Uint8Array(width * height * 4);
       for (let y = 0; y < height; y++) {
         const start = ((cropY + y) * options.width + cropX) * 4;
-        initial.set(background.texture.data.subarray(start, start + width * 4), (height - 1 - y) * width * 4);
+        initial.set(background.texture.data.subarray(start, start + width * 4), (topFirst ? y : height - 1 - y) * width * 4);
       }
       if (background.encoding === 'straight-alpha') for (let index = 0; index < initial.length; index += 4) {
         const alpha = initial[index + 3]! / 255;
@@ -277,7 +285,7 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
       gl.clearColor(clear[0]! * clear[3]!, clear[1]! * clear[3]!, clear[2]! * clear[3]!, clear[3]!); gl.clear(gl.COLOR_BUFFER_BIT);
     }
     gl.enable(gl.BLEND); gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD); gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    gl.viewport(-cropX, cropY + height - options.height, options.width, options.height);
+    gl.viewport(-cropX, topFirst ? -cropY : cropY + height - options.height, options.width, options.height);
     const positionBuffer = buffer(), uvBuffer = buffer(), colorBuffer = buffer(), indexBuffer = buffer();
     const normalBuffer = entityCommands.length ? buffer() : undefined, boneBuffer = entityCommands.length ? buffer() : undefined;
     const sourceTextures = new Map<GuiLayerTexture, WebGLTexture>(), shaderPrograms = new Map<'image' | 'sprite' | 'text' | 'entity', WebGLProgram>();
@@ -291,7 +299,7 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
       const w = Math.max(0, Math.min(cropX + width, globalScissor[0] + globalScissor[2], scissor[0] + scissor[2]) - x);
       const h = Math.max(0, Math.min(cropY + height, globalScissor[1] + globalScissor[3], scissor[1] + scissor[3]) - y);
       if (!w || !h) continue;
-      gl.enable(gl.SCISSOR_TEST); gl.scissor(x - cropX, height - (y - cropY) - h, w, h);
+      gl.enable(gl.SCISSOR_TEST); gl.scissor(x - cropX, topFirst ? y - cropY : height - (y - cropY) - h, w, h);
       let uploaded = sourceTextures.get(command.texture);
       if (!uploaded) {
         uploaded = allocateTexture();
@@ -320,7 +328,7 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
         if (entityState) {
           gl.disable(gl.DEPTH_TEST); gl.depthMask(false); gl.disable(gl.STENCIL_TEST);
           gl.enable(gl.BLEND); gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD); gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-          gl.viewport(-cropX, cropY + height - options.height, options.width, options.height); entityState = false;
+          gl.viewport(-cropX, topFirst ? -cropY : cropY + height - options.height, options.width, options.height); entityState = false;
         }
         const ordinary = command.kind === 'text' ? command.run : command.mesh;
         gl.uniform4fv(gl.getUniformLocation(active, 'tint'), new Float32Array(ordinary.tint ?? WHITE)); gl.uniform1f(gl.getUniformLocation(active, 'hudOpacity'), ordinary.hudOpacity ?? 1);
@@ -329,7 +337,7 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
       if (command.kind === 'entity') {
         const { mesh, palette, model, view, projection, viewport, material } = command.layout;
         gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LESS); gl.depthMask(true); gl.disable(gl.STENCIL_TEST); gl.disable(gl.CULL_FACE); gl.disable(gl.BLEND); entityState = true;
-        gl.viewport(viewport[0] - cropX, height - (viewport[1] - cropY) - viewport[3], viewport[2], viewport[3]);
+        gl.viewport(viewport[0] - cropX, topFirst ? viewport[1] - cropY : height - (viewport[1] - cropY) - viewport[3], viewport[2], viewport[3]);
         gl.uniformMatrix4fv(gl.getUniformLocation(active, 'model'), false, model); gl.uniformMatrix4fv(gl.getUniformLocation(active, 'view'), false, view);
         gl.uniformMatrix4fv(gl.getUniformLocation(active, 'projection'), false, projection); gl.uniformMatrix4fv(gl.getUniformLocation(active, 'bonePalette[0]'), false, palette);
         gl.uniform4fv(gl.getUniformLocation(active, 'tileLightColor'), new Float32Array(material.tileLightColor));
@@ -342,7 +350,7 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
         indices = mesh.indices;
       } else if (command.kind !== 'text') {
         const mesh = command.mesh;
-        gl.enable(gl.CULL_FACE); gl.frontFace(gl.CW); gl.cullFace(gl.FRONT);
+        gl.enable(gl.CULL_FACE); gl.frontFace(topFirst ? gl.CCW : gl.CW); gl.cullFace(gl.FRONT);
         gl.uniformMatrix4fv(gl.getUniformLocation(active, 'mvp'), false, command.mvp); gl.uniform1i(gl.getUniformLocation(active, 'source'), 0);
         attribute(active, 'position', positionBuffer, new Float32Array(mesh.vertices.flatMap(vertex => [...vertex.position])), 2, gl.FLOAT);
         attribute(active, 'packedUv', uvBuffer, new Uint16Array(mesh.vertices.flatMap(vertex => [...vertex.uvRaw])), 2, gl.UNSIGNED_SHORT, true);
@@ -350,7 +358,7 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
         indices = new Uint16Array(mesh.indices);
       } else {
         const run = command.run;
-        gl.frontFace(run.frontFace === 'cw' ? gl.CW : gl.CCW);
+        gl.frontFace((run.frontFace === 'cw') !== topFirst ? gl.CW : gl.CCW);
         if (!run.cull || run.cull === 'none') gl.disable(gl.CULL_FACE); else { gl.enable(gl.CULL_FACE); gl.cullFace(run.cull === 'front' ? gl.FRONT : gl.BACK); }
         gl.uniformMatrix4fv(gl.getUniformLocation(active, 'mvp'), false, run.mvp); gl.uniform1i(gl.getUniformLocation(active, 'atlas'), 0);
         gl.uniform1i(gl.getUniformLocation(active, 'smoothBitmap'), run.shader === 'bitmap-smooth' ? 1 : 0);
@@ -365,7 +373,7 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
     }
     const bottom = new Uint8Array(width * height * 4), data = new Uint8ClampedArray(bottom.length);
     gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, bottom); if (gl.getError() !== gl.NO_ERROR) throw new Error('GUI layer readback failed.');
-    for (let y = 0; y < height; y++) data.set(bottom.subarray(y * width * 4, (y + 1) * width * 4), (height - 1 - y) * width * 4);
+    for (let y = 0; y < height; y++) data.set(bottom.subarray(y * width * 4, (y + 1) * width * 4), (topFirst ? y : height - 1 - y) * width * 4);
     if (options.canvas) {
       gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, width, height); gl.disable(gl.SCISSOR_TEST); gl.disable(gl.CULL_FACE); gl.disable(gl.BLEND);
       if (entityCommands.length) { gl.disable(gl.DEPTH_TEST); gl.depthMask(false); gl.disable(gl.STENCIL_TEST); }
