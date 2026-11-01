@@ -884,10 +884,33 @@
         "fidelity": "fixed_source_composition_original_whole_materials_explicit_web_profile_native_unverified",
         "details": "docs/PROGRESS.md"
       }
+    ],
+    "file_transmission": [
+      {
+        "name": "FileTransmissionScreen",
+        "status": "implemented",
+        "validation": "source_browser_built_showcase_and_installed_react18_19_default_vite_verified_native_unverified",
+        "fidelity": "fixed_source_whole_materials_explicit_host_fonts_measurements_and_web_policies_native_unverified",
+        "details": "docs/FILE_TRANSMISSION.md"
+      },
+      {
+        "name": "FileTransmissionPanel",
+        "status": "implemented",
+        "validation": "source_browser_built_showcase_and_installed_react18_19_default_vite_verified_native_unverified",
+        "fidelity": "fixed_source_whole_materials_explicit_host_fonts_measurements_and_web_policies_native_unverified",
+        "details": "docs/FILE_TRANSMISSION.md"
+      },
+      {
+        "name": "FileTransferProgress",
+        "status": "implemented",
+        "validation": "source_browser_built_showcase_and_installed_react18_19_default_vite_verified_native_unverified",
+        "fidelity": "fixed_source_whole_materials_explicit_host_fonts_measurements_and_web_policies_native_unverified",
+        "details": "docs/FILE_TRANSMISSION.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 202,
+    "components": 205,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -898,12 +921,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 220,
+    "runtimeValues": 223,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "tested_functional_package_202_220_progress_scoped_native_unverified",
+    "publicationState": "tested_functional_package_file_transmission_205_223_native_unverified",
     "pureCreditsFunctions": [
       "layoutCredits"
     ],

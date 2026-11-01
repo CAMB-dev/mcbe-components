@@ -1,8 +1,7 @@
 import {createRoot} from 'react-dom/client';
 import {flushSync} from 'react-dom';
-import {FileTransmissionScreen,FileTransmissionPanel,FileTransferProgress} from '../src/file-transmission';
-import type {FileTransmissionController} from '../src/file-transmission';
-import type {FileTransmissionBindings,FileTransmissionAction} from '../src/file-transmission-model';
+import {FileTransmissionScreen,FileTransmissionPanel,FileTransferProgress} from '../src';
+import type {FileTransmissionController,FileTransmissionBindings,FileTransmissionAction} from '../src';
 import {makeFileTransmissionModel} from '../tests/fixtures/file-transmission-profile';
 import '../src/file-transmission.css';
 

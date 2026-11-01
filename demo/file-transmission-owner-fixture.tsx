@@ -1,8 +1,8 @@
 import {useLayoutEffect,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {flushSync} from 'react-dom';
-import {FileTransmissionScreen} from '../src/file-transmission';
-import type {FileTransmissionController} from '../src/file-transmission';
+import {FileTransmissionScreen} from '../src';
+import type {FileTransmissionController} from '../src';
 import {makeFileTransmissionModel} from '../tests/fixtures/file-transmission-profile';
 import '../src/file-transmission.css';
 let renders=0,update:(state:Partial<{outer:boolean;inner:boolean;percentage:number}>)=>void=()=>{};

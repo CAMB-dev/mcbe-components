@@ -1,0 +1,16 @@
+.file-transmission-demo{display:grid;gap:16px;min-width:0}
+.file-transmission-demo__controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;min-width:0}
+.file-transmission-demo__settings{border:2px solid #17191b;background:#292d30;padding:12px}
+.file-transmission-demo__settings>summary{cursor:pointer;margin-bottom:12px}
+.file-transmission-demo__fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.file-transmission-demo__stage{width:100%;min-width:0;background:#203040;border:2px solid #111;box-sizing:border-box;text-align:center;padding:16px}
+.file-transmission-demo__status{margin:0;font-size:14px;overflow-wrap:anywhere}
+.file-transmission-demo__parts{display:grid;gap:12px;min-width:0}
+.file-transmission-demo__parts h3{margin:0;font-size:1em}
+.file-transmission-demo__part-viewport{min-width:0;max-width:100%;overflow-x:auto;overflow-y:hidden;background:#203040;padding:8px}
+.file-transmission-demo__overlay{position:fixed;inset:0;z-index:100000;display:flex;overflow:auto;overscroll-behavior:contain;padding:16px;box-sizing:border-box;background:#203040}
+.file-transmission-demo__frame{flex:none;margin:auto}
+.file-transmission-demo__help{margin:0 0 12px;font:14px/1.5 sans-serif;color:white;text-align:center}
+.file-transmission-demo__canvas{position:relative;flex:none;background:#203040}
+.file-transmission-demo__host-base{position:absolute;inset:0;background:#203040}
+.file-transmission-demo__log{font-size:13px;padding-left:24px;overflow-wrap:anywhere}

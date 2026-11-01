@@ -178,3 +178,7 @@ export type { ProgressPackGridsProps, ProgressResourceDialogProps, ProgressCloud
 export type { ProgressBrandingDescriptor } from './progress-panels';
 export type { ProgressCloudKind } from './progress-cloud';
 export type { ProgressSize, ProgressRoute, ProgressContent, ProgressScreenAnimation, ProgressCapabilities, ProgressWholeImage, ProgressTextRole, ProgressFontSpec, ProgressTextContext, ProgressTextRenderer, ProgressPresentationProfile, ProgressBindings, ProgressIndicatorState, ProgressPackEntry, ProgressPackCollection, ProgressPackState, ProgressResourcePopupId, ProgressResourcePopup, ProgressCloudState, ProgressConflictPopup, ProgressAuxiliaryState, ProgressActionTarget, ProgressActionDetail, ProgressPackSelectionDetail, ProgressScreenModel } from './progress-types';
+
+export { FileTransmissionScreen, FileTransmissionPanel, FileTransferProgress } from './file-transmission';
+export type { FileTransmissionScreenProps, FileTransmissionPanelProps, FileTransferProgressProps, FileTransmissionController } from './file-transmission';
+export type { FileTransmissionBindings, FileTransmissionModel, FileTransmissionTarget, FileTransmissionAction, FileTransmissionPresentationProfile, FileTransmissionSize, FileTransmissionFontSpec, FileTransmissionTextRole, FileTransmissionTextContext, FileTransmissionTextRenderer } from './file-transmission-model';

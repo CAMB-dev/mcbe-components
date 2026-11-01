@@ -1,0 +1,193 @@
+{
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "licenseSHA256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+  "materials": [
+    {
+      "reference": "textures/ui/button_borderless_light",
+      "pngSHA256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "naturalSize": [
+        4,
+        4
+      ],
+      "metadata": {
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "reference": "textures/ui/button_borderless_lighthover",
+      "pngSHA256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "naturalSize": [
+        4,
+        4
+      ],
+      "metadata": {
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "reference": "textures/ui/button_borderless_lightpressed",
+      "pngSHA256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "naturalSize": [
+        4,
+        4
+      ],
+      "metadata": {
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "reference": "textures/ui/control",
+      "pngSHA256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "naturalSize": [
+        2,
+        2
+      ],
+      "metadata": {
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reference": "textures/ui/dialog_background_hollow_2",
+      "pngSHA256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f",
+      "naturalSize": [
+        18,
+        67
+      ],
+      "metadata": {
+        "sha256": "584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40",
+        "value": {
+          "nineslice_size": [
+            8,
+            23,
+            8,
+            42
+          ],
+          "base_size": [
+            18,
+            67
+          ]
+        }
+      }
+    },
+    {
+      "reference": "textures/ui/disabledButtonNoBorder",
+      "pngSHA256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "naturalSize": [
+        2,
+        2
+      ],
+      "metadata": {
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reference": "textures/ui/experiencebarempty",
+      "pngSHA256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0",
+      "naturalSize": [
+        13,
+        5
+      ],
+      "metadata": {
+        "sha256": "de67894f88e78223fa154d60fbd826da1349d35dbfe3b0d8dae5d6365161243f",
+        "value": {
+          "nineslice_size": [
+            6,
+            1,
+            6,
+            1
+          ],
+          "base_size": [
+            13,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "reference": "textures/ui/experiencebarfull",
+      "pngSHA256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1",
+      "naturalSize": [
+        13,
+        5
+      ],
+      "metadata": {
+        "sha256": "8ec618d73df58faa04e6ce31c88b77d88d6af1c2ae30d290eb25b57aa4601876",
+        "value": {
+          "nineslice_size": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "base_size": [
+            13,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "reference": "textures/ui/experiencenub",
+      "pngSHA256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55",
+      "naturalSize": [
+        11,
+        5
+      ],
+      "metadata": null
+    },
+    {
+      "reference": "textures/ui/focus_border_white",
+      "pngSHA256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "naturalSize": [
+        5,
+        5
+      ],
+      "metadata": {
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      }
+    }
+  ],
+  "scope": "Ten complete original fileUpload inputs and available raw metadata/copyright, not native rendered output."
+}

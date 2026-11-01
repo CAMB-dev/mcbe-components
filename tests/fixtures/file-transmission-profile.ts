@@ -1,17 +1,10 @@
 import type {FileTransmissionModel} from '../../src/file-transmission-model';
-import {makeProgressScreenProps} from './progress-profile';
 /** Explicit authored Web measurements; not native default-font/content recovery. */
 export function makeFileTransmissionModel():FileTransmissionModel{
- const profile=makeProgressScreenProps().profile;
- const intrinsicSizes={...profile.intrinsicSizes,
-  'file_upload.single_title_panel/center':[120,10] as const,
-  'file_upload.dual_title_panel/left':[100,10] as const,'file_upload.dual_title_panel/right':[100,10] as const,
-  'file_upload.message_text_panel/message_text':[200,10] as const,
-  'file_upload.progress_text_panel/progress':[60,10] as const,'file_upload.progress_text_panel/total':[60,10] as const,
-  'file_upload.warning_content_panel/message':[248,24] as const};
+ const font={family:'monospace',logicalSize:10,lineHeight:12,provenance:'Authored finite Web test font; not native recovery'};
  return {runKey:'transfer-test',disabled:false,readOnly:false,
   bindings:{singleTitle:'Upload world',leftTitle:'Upload',rightTitle:'1 of 3',message:'Sending file',progressSize:'2 MB',totalSize:'8 MB',singleTitleVisible:true,dualTitleVisible:false,uploadContentVisible:true,warningContentVisible:false,messageVisible:true,progressTextVisible:true,progressVisible:true,playVisible:false,cancelVisible:true,warningButtonsVisible:false,percentage:.25},
-  profile:{...profile,availableSize:[500,301],scale:1,intrinsicSizes,labels:{...profile.labels,'progressScreen.message.letsGo':'Let us go','permissions.Continue':'Continue','gui.cancel':'Cancel','progressScreen.noWifi.mobileDataWarning':'This transfer uses mobile data.','accessibility.fileTransferProgress':'File transfer progress'}},
+  profile:{availableSize:[500,301],scale:1,fonts:{title:font,progress:font,button:font},measurements:{singleTitleWidth:120,leftTitleWidth:100,rightTitleWidth:100,messageWidth:200,progressSizeWidth:60,totalSizeWidth:60,warningHeight:24},labels:{play:'Let us go',continue:'Continue',cancel:'Cancel',mobileDataWarning:'This transfer uses mobile data.',progress:'File transfer progress'},bodyColor:'#ffffff',titleColor:'#4c4c4c',provenance:'Authored finite Web fixture profile',textPolicy:'explicit-host-font-no-shadow-web'},
   materialPolicy:'explicit-common-hollow2-and-light-web',imageClipPolicy:'visible-fraction-web',
   stackLayout:{height:25,messageY:0,progressTextY:10,progressBarY:20,policy:'explicit-host-content-measurement-web',provenance:'Authored test layout retains all three declared extents; not native hidden-row semantics'},onAction:()=>{}};
 }

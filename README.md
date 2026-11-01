@@ -746,6 +746,10 @@ declare const profile: CreditsPresentationProfile;
 
 ## Progress / 加载与云端界面
 
-新增 `ProgressScreen`、`ProgressIndicators`、`ProgressPackGrids`、`ProgressResourceDialog`、`ProgressCloudPanel`、`ProgressCloudConflictDialog`，当前公开入口为 **202组件／220运行时值**。展示页的 **Progress & cloud** 可以选择15条源路由，也能独立预览指示器、资源包列表和弹窗。
+新增 `ProgressScreen`、`ProgressIndicators`、`ProgressPackGrids`、`ProgressResourceDialog`、`ProgressCloudPanel`、`ProgressCloudConflictDialog`，Progress接入阶段为 **202组件／220运行时值**。展示页的 **Progress & cloud** 可以选择15条源路由，也能独立预览指示器、资源包列表和弹窗。
 
 组件使用完整原图和源结构。字体、内容测量、未恢复的图片提供者及 Web 动画／裁切／焦点规则为明确输入；原生整页像素一致仍未认证。React18／19实际安装包及默认Vite开发／生产四组合已验证；具体合同、历史失败和图像资格范围见 [Progress API](docs/PROGRESS.md) 与 [验收记录](docs/PROGRESS_QA.md)。
+
+## File transmission
+
+当前公开205组件／223值。`FileTransmissionScreen`、`FileTransmissionPanel`、`FileTransferProgress`使用原版268×95传输结构与完整原图；字体、测量和独立绑定由精简profile提供。见[API](docs/FILE_TRANSMISSION.md)与[有限验收](docs/FILE_TRANSMISSION_QA.md)。原生整页、引擎布局和实际传输服务仍未认证。

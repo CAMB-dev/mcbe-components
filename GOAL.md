@@ -9,7 +9,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前202个公共组件、6个数据和12个渲染 / 几何 / 纹理函数，共220个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前205个公共组件、6个数据和12个渲染 / 几何 / 纹理函数，共223个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -24,7 +24,7 @@
 
 ## 当前验收快照（2026-11-02）
 
-- 公共入口及受检功能包为202组件 /220运行时值。最近完成 ChatScreen /ChatComposer /ChatTranscript：消息、输入、补全、坐标、设置、房主菜单均采用实际源结构；已通过两peer安装、默认Vite四组合和source /built公开页检查，见[Chat 验证](docs/CHAT_QA.md)。
+- 公共入口及受检功能包为205组件／223运行时值。FileTransmissionScreen／FileTransmissionPanel／FileTransferProgress的精简profile、真实字体展示、两peer安装与默认Vite四组合、生产桌面／Pixel7十项已通过具名检查；完整原生GUI仍未认证，见[FileTransmission验收](docs/FILE_TRANSMISSION_QA.md)。
 - MobEffect正式Node10项通过；34个不同桌面 /移动合同为首轮32通过、两个指针用例按可见宿主尺寸修订后2项通过，不称一次34全绿。六个原背景Web平面201,600个RGBA像素严格零差，只覆盖背景采样。
 - 同一功能tar实际React18.3.1 /19.3.1消费、严格声明及默认Vite开发 /生产四组合通过；source /built展示页分别验证。详见[Mob Effect验证](docs/MOB_EFFECT_QA.md)，前一Credits及其他族保留各自独立记录，不累加为当前全套通过率。
 - 新增原始default8分页候选，使固定Carlos整行的前景mask从缺350像素降为0；位置 /比例 /ROI /阈值未改。已提供可选私有位图准备工具，保留原始页与显式候选规则；它不认证其他文字、RGB /阴影、引擎路由或整屏，详见[字体记录](docs/CLASSIC_BITMAP_FONT_QA.md)。
@@ -110,3 +110,5 @@ Goal保持进行中：组件库及有限验证分批推进，严格的游戏画�
 - Progress当前六组件：ProgressScreen、ProgressIndicators、ProgressPackGrids、ProgressResourceDialog、ProgressCloudPanel、ProgressCloudConflictDialog。105项持久CPU／SSR、两peer各75SSR+types/assets/CSS、默认Vite四组合、公开部件及15route操作、独立12材质平面与四simple窗层级平面分阶段通过；不认证原生GUI、字体或所有状态。
 
 - File transmission私有源组合已实现：FileTransmissionScreen／FileTransmissionPanel／FileTransferProgress，268×95窗口、十个独立显隐、精确按钮目标、显式stack测量及原图进度材质。CPU10项与真实浏览器9项同批各通过；三预冻结bar平面RGBA0，frame的原混合假设7560差异保留，独立标量校准后的完整Web平面另记0，不能冒充blind/native认证。公开组件仍202／220，public API／包／展示资格待做，见docs/FILE_TRANSMISSION_IMPLEMENTATION_QA.md。
+
+- [x] FileTransmission三组件公开接入：FileTransmissionScreen／FileTransmissionPanel／FileTransferProgress，精简3字体／7测量／5文案profile、十个独立显隐、原图268×95窗口与248×5条；公开数205组件／223值。13CPU／SSR、公开源9项、实际两peer各24SSR＋types／assets／CSS、默认Vite四组合、生产桌面／Pixel7同批10项通过。三个盲测bar平面0与观察后校准frame0分开记录，原7560差异保留；native／完整base-screen引擎／服务未认证，见docs/FILE_TRANSMISSION_QA.md。

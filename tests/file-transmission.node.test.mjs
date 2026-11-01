@@ -31,8 +31,8 @@ test('host content measurements control all8 row-visibility subsets without infe
  }
 });
 test('snapshots detach mutable data, retain callbacks and freeze owned records',()=>{
- const model=make(),s=snapshot(model);model.bindings.singleTitle='mutated';model.stackLayout.height=77;model.profile.intrinsicSizes['file_upload.single_title_panel/center'][0]=1;
- assert.equal(s.bindings.singleTitle,'Upload world');assert.equal(s.stackLayout.height,25);assert.deepEqual(s.profile.intrinsicSizes['file_upload.single_title_panel/center'],[120,10]);assert.equal(s.onAction,model.onAction);assert(Object.isFrozen(s.bindings)&&Object.isFrozen(s.stackLayout));
+ const model=make(),s=snapshot(model);model.bindings.singleTitle='mutated';model.stackLayout.height=77;model.profile.measurements.singleTitleWidth=1;
+ assert.equal(s.bindings.singleTitle,'Upload world');assert.equal(s.stackLayout.height,25);assert.equal(s.profile.measurements.singleTitleWidth,120);assert.equal(s.onAction,model.onAction);assert(Object.isFrozen(s.bindings)&&Object.isFrozen(s.stackLayout));
 });
 test('plain-data rejection never invokes record accessors including latent bindings',()=>{
  for(const key of ['message','singleTitleVisible','percentage']){let reads=0;const model=make();Object.defineProperty(model.bindings,key,{get(){reads++;throw Error('getter');},enumerable:true});assert.throws(()=>plan(model),TypeError);assert.equal(reads,0);}
@@ -44,16 +44,31 @@ test('finite strings, flags, percentage and explicit policy inputs remain checke
  const model=make();for(const k of ['singleTitle','leftTitle','rightTitle','message','progressSize'])model.bindings[k]='x'.repeat(1048576);assert.throws(()=>plan(model),RangeError);
 });
 test('missing active last-leaf localization and measurements fail before any glyph/ref callback',()=>{
- for(const breakInput of [m=>{m.bindings.warningButtonsVisible=true;delete m.profile.labels['permissions.Continue'];},m=>{m.bindings.warningContentVisible=true;delete m.profile.intrinsicSizes['file_upload.warning_content_panel/message'];},m=>{delete m.profile.labels['accessibility.fileTransferProgress'];}]){
+ for(const breakInput of [m=>{m.bindings.warningButtonsVisible=true;delete m.profile.labels.continue;},m=>{m.bindings.warningContentVisible=true;delete m.profile.measurements.warningHeight;},m=>{delete m.profile.labels.progress;}]){
   let effects=0;const model=make();model.renderText=()=>{effects++;return null;};breakInput(model);
   assert.throws(()=>renderToStaticMarkup(createElement(FileTransmissionScreen,{model,open:true,label:'Upload',baseLayer:null,titleArt:null,ref:()=>effects++,controllerRef:()=>effects++})));assert.equal(effects,0);
  }
 });
-test('private components accept actual React key/ref metadata with SSR side effects zero',()=>{
+test('source components accept actual React key/ref metadata with SSR side effects zero',()=>{
  let effects=0;const model=make();model.onAction=()=>effects++;
  const panel=renderToStaticMarkup(createElement(FileTransmissionPanel,{key:'panel',ref:()=>effects++,model}));assert(panel.includes('data-file-transmission-button="cancel"'));assert(panel.includes('data-source-control="file_upload.progress_bar_icon"'));
  const screen=renderToStaticMarkup(createElement(FileTransmissionScreen,{key:'screen',ref:()=>effects++,controllerRef:()=>effects++,model,open:true,label:'Upload',baseLayer:null,titleArt:null}));assert(screen.includes('role="dialog"'));assert(screen.includes('data-source-route="file_transmission_screen"'));
  renderToStaticMarkup(createElement(FileTransferProgress,{key:'progress',ref:createRef(),width:248,scale:1,percentage:.5,visible:true,imageClipPolicy:'visible-fraction-web',label:'Progress'}));assert.equal(effects,0);
+});
+test('lean profile owns only three fonts and supports zero-width empty text without invented measurements',()=>{
+ const model=make();assert.deepEqual(Object.keys(model.profile.fonts),['title','progress','button']);assert.equal(model.profile.transitions,undefined);assert.equal(model.profile.customBar,undefined);assert.equal(model.profile.unresolvedMaterials,undefined);
+ model.bindings.singleTitle='';model.profile.measurements.singleTitleWidth=0;const p=plan(model);assert.equal(p.texts.find(x=>x.sourceControl==='file_upload.single_title_panel/center').box[2],0);
+ assert.doesNotThrow(()=>renderToStaticMarkup(createElement(FileTransmissionPanel,{model})));
+});
+test('presentation fields reject latent getters, invalid axes and aggregate text before any glyph',()=>{
+ for(const corrupt of [m=>Object.defineProperty(m.profile.fonts.button,'logicalSize',{get(){throw Error('getter executed');},enumerable:true}),m=>Object.defineProperty(m.profile.availableSize,'0',{get(){throw Error('getter executed');},enumerable:true}),m=>{m.profile.measurements.warningHeight=NaN;},m=>{m.profile.scale=1.5;},m=>{m.profile.bodyColor='url(external)';},m=>{m.profile.textPolicy='native';}]){
+  let glyphs=0;const model=make();model.renderText=()=>{glyphs++;return null;};corrupt(model);assert.throws(()=>renderToStaticMarkup(createElement(FileTransmissionPanel,{model})),error=>error instanceof TypeError||error instanceof RangeError);assert.equal(glyphs,0);
+ }
+ const model=make();model.profile.labels={play:'x'.repeat(1048576),cancel:'x'.repeat(1048576),continue:'x'.repeat(1048576),mobileDataWarning:'x'.repeat(1048576),progress:'p'};assert.throws(()=>plan(model),RangeError);
+});
+test('invalid CSS colors cannot reach the glyph context or be silently dropped by the browser',()=>{
+ for(const color of ['rgb(1)','rgba(%)','rgb(+++)','rgb(1,2%,3)','rgb(1 2 3 / )','rgba(1,2,3,NaN)']){const model=make();let calls=0;model.profile.bodyColor=color;model.renderText=()=>{calls++;return null;};assert.throws(()=>renderToStaticMarkup(createElement(FileTransmissionPanel,{model})),TypeError);assert.equal(calls,0);}
+ for(const color of ['#abc','#abcd','#123456','#12345678','rgb(1, 2, 3)','rgba(1,2,3,.5)','rgb(30% 30% 30%)','rgb(1 2 3 / 50%)']){const model=make();model.profile.bodyColor=color;assert.doesNotThrow(()=>plan(model));}
 });
 test('progress preflight validates hidden geometry and keeps fixed nub rather than fraction translation',()=>{
  for(const width of [NaN,0,9,8193])assert.throws(()=>renderToStaticMarkup(createElement(FileTransferProgress,{width,scale:1,percentage:.5,visible:false,imageClipPolicy:'visible-fraction-web',label:'Progress'})),RangeError);

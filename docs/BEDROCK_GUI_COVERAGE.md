@@ -1,8 +1,8 @@
 # Bedrock Classic GUI覆盖清单
 
-> 当前202组件／220运行时值；Progress 增量仅将 progress_screen.json 由B更新为有限A，得到 A42／B13／C34／D32／E0／F16／G63／H6，其余205数据行保持。有限A是专门组合的范围映射，不是所有Minecraft GUI或native完成。
+> 当前205组件／223运行时值；FileTransmission增量仅将file_upload_screen.json由B更新为有限A，得到A43／B12／C34／D32／E0／F16／G63／H6，其余205数据行保持。有限A是命名组合的范围映射，原生整页仍未认证。
 
-这是固定官方源文件与本库202组件的**范围映射**，不是原生像素验收表。202包含基础控件、零件和组合，不等于202个完整游戏GUI；有限A42也不是42个完整原生流程。Credits之前的已验阶段为188组件、A38／E1。
+这是固定官方源文件与本库205组件的**范围映射**，不是原生像素验收表。205包含基础控件、零件和组合，不等于205个完整游戏GUI；有限A43也不是43个完整原生流程。Credits之前的已验阶段为188组件、A38／E1。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -14,8 +14,8 @@ MobEffect增量提供可见name／timer、独立grid、原图行背景、滚动�
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|42|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
-|B|`partial_existing_parts`|13|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
+|A|`implemented_named_family_scoped`|43|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|B|`partial_existing_parts`|12|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
 |E|`confirmed_missing_named_family`|0|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
@@ -25,7 +25,7 @@ MobEffect增量提供可见name／timer、独立grid、原图行背景、滚动�
 
 ## 命名族E0的边界
 
-Credits经有限Web合同、功能包、实际安装与展示页检查后由E→有限A，该固定206行快照的E计数成为0。它只表示这组“确认缺失命名族”已建立有限映射；当前B13部分、C34通用候选、F16 Pocket未认证、G63可选未映射、H6未知，以及所有文件的native状态仍保留。不能据E0宣称Minecraft全部GUI完成。
+Credits经有限Web合同、功能包、实际安装与展示页检查后由E→有限A，该固定206行快照的E计数成为0。它只表示这组“确认缺失命名族”已建立有限映射；当前B12部分、C34通用候选、F16 Pocket未认证、G63可选未映射、H6未知，以及所有文件的native状态仍保留。不能据E0宣称Minecraft全部GUI完成。
 
 CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际内容排版、滚动、独立Skip和高层／受控源快照。48个不同Web合同与六个自编平面不认证原版字体、logo、poem／edu阶段、引擎路由或整屏像素。实际包／安装／source与built展示页资格见具名阶段；详见[CREDITS_QA.md](CREDITS_QA.md)。Credits增量只变动credits_screen.json一行，其余205数据行逐字保持。
 
@@ -128,7 +128,7 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 |`encyclopedia_screen.json`|encyclopedia|1|A|DocumentViewer、DocumentHeading、DocumentParagraph（有限宿主百科内容组合，原生像素待验）|
 |`expanded_skin_pack_screen.json`|expanded_skin_pack|1|G|—|
 |`feed_common.json`|feed_common|0|D|—|
-|`file_upload_screen.json`|file_upload|1|B|LoadingScreen、Progress|
+|`file_upload_screen.json`|file_upload|1|A|FileTransmissionScreen、FileTransmissionPanel、FileTransferProgress；显式字体／测量／Web栈策略，原生未认证|
 |`furnace_screen.json`|furnace|1|A|Furnace|
 |`furnace_screen_pocket.json`|furnace_pocket|0|F|—|
 |`game_tip_screen.json`|game_tip|0|H|—|
@@ -284,3 +284,5 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 **Invite已接入有限源组合**：InviteScreen与可独立复用的InvitePersonRow、InviteCategory、InvitePagination、InviteFooter使当前源码为188组件／205运行时值。六组好友、三类身份、选择／party、分页及footer保留独立宿主输入；邀请、账号、头像provider和资料服务由宿主实现。Invite106个不同合同按02批与06批的实际身份验证，200个完整源／Web材质平面共11,473,278像素RGBA零差；4个自然分数栅格测量仍未资格确认。新包的React18.3.1／19.3.1类型、SSR和资源消费通过，实际React18／19开发和生产四组合均通过，公开页17项通过。不是原生字体或整页像素认证。仅invite_screen.json该行E→有限A，其他205行逐字保留，八类总数仍为206；命名族缺口仅余Credits，Pocket、可选族、provider与整页资格边界不变。详见[INVITE_QA.md](INVITE_QA.md)。
 
 Progress 增量提供固定源15路由及独立条件、两个包集合／五factory、云错误／冲突等专门组合与可复用部件。真实React18／19安装消费、默认Vite开发／生产四组合、源与built展示页按具名阶段验证；不从局部材质或计数外推原生整页、字体、shader、内容测量或服务。只有progress_screen.json一行由B→有限A，其他205行不变。详见[PROGRESS_QA.md](PROGRESS_QA.md)。
+
+FileTransmission三组件接入固定源268×95窗口、十个独立显隐与原图经验进度条，source与真实两peer／默认Vite四组合的有限验收见[FILE_TRANSMISSION_QA.md](FILE_TRANSMISSION_QA.md)。仅一行B→有限A；它不认证base_screen引擎工厂、原生字体、自动高度或上传服务。

@@ -1,5 +1,7 @@
 # File transmission implementation qualification
 
+> Historical private implementation snapshot (202/220). Current public API and qualification are recorded in [FILE_TRANSMISSION_QA.md](FILE_TRANSMISSION_QA.md). The original alpha reference failure and amendment history below are retained.
+
 Recorded 2026-11-02. **Private source implementation; public exports remain202 components/220 values.** Nothing here upgrades file_upload_screen coverage to A or certifies native pixels. Public installation, ergonomic profile/demo and remaining base-screen integration are pending.
 
 The fixed Mojang Samples v1.26.60.5 file_upload_screen.json defines file_transmission_screen, a268x95 content window, independent single/dual titles, upload/warning content, message/size/bar branches and play/cancel/continue-pair controls. The10 visibility inputs have1024 combinations; no stage enum/exclusivity/default transaction flow is inferred. Buttons emit exact file_upload_* requests. Root cancel maps to menu_exit; left/right tab commands preserve their source identities. No uploads, redirects or automatic closing occur.

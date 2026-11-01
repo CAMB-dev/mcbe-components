@@ -6,9 +6,15 @@ import {classicModalOwnsInput,classicModalTab,deferClassicEvent,deferClassicRequ
 import {validateProgressRef} from './progress-data';
 import {projectProgressElementProps} from './progress-react-props';
 import {progressAssets} from './progress-assets';
-import {ProgressText} from './progress-actions';
 import {planFileTransmission} from './file-transmission-model';
-import type {FileTransmissionAction,FileTransmissionModel,FileTransmissionTarget} from './file-transmission-model';
+import type {FileTransmissionAction,FileTransmissionModel,FileTransmissionTarget,FileTransmissionTextRole} from './file-transmission-model';
+
+function TransmissionText({text,role,sourceControl,model,color}:{text:string;role:FileTransmissionTextRole;sourceControl:string;model:FileTransmissionModel;color:string}){
+ const p=model.profile,font=p.fonts[role],context=Object.freeze({role,sourceControl,font,scale:p.scale,color,shadow:false as const});
+ return <span className="mc-file-transmission-text" data-source-control={sourceControl} data-file-transmission-text-role={role} data-text-policy={p.textPolicy} style={{fontFamily:font.family,fontSize:font.logicalSize*p.scale,lineHeight:`${font.lineHeight*p.scale}px`,color}}>
+  {model.renderText?<><span aria-hidden="true">{model.renderText(text,context)}</span><span className="mc-file-transmission-text__literal">{text}</span></>:text}
+ </span>;
+}
 
 export interface FileTransferProgressProps {
  readonly width:number;readonly scale:number;readonly percentage:number;readonly visible:boolean;
@@ -52,13 +58,13 @@ function PanelPaint({plan,forwardedRef,onNativeClick}:{plan:Plan;forwardedRef:Re
  return <div ref={attach} tabIndex={-1} className="mc-file-transmission-panel" data-source-control="file_upload.file_upload_content/content" data-native-certified="false" data-material-policy={m.materialPolicy} style={{width:268*s,height:95*s,'--mc-file-transfer-unit':`${s}px`} as CSSProperties} onClick={onNativeClick}>
   <span className="mc-file-transmission-panel__fill" aria-hidden="true"><Image src={progressAssets['textures/ui/control'].url} sourceSize={[2,2]} size={[260,87]} scale={s} alt="" style={{left:4*s,top:4*s,opacity:.8}}/></span>
   <span className="mc-file-transmission-panel__frame" aria-hidden="true">{skin('textures/ui/dialog_background_hollow_2',268,95)}</span>
-  {plan.texts.map(leaf=><span key={leaf.sourceControl} className="mc-file-transmission-panel__text" style={boxStyle(leaf.box,s)}><ProgressText text={leaf.text} role={leaf.role} sourceControl={leaf.sourceControl} profile={m.profile} color={leaf.color} renderText={m.renderText}/></span>)}
+  {plan.texts.map(leaf=><span key={leaf.sourceControl} className="mc-file-transmission-panel__text" style={boxStyle(leaf.box,s)}><TransmissionText text={leaf.text} role={leaf.role} sourceControl={leaf.sourceControl} model={m} color={leaf.color}/></span>)}
   <span className="mc-file-transmission-panel__progress" style={boxStyle(plan.progress.box,s)}><FileTransferProgress width={248} scale={s} percentage={m.bindings.percentage} visible={plan.progress.visible} imageClipPolicy={m.imageClipPolicy} label={plan.progress.label}/></span>
   {plan.buttons.map(b=><button key={b.id} type="button" className="mc-file-transmission-button" disabled={m.disabled} aria-disabled={m.readOnly||undefined} aria-label={b.label} data-file-transmission-button={b.id} data-source-target={b.target} style={boxStyle(b.box,s)} onClick={event=>request(b.target,b.sourceControl,event.currentTarget,'control',event,b.id)}>
    {(['normal','hover','pressed','locked'] as const).map(state=><span key={state} aria-hidden="true" className={`mc-file-transmission-button__state mc-file-transmission-button__state--${state}`}>
     <span className="mc-file-transmission-button__face" style={{inset:s}}>{skin(state==='hover'?'textures/ui/button_borderless_lighthover':state==='pressed'?'textures/ui/button_borderless_lightpressed':state==='locked'?'textures/ui/disabledButtonNoBorder':'textures/ui/button_borderless_light',b.box[2]-2,b.box[3]-2)}</span>
     <span className="mc-file-transmission-button__border" style={{filter:state==='normal'||state==='locked'?'brightness(.075)':undefined}}>{skin('textures/ui/focus_border_white',b.box[2],b.box[3])}</span>
-    <span className="mc-file-transmission-button__label"><ProgressText text={b.label} role="button" sourceControl={b.sourceControl+'/label'} profile={m.profile} renderText={m.renderText} color={state==='normal'||state==='locked'?'rgb(30% 30% 30%)':'#fff'}/></span>
+    <span className="mc-file-transmission-button__label"><TransmissionText text={b.label} role="button" sourceControl={b.sourceControl+'/label'} model={m} color={state==='normal'||state==='locked'?'rgb(30% 30% 30%)':'#fff'}/></span>
    </span>)}
   </button>)}
  </div>;
