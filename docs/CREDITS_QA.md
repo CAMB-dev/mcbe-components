@@ -4,6 +4,8 @@
 
 随后增加[公开源平铺验证](GUI_TILED_IMAGES_QA.md)：明确的ceil stage／center／零offset候选可由公开GuiLayer生成完整网格，指定D3D11整背景及真实React DOM零差。它不恢复原生默认锚点、动画时钟或CreditsScreen整个播放器；旧阶段边界与失败仍保留。
 
+接续的[可选GPU背景](CREDITS_GPU_BACKGROUND_QA.md)已接入CreditsScreen连续呈现与公开示例；空内容、intro完成的明确受控快照也通过整背景原生对照。旧CSS路径保留，播放器整体及原生字体／时钟仍未认证。
+
 状态为**SOURCE_WEB_PACKAGE_INSTALLED_SOURCE_AND_BUILT_DEMO_QUALIFIED_NATIVE_UNVERIFIED**。当前实际barrel与受检功能包为191组件／209值，含CreditsScreen、CreditsRoll、CreditsSkipButton及纯layoutCredits。包、React18／19实际安装消费及source／built展示页已按具名阶段验证。最终仅文档tar及Git部署身份待root操作。覆盖表仅Credits一行E→有限A，A39／E0不代表所有Minecraft GUI或native完成。
 
 ## 已确认的源与实际数据

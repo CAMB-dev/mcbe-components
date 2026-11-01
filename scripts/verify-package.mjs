@@ -130,7 +130,7 @@ assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
 assert(!Object.hasOwn(ui,'workstationImageAssets'),'Internal workstation assets must not become a public export.');
 assert(!Object.hasOwn(ui,'useEnchantingImageLayer'),'Internal workstation image adapter must not become a public export.');
-for (const internal of ['renderPreparedGuiLayer','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
+for (const internal of ['renderPreparedGuiLayer','presentPreparedGuiLayer','presentGuiLayer','CreditsGpuBackground','validateCreditsGpuBackground','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
 for (const internal of ['compileGuiEntitySource','layoutGuiEntity','guiEntityVertexShader','npcActorSkins','npcActorSourceFiles']) assert(!Object.hasOwn(ui,internal),'Private entity preparation must not become a public export: '+internal);
 for(const internal of ['createCreditsClock','stepCreditsClock','CREDITS_COVER_MS','CREDITS_SKIP_WAIT_MS','creditsFinite','copyCreditsSurface','copyCreditsSnapshot','creditsSurfaceFrame','parseCreditsSections','parseCreditsContent','tokenizeCreditsText','CreditsSection','CreditsRoleGroup']) assert(!Object.hasOwn(ui,internal),'Private Credits helper must not become a public export: '+internal);
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());

@@ -106,7 +106,8 @@ function makeDemoProfile(width: number, height: number, metrics: DemoMetrics): C
       { id: 'a-small-idea', kind: 'end-poem', before: 0, after: 18 },
       { id: 'one-more-light', kind: 'quote', before: 0, after: 0 }
     ], initialLead: 22, completionGap: height },
-    surface: { background: { image: background, tileSize: [64, 64], logicalSize: [width, height * 20], from: [0, 0], to: [0, -height * 5], durationMs: 503000 }, edgeMask: { kind: 'none' }, coverPlacement: 'above-content' },
+    surface: { background: { image: background, tileSize: [64, 64], logicalSize: [width, height * 20], from: [0, 0], to: [0, -height * 5], durationMs: 503000,
+      rendering: { kind: 'gui-layer', rasterOrigin: 'top-left', originRounding: 'truncate' } }, edgeMask: { kind: 'none' }, coverPlacement: 'above-content' },
     logicalUnitsPerSecond: 22, fasterMultiplier: 3, skipLabelStyle: { ...body, lineHeight: 10, shadow: null },
     rasterPositioning: 'css-subpixel', imageSampling: 'point', completion: 'web-scroll-end-then-fade',
     input: { escape: 'reveal-then-exit', enter: 'reveal-skip', repeat: 'ignore', focus: 'host' }
@@ -149,8 +150,8 @@ export function CreditsDemo() {
     let live = true;
     void (async () => {
       try {
-        await Promise.all(['MCBE Pixel', 'MCBE CJK'].flatMap(family => [10, 12].map(size => owner.fonts.load(`${size * scale}px "${family}"`))));
-        await owner.fonts.ready;
+        const faces = await Promise.all(['MCBE Pixel', 'MCBE CJK'].flatMap(family => [10, 12].map(size => owner.fonts.load(`${size * scale}px "${family}"`, 'Builder 建造者'))));
+        if (faces.some(loaded => loaded.length === 0)) throw new Error('The selected bundled fonts are unavailable.');
         if (!live) return;
         const face = (logicalSize: number): CreditsCssFace => {
           node.style.fontFamily = fontFamilies[font]; node.style.fontSize = `${logicalSize * scale}px`;
@@ -160,7 +161,7 @@ export function CreditsDemo() {
           context.font = `${computed.fontStyle} ${computed.fontWeight} ${computed.fontSize} ${computed.fontFamily}`;
           if (computed.fontKerning === 'auto' || computed.fontKerning === 'normal' || computed.fontKerning === 'none') context.fontKerning = computed.fontKerning;
           const family = computed.fontFamily, fontSize = Number.parseFloat(computed.fontSize) / scale;
-          if (!Number.isFinite(fontSize) || fontSize <= 0 || !owner.fonts.check(context.font)) throw new Error('The selected bundled fonts did not become ready.');
+          if (!Number.isFinite(fontSize) || fontSize <= 0 || !owner.fonts.check(context.font, 'Builder 建造者')) throw new Error('The selected bundled fonts did not become ready.');
           return { kind: 'css-face', family, fontSize,
             metricsId: JSON.stringify(['credits-ofl-canvas', fontPins, scale, context.font, computed.fontWeight, computed.fontStyle, context.fontKerning]),
             measureText: text => { assertDemoGlyphs(text); return context.measureText(text).width / scale; } };

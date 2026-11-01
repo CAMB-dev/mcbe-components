@@ -1,7 +1,8 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import type { CSSProperties, Ref, SyntheticEvent } from 'react';
 import { CreditsRoll } from './credits-roll';
 import { CreditsSkipButton } from './credits-skip-button';
+import { CreditsGpuBackground, validateCreditsGpuBackground } from './credits-gpu-background';
 import { Image } from './image';
 import { createCreditsClock, stepCreditsClock } from './credits-clock';
 import type { CreditsClockState } from './credits-clock';
@@ -54,6 +55,12 @@ function CreditsSession(props: CreditsScreenProps & { forwardedRef: Ref<HTMLElem
     fadeOut: factory.outroAt === null ? null : { instanceId: `${runKey}:outro`, ageMs: Math.max(0, position.elapsedMs - factory.outroAt) } },
   };
   const frame = creditsSurfaceFrame(surface, snapshot), [width, height] = profile.layout.viewport.size;
+  if (surface.background.rendering && (profile.imageSampling !== 'point' || !Number.isSafeInteger(width * scale) || !Number.isSafeInteger(height * scale)))
+    throw new RangeError('Credits GPU background requires point sampling and integer physical dimensions.');
+  const bg = surface.background;
+  useMemo(() => validateCreditsGpuBackground(width * scale, height * scale, scale, bg), [width, height, scale,
+    bg.image.src, ...bg.image.naturalSize, ...bg.logicalSize, ...bg.tileSize, ...bg.from, ...bg.to,
+    bg.rendering?.kind, bg.rendering?.originRounding]);
   for (const value of [width * scale, height * scale, ...surface.background.logicalSize.map(value => value * scale),
     ...surface.background.tileSize.map(value => value * scale), ...frame.backgroundOffset.map(value => value * scale)]) creditsFinite(value, 'Credits scaled surface geometry');
   if (width <= 0 || height <= 0 || width * scale > 8192 || height * scale > 8192 || width * height * scale * scale > 4194304)
@@ -212,7 +219,12 @@ function CreditsSession(props: CreditsScreenProps & { forwardedRef: Ref<HTMLElem
       else if (event.key === 'Enter' && input.enter === 'reveal-skip' && event.target === event.currentTarget)
         route({ fromButtonId: 'button.menu_ok', destination: 'whole-screen' }, 'keyboard', event);
     }}>
-    <div className="mc-credits-screen__background" aria-hidden="true" style={backgroundStyle} data-source-texture={surface.background.image.provenance} />
+    {surface.background.rendering ? active && <CreditsGpuBackground
+      key={JSON.stringify([surface.background.image.src, ...surface.background.image.naturalSize])}
+      width={width * scale} height={height * scale} scale={scale} offset={frame.backgroundOffset}
+      background={{ ...surface.background, rendering: surface.background.rendering }}
+      onRenderError={error => onRenderError?.(error, { lineIndex: -1, runIndex: -1 })}/>
+      : <div className="mc-credits-screen__background" aria-hidden="true" style={backgroundStyle} data-source-texture={surface.background.image.provenance} />}
     {cover('intro', frame.introOpacity)}
     <CreditsRoll className="mc-credits-screen__roll" style={{ zIndex: 2 }} content={content} profile={profile.layout} plan={profile.plan} bindings={bindings}
       offset={position.offset} elapsedMs={position.elapsedMs} scale={scale} rasterPositioning={profile.rasterPositioning} imageSampling={profile.imageSampling}

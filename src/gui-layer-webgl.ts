@@ -50,6 +50,11 @@ export interface GuiLayerPreparedResult extends PixelTexture {
   /** Only dispose a live canvas after retiring it; this loses its exclusive context. */
   dispose: () => void;
 }
+export interface GuiLayerPreparedPresentationResult {
+  width: number;
+  height: number;
+  dispose: () => void;
+}
 
 const WHITE: GuiImageRgba = [1, 1, 1, 1];
 function finite(value: number, name: string): void {
@@ -197,7 +202,9 @@ function validate(options: GuiLayerPreparedOptions): GuiImageRect {
  * intermediate text canvas. Source layout remains the public adapter's job.
  * All pixels are top-first; live presentation is a blend-disabled PMA GPU copy.
  */
-export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLayerPreparedResult {
+function drawPreparedGuiLayer(options: GuiLayerPreparedOptions, readback: true): GuiLayerPreparedResult;
+function drawPreparedGuiLayer(options: GuiLayerPreparedOptions, readback: false): GuiLayerPreparedPresentationResult;
+function drawPreparedGuiLayer(options: GuiLayerPreparedOptions, readback: boolean): GuiLayerPreparedResult | GuiLayerPreparedPresentationResult {
   const [cropX, cropY, width, height] = validate(options);
   const topFirst = options.rasterOrigin === 'top-left';
   if (!options.canvas && typeof document === 'undefined') throw new Error('Prepared GUI rendering requires an explicit browser canvas.');
@@ -371,9 +378,12 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STREAM_DRAW); gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
       if (gl.getError() !== gl.NO_ERROR || gl.isContextLost()) throw new Error('GPU ordered GUI drawing failed.');
     }
-    const bottom = new Uint8Array(width * height * 4), data = new Uint8ClampedArray(bottom.length);
-    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, bottom); if (gl.getError() !== gl.NO_ERROR) throw new Error('GUI layer readback failed.');
-    for (let y = 0; y < height; y++) data.set(bottom.subarray(y * width * 4, (y + 1) * width * 4), (topFirst ? y : height - 1 - y) * width * 4);
+    let data: Uint8ClampedArray | undefined;
+    if (readback) {
+      const bottom = new Uint8Array(width * height * 4); data = new Uint8ClampedArray(bottom.length);
+      gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, bottom); if (gl.getError() !== gl.NO_ERROR) throw new Error('GUI layer readback failed.');
+      for (let y = 0; y < height; y++) data.set(bottom.subarray(y * width * 4, (y + 1) * width * 4), (topFirst ? y : height - 1 - y) * width * 4);
+    }
     if (options.canvas) {
       gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, width, height); gl.disable(gl.SCISSOR_TEST); gl.disable(gl.CULL_FACE); gl.disable(gl.BLEND);
       if (entityCommands.length) { gl.disable(gl.DEPTH_TEST); gl.depthMask(false); gl.disable(gl.STENCIL_TEST); }
@@ -384,11 +394,11 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
       if (gl.getError() !== gl.NO_ERROR || gl.isContextLost()) throw new Error('GUI layer presentation failed.');
     }
     const alphaMode = options.output === 'straight-alpha' ? 'straight' : 'premultiplied';
-    if (alphaMode === 'straight') for (let index = 0; index < data.length; index += 4) {
+    if (data && alphaMode === 'straight') for (let index = 0; index < data.length; index += 4) {
       const alpha = data[index + 3]!;
       for (let channel = 0; channel < 3; channel++) data[index + channel] = alpha ? Math.min(255, Math.round(data[index + channel]! * 255 / alpha)) : 0;
     }
-    successful = true; return { width, height, data, alphaMode, dispose };
+    successful = true; return data ? { width, height, data, alphaMode, dispose } : { width, height, dispose };
   } finally {
     gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.useProgram(null);
     for (const value of buffers) gl.deleteBuffer(value); for (const value of framebuffers) gl.deleteFramebuffer(value);
@@ -396,4 +406,15 @@ export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLay
     for (const value of textures) gl.deleteTexture(value); for (const value of programs) gl.deleteProgram(value); for (const value of shaders) gl.deleteShader(value);
     if (!options.canvas || !successful) dispose();
   }
+}
+
+/** Private readback path used by the public byte-returning source adapter. */
+export function renderPreparedGuiLayer(options: GuiLayerPreparedOptions): GuiLayerPreparedResult {
+  return drawPreparedGuiLayer(options, true);
+}
+
+/** Private live-only path. The owner keeps the canvas/context alive until retirement. */
+export function presentPreparedGuiLayer(options: Omit<GuiLayerPreparedOptions, 'output'> & { canvas: HTMLCanvasElement | OffscreenCanvas }): GuiLayerPreparedPresentationResult {
+  if (!options.canvas || typeof options.canvas.getContext !== 'function') throw new RangeError('Live GUI presentation requires an explicit exclusive canvas.');
+  return drawPreparedGuiLayer(options, false);
 }

@@ -30,9 +30,14 @@ function image(value: CreditsWholeImage): CreditsWholeImage {
 /** Snapshot all surface inputs before a host text-metrics callback can run. */
 export function copyCreditsSurface(value: CreditsSurfaceProfile): CreditsSurfaceProfile {
   const source = value.background;
+  const selected = source.rendering;
+  if (selected !== undefined && (!selected || selected.kind !== 'gui-layer'
+    || !['webgl', 'top-left'].includes(selected.rasterOrigin) || !['floor', 'truncate'].includes(selected.originRounding)))
+    throw new RangeError('Invalid Credits GPU background rendering policy.');
   const background = { image: image(source.image), tileSize: pair(source.tileSize, 'Credits tile size', true),
     logicalSize: pair(source.logicalSize, 'Credits background size', true), from: pair(source.from, 'Credits background origin', false),
-    to: pair(source.to, 'Credits background destination', false), durationMs: creditsFinite(source.durationMs, 'Credits background duration', Number.MIN_VALUE) };
+    to: pair(source.to, 'Credits background destination', false), durationMs: creditsFinite(source.durationMs, 'Credits background duration', Number.MIN_VALUE),
+    ...(selected === undefined ? {} : { rendering: { kind: 'gui-layer' as const, rasterOrigin: selected.rasterOrigin, originRounding: selected.originRounding } }) };
   const mask = value.edgeMask;
   if (mask.kind !== 'none' && mask.kind !== 'whole-image') throw new RangeError('Unsupported Credits edge mask.');
   const edgeMask = mask.kind === 'none' ? { kind: 'none' as const } : { kind: 'whole-image' as const, image: image(mask.image) };

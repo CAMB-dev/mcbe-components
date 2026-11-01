@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import type { Locator, Page, Response, TestInfo } from '@playwright/test';
 import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
+import type { Route } from '@playwright/test';
 import componentCatalog from '../docs/component-catalog.json' with { type: 'json' };
 
 /** Root runs this against the complete public demo in one desktop project.
@@ -82,10 +84,47 @@ async function originalBody(page: Page, url: string, baseURL = page.url()) {
     // Require an actual nonempty response and agreement among all available bodies.
     if (body.length) { if (original) expect(body.equals(original)).toBe(true); else original = body; }
   }
+  const uploads = await page.evaluate(async url => Promise.all(((window as any).creditsUploadedBackgroundBlobs ?? [])
+    .filter((record: any) => record.url === url).map(async (record: any) => ({ status: record.status, bytes: Array.from(new Uint8Array(await record.blob.arrayBuffer())) }))), absolute);
+  for (const upload of uploads) {
+    const body = Buffer.from(upload.bytes); expect(body.length).toBeGreaterThan(0);
+    observed.assetBodies.push({ url: absolute, status: upload.status, bytes: body.length, sha256: sha(body), resourceType: 'actual-fetch-blob-fed-to-gpu' });
+    if (original) expect(body.equals(original)).toBe(true); else original = body;
+  }
   expect(original, `No nonempty actual page response body for ${absolute}`).toBeDefined(); return original!;
 }
 
 test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    // Observe standard fetch→Blob→ImageBitmap→GPU upload provenance, without source/React hooks.
+    const blobRecords = new WeakMap<object, any>(), bitmapRecords = new WeakMap<object, any>(), recorded = new WeakSet<object>();
+    (window as any).creditsUploadedBackgroundSources = [];
+    (window as any).creditsUploadedBackgroundBlobs = [];
+    const fetchOriginal = window.fetch.bind(window);
+    window.fetch = async (...args) => {
+      const response = await fetchOriginal(...args), read = response.blob.bind(response);
+      response.blob = async () => { const blob = await read(); blobRecords.set(blob, { blob, status: response.status, url: response.url || new URL(String(args[0]), location.href).href }); return blob; };
+      return response;
+    };
+    const decodeOriginal = window.createImageBitmap.bind(window);
+    window.createImageBitmap = (async (...args: any[]) => {
+      const bitmap = await (decodeOriginal as any)(...args), record = blobRecords.get(args[0]); if (record) bitmapRecords.set(bitmap, record); return bitmap;
+    }) as typeof createImageBitmap;
+    const contextOriginal = HTMLCanvasElement.prototype.getContext, wrapped = new WeakSet<object>();
+    (HTMLCanvasElement.prototype as any).getContext = function (kind: string, ...args: any[]) {
+      const gl = (contextOriginal as any).call(this, kind, ...args);
+      if (kind === 'webgl' && gl && this.matches('[data-background-renderer="gui-layer"]') && !wrapped.has(gl)) {
+        wrapped.add(gl); const upload = gl.texImage2D.bind(gl);
+        gl.texImage2D = (...args: any[]) => { const bitmap = args[args.length - 1], record = bitmapRecords.get(bitmap);
+          if (record) {
+            if (!(window as any).creditsUploadedBackgroundSources.includes(record.url)) (window as any).creditsUploadedBackgroundSources.push(record.url);
+            if (!recorded.has(bitmap)) { recorded.add(bitmap); (window as any).creditsUploadedBackgroundBlobs.push(record); }
+          }
+          return upload(...args); };
+      }
+      return gl;
+    };
+  });
   const observed: PageObservation = { pageErrors: [], consoleErrors: [], failedRequests: [], responses: [], assetBodies: [] };
   observations.set(page, observed);
   page.on('pageerror', e => observed.pageErrors.push(e.stack ?? e.message));
@@ -160,7 +199,8 @@ test('bounded public text uses loaded bundled OFL faces and actual matching CSS 
   }
   const measurement = await canvasMeasurement(roll(page).locator('.mc-credits-roll__css-run').first());
   expect(measurement.family.replaceAll('"', '').split(',').map(s => s.trim())).toEqual(['MCBE Pixel', 'MCBE CJK']);
-  expect(measurement.fontSetReady && measurement.familyReady).toBe(true);
+  // Other gallery examples may still be loading unrelated faces; require this actual run's faces.
+  expect(measurement.familyReady).toBe(true);
   expect(measurement.kerning).toBe('normal'); expect(measurement.text.length).toBeGreaterThan(0);
   expect(Math.abs(measurement.DOMWidth - measurement.canvasWidth)).toBeLessThan(.1);
   expect(Math.abs(measurement.DOMCenter - measurement.viewportCenter)).toBeLessThan(.1);
@@ -170,8 +210,9 @@ test('bounded public text uses loaded bundled OFL faces and actual matching CSS 
 
 test('original whole dirt and title decode from actual public response bytes without native logo parity claims', async ({ page }, info) => {
   await restartAndPause(page);
-  const background = await scene(page).locator('.mc-credits-screen__background').evaluate(n => getComputedStyle(n).backgroundImage);
-  const backgroundURL = /url\(["']?([^"')]+)["']?\)/.exec(background)?.[1]; expect(backgroundURL).toBeTruthy();
+  await expect(scene(page).locator('[data-background-renderer="gui-layer"]')).toHaveAttribute('data-render-state', 'ready');
+  const actualUploaded = await page.evaluate(() => (window as any).creditsUploadedBackgroundSources as string[]);
+  expect(actualUploaded).toHaveLength(1); const backgroundURL = actualUploaded[0]!;
   expect(sha(await originalBody(page, backgroundURL!))).toBe(expectedAssets.bg32);
   const title = roll(page).locator('img[data-image-provenance="whole-original-v1.26.60.5-title-png"]');
   await expect(title).toBeAttached();
@@ -230,6 +271,26 @@ test('uniform Credits font combobox owns its popup and applies a second real bun
   expect(Math.abs(measurement.DOMWidth - measurement.canvasWidth)).toBeLessThan(.1);
   expect(Math.abs(measurement.DOMCenter - measurement.viewportCenter)).toBeLessThan(.1);
   await attachJSON(info, 'second-font-actual-computed-measurement', measurement);
+});
+
+test('switching actual Credits faces does not wait for an unrelated pending document font', async ({ page }, info) => {
+  await pause(page);let pending: Route | undefined;
+  const fontBytes = await readFile(new URL('../src/fonts/MCBEPixel-Regular.woff2', import.meta.url));
+  await page.route('**/qa-unrelated-pending.woff2', route => { pending = route; });
+  await page.evaluate(() => {
+    const face = new FontFace('Unrelated QA face', 'url("/qa-unrelated-pending.woff2")'); document.fonts.add(face);
+    (window as any).unrelatedFaceDone = false;
+    void face.load().then(() => { (window as any).unrelatedFaceDone = true; });
+    const node = document.createElement('span'); node.id = 'unrelated-font-probe'; node.style.cssText = 'position:fixed;left:-10000px;font-family:"Unrelated QA face"'; node.textContent = 'X'; document.body.append(node);
+  });
+  await expect.poll(() => !!pending).toBe(true);expect(await page.evaluate(() => document.fonts.status)).toBe('loading');
+  const trigger = section(page).getByRole('combobox', { name: 'Credits font', exact: true }); await trigger.click();
+  await page.getByRole('option', { name: 'MCBE CJK', exact: true }).click();
+  const first = roll(page).locator('.mc-credits-roll__css-run').first();await expect(first).toHaveCSS('font-family', /^"?MCBE CJK/);
+  const measurement = await canvasMeasurement(first);expect(measurement.familyReady).toBe(true);expect(await page.evaluate(() => (window as any).unrelatedFaceDone)).toBe(false);
+  await attachJSON(info, 'selected-face-ready-while-unrelated-pending', measurement);
+  await pending!.fulfill({ contentType: 'font/woff2', body: fontBytes });await page.waitForFunction(() => (window as any).unrelatedFaceDone);
+  await page.evaluate(() => document.getElementById('unrelated-font-probe')?.remove());
 });
 
 test('Escape reveals a real Skip which closes through host state and Play again starts a new scene', async ({ page }) => {

@@ -3,8 +3,8 @@ import type { GuiImageGeometry, GuiImageLayout, GuiImageLayoutOptions, GuiImageM
 import type { GuiImageBackground, GuiImageDraw, GuiImageTexture } from './gui-image-webgl';
 import { layoutGuiText } from './gui-text-geometry';
 import type { GuiTextGeometry, GuiTextLayout, GuiTextRgba8 } from './gui-text-geometry';
-import { renderPreparedGuiLayer } from './gui-layer-webgl';
-import type { GuiLayerPreparedCommand, GuiLayerPreparedResult } from './gui-layer-webgl';
+import { renderPreparedGuiLayer, presentPreparedGuiLayer } from './gui-layer-webgl';
+import type { GuiLayerPreparedCommand, GuiLayerPreparedResult, GuiLayerPreparedPresentationResult } from './gui-layer-webgl';
 import { layoutGuiModel } from './gui-model-geometry';
 import type { GuiModelGeometry, GuiModelLayout } from './gui-model-geometry';
 import type { GuiLayerTexture } from './gui-texture-atlas';
@@ -109,7 +109,7 @@ function intersect(layer: GuiImageLayoutOptions['scissor'], local: GuiImageLayou
  * Text inputs are source strings, metrics and paint origins, never captured vertices.
  * Whole-frame projection is retained when outputRect selects a physical output window.
  */
-export function renderGuiLayer(options: GuiLayerRenderOptions): GuiLayerRenderResult {
+function prepareGuiLayer(options: GuiLayerRenderOptions) {
   const layout = layoutSourceGuiLayer(options), commands: GuiLayerPreparedCommand[] = [];
   options.commands.forEach((command, index) => {
     const entry = layout.commands[index]!;
@@ -139,7 +139,20 @@ export function renderGuiLayer(options: GuiLayerRenderOptions): GuiLayerRenderRe
       }
     }
   });
+  return { layout, commands };
+}
+
+export function renderGuiLayer(options: GuiLayerRenderOptions): GuiLayerRenderResult {
+  const { layout, commands } = prepareGuiLayer(options);
   const result = renderPreparedGuiLayer({ width: options.width, height: options.height, commands,
     outputRect: layout.outputRect, scissor: options.scissor, background: options.background, canvas: options.canvas, output: options.output, rasterOrigin: options.rasterOrigin });
   return { ...result, layout };
+}
+
+/** Internal live source adapter. No CPU pixel readback, no new public runtime export. */
+export function presentGuiLayer(options: Omit<GuiLayerRenderOptions, 'output'> & { canvas: HTMLCanvasElement | OffscreenCanvas }): GuiLayerPreparedPresentationResult {
+  if (!options.canvas || typeof options.canvas.getContext !== 'function') throw new RangeError('Live GUI presentation requires an explicit exclusive canvas.');
+  const { layout, commands } = prepareGuiLayer(options);
+  return presentPreparedGuiLayer({ width: options.width, height: options.height, commands, outputRect: layout.outputRect,
+    scissor: options.scissor, background: options.background, canvas: options.canvas, rasterOrigin: options.rasterOrigin });
 }

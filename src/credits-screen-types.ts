@@ -11,6 +11,12 @@ export interface CreditsSurfaceProfile {
     readonly from: readonly [number, number];
     readonly to: readonly [number, number];
     readonly durationMs: number;
+    /** Optional source-tiled GPU presentation. Source offsets remain evaluated logical units. */
+    readonly rendering?: {
+      readonly kind: 'gui-layer';
+      readonly rasterOrigin: 'webgl' | 'top-left';
+      readonly originRounding: 'floor' | 'truncate';
+    };
   };
   readonly edgeMask: { readonly kind: 'none' } | { readonly kind: 'whole-image'; readonly image: CreditsWholeImage };
   /** JSON authors a black White-texture cover. A DOM solid is an explicit Web substitute. */

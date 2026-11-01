@@ -434,6 +434,8 @@ React层的 `commands` 可包含原图URL或显式RGBA8；text的原页默认取
 
 图像与sprite命令可使用 `tiling: { size: [64, 64], originRounding: 'truncate' }` 复用完整原图平铺，也可明确选择 `floor`。每tile独立量化，尾条保留局部UV，crop不会改变网格相位；不能与nineSlice同时设置。`GuiImageLayer` / `renderGuiImages` 也复用该源几何。`#credits` 有原材质的32／64尺寸预览；明确源候选的原生整背景对照及边界见 [平铺验证](docs/GUI_TILED_IMAGES_QA.md)。
 
+`CreditsScreen` 的背景可在 `surface.background.rendering` 明确设置 `{ kind: 'gui-layer', rasterOrigin: 'top-left', originRounding: 'truncate' }`，连续帧复用同一画布和已解码材质，不进行每帧CPU像素读回；关闭／隐藏后重开会创建新owner。省略时仍为CSS repeat。该模式要求point与整数物理frame，offset保持宿主求值的逻辑单位；[背景生命周期与验证](docs/CREDITS_GPU_BACKGROUND_QA.md)记录实际原生对照及尚未恢复的锚点／动画边界。
+
 `EnchantingTable imageRender.text` 新增必需的 `metrics:{lineHeight,paintOffset}`，并明确提供 `labels` / `costs` 与可选 `runes` 字体样式（font、fontScale、sampling、shader及可选颜色 / tint / hudOpacity）。`options[].runeText` 是宿主已排版 / 截断的最终原始大小写字符串；旧任意 `runes: ReactNode` 仍可用于DOM。新图文配置不推测缺字或度量，异常时整层同有效scale退回CSS；最终组件10项覆盖回退 / 恢复、DOM物品、book、焦点、选择和交互语义。旧CSS、GuiImageLayer与BitmapText默认路径不变。
 
 公开源输入 / GPU / React正式17项已通过：固定GUI4 / GUI5阶段的四FBO与四实际React完整目标共28,825,120像素RGBA零差；字符串、原字页与源布局作为正常输入，捕获属性仅用于比较。实际附魔台组件正式10项另验组合与生命周期，完整747,600像素原生区域仍有10,155个差异像素，不能称整GUI pixel perfect。实际React18 / 19包消费和生产38项辅助检查亦通过各自范围；可在本机展示页 `#gui-layer` 查看，完整API、示例和分层证据见 [GUI_LAYER_QA.md](docs/GUI_LAYER_QA.md)。
