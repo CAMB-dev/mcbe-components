@@ -14,7 +14,7 @@ Latest native studies remain UNQUALIFIED: mixedGlyph00 two candidates448/354mask
 
 Final docs-only archive is now actual: `.cache/credits-release-01/mcbeui-final.tgz`, SHA1b598bf1a018c203590af305393890d9e55217d6b69eb06372324594e8143fd0,5758254bytes. `.cache/credits-release-01/PACKAGE-FINAL.json` proves838same members, only6docs changed, other832filesincludingall699distandindexsourcemap byte-identical to a190 testedtar. No npm publication.
 
-Immediate next: finish scoped staging/checks and commit/push main; record actual remote equality/clean/closed ports in `.cache/credits-release-01/FINAL.json`. No guessed commit hash in this handoff. Then continue original goal: native mixed font/glyph-slot bearing/actualrenderer or further partial/Pocket/optional components; no repeated source filename scans or padding components. All agents from this release are stopped/frozen. Existing package verification/helper/docs/public/demo/asset preparation frozen records remain in their `.cache/credits-*` directories; do not overwrite historical results.
+Credits source implementation is actually committed/pushed at bcac38487d954667af70ab9d48a5c39bab813f64. This following handoff-only commit records the milestone; actual final HEAD/remote/clean/closed-port proof belongs in `.cache/credits-release-01/FINAL.json`. Continue the ACTIVE original goal: native mixed font/glyph-slot bearing/actualrenderer or further partial/Pocket/optional components; no repeated source filename scans or padding components. All agents from this release are stopped/frozen. Existing package verification/helper/docs/public/demo/asset preparation frozen records remain in their `.cache/credits-*` directories; do not overwrite historical results.
 
 ---
 
