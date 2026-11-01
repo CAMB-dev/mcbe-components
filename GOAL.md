@@ -1,6 +1,6 @@
 # mcbeui
 
-> 状态：进行中（2026-11-02）。Chat 三组件已公开；本轮修正文档语义与Start间距，并实现私有Progress十五路由组合。完整原生像素与剩余 GUI 范围仍未完成。暂停检查点 `7480520` 保留。
+> 状态：进行中（2026-11-02）。Chat 三组件已公开；本轮修正文档语义与Start间距，Progress十五路由组合及五个可复用部件已公开。完整原生像素与剩余 GUI 范围仍未完成。暂停检查点 `7480520` 保留。
 
 创建可发布的 React + TypeScript UI 组件库，复刻 Minecraft: Bedrock 的方角、像素字体、双层倒角、绿色交互状态和凹陷式控件。
 
@@ -9,7 +9,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前196个公共组件、6个数据和12个渲染 / 几何 / 纹理函数，共214个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前202个公共组件、6个数据和12个渲染 / 几何 / 纹理函数，共220个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -24,14 +24,14 @@
 
 ## 当前验收快照（2026-11-02）
 
-- 公共入口及受检功能包为196组件 /214运行时值。最近完成 ChatScreen /ChatComposer /ChatTranscript：消息、输入、补全、坐标、设置、房主菜单均采用实际源结构；已通过两peer安装、默认Vite四组合和source /built公开页检查，见[Chat 验证](docs/CHAT_QA.md)。
+- 公共入口及受检功能包为202组件 /220运行时值。最近完成 ChatScreen /ChatComposer /ChatTranscript：消息、输入、补全、坐标、设置、房主菜单均采用实际源结构；已通过两peer安装、默认Vite四组合和source /built公开页检查，见[Chat 验证](docs/CHAT_QA.md)。
 - MobEffect正式Node10项通过；34个不同桌面 /移动合同为首轮32通过、两个指针用例按可见宿主尺寸修订后2项通过，不称一次34全绿。六个原背景Web平面201,600个RGBA像素严格零差，只覆盖背景采样。
 - 同一功能tar实际React18.3.1 /19.3.1消费、严格声明及默认Vite开发 /生产四组合通过；source /built展示页分别验证。详见[Mob Effect验证](docs/MOB_EFFECT_QA.md)，前一Credits及其他族保留各自独立记录，不累加为当前全套通过率。
 - 新增原始default8分页候选，使固定Carlos整行的前景mask从缺350像素降为0；位置 /比例 /ROI /阈值未改。已提供可选私有位图准备工具，保留原始页与显式候选规则；它不认证其他文字、RGB /阴影、引擎路由或整屏，详见[字体记录](docs/CLASSIC_BITMAP_FONT_QA.md)。
-- 固定206个官方UI文件的范围映射为A41 /B14 /C34 /D32 /E0 /F16 /G63 /H6。A仅表示有限专门组合，不是整文件或原生认证；共享依赖也不要求一文件一个组件。详见[GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md)。
+- 固定206个官方UI文件的范围映射为A42 /B13 /C34 /D32 /E0 /F16 /G63 /H6。A仅表示有限专门组合，不是整文件或原生认证；共享依赖也不要求一文件一个组件。详见[GUI覆盖清单](docs/BEDROCK_GUI_COVERAGE.md)。
 - 新采集制作团队GPU帧，确认首组12个`=`使用原始default8图集；实际阴影与正文的限定CPU重放各完整2570×1402 RGBA零差。背景仍有1530像素差异，分页 /其他字形 /完整画面未认证，见[制作团队记录](docs/CREDITS_QA.md)。
 - 修复原版锁定按钮重叠九宫格产生负背景尺寸及压缩采样取整的问题，保留整图和原元数据；36个限定 Chromium 完整 RGBA 对照零差，独立3744组旧合法 SSR 不变，见[材质记录](docs/CLASSIC_SKIN_QA.md)。
-- [ ] 继续补齐有真实依据的部分GUI、可复用控件和分支，保留服务由宿主提供的边界；Chat 当前有限组合已接入；15种Progress源路由、基础／云／资源包组合及Screen已实现并通过具名Web检查，但尚未公开导出与展示页／新族包消费验收，见[Progress实施记录](docs/PROGRESS_IMPLEMENTATION_QA.md)。
+- [ ] 继续补齐有真实依据的部分GUI、可复用控件和分支，保留服务由宿主提供的边界；Chat 当前有限组合已接入；15种Progress源路由、基础／云／资源包组合及六个公开组件已通过两peer安装、默认Vite开发／生产四组合和source／built展示页分阶段验收，见[Progress记录](docs/PROGRESS_QA.md)。
 - [x] 修复本批Document ARIA ownership／不允许的panel角色、示例标签、Start padding优先级及三个宿主背板问题。最新全页与世界弹窗具名检查通过：保留raw Axe，30个图片背板对比度目标以加严三探针逐个采样通过，世界弹窗raw结果为空；展示页仍有16个moderate地标重名目标。旧93项原批90通过／1设备跳过／2失败历史不变，不称完整全站或WCAG认证，见[语义及背板复核](docs/ACCESSIBILITY_RENDERED_QA.md)。
 - [ ] 校准原版字体选择 /字形度量 /阴影 /shader、书本及模型、工作站完整页面；严格保留固定版本 /语言 /GUI scale /DPR和独立原生画面的对比，不以Web背景或同一渲染器自比替代。
 - [ ] 完成剩余Pocket /可选平台 /未知来源的判定及可实现视觉范围。完整目标保持进行中，不由组件数量或E0判断完成。
@@ -106,3 +106,5 @@
 - [ ] 固定目标游戏版本、页面、GUI scale、语言和分辨率，完成原版截图逐像素对照与差异修正
 
 Goal保持进行中：组件库及有限验证分批推进，严格的游戏画面对照验收尚未完成。需要预览时可运行`npm run preview -- --port 4173`；预览服务与Computer Use按需开启，用完关闭。
+
+- Progress当前六组件：ProgressScreen、ProgressIndicators、ProgressPackGrids、ProgressResourceDialog、ProgressCloudPanel、ProgressCloudConflictDialog。105项持久CPU／SSR、两peer各75SSR+types/assets/CSS、默认Vite四组合、公开部件及15route操作、独立12材质平面与四simple窗层级平面分阶段通过；不认证原生GUI、字体或所有状态。

@@ -1,0 +1,103 @@
+{
+  "status": "FROZEN_BEFORE_ROOT_MEASUREMENT",
+  "targetSelector": "#progress-resource-material-host",
+  "factories": [
+    "resource_pack_download_server_required",
+    "resource_pack_download_optional_and_required",
+    "resource_pack_download_optional",
+    "resource_pack_download_required"
+  ],
+  "host": {
+    "logicalSize": [
+      500,
+      301
+    ],
+    "scale": 1,
+    "pixelSize": [
+      500,
+      301
+    ],
+    "backdrop": [
+      32,
+      48,
+      64,
+      255
+    ]
+  },
+  "explicitWebIntrinsic": [
+    250,
+    209
+  ],
+  "windowBox": [
+    125,
+    46,
+    250,
+    209
+  ],
+  "sourceLayers": [
+    {
+      "texture": "textures/ui/control",
+      "rawSize": [
+        2,
+        2
+      ],
+      "box": [
+        133,
+        46,
+        234,
+        209
+      ],
+      "alpha": 1,
+      "sourceLayer": -10
+    },
+    {
+      "texture": "textures/ui/dialog_background_hollow_3",
+      "rawSize": [
+        18,
+        33
+      ],
+      "rawSlices": [
+        8,
+        23,
+        8,
+        8
+      ],
+      "box": [
+        125,
+        46,
+        250,
+        209
+      ],
+      "sourceLayer": 2
+    }
+  ],
+  "isolation": {
+    "property": "visibility:hidden",
+    "selectors": [
+      ".mc-progress-resource-dialog__title .mc-progress-packs__glyph",
+      ".mc-progress-resource-dialog__description .mc-progress-packs__glyph",
+      ".mc-progress-resource-dialog__warning .mc-progress-packs__glyph",
+      ".mc-progress-resource-dialog .mc-progress-source-button"
+    ],
+    "absentWarningAllowed": true,
+    "keepAllBoxes": true,
+    "keepFrameAndFillPaint": true,
+    "hideCompleteButtonPaint": true,
+    "exactRawStyleRestore": true
+  },
+  "sampling": "Independent integer/rational piecewise nine-slice destination pixel centres -> source floor, binary alpha; uniform whole control source point stretch",
+  "comparison": {
+    "allPixels": 150500,
+    "threshold": 0,
+    "tolerance": 0,
+    "mask": false,
+    "crop": false
+  },
+  "nativeGUI": false,
+  "nativeFonts": false,
+  "nativeContentEvaluator": false,
+  "browserMeasured": false,
+  "readProductionImplementation": false,
+  "readRuntimeScreenshotOrOutput": false,
+  "alterAfterMeasurement": false
+}

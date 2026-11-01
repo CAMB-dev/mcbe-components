@@ -1,6 +1,6 @@
 import type { CSSProperties, HTMLAttributes, ReactNode, Ref, SyntheticEvent } from 'react';
 
-/** Private source-family model. All geometry/font policies are explicit Web inputs. */
+/** Controlled source-family model. All geometry/font policies are explicit Web inputs. */
 export type ProgressSize = readonly [number, number];
 export type ProgressRoute = 'progress_screen'|'modal_progress_screen'|'delete_progress_screen'|'realms_stories_loading_progress_screen'
  |'world_loading_progress_screen'|'experience_world_loading_progress_screen'|'overworld_loading_progress_screen'|'nether_loading_progress_screen'

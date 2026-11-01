@@ -1,0 +1,94 @@
+{
+  "checks": [
+    {
+      "check": "binary-alpha",
+      "asset": "loading_spin",
+      "pixels": 490
+    },
+    {
+      "check": "binary-alpha",
+      "asset": "auto_save",
+      "pixels": 4860
+    },
+    {
+      "check": "binary-alpha",
+      "asset": "experiencebarfull",
+      "pixels": 65
+    },
+    {
+      "check": "binary-alpha",
+      "asset": "experiencebarempty",
+      "pixels": 65
+    },
+    {
+      "check": "binary-alpha",
+      "asset": "progress_bar_simple",
+      "pixels": 16
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "spinner-f0",
+      "pixels": 20000
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "spinner-f5",
+      "pixels": 20000
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "spinner-f9",
+      "pixels": 20000
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "autosave-f0",
+      "pixels": 20000
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "autosave-f4",
+      "pixels": 20000
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "autosave-f8",
+      "pixels": 20000
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "fancy-r0",
+      "pixels": 20200
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "thick-r0",
+      "pixels": 20000
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "fancy-r0_5",
+      "pixels": 20200
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "thick-r0_5",
+      "pixels": 20000
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "fancy-r1",
+      "pixels": 20200
+    },
+    {
+      "check": "complete-opaque-plane",
+      "id": "thick-r1",
+      "pixels": 20000
+    }
+  ],
+  "sourceFilesIndependentlyPinned": 17,
+  "caseCount": 12,
+  "halfTieForbiddenInQualifiedPlanes": true,
+  "productionHelpersReadOrImported": false,
+  "browserMeasured": false
+}

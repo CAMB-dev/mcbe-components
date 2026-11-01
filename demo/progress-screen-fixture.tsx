@@ -1,8 +1,8 @@
 import {StrictMode, createRef} from 'react';
 import {createRoot} from 'react-dom/client';
 import {flushSync} from 'react-dom';
-import {ProgressScreen} from '../src/progress-screen';
-import type {ProgressControllerHandle, ProgressScreenProps} from '../src/progress-screen';
+import {ProgressScreen} from '../src';
+import type {ProgressControllerHandle, ProgressScreenProps} from '../src';
 import {makeProgressScreenProps} from '../tests/fixtures/progress-profile';
 import '../src/progress-screen.css';
 

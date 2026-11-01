@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "sourceFiles": 7,
+  "completePlanePixels": 150500,
+  "binaryAlpha": true,
+  "integerOrigins": true,
+  "headerGreyPreserved": true,
+  "bodyUniformFill": true,
+  "externalBackdropPreserved": true,
+  "productionHelpersImported": false,
+  "browserMeasured": false
+}

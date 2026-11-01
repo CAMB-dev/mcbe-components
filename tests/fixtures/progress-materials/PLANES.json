@@ -1,0 +1,450 @@
+{
+  "planes": [
+    {
+      "id": "spinner-f0",
+      "template": "spinner",
+      "kind": "spinner",
+      "height": 100,
+      "frame": 0,
+      "box": [
+        93,
+        67,
+        14,
+        14
+      ],
+      "source": "progress.progress_loading_spinner",
+      "targetSelector": "[data-progress-template=\"spinner\"][data-progress-kind=\"spinner\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/spinner-f0.png",
+        "bytes": 376,
+        "sha256": "9d38c5b764ca6a5fa18b3208a8e53fe6bb9a89802af97b5f19771166ab047b01"
+      },
+      "wholeRGBA_SHA256": "2282a771f1270c8801d687cbff0b9613853413fcbfad651c90e56dcf23241bbf"
+    },
+    {
+      "id": "spinner-f5",
+      "template": "spinner",
+      "kind": "spinner",
+      "height": 100,
+      "frame": 5,
+      "box": [
+        93,
+        67,
+        14,
+        14
+      ],
+      "source": "progress.progress_loading_spinner",
+      "targetSelector": "[data-progress-template=\"spinner\"][data-progress-kind=\"spinner\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/spinner-f5.png",
+        "bytes": 378,
+        "sha256": "0358b112e0155034490caa07a82a61dbf6d3ebe835773788470e4287cfe609bd"
+      },
+      "wholeRGBA_SHA256": "3951738dac14c2f8fa5641f318984bcb59f1ceb4ecb25a871889446a1d6d74ab"
+    },
+    {
+      "id": "spinner-f9",
+      "template": "spinner",
+      "kind": "spinner",
+      "height": 100,
+      "frame": 9,
+      "box": [
+        93,
+        67,
+        14,
+        14
+      ],
+      "source": "progress.progress_loading_spinner",
+      "targetSelector": "[data-progress-template=\"spinner\"][data-progress-kind=\"spinner\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/spinner-f9.png",
+        "bytes": 380,
+        "sha256": "e67976c9600fd5a619934212c461aecfb7f501c87a12b69e866cebf5483d757e"
+      },
+      "wholeRGBA_SHA256": "961b1025ddb55311f76ec6cbf6411bda7e546d22e569591199fcbdf503c06ae8"
+    },
+    {
+      "id": "autosave-f0",
+      "template": "autosave",
+      "kind": "autosave",
+      "height": 100,
+      "frame": 0,
+      "box": [
+        91,
+        55,
+        18,
+        30
+      ],
+      "source": "progress.auto_save",
+      "targetSelector": "[data-progress-template=\"autosave\"][data-progress-kind=\"autosave\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/autosave-f0.png",
+        "bytes": 1016,
+        "sha256": "9d6632543d179ade24bc91b03c321e0c8d3b37bf91e8702fadbb6b42afe3bc02"
+      },
+      "wholeRGBA_SHA256": "be47c985ee49e12eaca8365cf31ad73108148cf08992bf3b08ffc6f77cbc3979"
+    },
+    {
+      "id": "autosave-f4",
+      "template": "autosave",
+      "kind": "autosave",
+      "height": 100,
+      "frame": 4,
+      "box": [
+        91,
+        55,
+        18,
+        30
+      ],
+      "source": "progress.auto_save",
+      "targetSelector": "[data-progress-template=\"autosave\"][data-progress-kind=\"autosave\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/autosave-f4.png",
+        "bytes": 967,
+        "sha256": "6b9941c2ccadc1a46e74597f7dc1bbdb8a9383a920c2f7dd435fc75a07bc7722"
+      },
+      "wholeRGBA_SHA256": "713f3b94ac8335764350d2685d9e619dd4da6a4f7bfa6636889a2c97c16220a1"
+    },
+    {
+      "id": "autosave-f8",
+      "template": "autosave",
+      "kind": "autosave",
+      "height": 100,
+      "frame": 8,
+      "box": [
+        91,
+        55,
+        18,
+        30
+      ],
+      "source": "progress.auto_save",
+      "targetSelector": "[data-progress-template=\"autosave\"][data-progress-kind=\"autosave\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/autosave-f8.png",
+        "bytes": 1016,
+        "sha256": "9d6632543d179ade24bc91b03c321e0c8d3b37bf91e8702fadbb6b42afe3bc02"
+      },
+      "wholeRGBA_SHA256": "be47c985ee49e12eaca8365cf31ad73108148cf08992bf3b08ffc6f77cbc3979"
+    },
+    {
+      "id": "fancy-r0",
+      "template": "fancy",
+      "kind": "fancy",
+      "height": 101,
+      "ratio": 0,
+      "box": [
+        10,
+        48,
+        180,
+        5
+      ],
+      "source": "progress.fancy_progress_loading_bars",
+      "isolation": {
+        "paint": "nub only visibility:hidden; keep box and all siblings",
+        "sourceControl": "progress.progress_bar_nub",
+        "box": [
+          15,
+          48,
+          170,
+          5
+        ]
+      },
+      "targetSelector": "[data-progress-template=\"fancy\"][data-progress-kind=\"fancy\"]",
+      "pixelSize": [
+        200,
+        101
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/fancy-r0.png",
+        "bytes": 515,
+        "sha256": "e10bb0f41a513328ada2b910d172a08d099fed0eadcd1bedcb01ae3a36aafbb4"
+      },
+      "wholeRGBA_SHA256": "e40f86959789f8b92b260ee04814203da21f63ea3393c49cd9b186f8035b9656"
+    },
+    {
+      "id": "thick-r0",
+      "template": "thick",
+      "kind": "thick",
+      "height": 100,
+      "ratio": 0,
+      "box": [
+        10,
+        43,
+        180,
+        14
+      ],
+      "source": "progress.thick_progress_bar",
+      "targetSelector": "[data-progress-template=\"thick\"][data-progress-kind=\"thick\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/thick-r0.png",
+        "bytes": 354,
+        "sha256": "a4a0055dc8c044c347327e3ad133786f7709d1baf1c9b83213544b6656352678"
+      },
+      "wholeRGBA_SHA256": "1a64086efed4725be688dd8ff8e0638376c102ccf44ae86f81a7fca44d46100d"
+    },
+    {
+      "id": "fancy-r0_5",
+      "template": "fancy",
+      "kind": "fancy",
+      "height": 101,
+      "ratio": 0.5,
+      "box": [
+        10,
+        48,
+        180,
+        5
+      ],
+      "source": "progress.fancy_progress_loading_bars",
+      "isolation": {
+        "paint": "nub only visibility:hidden; keep box and all siblings",
+        "sourceControl": "progress.progress_bar_nub",
+        "box": [
+          15,
+          48,
+          170,
+          5
+        ]
+      },
+      "targetSelector": "[data-progress-template=\"fancy\"][data-progress-kind=\"fancy\"]",
+      "pixelSize": [
+        200,
+        101
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/fancy-r0_5.png",
+        "bytes": 495,
+        "sha256": "9c4bf82f64c3b9015233bc88d8ae15a265aeb220af0dab2ee0b332c7f689d2f8"
+      },
+      "wholeRGBA_SHA256": "f136e7b2b16c2162f97e95c4582c3d1f1f15bfd1d68c778b0eb9dc0579423938"
+    },
+    {
+      "id": "thick-r0_5",
+      "template": "thick",
+      "kind": "thick",
+      "height": 100,
+      "ratio": 0.5,
+      "box": [
+        10,
+        43,
+        180,
+        14
+      ],
+      "source": "progress.thick_progress_bar",
+      "targetSelector": "[data-progress-template=\"thick\"][data-progress-kind=\"thick\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/thick-r0_5.png",
+        "bytes": 376,
+        "sha256": "f0486712af0097ebdf403e0c4948049a599933154255be975dd8386d9b0e31f6"
+      },
+      "wholeRGBA_SHA256": "1c1249426e8e4a2a92d60b23ff81f1e8256a466dd30bfa6f5a6bcd04bd8e04dc"
+    },
+    {
+      "id": "fancy-r1",
+      "template": "fancy",
+      "kind": "fancy",
+      "height": 101,
+      "ratio": 1,
+      "box": [
+        10,
+        48,
+        180,
+        5
+      ],
+      "source": "progress.fancy_progress_loading_bars",
+      "isolation": {
+        "paint": "nub only visibility:hidden; keep box and all siblings",
+        "sourceControl": "progress.progress_bar_nub",
+        "box": [
+          15,
+          48,
+          170,
+          5
+        ]
+      },
+      "targetSelector": "[data-progress-template=\"fancy\"][data-progress-kind=\"fancy\"]",
+      "pixelSize": [
+        200,
+        101
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/fancy-r1.png",
+        "bytes": 406,
+        "sha256": "3b620cb3bc38c07a98d7f0729fbc6be8e8b5c6b996b8c02b72cd0b2a1b32bdff"
+      },
+      "wholeRGBA_SHA256": "062f77b150b45ce802e35471ccb32bb08c240b6222cb0f42114de6e0ac02ca2e"
+    },
+    {
+      "id": "thick-r1",
+      "template": "thick",
+      "kind": "thick",
+      "height": 100,
+      "ratio": 1,
+      "box": [
+        10,
+        43,
+        180,
+        14
+      ],
+      "source": "progress.thick_progress_bar",
+      "targetSelector": "[data-progress-template=\"thick\"][data-progress-kind=\"thick\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "threshold": 0,
+      "tolerance": 0,
+      "wholePNG": {
+        "path": ".cache/progress-material-oracles-01/EXPECTED/thick-r1.png",
+        "bytes": 361,
+        "sha256": "963d3601c9843be6f1fc25d3caa3224bd5cd1851a467855a810e20c52d5b9249"
+      },
+      "wholeRGBA_SHA256": "4c719d8b5b7ecf3fae386506f9f0c3c6dca27aabb69f767f44b8d7beb70ca5e4"
+    }
+  ],
+  "diagnosticOnly": {
+    "loading_bar": {
+      "size": [
+        640,
+        8
+      ],
+      "opaque": 1756,
+      "partial": 0,
+      "transparent": 3364
+    },
+    "experiencenub": {
+      "size": [
+        11,
+        5
+      ],
+      "opaque": 25,
+      "partial": 30,
+      "transparent": 0
+    }
+  }
+}

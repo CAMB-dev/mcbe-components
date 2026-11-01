@@ -168,3 +168,13 @@ export { ChatScreen } from './chat-screen';
 export { ChatComposer } from './chat-composer';
 export { ChatTranscript } from './chat-transcript';
 export type { ChatSize, ChatWholeImage, ChatColorRun, ChatMessageRecord, ChatSuggestion, ChatCoordinates, ChatTypefaceChoice, ChatColorChoice, ChatSevenColors, ChatSliderState, ChatSettingsState, ChatHostCollection, ChatHostEntry, ChatHostPlayer, ChatHostGrid, ChatHostState, ChatBindings, ChatCapabilities, ChatFontSpec, ChatPresentationProfile, ChatDraft, ChatSettingChange, ChatActionTarget, ChatActionDetail, ChatComposerActionTarget, ChatComposerActionDetail, ChatControllerCommand, ChatControllerHandle, ChatEditorCommand, ChatEditorInput, ChatDraftApplication, ChatComposerHandle, ChatTextRole, ChatTextRenderContext, ChatTextRenderer, ChatInputProps, ChatDraftChange, ChatDraftMode, ChatComposerProps, ChatTranscriptScrollState, ChatTranscriptProps, ChatScreenProps } from './chat-types';
+
+export { ProgressScreen } from './progress-screen';
+export { ProgressIndicators } from './progress-indicators';
+export { ProgressPackGrids, ProgressResourceDialog, ProgressCloudPanel, ProgressCloudConflictDialog } from './progress-public-parts';
+export type { ProgressScreenProps, ProgressModalLayer, ProgressControllerHandle } from './progress-screen';
+export type { ProgressIndicatorsProps, ProgressIndicatorTemplate } from './progress-indicators';
+export type { ProgressPackGridsProps, ProgressResourceDialogProps, ProgressCloudPanelProps, ProgressCloudConflictDialogProps } from './progress-public-parts';
+export type { ProgressBrandingDescriptor } from './progress-panels';
+export type { ProgressCloudKind } from './progress-cloud';
+export type { ProgressSize, ProgressRoute, ProgressContent, ProgressScreenAnimation, ProgressCapabilities, ProgressWholeImage, ProgressTextRole, ProgressFontSpec, ProgressTextContext, ProgressTextRenderer, ProgressPresentationProfile, ProgressBindings, ProgressIndicatorState, ProgressPackEntry, ProgressPackCollection, ProgressPackState, ProgressResourcePopupId, ProgressResourcePopup, ProgressCloudState, ProgressConflictPopup, ProgressAuxiliaryState, ProgressActionTarget, ProgressActionDetail, ProgressPackSelectionDetail, ProgressScreenModel } from './progress-types';

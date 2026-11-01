@@ -81,6 +81,24 @@ test('branding descriptors remain pure data even when a route does not paint bra
  assert.equal(reads,0);
 });
 
+test('screen-only transition and branding records enforce a finite budget before getters or glyphs',()=>{
+ let reads=0;
+ for(const field of ['transition','branding']){
+  const p=make(),record=field==='transition'?{animation:'screen_exit_animation_push_fade',elapsedSeconds:0}:{...p.branding};
+  for(let i=0;i<257;i++)record['extra'+i]=i;
+  Object.defineProperty(record,'unread',{enumerable:true,get(){reads++;throw Error('budgeted getter ran');}});
+  p[field]=record;beforeGlyph(()=>{},p);
+ }
+ assert.equal(reads,0);
+});
+
+test('native attributes and CSS strings participate in individual and aggregate text budgets',()=>{
+ beforeGlyph(p=>{p.nativeProps={'aria-label':'x'.repeat(1048577)};});
+ beforeGlyph(p=>{p.nativeProps={style:{color:'x'.repeat(1048577)}};});
+ beforeGlyph(p=>{p.nativeProps=Object.fromEntries(Array.from({length:6},(_,i)=>['data-budget-'+i,'x'.repeat(750000)]));});
+ beforeGlyph(p=>{p.nativeProps={className:'x'.repeat(4097)};});
+});
+
 test('out_cubic source exit/entrance transitions preserve endpoints and host-selected durations',()=>{
  const opacity=p=>Number(/(?:;|\")opacity:([^;\"]+)/.exec(tag(render(p)))[1]);
  const p=make();

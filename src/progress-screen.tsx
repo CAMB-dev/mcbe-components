@@ -2,8 +2,9 @@ import {forwardRef, useRef, useState} from 'react';
 import type {CSSProperties, KeyboardEvent, Ref, SyntheticEvent} from 'react';
 import {Image} from './image';
 import {progressAssets} from './progress-assets';
-import {snapshotProgressScreenModel, snapshotProgressWholeImage, validateProgressRef} from './progress-data';
+import {PROGRESS_WEB_LIMITS, snapshotProgressScreenModel, snapshotProgressWholeImage, validateProgressRef} from './progress-data';
 import {progressBox} from './progress-layout';
+import {projectProgressElementProps} from './progress-react-props';
 import {resolveProgressRoute} from './progress-route';
 import {planProgressActions} from './progress-actions';
 import type {ProgressRawRequest} from './progress-actions';
@@ -40,7 +41,9 @@ const cloudKinds:Partial<Record<ReturnType<typeof resolveProgressRoute>['content
 function data(value:unknown,label:string):Record<string,unknown>{
   if(!value||typeof value!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(value)))throw new TypeError(`${label} requires a plain data record`);
   const out:Record<string,unknown>=Object.create(null);
-  for(const key of Reflect.ownKeys(value)){
+  const keys=Reflect.ownKeys(value);
+  if(keys.length>PROGRESS_WEB_LIMITS.recordFields)throw new RangeError(`${label} exceeds the finite data-field budget`);
+  for(const key of keys){
     const field=Object.getOwnPropertyDescriptor(value,key);
     if(typeof key!=='string'||['__proto__','constructor','prototype'].includes(key)||!field?.enumerable||!('value'in field))throw new TypeError(`${label} requires own enumerable data fields`);
     out[key]=field.value;
@@ -212,8 +215,8 @@ function Session({input,forwardedRef}:{input:Inputs;forwardedRef:Ref<HTMLElement
     </div>)}
   </section>;
 }
-/** Private until the complete family passes public demo/package qualification. */
+/** Source composition with explicit host measurements, materials and Web policies. */
 export const ProgressScreen=forwardRef<HTMLElement,ProgressScreenProps>(function ProgressScreen(props,ref){
-  const input=inputs(props,ref),s=input.snapshot;
+  const input=inputs(projectProgressElementProps(props),ref),s=input.snapshot;
   return <Session key={JSON.stringify([s.runKey,s.route,input.route.content,s.injectedContent?.provenance??null])} input={input} forwardedRef={ref}/>;
 });

@@ -1,0 +1,20 @@
+.progress-demo{display:grid;gap:16px;min-width:0}
+.progress-demo__controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;min-width:0}
+.progress-demo__controls>.mc-combobox{min-width:190px;max-width:100%}
+.progress-demo__settings{padding:12px;border:2px solid #17191b;background:#292d30}
+.progress-demo__settings>summary{cursor:pointer;margin-bottom:12px}
+.progress-demo__sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:16px}
+.progress-demo__controls label:has(input[type=file]){display:grid;gap:8px;min-width:0;max-width:100%;font-size:14px}
+.progress-demo__controls input[type=file]{max-width:100%;font:inherit}
+.progress-demo__viewport,.progress-demo__parts-viewport{position:relative;min-width:0;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;background:#203040}
+.progress-demo__viewport{min-height:90px;border:2px solid #111}
+.progress-demo__empty{padding:24px 16px;margin:0;text-align:center}
+.progress-demo__status{margin:0;font-size:14px}
+.progress-demo__parts{display:grid;gap:12px;min-width:0}
+.progress-demo__parts h3{margin:0;font-size:1em}
+.progress-demo__parts-viewport:has(.mc-progress-resource-dialog),.progress-demo__parts-viewport:has(.mc-progress-cloud-public),.progress-demo__parts-viewport:has(.mc-progress-cloud-conflict-public){min-height:320px}
+.progress-demo__log{font-size:13px;overflow-wrap:anywhere;padding-left:24px}
+.progress-demo__overlay{position:fixed;inset:0;z-index:100000;display:flex;box-sizing:border-box;padding:16px;overflow:auto;overscroll-behavior:contain;background:#203040}
+.progress-demo__overlay-frame{flex:none;margin:auto;max-width:none}
+.progress-demo__overlay-help{margin:0 0 12px;color:#fff;font:14px/1.5 sans-serif;text-align:center}
+.progress-demo__source-canvas{position:relative;flex:none;background:#203040}

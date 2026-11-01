@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { verifyInvitePackage } from './verify-invite-package.mjs';
 import { verifyCreditsPackage } from './verify-credits-package.mjs';
 import { verifyChatPackage } from './verify-chat-package.mjs';
+import { verifyProgressPackage } from './verify-progress-package.mjs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -114,10 +115,11 @@ components.push('InviteScreen','InvitePersonRow','InviteCategory','InvitePaginat
 components.push('CreditsScreen','CreditsRoll','CreditsSkipButton');
 components.push('MobEffectRow','MobEffectScreen');
 components.push('ChatScreen','ChatComposer','ChatTranscript');
-assert.equal(components.length,196);
+components.push('ProgressScreen','ProgressIndicators','ProgressPackGrids','ProgressResourceDialog','ProgressCloudPanel','ProgressCloudConflictDialog');
+assert.equal(components.length,202);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,12);
-assert.equal(Object.keys(ui).length,214);
+assert.equal(Object.keys(ui).length,220);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
 for (const internal of ['MobEffectList','resolveMobEffectRowLayout','resolveMobEffectListLayout','resolveMobEffectScreenLayout','mobEffectAssets']) assert(!Object.hasOwn(ui,internal),'Private Mob Effect composition must not become a public export: '+internal);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
@@ -2018,5 +2020,6 @@ export const demo = <>
   await verifyInvitePackage({ consumer, root, major });
   await verifyCreditsPackage({ consumer, root, major });
   await verifyChatPackage({ consumer, root, major });
+  await verifyProgressPackage({ consumer, root, major });
 }
 console.log(`Verified tarball: ${tarPath}`);

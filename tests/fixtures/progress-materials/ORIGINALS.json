@@ -1,0 +1,104 @@
+[
+  {
+    "member": "resource_pack/ui/progress_screen.json",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/ui/progress_screen.json",
+    "bytes": 72699,
+    "sha256": "2453144b1e4d98bcc56d63c014034dae50172f5e15989589a8dca2676599ee80"
+  },
+  {
+    "member": "resource_pack/ui/achievement_screen.json",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/ui/achievement_screen.json",
+    "bytes": 843,
+    "sha256": "0f596bb9a0cfc964cc07db5d75d9088a7dd276346136d453f668216dd553bdca"
+  },
+  {
+    "member": "resource_pack/ui/_global_variables.json",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/ui/_global_variables.json",
+    "bytes": 20210,
+    "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b"
+  },
+  {
+    "member": "LICENSE.md",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  {
+    "member": "resource_pack/textures/ui/loading_spin.png",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/loading_spin.png",
+    "bytes": 1945,
+    "sha256": "024ee98b3e4d000b748aab1e4e564473bd84f423c860f2ce8c1db203770a6b10"
+  },
+  {
+    "member": "resource_pack/textures/ui/loading_spin.json",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/loading_spin.json",
+    "bytes": 38,
+    "sha256": "b7f3c7af2413a2940aaff9da772012496517ae8f71ca19cfb9eda3b543750b48"
+  },
+  {
+    "member": "resource_pack/textures/ui/auto_save.png",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/auto_save.png",
+    "bytes": 942,
+    "sha256": "96b50c707b61335ae5350edc7231df64f8e6cd939d773d59544918683ce58ef6"
+  },
+  {
+    "member": "resource_pack/textures/ui/auto_save.json",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/auto_save.json",
+    "bytes": 40,
+    "sha256": "06129625debd4d81a83d1ff2655feb4252209f7c12f841fb4c4fc6a804b4302a"
+  },
+  {
+    "member": "resource_pack/textures/ui/experiencebarfull.png",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/experiencebarfull.png",
+    "bytes": 103,
+    "sha256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1"
+  },
+  {
+    "member": "resource_pack/textures/ui/experiencebarfull.json",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/experiencebarfull.json",
+    "bytes": 92,
+    "sha256": "8ec618d73df58faa04e6ce31c88b77d88d6af1c2ae30d290eb25b57aa4601876"
+  },
+  {
+    "member": "resource_pack/textures/ui/experiencebarempty.png",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/experiencebarempty.png",
+    "bytes": 180,
+    "sha256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0"
+  },
+  {
+    "member": "resource_pack/textures/ui/experiencebarempty.json",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/experiencebarempty.json",
+    "bytes": 92,
+    "sha256": "de67894f88e78223fa154d60fbd826da1349d35dbfe3b0d8dae5d6365161243f"
+  },
+  {
+    "member": "resource_pack/textures/ui/progress_bar_simple.png",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/progress_bar_simple.png",
+    "bytes": 90,
+    "sha256": "f6f59cf01ac31b8650a97db6b0ef6f1be5338673ec4c3395226d7b52cebd72c1"
+  },
+  {
+    "member": "resource_pack/textures/ui/progress_bar_simple.json",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/progress_bar_simple.json",
+    "bytes": 91,
+    "sha256": "a2a9b5fedc7b87dfef0df7cb005555a3f4681c37548ec6150174b2deaaa92aa2"
+  },
+  {
+    "member": "resource_pack/textures/ui/experiencenub.png",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/experiencenub.png",
+    "bytes": 160,
+    "sha256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55"
+  },
+  {
+    "member": "resource_pack/textures/ui/loading_bar.png",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/loading_bar.png",
+    "bytes": 323,
+    "sha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef"
+  },
+  {
+    "member": "resource_pack/textures/ui/loading_bar.json",
+    "path": ".cache/progress-material-oracles-01/ORIGINALS/resource_pack/textures/ui/loading_bar.json",
+    "bytes": 39,
+    "sha256": "38bc67e02f506f01308a16c9be27bbe203ea6da76cd02961571801327ad5f665"
+  }
+]

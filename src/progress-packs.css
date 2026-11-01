@@ -16,8 +16,9 @@
 .mc-progress-pack-row:has(input:focus-visible){outline:1px solid white;outline-offset:-1px}
 .mc-progress-packs__glyph{display:block;text-shadow:none}
 .mc-progress-packs__literal{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:pre-wrap}
-.mc-progress-resource-dialog{position:absolute;isolation:isolate;box-sizing:border-box;overflow:clip}
-.mc-progress-resource-dialog__fill{position:absolute;z-index:-1;image-rendering:pixelated}
+.mc-progress-resource-dialog{position:absolute;isolation:isolate;box-sizing:border-box;overflow:clip;outline:none}
+/* Source control fill layer -10 stays below the hollow3 frame layer 2. */
+.mc-progress-resource-dialog__fill{position:absolute;z-index:-2;image-rendering:pixelated}
 .mc-progress-resource-dialog>.mc-progress-skin{position:absolute;inset:0;z-index:-1}
 .mc-progress-resource-dialog__scroll{position:absolute!important}
 .mc-progress-resource-dialog__count,.mc-progress-resource-dialog__total,.mc-progress-resource-dialog__title,.mc-progress-resource-dialog__description,.mc-progress-resource-dialog__warning{position:absolute;display:block;white-space:pre-wrap;overflow-wrap:anywhere}

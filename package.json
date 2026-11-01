@@ -110,7 +110,14 @@
     "./mob-effect-row.css": "./dist/mob-effect-row.css",
     "./chat-screen.css": "./dist/chat-screen.css",
     "./chat-composer.css": "./dist/chat-composer.css",
-    "./chat-transcript.css": "./dist/chat-transcript.css"
+    "./chat-transcript.css": "./dist/chat-transcript.css",
+    "./progress-screen.css": "./dist/progress-screen.css",
+    "./progress-public-parts.css": "./dist/progress-public-parts.css",
+    "./progress-indicators.css": "./dist/progress-indicators.css",
+    "./progress-actions.css": "./dist/progress-actions.css",
+    "./progress-panels.css": "./dist/progress-panels.css",
+    "./progress-packs.css": "./dist/progress-packs.css",
+    "./progress-cloud.css": "./dist/progress-cloud.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -127,7 +134,9 @@
     "verify:package": "node scripts/verify-package.mjs",
     "prepack": "npm run build",
     "test:mob-effect:node": "node --test tests/mob-effect.node.test.mjs",
-    "test:credits:node": "node --test tests/credits-clock.node.test.mjs tests/credits-roll-ssr.node.test.mjs tests/credits-screen-model.node.test.mjs"
+    "test:credits:node": "node --test tests/credits-clock.node.test.mjs tests/credits-roll-ssr.node.test.mjs tests/credits-screen-model.node.test.mjs",
+    "test:progress:node": "node --test tests/progress-model.node.test.mjs tests/progress-panels.node.test.mjs tests/progress-indicators.node.test.mjs tests/progress-packs.node.test.mjs tests/progress-cloud.node.test.mjs tests/progress-screen.node.test.mjs tests/progress-public-parts.node.test.mjs tests/progress-react-props.node.test.mjs",
+    "verify:progress:browser": "node scripts/qualify-progress-browser.mjs"
   },
   "peerDependencies": {
     "react": ">=18.3.0 <20",

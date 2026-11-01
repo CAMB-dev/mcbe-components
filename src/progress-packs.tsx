@@ -1,6 +1,7 @@
 import { forwardRef, useRef, useState } from 'react';
 import type { Ref, SyntheticEvent } from 'react';
 import { Image } from './image';
+import {projectProgressElementProps} from './progress-react-props';
 import { ClassicSkin } from './classic-skin';
 import { ScrollArea } from './scroll-area';
 import { progressAssets } from './progress-assets';
@@ -64,7 +65,7 @@ function GridsSession({plan,forwardedRef}:{plan:GridPlan;forwardedRef:Ref<HTMLDi
     {([['required_resourcepacks',p.packs.required,0],['optional_resourcepacks',p.packs.optional,plan.requiredHeight]] as const).map(([collection,grid,top])=><div key={collection} className="mc-progress-pack-grid" data-source-collection={collection} data-grid-dimensions={grid.dimensions.join(',')} style={{top:top*s,width:plan.width*s,height:grid.dimensions[1]*17*s}}>{grid.entries.map((entry,index)=><PackRow key={entry.id} entry={entry} index={index} collection={collection} plan={plan} top={Math.floor(index/Math.max(1,grid.dimensions[0]))*17} width={plan.width/Math.max(1,grid.dimensions[0])} owner={root} latest={latest}/>)}</div>)}
   </div>;
 }
-export const ProgressPackGrids=forwardRef<HTMLDivElement,ProgressPackGridsProps>(function ProgressPackGrids(props,ref){const plan=planProgressPackGrids(props,ref);return <GridsSession key={JSON.stringify([plan.props.runKey,plan.props.instanceId])} plan={plan} forwardedRef={ref}/>;});
+export const ProgressPackGrids=forwardRef<HTMLDivElement,ProgressPackGridsProps>(function ProgressPackGrids(props,ref){const plan=planProgressPackGrids(projectProgressElementProps(props),ref);return <GridsSession key={JSON.stringify([plan.props.runKey,plan.props.instanceId])} plan={plan} forwardedRef={ref}/>;});
 
 export function planProgressResourceDialog(input:ProgressResourceDialogProps,ref?:Ref<HTMLDivElement>):ProgressResourceDialogPlan{
   record(input,'Progress resource dialog props');
@@ -120,4 +121,4 @@ function DialogSession({plan,forwardedRef}:{plan:ProgressResourceDialogPlan;forw
     {plan.buttons.map(button=><ProgressSourceButton key={button.id} snapshot={p} button={{...button,label:button.target==='button.join_and_download_everything'?once.everything:button.target==='button.join_and_download_required'?once.required:button.label,sourceControl:'progress.'+p.popup.factoryId+'/'+button.id,visible:true,enabled:!p.disabled,instanceId:p.popup.instanceId,material:'source-light'}} onRequest={request}/>)}
   </div>;
 }
-export const ProgressResourceDialog=forwardRef<HTMLDivElement,ProgressResourceDialogProps>(function ProgressResourceDialog(props,ref){const plan=planProgressResourceDialog(props,ref);return <DialogSession key={JSON.stringify([plan.props.runKey,plan.props.popup.instanceId,plan.props.popup.factoryId])} plan={plan} forwardedRef={ref}/>;});
+export const ProgressResourceDialog=forwardRef<HTMLDivElement,ProgressResourceDialogProps>(function ProgressResourceDialog(props,ref){const plan=planProgressResourceDialog(projectProgressElementProps(props),ref);return <DialogSession key={JSON.stringify([plan.props.runKey,plan.props.popup.instanceId,plan.props.popup.factoryId])} plan={plan} forwardedRef={ref}/>;});

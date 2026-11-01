@@ -3,7 +3,10 @@
   "implementationStatusIsNotPixelCertification": true,
   "sourceModelStage": {
     "status": "scoped_model_atlas_fixed_ui_package_and_production_checks_pass_not_universal_gui_certification",
-    "newPureFunctions": ["layoutGuiModel", "createGuiCuboidModel"],
+    "newPureFunctions": [
+      "layoutGuiModel",
+      "createGuiCuboidModel"
+    ],
     "sourceRuntimeValues": 134,
     "newAtlasPureFunction": "assembleGuiTextureAtlas",
     "sourceAtlas": "Complete original PNG URL/RGBA leaves plus explicit host packing; pure byte-copy/GPU texSubImage source assembly, no Canvas2D resampling/captured native atlas/UV epsilon. Public17PASS; four conditional native model comparisons FBO+ReactDOM28,825,120pixels strict0. GUI4 needs a complete end_rod neighbor tile in the tested packing. Standalone originalPNG GUI4=102/GUI5=32 remain nonzero.",
@@ -837,10 +840,54 @@
         "source": "resource_pack/ui/mob_effect_screen.json, fixed v1.26.60.5",
         "details": "docs/MOB_EFFECT_QA.md"
       }
+    ],
+    "progress": [
+      {
+        "name": "ProgressScreen",
+        "status": "implemented",
+        "validation": "source_browser_standalone_owner_materials_and_installed_react18_19_default_vite4_verified_native_unverified",
+        "fidelity": "fixed_source_composition_original_whole_materials_explicit_web_profile_native_unverified",
+        "details": "docs/PROGRESS.md"
+      },
+      {
+        "name": "ProgressIndicators",
+        "status": "implemented",
+        "validation": "source_browser_standalone_owner_materials_and_installed_react18_19_default_vite4_verified_native_unverified",
+        "fidelity": "fixed_source_composition_original_whole_materials_explicit_web_profile_native_unverified",
+        "details": "docs/PROGRESS.md"
+      },
+      {
+        "name": "ProgressPackGrids",
+        "status": "implemented",
+        "validation": "source_browser_standalone_owner_materials_and_installed_react18_19_default_vite4_verified_native_unverified",
+        "fidelity": "fixed_source_composition_original_whole_materials_explicit_web_profile_native_unverified",
+        "details": "docs/PROGRESS.md"
+      },
+      {
+        "name": "ProgressResourceDialog",
+        "status": "implemented",
+        "validation": "source_browser_standalone_owner_materials_and_installed_react18_19_default_vite4_verified_native_unverified",
+        "fidelity": "fixed_source_composition_original_whole_materials_explicit_web_profile_native_unverified",
+        "details": "docs/PROGRESS.md"
+      },
+      {
+        "name": "ProgressCloudPanel",
+        "status": "implemented",
+        "validation": "source_browser_standalone_owner_materials_and_installed_react18_19_default_vite4_verified_native_unverified",
+        "fidelity": "fixed_source_composition_original_whole_materials_explicit_web_profile_native_unverified",
+        "details": "docs/PROGRESS.md"
+      },
+      {
+        "name": "ProgressCloudConflictDialog",
+        "status": "implemented",
+        "validation": "source_browser_standalone_owner_materials_and_installed_react18_19_default_vite4_verified_native_unverified",
+        "fidelity": "fixed_source_composition_original_whole_materials_explicit_web_profile_native_unverified",
+        "details": "docs/PROGRESS.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 196,
+    "components": 202,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -851,12 +898,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 214,
+    "runtimeValues": 220,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "tested_functional_package_196_214_chat_scoped_native_unverified",
+    "publicationState": "tested_functional_package_202_220_progress_scoped_native_unverified",
     "pureCreditsFunctions": [
       "layoutCredits"
     ],
@@ -879,5 +926,22 @@
       "layoutGuiModel",
       "createGuiCuboidModel"
     ]
+  },
+  "progressStage": {
+    "componentNames": [
+      "ProgressScreen",
+      "ProgressIndicators",
+      "ProgressPackGrids",
+      "ProgressResourceDialog",
+      "ProgressCloudPanel",
+      "ProgressCloudConflictDialog"
+    ],
+    "sourceRoutes": 15,
+    "publicCSS": 7,
+    "sourceMaterials": 69,
+    "rawMetadata": 37,
+    "nativeWholeGUI": false,
+    "details": "docs/PROGRESS_QA.md",
+    "scope": "Explicit host fonts/intrinsics/missing providers and Web motion/clip/focus policies; source services remain host-owned."
   }
 }

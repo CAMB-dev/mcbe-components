@@ -1,0 +1,11 @@
+@import './progress-packs.css';
+@import './progress-cloud.css';
+.mc-progress-public-grids,.mc-progress-public-cloud,.mc-progress-public-modal{position:relative;box-sizing:border-box;flex:none;isolation:isolate}
+.mc-progress-public-cloud,.mc-progress-public-modal{overflow:clip}
+/* The grid retains the source row17/visual20 overflow; its owner chooses a viewport. */
+.mc-progress-public-grids{overflow:visible}
+.mc-progress-public-grids[hidden],.mc-progress-public-cloud[hidden],.mc-progress-public-modal[hidden]{display:none!important}
+.mc-progress-public-resource{background:transparent}
+.mc-progress-public-conflict{display:grid;place-items:center}
+.mc-progress-public-conflict__background{position:absolute;inset:0;pointer-events:none;z-index:0}
+.mc-progress-public-conflict__target{position:relative;z-index:1;outline:none;flex:none}

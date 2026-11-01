@@ -1,5 +1,7 @@
 @import './textures.css';
 @import './chat-screen.css';
+@import './progress-screen.css';
+@import './progress-public-parts.css';
 @import './inventory.css';
 @import './workstations.css';
 @import './enchanting-book.css';

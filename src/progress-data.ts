@@ -77,12 +77,13 @@ function native(value:unknown,b:Budget):ProgressScreenModel['nativeProps']{
   if(/^on[A-Z]/.test(key)&&value!==undefined&&value!==null&&typeof value!=='function')throw new TypeError(`Progress native ${key} must be callable`);
   if(key!=='style'&&!/^on[A-Z]/.test(key)&&value!==undefined&&value!==null&&!['string','boolean','number'].includes(typeof value))throw new TypeError(`Progress native ${key} must be primitive DOM data`);
   if(typeof value==='number'&&!Number.isFinite(value))throw new TypeError(`Progress native ${key} must be finite`);
+  if(typeof value==='string')text(value,`Progress native ${key}`,b,key==='className'?4096:PROGRESS_WEB_LIMITS.stringUnits);
   if(key==='ref')throw new TypeError('Use Progress rootRef');
  }
- if(d.hidden!==undefined)flag(d.hidden,'Progress native hidden');if(d.className!==undefined)text(d.className,'Progress native className',b,4096);
+ if(d.hidden!==undefined)flag(d.hidden,'Progress native hidden');if(d.className!==undefined&&typeof d.className!=='string')throw new TypeError('Progress native className must be a string');
  if(d.style!==undefined){const styles=record(d.style,'Progress native style'),copy:Record<string,string|number|undefined>=Object.create(null);for(const[key,value]of Object.entries(styles)){
   if(key.startsWith('--mc-progress-')||['width','height','minWidth','minHeight','padding','border','margin','overflow','position','display'].includes(key))throw new TypeError(`Progress owns style.${key}; position the parent`);
-  if(value!==undefined&&typeof value!=='string'&&!(typeof value==='number'&&Number.isFinite(value)))throw new TypeError('Progress style requires finite CSS data');copy[key]=value as string|number|undefined;
+  if(value!==undefined&&typeof value!=='string'&&!(typeof value==='number'&&Number.isFinite(value)))throw new TypeError('Progress style requires finite CSS data');if(typeof value==='string')text(value,`Progress native style.${key}`,b);copy[key]=value as string|number|undefined;
  }d.style=Object.freeze(copy)as CSSProperties;}
  return Object.freeze(d)as HTMLAttributes<HTMLElement>;
 }

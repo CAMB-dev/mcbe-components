@@ -14,3 +14,11 @@ tests/fixtures/chat-materials/*.json whitespace=blank-at-eol,blank-at-eof,space-
 # This unchanged upstream JSON intentionally ends with a blank line.
 src/assets/document-viewer/_global_variables.json whitespace=-blank-at-eof
 src/assets/player-permissions/_global_variables.json whitespace=-blank-at-eof
+
+# Frozen independent whole-plane Progress references retain source bytes.
+tests/fixtures/progress-materials/** -text
+tests/fixtures/progress-resource-materials/** -text
+
+# Frozen upstream originals keep intentional trailing spaces and blank final lines.
+tests/fixtures/progress-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+tests/fixtures/progress-resource-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

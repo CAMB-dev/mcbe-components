@@ -1,0 +1,277 @@
+{
+  "status": "FROZEN_BEFORE_BROWSER_MEASUREMENT",
+  "externalBackdrop": [
+    32,
+    48,
+    64,
+    255
+  ],
+  "parentWidth": 200,
+  "scale": 1,
+  "imageClipPolicy": "visible-fraction-web",
+  "percentageDomain": [
+    0,
+    1
+  ],
+  "unqualifiedAlternativePolicy": "left-removal-web",
+  "selectors": [
+    {
+      "id": "spinner-f0",
+      "selector": "[data-progress-template=\"spinner\"][data-progress-kind=\"spinner\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "box": [
+        93,
+        67,
+        14,
+        14
+      ],
+      "frame": 0,
+      "isolation": null
+    },
+    {
+      "id": "spinner-f5",
+      "selector": "[data-progress-template=\"spinner\"][data-progress-kind=\"spinner\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "box": [
+        93,
+        67,
+        14,
+        14
+      ],
+      "frame": 5,
+      "isolation": null
+    },
+    {
+      "id": "spinner-f9",
+      "selector": "[data-progress-template=\"spinner\"][data-progress-kind=\"spinner\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "box": [
+        93,
+        67,
+        14,
+        14
+      ],
+      "frame": 9,
+      "isolation": null
+    },
+    {
+      "id": "autosave-f0",
+      "selector": "[data-progress-template=\"autosave\"][data-progress-kind=\"autosave\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "box": [
+        91,
+        55,
+        18,
+        30
+      ],
+      "frame": 0,
+      "isolation": null
+    },
+    {
+      "id": "autosave-f4",
+      "selector": "[data-progress-template=\"autosave\"][data-progress-kind=\"autosave\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "box": [
+        91,
+        55,
+        18,
+        30
+      ],
+      "frame": 4,
+      "isolation": null
+    },
+    {
+      "id": "autosave-f8",
+      "selector": "[data-progress-template=\"autosave\"][data-progress-kind=\"autosave\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "box": [
+        91,
+        55,
+        18,
+        30
+      ],
+      "frame": 8,
+      "isolation": null
+    },
+    {
+      "id": "fancy-r0",
+      "selector": "[data-progress-template=\"fancy\"][data-progress-kind=\"fancy\"]",
+      "pixelSize": [
+        200,
+        101
+      ],
+      "box": [
+        10,
+        48,
+        180,
+        5
+      ],
+      "percentage": 0,
+      "isolation": {
+        "paint": "nub only visibility:hidden; keep box and all siblings",
+        "sourceControl": "progress.progress_bar_nub",
+        "box": [
+          15,
+          48,
+          170,
+          5
+        ]
+      }
+    },
+    {
+      "id": "thick-r0",
+      "selector": "[data-progress-template=\"thick\"][data-progress-kind=\"thick\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "box": [
+        10,
+        43,
+        180,
+        14
+      ],
+      "percentage": 0,
+      "isolation": null
+    },
+    {
+      "id": "fancy-r0_5",
+      "selector": "[data-progress-template=\"fancy\"][data-progress-kind=\"fancy\"]",
+      "pixelSize": [
+        200,
+        101
+      ],
+      "box": [
+        10,
+        48,
+        180,
+        5
+      ],
+      "percentage": 0.5,
+      "isolation": {
+        "paint": "nub only visibility:hidden; keep box and all siblings",
+        "sourceControl": "progress.progress_bar_nub",
+        "box": [
+          15,
+          48,
+          170,
+          5
+        ]
+      }
+    },
+    {
+      "id": "thick-r0_5",
+      "selector": "[data-progress-template=\"thick\"][data-progress-kind=\"thick\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "box": [
+        10,
+        43,
+        180,
+        14
+      ],
+      "percentage": 0.5,
+      "isolation": null
+    },
+    {
+      "id": "fancy-r1",
+      "selector": "[data-progress-template=\"fancy\"][data-progress-kind=\"fancy\"]",
+      "pixelSize": [
+        200,
+        101
+      ],
+      "box": [
+        10,
+        48,
+        180,
+        5
+      ],
+      "percentage": 1,
+      "isolation": {
+        "paint": "nub only visibility:hidden; keep box and all siblings",
+        "sourceControl": "progress.progress_bar_nub",
+        "box": [
+          15,
+          48,
+          170,
+          5
+        ]
+      }
+    },
+    {
+      "id": "thick-r1",
+      "selector": "[data-progress-template=\"thick\"][data-progress-kind=\"thick\"]",
+      "pixelSize": [
+        200,
+        100
+      ],
+      "box": [
+        10,
+        43,
+        180,
+        14
+      ],
+      "percentage": 1,
+      "isolation": null
+    }
+  ],
+  "fancyIsolation": {
+    "approval": "root approved before measurement",
+    "operation": "visibility:hidden on sourceControl progress.progress_bar_nub paint only",
+    "box": [
+      15,
+      48,
+      170,
+      5
+    ],
+    "selectorPlumbing": "root may choose and must record exact selector for that leaf; cannot change parent/bar/geometry",
+    "keepDOMBoxesAndDimensions": true,
+    "hideOnlyNubPaint": true
+  },
+  "comparison": {
+    "completePlane": true,
+    "threshold": 0,
+    "tolerance": 0,
+    "mask": false,
+    "ROIcrop": false
+  },
+  "CPU": {
+    "sampling": "nearest point via source pixel centres; integer/rational floor intervals",
+    "nineSlice": "raw metadata per material; no production helper",
+    "sourceAlpha": "binary0/255 for qualified planes",
+    "tintQuantization": "nearest integer, exact half ties forbidden",
+    "nativeShaderRecovered": false
+  },
+  "excluded": [
+    "wave half-tie tint",
+    "nub natural/tiled partial-alpha output",
+    "custom unknown shader",
+    "cloud-upload composition",
+    "reverse animation timing",
+    "all other frames/scales/fonts/native GUI"
+  ],
+  "productionImplementationRead": false,
+  "screenshotRead": false,
+  "browserMeasured": false,
+  "oracleMayChangeAfterMeasurement": false
+}

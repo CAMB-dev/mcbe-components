@@ -1,0 +1,52 @@
+{
+  "fixedArchive": {
+    "path": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "bytes": 169569258,
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "studyFinalSHA256": "3d7e61e7f00bd3ad827a24bc0310518fc5be8831a8f04f31d8fa666cc4505eef",
+  "originals": [
+    {
+      "member": "resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "path": "ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "bytes": 260,
+      "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b"
+    },
+    {
+      "member": "resource_pack/textures/ui/dialog_background_hollow_3.json",
+      "path": "ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_3.json",
+      "bytes": 94,
+      "sha256": "36700ca1326d14a269b2052c27d95115200897bee9c27b4d36e75fe893973415"
+    },
+    {
+      "member": "resource_pack/textures/ui/control.png",
+      "path": "ORIGINALS/resource_pack/textures/ui/control.png",
+      "bytes": 71,
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab"
+    },
+    {
+      "member": "resource_pack/textures/ui/control.json",
+      "path": "ORIGINALS/resource_pack/textures/ui/control.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+    },
+    {
+      "member": "resource_pack/ui/progress_screen.json",
+      "path": "ORIGINALS/resource_pack/ui/progress_screen.json",
+      "bytes": 72699,
+      "sha256": "2453144b1e4d98bcc56d63c014034dae50172f5e15989589a8dca2676599ee80"
+    },
+    {
+      "member": "resource_pack/ui/ui_common.json",
+      "path": "ORIGINALS/resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    },
+    {
+      "member": "LICENSE.md",
+      "path": "ORIGINALS/LICENSE.md",
+      "bytes": 222,
+      "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+    }
+  ]
+}

@@ -60,10 +60,10 @@ packing metadata are recorded separately in `docs/gui-model-assets.json`.
 This demonstration texture is outside the npm library; its original Mojang
 ownership and applicable sample terms remain unchanged.
 
-## Private Progress source materials
+## Progress source materials
 
-The private Progress implementation additionally retains 26 unchanged complete
-PNG resources and 11 raw JSON sidecars from the fixed Bedrock Samples
+The Progress implementation additionally retains 26 unchanged complete
+PNG resources and 12 raw JSON sidecars from the fixed Bedrock Samples
 v1.26.60.5 archive under `src/assets/progress`, alongside that archive's original
 `LICENSE.md`. Its registry reuses 43 existing whole resources by byte identity;
 it does not redraw or crop new game artwork. Source pins, exact scope and the

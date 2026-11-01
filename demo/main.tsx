@@ -53,6 +53,7 @@ import { InviteExamples } from './invite-examples';
 import { CreditsDemo } from './credits-demo';
 import { MobEffectDemo } from './mob-effect-demo';
 import { ChatDemo } from './chat-demo';
+import { ProgressDemo } from './progress-demo';
 import { UGCExamples } from './ugc-examples';
 import { ImmersiveReaderExamples } from './immersive-reader-examples';
 import { ScrollArea } from '../src';
@@ -96,6 +97,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'credits', name: 'Credits', icon: 'chevron', count: '03' },
   { id: 'mob-effects', name: 'Mob effects', icon: 'chevron', count: '02' },
   { id: 'chat', name: 'Chat & commands', icon: 'chevron', count: '03' },
+  { id: 'progress-screen', name: 'Progress & cloud', icon: 'chevron', count: '06' },
   { id: 'ugc-viewer', name: 'UGC viewer', icon: 'chevron', count: '02' },
   { id: 'immersive-reader', name: 'Immersive Reader', icon: 'chevron', count: '02' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
@@ -130,6 +132,7 @@ const snippets: Record<string, string> = {
   books: `import { BookReader, BookEditor } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<BookReader pages={['First leaf', 'Second leaf']} />\n<BookEditor defaultPages={['A new adventure']}\n  defaultAuthor="Player"\n  onSign={snapshot => saveBook(snapshot)} />\n// spreadIndex addresses a pair of leaf pages.\n// The host accepts structural page edits and persists signed books.`,
   scrolling: `<ScrollArea label="Inventory notes" style={{height:180}}>\n  <YourScrollableContent/>\n</ScrollArea>\n// ScrollBar is also available as a controlled primitive.`,
   credits: `import { CreditsScreen, layoutCredits } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<CreditsScreen runKey={sessionId}\n  content={yourOrderedCredits} profile={yourReusableProfile}\n  bindings={{ playerName, showEndPoem: true,\n    showEduIcon: false, scrollFaster: faster }}\n  scale={2} skipLabel="Skip"\n  playback={{ playing: true, initialOffset: 0,\n    hiddenPolicy: 'pause' }}\n  onCloseRequested={() => setOpen(false)} />\n// The profile supplies measured fonts, layout and whole images.\n// CreditsRoll, CreditsSkipButton and pure layoutCredits are reusable.`,
+  'progress-screen': `import { ProgressScreen, ProgressIndicators, ProgressResourceDialog } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<ProgressScreen {...yourControlledModel}\n  profile={yourMeasuredProfile} branding={yourWholeTitle}\n  imageClipPolicy="visible-fraction-web"\n  gradientPolicy="css-linear-top-bottom-web"\n  transition={null} />\n// Fonts, source content measurements and unresolved materials\n// are explicit inputs; onAction requests host operations.`,
   'mob-effects': "import { MobEffectScreen, MobEffectRow } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<MobEffectScreen effects={effects} gridDimensions={[1, 12]}\n  availableSize={[420, 260]} scale={1}\n  sourceProfile=\"desktop\" inputMode=\"mouse\"\n  textProfile={yourExplicitTextProfile}\n  iconLayout={{ kind: 'parent-percent-contain-web-policy' }}\n  layoutPolicy=\"source-formulas-parent-percent-web\"\n  closeButtonVisible={true} touchThumbVisible={false}\n  label=\"Active effects\" closeLabel=\"Close effects\" scrollLabel=\"Effect collection\"\n  onCloseRequested={handleClose} />\n// Timer strings, grid, images and navigation are host inputs.\n// MobEffectRow is reusable; the source-aware List/layout remain private.",
   buttons: `import { Button, PixelIcon } from 'mcbeui';\n\n<Button variant="primary"\n  startIcon={<PixelIcon name="plus" />}\n  onClick={() => createWorld()}>\n  Create new world\n</Button>`,
   inputs: `<TextField label="World name" name="worldName"\n  placeholder="My world" required />\n<Combobox label="Difficulty" options={[\n  { value: 'normal', label: 'Normal' },\n  { value: 'hard', label: 'Hard' },\n]} />`,
@@ -464,6 +467,7 @@ function App() {
       <Example id="invite" title="Invite & friends" detail="Six source collections, three identity presentations and reusable selection, pagination and footer compositions."><InviteExamples/></Example>
       <Example id="credits" title="Credits" detail="A rolling thank-you, an optional closing poem, and a reusable skip control."><CreditsDemo/></Example>
       <Example id="mob-effects" title="Mob effects" detail="Visible effect names, literal timers, and a reusable effect collection."><MobEffectDemo/></Example>
+      <Example id="progress-screen" title="Progress & cloud" detail="加载、资源包选择与云端世界；进度指示器和弹窗也可以独立使用。"><ProgressDemo/></Example>
       <Example id="chat" title="Chat & commands" detail="聊天、命令补全、坐标、设置与房主菜单，也可以单独使用消息输入框和聊天记录。"><ChatDemo/></Example>
       <Example id="ugc-viewer" title="UGC viewer" detail="Source search, scrolling collection and reusable content cards with caller-resolved images."><UGCExamples/></Example>
       <Example id="immersive-reader" title="Immersive Reader" detail="Independent source loading, error and running states with a persistent host renderer."><ImmersiveReaderExamples/></Example>

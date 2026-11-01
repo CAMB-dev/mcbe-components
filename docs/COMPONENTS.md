@@ -1,5 +1,6 @@
 # Bedrock 组件范围
 
+> 当前公开入口为202组件／220值；Progress六组件的实际范围见[PROGRESS_QA.md](PROGRESS_QA.md)。以下历史阶段数字保留各自时间与范围。
 > Credits：受检功能包已确认191组件／209值（191＋6数据＋12函数）；48不同Web合同跨阶段验证、六自编平面108,000RGBA零差；React18／19包及实际开发／生产四组合通过，source展示页9PASS，built首轮8／1保留，观察器URL修正后单项1PASS。最终文档包／Git部署pending；native四行holdout、ó350与logo41,344差异均保留，见[CREDITS_QA.md](CREDITS_QA.md)。
 
 Invite阶段的InviteScreen与可独立复用的InvitePersonRow、InviteCategory、InvitePagination、InviteFooter使当时源码为188组件／205运行时值。六组好友、三类身份、选择／party、分页及footer保留独立宿主输入；邀请、账号、头像provider和资料服务由宿主实现。Invite106个不同合同按02批与06批的实际身份验证，200个完整源／Web材质平面共11,473,278像素RGBA零差；4个自然分数栅格测量仍未资格确认。新包的React18.3.1／19.3.1类型、SSR和资源消费通过，实际React18／19开发和生产四组合均通过，公开页17项通过。不是原生字体或整页像素认证。使用见[INVITE_QA.md](INVITE_QA.md)。
@@ -143,3 +144,8 @@ PlayerInventoryScreen 的 needsCraftingTable 默认 false；显式启用时，�
 ## Chat
 
 新增 `ChatScreen`、`ChatComposer`、`ChatTranscript`，当前196组件／214运行时值。完整屏幕实际组合输入、消息、补全、坐标、设置、五类房主菜单和提示；共享子层、源数据验证和材质表保留私有。输入框与消息记录可以独立使用，旧 `ChatPanel` / `ChatMessage` 保留。已验证受控／非受控编辑、选区、原生表单重置、延迟事件否决、分层 Escape、modal 焦点、独立状态与原图材质。安装消费和有限Web像素检查不代表原生整页认证。见 [API](CHAT.md) 与 [验证](CHAT_QA.md)。
+
+
+## Progress
+
+新增六个公开组件：`ProgressScreen`、`ProgressIndicators`、`ProgressPackGrids`、`ProgressResourceDialog`、`ProgressCloudPanel`、`ProgressCloudConflictDialog`。当前202组件／220值。完整组合覆盖固定源15路由、独立能力分支、两个资源集合、五种资源factory和云成功／错误／冲突等；可复用部件独立保持受控数据、真实DOM refs与延迟可否决通知。源clip／动画／字体及未恢复材料边界保留，不能据计数声称全部GUI或native完成。见 [API](PROGRESS.md) 与 [验收](PROGRESS_QA.md)。

@@ -5,10 +5,11 @@ import { Image } from './image';
 import { progressAssets } from './progress-assets';
 import { useClassicNodeRef } from './classic-screen-lifecycle';
 import { validateProgressRef } from './progress-data';
+import {projectProgressElementProps} from './progress-react-props';
 import type { ProgressIndicatorState, ProgressPresentationProfile, ProgressSize } from './progress-types';
 
 export type ProgressIndicatorTemplate = 'wave'|'spinner'|'fancy'|'thick'|'custom'|'autosave'|'cloud-upload';
-/** Private reusable visual leaves. No whole-screen model, text renderer or clock. */
+/** Reusable original-material indicators with explicit Web frames and clip policy. */
 export interface ProgressIndicatorsProps {
   readonly templates: readonly ProgressIndicatorTemplate[];
   readonly state: ProgressIndicatorState;
@@ -82,7 +83,7 @@ export function planProgressIndicators(input:ProgressIndicatorsProps,ref?:Ref<HT
 }
 
 export const ProgressIndicators=forwardRef<HTMLDivElement,ProgressIndicatorsProps>(function ProgressIndicators(props,ref){
-  const plan=planProgressIndicators(props,ref),[_,attach]=useClassicNodeRef(ref),filterId='progress-indicators-'+useId().replace(/[^a-zA-Z0-9_-]/g,'');
+  const plan=planProgressIndicators(projectProgressElementProps(props),ref),[_,attach]=useClassicNodeRef(ref),filterId='progress-indicators-'+useId().replace(/[^a-zA-Z0-9_-]/g,'');
   const {scale:s}=plan;
   const skin=(key:keyof typeof progressAssets,w:number,h:number)=><ClassicSkin asset={progressAssets[key]} width={w} height={h} scale={s} baseClass="mc-progress-indicator-skin" errorName="ProgressIndicators"/>;
   return <div ref={attach} id={plan.id} className={`mc-progress-indicators ${plan.className}`} role="img" aria-label={plan.label} data-native-certified="false" data-motion-policy="explicit-frames-web" data-paused={plan.state.paused}
