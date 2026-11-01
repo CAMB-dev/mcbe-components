@@ -16,7 +16,7 @@ export interface ClassicSkinAsset {
 
 /** Private finite Web interpretation of Classic raw metadata. Original PNGs
  * remain whole inputs; this is not a recovered native material evaluator.
- * Zero-width centres use the boundary texel; physical/base mismatch stays raw.
+ * Nonpositive source centres use the boundary texel; physical/base mismatch stays raw.
  * The namespace selects existing CSS classes without adding a DOM wrapper. */
 export function ClassicSkin({ asset, width, height, scale, className = '', baseClass = 'mc-classic-skin', errorName = 'Classic' }: {
   asset: ClassicSkinAsset; width: number; height: number; scale: number; className?: string; baseClass?: string; errorName?: string;
@@ -42,9 +42,14 @@ export function ClassicSkin({ asset, width, height, scale, className = '', baseC
   let xs = axis(width, asset.width, metadata.base_size[0], cuts[0]!, cuts[2]!);
   let ys = axis(height, asset.height, metadata.base_size[1], cuts[1]!, cuts[3]!);
   let paintScale = scale;
-  const fractional = (segments: typeof xs) => segments.some(segment => !Number.isInteger(segment.at * scale)
-    || !Number.isInteger(segment.extent * scale) || !Number.isInteger(segment.source) || !Number.isInteger(segment.pixels));
-  if (Number.isInteger(width * scale) && Number.isInteger(height * scale) && (fractional(xs) || fractional(ys))) {
+  const overlappingSource = [...xs, ...ys].some(segment => segment.pixels < 0);
+  const fractional = (segments: typeof xs, physical: number) => segments.some(segment => !Number.isInteger(segment.at * scale)
+    || !Number.isInteger(segment.extent * scale) || !Number.isInteger(segment.source) || !Number.isInteger(segment.pixels)
+    // Overlapping source cuts can have integral destination boxes yet a
+    // fractional background paint size (e.g. 3px image * 3px box / 2px cut).
+    // Browsers round that independently; resolve those source texels directly.
+    || overlappingSource && !Number.isInteger(physical * segment.extent * scale / (segment.pixels > 0 ? segment.pixels : 1)));
+  if (Number.isInteger(width * scale) && Number.isInteger(height * scale) && (fractional(xs, asset.width) || fractional(ys, asset.height))) {
     // Fractional CSS background boxes round their paint size independently of
     // clipping. On compressed raw8x2/physical8x1 spines this changes texel
     // selection. Group destination pixel centres by original source texel;
@@ -73,7 +78,10 @@ export function ClassicSkin({ asset, width, height, scale, className = '', baseC
     if (!x.extent || !y.extent) continue;
     const sx = x.pixels > 0 ? x.source : Math.max(0, Math.min(asset.width - 1, Math.floor(x.source)));
     const sy = y.pixels > 0 ? y.source : Math.max(0, Math.min(asset.height - 1, Math.floor(y.source)));
-    const sw = x.pixels || 1, sh = y.pixels || 1;
+    // Some whole originals declare overlapping cuts (3px base, 2px per side).
+    // Match the POINT path's boundary-texel policy without emitting invalid
+    // negative CSS background sizes. The raw source metadata stays unchanged.
+    const sw = x.pixels > 0 ? x.pixels : 1, sh = y.pixels > 0 ? y.pixels : 1;
     const style: CSSProperties = { width: x.extent * paintScale, height: y.extent * paintScale, backgroundImage: `url(${JSON.stringify(asset.url)})`,
       backgroundSize: `${asset.width / sw * 100}% ${asset.height / sh * 100}%`,
       backgroundPosition: `${asset.width === sw ? 0 : sx / (asset.width - sw) * 100}% ${asset.height === sh ? 0 : sy / (asset.height - sh) * 100}%` };
