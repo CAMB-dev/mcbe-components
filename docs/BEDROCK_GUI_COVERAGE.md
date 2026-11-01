@@ -1,19 +1,21 @@
 # Bedrock Classic GUI覆盖清单
 
-> Credits的实际barrel／功能包、React18／19安装消费与source／built展示页检查按具名阶段完成，以下仅Credits行E→有限A。A39／E0是该206文件快照的范围映射，不是所有Minecraft GUI或native完成；最终仅文档tar与Git部署身份仍另记。
+> 当前193组件／211运行时值；本次仅将mob_effect_screen.json由B更新为有限A，得到A40／B15，其余205数据行保持。有限A是专门组合的范围映射，不是所有Minecraft GUI或native完成。
 
-这是固定官方源文件与本库191组件的**范围映射**，不是原生像素验收表。191包含基础控件、零件和组合，不等于191个完整游戏GUI；有限A39也不是39个完整原生流程。上一已验阶段为188组件、A38／E1。
+这是固定官方源文件与本库193组件的**范围映射**，不是原生像素验收表。193包含基础控件、零件和组合，不等于193个完整游戏GUI；有限A40也不是40个完整原生流程。Credits之前的已验阶段为188组件、A38／E1。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
 基础审计将当时133组件逐项对应到真实barrel导出与TS /TSX模块。ServerForms两个组件的实际37项合同与149值包消费通过后，仅将server_form.json从E更新为A。后续NPC五组件完整44项客户端合同通过，再仅将npc_interact_screen.json从E更新为A，相对前一快照其余205行逐字保留，该阶段组件数140。NPC154值React18 /19新包与56项公开辅助亦已通过；这两个增量不补造原生认证，文件状态也不用于计算Minecraft覆盖百分比或测试通过率。
 
+MobEffect增量提供可见name／timer、独立grid、原图行背景、滚动及关闭请求；正式Node、源浏览器、React18／19功能包与实际默认Vite四组合、source／built预览分阶段通过。它仍使用显式Web字体／图标／百分比／尾部可达性策略，不认证native／Pocket／服务。详见[MOB_EFFECT_QA.md](MOB_EFFECT_QA.md)。
+
 ## 八种状态
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|39|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
-|B|`partial_existing_parts`|16|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
+|A|`implemented_named_family_scoped`|40|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|B|`partial_existing_parts`|15|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
 |E|`confirmed_missing_named_family`|0|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
@@ -23,9 +25,9 @@
 
 ## 命名族E0的边界
 
-Credits经有限Web合同、功能包、实际安装与展示页检查后由E→有限A，该固定206行快照的E计数成为0。它只表示这组“确认缺失命名族”已建立有限映射；B16部分、C34通用候选、F16 Pocket未认证、G63可选未映射、H6未知，以及所有文件的native状态仍保留。不能据E0宣称Minecraft全部GUI完成。
+Credits经有限Web合同、功能包、实际安装与展示页检查后由E→有限A，该固定206行快照的E计数成为0。它只表示这组“确认缺失命名族”已建立有限映射；当前B15部分、C34通用候选、F16 Pocket未认证、G63可选未映射、H6未知，以及所有文件的native状态仍保留。不能据E0宣称Minecraft全部GUI完成。
 
-CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际内容排版、滚动、独立Skip和高层／受控源快照。48个不同Web合同与六个自编平面不认证原版字体、logo、poem／edu阶段、引擎路由或整屏像素。实际包／安装／source与built展示页资格见具名阶段；详见[CREDITS_QA.md](CREDITS_QA.md)。本增量只变动credits_screen.json一行，其余205数据行逐字保持。
+CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际内容排版、滚动、独立Skip和高层／受控源快照。48个不同Web合同与六个自编平面不认证原版字体、logo、poem／edu阶段、引擎路由或整屏像素。实际包／安装／source与built展示页资格见具名阶段；详见[CREDITS_QA.md](CREDITS_QA.md)。Credits增量只变动credits_screen.json一行，其余205数据行逐字保持。
 
 **ServerForms已接入有限源族**（`server_form.json`）：ServerActionForm /ServerCustomForm提供LongForm /CustomForm的225×200组合与typed字段，区别于ServerList。37项客户端合同通过，不据此推断第三MessageForm、后端协议或native parity，详见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。
 
@@ -161,7 +163,7 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 |`marketplace_sdl/sdl_image_row.json`|sdl_image_row|0|D|—|
 |`marketplace_sdl/sdl_label.json`|sdl_label|0|D|—|
 |`marketplace_sdl/sdl_text_row.json`|sdl_text_row|0|D|—|
-|`mob_effect_screen.json`|mob_effect|1|B|StatusEffect|
+|`mob_effect_screen.json`|mob_effect|1|A|MobEffectScreen、MobEffectRow；StatusEffect（HUD）|
 |`non_xbl_user_management_screen.json`|non_xbl_user_management|1|G|—|
 |`npc_interact_screen.json`|npc_interact|1|A|NpcPortrait、NpcSkinPicker、NpcActionEditor、NpcDialogue、NpcEditor|
 |`online_safety_screen.json`|online_safety|2|G|—|

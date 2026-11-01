@@ -798,10 +798,28 @@
         "source": "resource_pack/ui/credits_screen.json, fixed v1.26.60.5",
         "details": "docs/CREDITS_QA.md"
       }
+    ],
+    "mob_effect": [
+      {
+        "name": "MobEffectRow",
+        "status": "implemented",
+        "validation": "source_web_package_installed4_public_source_and_built_verified_native_unverified",
+        "fidelity": "fixed_source_visible_literal_name_timer_whole_original_materials_explicit_web_geometry_host_providers",
+        "source": "resource_pack/ui/mob_effect_screen.json, fixed v1.26.60.5",
+        "details": "docs/MOB_EFFECT_QA.md"
+      },
+      {
+        "name": "MobEffectScreen",
+        "status": "implemented",
+        "validation": "source_web_package_installed4_public_source_and_built_verified_native_unverified",
+        "fidelity": "fixed_source_visible_literal_name_timer_whole_original_materials_explicit_web_geometry_host_providers",
+        "source": "resource_pack/ui/mob_effect_screen.json, fixed v1.26.60.5",
+        "details": "docs/MOB_EFFECT_QA.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 191,
+    "components": 193,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -812,12 +830,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 209,
+    "runtimeValues": 211,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "tested_functional_package_191_209_final_docs_tar_pending",
+    "publicationState": "tested_functional_package_193_211_mob_effect_scoped_native_unverified",
     "pureCreditsFunctions": [
       "layoutCredits"
     ],

@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mob Effect fixture</title><link rel="icon" href="data:,">
+<style>body{margin:0;background:#718088;color:#101010;font:14px monospace}h1{margin:0;font-size:18px}#opener{margin:4px}#app{position:relative}#close-status{margin:4px}#event-panel{padding:4px}#event-panel ol{max-height:120px;overflow:auto}#ref-status{display:flex;gap:8px;flex-wrap:wrap}</style></head>
+<body><h1>Mob Effect source Web fixture</h1><button id="opener" type="button">Open effects</button><div id="app"></div>
+<div id="event-panel"><p id="close-status" role="status">No close requests</p><p>Committed callback version: <span id="callback-version">0</span></p><div id="ref-status"></div>
+<h2>Close requests</h2><ol id="close-events"></ol><h2>Native document propagation</h2><ol id="native-events"></ol></div>
+<script type="module" src="/demo/mob-effect-fixture.tsx"></script></body></html>

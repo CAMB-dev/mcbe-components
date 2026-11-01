@@ -1,0 +1,8 @@
+.mob-effect-demo { --mc-font:'MCBE Pixel','MCBE CJK',monospace; display:grid;gap:16px;min-width:0;font-family:'MCBE Pixel','MCBE CJK',monospace; }
+.mob-effect-demo__controls { display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;min-width:0; }
+.mob-effect-demo__flags,.mob-effect-demo__actions { display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center; }
+.mob-effect-demo__host,.mob-effect-demo__row-host { max-width:100%;min-width:0;overflow-x:auto; }
+.mob-effect-demo__status { margin:0;overflow-wrap:anywhere;font-size:12px;color:#c3c5c7; }
+.mob-effect-demo__notes { max-width:72ch;font-size:12px;color:#a8aaad; }
+.mob-effect-demo__notes>summary { cursor:pointer; }
+.mob-effect-demo__notes>p { margin:10px 0 0; }

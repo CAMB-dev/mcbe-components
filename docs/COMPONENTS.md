@@ -16,7 +16,7 @@ UGC阶段新增UGCViewer /UGCItemCard与ImmersiveReader /ImmersiveReaderButton�
 
 新增存储管理八组件覆盖Settings内容区、分类与条目、操作托盘、选择footer及依赖 /分享弹窗；截图闪光层独立复用，图像与时钟由宿主提供。使用与实际验证范围见 [STORAGE_QA.md](STORAGE_QA.md) 和 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)，不据源码实现宣称原生整页验收。
 
-当前实际barrel及受检功能包为191组件，另有6数据、9纯函数及3浏览器GPU函数，共209运行时值。built9不同项分阶段完成，最终仅文档包另记。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+上一Credits阶段受检功能包为191组件，另有6数据、9纯函数及3浏览器GPU函数，共209运行时值。built9不同项分阶段完成，最终仅文档包另记。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 新增存储管理八组件与截图闪光层，当前173组件 /190运行时值。Storage首99项94通过、1设备跳过、4比较方法失败保留，修正参照后8项材质复验通过：19完整平面、160,301像素RGBA零差；28项行为通过。Screenshot17项、公开14项和实际React18 /19默认Vite开发 /生产四场景分别通过。原生整页、默认锚点、材质解析与引擎provider仍未认证，见 [STORAGE_QA.md](STORAGE_QA.md) 与 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)。
 
@@ -134,3 +134,8 @@ BlockPreview / BannerPreview 使用 48 份官方原始 PNG / TGA 材质，其中
 InventoryToolbar 将三种背包布局与帮助 / 关闭入口拆为独立受控组件；CreativeInventory 默认包含完整 chrome，可显式 chrome=none 保留 pane。DeathScreen 默认采用当前 HBUI source profile，classic 保留 JSON UI 版本；LoadingScreen 默认采用世界加载 modal，compact 保留原组合。字体与背景场景的边界分别记录。
 
 PlayerInventoryScreen 的 needsCraftingTable 默认 false；显式启用时，由 craftingTablePreview 接入原生模型预览位置，不生成假工作台图或推算配方资格。
+
+
+## Mob Effect
+
+新增 `MobEffectRow` 和 `MobEffectScreen`，实际入口及受检功能包为193组件／211运行时值；列表、布局求值器与材质表保留私有。区别于 HUD `StatusEffect` 的单图标槽，新组件包含可见名称／字面 timer、独立 grid 和滚动关闭组合，复用33个原图图标。React18／19实际包与默认Vite四组合、source／built预览通过，不据此认证原生或 Pocket。详见 [MOB_EFFECT_QA.md](MOB_EFFECT_QA.md)。

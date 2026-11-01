@@ -4,7 +4,7 @@ import { lockModalScroll } from './modal-scroll-lock';
 
 /** Private lifecycle shared by source screen compositions; no public export. */
 export const useClassicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
-export function useClassicNodeRef<T extends HTMLElement>(forwarded?: Ref<T>, secondary?: Ref<T>) {
+export function useClassicNodeRef<T = HTMLElement>(forwarded?: Ref<T>, secondary?: Ref<T>) {
   const node = useRef<T | null>(null), releases = useRef<(() => void)[]>([]);
   // Always return void to React18. Honor caller cleanup ourselves on both peers.
   const attach: RefCallback<T> = useCallback((next: T | null) => {

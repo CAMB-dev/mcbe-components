@@ -1,0 +1,11 @@
+@import './mob-effect-list.css';
+.mc-mob-effect-screen[hidden] { display:none !important; }
+.mc-mob-effect-screen__backdrop,.mc-mob-effect-screen__main,.mc-mob-effect-screen__tab { pointer-events:none; }
+.mc-mob-effect-screen__list { z-index:1; }
+.mc-mob-effect-screen__close { display:block; box-sizing:border-box; margin:0; padding:0; border:0; border-radius:0; background:none; appearance:none; outline:none; cursor:pointer; z-index:2; }
+.mc-mob-effect-screen__close[hidden] { display:none !important; }
+.mc-mob-effect-screen__close:disabled { cursor:default; }
+.mc-mob-effect-screen__close>span { position:absolute; inset:0; pointer-events:none; }
+.mc-mob-effect-screen__close-pressed { display:none; }
+.mc-mob-effect-screen__close:active:not(:disabled)>.mc-mob-effect-screen__close-default { display:none; }
+.mc-mob-effect-screen__close:active:not(:disabled)>.mc-mob-effect-screen__close-pressed { display:block; }

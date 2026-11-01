@@ -1,0 +1,685 @@
+{
+  "status": "SOURCE_SCOPED_WEB_PACKAGE_INSTALLED_PUBLIC_QUALIFIED_NATIVE_UNVERIFIED",
+  "source": {
+    "release": "v1.26.60.5-full",
+    "zip": {
+      "path": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+      "bytes": 169569258,
+      "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+    },
+    "member": {
+      "source": "resource_pack/ui/mob_effect_screen.json",
+      "cachePath": ".cache/mob-effect-source-01/RAWFILES/mob_effect_screen.json",
+      "bytes": 6371,
+      "sha256": "d3158915d594fb77fb11a3030f3def35d5cd28fb70e6a277d9e255646f1b26b3"
+    },
+    "evidence": {
+      "path": ".cache/mob-effect-source-01/FINAL.json",
+      "sha256": "e276ac9261c0775ebcf37e4923e223f3111834739a81740a4966817c9cb8d0a9"
+    },
+    "spec": {
+      "path": ".cache/mob-effect-source-01/SPEC.md",
+      "sha256": "ab97bd00d75b6f89a096be43e11de91fc1c861c97c985c649c8ef87a2a19851f"
+    }
+  },
+  "definitions": [
+    {
+      "name": "mob_effect.effect_background",
+      "key": "effect_background",
+      "line": 6
+    },
+    {
+      "name": "mob_effect.main_background",
+      "key": "main_background",
+      "line": 42
+    },
+    {
+      "name": "mob_effect.button_background",
+      "key": "button_background",
+      "line": 50
+    },
+    {
+      "name": "mob_effect.effect_name",
+      "key": "effect_name",
+      "line": 58
+    },
+    {
+      "name": "mob_effect.effect_timer",
+      "key": "effect_timer",
+      "line": 76
+    },
+    {
+      "name": "mob_effect.effect_icon",
+      "key": "effect_icon",
+      "line": 93
+    },
+    {
+      "name": "mob_effect.mob_effect_grid_panel",
+      "key": "mob_effect_grid_panel",
+      "line": 107
+    },
+    {
+      "name": "mob_effect.mob_effect_grid",
+      "key": "mob_effect_grid",
+      "line": 116
+    },
+    {
+      "name": "mob_effect.mob_effect_grid_item",
+      "key": "mob_effect_grid_item",
+      "line": 136
+    },
+    {
+      "name": "mob_effect.mob_effect_list_content_panel",
+      "key": "mob_effect_list_content_panel",
+      "line": 146
+    },
+    {
+      "name": "mob_effect.mob_effect_screen_close_button",
+      "key": "mob_effect_screen_close_button@common.legacy_pocket_close_button",
+      "line": 168
+    },
+    {
+      "name": "mob_effect.close_button_panel",
+      "key": "close_button_panel",
+      "line": 175
+    },
+    {
+      "name": "mob_effect.mob_effect_content",
+      "key": "mob_effect_content",
+      "line": 182
+    },
+    {
+      "name": "mob_effect.main_screen",
+      "key": "main_screen",
+      "line": 194
+    },
+    {
+      "name": "mob_effect.mob_effect_screen",
+      "key": "mob_effect_screen@common.base_screen",
+      "line": 200
+    }
+  ],
+  "inventory": {
+    "own": 15,
+    "nestedControls": 14,
+    "exactInheritedNodes": 19,
+    "originalMaterialsWithMetadata": 11,
+    "reusedHUDWholePNGs": 35,
+    "reusedEffectIcons": 33
+  },
+  "productionSourcePins": {
+    "src/mob-effect-types.ts": "b9f2557e74cee385b2389a027e50fc36b0a23c8c0a67a2f2c3fde10dbe54cd4c",
+    "src/mob-effect-layout.ts": "a8007bd8380b16ecdbfd68359095b4ddb355b15b7010471a40073940f3b8f963",
+    "src/mob-effect-row.tsx": "8c1acb7a00e60d6293b443bae3f8aea6089c45b0987306e63c386ca2d57201d4",
+    "src/mob-effect-list.tsx": "a80ca4d8e8f22b9d5467c2927956482412cee9185e288b1f7d3ee368287de354",
+    "src/mob-effect-screen.tsx": "91844697ea556b232ef9ef0296eaafa01950d90460c805acb9306141f1f3ed4c",
+    "src/mob-effect-assets.ts": "f4a76902f51e0fed4ddbb05ebb447f0b1c2401f41b9e065ef8f537240a094722",
+    "src/mob-effect-row.css": "08cac19e3ff54d51dbbbe77128138695bac73f09ed9fc14e26067eb0e1c44224",
+    "src/mob-effect-list.css": "2b185f86095e649b6f8994e4d9ae24bafbf2f63d2cc2aa38ff595ccad276f08e",
+    "src/mob-effect-screen.css": "4fba04bab6de6432d465c49f9742f18259ff58d65d93326ed2c63927c15f9b89"
+  },
+  "publicAPI": {
+    "values": [
+      "MobEffectRow",
+      "MobEffectScreen"
+    ],
+    "types": [
+      "MobEffectIconSource",
+      "MobEffectEntry",
+      "MobEffectLabelFont",
+      "MobEffectTextProfile",
+      "MobEffectIconLayout",
+      "MobEffectTextContext",
+      "MobEffectTextRenderer",
+      "MobEffectRowProps",
+      "MobEffectScreenProps",
+      "MobEffectCloseDetail",
+      "MobEffectControllerCommand",
+      "MobEffectControllerHandle"
+    ],
+    "private": [
+      "MobEffectList",
+      "layout resolvers/snapshots",
+      "layout DTOs",
+      "material registry"
+    ],
+    "sourceBarrelAlreadyContainsValues": true,
+    "publicationQualification": "Pending actual integration verification; current consumed catalog/package snapshot191/209, proposed catalog193/211. No resolver/list runtime export added."
+  },
+  "entry": {
+    "collection": "mob_effects_collection",
+    "fields": {
+      "name": "#mob_effect_name; visible binding; literal text",
+      "timer": "#mob_effect_timer; always_when_visible; literal text",
+      "ambient": "#mob_effect_is_ambient; background only",
+      "icon": "#texture; dynamic host input"
+    },
+    "icons": [
+      "known-effect with existing33 original icon identities",
+      "whole-image with src/naturalSize",
+      "none"
+    ],
+    "noAutomatic": [
+      "timer countdown",
+      "tick formatting",
+      "Roman numerals/levels",
+      "sorting",
+      "ambient-derived timer visibility",
+      "native texture/provider lookup"
+    ],
+    "rowSize": [
+      240,
+      30
+    ],
+    "name": {
+      "offset": [
+        27,
+        5
+      ],
+      "color": "#ffffff",
+      "sourceShadow": true
+    },
+    "timer": {
+      "anchor": "bottom_left",
+      "offset": [
+        27,
+        -5
+      ],
+      "color": [
+        0.7,
+        0.7,
+        0.7,
+        1
+      ],
+      "sourceShadow": "unspecified",
+      "fontMetrics": "unspecified; explicit host Web profile"
+    }
+  },
+  "layout": {
+    "policy": "source-formulas-parent-percent-web",
+    "nativeEvaluatorRecovered": false,
+    "gridBinding": "#mob_effect_grid_size",
+    "declaredGridWidth": 150,
+    "cellStep": [
+      240,
+      30
+    ],
+    "gridOffset": [
+      "45% - 60px",
+      4
+    ],
+    "gridValidation": "Nonnegative safe-integer columns/rows, finite capacity, unique scoped ids and recordCount<=capacity; dimensions not derived from effects.length.",
+    "iconPolicy": "Parent-percent144x18 control plus offset-105,-1 and contain is explicitly Web; alternatively host-resolved box/fit. Native default anchor/paint unqualified.",
+    "main": {
+      "size": [
+        "90%",
+        "90%"
+      ],
+      "offset": [
+        4,
+        4
+      ]
+    },
+    "list": {
+      "size": [
+        "90%",
+        "90% - 4px"
+      ],
+      "offset": [
+        -4,
+        4
+      ],
+      "clipsChildren": true
+    },
+    "close": {
+      "size": [
+        18,
+        18
+      ],
+      "offset": [
+        "90% + 4px",
+        7.5
+      ],
+      "rounding": "No automatic integer rounding"
+    },
+    "sourceProfile": "Desktop/Pocket variables remain separate from mouse/touch; neither certifies native profile."
+  },
+  "scrolling": {
+    "reused": "Actual ScrollArea/ScrollBar DOM viewport/wheel/touch/refs; scoped private CSS",
+    "mouse": "Noncontained padding2/2,8px track,classic-button5x5/cuts2 thumb; not generic ScrollHandle",
+    "touch": "Contained/full viewport,4px/no track/touchScrollBox; visibility explicitly host-controlled",
+    "webFocusContainment": "Outer List/Screen overflow:clip avoids focus-driven ancestor autoscroll; actual ScrollArea remains scrollable",
+    "webTrailingReachability": "Content height4+declaredRows*30+2logical; final2 is Web last-row reachability, not recovered source padding",
+    "preservedSourceRelations": [
+      "scroll y2",
+      "grid y4",
+      "cell height30",
+      "nominal grid width150",
+      "mouse/touch rail formulas"
+    ],
+    "nativeThumbFadeGestureArbitrationTTSAnchoringRecovered": false
+  },
+  "close": {
+    "continueTarget": "button.menu_continue",
+    "screenController": [
+      "button.menu_cancel",
+      "button.mobeffects"
+    ],
+    "closeButtonController": [
+      "button.menu_select",
+      "button.menu_ok"
+    ],
+    "closeButtonVisibleIndependentOfScreenMapping": true,
+    "Escape": "Explicit Web menu_cancel adapter",
+    "playerHurt": {
+      "method": "notifyPlayerHurt()",
+      "reason": "player-hurt",
+      "sourceProperty": "close_on_player_hurt",
+      "fabricatedButtonID": false,
+      "nativeEventFabricated": false,
+      "currentSourcePolicy": "Active disabled Screen still accepts host property notification; ordinary input is disabled. Pending mounted verification."
+    },
+    "hostOwnsNavigation": true,
+    "nativeHandlers": "Synchronous before shared deferred owner-window request; actual event/ownership/state guards apply to finite contract.",
+    "focus": "Source close focus_enabled:false; DOM tabIndex-1/global Escape/viewport focus and optional modal are explicit Web policy."
+  },
+  "resources": {
+    "authority": {
+      "path": ".cache/mob-effect-source-01/ASSETS.json",
+      "sha256": "b9b6038ab53fac93fef0fe14c4df85f63c12ebce71adc1ec5d072b022c9fcfa8"
+    },
+    "exactHUDIdentityClaim": true,
+    "materials": [
+      {
+        "reference": "textures/ui/classic-button",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/classic-button.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/classic-button.png",
+            "bytes": 115,
+            "sha256": "4d849eedcca5c6b0f3122db5ca0b09eded9a7576b3352cbca6ab63a184350eba",
+            "naturalSize": [
+              5,
+              5
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/classic-button.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/classic-button.json",
+            "bytes": 60,
+            "sha256": "1d82150272c4986b2833fe7edb1267b9d82b6d8bba1ffbdc3abffbcc3d290f01",
+            "metadata": {
+              "nineslice_size": 2,
+              "base_size": [
+                5,
+                5
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/legacy_pocket_close_button_default",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/legacy_pocket_close_button_default.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/legacy_pocket_close_button_default.png",
+            "bytes": 173,
+            "sha256": "1b0b732e44469e1d676f75988d2fa1797172bd2e89db1eb70805d412d96e25b5",
+            "naturalSize": [
+              18,
+              18
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/legacy_pocket_close_button_default.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/legacy_pocket_close_button_default.json",
+            "bytes": 62,
+            "sha256": "d6d518834d8ec5867146d22aef494bbb93466b58b2f1de854a0a17e9a14f7c01",
+            "metadata": {
+              "nineslice_size": 2,
+              "base_size": [
+                18,
+                18
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/legacy_pocket_close_button_pressed",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/legacy_pocket_close_button_pressed.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/legacy_pocket_close_button_pressed.png",
+            "bytes": 147,
+            "sha256": "e39dbb5dcd2e5b1ca8398a5829446348b9f467b4a2fff1e7e178ce19a63535e4",
+            "naturalSize": [
+              18,
+              18
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/legacy_pocket_close_button_pressed.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/legacy_pocket_close_button_pressed.json",
+            "bytes": 62,
+            "sha256": "d6d518834d8ec5867146d22aef494bbb93466b58b2f1de854a0a17e9a14f7c01",
+            "metadata": {
+              "nineslice_size": 2,
+              "base_size": [
+                18,
+                18
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/screen_background",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/screen_background.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/screen_background.png",
+            "bytes": 80,
+            "sha256": "e612514247e30fdaf71b8ab025ca2162c2ac18816b648b73c4ac7a1f441d13ab",
+            "naturalSize": [
+              1,
+              1
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/screen_background.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/screen_background.json",
+            "bytes": 60,
+            "sha256": "0c675190fa587a78c4c1ba6f133668bb487f4ceb8f82c84781cabfafdac02e1c",
+            "metadata": {
+              "nineslice_size": 0,
+              "base_size": [
+                1,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/ScrollRail",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/ScrollRail.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/ScrollRail.png",
+            "bytes": 70,
+            "sha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be",
+            "naturalSize": [
+              1,
+              1
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/ScrollRail.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/ScrollRail.json",
+            "bytes": 60,
+            "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+            "metadata": {
+              "nineslice_size": 1,
+              "base_size": [
+                1,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/ScrollHandle",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/ScrollHandle.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/ScrollHandle.png",
+            "bytes": 89,
+            "sha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a",
+            "naturalSize": [
+              3,
+              5
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/ScrollHandle.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/ScrollHandle.json",
+            "bytes": 91,
+            "sha256": "08856911c52b8d9e90c4906df474bf3785813187971a0d2b57b0d3a7e82c4a77",
+            "metadata": {
+              "nineslice_size": [
+                1,
+                2,
+                1,
+                2
+              ],
+              "base_size": [
+                3,
+                5
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/touchScrollBox",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/touchScrollBox.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/touchScrollBox.png",
+            "bytes": 863,
+            "sha256": "86743f082bc3cdfbe4971aad9491069f4338576ec6ad9a23dddac614d5148efe",
+            "naturalSize": [
+              1,
+              1
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/touchScrollBox.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/touchScrollBox.json",
+            "bytes": 60,
+            "sha256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+            "metadata": {
+              "nineslice_size": 1,
+              "base_size": [
+                1,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/effect_background",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/effect_background.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/effect_background.png",
+            "bytes": 267,
+            "sha256": "46ae567772738afaac986020724da72ca09362d4168fe949d6967baaa07f8d48",
+            "naturalSize": [
+              120,
+              32
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/effect_background.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/effect_background.json",
+            "bytes": 63,
+            "sha256": "5133a8798ce81bc57f372d3f2f6ef962b167122ea1073fb56154517704493229",
+            "metadata": {
+              "nineslice_size": 4,
+              "base_size": [
+                120,
+                32
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/effect_background_ambient",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/effect_background_ambient.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/effect_background_ambient.png",
+            "bytes": 459,
+            "sha256": "70f51251c3d6dc678f33796125f3cd560660d87f641b4368b9945b82208e9a8a",
+            "naturalSize": [
+              120,
+              32
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/effect_background_ambient.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/effect_background_ambient.json",
+            "bytes": 63,
+            "sha256": "5133a8798ce81bc57f372d3f2f6ef962b167122ea1073fb56154517704493229",
+            "metadata": {
+              "nineslice_size": 4,
+              "base_size": [
+                120,
+                32
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/mob_effect_background",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/mob_effect_background.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/mob_effect_background.png",
+            "bytes": 184,
+            "sha256": "be07d22b50b11aa1a1dd90ceb9ee6bf2f0b268d29e9d3f2543f21e0b52c1db25",
+            "naturalSize": [
+              14,
+              14
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/mob_effect_background.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/mob_effect_background.json",
+            "bytes": 62,
+            "sha256": "e349864da48bb9f246fd8d97f7bc379fb7b1766f33987692ec57d0e09b657575",
+            "metadata": {
+              "nineslice_size": 4,
+              "base_size": [
+                14,
+                14
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "reference": "textures/ui/pocket_tab_right_side",
+        "resources": [
+          {
+            "member": "resource_pack/textures/ui/pocket_tab_right_side.png",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/pocket_tab_right_side.png",
+            "bytes": 179,
+            "sha256": "ae521284f8587943d8d204c18a8ece7e0e52f8268c0659bc7a153b9c5a341fff",
+            "naturalSize": [
+              14,
+              14
+            ]
+          },
+          {
+            "member": "resource_pack/textures/ui/pocket_tab_right_side.json",
+            "cachePath": ".cache/mob-effect-source-01/ASSETS/pocket_tab_right_side.json",
+            "bytes": 62,
+            "sha256": "e325d4c75df6e266ead02394b4ffcdaaa9ebda4aba303610595dd66a75a455fc",
+            "metadata": {
+              "nineslice_size": 3,
+              "base_size": [
+                14,
+                14
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "listBackgroundDiffersFromHUD": true,
+    "sourceArtRepainted": false,
+    "license": {
+      "path": "LICENSE.md (fixed ZIP)",
+      "bytes": 222,
+      "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+      "libraryMITDoesNotRelicenseArt": true
+    },
+    "originalFontsCopied": false
+  },
+  "demoCandidate": {
+    "target": "demo/mob-effect-demo.tsx",
+    "export": "MobEffectDemo",
+    "effectsCounts": [
+      0,
+      3,
+      12,
+      33
+    ],
+    "explicitGridPresets": [
+      [
+        1,
+        36
+      ],
+      [
+        2,
+        18
+      ],
+      [
+        3,
+        12
+      ]
+    ],
+    "explicitSizePresets": [
+      [
+        320,
+        220
+      ],
+      [
+        420,
+        260
+      ],
+      [
+        420,
+        340
+      ]
+    ],
+    "literalTimers": [
+      "2:15",
+      "0:45",
+      "∞"
+    ],
+    "timerClock": false,
+    "hostTitleCaseNamesAreNotNativeLocalization": true,
+    "customArtCreated": false,
+    "privateListNotDirectlyMounted": true
+  },
+  "qualification": {
+    "testedTarSHA256": "d9da917729b047cf41bd5c5261031122f4edfd542bea698d3cbd4cac227607c3",
+    "indexSHA256": "ea338512614036b51e8eb61eedd060c88927784f01fc3a537c0a47e1c02e5956",
+    "declarationSHA256": "b066a6ac9982fc3e80f2fba3f380d6dc430eb3cc2a763cffc18354df331e2378",
+    "publicComponents": 193,
+    "runtimeValues": 211,
+    "installedCombinations": 4,
+    "publicModes": [
+      "source",
+      "built"
+    ],
+    "native": false
+  },
+  "limits": [
+    "No engine texture/localization/effect/health providers",
+    "No native percent/default anchor/rounding/clip evaluator",
+    "No native font/raster/timer-shadow default recovery",
+    "No controller polling/physical mobeffects key",
+    "No whole content renderer placeholder",
+    "No arbitrary DOM/native-property mutation cancellation guarantee"
+  ]
+}

@@ -709,7 +709,7 @@ Invite阶段的InviteScreen与可独立复用的InvitePersonRow、InviteCategory
 
 ## Credits
 
-> 当前barrel及受检功能包确认191组件／209运行时值（191＋6数据＋12函数），含Credits三组件与layoutCredits。48不同Web合同跨阶段验证，React18／19包及真实默认Vite开发／生产四组合通过；source展示页9PASS，built9不同项为首轮8PASS＋观察器URL修正后的1PASS，不称单轮9全绿。完整原版字体／logo／整屏仍未认证。最终文档tar通过独立产物比对，Git身份及公网部署另记。
+> Credits阶段受检功能包确认191组件／209运行时值（191＋6数据＋12函数），含Credits三组件与layoutCredits。48不同Web合同跨阶段验证，React18／19包及真实默认Vite开发／生产四组合通过；source展示页9PASS，built9不同项为首轮8PASS＋观察器URL修正后的1PASS，不称单轮9全绿。完整原版字体／logo／整屏仍未认证。最终文档tar通过独立产物比对，Git身份及公网部署另记。
 
 | API | 当前源码合同 | 边界 |
 | --- | --- | --- |
@@ -733,3 +733,8 @@ declare const profile: CreditsPresentationProfile;
 ```
 
 普通Screen不要求每帧维护factory。高级`mode="controlled-source"`才提供`position`与`snapshot`，保持panel、child、visible binding和exitInputActive独立；child五秒消失后仍可退出。`profile.completion='web-scroll-end-then-fade'`是明确Web串联：scroll_end后3秒黑cover再credits_end；用户menu_exit不伪造这两个自然结束事件。playing／hidden策略管理单调时钟，scrollFaster仅作用于距离；内容、字体、stage顺序、shader与native速度没有被公开默认值替代。完整API与当前验证边界见[Credits记录](docs/CREDITS_QA.md)。
+
+
+## Active effects
+
+`MobEffectScreen` 与 `MobEffectRow` 提供可见效果名、宿主格式化计时、原图图标与背景、独立 grid、源面板和关闭请求。字体度量、图标注册和浏览器滚动策略显式指定；完整原生与 Pocket 布局仍待核验。当前实际入口与受检功能包为193组件／211运行时值，React18／19和默认Vite开发／生产四组合通过。用法与边界见 [Mob Effect记录](docs/MOB_EFFECT_QA.md)。

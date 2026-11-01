@@ -111,10 +111,12 @@ components.push('UGCViewer','UGCItemCard','ImmersiveReader','ImmersiveReaderButt
 components.push('Portfolio','PortfolioPhoto','PortfolioCaptionField','PortfolioPickerItem','PortfolioPageTurnButton','PortfolioPicker');
 components.push('InviteScreen','InvitePersonRow','InviteCategory','InvitePagination','InviteFooter');
 components.push('CreditsScreen','CreditsRoll','CreditsSkipButton');
-assert.equal(components.length,191);
+components.push('MobEffectRow','MobEffectScreen');
+assert.equal(components.length,193);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,12);
-assert.equal(Object.keys(ui).length,209);
+assert.equal(Object.keys(ui).length,211);
+for (const internal of ['MobEffectList','resolveMobEffectRowLayout','resolveMobEffectListLayout','resolveMobEffectScreenLayout','mobEffectAssets']) assert(!Object.hasOwn(ui,internal),'Private Mob Effect composition must not become a public export: '+internal);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');

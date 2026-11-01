@@ -46,6 +46,7 @@
 @import './credits-screen.css';
 @import './credits-roll.css';
 @import './credits-skip-button.css';
+@import './mob-effect-screen.css';
 /* mcbeui: scoped component styles; importing this file does not reset the page. */
 :root {
   --mc-font: 'Mojangles Pixel', 'MCBE Pixel', 'Mojangles', 'Monocraft', 'MCBE CJK', 'Fusion Pixel', monospace;

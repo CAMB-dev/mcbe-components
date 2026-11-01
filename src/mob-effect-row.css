@@ -1,0 +1,12 @@
+@import './hud-overlay-textures.css';
+.mc-mob-effect-skin { position:absolute;inset:0;display:block;pointer-events:none;image-rendering:pixelated; }
+.mc-mob-effect-skin__clip { position:absolute;display:block;overflow:hidden; }
+.mc-mob-effect-skin__patch { display:block;image-rendering:pixelated; }
+.mc-mob-effect-row { isolation:isolate;text-shadow:none;--mc-text-shadow:none;font-weight:400;font-style:normal; }
+.mc-mob-effect-row[hidden] { display:none!important; }
+.mc-mob-effect-row__background { z-index:0; }
+.mc-mob-effect-row__label { position:absolute;z-index:1;display:block;width:max-content;max-width:none;margin:0;padding:0;border:0;font-weight:400;font-style:normal;text-align:left;white-space:pre;overflow:visible; }
+.mc-mob-effect-row__glyphs { display:block; }
+.mc-mob-effect-row__text-alt { position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:pre; }
+.mc-mob-effect-row__icon { position:absolute;z-index:1;display:block;pointer-events:none;image-rendering:pixelated;background-position:0 0;background-size:100% 100%;background-repeat:no-repeat; }
+@media(forced-colors:active){.mc-mob-effect-skin { forced-color-adjust:none; }.mc-mob-effect-row__label { color:CanvasText!important;text-shadow:none!important; }}
