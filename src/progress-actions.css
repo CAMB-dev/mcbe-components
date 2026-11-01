@@ -1,0 +1,13 @@
+@import './image.css';
+.mc-progress-text{display:block;min-width:0;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;text-shadow:none;font-weight:normal;font-style:normal}
+.mc-progress-text__literal{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:pre-wrap}
+.mc-progress-panel-skin,.mc-progress-panel-skin__fill,.mc-progress-skin{position:absolute;display:block;pointer-events:none;image-rendering:pixelated}
+.mc-progress-panel-skin{inset:0}.mc-progress-skin{inset:0}.mc-progress-skin__clip{position:absolute;display:block;overflow:hidden}.mc-progress-skin__patch{position:absolute;display:block;image-rendering:pixelated}
+.mc-progress-actions{position:relative;pointer-events:none}
+.mc-progress-source-button{position:absolute;box-sizing:border-box;padding:0;margin:0;border:0;border-radius:0;appearance:none;background:none;cursor:pointer;pointer-events:auto;isolation:isolate}
+.mc-progress-source-button[hidden]{display:none!important}.mc-progress-source-button:disabled{cursor:default}.mc-progress-source-button:focus-visible{outline:1px solid white;outline-offset:1px}
+.mc-progress-source-button__state{position:absolute;inset:0;display:none;pointer-events:none}.mc-progress-source-button__state--normal{display:block}
+.mc-progress-source-button:is(:hover,:focus-visible,:active):not(:disabled)>.mc-progress-source-button__state--normal,.mc-progress-source-button:disabled>.mc-progress-source-button__state--normal{display:none}
+.mc-progress-source-button:is(:hover,:focus-visible):not(:disabled):not(:active)>.mc-progress-source-button__state--hover,.mc-progress-source-button:active:not(:disabled)>.mc-progress-source-button__state--pressed,.mc-progress-source-button:disabled>.mc-progress-source-button__state--locked{display:block}
+.mc-progress-source-button__face,.mc-progress-source-button__border{position:absolute;pointer-events:none}.mc-progress-source-button__border{inset:0}
+.mc-progress-source-button__label{position:absolute;inset:calc(3 * var(--mc-progress-button-unit));display:grid;place-items:center;overflow:hidden}.mc-progress-source-button__state--pressed>.mc-progress-source-button__label{transform:translateY(var(--mc-progress-button-unit))}

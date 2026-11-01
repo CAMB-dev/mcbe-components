@@ -1,0 +1,12 @@
+@import './image.css';
+.mc-progress-indicators{position:relative;isolation:isolate;box-sizing:border-box;flex:none}
+.mc-progress-indicators__filters{position:absolute;pointer-events:none;overflow:hidden}
+.mc-progress-indicator{position:absolute;display:block;overflow:clip;pointer-events:none;image-rendering:pixelated}
+.mc-progress-indicator[hidden]{display:none!important}
+.mc-progress-indicator__strip{position:absolute;top:0;display:block;max-width:none;image-rendering:pixelated}
+.mc-progress-indicator__empty,.mc-progress-indicator__full{position:absolute;inset:0;display:block;pointer-events:none}
+.mc-progress-indicator__nub{position:absolute;top:0;display:block;background-repeat:repeat-x;image-rendering:pixelated;z-index:4}
+.mc-progress-indicator__custom-web{position:absolute;inset:0;background:rgb(50% 100% 50%)}
+.mc-progress-indicator-skin{position:absolute;inset:0;display:block;background-repeat:no-repeat;image-rendering:pixelated;pointer-events:none}
+.mc-progress-indicator-skin__clip{position:absolute;display:block;overflow:hidden}
+.mc-progress-indicator-skin__patch{display:block;image-rendering:pixelated}

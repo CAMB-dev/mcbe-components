@@ -1,4 +1,5 @@
 import {expect,test} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 import type {Page} from '@playwright/test';
 import {createElement,createRef} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
@@ -9,6 +10,16 @@ async function open(page:Page,patch:Partial<ServerFormsQASettings>={},strict=fal
 const action=(page:Page)=>page.locator('#server-action-host .mc-server-action-form');
 const custom=(page:Page)=>page.locator('#server-custom-host .mc-server-custom-form');
 const name=(page:Page)=>custom(page).getByRole('textbox',{name:'Player name',exact:true});
+test('public supplies demo names include its current visible selections',async({page})=>{
+  await page.goto('/#server-forms');
+  const demo=page.locator('[data-server-forms-examples]'),field=demo.locator('[data-server-field-id="supplies"]'),trigger=field.getByRole('button');
+  await expect(trigger).toHaveText('Torches');await expect(trigger).toHaveAccessibleName('Travel supplies: Torches');
+  await trigger.click();await field.getByRole('checkbox',{name:'Map',exact:true}).check();
+  await expect(trigger).toHaveText('Torches, Map');await expect(trigger).toHaveAccessibleName('Travel supplies: Torches, Map');
+  await field.getByRole('checkbox',{name:'Torches',exact:true}).uncheck();
+  await expect(trigger).toHaveText('Map');await expect(trigger).toHaveAccessibleName('Travel supplies: Map');
+  expect((await new AxeBuilder({page}).include('[data-server-forms-examples]').withRules(['label-content-name-mismatch']).analyze()).violations).toEqual([]);
+});
 async function events(page:Page,kind:string){return page.evaluate(kind=>window.serverFormsQA.events.filter(event=>event.kind===kind),kind);}
 
 test('action rows preserve semantic order and emit isolated row IDs indices and snapshots on real keyboard activation',async({page})=>{

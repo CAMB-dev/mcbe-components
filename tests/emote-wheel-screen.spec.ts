@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 import type { Page, Locator } from '@playwright/test';
 import { createElement } from 'react';
 import type { ComponentProps } from 'react';
@@ -15,6 +16,16 @@ const part = (page: Page, name: string) => screen(page).locator(`.mc-emote-wheel
 const wheel = (page: Page) => screen(page).locator('.mc-emote-wheel');
 const slot = (page: Page, index: number) => wheel(page).locator(`button[data-emote-index="${index}"]`);
 const change = (page: Page) => part(page, 'change-button');
+test('public emote demo text previews match the named actions', async ({page}) => {
+  await page.goto('/#emote-wheel');
+  const preview=page.getByRole('region',{name:'Emote wheel preview',exact:true});
+  for(const [id,label] of [['wave','Wave'],['clap','Clap'],['dance','Dance']]){
+    const button=preview.locator(`button[data-emote-id="${id}"]`);
+    await expect(button).toHaveAccessibleName(label!);
+    await expect(button.locator('.mc-emote-slot-preview__text')).toHaveText(label!);
+  }
+  expect((await new AxeBuilder({page}).include('#emote-wheel').withRules(['label-content-name-mismatch']).analyze()).violations).toEqual([]);
+});
 async function configure(page: Page, patch: Partial<EmoteScreenQASettings>) { await page.evaluate(value => window.emoteScreenQA.configure(value), patch); }
 async function open(page: Page, patch: Partial<EmoteScreenQASettings> = {}, strict = false) {
   await page.addInitScript(value => { window.emoteScreenQAInitial = value; }, patch);

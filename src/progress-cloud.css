@@ -1,0 +1,10 @@
+@import './progress-actions.css';
+@import './progress-indicators.css';
+.mc-progress-cloud-branch{position:relative;isolation:isolate;box-sizing:border-box;flex:none}
+.mc-progress-cloud__skin,.mc-progress-cloud__image,.mc-progress-cloud__indicator,.mc-progress-cloud__external,.mc-progress-cloud__tts,.mc-progress-cloud__tts-border{position:absolute;display:block}
+.mc-progress-cloud__skin,.mc-progress-cloud__image,.mc-progress-cloud__external{pointer-events:none}
+.mc-progress-cloud__indicator{pointer-events:none;z-index:2}.mc-progress-cloud__image{z-index:1}.mc-progress-cloud-branch>.mc-progress-text{z-index:2}
+.mc-progress-cloud__tts{z-index:3;outline:none}.mc-progress-cloud__tts[tabindex='-1']{pointer-events:none}.mc-progress-cloud__tts-border{inset:0;display:none;filter:brightness(.7);pointer-events:none}.mc-progress-cloud__tts:is(:hover,:focus-visible,:active)[tabindex='0']>.mc-progress-cloud__tts-border{display:block}
+.mc-progress-cloud__link{position:absolute;z-index:4;margin:0;padding:0;border:0;border-radius:0;background:none;appearance:none;cursor:pointer;outline:none;text-align:left}.mc-progress-cloud__link[hidden]{display:none!important}.mc-progress-cloud__link>.mc-progress-text{text-align:left}.mc-progress-cloud__link:disabled{cursor:default}.mc-progress-cloud__link:is(:hover,:focus-visible,:active):not(:disabled)>.mc-progress-text{color:rgb(21.5% 83.9% 11.8%)!important}
+.mc-progress-cloud__underline,.mc-progress-cloud__underline-focus{position:absolute;opacity:.6;pointer-events:none}.mc-progress-cloud__underline-focus{display:none}.mc-progress-cloud__link:is(:hover,:focus-visible,:active):not(:disabled)>.mc-progress-cloud__underline{display:none}.mc-progress-cloud__link:is(:hover,:focus-visible,:active):not(:disabled)>.mc-progress-cloud__underline-focus{display:block}
+.mc-progress-cloud__external{z-index:4}.mc-progress-cloud-conflict{position:relative;flex:none}.mc-progress-cloud-branch>.mc-progress-source-button{z-index:4}

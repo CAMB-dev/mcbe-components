@@ -11,7 +11,10 @@ type SchemaPreset = 'all' | 'short';
 type IconState = ServerActionIcon['state'];
 const initialValues: ServerCustomFormValues = { player: 'Alex', notices: true, distance: 4, pace: 'balanced', place: 'river', supplies: ['torch'] };
 const copyValues = (value: ServerCustomFormValues): ServerCustomFormValues => Object.fromEntries(Object.entries(value).map(([id, item]) => [id, Array.isArray(item) ? [...item] : item]));
-function fieldsFor(preset: SchemaPreset, extra: boolean, expanded: boolean): ServerCustomField[] {
+const supplyOptions = [{ value: 'torch', label: 'Torches' }, { value: 'map', label: 'Map' }, { value: 'food', label: 'Food' }] as const;
+function fieldsFor(preset: SchemaPreset, extra: boolean, expanded: boolean, accepted: ServerCustomFormValues = initialValues): ServerCustomField[] {
+  const selected = accepted.supplies;
+  const suppliesSummary = supplyOptions.filter(option => Array.isArray(selected) && selected.includes(option.value)).map(option => option.label).join(', ');
   const fields: ServerCustomField[] = [
     { id: 'trip-heading', type: 'header', text: 'Plan a visit' },
     { id: 'trip-description', type: 'label', text: 'Choose your preferences for this local example.' },
@@ -25,9 +28,7 @@ function fieldsFor(preset: SchemaPreset, extra: boolean, expanded: boolean): Ser
     { id: 'place', type: 'dropdown', label: 'Destination', defaultValue: 'river', options: [
       { value: 'river', label: 'River' }, { value: 'garden', label: 'Garden' }, { value: 'village', label: 'Village' },
     ] },
-    { id: 'supplies', type: 'multiselect', label: 'Travel supplies', defaultValue: ['torch'], expanded, options: [
-      { value: 'torch', label: 'Torches' }, { value: 'map', label: 'Map' }, { value: 'food', label: 'Food' },
-    ] },
+    { id: 'supplies', type: 'multiselect', label: suppliesSummary ? `Travel supplies: ${suppliesSummary}` : 'Travel supplies', defaultValue: ['torch'], expanded, options: supplyOptions },
   ];
   const visible = preset === 'all' ? fields : fields.filter(field => ['trip-heading', 'trip-description', 'player', 'place'].includes(field.id));
   if (extra) visible.push({ id: 'note', type: 'input', label: 'Extra note', placeholder: 'An optional note', defaultValue: '' });
@@ -82,7 +83,7 @@ export function ServerFormsExamples({ notify }: { notify: (message: string) => v
   const [submission, setSubmission] = useState<ServerCustomFormValues | null>(null);
   const [receipt, setReceipt] = useState('Edit a form or choose an action. Requests stay in this demo.');
   const report = (message: string) => { setReceipt(message); notify(message); };
-  const fields = fieldsFor(schemaPreset, extraField, suppliesExpanded);
+  const fields = fieldsFor(schemaPreset, extraField, suppliesExpanded, values);
   const rows = rowsFor(shortMenu, extraAction, iconState);
   function changeSchema(nextPreset: SchemaPreset, nextExtra: boolean) {
     setSchemaPreset(nextPreset); setExtraField(nextExtra);

@@ -49,6 +49,8 @@ import 'mcbeui/styles.css';
 
 接受的主题、键盘焦点、两侧滚动位置分别管理。上述滚动重置 /保留、手动激活与默认首个可用主题是明确的 Web 策略，不冒称源控制器提交时机。正文保留真实 DOM，供选择、复制与辅助技术读取。
 
+导航保留一个纵向 `tablist`，跨分类的焦点移动、手动激活和 `tab` / `tabpanel` 配对不变。分类容器及分类标题使用展示性角色，保留可见文字、原有 ID、节点和尺寸；分类文字不设置 `aria-hidden`，并由该分类的每个 tab 通过 `aria-describedby` 引用。分类在此复合控件中作为 tab 的描述，不再暴露为控件内部的无障碍 heading，避免 `group` / heading 阻断 tablist 的必需子角色关系。无分类文字时不生成描述引用。正文中的 `DocumentHeading` 仍为正常 `h2`。
+
 宿主负责输入提示图形与文字、触控 /键鼠 /控制器段落、Education /Realms /商城等条件和外部路由。源中重复的 forced-index 不作为公开稳定主题 ID。段落里的图标预处理与 TTS 动态绑定也不等于任意文字解析器或每段都成为 tab-stop。
 
 源背景声明 `textures/ui/White` 与 tint `[.192,.196,.2]`。安装版 `vanilla_base/White.png` 是2×2全白RGBA，完整87字节与固定公开ZIP的 `permissions_player_fade_overlay.png` 相同；组件以该公开原文件作材料别名，并用 CSS multiply叠加源tint。小写 `white.png` 候选已排除。私有安装文件未发布；完整材料身份相同也不代表运行时资源栈或原生实际draw绑定已恢复。
@@ -62,6 +64,8 @@ import 'mcbeui/styles.css';
 
 ## 已执行验证
 
+导航 ARIA 修正批次保留了原始全页 axe 失败（DocumentViewer 的1个必需子角色、5个必需父角色目标）。本批仅修改上述角色及描述关系，未改 CSS、资源、尺寸、事件或公开 API。前后 SSR 在去除这几处语义属性后逐字相同；独立 SSR 测试2项通过，源码 TypeScript 检查通过。证据保存在 `.cache/a11y-document-fix-01/`。新增已挂载测试覆盖分类的可访问描述、正文 heading 以及 `aria-required-children` / `aria-required-parent`，本批由主代理另行运行；此处 SSR 与类型证据不代表浏览器 axe、键盘或像素验证已经通过。
+
 完整正式批次列出59项，实际58通过、1项桌面真实触屏条件跳过；移动端真实触摸滚动通过。新增36次文档DOM/SSR合同与3项像素检查全部通过，未改的ScrollArea回归为19通过、1条件跳过。按正常配置、单worker、零retry执行，批次内70份源/fixture/资源pin无变化。首轮56通过、2失败、1跳过的原记录仍保留：分类标题的文字定位落到内部span，错误地把父层9单位留白及子层−3位移量在同一节点。只修正测试定位，分别验证父层9、子层max50和实际相差6，没有修改产品或降低源几何要求。证据：`.cache/document-viewer-tests-01/FINAL.json`、`FIRST-FAILURE.json` 与 `TEST-ONLY-FIX.diff`。
 
 五种导航素材状态在1×/2×形成10份独立标准nine-slice或disabled整图stretch参考，比较73,500像素，差异0、最大通道差0；实际取回的原PNG字节相同。另核9份原PNG和7份原metadata，原白图乘源声明色得到实际不透明RGBA `[49,50,51,255]`。这验证源素材组合，尚不能认证Minecraft原生整页或文字像素。
@@ -69,3 +73,5 @@ import 'mcbeui/styles.css';
 `npm run verify:package` 实际构建并安装tarball，在React18.3.1与19.3.1分别通过ESM、146组件＋6份数据＋11函数（163运行时值）、SSR、严格已安装包TypeScript消费、CSS子路径、51份原素材/许可及私有字体泄漏门禁。严格消费覆盖独立sectionTitle、readonly主题集、两视口及主题refs、hint与滚动策略；原有包门禁全部保留。
 
 实际构建后的公开4173预览另外完成10项检查：两源族示例、独立标题与目录、30/70源偏移、23高顶部条、实际5/3/5滑块/轨道宽度、受控拒绝、键盘焦点不提交、切换输入原图、正文重置、返回与原控制器图标请求、文字选择、1×/2×/3×及390宽局部横向预览。页面/控制台/HTTP/请求失败均0，绑定的源码和构建文件无漂移，浏览器已关闭；用户4173服务保留。证据：`.cache/document-viewer-root-01/public-01/FINAL.json`，原版窗口或PIX捕获未在此轮执行，Computer Use未开启。
+
+2026-11-02 后续实际浏览器复核：分类 ownership 修正后，正文面板改用允许 `role="tabpanel"` 的普通 `div`，避免 `article` 上不允许的角色覆盖；class、内容和布局规则不变。持久测试同时检查 `aria-allowed-role`，并断言 SSR 的配对 panel 标签。最新 document 两套测试共23项全部通过（`.cache/a11y-document-final-02.json`），涵盖两整数scale的原图像素、几何、滚动、键盘、refs与强制色；这是本批有限Web回归，不是原生整页认证。

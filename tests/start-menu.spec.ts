@@ -11,6 +11,23 @@ async function set(p:Page,patch:Partial<StartMenuQASettings>){await p.evaluate(v
 async function events(p:Page,kind:string){return p.evaluate(k=>window.startMenuQA.events.filter(e=>e.kind===k),kind)}
 async function clear(p:Page){await p.evaluate(()=>{window.startMenuQA.events.length=0})}
 const full=(p:Page)=>p.locator('#qa-start-full');const action=(p:Page,key:string)=>p.locator('#start-button-'+key).filter({visible:true});
+
+test('source form-fitting and profile padding survives the shared button reset at three scales',async({page})=>{
+ await open(page,{part:'profile',dressingProfile:'text'});
+ const check=async(selector:string,padding:number,height:number,scale:number)=>{
+  const button=page.locator(selector).filter({visible:true}).first();await expect(button).toBeVisible();
+  const result=await button.evaluate(node=>{const s=getComputedStyle(node),label=node.querySelector('.mc-button__label')!;return{start:parseFloat(s.paddingInlineStart),end:parseFloat(s.paddingInlineEnd),width:node.getBoundingClientRect().width,labelWidth:label.getBoundingClientRect().width,height:node.getBoundingClientRect().height};});
+  expect(result.start).toBe(padding*scale);expect(result.end).toBe(padding*scale);expect(result.width-result.labelWidth).toBeCloseTo(2*padding*scale,1);expect(result.height).toBeCloseTo(height*scale,1);
+ };
+ for(const scale of[1,2,3]){
+  await set(page,{part:'profile',dressingProfile:'text',scale});await check('.mc-start-profile__dressing-room',6,25,scale);await check('.mc-start-button--profile-content',2,24,scale);
+  await set(page,{part:'auxiliary',signInProfile:'standard'});await check('.mc-start-auxiliary__sign-in',5,25,scale);await check('#start-button-profile-a',2,24,scale);
+  await set(page,{part:'full',friendsVisible:true});await check('.mc-start-menu__friends .mc-start-button',2,25,scale);
+ }
+ await set(page,{part:'profile',scale:2,dressingProfile:'text'});const dressing=page.locator('.mc-start-profile__dressing-room');const before=await dressing.boundingBox();
+ await dressing.hover();await page.mouse.down();await expect(dressing).toHaveCSS('padding-inline-start','12px');await page.mouse.up();expect((await dressing.boundingBox())!.width).toBe(before!.width);
+ await set(page,{dressingProfile:'education-glyph'});await expect(dressing).toHaveCSS('padding-inline-start','0px');expect((await dressing.boundingBox())!.width).toBe(50);
+});
 async function box(p:ReturnType<Page['locator']>){const b=await p.boundingBox();expect(b).not.toBeNull();return b!}
 function minimal():StartMenuProps{const yes={included:true,visible:true,enabled:true},no={...yes,visible:false};const button=(action:StartMenuActionId):StartMenuButton=>({state:yes,action,label:action,target:'host.'+action});return{size:[400,300],scale:1,label:'Host StartMenu',visible:true,canQuit:true,title:{profile:'win10'},actions:{normal:{state:yes,rows:{play:{state:yes,button:button('play')}}},newPlayer:{state:no,rows:{trialSpacerIncluded:false,getStarted:{state:yes,button:button('get-started')},mainMenu:{state:yes,button:button('main-menu')}}}},auxiliary:{state:yes,upper:{state:yes,signInProfile:'standard',signIn:button('sign-in'),gamertag:{state:no,text:'Host'}},lower:{state:yes}},profile:{viewer:{state:yes,portrait:{state:yes,content:createElement('span',null,'Host portrait')}},controls:{state:yes,dressingRoom:{profile:'text',button:button('dressing-room')}}},footer:{copyright:'© Host',version:'v1',development:{state:no,text:'Dev'}}}}
 

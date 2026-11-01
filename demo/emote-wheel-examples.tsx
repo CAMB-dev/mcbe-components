@@ -8,9 +8,9 @@ import { EmoteWheelScreen } from '../src/emote-wheel-screen';
 import type { EmoteIndex, EmoteSlot, EmoteWheelProps } from '../src/emote-wheel';
 
 const slots: readonly [EmoteSlot, EmoteSlot, EmoteSlot, EmoteSlot] = [
-  { id: 'wave', label: 'Wave', preview: { kind: 'text', text: '1' } },
-  { id: 'clap', label: 'Clap', preview: { kind: 'text', text: '2' } },
-  { id: 'dance', label: 'Dance', preview: { kind: 'text', text: '3' } },
+  { id: 'wave', label: 'Wave', preview: { kind: 'text', text: 'Wave' } },
+  { id: 'clap', label: 'Clap', preview: { kind: 'text', text: 'Clap' } },
+  { id: 'dance', label: 'Dance', preview: { kind: 'text', text: 'Dance' } },
   { id: 'empty', label: 'Empty slot', preview: { kind: 'empty' } },
 ];
 
@@ -52,10 +52,10 @@ export function EmoteWheelExamples() {
         : <EmoteWheel {...wheelProps} onCancel={() => setReceipt('The host received an Escape request.')}/>}
     </div>
     <p role="status" aria-live="polite" style={{ margin: 0, fontSize: 12 }}>{receipt}</p>
-    <p style={{ margin: 0, fontSize: 12 }}>The full screen includes the source instruction background and Change Emotes row. These are valid slots without thumbnails, plus one empty slot. Images, gamepad text and controller glyphs come from your application.</p>
+    <p style={{ margin: 0, fontSize: 12 }}>The full screen includes the source instruction background and Change Emotes row. These slots use host-supplied text labels, plus one empty slot. Images, gamepad text and controller glyphs come from your application.</p>
     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 20 }}>
       <EmoteSlotPreview content={{ kind: 'empty' }} scale={scale} style={{ width: 42 * scale, height: 42 * scale }} aria-label="Reusable empty preview"/>
-      <EmoteSlotPreview content={{ kind: 'text', text: '1' }} scale={scale} style={{ width: 42 * scale, height: 42 * scale, background: '#313233' }} aria-label="Reusable valid slot without thumbnail"/>
+      <EmoteSlotPreview content={{ kind: 'text', text: 'Wave' }} scale={scale} style={{ width: 42 * scale, height: 42 * scale, background: '#313233' }} aria-label="Reusable Wave slot preview"/>
       <span style={{ fontSize: 12 }}>Reusable slot preview</span>
     </div>
     <pre style={{ margin: 0, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontSize: 12 }}>{`<EmoteWheelScreen slots={fourSlots} label="Emotes"

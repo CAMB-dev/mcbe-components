@@ -60,6 +60,17 @@ packing metadata are recorded separately in `docs/gui-model-assets.json`.
 This demonstration texture is outside the npm library; its original Mojang
 ownership and applicable sample terms remain unchanged.
 
+## Private Progress source materials
+
+The private Progress implementation additionally retains 26 unchanged complete
+PNG resources and 11 raw JSON sidecars from the fixed Bedrock Samples
+v1.26.60.5 archive under `src/assets/progress`, alongside that archive's original
+`LICENSE.md`. Its registry reuses 43 existing whole resources by byte identity;
+it does not redraw or crop new game artwork. Source pins, exact scope and the
+remaining provider gaps are recorded in `docs/PROGRESS_IMPLEMENTATION_QA.md`.
+These resources retain their upstream Mojang ownership and terms; the MIT
+license applies to library code, not to a relicensing of Minecraft artwork.
+
 ## Original GUI icon catalog
 
 GuiIcon bundles 150 unchanged complete official Mojang GUI PNGs under `dist/assets/gui-icons` (52,654 image bytes). Their original source paths, fixed release / commit URLs, byte and RGBA hashes, physical dimensions, state labels, source UI usage references and installed base-pack matches are recorded in `docs/gui-icons.json`. The original upstream `LICENSE.md` from that same fixed release is retained unchanged at `dist/assets/gui-icons/LICENSE.md` (222 bytes, SHA256 `ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d`); Minecraft artwork remains subject to its upstream terms, and this project's MIT license does not relicense it.

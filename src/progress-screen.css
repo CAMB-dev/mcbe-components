@@ -1,0 +1,8 @@
+@import './progress-panels.css';
+@import './progress-cloud.css';
+@import './progress-packs.css';
+.mc-progress-screen{position:relative;isolation:isolate;box-sizing:border-box;overflow:clip;margin:0;padding:0;border:0;outline:none;flex-shrink:0}
+.mc-progress-screen[hidden]{display:none!important}
+.mc-progress-screen__base,.mc-progress-screen__modal{position:absolute;inset:0;isolation:isolate}
+.mc-progress-screen__center{position:absolute;isolation:isolate;outline:none}
+.mc-progress-screen__conflict-background{position:absolute;inset:0;pointer-events:none}

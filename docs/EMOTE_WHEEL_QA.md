@@ -97,3 +97,9 @@ CPU测量得到说明背景约545×145、11字 ink490×40，Change 按钮600×11
 最终143组件 /160值包已实际安装至 React18.3.1 /19.3.1 消费者，ESM /SSR /strict TypeScript /样式 /资产 /许可检查通过，私有原字体泄漏门禁通过。构建后的真实公开预览另13项辅助检查通过，含完整屏幕 /单轮盘切换、五种原图状态、关闭请求接受 /拒绝、源方向焦点、禁用、Gamepad 行切换、中文全空槽、整倍数字号及390宽局部平移，无页面 /控制台 /HTTP /请求错误。
 
 中文参考用512×280逻辑 frame /5倍和同源文案。浏览器 `CSS.getPlatformFontsForNode` 实际报告11字由自定义 `MCBE Classic` 绘制，实际请求的 WOFF2 与227字 Host face SHA256 `e386324851d377a0b31d05df6e7d0866f0bcd9901db67e0e28c22d519396392a` 一致。DOM 背景545×145、文字框495×75、Change 按钮600×115与主尺寸参考相容，未调整共同位置残差。公开预览检查与81次正式执行分别记录，不累加为原生整页通过；最后仅补记此验收说明，最终包的运行时、样式、字体和资产应与已受测包逐字节相同。
+
+## Public demo preview names (2026-11-02)
+
+The three populated demo slots now supply the action text `Wave`, `Clap`, and `Dance` as their visible text previews instead of unrelated numeric placeholders. Their existing button accessible names remain the same action labels. The reusable standalone Wave preview likewise includes Wave in its accessible name. These are explicit host-authored text previews, not recovered game animations, thumbnail art, or screenshots; source wheel structure, component API, original materials and input geometry are unchanged.
+
+`tests/emote-wheel-screen.spec.ts` adds a public-demo check of actual preview text against each button name and executes the `label-content-name-mismatch` Axe rule. Root owns its mounted-browser verification; this text records the implementation and test scope without attributing older full-screen pixel evidence to the new labels.

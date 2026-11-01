@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import AxeBuilder from '@axe-core/playwright';
 import { DocumentViewer, DocumentHeading, DocumentParagraph } from '../src/document-viewer';
 import type { DocumentQASettings } from '../demo/document-viewer-fixture';
 
@@ -36,6 +37,50 @@ test('SSR is live semantic content with source defaults and no fetch or image IO
     expect(() => renderToStaticMarkup(createElement(DocumentParagraph, { linePadding: -1 }, 'Bad'))).toThrow(RangeError);
     expect(renderToStaticMarkup(createElement(DocumentHeading, null, 'Source heading'))).toContain('Source heading');
   } finally { globalThis.fetch = oldFetch; }
+});
+
+test('SSR keeps one tablist with presentational categories and paired described tabs', () => {
+  const groups = [
+    { id: 'first / 中文', label: 'First category', topics: [{ id: 'one', title: 'First topic', content: createElement(DocumentHeading, null, 'Article heading') }, { id: 'locked', title: 'Locked topic', content: 'Locked article', disabled: true }] },
+    { id: 'second', label: 'Second category', topics: [{ id: 'two', title: 'Second topic', content: 'Second article' }] },
+    { id: 'unlabelled', topics: [{ id: 'three', title: 'Third topic', content: 'Third article' }] },
+  ];
+  const html = renderToStaticMarkup(createElement(DocumentViewer, { groups, label: 'Grouped reader', scale: 1 }));
+  const tags = [...html.matchAll(/<[^>]+>/g)].map(match => match[0]);
+  const attribute = (tag: string, name: string) => new RegExp(` ${name}="([^"]*)"`).exec(tag)?.[1];
+  const tabs = tags.filter(tag => attribute(tag, 'role') === 'tab'), panels = tags.filter(tag => attribute(tag, 'role') === 'tabpanel');
+  const wrappers = tags.filter(tag => attribute(tag, 'class') === 'mc-document-viewer__group');
+  const titles = tags.filter(tag => attribute(tag, 'class') === 'mc-document-viewer__group-heading');
+  expect(tags.filter(tag => attribute(tag, 'role') === 'tablist')).toHaveLength(1);
+  expect(wrappers).toHaveLength(3); expect(titles).toHaveLength(2); expect(tabs).toHaveLength(4); expect(panels).toHaveLength(4);
+  for (const tag of [...wrappers, ...titles]) { expect(attribute(tag, 'role')).toBe('presentation'); expect(attribute(tag, 'aria-hidden')).toBeUndefined(); expect(attribute(tag, 'aria-labelledby')).toBeUndefined(); }
+  expect(attribute(tabs[0]!, 'aria-describedby')).toBe(attribute(titles[0]!, 'id'));
+  expect(attribute(tabs[1]!, 'aria-describedby')).toBe(attribute(titles[0]!, 'id'));
+  expect(attribute(tabs[2]!, 'aria-describedby')).toBe(attribute(titles[1]!, 'id'));
+  expect(attribute(tabs[3]!, 'aria-describedby')).toBeUndefined();
+  for (let index = 0; index < tabs.length; index++) {
+    expect(panels[index]).toMatch(/^<div\b/); // Generic container permits tabpanel; article does not.
+    expect(attribute(tabs[index]!, 'aria-controls')).toBe(attribute(panels[index]!, 'id'));
+    expect(attribute(panels[index]!, 'aria-labelledby')).toBe(attribute(tabs[index]!, 'id'));
+    expect(attribute(tabs[index]!, 'tabindex')).toBe(index === 0 ? '0' : '-1');
+  }
+  expect(html).toContain('First category'); expect(html).toContain('Second category');
+  expect(html).toMatch(/<h2[^>]*class="mc-document-heading"/); // Article headings retain native heading semantics.
+});
+
+test('grouped tabs expose category descriptions and satisfy required ARIA ownership', async ({ page }) => {
+  await open(page);
+  const list = viewer(page).getByRole('tablist', { name: 'Caller document viewer: topics' });
+  await expect(list).toHaveCount(1); await expect(list.getByRole('group')).toHaveCount(0);
+  await expect(part(page, 'group-heading').filter({ hasText: 'Basics category' })).toBeVisible();
+  await expect(part(page, 'group-heading').filter({ hasText: 'More category' })).toBeVisible();
+  await expect(topic(page, 'intro')).toHaveAccessibleDescription('Basics category');
+  await expect(topic(page, 'locked')).toHaveAccessibleDescription('Basics category');
+  await expect(topic(page, 'second')).toHaveAccessibleDescription('Basics category');
+  await expect(topic(page, 'extra-0')).toHaveAccessibleDescription('More category');
+  await expect(article(page).getByRole('heading', { name: 'Introduction heading' })).toBeVisible();
+  const result = await new AxeBuilder({ page }).include('#qa-document-viewer').withRules(['aria-required-children', 'aria-required-parent', 'aria-allowed-role']).analyze();
+  expect(result.violations).toEqual([]);
 });
 
 test('source two-pane wrappers retain30percent70percent offsets23 header and divider through scale and resize', async ({ page }) => {

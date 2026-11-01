@@ -118,7 +118,7 @@ export function StructureEditorExamples({ notify }: { notify: (message: string) 
       <h3 id={`${id}-xyz-title`} style={{ margin: 0 }}>Reusable XYZ fields</h3>
       <p style={note}>Use the three fields in another form. This position has its own draft.</p>
       <div role="region" aria-label="Independent XYZ preview" tabIndex={0} style={preview}>
-        <div style={{ width: 180 * scale }}>
+        <div style={{ width: 180 * scale, background: '#131313' }}>
           <XYZVectorInput label="Position" value={point} onValueChange={(next, detail) => { setPoint(next); setReceipt(`Updated independent ${detail.axis.toUpperCase()} position.`); }}
             maxLength={5} scale={scale} readOnly={readOnly} disabled={disabled}/>
         </div>

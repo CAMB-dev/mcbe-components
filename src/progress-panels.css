@@ -1,0 +1,7 @@
+@import './progress-actions.css';
+@import './progress-indicators.css';
+.mc-progress-base-panels,.mc-progress-background,.mc-progress-auxiliary{position:absolute;inset:0;pointer-events:none;isolation:isolate}
+.mc-progress-base-panel{position:absolute;isolation:isolate}.mc-progress-base-panel>.mc-progress-text{z-index:2}.mc-progress-base-panel__indicators{pointer-events:none;z-index:3}.mc-progress-base-panel__actions{z-index:4;pointer-events:none}
+.mc-progress-background{z-index:-10}.mc-progress-background__tiles,.mc-progress-background__gradient{position:absolute;inset:0;background-repeat:repeat;image-rendering:pixelated}
+.mc-progress-background>img,.mc-progress-background__realms-fill{position:absolute;inset:0}.mc-progress-background__realms-gradient{position:absolute;left:0;top:0;width:100%;background-repeat:repeat-x;image-rendering:pixelated}
+.mc-progress-auxiliary{z-index:5}.mc-progress-branding{z-index:-2}.mc-progress-auxiliary .mc-progress-text{pointer-events:none}

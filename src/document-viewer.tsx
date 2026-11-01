@@ -184,10 +184,11 @@ export const DocumentViewer = forwardRef<HTMLElement, DocumentViewerProps>(funct
     <ScrollArea variant="document" scale={scale} className="mc-document-viewer__navigation" label={`${label}: topics`} viewportRef={attachNavigation}
       scrollbarVisibility="always" contentProps={{ className: 'mc-document-viewer__navigation-content' }} onScrollPositionChange={navigationScroll}>
       <div className="mc-document-viewer__topic-list" role="tablist" aria-label={`${label}: topics`} aria-orientation="vertical">
-        {groups.map(group => <div className="mc-document-viewer__group" key={group.id} role="group" aria-labelledby={group.label === undefined ? undefined : `${uid}-group-${encodeURIComponent(group.id)}`}>
-          {group.label !== undefined && <h2 className="mc-document-viewer__group-heading" id={`${uid}-group-${encodeURIComponent(group.id)}`}><span className="mc-document-viewer__group-label">{group.label}</span></h2>}
+        {groups.map(group => <div className="mc-document-viewer__group" key={group.id} role="presentation">
+          {group.label !== undefined && <h2 className="mc-document-viewer__group-heading" role="presentation" id={`${uid}-group-${encodeURIComponent(group.id)}`}><span className="mc-document-viewer__group-label">{group.label}</span></h2>}
           {group.topics.map(topic => <button key={topic.id} ref={refs.get(topic.id)} type="button" role="tab" className="mc-document-viewer__topic" data-topic-id={topic.id}
-            id={tabId(topic.id)} aria-controls={panelId(topic.id)} aria-selected={accepted?.id === topic.id} aria-label={topic.label} disabled={disabled || topic.disabled}
+            id={tabId(topic.id)} aria-controls={panelId(topic.id)} aria-selected={accepted?.id === topic.id} aria-label={topic.label}
+            aria-describedby={group.label === undefined ? undefined : `${uid}-group-${encodeURIComponent(group.id)}`} disabled={disabled || topic.disabled}
             tabIndex={!disabled && roving === topic.id ? 0 : -1} onFocus={() => setFocused(topic.id)}>
             <span className="mc-document-viewer__topic-skin" aria-hidden="true"/><span className="mc-document-viewer__topic-border" aria-hidden="true"/>
             <span className="mc-document-viewer__topic-content"><span className="mc-document-viewer__topic-label">{topic.title}</span>
@@ -201,7 +202,7 @@ export const DocumentViewer = forwardRef<HTMLElement, DocumentViewerProps>(funct
       <ScrollArea variant="document" scale={scale} className="mc-document-viewer__content" label={`${label}: document`} viewportRef={attachContent}
         scrollbarVisibility="always" contentProps={{ className: 'mc-document-viewer__article-stack' }} onScrollPositionChange={contentScroll}>
         <div className="mc-document-viewer__leading" aria-hidden="true"/>
-        {topics.map(topic => <article key={topic.id} className="mc-document-viewer__article" id={panelId(topic.id)} role="tabpanel" aria-labelledby={tabId(topic.id)} hidden={accepted?.id !== topic.id}>{topic.content}</article>)}
+        {topics.map(topic => <div key={topic.id} className="mc-document-viewer__article" id={panelId(topic.id)} role="tabpanel" aria-labelledby={tabId(topic.id)} hidden={accepted?.id !== topic.id}>{topic.content}</div>)}
         {!accepted && <div className="mc-document-viewer__empty">{emptyContent}</div>}
         <div className="mc-document-viewer__trailing" aria-hidden="true"/>
       </ScrollArea>

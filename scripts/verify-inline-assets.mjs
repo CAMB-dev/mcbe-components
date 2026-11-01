@@ -1,24 +1,42 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFile, readdir } from 'node:fs/promises';
-import { dirname, extname, join, relative, resolve } from 'node:path';
+import { readFile, realpath } from 'node:fs/promises';
+import { dirname, extname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
-async function filesIn(directory) {
-  const entries = await readdir(directory, { withFileTypes: true });
-  return (await Promise.all(entries.map(entry => entry.isDirectory()
-    ? filesIn(join(directory, entry.name)) : [join(directory, entry.name)]))).flat();
+function within(directory, file) {
+  const name = relative(directory, file);
+  return name !== '..' && !name.startsWith('..' + sep) && !isAbsolute(name);
 }
 
+/** A fresh program rooted only at the published entry follows TypeScript's
+ * module resolution, including barrels and shared imports. Do not pass the
+ * tsconfig include list: private disconnected work is not published input. */
+export function publicSourceModules(projectRoot) {
+  const root = resolve(projectRoot), configPath = join(root, 'tsconfig.json');
+  const config = ts.readConfigFile(configPath, ts.sys.readFile);
+  assert(!config.error, config.error && ts.flattenDiagnosticMessageText(config.error.messageText, '\n'));
+  const parsed = ts.parseJsonConfigFileContent(config.config, ts.sys, root);
+  assert.equal(parsed.errors.length, 0, 'Public asset scope requires valid TypeScript configuration.');
+  const entry = join(root, 'src', 'index.ts');
+  assert(ts.sys.fileExists(entry), 'Public source entry src/index.ts must exist.');
+  const program = ts.createProgram({ rootNames: [entry], options: parsed.options });
+  return program.getSourceFiles().filter(source => !source.isDeclarationFile && within(join(root, 'src'), resolve(source.fileName)));
+}
+
+export async function verifyInlineAssets({ projectRoot = repositoryRoot, bundlePath, log = console.log } = {}) {
+const root = resolve(projectRoot);
 // Check the emitted module itself: relative asset URLs break when a consumer's
 // dependency optimizer relocates it. Every literal source asset must instead
 // survive as an original-byte data URL, including fetch-based TGA and JSON.
+// Inventory only the public entry's resolved source-module dependency closure.
 const expected = [];
-for (const file of (await filesIn(join(root, 'src'))).filter(file => /[.]tsx?$/.test(file))) {
-  const source = ts.createSourceFile(file, await readFile(file, 'utf8'), ts.ScriptTarget.Latest, true);
+const modules = publicSourceModules(root);
+for (const source of modules) {
+  const file = resolve(source.fileName);
   const assets = [];
   function visit(node) {
     if (ts.isNewExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === 'URL' && node.arguments?.length === 2) {
@@ -31,12 +49,12 @@ for (const file of (await filesIn(join(root, 'src'))).filter(file => /[.]tsx?$/.
   }
   visit(source);
   for (const asset of assets) {
-    assert(!relative(join(root, 'src', 'assets'), asset).startsWith('..'), 'Asset must stay in the public source bank.');
+    assert(within(join(root, 'src', 'assets'), asset), 'Asset must stay in the public source bank.');
     expected.push({ asset, bytes: await readFile(asset) });
   }
 }
 assert(expected.length > 0, 'Source asset inventory must not be empty.');
-const output = await readFile(join(root, 'dist', 'index.js'), 'utf8');
+const output = await readFile(bundlePath ?? join(root, 'dist', 'index.js'), 'utf8');
 const bundle = ts.createSourceFile('index.js', output, ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
 const inline = new Map();
 const residual = [];
@@ -60,4 +78,9 @@ for (const { asset, bytes } of expected) {
 }
 const counts = {};
 for (const { asset } of expected) counts[extname(asset)] = (counts[extname(asset)] ?? 0) + 1;
-console.log('Published inline assets: ' + expected.length + ' original-byte references verified ' + JSON.stringify(counts));
+log('Published inline assets: ' + expected.length + ' original-byte references verified ' + JSON.stringify(counts)
+  + '; scope src/index.ts dependency closure: ' + modules.length + ' non-declaration source modules.');
+return Object.freeze({ references: expected.length, counts: Object.freeze(counts), modules: Object.freeze(modules.map(source => relative(root, source.fileName))) });
+}
+
+if (process.argv[1] && await realpath(resolve(process.argv[1])) === await realpath(fileURLToPath(import.meta.url))) await verifyInlineAssets();

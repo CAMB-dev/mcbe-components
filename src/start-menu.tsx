@@ -250,7 +250,7 @@ interface StartSourceButtonProps {
   geometry:
     | { kind: 'main-row' }
     | { kind: 'fixed'; size: readonly [number, number] }
-    | { kind: 'form-fitting'; height: number; extraWidth?: number; pressedAlpha?: number }
+    | { kind: 'form-fitting'; height: number; basePadding?: 2 | 5; extraWidth?: number; pressedAlpha?: number }
     | { kind: 'profile-content' };
   className?: string;
   style?: CSSProperties;
@@ -335,7 +335,7 @@ function StartSourceButton({ config, scale, disabled = false, role, geometry, cl
   const sizing: CSSProperties = geometry.kind === 'fixed'
     ? { width: geometry.size[0] * scale, height: geometry.size[1] * scale }
     : geometry.kind === 'form-fitting'
-      ? { height: geometry.height * scale, '--mc-start-extra-width': `${(geometry.extraWidth ?? 0) * scale}px`, '--mc-start-pressed-alpha': geometry.pressedAlpha ?? 1 } as CSSProperties
+      ? { height: geometry.height * scale, '--mc-start-base-padding': `${(geometry.basePadding ?? 5) * scale}px`, '--mc-start-extra-width': `${(geometry.extraWidth ?? 0) * scale}px`, '--mc-start-pressed-alpha': geometry.pressedAlpha ?? 1 } as CSSProperties
       : {};
   return <Button {...native} ref={config.ref} type="button" aria-label={native['aria-label'] ?? config.label} disabled={locked} hidden={!config.state.visible} className={`mc-start-button mc-start-button--${role} mc-start-button--${geometry.kind} ${config.action === 'realms' ? 'mc-start-button--realms' : ''} ${className ?? ''} ${native.className ?? ''}`} style={{ ...sizing, ...native.style, ...style }} data-start-action={config.action} data-start-target={config.target} onClick={event => {
     onClick?.(event);
@@ -533,7 +533,7 @@ export const StartMenu = forwardRef<HTMLElement, StartMenuProps>(function StartM
     }}>
     <div className="mc-start-menu__background">{background}</div><div className="mc-start-menu__surface"><div className="mc-start-menu__main-stack"><div className="mc-start-menu__title-pad"/><StartMenuTitle {...title} size={size} scale={s}/><div className="mc-start-menu__fill"/><StartMenuActionStack {...actions} scale={s} disabled={disabled}/><div className="mc-start-menu__fill mc-start-menu__hint-fill">{controllerHints}{offlineHint}</div><div className="mc-start-menu__bottom-pad"/></div>
       <StartMenuAuxiliaryActions {...auxiliary} size={size} scale={s} disabled={disabled}/><StartMenuProfile {...profile} size={size} scale={s} disabled={disabled}/><div className="mc-start-menu__footer"><StartMenuFooter {...footer} width={w - 2} scale={s}/></div>
-      {friends && <StartSourceState state={friends.state} className="mc-start-menu__friends"><StartSourceButton config={content(friends.button, friends.content ?? friends.button.label)} scale={s} role="light-content" geometry={{ kind: 'form-fitting', height: 25 }}/></StartSourceState>}
+      {friends && <StartSourceState state={friends.state} className="mc-start-menu__friends"><StartSourceButton config={content(friends.button, friends.content ?? friends.button.label)} scale={s} role="light-content" geometry={{ kind: 'form-fitting', height: 25, basePadding: 2 }}/></StartSourceState>}
     </div><Popup value={externalPopup} scale={s} active={popupActive} disabled={disabled} rootRef={popupRef} dialogRef={dialogRef}/>
   </section></Interaction.Provider>;
 });

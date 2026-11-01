@@ -84,3 +84,9 @@ python scripts/prepare-server-form-assets.py --check
 CDP所测真实name input使用Classic；公开页码autoHan /forcedUnicode使用Unicode，inherit /forcedLatin使用Classic，各为所测label的6glyph，且父级精确family继承 /无inline family、Reader正文隔离、原textarea节点 /选区和英语reset均检查。首公开53通过 /1失败是私有harness误拒合法fallback family字符串，后续未执行保留；修为源一致的父级computed family与marker /无inline检查，并加CDP实际face正控，不是产品bug，也不累计首批通过数。
 
 公开page /consoleError /HTTP /request错误及取消为0，4条整页ReadPixels性能warning保留；见 `.cache/server-forms-public-focused-01/phase02/FINAL.json`。37正式、Book85与6导航、64辅助各保原范围，不等于全部GUI /后端协议 /native像素通过。
+
+## Public demo accessible selection names (2026-11-02)
+
+The demo host now derives the Travel supplies field label from the same ordered option schema and accepted values as the visible collapsed summary. For example, the visible `Torches, Map` is included in `Travel supplies: Torches, Map`; a declined field change leaves both labels on the previous accepted selection. This changes only demo schema data, not the ServerCustomForm component, textures, public API, or values policy. No ARIA is removed and no Axe rule is disabled.
+
+`tests/server-forms.spec.ts` adds a public-demo regression for initial, multiple and changed selections plus the actual `label-content-name-mismatch` rule. At the time of this source edit, TypeScript is checked separately; root owns mounted-browser execution. Earlier native/material results above do not prove this new accessible-name behavior.

@@ -1,0 +1,25 @@
+@import './progress-actions.css';
+@import './scroll-area.css';
+.mc-progress-pack-grids,.mc-progress-pack-grid{position:relative;box-sizing:border-box}
+.mc-progress-pack-grid{position:absolute;left:0}
+.mc-progress-pack-row{position:absolute;display:block;cursor:pointer}
+.mc-progress-pack-row input{position:absolute;inset:0;z-index:2;margin:0;width:100%;height:100%;opacity:0;cursor:inherit}
+.mc-progress-pack-row[data-locked]{cursor:default}
+.mc-progress-pack-row__visual{position:absolute;left:0;top:0;pointer-events:none}
+.mc-progress-pack-row__art{position:absolute;left:0;top:0;image-rendering:pixelated}
+.mc-progress-pack-row__art--hover,.mc-progress-pack-row__art--locked{display:none}
+.mc-progress-pack-row:not([data-locked]):is(:hover,:focus-within) .mc-progress-pack-row__art--normal{display:none}
+.mc-progress-pack-row:not([data-locked]):is(:hover,:focus-within) .mc-progress-pack-row__art--hover{display:block}
+.mc-progress-pack-row[data-locked] .mc-progress-pack-row__art--normal{display:none}
+.mc-progress-pack-row[data-locked] .mc-progress-pack-row__art--locked{display:block}
+.mc-progress-pack-row__label{position:absolute;white-space:pre-wrap;overflow-wrap:anywhere}
+.mc-progress-pack-row:has(input:focus-visible){outline:1px solid white;outline-offset:-1px}
+.mc-progress-packs__glyph{display:block;text-shadow:none}
+.mc-progress-packs__literal{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:pre-wrap}
+.mc-progress-resource-dialog{position:absolute;isolation:isolate;box-sizing:border-box;overflow:clip}
+.mc-progress-resource-dialog__fill{position:absolute;z-index:-1;image-rendering:pixelated}
+.mc-progress-resource-dialog>.mc-progress-skin{position:absolute;inset:0;z-index:-1}
+.mc-progress-resource-dialog__scroll{position:absolute!important}
+.mc-progress-resource-dialog__count,.mc-progress-resource-dialog__total,.mc-progress-resource-dialog__title,.mc-progress-resource-dialog__description,.mc-progress-resource-dialog__warning{position:absolute;display:block;white-space:pre-wrap;overflow-wrap:anywhere}
+.mc-progress-resource-dialog__total{text-align:right}
+.mc-progress-resource-dialog__title{text-align:center}

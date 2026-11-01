@@ -6,6 +6,7 @@ import { InvitePersonRow } from '../src/invite-person-row';
 import { InviteCategory } from '../src/invite-category';
 import { InvitePagination } from '../src/invite-pagination';
 import { InviteFooter } from '../src/invite-footer';
+import './invite-examples.css';
 import type { InviteActionDetail, InviteBindings, InviteCapabilities, InviteCategoryData, InviteCollection, InviteControllerHandle, InviteLabels, InvitePerson, InviteSelection } from '../src/invite-types';
 
 const collectionOrder: readonly InviteCollection[] = ['online_platform_friends', 'online_linked_account_friends', 'online_xbox_live_friends', 'offline_platform_friends', 'offline_linked_account_friends', 'offline_xbox_live_friends'];
@@ -103,7 +104,7 @@ export function InviteExamples() {
     </div>
     <p role="status" aria-live="polite" style={{ margin: 0, overflowWrap: 'anywhere' }}>{status}</p>
     <p style={{ margin: 0, fontSize: 12, color: '#b3b5b7' }}>Six independent sample collections reuse a complete original profile glyph supplied by this host. It is not a gamerpic provider. Selection and page changes stay local; no invitations, accounts or parties are accessed. The host chooses 1× below 768px, keeps at least 320 logical viewport units and uses the Pocket profile when Desktop does not fit. Smaller hosts scroll this preview locally.</p>
-    <div style={{ display: 'grid', gap: 12, minWidth: 0, overflowX: 'auto' }}>
+    <div data-invite-demo-parts style={{ display: 'grid', gap: 12, minWidth: 0, overflowX: 'auto' }}>
       <h3 style={{ margin: 0 }}>Reusable person row</h3>
       <InvitePersonRow scale={scale} scope={{ collection: 'online_xbox_live_friends', itemId: 'standalone', collectionIndex: 0 }} person={{ id: 'standalone', identity: 'xbox-live', gamertag: 'Standalone friend', currentGameLabel: 'Minecraft', onlineVisible: true, gamerpic: profile }} width={300} capabilities={capabilities} crossPlatformEnabled={flags.crossPlatform} labels={labels} disabled={flags.disabled} readOnly={flags.readOnly} onAction={receive} onSelectedChange={detail => setStatus(`Standalone friend · ${detail.selected ? 'selected' : 'unselected'}.`)}/>
       <h3 style={{ margin: 0 }}>Reusable category</h3>

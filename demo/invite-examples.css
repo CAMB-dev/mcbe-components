@@ -1,0 +1,4 @@
+/* Reusable pagination has source dark ink and no owned screen backdrop. */
+[data-invite-demo-parts] .mc-invite-pagination {
+  background-color: var(--mc-control, #c6c6c6);
+}

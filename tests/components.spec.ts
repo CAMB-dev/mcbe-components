@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { verifyAxeWithPaintedContrast } from './helpers/painted-contrast';
 
 test.beforeEach(async ({ page }) => { await page.goto('/'); await page.evaluate(() => document.fonts.ready); });
 
@@ -140,14 +141,17 @@ test('forms retain readable colors and native input behavior inside a Classic pa
   expect(results.violations.filter(item=>item.impact==='serious'||item.impact==='critical')).toEqual([]);
 });
 
-test('page and modal have no serious or critical axe violations', async ({ page }) => {
-  // The complete showcase and its modal each run the full axe ruleset.
-  test.slow();
+test('page and modal pass structural Axe and actual image-backed text contrast', async ({ page }, info) => {
+  // Keep every raw Axe rule. Its CSS-background heuristic misses sibling and
+  // border-image paint, so verify each reported contrast pair against pixels.
+  // Each reported pair requires original, transparent/black/white text-fill
+  // probes and exact restored paint. Keep a bounded allowance for all five.
+  test.setTimeout(240_000);
   const pageResults = await new AxeBuilder({ page }).analyze();
-  expect(pageResults.violations.filter(item => item.impact === 'serious' || item.impact === 'critical')).toEqual([]);
+  await verifyAxeWithPaintedContrast(page, pageResults.violations, info, 'showcase');
   await page.getByRole('button', { name: 'Create new world', exact: true }).click();
   const modalResults = await new AxeBuilder({ page }).analyze();
-  expect(modalResults.violations.filter(item => item.impact === 'serious' || item.impact === 'critical')).toEqual([]);
+  await verifyAxeWithPaintedContrast(page, modalResults.violations, info, 'world-dialog');
 });
 
 test('reflows at 320px and captures visual evidence', async ({ page }, testInfo) => {
