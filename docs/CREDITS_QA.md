@@ -98,6 +98,18 @@ source主展示页本轮9项通过、1223pins零漂移，root查看1440／390截
 
 后续字体有界候选仍未晋升：只让ó走原glyph_00的两种固定混排分别有448／354个mask差；Mojangles em10 mono的14个ink拓扑虽吻合，保留原空列的固定paint仍500差，灰度128候选250差。纯源对源95ASCII统一转换只74个同时满足形状与真实字距，因此未把它用于ó或四个native holdout。没有删除空列、逐字拟合或把拓扑吻合当位置／RGB认证。
 
+## 新采集帧的字体绘制核验（2026-11-01）
+
+在已解锁桌面上，通过已安装的 PIX 2610.28，以 Packaged App / GPU Capture 模式启动实际 Minecraft for Windows 1.26.6005.0，沿 Settings / General / Credits 采集一帧。未进入世界或修改设置。原始 `.wpix` 与独立分析副本均为63,686,400字节，SHA256 `5f7b2995bcfab2cdbc84c18d49508f7557f49c0b79b959497cdfc56e7ebfc550`。保存与有限读取记录见 `.cache/credits-pix-live-02/LIVE-FINAL.json`，SHA256 `3f273cd2b84010a98b38450165112bbdc0d9a7d99b55eb3e750cfd9e656b9435`。游戏、PIX 界面和 Computer Use 均已关闭。
+
+本次限定对象是首组**十二个重复的 `=` 字符**。实际 queue0 / API76、82（Global16、17）绑定的完整128×128字体纹理235，与本机原始 `default8.png` 全 RGBA 一致。实际 DXIL、VB/IB、常量及 sampler 共同证明：该组使用8×12字格、point/clamp 采样，并将 UV 钳制在字格的半 texel 边界内；阴影 Tint 为0.25，正文为1，阴影矩阵比正文向右、向下各偏移1个 GUI 单位，即本帧5个物理像素。
+
+分别从真实绘制前画面出发，CPU 重放阴影和正文，对两份完整2570×1402目标逐 RGBA 比较均为0差异，每份3,603,140像素。读取严格遵循原 footprint 的10496字节行距，未把带 padding 的 blob 当紧排图像。研究见 `.cache/credits-pix-cpu-study-01/FINAL.json`，SHA256 `ba49877344fb894693700c282746c1f473e34bd31f4839ef554414dab1fc03c5`。
+
+独立 CPU 复核再次得到两份完整目标逐像素、逐字节 RGBA 零差，并核验原始帧、字体及带 padding 的输入。它独立解析了原始 vertex 字节和 shader 实际引用的常量，没有再次解压整个捕获资源流；该流的出处仍依赖冻结的 decoder。复核见 `.cache/credits-pix-independent-01/FINAL.json`，SHA256 `ca433f20330c51061f6833307ef4ff2218feea243b418fd7fa562eda523ae046`。首次比较未引用常量尾部 NaN 的失败保留，后续按实际引用的字节核验；没有放宽像素门槛。
+
+这不是独立生成整屏：两次重放都使用真实的绘制前背景，且字符只有上述 `=`。单独重建背景仍在Y1392一行有1530像素差异，最大通道差30，保留未通过结果。分页／变音字符／fallback、其他文字、logo、后续合成和完整 GUI 仍未由本帧认证；本轮没有修改库的默认字体、shader 或公开 API。
+
 ## 原始分页字格的限定预测（2026-11-01）
 
 同一本机原始`font.brarchive`还包含完整的`default8_1.png`和`default8_2.png`。它们都是128×128，与第一张图的字格排列不同。原`default8.json`写有字高12、Y偏移−3和`ascii_extended:true`，但没有直接声明引擎怎样选择分页。源文件字节与行／字格分析见`.cache/credits-native-default-pages-01/FINAL.json`，SHA256 `50e5d05fe619cdab988de6b73f9a5c8884273ae302612ae9fdeb905b744bd800`。
