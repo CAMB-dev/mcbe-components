@@ -33,7 +33,7 @@
 | Chromium156.0.8078.4 / ANGLE / RTX3050 Laptop / D3D11 | 0 / 3,603,140 | 0 |
 | 同版 Chromium / ANGLE / SwiftShader Vulkan | 80 / 3,603,140 | 0 |
 
-D3D11预测与实际目标的完整RGBA SHA256均为 `a5c0c453c0202480abaaef3b70c1ae42ab1139226ae40dc88a25ea47bbdbd45b`。底层原始readback按实际rowPitch10496解码，未按width×4猜stride。两个实际核心结果位于 `.cache/credits-background-raster-01/prepared-{d3d11,default}-01/RESULT.json`。独立逐字节复核位于 `.cache/credits-background-independent-02/AUTHORIZED-READONLY-COMPARISON.json`。
+D3D11预测与实际目标的完整RGBA SHA256均为 `a5c0c453c0202480abaaef3b70c1ae42ab1139226ae40dc88a25ea47bbdbd45b`。底层原始readback按实际rowPitch10496解码，未按width×4猜stride。两个实际核心结果位于 `.cache/credits-background-raster-01/prepared-{d3d11,default}-01/RESULT.json`。当前核心的独立逐字节复核位于 `.cache/credits-background-independent-02/FINAL-PREPARED-CORE-INDEPENDENT-03.json`；其中也核对重打包bundle与源码身份。live COPY零差异由实际浏览器producer记录，独立agent未再次运行浏览器；其独立整平面字节比较针对保存的返回RGBA。较早的 `AUTHORIZED-READONLY-COMPARISON.json` 只复核实验runner输出。
 
 这是指定捕获背景、指定后端和**内部 prepared GPU 边界**的结果。它绕过公开源布局计算，不能称公开 `CreditsScreen`、源tile-origin求值、滚动时间或所有字体整页都已还原。公开 `layoutGuiImages` 仍先物理floor/ceil再half packing；把捕获后的half顶点当成源rect会再次量化，不能用这种输入伪造公开源布局通过。SwiftShader80像素残差也阻止跨后端pixel-perfect结论。
 
@@ -45,6 +45,6 @@ D3D11预测与实际目标的完整RGBA SHA256均为 `a5c0c453c0202480abaaef3b70
 - 默认SwiftShader批次48 PASS / 5 FAIL。一个旧GUI5文字对照差273像素、最大通道差4；另四个旧native模型的FBO/live像素为零差，但断言要求NVIDIA Direct3D11后端而失败。用HEAD三份旧GuiLayer模块复跑后，五项失败的状态、错误和完整像素报告均一致，见 `BASELINE-COMPARISON.json`。不能把软件后端批次写成53全绿。首次baseline配置未继承原Vite虚拟字体插件及watch exclusions，发生导航／reload失败；该轮无比较资格，原记录另留 `baseline-01.json`，有效复跑是 `baseline-02.json`。
 - `npm run verify:package` PASS：实际安装的React18.3.1／19.3.1，205组件／223 runtime values、ESM、SSR、声明、CSS、字体、许可及现有Invite/Credits/Chat/Progress/FileTransmission门禁。公开依赖闭包仍162模块／676份原字节资源；没有增加组件数。
 - 两个实际安装消费目录另验证新参数：每个peer均独立打包已安装的`mcbeui`到浏览器，验证省略／webgl／top-left三个策略的返回像素及live像素，React仅改变策略后的新canvas和正向结果，以及严格声明与两个非法策略负例。见 `installed-origin-01/RESULT.json`。此轮是无源别名的esbuild浏览器消费，不称默认Vite开发／生产矩阵。
-- 受检功能tar：`.cache/credits-background-raster-01/functional-candidate/mcbeui-0.1.0.tgz`，SHA256 `82de9495027daa3704c9fd820c2e2fe0f973cf246ffcec0bb0c6265594bfcb94`。实际安装包ESM SHA256 `4ddfadb4363b7d4e17e2744184f5d9982f8535274c0aac32a7e9abfdfe0bc0fb`，DTS `d7daf8087845b0eca7e03e705d358cbf3aaa62352f4d4f63fc7770ad1256b202`。最终仅文档包的非文档字节一致性另存 `final-documentation-pack/IDENTITY.json`，不覆盖功能tar。
+- 受检功能tar：`.cache/credits-background-raster-01/functional-candidate/mcbeui-0.1.0.tgz`，SHA256 `82de9495027daa3704c9fd820c2e2fe0f973cf246ffcec0bb0c6265594bfcb94`。实际安装包ESM SHA256 `4ddfadb4363b7d4e17e2744184f5d9982f8535274c0aac32a7e9abfdfe0bc0fb`，DTS `d7daf8087845b0eca7e03e705d358cbf3aaa62352f4d4f63fc7770ad1256b202`。最终仅文档包的非文档字节一致性另存 `final-documentation-pack-02/IDENTITY.json`，不覆盖功能tar或首份文档包。
 
 所有本轮浏览器都在finally关闭。未打开Computer Use，也未重新启动Minecraft、PIX或原生采集；本轮自有开发端口另记服务关闭收据，用户4173不在操作范围。
