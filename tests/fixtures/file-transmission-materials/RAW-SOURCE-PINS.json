@@ -1,0 +1,56 @@
+[
+  {
+    "member": "LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "path": ".cache\\file-transmission-source-review-01\\ORIGINALS\\LICENSE.md"
+  },
+  {
+    "member": "resource_pack/ui/file_upload_screen.json",
+    "bytes": 10969,
+    "sha256": "45c024070ed1ffba06bbdce2111d3c00c5b1e9190faa44cc4ab2f2b3ae845075",
+    "path": ".cache\\file-transmission-source-review-01\\ORIGINALS\\resource_pack\\ui\\file_upload_screen.json"
+  },
+  {
+    "member": "resource_pack/ui/ui_common.json",
+    "bytes": 243941,
+    "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+    "path": ".cache\\file-transmission-source-review-01\\ORIGINALS\\resource_pack\\ui\\ui_common.json"
+  },
+  {
+    "member": "resource_pack/ui/ui_template_buttons.json",
+    "bytes": 76484,
+    "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+    "path": ".cache\\file-transmission-source-review-01\\ORIGINALS\\resource_pack\\ui\\ui_template_buttons.json"
+  },
+  {
+    "member": "resource_pack/ui/ui_art_assets_common.json",
+    "bytes": 6731,
+    "sha256": "f6085c9aa28ed04057e1ff83a90620dc024ab43e72166e2949bfde938c1fce3a",
+    "path": ".cache\\file-transmission-source-review-01\\ORIGINALS\\resource_pack\\ui\\ui_art_assets_common.json"
+  },
+  {
+    "member": "resource_pack/ui/_global_variables.json",
+    "bytes": 20210,
+    "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+    "path": ".cache\\file-transmission-source-review-01\\ORIGINALS\\resource_pack\\ui\\_global_variables.json"
+  },
+  {
+    "member": "resource_pack/ui/_ui_defs.json",
+    "bytes": 7470,
+    "sha256": "b4f7f25b6ee4246b3582eb78a031ecc93793fdb2cf09f77b886d73f4038cb270",
+    "path": ".cache\\file-transmission-source-review-01\\ORIGINALS\\resource_pack\\ui\\_ui_defs.json"
+  },
+  {
+    "member": "resource_pack/ui/ui_common_classic.json",
+    "bytes": 3030,
+    "sha256": "d65eb51c5264b7b9eb8611bfe250736bc48eed8207682b6c26f3ede224277783",
+    "path": ".cache\\file-transmission-source-review-01\\ORIGINALS\\resource_pack\\ui\\ui_common_classic.json"
+  },
+  {
+    "member": "resource_pack/ui/ui_template_dialogs.json",
+    "bytes": 14238,
+    "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264",
+    "path": ".cache\\file-transmission-source-review-01\\ORIGINALS\\resource_pack\\ui\\ui_template_dialogs.json"
+  }
+]

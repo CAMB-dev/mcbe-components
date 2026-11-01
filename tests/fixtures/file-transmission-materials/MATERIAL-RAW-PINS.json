@@ -1,0 +1,241 @@
+[
+  {
+    "texture": "textures/ui/dialog_background_hollow_2",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/dialog_background_hollow_2.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_2.png",
+        "bytes": 314,
+        "sha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f"
+      },
+      {
+        "member": "resource_pack/textures/ui/dialog_background_hollow_2.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_2.json",
+        "bytes": 95,
+        "sha256": "584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/control",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/control.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/control.png",
+        "bytes": 71,
+        "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab"
+      },
+      {
+        "member": "resource_pack/textures/ui/control.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/control.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/experiencebarempty",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/experiencebarempty.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencebarempty.png",
+        "bytes": 180,
+        "sha256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0"
+      },
+      {
+        "member": "resource_pack/textures/ui/experiencebarempty.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencebarempty.json",
+        "bytes": 92,
+        "sha256": "de67894f88e78223fa154d60fbd826da1349d35dbfe3b0d8dae5d6365161243f"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/experiencebarfull",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/experiencebarfull.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencebarfull.png",
+        "bytes": 103,
+        "sha256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1"
+      },
+      {
+        "member": "resource_pack/textures/ui/experiencebarfull.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencebarfull.json",
+        "bytes": 92,
+        "sha256": "8ec618d73df58faa04e6ce31c88b77d88d6af1c2ae30d290eb25b57aa4601876"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/experiencenub",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/experiencenub.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencenub.png",
+        "bytes": 160,
+        "sha256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55"
+      },
+      {
+        "member": "resource_pack/textures/ui/experiencenub.json",
+        "absent": true
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/button_borderless_light",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/button_borderless_light.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_light.png",
+        "bytes": 131,
+        "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376"
+      },
+      {
+        "member": "resource_pack/textures/ui/button_borderless_light.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/button_borderless_lighthover",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/button_borderless_lighthover.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_lighthover.png",
+        "bytes": 85,
+        "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8"
+      },
+      {
+        "member": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/button_borderless_lightpressed",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_lightpressed.png",
+        "bytes": 84,
+        "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983"
+      },
+      {
+        "member": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/disabledButtonNoBorder",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/disabledButtonNoBorder.png",
+        "bytes": 88,
+        "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f"
+      },
+      {
+        "member": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/focus_border_white",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/focus_border_white.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/focus_border_white.png",
+        "bytes": 105,
+        "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"
+      },
+      {
+        "member": "resource_pack/textures/ui/focus_border_white.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/title",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/title.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/title.png",
+        "bytes": 86796,
+        "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662"
+      },
+      {
+        "member": "resource_pack/textures/ui/title.json",
+        "absent": true
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/title_edu",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/title_edu.png",
+        "absent": true
+      },
+      {
+        "member": "resource_pack/textures/ui/title_edu.json",
+        "absent": true
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/title_edu_preview",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/title_edu_preview.png",
+        "absent": true
+      },
+      {
+        "member": "resource_pack/textures/ui/title_edu_preview.json",
+        "absent": true
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/Black",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/Black.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/Black.png",
+        "bytes": 84,
+        "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e"
+      },
+      {
+        "member": "resource_pack/textures/ui/Black.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/Black.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+      }
+    ]
+  },
+  {
+    "texture": "textures/ui/edu_green_tile",
+    "files": [
+      {
+        "member": "resource_pack/textures/ui/edu_green_tile.png",
+        "absent": true
+      },
+      {
+        "member": "resource_pack/textures/ui/edu_green_tile.json",
+        "absent": true
+      }
+    ]
+  }
+]

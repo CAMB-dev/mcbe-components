@@ -1,0 +1,1147 @@
+{
+  "scope": "Independent scalar alpha experiment; no product CSS, planner, window PNG or expected material image used",
+  "browser": "156.0.8078.4",
+  "sourceSHA256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+  "cases": [
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "straightRoundRGBA": [
+        0,
+        0,
+        0,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "straightRoundRGBA": [
+        0,
+        0,
+        0,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "straightRoundRGBA": [
+        0,
+        0,
+        0,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.25,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        2,
+        2,
+        2,
+        255
+      ],
+      "straightRoundRGBA": [
+        2,
+        2,
+        2,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.25,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        2,
+        2,
+        2,
+        255
+      ],
+      "straightRoundRGBA": [
+        2,
+        2,
+        2,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.25,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        2,
+        2,
+        2,
+        255
+      ],
+      "straightRoundRGBA": [
+        2,
+        2,
+        2,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.5,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        4,
+        4,
+        4,
+        255
+      ],
+      "straightRoundRGBA": [
+        5,
+        5,
+        5,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.5,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        5,
+        5,
+        5,
+        255
+      ],
+      "straightRoundRGBA": [
+        5,
+        5,
+        5,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.5,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        5,
+        5,
+        5,
+        255
+      ],
+      "straightRoundRGBA": [
+        5,
+        5,
+        5,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.75,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        6,
+        6,
+        6,
+        255
+      ],
+      "straightRoundRGBA": [
+        7,
+        7,
+        7,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.75,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        7,
+        7,
+        7,
+        255
+      ],
+      "straightRoundRGBA": [
+        7,
+        7,
+        7,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.75,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        7,
+        7,
+        7,
+        255
+      ],
+      "straightRoundRGBA": [
+        7,
+        7,
+        7,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.8,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        7,
+        7,
+        7,
+        255
+      ],
+      "straightRoundRGBA": [
+        7,
+        7,
+        7,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.8,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        7,
+        7,
+        7,
+        255
+      ],
+      "straightRoundRGBA": [
+        7,
+        7,
+        7,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 0.8,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        7,
+        7,
+        7,
+        255
+      ],
+      "straightRoundRGBA": [
+        7,
+        7,
+        7,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 1,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        9,
+        9,
+        9,
+        255
+      ],
+      "straightRoundRGBA": [
+        9,
+        9,
+        9,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 1,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        9,
+        9,
+        9,
+        255
+      ],
+      "straightRoundRGBA": [
+        9,
+        9,
+        9,
+        255
+      ]
+    },
+    {
+      "background": [
+        0,
+        0,
+        0
+      ],
+      "alpha": 1,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        9,
+        9,
+        9,
+        255
+      ],
+      "straightRoundRGBA": [
+        9,
+        9,
+        9,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "straightRoundRGBA": [
+        32,
+        48,
+        64,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "straightRoundRGBA": [
+        32,
+        48,
+        64,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "straightRoundRGBA": [
+        32,
+        48,
+        64,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.25,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        26,
+        38,
+        50,
+        255
+      ],
+      "straightRoundRGBA": [
+        26,
+        38,
+        50,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.25,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        26,
+        38,
+        50,
+        255
+      ],
+      "straightRoundRGBA": [
+        26,
+        38,
+        50,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.25,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        26,
+        38,
+        50,
+        255
+      ],
+      "straightRoundRGBA": [
+        26,
+        38,
+        50,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.5,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        20,
+        28,
+        36,
+        255
+      ],
+      "straightRoundRGBA": [
+        21,
+        29,
+        37,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.5,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        21,
+        29,
+        37,
+        255
+      ],
+      "straightRoundRGBA": [
+        21,
+        29,
+        37,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.5,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        21,
+        29,
+        37,
+        255
+      ],
+      "straightRoundRGBA": [
+        21,
+        29,
+        37,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.75,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        14,
+        18,
+        22,
+        255
+      ],
+      "straightRoundRGBA": [
+        15,
+        19,
+        23,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.75,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        15,
+        19,
+        23,
+        255
+      ],
+      "straightRoundRGBA": [
+        15,
+        19,
+        23,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.75,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        15,
+        19,
+        23,
+        255
+      ],
+      "straightRoundRGBA": [
+        15,
+        19,
+        23,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.8,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        13,
+        16,
+        20,
+        255
+      ],
+      "straightRoundRGBA": [
+        14,
+        17,
+        20,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.8,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        13,
+        16,
+        20,
+        255
+      ],
+      "straightRoundRGBA": [
+        14,
+        17,
+        20,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 0.8,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        13,
+        16,
+        20,
+        255
+      ],
+      "straightRoundRGBA": [
+        14,
+        17,
+        20,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 1,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        9,
+        9,
+        9,
+        255
+      ],
+      "straightRoundRGBA": [
+        9,
+        9,
+        9,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 1,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        9,
+        9,
+        9,
+        255
+      ],
+      "straightRoundRGBA": [
+        9,
+        9,
+        9,
+        255
+      ]
+    },
+    {
+      "background": [
+        32,
+        48,
+        64
+      ],
+      "alpha": 1,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        9,
+        9,
+        9,
+        255
+      ],
+      "straightRoundRGBA": [
+        9,
+        9,
+        9,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "straightRoundRGBA": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "straightRoundRGBA": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "straightRoundRGBA": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.25,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        193,
+        193,
+        193,
+        255
+      ],
+      "straightRoundRGBA": [
+        194,
+        194,
+        194,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.25,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        193,
+        193,
+        193,
+        255
+      ],
+      "straightRoundRGBA": [
+        194,
+        194,
+        194,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.25,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        193,
+        193,
+        193,
+        255
+      ],
+      "straightRoundRGBA": [
+        194,
+        194,
+        194,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.5,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        131,
+        131,
+        131,
+        255
+      ],
+      "straightRoundRGBA": [
+        132,
+        132,
+        132,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.5,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        132,
+        132,
+        132,
+        255
+      ],
+      "straightRoundRGBA": [
+        132,
+        132,
+        132,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.5,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        132,
+        132,
+        132,
+        255
+      ],
+      "straightRoundRGBA": [
+        132,
+        132,
+        132,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.75,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        70,
+        70,
+        70,
+        255
+      ],
+      "straightRoundRGBA": [
+        71,
+        71,
+        71,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.75,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        71,
+        71,
+        71,
+        255
+      ],
+      "straightRoundRGBA": [
+        71,
+        71,
+        71,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.75,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        71,
+        71,
+        71,
+        255
+      ],
+      "straightRoundRGBA": [
+        71,
+        71,
+        71,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.8,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        58,
+        58,
+        58,
+        255
+      ],
+      "straightRoundRGBA": [
+        58,
+        58,
+        58,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.8,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        58,
+        58,
+        58,
+        255
+      ],
+      "straightRoundRGBA": [
+        58,
+        58,
+        58,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 0.8,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        58,
+        58,
+        58,
+        255
+      ],
+      "straightRoundRGBA": [
+        58,
+        58,
+        58,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 1,
+      "kind": "original-image-opacity",
+      "actualRGBA": [
+        9,
+        9,
+        9,
+        255
+      ],
+      "straightRoundRGBA": [
+        9,
+        9,
+        9,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 1,
+      "kind": "solid-opacity",
+      "actualRGBA": [
+        9,
+        9,
+        9,
+        255
+      ],
+      "straightRoundRGBA": [
+        9,
+        9,
+        9,
+        255
+      ]
+    },
+    {
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "alpha": 1,
+      "kind": "solid-rgba",
+      "actualRGBA": [
+        9,
+        9,
+        9,
+        255
+      ],
+      "straightRoundRGBA": [
+        9,
+        9,
+        9,
+        255
+      ]
+    }
+  ],
+  "canvas2dGlobalAlphaPoint8": [
+    13,
+    16,
+    19,
+    255
+  ]
+}

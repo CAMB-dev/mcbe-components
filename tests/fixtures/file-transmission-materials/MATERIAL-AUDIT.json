@@ -1,0 +1,624 @@
+[
+  {
+    "texture": "textures/ui/dialog_background_hollow_2",
+    "width": 18,
+    "height": 67,
+    "alphaCounts": {
+      "transparent": 25,
+      "partial": 0,
+      "opaque": 1181
+    },
+    "rgbaSha256": "814fd54c0359e5f628d7b701e992bf277492344cdad3c66d1881f397437a3220",
+    "metadata": {
+      "nineslice_size": [
+        8,
+        23,
+        8,
+        42
+      ],
+      "base_size": [
+        18,
+        67
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/dialog_background_hollow_2.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_2.png",
+        "bytes": 314,
+        "sha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f"
+      },
+      {
+        "member": "resource_pack/textures/ui/dialog_background_hollow_2.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_2.json",
+        "bytes": 95,
+        "sha256": "584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "./assets/storage-management/dialog_background_hollow_2.png",
+      "pngSha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": [
+          8,
+          23,
+          8,
+          42
+        ],
+        "base_size": [
+          18,
+          67
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/control",
+    "width": 2,
+    "height": 2,
+    "alphaCounts": {
+      "transparent": 0,
+      "partial": 0,
+      "opaque": 4
+    },
+    "rgbaSha256": "81eb2d3bce07f35376c3caa7feb306adabe65d6c8fdf04f191a3126d7b8c20ef",
+    "metadata": {
+      "nineslice_size": 1,
+      "base_size": [
+        2,
+        2
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/control.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/control.png",
+        "bytes": 71,
+        "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab"
+      },
+      {
+        "member": "resource_pack/textures/ui/control.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/control.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "./assets/jigsaw/control.png",
+      "pngSha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/experiencebarempty",
+    "width": 13,
+    "height": 5,
+    "alphaCounts": {
+      "transparent": 4,
+      "partial": 0,
+      "opaque": 61
+    },
+    "rgbaSha256": "1dde2fa7df05c8334a5805362dff64699592d6fb37cd7b9485a9ee1fb185826d",
+    "metadata": {
+      "nineslice_size": [
+        6,
+        1,
+        6,
+        1
+      ],
+      "base_size": [
+        13,
+        5
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/experiencebarempty.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencebarempty.png",
+        "bytes": 180,
+        "sha256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0"
+      },
+      {
+        "member": "resource_pack/textures/ui/experiencebarempty.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencebarempty.json",
+        "bytes": 92,
+        "sha256": "de67894f88e78223fa154d60fbd826da1349d35dbfe3b0d8dae5d6365161243f"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "literal data URI",
+      "pngSha256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": [
+          6,
+          1,
+          6,
+          1
+        ],
+        "base_size": [
+          13,
+          5
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/experiencebarfull",
+    "width": 13,
+    "height": 5,
+    "alphaCounts": {
+      "transparent": 4,
+      "partial": 0,
+      "opaque": 61
+    },
+    "rgbaSha256": "e8ef603fae027165e1d152353fd7e32fdaf28ce98e9383eaaf821f5d65aacca1",
+    "metadata": {
+      "nineslice_size": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "base_size": [
+        13,
+        5
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/experiencebarfull.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencebarfull.png",
+        "bytes": 103,
+        "sha256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1"
+      },
+      {
+        "member": "resource_pack/textures/ui/experiencebarfull.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencebarfull.json",
+        "bytes": 92,
+        "sha256": "8ec618d73df58faa04e6ce31c88b77d88d6af1c2ae30d290eb25b57aa4601876"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "literal data URI",
+      "pngSha256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "base_size": [
+          13,
+          5
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/experiencenub",
+    "width": 11,
+    "height": 5,
+    "alphaCounts": {
+      "transparent": 0,
+      "partial": 30,
+      "opaque": 25
+    },
+    "rgbaSha256": "befb29ee16dcfdb232463a8035ed1365cd33fc3254fcd13c6e16c1af1f38534f",
+    "metadata": null,
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/experiencenub.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/experiencenub.png",
+        "bytes": 160,
+        "sha256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55"
+      },
+      {
+        "member": "resource_pack/textures/ui/experiencenub.json",
+        "absent": true
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "literal data URI",
+      "pngSha256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": null,
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/button_borderless_light",
+    "width": 4,
+    "height": 4,
+    "alphaCounts": {
+      "transparent": 0,
+      "partial": 0,
+      "opaque": 16
+    },
+    "rgbaSha256": "9092e39baddfeaed8a28a47ee8548451162f6b4dc50478b412720d04c55ff841",
+    "metadata": {
+      "nineslice_size": 1,
+      "base_size": [
+        4,
+        4
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/button_borderless_light.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_light.png",
+        "bytes": 131,
+        "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376"
+      },
+      {
+        "member": "resource_pack/textures/ui/button_borderless_light.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "./assets/document-viewer/button_borderless_light.png",
+      "pngSha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/button_borderless_lighthover",
+    "width": 4,
+    "height": 4,
+    "alphaCounts": {
+      "transparent": 0,
+      "partial": 0,
+      "opaque": 16
+    },
+    "rgbaSha256": "8bc3a14bce9cffb15dc77a3937ecad1c62de61459dce90bca6d87404ae72a084",
+    "metadata": {
+      "nineslice_size": 1,
+      "base_size": [
+        4,
+        4
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/button_borderless_lighthover.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_lighthover.png",
+        "bytes": 85,
+        "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8"
+      },
+      {
+        "member": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "./assets/document-viewer/button_borderless_lighthover.png",
+      "pngSha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/button_borderless_lightpressed",
+    "width": 4,
+    "height": 4,
+    "alphaCounts": {
+      "transparent": 0,
+      "partial": 0,
+      "opaque": 16
+    },
+    "rgbaSha256": "0883c873c08e5fc9b05494527a4dc4b7fa98d75e4d936102596fe3a3a1fb9a54",
+    "metadata": {
+      "nineslice_size": 1,
+      "base_size": [
+        4,
+        4
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_lightpressed.png",
+        "bytes": 84,
+        "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983"
+      },
+      {
+        "member": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "./assets/document-viewer/button_borderless_lightpressed.png",
+      "pngSha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/disabledButtonNoBorder",
+    "width": 2,
+    "height": 2,
+    "alphaCounts": {
+      "transparent": 0,
+      "partial": 0,
+      "opaque": 4
+    },
+    "rgbaSha256": "e67567d79bb3aa67a31d6b356994cc8e12575ac8559f4d065015cdf0b75450bd",
+    "metadata": {
+      "nineslice_size": 1,
+      "base_size": [
+        2,
+        2
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/disabledButtonNoBorder.png",
+        "bytes": 88,
+        "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f"
+      },
+      {
+        "member": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "./assets/document-viewer/disabledButtonNoBorder.png",
+      "pngSha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/focus_border_white",
+    "width": 5,
+    "height": 5,
+    "alphaCounts": {
+      "transparent": 9,
+      "partial": 0,
+      "opaque": 16
+    },
+    "rgbaSha256": "7ade542643cd10ac042f8297c694c945d49f968ae8d84775db7fccdb28f89bbb",
+    "metadata": {
+      "nineslice_size": 1,
+      "base_size": [
+        5,
+        5
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/focus_border_white.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/focus_border_white.png",
+        "bytes": 105,
+        "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"
+      },
+      {
+        "member": "resource_pack/textures/ui/focus_border_white.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "./assets/document-viewer/focus_border_white.png",
+      "pngSha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/title",
+    "width": 1937,
+    "height": 333,
+    "alphaCounts": {
+      "transparent": 42172,
+      "partial": 3400,
+      "opaque": 599449
+    },
+    "rgbaSha256": "c8a8c4818b3da51e8853486f181c5a9371e1f63aa5da080400b2f55ba374e34b",
+    "metadata": null,
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/title.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/title.png",
+        "bytes": 86796,
+        "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662"
+      },
+      {
+        "member": "resource_pack/textures/ui/title.json",
+        "absent": true
+      }
+    ],
+    "reuse": {
+      "present": false
+    }
+  },
+  {
+    "texture": "textures/ui/title_edu",
+    "sourceMissing": true,
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/title_edu.png",
+        "absent": true
+      },
+      {
+        "member": "resource_pack/textures/ui/title_edu.json",
+        "absent": true
+      }
+    ],
+    "reuse": {
+      "present": false
+    }
+  },
+  {
+    "texture": "textures/ui/title_edu_preview",
+    "sourceMissing": true,
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/title_edu_preview.png",
+        "absent": true
+      },
+      {
+        "member": "resource_pack/textures/ui/title_edu_preview.json",
+        "absent": true
+      }
+    ],
+    "reuse": {
+      "present": false
+    }
+  },
+  {
+    "texture": "textures/ui/Black",
+    "width": 2,
+    "height": 2,
+    "alphaCounts": {
+      "transparent": 0,
+      "partial": 0,
+      "opaque": 4
+    },
+    "rgbaSha256": "cc0fa51d4d0a97b664030be5052f3b2b69a1267f89ace4c9bbc65007566725df",
+    "metadata": {
+      "nineslice_size": 1,
+      "base_size": [
+        2,
+        2
+      ]
+    },
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/Black.png",
+        "saved": "ORIGINALS/resource_pack/textures/ui/Black.png",
+        "bytes": 84,
+        "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e"
+      },
+      {
+        "member": "resource_pack/textures/ui/Black.json",
+        "saved": "ORIGINALS/resource_pack/textures/ui/Black.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+      }
+    ],
+    "reuse": {
+      "present": true,
+      "pngOrigin": "./assets/emote-wheel/Black.png",
+      "pngSha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e",
+      "rawPngExact": true,
+      "widthExact": true,
+      "heightExact": true,
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataSemanticExact": true
+    }
+  },
+  {
+    "texture": "textures/ui/edu_green_tile",
+    "sourceMissing": true,
+    "sourceFiles": [
+      {
+        "member": "resource_pack/textures/ui/edu_green_tile.png",
+        "absent": true
+      },
+      {
+        "member": "resource_pack/textures/ui/edu_green_tile.json",
+        "absent": true
+      }
+    ],
+    "reuse": {
+      "present": false
+    }
+  }
+]

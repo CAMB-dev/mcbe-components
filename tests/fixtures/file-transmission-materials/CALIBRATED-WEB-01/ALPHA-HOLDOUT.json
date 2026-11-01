@@ -1,0 +1,524 @@
+{
+  "protocolSHA256": "ff5faa5c5b2005e40b26b1a27d5ea816c6336f55acc4dad1c1325e7696ca046b",
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "HeadlessChrome/156.0.8078.4",
+    "revision": "@f842f52ef39fd97b449eb27cff414bf05a98ddce",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
+    "jsVersion": "15.6.75"
+  },
+  "rows": [
+    {
+      "source": 9,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          10,
+          13,
+          20
+        ],
+        "premulRounded255Then256": [
+          10,
+          13,
+          19
+        ],
+        "scaled256Both": [
+          10,
+          13,
+          19
+        ]
+      },
+      "kind": "opaque-png-opacity",
+      "actualRGB": [
+        10,
+        13,
+        19
+      ]
+    },
+    {
+      "source": 9,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          10,
+          13,
+          20
+        ],
+        "premulRounded255Then256": [
+          10,
+          13,
+          19
+        ],
+        "scaled256Both": [
+          10,
+          13,
+          19
+        ]
+      },
+      "kind": "solid-opacity",
+      "actualRGB": [
+        10,
+        13,
+        19
+      ]
+    },
+    {
+      "source": 9,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          10,
+          13,
+          20
+        ],
+        "premulRounded255Then256": [
+          10,
+          13,
+          19
+        ],
+        "scaled256Both": [
+          10,
+          13,
+          19
+        ]
+      },
+      "kind": "solid-rgba",
+      "actualRGB": [
+        10,
+        13,
+        19
+      ]
+    },
+    {
+      "source": 9,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          10,
+          13,
+          20
+        ],
+        "premulRounded255Then256": [
+          10,
+          13,
+          19
+        ],
+        "scaled256Both": [
+          10,
+          13,
+          19
+        ]
+      },
+      "kind": "alpha-png",
+      "actualRGB": [
+        10,
+        13,
+        19
+      ]
+    },
+    {
+      "source": 77,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          65,
+          68,
+          74
+        ],
+        "premulRounded255Then256": [
+          65,
+          68,
+          74
+        ],
+        "scaled256Both": [
+          64,
+          67,
+          73
+        ]
+      },
+      "kind": "opaque-png-opacity",
+      "actualRGB": [
+        64,
+        67,
+        73
+      ]
+    },
+    {
+      "source": 77,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          65,
+          68,
+          74
+        ],
+        "premulRounded255Then256": [
+          65,
+          68,
+          74
+        ],
+        "scaled256Both": [
+          64,
+          67,
+          73
+        ]
+      },
+      "kind": "solid-opacity",
+      "actualRGB": [
+        65,
+        68,
+        74
+      ]
+    },
+    {
+      "source": 77,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          65,
+          68,
+          74
+        ],
+        "premulRounded255Then256": [
+          65,
+          68,
+          74
+        ],
+        "scaled256Both": [
+          64,
+          67,
+          73
+        ]
+      },
+      "kind": "solid-rgba",
+      "actualRGB": [
+        65,
+        68,
+        74
+      ]
+    },
+    {
+      "source": 77,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          65,
+          68,
+          74
+        ],
+        "premulRounded255Then256": [
+          65,
+          68,
+          74
+        ],
+        "scaled256Both": [
+          64,
+          67,
+          73
+        ]
+      },
+      "kind": "alpha-png",
+      "actualRGB": [
+        65,
+        68,
+        74
+      ]
+    },
+    {
+      "source": 9,
+      "alpha": 0.2,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          14,
+          27,
+          52
+        ],
+        "premulRounded255Then256": [
+          14,
+          26,
+          52
+        ],
+        "scaled256Both": [
+          13,
+          25,
+          51
+        ]
+      },
+      "kind": "opaque-png-opacity",
+      "actualRGB": [
+        13,
+        25,
+        51
+      ]
+    },
+    {
+      "source": 9,
+      "alpha": 0.2,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          14,
+          27,
+          52
+        ],
+        "premulRounded255Then256": [
+          14,
+          26,
+          52
+        ],
+        "scaled256Both": [
+          13,
+          25,
+          51
+        ]
+      },
+      "kind": "solid-opacity",
+      "actualRGB": [
+        14,
+        26,
+        52
+      ]
+    },
+    {
+      "source": 9,
+      "alpha": 0.2,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          14,
+          27,
+          52
+        ],
+        "premulRounded255Then256": [
+          14,
+          26,
+          52
+        ],
+        "scaled256Both": [
+          13,
+          25,
+          51
+        ]
+      },
+      "kind": "solid-rgba",
+      "actualRGB": [
+        14,
+        26,
+        52
+      ]
+    },
+    {
+      "source": 9,
+      "alpha": 0.2,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          14,
+          27,
+          52
+        ],
+        "premulRounded255Then256": [
+          14,
+          26,
+          52
+        ],
+        "scaled256Both": [
+          13,
+          25,
+          51
+        ]
+      },
+      "kind": "alpha-png",
+      "actualRGB": [
+        14,
+        26,
+        52
+      ]
+    },
+    {
+      "source": 127,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          105,
+          108,
+          114
+        ],
+        "premulRounded255Then256": [
+          105,
+          108,
+          114
+        ],
+        "scaled256Both": [
+          104,
+          107,
+          113
+        ]
+      },
+      "kind": "opaque-png-opacity",
+      "actualRGB": [
+        104,
+        107,
+        113
+      ]
+    },
+    {
+      "source": 127,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          105,
+          108,
+          114
+        ],
+        "premulRounded255Then256": [
+          105,
+          108,
+          114
+        ],
+        "scaled256Both": [
+          104,
+          107,
+          113
+        ]
+      },
+      "kind": "solid-opacity",
+      "actualRGB": [
+        105,
+        108,
+        114
+      ]
+    },
+    {
+      "source": 127,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          105,
+          108,
+          114
+        ],
+        "premulRounded255Then256": [
+          105,
+          108,
+          114
+        ],
+        "scaled256Both": [
+          104,
+          107,
+          113
+        ]
+      },
+      "kind": "solid-rgba",
+      "actualRGB": [
+        105,
+        108,
+        114
+      ]
+    },
+    {
+      "source": 127,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          105,
+          108,
+          114
+        ],
+        "premulRounded255Then256": [
+          105,
+          108,
+          114
+        ],
+        "scaled256Both": [
+          104,
+          107,
+          113
+        ]
+      },
+      "kind": "alpha-png",
+      "actualRGB": [
+        105,
+        108,
+        114
+      ]
+    }
+  ]
+}

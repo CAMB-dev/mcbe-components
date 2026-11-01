@@ -22,3 +22,8 @@ tests/fixtures/progress-resource-materials/** -text
 # Frozen upstream originals keep intentional trailing spaces and blank final lines.
 tests/fixtures/progress-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 tests/fixtures/progress-resource-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+
+# Independent file-transmission source and material references remain whole bytes.
+tests/fixtures/file-transmission-materials/** -text
+tests/fixtures/file-transmission-materials/** whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tests/fixtures/file-transmission-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

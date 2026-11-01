@@ -1,0 +1,14 @@
+[
+  {
+    "member": "resource_pack/ui/store_common.json",
+    "saved": "ORIGINALS/resource_pack/ui/store_common.json",
+    "bytes": 396906,
+    "sha256": "306f9f7e4bf69ebdeb3cccf4a76cc01aa26102d96273623ae5d7f99d81006557"
+  },
+  {
+    "member": "resource_pack/ui/ui_template_dialogs.json",
+    "saved": "ORIGINALS/resource_pack/ui/ui_template_dialogs.json",
+    "bytes": 14238,
+    "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264"
+  }
+]

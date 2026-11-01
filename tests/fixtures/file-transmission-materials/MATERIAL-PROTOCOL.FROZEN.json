@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "status": "FROZEN BEFORE ROOT MEASUREMENT",
+  "scope": "Finite Web original-material frame+fill and empty/fullbar planes only; not native GUI, font, percentage parsing, default anchors, source percentage evaluator, tile origin, or layer sorting certification.",
+  "sourceArchive": {
+    "path": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "bytes": 169569258,
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "sourceRoot": "ORIGINALS",
+  "host": {
+    "width": 500,
+    "height": 301,
+    "scale": 1,
+    "deviceScaleFactor": 1,
+    "backdrop": "#203040",
+    "alpha": 255
+  },
+  "sampling": {
+    "mapper": "Independent piecewise point pull at output pixel centers: leading/trailing slices1:1; center floor((i-leading+.5)*sourceCenter/destCenter).",
+    "layering": "control fill first then frame. Bar empty first then full image clip; nub paint hidden only.",
+    "alpha": "straight RGBA byte source-over onto opaque output; round nearest byte each layer. Frame/bar binary alpha; uniform controlRGB9 alpha.8 gives rounded(14,17,20) over#203040; no .5ties.",
+    "tolerance": 0,
+    "mask": null,
+    "compare": "all500×301×4 bytes; whole planes, external backdrop included"
+  },
+  "notQualified": [
+    "native clip_ratio direction/range/out-of-range and rounding",
+    "native omitted anchors and sizes",
+    "conditional stack layout/collapse and source %c evaluator",
+    "native tiled nub phase/stretch/alpha and GPU premultiplication",
+    "native font/rendering, title assets/position, source input lifecycle",
+    "full-screen safezone, background loading bars and animations"
+  ],
+  "cases": [
+    {
+      "id": "frame-fill",
+      "targetSelector": "[data-file-transmission-material-plane=\"frame-fill\"]",
+      "wholePlane": [
+        0,
+        0,
+        500,
+        301
+      ],
+      "png": "EXPECTED/frame-fill.png",
+      "rgba": "EXPECTED/frame-fill.rgba",
+      "pngSha256": "b5acb7004ac65e2a4d7b593640d0d42925e326991de53c04c47d47a48bef9d2c",
+      "rgbaSha256": "f0fb11433d5e7b718111ca3e8d19ce014811bcda6fc68a5978b84b9c5b03e51b",
+      "frameBox": [
+        116,
+        103,
+        268,
+        95
+      ],
+      "fillBox": [
+        120,
+        107,
+        260,
+        87
+      ],
+      "fillAlpha": 0.8,
+      "paintIsolation": "All title/description/warning glyph paint, all buttons, both progress image paint and nub paint, platform logo paint visibility:hidden; preserve boxes/geometry. Source common_panel close remains ignored defaultfalse."
+    },
+    {
+      "id": "bar-0",
+      "targetSelector": "[data-file-transmission-material-plane=\"bar-0\"]",
+      "wholePlane": [
+        0,
+        0,
+        500,
+        301
+      ],
+      "png": "EXPECTED/bar-0.png",
+      "rgba": "EXPECTED/bar-0.rgba",
+      "pngSha256": "01d2ed96072ecd40aaeffa727f3282882e786133e5b1f6359cc61302a9827d62",
+      "rgbaSha256": "0d7caa3f686524cedc62fa99a6275481b5f40d4c1aa77f601b0aa8391828debb",
+      "barBox": [
+        126,
+        148,
+        248,
+        5
+      ],
+      "nubBox": [
+        131,
+        148,
+        238,
+        5
+      ],
+      "sourceClipDirection": "left",
+      "sourceClipPixelperfect": false,
+      "finiteWebClipPolicy": "visible-fraction-web",
+      "fraction": 0,
+      "visibleFullWidth": 0,
+      "paintIsolation": "Only empty/full original material paint. Full-sized nub retains box but visibility:hidden; no frame/buttons/fonts/logo paint. Standalone bar placement is explicit test-host policy, not source stack/default-anchor recovery."
+    },
+    {
+      "id": "bar-0_5",
+      "targetSelector": "[data-file-transmission-material-plane=\"bar-0_5\"]",
+      "wholePlane": [
+        0,
+        0,
+        500,
+        301
+      ],
+      "png": "EXPECTED/bar-0_5.png",
+      "rgba": "EXPECTED/bar-0_5.rgba",
+      "pngSha256": "1a7a41231a7f9cecbb771759c8e8ee30f7b85d85d9855f8e6f449744f2f3741c",
+      "rgbaSha256": "cc07d1010b1aba8e5201d00035e83eaf263fc12830a1824053d0aae5db45c07b",
+      "barBox": [
+        126,
+        148,
+        248,
+        5
+      ],
+      "nubBox": [
+        131,
+        148,
+        238,
+        5
+      ],
+      "sourceClipDirection": "left",
+      "sourceClipPixelperfect": false,
+      "finiteWebClipPolicy": "visible-fraction-web",
+      "fraction": 0.5,
+      "visibleFullWidth": 124,
+      "paintIsolation": "Only empty/full original material paint. Full-sized nub retains box but visibility:hidden; no frame/buttons/fonts/logo paint. Standalone bar placement is explicit test-host policy, not source stack/default-anchor recovery."
+    },
+    {
+      "id": "bar-1",
+      "targetSelector": "[data-file-transmission-material-plane=\"bar-1\"]",
+      "wholePlane": [
+        0,
+        0,
+        500,
+        301
+      ],
+      "png": "EXPECTED/bar-1.png",
+      "rgba": "EXPECTED/bar-1.rgba",
+      "pngSha256": "5e782239c746d64c28b9ededadbfe7ecf54c0fd242642c6e006903a75e0b631d",
+      "rgbaSha256": "3e62d9dbfd0fc6f8e89d5b407899b7a1e2edf36cdf9ec907cc96ea73f8f6b3d5",
+      "barBox": [
+        126,
+        148,
+        248,
+        5
+      ],
+      "nubBox": [
+        131,
+        148,
+        238,
+        5
+      ],
+      "sourceClipDirection": "left",
+      "sourceClipPixelperfect": false,
+      "finiteWebClipPolicy": "visible-fraction-web",
+      "fraction": 1,
+      "visibleFullWidth": 248,
+      "paintIsolation": "Only empty/full original material paint. Full-sized nub retains box but visibility:hidden; no frame/buttons/fonts/logo paint. Standalone bar placement is explicit test-host policy, not source stack/default-anchor recovery."
+    }
+  ]
+}

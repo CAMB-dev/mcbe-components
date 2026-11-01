@@ -108,3 +108,5 @@
 Goal保持进行中：组件库及有限验证分批推进，严格的游戏画面对照验收尚未完成。需要预览时可运行`npm run preview -- --port 4173`；预览服务与Computer Use按需开启，用完关闭。
 
 - Progress当前六组件：ProgressScreen、ProgressIndicators、ProgressPackGrids、ProgressResourceDialog、ProgressCloudPanel、ProgressCloudConflictDialog。105项持久CPU／SSR、两peer各75SSR+types/assets/CSS、默认Vite四组合、公开部件及15route操作、独立12材质平面与四simple窗层级平面分阶段通过；不认证原生GUI、字体或所有状态。
+
+- File transmission私有源组合已实现：FileTransmissionScreen／FileTransmissionPanel／FileTransferProgress，268×95窗口、十个独立显隐、精确按钮目标、显式stack测量及原图进度材质。CPU10项与真实浏览器9项同批各通过；三预冻结bar平面RGBA0，frame的原混合假设7560差异保留，独立标量校准后的完整Web平面另记0，不能冒充blind/native认证。公开组件仍202／220，public API／包／展示资格待做，见docs/FILE_TRANSMISSION_IMPLEMENTATION_QA.md。

@@ -1,0 +1,110 @@
+{
+  "status": "Predictions saved before independent holdout rendering; original window already observed",
+  "cases": [
+    {
+      "source": 9,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          10,
+          13,
+          20
+        ],
+        "premulRounded255Then256": [
+          10,
+          13,
+          19
+        ],
+        "scaled256Both": [
+          10,
+          13,
+          19
+        ]
+      }
+    },
+    {
+      "source": 77,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          65,
+          68,
+          74
+        ],
+        "premulRounded255Then256": [
+          65,
+          68,
+          74
+        ],
+        "scaled256Both": [
+          64,
+          67,
+          73
+        ]
+      }
+    },
+    {
+      "source": 9,
+      "alpha": 0.2,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          14,
+          27,
+          52
+        ],
+        "premulRounded255Then256": [
+          14,
+          26,
+          52
+        ],
+        "scaled256Both": [
+          13,
+          25,
+          51
+        ]
+      }
+    },
+    {
+      "source": 127,
+      "alpha": 0.8,
+      "background": [
+        15,
+        31,
+        63
+      ],
+      "predictions": {
+        "straightRound": [
+          105,
+          108,
+          114
+        ],
+        "premulRounded255Then256": [
+          105,
+          108,
+          114
+        ],
+        "scaled256Both": [
+          104,
+          107,
+          113
+        ]
+      }
+    }
+  ],
+  "scope": "Independent scalar source images/CSS controls only. No product code/CSS/image measurements used to generate predictions."
+}

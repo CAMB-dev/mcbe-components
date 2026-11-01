@@ -1,0 +1,260 @@
+{
+  "scope": "source-only archive originals/material audit and independent prefrozen finite-Web planes; no browser measurements",
+  "files": [
+    {
+      "path": "ADDITIONAL-SOURCE-PINS.json",
+      "bytes": 478,
+      "sha256": "9ee1e1b19dde24500884cfb43837c06b5a89e1f738df3603f7b389da60978bab"
+    },
+    {
+      "path": "audit.mjs",
+      "bytes": 5266,
+      "sha256": "22e24719adfdc165d7ed614af8ef19ec0fdad430aab3388365d3d0f1ac5b290d"
+    },
+    {
+      "path": "EXPECTED/bar-0.png",
+      "bytes": 1370,
+      "sha256": "01d2ed96072ecd40aaeffa727f3282882e786133e5b1f6359cc61302a9827d62"
+    },
+    {
+      "path": "EXPECTED/bar-0.rgba",
+      "bytes": 602000,
+      "sha256": "0d7caa3f686524cedc62fa99a6275481b5f40d4c1aa77f601b0aa8391828debb"
+    },
+    {
+      "path": "EXPECTED/bar-0_5.png",
+      "bytes": 1350,
+      "sha256": "1a7a41231a7f9cecbb771759c8e8ee30f7b85d85d9855f8e6f449744f2f3741c"
+    },
+    {
+      "path": "EXPECTED/bar-0_5.rgba",
+      "bytes": 602000,
+      "sha256": "cc07d1010b1aba8e5201d00035e83eaf263fc12830a1824053d0aae5db45c07b"
+    },
+    {
+      "path": "EXPECTED/bar-1.png",
+      "bytes": 1263,
+      "sha256": "5e782239c746d64c28b9ededadbfe7ecf54c0fd242642c6e006903a75e0b631d"
+    },
+    {
+      "path": "EXPECTED/bar-1.rgba",
+      "bytes": 602000,
+      "sha256": "3e62d9dbfd0fc6f8e89d5b407899b7a1e2edf36cdf9ec907cc96ea73f8f6b3d5"
+    },
+    {
+      "path": "EXPECTED/frame-fill.png",
+      "bytes": 1374,
+      "sha256": "b5acb7004ac65e2a4d7b593640d0d42925e326991de53c04c47d47a48bef9d2c"
+    },
+    {
+      "path": "EXPECTED/frame-fill.rgba",
+      "bytes": 602000,
+      "sha256": "f0fb11433d5e7b718111ca3e8d19ce014811bcda6fc68a5978b84b9c5b03e51b"
+    },
+    {
+      "path": "extract.py",
+      "bytes": 2287,
+      "sha256": "66343760c83e319114a36a5d9fc4b9ad8ddaca741d43aadb75a68ab0ca34e7c3"
+    },
+    {
+      "path": "freeze-materials.mjs",
+      "bytes": 4771,
+      "sha256": "9a4a87aa9740b633e413df973b88e4d575661e3b3e9a4e328734d90d6de24c92"
+    },
+    {
+      "path": "MATERIAL-AUDIT.json",
+      "bytes": 16926,
+      "sha256": "7941b9cf6dbe78d9ef765e16a7852032332e17c2af1117dbdacdbb0575a46a47"
+    },
+    {
+      "path": "MATERIAL-PROTOCOL.FROZEN.json",
+      "bytes": 5627,
+      "sha256": "6081f1803cdae74e55f8c1c8149b480097b7afdb6946e3cc5a161ec322f90c19"
+    },
+    {
+      "path": "MATERIAL-PROTOCOL.FROZEN.sha256",
+      "bytes": 96,
+      "sha256": "458bd745ba5bd107d67b2d70e9433b80d075613d5d36a775a2660b41be9d0515"
+    },
+    {
+      "path": "MATERIAL-RAW-PINS.json",
+      "bytes": 8268,
+      "sha256": "aac9791b87d90d419d73ba833d2875ceb2960f7602919836acf0492fdfae4e76"
+    },
+    {
+      "path": "ORIGINALS/LICENSE.md",
+      "bytes": 222,
+      "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/Black.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/Black.png",
+      "bytes": 84,
+      "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/button_borderless_light.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/button_borderless_lighthover.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/button_borderless_lightpressed.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/control.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/control.png",
+      "bytes": 71,
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_2.json",
+      "bytes": 95,
+      "sha256": "584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_2.png",
+      "bytes": 314,
+      "sha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/disabledButtonNoBorder.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/experiencebarempty.json",
+      "bytes": 92,
+      "sha256": "de67894f88e78223fa154d60fbd826da1349d35dbfe3b0d8dae5d6365161243f"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/experiencebarempty.png",
+      "bytes": 180,
+      "sha256": "531bb4ca58b8bae327756840c19074ff6bbee08f0b479b17af2c960c041569c0"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/experiencebarfull.json",
+      "bytes": 92,
+      "sha256": "8ec618d73df58faa04e6ce31c88b77d88d6af1c2ae30d290eb25b57aa4601876"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/experiencebarfull.png",
+      "bytes": 103,
+      "sha256": "91978c74425ac8fad80e0f531610b28f621e14a618892c59e869c19f3c6149d1"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/experiencenub.png",
+      "bytes": 160,
+      "sha256": "c81011ab8abed25f6aa48b52e1a6bfac2a193d2a753f594428774c3321c5eb55"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/focus_border_white.json",
+      "bytes": 60,
+      "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/textures/ui/title.png",
+      "bytes": 86796,
+      "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/ui/_global_variables.json",
+      "bytes": 20210,
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/ui/_ui_defs.json",
+      "bytes": 7470,
+      "sha256": "b4f7f25b6ee4246b3582eb78a031ecc93793fdb2cf09f77b886d73f4038cb270"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/ui/file_upload_screen.json",
+      "bytes": 10969,
+      "sha256": "45c024070ed1ffba06bbdce2111d3c00c5b1e9190faa44cc4ab2f2b3ae845075"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/ui/store_common.json",
+      "bytes": 396906,
+      "sha256": "306f9f7e4bf69ebdeb3cccf4a76cc01aa26102d96273623ae5d7f99d81006557"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/ui/ui_art_assets_common.json",
+      "bytes": 6731,
+      "sha256": "f6085c9aa28ed04057e1ff83a90620dc024ab43e72166e2949bfde938c1fce3a"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/ui/ui_common_classic.json",
+      "bytes": 3030,
+      "sha256": "d65eb51c5264b7b9eb8611bfe250736bc48eed8207682b6c26f3ede224277783"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/ui/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96"
+    },
+    {
+      "path": "ORIGINALS/resource_pack/ui/ui_template_dialogs.json",
+      "bytes": 14238,
+      "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264"
+    },
+    {
+      "path": "RAW-SOURCE-PINS.json",
+      "bytes": 2488,
+      "sha256": "49c785adfa2df09d5e922ab7a870e30aa3a5cc4f5af59ea622a1e898422afa97"
+    },
+    {
+      "path": "SOURCE-AUDIT.json",
+      "bytes": 24540,
+      "sha256": "532ae8cb3797967aab44153c0d54a2e65c22ddd7671394b6b1a7a7ed0e868dc6"
+    },
+    {
+      "path": "SOURCE-SPEC.md",
+      "bytes": 11817,
+      "sha256": "03fefe0157da4d35a6e43fc39e162a7060a7c14e0b13f5ee162cc7d4e340e12e"
+    }
+  ]
+}

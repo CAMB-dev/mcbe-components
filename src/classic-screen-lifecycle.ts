@@ -48,6 +48,8 @@ function focusables(node: HTMLElement) {
 function top(boundary: HTMLElement) {
   return modalStates.get(boundary.ownerDocument)?.owners.at(-1)?.boundary === boundary && !boundary.closest('[inert]');
 }
+/** Private ownership query for semantic requests from nested source screens. */
+export function classicModalOwnsInput(boundary:HTMLElement|null):boolean{return !!boundary&&top(boundary);}
 function focusInside(owner: Pick<ModalOwner, 'boundary' | 'target'>) {
   const target = owner.target.current ?? owner.boundary;
   (focusables(target)[0] ?? target).focus({ preventScroll: true });
