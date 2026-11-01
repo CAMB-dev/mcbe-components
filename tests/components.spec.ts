@@ -12,7 +12,7 @@ test('loads local Latin and Chinese fonts without runtime errors', async ({ page
     await document.fonts.load('18px "MCBE Pixel"');
     await document.fonts.load('24px "Fusion Pixel"', '创造属于你的世界');
   });
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Build something blocky.');
+  await expect(page.getByRole('heading', { level: 1, name: 'Build something blocky.', exact: true })).toHaveText('Build something blocky.');
   expect(await page.evaluate(() => document.fonts.check('16px Monocraft') && document.fonts.check('24px "Fusion Pixel"', '创造属于你的世界'))).toBe(true);
   expect(errors).toEqual([]);
   if (await page.locator('.font-note').innerText().then(text => text.includes('local game'))) {

@@ -1,8 +1,8 @@
 # Bedrock Classic GUI覆盖清单
 
-> 当前193组件／211运行时值；本次仅将mob_effect_screen.json由B更新为有限A，得到A40／B15，其余205数据行保持。有限A是专门组合的范围映射，不是所有Minecraft GUI或native完成。
+> 当前196组件／214运行时值；Chat 增量仅将 chat_screen.json 由B更新为有限A，得到 A41／B14／C34／D32／E0／F16／G63／H6，其余205数据行保持。有限A是专门组合的范围映射，不是所有Minecraft GUI或native完成。
 
-这是固定官方源文件与本库193组件的**范围映射**，不是原生像素验收表。193包含基础控件、零件和组合，不等于193个完整游戏GUI；有限A40也不是40个完整原生流程。Credits之前的已验阶段为188组件、A38／E1。
+这是固定官方源文件与本库196组件的**范围映射**，不是原生像素验收表。196包含基础控件、零件和组合，不等于196个完整游戏GUI；有限A41也不是41个完整原生流程。Credits之前的已验阶段为188组件、A38／E1。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -85,7 +85,7 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 |`cartography_screen.json`|cartography|1|A|CartographyTable|
 |`cartography_screen_pocket.json`|cartography_pocket|0|F|—|
 |`chalkboard_screen.json`|chalkboard|1|A|ChalkboardEditor、ChalkboardTextField、ChalkboardLock（有限Classic源组合，原生整页未认证）|
-|`chat_screen.json`|chat|1|B|ChatPanel、ChatMessage|
+|`chat_screen.json`|chat|1|A|ChatScreen、ChatComposer、ChatTranscript；旧ChatPanel、ChatMessage保留|
 |`chat_settings_menu_screen.json`|chat_settings|0|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
 |`chest_screen.json`|chest|5|A|Chest、ShulkerBox、ContainerFrame|
 |`choose_realm_screen.json`|choose_realm|1|G|—|

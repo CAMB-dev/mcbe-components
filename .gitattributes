@@ -8,6 +8,8 @@ src/assets/portfolio/** -text
 src/assets/invite/** -text
 src/assets/mob-effect/** -text
 src/assets/chat/** -text
+tests/fixtures/chat-materials/** -text
+tests/fixtures/chat-materials/*.json whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # This unchanged upstream JSON intentionally ends with a blank line.
 src/assets/document-viewer/_global_variables.json whitespace=-blank-at-eof
 src/assets/player-permissions/_global_variables.json whitespace=-blank-at-eof

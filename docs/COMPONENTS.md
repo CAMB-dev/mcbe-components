@@ -138,4 +138,8 @@ PlayerInventoryScreen 的 needsCraftingTable 默认 false；显式启用时，�
 
 ## Mob Effect
 
-新增 `MobEffectRow` 和 `MobEffectScreen`，实际入口及受检功能包为193组件／211运行时值；列表、布局求值器与材质表保留私有。区别于 HUD `StatusEffect` 的单图标槽，新组件包含可见名称／字面 timer、独立 grid 和滚动关闭组合，复用33个原图图标。React18／19实际包与默认Vite四组合、source／built预览通过，不据此认证原生或 Pocket。详见 [MOB_EFFECT_QA.md](MOB_EFFECT_QA.md)。
+新增 `MobEffectRow` 和 `MobEffectScreen`，该阶段实际入口及受检功能包为193组件／211运行时值；列表、布局求值器与材质表保留私有。区别于 HUD `StatusEffect` 的单图标槽，新组件包含可见名称／字面 timer、独立 grid 和滚动关闭组合，复用33个原图图标。React18／19实际包与默认Vite四组合、source／built预览通过，不据此认证原生或 Pocket。详见 [MOB_EFFECT_QA.md](MOB_EFFECT_QA.md)。
+
+## Chat
+
+新增 `ChatScreen`、`ChatComposer`、`ChatTranscript`，当前196组件／214运行时值。完整屏幕实际组合输入、消息、补全、坐标、设置、五类房主菜单和提示；共享子层、源数据验证和材质表保留私有。输入框与消息记录可以独立使用，旧 `ChatPanel` / `ChatMessage` 保留。已验证受控／非受控编辑、选区、原生表单重置、延迟事件否决、分层 Escape、modal 焦点、独立状态与原图材质。安装消费和有限Web像素检查不代表原生整页认证。见 [API](CHAT.md) 与 [验证](CHAT_QA.md)。

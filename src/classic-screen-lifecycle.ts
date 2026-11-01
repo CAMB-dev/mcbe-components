@@ -30,6 +30,14 @@ type ModalOwner = { doc: Document; boundary: HTMLElement; target: NodeRef; previ
 type ModalState = { owners: ModalOwner[]; changed: Map<Element, string | null> };
 const modalStates = new WeakMap<Document, ModalState>();
 const selector = 'button,input,select,textarea,a[href],iframe,[tabindex],[contenteditable="true"]';
+function documentNode(value: unknown, doc: Document): value is Node {
+  const view = doc.defaultView as (Window & typeof globalThis) | null;
+  return !!view && value instanceof view.Node;
+}
+function documentElement(value: unknown, doc: Document): value is HTMLElement {
+  const view = doc.defaultView as (Window & typeof globalThis) | null;
+  return !!view && value instanceof view.HTMLElement;
+}
 function available(node: HTMLElement) {
   return !node.closest('[hidden],[inert]') && !node.matches(':disabled')
     && node.getClientRects().length > 0 && node.ownerDocument.defaultView?.getComputedStyle(node).visibility !== 'hidden';
@@ -76,7 +84,7 @@ function removeOwner(owner: ModalOwner, restore = true) {
   reconcile(state); owner.releaseScroll();
   if (!state.owners.length) modalStates.delete(doc);
   const current = doc.activeElement;
-  if (restore && wasTop && (current === doc.body || current instanceof Node && owner.boundary.contains(current))) {
+  if (restore && wasTop && (current === doc.body || documentNode(current, doc) && owner.boundary.contains(current))) {
     if (owner.previous?.isConnected && available(owner.previous)) owner.previous.focus({ preventScroll: true });
     else if (state.owners.at(-1)) focusInside(state.owners.at(-1)!);
   }
@@ -109,7 +117,7 @@ export function useClassicModal(boundaryRef: NodeRef, targetRef: NodeRef, active
     }
     reconcile(stateFor(boundary.ownerDocument));
     const target = targetRef.current ?? boundary, current = boundary.ownerDocument.activeElement;
-    if (top(boundary) && (!(current instanceof HTMLElement) || !target.contains(current) || !available(current))) focusInside(owner);
+    if (top(boundary) && (!documentElement(current, boundary.ownerDocument) || !target.contains(current) || !available(current))) focusInside(owner);
   });
   // The listener reads the current lease, so a replaced boundary or target is
   // observed without losing the original return-focus destination.
@@ -118,7 +126,7 @@ export function useClassicModal(boundaryRef: NodeRef, targetRef: NodeRef, active
     const contain = (event: FocusEvent) => {
       const owner = lease.current; if (!owner) return;
       const target = owner.target.current ?? owner.boundary;
-      if (top(owner.boundary) && event.target instanceof Node && !target.contains(event.target)) focusInside(owner);
+      if (top(owner.boundary) && documentNode(event.target, owner.doc) && !target.contains(event.target)) focusInside(owner);
     };
     doc.addEventListener('focusin', contain);
     return () => doc.removeEventListener('focusin', contain);

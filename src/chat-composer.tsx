@@ -3,6 +3,7 @@ import type { CSSProperties, HTMLAttributes, Ref, SyntheticEvent } from 'react';
 import { ClassicSkin } from './classic-skin';
 import { Image } from './image';
 import { chatAssets } from './chat-assets';
+import { createChatRevision } from './chat-revision';
 import { deferClassicRequest, scheduleClassicTask, useClassicLayoutEffect, useClassicNodeRef } from './classic-screen-lifecycle';
 import { CHAT_EDITOR_MAPPINGS, createChatLocalHistoryState, resolveChatDraftApplication, snapshotChatComposer, snapshotChatDraft, snapshotChatEditorCommand, stepChatLocalHistory, validateChatRef } from './chat-data';
 import type { ChatComposerActionDetail, ChatComposerActionTarget, ChatComposerHandle, ChatComposerProps, ChatComposerSnapshot, ChatDraft, ChatDraftApplication, ChatEditorCommand, ChatEditorInput, ChatLocalHistoryState, ChatTextRenderContext } from './chat-types';
@@ -48,20 +49,6 @@ export function planChatComposer(snapshot:ChatComposerSnapshot,nativeProps:ChatC
   return Object.freeze({width,height:27,scale,editorWidth,keyboardVisible,hostVisible,hostWidth:23,sendWidth:50,labels,
     trace:Object.freeze(['source:chat.chat_bottom_panel height27; keyboard/settings27; send offset[-20,0]','explicit-Web:%c host17+6=23; send44+6=50; editor=available-visible-controls','native:%c intrinsic evaluator and keyboard platform adapter remain unqualified'])});
 }
-// Opaque Web revisions are independent of host runKey length. A scalar high
-// watermark reserves every observed token in this namespace without a per-edit
-// Set. Exhaustion is explicit rather than wrapping/reusing a prior revision.
-const revisionPattern=/^mcchat:web:([0-9a-f]{32})$/;
-const revisionLimit=(1n<<128n)-1n;
-let revisionWatermark=0n;
-function observeRevision(revision:string|undefined){
-  const match=revision===undefined?null:revisionPattern.exec(revision);
-  if(match){const value=BigInt('0x'+match[1]);if(value>revisionWatermark)revisionWatermark=value;}
-}
-function allocateRevision(){
-  if(revisionWatermark===revisionLimit)throw new RangeError('Chat Web revision token space exhausted; it cannot wrap');
-  return 'mcchat:web:'+(++revisionWatermark).toString(16).padStart(32,'0');
-}
 const mutating=new Set<ChatComposerActionTarget>(['button.send','button.chat_autocomplete','button.chat_autocomplete_back','button.chat_previous_message','button.chat_next_message','button.chat_paste_coordinates','button.text_edit_box_clear']);
 const editorOnly=new Set<ChatComposerActionTarget>(['button.chat_autocomplete','button.chat_autocomplete_back','button.chat_previous_message','button.chat_next_message','button.chat_paste_coordinates','button.text_edit_box_selected','button.text_edit_box_deselected','button.text_edit_box_hovered','button.text_edit_box_clear']);
 const focusedHistory=new Set<ChatComposerActionTarget>(['button.chat_previous_message','button.chat_next_message','button.text_edit_box_clear']);
@@ -76,19 +63,16 @@ function Session({snapshot,onRawRequest,nativeProps={},controlRequestRef,forward
   const [,attachButtonHandle]=useClassicNodeRef(controlRequestRef);
   const buttonControls=useRef(new Map<ChatComposerActionTarget,HTMLButtonElement>());
   const textVersion=useRef(0),editVersion=useRef(0),composing=useRef(false),suppressFocus=useRef(false);
-  const [initial]=useState<ChatDraft>(()=>snapshot.draftMode.mode==='controlled'?snapshot.draftMode.draft!:snapshotChatDraft({text:snapshot.draftMode.defaultDraft!,selectionStart:snapshot.draftMode.defaultDraft!.length,selectionEnd:snapshot.draftMode.defaultDraft!.length,direction:'none',revision:allocateRevision()}));
+  const [initial]=useState<ChatDraft>(()=>snapshot.draftMode.mode==='controlled'?snapshot.draftMode.draft!:snapshotChatDraft({text:snapshot.draftMode.defaultDraft!,selectionStart:snapshot.draftMode.defaultDraft!.length,selectionEnd:snapshot.draftMode.defaultDraft!.length,direction:'none',revision:createChatRevision()}));
   const [local,setLocal]=useState<ChatDraft>(initial),[editing,setEditing]=useState<ChatDraft|null>(null);
   const mountInitial=useRef(initial);
   const liveDraft=useRef(initial),history=useRef<ChatLocalHistoryState>(createChatLocalHistoryState());
   const pendingSelection=useRef<ChatDraft|null>(initial),programmaticSelection=useRef<{start:number;end:number;direction:ChatDraft['direction']}|null>(null);
   const committed=useRef({snapshot,onRawRequest});
-  const nextRevision=()=>{
-    observeRevision(committed.current.snapshot.draftMode.draft?.revision);observeRevision(liveDraft.current.revision);observeRevision(history.current.restoreDraft?.revision);
-    return allocateRevision();
-  };
+  const nextRevision=()=>createChatRevision([committed.current.snapshot.draftMode.draft?.revision,liveDraft.current.revision,history.current.restoreDraft?.revision]);
   const controlled=snapshot.draftMode.mode==='controlled',accepted=controlled?snapshot.draftMode.draft!:local;
   const display=editing??accepted;
-  useClassicLayoutEffect(()=>{committed.current={snapshot,onRawRequest};observeRevision(snapshot.draftMode.draft?.revision);});
+  useClassicLayoutEffect(()=>{committed.current={snapshot,onRawRequest};});
   const restoreSelection=(node:HTMLInputElement,next:ChatDraft)=>{
     node.setSelectionRange(next.selectionStart,next.selectionEnd,next.direction);
     // Chromium normalizes a collapsed "none" to "forward". Suppress only the
@@ -122,7 +106,7 @@ function Session({snapshot,onRawRequest,nativeProps={},controlRequestRef,forward
     suppressFocus.current=true;try{if(selected)node.focus({preventScroll:true});else node.blur();}finally{suppressFocus.current=false;}return true;
   };
   const write=(next:ChatDraft,event?:SyntheticEvent<HTMLInputElement>,resetHistory=true)=>{
-    const p=committed.current.snapshot;observeRevision(next.revision);
+    const p=committed.current.snapshot;
     if(resetHistory)history.current=createChatLocalHistoryState();
     if(p.draftMode.mode==='uncontrolled-web'){liveDraft.current=next;pendingSelection.current=next;textVersion.current++;editVersion.current++;setLocal(next);}
     p.callbacks.onDraftChange?.(snapshotChatDraft(next),event);

@@ -739,4 +739,6 @@ declare const profile: CreditsPresentationProfile;
 
 ## Active effects
 
-`MobEffectScreen` 与 `MobEffectRow` 提供可见效果名、宿主格式化计时、原图图标与背景、独立 grid、源面板和关闭请求。字体度量、图标注册和浏览器滚动策略显式指定；完整原生与 Pocket 布局仍待核验。当前实际入口与受检功能包为193组件／211运行时值，React18／19和默认Vite开发／生产四组合通过。用法与边界见 [Mob Effect记录](docs/MOB_EFFECT_QA.md)。
+`MobEffectScreen` 与 `MobEffectRow` 提供可见效果名、宿主格式化计时、原图图标与背景、独立 grid、源面板和关闭请求。字体度量、图标注册和浏览器滚动策略显式指定；完整原生与 Pocket 布局仍待核验。该阶段实际入口与受检功能包为193组件／211运行时值，React18／19和默认Vite开发／生产四组合通过。用法与边界见 [Mob Effect记录](docs/MOB_EFFECT_QA.md)。
+
+`ChatScreen` 提供聊天、命令补全、坐标、设置和房主菜单，`ChatComposer` 与 `ChatTranscript` 可独立复用。展示页的 **Chat & commands** 可以直接打开和操作。当前为196组件／214运行时值；React18／19实际包及默认Vite开发／生产四组合通过。11张完整材质参考平面为零像素差异，原生整页、字体路由和全部平台仍待校准。[使用方式](docs/CHAT.md) · [验证记录](docs/CHAT_QA.md)。

@@ -1,0 +1,20 @@
+{
+  "status": "PRE-MEASUREMENT_HARNESS_SCOPE_CLARIFICATION_EXPECTED_PLANES_UNCHANGED",
+  "protocolSHA256": "0fa39e3481b4c1b5dc5d49dcaedff75c34864659f5deb69eadb9f15c09329020",
+  "approvedByRootBeforeMaterialMeasurement": true,
+  "editorIsolation": {
+    "cases": ["editor-normal-s1", "editor-hover-s1"],
+    "reason": "Original chat.chat_bottom_panel explicitly offsets send_button by[-20,0], so the adjacent send material overlaps the end of the complete editor box in a whole Composer capture.",
+    "method": "Before measuring, set only the sibling [data-source-action=\"button.send\"] paint to visibility:hidden, preserving its50px flow box and original[-20,0] offset. Restore exact previous style after capture.",
+    "target": "The complete original editor396x27 box remains unchanged, including all pixels; no target ROI crop, pixel mask or tolerance.",
+    "expectedPNGChanged": false,
+    "sourceClause": "resource_pack/ui/chat_screen.json chat_bottom_panel controls/4/send_button@chat.send_button offset[-20,0]"
+  },
+  "sourceOnlyClarification": {
+    "productionUIFilesRead": ["src/chat-composer.tsx", "src/chat-composer.css"],
+    "readPurpose": "Locate actual semantic selectors and identify the separately declared finite Web intrinsic contract. No production helper was imported/invoked, no production renderer/golden/screenshot/computed style was used to generate any expected pixel.",
+    "samplingAndSourceGeometryInputs": "Only fixed ZIP originals/raw sidecars, frozen raw clauses and explicitly predeclared finite Web geometry. Exact rational scalar pixel-centre equation is independent of production ClassicSkin patch output.",
+    "originalFrozenFieldMeaning": "PROTOCOL-FROZEN productionRendererReadOrInvoked:false must be read as no production renderer/helper output or invocation. It is not a claim that no production selector/public-profile source text was read. This clarification preserves that original record without silently rewriting history."
+  },
+  "failurePolicyUnchanged": "All complete RGBA planes remain fixed at threshold0/tolerance0. Root can correct implementation or declared harness isolation mistakes in new revisions; no screenshot-informed source, geometry or oracle fitting."
+}

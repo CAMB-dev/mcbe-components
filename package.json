@@ -107,7 +107,10 @@
     "./credits-roll.css": "./dist/credits-roll.css",
     "./credits-skip-button.css": "./dist/credits-skip-button.css",
     "./mob-effect-screen.css": "./dist/mob-effect-screen.css",
-    "./mob-effect-row.css": "./dist/mob-effect-row.css"
+    "./mob-effect-row.css": "./dist/mob-effect-row.css",
+    "./chat-screen.css": "./dist/chat-screen.css",
+    "./chat-composer.css": "./dist/chat-composer.css",
+    "./chat-transcript.css": "./dist/chat-transcript.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",

@@ -1,0 +1,7 @@
+import {useRef,useState} from 'react';
+import {ChatScreen,ChatComposer,ChatTranscript} from 'mcbeui';
+import type {ChatDraft,ChatComposerHandle,ChatControllerHandle} from 'mcbeui';
+import {screen} from './model';
+export function App(){const[open,setOpen]=useState(false),[draft,setDraft]=useState<ChatDraft>(screen.draft!),[sent,setSent]=useState('');const controller=useRef<ChatControllerHandle>(null),composer=useRef<ChatComposerHandle>(null);
+return <><button id="open-package-chat" onClick={()=>setOpen(true)}>Open package Chat</button><output id="package-send-result">{sent}</output><ChatScreen {...screen} mode="controlled" draft={draft} defaultDraft={undefined} historyPolicy="host-requests" onDraftChange={setDraft} open={open} controllerRef={controller} composerRef={composer} onCloseRequested={()=>setOpen(false)} onAction={detail=>{if(detail.target==='button.send')setSent(detail.rawDraft.text);}}/><div id="package-composer"><ChatComposer runKey="standalone" cheatsOn={false} history={[]} bindings={screen.bindings} capabilities={screen.capabilities} profile={screen.profile} mode="uncontrolled-web" defaultDraft="Standalone draft" historyPolicy="local-oldest-first-web" onAction={()=>{}}/></div><div id="package-transcript" style={{width:500,height:100}}><ChatTranscript runKey="transcript" messages={screen.messages} bindings={screen.bindings} profile={screen.profile} maxChildren={100} overflowPolicy="reject"/></div></>;
+}

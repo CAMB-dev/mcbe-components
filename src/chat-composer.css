@@ -1,3 +1,4 @@
+@import './image.css';
 .mc-chat-composer { isolation:isolate;flex:none;--mc-text-shadow:none; }
 .mc-chat-composer[hidden],.mc-chat-composer [hidden] { display:none!important; }
 .mc-chat-composer-skin { position:absolute;inset:0;display:block;pointer-events:none;image-rendering:pixelated; }

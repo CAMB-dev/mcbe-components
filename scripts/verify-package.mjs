@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { verifyInvitePackage } from './verify-invite-package.mjs';
 import { verifyCreditsPackage } from './verify-credits-package.mjs';
+import { verifyChatPackage } from './verify-chat-package.mjs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -112,10 +113,12 @@ components.push('Portfolio','PortfolioPhoto','PortfolioCaptionField','PortfolioP
 components.push('InviteScreen','InvitePersonRow','InviteCategory','InvitePagination','InviteFooter');
 components.push('CreditsScreen','CreditsRoll','CreditsSkipButton');
 components.push('MobEffectRow','MobEffectScreen');
-assert.equal(components.length,193);
+components.push('ChatScreen','ChatComposer','ChatTranscript');
+assert.equal(components.length,196);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,12);
-assert.equal(Object.keys(ui).length,211);
+assert.equal(Object.keys(ui).length,214);
+for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
 for (const internal of ['MobEffectList','resolveMobEffectRowLayout','resolveMobEffectListLayout','resolveMobEffectScreenLayout','mobEffectAssets']) assert(!Object.hasOwn(ui,internal),'Private Mob Effect composition must not become a public export: '+internal);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
@@ -2014,5 +2017,6 @@ export const demo = <>
   console.log(`React ${major}: installed package TypeScript consumer PASS`);
   await verifyInvitePackage({ consumer, root, major });
   await verifyCreditsPackage({ consumer, root, major });
+  await verifyChatPackage({ consumer, root, major });
 }
 console.log(`Verified tarball: ${tarPath}`);

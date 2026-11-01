@@ -163,3 +163,8 @@ export type { CreditsSkipActionDetail, CreditsSkipButtonProps } from './credits-
 export { MobEffectRow } from './mob-effect-row';
 export { MobEffectScreen } from './mob-effect-screen';
 export type { MobEffectIconSource, MobEffectEntry, MobEffectLabelFont, MobEffectTextProfile, MobEffectIconLayout, MobEffectTextContext, MobEffectTextRenderer, MobEffectRowProps, MobEffectScreenProps, MobEffectCloseDetail, MobEffectControllerCommand, MobEffectControllerHandle } from './mob-effect-types';
+
+export { ChatScreen } from './chat-screen';
+export { ChatComposer } from './chat-composer';
+export { ChatTranscript } from './chat-transcript';
+export type { ChatSize, ChatWholeImage, ChatColorRun, ChatMessageRecord, ChatSuggestion, ChatCoordinates, ChatTypefaceChoice, ChatColorChoice, ChatSevenColors, ChatSliderState, ChatSettingsState, ChatHostCollection, ChatHostEntry, ChatHostPlayer, ChatHostGrid, ChatHostState, ChatBindings, ChatCapabilities, ChatFontSpec, ChatPresentationProfile, ChatDraft, ChatSettingChange, ChatActionTarget, ChatActionDetail, ChatComposerActionTarget, ChatComposerActionDetail, ChatControllerCommand, ChatControllerHandle, ChatEditorCommand, ChatEditorInput, ChatDraftApplication, ChatComposerHandle, ChatTextRole, ChatTextRenderContext, ChatTextRenderer, ChatInputProps, ChatDraftChange, ChatDraftMode, ChatComposerProps, ChatTranscriptScrollState, ChatTranscriptProps, ChatScreenProps } from './chat-types';

@@ -1,0 +1,10 @@
+.chat-demo{display:grid;gap:16px;min-width:0}
+.chat-demo__controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.chat-demo__host{width:100%;min-height:120px;min-width:0;position:relative;background:#203040;border:2px solid #111;padding:0;overflow:clip}
+.chat-demo__empty{margin:0;padding:32px 16px;text-align:center;color:#d7dedf}
+.chat-demo__status{margin:0;min-height:1.5em;color:#d0d5d7}
+.chat-demo__parts{display:grid;gap:12px;min-width:0}
+.chat-demo__parts h3{margin:8px 0 0}
+.chat-demo__transcript{height:144px;background:#203040;max-width:100%;overflow:clip}
+.chat-demo__composer{max-width:100%;overflow:clip;background:#203040}
+.chat-demo__font-error{color:#ffb4b4;margin:0}

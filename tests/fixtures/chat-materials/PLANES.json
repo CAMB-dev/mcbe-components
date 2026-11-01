@@ -1,0 +1,244 @@
+{
+  "protocolSHA256": "0fa39e3481b4c1b5dc5d49dcaedff75c34864659f5deb69eadb9f15c09329020",
+  "planes": [
+    {
+      "id": "keyboard-normal-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/keyboard-normal-s1.png",
+        "bytes": 212,
+        "sha256": "1ccaf46571e27fb8dda7cf7a7f3063db240026e41474c073dfa25336a58aa343"
+      },
+      "pixelSize": [
+        27,
+        27
+      ],
+      "wholeRGBA_SHA256": "2de68469f9fb3aa5569e69c8f68646a09b92c3ffc98d9a9ca148b65864914c9b",
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": "[data-source-action=\"button.keyboard_toggle\"]"
+    },
+    {
+      "id": "keyboard-hover-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/keyboard-hover-s1.png",
+        "bytes": 193,
+        "sha256": "374ac766979a2e3bbabdae5aa57e946329660ec7f2a112a6e20cfb7326f8db2c"
+      },
+      "pixelSize": [
+        27,
+        27
+      ],
+      "wholeRGBA_SHA256": "cb41097617a0a13895691929451f54f6008af594975e86f80c120ad5a3f01cc4",
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": "[data-source-action=\"button.keyboard_toggle\"]"
+    },
+    {
+      "id": "keyboard-pressed-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/keyboard-pressed-s1.png",
+        "bytes": 191,
+        "sha256": "fb747aeb11f394bb9d503399bef515e190af00851c01cb6364aed6f2d09ba84e"
+      },
+      "pixelSize": [
+        27,
+        27
+      ],
+      "wholeRGBA_SHA256": "774311b8a7c2ab89ffcf9a43ed4869244092b8ec8464887f165b34bbc2a719d1",
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": "[data-source-action=\"button.keyboard_toggle\"]"
+    },
+    {
+      "id": "keyboard-locked-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/keyboard-locked-s1.png",
+        "bytes": 160,
+        "sha256": "195fa6dfc2c76b4b0642d1ae52d5fe9053d8f44b2c56903750e22749a5f27a76"
+      },
+      "pixelSize": [
+        27,
+        27
+      ],
+      "wholeRGBA_SHA256": "eada942f316d21c524b94fd60d95372873d6e1782d9a8487634e9f9f39c553c5",
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": "[data-source-action=\"button.keyboard_toggle\"]"
+    },
+    {
+      "id": "editor-normal-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/editor-normal-s1.png",
+        "bytes": 226,
+        "sha256": "4ceb4f2f640a8e1af0fe70f0d176a57161813bf1e6cbb8c1dd4cd46c2e8dbee9"
+      },
+      "pixelSize": [
+        396,
+        27
+      ],
+      "wholeRGBA_SHA256": "e8e905607d816a1cad9311ac2f8b7083825437a9f17c92c1d588267008740c27",
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": ".mc-chat-composer__editor"
+    },
+    {
+      "id": "editor-hover-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/editor-hover-s1.png",
+        "bytes": 223,
+        "sha256": "ebbee5a5447b846ecceef21055de372cdbae4ed2afb874b299dfa86efef67a74"
+      },
+      "pixelSize": [
+        396,
+        27
+      ],
+      "wholeRGBA_SHA256": "8e4c78f2a8c989e3b710f002eef74f09433c3a032fa3f5300a82a6b0a848705a",
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": ".mc-chat-composer__editor"
+    },
+    {
+      "id": "settings-shell-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/settings-shell-s1.png",
+        "bytes": 737,
+        "sha256": "88bdff817d35af9a46b82747a8c3da8770ca8bbb0c11972a7b6df01b15d6cef8"
+      },
+      "pixelSize": [
+        252,
+        160
+      ],
+      "wholeRGBA_SHA256": "71bab905957e51d3427bef87faa42f8c951daefd68efb4c47600db691eefb215",
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": ".mc-chat-settings"
+    },
+    {
+      "id": "settings-toggle-off-normal-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/settings-toggle-off-normal-s1.png",
+        "bytes": 197,
+        "sha256": "1a23e133133953fece8b8602b0c750632a0f154891970ed6f183b01e1eaa3a04"
+      },
+      "pixelSize": [
+        30,
+        16
+      ],
+      "wholeRGBA_SHA256": "117ee30e25f29a3a25e6de52e32821fbec55c37a1180cee3eea196fff31fe84a",
+      "backdrop": [
+        49,
+        49,
+        49,
+        255
+      ],
+      "selector": ".mc-chat-settings__toggle[data-chat-setting=\"hide_chat\"] > .mc-chat-settings__toggle-art"
+    },
+    {
+      "id": "settings-toggle-off-hover-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/settings-toggle-off-hover-s1.png",
+        "bytes": 204,
+        "sha256": "bfde90671fb15f367a8dab193188898973dd3203e8b9d843cbf00eeff2cc1834"
+      },
+      "pixelSize": [
+        30,
+        16
+      ],
+      "wholeRGBA_SHA256": "fcab0eade54b837122121401d742877dac2033f9b0062bb36cc3fd3628bdbcad",
+      "backdrop": [
+        49,
+        49,
+        49,
+        255
+      ],
+      "selector": ".mc-chat-settings__toggle[data-chat-setting=\"hide_chat\"] > .mc-chat-settings__toggle-art"
+    },
+    {
+      "id": "settings-toggle-on-normal-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/settings-toggle-on-normal-s1.png",
+        "bytes": 182,
+        "sha256": "f3fb2fa14dedc4b985b21b4f15c701a4e5890ceab7a65bec116f743368ed6c19"
+      },
+      "pixelSize": [
+        30,
+        16
+      ],
+      "wholeRGBA_SHA256": "8c8684c1b90d03ed9788cd8ca50699f47519e9c24272a09508402ab7f5363ace",
+      "backdrop": [
+        49,
+        49,
+        49,
+        255
+      ],
+      "selector": ".mc-chat-settings__toggle[data-chat-setting=\"hide_chat\"] > .mc-chat-settings__toggle-art"
+    },
+    {
+      "id": "settings-toggle-on-hover-s1",
+      "expectedPNG": {
+        "path": ".cache/chat-material-oracles-01/EXPECTED/settings-toggle-on-hover-s1.png",
+        "bytes": 187,
+        "sha256": "b7d3c588d0d019d0130fcc883f000f5750b07940a74c3e88030b4b81c6b8a776"
+      },
+      "pixelSize": [
+        30,
+        16
+      ],
+      "wholeRGBA_SHA256": "3c7bdb03186b63a85eb8d9167e739bef8322aecb5def7eaeb6da1c1b07622eb8",
+      "backdrop": [
+        49,
+        49,
+        49,
+        255
+      ],
+      "selector": ".mc-chat-settings__toggle[data-chat-setting=\"hide_chat\"] > .mc-chat-settings__toggle-art"
+    }
+  ],
+  "sourceAlphaBinary": true,
+  "allExpectedAlpha255": true,
+  "settingsToggleParentBackingAssertion": {
+    "sourceOriginBox": [
+      8,
+      23,
+      30,
+      16
+    ],
+    "pixels": 480,
+    "uniqueRGBA": [
+      49,
+      49,
+      49,
+      255
+    ],
+    "result": "PASS"
+  },
+  "rootBrowserMeasurementPerformed": false
+}

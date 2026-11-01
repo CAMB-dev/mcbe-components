@@ -1,0 +1,46 @@
+{
+  "archiveSha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "scope": "Whole originals for explicit host Web profile. lowercase white is a declared host alias; exact textures/ui/White remains unresolved. Xbox art is explicit host provider selection, not inferred universal controller mapping.",
+  "files": [
+    {
+      "source": "resource_pack/textures/ui/white.png",
+      "file": "white.png",
+      "bytes": 132,
+      "sha256": "e666f27bda2c08c810a18b699397f8f0df5ffee87157a14bb96157e4a6b27fc3",
+      "size": [
+        15,
+        15
+      ]
+    },
+    {
+      "source": "resource_pack/textures/ui/xbox_face_button_left.png",
+      "file": "xbox_face_button_left.png",
+      "bytes": 349,
+      "sha256": "4d3e37fc2bf3a45d95809751fd584c3d1b295a9ebe0bd054ec242886523e306e",
+      "size": [
+        26,
+        26
+      ]
+    },
+    {
+      "source": "resource_pack/textures/ui/xbox_face_button_right.png",
+      "file": "xbox_face_button_right.png",
+      "bytes": 334,
+      "sha256": "17debfc6d6634a849defc3a55a1bccedd6d7ecc9094f16ddd26d58800d3445c6",
+      "size": [
+        26,
+        26
+      ]
+    },
+    {
+      "source": "resource_pack/textures/ui/xbox_face_button_up.png",
+      "file": "xbox_face_button_up.png",
+      "bytes": 311,
+      "sha256": "59fb6b536bad7cfb2ab17448309f798b5527b57ef712eddc97bc342d2ae30745",
+      "size": [
+        26,
+        26
+      ]
+    }
+  ]
+}

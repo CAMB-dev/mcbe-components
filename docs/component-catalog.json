@@ -583,6 +583,27 @@
         "fidelity": "source_texture_web_composition"
       },
       {
+        "name": "ChatScreen",
+        "status": "implemented",
+        "validation": "mounted_web_interaction_11_material_planes_installed_react18_19_default_vite4_and_public_previews_verified_native_unverified",
+        "fidelity": "fixed_source_composition_explicit_web_geometry_and_host_providers",
+        "details": "docs/CHAT.md"
+      },
+      {
+        "name": "ChatComposer",
+        "status": "implemented",
+        "validation": "mounted_controlled_uncontrolled_editor_native_event_contracts_and_installed_two_peer_package_verified",
+        "fidelity": "original_materials_native_editor_explicit_web_revision_and_input_policy",
+        "details": "docs/CHAT.md"
+      },
+      {
+        "name": "ChatTranscript",
+        "status": "implemented",
+        "validation": "mounted_scroll_bottom_stack_and_installed_two_peer_package_verified_native_unverified",
+        "fidelity": "original_scroll_materials_host_text_fonts_shadow_and_finite_web_layout",
+        "details": "docs/CHAT.md"
+      },
+      {
         "name": "Scoreboard",
         "status": "implemented"
       },
@@ -819,7 +840,7 @@
     ]
   },
   "publicExports": {
-    "components": 193,
+    "components": 196,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -830,12 +851,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 211,
+    "runtimeValues": 214,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "tested_functional_package_193_211_mob_effect_scoped_native_unverified",
+    "publicationState": "tested_functional_package_196_214_chat_scoped_native_unverified",
     "pureCreditsFunctions": [
       "layoutCredits"
     ],

@@ -52,6 +52,7 @@ import { PortfolioExamples } from './portfolio-examples';
 import { InviteExamples } from './invite-examples';
 import { CreditsDemo } from './credits-demo';
 import { MobEffectDemo } from './mob-effect-demo';
+import { ChatDemo } from './chat-demo';
 import { UGCExamples } from './ugc-examples';
 import { ImmersiveReaderExamples } from './immersive-reader-examples';
 import { ScrollArea } from '../src';
@@ -94,6 +95,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'invite', name: 'Invite & friends', icon: 'chevron', count: '05' },
   { id: 'credits', name: 'Credits', icon: 'chevron', count: '03' },
   { id: 'mob-effects', name: 'Mob effects', icon: 'chevron', count: '02' },
+  { id: 'chat', name: 'Chat & commands', icon: 'chevron', count: '03' },
   { id: 'ugc-viewer', name: 'UGC viewer', icon: 'chevron', count: '02' },
   { id: 'immersive-reader', name: 'Immersive Reader', icon: 'chevron', count: '02' },
   { id: 'processing', name: 'Crafting & smelting', icon: 'chevron', count: '10' },
@@ -462,6 +464,7 @@ function App() {
       <Example id="invite" title="Invite & friends" detail="Six source collections, three identity presentations and reusable selection, pagination and footer compositions."><InviteExamples/></Example>
       <Example id="credits" title="Credits" detail="A rolling thank-you, an optional closing poem, and a reusable skip control."><CreditsDemo/></Example>
       <Example id="mob-effects" title="Mob effects" detail="Visible effect names, literal timers, and a reusable effect collection."><MobEffectDemo/></Example>
+      <Example id="chat" title="Chat & commands" detail="聊天、命令补全、坐标、设置与房主菜单，也可以单独使用消息输入框和聊天记录。"><ChatDemo/></Example>
       <Example id="ugc-viewer" title="UGC viewer" detail="Source search, scrolling collection and reusable content cards with caller-resolved images."><UGCExamples/></Example>
       <Example id="immersive-reader" title="Immersive Reader" detail="Independent source loading, error and running states with a persistent host renderer."><ImmersiveReaderExamples/></Example>
 

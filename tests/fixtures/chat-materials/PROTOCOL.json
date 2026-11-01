@@ -1,0 +1,1339 @@
+{
+  "status": "FROZEN_BEFORE_ANY_ROOT_BROWSER_MATERIAL_MEASUREMENT",
+  "sourceFINAL": {
+    "path": ".cache/chat-screen-source-01/FINAL.json",
+    "bytes": 35954,
+    "sha256": "33519823c982bd8161ba9aed4ec0408a17fda7ade8eaa745b498ad84f3c77cf2"
+  },
+  "archive": {
+    "path": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "bytes": 169569258,
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "inputs": [
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/focus_border_white.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/focus_border_white.png",
+        "bytes": 105,
+        "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+        "naturalSize": [
+          5,
+          5
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/focus_border_white.png",
+        "bytes": 105,
+        "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/focus_border_white.json",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/button_borderless_light.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/button_borderless_light.png",
+        "bytes": 131,
+        "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+        "naturalSize": [
+          4,
+          4
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/button_borderless_light.png",
+        "bytes": 131,
+        "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/button_borderless_light.json",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/button_borderless_lighthover.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/button_borderless_lighthover.png",
+        "bytes": 85,
+        "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+        "naturalSize": [
+          4,
+          4
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/button_borderless_lighthover.png",
+        "bytes": 85,
+        "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/button_borderless_lightpressed.png",
+        "bytes": 84,
+        "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+        "naturalSize": [
+          4,
+          4
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/button_borderless_lightpressed.png",
+        "bytes": 84,
+        "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/disabledButtonNoBorder.png",
+        "bytes": 88,
+        "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+        "naturalSize": [
+          2,
+          2
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/disabledButtonNoBorder.png",
+        "bytes": 88,
+        "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/chat_keyboard.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/chat_keyboard.png",
+        "bytes": 151,
+        "sha256": "6997491e179dec824c80b8f8e0197cd26e663835e2ca53d529fc433ed59189be",
+        "naturalSize": [
+          9,
+          7
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/chat_keyboard.png",
+        "bytes": 151,
+        "sha256": "6997491e179dec824c80b8f8e0197cd26e663835e2ca53d529fc433ed59189be"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/chat_keyboard_hover.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/chat_keyboard_hover.png",
+        "bytes": 119,
+        "sha256": "5cb198df748d078daf0eb118f2a4e97ce587d47bd6f2d0a0d26a08cde2400c51",
+        "naturalSize": [
+          9,
+          7
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/chat_keyboard_hover.png",
+        "bytes": 119,
+        "sha256": "5cb198df748d078daf0eb118f2a4e97ce587d47bd6f2d0a0d26a08cde2400c51"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/edit_box_indent.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/edit_box_indent.png",
+        "bytes": 126,
+        "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109",
+        "naturalSize": [
+          6,
+          6
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/edit_box_indent.png",
+        "bytes": 126,
+        "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/edit_box_indent.json",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/edit_box_indent.json",
+        "bytes": 60,
+        "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+        "metadata": {
+          "nineslice_size": 2,
+          "base_size": [
+            6,
+            6
+          ]
+        }
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/edit_box_indent.json",
+        "bytes": 60,
+        "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/edit_box_indent_hover.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/edit_box_indent_hover.png",
+        "bytes": 125,
+        "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb",
+        "naturalSize": [
+          6,
+          6
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/edit_box_indent_hover.png",
+        "bytes": 125,
+        "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/edit_box_indent_hover.json",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/edit_box_indent_hover.json",
+        "bytes": 60,
+        "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+        "metadata": {
+          "nineslice_size": 2,
+          "base_size": [
+            6,
+            6
+          ]
+        }
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/edit_box_indent_hover.json",
+        "bytes": 60,
+        "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/dialog_background_hollow_3.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/dialog_background_hollow_3.png",
+        "bytes": 260,
+        "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+        "naturalSize": [
+          18,
+          33
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/dialog_background_hollow_3.png",
+        "bytes": 260,
+        "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/dialog_background_hollow_3.json",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/dialog_background_hollow_3.json",
+        "bytes": 94,
+        "sha256": "36700ca1326d14a269b2052c27d95115200897bee9c27b4d36e75fe893973415",
+        "metadata": {
+          "nineslice_size": [
+            8,
+            23,
+            8,
+            8
+          ],
+          "base_size": [
+            18,
+            33
+          ]
+        }
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/dialog_background_hollow_3.json",
+        "bytes": 94,
+        "sha256": "36700ca1326d14a269b2052c27d95115200897bee9c27b4d36e75fe893973415"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/control_gray.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/control_gray.png",
+        "bytes": 4870,
+        "sha256": "8675323a3c5d19d9381d738407655baa57f3b6ade8a55e9e202cab03f84e781a",
+        "naturalSize": [
+          2,
+          2
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/control_gray.png",
+        "bytes": 4870,
+        "sha256": "8675323a3c5d19d9381d738407655baa57f3b6ade8a55e9e202cab03f84e781a"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/control_gray.json",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/control_gray.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "metadata": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/control_gray.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/toggle_on.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/toggle_on.png",
+        "bytes": 167,
+        "sha256": "b37762f63652856a4c735f5adf55e511e9c01744a883ec70647b97e08a1711ff",
+        "naturalSize": [
+          30,
+          16
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/toggle_on.png",
+        "bytes": 167,
+        "sha256": "b37762f63652856a4c735f5adf55e511e9c01744a883ec70647b97e08a1711ff"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/toggle_on_hover.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/toggle_on_hover.png",
+        "bytes": 225,
+        "sha256": "3ce38b76a06e672c95cb8fa4892456e4deaf482c7f6a67b8e991761421fe6b8b",
+        "naturalSize": [
+          30,
+          16
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/toggle_on_hover.png",
+        "bytes": 225,
+        "sha256": "3ce38b76a06e672c95cb8fa4892456e4deaf482c7f6a67b8e991761421fe6b8b"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/toggle_off.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/toggle_off.png",
+        "bytes": 7234,
+        "sha256": "e3c03f72af1d8afc7617f229e4eddb6d439a02411e464e48c1bdd1f01f873962",
+        "naturalSize": [
+          30,
+          16
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/toggle_off.png",
+        "bytes": 7234,
+        "sha256": "e3c03f72af1d8afc7617f229e4eddb6d439a02411e464e48c1bdd1f01f873962"
+      }
+    },
+    {
+      "source": {
+        "member": "resource_pack/textures/ui/toggle_off_hover.png",
+        "cachePath": ".cache/chat-screen-source-01/ASSETS/textures/ui/toggle_off_hover.png",
+        "bytes": 7657,
+        "sha256": "5083272d331669bde3e5c3ef14cbfd12d6660763bad23b7474c902b4fc82d056",
+        "naturalSize": [
+          30,
+          16
+        ]
+      },
+      "copy": {
+        "path": ".cache/chat-material-oracles-01/ORIGINALS/toggle_off_hover.png",
+        "bytes": 7657,
+        "sha256": "5083272d331669bde3e5c3ef14cbfd12d6660763bad23b7474c902b4fc82d056"
+      }
+    }
+  ],
+  "clauses": {
+    "path": ".cache/chat-material-oracles-01/SOURCE-CLAUSES.json",
+    "bytes": 39504,
+    "sha256": "01a254d0f8c187fa8e3bfefba122ad7f0f6fad5584a201c213a6ca0e173a05f3"
+  },
+  "caseCount": 11,
+  "cases": [
+    {
+      "id": "keyboard-normal-s1",
+      "logicalSize": [
+        27,
+        27
+      ],
+      "pixelSize": [
+        27,
+        27
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": "[data-source-action=\"button.keyboard_toggle\"]",
+      "scope": "complete actual keyboard small-button box including original icon",
+      "fixedOverrides": {
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "bindings.keyboardButtonVisible": true,
+        "bindings.keyboardInUse": false,
+        "cheatsOn": false,
+        "capabilities.isPregame": false,
+        "disabled": false,
+        "readOnly": false,
+        "interaction": "normal"
+      },
+      "layers": [
+        {
+          "material": "button_borderless_light",
+          "box": [
+            1,
+            1,
+            25,
+            25
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 1,
+            "base_size": [
+              4,
+              4
+            ]
+          }
+        },
+        {
+          "material": "focus_border_white",
+          "box": [
+            0,
+            0,
+            27,
+            27
+          ],
+          "tintRGB": "0.075",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 1,
+            "base_size": [
+              5,
+              5
+            ]
+          }
+        },
+        {
+          "material": "chat_keyboard",
+          "box": [
+            9,
+            10,
+            9,
+            7
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": null
+        }
+      ],
+      "sourceClauses": [
+        "chat.small_button",
+        "chat.keyboard_button",
+        "chat.keyboard_image_panel",
+        "chat.keyboard_image",
+        "common_buttons.light_content_button",
+        "common_buttons.light_button_assets",
+        "common_buttons.new_ui_button_panel",
+        "common_buttons.button_content_panel"
+      ]
+    },
+    {
+      "id": "keyboard-hover-s1",
+      "logicalSize": [
+        27,
+        27
+      ],
+      "pixelSize": [
+        27,
+        27
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": "[data-source-action=\"button.keyboard_toggle\"]",
+      "scope": "complete actual keyboard small-button box including original icon",
+      "fixedOverrides": {
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "bindings.keyboardButtonVisible": true,
+        "bindings.keyboardInUse": false,
+        "cheatsOn": false,
+        "capabilities.isPregame": false,
+        "disabled": false,
+        "readOnly": false,
+        "interaction": "hover"
+      },
+      "layers": [
+        {
+          "material": "button_borderless_lighthover",
+          "box": [
+            1,
+            1,
+            25,
+            25
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 1,
+            "base_size": [
+              4,
+              4
+            ]
+          }
+        },
+        {
+          "material": "focus_border_white",
+          "box": [
+            0,
+            0,
+            27,
+            27
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 1,
+            "base_size": [
+              5,
+              5
+            ]
+          }
+        },
+        {
+          "material": "chat_keyboard_hover",
+          "box": [
+            9,
+            10,
+            9,
+            7
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": null
+        }
+      ],
+      "sourceClauses": [
+        "chat.small_button",
+        "chat.keyboard_button",
+        "chat.keyboard_image_panel",
+        "chat.keyboard_image",
+        "common_buttons.light_content_button",
+        "common_buttons.light_button_assets",
+        "common_buttons.new_ui_button_panel",
+        "common_buttons.button_content_panel"
+      ]
+    },
+    {
+      "id": "keyboard-pressed-s1",
+      "logicalSize": [
+        27,
+        27
+      ],
+      "pixelSize": [
+        27,
+        27
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": "[data-source-action=\"button.keyboard_toggle\"]",
+      "scope": "complete actual keyboard small-button box including original icon",
+      "fixedOverrides": {
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "bindings.keyboardButtonVisible": true,
+        "bindings.keyboardInUse": false,
+        "cheatsOn": false,
+        "capabilities.isPregame": false,
+        "disabled": false,
+        "readOnly": false,
+        "interaction": "pressed"
+      },
+      "layers": [
+        {
+          "material": "button_borderless_lightpressed",
+          "box": [
+            1,
+            1,
+            25,
+            25
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 1,
+            "base_size": [
+              4,
+              4
+            ]
+          }
+        },
+        {
+          "material": "focus_border_white",
+          "box": [
+            0,
+            0,
+            27,
+            27
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 1,
+            "base_size": [
+              5,
+              5
+            ]
+          }
+        },
+        {
+          "material": "chat_keyboard_hover",
+          "box": [
+            9,
+            11,
+            9,
+            7
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": null
+        }
+      ],
+      "sourceClauses": [
+        "chat.small_button",
+        "chat.keyboard_button",
+        "chat.keyboard_image_panel",
+        "chat.keyboard_image",
+        "common_buttons.light_content_button",
+        "common_buttons.light_button_assets",
+        "common_buttons.new_ui_button_panel",
+        "common_buttons.button_content_panel"
+      ]
+    },
+    {
+      "id": "keyboard-locked-s1",
+      "logicalSize": [
+        27,
+        27
+      ],
+      "pixelSize": [
+        27,
+        27
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": "[data-source-action=\"button.keyboard_toggle\"]",
+      "scope": "complete actual keyboard small-button box including original icon",
+      "fixedOverrides": {
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "bindings.keyboardButtonVisible": true,
+        "bindings.keyboardInUse": false,
+        "cheatsOn": false,
+        "capabilities.isPregame": false,
+        "disabled": true,
+        "readOnly": false,
+        "interaction": "locked"
+      },
+      "layers": [
+        {
+          "material": "disabledButtonNoBorder",
+          "box": [
+            1,
+            1,
+            25,
+            25
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 1,
+            "base_size": [
+              2,
+              2
+            ]
+          }
+        },
+        {
+          "material": "focus_border_white",
+          "box": [
+            0,
+            0,
+            27,
+            27
+          ],
+          "tintRGB": "0.075",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 1,
+            "base_size": [
+              5,
+              5
+            ]
+          }
+        },
+        {
+          "material": "chat_keyboard",
+          "box": [
+            9,
+            10,
+            9,
+            7
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": null
+        }
+      ],
+      "sourceClauses": [
+        "chat.small_button",
+        "chat.keyboard_button",
+        "chat.keyboard_image_panel",
+        "chat.keyboard_image",
+        "common_buttons.light_content_button",
+        "common_buttons.light_button_assets",
+        "common_buttons.new_ui_button_panel",
+        "common_buttons.button_content_panel"
+      ]
+    },
+    {
+      "id": "editor-normal-s1",
+      "logicalSize": [
+        396,
+        27
+      ],
+      "pixelSize": [
+        396,
+        27
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": ".mc-chat-composer__editor",
+      "scope": "complete opaque editor box, not just a cropped skin border",
+      "fixedOverrides": {
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "bindings.keyboardButtonVisible": true,
+        "bindings.editorEnabled": true,
+        "cheatsOn": false,
+        "capabilities.isPregame": false,
+        "disabled": false,
+        "readOnly": false,
+        "mode": "controlled",
+        "draft.text": "",
+        "inputProps.placeholder": "",
+        "interaction": "normal",
+        "focus": "editor MUST remain unfocused; no caret or selection paint"
+      },
+      "explicitWebIntrinsicResolution": {
+        "keyboard": 27,
+        "host": 0,
+        "settings": 27,
+        "send": "source44 content + chosen6 surrounding =50",
+        "editorFill": "500-27-0-27-50=396; declared before measurement, no width fitting"
+      },
+      "layers": [
+        {
+          "material": "edit_box_indent",
+          "box": [
+            0,
+            0,
+            396,
+            27
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 2,
+            "base_size": [
+              6,
+              6
+            ]
+          }
+        }
+      ],
+      "sourceClauses": [
+        "chat.text_edit_box",
+        "common.text_edit_box",
+        "common.edit_box_indent",
+        "common.edit_box_indent_hover"
+      ]
+    },
+    {
+      "id": "editor-hover-s1",
+      "logicalSize": [
+        396,
+        27
+      ],
+      "pixelSize": [
+        396,
+        27
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": ".mc-chat-composer__editor",
+      "scope": "complete opaque editor box, not just a cropped skin border",
+      "fixedOverrides": {
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "bindings.keyboardButtonVisible": true,
+        "bindings.editorEnabled": true,
+        "cheatsOn": false,
+        "capabilities.isPregame": false,
+        "disabled": false,
+        "readOnly": false,
+        "mode": "controlled",
+        "draft.text": "",
+        "inputProps.placeholder": "",
+        "interaction": "hover",
+        "focus": "editor MUST remain unfocused; no caret or selection paint"
+      },
+      "explicitWebIntrinsicResolution": {
+        "keyboard": 27,
+        "host": 0,
+        "settings": 27,
+        "send": "source44 content + chosen6 surrounding =50",
+        "editorFill": "500-27-0-27-50=396; declared before measurement, no width fitting"
+      },
+      "layers": [
+        {
+          "material": "edit_box_indent_hover",
+          "box": [
+            0,
+            0,
+            396,
+            27
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 2,
+            "base_size": [
+              6,
+              6
+            ]
+          }
+        }
+      ],
+      "sourceClauses": [
+        "chat.text_edit_box",
+        "common.text_edit_box",
+        "common.edit_box_indent",
+        "common.edit_box_indent_hover"
+      ]
+    },
+    {
+      "id": "settings-shell-s1",
+      "logicalSize": [
+        252,
+        160
+      ],
+      "pixelSize": [
+        252,
+        160
+      ],
+      "backdrop": [
+        32,
+        48,
+        64,
+        255
+      ],
+      "selector": ".mc-chat-settings",
+      "scope": "MATERIAL-ONLY isolated shell; not a full settings GUI image",
+      "fixedOverrides": {
+        "mount": "standalone actual private ChatSettingsPanel, without root dim/Chat backdrop",
+        "runKey": "material-fixture",
+        "settings.popup.instanceId": "material-settings",
+        "settings.popup.closeButtonVisible": true,
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "renderText": "empty visual glyph seam, preserving source boxes",
+        "disabled": false,
+        "readOnly": false
+      },
+      "predeclaredPaintIsolation": {
+        "method": "visibility:hidden only, preserving layout; exact restore afterward",
+        "relativeSelectors": [
+          ":scope > .mc-chat-settings__title",
+          ":scope > .mc-chat-settings__close",
+          ":scope > .mc-chat-settings__scroll"
+        ],
+        "retainedPaint": "whole original hollow3 exterior and control_gray fill; no target crop/ROI mask/tolerance",
+        "notAllowed": "Do not change target dimensions, raw source metadata, paint boxes, source bytes or expected image based on measurement."
+      },
+      "explicitWebGeometry": {
+        "outer": [
+          252,
+          160
+        ],
+        "basis": "scroller236x129 plus form-fit panel +16x+31; declared finite interpretation, not native %cm evaluator",
+        "fillBox": [
+          4,
+          4,
+          244,
+          152
+        ],
+        "fillAlpha": 1
+      },
+      "layers": [
+        {
+          "material": "control_gray",
+          "box": [
+            4,
+            4,
+            244,
+            152
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": 1,
+            "base_size": [
+              2,
+              2
+            ]
+          }
+        },
+        {
+          "material": "dialog_background_hollow_3",
+          "box": [
+            0,
+            0,
+            252,
+            160
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": {
+            "nineslice_size": [
+              8,
+              23,
+              8,
+              8
+            ],
+            "base_size": [
+              18,
+              33
+            ]
+          }
+        }
+      ],
+      "sourceClauses": [
+        "chat_settings.chat_setting_scrolling_panel",
+        "chat_settings.chat_settings_popup",
+        "popup_dialog.form_fit_screen_with_title_and_close",
+        "common.dialog_background_hollow_3",
+        "common.dialog_background_hollow_common"
+      ]
+    },
+    {
+      "id": "settings-toggle-off-normal-s1",
+      "logicalSize": [
+        30,
+        16
+      ],
+      "pixelSize": [
+        30,
+        16
+      ],
+      "backdrop": [
+        49,
+        49,
+        49,
+        255
+      ],
+      "selector": ".mc-chat-settings__toggle[data-chat-setting=\"hide_chat\"] > .mc-chat-settings__toggle-art",
+      "scope": "complete native first-toggle art30x16 box, on source-derived opaque inner fill",
+      "fixedOverrides": {
+        "mount": "standalone actual private ChatSettingsPanel, no paint isolation for this target",
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "settings.hideChat": false,
+        "settings.popup.instanceId": "material-settings",
+        "settings.popup.closeButtonVisible": true,
+        "renderText": "empty visual glyph seam",
+        "capabilities.educationEdition": false,
+        "disabled": false,
+        "readOnly": false,
+        "interaction": "normal"
+      },
+      "backdropSourceProof": "independent complete shell must be uniform RGBA49,49,49,255 across exact target source-origin box[8,23,30,16]; assertion occurs before fixture handoff",
+      "layers": [
+        {
+          "material": "toggle_off",
+          "box": [
+            0,
+            0,
+            30,
+            16
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": null
+        }
+      ],
+      "sourceClauses": [
+        "chat_settings.mute_all_toggle",
+        "chat_settings.chat_setting_scrolling_panel",
+        "settings_common.option_toggle_state_template",
+        "settings_common.option_toggle_on",
+        "settings_common.option_toggle_off",
+        "settings_common.option_toggle_on_hover",
+        "settings_common.option_toggle_off_hover"
+      ]
+    },
+    {
+      "id": "settings-toggle-off-hover-s1",
+      "logicalSize": [
+        30,
+        16
+      ],
+      "pixelSize": [
+        30,
+        16
+      ],
+      "backdrop": [
+        49,
+        49,
+        49,
+        255
+      ],
+      "selector": ".mc-chat-settings__toggle[data-chat-setting=\"hide_chat\"] > .mc-chat-settings__toggle-art",
+      "scope": "complete native first-toggle art30x16 box, on source-derived opaque inner fill",
+      "fixedOverrides": {
+        "mount": "standalone actual private ChatSettingsPanel, no paint isolation for this target",
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "settings.hideChat": false,
+        "settings.popup.instanceId": "material-settings",
+        "settings.popup.closeButtonVisible": true,
+        "renderText": "empty visual glyph seam",
+        "capabilities.educationEdition": false,
+        "disabled": false,
+        "readOnly": false,
+        "interaction": "hover"
+      },
+      "backdropSourceProof": "independent complete shell must be uniform RGBA49,49,49,255 across exact target source-origin box[8,23,30,16]; assertion occurs before fixture handoff",
+      "layers": [
+        {
+          "material": "toggle_off_hover",
+          "box": [
+            0,
+            0,
+            30,
+            16
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": null
+        }
+      ],
+      "sourceClauses": [
+        "chat_settings.mute_all_toggle",
+        "chat_settings.chat_setting_scrolling_panel",
+        "settings_common.option_toggle_state_template",
+        "settings_common.option_toggle_on",
+        "settings_common.option_toggle_off",
+        "settings_common.option_toggle_on_hover",
+        "settings_common.option_toggle_off_hover"
+      ]
+    },
+    {
+      "id": "settings-toggle-on-normal-s1",
+      "logicalSize": [
+        30,
+        16
+      ],
+      "pixelSize": [
+        30,
+        16
+      ],
+      "backdrop": [
+        49,
+        49,
+        49,
+        255
+      ],
+      "selector": ".mc-chat-settings__toggle[data-chat-setting=\"hide_chat\"] > .mc-chat-settings__toggle-art",
+      "scope": "complete native first-toggle art30x16 box, on source-derived opaque inner fill",
+      "fixedOverrides": {
+        "mount": "standalone actual private ChatSettingsPanel, no paint isolation for this target",
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "settings.hideChat": true,
+        "settings.popup.instanceId": "material-settings",
+        "settings.popup.closeButtonVisible": true,
+        "renderText": "empty visual glyph seam",
+        "capabilities.educationEdition": false,
+        "disabled": false,
+        "readOnly": false,
+        "interaction": "normal"
+      },
+      "backdropSourceProof": "independent complete shell must be uniform RGBA49,49,49,255 across exact target source-origin box[8,23,30,16]; assertion occurs before fixture handoff",
+      "layers": [
+        {
+          "material": "toggle_on",
+          "box": [
+            0,
+            0,
+            30,
+            16
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": null
+        }
+      ],
+      "sourceClauses": [
+        "chat_settings.mute_all_toggle",
+        "chat_settings.chat_setting_scrolling_panel",
+        "settings_common.option_toggle_state_template",
+        "settings_common.option_toggle_on",
+        "settings_common.option_toggle_off",
+        "settings_common.option_toggle_on_hover",
+        "settings_common.option_toggle_off_hover"
+      ]
+    },
+    {
+      "id": "settings-toggle-on-hover-s1",
+      "logicalSize": [
+        30,
+        16
+      ],
+      "pixelSize": [
+        30,
+        16
+      ],
+      "backdrop": [
+        49,
+        49,
+        49,
+        255
+      ],
+      "selector": ".mc-chat-settings__toggle[data-chat-setting=\"hide_chat\"] > .mc-chat-settings__toggle-art",
+      "scope": "complete native first-toggle art30x16 box, on source-derived opaque inner fill",
+      "fixedOverrides": {
+        "mount": "standalone actual private ChatSettingsPanel, no paint isolation for this target",
+        "profile.availableSize": [
+          500,
+          300
+        ],
+        "profile.scale": 1,
+        "settings.hideChat": true,
+        "settings.popup.instanceId": "material-settings",
+        "settings.popup.closeButtonVisible": true,
+        "renderText": "empty visual glyph seam",
+        "capabilities.educationEdition": false,
+        "disabled": false,
+        "readOnly": false,
+        "interaction": "hover"
+      },
+      "backdropSourceProof": "independent complete shell must be uniform RGBA49,49,49,255 across exact target source-origin box[8,23,30,16]; assertion occurs before fixture handoff",
+      "layers": [
+        {
+          "material": "toggle_on_hover",
+          "box": [
+            0,
+            0,
+            30,
+            16
+          ],
+          "tintRGB": "1",
+          "opacity": 1,
+          "metadata": null
+        }
+      ],
+      "sourceClauses": [
+        "chat_settings.mute_all_toggle",
+        "chat_settings.chat_setting_scrolling_panel",
+        "settings_common.option_toggle_state_template",
+        "settings_common.option_toggle_on",
+        "settings_common.option_toggle_off",
+        "settings_common.option_toggle_on_hover",
+        "settings_common.option_toggle_off_hover"
+      ]
+    }
+  ],
+  "sampling": {
+    "interpretation": "Finite Web POINT pixel-centre pullback; explicitly not native material evaluator",
+    "scale": 1,
+    "wholeImage": "floor((destinationPixelCentre-start)*physicalExtent/destinationExtent), clamped to original full image bounds",
+    "nineslice": "For each axis use raw logical base/cuts; preserve nominal destination borders unless compressed to fit extent. Classify pixel centre into before/centre/after, pull back into original source coordinate by exact rational arithmetic and floor. For nonpositive source centre choose the boundary texel. Never read production ClassicSkin or screenshots.",
+    "RGBA": "All chosen input source alpha is binary0/255 and all layer opacity1. Opaque base planes. Copy opaque original RGB; sourcealpha0 reveals prior layer; no group-opacity/blend-profile calibration needed.",
+    "tint": "Only focus border RGB multiply.075 or1; nearest integer, no half tie in selected original colors (255*.075=19.125). Preserve original alpha.",
+    "threshold": 0,
+    "tolerance": 0,
+    "mask": null,
+    "nativePixelCertified": false
+  },
+  "harnessRules": {
+    "backdrop": "opaque #203040 outside standalone actual material components; settings toggle target has independent sourcefill#313131",
+    "geometry": "Known logical/pixel target box is asserted before comparison. No screenshot-informed size/offset/oracle edits. Selector adapters may locate unchanged semantic targets only.",
+    "glyph": "Empty non-editor visual glyph seam. Do not conceal original image icons. Editor text/placeholder empty and unfocused.",
+    "states": "normal mouse away; hover mouse without focus; pressed pointer held after hover; locked disabled true. No keyboard focus outline introduced.",
+    "settingsIsolation": "Only shell case explicitly hides known title/close/scroller paint by visibility:hidden; other full UI capture/behavior remains separate.",
+    "failure": "Keep every initial failure and whole actual/expected planes. Root may correct implementation or harness bugs with new revisions; never alter immutable oracle to match actual."
+  },
+  "scope": "New cache only. Original complete PNG/JSON copied unchanged. Generated PNGs are diagnostic expected RGBA planes, not runtime material replacements. No production helper import/output/golden/screenshots/browser/GPU/CU/server/network/build/install."
+}
