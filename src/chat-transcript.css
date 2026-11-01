@@ -1,0 +1,14 @@
+.mc-chat-transcript { position: relative; box-sizing: border-box; width: 100%; height: 100%; min-width: 0; min-height: 0; overflow: clip; color: #fff; }
+.mc-chat-transcript[hidden] { display: none; }
+.mc-chat-transcript__scroll { width: 100%; height: 100%; grid-template-columns: minmax(0, 1fr) calc(5 * var(--mc-chat-unit)); grid-template-rows: minmax(0, 1fr); }
+.mc-chat-transcript__scroll > .mc-scrollbar[data-orientation="vertical"] { height: calc(100% - 4 * var(--mc-chat-unit)); align-self: center; }
+.mc-chat-transcript__scroll > .mc-scrollbar > .mc-scrollbar__track { left: 0 !important; width: calc(5 * var(--mc-chat-unit)) !important; }
+/* Keep the source bottom stack when another leaf imports ScrollArea defaults later. */
+.mc-chat-transcript .mc-chat-transcript__content { display: flex; flex-direction: column; min-height: 100%; }
+.mc-chat-transcript__stack { flex: 0 0 auto; margin-top: auto; width: 100%; }
+.mc-chat-transcript__message { box-sizing: border-box; width: 100%; margin: 0; padding: 0; }
+.mc-chat-transcript__message[hidden] { display: none; }
+.mc-chat-transcript__label { display: block; width: calc(100% - 3 * var(--mc-chat-unit)); font-family: var(--mc-chat-font-family); font-size: var(--mc-chat-font-size); font-weight: normal; font-style: normal; line-height: var(--mc-chat-line-height); white-space: pre-wrap; overflow-wrap: anywhere; text-shadow: var(--mc-chat-shadow); }
+/* Web keyboard/TTS eligibility only; not a recovered native TTS focus material. */
+.mc-chat-transcript__message:focus-visible { outline: var(--mc-chat-unit) solid #fff; outline-offset: calc(-1 * var(--mc-chat-unit)); }
+.mc-chat-transcript__literal { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: pre-wrap; border: 0; }

@@ -1,5 +1,7 @@
 # mcbeui
 
+> 状态：已按用户请求暂停（2026-11-01）。等待用户说“继续”；当前检查点与未完成项见 `.claude/handoff.md`。
+
 创建可发布的 React + TypeScript UI 组件库，复刻 Minecraft: Bedrock 的方角、像素字体、双层倒角、绿色交互状态和凹陷式控件。
 
 ## 范围

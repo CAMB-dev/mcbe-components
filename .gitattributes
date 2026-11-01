@@ -7,6 +7,7 @@ src/assets/player-permissions/** -text
 src/assets/portfolio/** -text
 src/assets/invite/** -text
 src/assets/mob-effect/** -text
+src/assets/chat/** -text
 # This unchanged upstream JSON intentionally ends with a blank line.
 src/assets/document-viewer/_global_variables.json whitespace=-blank-at-eof
 src/assets/player-permissions/_global_variables.json whitespace=-blank-at-eof
