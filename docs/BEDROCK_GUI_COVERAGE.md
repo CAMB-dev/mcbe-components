@@ -1,6 +1,8 @@
 # Bedrock Classic GUI覆盖清单
 
-这是固定官方源文件与本库188个公开组件的**范围映射**，不是原生像素验收表。188组件包含基础控件、可复用零件及组合，不能读作188个完整游戏GUI；A类的38个文件也不代表37个完整原生流程已完成。
+> Credits的实际barrel／功能包、React18／19安装消费与source／built展示页检查按具名阶段完成，以下仅Credits行E→有限A。A39／E0是该206文件快照的范围映射，不是所有Minecraft GUI或native完成；最终仅文档tar与Git部署身份仍另记。
+
+这是固定官方源文件与本库191组件的**范围映射**，不是原生像素验收表。191包含基础控件、零件和组合，不等于191个完整游戏GUI；有限A39也不是39个完整原生流程。上一已验阶段为188组件、A38／E1。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -10,22 +12,20 @@
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|38|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|39|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|16|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
 |C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
-|E|`confirmed_missing_named_family`|1|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
+|E|`confirmed_missing_named_family`|0|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
 |G|`optional_family_unmapped`|63|可选族未建立映射：教育、平台、账户、交易等来源仍保留；服务能力由宿主负责。|
 |H|`unknown`|6|证据不足：保持未知，不强制归为已覆盖或必需新增。|
 
-## 尚缺的1个命名族
+## 命名族E0的边界
 
-以下表示源文件存在、该快照没有专门公开组合，不表示所有功能都须另建组件或由库接管外部服务。教育 /平台功能、通用宿主组合与Pocket仍应按产品范围单独决定。
+Credits经有限Web合同、功能包、实际安装与展示页检查后由E→有限A，该固定206行快照的E计数成为0。它只表示这组“确认缺失命名族”已建立有限映射；B16部分、C34通用候选、F16 Pocket未认证、G63可选未映射、H6未知，以及所有文件的native状态仍保留。不能据E0宣称Minecraft全部GUI完成。
 
-|命名族|实际源文件|
-|---|---|
-|片尾名单 /Credits|`credits_screen.json`|
+CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际内容排版、滚动、独立Skip和高层／受控源快照。48个不同Web合同与六个自编平面不认证原版字体、logo、poem／edu阶段、引擎路由或整屏像素。实际包／安装／source与built展示页资格见具名阶段；详见[CREDITS_QA.md](CREDITS_QA.md)。本增量只变动credits_screen.json一行，其余205数据行逐字保持。
 
 **ServerForms已接入有限源族**（`server_form.json`）：ServerActionForm /ServerCustomForm提供LongForm /CustomForm的225×200组合与typed字段，区别于ServerList。37项客户端合同通过，不据此推断第三MessageForm、后端协议或native parity，详见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。
 
@@ -94,7 +94,7 @@
 |`content_log_history_screen.json`|content_log_history|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
 |`crafter_screen_pocket.json`|crafter_pocket|0|F|—|
 |`create_world_upsell_screen.json`|create_world_upsell|2|G|—|
-|`credits_screen.json`|credits|1|E|—|
+|`credits_screen.json`|credits|1|A|CreditsScreen、CreditsRoll、CreditsSkipButton；layoutCredits（函数）|
 |`csb_purchase_error_screen.json`|csb_purchase_error|1|G|—|
 |`csb_screen.json`|csb|2|G|—|
 |`csb_sections/content_section.json`|csb_content|0|D|—|

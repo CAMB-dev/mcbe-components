@@ -150,3 +150,12 @@ export { InviteCategory } from './invite-category';
 export { InvitePagination } from './invite-pagination';
 export { InviteFooter } from './invite-footer';
 export type * from './invite-types';
+
+export { CreditsScreen } from './credits-screen';
+export { CreditsRoll } from './credits-roll';
+export { CreditsSkipButton } from './credits-skip-button';
+export { layoutCredits } from './credits-layout';
+export type { CreditsTitleGroup, CreditsDiscipline, CreditsSectionData, CreditsContent, CreditsTextRole, CreditsPath, CreditsSourceSpan, CreditsBitmapFace, CreditsMissingGlyphPolicy, CreditsCssFace, CreditsDirectFontSource, CreditsFontSource, CreditsTextStyle, CreditsBlockSpacing, CreditsColorCode, CreditsMarkupPolicy, CreditsLayoutLimits, CreditsDecoration, CreditsLayoutProfile, CreditsWholeImage, CreditsStage, CreditsRollPlan, CreditsLayoutBindings, CreditsTextToken, CreditsLayoutRun, CreditsLayoutLine, CreditsLayoutParagraph, CreditsLayoutNode, CreditsLayoutImage, CreditsLayoutStage, CreditsLayoutUsage, CreditsLayout, CreditsLayoutRequest } from './credits-types';
+export type { CreditsSurfaceProfile, CreditsPresentationProfile, CreditsFactorySnapshot, CreditsScreenSnapshot, CreditsActionDetail, CreditsLifecycleDetail, CreditsControllerCommand, CreditsControllerHandle, CreditsPlaybackScreenProps, CreditsControlledScreenProps, CreditsScreenProps } from './credits-screen-types';
+export type { CreditsRollProps } from './credits-roll';
+export type { CreditsSkipActionDetail, CreditsSkipButtonProps } from './credits-skip-button';

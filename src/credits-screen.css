@@ -1,0 +1,5 @@
+.mc-credits-screen { background: #000; }
+.mc-credits-screen[hidden] { display: none !important; }
+.mc-credits-screen__cover { position: absolute; inset: 0; background: #000; pointer-events: none; }
+.mc-credits-screen__background { pointer-events: none; }
+.mc-credits-screen__roll { position: relative; }

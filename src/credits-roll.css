@@ -1,0 +1,5 @@
+.mc-credits-roll { isolation: isolate; }
+.mc-credits-roll__visual { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.mc-credits-roll__stage, .mc-credits-roll__line, .mc-credits-roll__run { position: static; }
+.mc-credits-roll__css-run { font-style: normal; font-weight: normal; text-decoration: none; }
+.mc-credits-roll__transcript { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: pre-wrap; border: 0; }

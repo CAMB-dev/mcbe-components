@@ -704,4 +704,32 @@ UGC阶段新增UGCViewer /UGCItemCard与ImmersiveReader /ImmersiveReaderButton�
 
 ## Invite
 
-InviteScreen与可独立复用的InvitePersonRow、InviteCategory、InvitePagination、InviteFooter使当前源码为188组件／205运行时值。六组好友、三类身份、选择／party、分页及footer保留独立宿主输入；邀请、账号、头像provider和资料服务由宿主实现。Invite106个不同合同按02批与06批的实际身份验证，200个完整源／Web材质平面共11,473,278像素RGBA零差；4个自然分数栅格测量仍未资格确认。新包的React18.3.1／19.3.1类型、SSR和资源消费通过，实际React18／19开发和生产四组合均通过，公开页17项通过。不是原生字体或整页像素认证。使用与宿主边界见[INVITE_QA.md](docs/INVITE_QA.md)。
+Invite阶段的InviteScreen与可独立复用的InvitePersonRow、InviteCategory、InvitePagination、InviteFooter使当时源码为188组件／205运行时值。六组好友、三类身份、选择／party、分页及footer保留独立宿主输入；邀请、账号、头像provider和资料服务由宿主实现。Invite106个不同合同按02批与06批的实际身份验证，200个完整源／Web材质平面共11,473,278像素RGBA零差；4个自然分数栅格测量仍未资格确认。新包的React18.3.1／19.3.1类型、SSR和资源消费通过，实际React18／19开发和生产四组合均通过，公开页17项通过。不是原生字体或整页像素认证。使用与宿主边界见[INVITE_QA.md](docs/INVITE_QA.md)。
+
+
+## Credits
+
+> 当前barrel及受检功能包确认191组件／209运行时值（191＋6数据＋12函数），含Credits三组件与layoutCredits。48不同Web合同跨阶段验证，React18／19包及真实默认Vite开发／生产四组合通过；source展示页9PASS，built9不同项为首轮8PASS＋观察器URL修正后的1PASS，不称单轮9全绿。完整原版字体／logo／整屏仍未认证。最终文档tar通过独立产物比对，Git身份及公网部署另记。
+
+| API | 当前源码合同 | 边界 |
+| --- | --- | --- |
+| `CreditsScreen` | 必填`runKey`、`content`、`profile`、`bindings`、`scale`、`skipLabel`、`onCloseRequested`；普通模式还需`playback` | 高层播放器管理roll／cover／Skip子实例；`runKey`开始新run，单纯换content/profile不重置；ref为section |
+| `CreditsRoll` | `content`、`profile`、`plan`、`bindings`、`offset`、`elapsedMs`、`scale`、`rasterPositioning`、`imageSampling` | 实际typed-data与字体排版／格式token／图片／滚动内容，不是renderer插槽；ref与viewportRef为div |
+| `CreditsSkipButton` | `label`、`labelStyle`、`scale`；可选`labelSize`、`visible`、`disabled`及原生button属性 | source form-fitting light按钮，ref为真实button；label＋6、label盒高≤10是显式Web求值 |
+| `layoutCredits(request)` | 实际内容／profile／plan／bindings，返回nodes、paragraphs、lines、images、stages与completionOffset | 纯函数，显式bitmap fallback／CSS metrics、预算、UTF-16来源范围；不带游戏文本或字体 |
+
+```tsx
+import { CreditsScreen } from 'mcbeui';
+import type { CreditsContent, CreditsPresentationProfile } from 'mcbeui';
+// content由宿主提供；profile是复用的字体／布局／材料／速度及Web路由配置。
+// 此处没有捆绑原版staff、poem、quote或本机字体，也不猜测默认native profile。
+declare const content: CreditsContent;
+declare const profile: CreditsPresentationProfile;
+<CreditsScreen runKey="credits-run-1" content={content} profile={profile}
+  bindings={{ showEduIcon: false, showEndPoem: false, playerName: 'Player', scrollFaster: false }}
+  scale={2} skipLabel="Skip"
+  playback={{ playing: true, initialOffset: 0, hiddenPolicy: 'pause' }}
+  onCloseRequested={detail => { /* 宿主处理button.menu_exit，组件不导航 */ }} />;
+```
+
+普通Screen不要求每帧维护factory。高级`mode="controlled-source"`才提供`position`与`snapshot`，保持panel、child、visible binding和exitInputActive独立；child五秒消失后仍可退出。`profile.completion='web-scroll-end-then-fade'`是明确Web串联：scroll_end后3秒黑cover再credits_end；用户menu_exit不伪造这两个自然结束事件。playing／hidden策略管理单调时钟，scrollFaster仅作用于距离；内容、字体、stage顺序、shader与native速度没有被公开默认值替代。完整API与当前验证边界见[Credits记录](docs/CREDITS_QA.md)。

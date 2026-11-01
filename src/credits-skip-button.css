@@ -1,0 +1,27 @@
+/* Source state/offset/material identity, explicit Web fit. Native %c/Skip raster unqualified. */
+.mc-credits-skip { position:relative; display:inline-block; flex:none; box-sizing:border-box; min-width:0; min-height:0; padding:0; border:0; margin:0; border-radius:0; background:transparent; box-shadow:none; font:inherit; line-height:1; text-shadow:none; cursor:pointer; overflow:visible; touch-action:manipulation; vertical-align:top; }
+.mc-credits-skip[hidden] { display:none; }
+.mc-credits-skip:disabled { cursor:default; }
+.mc-credits-skip__state { display:none; position:absolute; inset:0; pointer-events:none; }
+.mc-credits-skip__state--normal { display:block; }
+.mc-credits-skip:is(:hover,:focus-visible):not(:disabled)>.mc-credits-skip__state--normal { display:none; }
+.mc-credits-skip:is(:hover,:focus-visible):not(:disabled)>.mc-credits-skip__state--hover { display:block; }
+.mc-credits-skip:active:not(:disabled)>.mc-credits-skip__state--normal,
+.mc-credits-skip:active:not(:disabled)>.mc-credits-skip__state--hover { display:none; }
+.mc-credits-skip:active:not(:disabled)>.mc-credits-skip__state--pressed { display:block; }
+.mc-credits-skip:disabled>.mc-credits-skip__state--normal { display:none; }
+.mc-credits-skip:disabled>.mc-credits-skip__state--locked { display:block; }
+.mc-credits-skip__image,
+.mc-credits-skip__border,
+.mc-credits-skip__label { display:block; position:absolute; }
+.mc-credits-skip__border { inset:0; }
+.mc-credits-skip__label { z-index:3; overflow:hidden; text-shadow:none; }
+.mc-credits-skip__css-label { font-weight:normal; font-style:normal; font-variant:normal; text-transform:none; text-decoration:none; }
+.mc-credits-skip-skin { display:block; position:absolute; inset:0; pointer-events:none; background-repeat:no-repeat; image-rendering:pixelated; }
+.mc-credits-skip-skin__clip { display:block; position:absolute; overflow:hidden; }
+.mc-credits-skip-skin__patch { display:block; position:absolute; inset:0; background-repeat:no-repeat; image-rendering:pixelated; }
+@media (forced-colors:active) {
+  .mc-credits-skip { border:1px solid ButtonText; color:ButtonText; }
+  .mc-credits-skip:focus-visible { outline:2px solid Highlight; outline-offset:2px; }
+  .mc-credits-skip-skin { display:none; }
+}

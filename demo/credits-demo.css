@@ -1,0 +1,18 @@
+.credits-demo { --mc-font:'MCBE Pixel','MCBE CJK'; --mc-font-unicode:'MCBE CJK','MCBE Pixel'; display:grid; gap:16px; min-width:0; font-family:'MCBE Pixel','MCBE CJK'; }
+.credits-demo__controls { display:flex; flex-wrap:wrap; gap:14px 20px; align-items:end; }
+.credits-demo__buttons { display:flex; gap:10px; }
+.credits-demo__controls>.mc-field { flex:1 1 180px; max-width:260px; }
+.credits-demo__controls>.mc-choice { margin:0; min-height:40px; }
+.credits-demo__host { position:relative; width:100%; max-width:960px; min-width:0; overflow-x:auto; overflow-y:hidden; background:#141414; }
+.credits-demo__font-probe { position:absolute; visibility:hidden; pointer-events:none; white-space:pre; font-style:normal; font-weight:400; font-variant:normal; font-feature-settings:normal; font-kerning:normal; letter-spacing:0; text-transform:none; line-height:1; }
+.credits-demo__host>.mc-credits-screen { outline-offset:-2px; }
+.credits-demo__host .mc-credits-roll__css-run,
+.credits-demo__host .mc-credits-skip__css-label { font-kerning:normal; font-feature-settings:normal; font-variant:normal; text-transform:none; }
+.credits-demo__empty { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; min-height:320px; max-width:100%; padding:24px; box-sizing:border-box; text-align:center; color:#d0d1d4; }
+.credits-demo__empty>p { margin:0; }
+.credits-demo__caption { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:6px 16px; font-size:12px; color:#a8aaad; }
+.credits-demo__caption>p { margin:0; color:#d0d1d4; }
+.credits-demo__notes { max-width:72ch; font-size:12px; color:#a8aaad; }
+.credits-demo__notes>summary { cursor:pointer; }
+.credits-demo__notes>p { margin:10px 0 0; }
+@media (max-width:480px) { .credits-demo__controls { align-items:center; gap:12px; } .credits-demo__controls>.mc-field { flex-basis:100%; max-width:none; } }

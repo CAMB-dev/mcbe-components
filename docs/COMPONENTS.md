@@ -1,6 +1,8 @@
 # Bedrock 组件范围
 
-InviteScreen与可独立复用的InvitePersonRow、InviteCategory、InvitePagination、InviteFooter使当前源码为188组件／205运行时值。六组好友、三类身份、选择／party、分页及footer保留独立宿主输入；邀请、账号、头像provider和资料服务由宿主实现。Invite106个不同合同按02批与06批的实际身份验证，200个完整源／Web材质平面共11,473,278像素RGBA零差；4个自然分数栅格测量仍未资格确认。新包的React18.3.1／19.3.1类型、SSR和资源消费通过，实际React18／19开发和生产四组合均通过，公开页17项通过。不是原生字体或整页像素认证。使用见[INVITE_QA.md](INVITE_QA.md)。
+> Credits：受检功能包已确认191组件／209值（191＋6数据＋12函数）；48不同Web合同跨阶段验证、六自编平面108,000RGBA零差；React18／19包及实际开发／生产四组合通过，source展示页9PASS，built首轮8／1保留，观察器URL修正后单项1PASS。最终文档包／Git部署pending；native四行holdout、ó350与logo41,344差异均保留，见[CREDITS_QA.md](CREDITS_QA.md)。
+
+Invite阶段的InviteScreen与可独立复用的InvitePersonRow、InviteCategory、InvitePagination、InviteFooter使当时源码为188组件／205运行时值。六组好友、三类身份、选择／party、分页及footer保留独立宿主输入；邀请、账号、头像provider和资料服务由宿主实现。Invite106个不同合同按02批与06批的实际身份验证，200个完整源／Web材质平面共11,473,278像素RGBA零差；4个自然分数栅格测量仍未资格确认。新包的React18.3.1／19.3.1类型、SSR和资源消费通过，实际React18／19开发和生产四组合均通过，公开页17项通过。不是原生字体或整页像素认证。使用见[INVITE_QA.md](INVITE_QA.md)。
 
 
 此前共享请求时序修订保持当时183组件／200运行时值及206行覆盖表不变。新的132项正式合同单轮全部通过（114行为＋18材质，8次新增可信输入回归＋124次原有执行；无跳过、flaky或源码漂移，未加算导航），138个完整源／Web材质平面共3,969,420像素RGBA零差。全新0907bc04包／f38bb1索引通过React18.3.1／19.3.1类型、SSR、资源及实际开发／生产四组合；公开30个不同检查来自Portfolio首阶段16项和UGC／Reader第二阶段14项，不能称单轮30全绿。UGC／Reader晚期document否决缺陷已在当前受检请求通道与实际包中修复；原生整页、字体、provider和真实服务仍未认证。
@@ -14,7 +16,7 @@ UGC阶段新增UGCViewer /UGCItemCard与ImmersiveReader /ImmersiveReaderButton�
 
 新增存储管理八组件覆盖Settings内容区、分类与条目、操作托盘、选择footer及依赖 /分享弹窗；截图闪光层独立复用，图像与时钟由宿主提供。使用与实际验证范围见 [STORAGE_QA.md](STORAGE_QA.md) 和 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)，不据源码实现宣称原生整页验收。
 
-当前导出 188 个组件，目录 188 项均为 implemented；另有 6 份数据、8 个纯函数及 3 个浏览器 GPU 函数，共 205 个源运行时值导出。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
+当前实际barrel及受检功能包为191组件，另有6数据、9纯函数及3浏览器GPU函数，共209运行时值。built9不同项分阶段完成，最终仅文档包另记。这些数据和函数不计作组件。这个数字是工作清单，不表示已经穷尽所有游戏版本中的 GUI。实现状态不等于整屏像素验收通过。
 
 新增存储管理八组件与截图闪光层，当前173组件 /190运行时值。Storage首99项94通过、1设备跳过、4比较方法失败保留，修正参照后8项材质复验通过：19完整平面、160,301像素RGBA零差；28项行为通过。Screenshot17项、公开14项和实际React18 /19默认Vite开发 /生产四场景分别通过。原生整页、默认锚点、材质解析与引擎provider仍未认证，见 [STORAGE_QA.md](STORAGE_QA.md) 与 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)。
 
@@ -58,6 +60,7 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 
 | 分类 | 组件 |
 | --- | --- |
+| Credits（有限源族） | CreditsScreen、CreditsRoll、CreditsSkipButton；另有纯函数layoutCredits，不计作组件 |
 | 文字与表面（21） | Text、BitmapText、PixelIcon、GuiIcon、Image、NineSlice、GuiImageLayer、GuiLayer、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
 | 输入与设置（16） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、ToggleButton、SearchField、Tabs、NavigationList、SettingRow、KeybindingField |
 | 物品与容器结构（27） | ItemSlot、ItemImage、ItemCount、DurabilityBar、ItemTooltip、InventoryGrid、PlayerInventory、WorkstationFrame、InventoryScreenFrame、RecipeGrid、RecipeSelectionGrid、RecipeSearch、RecipeFilterToggle、RecipeBook、RecipeBookEntry、RecipeCategoryTabs、InventoryToolbar、ProcessingArrow、FuelIndicator、BrewingIndicator、BeaconEffect、TradeOffer、ArmorSlot、ResultSlot、SlotPlaceholder、CrafterSlot、ContainerFrame |
@@ -96,7 +99,7 @@ HUD 使用原始图像，生命 / 饥饿 / 护甲 / 氧气的行排列属于 cus
 
 ## 验收边界
 
-当前目录中的 140 项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 /服务器数据、原生预览与特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与Web测试通过不能替代真实游戏逐屏验收。
+该历史阶段目录中的140项均已提供组件，不代表穷尽所有游戏版本、平台或未来新增 GUI。游戏规则、世界 /服务器数据、原生预览与特效 renderer、字体栅格及整屏动态状态仍有独立边界；源码、资源相同与Web测试通过不能替代真实游戏逐屏验收。
 
 [完整GUI覆盖清单](BEDROCK_GUI_COVERAGE.md) 提供全部206个实际UI文件、198个声明screen root /128个相关文件、八种文件状态与13个命名族缺口。140组件与26个scoped命名源文件均不等于完整原生GUI数量；共享 /可选 /未知文件也不自动要求新建组件。
 

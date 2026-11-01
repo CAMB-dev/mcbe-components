@@ -1,0 +1,1049 @@
+{
+  "status": "SOURCE_WEB_PACKAGE_INSTALLED_SOURCE_BUILT_DEMO_QUALIFIED_NATIVE_UNVERIFIED",
+  "evidence": {
+    "study": {
+      "path": ".cache/credits-source-study-01/FINAL.json",
+      "sha256": "c5f9a7fc1360128b9ccabc49eb69a16773407346b2b9c01e64c1c625693ca2ff"
+    },
+    "captures": {
+      "path": ".cache/credits-native-root-01/CAPTURES-FINAL.json",
+      "sha256": "6edd29c639b02785140ccf8df91577cdb587b45325620547972f4baa204ee670"
+    },
+    "analysis": {
+      "path": ".cache/credits-native-analysis-01/FINAL.json",
+      "sha256": "3671a6d0664b7765b4b47cc25e79ad227bec2996c2516b86215d31a09ac9ca8a"
+    },
+    "proposal": {
+      "path": ".cache/credits-api-spec-01/FINAL.json",
+      "sha256": "f77c29594535b3920da2aa3ea2f9fca97b44db707d1924cef9b54ce9170bd1cb"
+    },
+    "nativeFontEdge": {
+      "path": ".cache/credits-native-font-edge-01/FINAL.json",
+      "bytes": 5246,
+      "sha256": "602757594499ac6410802ebf7e5bc9ee7343772817461e169173b93d242091df"
+    },
+    "coreReview": {
+      "path": ".cache/credits-core-review-01/FINAL.json",
+      "bytes": 6692,
+      "sha256": "b67c9b849191a27c674f3525d939cdc5fe301bc5ab8986926df714aa212d0a0d"
+    },
+    "fallbackReview": {
+      "path": ".cache/credits-core-review-02/FINAL.json",
+      "bytes": 2050,
+      "sha256": "9fe83b526ba4f2186a3bd6e3ba6aa71036c798600017b23210eaf1028c582932"
+    },
+    "webQualification": {
+      "path": ".cache/credits-web-qualification-01/FINAL.json",
+      "bytes": 22462,
+      "sha256": "fabc3f5d8033265bcc8aeaaa3dddd4066c4fa764a4444277bfce66ee2c2ba2d6"
+    },
+    "credits-package-02/ARCHIVE-IDENTITY.json": {
+      "path": ".cache/credits-package-02/ARCHIVE-IDENTITY.json",
+      "bytes": 138309,
+      "sha256": "766855e2d4f6bed1b5e5cb639775649deed56236adfaf1ef3b426ca4ef8cd88d"
+    },
+    "credits-package-observer-02/FINAL.json": {
+      "path": ".cache/credits-package-observer-02/FINAL.json",
+      "bytes": 2986,
+      "sha256": "af5a37d6081d70a990cfebd794b324db4b7c16a17964a2661fe378cf6fbb84f3"
+    },
+    "consumer-react18/credits-verification.json": {
+      "path": ".cache/consumer-react18/credits-verification.json",
+      "bytes": 2980,
+      "sha256": "fcf05c648077eebb243783e0ec62443543614e8a9fd09adea969f9619ac96889"
+    },
+    "consumer-react19/credits-verification.json": {
+      "path": ".cache/consumer-react19/credits-verification.json",
+      "bytes": 2979,
+      "sha256": "643b6283378fb73a855f173981f682b795e125fc84abd93b30bab44a91410704"
+    },
+    "credits-installed-01/FINAL.json": {
+      "path": ".cache/credits-installed-01/FINAL.json",
+      "bytes": 24526,
+      "sha256": "8e52d38e206890324283c0c0f2d52c3ff876f3a60a386bdd6f672d9c391fbb0c"
+    },
+    "credits-public-01/RESULT.json": {
+      "path": ".cache/credits-public-01/RESULT.json",
+      "bytes": 538,
+      "sha256": "e3f1528a76fa36a7adfc22645b1f35a9845fa1259edc9896655d6048a6f3eddb"
+    },
+    "credits-public-02/RESULT.json": {
+      "path": ".cache/credits-public-02/RESULT.json",
+      "bytes": 531,
+      "sha256": "7e1a06d9aea737a6b505768d18e1f4455eb2a375c6ce6dd9308b0507e003b637"
+    },
+    "credits-demo-implementation-01/FINAL.json": {
+      "path": ".cache/credits-demo-implementation-01/FINAL.json",
+      "bytes": 3670,
+      "sha256": "5ab0b6555b7c3b2bbd4dff23e386872f8a24b87e803096c379cc0e3f0fa2f44d"
+    },
+    "credits-demo-assets-prep-01/FINAL.json": {
+      "path": ".cache/credits-demo-assets-prep-01/FINAL.json",
+      "bytes": 5631,
+      "sha256": "f99232716a1e9055089e5bbdc4513f6b35336d096027accb4d15da9d7c66d839"
+    },
+    "credits-native-root-01/EOF-FORMAT.json": {
+      "path": ".cache/credits-native-root-01/EOF-FORMAT.json",
+      "bytes": 865,
+      "sha256": "86dbc8edbbef9713780d40e59138fc46ff9f4612a7179797b9843071fe186978"
+    },
+    "docs/credits-assets.json": {
+      "path": "docs/credits-assets.json",
+      "bytes": 3148,
+      "sha256": "d4d4c6074ca708af21da644e7c4033b8a9ebafcf5bbde99e3c80867fa95480ee"
+    },
+    "credits-public-03/RESULT.json": {
+      "path": ".cache/credits-public-03/RESULT.json",
+      "bytes": 504,
+      "sha256": "f9f95ed668fdea5f4d39bd1deca58b1d47a506fd111123facab4165b88b70c2f"
+    },
+    "credits-native-root-01/PUBLIC-FONT-URL-CAUSE.json": {
+      "path": ".cache/credits-native-root-01/PUBLIC-FONT-URL-CAUSE.json",
+      "bytes": 1064,
+      "sha256": "dec22b54c507d18c2985e8eb32705b3f8ac9c274c1d3e807f30609de394158c5"
+    }
+  },
+  "source": {
+    "release": "v1.26.60.5-full",
+    "installedVersion": "1.26.6005.0",
+    "zip": {
+      "path": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+      "bytes": 169569258,
+      "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+    },
+    "ui": {
+      "path": "resource_pack/ui/credits_screen.json",
+      "bytes": 4028,
+      "sha256": "9a30b84328cbb6d499f336889456c9148a03e28695308a4f9863770d7baf7ea1"
+    },
+    "installedUI": {
+      "path": "data/resource_packs/vanilla/__brarchive/ui.brarchive::credits_screen.json",
+      "bytes": 2596,
+      "sha256": "164424a85711f4d19b6965ace3f6f481234953fb4bb084bf3adba7c6f37a5cb2",
+      "samplesByteEqual": false,
+      "samplesParsedJSONEqual": true
+    }
+  },
+  "inventory": {
+    "ownDefinitions": [
+      {
+        "name": "credits.anim_fade_in",
+        "key": "anim_fade_in",
+        "line": 4
+      },
+      {
+        "name": "credits.anim_fade_out",
+        "key": "anim_fade_out",
+        "line": 12
+      },
+      {
+        "name": "credits.anim_background_scroll",
+        "key": "anim_background_scroll",
+        "line": 21
+      },
+      {
+        "name": "credits.anim_button_wait",
+        "key": "anim_button_wait",
+        "line": 28
+      },
+      {
+        "name": "credits.fade_in_image",
+        "key": "fade_in_image",
+        "line": 34
+      },
+      {
+        "name": "credits.fade_out_image",
+        "key": "fade_out_image@credits.fade_in_image",
+        "line": 43
+      },
+      {
+        "name": "credits.skip_panel",
+        "key": "skip_panel",
+        "line": 50
+      },
+      {
+        "name": "credits.credits_renderer",
+        "key": "credits_renderer",
+        "line": 89
+      },
+      {
+        "name": "credits.credits_screen_content",
+        "key": "credits_screen_content",
+        "line": 110
+      },
+      {
+        "name": "credits.background",
+        "key": "background@common.dirt_background",
+        "line": 160
+      },
+      {
+        "name": "credits.credits_screen",
+        "key": "credits_screen@common.base_screen",
+        "line": 171
+      }
+    ],
+    "authoredNestedControls": 7,
+    "conservativeClosureNames": 188,
+    "closureIsMountedCount": false,
+    "sourceSearch": {
+      "zipDirectoryEntries": 22932,
+      "utf8ReadableMembers": 9074,
+      "utf8ReadableNonUI": 8868,
+      "installedPackManifests": 75,
+      "installedRendererPaths": 238,
+      "nativeEngineCodeScanned": false,
+      "caveat": "Bounded readable-source search; zero renderer hits do not prove absence from engine code or unsearched binary formats."
+    }
+  },
+  "actualData": {
+    "files": [
+      {
+        "path": "data/credits/credits.json",
+        "bytes": 240433,
+        "sha256": "acd3f38b536ec9270e9ac62c4724f132657c97df31d22d08545fce7da27e9401",
+        "lines": 5445,
+        "formattingTokenCounts": {},
+        "placeholderCounts": {}
+      },
+      {
+        "path": "data/credits/end.txt",
+        "bytes": 8913,
+        "sha256": "4e1de48642b86d680064c968b7216e82b976b3fa3f2671a23e9820131d0796c8",
+        "lines": 151,
+        "formattingTokenCounts": {
+          "§3": 39,
+          "§2": 45,
+          "§f": 8,
+          "§k": 8,
+          "§a": 8,
+          "§b": 8
+        },
+        "placeholderCounts": {
+          "PLAYERNAME": 1
+        }
+      },
+      {
+        "path": "data/credits/quote.txt",
+        "bytes": 255,
+        "sha256": "4e6b7c1e96a54337e814c06cabe8758c60c953a870f7e3c79072de43493094ff",
+        "lines": 1,
+        "formattingTokenCounts": {
+          "§f": 1,
+          "§7": 1
+        },
+        "placeholderCounts": {}
+      }
+    ],
+    "schema": "readonly {section:string; disciplines:readonly {discipline:string; titles:readonly {title:string; names:readonly string[]}[]}[]}[]",
+    "exactObjectRecords": 469,
+    "sections": 22,
+    "disciplines": 39,
+    "titleNameGroups": 408,
+    "names": 3098,
+    "totalStrings": 3567,
+    "emptyHeadings": {
+      "discipline": 21,
+      "title": 2
+    },
+    "numericFields": 0,
+    "layoutFontSpeedColorImageTextureFields": 0,
+    "orderedArrays": true,
+    "automaticSortingRecovered": false,
+    "contentsCopied": false,
+    "caveat": "Schema/order/format tokens are observed. Paragraph layout, blank-heading spacing, PLAYERNAME replacement and obfuscation/color behavior are not recovered."
+  },
+  "authoredUI": {
+    "renderer": {
+      "type": "custom",
+      "name": "credits_renderer",
+      "size": [
+        "65%",
+        "100%"
+      ],
+      "endEvent": "scroll_end",
+      "bindings": [
+        "#show_edu_icon",
+        "#show_end_poem",
+        "#player_name",
+        "#scroll_faster"
+      ],
+      "rendererImplementationInJSON": false
+    },
+    "fadeIn": {
+      "target": "black cover image",
+      "from": 1,
+      "to": 0,
+      "duration": 3,
+      "easing": "linear"
+    },
+    "fadeOut": {
+      "target": "black cover image",
+      "from": 0,
+      "to": 1,
+      "duration": 3,
+      "endEvent": "credits_end",
+      "automaticFactoryWiringRecovered": false
+    },
+    "background": {
+      "texture": "textures/ui/bg32",
+      "sourceSize": [
+        32,
+        32
+      ],
+      "tiled": true,
+      "tiledScale": [
+        2,
+        2
+      ],
+      "size": [
+        "100%",
+        "2000%"
+      ],
+      "duration": 503,
+      "offsetFrom": [
+        0,
+        "-0%y"
+      ],
+      "offsetTo": [
+        0,
+        "-25%y"
+      ],
+      "durationIsCreditsRollDuration": false,
+      "percentageEvaluatorRecovered": false
+    },
+    "skip": {
+      "button": "common_buttons.light_text_form_fitting_button",
+      "anchor": "bottom_right",
+      "offset": [
+        -8,
+        -8
+      ],
+      "target": "button.menu_exit",
+      "visibleBinding": "#skip_button_visible",
+      "childWaitDuration": 5,
+      "destroyAtEnd": "skip_button",
+      "waitMeansDelayedAppearance": false
+    },
+    "mappings": {
+      "wholeScreen": [
+        {
+          "from": "button.menu_select",
+          "to": "button.show_skip"
+        },
+        {
+          "from": "button.menu_ok",
+          "to": "button.show_skip"
+        },
+        {
+          "from": "button.menu_cancel",
+          "to": "button.show_skip"
+        }
+      ],
+      "spawnedPanel": {
+        "from": "button.menu_cancel",
+        "to": "button.menu_exit"
+      },
+      "universalPriorityRecovered": false
+    },
+    "exactCaseWhite": {
+      "authored": "textures/ui/White",
+      "exactOriginalRecovered": false,
+      "lowercaseCandidate": {
+        "path": "resource_pack/textures/ui/white.png",
+        "size": [
+          15,
+          15
+        ],
+        "sha256": "e666f27bda2c08c810a18b699397f8f0df5ffee87157a14bb96157e4a6b27fc3"
+      },
+      "nativeCaseResolutionRecovered": false
+    }
+  },
+  "fontCandidates": {
+    "bitmapArchive": {
+      "path": "data/resource_packs/vanilla/__brarchive/font.brarchive",
+      "bytes": 1254618,
+      "sha256": "cdb2c8dbfcea7e0967d5369ced0eb5f4a6fcded79769e4e4605c1f0b406c86bc",
+      "entries": 235
+    },
+    "selectedSourceEntries": [
+      {
+        "entry": "default8.png",
+        "bytes": 1785,
+        "sha256": "daf219bcd3a050c33f0f8883e12d75acc818cee918f400f5afcd7ac386b2f904",
+        "matchesExistingPreparation": true
+      },
+      {
+        "entry": "default8.json",
+        "bytes": 81,
+        "sha256": "1326598897eebc60e5c6835f1fdf700c175f5d2628bb4ed6a9bba959d3695793",
+        "matchesExistingPreparation": true
+      },
+      {
+        "entry": "glyph_00.png",
+        "bytes": 8136,
+        "sha256": "93fb46cef268a658be542e109f0c5f9e49565afe95f160027fbc95f04b03fdfc",
+        "matchesExistingPreparation": true
+      },
+      {
+        "entry": "font_metadata.json",
+        "bytes": 1707,
+        "sha256": "48c537a010ffb7c4fe5c2d6cc4b2c955758be2df184f553077080bdc2afc3b5a",
+        "matchesExistingPreparation": true
+      }
+    ],
+    "mojanglesTTF": {
+      "path": "data/fonts/Mojangles.ttf",
+      "bytes": 71900,
+      "sha256": "3d4cdf2752075d28c6ebf0ba44a61157ec6eb38f8db0ebdc3205aec056760be5",
+      "sourceMetadataParsed": true,
+      "copiedToLibrary": false
+    },
+    "selectedFaceRecovered": false,
+    "arbitraryUnicodeFallbackRecovered": false,
+    "firstPNG": {
+      "availableDefault8Candidates": 10,
+      "zeroDiagnosticForegroundMasks": 7,
+      "physicalScale": 5,
+      "threshold": "achromatic minRGB75",
+      "boundedTranslation": "±3X/±8Y per first-image candidate",
+      "scope": "Full selected line ROI shape/adjacent advance masks only; not native RGB/RGBA or font-resource identity"
+    },
+    "independentThirdPNG": {
+      "candidates": 14,
+      "zeroDiagnosticMainMasks": 10,
+      "nonzeroMaskDifferences": [
+        3725,
+        70,
+        5,
+        1405
+      ],
+      "origin": [
+        648,
+        2
+      ],
+      "nameStride": 100,
+      "physicalScale": 5,
+      "threshold": "achromatic minRGB128",
+      "perNameFit": false,
+      "scope": "Different diagnostic gate; fixed held-out parameters. Failed/faded/long-line cases retained, not a relaxed RGBA test."
+    },
+    "existingCPUPath": "layoutBitmapText/renderBitmapLayout alpha agrees with14 manual original-page candidates; implementation reuse check, not second independent native oracle",
+    "TTFExperiment": "Specific Pillow/FreeType128-threshold whole-run candidate sizes45..55 remained nonzero1558..7420. This does not disprove native use of TTF under another policy.",
+    "unresolved": [
+      "extended mapping such as ó",
+      "terminal advance/general metrics",
+      "TTF-versus-bitmap native resource choice",
+      "native shader/AA/gamma",
+      "exact shadow/vignette formula"
+    ]
+  },
+  "nativeCaptures": {
+    "inputs": [
+      {
+        "path": ".cache/credits-native-01/native-clipboard-01.png",
+        "bytes": 505023,
+        "sha256": "652a3651bce5c847e493082196c312ddd8e0019e1fafa9a5999ec4c83d8c8817",
+        "size": [
+          2568,
+          1400
+        ],
+        "wholeUnmodified": true,
+        "clientCropApplied": false
+      },
+      {
+        "path": ".cache/credits-native-01/native-logo-02.png",
+        "bytes": 588335,
+        "sha256": "c370a72e8e5675ad293c15af88c2a62026267f22f87d4f8756607df69cd74bf0",
+        "size": [
+          2568,
+          1400
+        ],
+        "wholeUnmodified": true,
+        "clientCropApplied": false
+      },
+      {
+        "path": ".cache/credits-native-01/native-skip-request-03.png",
+        "bytes": 504084,
+        "sha256": "f17328d7654effa8d2033c97b1140cdc764a17aa1558d0954ca1b8ee04a02a65",
+        "size": [
+          2568,
+          1400
+        ],
+        "wholeUnmodified": true,
+        "clientCropApplied": false
+      }
+    ],
+    "analysisArtifacts": {
+      "count": 97,
+      "byteHashesVerified": true,
+      "runtimeTestCount": false
+    },
+    "thirdPNGContainsSkip": false,
+    "JPEGRole": "Input/entry observations only; never RGBA goldens",
+    "clientBoundsRecovered": false,
+    "caveat": "Whole2568x1400 PNGs contain host-looking borders and differ from2560x1400 CU JPEGs; no8px crop/rescale or client-rect inference."
+  },
+  "boundedNativeMeasurements": {
+    "logo": {
+      "original": {
+        "path": "resource_pack/textures/ui/title.png",
+        "size": [
+          1937,
+          333
+        ],
+        "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662"
+      },
+      "candidateCases": 510,
+      "bestSamplerCandidate": "point",
+      "bestOuterBox": [
+        536,
+        371,
+        1505,
+        255
+      ],
+      "domain": "Predicted source alpha255 RGB only",
+      "domainPixels": 356072,
+      "equalRGB": 314728,
+      "differingRGB": 41344,
+      "transparentOrPartialAlphaTested": false,
+      "fullRGBAQualified": false,
+      "geometrySamplerRecovered": false
+    },
+    "background": {
+      "original": {
+        "path": "resource_pack/textures/ui/bg32.png",
+        "size": [
+          32,
+          32
+        ],
+        "sha256": "76842acb4488a28062ca494d9150a56db94d1555704d66340ef72cd42066d6bb"
+      },
+      "firstSecond": {
+        "RGBComparisons": 645000,
+        "overlappingROIs": true,
+        "distinctPixels": 470000,
+        "differences": 0
+      },
+      "firstThirdSeparate": {
+        "RGBComparisons": 200000,
+        "differences": 0,
+        "scope": "Separate native-to-native ROI, not an additional globally unique pixel count"
+      },
+      "candidatePhysicalTile": [
+        320,
+        320
+      ],
+      "nativeTemporalScrollRecovered": false
+    },
+    "shadow": "One source-unit5physical down/right and approximately quarter-intensity candidate; exact color/shader rule not recovered",
+    "vignette": "Attenuation observed near edges, exact source color/shader/gamma and opacity_override0 behavior unknown",
+    "selectedDomainsOnly": true,
+    "wholeGUIQualified": false
+  },
+  "observedSettingsInput": {
+    "entry": "Actual installed Settings/General/Credits, no world entry",
+    "firstEscape": "Grey Skip appeared; roll continued",
+    "laterChildHidden": "No visible Skip after48.521..51.894s; not exact5s boundary measurement",
+    "nextEscape": "Returned to General at57.583s despite previously hidden child",
+    "separateVisitReturn": "Green focused Skip appeared; roll continued",
+    "thirdPNGDelay": "11.186..11.595s after Return; no Skip captured",
+    "conclusion": "Panel input eligibility must not equal child button visibility. Retained-panel explanation is a hypothesis, not observed engine object lifetime or universal priority.",
+    "untested": [
+      "other entrances",
+      "poem/quote/education",
+      "faster held-key timing",
+      "repeat-key/controller/touch",
+      "full completion/end-event chain"
+    ]
+  },
+  "qualification": {
+    "sourceAndWebImplementation": true,
+    "privateMountedContractsVerified": true,
+    "publicReleaseCandidateOnly": false,
+    "previousVerifiedComponentCount": 188,
+    "previousVerifiedRuntimeValues": 205,
+    "nativeWholeGUI": false,
+    "nativeFontRecovered": false,
+    "nativeLogoFullRGBA": false,
+    "nativeRendererRecovered": false,
+    "allGUIComplete": false,
+    "currentSourceAndTestedPackageComponentCount": 191,
+    "currentSourceAndTestedPackageRuntimeValues": 209,
+    "packageQualified": true,
+    "installedBrowserQualified": true,
+    "builtSiteQualified": true,
+    "finalDocsTarQualified": false,
+    "coverage": {
+      "A": 39,
+      "E": 0,
+      "changedOnly": "credits_screen.json E->scoped A",
+      "otherRowsPreserved": 205,
+      "allMinecraftComplete": false
+    }
+  },
+  "contentPolicy": "No staff strings, poem/quote text, original local fonts or absolute machine/user installation paths copied into these candidates.",
+  "historicalAPIProposal": {
+    "evidence": {
+      "path": ".cache/credits-api-spec-01/FINAL.json",
+      "sha256": "f77c29594535b3920da2aa3ea2f9fca97b44db707d1924cef9b54ce9170bd1cb"
+    },
+    "highLevel": "Concrete CreditsRoll data renderer plus CreditsScreen using a reusable explicit profile; advanced source mode preserves independent factories/bindings/input destinations",
+    "typeCheck": {
+      "strict": true,
+      "skipLibCheck": false,
+      "expectedNegativeContracts": 12,
+      "runtimeVerified": false
+    },
+    "rendererSlotCountsAsComplete": false
+  },
+  "implementation": {
+    "candidatePublicComponents": [
+      "CreditsScreen",
+      "CreditsRoll",
+      "CreditsSkipButton"
+    ],
+    "candidatePureFunction": "layoutCredits",
+    "sources": [
+      {
+        "path": "src/credits-clock.ts",
+        "bytes": 3947,
+        "sha256": "9e2f84f5cccc3d543b5b135e220c43ed9d9a947d23457365644209ffe2ab58e0"
+      },
+      {
+        "path": "src/credits-layout.ts",
+        "bytes": 39587,
+        "sha256": "47b6e985b53b2f746b43c533424cb9d3eca86507dd5cad62041327e83a10f77a"
+      },
+      {
+        "path": "src/credits-roll.css",
+        "bytes": 530,
+        "sha256": "697580f2bc3908568a5c3b37c64812171e089bb8319294f652a862823bb00686"
+      },
+      {
+        "path": "src/credits-roll.tsx",
+        "bytes": 14575,
+        "sha256": "630ae1d5b391a88c1119e66ae7de54bbb1bada89f802305b684d7db628ca5963"
+      },
+      {
+        "path": "src/credits-screen-model.ts",
+        "bytes": 5114,
+        "sha256": "49e4c4df240f306ac90368fe42fec0493ef0a4bbfed9b1982d99195024fca59d"
+      },
+      {
+        "path": "src/credits-screen-types.ts",
+        "bytes": 5378,
+        "sha256": "3c0ac815747d9533a9d40f173182be783226391824f4e7ee6dd6e9789370190e"
+      },
+      {
+        "path": "src/credits-screen.css",
+        "bytes": 304,
+        "sha256": "3d7266cca63d04bbe302396c9d022c6b73151a7f7e097e09c272b3051f3a737a"
+      },
+      {
+        "path": "src/credits-screen.tsx",
+        "bytes": 22165,
+        "sha256": "03456af55e0124760dcabf128293e6b802cb897716923218f781eff957cffef9"
+      },
+      {
+        "path": "src/credits-skip-button.css",
+        "bytes": 2242,
+        "sha256": "678878dd8e31711bc11c49d29df8046eee2c0bc39eb0eb176dbce55fbff17b4f"
+      },
+      {
+        "path": "src/credits-skip-button.tsx",
+        "bytes": 10401,
+        "sha256": "a7c4d35529d641183db6ec840271563a29fe3f51c214e63d4d3be21494a4127f"
+      },
+      {
+        "path": "src/credits-types.ts",
+        "bytes": 10741,
+        "sha256": "dac6bf3a21f5c170209a08d30adf416956e3e25a52219486547866f62bb56d54"
+      }
+    ],
+    "highLevel": "Playback Screen owns timeline/factory; runKey resets while content/profile changes preserve playback",
+    "advanced": "controlled-source position+snapshot; independent parent/child/visibility/input/fade state",
+    "dataCore": "Concrete hierarchy/format/wrap/fonts/images/scroll; no whole-renderer injection",
+    "nativeCertified": false
+  },
+  "verification": {
+    "distinctLatestContracts": 48,
+    "composition": "Screen32 = run05 unaffected24 + run07 affected8; unchanged Roll16 from run02; not one green48 run",
+    "screenHistory": {
+      "01": {
+        "code": 1,
+        "stats": {
+          "startTime": "2026-11-01T07:51:58.842Z",
+          "duration": 15382.091,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 5,
+          "flaky": 0
+        },
+        "expectedTests": 5,
+        "pins": 833,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Actual mounted private Screen targeted regression reproduction before fixes; failures are retained, not release qualification."
+      },
+      "02": {
+        "code": 1,
+        "stats": {
+          "startTime": "2026-11-01T07:53:47.484Z",
+          "duration": 49992.767,
+          "expected": 42,
+          "skipped": 0,
+          "unexpected": 2,
+          "flaky": 0
+        },
+        "expectedTests": 44,
+        "pins": 833,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Actual private Credits Screen+Roll DOM/clock/requests/refs/error on desktop and mobile plus six full authored Web planes. Not original Minecraft materials/native GUI pixels or installed-package qualification."
+      },
+      "03": {
+        "code": 0,
+        "stats": {
+          "startTime": "2026-11-01T07:55:11.477Z",
+          "duration": 3240.484,
+          "expected": 2,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "expectedTests": 2,
+        "pins": 833,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Rerun only the two restart/ref tests after observer-only host focus restoration, no production delta from run02. Not a single44 green run."
+      },
+      "04": {
+        "code": 1,
+        "stats": {
+          "startTime": "2026-11-01T07:57:10.927Z",
+          "duration": 3421.579,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "expectedTests": 1,
+        "pins": 833,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Actual mounted private Screen targeted regression reproduction before fixes; failures are retained, not release qualification."
+      },
+      "05": {
+        "code": 0,
+        "stats": {
+          "startTime": "2026-11-01T07:59:34.272Z",
+          "duration": 32372.458000000002,
+          "expected": 30,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "expectedTests": 30,
+        "pins": 834,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Actual all30 Screen mounted contracts after policy/model/current-generation guard changes. Prior unchanged Roll16 qualified run02. This is not original Minecraft native GUI pixels or installed-package qualification."
+      },
+      "06": {
+        "code": 1,
+        "stats": {
+          "startTime": "2026-11-01T08:00:58.085Z",
+          "duration": 3424.811,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "expectedTests": 1,
+        "pins": 834,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Actual mounted private Screen targeted regression reproduction before fixes; failures are retained, not release qualification."
+      },
+      "07": {
+        "code": 0,
+        "stats": {
+          "startTime": "2026-11-01T08:01:16.333Z",
+          "duration": 4861.383,
+          "expected": 8,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "expectedTests": 8,
+        "pins": 834,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Eight affected Screen request/veto contracts after post-host-callback policy guard fix; unchanged clock/layout cases remain qualified run05 and Roll16 run02. Not a single48 green run or native GUI certificate."
+      }
+    },
+    "rollHistory": {
+      "01": {
+        "code": 1,
+        "stats": {
+          "startTime": "2026-11-01T07:27:58.553Z",
+          "duration": 14317.446,
+          "expected": 10,
+          "skipped": 0,
+          "unexpected": 6,
+          "flaky": 0
+        },
+        "expectedTests": 16,
+        "pins": 824,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Actual private CreditsRoll mounted React19 DOM/assets/refs/error/controlled offset across desktop+mobile and six complete authored2x6 Web planes. Not original Minecraft material planes, published API/package consumption or native pixel certification."
+      },
+      "02": {
+        "code": 0,
+        "stats": {
+          "startTime": "2026-11-01T07:32:24.669Z",
+          "duration": 3486.877,
+          "expected": 6,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "expectedTests": 6,
+        "pins": 824,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Six actual private CreditsRoll complete authored2x6 Web planes after fixture-host integer alignment; desktop/mobile behavior retains its unchanged run01 evidence. Not original Minecraft material planes, published API/package consumption or native pixel certification."
+      }
+    },
+    "confirmedMountedDefects": 7,
+    "pureModelShapeHistory": {
+      "before": "7PASS/1FAIL",
+      "after": "8PASS",
+      "failure": "nonnull panel missing explicit button field",
+      "isAdditionalMountedBug": false
+    },
+    "authoredWebPlanes": {
+      "planes": 6,
+      "rgbaPixels": 108000,
+      "different": 0,
+      "nativeGolden": false
+    },
+    "package": {
+      "status": "SAME_TAR_TWO_PHASE_QUALIFIED_NEGATIVE_FIXTURE_FAILURE_RETAINED",
+      "tar": {
+        "path": ".cache\\credits-package-01\\credits-built.tgz",
+        "sha256": "a190d4aba6317981b44dcc22f8d6fad419d4a4a526232a03e3d73adcbc828c30",
+        "bytes": 5751012
+      },
+      "fileCount": 838,
+      "distFileCount": 699,
+      "indexSHA256": "d9d53684cd2cfe01c230ef888695e53b92e71053e6592f78530aed744fdea5ba",
+      "declarationSHA256": "498623713c68e381969e6b4d9640de58d62aaa181e0a98f34fdd832ebc461747",
+      "peerContracts": {
+        "versions": [
+          "18.3.1",
+          "19.3.1"
+        ],
+        "SSR": 15,
+        "layout": 7,
+        "runtimeInvalid": 13,
+        "CSS": 3,
+        "publicTypes": 47,
+        "negative": 15,
+        "strictNodeNext": true,
+        "skipLibCheck": false
+      },
+      "phase01Exit": 1,
+      "phase02Exit": 0,
+      "productDeltaForFixtureFix": false
+    },
+    "installed": {
+      "status": "PASS",
+      "combinations": 4,
+      "groupsEach": 10,
+      "zeroDrift": true,
+      "authoredCanvasPixelsEach": 120,
+      "sameArchiveFileCount": 838,
+      "sourceAliasesOrDedupeOptimizerWorkarounds": false
+    },
+    "public": {
+      "source": {
+        "code": 0,
+        "stats": {
+          "startTime": "2026-11-01T08:26:23.304Z",
+          "duration": 75485.961,
+          "expected": 9,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "expectedTests": 9,
+        "pins": 1223,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Actual complete public main source page #credits, real font/image bodies, controls, responsive local screenshots and native document veto. Original/native GUI pixel parity and built-site/installed-package identity are separate."
+      },
+      "builtFirst": {
+        "code": 1,
+        "stats": {
+          "startTime": "2026-11-01T08:37:51.953Z",
+          "duration": 110171.97200000001,
+          "expected": 8,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "expectedTests": 9,
+        "pins": 1296,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Actual built site #credits from the package-phase build, with exact site leaves pinned. Real font/image bytes, controls, responsive screenshots and native document veto; not native Minecraft pixel certification."
+      },
+      "builtLatestStatus": "NINE_DISTINCT_BUILT_CONTRACTS_PASSED_ACROSS_RUN02_AND_RUN03",
+      "builtCorrectedSingle": {
+        "code": 0,
+        "stats": {
+          "startTime": "2026-11-01T08:42:29.096Z",
+          "duration": 5187.109,
+          "expected": 1,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "expectedTests": 1,
+        "pins": 1296,
+        "drift": [],
+        "ownedServerClosed": true,
+        "computerUseAlreadyClosed": true,
+        "scope": "Only the built-font transport/Canvas test rerun after observer stylesheet-base URL correction. No product/site/font/byte-oracle change; first8 passed identities remain run02. Not one9 green run."
+      },
+      "builtSameInputsDifference": [
+        "tests/credits-public.spec.ts"
+      ],
+      "singleNineGreenRun": false,
+      "fontURLCause": {
+        "status": "OBSERVER_FONT_URL_BASE_ERROR_CONFIRMED_FROM_ORIGINAL_TRACE_AND_BUILT_CSS",
+        "failedBatch": ".cache/credits-public-02",
+        "actualLoadedFontResponses": [
+          {
+            "url": "http://127.0.0.1:5301/assets/MCBEPixel-Regular-oWDdZZxn.woff2",
+            "status": 200
+          },
+          {
+            "url": "http://127.0.0.1:5301/assets/MCBECJK-12px-zh-hans-gxmL64vb.woff2",
+            "status": 200
+          }
+        ],
+        "actualCssReferences": [
+          {
+            "stylesheet": "site/assets/system-screens-CduOTrg-.css",
+            "relativeValue": "./MCBECJK-12px-zh-hans-gxmL64vb.woff2"
+          },
+          {
+            "stylesheet": "site/assets/system-screens-CduOTrg-.css",
+            "relativeValue": "./MCBEPixel-Regular-oWDdZZxn.woff2"
+          }
+        ],
+        "cause": "The test resolved relative external stylesheet font URLs against the page instead of the stylesheet. The real browser requested assets/ URLs and loaded status200. No product/CSS/font bytes changed.",
+        "correction": "Keep exact byte oracle; use the actual CSSStyleSheet.href, or document.baseURI only for inline sheets."
+      }
+    },
+    "latestContractIndex": {
+      "path": ".cache/credits-web-qualification-01/FINAL.json",
+      "bytes": 22462,
+      "sha256": "fabc3f5d8033265bcc8aeaaa3dddd4066c4fa764a4444277bfce66ee2c2ba2d6"
+    },
+    "eofFormatDelta": {
+      "status": "EXACT_EOF_ONLY_SOURCE_DELTA",
+      "files": [
+        {
+          "file": "src/credits-types.ts",
+          "beforeSHA256": "e097091da5b39d88cd5e8096fbdd7e1bd1fde524837302cea580e1f245613efb",
+          "afterSHA256": "dac6bf3a21f5c170209a08d30adf416956e3e25a52219486547866f62bb56d54",
+          "removedBytes": 4,
+          "onlyTwoTrailingEmptyCRLFLinesRemoved": true
+        },
+        {
+          "file": "src/credits-layout.ts",
+          "beforeSHA256": "1034b1f9c7330db0c6e433d6350a493d89bddf31d38d6c77ab3ea9c2cb871fb1",
+          "afterSHA256": "47b6e985b53b2f746b43c533424cb9d3eca86507dd5cad62041327e83a10f77a",
+          "removedBytes": 4,
+          "onlyTwoTrailingEmptyCRLFLinesRemoved": true
+        }
+      ],
+      "scope": "Old browser/CPU source pins are temporal; all prior code bytes are unchanged prefixes. New build/package checks use current files. No re-run of unchanged pixel logic inferred."
+    },
+    "finalDocsTar": {
+      "identityPolicy": "FINAL_DOCS_ARCHIVE_REQUIRES_EXACT_PRODUCT_BYTES_FROM_TESTED_FUNCTIONAL_TAR",
+      "record": ".cache/credits-release-01/PACKAGE-FINAL.json",
+      "testedTarIsFinalDocsTar": false
+    },
+    "gitCommitPushDeployment": {
+      "repository": "https://github.com/CAMB-dev/mcbe-components",
+      "commitAndPushIdentity": "Git history and the release record; no self-referential commit hash is embedded here",
+      "deploymentStatus": "NOT_CLAIMED_FROM_LOCAL_BROWSER_TESTS"
+    },
+    "finalSiteRebuild": {
+      "equivalence": {
+        "path": ".cache/credits-release-01/SITE-EQUIVALENCE.json",
+        "sha256": "57300dfbe3eb86fcbfba6b80f9c5fc601a643e6dd867a544fd8b7b410a7b29c7"
+      },
+      "changedEntryFieldsOnly": [
+        "three publication strings",
+        "three validation strings"
+      ],
+      "otherFilesByteIdentical": 71,
+      "finalBootCodeAndFontSmoke": {
+        "path": ".cache/credits-public-04/RESULT.json",
+        "sha256": "2f1622236f454dc475d8be0e8518b2c9be397016c953880a91281360342768b6",
+        "actualPass": 2,
+        "pins": 1296,
+        "drift": []
+      },
+      "scope": "No additional unique public contracts. Final entry differs only in developer catalog strings; the prior built9 contracts retain their phase identities."
+    },
+    "additionalNativeFontCandidates": {
+      "mixedUnicode": {
+        "path": ".cache/credits-native-font-mixed-01/FINAL.json",
+        "sha256": "62b3fec19e92e9122a464e83f7ad749b3c82432680413dedd4f8f59173d28fd9",
+        "fixedCandidates": 2,
+        "maskDifferences": [
+          448,
+          354
+        ],
+        "qualified": false
+      },
+      "ttfEm10": {
+        "path": ".cache/credits-native-font-ttf-mixed-01/FINAL.json",
+        "sha256": "6698d31bc8972da95dc85133546427c23e93127426df338496496e79a0c2a5a4",
+        "monoInkTopologyMatches": true,
+        "monoPositionedMaskDifferences": 500,
+        "grayscale128PositionedMaskDifferences": 250,
+        "nativePositionOrRGBQualified": false
+      },
+      "asciiSourceGate": {
+        "path": ".cache/credits-native-font-ttf-ascii-source-01/FINAL.json",
+        "sha256": "453f7a1f4720b67fb3811cc92c3925b078c1da0f357e6a1f4970957a25ab00f7",
+        "glyphs": 95,
+        "shapeMatches": 75,
+        "advanceMatches": 85,
+        "jointMatches": 74,
+        "uniformConversionAccepted": false,
+        "appliedToNativeHoldout": false
+      }
+    }
+  }
+}

@@ -16,6 +16,30 @@
     "productionValidation": "65 auxiliary PASS,8 HTTP/site entries byte-identical; three-switch8combinations and actual source model/fallback/book/count/interaction/narrow150icons. Raw12ERR_ABORTED retained,5distinctglyph resources rechecked HTTP200/byte0; no noncancel/page/console/render errors or native-atlas-pixel/.cache request. SwiftShader auxiliary scope, no runtime native parity claim.",
     "details": "docs/GUI_MODEL_QA.md"
   },
+  "creditsStage": {
+    "status": "SOURCE_WEB_PACKAGE_INSTALLED_SOURCE_BUILT_DEMO_QUALIFIED_NATIVE_UNVERIFIED",
+    "componentNames": [
+      "CreditsScreen",
+      "CreditsRoll",
+      "CreditsSkipButton"
+    ],
+    "pureFunction": "layoutCredits",
+    "countsAreCandidateUntilIntegration": false,
+    "previousVerifiedComponents": 188,
+    "previousVerifiedRuntimeValues": 205,
+    "targetComponents": 191,
+    "targetRuntimeValues": 209,
+    "validation": "48 distinct scoped Web contracts across phases; package React18/19 and installed4PASS; sourcepublic9PASS; built8PASS plus corrected single1PASS, not one9green",
+    "nativeWholeGUI": false,
+    "details": "docs/CREDITS_QA.md",
+    "testedTar": {
+      "path": ".cache\\credits-package-01\\credits-built.tgz",
+      "sha256": "a190d4aba6317981b44dcc22f8d6fad419d4a4a526232a03e3d73adcbc828c30",
+      "bytes": 5751012
+    },
+    "finalDocsTar": "pending doc-only repack and same functional payload proof",
+    "gitDeployment": "pending actual commit/push/deployment"
+  },
   "basis": {
     "edition": "Bedrock Classic / JSON UI",
     "installedVersion": "1.26.6005.0",
@@ -745,10 +769,39 @@
       {"name":"BookPageTurnButton","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
       {"name":"SignTextSurface","status":"implemented","fidelity":"source_texture_web_composition_client_verified_native_texture_draw_analysis_whole_ui_pixels_pending","source":"resource_pack/ui/sign_screen.json, fixed v1.26.60.5","details":"docs/SIGN_QA.md"},
       {"name":"SignEditor","status":"implemented","fidelity":"source_texture_web_composition_client_verified_native_texture_draw_analysis_whole_ui_pixels_pending","source":"resource_pack/ui/sign_screen.json, fixed v1.26.60.5","details":"docs/SIGN_QA.md"}
+    ],
+    "credits": [
+      {
+        "name": "CreditsScreen",
+        "status": "implemented",
+        "publication": "scoped_package_and_demo_verified",
+        "validation": "source_web_package_installed4_sourcepublic9_built8plus1_verified_native_unverified",
+        "fidelity": "explicit_data_driven_web_profile_source_scoped_native_font_logo_whole_gui_unverified",
+        "source": "resource_pack/ui/credits_screen.json, fixed v1.26.60.5",
+        "details": "docs/CREDITS_QA.md"
+      },
+      {
+        "name": "CreditsRoll",
+        "status": "implemented",
+        "publication": "scoped_package_and_demo_verified",
+        "validation": "source_web_package_installed4_sourcepublic9_built8plus1_verified_native_unverified",
+        "fidelity": "explicit_data_driven_web_profile_source_scoped_native_font_logo_whole_gui_unverified",
+        "source": "resource_pack/ui/credits_screen.json, fixed v1.26.60.5",
+        "details": "docs/CREDITS_QA.md"
+      },
+      {
+        "name": "CreditsSkipButton",
+        "status": "implemented",
+        "publication": "scoped_package_and_demo_verified",
+        "validation": "source_web_package_installed4_sourcepublic9_built8plus1_verified_native_unverified",
+        "fidelity": "explicit_data_driven_web_profile_source_scoped_native_font_logo_whole_gui_unverified",
+        "source": "resource_pack/ui/credits_screen.json, fixed v1.26.60.5",
+        "details": "docs/CREDITS_QA.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 188,
+    "components": 191,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -759,13 +812,24 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 205,
-    "pureTextureFunctions": ["assembleGuiTextureAtlas"],
+    "runtimeValues": 209,
+    "pureTextureFunctions": [
+      "assembleGuiTextureAtlas"
+    ],
     "countsAreNotPixelCertification": true,
+    "publicationState": "tested_functional_package_191_209_final_docs_tar_pending",
+    "pureCreditsFunctions": [
+      "layoutCredits"
+    ],
     "dataValues": 6,
     "npcDataValues": 2,
-    "npcRegistries": ["npcSkinNames", "npcAppearanceOptions"],
-    "pureEntityFunctions": ["createNpcEntity"],
+    "npcRegistries": [
+      "npcSkinNames",
+      "npcAppearanceOptions"
+    ],
+    "pureEntityFunctions": [
+      "createNpcEntity"
+    ],
     "guiIconDataValues": 1,
     "iconNameRegistries": [
       "guiIconNames"

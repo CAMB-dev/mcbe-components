@@ -102,7 +102,10 @@
     "./classic-fonts.css": "./dist/classic-fonts.css",
     "./fonts/*": "./dist/fonts/*",
     "./package.json": "./package.json",
-    "./invite-source-helpers.css": "./dist/invite-source-helpers.css"
+    "./invite-source-helpers.css": "./dist/invite-source-helpers.css",
+    "./credits-screen.css": "./dist/credits-screen.css",
+    "./credits-roll.css": "./dist/credits-roll.css",
+    "./credits-skip-button.css": "./dist/credits-skip-button.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -117,7 +120,8 @@
     "test:classic-fonts": "python -m unittest discover -s tests -p classic_font_preparation_test.py",
     "preview": "vite preview --host 127.0.0.1",
     "verify:package": "node scripts/verify-package.mjs",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "test:credits:node": "node --test tests/credits-clock.node.test.mjs tests/credits-roll-ssr.node.test.mjs tests/credits-screen-model.node.test.mjs"
   },
   "peerDependencies": {
     "react": ">=18.3.0 <20",

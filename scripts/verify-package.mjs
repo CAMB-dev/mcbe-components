@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { verifyInvitePackage } from './verify-invite-package.mjs';
+import { verifyCreditsPackage } from './verify-credits-package.mjs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -98,7 +99,7 @@ import * as ui from 'mcbeui';
 const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames','npcSkinNames','npcAppearanceOptions'];
 components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage','BookPageTurnButton','SignTextSurface','SignEditor','JigsawEditor','JigsawPriorityFields','CommandBlockEditor','CommandInput','CommandOutputPanel','StructureEditor','XYZVectorInput','ServerActionForm','ServerCustomForm','NpcPortrait','NpcSkinPicker','NpcActionEditor','NpcDialogue','NpcEditor');
-const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity'];
+const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity','layoutCredits'];
 components.push('EmoteWheel','EmoteSlotPreview','EmoteWheelScreen');
 components.push('DocumentViewer','DocumentHeading','DocumentParagraph');
 components.push('PlayerPermissions','PermissionLevelSelect','PermissionToggleRow','PermissionPlayerRow');
@@ -109,10 +110,11 @@ components.push('StorageManagement','StorageToolbar','StorageCategory','StorageI
 components.push('UGCViewer','UGCItemCard','ImmersiveReader','ImmersiveReaderButton');
 components.push('Portfolio','PortfolioPhoto','PortfolioCaptionField','PortfolioPickerItem','PortfolioPageTurnButton','PortfolioPicker');
 components.push('InviteScreen','InvitePersonRow','InviteCategory','InvitePagination','InviteFooter');
-assert.equal(components.length,188);
+components.push('CreditsScreen','CreditsRoll','CreditsSkipButton');
+assert.equal(components.length,191);
 assert.equal(dataExports.length,6);
-assert.equal(rendererFunctions.length,11);
-assert.equal(Object.keys(ui).length,205);
+assert.equal(rendererFunctions.length,12);
+assert.equal(Object.keys(ui).length,209);
 assert(!Object.hasOwn(ui,'InventoryScreenFrameBase'),'Internal frame base must not become a public export.');
 assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not become a public export.');
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
@@ -120,6 +122,7 @@ assert(!Object.hasOwn(ui,'workstationImageAssets'),'Internal workstation assets 
 assert(!Object.hasOwn(ui,'useEnchantingImageLayer'),'Internal workstation image adapter must not become a public export.');
 for (const internal of ['renderPreparedGuiLayer','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
 for (const internal of ['compileGuiEntitySource','layoutGuiEntity','guiEntityVertexShader','npcActorSkins','npcActorSourceFiles']) assert(!Object.hasOwn(ui,internal),'Private entity preparation must not become a public export: '+internal);
+for(const internal of ['createCreditsClock','stepCreditsClock','CREDITS_COVER_MS','CREDITS_SKIP_WAIT_MS','creditsFinite','copyCreditsSurface','copyCreditsSnapshot','creditsSurfaceFrame','parseCreditsSections','parseCreditsContent','tokenizeCreditsText','CreditsSection','CreditsRoleGroup']) assert(!Object.hasOwn(ui,internal),'Private Credits helper must not become a public export: '+internal);
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
 const glintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25]};
 const glintTexture = {width:1,height:1,data:new Uint8ClampedArray([255,255,255,255])};
@@ -892,7 +895,7 @@ assert.match(output, /role="tablist"/);
 for (const className of ['mc-inventory-screen-frame','mc-survival-inventory-screen','mc-recipe-book','mc-recipe-book-entry','mc-crafting-screen','mc-recipe-filter-toggle','mc-bitmap-text','mc-brewing','mc-smithing','mc-cartography','mc-scroll-area','mc-scrollbar','mc-hud-stat','mc-experience-bar','mc-hotbar','mc-crosshair','mc-boss-bar','mc-chat-message','mc-chat-panel','mc-scoreboard','mc-status-effect','mc-action-bar','mc-title-overlay','mc-held-item-tooltip','mc-stonecutter','mc-loom','mc-beacon','mc-crafter','mc-recipe-selection-grid','mc-crafter-slot','mc-beacon-effect','mc-toggle-button','mc-search-field','mc-navigation-list','mc-setting-row','mc-keybinding','mc-spinner','mc-tooltip-trigger','mc-toast','mc-world-list','mc-server-list','mc-player-card','mc-pack-card','mc-pack-list','mc-settings-panel','mc-loading-screen','mc-achievement-toast','mc-player-list','mc-touch-controls','mc-pause-menu','mc-death-screen','mc-trade-offer','mc-trading','mc-mount-inventory','mc-block-preview','mc-banner-preview','mc-item-glint','mc-player-screen','mc-creative-inventory','mc-armor-slot','mc-recipe-search','mc-recipe-categories','mc-inventory-toolbar']) assert(output.includes(className), 'Missing SSR markup: '+className);
 const fontCss = await readFile(fileURLToPath(import.meta.resolve('mcbeui/fonts.css')), 'utf8');
 assert.match(fontCss, /Monocraft-Regular.woff2/);
-for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','ore-player-permissions.css','chalkboard.css','start-menu.css','storage-management.css','screenshot-flash.css','ugc-viewer.css','immersive-reader.css','portfolio.css','portfolio-parts.css','portfolio-picker.css','portfolio-skin.css', 'invite.css', 'invite-skin.css', 'invite-controls.css', 'invite-person-row.css', 'invite-pagination.css', 'invite-category.css', 'invite-footer.css', 'invite-screen.css', 'invite-source-helpers.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
+for (const asset of ['styles.css','textures.css','inventory.css','workstations.css','enchanting-book.css','processing.css','anvil.css','containers.css','image.css','brewing.css','special-workstations.css','scroll-area.css','hud.css','hud-textures.css','hud-overlays.css','hud-overlay-textures.css','advanced-workstations.css','advanced-workstation-textures.css', 'feedback.css', 'feedback-textures.css', 'settings-controls.css', 'settings-control-textures.css', 'game-lists.css', 'game-list-textures.css', 'system-screens.css', 'system-screens-textures.css', 'game-controls.css', 'game-control-textures.css', 'trading-mounts.css', 'trading-mount-textures.css', 'item-renderers.css', 'inventory-screens.css', 'inventory-screen-textures.css','recipe-book.css','recipe-book-textures.css','crafting-screen.css','inventory-screen-frame.css','book.css','sign.css','jigsaw.css','command-block.css','structure-editor.css','server-forms.css','npc.css','emote-wheel.css','emote-wheel-screen.css','document-viewer.css','player-permissions.css','ore-player-permissions.css','chalkboard.css','start-menu.css','storage-management.css','screenshot-flash.css','ugc-viewer.css','immersive-reader.css','portfolio.css','portfolio-parts.css','portfolio-picker.css','portfolio-skin.css', 'invite.css', 'invite-skin.css', 'invite-controls.css', 'invite-person-row.css', 'invite-pagination.css', 'invite-category.css', 'invite-footer.css', 'invite-screen.css', 'invite-source-helpers.css','credits-screen.css','credits-roll.css','credits-skip-button.css','fonts.css','mojangles.css','classic-fonts.css','fonts/MCBEPixel-Regular.woff2','fonts/MCBECJK-12px-zh-hans.woff2','fonts/Monocraft-Regular.woff2','fonts/FusionPixel-12px-zh-hans.woff2','fonts/Monocraft-OFL.txt','fonts/Fusion-Pixel-OFL.txt','fonts/fusion-notices/LICENSES/galmuri/LICENSE.txt']) {
   assert((await stat(fileURLToPath(import.meta.resolve('mcbeui/'+asset)))).size > 0);
 }
 assert((await stat(new URL('./node_modules/mcbeui/dist/assets/enchanting/enchanting_table_book.png',import.meta.url))).size>0);
@@ -1222,10 +1225,99 @@ for (const [file,sha256] of [
   const bytes = await readFile(new URL(file,packageRoot));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),sha256,'Packed original glint resource: '+file);
 }
+// Self-authored host data: no native credits, poem, fonts, or atlas bytes.
+const packedCreditsFont = { kind: 'css-face', family: 'monospace', fontSize: 10, metricsId: 'package-host-fixture', measureText: value => [...value].length * 2 };
+const packedCreditsStyle = { font: packedCreditsFont, lineHeight: 10, letterSpacing: 0, color: '#fff', shadow: null };
+const packedCreditsBlock = { before: 0, after: 0, insetStart: 0, insetEnd: 0 };
+const packedCreditsProfile = {
+  viewport: { size: [100, 100], contentWidth: 80, contentX: 10 },
+  styles: { section: packedCreditsStyle, discipline: packedCreditsStyle, title: packedCreditsStyle, name: packedCreditsStyle, poem: packedCreditsStyle, quote: packedCreditsStyle },
+  blocks: { section: packedCreditsBlock, discipline: packedCreditsBlock, title: packedCreditsBlock, name: packedCreditsBlock, poem: packedCreditsBlock, quote: packedCreditsBlock },
+  emptyDiscipline: 'omit-and-collapse', emptyTitle: 'omit-and-collapse', paragraphs: 'hard-lines', paragraphGap: 0, paragraphBlankLines: 'collapse',
+  wrap: 'preserve-lines', longWord: 'error', horizontalWhitespace: 'preserve', wrapWhitespace: 'retain',
+  textAlign: { section: 'center', discipline: 'center', title: 'left', name: 'left', poem: 'center', quote: 'left' }, gatedStageSpacing: 'omit',
+  markup: { roles: ['poem', 'quote'], colors: { '2': '#020', '3': '#030', '7': '#777', a: '#0a0', b: '#0bb', f: '#fff' }, obfuscated: { alphabet: 'ABC', periodMs: 100, seed: 1, preserveAdvance: true }, colorResetsObfuscated: true, resetCode: 'r', playerNameToken: { token: 'PLAYERNAME', replacement: 'literal-all' }, unknownCode: 'literal' },
+  limits: { maxSections: 10, maxDisciplines: 10, maxTitles: 10, maxNames: 10, maxInputUnits: 4096, maxExpandedUnits: 4096, maxTokens: 8192, maxParagraphs: 100, maxLines: 100, maxRuns: 100, maxStages: 10, maxFontGlyphs: 1000, maxMeasureCalls: 8192, maxMeasuredUnits: 200000, maxContentHeight: 100000 },
+  provenance: 'host-resolved-web-profile', evidenceId: 'package-self-authored-fixture'
+};
+const packedCreditsContent = { sections: [{ section: 'Host credits', disciplines: [{ discipline: '', titles: [{ title: '', names: ['Host name'] }] }] }], endPoem: 'PLAYERNAME', quote: 'Host quote' };
+const packedCreditsPlan = { stages: [{ id: 'staff', kind: 'staff', before: 0, after: 0 }, { id: 'poem', kind: 'end-poem', before: 0, after: 0 }, { id: 'quote', kind: 'quote', before: 0, after: 0 }], initialLead: 0, completionGap: 0 };
+const packedCreditsBindings = { showEduIcon: false, showEndPoem: true, playerName: '<Host>' };
+const packedCreditsImage = { src: '/host-whole-credits.png', naturalSize: [2, 2], displaySize: [100, 100], alt: 'Host art', provenance: 'self-authored-package-fixture' };
+const packedCreditsPresentation = {
+  id: 'package-host-profile', evidenceId: 'package-self-authored', layout: packedCreditsProfile, plan: packedCreditsPlan,
+  surface: { background: { image: packedCreditsImage, tileSize: [4, 4], logicalSize: [100, 100], from: [0, 0], to: [0, -10], durationMs: 1000 }, edgeMask: { kind: 'none' }, coverPlacement: 'above-content' },
+  logicalUnitsPerSecond: 1, fasterMultiplier: 2, skipLabelStyle: packedCreditsStyle, rasterPositioning: 'css-subpixel', imageSampling: 'point', completion: 'web-scroll-end-then-fade',
+  input: { escape: 'reveal-then-exit', enter: 'reveal-skip', repeat: 'ignore', focus: 'host' }
+};
+
+const packedCreditsRequest = { content: packedCreditsContent, profile: packedCreditsProfile, plan: packedCreditsPlan, bindings: packedCreditsBindings };
+const packedCreditsResult = ui.layoutCredits(packedCreditsRequest);
+assert.equal(packedCreditsResult.nodes.filter(node => node.role === 'name').length, 1);
+assert(packedCreditsResult.lines.some(line => line.text === '<Host>'));
+assert.equal(packedCreditsContent.endPoem, 'PLAYERNAME');
+assert.equal(packedCreditsResult.trace.nativeCertified, false);
+let packedCreditsEffects = 0;
+const packedCreditsRefs = [React.createRef(), React.createRef(), React.createRef()];
+const packedCreditsFetch = globalThis.fetch, packedCreditsTimer = globalThis.setTimeout;
+let packedCreditsMarkup;
+try {
+  globalThis.fetch = () => { throw new Error('Credits SSR must not fetch'); };
+  globalThis.setTimeout = () => { throw new Error('Credits SSR must not schedule timers'); };
+  packedCreditsMarkup = renderToString(React.createElement(React.Fragment, null,
+    React.createElement(ui.CreditsRoll, { ...packedCreditsRequest, offset: 0, elapsedMs: 0, scale: 1, rasterPositioning: 'css-subpixel', imageSampling: 'point', onLayout: () => packedCreditsEffects++, ref: packedCreditsRefs[0] }),
+    React.createElement(ui.CreditsSkipButton, { label: 'Skip', labelStyle: packedCreditsStyle, scale: 1, onAction: () => packedCreditsEffects++, ref: packedCreditsRefs[1] }),
+    React.createElement(ui.CreditsScreen, { runKey: 'package', content: packedCreditsContent, profile: packedCreditsPresentation, bindings: { ...packedCreditsBindings, scrollFaster: false }, scale: 1, skipLabel: 'Skip', playback: { playing: false, initialOffset: 0, hiddenPolicy: 'pause' }, onCloseRequested: () => packedCreditsEffects++, onAction: () => { packedCreditsEffects++; }, onLifecycle: () => packedCreditsEffects++, ref: packedCreditsRefs[2] })
+  ));
+} finally { globalThis.fetch = packedCreditsFetch; globalThis.setTimeout = packedCreditsTimer; }
+assert.equal(packedCreditsEffects, 0);
+assert(packedCreditsRefs.every(ref => ref.current === null));
+for (const expected of ['mc-credits-roll', 'mc-credits-skip', 'mc-credits-screen', 'Host name', '&lt;Host&gt;']) assert(packedCreditsMarkup.includes(expected), 'Packed Credits SSR: ' + expected);
+
 console.log('React '+React.version+': ESM, '+components.length+' components + '+dataExports.length+' data exports + '+rendererFunctions.length+' renderer functions, SSR, styles, fonts, renderer assets and licenses PASS');
 `);
   console.log(execFileSync(process.execPath, ['smoke.mjs'], { cwd: consumer, encoding: 'utf8' }).trim());
-  await writeFile(join(consumer, 'consumer.tsx'), `
+  await writeFile(join(consumer, 'consumer.tsx'), `import { CreditsScreen as PackedCreditsScreen, CreditsRoll as PackedCreditsRoll, CreditsSkipButton as PackedCreditsSkipButton, layoutCredits as packedLayoutCredits } from 'mcbeui';
+import type { CreditsTitleGroup, CreditsDiscipline, CreditsSectionData, CreditsContent, CreditsTextRole, CreditsPath, CreditsSourceSpan, CreditsBitmapFace, CreditsMissingGlyphPolicy, CreditsCssFace, CreditsDirectFontSource, CreditsFontSource, CreditsTextStyle, CreditsBlockSpacing, CreditsColorCode, CreditsMarkupPolicy, CreditsLayoutLimits, CreditsDecoration, CreditsLayoutProfile, CreditsWholeImage, CreditsStage, CreditsRollPlan, CreditsLayoutBindings, CreditsTextToken, CreditsLayoutRun, CreditsLayoutLine, CreditsLayoutParagraph, CreditsLayoutNode, CreditsLayoutImage, CreditsLayoutStage, CreditsLayoutUsage, CreditsLayout, CreditsLayoutRequest, CreditsSurfaceProfile, CreditsPresentationProfile, CreditsFactorySnapshot, CreditsScreenSnapshot, CreditsActionDetail, CreditsLifecycleDetail, CreditsControllerCommand, CreditsControllerHandle, CreditsPlaybackScreenProps, CreditsControlledScreenProps, CreditsScreenProps, CreditsRollProps, CreditsSkipActionDetail, CreditsSkipButtonProps } from 'mcbeui';
+const packedCreditsFont: CreditsCssFace = { kind: 'css-face', family: 'monospace', fontSize: 10, metricsId: 'package-host-fixture', measureText: value => [...value].length * 2 };
+const packedCreditsStyle: CreditsTextStyle = { font: packedCreditsFont, lineHeight: 10, letterSpacing: 0, color: '#fff', shadow: null };
+const packedCreditsBlock: CreditsBlockSpacing = { before: 0, after: 0, insetStart: 0, insetEnd: 0 };
+const packedCreditsProfile: CreditsLayoutProfile = {
+  viewport: { size: [100, 100], contentWidth: 80, contentX: 10 },
+  styles: { section: packedCreditsStyle, discipline: packedCreditsStyle, title: packedCreditsStyle, name: packedCreditsStyle, poem: packedCreditsStyle, quote: packedCreditsStyle },
+  blocks: { section: packedCreditsBlock, discipline: packedCreditsBlock, title: packedCreditsBlock, name: packedCreditsBlock, poem: packedCreditsBlock, quote: packedCreditsBlock },
+  emptyDiscipline: 'omit-and-collapse', emptyTitle: 'omit-and-collapse', paragraphs: 'hard-lines', paragraphGap: 0, paragraphBlankLines: 'collapse',
+  wrap: 'preserve-lines', longWord: 'error', horizontalWhitespace: 'preserve', wrapWhitespace: 'retain',
+  textAlign: { section: 'center', discipline: 'center', title: 'left', name: 'left', poem: 'center', quote: 'left' }, gatedStageSpacing: 'omit',
+  markup: { roles: ['poem', 'quote'], colors: { '2': '#020', '3': '#030', '7': '#777', a: '#0a0', b: '#0bb', f: '#fff' }, obfuscated: { alphabet: 'ABC', periodMs: 100, seed: 1, preserveAdvance: true }, colorResetsObfuscated: true, resetCode: 'r', playerNameToken: { token: 'PLAYERNAME', replacement: 'literal-all' }, unknownCode: 'literal' },
+  limits: { maxSections: 10, maxDisciplines: 10, maxTitles: 10, maxNames: 10, maxInputUnits: 4096, maxExpandedUnits: 4096, maxTokens: 8192, maxParagraphs: 100, maxLines: 100, maxRuns: 100, maxStages: 10, maxFontGlyphs: 1000, maxMeasureCalls: 8192, maxMeasuredUnits: 200000, maxContentHeight: 100000 },
+  provenance: 'host-resolved-web-profile', evidenceId: 'package-self-authored-fixture'
+};
+const packedCreditsContent: CreditsContent = { sections: [{ section: 'Host credits', disciplines: [{ discipline: '', titles: [{ title: '', names: ['Host name'] }] }] }], endPoem: 'PLAYERNAME', quote: 'Host quote' };
+const packedCreditsPlan: CreditsRollPlan = { stages: [{ id: 'staff', kind: 'staff', before: 0, after: 0 }, { id: 'poem', kind: 'end-poem', before: 0, after: 0 }, { id: 'quote', kind: 'quote', before: 0, after: 0 }], initialLead: 0, completionGap: 0 };
+const packedCreditsBindings: CreditsLayoutBindings = { showEduIcon: false, showEndPoem: true, playerName: '<Host>' };
+const packedCreditsImage: CreditsWholeImage = { src: '/host-whole-credits.png', naturalSize: [2, 2], displaySize: [100, 100], alt: 'Host art', provenance: 'self-authored-package-fixture' };
+const packedCreditsPresentation: CreditsPresentationProfile = {
+  id: 'package-host-profile', evidenceId: 'package-self-authored', layout: packedCreditsProfile, plan: packedCreditsPlan,
+  surface: { background: { image: packedCreditsImage, tileSize: [4, 4], logicalSize: [100, 100], from: [0, 0], to: [0, -10], durationMs: 1000 }, edgeMask: { kind: 'none' }, coverPlacement: 'above-content' },
+  logicalUnitsPerSecond: 1, fasterMultiplier: 2, skipLabelStyle: packedCreditsStyle, rasterPositioning: 'css-subpixel', imageSampling: 'point', completion: 'web-scroll-end-then-fade',
+  input: { escape: 'reveal-then-exit', enter: 'reveal-skip', repeat: 'ignore', focus: 'host' }
+};
+
+const packedCreditsRequest: CreditsLayoutRequest = { content: packedCreditsContent, profile: packedCreditsProfile, plan: packedCreditsPlan, bindings: packedCreditsBindings };
+const packedCreditsLayout: CreditsLayout = packedLayoutCredits(packedCreditsRequest);
+const packedCreditsRunFont: CreditsDirectFontSource | undefined = packedCreditsLayout.lines[0]?.runs[0]?.font;
+const packedCreditsController = createRef<CreditsControllerHandle>();
+const packedCreditsRollRef = createRef<HTMLDivElement>();
+const packedCreditsSkipRef = createRef<HTMLButtonElement>();
+const packedCreditsScreenRef = createRef<HTMLElement>();
+const packedCreditsRollProps: CreditsRollProps = { ...packedCreditsRequest, offset: 0, elapsedMs: 0, scale: 1, rasterPositioning: 'css-subpixel', imageSampling: 'point', onLayout: value => { const result: CreditsLayout = value; void result; } };
+const packedCreditsSkipProps: CreditsSkipButtonProps = { label: 'Skip', labelStyle: packedCreditsStyle, scale: 1, onAction: detail => { const target: HTMLButtonElement = detail.event.currentTarget; void target; } };
+const packedCreditsScreenProps: CreditsScreenProps = { runKey: 'package', content: packedCreditsContent, profile: packedCreditsPresentation, bindings: { ...packedCreditsBindings, scrollFaster: false }, scale: 1, skipLabel: 'Skip', playback: { playing: false, initialOffset: 0, hiddenPolicy: 'pause' }, controllerRef: packedCreditsController, onCloseRequested: detail => { const request: CreditsActionDetail = detail; void request; } };
+const packedCreditsConsumer = <><PackedCreditsRoll {...packedCreditsRollProps} ref={packedCreditsRollRef}/><PackedCreditsSkipButton {...packedCreditsSkipProps} ref={packedCreditsSkipRef}/><PackedCreditsScreen {...packedCreditsScreenProps} ref={packedCreditsScreenRef}/></>;
+void packedCreditsConsumer; void packedCreditsRunFont;
+
+
 import { createRef } from 'react';
 import { Portfolio, PortfolioPhoto, PortfolioCaptionField, PortfolioPickerItem, PortfolioPageTurnButton, PortfolioPicker } from 'mcbeui';
 import type { PortfolioSide, PortfolioLeaf, PortfolioBindings, PortfolioLayoutResolution, PortfolioAction, PortfolioActionTarget, PortfolioActionDetail, PortfolioLeafCaptionDetail, PortfolioLabels, PortfolioProps, PortfolioImageSource, PortfolioStateImages, PortfolioCaptionChangeDetail, PortfolioCaptionFieldProps, PortfolioPhotoProps, PortfolioPickDetail, PortfolioPickerItemProps, PortfolioPageDirection, PortfolioPageTurnDetail, PortfolioPageTurnButtonProps, PortfolioPickerCell, PortfolioPickerRow, PortfolioPickerActionDetail, PortfolioPickerProps } from 'mcbeui';
@@ -1919,5 +2011,6 @@ export const demo = <>
   execFileSync(process.execPath, [tsc, '--noEmit', '--strict', '--skipLibCheck', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', '--target', 'ES2022', '--jsx', 'react-jsx', 'consumer.tsx'], { cwd: consumer, encoding: 'utf8' });
   console.log(`React ${major}: installed package TypeScript consumer PASS`);
   await verifyInvitePackage({ consumer, root, major });
+  await verifyCreditsPackage({ consumer, root, major });
 }
 console.log(`Verified tarball: ${tarPath}`);

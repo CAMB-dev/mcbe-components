@@ -1,0 +1,67 @@
+{
+  "scope": "Credits public demo artwork and bundled OFL font policy; no native pixel certification",
+  "source": {
+    "release": "v1.26.60.5-full",
+    "url": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip",
+    "zipSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "wholeImages": [
+    {
+      "key": "background",
+      "path": "demo/assets/credits/bg32.png",
+      "sourceMember": "resource_pack/textures/ui/bg32.png",
+      "naturalSize": [32, 32],
+      "bytes": 324,
+      "sha256": "76842acb4488a28062ca494d9150a56db94d1555704d66340ef72cd42066d6bb",
+      "rgbaSHA256": "9d4995989eab1686456fda7a1b45e539937f1e313e246ecad5b487d667657eec",
+      "policy": "Whole unchanged original PNG; demo-only, not a new library asset bank"
+    },
+    {
+      "key": "title",
+      "path": "src/assets/start-menu/title.png",
+      "sourceMember": "resource_pack/textures/ui/title.png",
+      "naturalSize": [1937, 333],
+      "bytes": 86796,
+      "sha256": "1ab368c3719a0fa0c273a0040bd5d3e8c47a9678b8dff22a09aa1bf570781662",
+      "rgbaSHA256": "c8a8c4818b3da51e8853486f181c5a9371e1f63aa5da080400b2f55ba374e34b",
+      "policy": "Reuse existing whole original PNG; preserve natural aspect; chosen display size is a Web policy"
+    }
+  ],
+  "artworkLicense": {
+    "path": "src/assets/Minecraft-Sample-LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "sourceMember": "LICENSE.md",
+    "policy": "Original upstream rights and EULA notice retained; these images are not covered by the library MIT license or the font OFL licenses"
+  },
+  "fonts": [
+    {
+      "family": "MCBE Pixel",
+      "path": "src/fonts/MCBEPixel-Regular.woff2",
+      "sha256": "63afb50e1a41962f939ffad9df43f0f9047ccfe9f7daedb0b64612a074161c2f",
+      "metadata": "docs/pixel-font.json",
+      "license": "src/fonts/Monocraft-OFL.txt"
+    },
+    {
+      "family": "MCBE CJK",
+      "path": "src/fonts/MCBECJK-12px-zh-hans.woff2",
+      "sha256": "ef9a950e89f948d74a7b09f3980e21826aa68b15f80273565f2b8a5c57c5d19d",
+      "metadata": "docs/pixel-cjk-font.json",
+      "license": "src/fonts/Fusion-Pixel-OFL.txt"
+    }
+  ],
+  "fontPolicy": "Existing renamed OFL faces, measured after actual browser FontFaceSet loading with matching Canvas physical font and one logical-scale conversion. No installed Mojangles/default8/Unicode atlas bytes are redistributed.",
+  "authoredCorpus": {
+    "demo": "demo/credits-demo.tsx",
+    "literalCodepointInstances": 3215,
+    "literalRecords": 205,
+    "explicitWhitelistCodepoints": 131,
+    "missingFromBundledCmapUnion": 0,
+    "scope": "Static independent preparation, not a browser paint result; includes the expanded player-name text and Skip. No original staff list, End Poem or quote copied."
+  },
+  "unresolved": [
+    "Native font routing, metrics, colors, sampler, shader and full GUI pixels",
+    "Education logo: unidentified, no replacement artwork supplied",
+    "Samples locale override font pages do not establish the installed primary default8 or Unicode bank"
+  ]
+}
