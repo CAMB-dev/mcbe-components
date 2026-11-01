@@ -1,5 +1,7 @@
 # GuiLayer 的显式离屏栅格原点
 
+后续2026-11-02：[源坐标平铺](GUI_TILED_IMAGES_QA.md)补上公开源声明生成完整网格的能力，并以明确居中／零offset候选验证同一捕获背景；下文prepared边界是当时阶段的原始结果。
+
 2026-11-02。新增 `GuiLayer` / `renderGuiLayer` 的可选 `rasterOrigin: 'webgl' | 'top-left'`。省略时保留原来的 WebGL 路径；`top-left` 在离屏绘制中反射最终 clip Y，并统一背景、viewport、scissor、culling、readback 和显示复制的方向。调用者的源坐标、输出裁剪坐标和返回像素始终为从左上开始。
 
 ```tsx

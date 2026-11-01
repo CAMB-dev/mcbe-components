@@ -151,6 +151,59 @@ test('top-left raster origin preserves asymmetric initial pixels, text culling, 
   expect(await page.evaluate(o => { try { window.guiLayerQA.render({ ...o, rasterOrigin: 'invalid' }); return false; } catch { return true; } }, options)).toBe(true);
 });
 
+test('tiled public image command preserves partial strips, local scissor, crop and React repeat changes', async ({ page }, info) => {
+  await open(page);
+  const colors = [[255, 0, 0, 255], [0, 255, 0, 255], [0, 0, 255, 255], [255, 255, 0, 255]];
+  const options = { width: 14, height: 8, guiScale: 1, rasterOrigin: 'top-left', scissor: [2, 2, 10, 5],
+    commands: [{ kind: 'image', rect: [1, 1, 11, 5], tiling: { size: [4, 4], originRounding: 'truncate' }, texture: { width: 2, height: 2, rgba: colors.flat() } }] };
+  const expected = (size: number) => {
+    const result = field(14, 8);
+    for (let y = 2; y < 6; y++) for (let x = 2; x < 12; x++) result.set(colors[((y - 1) % 4 >= 2 ? 2 : 0) + ((x - 1) % size >= size / 2 ? 1 : 0)]!, (y * 14 + x) * 4);
+    return result;
+  };
+  const value = await render(page, options); await prove(info, 'tiled-partial-strips-source', value.data, expected(4)); equal(value.live, expected(4));
+  const cropped = await render(page, { ...options, outputRect: [3, 2, 7, 4] }), crop = field(7, 4), full = expected(4);
+  for (let y = 0; y < 4; y++) crop.set(full.subarray(((y + 2) * 14 + 3) * 4, ((y + 2) * 14 + 10) * 4), y * 7 * 4);
+  equal(cropped.data, crop); equal(cropped.live, crop);
+  await mount(page, options); equal((await raw(page)).data, expected(4));
+  await page.evaluate(() => { window.guiLayerQA.props.commands[0].tiling.size[0] = 6; window.guiLayerQA.paint(); });
+  await page.waitForFunction(() => window.guiLayerQA.serial === 2); equal((await raw(page)).data, expected(6));
+});
+
+test.describe('conditional captured Credits background from public tiled source inputs', () => {
+  test('OPTIONAL private native target equals public source geometry and actual React DOM plane', async ({ playwright }, info) => {
+    const native = new URL('../.cache/credits-pix-live-02/text-shadow-q0-e76-01/', import.meta.url);
+    test.skip(!existsSync(new URL('texture-13-before.bin', native)), 'The user-owned immutable native target is optional and never bundled.');
+    const nativeBrowser = await playwright.chromium.launch({ headless: true, args: ['--enable-gpu', '--use-gl=angle', '--use-angle=d3d11'] });
+    try {
+    const page = await nativeBrowser.newPage();
+    const source = PNG.sync.read((await zip())('resource_pack/textures/ui/bg32.png'));
+    expect(sha(source.data)).toBe('9d4995989eab1686456fda7a1b45e539937f1e313e246ecad5b487d667657eec');
+    const width = 2570, height = 1402, guiScale = 5, logicalWidth = Math.ceil(width / guiScale), logicalHeight = Math.ceil(height / guiScale);
+    // Finite centered, zero-offset candidate. This does not establish engine anchor defaults or its animation clock.
+    const options = { width, height, guiScale, rasterOrigin: 'top-left', commands: [{ kind: 'image',
+      rect: [0, (logicalHeight - logicalHeight * 20) / 2, logicalWidth, logicalHeight * 20], physicalPrecision: 'float32',
+      tiling: { size: [source.width * 2, source.height * 2], originRounding: 'truncate' }, texture: texture(source) }] };
+    await page.setViewportSize({ width, height }); await open(page);
+    await page.locator('#root').evaluate(node => Object.assign((node as HTMLElement).style, { left: '0px', top: '0px' }));
+    const prediction = await render(page, options);
+    expect(prediction.renderer).toMatch(/NVIDIA.*Direct3D11/);
+    expect(prediction.layout.commands[0].mesh.vertices).toHaveLength(3168); expect(prediction.layout.commands[0].mesh.indices).toHaveLength(4752);
+    // Load actual target only after source-generated prediction. Never use capture VB/IB/CB as renderer inputs.
+    const padded = await readFile(new URL('texture-13-before.bin', native)); expect(sha(padded)).toBe('72027f112891eb288525dd11d252a28ed0bad5635f69d92562ed21c4fd415391');
+    const metadata = await readFile(new URL('texture-13-before-footprints.json', native)); expect(sha(metadata)).toBe('4cb44cd3cb15b2aaa9b7aedc622af7a252a1c0a49d7e9ac6a9ea8d0097234fcf');
+    const fp = JSON.parse(metadata.toString('utf8')).subresources[0]; expect([fp.width, fp.height, fp.rowPitch]).toEqual([width, height, 10496]);
+    const expected = Buffer.concat(Array.from({ length: height }, (_, y) => padded.subarray(fp.placedOffset + y * fp.rowPitch, fp.placedOffset + y * fp.rowPitch + width * 4)));
+    await prove(info, 'credits-public-source-tiled-native-full-target', prediction.data, expected, { renderer: prediction.renderer, sourceScope: 'Explicit centered/from-state source candidate; no public anchor or animation recovery claim.' }); equal(prediction.live, expected);
+    await mount(page, options); await prove(info, 'credits-public-react-tiled-native-full-target', (await raw(page)).data, expected);
+    const screenshotBytes = await page.screenshot({ omitBackground: true });
+    await info.attach('credits-public-react-source-tiled.png', { body: screenshotBytes, contentType: 'image/png' });
+    const screenshot = PNG.sync.read(screenshotBytes); await prove(info, 'credits-public-react-tiled-native-dom', screenshot.data, expected,
+      { hostOrigin: await page.locator('#root').evaluate(node => { const r = node.getBoundingClientRect(); return [r.x, r.y]; }) });
+    } finally { await nativeBrowser.close(); }
+  });
+});
+
 test('blank full-cell periods draw no invented ink while advance-only spaces retain their pen width', async ({ page }) => {
   await open(page); const image = new PNG({ width: 128, height: 128 }); rect(image.data, 128, [0, 0, 8, 8], [255, 255, 255, 255]);
   const font: GuiTextFont = { ...font8(), glyphs: { ...font8().glyphs, '.': { page: 0, x: 8, y: 0, width: 8, height: 8, advance: 1 }, B: { page: 0, x: 0, y: 0, width: 8, height: 8, advance: 6 }, ' ': { page: 0, x: 0, y: 0, width: 0, height: 0, advance: 4 } } };

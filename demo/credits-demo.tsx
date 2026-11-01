@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button, Checkbox } from '../src/components';
 import { Combobox } from '../src/combobox';
 import { CreditsScreen } from '../src/credits-screen';
+import { GuiLayer } from '../src/gui-layer-component';
 import type { CreditsPresentationProfile } from '../src/credits-screen-types';
 import type { CreditsContent, CreditsCssFace, CreditsLayoutLimits, CreditsTextStyle, CreditsWholeImage } from '../src/credits-types';
 import '../src/fonts.css';
@@ -112,6 +113,20 @@ function makeDemoProfile(width: number, height: number, metrics: DemoMetrics): C
   };
 }
 
+function TiledArtworkPreview() {
+  const [size, setSize] = useState(64), [error, setError] = useState('');
+  return <figure className="credits-demo__tile-preview" data-demo-credits-tiles="true" style={{ margin: '20px 0 0', maxWidth: 320 }}>
+    <figcaption style={{ marginBottom: 10 }}>Original tiled artwork</figcaption>
+    <Combobox label="Tile size" value={String(size)} options={[{ value: '64', label: '64 × 64' }, { value: '32', label: '32 × 32' }]}
+      onValueChange={value => { if (value === '32' || value === '64') { setSize(Number(value)); setError(''); } }}/>
+    <GuiLayer width={320} height={144} guiScale={1} rasterOrigin="top-left" label="Original tiled artwork"
+      commands={[{ kind: 'image', rect: [0, 0, 320, 144], texture: dirtURL,
+        tiling: { size: [size, size], originRounding: 'truncate' }, physicalPrecision: 'float32' }]}
+      style={{ maxWidth: '100%', height: 'auto', marginTop: 10 }} onRenderError={reason => setError(reason.message)}/>
+    {error && <p role="alert">{error}</p>}
+  </figure>;
+}
+
 export function CreditsDemo() {
   const host = useRef<HTMLDivElement>(null), probe = useRef<HTMLSpanElement>(null);
   const [hostWidth, setHostWidth] = useState(0), [font, setFont] = useState<DemoFont>('pixel');
@@ -184,6 +199,7 @@ export function CreditsDemo() {
       </> : <div className="credits-demo__empty" role="status">Preparing the preview…</div>}
     </div>
     <div className="credits-demo__caption"><p role="status" aria-live="polite">{status}</p><span>Click the scene, then Enter or Esc to reveal Skip.</span></div>
+    <TiledArtworkPreview/>
     <details className="credits-demo__notes"><summary>About this example</summary><p>This preview uses original sample artwork with authored demonstration credits and writing. MCBE Pixel and MCBE CJK are bundled OFL fonts; their loaded browser metrics drive this Web profile. The staff region and title/name spacing follow measured entry relationships under an explicit viewport registration. Other spacing, font metrics, scroll speed, image sampling, cover placement and input policy are Web choices; native font, shader and whole-screen pixel parity remain unqualified. Education art is unavailable and is not substituted.</p></details>
   </div>;
 }

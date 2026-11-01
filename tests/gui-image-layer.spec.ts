@@ -54,6 +54,47 @@ test('typed SSR is decorative or singly named without browser/GPU use', () => {
   expect(() => renderGuiImages({ ...props, images: [] })).toThrow(/browser canvas/);
 });
 
+test('tiled source geometry retains column order, independent origin rounding, partial UVs and whole-grid crop phase', () => {
+  const image = { rect: [-.25, -.75, 5, 3] as const, tiling: { size: [2, 2] as const, originRounding: 'truncate' as const }, physicalPrecision: 'float32' as const };
+  const frame = { width: 8, height: 6, guiScale: 2, images: [image] }, value = layoutGuiImages(frame), mesh = value.meshes[0]!;
+  expect(mesh.vertices).toHaveLength(24); expect(mesh.indices).toHaveLength(36);
+  expect(mesh.vertices.slice(0, 4).map(v => v.position)).toEqual([[-0, 1.5], [2, 1.5], [2, -.5], [-0, -.5]]);
+  expect(mesh.vertices.filter((_, i) => i % 4 === 3).map(v => v.position)).toEqual([[-0, -.5], [-0, 1], [1.5, -.5], [1.5, 1], [3.5, -.5], [3.5, 1]]);
+  expect(mesh.vertices.slice(-4).map(v => v.uvRaw)).toEqual([[0, 32768], [32768, 32768], [32768, 0], [0, 0]]);
+  const cropped = layoutGuiImages({ ...frame, outputRect: [2, 1, 3, 3], scissor: [2, 2, 2, 2] });
+  expect(cropped.meshes[0]!.vertices).toEqual(mesh.vertices); expect(cropped.meshes[0]!.indices).toEqual(mesh.indices); expect(cropped.mvp).toEqual(value.mvp);
+  const floor = layoutGuiImages({ ...frame, images: [{ ...image, tiling: { ...image.tiling, originRounding: 'floor' } }] });
+  expect(floor.meshes[0]!.vertices[3]!.position).toEqual([-.5, -1]);
+  const stride = layoutGuiImages({ width: 8, height: 4, guiScale: 3, images: [{ rect: [.2, 0, 1.5, 1], tiling: { size: [.5, 1], originRounding: 'floor' } }] });
+  expect(stride.meshes[0]!.vertices[11]!.position[0]).toBe(1); // Never advance by the ceil-expanded2/3 draw width.
+});
+
+test('tiled mesh and aggregate budgets reject invalid or excessive expansion before any canvas or resource IO', () => {
+  const frame = { width: 8, height: 8, guiScale: 1 };
+  for (const tiling of [null, { size: [0, 2], originRounding: 'floor' }, { size: [1, Infinity], originRounding: 'floor' },
+    { size: [2, 2], originRounding: 'nearest' }, { size: [2], originRounding: 'floor' }, { size: [1e-30, 1], originRounding: 'floor' }]) {
+    expect(() => layoutGuiImages({ ...frame, images: [{ rect: [0, 0, 4, 4], tiling } as any] })).toThrow();
+  }
+  expect(() => layoutGuiImages({ ...frame, images: [{ rect: [0, 0, 4, 4], tiling: { size: [2, 2], originRounding: 'floor' }, nineSlice: { baseSize: [4, 4], insets: 1 } }] })).toThrow(/mutually exclusive/);
+  expect(() => layoutGuiImages({ ...frame, images: [{ rect: [0, 0, 129, 128], tiling: { size: [1, 1], originRounding: 'floor' } }] })).toThrow(/16-bit/);
+  expect(() => layoutGuiImages({ ...frame, images: [{ rect: [0, 0, 1e-300, 1], tiling: { size: [1e30, 1], originRounding: 'floor' } }] })).toThrow(/nonempty/);
+  expect(() => layoutGuiImages({ ...frame, images: Array.from({ length: 5 }, () => ({ rect: [0, 0, 128, 128] as const, tiling: { size: [1, 1] as const, originRounding: 'floor' as const } })) })).toThrow(/combined geometry/);
+});
+
+test('GuiImageLayer snapshots tiled geometry and repaints a changed repeat size', async ({ page }) => {
+  await open(page);
+  const source = { width: 2, height: 1, rgba: [255, 0, 0, 255, 0, 255, 0, 255] };
+  const image = { rect: [0, 0, 12, 2], texture: source, tiling: { size: [4, 2], originRounding: 'truncate' } };
+  const options = { width: 12, height: 2, guiScale: 1, images: [image] };
+  const expected = (size: number) => Buffer.from(Array.from({ length: 24 }, (_, at) => at % 12 % size < size / 2 ? [255, 0, 0, 255] : [0, 255, 0, 255]).flat());
+  equal((await render(page, options)).data, expected(4));
+  await page.evaluate(o => window.guiImageQA.mount(o), options); await page.waitForFunction(() => window.guiImageQA.events.filter((x: string) => x === 'ready').length === 1);
+  equal(Buffer.from((await page.evaluate(() => window.guiImageQA.rawCanvas())).rgba, 'base64'), expected(4));
+  await page.evaluate(o => window.guiImageQA.mount(o), { ...options, images: [{ ...image, tiling: { ...image.tiling, size: [6, 2] } }] });
+  await page.waitForFunction(() => window.guiImageQA.events.filter((x: string) => x === 'ready').length === 2);
+  equal(Buffer.from((await page.evaluate(() => window.guiImageQA.rawCanvas())).rgba, 'base64'), expected(6));
+});
+
 test('independent scalar examples preserve whole-frame projection, source quantization and half positions', () => {
   const value = layoutGuiImages({ width: 81, height: 59, guiScale: 2.5, images: [{ rect: [1.17, 2.49, 15.13, 11.81], uvRect: [.1, .2, .3, .4] }] });
   expect(value.logicalStage).toEqual([33, 24]); expect(value.projectionSize).toEqual([32.4, 23.6]);

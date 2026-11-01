@@ -17,6 +17,12 @@ export interface GuiImageGeometry {
   /** Normalized source x/y/width/height; omission uses the complete original texture. */
   uvRect?: GuiImageRect;
   nineSlice?: GuiImageNineSlice;
+  /** Repeat the source UV region in game units, preserving partial final strips. Mutually exclusive with nineSlice. */
+  tiling?: {
+    size: readonly [number, number];
+    /** Quantize each tile's source origin independently; this never changes the source tile stride. */
+    originRounding: 'floor' | 'truncate';
+  };
   tint?: GuiImageRgba;
   hudOpacity?: number;
   /** Physical framebuffer scissor. It is intersected with the layer scissor. */
@@ -108,6 +114,25 @@ export function layoutGuiImages(options: GuiImageLayoutOptions): GuiImageLayout 
   pixelRect(layerScissor, width, height, 'scissor');
   const outputRect = options.outputRect ?? full; pixelRect(outputRect, width, height, 'outputRect');
   if (!outputRect[2] || !outputRect[3]) throw new RangeError('GUI output window must have positive dimensions.');
+  // Bound expansion before allocating any tile vertices, including wholly clipped controls.
+  let totalQuads = 0;
+  const tileGrids = options.images.map(image => {
+    if (!image) throw new RangeError('A GUI image is missing.');
+    let grid: readonly [number, number] | undefined;
+    if (image.tiling !== undefined) {
+      const tile = image.tiling;
+      if (!tile || !Array.isArray(tile.size) || tile.size.length !== 2
+        || (tile.originRounding !== 'floor' && tile.originRounding !== 'truncate')) throw new RangeError('Tiling requires two positive source dimensions and explicit floor or truncate origin rounding.');
+      if (image.nineSlice !== undefined) throw new RangeError('Tiling and nine-slice are mutually exclusive.');
+      sourceRect(image.rect, 'image.rect'); positive(tile.size[0], 'tile width'); positive(tile.size[1], 'tile height');
+      const columns = Math.ceil(image.rect[2] / tile.size[0]), rows = Math.ceil(image.rect[3] / tile.size[1]);
+      if (!Number.isSafeInteger(columns) || !Number.isSafeInteger(rows) || columns < 1 || rows < 1 || columns * rows > 16384) throw new RangeError('Tiled image requires a nonempty bounded 16-bit mesh.');
+      grid = [columns, rows];
+    }
+    totalQuads += grid ? grid[0] * grid[1] : image.nineSlice ? 9 : 1;
+    if (totalQuads > 65536) throw new RangeError('GUI images exceed the combined geometry budget.');
+    return grid;
+  });
   const meshes = options.images.map((image: GuiImageGeometry, imageIndex: number): GuiImageMesh => {
     if (!image) throw new RangeError('A GUI image is missing.');
     if (image.physicalPrecision !== undefined && image.physicalPrecision !== 'float32') throw new RangeError('Image physicalPrecision must be float32 or omitted.');
@@ -123,7 +148,8 @@ export function layoutGuiImages(options: GuiImageLayoutOptions): GuiImageLayout 
     const scissor = image.scissor ? intersection(layerScissor, image.scissor) : layerScissor;
     const [x, y, w, h] = image.rect;
     const physical = (value: number, name: string) => finite(image.physicalPrecision === 'float32' ? Math.fround(Math.fround(value) * Math.fround(guiScale)) : value * guiScale, name);
-    const left = Math.floor(physical(x, 'physical x')) / guiScale, top = Math.floor(physical(y, 'physical y')) / guiScale;
+    const originRound = image.tiling?.originRounding === 'truncate' ? Math.trunc : Math.floor;
+    const left = originRound(physical(x, 'physical x')) / guiScale, top = originRound(physical(y, 'physical y')) / guiScale;
     const drawnWidth = Math.ceil(physical(w, 'physical width')) / guiScale, drawnHeight = Math.ceil(physical(h, 'physical height')) / guiScale;
     const right = left + drawnWidth, bottom = top + drawnHeight;
     const vertices: GuiImageVertex[] = [], indices: number[] = [];
@@ -135,7 +161,19 @@ export function layoutGuiImages(options: GuiImageLayoutOptions): GuiImageLayout 
         { position: [half(x0), half(y0)], uvRaw: [packedUv(u0), packedUv(v0)] });
       indices.push(start + 1, start + 2, start, start, start + 2, start + 3);
     };
-    if (image.nineSlice) {
+    if (image.tiling) {
+      const [tileWidth, tileHeight] = image.tiling.size, [columns, rows] = tileGrids[imageIndex]!;
+      // Column-major source order. Destination rounding never feeds the next tile's stride.
+      for (let column = 0; column < columns; column++) for (let row = 0; row < rows; row++) {
+        const sourceX = column * tileWidth, sourceY = row * tileHeight;
+        const sourceWidth = Math.min(tileWidth, w - sourceX), sourceHeight = Math.min(tileHeight, h - sourceY);
+        const tileLeft = originRound(physical(x + sourceX, 'tile x')) / guiScale;
+        const tileTop = originRound(physical(y + sourceY, 'tile y')) / guiScale;
+        const tileRight = tileLeft + Math.ceil(physical(sourceWidth, 'tile width')) / guiScale;
+        const tileBottom = tileTop + Math.ceil(physical(sourceHeight, 'tile height')) / guiScale;
+        quad(tileLeft, tileTop, tileRight, tileBottom, uv[0], uv[1], uv[0] + uv[2] * sourceWidth / tileWidth, uv[1] + uv[3] * sourceHeight / tileHeight);
+      }
+    } else if (image.nineSlice) {
       const { insets, baseSize } = image.nineSlice;
       if (!baseSize || baseSize.length !== 2) throw new RangeError('Nine-slice requires an explicit logical baseSize.');
       positive(baseSize[0], 'nineSlice.baseSize.width'); positive(baseSize[1], 'nineSlice.baseSize.height');

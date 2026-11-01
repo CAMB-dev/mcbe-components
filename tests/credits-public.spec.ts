@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import type { Locator, Page, Response, TestInfo } from '@playwright/test';
 import { createHash } from 'node:crypto';
+import componentCatalog from '../docs/component-catalog.json' with { type: 'json' };
 
 /** Root runs this against the complete public demo in one desktop project.
  * Other main-page examples remain mounted. No routing interception, fake clocks,
@@ -11,6 +12,7 @@ interface PageObservation {
   consoleErrors: string[];
   failedRequests: { url: string; error: string | null }[];
   responses: Response[];
+  assetBodies: { url: string; status: number; bytes: number; sha256: string; resourceType: string }[];
 }
 const observations = new WeakMap<Page, PageObservation>();
 const section = (page: Page) => page.locator('#credits');
@@ -68,14 +70,23 @@ async function originalBody(page: Page, url: string, baseURL = page.url()) {
   // the same complete body. This does not make a shader/resampling pixel claim.
   const absolute = new URL(url, baseURL).href;
   if (absolute.startsWith('data:')) return Buffer.from(await page.evaluate(async value => Array.from(new Uint8Array(await (await fetch(value)).arrayBuffer())), absolute));
-  const response = observations.get(page)!.responses.find(r => r.url() === absolute)
-    ?? await page.waitForResponse(r => r.url() === absolute);
-  expect(response, `No actual public response recorded for ${absolute}`).toBeTruthy();
-  expect(response!.ok()).toBe(true); return response!.body();
+  const observed = observations.get(page)!;
+  let responses = observed.responses.filter(r => r.url() === absolute);
+  if (!responses.length) responses = [await page.waitForResponse(r => r.url() === absolute)];
+  let original: Buffer | undefined;
+  for (const response of responses) {
+    expect(response.ok()).toBe(true);
+    const body = await response.body();
+    observed.assetBodies.push({ url: absolute, status: response.status(), bytes: body.length, sha256: sha(body), resourceType: response.request().resourceType() });
+    // Concurrent CSS and GPU fetches may expose an empty coalesced/cache body.
+    // Require an actual nonempty response and agreement among all available bodies.
+    if (body.length) { if (original) expect(body.equals(original)).toBe(true); else original = body; }
+  }
+  expect(original, `No nonempty actual page response body for ${absolute}`).toBeDefined(); return original!;
 }
 
 test.beforeEach(async ({ page }) => {
-  const observed: PageObservation = { pageErrors: [], consoleErrors: [], failedRequests: [], responses: [] };
+  const observed: PageObservation = { pageErrors: [], consoleErrors: [], failedRequests: [], responses: [], assetBodies: [] };
   observations.set(page, observed);
   page.on('pageerror', e => observed.pageErrors.push(e.stack ?? e.message));
   page.on('console', message => { if (message.type() === 'error') observed.consoleErrors.push(message.text()); });
@@ -90,14 +101,15 @@ test.beforeEach(async ({ page }) => {
 test.afterEach(async ({ page }, info) => {
   const observed = observations.get(page)!;
   await attachJSON(info, 'full-main-page-observation', { pageErrors: observed.pageErrors, consoleErrors: observed.consoleErrors,
-    failedRequests: observed.failedRequests, responses: observed.responses.map(r => ({ url: r.url().startsWith('data:') ? `${r.url().split(',')[0]},[inline body omitted]` : r.url(), status: r.status() })) });
+    failedRequests: observed.failedRequests, assetBodies: observed.assetBodies, responses: observed.responses.map(r => ({ url: r.url().startsWith('data:') ? `${r.url().split(',')[0]},[inline body omitted]` : r.url(), status: r.status() })) });
   expect(observed.pageErrors, 'All main examples render; actual global page errors are retained, never bypassed.').toEqual([]);
   expect(observed.consoleErrors).toEqual([]);
   expect(observed.failedRequests.filter(r => r.error !== 'net::ERR_ABORTED')).toEqual([]);
 });
 
-test('public Credits deep link shows191 catalog, active sidebar and the real new code snippet', async ({ page }) => {
-  await expect(page.locator('.components-label span')).toHaveText('191');
+test('public Credits deep link shows the current catalog, active sidebar and the real code snippet', async ({ page }) => {
+  const componentCount = Object.values(componentCatalog.groups).flat().filter(component => component.status === 'implemented').length;
+  await expect(page.locator('.components-label span')).toHaveText(String(componentCount));
   await expect(page.locator('.sidebar-link[aria-current="location"]')).toHaveAttribute('href', '#credits');
   await expect(scene(page)).toHaveAttribute('data-native-certified', 'false');
   await expect(roll(page)).toHaveAttribute('data-source-renderer', 'credits_renderer');
@@ -108,6 +120,22 @@ test('public Credits deep link shows191 catalog, active sidebar and the real new
   await expect(code).toContainText('onCloseRequested');
   await section(page).getByRole('button', { name: 'Preview', exact: true }).click();
   await expect(scene(page)).toBeVisible();
+});
+
+test('public original tiled artwork preview paints both selectable repeat sizes', async ({ page }, info) => {
+  const preview = section(page).locator('[data-demo-credits-tiles]'); await preview.scrollIntoViewIfNeeded();
+  const canvas = preview.getByRole('img', { name: 'Original tiled artwork' }); await expect(canvas).toHaveAttribute('data-render-state', 'ready');
+  const read = () => canvas.evaluate(node => {
+    const canvas = node as HTMLCanvasElement, gl = canvas.getContext('webgl')!, bytes = new Uint8Array(canvas.width * canvas.height * 4);
+    gl.readPixels(0, 0, canvas.width, canvas.height, gl.RGBA, gl.UNSIGNED_BYTE, bytes);
+    return { width: canvas.width, height: canvas.height, sample: Array.from(bytes), error: gl.getError() };
+  });
+  const large = await read(); expect([large.width, large.height, large.error]).toEqual([320, 144, 0]);
+  await preview.getByRole('combobox', { name: 'Tile size' }).click();
+  await page.getByRole('option', { name: '32 × 32', exact: true }).click(); await expect(canvas).toHaveAttribute('data-render-state', 'ready');
+  await expect(preview.getByRole('combobox', { name: 'Tile size' })).toHaveText('32 × 32');
+  const small = await read(); expect([small.width, small.height, small.error]).toEqual([320, 144, 0]); expect(sha(Buffer.from(small.sample))).not.toBe(sha(Buffer.from(large.sample)));
+  await attachJSON(info, 'public-tiled-artwork-two-repeats', { width: 320, height: 144, largeSHA256: sha(Buffer.from(large.sample)), smallSHA256: sha(Buffer.from(small.sample)) });
 });
 
 test('bounded public text uses loaded bundled OFL faces and actual matching CSS Canvas advances', async ({ page }, info) => {
