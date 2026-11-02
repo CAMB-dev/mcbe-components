@@ -53,7 +53,7 @@ R248 整页与当前安装的 `glyph_6D.png` 全部 65,536 texel 相同。U+6D3B
 
 独立 `native-header-cjk.spec.ts` 锁定明确 NVIDIA D3D11 条件，原始私有资源缺失时跳过，不能生成替代 golden。该有限成功使用宿主 origin 与原生 before 背景，不证明整页 GUI、默认锚点、多字间距或通用字体都已复刻。
 
-另一次只在临时实验中用手动 8-bit 权重插值替代 texture sampling，SwiftShader 变为 75 个、NVIDIA 变为 31 个不同像素，实验失败。所有原始结果保留；库未加入该采样选项，也未调整 UV、offset、shader 或容差来适配测试。软件后端残差的原因尚未确定。
+另一次只在临时实验中用手动 8-bit 权重插值替代 texture sampling，SwiftShader 变为 75 个、NVIDIA 变为 31 个不同像素，实验失败。所有原始结果保留；库未加入该采样选项，也未调整 UV、offset、shader 或容差来适配测试。后续相同 uniform UV 的控制实验已定位采样路径会返回不同值，但精确滤波模型与可跨后端修复仍未完成；诊断命令和新证据见 [FONT_SAMPLING_DIAGNOSIS.md](FONT_SAMPLING_DIAGNOSIS.md)。
 
 ## 本阶段验证与证据
 

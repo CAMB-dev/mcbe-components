@@ -1,4 +1,64 @@
-# Current checkpoint — Classic Ten source and finite native font proof, 2026-11-03
+# Current checkpoint — Font sampler cause isolated, 2026-11-03
+
+Full goal ACTIVE/incomplete. Branch codex/font-sampler-diagnosis-20261103,
+based on3076408ebf157561b8f822c1ff3995f40e6eb053. Final proof/commit/push:
+.cache/font-sampling-diagnosis-20261103-01/FINAL.json. No src/default shader,
+font, UV, origin, native target or oracle changed; still253/271. Never force push.
+
+## New evidence and reusable feedback loop
+
+- Used diagnosing-bugs skill. Real public renderGuiLayer reduced to single
+  original 活/no React/DOM repeats38pix/max5 twice with identical fullRGBA
+  199ca66185e1fc3127d3b8c2abbc07b9a00f0bb70b73f71de8f73b6b3bf98096.
+  Function/live canvas are exact. Explicit real NVIDIA D3D11 baseline0.
+- Temporary raw sample fixed24 fragment probes:861/1600 quad positions differ
+  before smooth, all38 native residual positions included. UV probes show tiny
+  differences; x2^-24 max. Initial y fixed24 probe insufficient for exact f32
+  yULPs, so scaled4 probe added with predeclared precision amendment.
+- uniform-sampler.mjs removes varying/MVP: same38 float32 uniform UVs and same
+  original fullRGBA source still give38/38 different sample values. Each backend
+  fixed24 encoder separately validated263known values,0errors. Thus sampler
+  itself demonstrably differs; not merely a theory about React/UV/readback.
+- New predeclared single-variable negatives: returned UNORM8 rounding gives
+  software46/max6, hardware44/max5. Smooth division38/0, highp sampler38/0
+  unchanged. Previous RNE8 weights75/31 retained. No failed change shipped.
+- CPU model RNE8address+UNORM16return fails312/1600 raw probes; RNE8address+
+  RNE8return-levels still38/1600 differ1. Do not fit undocumented quantizer.
+- Primary SwiftShader SamplerCore.cpp/SpirvShaderImage.cpp fetched at Chromium
+  156.0.8078.4 DEPS revision1e80438d2b93ef36a7c05f8d2b81233bac0e3d16,
+  source hashes in primary/SOURCES.json. Has16bit/32bit filtering paths, but
+  actual chosen branch not traced. D3D spec gives minimum precision, not universal
+  byte equality. NVIDIA CUDA statements aren't proof of D3D full arithmetic.
+- Added repository-only scripts/diagnose-header-font.mjs. Real original private
+  fixtures/packet/expectedSHA, normal source inputs, full geometry/MVP/clamp check,
+  full2570x1402 function/live target, zero tolerance. CLI --backend software or
+  nvidia-d3d11, new --label each run; private .cache/header-font-diagnostics.
+  Exit1 strict pixel failure,0finite native pass,2fixture/harness error. Actual
+  final04 software1/38pixels, NVIDIA0/0pixels. Existing label must stay untouched.
+  --port defaults5481 and rejects user preview4173. Own browsers/server closed.
+- Source-font CPU negative: Pillow/FreeType2.14.3 current TTF100ppem ink dims
+  mismatch native. Independent106ppem dimensional hypothesis: 0/5 still53x74
+  vs52x74; 1same38x74 but412alpha pixels differ/max252. This DOES NOT identify
+  original glyphs or native provider; no sourceTTF->atlas zero claim. Native
+  cache128-pixel scale is an untested hypothesis, not a recovered algorithm.
+
+## Next work / operations
+
+- Need actual sampler branch/arithmetic evidence or independent native scenes
+  before an explicit portable filter can be implemented; no UV adjustment or
+  per-pixel expected-color lookups. Keep baseline38 and all negative probes.
+- Dynamic TrueType1024 atlas font provider, normal baseline/advance/fallback/
+  intrinsic and source1.39 relationship remain open. Do not use captured R28
+  as shipped artwork or captured mesh as normal production text data.
+- Current changes are diagnostic tool/docs only. No new component/library API.
+  Final tar must preserve all870runtime/manifest/license bytes from actual
+  tested candidate75ad5ac6945e3cceaff70d1fc3614b1210136538367275829ae50d48056fc322.
+  Previous React18/19/4installed scopes carried by byte identity, no new run claim.
+- No Computer Use/Minecraft/PIX UI opened. Saved frame only; keep preview4173
+  PID217140. Don't rerun exclusive raw decoders from prior checkpoints. Goal
+  stays active; no global memory writes. Agents remain frozen/CPU only.
+
+# Previous checkpoint — Classic Ten source and finite native font proof, 2026-11-03
 
 Full goal ACTIVE/incomplete. Branch codex/classic-ten-font-source-20261103,
 based on89a1b5e974d0da885c34e21ff7fa88148b86bc93. Current final commit/push,

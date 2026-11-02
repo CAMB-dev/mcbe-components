@@ -1,6 +1,20 @@
 {
   "scope": "Bedrock-native controls, reusable GUI parts, complete container GUIs and HUD; composition reuses source-backed primitives.",
   "implementationStatusIsNotPixelCertification": true,
+  "fontSamplerDiagnosisStage": {
+    "status": "SAMPLER_DIFFERENCE_ISOLATED_NOT_FIXED",
+    "components": 253,
+    "runtimeValues": 271,
+    "libraryRuntimeChanged": false,
+    "sameUniformUVSampleDifferences": 38,
+    "knownEncoderControlsPerBackend": 263,
+    "encoderControlFailures": 0,
+    "softwareNativeDifferentPixels": 38,
+    "nvidiaD3D11NativeDifferentPixels": 0,
+    "portableExactSamplerRecovered": false,
+    "diagnosticCommand": "node scripts/diagnose-header-font.mjs",
+    "details": "docs/FONT_SAMPLING_DIAGNOSIS.md"
+  },
   "classicTenSourceStage": {
     "status": "UNCHANGED_LOCAL_TTF_PREVIEW_AND_EXPLICIT_HARDWARE_SINGLE_GLYPH_NATIVE_MATCH",
     "components": 253,
