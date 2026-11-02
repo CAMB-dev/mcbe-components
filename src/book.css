@@ -38,6 +38,14 @@
 .mc-book__text-box:has(.mc-book__text:focus-visible), .mc-book__cover-input:focus-visible { outline:var(--mc-book-u) solid #564332; outline-offset:var(--mc-book-u); }
 .mc-book__text:focus-visible { outline:none; }
 .mc-book__text:disabled { color:#000; opacity:1; -webkit-text-fill-color:#000; }
+/* Whole-target idle ink lives outside the text clip. The source command owns
+   its physical scissor; cropping the backing canvas changes sampling phase. */
+.mc-book__body-owner, .mc-book__body-painter { position:absolute; left:0; top:0; width:0; height:0; z-index:4; overflow:visible; pointer-events:none; }
+.mc-book__body-painter { display:none; }
+@media (forced-colors:none) {
+  .mc-book__page:not(:focus-within) > .mc-book__body-owner[data-book-body-idle="true"] > .mc-book__body-painter[data-book-body-ready="true"] { display:block; }
+  .mc-book__page:not(:focus-within):has(> .mc-book__body-owner[data-book-body-idle="true"] > .mc-book__body-painter[data-book-body-ready="true"]) > .mc-book__page-content .mc-book__text { color:transparent !important; -webkit-text-fill-color:transparent !important; }
+}
 .mc-book__image-button { display:block; margin:0; padding:0; border:0; border-radius:0; background-color:transparent; background-image:var(--mc-book-button-normal); background-position:center; background-size:100% 100%; background-repeat:no-repeat; box-shadow:none; transform:none; image-rendering:pixelated; appearance:none; cursor:pointer; }
 .mc-book__image-button:hover:not(:disabled), .mc-book__image-button:focus-visible:not(:disabled) { background-image:var(--mc-book-button-hover); }
 .mc-book__image-button:active:not(:disabled) { background-image:var(--mc-book-button-pressed); transform:none; }

@@ -1,9 +1,10 @@
 """Prepare caller-owned whole Unicode PNG pages and a finite Book GuiTextFont.
 
 python scripts/prepare-book-label-font.py [FONT_BRARCHIVE] [--characters TEXT]
-    [--text-file UTF8_FILE] [--check-only]
+    [--text-file UTF8_FILE] [--target labels|body] [--check-only]
 
-Only .cache/local-fonts/book-labels is written. No font registration, WOFF,
+Only the selected fixed .cache/local-fonts/book-labels or book-body is written.
+Labels remain the default. No font registration, WOFF,
 captured/native atlas input or inferred engine font routing is used. Pillow is
 required; the existing project-local .cache/python may supply it.
 """
@@ -24,6 +25,8 @@ DEFAULT_ARCHIVE = Path('C:/XboxGames/Minecraft for Windows/Content/data/resource
 MAX_ARCHIVE_BYTES, MAX_TEXT_BYTES = 16 * 1024 * 1024, 1024 * 1024
 MAX_TOTAL_TEXT_BYTES, MAX_CHARACTERS, MAX_TEXT_INPUTS = 4 * 1024 * 1024, 4096, 32
 DEFAULT_CHARACTERS = ''.join(chr(c) for c in range(32, 127)) + '第页共签名'
+BODY_CHARACTERS = ''.join(chr(c) for c in range(32, 127)) + '像素字体测试'
+TARGETS = {'labels': ('book-labels', DEFAULT_CHARACTERS), 'body': ('book-body', BODY_CHARACTERS)}
 
 
 def require(condition, message):
@@ -51,10 +54,11 @@ def no_links(path):
     return path
 
 
-def output_directory():
-    project = no_links(PROJECT)
+def _fixed_output_directory(project, target):
+    require(target in TARGETS, 'Unsupported fixed Book font target.')
+    project = no_links(project)
     require(project.is_dir(), 'Project root is unavailable.')
-    destination = project / '.cache' / 'local-fonts' / 'book-labels'
+    destination = project / '.cache' / 'local-fonts' / TARGETS[target][0]
     no_links(destination)
     for part in [project / '.cache', project / '.cache/local-fonts', destination]:
         require(not part.exists() or part.is_dir(), f'Output ancestor is not a directory: {part}')
@@ -63,10 +67,15 @@ def output_directory():
     return destination
 
 
+def output_directory(target='labels'):
+    return _fixed_output_directory(PROJECT, target)
+
+
 def output_path(directory, name):
     require(name in ('font.json', 'provenance.json', 'font_metadata.json')
             or re.fullmatch(r'glyph_[0-9A-F]{2}\.png', name), 'Unsupported Book-label output filename.')
-    require(directory == output_directory(), 'Book-label output directory changed.')
+    selected = next((target for target, (leaf, _) in TARGETS.items() if directory.name == leaf), None)
+    require(selected is not None and directory == output_directory(selected), 'Book font output directory changed.')
     target = no_links(directory / name)
     require(target.parent == directory and target.resolve().parent == directory.resolve(), 'Book-label output is redirected.')
     require(not target.exists() or target.is_file(), 'Book-label output is not a regular file.')
@@ -83,9 +92,9 @@ def read_input(path, limit, destination, description):
     return resolved, raw
 
 
-def characters(additions, files, destination):
+def characters(additions, files, destination, default_characters=DEFAULT_CHARACTERS):
     require(len(additions) + len(files) <= MAX_TEXT_INPUTS, 'Too many text inputs (maximum32).')
-    values, inputs, total = set(DEFAULT_CHARACTERS), [], 0
+    values, inputs, total = set(default_characters), [], 0
     for text in additions:
         raw = text.encode('utf-8')
         require(len(raw) <= MAX_TEXT_BYTES, '--characters exceeds its UTF8 byte budget.')
@@ -120,8 +129,10 @@ def classic_module():
 
 
 def build(args):
-    destination = output_directory()
-    wanted, text_inputs = characters(args.characters, args.text_file, destination)
+    target = getattr(args, 'target', 'labels')
+    destination = output_directory(target)
+    default_characters = TARGETS[target][1]
+    wanted, text_inputs = characters(args.characters, args.text_file, destination, default_characters)
     archive_path, archive = read_input(args.archive, MAX_ARCHIVE_BYTES, destination, 'Original archive')
     require(sha(archive) == ARCHIVE_SHA256, 'font.brarchive differs from the pinned original source.')
     classic = classic_module()
@@ -149,13 +160,13 @@ def build(args):
     outputs = {name: entries[name] for name in names}
     outputs['font_metadata.json'] = entries['font_metadata.json']
     outputs['font.json'] = json_bytes(font)
-    provenance = {'schemaVersion': 1, 'status': 'Finite source-derived Book label GuiTextFont; no native renderer certification',
+    provenance = {'schemaVersion': 1, 'status': 'Finite source-derived Book ' + ('label' if target == 'labels' else 'body') + ' GuiTextFont; no native renderer certification',
         'distribution': 'Caller-owned original artwork. Private ignored output only; not a font registration or distributable bundled asset.',
         'archive': {'path': str(archive_path), 'bytes': len(archive), 'sha256': sha(archive), 'table': table},
         'metricProducer': {'path': 'scripts/prepare-classic-fonts.py', 'sha256': sha((PROJECT / 'scripts/prepare-classic-fonts.py').read_bytes()),
                            'functions': ['archive_entries', 'decode_pages', 'glyph'], 'policy': 'body-bounds-v1'},
         'metricManifest': {'path': manifest_path.relative_to(PROJECT).as_posix(), 'sha256': sha(manifest_raw)},
-        'defaultCharacters': DEFAULT_CHARACTERS, 'characters': wanted, 'characterCount': len(wanted), 'additionalTextInputs': text_inputs,
+        'defaultCharacters': default_characters, 'characters': wanted, 'characterCount': len(wanted), 'additionalTextInputs': text_inputs,
         'originalPages': page_pins,
         'sourceMetadata': {'entry': 'font_metadata.json', 'bytes': len(entries['font_metadata.json']), 'sha256': sha(entries['font_metadata.json'])},
         'geometryPolicy': {'pages': 'Complete unmodified256x256 Unicode PNG pages; no atlas crop, packing, resize or recolor.',
@@ -197,10 +208,11 @@ def write_output(directory, name, content):
 def prepare(args):
     destination, outputs, count, pages = build(args)
     if args.check_only:
-        print(f'Checked Book label GuiTextFont in memory: {count}characters, {pages}complete256px pages; no outputs or mtimes changed.')
+        role = 'label' if getattr(args, 'target', 'labels') == 'labels' else 'body'
+        print(f'Checked Book {role} GuiTextFont in memory: {count}characters, {pages}complete256px pages; no outputs or mtimes changed.')
         return
     destination.mkdir(parents=True, exist_ok=True)
-    require(destination == output_directory(), 'Book-label output directory changed before writing.')
+    require(destination == output_directory(getattr(args, 'target', 'labels')), 'Book font output directory changed before writing.')
     for name, content in outputs.items():
         write_output(destination, name, content)
     print(f'Prepared {destination / "font.json"}: {count}characters, {pages}complete256px original PNG pages, cells16/lineHeight20.')
@@ -210,6 +222,7 @@ def prepare(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('archive', nargs='?', default=str(DEFAULT_ARCHIVE))
+    parser.add_argument('--target', choices=tuple(TARGETS), default='labels', help='Fixed private output and finite default set: labels (default) or body.')
     parser.add_argument('--characters', action='append', default=[], help='Append literal characters; CR/LF are separators, other controls rejected.')
     parser.add_argument('--text-file', action='append', default=[], help='Append bounded UTF8 text; no normalization or arbitrary fallback.')
     parser.add_argument('--check-only', action='store_true', help='Validate entirely in memory without output writes or directory creation.')

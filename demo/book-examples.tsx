@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 import { Button, Combobox, Switch, TextField } from '../src';
 import { BookEditor, BookPage, BookPageTurnButton, BookReader } from '../src/book';
 import type { BookDocumentSnapshot, BookFontMode, BookMode, BookPageAction, BookPageNumberFontMode, BookLabelRasterStyle } from '../src/book';
-import { nativeGuiBookLabels } from 'virtual:mcbeui-game-font';
+import { nativeGuiBookBody, nativeGuiBookLabels } from 'virtual:mcbeui-game-font';
 import '../src/book.css';
 
 const initialPages = [
@@ -39,6 +39,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   const [pencilActions, setPencilActions] = useState(false);
   const [sourcePencils, setSourcePencils] = useState(false);
   const [sourceLabels, setSourceLabels] = useState(false);
+  const [sourceBody, setSourceBody] = useState(false);
   const [hostPageTurns, setHostPageTurns] = useState(false);
   const [pageCounterFont, setPageCounterFont] = useState<BookPageNumberFontMode>('auto'), [chineseCounters, setChineseCounters] = useState(false);
   const [fontMode, setFontMode] = useState<BookFontMode>('auto'), [separatePageFonts, setSeparatePageFonts] = useState(false);
@@ -101,7 +102,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   }
   function reset() {
     setPages([...initialPages]); setSpread(0); setTitle('River journal'); setAuthor('Alex'); setMode('pages');
-    setReadOnly(false); setDisabled(false); setPencilActions(false); setSourcePencils(false); setSourceLabels(false); setHostPageTurns(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
+    setReadOnly(false); setDisabled(false); setPencilActions(false); setSourcePencils(false); setSourceLabels(false); setSourceBody(false); setHostPageTurns(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
     setSignRequest(null); setSignedCopy(null); setLeafTexts([...primitivePages]); setLeafIndex(0);
     setFontMode('auto'); setSeparatePageFonts(false); setPageCounterFont('auto'); setChineseCounters(false); setLeftFont('inherit'); setRightFont('inherit');
     report('Book examples restored.');
@@ -160,6 +161,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
           onValueChange={value => setPencilActions(value === 'pencil')}/>
         <Switch label="Source pencil rendering" checked={sourcePencils} onChange={event => { setSourcePencils(event.target.checked); if (event.target.checked) setPencilActions(true); }}/>
         <Switch label="Source book labels" checked={sourceLabels} disabled={!sourceLabelStyle} onChange={event => setSourceLabels(event.target.checked)}/>
+        <Switch label="Source idle page text" checked={sourceBody} disabled={!nativeGuiBookBody} onChange={event => setSourceBody(event.target.checked)}/>
         <Switch label="Host-managed page turns" checked={hostPageTurns} onChange={event => setHostPageTurns(event.target.checked)}/>
         <Switch label="Read-only editor" checked={readOnly} onChange={event => { setReadOnly(event.target.checked); setSignRequest(null); }}/>
         <Switch label="Disable editor" checked={disabled} onChange={event => setDisabled(event.target.checked)}/>
@@ -179,6 +181,11 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
             setLeafTexts(fontRolePages.slice(0, 2)); setLeafIndex(0);
             report('Loaded Latin and mixed Latin/Han editable page samples.');
           }}>Load font role sample</Button>
+          <Button size="sm" disabled={!editable} onClick={() => {
+            acceptPages(['Bedrock UI 0123456789 abc XYZ\n像素字体测试', 'A short note\n0123456789']);
+            setSpread(0); setMode('pages'); setEditorOpen(true);
+            report('Loaded two short page samples.');
+          }}>Load two-line sample</Button>
         </div>
         {separatePageFonts && <div style={controlsStyle}>
           <Combobox label="Left page font" value={leftFont} disabled={!editable}
@@ -189,11 +196,14 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
             onValueChange={value => setRightFont(value === 'inherit' ? 'inherit' : fontModeFrom(value))}/>
         </div>}
         <p style={noteStyle}>These roles affect editable page text; the shared role also applies to the reusable leaf below. Auto selects one family for a whole page containing Han. Font routing remains a candidate; native advances and wrapping are unverified.</p>
+        <p style={noteStyle}>Source idle page text uses locally prepared original font pages. It returns to the editable text when you focus a page, select text, compose input, scroll, or exceed the supported page layout.</p>
       </div>
       <div role="region" aria-label="Book editor preview" tabIndex={0} style={previewStyle}>
         {editorOpen ? <BookEditor aria-label="Example book and quill" pages={pages} spreadIndex={currentSpread}
           layout={{ unitScale: 2, pencilRaster: sourcePencils ? { frameSize: [640, 480], origin: [0, 0] } : undefined,
-            labelRaster: sourceLabels && sourceLabelStyle ? { frameSize: [640, 480], origin: [0, 0], pageNumber: sourceLabelStyle, footer: sourceLabelStyle } : undefined }}
+            labelRaster: sourceLabels && sourceLabelStyle ? { frameSize: [640, 480], origin: [0, 0], pageNumber: sourceLabelStyle, footer: sourceLabelStyle } : undefined,
+            bodyRaster: sourceBody && nativeGuiBookBody ? { frameSize: [640, 480], origin: [0, 0], mode: 'idle', font: nativeGuiBookBody,
+              fontScale: .5, sampling: 'bilinear', shader: 'bitmap-smooth', paintOffset: [0, 1], clipRounding: 'logical-stage-floor' } : undefined }}
           onLabelRenderError={(error, role) => report(`${role}: ${error.message}`)}
           title={title} author={author} mode={mode} authorEditable readOnly={readOnly} disabled={disabled}
           fontMode={separatePageFonts ? pageFont : fontMode}

@@ -763,3 +763,5 @@ declare const profile: CreditsPresentationProfile;
 BookEditor 的 layout.pencilRaster 可显式提供完整目标尺寸与Book逻辑原点，复用源图层绘制编辑铅笔，保留真实按钮和CSS回退。公开 #books 可切换预览；范围与原生残差见 [Book pencil QA](docs/BOOK_PENCIL_RASTER_QA.md)。
 
 Book 的 layout.labelRaster 接受调用者分页位图字体，分别绘制页码与底部按钮，保留真实输入/动作和失败回退。原字页准备脚本及固定Book整帧验证范围见 [Book label raster QA](docs/BOOK_LABEL_RASTER_QA.md)。
+
+Book 的 `layout.bodyRaster` 可在页面空闲时用原字页绘制正文，聚焦、选区、输入法组合和不支持的排版返回真实输入框。准备原字体及验证范围见 [Book body raster QA](docs/BOOK_BODY_RASTER_QA.md)。

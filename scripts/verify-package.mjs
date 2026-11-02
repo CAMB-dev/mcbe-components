@@ -130,7 +130,7 @@ assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
 assert(!Object.hasOwn(ui,'workstationImageAssets'),'Internal workstation assets must not become a public export.');
 assert(!Object.hasOwn(ui,'useEnchantingImageLayer'),'Internal workstation image adapter must not become a public export.');
-for (const internal of ['BookCounterLayer','BookFooterButton','measureBookFooter','validateBookLabelRaster','BookPencilButton','layoutBookPencil','validateBookPencilRaster','renderPreparedGuiLayer','presentPreparedGuiLayer','presentGuiLayer','CreditsGpuBackground','validateCreditsGpuBackground','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
+for (const internal of ['BookBodyLayer','validateBookBodyRaster','layoutBookBody','BookCounterLayer','BookFooterButton','measureBookFooter','validateBookLabelRaster','BookPencilButton','layoutBookPencil','validateBookPencilRaster','renderPreparedGuiLayer','presentPreparedGuiLayer','presentGuiLayer','CreditsGpuBackground','validateCreditsGpuBackground','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
 for (const internal of ['compileGuiEntitySource','layoutGuiEntity','guiEntityVertexShader','npcActorSkins','npcActorSourceFiles']) assert(!Object.hasOwn(ui,internal),'Private entity preparation must not become a public export: '+internal);
 for(const internal of ['createCreditsClock','stepCreditsClock','CREDITS_COVER_MS','CREDITS_SKIP_WAIT_MS','creditsFinite','copyCreditsSurface','copyCreditsSnapshot','creditsSurfaceFrame','parseCreditsSections','parseCreditsContent','tokenizeCreditsText','CreditsSection','CreditsRoleGroup']) assert(!Object.hasOwn(ui,internal),'Private Credits helper must not become a public export: '+internal);
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
@@ -374,6 +374,11 @@ assert.equal((consumerSourceLabels.match(/class="mc-gui-layer"/g)??[]).length,5)
 assert(!consumerSourceLabels.includes('data-book-label-ready'),'SSR cannot claim ready Book labels');
 assert.equal((renderToString(element(ui.BookEditor,{pages:['',''],mode:'signing',layout:{unitScale:2,labelRaster:consumerBookLabelProfile}})).match(/class="mc-gui-layer"/g)??[]).length,8);
 assert.throws(()=>renderToString(element(ui.BookEditor,{mode:'signing',layout:{labelRaster:{...consumerBookLabelProfile,footer:{...consumerBookLabelStyle,widthRounding:'nearest'}}}})),/width-rounding/);
+const consumerBookBodyProfile = {...consumerPencilProfile,mode:'idle',font:consumerBookLabelFont,fontScale:.5,sampling:'bilinear',shader:'bitmap-smooth',paintOffset:[0,1],clipRounding:'logical-stage-floor'};
+const consumerSourceBody = renderToString(element(ui.BookEditor,{pages:['Body',''],layout:{unitScale:2,bodyRaster:consumerBookBodyProfile}}));
+assert(consumerSourceBody.includes('<textarea') && consumerSourceBody.includes('Body'));
+assert(!consumerSourceBody.includes('data-book-body-ready'),'SSR cannot claim ready Book body');
+assert.throws(()=>renderToString(element(ui.BookReader,{pages:['Body'],layout:{bodyRaster:{...consumerBookBodyProfile,mode:'focused'}}})),RangeError);
 assert(renderToString(element(ui.BookPageTurnButton, { direction: 'previous', available: false })).includes('disabled'));
 const consumerSignSurface = renderToString(element(ui.SignTextSurface, { defaultValue: 'Consumer sign', variant: 'hanging', label: 'Consumer sign input' }));
 assert(consumerSignSurface.includes('<textarea') && consumerSignSurface.includes('Consumer sign'));
@@ -1720,7 +1725,7 @@ const jigsawValue: JigsawValue = { targetPool:'demo:pool', name:'demo:name', tar
 const jigsawProps: JigsawEditorProps = { value:jigsawValue, size:[320,260], inputRefs:{targetPool:createRef<HTMLInputElement>()}, onValueChange:(next,detail)=>next[detail.field], onDone:next=>next.finalBlock, onCancel:(next,detail)=>next.name+detail.reason };
 const jigsawConsumer = <><JigsawEditor {...jigsawProps} ref={createRef<HTMLElement>()}/><JigsawPriorityFields defaultValue={{selectionPriority:'0',placementPriority:'-1'} satisfies JigsawPriorities} ref={createRef<HTMLFieldSetElement>()}/></>;
 import { BookReader, BookEditor, BookPage, BookPageTurnButton } from 'mcbeui';
-import type { BookReaderProps, BookEditorProps, BookDocumentSnapshot, BookLabels, BookFontMode, BookPencilRasterProfile, BookLabelRasterProfile, BookLabelRasterStyle, BookLabelRole } from 'mcbeui';
+import type { BookReaderProps, BookEditorProps, BookDocumentSnapshot, BookLabels, BookFontMode, BookPencilRasterProfile, BookLabelRasterProfile, BookLabelRasterStyle, BookLabelRole, BookBodyRasterProfile } from 'mcbeui';
 const consumerBookSnapshot = (snapshot: BookDocumentSnapshot) => snapshot.pages.join('') + snapshot.mode;
 const consumerBookLabels: Partial<BookLabels> = { previous: 'Previous spread', next: 'Next spread' };
 const consumerBookProps: BookReaderProps = { pages: ['One', 'Two'], layout: { unitScale: 2 }, navigation:hostBookNavigation, pageNumberFontMode:pageNumberMode, labels: consumerBookLabels, onFinish: consumerBookSnapshot };
@@ -1828,6 +1833,14 @@ const consumerBookLabelRoles: BookLabelRole[] = [];
 const consumerBookLabelElement = <BookEditor layout={{unitScale:2,labelRaster:consumerBookRasterProfile}} onLabelRenderError={(error,role)=>{consumerBookLabelRoles.push(role);console.log(error.message);}}/>;
 // @ts-expect-error Width rounding is a named explicit source policy.
 const badBookLabelStyle: BookLabelRasterStyle = {...consumerBookLabelStyle,widthRounding:'nearest'};
+const consumerBookBodyRaster: BookBodyRasterProfile = {frameSize:[900,600],origin:[30.25,20.25],mode:'idle',font:packedFont,fontScale:.5,sampling:'bilinear',shader:'bitmap-smooth',paintOffset:[0,1],clipRounding:'logical-stage-floor'};
+const consumerBookBodyElement = <BookEditor layout={{unitScale:2,bodyRaster:consumerBookBodyRaster}} onBodyRenderError={(error,pageIndex)=>console.log(error.message,pageIndex)}/>;
+// @ts-expect-error Focused native editing has no qualified raster policy.
+const badBookBodyMode: BookBodyRasterProfile = {...consumerBookBodyRaster,mode:'focused'};
+// @ts-expect-error Clip rounding is an explicit named host policy.
+const badBookBodyClip: BookBodyRasterProfile = {...consumerBookBodyRaster,clipRounding:'round'};
+// @ts-expect-error A caller-owned source font is required.
+const badBookBodyFont: BookBodyRasterProfile = {frameSize:[900,600],origin:[0,0],mode:'idle',fontScale:.5,sampling:'point',shader:'bitmap',paintOffset:[0,0],clipRounding:'physical-floor'};
 const sourceText: GuiTextGeometry = {text:'1',font:packedFont,origin:[0,0],fontScale:1,color:textBytes,sampling:'point',shader:'bitmap',shadow:{offset:[1,1],tint:[.25,.25,.25,1]}};
 export const textOptions: GuiTextLayoutOptions = {width:640,height:480,guiScale:2,...sourceText};
 export const textLayout: GuiTextLayout = layoutGuiText(textOptions);

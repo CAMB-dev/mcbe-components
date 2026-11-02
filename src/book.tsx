@@ -13,6 +13,9 @@ export type { BookPencilRasterProfile } from './book-pencil';
 import { BookCounterLayer, BookFooterButton, measureBookFooter, validateBookLabelRaster } from './book-labels';
 import type { BookLabelRasterProfile, BookLabelRole } from './book-labels';
 export type { BookLabelRasterProfile, BookLabelRasterStyle, BookLabelRole } from './book-labels';
+import { BookBodyLayer, validateBookBodyRaster } from './book-body';
+import type { BookBodyRasterProfile } from './book-body';
+export type { BookBodyRasterProfile } from './book-body';
 
 export type BookMode = 'pages' | 'signing';
 export type BookFontMode = ClassicInputFontMode;
@@ -44,6 +47,9 @@ export interface BookLayoutProfile {
   /** Caller-owned paged fonts and explicit label measurement/paint policies.
    * Source backdrops and labels blend together before DOM composition. */
   labelRaster?: BookLabelRasterProfile;
+  /** Idle editable-page source ink only. Real DOM editing resumes for focus,
+   * selection, IME, scrolling, unsupported wrapping and painter failure. */
+  bodyRaster?: BookBodyRasterProfile;
 }
 export interface BookSkinSources {
   background: string;
@@ -103,6 +109,7 @@ export interface BookBaseProps extends Omit<HTMLAttributes<HTMLElement>, 'title'
   layout?: BookLayoutProfile;
   onPencilRenderError?: (error: Error, pageIndex: number) => void;
   onLabelRenderError?: (error: Error, role: BookLabelRole) => void;
+  onBodyRenderError?: (error: Error, pageIndex: number) => void;
   skin?: Partial<BookSkinSources>;
   labels?: Partial<BookLabels>;
   /** Caller limits in UTF-16 code units, not recovered engine wrapping rules. */
@@ -188,6 +195,12 @@ const skins: BookSkinSources = {
 };
 const SkinContext = createContext<BookSkinSources | null>(null);
 const GeometryContext = createContext({ width: 320, height: 207, pageWidth: 160, pageHeight: 207 });
+const BodyContext = createContext<{
+  profile?: BookBodyRasterProfile;
+  active: boolean;
+  scale: number;
+  onError?: (error: Error, pageIndex: number) => void;
+} | null>(null);
 const useBookLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 function url(value: string) { return `url(${JSON.stringify(value)})`; }
 function skinStyle(skin: BookSkinSources): CSSProperties {
@@ -229,6 +242,7 @@ function resolveLayout(layout: BookLayoutProfile = {}) {
   if (!Number.isFinite(unit) || unit <= 0) throw new RangeError('Book unitScale must be positive and finite.');
   if (layout.pencilRaster !== undefined) validateBookPencilRaster(layout.pencilRaster, unit);
   if (layout.labelRaster !== undefined) validateBookLabelRaster(layout.labelRaster, unit);
+  if (layout.bodyRaster !== undefined) validateBookBodyRaster(layout.bodyRaster, unit);
   const width = Math.min(spread[0], cap[0]); const height = Math.min(spread[1], cap[1]);
   const pageWidth = Math.min(page[0], width / 2); const pageHeight = Math.min(page[1], height);
   const coverWidth = Math.min(page[0], cap[0]); const coverHeight = pageHeight;
@@ -327,6 +341,7 @@ export const BookPage = forwardRef<HTMLDivElement, BookPageProps>(function BookP
   onTextChange, textareaRef, textareaProps = {}, fontMode = 'auto', className, style, ...props
 }, ref) {
   const context = useContext(SkinContext); const geometry = useContext(GeometryContext);
+  const body = useContext(BodyContext);
   const skin = context ?? skins; const [value, setValue] = useValue(text, defaultText);
   const acceptedText = useRef(value); acceptedText.current = value;
   const selectedFont = resolveClassicInputFont(fontMode, value);
@@ -376,6 +391,10 @@ export const BookPage = forwardRef<HTMLDivElement, BookPageProps>(function BookP
         </div>
       }
     </div>}
+    {body?.active && body.profile && !readOnly && !blank && !textareaProps.disabled && value !== '' && pageIndex !== undefined &&
+      <BookBodyLayer profile={body.profile} scale={body.scale} text={value} pageIndex={pageIndex} side={side}
+        pageOrigin={[body.profile.origin[0] + (geometry.width - geometry.pageWidth * 2) / 2 + (side === 'left' ? 0 : geometry.pageWidth), body.profile.origin[1]]}
+        pageSize={[geometry.pageWidth, geometry.pageHeight]} onError={body.onError}/>}
   </div>;
 });
 
@@ -385,7 +404,7 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     title: controlledTitle, defaultTitle = '', onTitleChange,
     author: controlledAuthor, defaultAuthor = '', onAuthorChange,
     mode: controlledMode, defaultMode = 'pages', onModeChange, readOnly = !editor, disabled = false,
-    layout, onPencilRenderError, onLabelRenderError, skin: overrides, labels: labelOverrides, maxPageLength, maxTitleLength, onFinish, pageNumberLabel, pageNumberFontMode = 'auto',
+    layout, onPencilRenderError, onLabelRenderError, onBodyRenderError, skin: overrides, labels: labelOverrides, maxPageLength, maxTitleLength, onFinish, pageNumberLabel, pageNumberFontMode = 'auto',
     authorEditable = false, onSign, pageActions, onPageAction, finalizeEnabled = true, fontMode = 'auto',
     textareaProps, textareaRef, titleInputProps = {}, authorInputProps = {}, titleInputRef, authorInputRef,
     className, style, onKeyDown, ...rest } = props;
@@ -409,6 +428,7 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     pageActions: { ...skins.pageActions,
       ...Object.fromEntries(Object.entries(overrides?.pageActions ?? {}).filter(([, value]) => value !== undefined)) } };
   const geometry = resolveLayout(layout);
+  if (onBodyRenderError !== undefined && typeof onBodyRenderError !== 'function') throw new TypeError('Book onBodyRenderError must be a function.');
   const lastSpread = Math.max(0, Math.ceil(pages.length / 2) - 1);
   const clamp = (value: number) => Math.max(0, Math.min(lastSpread, Number.isFinite(value) ? Math.floor(value) : 0));
   const spread = composing ? heldSpread.current : clamp(requestedSpread);
@@ -560,6 +580,8 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
       onCompositionEnd={event => { endComposition(event.currentTarget); attributes.onCompositionEnd?.(event); }}/>
   };
   return <SkinContext.Provider value={skin}><GeometryContext.Provider value={geometry}>
+    <BodyContext.Provider value={{ profile: layout?.bodyRaster, scale: layout?.unitScale ?? 2,
+      active: editor && mode === 'pages' && !readOnly && !disabled && !rest.hidden, onError: onBodyRenderError }}>
     <section {...rest} ref={attachRoot} tabIndex={rest.tabIndex ?? -1} className={['mc-book', editor ? 'mc-book--editor' : 'mc-book--reader', className].filter(Boolean).join(' ')}
       aria-label={rest['aria-label'] ?? (editor ? labels.editor : labels.reader)} data-mode={mode} data-spread-index={spread}
       data-disabled={disabled} style={{ ...skinStyle(skin), ...geometry.style, ...style }}
@@ -606,7 +628,7 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
         {mode === 'signing' ? labels.title : pages.length ? `${numberLabel(spread * 2 + 1, pages.length)}${spread * 2 + 1 < pages.length ? ` – ${numberLabel(spread * 2 + 2, pages.length)}` : ''}` : labels.empty}
       </span>
     </section>
-  </GeometryContext.Provider></SkinContext.Provider>;
+  </BodyContext.Provider></GeometryContext.Provider></SkinContext.Provider>;
 }
 
 export const BookReader = forwardRef<HTMLElement, BookReaderProps>(function BookReader(props, ref) {
