@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "status": "CONDITIONED_NATIVE_PLUS_RENDERER_QUALIFIED_JSON_LAYOUT_AND_WHOLE_GUI_UNQUALIFIED",
+  "components": 253,
+  "runtimeValues": 271,
+  "componentCountChanged": false,
+  "details": "docs/RESOURCE_PACK_HEADER_NATIVE_QA.md",
+  "source": {
+    "release": "v1.26.60.5-full",
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "currentInstalledUI": {
+      "files": 5,
+      "parsedEqual": true,
+      "rawByteEqual": false
+    },
+    "png": {
+      "entry": "resource_pack/textures/ui/plus.png",
+      "bytes": 123,
+      "sha256": "965fa4c152e09cdd8d61ead15b5eb2ecefd9e1c78cd49a9b652b84b78bf55f9f",
+      "size": [
+        11,
+        11
+      ],
+      "nativeWholeRGBA_SHA256": "67d85a763cd7bccd356319a6c36d4cd8a7c0a3aee2d62a2e8a3dbd085a4aeaa8"
+    }
+  },
+  "native": {
+    "screenObserved": "Settings -> Global Resources -> Active expanded",
+    "captureSHA256": "3a4254736d4b9b904fb24d3be6be70482697deebbe7a98691f17181fc904a3d5",
+    "captureBytes": 62956034,
+    "frameCount": 1,
+    "delimiter": "Present-to-Present",
+    "globalId": 81,
+    "apiQueueIndex": 0,
+    "apiEventIndex": 515,
+    "commandList": 506,
+    "sourceResource": 298,
+    "targetResource": 19,
+    "targetSize": [
+      2570,
+      1402
+    ],
+    "targetFormat": "R8G8B8A8_UNORM",
+    "targetSamples": 1,
+    "drawArguments": [
+      12,
+      1,
+      49400,
+      0,
+      0
+    ],
+    "sampler": "POINT_CLAMP",
+    "hostRectangles": [
+      [
+        442.5,
+        153,
+        10,
+        10
+      ],
+      [
+        442.5,
+        179,
+        10,
+        10
+      ]
+    ],
+    "rectangleQualification": "Capture-derived host snapshots, not independently recovered JSON positions.",
+    "sourceDisplaySize": [
+      10,
+      10
+    ],
+    "guiScale": 5,
+    "PSConstants": {
+      "HudOpacity": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "TintColor": [
+        0.30000001192092896,
+        0.30000001192092896,
+        0.30000001192092896,
+        1
+      ]
+    },
+    "VSShaderSHA256": "890dff20d99ff8fa0d314935fd52d560f62e4a9aebb7db2109c130c2c5dfaa6e",
+    "PSShaderSHA256": "346344d4af11892e72424dc4e0adf35426ecfafbe5a2a5a23657d5cb5b2ca4f2",
+    "opaqueWhiteTexelOutput": 76,
+    "universalQuantizerQualified": false
+  },
+  "causalReadback": {
+    "beforeRGBA_SHA256": "d0f72fcc063f9ee39375b7b8015428093be1378ac8e4306f243ee4b8bc4aefd2",
+    "afterRGBA_SHA256": "532ef5ee4f8c5590b82cc73d40de3ee4d3193437a0c4993740dcfed613f5205e",
+    "fullFramePixels": 3603140,
+    "changedPixels": 2336,
+    "changedPerGlyph": 1168,
+    "transition": {
+      "before": [
+        198,
+        198,
+        198,
+        255
+      ],
+      "after": [
+        76,
+        76,
+        76,
+        255
+      ]
+    },
+    "observedPixelRectangles": [
+      [
+        2212,
+        765,
+        50,
+        50
+      ],
+      [
+        2212,
+        895,
+        50,
+        50
+      ]
+    ],
+    "outsideThosePlanesDifferentPixels": 0,
+    "allAlpha255": true
+  },
+  "phase": {
+    "nominalPhysicalLeft": 2212.5,
+    "conditionalPointStripe": [
+      13,
+      14
+    ],
+    "integerBCRStripe": [
+      14,
+      14
+    ],
+    "actualOpaquePixels": 1168,
+    "integerBCRBrowserOpaquePixels": 1204,
+    "integerBCRDifferencePerPlane": 36,
+    "fittedOffsets": false,
+    "knownNativeBCR_CSS": {
+      "cases": 2,
+      "fullFrameDifferentPixelsPerCase": 128,
+      "status": "STRICT_FAILURE_RETAINED",
+      "meaning": "Matching the known half-pixel BCR alone does not reproduce the native renderer. No generic CSS half-pixel fix is asserted.",
+      "differencesOutsideNative50Squared": 28,
+      "fullFrameComparison": true
+    }
+  },
+  "validation": {
+    "allOrderedDrawArgumentsMatched": 63,
+    "lowLevelPublicPaths": 3,
+    "backends": [
+      {
+        "backend": "default",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      },
+      {
+        "backend": "nvidia-d3d11",
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3050 Laptop GPU (0x000025E2) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    ],
+    "conditionedFunctionCases": 6,
+    "mountedPublicReactCases": 2,
+    "formalRegression": {
+      "pass": 3,
+      "skip": 0,
+      "retries": 0
+    },
+    "fullOutputDifferentPixels": 0,
+    "normalGeometryXYandUVMatch": true,
+    "effectiveClipXYWMatch": true,
+    "fullMVPMatch": false,
+    "MVPZDifference": {
+      "public": 1,
+      "native": -0.0010000000474974513,
+      "allSourceVertexZ": 0
+    },
+    "backgroundIsNativeBeforeSnapshot": true,
+    "fontsReconstructed": false,
+    "JSONIntrinsicLayoutRecovered": false,
+    "nativeWholeGUIQualified": false
+  },
+  "privateArtifactsExcludedFromPackage": true,
+  "oldStrictOracles": {
+    "resourcePacks": {
+      "exact": 92,
+      "total": 120,
+      "unqualified": 28
+    },
+    "manifest": {
+      "exact": 6,
+      "total": 18,
+      "unqualified": 12
+    },
+    "changed": false
+  },
+  "independentReceiptPins": [
+    {
+      "path": ".cache/resource-pack-native-gpu-20261103-01/static-index-01/FINAL.json",
+      "sha256": "804f9f61ccf72fa5aa54422621a35f544b3a986b631b0175b65f27d0ef529dea"
+    },
+    {
+      "path": ".cache/resource-pack-pix-plus-independent-20261103-01/AMENDMENT-01/FINAL.json",
+      "sha256": "e343f091134b1a86382f31e549396d77ebc3f54550637b84fd82b67c0a496f34"
+    },
+    {
+      "path": ".cache/resource-pack-pix-plus-independent-20261103-01/AMENDMENT-02/FINAL.json",
+      "sha256": "8844c7885755d3f0a8262bb6343ebd08a70c9ac96b8caf7dcef1e43e5edb89fb"
+    },
+    {
+      "path": ".cache/resource-pack-pix-plus-independent-20261103-01/AMENDMENT-03/FINAL.json",
+      "sha256": "998bd797ceecf2ddec5e1f37f749ebc11dc42126339feb766d5125c54cf0a6e8"
+    },
+    {
+      "path": ".cache/resource-pack-pix-plus-independent-20261103-01/AMENDMENT-04/FINAL.json",
+      "sha256": "4846fd103c558d125d5c988825e84a903f15b97ebba53a2a1c064da917fc2952"
+    },
+    {
+      "path": ".cache/resource-pack-pix-plus-independent-20261103-01/AMENDMENT-05/FINAL.json",
+      "sha256": "637a9b44c6f606e96b392e2a497569191df3dcca7ba271e14d66cdbb9aafaf61"
+    }
+  ]
+}

@@ -1,4 +1,94 @@
-# Current checkpoint — Manifest Validation, 2026-11-03
+# Current checkpoint — Native Resource Pack header, 2026-11-03
+
+Full goal ACTIVE/incomplete. Branch codex/native-header-sampling-20261103 based
+on921ac910e1611ed462b44113434c01011758a0a9. Local main is stale. Final actual
+commit/push/clean evidence: .cache/resource-pack-native-gpu-20261103-01/FINAL.json.
+Normal push origin HEAD:main only. No component/runtime/source implementation
+changed:253components/271values. This phase adds native evidence/docs/test.
+
+## Completed
+
+- Fresh PIX2610.28 GPU UI launch and actual1Present frame at Settings->Global
+  Resources->Active expanded. Normal oldgame224048 closed; new216940/
+  startTicks639292332388651871/HWND595924 had capturer2610.28001 loaded, same
+  installedDLL SHA3be8f4d2...573b7. ForceD3D11On12 false. TakeCapture0->1.
+- Original andanalysis.wpix62956034B SHA256
+  3a4254736d4b9b904fb24d3be6be70482697deebbe7a98691f17181fc904a3d5
+  in.cache/resource-pack-native-gpu-20261103-01. Original preserved. Official
+  CLIevents/screenshot/C++exports andAPIlist actual0, source hashes unchanged.
+  Generated C++ never compiled/executed. Game/PIX normally closed, CU reset.
+- IndependentCPU63/63complete ordered draw arguments map717APIevents. G81=
+  q0e515/CL506,DrawIndexed(12,1,49400,0,0),R29811square source->R19sample1.
+  Actualsource121texels/484RGBA bytes exactly officialZIP/repo wholeplus.
+  Currentinstalled5wholeUI parsed equal toZIP, rawJSONbytes DIFFERENT(minified);
+  originalPNG123B wholebyte equal SHA965fa4c1...55f9f.
+- Currentmodified uploadR12 CopyG15->R8 used actual8x12B XYZW/UV vertices,
+  12indices,64BVS+32BPS. Sourcegeometry halfXY x442.5..452.5,y153..163 and
+  179..189,fullUV0/65535. PS Hud1 andfloat32(.3) RGB/alpha1, NOT packed76RGBA
+  vertices (do not confuse priorBook16Bfont evidence). UI/Blitshader identities
+  exact. Nativebefore/afterG81 R19 full3.6MP only2336changed,2x1168,198->76,
+  allalpha255. G94q0e632/R19finalUI equals completePIXscreenshot14,412,560B.
+  Do not readsample8 R13 or wholeCBV suffixes. Allrawfootprints/PNG retained.
+- CPUmodification61,557,888B was explicitly budgeted/read/decompressed ONCE
+  inRAM, wholeSHA6ad5412e76adb9654962a078fda31ea9f6f2bd7536196916fc979277332f0f83;
+  saved only216B geometry/constants plus smallshader. IBplacedresource517(1MiB),
+  not earlyunverified514. CPUfirstSyntaxError retained; finalonceguardprevents
+  accidentalrerun. Don't rerunhistoricalcapture helpers or relax oldPID pins.
+- Exactphase diagnosis: physicalleft442.5*5=2212.5, Y153*5=765. Source3stripe
+  produces13x14width and1168pixels; integerBCR14x14 gives1204,36extra. This
+  explains integerplane failure, not independentJSONlayout recovery.
+- RealCSSResourcePackSection at matchedknownBCR2212.5,765/895 still128fullframe
+  differences for eachof2launchconfigs (100introduced/28missing);28diffoutside
+  native50square atx2262. Fullframe preserved, no cropped/masked pass. No generic
+  CSS+.5 fix. Report native-plus-css-phase-20261103-01,UVAMENDMENT05.
+- ExistingpublicrenderGuiImages +renderGuiLayerwebgl/top-left xdefaultSwiftShader/
+  actualNVIDIAD3D11=6/6fullRGBA0 with sourcePNG/literalTint.3/Hud1, NORMAL API
+  rectangles BUT capture-derivedHOSTsnapshot and realnativebeforeBG. NoVB/MVP
+  asproducerinput; this is CONDITIONED renderer proof, not wholeGUI rebuild.
+  Purelayout8XY/fullUV/indices match; MVPindex10 differs(public1/native-.001),
+  allsourcez0 so effectiveclipXY/W same. Never claimfullMVPbyteidentity.
+- MountedpublicGuiImageLayer originalPNGURL/ImageBitmap2backend live+DOM0;
+  actualconsumedBlob123B originalSHA +sameBlobnone/none/none options traced.
+  PW200/0Bcoalescedbody remains recorded. mounted01failed transportassert despite
+  pixel0; mounted02auditsactualconsumedblob withoutrefetch/replacement/selection.
+- Formal tests/resource-pack-header-native.spec.ts pixelproject3/3PASS,
+  latestbrowser-native02.json pins decodedoracleSHA; strict standaloneTSC PASS.
+  Tests explicitly skip absentprivateoracles, never generatefakeones. Reference
+  images/privatefonts/captures excludedfrompackage. Docs-onlytar runtime870members
+  exactto prioractualReact18/19testedtar; currentSHA inPACK-IDENTITY.json.
+
+## Pending / next action
+
+- Full pixel-perfect goal incomplete. DOMResourcePackSection phase still fails;
+  next independently recover normalJSONGLOBALorigin then consider an explicit
+  source-image rendering profile/adapter. ExistingGuiImageLayer can reproduce
+  this draw; do not disguise capture-derivedrectangles as source defaults.
+  Relevant source general_section global_texture_pack_section ~1541, resource
+  selected_stack_panel and light_content_button/button_content_panel geometry.
+- The two plus shader .3 role has directnative76 output evidence only for this
+  source/pipeline. No universalquantizer/.7/partialalpha/font recovery. Previous
+  resource92/120+28FAIL andManifest6/18+12FAIL remain unchanged/separate.
+- Frozenordinaryhost6frames/18glyphGPUexperiment default12/18idealexact versus
+  NVIDIAD3D11 6/18idealexact is NOT native qualification or best-backend selection.
+- BroaderallGUI/settings/disconnect/templates/sleep/calibration/providers/Pocket/
+  Ore andwholeGUI/nativefont/intrinsic/alpha qualification still required.
+
+## Evidence and operation
+
+- Public docs/RESOURCE_PACK_HEADER_NATIVE_QA.md andresource-pack-header-native.json.
+  Private maincase .cache/resource-pack-native-gpu-20261103-01/static-index-01/FINAL.json;
+  .cache/resource-pack-pix-plus-independent-20261103-01/AMENDMENT-01..05;
+  .cache/native-plus-public-replay-20261103-01/RESULT.json;
+  .cache/native-plus-mounted-20261103-02/RESULT.json. RootownsGPU/CU/Git,
+  allagentsfrozenCPU-only. No globalmemorywrites.
+- Keep user4173preview PID217140, currentHTML SHA
+  fccac39d3c9231339fa402122d0a52b148f601be80f4361cdf32184d842f659d.
+  Own5481server andalltestbrowsersclosed. Game216940 andWinPixUI closed normally;
+  ComputerUse reset immediatelyaftercapture. No newgame/PIX launch needed to
+  continueCPU/sourceanalysis. OldclipboardPNG2568x1400 vsfreshPIX2570x1402 have
+  distinctcoords; never mix or use observed[-3,+5] as globalmapping.
+
+# Previous checkpoint — Manifest Validation, 2026-11-03
 
 Full goal ACTIVE/incomplete. Branch codex/manifest-validation-20261102 based on
 271117bead6d55bdcd1dbab64d9591efdb2457ac. Local main is stale. Normal push

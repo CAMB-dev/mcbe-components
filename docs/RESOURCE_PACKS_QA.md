@@ -1,5 +1,7 @@
 # Resource Packs / Pack Settings
 
+后续有限原生审计：[标题plus绘制证据](RESOURCE_PACK_HEADER_NATIVE_QA.md)已取得真实原图／shader／顶点／常量及before-after读回，并验证条件化公开GPU渲染。它不改本阶段92／120与28个严格失败，也不表示默认整页布局或字体已认证。
+
 本轮公开 8 个 Classic 组件，源码计数为 **247 组件／265 运行时值**。实际 React18／19 安装包、浏览器及生产展示检查已完成；材质比对仍有28个区域未通过，不表示原生整页像素认证。机器可读来源见 [resource-packs-source.json](resource-packs-source.json)，完整材质身份见 [resource-pack-assets.json](resource-pack-assets.json)。
 
 ## 来源与范围

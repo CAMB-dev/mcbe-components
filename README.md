@@ -17,6 +17,8 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 资源包家族新增 `ResourcePackManager`、`ResourcePackSection`、`ResourcePackItem`、`ResourcePackActions`、`ResourcePackDiagnostics` 与 `PackSettingsScreen`、`PackSettingsContent`、`PackContentTier`。global／level／addon 保留各自源码绑定；内容等级的 raw value／steps 与显式 Web 数值域独立，生成字段复用九种实际表单行。API、来源和待验证范围见 [RESOURCE_PACKS_QA.md](docs/RESOURCE_PACKS_QA.md)。
 
+已取得原版资源包标题图标的单帧GPU证据：两颗plus的半像素GLOBAL位置解释了整数对照的36像素差异。已有GPU接口在给定位置及原生背景的条件下通过真实React／两后端对照；默认整页布局和字体仍未认证。见 [原生标题图标验证](docs/RESOURCE_PACK_HEADER_NATIVE_QA.md)。
+
 资源包验证报告入口 `#manifest-validation`：新增 `ManifestValidationScreen`、`ManifestValidationContent`、`ManifestPackSummary`、`ManifestValidationIssues`、`ManifestValidationIssue`、`ManifestValidationButton` 六个可复用部件。保留独立全局状态、完整问题集合和原始操作target；复制、刷新、删除仅发出宿主请求。默认报告使用文字刷新／删除，独立预览另外提供图标变体。见 [MANIFEST_VALIDATION_QA.md](docs/MANIFEST_VALIDATION_QA.md)。
 
 ## 本地运行

@@ -1845,5 +1845,22 @@
       "fail": 0,
       "skipped": 0
     }
+  },
+  "resourcePackHeaderNativeStage": {
+    "status": "CONDITIONED_NATIVE_PLUS_RENDERER_QUALIFIED_JSON_LAYOUT_AND_WHOLE_GUI_UNQUALIFIED",
+    "componentCountChanged": false,
+    "details": "docs/RESOURCE_PACK_HEADER_NATIVE_QA.md",
+    "metadata": "docs/resource-pack-header-native.json",
+    "conditionedFunctionCases": 6,
+    "mountedPublicReactCases": 2,
+    "formalRegressionPass": 3,
+    "sourceTexels": 121,
+    "actualChangedPixels": 2336,
+    "wholeGUIQualified": false,
+    "fontsReconstructed": false,
+    "JSONLayoutRecovered": false,
+    "sourceTint": 0.3,
+    "nativeOutputForWhiteTexel": 76,
+    "oldStrictFailuresUnchanged": true
   }
 }
