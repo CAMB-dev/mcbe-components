@@ -1,0 +1,14 @@
+@import './manifest-validation-parts.css';
+.mc-manifest-validation-screen{position:relative;isolation:isolate;box-sizing:border-box;overflow:clip;min-width:0;font:400 calc(var(--mc-manifest-font-size,var(--mc-font-size,18px)) * var(--mc-manifest-scale) / 2)/calc(10px * var(--mc-manifest-scale)) var(--mc-font,monospace);text-shadow:none;color:rgb(100% 100% 100%);image-rendering:pixelated}
+.mc-manifest-validation-screen[hidden],.mc-manifest-validation-screen__close[hidden]{display:none!important}
+.mc-manifest-validation-screen__dim{position:absolute;inset:0;pointer-events:none}
+.mc-manifest-validation-screen__panel{position:absolute;isolation:isolate}
+.mc-manifest-validation-screen__underfill{position:absolute;left:calc(4px * var(--mc-manifest-scale));top:calc(4px * var(--mc-manifest-scale));opacity:1;pointer-events:none}
+.mc-manifest-validation-screen__title{position:absolute;top:calc(9px * var(--mc-manifest-scale));left:50%;transform:translateX(-50%);height:calc(10px * var(--mc-manifest-scale));color:rgb(30% 30% 30%);white-space:nowrap;overflow:hidden}
+.mc-manifest-validation-screen__close{position:absolute;right:0;top:0;box-sizing:border-box;width:calc(21px * var(--mc-manifest-scale));height:calc(21px * var(--mc-manifest-scale));padding:0;margin:0;border:0;border-radius:0;appearance:none;background:transparent var(--mc-manifest-close) center/calc(15px * var(--mc-manifest-scale)) calc(15px * var(--mc-manifest-scale)) no-repeat;cursor:pointer;image-rendering:pixelated}
+.mc-manifest-validation-screen__close:hover:not(:disabled),.mc-manifest-validation-screen__close:focus-visible:not(:disabled){background-image:var(--mc-manifest-close-hover)}
+.mc-manifest-validation-screen__close:active:not(:disabled){background-image:var(--mc-manifest-close-pressed)}
+.mc-manifest-validation-screen__close:focus-visible{outline:calc(1px * var(--mc-manifest-scale)) solid Highlight;outline-offset:calc(-1px * var(--mc-manifest-scale))}
+.mc-manifest-validation-screen__close:disabled{cursor:default}
+.mc-manifest-validation-screen__content{position:absolute;left:calc(8px * var(--mc-manifest-scale));top:calc(23px * var(--mc-manifest-scale))}
+@media(forced-colors:active){.mc-manifest-validation-screen__panel{background:Canvas;color:CanvasText;outline:1px solid CanvasText}.mc-manifest-validation-screen__underfill,.mc-manifest-validation-screen__hollow{display:none}.mc-manifest-validation-screen__title{color:CanvasText}.mc-manifest-validation-screen__close{background:ButtonFace;border:1px solid ButtonText}}

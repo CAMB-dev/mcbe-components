@@ -49,6 +49,56 @@
     "publicFullReference": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip"
   },
   "groups": {
+    "manifestValidation": [
+      {
+        "name": "ManifestValidationButton",
+        "status": "implemented",
+        "validation": "node129_browserFinal58_adjacentCombined221_plus_responsive2_package18_19_installed4_built2_material6of18_native_unqualified",
+        "source": "manifest_validation_screen.json",
+        "details": "docs/MANIFEST_VALIDATION_QA.md",
+        "fidelity": "source_geometry_host_font_and_intrinsic_budgets_material_partial_native_unqualified"
+      },
+      {
+        "name": "ManifestPackSummary",
+        "status": "implemented",
+        "validation": "node129_browserFinal58_adjacentCombined221_plus_responsive2_package18_19_installed4_built2_material6of18_native_unqualified",
+        "source": "manifest_validation_screen.json",
+        "details": "docs/MANIFEST_VALIDATION_QA.md",
+        "fidelity": "source_geometry_host_font_and_intrinsic_budgets_material_partial_native_unqualified"
+      },
+      {
+        "name": "ManifestValidationIssue",
+        "status": "implemented",
+        "validation": "node129_browserFinal58_adjacentCombined221_plus_responsive2_package18_19_installed4_built2_material6of18_native_unqualified",
+        "source": "manifest_validation_screen.json",
+        "details": "docs/MANIFEST_VALIDATION_QA.md",
+        "fidelity": "source_geometry_host_font_and_intrinsic_budgets_material_partial_native_unqualified"
+      },
+      {
+        "name": "ManifestValidationIssues",
+        "status": "implemented",
+        "validation": "node129_browserFinal58_adjacentCombined221_plus_responsive2_package18_19_installed4_built2_material6of18_native_unqualified",
+        "source": "manifest_validation_screen.json",
+        "details": "docs/MANIFEST_VALIDATION_QA.md",
+        "fidelity": "source_geometry_host_font_and_intrinsic_budgets_material_partial_native_unqualified"
+      },
+      {
+        "name": "ManifestValidationContent",
+        "status": "implemented",
+        "validation": "node129_browserFinal58_adjacentCombined221_plus_responsive2_package18_19_installed4_built2_material6of18_native_unqualified",
+        "source": "manifest_validation_screen.json",
+        "details": "docs/MANIFEST_VALIDATION_QA.md",
+        "fidelity": "source_geometry_host_font_and_intrinsic_budgets_material_partial_native_unqualified"
+      },
+      {
+        "name": "ManifestValidationScreen",
+        "status": "implemented",
+        "validation": "node129_browserFinal58_adjacentCombined221_plus_responsive2_package18_19_installed4_built2_material6of18_native_unqualified",
+        "source": "manifest_validation_screen.json",
+        "details": "docs/MANIFEST_VALIDATION_QA.md",
+        "fidelity": "source_geometry_host_font_and_intrinsic_budgets_material_partial_native_unqualified"
+      }
+    ],
     "resourcePacks": [
       {
         "name": "ResourcePackManager",
@@ -1698,7 +1748,7 @@
     ]
   },
   "publicExports": {
-    "components": 247,
+    "components": 253,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1709,12 +1759,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 265,
+    "runtimeValues": 271,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "scoped_resource_packs_247_265_web_verified_material_partial_native_unqualified",
+    "publicationState": "manifest_validation_253_271_scoped_web_package_qualified_material_partial_native_unqualified",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
@@ -1755,5 +1805,45 @@
     "nativeWholeGUI": false,
     "details": "docs/PROGRESS_QA.md",
     "scope": "Explicit host fonts/intrinsics/missing providers and Web motion/clip/focus policies; source services remain host-owned."
+  },
+  "manifestValidationStage": {
+    "componentNames": [
+      "ManifestValidationButton",
+      "ManifestPackSummary",
+      "ManifestValidationIssue",
+      "ManifestValidationIssues",
+      "ManifestValidationContent",
+      "ManifestValidationScreen"
+    ],
+    "sourceFiles": 7,
+    "sourceDefinitions": 31,
+    "defaultReachable": 24,
+    "declaredOnly": 7,
+    "materials": 20,
+    "rawMetadata": 14,
+    "explicitlyAbsentMetadata": 6,
+    "newPNGs": 0,
+    "publicCSS": 2,
+    "node": 129,
+    "manifestBrowser": 54,
+    "combinedBrowser": {
+      "pass": 221,
+      "total": 222,
+      "focusedResponsiveAfterFix": 2
+    },
+    "installed": 4,
+    "built": 2,
+    "material": {
+      "exact": 6,
+      "total": 18,
+      "strictFailures": 12
+    },
+    "nativeWholeGUI": false,
+    "details": "docs/MANIFEST_VALIDATION_QA.md",
+    "finalSourceBrowser": {
+      "pass": 58,
+      "fail": 0,
+      "skipped": 0
+    }
   }
 }

@@ -1,4 +1,94 @@
-# Current checkpoint — Resource Packs, 2026-11-02
+# Current checkpoint — Manifest Validation, 2026-11-03
+
+Full goal ACTIVE/incomplete. Branch codex/manifest-validation-20261102 based on
+271117bead6d55bdcd1dbab64d9591efdb2457ac. Local main is stale. Normal push
+origin HEAD:main only. Final commit/push/clean status must be read from
+.cache/manifest-validation-qa-01/FINAL.json rather than inferred from this note.
+
+## Completed
+
+- Actual253 components /271 runtime values (253+6data+12functions). New6:
+  ManifestValidationButton, ManifestPackSummary, ManifestValidationIssue,
+  ManifestValidationIssues, ManifestValidationContent, ManifestValidationScreen.
+  Gallery #manifest-validation has four reusable parts, five button variants,
+  explicit source state toggles and an initially closed report.
+- Pinned primary manifest_validation_screen.json35591bytes SHA256
+  0bf65eb9846e9d0d7abbf38b21b84c5098e1ccf1788ce20271bd25a7c13f1ecc.
+  Independent audits:7whole JSON,31defs, default root24reachable/7declared-only.
+  Default summary uses text refresh/delete; icons/loading declared-only, copy per
+  issue. Factory is vertical stack, full capacity/index snapshots; shared global
+  hasErrorsOrWarnings is independent from severity/content/length. File-error
+  section is commented and excluded. All operations are host requests only.
+- Core20 material keys reuse existing whole original bytes;14rawmetadata,
+  6explicitly absent,0newPNG. Six conditional/inherited/shadowed records separate.
+  Reproducible fixed-ZIP source preparer now shared with old14-source Resource
+  Pack wrapper.12guards cover hashes, preserved bad caches, path/junction bounds.
+- Node129/129 (new parts35, preparation12, adjacent82); full typecheck/build.
+  Source combined browser02=221/222; remaining320px overflow fixed then2/2.
+  Final current-data browser-final=58/58,0skip/retry (54family+2fonts+2responsive).
+  Previous failures and harness corrections remain intact, not one222green run.
+- Actual package02 React18.3.1/19.3.1 all253/271+older family gates PASS; new
+  family each23SSR/24negative types/20originals/CSS. Later only runtime amendment
+  is partsCSS flex-shrink:0 (actual width20 vs expected50 red, then54PASS).
+  Installed02 fresh default Vite dev/prod x2React=4PASS, actual six refs, exact
+  cleanup, native cancellation/identity/flags/close. Final installed03 additionally
+  qualifies the final docs tar and current host sample data; read RESULT.json.
+- Built04 actual4173 desktop/mobile PASS, HTML SHA256
+  fccac39d3c9231339fa402122d0a52b148f601be80f4361cdf32184d842f659d,
+  four parts and report/global state,740x500 panel, no document overflow.
+  Visual inspection caught host label-budget overlap; sample labels now80units,
+  fixed30 prefix uses Info. Text ranges fit actual font budgets; source geometry
+  unchanged. Gallery Switch wrap and old Progress file chooser min-width fixed.
+- Final tar SHA256 b0b9a0b9d9dd6999b6900840cdf0650dbbe5f2da61db720fe42cb55b3e079cf0.
+  PACK-IDENTITY.json proves all870runtime/manifest/license members exactly equal
+  installed02 candidate; only5README/docs members differ. Full package02 to
+  installed02 runtime difference is only manifest-validation-parts.css.
+- User manually opened native game; Settings->Global Resources->Active expanded
+  observed. Actual Alt_L+Print plus read-only image clipboard export saved
+  2568x1400 PNG SHA256cc5576350d146d34a82f32c6141b02e741dbdc64cd735a47bfb02010e3fe8156.
+  Process224048/startTicks639292301552109887/window49612712 and clipboard sequence
+  5078->5082 verified. No pack activation/deletion/settings mutation. Prior Sky
+  JPEGs are only structure references. This does not prove Manifest native route.
+  Computer Use session reset/closed after use; user game remains open.
+
+## Pending
+
+- Full goal remains incomplete. New strict glyph material suite6/18exact,
+  12FAIL_RGBA retained; oldResourcePacks92/120exact+28FAIL unchanged/separate.
+  New18planes15848pixels,6exact7056pixels;790wrong pixels all exact texel-edge
+  ties;14128non-tie pixels exact,0unexpected palette/alpha differences. Binary
+  source alpha0/255 only; no partial-alpha quantization proof. No fitted oracle,
+  UV epsilon, source tint/image edits or tolerance. Need native sampling/roles.
+- Native fonts, CM/intrinsic engine evaluation, parent/child alpha and whole-GUI
+  parity remain unqualified. Manifest screen alpha.8 is static scope candidate;
+  existing PackSettings.65 is separate direct-background subtree and unchanged.
+- Broader Create/Edit World settings, Disconnect/templates/sleep/calibration,
+  providers/marketplace and other feasible Bedrock GUI, Pocket/Ore counterparts.
+  Source registration does not establish current active native routes.
+
+## Learned and continuation
+
+- Metadata/issue host budgets must fit actual fallback fonts; do not alter fixed
+  source geometry to hide sample mistakes. Explicit button sizes need flex-shrink0.
+- prepareManifestValidationInstalledFixture requires a NEW directory; use
+  consumer/app with node_modules in parent. Installed01 EEXIST retained. Package01
+  ledger drift from changing EOF bytes after build retained; pack/build only after
+  source freeze. Root final diagrams/goldens unchanged.
+- Public docs: docs/MANIFEST_VALIDATION_QA.md, manifest-validation-source.json,
+  manifest-validation-assets.json and component-catalog.json. Current receipts:
+  .cache/manifest-validation-qa-01/{FINAL,PACK-IDENTITY}.json,
+  .cache/manifest-validation-installed-03/RESULT.json,
+  .cache/manifest-validation-material-diagnostic-20261102-01,
+  .cache/native-resource-packs-20261102-01/LOSSLESS-CAPTURE.json.
+- Keep user preview4173 PID217140. Close only own temporary5480..5485 servers;
+  final live checks indexed by FINAL. Do not kill all Node/game processes.
+  Old PIX/book capture helper pins process208332 and cannot target current game;
+  current user-launched game had no WinPixGpuCapturer module. Do not relax pins.
+- Agents are finished/frozen; root changed only partsCSS and sample/responsive
+  integration after owner freeze. Root owns browser/GPU/server/Git. End Computer
+  Use after use, as explicitly requested. No global memory writes.
+
+# Previous checkpoint — Resource Packs, 2026-11-02
 
 Full goal ACTIVE/incomplete. Branch codex/resource-packs-20261102 based on
 82634770550c0e0602fe632952c6d2615c887531. Local main is stale. Normal push

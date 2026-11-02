@@ -1,3 +1,4 @@
+import { verifyManifestValidationPackage } from './verify-manifest-validation-package.mjs';
 import assert from 'node:assert/strict';
 import { verifyInvitePackage } from './verify-invite-package.mjs';
 import { verifyCreditsPackage } from './verify-credits-package.mjs';
@@ -136,10 +137,11 @@ components.push('OreModal','OreModalHeader','OreModalContent','OreModalText','Or
 components.push('FurnaceRecipeBook','FurnaceRecipeBookEntry','FurnaceRecipeCategoryTabs','FurnaceRecipeFilterToggle','FurnaceScreenFrame','FurnaceScreen','BlastFurnaceScreen','SmokerScreen');
 components.push('PlayScreen','PlayScreenFrame','PlayNavigationTabs','PlayWorldRow','PlayNetworkWorldRow','PlayWorldsContent','PlayFriendsContent','PlayServersContent','PlayServerRow','PlayServerDetails','PlayJoinCodeDialog','PlayHighPingDialog');
 components.push('ResourcePackManager','ResourcePackSection','ResourcePackItem','ResourcePackActions','ResourcePackDiagnostics','PackSettingsScreen','PackSettingsContent','PackContentTier');
-assert.equal(components.length,247);
+components.push("ManifestValidationButton","ManifestPackSummary","ManifestValidationIssue","ManifestValidationIssues","ManifestValidationContent","ManifestValidationScreen");
+assert.equal(components.length,253);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,12);
-assert.equal(Object.keys(ui).length,265);
+assert.equal(Object.keys(ui).length,271);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -2089,5 +2091,6 @@ export const demo = <>
   await verifyFurnaceScreenPackage({ consumer, root, major });
   await verifyPlayScreenPackage({ consumer, root, major, evidenceName:'play-screen-contracts-'+Date.now() });
   await verifyResourcePacksPackage({ consumer, root, major, evidenceName:'resource-packs-contracts-'+Date.now() });
+  await verifyManifestValidationPackage({ consumer, root, major, evidenceName:'manifest-validation-contracts-'+Date.now() });
 }
 console.log(`Verified tarball: ${tarPath}`);

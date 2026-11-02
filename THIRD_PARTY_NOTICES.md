@@ -239,3 +239,16 @@ and whole field image URLs; these installed PNGs are not bundled, redrawn,
 cropped or relicensed. Identity metadata is in
 `docs/ore-external-server-source.json`. Optional local site builds can embed
 prepared assets; the npm library and Git source asset directories do not.
+
+## Manifest Validation materials
+
+The Manifest Validation family reuses twenty complete original material keys
+already present in this library, from the fixed Mojang bedrock-samples
+v1.26.60.5-full archive. Fourteen have original raw metadata and six have no
+metadata. No new PNG, recolored sprite or cropped replacement is introduced.
+Their source paths, whole-byte hashes and reuse origins are recorded in
+`docs/manifest-validation-assets.json`; six conditional, lifecycle or shadowed
+alternatives are listed separately. Existing upstream rights and licenses,
+including `src/assets/resource-pack/LICENSE.md` (copied to dist), continue to
+apply independently of this project's MIT code license. Private game fonts and
+native capture data remain outside the package.

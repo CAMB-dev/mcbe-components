@@ -1,3 +1,4 @@
+import { prepareManifestValidationReferences } from './prepare-manifest-validation-references.mjs';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { prepareResourcePackReferences } from './prepare-resource-pack-references.mjs';
@@ -31,6 +32,7 @@ if (!archiveBytes || createHash('sha256').update(archiveBytes).digest('hex') !==
 }
 archiveBytes = undefined;
 await prepareResourcePackReferences();
+await prepareManifestValidationReferences();
 const references = new Map();
 // Caller-bound recipe backgrounds are exercised by QA, not default production skins.
 const fixtureReferences = [

@@ -4,8 +4,8 @@
 .progress-demo__settings{padding:12px;border:2px solid #17191b;background:#292d30}
 .progress-demo__settings>summary{cursor:pointer;margin-bottom:12px}
 .progress-demo__sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:16px}
-.progress-demo__controls label:has(input[type=file]){display:grid;gap:8px;min-width:0;max-width:100%;font-size:14px}
-.progress-demo__controls input[type=file]{max-width:100%;font:inherit}
+.progress-demo__controls label:has(input[type=file]){display:grid;grid-template-columns:minmax(0,1fr);gap:8px;min-width:0;max-width:100%;font-size:14px}
+.progress-demo__controls input[type=file]{width:100%;min-width:0;max-width:100%;font:inherit}
 .progress-demo__viewport,.progress-demo__parts-viewport{position:relative;min-width:0;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;background:#203040}
 .progress-demo__viewport{min-height:90px;border:2px solid #111}
 .progress-demo__empty{padding:24px 16px;margin:0;text-align:center}

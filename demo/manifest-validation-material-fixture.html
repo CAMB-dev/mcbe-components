@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manifest validation actual glyph material fixture</title>
+  <style>
+    html,body{margin:0;min-width:640px;min-height:480px;background:#808080;color:#fff;font:12px monospace}
+    #material-parking{position:absolute;left:8px;top:8px;width:112px;height:32px}
+    #material-note{position:absolute;left:8px;top:52px;white-space:pre-wrap}
+    #material-host{position:absolute;left:128px;top:128px;width:400px;height:300px}
+    #material-mount{position:relative;margin:32px;width:max-content}
+    /* Isolation only. No glyph color, opacity, filter, geometry or UV override. */
+    #material-host .mc-manifest-validation-button__skins,
+    #material-host .mc-manifest-validation-button__outline{visibility:hidden!important}
+  </style>
+</head>
+<body>
+  <button type="button" id="material-parking">Pointer parking</button>
+  <div id="material-note">Actual ManifestValidationButton icon only. Reference PNGs are never loaded by this fixture.
+Park pointer outside the source button, configure(), await ready(), align() opaque host, then capture the complete target rectangle at DPR1.
+Prepared material isolation; not a browser pass or native GUI certification.</div>
+  <div id="root"></div>
+  <script type="module" src="./manifest-validation-material-fixture.tsx"></script>
+</body>
+</html>

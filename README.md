@@ -17,6 +17,8 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 资源包家族新增 `ResourcePackManager`、`ResourcePackSection`、`ResourcePackItem`、`ResourcePackActions`、`ResourcePackDiagnostics` 与 `PackSettingsScreen`、`PackSettingsContent`、`PackContentTier`。global／level／addon 保留各自源码绑定；内容等级的 raw value／steps 与显式 Web 数值域独立，生成字段复用九种实际表单行。API、来源和待验证范围见 [RESOURCE_PACKS_QA.md](docs/RESOURCE_PACKS_QA.md)。
 
+资源包验证报告入口 `#manifest-validation`：新增 `ManifestValidationScreen`、`ManifestValidationContent`、`ManifestPackSummary`、`ManifestValidationIssues`、`ManifestValidationIssue`、`ManifestValidationButton` 六个可复用部件。保留独立全局状态、完整问题集合和原始操作target；复制、刷新、删除仅发出宿主请求。默认报告使用文字刷新／删除，独立预览另外提供图标变体。见 [MANIFEST_VALIDATION_QA.md](docs/MANIFEST_VALIDATION_QA.md)。
+
 ## 本地运行
 
 需要 Node.js 22.12+ 或 24+。
@@ -72,7 +74,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
-> 当前实际安装包为247组件／265运行时值；React18／19、四种默认安装运行组合及桌面／手机生产展示已验证。独立材质平面92／120一致、28未通过，原生整页像素仍未认证。范围与记录见[RESOURCE_PACKS_QA.md](docs/RESOURCE_PACKS_QA.md)。此前Classic Play阶段为239／257，原有证据保留在[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。
+> 当前实际安装包为253组件／271运行时值；React18／19、四种默认安装运行组合及桌面／手机生产展示已验证。Manifest图标平面6／18一致、12未通过；此前资源包平面92／120一致、28未通过，两套语料分别保留。原生整页像素仍未认证。范围见[MANIFEST_VALIDATION_QA.md](docs/MANIFEST_VALIDATION_QA.md)与[RESOURCE_PACKS_QA.md](docs/RESOURCE_PACKS_QA.md)。此前Classic Play阶段为239／257，原有证据保留在[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。
 
 > Furnace已验阶段：227 组件／245 运行时值。新增完整熔炉、高炉、烟熏炉与可复用配方书等8部件；49项Node、browser04单批143个浏览器项目用例、8个独立filter像素平面、React18／19实际包与开发／生产四组合均通过。全库及原生整页像素资格仍未完成。入口 `#furnace-screens`；见 [FURNACE_SCREEN_QA.md](docs/FURNACE_SCREEN_QA.md)。
 
@@ -88,6 +90,11 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 | 组件 | 主要属性 | 行为 |
 | --- | --- | --- |
+| `ManifestValidationScreen` | `open`、`viewportSize`、`scale`、`title`、完整 `content`；`onCloseRequest`、可选 `onViewRequest` | 原报告窗口及modal生命周期；退出／翻页为宿主请求，div ref |
+| `ManifestValidationContent` | 显式 `size`、`summary`、`entries`／`capacity`、全局标记与独立状态 | 原滚动区与纵向问题工厂；div／viewport refs |
+| `ManifestPackSummary` | 完整 `data`、布局预算、包身份、操作状态 | 包图、metadata及文字刷新／删除；div ref |
+| `ManifestValidationIssues`／`ManifestValidationIssue` | 完整集合及显式容量／索引，或单条记录；`hasErrorsOrWarnings` | 全局标记控制复制／正文，操作保留行身份；div refs |
+| `ManifestValidationButton` | 五种 `variant`、显式身份／状态／加载帧；文字变体必填 `width`，复制必填 `issue` | 原始PNG、独立加载选择及宿主操作请求；真实button ref |
 | `Text` | `as`: span / p / h1…h4；`size`: sm / md / lg / xl；`shadow` 默认 true | 像素文字与无模糊阴影，转发 HTMLElement ref |
 | `GuiImageLayer` | **必填** 物理 `width` / `height`、`guiScale`、`images`；可选 `scissor`、`outputRect`、`background`、`label`、`renderKey`、状态回调 | ref为canvas；已求值GLOBAL image / nine-slice几何及UI/Blit GPU profile；已分层验证底层 / 集成 / 包与生产，非原生整GUI认证 |
 | `GuiLayer` | **必填** 物理 `width` / `height`、`guiScale`、有序image / sprite / model / text `commands`；文字含显式 `font` / `origin` / `fontScale` / `sampling` / `shader` | 单一RGBA8目标顺序绘制原图 / sprite / model / 字格；ref为canvas。历史图文17项范围见 [GUI_LAYER_QA.md](docs/GUI_LAYER_QA.md)，新增sprite / 呈现验证见 [GUI_SPRITE_QA.md](docs/GUI_SPRITE_QA.md) |

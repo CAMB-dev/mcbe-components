@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "status": "fixed_source_ledger_scoped_web_package_qualified_material_partial_native_unqualified",
+  "currentPublicCounts": {
+    "components": 253,
+    "runtimeValues": 271,
+    "meaning": "Actual installed package: 253 components + 6 data values + 12 functions; count is not pixel certification."
+  },
+  "candidateComponents": {
+    "status": "implemented_scoped_web_package_qualified_native_unqualified",
+    "count": 6,
+    "names": [
+      "ManifestValidationButton",
+      "ManifestPackSummary",
+      "ManifestValidationIssue",
+      "ManifestValidationIssues",
+      "ManifestValidationContent",
+      "ManifestValidationScreen"
+    ],
+    "refs": {
+      "ManifestValidationButton": "HTMLButtonElement",
+      "others": "HTMLDivElement"
+    }
+  },
+  "source": {
+    "repository": "https://github.com/Mojang/bedrock-samples",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "releaseLabel": "v1.26.60.5-full",
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "wholeSourceFiles": 7,
+    "files": [
+      {
+        "entry": "resource_pack/ui/_global_variables.json",
+        "bytes": 20210,
+        "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b"
+      },
+      {
+        "entry": "resource_pack/ui/_ui_defs.json",
+        "bytes": 7470,
+        "sha256": "b4f7f25b6ee4246b3582eb78a031ecc93793fdb2cf09f77b886d73f4038cb270"
+      },
+      {
+        "entry": "resource_pack/ui/manifest_validation_screen.json",
+        "bytes": 35591,
+        "sha256": "0bf65eb9846e9d0d7abbf38b21b84c5098e1ccf1788ce20271bd25a7c13f1ecc"
+      },
+      {
+        "entry": "resource_pack/ui/resource_packs_screen.json",
+        "bytes": 122453,
+        "sha256": "c73819a074d90e63268f9b52e86ce32179f10989288aefdd18a66c6ba394f3ae"
+      },
+      {
+        "entry": "resource_pack/ui/ui_common.json",
+        "bytes": 243941,
+        "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_buttons.json",
+        "bytes": 76484,
+        "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96"
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_dialogs.json",
+        "bytes": 14238,
+        "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264"
+      }
+    ],
+    "primary": {
+      "entry": "resource_pack/ui/manifest_validation_screen.json",
+      "bytes": 35591,
+      "sha256": "0bf65eb9846e9d0d7abbf38b21b84c5098e1ccf1788ce20271bd25a7c13f1ecc",
+      "namespace": "manifest_validation",
+      "ownDefinitionCount": 31
+    },
+    "registration": [
+      "ui/manifest_validation_screen.json"
+    ],
+    "sourceOnly": true,
+    "independentAudit": {
+      "contractSHA256": "7a6a2396a664a360a3463683e5b9e3397d54d33331dedb8f8b8492d7c5427c41",
+      "finalSHA256": "f237aa0337a39c1867f25838553fd46cb39cbb1e61882a992213c4e48fac76f7",
+      "shadeAmendmentSHA256": "74efe056b7464b1b06f27a5a22275dc0b8a0e332c861cda61923125d1e53bab6"
+    }
+  },
+  "staticScope": {
+    "ownDefinitions": 31,
+    "rootReachedDefinitions": 24,
+    "unreachedDefinitions": 7,
+    "reachabilityMeaning": "Finite literal own-namespace inheritance/control/factory graph; dynamic engine activation is not inferred.",
+    "activeBindings": 23,
+    "sharedHasErrorsOrWarningsBindings": 3,
+    "explicitCollectionTextFields": [
+      "#error_type_label",
+      "#error_content_label"
+    ],
+    "collection": "pack_errors",
+    "factory": {
+      "control": "error_content_grid",
+      "type": "stack_panel",
+      "orientation": "vertical",
+      "declaredLength": "#error_grid_dimensions",
+      "bindingNameOverride": "#collection_length",
+      "meaning": "An independent vertical collection length, not two-dimensional grid columns or a count inferred from sample records."
+    },
+    "clipboard": "Per generated issue card; preserve pack_errors collection_details identity and independent shared visibility. No clipboard service is implemented by this ledger.",
+    "actions": [
+      "button.delete_manifest",
+      "button.refresh_manifest",
+      "button.copy_to_clipboard"
+    ],
+    "summaryVisibilityOnce": [
+      "#refresh_visible",
+      "#delete_visible"
+    ],
+    "unreachedStatusControls": "The 30x30 icon-action branches and loading/status helpers are declared but not part of the default root reachability; do not instantiate them automatically.",
+    "inactiveComments": "The TODO file_text_panel/#file_error section is commented; active bindings exclude #file_error.",
+    "commentParsing": "JSONC source includes comments; byte identity does not authorize strict JSON parsing or activating commented nodes."
+  },
+  "shadeSourceModel": {
+    "manifest": {
+      "declaredScreenBackgroundAlpha": 0.65,
+      "resolvedFillAlphaCandidate": 0.8,
+      "chain": "common.base_screen -> common_dialogs.full_screen_background -> background@$screen_background_control has explicit alpha:$fill_alpha. Its .8 default is in a separate subtree from the main-panel local $fill_alpha:1.",
+      "qualification": "Static instance-over-template/downward-scope interpretation only; native engine variable scope, provider overrides, animation/propagate-alpha and final blend are unmeasured."
+    },
+    "packSettingsComparison": {
+      "entry": "resource_pack/ui/pack_settings_screen.json",
+      "scope": "Comparison from independent shade amendment; this comparison file is not an eighth required preparation reference.",
+      "directBackgroundAlpha": 0.65,
+      "chain": "$screen_bg_content -> pack_settings.background explicitly declares numeric alpha:.65; the Manifest .8 interpretation does not justify changing it."
+    }
+  },
+  "runtimeValidation": {
+    "status": "scoped_web_package_and_built_demo_qualified_material_partial_native_unqualified",
+    "node": {
+      "pass": 129,
+      "fail": 0,
+      "newParts": 35,
+      "newPreparation": 12
+    },
+    "browser": true,
+    "package": true,
+    "installedMatrix": {
+      "react": [
+        "18.3.1",
+        "19.3.1"
+      ],
+      "modes": [
+        "development",
+        "production"
+      ],
+      "pass": 4
+    },
+    "builtDemo": {
+      "desktop": true,
+      "mobile": true,
+      "htmlByteIdentity": true
+    },
+    "material": {
+      "planes": 18,
+      "exact": 6,
+      "strictFailures": 12,
+      "exactPlanePixels": 7056,
+      "differentPixels": 790,
+      "nonTieDifferentPixels": 0,
+      "threshold": 0,
+      "qualification": "Independent whole-original Web planes; all observed mismatches at exact source texel-edge ties. Not a native oracle."
+    },
+    "nativeActiveRoute": false,
+    "nativePixelParity": false,
+    "meaning": "Global Resources route and lossless original-app screenshot observed separately. Manifest active report route, font metrics, engine scope and whole-GUI pixels remain unqualified.",
+    "finalSourceBrowser": {
+      "pass": 58,
+      "fail": 0,
+      "skipped": 0
+    }
+  },
+  "preparation": {
+    "script": "scripts/prepare-manifest-validation-references.mjs",
+    "export": "prepareManifestValidationReferences({root?,directory?})",
+    "defaultDirectory": ".cache/manifest-validation-source-20261102-01/original",
+    "archivePrerequisite": "node scripts/fetch-references.mjs",
+    "mode": "Offline SHA-pinned ZIP extraction; existing mismatches are preserved and rejected before any writes.",
+    "privateAssets": "Only seven public whole UI JSON files are prepared. No native font, capture, GPU dump or private image is copied."
+  }
+}
