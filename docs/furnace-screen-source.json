@@ -1,0 +1,700 @@
+{
+  "schemaVersion": 1,
+  "qualification": "source_only_native_unqualified",
+  "implementationValidation": "pending_actual_integration_checks",
+  "authority": {
+    "study": ".cache/furnace-screen-source-20261102-01",
+    "specSHA256": "3ff4bcdc7b49e91514c514d72b8b42066687b1f578dace02dacce98b0c1f8ee8",
+    "inputPinsSHA256": "6441370008c98d3554a9fd2ec29296b0d756cd740aad8e244235c665fae16a26",
+    "sourceFiles": [
+      {
+        "entry": "resource_pack/ui/furnace_screen.json",
+        "bytes": 63573,
+        "sha256": "ca690949189fc27f1b9169c21ea3757bfd16526ff0908ddac3a89741270fe038",
+        "wholeZIPBytesEqual": true
+      },
+      {
+        "entry": "resource_pack/ui/blast_furnace_screen.json",
+        "bytes": 91,
+        "sha256": "a3459bf5e6da1ca256b30abb570dca9e4116b897c839f43c665f7efc846f170f",
+        "wholeZIPBytesEqual": true
+      },
+      {
+        "entry": "resource_pack/ui/smoker_screen.json",
+        "bytes": 77,
+        "sha256": "1cf9ec6cb8b9fb8479fa3430c4b6c373f30828438b52ad0210f9b3c8203c9089",
+        "wholeZIPBytesEqual": true
+      },
+      {
+        "entry": "resource_pack/ui/ui_common.json",
+        "bytes": 243941,
+        "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "wholeZIPBytesEqual": true
+      },
+      {
+        "entry": "resource_pack/ui/ui_common_classic.json",
+        "bytes": 3030,
+        "sha256": "d65eb51c5264b7b9eb8611bfe250736bc48eed8207682b6c26f3ede224277783",
+        "wholeZIPBytesEqual": true
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_tabs.json",
+        "bytes": 16954,
+        "sha256": "e4aae0403646ee6a0a4199f0b9eafd89550c301b2683fada406f6f6491b6dc88",
+        "wholeZIPBytesEqual": true
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_toggles.json",
+        "bytes": 47106,
+        "sha256": "efe2bf9fab47aa5e29d7116a2aa705a964a42b0ef86c947c4e46188be9ac2a01",
+        "wholeZIPBytesEqual": true
+      },
+      {
+        "entry": "resource_pack/ui/_global_variables.json",
+        "bytes": 20210,
+        "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "wholeZIPBytesEqual": true
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_buttons.json",
+        "bytes": 76484,
+        "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+        "wholeZIPBytesEqual": true
+      }
+    ],
+    "finalSHA256": "c1500105bfe705b5000d27ee10a73991874172040d75701b85387231f2b18a26",
+    "sourceAuditChecks": {
+      "sourceDocuments": 9,
+      "wholeOfficialZIPMatches": 9,
+      "rawNodeByteAndHashChecks": 896,
+      "focusedNodes": 35,
+      "oldParsedEquality": 8,
+      "productWrites": false,
+      "oldCacheWrites": false,
+      "browser": false,
+      "GPU": false,
+      "server": false,
+      "CU": false,
+      "git": false
+    }
+  },
+  "sourceContract": {
+    "status": "SOURCE_ONLY_NOT_NATIVE_PIXEL_CERTIFICATION",
+    "source": {
+      "release": "v1.26.60.5",
+      "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+      "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+      "desktop": true,
+      "pocket": "out of scope",
+      "variants": "BlastFurnace and Smoker are empty subclasses of furnace.furnace_screen; no pervariant recipe/category visibility table"
+    },
+    "frame": {
+      "policy": "intrinsic horizontal content stack, never fixed326 with75compactpadding",
+      "expanded": {
+        "size": [
+          326,
+          166
+        ],
+        "book": [
+          0,
+          0,
+          146,
+          166
+        ],
+        "fold": [
+          146,
+          0,
+          4,
+          166
+        ],
+        "right": [
+          150,
+          0,
+          176,
+          166
+        ]
+      },
+      "compact": {
+        "size": [
+          176,
+          166
+        ],
+        "right": [
+          0,
+          0,
+          176,
+          166
+        ],
+        "bookVisible": false,
+        "foldVisible": false
+      },
+      "bookFoldBinding": "#is_recipe_book_layout",
+      "defaultAndBreakpoint": "host/engine unknown; no responsive browser breakpoint declared",
+      "foldSkin": {
+        "texture": "textures/ui/recipe_back_panel",
+        "rectRelativeFold": [
+          -4,
+          3,
+          12,
+          160
+        ]
+      },
+      "backgroundAlpha": 0.4,
+      "backgroundScope": "whole game screen branch, not mandatory embedding backdrop"
+    },
+    "toolbar": {
+      "height": 20,
+      "shownCloseWidth": 99,
+      "hiddenCloseWidth": 84,
+      "expandedShown": [
+        227,
+        -20,
+        99,
+        20
+      ],
+      "compactShown": [
+        77,
+        -20,
+        99,
+        20
+      ],
+      "expandedHidden": [
+        242,
+        -20,
+        84,
+        20
+      ],
+      "compactHidden": [
+        92,
+        -20,
+        84,
+        20
+      ],
+      "sequenceWidths": [
+        8,
+        25,
+        1,
+        25,
+        4,
+        15,
+        15,
+        6
+      ],
+      "hiddenOmits": "closeholder15",
+      "modeControlSize": [
+        25,
+        18
+      ],
+      "modeHolderSize": [
+        25,
+        20
+      ],
+      "helpControlSize": [
+        15,
+        15
+      ],
+      "closeHitSize": [
+        21,
+        21
+      ],
+      "closeGlyphSize": [
+        15,
+        15
+      ],
+      "skinOffsetY": -3,
+      "skinHeight": 28,
+      "closeOffsetOverride": [
+        0,
+        0
+      ],
+      "modeBindings": [
+        "#is_recipe_book_layout",
+        "#is_survival_layout"
+      ],
+      "focusIds": [
+        "default_layout_toggle",
+        "only_inventory_layout_toggle",
+        "help_button"
+      ],
+      "reuse": "InventoryToolbar two-layout profile, preserving separate21closehit and15glyph"
+    },
+    "book": {
+      "size": [
+        146,
+        166
+      ],
+      "navHolder": [
+        0,
+        -23,
+        146,
+        23
+      ],
+      "navContent": [
+        0,
+        -23,
+        146,
+        27
+      ],
+      "slots": {
+        "food": [
+          0,
+          -23,
+          25,
+          27
+        ],
+        "items": [
+          25,
+          -23,
+          25,
+          27
+        ],
+        "blocks": [
+          50,
+          -23,
+          25,
+          27
+        ],
+        "fill": [
+          75,
+          -23,
+          46,
+          27
+        ],
+        "search": [
+          121,
+          -23,
+          25,
+          27
+        ]
+      },
+      "holderVisibility": "holders have no visiblebinding; hidechildren does not authorize filtering/reflowing25wideholders",
+      "offset": {
+        "property": "#offset",
+        "fallback": [
+          0,
+          0
+        ],
+        "type": "finite 2D logicalgamepixel vector relative fixedholder",
+        "actualProviderValues": "unknown"
+      },
+      "categories": {
+        "food": {
+          "leftmost": true,
+          "visible": "#food_tab_visible",
+          "offset": "#food_tab_offset",
+          "selected": "#is_left_tab_food"
+        },
+        "items": {
+          "leftmostVisible": "#items_tab_is_leftmost",
+          "normalVisible": "#items_tab_visible_not_leftmost",
+          "offset": "#items_tab_offset",
+          "selected": "#is_left_tab_items"
+        },
+        "blocks": {
+          "leftmostVisible": "#blocks_tab_is_leftmost",
+          "normalVisible": "#blocks_tab_visible_not_leftmost",
+          "offset": "#blocks_tab_offset",
+          "selected": "#is_left_tab_blocks"
+        },
+        "search": {
+          "rightmost": true,
+          "offset": [
+            0,
+            0
+          ],
+          "providerOffsetBinding": false,
+          "selected": "#is_left_tab_search"
+        }
+      },
+      "iconBox": [
+        17,
+        17
+      ],
+      "iconTextures": {
+        "food": "category_icon_food",
+        "items": "category_icon_items",
+        "blocks": "category_icon_blocks",
+        "search": "magnifyingGlass"
+      },
+      "iconPhysicalSizes": {
+        "food": [
+          13,
+          14
+        ],
+        "items": [
+          16,
+          12
+        ],
+        "blocks": [
+          16,
+          17
+        ]
+      },
+      "rawParentTabAlpha": 0.2,
+      "alphaCaveat": "panelalpha is not proof of CSSgroupopacity propagation",
+      "titleBinding": "#tab_label_text",
+      "titleColor": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "rectBasis": "source/defaultanchor arithmetic, not nativepacked or fitted positions",
+      "ordinary": {
+        "headerLabel": [
+          9,
+          8,
+          102,
+          10
+        ],
+        "filterControl": [
+          112,
+          3.5,
+          29,
+          17
+        ],
+        "filterImage": [
+          113,
+          4.5,
+          27,
+          15
+        ],
+        "items": [
+          6,
+          21,
+          134,
+          139
+        ]
+      },
+      "search": {
+        "headerLabel": [
+          9,
+          8,
+          131,
+          10
+        ],
+        "input": [
+          6,
+          19,
+          104,
+          16
+        ],
+        "filterControl": [
+          112,
+          18.5,
+          29,
+          17
+        ],
+        "filterImage": [
+          113,
+          19.5,
+          27,
+          15
+        ],
+        "items": [
+          6,
+          37,
+          134,
+          123
+        ]
+      },
+      "inventoryWithoutSearch": {
+        "headerVisible": false,
+        "ordinaryPaddingVisible": false,
+        "shadowsVisible": false,
+        "items": [
+          6,
+          6,
+          134,
+          154
+        ],
+        "gridRemains": true,
+        "nodropZone": [
+          0,
+          0,
+          146,
+          166
+        ]
+      },
+      "inventoryWithSearch": {
+        "headerVisible": false,
+        "shadowsVisible": false,
+        "input": [
+          6,
+          6,
+          104,
+          16
+        ],
+        "filterControl": [
+          112,
+          5.5,
+          29,
+          17
+        ],
+        "filterImage": [
+          113,
+          6.5,
+          27,
+          15
+        ],
+        "items": [
+          6,
+          22,
+          134,
+          138
+        ],
+        "nodropZone": [
+          0,
+          0,
+          146,
+          166
+        ]
+      },
+      "independentFlags": [
+        "#is_left_tab_inventory",
+        "#is_left_tab_search"
+      ],
+      "nodrop": {
+        "source": "common.root_panel",
+        "layer": 2,
+        "searchRowLayer": 11,
+        "paint": "none extra",
+        "policy": "host inventorydrop intent boundary only; no fake backend drag/move/delete or block-all DOMoverlay"
+      },
+      "shadows": {
+        "top": {
+          "height": 2,
+          "texture": "White",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0.5
+        },
+        "rim": {
+          "height": 1,
+          "offsetY": -1,
+          "color": [
+            0.75,
+            0.75,
+            0.75
+          ]
+        },
+        "cutterWidth": 6,
+        "cutterCondition": "scrollbar visible and nottouch",
+        "hiddenForInventory": true
+      }
+    },
+    "search": {
+      "source": "common.text_edit_control",
+      "maxLength": 30,
+      "controlSize": [
+        104,
+        16
+      ],
+      "clearSize": [
+        15,
+        15
+      ],
+      "clearOffset": [
+        2,
+        0
+      ],
+      "magnifierSize": [
+        8,
+        8
+      ],
+      "magnifierOffset": [
+        0,
+        -0.5
+      ],
+      "labelSize": [
+        "default",
+        10
+      ],
+      "labelOffset": [
+        10,
+        0
+      ],
+      "focusId": "recipe_search_bar",
+      "focusRight": "smeltable_toggle",
+      "focusUp": "search_tab",
+      "fontSize": "normal inherited text_edit_box",
+      "shadow": false,
+      "exactFontMetrics": "not uniquely specified by JSON; caller sourcefont/renderText profile"
+    },
+    "filter": {
+      "controlSize": [
+        29,
+        17
+      ],
+      "imageRect": [
+        1,
+        1,
+        27,
+        15
+      ],
+      "basis": "common_buttons.new_ui_button_panel default image100%-2 centered",
+      "binding": "#filtering_enabled",
+      "focusId": "smeltable_toggle",
+      "states": {
+        "unchecked": "furnace_toggle_off",
+        "checked": "furnace_toggle_on",
+        "uncheckedHover": "furnace_toggle_off_hover",
+        "checkedHover": "furnace_toggle_on_hover",
+        "uncheckedLocked": "furnace_toggle_off",
+        "checkedLocked": "furnace_toggle_on"
+      },
+      "defaultHoverBorderVisible": false,
+      "rawLockedAlpha": 0.5,
+      "compositeCaveat": "raw variable chain is not a universal CSSopacity/finalRGBA law",
+      "recipeFiltering": "host only"
+    },
+    "entry": {
+      "slot": [
+        18,
+        18
+      ],
+      "renderer": [
+        16,
+        16
+      ],
+      "collection": "recipe_book",
+      "maximumBinding": "#recipe_book_total_items",
+      "backgroundBinding": "#container_item_background_texture",
+      "selectedBinding": "#is_recipe_selected_slot",
+      "tooltipBinding": "#recipe_hover_text",
+      "actions": [
+        "button.recipe_select",
+        "button.recipe_secondary",
+        "button.recipe_tertiary"
+      ],
+      "countLabelAbsent": true,
+      "craftingGroupModifierAbsent": true,
+      "proof": "furnace.inventory_container_item replaces controls and removes stack_count_label/groupoverlay; stack_count_required true cannot create missingchildren",
+      "retainedHooks": [
+        "selection",
+        "lockoverlay",
+        "itemlockimage",
+        "bundle_slot_panel"
+      ],
+      "noInferredDisabled": "red/unavailable background does not imply disabled",
+      "grid": "horizontal rescaling;7columns baseline at134wide; exact engine rescale/snap unknown"
+    },
+    "scroll": {
+      "source": "common.container_scroll_panel",
+      "mouseViewport": "100%x100%,offset0",
+      "touchViewport": "(100%-16)x100%,offset0",
+      "noRecipePagingControls": true,
+      "focusControllerEngine": "not recreated automatically"
+    },
+    "rightPane": {
+      "leaves": [
+        "Furnace",
+        "BlastFurnace",
+        "Smoker"
+      ],
+      "size": [
+        176,
+        166
+      ],
+      "topHalf": [
+        0,
+        7,
+        176,
+        71
+      ],
+      "titleTop": 4,
+      "ingredient": [
+        50,
+        14.5,
+        18,
+        18
+      ],
+      "fuel": [
+        50,
+        52.5,
+        18,
+        18
+      ],
+      "flame": [
+        52.5,
+        36,
+        13,
+        13
+      ],
+      "arrow": [
+        77,
+        35,
+        22,
+        15
+      ],
+      "output": [
+        108,
+        29.5,
+        26,
+        26
+      ],
+      "inventory": [
+        7,
+        86,
+        162,
+        54
+      ],
+      "hotbar": [
+        7,
+        143,
+        162,
+        18
+      ],
+      "slots": 39,
+      "innerClose": false,
+      "ratios": [
+        "#furnace_arrow_ratio",
+        "#furnace_flame_ratio"
+      ],
+      "title": [
+        "$container_title",
+        "$localize_title"
+      ],
+      "basis": "defaultanchor source arithmetic, consistent withexisting2xCSS; no newnativepixelqualification"
+    },
+    "boundaries": [
+      {
+        "name": "FurnaceScreenFrame",
+        "scope": "intrinsicframe/fold/rightslot/source2modetoolbar"
+      },
+      {
+        "name": "FurnaceRecipeBook",
+        "scope": "controlled query/filter/categories/entries, independentinventory/searchflags, gridscrollseam"
+      },
+      {
+        "name": "FurnaceRecipeBookEntry",
+        "scope": "noownedcount/group; hostart/background/selected/actionrequests"
+      },
+      {
+        "name": "FurnaceRecipeCategoryTabs",
+        "scope": "fixedholders/rawvariantvisibility/offsets; searchfixedrightmost"
+      },
+      {
+        "name": "FurnaceRecipeFilterToggle",
+        "scope": "4furnaceskins/inset1/control29x17; reuseexistingRecipeSearch insteadofshallownewsearch"
+      }
+    ],
+    "facades": "FurnaceScreen/BlastFurnaceScreen/SmokerScreen compose those5boundaries andexistingrightpanes, not independentgeometry",
+    "hostInputs": [
+      "explicitcategories flags/offsets/labels/titles",
+      "alreadyfiltered recipecollection andselection",
+      "accepted query/filter/layout andrequests",
+      "rightpane items/progress/fuelratio/playerinventory",
+      "optional renderer/helpers forhelditem/detail/flying/locks; no inventedworldservices"
+    ],
+    "unknowns": [
+      "nativeviewportorigin/guiScale/defaultlayout/category/variantproviderstates",
+      "Classicfont metrics/bearing/AA/paintoffset/globalhalf rounding",
+      "enginegridrescaling/clip/scroll/controller/focus/dragging services",
+      "parentalpha propagation/finalRGBA",
+      "Pocket andotherplatformbranches"
+    ]
+  }
+}

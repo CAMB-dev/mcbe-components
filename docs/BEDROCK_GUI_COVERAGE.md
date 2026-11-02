@@ -1,8 +1,9 @@
 # Bedrock Classic GUI覆盖清单
 
-> 当前207组件／225运行时值；ExternalServer两组件的有限功能／实际包／安装及展示检查通过，仅add_external_server_screen.json由C更新为有限A，得到A44／B12／C33／D32／E0／F16／G63／H6，其余205数据行逐字保持。当前source67项通过含15完整RGBA＋4alpha参数合同，4项partial-alpha像素候选UNQUALIFIED；修后package03／实际安装四组合02／built02均通过，原生整页未认证。
+> 当前实际包为227组件／245运行时值，完整熔炼屏幕与配方书的有限Web／包／四组合验证已完成，见[FURNACE_SCREEN_QA.md](FURNACE_SCREEN_QA.md)。12个OreUI部件是另一profile。本页206行保留ExternalServer阶段207／225的范围快照：A44／B12／C33／D32／E0／F16／G63／H6，不据新增数量推广其他GUI或原生像素资格。
+> 历史ExternalServer阶段：207组件／225运行时值；ExternalServer两组件的有限功能／实际包／安装及展示检查通过，仅add_external_server_screen.json由C更新为有限A，得到A44／B12／C33／D32／E0／F16／G63／H6，其余205数据行逐字保持。当前source67项通过含15完整RGBA＋4alpha参数合同，4项partial-alpha像素候选UNQUALIFIED；修后package03／实际安装四组合02／built02均通过，原生整页未认证。
 
-这是固定官方源文件与本库207组件的**范围映射**，不是原生像素验收表。207包含基础控件、零件和组合，不等于207个完整游戏GUI；有限A44也不是44个完整原生流程。Credits之前的已验阶段为188组件、A38／E1。
+这是固定官方源文件与ExternalServer阶段本库207组件的**范围映射**，不是原生像素验收表。207包含基础控件、零件和组合，不等于207个完整游戏GUI；有限A44也不是44个完整原生流程。Credits之前的已验阶段为188组件、A38／E1。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -56,6 +57,10 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 **开始菜单已接入有限源组合**：`StartMenu` 与五个可独立使用的部分保留normal /new-player /trial等显式宿主分支。正式97项中96通过、1个设备条件跳过；12个完整源绘制平面共193,355像素严格RGBA零差，属于Web源期望。实际181值包的React18 /19 ESM、SSR和类型消费通过，默认Vite开发与生产消费四场景亦通过，包含37张完整PNG、TGA绘制和可选公开字体。仅 `start_screen.json` E→有限A，其他205行不变；panorama、角色、引擎绑定和完整原生整页仍未认证，详见 [START_MENU_QA.md](START_MENU_QA.md)。
 
 **存储管理与截图闪光已接入有限源组合**：八个Storage部分对应Settings内容区、独立分类 /条目 /操作 /选择footer与两类popup；ScreenshotFlash仅对应源闪光覆盖层，图像与时钟由宿主提供。173组件 /190运行时值的实际React18 /19包与默认Vite开发 /生产四场景通过，Source /Web行为、材质与公开页结果见 [STORAGE_QA.md](STORAGE_QA.md) 和 [SCREENSHOT_FLASH_QA.md](SCREENSHOT_FLASH_QA.md)。仅两行E→有限A，其余204行不变；不认证存储服务、原生White材质 /时钟 /锚点或整页像素。
+
+## 本轮熔炼增量的范围边界
+
+源审计确认furnace／blast_furnace／smoker三个Classic屏幕共享同一完整frame与独立熔炼配方书profile。既有表中的Furnace／BlastFurnace／Smoker映射仅覆盖原右pane；本轮目标新增完整屏幕、intrinsic expanded／compact frame及可复用book／entry／tabs／filter，不以已有A自动宣布全部状态已交付。来源与未验证事项见[FURNACE_SCREEN_QA.md](FURNACE_SCREEN_QA.md)。在本轮实际检查完成前，以下206数据行与八类计数保持原样；Pocket、引擎provider、原生字体及整屏像素资格均不提升。
 
 ## 全部206文件
 

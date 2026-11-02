@@ -127,7 +127,9 @@
     "./ore-screen-frame.css": "./dist/ore-screen-frame.css",
     "./ore-scroll-area.css": "./dist/ore-scroll-area.css",
     "./ore-external-server-form.css": "./dist/ore-external-server-form.css",
-    "./ore-modal.css": "./dist/ore-modal.css"
+    "./ore-modal.css": "./dist/ore-modal.css",
+    "./furnace-recipe-book.css": "./dist/furnace-recipe-book.css",
+    "./furnace-screen.css": "./dist/furnace-screen.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -153,7 +155,8 @@
     "verify:external-server:browser": "node scripts/qualify-external-server-browser.mjs",
     "test:ore-text-field:node": "node --test tests/ore-text-field.node.test.mjs",
     "test:ore-external-server:node": "node --test tests/ore-button.node.test.mjs tests/ore-screen-frame.node.test.mjs tests/ore-scroll-area.node.test.mjs tests/ore-external-server-form.node.test.mjs",
-    "test:ore-modal:node": "node --test tests/ore-modal.node.test.mjs"
+    "test:ore-modal:node": "node --test tests/ore-modal.node.test.mjs",
+    "test:furnace:node": "node --test tests/recipe-book-core.node.test.mjs tests/furnace-recipe-book.node.test.mjs tests/furnace-screen.node.test.mjs"
   },
   "peerDependencies": {
     "react": ">=18.3.0 <20",

@@ -1,0 +1,24 @@
+@import './inventory-screens.css';
+@import './recipe-book.css';
+/* furnace_screen.json Classic/default anchors, GUI2 logical pixels *2.
+   Engine offsets/visibility are host bindings; native pixels are not certified. */
+.mc-furnace-recipe-book .mc-recipe-book__title{width:204px}
+.mc-furnace-recipe-book .mc-recipe-book__header-filter{position:absolute}
+.mc-furnace-recipe-book .mc-recipe-book__categories{position:absolute}
+.mc-furnace-recipe-book[data-search] .mc-recipe-book__title{width:262px}
+.mc-furnace-recipe-book[data-inventory-tab] .mc-recipe-book__header{display:none}
+.mc-furnace-recipe-book[data-inventory-tab] .mc-recipe-book__search{top:12px;z-index:11}
+.mc-furnace-recipe-book[data-inventory-tab] .mc-recipe-book__items{top:12px;height:308px}
+.mc-furnace-recipe-book[data-inventory-tab][data-search] .mc-recipe-book__items{top:44px;height:276px}
+.mc-furnace-recipe-book[data-inventory-tab] .mc-recipe-book__items::before,.mc-furnace-recipe-book[data-inventory-tab] .mc-recipe-book__items::after{display:none}
+.mc-furnace-recipe-categories{display:block;width:292px;height:46px;overflow:visible}
+.mc-furnace-recipe-categories__holder{position:absolute;top:0;width:50px;height:54px}
+.mc-furnace-recipe-categories__holder[data-holder='food']{left:0}
+.mc-furnace-recipe-categories__holder[data-holder='items']{left:50px}
+.mc-furnace-recipe-categories__holder[data-holder='blocks']{left:100px}
+.mc-furnace-recipe-categories__holder[data-holder='search']{left:242px}
+.mc-furnace-recipe-categories__fill{position:absolute;left:150px;top:0;width:92px;height:54px;pointer-events:none}
+.mc-furnace-recipe-categories .mc-recipe-categories__tab{position:absolute;margin:0}
+.mc-furnace-recipe-categories__accessible-label{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+/* No full-pane HTML nodrop overlay: the source layer2 input region is metadata
+   for a host drag/drop service. The independent source search row is layer11. */

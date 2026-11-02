@@ -6,6 +6,13 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 新增现代 Ore 弹窗原语：`OreModal`、`OreModalHeader`、`OreModalContent`、`OreModalText`、`OreModalActions`，展示入口 `#ore-modals`。标题使用 Seven、正文使用 Noto；内容默认按设置尺寸裁切，显式开启后才使用自定义滚动区。未保存、删除和错误提示可由这些部分组合。浏览器已经完成的关闭通过 `native-close` 通知宿主，不自动重新弹出。[使用与验证说明](docs/ORE_MODAL_QA.md)。
 
+完整熔炼屏幕入口为 `#furnace-screens`：`FurnaceScreen`、
+`BlastFurnaceScreen`、`SmokerScreen`，共用 `FurnaceScreenFrame`，并提供
+`FurnaceRecipeBook`、`FurnaceRecipeBookEntry`、`FurnaceRecipeCategoryTabs`、
+`FurnaceRecipeFilterToggle`。展开为 326×166、收起为 176×166 游戏像素，
+保留原版分类位置与四种筛选材质。配方、类别绑定、查询与物品状态由宿主提供。
+使用范围和 API 见 [FURNACE_SCREEN_QA.md](docs/FURNACE_SCREEN_QA.md)。
+
 ## 本地运行
 
 需要 Node.js 22.12+ 或 24+。
@@ -61,7 +68,9 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
-> 最新有限阶段：219 组件／237 运行时值。新增 5 个现代 Ore 弹窗原语，按原版源码校准字体、阴影、关闭按钮、正文与操作区。桌面／手机 72 项、Node 72 项、React 18/19 实际包及开发／生产四种安装组合通过。原版整页像素对照仍未达标，组件数量不表示像素认证。入口 `#ore-modals`；范围见 [ORE_MODAL_QA.md](docs/ORE_MODAL_QA.md)。
+> 最新有限阶段：227 组件／245 运行时值。新增完整熔炉、高炉、烟熏炉与可复用配方书等8部件；49项Node、browser04单批143个浏览器项目用例、8个独立filter像素平面、React18／19实际包与开发／生产四组合均通过。全库及原生整页像素资格仍未完成。入口 `#furnace-screens`；见 [FURNACE_SCREEN_QA.md](docs/FURNACE_SCREEN_QA.md)。
+
+> OreModal阶段：219 组件／237 运行时值。新增 5 个现代 Ore 弹窗原语，按原版源码校准字体、阴影、关闭按钮、正文与操作区。桌面／手机 72 项、Node 72 项、React 18/19 实际包及开发／生产四种安装组合通过。原版整页像素对照仍未达标，组件数量不表示像素认证。入口 `#ore-modals`；范围见 [ORE_MODAL_QA.md](docs/ORE_MODAL_QA.md)。
 
 > 上一有限阶段：214 组件／232 运行时值，新增现代 `OreExternalServerForm`、`OreButton`、`OreActionBar`、`OreScreenFrame`、`OreScrollArea`。默认 Enter 对齐原版只 blur；窄屏操作栏移出滚动区。最终浏览器 93 通过／1 项预期跳过，Node 52、React 18/19 包、四种默认 Vite 安装组合与两项生产展示检查通过。完整原版帧仍有 1,419,830 像素差异，未宣称整页 pixel perfect。入口 `#ore-external-servers`；范围见 [ORE_EXTERNAL_SERVER_QA.md](docs/ORE_EXTERNAL_SERVER_QA.md)。
 

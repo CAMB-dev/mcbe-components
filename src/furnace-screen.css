@@ -1,0 +1,19 @@
+@import './textures.css';
+@import './inventory.css';
+@import './workstations.css';
+@import './processing.css';
+@import './inventory-screens.css';
+@import './advanced-workstation-textures.css';
+@import './furnace-recipe-book.css';
+.mc-furnace-screen-scroll{box-sizing:border-box;max-width:100%;overflow:auto;padding:52px 6px 6px}
+.mc-furnace-screen-frame{position:relative;isolation:isolate;box-sizing:border-box;width:652px;height:332px;image-rendering:pixelated}
+.mc-furnace-screen-frame[hidden]{display:none!important}
+.mc-furnace-screen-frame__book{position:absolute;left:0;top:0;width:292px;height:332px}
+.mc-furnace-screen-frame__fold{position:absolute;left:292px;top:0;width:8px;height:332px;z-index:-1;pointer-events:none}
+.mc-furnace-screen-frame__fold::before{content:"";position:absolute;left:-8px;top:6px;width:24px;height:320px;box-sizing:border-box;border:8px solid transparent;border-image:var(--mc-advanced-recipe-back-panel) 4 fill / 8px stretch;image-rendering:pixelated;pointer-events:none}
+.mc-furnace-screen-frame__book[hidden],.mc-furnace-screen-frame__fold[hidden]{display:none!important}
+.mc-furnace-screen-frame__right{position:absolute;left:300px;top:0;width:352px;height:332px}
+.mc-furnace-screen-frame[data-furnace-layout='compact']{width:352px}
+.mc-furnace-screen-frame[data-furnace-layout='compact'] .mc-furnace-screen-frame__right{left:0}
+.mc-furnace-screen-frame__right>.mc-workstation-scroll{max-width:none;overflow:visible;padding:0}
+.mc-furnace-screen-frame>.mc-furnace-screen-frame__toolbar{position:absolute;left:auto;right:0;top:-40px;width:var(--mc-furnace-toolbar-width);height:40px;z-index:-2}

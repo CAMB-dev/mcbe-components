@@ -1,0 +1,505 @@
+{
+  "status": "WHOLE_ORIGINALS_BYTE_VERIFIED_NOT_GUI_PIXEL_CERTIFICATION",
+  "sourceArchive": {
+    "path": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "release": "v1.26.60.5",
+    "bytes": 169569258,
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "assets": [
+    {
+      "key": "furnace_toggle_off",
+      "sourceFile": "resource_pack/textures/ui/furnace_toggle_off.png",
+      "outputFile": "src/assets/furnace-screen/furnace_toggle_off.png",
+      "bytes": 302,
+      "sha256": "29c31fa7d0725d8ae67c91377e69974fea8689450aa134c3aada47fda3debce3",
+      "dimensions": [
+        27,
+        15
+      ],
+      "chunkTypes": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "allChunkCRCsValid": true,
+      "signatureValid": true,
+      "metadata": {
+        "sourceFile": "resource_pack/textures/ui/furnace_toggle_off.json",
+        "exists": false,
+        "nineslice": null,
+        "qualification": "No same-basename source metadata; no slicing rule inferred"
+      },
+      "installedComparisons": [
+        {
+          "archiveIndex": 0,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "29c31fa7d0725d8ae67c91377e69974fea8689450aa134c3aada47fda3debce3",
+          "bytes": 302,
+          "dimensions": [
+            27,
+            15
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/0/furnace_toggle_off.png"
+        },
+        {
+          "archiveIndex": 1,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "29c31fa7d0725d8ae67c91377e69974fea8689450aa134c3aada47fda3debce3",
+          "bytes": 302,
+          "dimensions": [
+            27,
+            15
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/1/furnace_toggle_off.png"
+        }
+      ]
+    },
+    {
+      "key": "furnace_toggle_on",
+      "sourceFile": "resource_pack/textures/ui/furnace_toggle_on.png",
+      "outputFile": "src/assets/furnace-screen/furnace_toggle_on.png",
+      "bytes": 353,
+      "sha256": "4daa4f1c6004e8d0b72855706731f20aad9f7b63dec869caf35016a3910c08a6",
+      "dimensions": [
+        27,
+        15
+      ],
+      "chunkTypes": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "allChunkCRCsValid": true,
+      "signatureValid": true,
+      "metadata": {
+        "sourceFile": "resource_pack/textures/ui/furnace_toggle_on.json",
+        "exists": false,
+        "nineslice": null,
+        "qualification": "No same-basename source metadata; no slicing rule inferred"
+      },
+      "installedComparisons": [
+        {
+          "archiveIndex": 0,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "4daa4f1c6004e8d0b72855706731f20aad9f7b63dec869caf35016a3910c08a6",
+          "bytes": 353,
+          "dimensions": [
+            27,
+            15
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/0/furnace_toggle_on.png"
+        },
+        {
+          "archiveIndex": 1,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "4daa4f1c6004e8d0b72855706731f20aad9f7b63dec869caf35016a3910c08a6",
+          "bytes": 353,
+          "dimensions": [
+            27,
+            15
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/1/furnace_toggle_on.png"
+        }
+      ]
+    },
+    {
+      "key": "furnace_toggle_off_hover",
+      "sourceFile": "resource_pack/textures/ui/furnace_toggle_off_hover.png",
+      "outputFile": "src/assets/furnace-screen/furnace_toggle_off_hover.png",
+      "bytes": 324,
+      "sha256": "842ff4833dcd78621766b9b671f7f9527e0b4d5829f858589eacd78ba94f3dd7",
+      "dimensions": [
+        27,
+        15
+      ],
+      "chunkTypes": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "allChunkCRCsValid": true,
+      "signatureValid": true,
+      "metadata": {
+        "sourceFile": "resource_pack/textures/ui/furnace_toggle_off_hover.json",
+        "exists": false,
+        "nineslice": null,
+        "qualification": "No same-basename source metadata; no slicing rule inferred"
+      },
+      "installedComparisons": [
+        {
+          "archiveIndex": 0,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "842ff4833dcd78621766b9b671f7f9527e0b4d5829f858589eacd78ba94f3dd7",
+          "bytes": 324,
+          "dimensions": [
+            27,
+            15
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/0/furnace_toggle_off_hover.png"
+        },
+        {
+          "archiveIndex": 1,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "842ff4833dcd78621766b9b671f7f9527e0b4d5829f858589eacd78ba94f3dd7",
+          "bytes": 324,
+          "dimensions": [
+            27,
+            15
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/1/furnace_toggle_off_hover.png"
+        }
+      ]
+    },
+    {
+      "key": "furnace_toggle_on_hover",
+      "sourceFile": "resource_pack/textures/ui/furnace_toggle_on_hover.png",
+      "outputFile": "src/assets/furnace-screen/furnace_toggle_on_hover.png",
+      "bytes": 361,
+      "sha256": "2e68079d4a14a4bff4fd20a86c73ba1b3dd2f0bb5af26a416d6da82a480e140a",
+      "dimensions": [
+        27,
+        15
+      ],
+      "chunkTypes": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "allChunkCRCsValid": true,
+      "signatureValid": true,
+      "metadata": {
+        "sourceFile": "resource_pack/textures/ui/furnace_toggle_on_hover.json",
+        "exists": false,
+        "nineslice": null,
+        "qualification": "No same-basename source metadata; no slicing rule inferred"
+      },
+      "installedComparisons": [
+        {
+          "archiveIndex": 0,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "2e68079d4a14a4bff4fd20a86c73ba1b3dd2f0bb5af26a416d6da82a480e140a",
+          "bytes": 361,
+          "dimensions": [
+            27,
+            15
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/0/furnace_toggle_on_hover.png"
+        },
+        {
+          "archiveIndex": 1,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "2e68079d4a14a4bff4fd20a86c73ba1b3dd2f0bb5af26a416d6da82a480e140a",
+          "bytes": 361,
+          "dimensions": [
+            27,
+            15
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/1/furnace_toggle_on_hover.png"
+        }
+      ]
+    },
+    {
+      "key": "category_icon_food",
+      "sourceFile": "resource_pack/textures/ui/category_icon_food.png",
+      "outputFile": "src/assets/furnace-screen/category_icon_food.png",
+      "bytes": 394,
+      "sha256": "9b6c63924add3d68934470f095b04ad1027b7870f5abe13e059dadd576776572",
+      "dimensions": [
+        13,
+        14
+      ],
+      "chunkTypes": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "allChunkCRCsValid": true,
+      "signatureValid": true,
+      "metadata": {
+        "sourceFile": "resource_pack/textures/ui/category_icon_food.json",
+        "exists": false,
+        "nineslice": null,
+        "qualification": "No same-basename source metadata; no slicing rule inferred"
+      },
+      "installedComparisons": [
+        {
+          "archiveIndex": 0,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "9b6c63924add3d68934470f095b04ad1027b7870f5abe13e059dadd576776572",
+          "bytes": 394,
+          "dimensions": [
+            13,
+            14
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/0/category_icon_food.png"
+        },
+        {
+          "archiveIndex": 1,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "9b6c63924add3d68934470f095b04ad1027b7870f5abe13e059dadd576776572",
+          "bytes": 394,
+          "dimensions": [
+            13,
+            14
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/1/category_icon_food.png"
+        }
+      ]
+    },
+    {
+      "key": "category_icon_items",
+      "sourceFile": "resource_pack/textures/ui/category_icon_items.png",
+      "outputFile": "src/assets/furnace-screen/category_icon_items.png",
+      "bytes": 303,
+      "sha256": "f0cadcd8eea2abd57bf50b8243e78cbe53ba6f0773657331f480dfd42040b183",
+      "dimensions": [
+        16,
+        12
+      ],
+      "chunkTypes": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "allChunkCRCsValid": true,
+      "signatureValid": true,
+      "metadata": {
+        "sourceFile": "resource_pack/textures/ui/category_icon_items.json",
+        "exists": false,
+        "nineslice": null,
+        "qualification": "No same-basename source metadata; no slicing rule inferred"
+      },
+      "installedComparisons": [
+        {
+          "archiveIndex": 0,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "f0cadcd8eea2abd57bf50b8243e78cbe53ba6f0773657331f480dfd42040b183",
+          "bytes": 303,
+          "dimensions": [
+            16,
+            12
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/0/category_icon_items.png"
+        },
+        {
+          "archiveIndex": 1,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "f0cadcd8eea2abd57bf50b8243e78cbe53ba6f0773657331f480dfd42040b183",
+          "bytes": 303,
+          "dimensions": [
+            16,
+            12
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/1/category_icon_items.png"
+        }
+      ]
+    },
+    {
+      "key": "category_icon_blocks",
+      "sourceFile": "resource_pack/textures/ui/category_icon_blocks.png",
+      "outputFile": "src/assets/furnace-screen/category_icon_blocks.png",
+      "bytes": 239,
+      "sha256": "d149c316fcbd2e1e8075cb17ebda39a20b4b84f16ef6a3fa8cfcfee832e870ba",
+      "dimensions": [
+        16,
+        17
+      ],
+      "chunkTypes": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "allChunkCRCsValid": true,
+      "signatureValid": true,
+      "metadata": {
+        "sourceFile": "resource_pack/textures/ui/category_icon_blocks.json",
+        "exists": false,
+        "nineslice": null,
+        "qualification": "No same-basename source metadata; no slicing rule inferred"
+      },
+      "installedComparisons": [
+        {
+          "archiveIndex": 0,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "d149c316fcbd2e1e8075cb17ebda39a20b4b84f16ef6a3fa8cfcfee832e870ba",
+          "bytes": 239,
+          "dimensions": [
+            16,
+            17
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/0/category_icon_blocks.png"
+        },
+        {
+          "archiveIndex": 1,
+          "pngPresent": true,
+          "metadataPresent": false,
+          "wholeBytesEqual": true,
+          "sha256": "d149c316fcbd2e1e8075cb17ebda39a20b4b84f16ef6a3fa8cfcfee832e870ba",
+          "bytes": 239,
+          "dimensions": [
+            16,
+            17
+          ],
+          "receiptCopy": ".cache/furnace-screen-assets-20261102-01/installed/1/category_icon_blocks.png"
+        }
+      ]
+    }
+  ],
+  "installedArchives": [
+    {
+      "path": "C:\\XboxGames\\Minecraft for Windows\\Content\\data\\resource_packs\\vanilla\\__brarchive\\textures\\ui.brarchive",
+      "exists": true,
+      "bytes": 16130567,
+      "sha256": "9f5f7650aa592fcd72c6145005b9c4adbb9777bbb28f253d315e670030377177",
+      "version": 1,
+      "entryCount": 1831,
+      "tableBytes": 468752,
+      "selected": [
+        {
+          "name": "category_icon_blocks.png",
+          "index": 417,
+          "payloadOffsetAbsolute": 2293247,
+          "bytes": 239,
+          "sha256": "d149c316fcbd2e1e8075cb17ebda39a20b4b84f16ef6a3fa8cfcfee832e870ba"
+        },
+        {
+          "name": "category_icon_food.png",
+          "index": 418,
+          "payloadOffsetAbsolute": 2293486,
+          "bytes": 394,
+          "sha256": "9b6c63924add3d68934470f095b04ad1027b7870f5abe13e059dadd576776572"
+        },
+        {
+          "name": "category_icon_items.png",
+          "index": 419,
+          "payloadOffsetAbsolute": 2293880,
+          "bytes": 303,
+          "sha256": "f0cadcd8eea2abd57bf50b8243e78cbe53ba6f0773657331f480dfd42040b183"
+        },
+        {
+          "name": "furnace_toggle_off.png",
+          "index": 749,
+          "payloadOffsetAbsolute": 3224926,
+          "bytes": 302,
+          "sha256": "29c31fa7d0725d8ae67c91377e69974fea8689450aa134c3aada47fda3debce3"
+        },
+        {
+          "name": "furnace_toggle_off_hover.png",
+          "index": 750,
+          "payloadOffsetAbsolute": 3225228,
+          "bytes": 324,
+          "sha256": "842ff4833dcd78621766b9b671f7f9527e0b4d5829f858589eacd78ba94f3dd7"
+        },
+        {
+          "name": "furnace_toggle_on.png",
+          "index": 751,
+          "payloadOffsetAbsolute": 3225552,
+          "bytes": 353,
+          "sha256": "4daa4f1c6004e8d0b72855706731f20aad9f7b63dec869caf35016a3910c08a6"
+        },
+        {
+          "name": "furnace_toggle_on_hover.png",
+          "index": 752,
+          "payloadOffsetAbsolute": 3225905,
+          "bytes": 361,
+          "sha256": "2e68079d4a14a4bff4fd20a86c73ba1b3dd2f0bb5af26a416d6da82a480e140a"
+        }
+      ],
+      "readOnlyBytesAndMtimeUnchanged": true
+    },
+    {
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.MinecraftUWP_1.26.6005.0_x64__8wekyb3d8bbwe\\data\\resource_packs\\vanilla\\__brarchive\\textures\\ui.brarchive",
+      "exists": true,
+      "bytes": 16130567,
+      "sha256": "9f5f7650aa592fcd72c6145005b9c4adbb9777bbb28f253d315e670030377177",
+      "version": 1,
+      "entryCount": 1831,
+      "tableBytes": 468752,
+      "selected": [
+        {
+          "name": "category_icon_blocks.png",
+          "index": 417,
+          "payloadOffsetAbsolute": 2293247,
+          "bytes": 239,
+          "sha256": "d149c316fcbd2e1e8075cb17ebda39a20b4b84f16ef6a3fa8cfcfee832e870ba"
+        },
+        {
+          "name": "category_icon_food.png",
+          "index": 418,
+          "payloadOffsetAbsolute": 2293486,
+          "bytes": 394,
+          "sha256": "9b6c63924add3d68934470f095b04ad1027b7870f5abe13e059dadd576776572"
+        },
+        {
+          "name": "category_icon_items.png",
+          "index": 419,
+          "payloadOffsetAbsolute": 2293880,
+          "bytes": 303,
+          "sha256": "f0cadcd8eea2abd57bf50b8243e78cbe53ba6f0773657331f480dfd42040b183"
+        },
+        {
+          "name": "furnace_toggle_off.png",
+          "index": 749,
+          "payloadOffsetAbsolute": 3224926,
+          "bytes": 302,
+          "sha256": "29c31fa7d0725d8ae67c91377e69974fea8689450aa134c3aada47fda3debce3"
+        },
+        {
+          "name": "furnace_toggle_off_hover.png",
+          "index": 750,
+          "payloadOffsetAbsolute": 3225228,
+          "bytes": 324,
+          "sha256": "842ff4833dcd78621766b9b671f7f9527e0b4d5829f858589eacd78ba94f3dd7"
+        },
+        {
+          "name": "furnace_toggle_on.png",
+          "index": 751,
+          "payloadOffsetAbsolute": 3225552,
+          "bytes": 353,
+          "sha256": "4daa4f1c6004e8d0b72855706731f20aad9f7b63dec869caf35016a3910c08a6"
+        },
+        {
+          "name": "furnace_toggle_on_hover.png",
+          "index": 752,
+          "payloadOffsetAbsolute": 3225905,
+          "bytes": 361,
+          "sha256": "2e68079d4a14a4bff4fd20a86c73ba1b3dd2f0bb5af26a416d6da82a480e140a"
+        }
+      ],
+      "readOnlyBytesAndMtimeUnchanged": true
+    }
+  ],
+  "reusePolicy": "Only seven furnace-specific originals copied; existing top_tab/fold/search/toolbar assets remain shared.",
+  "limits": [
+    "Installed archive filename identity and whole-byte equality do not certify effective runtime resource-pack override selection.",
+    "No image rendering, cropping, recoloring, rescaling, screenshots or browser/GPU execution was performed.",
+    "Absent same-basename metadata is not replaced by invented nineslice/base-size metadata."
+  ]
+}

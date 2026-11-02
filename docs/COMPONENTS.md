@@ -1,6 +1,7 @@
 # Bedrock 组件范围
 
-> 当前源公开入口为207组件／225值；新增ExternalServerForm与ExternalServerField，source browser04完整67／67通过（48交互＋15完整RGBA＋4alpha参数合同），4项alpha像素候选仍UNQUALIFIED；新forced-colors修复后的package03／实际安装四组合02／built02六项与Node25已通过，native未认证。上一受检FileTransmission阶段205组件／223值保留原验收身份，见[FILE_TRANSMISSION_QA.md](FILE_TRANSMISSION_QA.md)。以下历史阶段数字保留各自时间与范围。
+> 当前实际React18／19包已确认227组件／245运行时值，包含12个新增OreUI部件及8个完整熔炼屏幕／配方书部件。Node49、browser04单批143个项目用例、独立filter材质8平面、实际安装四组合通过；不表示原生整页像素认证。详见[FURNACE_SCREEN_QA.md](FURNACE_SCREEN_QA.md)。Classic206文件表仍为独立历史范围快照，不随组件数量扩充。
+> ExternalServer阶段为207组件／225值；新增ExternalServerForm与ExternalServerField，source browser04完整67／67通过（48交互＋15完整RGBA＋4alpha参数合同），4项alpha像素候选仍UNQUALIFIED；新forced-colors修复后的package03／实际安装四组合02／built02六项与Node25已通过，native未认证。上一受检FileTransmission阶段205组件／223值保留原验收身份，见[FILE_TRANSMISSION_QA.md](FILE_TRANSMISSION_QA.md)。以下历史阶段数字保留各自时间与范围。
 > Credits：受检功能包已确认191组件／209值（191＋6数据＋12函数）；48不同Web合同跨阶段验证、六自编平面108,000RGBA零差；React18／19包及实际开发／生产四组合通过，source展示页9PASS，built首轮8／1保留，观察器URL修正后单项1PASS。最终文档包／Git部署pending；native四行holdout、ó350与logo41,344差异均保留，见[CREDITS_QA.md](CREDITS_QA.md)。
 
 Invite阶段的InviteScreen与可独立复用的InvitePersonRow、InviteCategory、InvitePagination、InviteFooter使当时源码为188组件／205运行时值。六组好友、三类身份、选择／party、分页及footer保留独立宿主输入；邀请、账号、头像provider和资料服务由宿主实现。Invite106个不同合同按02批与06批的实际身份验证，200个完整源／Web材质平面共11,473,278像素RGBA零差；4个自然分数栅格测量仍未资格确认。新包的React18.3.1／19.3.1类型、SSR和资源消费通过，实际React18／19开发和生产四组合均通过，公开页17项通过。不是原生字体或整页像素认证。使用见[INVITE_QA.md](INVITE_QA.md)。
@@ -80,6 +81,9 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 | 存储管理（8） | StorageManagement、StorageToolbar、StorageCategory、StorageItem、StorageItemActions、StorageSelectionFooter、StorageDependencyDialog、StorageSharingProgress |
 | 截图闪光（1） | ScreenshotFlash |
 | 玩家权限OreUI（5） | OrePlayerPermissions、OrePermissionLevelSelect、OrePermissionToggleRow、OrePlayerCard、OreSwitch |
+| OreUI字段（2） | OreTextField、OreFieldSection |
+| OreUI屏幕与操作（5） | OreButton、OreActionBar、OreScreenFrame、OreScrollArea、OreExternalServerForm |
+| OreUI模态组合（5） | OreModal、OreModalHeader、OreModalContent、OreModalText、OreModalActions |
 | 黑板编辑（3） | ChalkboardEditor、ChalkboardTextField、ChalkboardLock |
 
 `EnchantingBook` 的mesh、UV及着色路径现来自实际Bedrock GUI书本draw；显式 `rendererState` 的已捕获打开姿态在测试NVIDIA后端与完整API-after target零RGBA差。默认open/pageFlip仍是受控重建，native CPU动画、其他姿态和完整GUI不由这一draw认证；旧Java/候选照明与PNG数字保留为历史。实际PSO795着色程序不等于旧Entity/MeshFallback文件字节，材质字符串名仍未知。`EnchantingRunes` 需要调用方提供原版字图集。
@@ -157,3 +161,18 @@ PlayerInventoryScreen 的 needsCraftingTable 默认 false；显式启用时，�
 ## External servers（功能／参数合同已验，alpha像素未获资格）
 
 `ExternalServerForm` 对应固定commit `15701fa9c13923f12662984c32c124327e40e3d3` 的 `add_external_server_screen.json`，提供316×179逻辑尺寸的内嵌表单；`ExternalServerField` 拆出38高label / editor行，保留真实input与ref。title、add / edit模式、七项labels、四个独立enabled / disabled-overlay绑定均由宿主显式传入；new / edit源alias为空覆盖，不从alias猜模式。值中的name / address / port均为字符串，port只提供numeric键盘提示，不过滤或解析。组件仅发出保存／连接／移除请求；验证、存储、连接及modal生命周期由宿主实现。默认Enter请求Save（可选Play），不会隐式Remove。source browser04单批67／67通过：48交互＝19fixture＋3gallery＋2真实状态各desktop／mobile，材质合同19＝15完整RGBA零差＋4源alpha参数合同。四个partial-alpha像素候选仍UNQUALIFIED；99＋66独立实验不支持旧scalar规则迁移，perpatch亦未获资格，不改.8／.5或旧expected，旧四项FAIL保留。真实forced-colors检查修复hover specificity覆盖隐藏图层，普通模式无改。有限A只表示该命名组合范围；旧package02／安装四组合／built6属于修前CSS，修后package03实际React18／19各207组件／225值、58项SSR／类型／原图／metadata／CSS与安装四组合02均通过，forced-colors四场景实测图层隐藏／真实input outline，built02为6／6、Node25通过；不据功能／发布检查通过称alpha像素或原生整页通过；见 [EXTERNAL_SERVER_QA.md](EXTERNAL_SERVER_QA.md)。
+
+
+## OreUI补列的12个公开部件
+
+`OreTextField` 保留真实input／ref、原生编辑与表单行为，`OreFieldSection` 拆出label／description关联；完整normal／disabled皮肤URL、字体与本地化由宿主提供。它们不继承Classic外部服务器字段的长度或验证规则。见[ORE_TEXT_FIELD_QA.md](ORE_TEXT_FIELD_QA.md)。
+
+`OreButton`、`OreActionBar`、`OreScreenFrame`、`OreScrollArea` 可独立复用，`OreExternalServerForm` 将其与字段组合为现代Add／Edit流程。size、viewportSize、safeArea是独立显式输入；默认Enter仅blur，port采用source-blur或显式host验证，`submitAction`才启用Web提交。受控请求可被宿主拒绝，readOnly保留选择与Back，保存／连接／删除服务不由库执行。参见[ORE_EXTERNAL_SERVER_QA.md](ORE_EXTERNAL_SERVER_QA.md)。
+
+`OreModal` 与Header／Content／Text／Actions拆分现代模态布局，ref为真实dialog；默认clip，Content须显式启用scrollable。`escape`／`close`／`backdrop`是请求，`native-close`则通知已经完成的平台关闭，不能否决；重新打开须由宿主提交false→true。字号、字体、图标与服务仍保留宿主边界，见[ORE_MODAL_QA.md](ORE_MODAL_QA.md)。这些OreUI实现不提升Classic覆盖状态，也不代表native整页像素验收。
+
+## 完整熔炼屏幕
+
+新增八个公开组件：`FurnaceScreenFrame`、`FurnaceScreen`、`BlastFurnaceScreen`、`SmokerScreen`，以及可复用的`FurnaceRecipeBook`、`FurnaceRecipeBookEntry`、`FurnaceRecipeCategoryTabs`、`FurnaceRecipeFilterToggle`。既有`Furnace`／`BlastFurnace`／`Smoker`继续是176×166逻辑像素右pane，不改成完整屏幕的别名。
+
+完整组合采用源intrinsic尺寸：expanded为326×166＝146宽book＋4宽fold＋176宽右pane；compact为176×166，隐藏book／fold并移除其占位，不用固定326加75留白模拟。GUI2对应2倍CSS像素。分类保留固定Food／Items／Blocks holders与各自二维offset／独立可见变体，Search固定最右；inventory与search状态不互相推断。过滤开关使用四张原furnace皮肤，29×17控制框内为27×15图像。条目不生成本族源未保留的count或crafting group；配方集合、接受后的query／filter／layout、物品与进度均由宿主提供。API与有限Web／包验证见[FURNACE_SCREEN_QA.md](FURNACE_SCREEN_QA.md)；原生整页像素仍未认证。

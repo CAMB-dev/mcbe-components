@@ -203,4 +203,8 @@ export { OreExternalServerForm } from './ore-external-server-form';
 export type { OreExternalServerFormProps, OreExternalServerFieldKind, OreExternalServerAction, OreExternalServerValues, OreExternalServerLabels, OreExternalServerValueChangeDetail, OreExternalServerActionDetail, OreExternalServerPortInvalidDetail } from './ore-external-server-form';
 
 export { OreModal, OreModalHeader, OreModalContent, OreModalText, OreModalActions } from './ore-modal';
+export { FurnaceRecipeBook, FurnaceRecipeBookEntry, FurnaceRecipeCategoryTabs, FurnaceRecipeFilterToggle } from './furnace-recipe-book';
+export { FurnaceScreenFrame, FurnaceScreen, BlastFurnaceScreen, SmokerScreen } from './furnace-screen';
+export type { FurnaceRecipeCategoryId, FurnaceRecipeCategoryBindings, FurnaceRecipeBookItem, FurnaceRecipeBookEntryProps, FurnaceRecipeFilterToggleProps, FurnaceRecipeCategoryTabsProps, FurnaceRecipeBookProps } from './furnace-recipe-book';
+export type { FurnaceScreenLayout, FurnaceScreenFrameProps, FurnaceScreenProps, BlastFurnaceScreenProps, SmokerScreenProps } from './furnace-screen';
 export type { OreModalProps, OreModalDismissDetail, OreModalHeaderProps, OreModalContentProps, OreModalTextProps, OreModalActionsProps } from './ore-modal';

@@ -1,11 +1,10 @@
-import { forwardRef, useCallback, useContext, useEffect, useId, useRef, useState } from 'react';
-import type { CSSProperties, HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
+import { forwardRef } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { ItemCount, ItemSlot } from './inventory';
 import type { InventoryItem, ItemSlotProps } from './inventory';
-import { RecipeCategoryTabs, RecipeFilterToggle, RecipeSearch } from './inventory-screens';
 import type { RecipeCategory } from './inventory-screens';
-import { ScrollArea } from './scroll-area';
-import { CraftingRecipeViewport } from './crafting-image-layer';
+import { useRecipeBookView } from './recipe-book-core';
+import type { RecipeBookViewParts } from './recipe-book-core';
 
 export type RecipeBookAction = 'primary' | 'secondary' | 'tertiary';
 /** Host-resolved recipe_book collection record, including its original background binding. */
@@ -82,75 +81,9 @@ export const RecipeBookEntry = forwardRef<HTMLButtonElement, RecipeBookEntryProp
   </ItemSlot>;
 });
 
+const recipeBookParts: RecipeBookViewParts = { renderEntry: props => <RecipeBookEntry {...props}/> };
+
 /** Classic recipe book pane. The host owns recipe lookup, search, filtering and group expansion. */
-export const RecipeBook = forwardRef<HTMLDivElement, RecipeBookProps>(function RecipeBook({
-  title, entries, categories, categoryId, onCategoryChange, query, onQueryChange, craftableOnly, onCraftableOnlyChange,
-  selectedId, onRecipeAction, creative = false, disabled, searchLabel = 'Search recipes', searchPlaceholder, filterLabel = 'Craftable recipes only',
-  categoriesLabel = 'Recipe categories', recipesLabel = 'Recipes', emptyLabel = 'No matching recipes',
-  id: suppliedId, className, onKeyDown, ...props
-}, ref) {
-  const generatedId = useId(), id = suppliedId ?? `mc-recipe-book-${generatedId}`, search = categoryId === 'search';
-  const viewport = useRef<HTMLDivElement>(null), buttons = useRef(new Map<string, HTMLButtonElement>());
-  const sourceViewport = useContext(CraftingRecipeViewport);
-  const viewportRef = useCallback((element: HTMLDivElement | null) => { viewport.current = element; sourceViewport?.bind(element); }, [sourceViewport]);
-  const [columns, setColumns] = useState(7), [focusedId, setFocusedId] = useState<string>();
-  const enabled = entries.filter(entry => !disabled && !entry.disabled && !entry.item?.disabled);
-  const activeId = enabled.some(entry => entry.id === focusedId) ? focusedId : enabled.some(entry => entry.id === selectedId) ? selectedId : enabled[0]?.id;
-  useEffect(() => {
-    const element = viewport.current; if (!element) return;
-    const measure = () => setColumns(Math.max(1, Math.floor(element.clientWidth / 36)));
-    measure(); const observer = new ResizeObserver(measure); observer.observe(element); return () => observer.disconnect();
-  }, []);
-  const navigate = (event: KeyboardEvent<HTMLDivElement>) => {
-    onKeyDown?.(event); if (event.defaultPrevented || event.nativeEvent.isComposing || disabled) return;
-    const from = entries.findIndex(entry => buttons.current.get(entry.id) === event.target); if (from < 0) return;
-    const rtl = getComputedStyle(event.currentTarget).direction === 'rtl';
-    const direction = event.key === 'ArrowRight' ? (rtl ? -1 : 1) : event.key === 'ArrowLeft' ? (rtl ? 1 : -1) : event.key === 'ArrowDown' ? columns : event.key === 'ArrowUp' ? -columns : 0;
-    let next = from;
-    if (direction) {
-      next += direction;
-      while (next >= 0 && next < entries.length && !enabled.includes(entries[next]!)) next += direction;
-    } else if (event.key === 'Home') {
-      next = event.ctrlKey ? 0 : Math.floor(from / columns) * columns;
-      const end = event.ctrlKey ? entries.length - 1 : Math.min(entries.length - 1, Math.floor(from / columns) * columns + columns - 1);
-      while (next <= end && !enabled.includes(entries[next]!)) next++;
-      if (next > end) next = from;
-    } else if (event.key === 'End') {
-      next = event.ctrlKey ? entries.length - 1 : Math.min(entries.length - 1, Math.floor(from / columns) * columns + columns - 1);
-      const start = event.ctrlKey ? 0 : Math.floor(from / columns) * columns;
-      while (next >= start && !enabled.includes(entries[next]!)) next--;
-      if (next < start) next = from;
-    }
-    else return;
-    event.preventDefault();
-    const entry = entries[next];
-    if (entry && enabled.includes(entry)) { event.preventDefault(); buttons.current.get(entry.id)?.focus(); }
-  };
-  return <div {...props} ref={ref} id={id} className={cx('mc-recipe-book', className)} data-search={search || undefined} data-creative={creative || undefined} onKeyDown={navigate}>
-    <RecipeCategoryTabs id={`${id}-categories`} className="mc-recipe-book__categories" categories={categories}
-      value={categoryId} onValueChange={onCategoryChange} label={categoriesLabel} disabled={disabled} panelId={`${id}-recipes`}/>
-    <div className="mc-recipe-book__header">
-      <h2 className="mc-recipe-book__title">{title}</h2>
-      {!creative && !search && <RecipeFilterToggle className="mc-recipe-book__header-filter" craftableOnly={craftableOnly}
-        onCraftableOnlyChange={onCraftableOnlyChange} label={filterLabel} disabled={disabled}/>}
-    </div>
-    {search && <RecipeSearch className="mc-recipe-book__search" label={searchLabel} value={query}
-      placeholder={searchPlaceholder}
-      onValueChange={onQueryChange} showFilter={!creative} craftableOnly={craftableOnly}
-      onCraftableOnlyChange={onCraftableOnlyChange} filterLabel={filterLabel} disabled={disabled}/>}
-    <ScrollArea id={`${id}-recipes`} className="mc-recipe-book__items" role="tabpanel" aria-labelledby={`${id}-categories-${encodeURIComponent(categoryId)}`}
-      label={recipesLabel} variant="container" viewportRef={viewportRef} onScrollPositionChange={sourceViewport?.scroll}>
-      <div role="grid" aria-label={recipesLabel} aria-rowcount={Math.ceil(entries.length / columns)} aria-colcount={columns}
-        className="mc-recipe-book__grid" style={{ '--mc-recipe-book-columns': columns } as CSSProperties}>
-        {Array.from({ length: Math.ceil(entries.length / columns) }, (_, row) => <div role="row" key={row}>
-          {entries.slice(row * columns, (row + 1) * columns).map(entry => <div role="gridcell" aria-selected={entry.id === selectedId} key={entry.id}>
-            <RecipeBookEntry ref={node => { if (node) buttons.current.set(entry.id, node); else buttons.current.delete(entry.id); }}
-              entry={entry} selected={entry.id === selectedId} disabled={disabled} tabIndex={entry.id === activeId ? 0 : -1}
-              onFocus={() => setFocusedId(entry.id)} onRecipeAction={onRecipeAction}/>
-          </div>)}
-        </div>)}
-      </div>
-      {!entries.length && <span className="mc-recipe-book__empty" role="status">{emptyLabel}</span>}
-    </ScrollArea>
-  </div>;
+export const RecipeBook = forwardRef<HTMLDivElement, RecipeBookProps>(function RecipeBook(props, ref) {
+  return useRecipeBookView(props, ref, recipeBookParts);
 });

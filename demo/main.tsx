@@ -59,6 +59,7 @@ import { ExternalServerExamples } from './external-server-examples';
 import { OreTextFieldExamples } from './ore-text-field-examples';
 import { OreExternalServerExamples } from './ore-external-server-examples';
 import { OreModalExamples } from './ore-modal-examples';
+import { FurnaceScreenExamples } from './furnace-screen-examples';
 import { UGCExamples } from './ugc-examples';
 import { ImmersiveReaderExamples } from './immersive-reader-examples';
 import { ScrollArea } from '../src';
@@ -78,6 +79,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'item-renderers', name: 'Block items', icon: 'chevron', count: '01' },
   { id: 'bitmap-text', name: 'Bitmap text', icon: 'chevron', count: '01' },
   { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
+  { id: 'furnace-screens', name: 'Furnace screens', icon: 'chevron', count: '08' },
   { id: 'workstation-text', name: 'Workstation text', icon: 'chevron', count: '01' },
   { id: 'gui-layer', name: 'Composed GUI', icon: 'chevron', count: '01' },
   { id: 'grindstone-layer', name: 'Source Grindstone', icon: 'chevron', count: '01' },
@@ -489,6 +491,7 @@ function App() {
       <Example id="ugc-viewer" title="UGC viewer" detail="Source search, scrolling collection and reusable content cards with caller-resolved images."><UGCExamples/></Example>
       <Example id="immersive-reader" title="Immersive Reader" detail="Independent source loading, error and running states with a persistent host renderer."><ImmersiveReaderExamples/></Example>
 
+      <Example id="furnace-screens" title="Furnace screens" detail="熔炉、高炉和烟熏炉完整布局；配方书、分类与筛选可独立复用。"><FurnaceScreenExamples/></Example>
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>
       </Example>

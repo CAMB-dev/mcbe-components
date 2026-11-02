@@ -1,5 +1,15 @@
 # Third-party notices
 
+The Furnace screen bank adds seven unchanged whole PNG files from the fixed
+public Mojang Bedrock Samples `v1.26.60.5` release: four furnace filter states
+and three category icons. Original paths, dimensions, hashes and independent
+installed-resource comparisons are recorded in `docs/furnace-screen-assets.json`.
+The existing unchanged upstream notice at `dist/assets/document-viewer/LICENSE.md`
+also applies to these resources. The images retain Mojang ownership and upstream
+Minecraft EULA terms, separately from this project's MIT code. No texture metadata
+was invented for the seven files, whose matching JSON descriptions are absent.
+Font binaries and captured native pixels are not added by this bank.
+
 The mcbeui source code is MIT licensed. The following optional bundled fonts are separately licensed under the SIL Open Font License 1.1. Keep these notices and their full licenses when redistributing the fonts.
 
 ## Monocraft v4.2.1

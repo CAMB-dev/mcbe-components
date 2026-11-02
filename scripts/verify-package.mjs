@@ -8,6 +8,7 @@ import { verifyExternalServerPackage } from './verify-external-server-package.mj
 import { verifyOreTextFieldPackage } from './verify-ore-text-field-package.mjs';
 import { verifyOreExternalServerPackage } from './verify-ore-external-server-package.mjs';
 import { verifyOreModalPackage } from './verify-ore-modal-package.mjs';
+import { verifyFurnaceScreenPackage } from './verify-furnace-screen-package.mjs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -130,10 +131,11 @@ components.push('ExternalServerForm','ExternalServerField');
 components.push('OreTextField','OreFieldSection');
 components.push('OreButton','OreActionBar','OreScreenFrame','OreScrollArea','OreExternalServerForm');
 components.push('OreModal','OreModalHeader','OreModalContent','OreModalText','OreModalActions');
-assert.equal(components.length,219);
+components.push('FurnaceRecipeBook','FurnaceRecipeBookEntry','FurnaceRecipeCategoryTabs','FurnaceRecipeFilterToggle','FurnaceScreenFrame','FurnaceScreen','BlastFurnaceScreen','SmokerScreen');
+assert.equal(components.length,227);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,12);
-assert.equal(Object.keys(ui).length,237);
+assert.equal(Object.keys(ui).length,245);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -2080,5 +2082,6 @@ export const demo = <>
   await verifyOreTextFieldPackage({ consumer, root, major, privateResourceHashes:privateOreResourceHashes });
   await verifyOreExternalServerPackage({ consumer, root, major, privateResourceHashes:privateOreResourceHashes });
   await verifyOreModalPackage({ consumer, root, major, privateResourceHashes:privateOreResourceHashes });
+  await verifyFurnaceScreenPackage({ consumer, root, major });
 }
 console.log(`Verified tarball: ${tarPath}`);

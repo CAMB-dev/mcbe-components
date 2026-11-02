@@ -1,5 +1,61 @@
 # Session handoff
 
+## Current checkpoint — complete Classic Furnace family, 2026-11-02
+
+Full goal ACTIVE/incomplete. Branch `codex/furnace-screen-20261102` from
+`beecebc5fe7ed446e072c76e279752e5fc9dbc36`. Public now227 components /245
+runtime values (227+6data+12functions). Actual final Git/main identity is in
+`.cache/furnace-qa-01/FINAL.json`; do not infer it from this precommit note.
+
+New8: FurnaceScreenFrame/FurnaceScreen/BlastFurnaceScreen/SmokerScreen;
+FurnaceRecipeBook/Entry/CategoryTabs/FilterToggle. New route `#furnace-screens`.
+Read `docs/FURNACE_SCREEN_QA.md`, `docs/furnace-screen-source.json` and asset
+ledger before continuing. Complete root is intrinsic326x166 expanded and176x166
+compact (CSS652/352x332); do not reuse fixed326 InventoryScreenFrame. Existing
+Furnace/BlastFurnace/Smoker remain right panes. NewFrame hides book/fold without
+unmounting; source category holders and visibility/offset flags stay independent.
+Entry strips count/durability/group, red does not imply disabled. Host owns all
+recipes/bindings/services. No new imageRender/native/Pocket qualification.
+
+Shared private useRecipeBookView extraction retains18 exact old/new SSRs including
+IDs across realReact18/19. New filter uses7 unchanged original public PNGs bank;
+asset byte references699 (654PNG39TGA6JSON), source closure180 modules.
+
+Final verification: node-final49PASS; browser04 single143PASS/0skip/0flaky;
+material02 eight full58x34 black/white filter planes strictRGBA0 (15776pixels);
+package03 full actual18.3.1/19.3.1, newfamily29SSR+19negative types each;
+installed02 four fresh default-Vite modes PASS without source aliases;
+built02 two user4173 production desktop/mobile modes PASS and HTML byte identity.
+Functional tar `.cache/furnace-installed-02/candidate.tgz` SHA256
+97942bbbe258bd4eb016772833a7e4bc113a153d55ba59be4fc755329ce77990.
+Final docs pack must satisfy PACK-IDENTITY.json all dist/package members equal.
+
+Real bug discovered at final visual review: recipe CSS import order let generic
+relative override header-filter absolute (x12 instead of224CSS). Fixed ordering
+AND owner-specific absolute for headerfilter/categories. Added all four branch
+header/input/filter source rect assertions and installed nonsearch filter test.
+Final bookCSS SHA73c1b0ead6ffc9bbdf9cbd757d6d88171c31faaa455354f7f454c567b47382ae.
+Independent initial freeze missed cascade; AMENDMENT-01 preserves and corrects it,
+SHA56c514d239c7dafe794942b3a8bc7cecaa75e8cae46bafb4606b23bd7c3a0db6.
+All pre-fix browser01/02/03, package01/02, installed01 and built01 retained.
+Pre-fix tar7d551e65... is NOT final CSS qualification. Initial browser failures
+also include test-role/grid scoping and root catalog edit causing Vite reload.
+Never edit imported catalog/source while a source browser matrix is running.
+
+Full-source audit baseline `.cache/full-goal-audit-20261102-01` correctly reports
+beecebc missing full Furnace; this round fills that finite Classic Web gap,
+so do not reimplement these8 next turn. Next concrete missing UI: PlayScreen,
+resource pack five collections/diagnostics/tier settings, Create/EditWorld
+settings, DisconnectScreen. Pocket16, other G63 UI, template/sleep/calibration
+and native fidelity remain in full scope. Counts/E0 are NOT goal completion.
+
+No CU/native/GPU capture this round. Keep user-owned preview4173 running; all
+temporary5480..5485 servers close after checks. CU must close after actual use.
+Prior Ore/Classic/native alpha/font/book/caret/selection failures remain open;
+do not repeat the failed ForceD3D11On12 precomposed capture as a font recovery.
+
+## Previous checkpoint (retained)
+
 ## Current checkpoint — Ore modal primitives and D3D11On12 capture, 2026-11-02
 
 Full goal ACTIVE/incomplete. Branch `codex/ore-modal-20261102`, parent

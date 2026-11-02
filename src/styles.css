@@ -29,6 +29,8 @@
 @import './item-renderers.css';
 @import './inventory-screens.css';
 @import './recipe-book.css';
+@import './furnace-recipe-book.css';
+@import './furnace-screen.css';
 @import './crafting-screen.css';
 @import './inventory-screen-frame.css';
 @import './book.css';
