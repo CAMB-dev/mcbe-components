@@ -1,8 +1,10 @@
 # Bedrock 组件范围
 
-> 最新实际包（2026-11-03）：**258 组件／276 运行时值**。WorldLaunchActions 提供原版 35 高的 Bedrock／Education 启动行；WorldSettingsActionButton 提供可复用 light／dark／Realms 操作按钮。62 项 Web 检查、24 原图材质平面、两 peer 实际包、四个 Vite 开发／生产场景及 4 项 built 展示检查通过。完整 WorldSettingsScreen 及原生像素仍未完成；见 [WORLD_SETTINGS_ACTIONS.md](WORLD_SETTINGS_ACTIONS.md)。以下较早数字保留历史阶段身份。
+> 当前源码（2026-11-03）：**261组件／280运行时值**，其中6份数据、13个函数不计作组件。新增 `SettingsFrame`、`SettingsNavigation`、`SettingsFields` 与纯 `layoutSettingsFrame`；36项交互＋24项原材质源浏览器检查通过。本阶段React18.3.1／19.3.1实际包、四个Vite开发／生产安装场景及built展示8项检查通过；Node43通过。完整 `WorldSettingsScreen`、Game／Multiplayer具名完整快照、原生字体和默认几何仍未完成。见 [SETTINGS_SOURCE.md](SETTINGS_SOURCE.md)。
 
-> 当前实际包（2026-11-03）：**256 组件／274 运行时值**。新增 DisconnectScreen（普通／Realms 两类断线及警告）、DisconnectMessage（正文与标题）、DisconnectActions（独立按钮与源间隔）。使用完整原始 dirt／portal 背景；尺寸、安全区、字体和未恢复的布局默认值由宿主明确提供。三者支持真实 ref、React 18／19 inert、延迟请求否决和嵌套原生 dialog 输入所有权。16 模型、50 浏览器、两 peer 安装包与四个实际 Vite 开发／生产场景通过，完整 native 未认证；见 [DISCONNECT_SCREEN.md](DISCONNECT_SCREEN.md)。下方计数为各历史阶段，不是当前总数。
+> 上一实际包（2026-11-03）：**258 组件／276 运行时值**。WorldLaunchActions 提供原版 35 高的 Bedrock／Education 启动行；WorldSettingsActionButton 提供可复用 light／dark／Realms 操作按钮。62 项 Web 检查、24 原图材质平面、两 peer 实际包、四个 Vite 开发／生产场景及 4 项 built 展示检查通过。完整 WorldSettingsScreen 及原生像素仍未完成；见 [WORLD_SETTINGS_ACTIONS.md](WORLD_SETTINGS_ACTIONS.md)。以下较早数字保留历史阶段身份。
+
+> 历史Disconnect阶段实际包（2026-11-03）：**256 组件／274 运行时值**。新增 DisconnectScreen（普通／Realms 两类断线及警告）、DisconnectMessage（正文与标题）、DisconnectActions（独立按钮与源间隔）。使用完整原始 dirt／portal 背景；尺寸、安全区、字体和未恢复的布局默认值由宿主明确提供。三者支持真实 ref、React 18／19 inert、延迟请求否决和嵌套原生 dialog 输入所有权。16 模型、50 浏览器、两 peer 安装包与四个实际 Vite 开发／生产场景通过，完整 native 未认证；见 [DISCONNECT_SCREEN.md](DISCONNECT_SCREEN.md)。下方计数为各历史阶段，不是当前总数。
 
 > 当前实际React18／19包已确认227组件／245运行时值，包含12个新增OreUI部件及8个完整熔炼屏幕／配方书部件。Node49、browser04单批143个项目用例、独立filter材质8平面、实际安装四组合通过；不表示原生整页像素认证。详见[FURNACE_SCREEN_QA.md](FURNACE_SCREEN_QA.md)。Classic206文件表仍为独立历史范围快照，不随组件数量扩充。
 > ExternalServer阶段为207组件／225值；新增ExternalServerForm与ExternalServerField，source browser04完整67／67通过（48交互＋15完整RGBA＋4alpha参数合同），4项alpha像素候选仍UNQUALIFIED；新forced-colors修复后的package03／实际安装四组合02／built02六项与Node25已通过，native未认证。上一受检FileTransmission阶段205组件／223值保留原验收身份，见[FILE_TRANSMISSION_QA.md](FILE_TRANSMISSION_QA.md)。以下历史阶段数字保留各自时间与范围。
@@ -66,6 +68,7 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 
 | 分类 | 组件 |
 | --- | --- |
+| Classic设置源码框架（3） | SettingsFrame、SettingsNavigation、SettingsFields；另有纯函数layoutSettingsFrame，不计组件。完整WorldSettingsScreen未实现 |
 | Credits（有限源族） | CreditsScreen、CreditsRoll、CreditsSkipButton；另有纯函数layoutCredits，不计作组件 |
 | 文字与表面（21） | Text、BitmapText、PixelIcon、GuiIcon、Image、NineSlice、GuiImageLayer、GuiLayer、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
 | 输入与设置（16） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、ToggleButton、SearchField、Tabs、NavigationList、SettingRow、KeybindingField |
@@ -180,3 +183,11 @@ PlayerInventoryScreen 的 needsCraftingTable 默认 false；显式启用时，�
 新增八个公开组件：`FurnaceScreenFrame`、`FurnaceScreen`、`BlastFurnaceScreen`、`SmokerScreen`，以及可复用的`FurnaceRecipeBook`、`FurnaceRecipeBookEntry`、`FurnaceRecipeCategoryTabs`、`FurnaceRecipeFilterToggle`。既有`Furnace`／`BlastFurnace`／`Smoker`继续是176×166逻辑像素右pane，不改成完整屏幕的别名。
 
 完整组合采用源intrinsic尺寸：expanded为326×166＝146宽book＋4宽fold＋176宽右pane；compact为176×166，隐藏book／fold并移除其占位，不用固定326加75留白模拟。GUI2对应2倍CSS像素。分类保留固定Food／Items／Blocks holders与各自二维offset／独立可见变体，Search固定最右；inventory与search状态不互相推断。过滤开关使用四张原furnace皮肤，29×17控制框内为27×15图像。条目不生成本族源未保留的count或crafting group；配方集合、接受后的query／filter／layout、物品与进度均由宿主提供。API与有限Web／包验证见[FURNACE_SCREEN_QA.md](FURNACE_SCREEN_QA.md)；原生整页像素仍未认证。
+
+## 设置源码基础件
+
+`SettingsFrame` 使用显式 `SettingsFrameLayout` 与 `layoutSettingsFrame`，提供 selector／content 独立滚动及 content_area popup host。宿主指定 `dialogRect`、背景、字体、返回按钮几何、输入模式和 `mouseRailAllocation`，不从屏幕尺寸推断原生默认安全区；`disabled` 只管框架请求，不替代嵌入字段的权限。
+
+`SettingsNavigation` 是受控 source radio 导航：section／group／spacer 保留独立 ignored／visible／enabled；业务 `value`、`sourceIndex`、`viewBinding` 与 `sourceDefaultIndex` 分开。30高行与31高状态图、原outline／color glyph复用原素材；居中半像素相位和hover策略明确为Web合同，server进度provider尚未实现。
+
+`SettingsFields` 接收完整有序快照：label、info、spacer、divider、stack、toggle、text、text-action、dropdown、radio、slider、permissions、action、experiments。14种kind含递归stack和实验集合，不意味着69个Game控件或Multiplayer页面已命名实现。原值／绑定／步骤与Web滑块域独立，变更只发宿主请求；默认popup内联，可显式使用Frame的overlay。同源60项浏览器检查已通过，安装包验证待执行；完整 API、组合示例和未知边界见 [SETTINGS_SOURCE.md](SETTINGS_SOURCE.md)。

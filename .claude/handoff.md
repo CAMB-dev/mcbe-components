@@ -1,3 +1,20 @@
+# Current Settings parts checkpoint — 2026-11-03
+
+Goal ACTIVE / incomplete. Branch codex/world-settings-screen-20261103 based on7b942c99db6b7895a1d0648c77988ebffd937edd. Current stage evidence .cache/settings-screen-qa-20261103-01/FINAL.json (commit/push recorded after sealing). Normal authorized push only; never force.
+
+- Actual public namespace261 components+6data+13functions=280. New SettingsFrame/SettingsNavigation/SettingsFields and pure layoutSettingsFrame. Three CSS subpaths and public #settings-source demo. API/QA docs SETTINGS_SOURCE.md / SETTINGS_SOURCE_QA.md.
+- Final source browser04 60/60, Node-final03 43/43, fresh canonical package02 actual React18.3.1/19.3.1 PASS. Settings package helper each9groups/14negative types;49 whole files33PNG+10rawJSON+6licenses;7CSS closure bytes. No SSR events/refs/services/warnings.
+- Actual installed02 four default Vite dev/prod cases PASS;14kind/controlled host values/Nav/portal/Escape/late veto/inert/nativeDialog/ref lifecycle.16 complete dev/prod frame comparisons2,828,800RGBA strict0.24 independent source material planes1,180,296RGBA strict0. These are finite Web proofs, not native.
+- Built02 actual4173 public+adjacent8/8; servedHTML equals site/index.html. Scoped axe03 Settings demo0violations/27passes/1incomplete. Keep audit01 helper-context failure and axe02 true visible-label/name mismatch. Root fix includes dropdown/permission visible face in default accessible name; explicit host names preserved. Original agent Fields receipt remains pre-amendment, do not rewrite it.
+- Retain browser01 CSS inheritance/oversized mobile fixture failures and model01/02 float oracle failures. CSS now stronger frame ancestor selector, source8mouse reservation stays independent of paint visibility. Interactive mobile fixture explicitly fits host;520 geometry tests remain. No tolerance fitting.
+- Tested package02 SHA9422c63bb12b3d6e8b0c00227d163c74befa1842df6bfb92335d265f951eed68; immutable package02-tested.tgz. Final docs-only identity DOC_IDENTITY02.json.
+- Private world-settings-source.ts and public world-settings-source.json reproducibly pin Game69/Multi8 direct topology and limited inheritance. Not public runtime; no complete named WorldSettingsScreen yet. Coverage staysA45/B13/C31/D32/E0/F16/G63/H6; settings_screen/world_section remainB.
+- Native probe01 found0Minecraft apps/windows/processes. Installed UWP1.26.6005.0 confirmed; one sky.launch_app attempt returned accessibility window-opened handler did not become ready, fresh list_windows still0. No app input/newnative screenshot. CU js_reset immediately. Native/font/backend/ResourcePacks28/Manifest12 residuals unchanged.
+- Preserve user4173 PID217140. Owned5481/5483/5484 closed after checks. No npm registry publish requested.
+- NEXT: actual full WorldSettingsScreen assembly must own Game69/Multi8 source order/identity/kind and complete canonical named snapshots incl ignored controls; preserve independent raw source bindings/conditions/Edu/Debug branches. Source World header/footer empty; do not invent Save footer. Mount existing ResourcePackManager/addons/server content only at genuine source slots. Server loading-bar provider still missing. Explicit font/default geometry/provider/native limits remain. Then continue other optional/Pocket/world-template/calibration ranges; never complete goal from counts.
+
+---
+
 # Current checkpoint — World settings action parts, 2026-11-03
 
 ## Latest checkpoint — World settings action parts, 2026-11-03

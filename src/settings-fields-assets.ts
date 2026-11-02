@@ -1,0 +1,28 @@
+import type {ClassicSkinAsset} from './classic-skin';
+/** Private whole original Classic settings materials; existing public asset bytes are reused unchanged. */
+export const settingsFieldAssets = {
+  "toggle_on": {url:new URL("./assets/npc/toggle_on.png",import.meta.url).href,"width":30,"height":16},
+  "toggle_off": {url:new URL("./assets/player-permissions/toggle_off.png",import.meta.url).href,"width":30,"height":16},
+  "toggle_on_hover": {url:new URL("./assets/npc/toggle_on_hover.png",import.meta.url).href,"width":30,"height":16},
+  "toggle_off_hover": {url:new URL("./assets/player-permissions/toggle_off_hover.png",import.meta.url).href,"width":30,"height":16},
+  "edit_box_indent": {url:new URL("./assets/external-server/edit_box_indent.png",import.meta.url).href,"width":6,"height":6,"metadata":{"nineslice_size":2,"base_size":[6,6]}},
+  "edit_box_indent_hover": {url:new URL("./assets/external-server/edit_box_indent_hover.png",import.meta.url).href,"width":6,"height":6,"metadata":{"nineslice_size":2,"base_size":[6,6]}},
+  "dropdown_background": {url:new URL("./assets/player-permissions/dropdown_background.png",import.meta.url).href,"width":5,"height":5,"metadata":{"nineslice_size":2,"base_size":[5,5]}},
+  "dropdown_chevron": {url:new URL("./assets/player-permissions/dropdown_chevron.png",import.meta.url).href,"width":11,"height":11},
+  "chevron_white_down": {url:new URL("./assets/player-permissions/chevron_white_down.png",import.meta.url).href,"width":11,"height":11},
+  "dropDownHoverBG": {url:new URL("./assets/player-permissions/dropDownHoverBG.png",import.meta.url).href,"width":1,"height":1},
+  "dropDownSelectBG": {url:new URL("./assets/player-permissions/dropDownSelectBG.png",import.meta.url).href,"width":1,"height":1},
+  "radio_on": {url:new URL("./assets/player-permissions/radio_on.png",import.meta.url).href,"width":10,"height":10},
+  "radio_off": {url:new URL("./assets/player-permissions/radio_off.png",import.meta.url).href,"width":10,"height":10},
+  "radio_on_hover": {url:new URL("./assets/player-permissions/radio_on_hover.png",import.meta.url).href,"width":10,"height":10},
+  "radio_off_hover": {url:new URL("./assets/player-permissions/radio_off_hover.png",import.meta.url).href,"width":10,"height":10},
+  "text_label_box": {url:new URL("./assets/player-permissions/text_label_box.png",import.meta.url).href,"width":4,"height":4,"metadata":{"nineslice_size":1,"base_size":[4,4]}},
+  "arrowRight": {url:new URL("./assets/command-block/arrowRight.png",import.meta.url).href,"width":8,"height":8},
+  "button_borderless_lightpressednohover": {url:new URL("./assets/document-viewer/button_borderless_lightpressednohover.png",import.meta.url).href,"width":4,"height":4,"metadata":{"nineslice_size":1,"base_size":[4,4]}},
+  "permissions_visitor_hand": {url:new URL("./assets/player-permissions/permissions_visitor_hand.png",import.meta.url).href,"width":14,"height":15},
+  "permissions_visitor_hand_hover": {url:new URL("./assets/player-permissions/permissions_visitor_hand_hover.png",import.meta.url).href,"width":14,"height":15},
+  "permissions_member_star": {url:new URL("./assets/player-permissions/permissions_member_star.png",import.meta.url).href,"width":13,"height":14},
+  "permissions_member_star_hover": {url:new URL("./assets/player-permissions/permissions_member_star_hover.png",import.meta.url).href,"width":13,"height":14},
+  "permissions_op_crown": {url:new URL("./assets/player-permissions/permissions_op_crown.png",import.meta.url).href,"width":14,"height":14},
+  "permissions_op_crown_hover": {url:new URL("./assets/player-permissions/permissions_op_crown_hover.png",import.meta.url).href,"width":14,"height":14},
+} as const satisfies Readonly<Record<string,ClassicSkinAsset>>;

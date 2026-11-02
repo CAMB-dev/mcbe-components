@@ -248,3 +248,12 @@ export type { DisconnectButtonState, DisconnectVariant, DisconnectButtonKind, Di
 export { WorldSettingsActionButton, WorldLaunchActions } from './world-settings-actions';
 export type { WorldSettingsFont, WorldSettingsActionDetail, WorldSettingsActionButtonProps, WorldLaunchButtonState,
   WorldSettingsMode, WorldLaunchModel, WorldLaunchButtonKind, WorldLaunchTarget, WorldLaunchActionDetail, WorldLaunchActionsProps } from './world-settings-actions';
+
+export { SettingsFrame, layoutSettingsFrame } from './settings-frame';
+export type { SettingsFrameLayout, SettingsFrameGeometry, SettingsFramePane, SettingsFrameBox, SettingsFrameBackground,
+  SettingsFrameBack, SettingsFrameCommand, SettingsFrameRequest, SettingsFrameController, SettingsFrameProps } from './settings-frame';
+export { SettingsNavigation } from './settings-navigation';
+export type { SettingsNavigationImage, SettingsNavigationSection, SettingsNavigationGroup, SettingsNavigationSpacer,
+  SettingsNavigationItem, SettingsNavigationDetail, SettingsNavigationProps } from './settings-navigation';
+export { SettingsFields } from './settings-fields';
+export type * from './settings-fields-model';

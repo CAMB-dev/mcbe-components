@@ -1,0 +1,16 @@
+{
+  "sourceCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "source": "resource_pack/ui/settings_sections/settings_common.json",
+  "sourceSHA256": "36863803c56e42d31b915aa9df13cf88cc43a528eb40c76cbf26c911ef7b3ecf",
+  "nativeGeometryQualified": false,
+  "dialogTitles": {"size": ["100%",15], "offset": [0,3.5], "leftPadding":18, "dialogTitleWidth":"40% - 3px", "centerPadding":9, "rightPadding":22},
+  "selector": {"anchor":"top_left", "offset":[2,21], "size":["40% - 3px","100% - 19px"]},
+  "content": {"anchor":"top_right", "offset":[-1,21], "size":["60% - 8px","100% - 19px"]},
+  "divider": {"anchor":"top_left", "offset":["40%",20], "size":[4,"100% - 18px"]},
+  "fullscreenContent": {"anchor":"top_right", "offset":["-10%",21], "size":["80%","100% - 19px"]},
+  "mouseBar": {"slotWidth":5,"leftPadding":1,"rightPadding":2,"height":"100% - 4px"},
+  "contentWrapper":{"offset":[2,0],"size":["100% - 4px","100%c + 4px"]},
+  "selectorWrapper":{"offset":[2,2],"size":["100% - 4px","100%c + 4px"]},
+  "topBar":{"source":"resource_pack/ui/ui_common.json#fullscreen_header","size":["100%",23]},
+  "background":{"texture":"textures/ui/White","sourceColor":[0.192,0.196,0.2],"height":"100%sm","resolution":"explicit host whole-image source; literal case unresolved in fixed public ZIP"}
+}

@@ -1,0 +1,40 @@
+.mc-settings-navigation{position:relative;display:flex;flex-direction:column;box-sizing:border-box;min-width:0;max-width:none;margin:0;padding:0;border:0;color:#fff;font-weight:400;text-shadow:none;isolation:isolate;image-rendering:pixelated}
+.mc-settings-navigation *{box-sizing:border-box}
+.mc-settings-navigation[hidden],.mc-settings-navigation [hidden]{display:none!important}
+.mc-settings-navigation-section{--mc-settings-navigation-text:rgb(30% 30% 30%);--mc-settings-navigation-glyph:0;--mc-settings-navigation-border:.075;position:relative;display:block;flex:none;min-width:0;min-height:0;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;appearance:none;background:none;box-shadow:none;outline:none;transform:none;color:var(--mc-settings-navigation-text);font:inherit;font-weight:400;letter-spacing:inherit;line-height:inherit;text-align:left;text-shadow:none;cursor:pointer;overflow:visible;z-index:1;touch-action:manipulation}
+.mc-settings-navigation-section[aria-checked=true]:not(:disabled){--mc-settings-navigation-text:rgb(12.16% 12.16% 12.16%);z-index:2}
+.mc-settings-navigation-section:not(:disabled):is(:hover,:focus-visible){--mc-settings-navigation-text:#fff;--mc-settings-navigation-glyph:1;--mc-settings-navigation-border:1;z-index:3}
+.mc-settings-navigation-section[aria-checked=true]:not(:disabled):is(:hover,:focus-visible){z-index:4}
+.mc-settings-navigation-section:disabled{--mc-settings-navigation-text:rgb(30% 30% 30%);--mc-settings-navigation-glyph:0;--mc-settings-navigation-border:.075;cursor:default;z-index:1}
+.mc-settings-navigation-section:is(:hover,:focus-visible,:active,:disabled){background:none;box-shadow:none;outline:none;transform:none;text-shadow:none;opacity:1;filter:none}
+/* 31-unit source state board over a30-unit row. Center for omitted parent
+   anchors is the explicit Web policy; it is not a native half-phase capture. */
+.mc-settings-navigation-section__paint{position:absolute;left:0;top:calc(-.5 * var(--mc-settings-navigation-u));width:100%;height:calc(31 * var(--mc-settings-navigation-u));pointer-events:none}
+.mc-settings-navigation-section__state{position:absolute;left:var(--mc-settings-navigation-u);top:var(--mc-settings-navigation-u);display:none;width:calc(100% - 2 * var(--mc-settings-navigation-u));height:calc(29 * var(--mc-settings-navigation-u));pointer-events:none}
+.mc-settings-navigation-section:not(:disabled):not(:hover):not(:focus-visible)[aria-checked=false]>.mc-settings-navigation-section__paint>.mc-settings-navigation-section__state--unchecked,
+.mc-settings-navigation-section:not(:disabled):not(:hover):not(:focus-visible)[aria-checked=true]>.mc-settings-navigation-section__paint>.mc-settings-navigation-section__state--checked,
+.mc-settings-navigation-section:not(:disabled):is(:hover,:focus-visible)[aria-checked=false]>.mc-settings-navigation-section__paint>.mc-settings-navigation-section__state--uncheckedHover,
+.mc-settings-navigation-section:not(:disabled):is(:hover,:focus-visible)[aria-checked=true]>.mc-settings-navigation-section__paint>.mc-settings-navigation-section__state--checkedHover,
+.mc-settings-navigation-section:disabled>.mc-settings-navigation-section__paint>.mc-settings-navigation-section__state--locked{display:block}
+.mc-settings-navigation-section__border{position:absolute;inset:0;filter:brightness(var(--mc-settings-navigation-border));pointer-events:none}
+.mc-settings-navigation-skin,.mc-settings-navigation-skin__clip{position:absolute;display:block;overflow:hidden;pointer-events:none}
+.mc-settings-navigation-skin__patch{display:block;image-rendering:pixelated}
+/* new_ui_button_panel's content has a3-unit inset relative to the state board;
+   glyph5 and label34 are local coordinates, hence root X8 and X37. */
+.mc-settings-navigation-section__content{position:absolute;left:calc(3 * var(--mc-settings-navigation-u));right:calc(3 * var(--mc-settings-navigation-u));top:calc(2.5 * var(--mc-settings-navigation-u));height:calc(25 * var(--mc-settings-navigation-u));pointer-events:none}
+.mc-settings-navigation-section__glyph{position:absolute;left:calc(5 * var(--mc-settings-navigation-u));top:50%;transform:translateY(-50%);pointer-events:none}
+.mc-settings-navigation-section__glyph>.mc-image{position:absolute;left:0;top:0;display:block;max-width:none;max-height:none;image-rendering:pixelated;pointer-events:none}
+.mc-settings-navigation-section__outline-glyph{filter:brightness(var(--mc-settings-navigation-glyph));z-index:3}
+.mc-settings-navigation-section__color-glyph{filter:none;z-index:4}
+.mc-settings-navigation-section__label{position:absolute;left:calc(34 * var(--mc-settings-navigation-u));top:0;display:flex;align-items:center;width:calc(100% - 38 * var(--mc-settings-navigation-u));height:100%;pointer-events:none}
+.mc-settings-navigation-section__label>span{display:block;max-width:100%;max-height:calc(21 * var(--mc-settings-navigation-u));white-space:pre-wrap;overflow-wrap:anywhere;overflow:hidden;text-shadow:none}
+.mc-settings-navigation-group,.mc-settings-navigation-spacer{position:relative;flex:none;min-width:0;margin:0;padding:0;border:0}
+.mc-settings-navigation-group>span{position:absolute;left:calc(15 * var(--mc-settings-navigation-u));top:0;display:block;width:100%;height:100%;color:#fff;white-space:pre-wrap;overflow-wrap:anywhere;text-shadow:none}
+@media(forced-colors:active){
+ .mc-settings-navigation-section__paint{display:none!important}
+ .mc-settings-navigation-section{background:Canvas!important;color:CanvasText;border:1px solid ButtonText}
+ .mc-settings-navigation-section[aria-checked=true]{outline:2px solid Highlight;outline-offset:-2px}
+ .mc-settings-navigation-section:focus-visible{outline:2px solid Highlight;outline-offset:1px}
+ .mc-settings-navigation-section:disabled{color:GrayText}
+ .mc-settings-navigation-group>span{color:CanvasText}
+}

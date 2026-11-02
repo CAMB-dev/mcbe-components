@@ -1,0 +1,113 @@
+@import './scroll-area.css';
+@import './world-settings-actions.css';
+.mc-settings-fields,.mc-settings-field-row{position:relative;box-sizing:border-box;min-width:0;color:#fff;font-weight:400;text-shadow:none;image-rendering:pixelated}
+.mc-settings-fields[hidden]{display:none!important}
+.mc-settings-field-row{position:absolute}
+.mc-settings-field-skin,.mc-settings-field-skin__clip{display:block;position:absolute;overflow:hidden;pointer-events:none}
+.mc-settings-field-skin__patch{display:block;image-rendering:pixelated}
+.mc-settings-static-label,.mc-settings-info-text,.mc-settings-option__label,.mc-settings-option__description{position:absolute;box-sizing:border-box;min-width:0;max-width:100%;margin:0;padding:0;white-space:pre-wrap;overflow-wrap:anywhere;overflow:hidden;text-shadow:none;font-weight:400}
+.mc-settings-static-label{left:0;width:100%}
+.mc-settings-option__description{color:rgb(70% 70% 70%)}
+.mc-settings-divider{position:absolute;image-rendering:pixelated}
+.mc-settings-option__control{position:absolute;left:0}
+.mc-settings-toggle{position:relative;display:block}
+.mc-settings-toggle>input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;z-index:2;cursor:pointer}
+.mc-settings-toggle__normal,.mc-settings-toggle__hover{position:absolute;inset:0;pointer-events:none}
+.mc-settings-toggle__hover{display:none}
+.mc-settings-toggle:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-toggle__normal{display:none}
+.mc-settings-toggle:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-toggle__hover{display:block}
+.mc-settings-toggle[data-locked=true]>.mc-settings-toggle__normal{opacity:.5}
+.mc-settings-toggle:has(>input:focus-visible){outline:var(--mc-settings-u) solid #fff;outline-offset:var(--mc-settings-u)}
+.mc-settings-text{position:relative;display:block}
+.mc-settings-text>input{position:absolute;box-sizing:border-box;inset:calc(2 * var(--mc-settings-u)) calc(3 * var(--mc-settings-u));width:calc(100% - 6 * var(--mc-settings-u));height:calc(100% - 4 * var(--mc-settings-u));min-width:0;margin:0;padding:0;border:0;border-radius:0;outline:none;background:transparent;color:#fff;font:inherit;text-shadow:none;box-shadow:none}
+.mc-settings-text>input::placeholder{color:inherit;opacity:1}
+.mc-settings-text>input:disabled{opacity:.5;cursor:default}
+.mc-settings-text__normal,.mc-settings-text__hover{position:absolute;inset:0;pointer-events:none}
+.mc-settings-text__hover{display:none}
+.mc-settings-text:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-text__normal{display:none}
+.mc-settings-text:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-text__hover{display:block}
+.mc-settings-text-action{position:relative;display:block}
+.mc-settings-arrow-action,.mc-settings-mock,.mc-settings-dropdown,.mc-settings-choice{appearance:none;box-sizing:border-box;display:block;position:relative;min-width:0;max-width:none;min-height:0;max-height:none;margin:0;padding:0;border:0;border-radius:0;outline:none;background:transparent;font:inherit;font-weight:400;color:rgb(30% 30% 30%);text-shadow:none;box-shadow:none;transform:none;touch-action:manipulation;cursor:pointer}
+.mc-settings-arrow-action:disabled,.mc-settings-mock:disabled,.mc-settings-dropdown:disabled,.mc-settings-choice:disabled{cursor:default}
+.mc-settings-button-paint{position:absolute;inset:var(--mc-settings-u);pointer-events:none;z-index:0}
+.mc-settings-button-paint>span{position:absolute;inset:0}
+.mc-settings-button-paint__hover,.mc-settings-button-paint__pressed,.mc-settings-button-paint__locked{display:none}
+.mc-settings-button-outline{position:absolute;inset:0;pointer-events:none;filter:brightness(.075);z-index:1}
+.mc-settings-arrow-action:is(:hover,:focus-visible):not(:disabled) .mc-settings-button-paint__normal,.mc-settings-dropdown:is(:hover,:focus-visible):not(:disabled) .mc-settings-button-paint__normal{display:none}
+.mc-settings-arrow-action:is(:hover,:focus-visible):not(:disabled) .mc-settings-button-paint__hover,.mc-settings-dropdown:is(:hover,:focus-visible):not(:disabled) .mc-settings-button-paint__hover{display:block}
+.mc-settings-arrow-action:active:not(:disabled) .mc-settings-button-paint__normal,.mc-settings-arrow-action:active:not(:disabled) .mc-settings-button-paint__hover{display:none}
+.mc-settings-arrow-action:active:not(:disabled) .mc-settings-button-paint__pressed{display:block}
+.mc-settings-arrow-action:disabled .mc-settings-button-paint__normal,.mc-settings-dropdown:disabled .mc-settings-button-paint__normal{display:none}
+.mc-settings-arrow-action:disabled .mc-settings-button-paint__locked,.mc-settings-dropdown:disabled .mc-settings-button-paint__locked{display:block}
+.mc-settings-arrow-action:is(:hover,:focus-visible,:active):not(:disabled) .mc-settings-button-outline,.mc-settings-dropdown:is(:hover,:focus-visible):not(:disabled) .mc-settings-button-outline{filter:none}
+.mc-settings-arrow-action__glyph{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;image-rendering:pixelated}
+.mc-settings-arrow-action:active:not(:disabled)>.mc-settings-arrow-action__glyph{translate:0 var(--mc-settings-u)}
+.mc-settings-mock__hover{position:absolute;inset:0;display:none;pointer-events:none}
+.mc-settings-mock:is(:hover,:focus-visible):not(:disabled)>.mc-settings-mock__hover{display:block}
+.mc-settings-mock__label{position:absolute;inset:calc(2 * var(--mc-settings-u)) calc(3 * var(--mc-settings-u));text-align:left;color:#fff;overflow:hidden;pointer-events:none}
+.mc-settings-dropdown__label{position:absolute;left:calc(8 * var(--mc-settings-u));right:calc(24 * var(--mc-settings-u));top:calc(4 * var(--mc-settings-u));bottom:calc(4 * var(--mc-settings-u));display:flex;align-items:center;overflow:hidden;white-space:nowrap;z-index:2;pointer-events:none}
+.mc-settings-dropdown__arrow,.mc-settings-dropdown__arrow-hover{position:absolute;right:calc(8 * var(--mc-settings-u));top:50%;transform:translateY(-50%);z-index:2;pointer-events:none;image-rendering:pixelated}
+.mc-settings-dropdown__arrow-hover{display:none}
+.mc-settings-dropdown:is(:hover,:focus-visible):not(:disabled){color:#fff}
+.mc-settings-dropdown[data-expanded=true]:not(:hover):not(:focus-visible){color:rgb(12.16% 12.16% 12.16%)}
+.mc-settings-dropdown[data-expanded=true]:is(:hover,:focus-visible):not(:disabled) .mc-settings-button-paint__hover{display:none}
+.mc-settings-dropdown[data-expanded=true]:is(:hover,:focus-visible):not(:disabled) .mc-settings-button-paint__pressed{display:block}
+.mc-settings-dropdown:is(:hover,:focus-visible):not(:disabled)[data-expanded=false]>.mc-settings-dropdown__arrow{display:none}
+.mc-settings-dropdown:is(:hover,:focus-visible):not(:disabled)[data-expanded=false]>.mc-settings-dropdown__arrow-hover{display:block}
+.mc-settings-dropdown:disabled>.mc-settings-dropdown__label,.mc-settings-dropdown:disabled>.mc-settings-button-paint{opacity:.5}
+.mc-settings-dropdown-popup{box-sizing:border-box;color:#fff;font-weight:400;text-shadow:none;isolation:isolate;z-index:42;image-rendering:pixelated;pointer-events:auto}
+.mc-settings-dropdown-popup>.mc-settings-field-skin{z-index:-1}
+.mc-settings-dropdown-scroll{position:relative;box-sizing:border-box;display:block}
+.mc-settings-dropdown-scroll>.mc-scroll-area__viewport{position:absolute;left:calc(2 * var(--mc-settings-u));top:calc(2 * var(--mc-settings-u));width:calc(100% - 4 * var(--mc-settings-u));height:calc(100% - 4 * var(--mc-settings-u))}
+.mc-settings-dropdown-scroll>.mc-scrollbar[data-orientation=vertical]{position:absolute;right:0;top:var(--mc-settings-u);height:calc(100% - 2 * var(--mc-settings-u))}
+.mc-settings-choices{position:relative;box-sizing:border-box}
+.mc-settings-choice{color:#fff;text-align:left}
+.mc-settings-choice>img{position:absolute;image-rendering:pixelated;pointer-events:none}
+.mc-settings-choice__selected,.mc-settings-choice__hover{z-index:0}
+.mc-settings-choice__hover,.mc-settings-choice__radio-hover{display:none}
+.mc-settings-choice__radio,.mc-settings-choice__radio-hover{left:calc(3 * var(--mc-settings-u));top:50%;transform:translateY(-50%);z-index:1}
+.mc-settings-choice>span:not(.mc-settings-permission-choice-focus){position:absolute;left:calc(19 * var(--mc-settings-u));right:0;top:calc(.5 * var(--mc-settings-u));height:100%;display:flex;align-items:center;white-space:nowrap;overflow:hidden;pointer-events:none;z-index:1}
+.mc-settings-choice:is(:hover,:focus-visible):not(:disabled)>.mc-settings-choice__hover,.mc-settings-choice:is(:hover,:focus-visible):not(:disabled)>.mc-settings-choice__radio-hover{display:block}
+.mc-settings-choice:is(:hover,:focus-visible):not(:disabled)>.mc-settings-choice__radio{display:none}
+.mc-settings-choice:disabled>.mc-settings-choice__radio,.mc-settings-choice:disabled>span{opacity:.5}
+.mc-settings-permission-face-icon{position:absolute;left:calc(8 * var(--mc-settings-u));top:50%;transform:translateY(calc(-50% - var(--mc-settings-u)));pointer-events:none;z-index:2;image-rendering:pixelated}
+.mc-settings-permission-choice-focus{position:absolute;top:0;display:none;pointer-events:none}
+.mc-settings-choice--permission:is(:hover,:focus-visible):not(:disabled)>.mc-settings-permission-choice-focus{display:block}
+.mc-settings-permission-choice-description{position:absolute;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;pointer-events:none}
+.mc-settings-slider{position:absolute;display:block}
+.mc-settings-slider__normal,.mc-settings-slider__hover{position:absolute;inset:0;pointer-events:none}
+.mc-settings-slider__hover{display:none}
+.mc-settings-slider__inside{position:absolute;inset:var(--mc-settings-u);overflow:hidden}
+.mc-settings-slider__progress,.mc-settings-slider__fade{position:absolute;inset:0;pointer-events:none}
+.mc-settings-slider__marker{position:absolute;top:calc(2 * var(--mc-settings-u));height:calc(6 * var(--mc-settings-u));width:calc(2 * var(--mc-settings-u));pointer-events:none}
+.mc-settings-slider__marker>span{position:absolute;inset:0}
+.mc-settings-slider__marker-hover{display:none}
+.mc-settings-slider:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-slider__marker>.mc-settings-slider__marker-normal{display:none}
+.mc-settings-slider:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-slider__marker>.mc-settings-slider__marker-hover{display:block}
+.mc-settings-slider__thumb{position:absolute;top:calc(-3 * var(--mc-settings-u));width:calc(10 * var(--mc-settings-u));height:calc(16 * var(--mc-settings-u));pointer-events:none}
+.mc-settings-slider__thumb>span{position:absolute;inset:0}
+.mc-settings-slider__thumb-hover,.mc-settings-slider__thumb-indent,.mc-settings-slider__thumb-locked{display:none}
+.mc-settings-slider>input{appearance:none;position:absolute;inset:calc(-3 * var(--mc-settings-u)) 0;width:100%;height:calc(16 * var(--mc-settings-u));margin:0;opacity:0;z-index:2;cursor:pointer}
+.mc-settings-slider:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-slider__normal{display:none}
+.mc-settings-slider:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-slider__hover{display:block}
+.mc-settings-slider:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-slider__thumb>.mc-settings-slider__thumb-default{display:none}
+.mc-settings-slider:has(>input:is(:hover,:focus-visible):not(:disabled))>.mc-settings-slider__thumb>.mc-settings-slider__thumb-hover{display:block}
+.mc-settings-slider:has(>input:active:not(:disabled))>.mc-settings-slider__thumb>.mc-settings-slider__thumb-hover,.mc-settings-slider:has(>input:active:not(:disabled))>.mc-settings-slider__thumb>.mc-settings-slider__thumb-default{display:none}
+.mc-settings-slider:has(>input:active:not(:disabled))>.mc-settings-slider__thumb>.mc-settings-slider__thumb-indent{display:block}
+.mc-settings-slider[data-locked=true]>.mc-settings-slider__thumb>.mc-settings-slider__thumb-default{display:none}
+.mc-settings-slider[data-locked=true]>.mc-settings-slider__thumb>.mc-settings-slider__thumb-locked{display:block}
+.mc-settings-radio-control{position:relative}
+.mc-settings-radio-control__choices{display:flex;position:relative}
+.mc-settings-inline-radio{appearance:none;position:relative;display:block;box-sizing:border-box;flex:none;margin:0;padding:0;border:0;border-radius:0;background:transparent;color:#fff;font:inherit;cursor:pointer;text-align:left}
+.mc-settings-inline-radio__paint{position:absolute;pointer-events:none;background-size:100% 100%;filter:brightness(.43)}
+.mc-settings-inline-radio[data-checked=true]>.mc-settings-inline-radio__paint{filter:brightness(.29)}
+.mc-settings-inline-radio:is(:hover,:focus-visible):not(:disabled)>.mc-settings-inline-radio__paint{filter:none;background-color:rgb(12% 48% 0%);background-blend-mode:multiply}
+.mc-settings-inline-radio>img{position:absolute;left:calc(5 * var(--mc-settings-u));top:50%;transform:translateY(-50%);pointer-events:none;image-rendering:pixelated}
+.mc-settings-inline-radio__hover{display:none}
+.mc-settings-inline-radio:is(:hover,:focus-visible):not(:disabled)>.mc-settings-inline-radio__hover{display:block}
+.mc-settings-inline-radio:is(:hover,:focus-visible):not(:disabled)>.mc-settings-inline-radio__normal{display:none}
+.mc-settings-inline-radio__label{position:absolute;right:0;white-space:nowrap;overflow:hidden;pointer-events:none}
+.mc-settings-inline-radio:disabled>.mc-settings-inline-radio__label,.mc-settings-inline-radio:disabled>img{opacity:.5}
+.mc-settings-radio-control__description{position:absolute;white-space:pre-wrap;overflow-wrap:anywhere;overflow:hidden;text-shadow:none}
+@media(forced-colors:active){.mc-settings-field-skin,.mc-settings-button-paint,.mc-settings-button-outline,.mc-settings-toggle__normal,.mc-settings-toggle__hover,.mc-settings-slider>span,.mc-settings-choice>img{display:none!important}.mc-settings-toggle>input,.mc-settings-slider>input{opacity:1;appearance:auto}.mc-settings-text>input,.mc-settings-dropdown,.mc-settings-choice,.mc-settings-arrow-action,.mc-settings-mock{background:Field;color:FieldText;border:1px solid FieldText}.mc-settings-dropdown:focus-visible,.mc-settings-choice:focus-visible,.mc-settings-arrow-action:focus-visible,.mc-settings-text>input:focus-visible{outline:2px solid Highlight}.mc-settings-choice[aria-checked=true]{outline:2px solid Highlight}}
+@media(forced-colors:active){.mc-settings-inline-radio{background:ButtonFace;border:1px solid ButtonText;color:ButtonText}.mc-settings-inline-radio>.mc-settings-inline-radio__paint,.mc-settings-inline-radio>img{display:none!important}.mc-settings-inline-radio[aria-checked=true],.mc-settings-inline-radio:focus-visible{outline:2px solid Highlight;outline-offset:-2px}}

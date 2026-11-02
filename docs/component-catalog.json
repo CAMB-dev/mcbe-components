@@ -1811,10 +1811,30 @@
         "fidelity": "source_action_button_and_launch_row_only_full_world_settings_not_implemented",
         "details": "docs/WORLD_SETTINGS_ACTIONS.md"
       }
+    ],
+    "settings_source": [
+      {
+        "name": "SettingsFrame",
+        "status": "implemented",
+        "fidelity": "explicit_source_parts_host_snapshot_fonts_and_intrinsics_full_world_settings_incomplete",
+        "details": "docs/SETTINGS_SOURCE.md"
+      },
+      {
+        "name": "SettingsNavigation",
+        "status": "implemented",
+        "fidelity": "explicit_source_parts_host_snapshot_fonts_and_intrinsics_full_world_settings_incomplete",
+        "details": "docs/SETTINGS_SOURCE.md"
+      },
+      {
+        "name": "SettingsFields",
+        "status": "implemented",
+        "fidelity": "explicit_source_parts_host_snapshot_fonts_and_intrinsics_full_world_settings_incomplete",
+        "details": "docs/SETTINGS_SOURCE.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 258,
+    "components": 261,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1825,12 +1845,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 276,
+    "runtimeValues": 280,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "world_actions_258_276_scoped_web_package_installed_built_qualified_full_world_settings_incomplete",
+    "publicationState": "settings_parts_261_280_scoped_web_package_installed_built_qualified_full_world_settings_incomplete",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
@@ -1852,7 +1872,8 @@
       "layoutGuiImages",
       "layoutGuiText",
       "layoutGuiModel",
-      "createGuiCuboidModel"
+      "createGuiCuboidModel",
+      "layoutSettingsFrame"
     ]
   },
   "progressStage": {
@@ -2148,5 +2169,28 @@
       "runtime intrinsics/fonts/native full-frame verification"
     ],
     "details": "docs/WORLD_SETTINGS_ACTIONS.md"
+  },
+  "settingsPartsStage": {
+    "status": "SOURCE_WEB_PACKAGE_INSTALLED_BUILT_PASS_NATIVE_INCOMPLETE",
+    "components": [
+      "SettingsFrame",
+      "SettingsNavigation",
+      "SettingsFields"
+    ],
+    "pureFunction": "layoutSettingsFrame",
+    "fullWorldSettingsScreenImplemented": false,
+    "nativeWholeGUI": false,
+    "details": "docs/SETTINGS_SOURCE.md",
+    "nodeTests": 43,
+    "sourceBrowserTests": 60,
+    "wholeSourceMaterialPlanes": 24,
+    "wholeSourceMaterialPixels": 1180296,
+    "installedViteCases": 4,
+    "installedDevProdWholeFrameComparisons": 16,
+    "installedDevProdComparedPixels": 2828800,
+    "builtDemoTests": 8,
+    "scopedAxeViolations": 0,
+    "scopedAxeIncomplete": 1,
+    "validationDetails": "docs/SETTINGS_SOURCE_QA.md"
   }
 }

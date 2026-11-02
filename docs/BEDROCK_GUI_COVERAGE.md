@@ -1,5 +1,7 @@
 # Bedrock Classic GUI覆盖清单
 
+> 当前实际包（2026-11-03）：261组件／280运行时值。新增SettingsFrame、SettingsNavigation、SettingsFields与layoutSettingsFrame，保留settings_screen及world_section为部分B；完整WorldSettingsScreen／具名快照与native未完成。206行计数仍为A45／B13／C31／D32／E0／F16／G63／H6。见 [设置部件验证](SETTINGS_SOURCE_QA.md)。
+
 > 最新实际包（2026-11-03）为 **258 组件／276 运行时值**。本阶段只提供两个世界设置操作部件，因此仅将 `settings_sections/world_section.json` 从 C 更新为 **部分 B**，不是完整设置页。当前固定 206 行为 **A45／B13／C31／D32／E0／F16／G63／H6**；其余 205 行保留。`settings_screen.json` 仍为部分 B；所有原生整页状态未推广。见 [World settings actions](WORLD_SETTINGS_ACTIONS.md)。
 
 > 历史 Disconnect 阶段实际包（2026-11-03）为 **256 组件／274 运行时值**。Disconnect 三部件已完成有限源／Web、实际两 peer 包和开发／生产四组合检查；仅将 `disconnect_screen.json` 从 C 更新为有限 A。当前此页固定 206 行计数为 **A45／B12／C32／D32／E0／F16／G63／H6**；其余 205 行保持原历史映射。Play／ResourcePacks 等后续族的实现不追溯改写其他历史行，也不代表任一整页原生像素完成。下方 ExternalServer／Furnace 文字保留其历史身份。详见 [断线界面及资格边界](DISCONNECT_SCREEN.md)。
@@ -210,13 +212,13 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 |`screenshot_screen.json`|screenshot|1|A|ScreenshotFlash（有限源闪光层，显式宿主材质与时钟，原生未认证）|
 |`select_world_screen.json`|select_world|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
 |`server_form.json`|server_form|1|A|ServerActionForm、ServerCustomForm|
-|`settings_screen.json`|settings|15|B|SettingsPanel、SettingRow、NavigationList、KeybindingField|
+|`settings_screen.json`|settings|15|B|SettingsFrame、SettingsNavigation、layoutSettingsFrame、SettingsPanel、SettingRow、NavigationList、KeybindingField（框架／导航部分；完整设置Screen未实现）|
 |`settings_sections/controls_section.json`|controls_section|0|C|SettingsPanel、SettingRow、Switch、Slider、KeybindingField、Combobox|
 |`settings_sections/general_section.json`|general_section|0|C|SettingsPanel、SettingRow、Switch、Slider、KeybindingField、Combobox|
 |`settings_sections/realms_world_section.json`|realms_world_section|0|C|SettingsPanel、SettingRow、Switch、Slider、KeybindingField、Combobox|
 |`settings_sections/settings_common.json`|settings_common|4|C|SettingsPanel、SettingRow、Switch、Slider、KeybindingField、Combobox|
 |`settings_sections/social_section.json`|social_section|0|C|SettingsPanel、SettingRow、Switch、Slider、KeybindingField、Combobox|
-|`settings_sections/world_section.json`|world_section|0|B|WorldLaunchActions、WorldSettingsActionButton（仅操作部分；完整字段／框架待实现）|
+|`settings_sections/world_section.json`|world_section|0|B|WorldLaunchActions、WorldSettingsActionButton、SettingsFields（14kind内核；具名Game69／Multi8完整页面仍未实现）|
 |`sidebar_navigation.json`|sidebar_navigation|0|D|—|
 |`sign_screen.json`|sign|1|A|SignEditor、SignTextSurface|
 |`simple_inprogress_screen.json`|simple_inprogress|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|

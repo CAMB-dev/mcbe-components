@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "status": "source-materials-checked-runtime-native-unqualified",
+  "sourceCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "assets": {
+    "unchecked": {
+      "source": "resource_pack/textures/ui/button_borderless_light.png",
+      "file": "src/assets/document-viewer/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/button_borderless_light.json",
+        "file": "src/assets/document-viewer/button_borderless_light.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "existing-whole-original-via-resourcePackAssets",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_light.png"
+    },
+    "checked": {
+      "source": "resource_pack/textures/ui/button_borderless_lightpressednohover.png",
+      "file": "src/assets/document-viewer/button_borderless_lightpressednohover.png",
+      "bytes": 155,
+      "sha256": "c3e928f9c58b6cf42399686ba71f5656de59a2dadcdd6cee9b26111ec5200c52",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/button_borderless_lightpressednohover.json",
+        "file": "src/assets/document-viewer/button_borderless_lightpressednohover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "existing-whole-original-via-resourcePackAssets",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lightpressednohover.png"
+    },
+    "uncheckedHover": {
+      "source": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "file": "src/assets/document-viewer/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/button_borderless_lighthover.json",
+        "file": "src/assets/document-viewer/button_borderless_lighthover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "existing-whole-original-via-resourcePackAssets",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lighthover.png"
+    },
+    "checkedHover": {
+      "source": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "file": "src/assets/document-viewer/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+        "file": "src/assets/document-viewer/button_borderless_lightpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "existing-whole-original-via-resourcePackAssets",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_lightpressed.png"
+    },
+    "locked": {
+      "source": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "file": "src/assets/document-viewer/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "dimensions": [
+        2,
+        2
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+        "file": "src/assets/document-viewer/disabledButtonNoBorder.json",
+        "bytes": 60,
+        "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            2,
+            2
+          ]
+        }
+      },
+      "distribution": "existing-whole-original-via-resourcePackAssets",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/disabledButtonNoBorder.png"
+    },
+    "border": {
+      "source": "resource_pack/textures/ui/focus_border_white.png",
+      "file": "src/assets/document-viewer/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "dimensions": [
+        5,
+        5
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/focus_border_white.json",
+        "file": "src/assets/document-viewer/focus_border_white.json",
+        "bytes": 60,
+        "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            5,
+            5
+          ]
+        }
+      },
+      "distribution": "existing-whole-original-via-resourcePackAssets",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/focus_border_white.png"
+    },
+    "controller": {
+      "source": "resource_pack/textures/ui/controller_glyph.png",
+      "file": "src/assets/gui-icons/controller-glyph.png",
+      "bytes": 167,
+      "sha256": "00abbfb7d92fa35635979bfbabad0b3276e72e86e4d0640f1717d7a4a63fe931",
+      "dimensions": [
+        21,
+        14
+      ],
+      "metadata": null,
+      "metadataAbsentInFixedArchive": true,
+      "distribution": "existing-whole-original-gui-icon",
+      "licenseFile": "src/assets/gui-icons/LICENSE.md",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/controller_glyph.png"
+    },
+    "controllerColor": {
+      "source": "resource_pack/textures/ui/controller_glyph_color.png",
+      "file": "src/assets/gui-icons/controller-glyph-color.png",
+      "bytes": 420,
+      "sha256": "3c165bb7cbbe3af4ca7416faecc3dbab507bc71ca45de99730ca0866f02eb2b2",
+      "dimensions": [
+        21,
+        14
+      ],
+      "metadata": null,
+      "metadataAbsentInFixedArchive": true,
+      "distribution": "existing-whole-original-gui-icon",
+      "licenseFile": "src/assets/gui-icons/LICENSE.md",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/controller_glyph_color.png"
+    },
+    "multiplayer": {
+      "source": "resource_pack/textures/ui/multiplayer_glyph.png",
+      "file": "src/assets/gui-icons/multiplayer-glyph.png",
+      "bytes": 152,
+      "sha256": "da14f4600757df01ee448e6d13e870d3e6b250ec68f1a09b2dc2e93f19534c16",
+      "dimensions": [
+        22,
+        12
+      ],
+      "metadata": null,
+      "metadataAbsentInFixedArchive": true,
+      "distribution": "existing-whole-original-gui-icon",
+      "licenseFile": "src/assets/gui-icons/LICENSE.md",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/multiplayer_glyph.png"
+    },
+    "multiplayerColor": {
+      "source": "resource_pack/textures/ui/multiplayer_glyph_color.png",
+      "file": "src/assets/gui-icons/multiplayer-glyph-color.png",
+      "bytes": 518,
+      "sha256": "d9e0c1c36d0fb6512be303c1960b0b4c2d203e776165242b4d97d5320f8bd129",
+      "dimensions": [
+        22,
+        12
+      ],
+      "metadata": null,
+      "metadataAbsentInFixedArchive": true,
+      "distribution": "existing-whole-original-gui-icon",
+      "licenseFile": "src/assets/gui-icons/LICENSE.md",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/multiplayer_glyph_color.png"
+    }
+  },
+  "license": {
+    "source": "LICENSE.md",
+    "file": "src/assets/document-viewer/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sourceStates": {
+    "unchecked": {
+      "texture": "button_borderless_light",
+      "text": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "glyph": [
+        0,
+        0,
+        0
+      ],
+      "border": [
+        0.075,
+        0.075,
+        0.075
+      ]
+    },
+    "checked": {
+      "texture": "button_borderless_lightpressednohover",
+      "text": [
+        0.1216,
+        0.1216,
+        0.1216
+      ],
+      "glyph": [
+        0,
+        0,
+        0
+      ],
+      "border": [
+        0.075,
+        0.075,
+        0.075
+      ]
+    },
+    "uncheckedHover": {
+      "texture": "button_borderless_lighthover",
+      "text": [
+        1,
+        1,
+        1
+      ],
+      "glyph": [
+        1,
+        1,
+        1
+      ],
+      "border": [
+        1,
+        1,
+        1
+      ]
+    },
+    "checkedHover": {
+      "texture": "button_borderless_lightpressed",
+      "text": [
+        1,
+        1,
+        1
+      ],
+      "glyph": [
+        1,
+        1,
+        1
+      ],
+      "border": [
+        1,
+        1,
+        1
+      ]
+    },
+    "locked": {
+      "texture": "disabledButtonNoBorder",
+      "text": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "glyph": [
+        0,
+        0,
+        0
+      ],
+      "border": [
+        0.075,
+        0.075,
+        0.075
+      ]
+    }
+  },
+  "geometry": {
+    "rowHeight": 30,
+    "statePaintHeight": 31,
+    "statePaintOffsetY": -0.5,
+    "boardImageInset": 1,
+    "boardContentInset": 3,
+    "glyphContentX": 5,
+    "textContentX": 34,
+    "rootGlyphX": 8,
+    "rootTextX": 37,
+    "groupLabelX": 15
+  },
+  "boundaries": [
+    "Centered omitted content anchors and half-phase are explicit Web policy, not native placement proof.",
+    "Native hover evaluator, font metrics/wrapping and provider/forced-index activation are not recovered.",
+    "The optional server progress_loading_bars glyph provider is not implemented by this finite component.",
+    "No glyph is drawn or inferred; callers provide complete original image URL/physical dimensions and explicit visibility.",
+    "Six existing skin PNG/JSON pairs and four whole glyph PNGs reused read-only; no new PNG or hidden private font."
+  ]
+}

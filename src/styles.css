@@ -1,5 +1,8 @@
 @import './disconnect.css';
 @import './world-settings-actions.css';
+@import './settings-frame.css';
+@import './settings-navigation.css';
+@import './settings-fields.css';
 @import './manifest-validation-screen.css';
 @import './pack-settings.css';
 @import './resource-packs.css';

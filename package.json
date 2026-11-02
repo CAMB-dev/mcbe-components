@@ -141,7 +141,10 @@
     "./manifest-validation-parts.css": "./dist/manifest-validation-parts.css",
     "./manifest-validation-screen.css": "./dist/manifest-validation-screen.css",
     "./disconnect.css": "./dist/disconnect.css",
-    "./world-settings-actions.css": "./dist/world-settings-actions.css"
+    "./world-settings-actions.css": "./dist/world-settings-actions.css",
+    "./settings-frame.css": "./dist/settings-frame.css",
+    "./settings-navigation.css": "./dist/settings-navigation.css",
+    "./settings-fields.css": "./dist/settings-fields.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
