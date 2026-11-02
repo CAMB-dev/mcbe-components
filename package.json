@@ -129,7 +129,12 @@
     "./ore-external-server-form.css": "./dist/ore-external-server-form.css",
     "./ore-modal.css": "./dist/ore-modal.css",
     "./furnace-recipe-book.css": "./dist/furnace-recipe-book.css",
-    "./furnace-screen.css": "./dist/furnace-screen.css"
+    "./furnace-screen.css": "./dist/furnace-screen.css",
+    "./play-screen.css": "./dist/play-screen.css",
+    "./play-screen-frame.css": "./dist/play-screen-frame.css",
+    "./play-worlds.css": "./dist/play-worlds.css",
+    "./play-servers.css": "./dist/play-servers.css",
+    "./play-popups.css": "./dist/play-popups.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",

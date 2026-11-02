@@ -21,7 +21,7 @@
 .mc-npc-skin-picker__skin:disabled { cursor:default; }
 .mc-npc-skin-picker__skin:focus-visible { outline:var(--mc-npc-u) solid var(--mc-focus,#fff); outline-offset:calc(var(--mc-npc-u) * -1); }
 .mc-npc-skin-picker__selected { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:calc(100% - var(--mc-npc-u)); height:calc(100% - var(--mc-npc-u) * 2); border:var(--mc-npc-u) solid transparent; border-image:var(--mc-npc-focus) 1 fill / var(--mc-npc-u) stretch; pointer-events:none; image-rendering:pixelated; }
-.mc-npc-skin-picker__previous, .mc-npc-skin-picker__next { position:absolute; bottom:0; width:calc(var(--mc-npc-u) * 30); height:100%; }
+.mc-npc-skin-picker .mc-npc-skin-picker__previous, .mc-npc-skin-picker .mc-npc-skin-picker__next { position:absolute; bottom:0; width:calc(var(--mc-npc-u) * 30); height:100%; }
 .mc-npc-skin-picker__previous { left:0; }.mc-npc-skin-picker__next { right:0; }
 .mc-npc-skin-picker__chevron { display:block; width:calc(var(--mc-npc-u) * 4); height:calc(var(--mc-npc-u) * 7); background:var(--mc-npc-chevron-left) center / 100% 100% no-repeat; image-rendering:pixelated; }
 .mc-npc-skin-picker__chevron { filter:brightness(.3); }

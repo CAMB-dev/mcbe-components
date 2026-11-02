@@ -13,6 +13,8 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 保留原版分类位置与四种筛选材质。配方、类别绑定、查询与物品状态由宿主提供。
 使用范围和 API 见 [FURNACE_SCREEN_QA.md](docs/FURNACE_SCREEN_QA.md)。
 
+完整Classic Play入口为`#play-screen`：新增`PlayScreen`及11个可独立复用的frame／navigation／内容／行／详情／popup部件。Worlds、Friends与Servers保留独立provider快照；服务器先选择详情、再单独请求Join，不执行游戏或网络服务。原版Realms卡片与Pocket等仍有明确外部／未认证范围。见[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。
+
 ## 本地运行
 
 需要 Node.js 22.12+ 或 24+。
@@ -68,7 +70,9 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
-> 最新有限阶段：227 组件／245 运行时值。新增完整熔炉、高炉、烟熏炉与可复用配方书等8部件；49项Node、browser04单批143个浏览器项目用例、8个独立filter像素平面、React18／19实际包与开发／生产四组合均通过。全库及原生整页像素资格仍未完成。入口 `#furnace-screens`；见 [FURNACE_SCREEN_QA.md](docs/FURNACE_SCREEN_QA.md)。
+> 当前源码为239组件／257运行时值，新增12个Classic Play部件；本轮最终source浏览器、实际React18／19包／安装与生产检查由Root进行，尚不据实现计数声明通过，native整页未认证。入口`#play-screen`，API与有限源范围见[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。
+
+> Furnace已验阶段：227 组件／245 运行时值。新增完整熔炉、高炉、烟熏炉与可复用配方书等8部件；49项Node、browser04单批143个浏览器项目用例、8个独立filter像素平面、React18／19实际包与开发／生产四组合均通过。全库及原生整页像素资格仍未完成。入口 `#furnace-screens`；见 [FURNACE_SCREEN_QA.md](docs/FURNACE_SCREEN_QA.md)。
 
 > OreModal阶段：219 组件／237 运行时值。新增 5 个现代 Ore 弹窗原语，按原版源码校准字体、阴影、关闭按钮、正文与操作区。桌面／手机 72 项、Node 72 项、React 18/19 实际包及开发／生产四种安装组合通过。原版整页像素对照仍未达标，组件数量不表示像素认证。入口 `#ore-modals`；范围见 [ORE_MODAL_QA.md](docs/ORE_MODAL_QA.md)。
 
@@ -197,6 +201,12 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `Beacon` | `payment`、`acceptedItems`、`effects`、`extraEffect`、`canConfirm`、`onPaymentAction`、`onEffectSelect`、`onConfirm`、`onCancel` | 原版主 / 次级效果与支付面板；等级、可用状态、支付和选择有效性由调用方控制 |
 | `CrafterSlot` | ItemSlot 属性；`index`、`enabled`、`onEnabledChange`、`onSlotAction` | 可复用合成器槽，enabled=false 时仍能操作以重新启用；disabled 才禁止按钮操作 |
 | `Crafter` | `items`、`disabledSlots`、`powered`、`output`、`onSlotAction`、`onSlotEnabledChange` | 原版 3×3 槽与供电状态；output 为预览，不生成可取出的伪结果槽，游戏规则由调用方提供 |
+| `PlayScreen` | **必填** viewportSize、scale、inputMode、navigation、worlds、friends、servers、exitButtonVisible；paneRefs、popups、inputHints、onExitRequest | Classic默认三页完整组合；宿主数据／动作与显式canvas，两种popup居中于该canvas；native路由／整GUI未认证 |
+| `PlayScreenFrame` / `PlayNavigationTabs` | viewportSize／scale、navigation；value／labels／counts／friends、tab refs、close绑定／refs | 282×(H−50) frame与270×(H−88)内容；源30高tabs／固定close holder、独立字面counts，不等于通用Tabs换皮 |
+| `PlayWorldsContent` / `PlayFriendsContent` | **必填** size／scale／inputMode、provider／flags／labels、各collection与rowCount、loading快照；externalFamilies、onAction | 源标题、grid、空／loading／auth标志保持独立；Worlds下部20%是Storage状态，不是legacy列表；Realms族为显式外部依赖 |
+| `PlayWorldRow` / `PlayNetworkWorldRow` | item、collection、index、width、scale；相应能力／labels、button props、onAction | 无自带列表滚动的真实source行；世界启动／edit／迁移及网络加入只通知宿主，旧WorldList／ServerList／PlayerCard保持兼容 |
+| `PlayServersContent` / `PlayServerRow` / `PlayServerDetails` | 显式collections／visibility／details；kind／selected／enabled／info状态；三种detail可见flags、原始文案与宿主图像 | 行选择不连接；详情Join独立。Read More／Less可见时须给正有限readButtonHeight，例12只是Web预算；不认证native intrinsic高度 |
+| `PlayJoinCodeDialog` / `PlayHighPingDialog` | **必填** open、labels、独立bindings；JoinCode的value／onValueChange、onAction／onClose、真实input／button refs | 原200×90代码与250×170高延迟factory；15字符输入、只读保留cancel／close，实际Web生命周期验证待本轮结果，不含登录／连接服务 |
 | `WorldList` | **必填** `label`、`worlds`；`value` / `defaultValue`、`onValueChange`、`onPlay`、`onEdit`、`onDelete`、`scale`、`maxHeight` | 世界行与缩略图布局；方向键移动焦点，激活发出操作意图，日期 / 大小 / 模式由调用方格式化 |
 | `ServerList` | **必填** `label`、`servers`；选择属性、`onConnect`、`onEdit`、`onDelete` | 服务器名称、说明、人数与状态原图；连接和在线检测由调用方实现 |
 | `PlayerCard` | **必填** `name`；`avatar`、`renderSkin`、`platform`、`permissionIcon`、`onProfile`、`onPermissions`、`scale` | 玩家卡与权限入口，头像或 3D 皮肤 renderer 由调用方提供 |
@@ -857,3 +867,31 @@ import 'mcbeui/ore-external-server-form.css';
 滚动区也被现有权限界面共用，并支持 React 19 callback-ref 清理。
 材质和 Seven/Ten/Noto 字体由宿主提供，不随 npm 分发私有安装文件。
 功能资格与原版像素资格分开记录，详见 [ORE_EXTERNAL_SERVER_QA.md](docs/ORE_EXTERNAL_SERVER_QA.md)。
+
+
+## Classic Play三页组合
+
+Play的12个公开部件与完整props／宿主边界见[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。下面三种pane是调用方提供的完整typed快照；库不从数组长度猜状态，也不根据网络状态偷偷连接。参考仓库`demo/play-screen-data.ts`可查看所有必需flags／labels的本地示例。
+
+```tsx
+import {useState} from 'react';
+import {PlayScreen} from 'mcbeui';
+import type {PlayScreenProps, PlayTabId} from 'mcbeui';
+import 'mcbeui/styles.css';
+
+type PlayData = Pick<PlayScreenProps, 'worlds' | 'friends' | 'servers'>;
+export function PlayExample({worlds, friends, servers}: PlayData) {
+  const [tab, setTab] = useState<PlayTabId>('worlds');
+  return <PlayScreen viewportSize={[360, 300]} scale={2} inputMode="mouse"
+    navigation={{value: tab, onValueChange: setTab,
+      labels: {worlds: 'Worlds', friends: 'Friends', servers: 'Servers'},
+      counts: {worlds: '27', friends: '9', servers: '4'},
+      friends: {showBouncing: false, showNotBouncing: true,
+        showInvites: false, inboxEnabled: false}}}
+    worlds={worlds} friends={friends} servers={servers}
+    exitButtonVisible={false} closeLabel="Close Play"
+    onExitRequest={request => console.log(request.target)}/>;
+}
+```
+
+`PlayScreen`不会自动接受服务器选择或连接请求；宿主在`servers.onAction`中接受`server_navigation_toggle`后更新selected／details，再由详情Join发出独立意图。可选本机字体与动态缩略图是宿主资源，缺图可明确为null，不提供假截图。Default Classic、Pocket、当前OreUI与Realms服务不能互相代替，完整Bedrock GUI目标仍未完成。本轮最终包／安装／生产验证结果待Root补入。

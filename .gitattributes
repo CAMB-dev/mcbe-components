@@ -30,5 +30,6 @@ tests/fixtures/file-transmission-materials/ORIGINALS/** whitespace=-blank-at-eol
 
 # Whole upstream originals and raw metadata retain their exact source bytes.
 src/assets/external-server/** -text
+src/assets/play-screen/** -text
 tests/fixtures/external-server-materials/** -text
 tests/fixtures/external-server-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

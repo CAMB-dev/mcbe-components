@@ -9,6 +9,7 @@ import { verifyOreTextFieldPackage } from './verify-ore-text-field-package.mjs';
 import { verifyOreExternalServerPackage } from './verify-ore-external-server-package.mjs';
 import { verifyOreModalPackage } from './verify-ore-modal-package.mjs';
 import { verifyFurnaceScreenPackage } from './verify-furnace-screen-package.mjs';
+import { verifyPlayScreenPackage } from './verify-play-screen-package.mjs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -132,10 +133,11 @@ components.push('OreTextField','OreFieldSection');
 components.push('OreButton','OreActionBar','OreScreenFrame','OreScrollArea','OreExternalServerForm');
 components.push('OreModal','OreModalHeader','OreModalContent','OreModalText','OreModalActions');
 components.push('FurnaceRecipeBook','FurnaceRecipeBookEntry','FurnaceRecipeCategoryTabs','FurnaceRecipeFilterToggle','FurnaceScreenFrame','FurnaceScreen','BlastFurnaceScreen','SmokerScreen');
-assert.equal(components.length,227);
+components.push('PlayScreen','PlayScreenFrame','PlayNavigationTabs','PlayWorldRow','PlayNetworkWorldRow','PlayWorldsContent','PlayFriendsContent','PlayServersContent','PlayServerRow','PlayServerDetails','PlayJoinCodeDialog','PlayHighPingDialog');
+assert.equal(components.length,239);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,12);
-assert.equal(Object.keys(ui).length,245);
+assert.equal(Object.keys(ui).length,257);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -2083,5 +2085,6 @@ export const demo = <>
   await verifyOreExternalServerPackage({ consumer, root, major, privateResourceHashes:privateOreResourceHashes });
   await verifyOreModalPackage({ consumer, root, major, privateResourceHashes:privateOreResourceHashes });
   await verifyFurnaceScreenPackage({ consumer, root, major });
+  await verifyPlayScreenPackage({ consumer, root, major, evidenceName:'play-screen-contracts-'+Date.now() });
 }
 console.log(`Verified tarball: ${tarPath}`);

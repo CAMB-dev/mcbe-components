@@ -1,0 +1,2065 @@
+{
+  "status": "WHOLE_SOURCE_BYTES_VERIFIED_NATIVE_ROUTE_AND_RGBA_UNQUALIFIED",
+  "sourceArchive": {
+    "release": "v1.26.60.5",
+    "path": ".cache/references/bedrock-samples-v1.26.60.5-full.zip",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "profile": {
+    "target": "Root-approved finite Classic desktop Play frame/nav, Worlds/Friends/Servers source leaves and two popup materials",
+    "roots": [
+      "play.default_play_screen_panel",
+      "play.default_tab_navigation_panel_layout",
+      "play.common_tab_content_panel"
+    ],
+    "sourcePlaySHA256": "10b1cab24aeee5cb5a875255bb6ffe266ca4056394c05f1c4d99b8cc56cf805a",
+    "underfill": "Source common.hollow_common uses complete textures/ui/control inset4, W-8/H-8, alpha.8, separate from hollow frame layer2.",
+    "tabEdges": "Worlds leftmost; Friends/Servers keep source default nonedge unless an explicit separate source profile overrides. Rightmost originals are existing reusable variants.",
+    "lightClose": "common.light_close_button inherits21x21 interactive target and15x15 child panel; its three whole15x15 PNG states are separate from play.X_tab_back.",
+    "friendNotifications": "invite_base is whole20x20; icon_bell is whole16x16 but play.bell_icon explicitly displays20x20. Their visibility flags remain independent host source bindings.",
+    "darkToggleResolvedStates": {
+      "uncheckedDefault": "textures/ui/button_borderless_dark",
+      "checkedDefault": "textures/ui/button_borderless_darkpressednohover",
+      "uncheckedHover": "textures/ui/button_borderless_darkhover",
+      "checkedHover": "textures/ui/button_borderless_darkpressed",
+      "allLockedStates": "textures/ui/disabledButtonNoBorder"
+    },
+    "darkToggleSource": "ui_template_toggles.json dark_image_toggle_collection663 -> dark_ui_toggle_collection670 -> light_ui_toggle_collection687 +toggle_unchecked837/checked852/unchecked_hover867/checked_hover882/locked897; token names are not direct visual-state translations."
+  },
+  "module": "src/play-screen-assets.ts",
+  "assetCount": 71,
+  "newPNGCount": 16,
+  "newJSONCount": 8,
+  "entries": [
+    {
+      "key": "textures/ui/TabTopBack",
+      "sourceFile": "resource_pack/textures/ui/TabTopBack.png",
+      "bytes": 118,
+      "sha256": "f84f1c01f1f7dfb30876f5bf0866d2f8bb2dc90d4c4e2971a25c07343320e324",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopBack.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 42,
+            "cssVariable": "--mc-inv-screen-tab-back"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 52,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopBackHover",
+      "sourceFile": "resource_pack/textures/ui/TabTopBackHover.png",
+      "bytes": 200,
+      "sha256": "bdfd101269cd2a13f83654f2b0e26ef7bf10261498c6348da55cc47f3deb44b9",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopBackHover.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 43,
+            "cssVariable": "--mc-inv-screen-tab-back-hover"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 53,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopBackLeftMost",
+      "sourceFile": "resource_pack/textures/ui/TabTopBackLeftMost.png",
+      "bytes": 132,
+      "sha256": "cc9f0e89e87d08b4af6cedbd2f9361dc74ab17a2ed7736d9ee0ed3fca8104a7e",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopBackLeftMost.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 46,
+            "cssVariable": "--mc-inv-screen-tab-back-left"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 54,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopBackLeftMostHover",
+      "sourceFile": "resource_pack/textures/ui/TabTopBackLeftMostHover.png",
+      "bytes": 217,
+      "sha256": "ef35b948c1e7f83ca77e13d3d15307451026602f768071f1b8bb60b0433fa851",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopBackLeftMostHover.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 47,
+            "cssVariable": "--mc-inv-screen-tab-back-left-hover"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 55,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopBackRightMost",
+      "sourceFile": "resource_pack/textures/ui/TabTopBackRightMost.png",
+      "bytes": 126,
+      "sha256": "715acc6b2b5091cb3750879ce57828c1b39d90d4089a7de9c1ee9f3003aefbec",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopBackRightMost.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 50,
+            "cssVariable": "--mc-inv-screen-tab-back-right"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 56,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopBackRightMostHover",
+      "sourceFile": "resource_pack/textures/ui/TabTopBackRightMostHover.png",
+      "bytes": 219,
+      "sha256": "f418280240be23192f58120438fda781d3138e880c6e27b15c4873a9d0bcd863",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopBackRightMostHover.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 51,
+            "cssVariable": "--mc-inv-screen-tab-back-right-hover"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 57,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopFront",
+      "sourceFile": "resource_pack/textures/ui/TabTopFront.png",
+      "bytes": 149,
+      "sha256": "ca2abc2d1515c29b78ceb303ab893f86e6160700031568584e259d0ad8687d04",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopFront.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 44,
+            "cssVariable": "--mc-inv-screen-tab-front"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 58,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopFrontHover",
+      "sourceFile": "resource_pack/textures/ui/TabTopFrontHover.png",
+      "bytes": 230,
+      "sha256": "745d36f8e8ec21faf5e98e5e6a5c08e70ffbe65906708e5c374c23902894f66e",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopFrontHover.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 45,
+            "cssVariable": "--mc-inv-screen-tab-front-hover"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 59,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopFrontLeftMost",
+      "sourceFile": "resource_pack/textures/ui/TabTopFrontLeftMost.png",
+      "bytes": 138,
+      "sha256": "bbe746937245060faf4bf6fdb31616e616f4342a8d5f9b9500477f106b0cd58d",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopFrontLeftMost.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 48,
+            "cssVariable": "--mc-inv-screen-tab-front-left"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 60,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopFrontLeftMostHover",
+      "sourceFile": "resource_pack/textures/ui/TabTopFrontLeftMostHover.png",
+      "bytes": 213,
+      "sha256": "e4b747ce39f010a8f6f66a6e448a36cb0ca96118ceda12db7a0c821c067b3242",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopFrontLeftMostHover.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 49,
+            "cssVariable": "--mc-inv-screen-tab-front-left-hover"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 61,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopFrontRightMost",
+      "sourceFile": "resource_pack/textures/ui/TabTopFrontRightMost.png",
+      "bytes": 175,
+      "sha256": "215c6f96a23f3f0d594deb52b1627e465f4770a781294890fca92e00d2148ebf",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopFrontRightMost.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 52,
+            "cssVariable": "--mc-inv-screen-tab-front-right"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 62,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/TabTopFrontRightMostHover",
+      "sourceFile": "resource_pack/textures/ui/TabTopFrontRightMostHover.png",
+      "bytes": 223,
+      "sha256": "ede467ff2a949faeca310fe52a33fac53db19d62bc92b2846dd5ff75d88cba58",
+      "width": 12,
+      "height": 11,
+      "metadataFile": "resource_pack/textures/ui/TabTopFrontRightMostHover.json",
+      "metadataSHA256": "d6b0c7e37a739412cf8e476cc64c583b0a3882d2d32118724765b93c04231e56",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          12,
+          11
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    12,\n    11\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 53,
+            "cssVariable": "--mc-inv-screen-tab-front-right-hover"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 63,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/numberBGBack",
+      "sourceFile": "resource_pack/textures/ui/numberBGBack.png",
+      "bytes": 84,
+      "sha256": "a779bb299e6da7179164c9d383469a7fb8301eebac34902a02f5ceea6e2c57f5",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/numberBGBack.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/numberBGBack.png",
+        "metadataFile": "src/assets/play-screen/numberBGBack.json"
+      }
+    },
+    {
+      "key": "textures/ui/numberBGFront",
+      "sourceFile": "resource_pack/textures/ui/numberBGFront.png",
+      "bytes": 82,
+      "sha256": "3b4f882202693bfd999d1c79e71252efc80f3d510ebdc3f555cdc798664311fe",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/numberBGFront.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/numberBGFront.png",
+        "metadataFile": "src/assets/play-screen/numberBGFront.json"
+      }
+    },
+    {
+      "key": "textures/ui/worldsIcon",
+      "sourceFile": "resource_pack/textures/ui/worldsIcon.png",
+      "bytes": 335,
+      "sha256": "65b538b9ed05b68d9003c9dfaf2eaf9b9d209bbd63091fe27d2a4341a46dd79a",
+      "width": 16,
+      "height": 17,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/progress/ui/worldsIcon.png",
+        "sameWholeBytes": true,
+        "bankReferences": [
+          {
+            "module": "src/progress-assets.ts",
+            "line": 75,
+            "literalRelativePath": "./assets/progress/ui/worldsIcon.png",
+            "linePrefix": "\"textures/ui/worldsIcon\": { url:"
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/Friend1",
+      "sourceFile": "resource_pack/textures/ui/Friend1.png",
+      "bytes": 247,
+      "sha256": "e7d161f733e1b6cd27a92540c125ee77ac6e7af86cbfee7ec7c0536bed9ab032",
+      "width": 10,
+      "height": 10,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/friend1.png",
+        "sameWholeBytes": true,
+        "bankReferences": [
+          {
+            "module": "src/gui-icon-assets.ts",
+            "line": 55,
+            "literalRelativePath": "./assets/gui-icons/friend1.png",
+            "linePrefix": "'friend1': { width: 10, height: 10, url:"
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/Friend2",
+      "sourceFile": "resource_pack/textures/ui/Friend2.png",
+      "bytes": 309,
+      "sha256": "a67638cc257c8f7ca48014a2d24c1f5301867a6b911e12a92f904f2107e6c9ce",
+      "width": 10,
+      "height": 10,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/Friend2.png"
+      }
+    },
+    {
+      "key": "textures/ui/servers",
+      "sourceFile": "resource_pack/textures/ui/servers.png",
+      "bytes": 381,
+      "sha256": "8761eb9024d3d436edb8af8c9f3e5a48431ec1cb2c6af632dc49dd4c8a56d34d",
+      "width": 15,
+      "height": 15,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/progress/ui/servers.png",
+        "sameWholeBytes": true,
+        "bankReferences": [
+          {
+            "module": "src/progress-assets.ts",
+            "line": 69,
+            "literalRelativePath": "./assets/progress/ui/servers.png",
+            "linePrefix": "\"textures/ui/servers\": { url:"
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/XTab",
+      "sourceFile": "resource_pack/textures/ui/XTab.png",
+      "bytes": 104,
+      "sha256": "d733302332d404c8cda597b09f7ccd17f7b041f5663affa93a39a674142a97ac",
+      "width": 10,
+      "height": 10,
+      "metadataFile": "resource_pack/textures/ui/XTab.json",
+      "metadataSHA256": "82d0791637167db824dd8a4fae778ba9e82710a5c306e093dceb65b2718294c1",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          10,
+          10
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    10,\n    10\n  ]\n}",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/XTab.png",
+        "metadataFile": "src/assets/play-screen/XTab.json"
+      }
+    },
+    {
+      "key": "textures/ui/dialog_background_hollow_4",
+      "sourceFile": "resource_pack/textures/ui/dialog_background_hollow_4.png",
+      "bytes": 230,
+      "sha256": "274740b9ceed9229f6a20c46e0d840ecfb5c3b36bcff6cc9c7970e304a2b1893",
+      "width": 18,
+      "height": 18,
+      "metadataFile": "resource_pack/textures/ui/dialog_background_hollow_4.json",
+      "metadataSHA256": "10b8389eb1b4b9967de5aef1925851073b5d506d70c2ec32ea2064f4504902e9",
+      "metadata": {
+        "nineslice_size": 8,
+        "base_size": [
+          18,
+          18
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 8,\n  \"base_size\": [\n    18,\n    18\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/jigsaw/dialog_background_hollow_4.png",
+        "sameWholeBytes": true,
+        "bankReferences": [
+          {
+            "module": "src/chat-assets.ts",
+            "line": 49,
+            "literalRelativePath": "./assets/jigsaw/dialog_background_hollow_4.png",
+            "linePrefix": "\"textures/ui/dialog_background_hollow_4\": { url:"
+          },
+          {
+            "module": "src/invite-assets.ts",
+            "line": 43,
+            "literalRelativePath": "./assets/jigsaw/dialog_background_hollow_4.png",
+            "linePrefix": "\"dialog_background_hollow_4\": { url:"
+          },
+          {
+            "module": "src/jigsaw-image-assets.ts",
+            "line": 8,
+            "literalRelativePath": "./assets/jigsaw/dialog_background_hollow_4.png",
+            "linePrefix": "dialog_background_hollow_4: { url:"
+          },
+          {
+            "module": "src/progress-assets.ts",
+            "line": 42,
+            "literalRelativePath": "./assets/jigsaw/dialog_background_hollow_4.png",
+            "linePrefix": "\"textures/ui/dialog_background_hollow_4\": { url:"
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/control",
+      "sourceFile": "resource_pack/textures/ui/control.png",
+      "bytes": 71,
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/control.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/external-server/control.png",
+        "sameWholeBytes": true,
+        "bankReferences": [
+          {
+            "module": "src/chat-assets.ts",
+            "line": 45,
+            "literalRelativePath": "./assets/jigsaw/control.png",
+            "linePrefix": "\"textures/ui/control\": { url:"
+          },
+          {
+            "module": "src/external-server-assets.ts",
+            "line": 16,
+            "literalRelativePath": "./assets/external-server/control.png",
+            "linePrefix": "'control': { url:"
+          },
+          {
+            "module": "src/invite-assets.ts",
+            "line": 40,
+            "literalRelativePath": "./assets/jigsaw/control.png",
+            "linePrefix": "\"control\": { url:"
+          },
+          {
+            "module": "src/jigsaw-image-assets.ts",
+            "line": 9,
+            "literalRelativePath": "./assets/jigsaw/control.png",
+            "linePrefix": "control: { url:"
+          },
+          {
+            "module": "src/progress-assets.ts",
+            "line": 39,
+            "literalRelativePath": "./assets/jigsaw/control.png",
+            "linePrefix": "\"textures/ui/control\": { url:"
+          },
+          {
+            "module": "src/storage-assets.ts",
+            "line": 43,
+            "literalRelativePath": "./assets/jigsaw/control.png",
+            "linePrefix": "control: { url:"
+          },
+          {
+            "module": "src/ugc-reader-assets.ts",
+            "line": 21,
+            "literalRelativePath": "./assets/jigsaw/control.png",
+            "linePrefix": "control: Object.freeze({ url:"
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/editIcon",
+      "sourceFile": "resource_pack/textures/ui/editIcon.png",
+      "bytes": 147,
+      "sha256": "53689fd0a99a52c18591f9d5638ed868d79555bc454ff321b2b63aaef1236563",
+      "width": 22,
+      "height": 16,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/game-list-textures.css",
+            "line": 10,
+            "cssVariable": "--mc-list-edit"
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/world_screenshot_focus_border",
+      "sourceFile": "resource_pack/textures/ui/world_screenshot_focus_border.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "width": 5,
+      "height": 5,
+      "metadataFile": "resource_pack/textures/ui/world_screenshot_focus_border.json",
+      "metadataSHA256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    5,\n    5\n  ]\n}",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/focus_border_white.png",
+        "sameWholeBytes": true,
+        "bankReferences": [
+          {
+            "module": "src/chat-assets.ts",
+            "line": 57,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "\"textures/ui/focus_border_white\": { url:"
+          },
+          {
+            "module": "src/chat-assets.ts",
+            "line": 67,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "\"textures/ui/pause_screen_border\": { url:"
+          },
+          {
+            "module": "src/chat-assets.ts",
+            "line": 88,
+            "literalRelativePath": "./assets/player-permissions/square_image_border_white.png",
+            "linePrefix": "\"textures/ui/square_image_border_white\": { url:"
+          },
+          {
+            "module": "src/emote-wheel-assets.ts",
+            "line": 18,
+            "literalRelativePath": "./assets/emote-wheel/focus_border_white.png",
+            "linePrefix": "focusWhite: { url:"
+          },
+          {
+            "module": "src/external-server-assets.ts",
+            "line": 12,
+            "literalRelativePath": "./assets/external-server/focus_border_white.png",
+            "linePrefix": "'focus_border_white': { url:"
+          },
+          {
+            "module": "src/invite-assets.ts",
+            "line": 50,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "\"focus_border_white\": { url:"
+          },
+          {
+            "module": "src/invite-assets.ts",
+            "line": 62,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "\"square_image_border_white\": { url:"
+          },
+          {
+            "module": "src/portfolio-assets.ts",
+            "line": 35,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "'focus_border_white': { url:"
+          },
+          {
+            "module": "src/progress-assets.ts",
+            "line": 50,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "\"textures/ui/focus_border_white\": { url:"
+          },
+          {
+            "module": "src/progress-assets.ts",
+            "line": 71,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "\"textures/ui/square_image_border_white\": { url:"
+          },
+          {
+            "module": "src/start-menu-assets.ts",
+            "line": 25,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "focusWhite: { url:"
+          },
+          {
+            "module": "src/storage-assets.ts",
+            "line": 19,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "focusWhite: { url:"
+          },
+          {
+            "module": "src/storage-assets.ts",
+            "line": 32,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "worldScreenshotFocus: { url:"
+          },
+          {
+            "module": "src/ugc-reader-assets.ts",
+            "line": 29,
+            "literalRelativePath": "./assets/document-viewer/focus_border_white.png",
+            "linePrefix": "focusWhite: Object.freeze({ url:"
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/close_button_default_light",
+      "sourceFile": "resource_pack/textures/ui/close_button_default_light.png",
+      "bytes": 160,
+      "sha256": "c0a7413ccebff8c8cf6868b6bd5310d4638ce24fa1969f7bd70cce4dce4b09e0",
+      "width": 15,
+      "height": 15,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/feedback-textures.css",
+            "line": 6,
+            "cssVariable": "--mc-feedback-close"
+          },
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 39,
+            "cssVariable": "--mc-inv-screen-toolbar-close"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 49,
+            "cssVariable": null
+          },
+          {
+            "file": "src/invite-assets.ts",
+            "line": 31,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/close_button_hover_light",
+      "sourceFile": "resource_pack/textures/ui/close_button_hover_light.png",
+      "bytes": 1416,
+      "sha256": "5bbbba3c8e947a973b8a9773a298fe674b11e7009410d5dc9ec01db02be9431d",
+      "width": 15,
+      "height": 15,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/feedback-textures.css",
+            "line": 7,
+            "cssVariable": "--mc-feedback-close-hover"
+          },
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 40,
+            "cssVariable": "--mc-inv-screen-toolbar-close-hover"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 50,
+            "cssVariable": null
+          },
+          {
+            "file": "src/invite-assets.ts",
+            "line": 34,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/close_button_pressed_light",
+      "sourceFile": "resource_pack/textures/ui/close_button_pressed_light.png",
+      "bytes": 139,
+      "sha256": "1ca7a00fa243eec0cfcb489214ed7eab4dc88838edada5a2f9933216ac5d098b",
+      "width": 15,
+      "height": 15,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/feedback-textures.css",
+            "line": 8,
+            "cssVariable": "--mc-feedback-close-pressed"
+          },
+          {
+            "file": "src/inventory-screen-textures.css",
+            "line": 41,
+            "cssVariable": "--mc-inv-screen-toolbar-close-pressed"
+          },
+          {
+            "file": "src/crafting-image-assets.ts",
+            "line": 51,
+            "cssVariable": null
+          },
+          {
+            "file": "src/invite-assets.ts",
+            "line": 37,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/invite_base",
+      "sourceFile": "resource_pack/textures/ui/invite_base.png",
+      "bytes": 233,
+      "sha256": "31033fa84bd1d29cd2d37d12e0e11fd4b53b82976bf736a4eddbff5645140a6c",
+      "width": 20,
+      "height": 20,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/start-menu/invite_base.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/icon_bell",
+      "sourceFile": "resource_pack/textures/ui/icon_bell.png",
+      "bytes": 1751,
+      "sha256": "370a69a73d1f4c44afc28aa2fe4060745fe82a20c350f81f294c8931628b1f2b",
+      "width": 16,
+      "height": 16,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/start-menu/icon_bell.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/HowToPlayDivider",
+      "sourceFile": "resource_pack/textures/ui/HowToPlayDivider.png",
+      "bytes": 106,
+      "sha256": "e17d780302672be622ed504abc1565707cf3d46b77cacceaf8f687020df9493e",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/HowToPlayDivider.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/HowToPlayDivider.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/screen_background",
+      "sourceFile": "resource_pack/textures/ui/screen_background.png",
+      "bytes": 80,
+      "sha256": "e612514247e30fdaf71b8ab025ca2162c2ac18816b648b73c4ac7a1f441d13ab",
+      "width": 1,
+      "height": 1,
+      "metadataFile": "resource_pack/textures/ui/screen_background.json",
+      "metadataSHA256": "0c675190fa587a78c4c1ba6f133668bb487f4ceb8f82c84781cabfafdac02e1c",
+      "metadata": {
+        "nineslice_size": 0,
+        "base_size": [
+          1,
+          1
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 0,\n  \"base_size\": [\n    1,\n    1\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/screen_background.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/arrow_left_white",
+      "sourceFile": "resource_pack/textures/ui/arrow_left_white.png",
+      "bytes": 95,
+      "sha256": "46818c2bdd7f1c7df5f3e416c7bb76b51d8b89a9269dd90d0da098ab0ce27ac0",
+      "width": 4,
+      "height": 7,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/arrow-left-white.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/arrow_right_white",
+      "sourceFile": "resource_pack/textures/ui/arrow_right_white.png",
+      "bytes": 98,
+      "sha256": "fc340778bfd5c3c0492d3cee644854da747432ce4e0f739344485779034293f4",
+      "width": 4,
+      "height": 7,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/arrow-right-white.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/Black",
+      "sourceFile": "resource_pack/textures/ui/Black.png",
+      "bytes": 84,
+      "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/Black.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/emote-wheel/Black.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/white_background",
+      "sourceFile": "resource_pack/textures/ui/white_background.png",
+      "bytes": 107,
+      "sha256": "c8b316a3c8df17fff4733916bca95b1995e05eebcbce1f7b4a4700ac441a4f32",
+      "width": 2,
+      "height": 2,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/white_background.png"
+      }
+    },
+    {
+      "key": "textures/ui/button_borderless_dark",
+      "sourceFile": "resource_pack/textures/ui/button_borderless_dark.png",
+      "bytes": 137,
+      "sha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_dark.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/button_borderless_dark.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/button_borderless_darkpressednohover",
+      "sourceFile": "resource_pack/textures/ui/button_borderless_darkpressednohover.png",
+      "bytes": 137,
+      "sha256": "5ce36bfbe4a3d94c8ab42c897a7b483aed253fce4a1d6864b432bf42dd60807d",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_darkpressednohover.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/button_borderless_darkpressednohover.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/button_borderless_darkhover",
+      "sourceFile": "resource_pack/textures/ui/button_borderless_darkhover.png",
+      "bytes": 151,
+      "sha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_darkhover.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/button_borderless_darkhover.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/button_borderless_darkpressed",
+      "sourceFile": "resource_pack/textures/ui/button_borderless_darkpressed.png",
+      "bytes": 145,
+      "sha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_darkpressed.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/button_borderless_darkpressed.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/disabledButtonNoBorder",
+      "sourceFile": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/disabledButtonNoBorder.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/default_indent",
+      "sourceFile": "resource_pack/textures/ui/default_indent.png",
+      "bytes": 120,
+      "sha256": "35f98c105d7eb71519be92e9afd5c7cbd8239dd1addf40bb4a79fad472d5e395",
+      "width": 5,
+      "height": 5,
+      "metadataFile": "resource_pack/textures/ui/default_indent.json",
+      "metadataSHA256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    5,\n    5\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/game-list-textures.css",
+            "line": 7,
+            "cssVariable": "--mc-list-indent"
+          },
+          {
+            "file": "src/storage-assets.ts",
+            "line": 8,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/divider3",
+      "sourceFile": "resource_pack/textures/ui/divider3.png",
+      "bytes": 99,
+      "sha256": "9d3316beada658b7da2a477b9f1c63710e1246e56328ae9e145f81ab5adbb3d9",
+      "width": 1,
+      "height": 1,
+      "metadataFile": "resource_pack/textures/ui/divider3.json",
+      "metadataSHA256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          1,
+          1
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    1,\n    1\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/invite/divider3.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/Ping_Yellow_Dark",
+      "sourceFile": "resource_pack/textures/ui/Ping_Yellow_Dark.png",
+      "bytes": 160,
+      "sha256": "68d552a02d0ffa5cfa79cf534e662de3e8b381f7d15ce8970d9a71c0d01bf1f8",
+      "width": 7,
+      "height": 7,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/Ping_Yellow_Dark.png"
+      }
+    },
+    {
+      "key": "textures/ui/Ping_Red_Dark",
+      "sourceFile": "resource_pack/textures/ui/Ping_Red_Dark.png",
+      "bytes": 159,
+      "sha256": "c0d87d96b66751d95f389f0218797f0064453b73d8fa79b220793ad6c43dc846",
+      "width": 7,
+      "height": 7,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/Ping_Red_Dark.png"
+      }
+    },
+    {
+      "key": "textures/ui/mainbanners",
+      "sourceFile": "resource_pack/textures/ui/mainbanners.png",
+      "bytes": 80,
+      "sha256": "eb517774e883832c233bf2c57c7eac4d58fdbc5302c6b30b046fd84c96d94547",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/mainbanners.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/invite/mainbanners.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/BannersLight",
+      "sourceFile": "resource_pack/textures/ui/BannersLight.png",
+      "bytes": 77,
+      "sha256": "fe6c05e1746afd212f797c6d1dedd785196b96297b61743c966f01c4af4c1457",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/BannersLight.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/BannersLight.png",
+        "metadataFile": "src/assets/play-screen/BannersLight.json"
+      }
+    },
+    {
+      "key": "textures/ui/greyBorder",
+      "sourceFile": "resource_pack/textures/ui/greyBorder.png",
+      "bytes": 138,
+      "sha256": "d64f10ee78e7a09ed72c0659a70e7c8e109af304383092fbb6d1ac469fdd81e0",
+      "width": 16,
+      "height": 16,
+      "metadataFile": "resource_pack/textures/ui/greyBorder.json",
+      "metadataSHA256": "f5e0d63d8b595601b0a643fa5417813186c09da1fbe0b8341ab387cfda773222",
+      "metadata": {
+        "nineslice_size": 4,
+        "base_size": [
+          16,
+          16
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 4,\n  \"base_size\": [\n    16,\n    16\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/feedback-textures.css",
+            "line": 5,
+            "cssVariable": "--mc-feedback-toast"
+          },
+          {
+            "file": "src/chat-assets.ts",
+            "line": 59,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/infobulb",
+      "sourceFile": "resource_pack/textures/ui/infobulb.png",
+      "bytes": 282,
+      "sha256": "01338044c8434b2cb37e35517e212c54b5de8fb7eb5776c49f32d4f4219d928c",
+      "width": 15,
+      "height": 19,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/infobulb.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/DarkBannerNoBorder",
+      "sourceFile": "resource_pack/textures/ui/DarkBannerNoBorder.png",
+      "bytes": 88,
+      "sha256": "fab0f26672f56ab16ede522ea3def6875a2460f746ec3e0301de34b830cd4f3e",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/DarkBannerNoBorder.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/DarkBannerNoBorder.png",
+        "metadataFile": "src/assets/play-screen/DarkBannerNoBorder.json"
+      }
+    },
+    {
+      "key": "textures/ui/external_link",
+      "sourceFile": "resource_pack/textures/ui/external_link.png",
+      "bytes": 293,
+      "sha256": "b6f904b36e90409d0d80200dd0c068d78b29283791e0e8dcda0807f4c3a9fb28",
+      "width": 20,
+      "height": 20,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/external-link.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/world_download",
+      "sourceFile": "resource_pack/textures/ui/world_download.png",
+      "bytes": 243,
+      "sha256": "7927cf218502ee9f6f0926da9e9291f662333c1d7da38865797ccd3b8b309b43",
+      "width": 15,
+      "height": 16,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/world_download.png"
+      }
+    },
+    {
+      "key": "textures/ui/import",
+      "sourceFile": "resource_pack/textures/ui/import.png",
+      "bytes": 196,
+      "sha256": "160011cfdd4b6fcc94e50c8232211456b3cee5a47dffe86b9ba68d45d5719105",
+      "width": 16,
+      "height": 16,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/import.png"
+      }
+    },
+    {
+      "key": "textures/ui/lock",
+      "sourceFile": "resource_pack/textures/ui/lock.png",
+      "bytes": 95,
+      "sha256": "fa54afb188ed482b1f6cd63c3bf433f767c67f8c5094df92a11ab838776c2322",
+      "width": 8,
+      "height": 8,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/lock.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/realmsIcon",
+      "sourceFile": "resource_pack/textures/ui/realmsIcon.png",
+      "bytes": 220,
+      "sha256": "d0d8d4fe163a3fdc80442d7a1fb6ace1e819edbe01e331411b074a70114acd2f",
+      "width": 11,
+      "height": 14,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/realmsIcon.png"
+      }
+    },
+    {
+      "key": "textures/ui/realms_chevron_play",
+      "sourceFile": "resource_pack/textures/ui/realms_chevron_play.png",
+      "bytes": 253,
+      "sha256": "4447e4ee4d44c40f8e62589047001134e41e6a76e1205bddbfc226f2f19d6f80",
+      "width": 23,
+      "height": 28,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/realms_chevron_play.png"
+      }
+    },
+    {
+      "key": "textures/ui/lan_icon",
+      "sourceFile": "resource_pack/textures/ui/lan_icon.png",
+      "bytes": 305,
+      "sha256": "093a08fa77753b88d6cd225815e0b49df72b46b7523393188137f56579df3cc2",
+      "width": 14,
+      "height": 14,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/lan-icon.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/button_borderless_light",
+      "sourceFile": "resource_pack/textures/ui/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_light.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/button_borderless_light.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/button_borderless_lighthover",
+      "sourceFile": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_lighthover.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/button_borderless_lighthover.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/button_borderless_lightpressed",
+      "sourceFile": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/button_borderless_lightpressed.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/button_borderless_lightpressednohover",
+      "sourceFile": "resource_pack/textures/ui/button_borderless_lightpressednohover.png",
+      "bytes": 155,
+      "sha256": "c3e928f9c58b6cf42399686ba71f5656de59a2dadcdd6cee9b26111ec5200c52",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_lightpressednohover.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/button_borderless_lightpressednohover.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/focus_border_white",
+      "sourceFile": "resource_pack/textures/ui/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "width": 5,
+      "height": 5,
+      "metadataFile": "resource_pack/textures/ui/focus_border_white.json",
+      "metadataSHA256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    5,\n    5\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/focus_border_white.png",
+        "sameWholeBytes": true
+      }
+    },
+    {
+      "key": "textures/ui/loading_bar",
+      "sourceFile": "resource_pack/textures/ui/loading_bar.png",
+      "bytes": 323,
+      "sha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef",
+      "width": 640,
+      "height": 8,
+      "metadataFile": "resource_pack/textures/ui/loading_bar.json",
+      "metadataSHA256": "38bc67e02f506f01308a16c9be27bbe203ea6da76cd02961571801327ad5f665",
+      "metadata": {
+        "base_size": [
+          640,
+          8
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"base_size\": [\n    640,\n    8\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/system-screens-textures.css",
+            "line": 10,
+            "cssVariable": "--mc-system-loading-waveform"
+          },
+          {
+            "file": "src/invite-assets.ts",
+            "line": 54,
+            "cssVariable": null
+          },
+          {
+            "file": "src/progress-assets.ts",
+            "line": 55,
+            "cssVariable": null
+          },
+          {
+            "file": "src/storage-assets.ts",
+            "line": 12,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/online",
+      "sourceFile": "resource_pack/textures/ui/online.png",
+      "bytes": 116,
+      "sha256": "e2782521b081320bc3785780e409b64bc8cbd22799207f532bb54398f0f91094",
+      "width": 7,
+      "height": 7,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/game-list-textures.css",
+            "line": 12,
+            "cssVariable": "--mc-list-online"
+          },
+          {
+            "file": "src/invite-assets.ts",
+            "line": 57,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/offline",
+      "sourceFile": "resource_pack/textures/ui/offline.png",
+      "bytes": 124,
+      "sha256": "a05d38826a76ff5abb58f3f6c1a38fb1975cc1dcd5d6be336f7b73c359c7aec9",
+      "width": 7,
+      "height": 7,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/game-list-textures.css",
+            "line": 13,
+            "cssVariable": "--mc-list-offline"
+          },
+          {
+            "file": "src/invite-assets.ts",
+            "line": 56,
+            "cssVariable": null
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/trash_light",
+      "sourceFile": "resource_pack/textures/ui/trash_light.png",
+      "bytes": 143,
+      "sha256": "53556e3e2e9fd3e1947c5961fa80289c04f3ad795d62d341c67b5cdbb98cb627",
+      "width": 13,
+      "height": 17,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "sameWholeBytes": true,
+        "previousCSSReferences": [
+          {
+            "file": "src/game-list-textures.css",
+            "line": 11,
+            "cssVariable": "--mc-list-trash"
+          }
+        ]
+      }
+    },
+    {
+      "key": "textures/ui/White",
+      "sourceFile": "resource_pack/textures/ui/permissions_player_fade_overlay.png",
+      "authoredSourceLiteral": "textures/ui/White",
+      "bytes": 87,
+      "sha256": "5ef05eb8f2100ac885c96aced008715e1225634d327162b88625672be82547e5",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/permissions_player_fade_overlay.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "introducedBy": "AMENDMENT01",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/permissions_player_fade_overlay.png",
+        "sameWholeBytes": true
+      },
+      "authoredLiteralResolution": {
+        "kind": "live-case-preserving-installed-identity-to-public-alias",
+        "evidence": ".cache/play-screen-assets-study-20261102-01/AMENDMENT01/WHITE-ALIAS-BASE-LIVE-READBACK.json",
+        "publicExactWhitePNGExists": false,
+        "installedWholePNGBytesEqual": true,
+        "metadataValuesEqual": true,
+        "privateRuntimeArtCopied": false
+      },
+      "sourceUse": "play.divider and empty/green/blue diskspace bars in Worlds storage branch"
+    },
+    {
+      "key": "textures/ui/realmsContent",
+      "sourceFile": "resource_pack/textures/ui/realmsContent.png",
+      "bytes": 157,
+      "sha256": "7d27d0ab86682f65d6cec8a8825224aafdce9043d8beca066464a56f76ef2950",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/realmsContent.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT02",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/realmsContent.png",
+        "metadataFile": "src/assets/play-screen/realmsContent.json"
+      },
+      "sourceUse": "play.create_on_realms_button_panel static normal/hover/pressed surfaces only; no Realm card/provider family"
+    },
+    {
+      "key": "textures/ui/realmsContentHover",
+      "sourceFile": "resource_pack/textures/ui/realmsContentHover.png",
+      "bytes": 159,
+      "sha256": "276867950cb819f53616056f0bc1ffea0a5349923fbf7fad3fe441baf787e15e",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/realmsContentHover.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT02",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/realmsContentHover.png",
+        "metadataFile": "src/assets/play-screen/realmsContentHover.json"
+      },
+      "sourceUse": "play.create_on_realms_button_panel static normal/hover/pressed surfaces only; no Realm card/provider family"
+    },
+    {
+      "key": "textures/ui/realmsContentPressed",
+      "sourceFile": "resource_pack/textures/ui/realmsContentPressed.png",
+      "bytes": 159,
+      "sha256": "11a087be7187232de7db572afbcf1d6b27c75bfb96ea0e482517c6ec80ed32ea",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/realmsContentPressed.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT02",
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/play-screen/realmsContentPressed.png",
+        "metadataFile": "src/assets/play-screen/realmsContentPressed.json"
+      },
+      "sourceUse": "play.create_on_realms_button_panel static normal/hover/pressed surfaces only; no Realm card/provider family"
+    },
+    {
+      "key": "textures/ui/underline",
+      "sourceFile": "resource_pack/textures/ui/underline.png",
+      "bytes": 99,
+      "sha256": "1b577f29e5fe1af2634f952389051a03bdf0a25b8ef9bdfdd716334561c6e48b",
+      "width": 1,
+      "height": 1,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT03",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/progress/ui/underline.png",
+        "sameWholeBytes": true
+      },
+      "sourceUse": "common_buttons.read_button -> underline_button (ui_template_buttons.json:525) -> common.single_line_label/underline (ui_common.json:2388); tiled x, source display H1, alpha0.6."
+    },
+    {
+      "key": "textures/ui/underline_focus",
+      "sourceFile": "resource_pack/textures/ui/underline_focus.png",
+      "bytes": 85,
+      "sha256": "2195dcbf031628c32d97555379c210b3b5a70c463920d44809799c2c4e7790e3",
+      "width": 1,
+      "height": 1,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadata": null,
+      "metadataRawUTF8": null,
+      "introducedBy": "AMENDMENT03",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/start-menu/underline_focus.png",
+        "sameWholeBytes": true
+      },
+      "sourceUse": "common_buttons.read_button -> underline_button (ui_template_buttons.json:525) -> common.single_line_label/underline (ui_common.json:2388); focused/hover whole original; no inferred nineslice."
+    },
+    {
+      "key": "textures/ui/invite_number_background",
+      "sourceFile": "resource_pack/textures/ui/invite_number_background.png",
+      "bytes": 137,
+      "sha256": "3b5971f66286b93fdf7b764e6ff969c4d64ea9cdc842984a75490fd45b2adf56",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/invite_number_background.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "introducedBy": "AMENDMENT03",
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/start-menu/invite_number_background.png",
+        "sameWholeBytes": true
+      },
+      "sourceUse": "play Friends body count badge -> start.notification_button_text_panel (start_screen.json:2687); exact existing public start-menu whole original."
+    }
+  ],
+  "aliasCorrection": "world_screenshot_focus_border and focus_border_white are whole-byte-identical source PNGs with the same 5x5 cuts1 metadata. Distinct roles retain their exact source keys.",
+  "boundaries": [
+    "World/server screenshots, texture file-system bindings and provider icons remain host inputs; no default provider artwork is fabricated.",
+    "No private fonts or native captures were copied or decoded.",
+    "Asset presence and exact byte identity do not certify active route, state visibility, native material alpha propagation or native RGBA.",
+    "Finite71approvedkeys only; dynamic Realm trial/Plus/provider families remain host-owned and are not inferred from these originals."
+  ],
+  "amendments": [
+    {
+      "id": "AMENDMENT01",
+      "preservedInitialKeys": 28,
+      "addedKeys": 37,
+      "beforeModuleSHA256": "79ce584eaf6808e4fef23339116825791fb711c67648df6dc5f9860c38cf6bc4",
+      "beforeManifestSHA256": "dd2aa9f8e53e0008f0a15ada9cc356cfdfb493609d9adcce876a8b2d240e98f1",
+      "sourceProof": "Actual fixed source DefaultClassic frame/panes and two factories; finite writer dependencies approved by root.",
+      "darkToggleStateMap": {
+        "uncheckedDefault": "textures/ui/button_borderless_dark",
+        "checkedDefault": "textures/ui/button_borderless_darkpressednohover",
+        "uncheckedHover": "textures/ui/button_borderless_darkhover",
+        "checkedHover": "textures/ui/button_borderless_darkpressed",
+        "allLockedStates": "textures/ui/disabledButtonNoBorder"
+      },
+      "newFiles": [
+        "src/assets/play-screen/white_background.png",
+        "src/assets/play-screen/Ping_Yellow_Dark.png",
+        "src/assets/play-screen/Ping_Red_Dark.png",
+        "src/assets/play-screen/BannersLight.png",
+        "src/assets/play-screen/BannersLight.json",
+        "src/assets/play-screen/DarkBannerNoBorder.png",
+        "src/assets/play-screen/DarkBannerNoBorder.json",
+        "src/assets/play-screen/world_download.png",
+        "src/assets/play-screen/import.png",
+        "src/assets/play-screen/realmsIcon.png",
+        "src/assets/play-screen/realms_chevron_play.png"
+      ],
+      "additionalSourceLeaf": "play.divider/storageWhite uses live verifiedcase-preserving publicwholealias"
+    },
+    {
+      "id": "AMENDMENT02",
+      "preservedPriorKeys": 65,
+      "addedKeys": 3,
+      "beforeModuleSHA256": "1db60e9f4b05895f9c42f758fe94d61b190394b061c5350dc1975bd8cd5216f2",
+      "beforeManifestSHA256": "5352727e5c78f9ce443c5d3ed433a69c7c8e1175c149d50a3ac99cb7bf57d2b3",
+      "sourceProof": "Root-approved play.create_on_realms_button_panel three static surfaces; no Realm card expansion",
+      "newFiles": [
+        "src/assets/play-screen/realmsContent.png",
+        "src/assets/play-screen/realmsContent.json",
+        "src/assets/play-screen/realmsContentHover.png",
+        "src/assets/play-screen/realmsContentHover.json",
+        "src/assets/play-screen/realmsContentPressed.png",
+        "src/assets/play-screen/realmsContentPressed.json"
+      ]
+    },
+    {
+      "id": "AMENDMENT03",
+      "preservedPriorKeys": 68,
+      "addedKeys": 3,
+      "beforeModuleSHA256": "45545bfdc6cb1bac1303cf911a1bf825161829e741e5abb19c450a5ae38abc8d",
+      "beforeManifestSHA256": "f5e4021c537f16ce637aa23e1c6bf9f19aa686a52d0bc0366f001626e5ce8130",
+      "sourceProof": "Default Classic server read-more underline states and Friends count badge; exact source paths supplied by respective leaf writers.",
+      "newFiles": []
+    }
+  ]
+}

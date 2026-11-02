@@ -1,0 +1,955 @@
+{
+  "schemaVersion": 1,
+  "status": "source_default_classic_web_qualified_native_unqualified",
+  "currentPublicCounts": {
+    "components": 239,
+    "runtimeValues": 257,
+    "meaning": "Actual installed React18.3.1/19.3.1 ESM surface; not native qualification"
+  },
+  "components": [
+    "PlayScreen",
+    "PlayScreenFrame",
+    "PlayNavigationTabs",
+    "PlayWorldsContent",
+    "PlayFriendsContent",
+    "PlayWorldRow",
+    "PlayNetworkWorldRow",
+    "PlayServersContent",
+    "PlayServerRow",
+    "PlayServerDetails",
+    "PlayJoinCodeDialog",
+    "PlayHighPingDialog"
+  ],
+  "profile": "fixed Classic desktop default Play; finite declared host bindings",
+  "source": {
+    "release": "v1.26.60.5-full",
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "wholeSourceFiles": 14,
+    "files": [
+      {
+        "entry": "resource_pack/ui/play_screen.json",
+        "bytes": 246577,
+        "sha256": "10b1cab24aeee5cb5a875255bb6ffe266ca4056394c05f1c4d99b8cc56cf805a",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/play_screen.json"
+      },
+      {
+        "entry": "resource_pack/ui/ui_common.json",
+        "bytes": 243941,
+        "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_common.json"
+      },
+      {
+        "entry": "resource_pack/ui/ui_common_classic.json",
+        "bytes": 3030,
+        "sha256": "d65eb51c5264b7b9eb8611bfe250736bc48eed8207682b6c26f3ede224277783",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_common_classic.json"
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_buttons.json",
+        "bytes": 76484,
+        "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_template_buttons.json"
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_tabs.json",
+        "bytes": 16954,
+        "sha256": "e4aae0403646ee6a0a4199f0b9eafd89550c301b2683fada406f6f6491b6dc88",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_template_tabs.json"
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_toggles.json",
+        "bytes": 47106,
+        "sha256": "efe2bf9fab47aa5e29d7116a2aa705a964a42b0ef86c947c4e46188be9ac2a01",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_template_toggles.json"
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_dialogs.json",
+        "bytes": 14238,
+        "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/ui_template_dialogs.json"
+      },
+      {
+        "entry": "resource_pack/ui/popup_dialog.json",
+        "bytes": 27268,
+        "sha256": "571ad6ff20301043e0d08afa90b868232d6ef6052a213a7b28897a87cc8421e5",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/popup_dialog.json"
+      },
+      {
+        "entry": "resource_pack/ui/progress_screen.json",
+        "bytes": 72699,
+        "sha256": "2453144b1e4d98bcc56d63c014034dae50172f5e15989589a8dca2676599ee80",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/progress_screen.json"
+      },
+      {
+        "entry": "resource_pack/ui/realms_common.json",
+        "bytes": 11904,
+        "sha256": "50728eaf7788b5b83a818cadb5c1a35d07fcfd91e3ec32fbf11756d2e1ad6eee",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/realms_common.json"
+      },
+      {
+        "entry": "resource_pack/ui/start_screen.json",
+        "bytes": 82605,
+        "sha256": "96ca12f45bd8a0251ddf2a7a6deaea11b14c921dfbd9592c73f46ff8bc611089",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/start_screen.json"
+      },
+      {
+        "entry": "resource_pack/ui/store_common.json",
+        "bytes": 396906,
+        "sha256": "306f9f7e4bf69ebdeb3cccf4a76cc01aa26102d96273623ae5d7f99d81006557",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/store_common.json"
+      },
+      {
+        "entry": "resource_pack/ui/_global_variables.json",
+        "bytes": 20210,
+        "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/_global_variables.json"
+      },
+      {
+        "entry": "resource_pack/ui/settings_sections/settings_common.json",
+        "bytes": 80972,
+        "sha256": "36863803c56e42d31b915aa9df13cf88cc43a528eb40c76cbf26c911ef7b3ecf",
+        "wholeByteDifferences": 0,
+        "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/ui/settings_sections/settings_common.json"
+      }
+    ]
+  },
+  "authorityReceipts": [
+    {
+      "path": ".cache/play-screen-source-20261102-01/FINAL.json",
+      "sha256": "be28786db844efc16f67640a1bf6b0cb06ab76fdb4ee00161ed5b9b7e292c4b9",
+      "scope": "frozen whole Classic source and finite direct inheritance"
+    },
+    {
+      "path": ".cache/play-screen-source-20261102-01/SPEC.json",
+      "sha256": "bce549c790376631f1502a0ba12f0bd70a5a511d650341a5335c1dcbc093ad45",
+      "scope": "canonical source spec; storage referent clarified below without rewriting historical receipt"
+    },
+    {
+      "path": ".cache/play-screen-independent-20261102-01/AMENDMENT-01/FINAL.json",
+      "sha256": "e7202fa6d714a58dbe426aadcac96076dc5ef714298b14ddbf20d1c9cf7a95e9",
+      "scope": "independent20percent storage semantics correction"
+    },
+    {
+      "path": ".cache/play-servers-implementation-20261102-01/AMENDMENT03/FINAL.json",
+      "sha256": "6cdc983a92bd401656ed6670c1238a906d25ca218cf95656dbab79628b9804c2",
+      "scope": "server whole-pane-minus1/source read-button leaf and explicit host intrinsic height"
+    },
+    {
+      "path": ".cache/play-screen-assets-study-20261102-01/AMENDMENT03/FINAL.json",
+      "sha256": "f70b5b535a847aecab29affa8e45658409a5e1f49ca8fe906eadd23458b3e825",
+      "scope": "71 material keys including original underline and notification badge aliases"
+    },
+    {
+      "path": ".cache/play-worlds-implementation-20261102-01/AMENDMENT01/RESULT.json",
+      "sha256": "13904124ab88be991c21e446ec794abc3e0b74a57ddc8a2b7381e74a4f214216",
+      "scope": "measured original-texture background through shared ClassicSkin boundary texels"
+    },
+    {
+      "path": ".cache/play-frame-20261102-01/AMENDMENT03/RESULT.json",
+      "sha256": "da5f57882f044a539d12bfc10d2df263951765382aaafdb413a02033aa4520b3",
+      "scope": "raw control zero-centre underfill uses shared original-image boundary painter"
+    }
+  ],
+  "contracts": {
+    "units": {
+      "dimensions": "Original JSON logical px / percentage expressions. Host scale and viewport are explicit; no physical guiScale inferred.",
+      "contentSizing": "c, cm, sm, fill and default are engine layout operators, not literal CSS pixels. Preserve expressions and declare finite Web policies where intrinsic engine resolution is not implemented.",
+      "absoluteOrigin": "No global physical origin is supplied by this source study. Safezone/screen matrix/provider evaluation remains external."
+    },
+    "root": {
+      "size": {
+        "desktop": [
+          282,
+          "100% - 50px"
+        ],
+        "pocket": [
+          "83.4375%",
+          "100% - 4px"
+        ],
+        "conditionDesktop": "$desktop_screen",
+        "conditionPocket": "$pocket_screen",
+        "sourceLines": [
+          6384,
+          6434
+        ],
+        "selectedProviderProfile": "host required; not inferred from width"
+      },
+      "routes": [
+        {
+          "when": "not $education_edition and not $is_editor_mode_enabled and not $is_editor_playtest_roundtrip",
+          "panel": "play.default_play_screen_panel"
+        },
+        {
+          "when": "$education_edition and not $is_editor_mode_enabled and not $is_editor_playtest_roundtrip",
+          "panel": "play.edu_play_screen_panel"
+        },
+        {
+          "when": "(not $education_edition and $is_editor_mode_enabled) or $is_editor_playtest_roundtrip",
+          "panel": "play.editor_play_screen_panel"
+        }
+      ],
+      "trial": {
+        "panel": "play.trial_play_screen_panel",
+        "declared": true,
+        "selectedByPlayScreenContent": false,
+        "scope": "worlds tab only, full tab width; do not silently claim trial root is active"
+      },
+      "screenActions": [
+        {
+          "from": "button.menu_cancel",
+          "to": "button.menu_exit",
+          "mapping": "global"
+        },
+        {
+          "from": "button.menu_tab_left",
+          "to": "button.menu_tab_left",
+          "mapping": "global",
+          "scope": "view"
+        },
+        {
+          "from": "button.menu_tab_right",
+          "to": "button.menu_tab_right",
+          "mapping": "global",
+          "scope": "view"
+        }
+      ],
+      "popupFactory": {
+        "ids": {
+          "join_by_code": "play.popup_dialog_join_by_code",
+          "high_ping_warning": "play.popup_dialog_high_ping"
+        },
+        "hostOwnsCreation": true
+      }
+    },
+    "frame": {
+      "navigation": {
+        "height": 30,
+        "anchor": "top_middle",
+        "flow": "horizontal",
+        "tabsHolderWidth": "fill",
+        "tabsInternalWidth": "100% + 2px",
+        "closeHolder": [
+          30,
+          30
+        ],
+        "columns": [
+          "33%",
+          "33%",
+          "fill"
+        ]
+      },
+      "content": {
+        "height": "100%-26px",
+        "anchor": "bottom_middle",
+        "overlapWithNavigation": 4,
+        "background": "common.common_panel / dialog_background_hollow_4",
+        "closeInBody": false,
+        "underfill": {
+          "texture": "textures/ui/control",
+          "size": [
+            "100% - 8px",
+            "100% - 8px"
+          ],
+          "alpha": 0.8,
+          "layer": -1,
+          "source": "common.dialog_background_hollow_common"
+        },
+        "innerSize": [
+          "100%-12px",
+          "100%-12px"
+        ],
+        "innerOffset": [
+          6,
+          6
+        ]
+      },
+      "close": {
+        "background": "play.X_tab_back",
+        "control": "common.light_close_button",
+        "offset": [
+          0,
+          -1
+        ],
+        "anchor": "center",
+        "visibleBinding": "(not #exit_button_visible)",
+        "note": "Do not invert the surprising raw binding to match its name. Exact common close child/control sizes are preserved in SOURCE-NODES."
+      },
+      "tabs": {
+        "defaultSelected": "$default_tab; absent from fixed public UI definitions, host required",
+        "group": "navigation_tab",
+        "radio": true,
+        "forcedIndices": {
+          "worlds": 0,
+          "friends": 1,
+          "servers": 2
+        },
+        "checkedVisibility": [
+          "world_navigation_tab_toggle.#toggle_state",
+          "friends_navigation_tab_toggle.#toggle_state",
+          "server_navigation_tab_toggle.#toggle_state"
+        ],
+        "worldsLeftmost": true,
+        "serversRightmostFlagDeclared": false,
+        "content": [
+          "common_navigation_tab_content",
+          "friends_navigation_tab_content"
+        ],
+        "labelKeys": [
+          "selectWorld.tab.worlds",
+          "selectWorld.tab.friends",
+          "selectWorld.tab.thirdParty"
+        ],
+        "counts": [
+          "#world_item_count",
+          "#friend_world_item_count",
+          "#server_world_item_count"
+        ],
+        "independentFriendIndicators": [
+          "#friends_tab_show_bouncing",
+          "#friends_tab_show_not_bouncing",
+          "#friends_tab_show_invites"
+        ],
+        "animations": "Full authored play anim_* definitions retained; engine clock/runtime animation phase unknown."
+      }
+    },
+    "scroll": {
+      "commonSource": {
+        "namespace": "common",
+        "key": "scrolling_panel",
+        "fileSha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "startLine": 4666,
+        "endLine": 4759,
+        "byteStart": 146795,
+        "byteEnd": 151006,
+        "sha256": "cc5715afb15173a80dc30ec83482a08a97434ddbd8fb480198d81d2fb1c1a9e7"
+      },
+      "outerOffsets": {
+        "size": [
+          "100% - 4px",
+          "100% - 4px"
+        ],
+        "offset": [
+          2,
+          2
+        ]
+      },
+      "playPaneSize": [
+        "100% - 1px",
+        "100%"
+      ],
+      "mouse": {
+        "bar": [
+          5,
+          "100% - 4px"
+        ],
+        "leftPadding": [
+          2,
+          0
+        ],
+        "rightPadding": [
+          2,
+          0
+        ],
+        "derivedReservedWidth": 9,
+        "contained": false,
+        "trackImageWidth": 3,
+        "thumbImageWidth": 5,
+        "thumbVisibleDefault": true
+      },
+      "touch": {
+        "contained": true,
+        "leftPadding": [
+          0,
+          0
+        ],
+        "rightPadding": [
+          0,
+          0
+        ],
+        "track": "common.empty_panel",
+        "thumbVisibleDefault": false,
+        "barDefault": [
+          4,
+          "100%"
+        ],
+        "note": "No 9px mouse reservation; touch branch retains parent inheritance/size rules."
+      },
+      "contentPane": {
+        "size": [
+          "100%-4px",
+          "100%c"
+        ],
+        "offset": [
+          2,
+          0
+        ]
+      },
+      "focus": {
+        "container": true,
+        "useLastFocus": true,
+        "directions": "contained"
+      },
+      "nativeScrollDynamics": "unknown; Web wheel, pointer, keyboard, roving focus are explicit host policies, not engine recovery"
+    },
+    "worlds": {
+      "orderedTopLevelChildren": [
+        "padding_0",
+        "play_screen_warning@play.realm_warning_tip",
+        "header_button",
+        "worlds_crossplatform_disabled_panel@play.crossplatform_disabled_panel",
+        "worlds_crossplatform_disable_spacer@play.crossplatform_disable_spacer",
+        "realms_panel",
+        "realms_multiplayer_blocked_panel",
+        "worlds_label@play.world_list_label_with_color_panel",
+        "grid@play.local_world_item_grid",
+        "no_local_worlds_label@play.label_content_template",
+        "no_local_worlds_switch_setting@play.no_local_worlds_switch_setting",
+        "beta_retail_local_padding",
+        "beta_retail_local_worlds_label@play.world_list_label_panel",
+        "beta_retail_local_grid@play.beta_retail_local_world_item_grid",
+        "loading_legacy_worlds_panel_padding",
+        "legacy_worlds_button",
+        "loading_legacy_worlds_panel@play.label_background",
+        "padding_2",
+        "upgrade_legacy_worlds_label@play.world_list_label_with_color_panel",
+        "legacy_world_item_grid@play.legacy_world_item_grid",
+        "beta_retail_legacy_padding",
+        "beta_retail_legacy_worlds_label@play.world_list_label_panel",
+        "beta_retail_legacy_grid@play.beta_retail_legacy_world_item_grid",
+        "pad_hack_panel"
+      ],
+      "layout": "vertical intrinsic stack",
+      "topPadding": 2,
+      "header": {
+        "height": 30,
+        "extraStackHeight": 4,
+        "ignored": "$local_world_upload",
+        "primary": "create_new_world_button",
+        "secondary": "new_ui_switch_button_options_panel",
+        "tertiary": "import_world_button",
+        "tertiaryVisible": "$world_archive_support",
+        "educationQuickPlay": "additional 30px child, ignored when not education"
+      },
+      "rows": {
+        "local": {
+          "height": 29,
+          "paintHeight": 30,
+          "main": "local_world_item_button",
+          "secondary": "local_world_edit_button",
+          "secondaryWidth": "100%y - 1px",
+          "secondaryVisibleDefault": true,
+          "collections": [
+            "local_worlds"
+          ],
+          "actions": [
+            "button.menu_start_local_world",
+            "button.local_world_upload",
+            "button.menu_local_world_item_edit"
+          ],
+          "ownershipOverlay": "ownership_verification_in_progress_panel independent binding"
+        },
+        "legacy": {
+          "height": 29,
+          "paintHeight": 30,
+          "deleteBranch": "$legacy_worlds_share_storage",
+          "migrateBranch": "$legacy_worlds_supports_migration",
+          "singleBranch": "not share_storage and not supports_migration",
+          "independence": "delete and migrate branches are independent source ignored expressions; do not impose an unproved exclusive enum"
+        },
+        "betaRetail": {
+          "collections": [
+            "beta_retail_local_worlds",
+            "beta_retail_legacy_worlds"
+          ],
+          "actions": "source-defined import actions; host handles conversion/import"
+        }
+      },
+      "screenshot": {
+        "frame": [
+          "100%cm + 2px",
+          "100%"
+        ],
+        "picture": [
+          "173.91%y",
+          "100% - 2px"
+        ],
+        "offset": [
+          1,
+          1
+        ],
+        "fill": true,
+        "texture": "host #local_world_image / #local_world_texture_source, or corresponding legacy bindings",
+        "borders": {
+          "normal": "default_indent",
+          "hover": "world_screenshot_focus_border",
+          "pressed": "world_screenshot_focus_border",
+          "locked": "default_indent"
+        },
+        "hostResources": "No filesystem reader or fake screenshots. Source supports texture reload and conditional RealmsPlus overlay."
+      },
+      "legacySeparateScroller": {
+        "meaning": "storage usage status only; all four world row grids remain in primary worlds_stack_panel",
+        "height": "20%",
+        "visibleWhen": "legacy_worlds_share_storage OR legacy_worlds_supports_migration",
+        "content": "play.legacy_world_content_status_area_panel",
+        "titleKey": "playscreen.worldsStorage",
+        "sourceLabels": {
+          "en_US": "Storage",
+          "zh_CN": "瀛樺偍"
+        },
+        "clip": {
+          "direction": "left",
+          "pixelperfect": false,
+          "localBinding": "#local_worlds_storage_size",
+          "legacyBinding": "#legacy_worlds_storage_size",
+          "imagesOverlayNotAdjacent": true,
+          "sourceRGB": {
+            "local": [
+              0.565,
+              0.643,
+              0.498
+            ],
+            "legacy": [
+              0.373,
+              0.518,
+              0.792
+            ],
+            "empty": [
+              0.157,
+              0.157,
+              0.157
+            ]
+          },
+          "unqualified": [
+            "ratio visible-vs-removed interpretation",
+            "cumulative/provider meaning",
+            "filesystem capacity conversion",
+            "native fractional clip rasterization"
+          ]
+        }
+      },
+      "states": {
+        "separateBindings": true,
+        "examples": [
+          "#personal_realms_grid_visible",
+          "#realm_label_visible",
+          "#loading_personal_realms_grid_visible",
+          "#realms_loading_display_message",
+          "#local_worlds_visible",
+          "#no_local_worlds",
+          "#legacy_worlds_visible",
+          "#loading_legacy_worlds_grid_visible",
+          "#legacy_worlds_loading_display_message",
+          "#beta_retail_local_worlds_visible",
+          "#beta_retail_legacy_worlds_visible",
+          "#multiplayer_blocked_panel_visible"
+        ],
+        "warning": "Do not derive empty/loading/auth flags from collection length. #no_local_worlds node is additionally ignored unless $local_world_upload."
+      }
+    },
+    "friends": {
+      "headerGeometry": {
+        "height": "100%cm",
+        "addFriendHeight": 30,
+        "joinByCodeHeight": 30,
+        "paddingWidth": 1,
+        "notificationWidth": "13%",
+        "notificationHeight": 30
+      },
+      "collections": {
+        "realms": "friends_realms",
+        "friends": "friends_network_worlds",
+        "crossPlatform": "cross_platform_friends_network_worlds",
+        "lan": "lan_network_worlds (see exact lan node binding)"
+      },
+      "row": {
+        "height": 30,
+        "paintHeight": 31,
+        "enabledSources": [
+          "#network_world_button_enabled",
+          "#cross_platform_enabled"
+        ],
+        "action": "button.menu_network_world_item",
+        "statusAndPlayerCount": "separate source bindings, not inferred from online Boolean"
+      },
+      "branches": {
+        "addFriendIgnored": "not $supports_add_friend or $nx_os or $is_ps4",
+        "joinByCodeIgnored": "$is_editor_mode_enabled",
+        "joinableRealmsIgnored": "$is_editor_mode_enabled",
+        "crossPlatformGridIgnored": "not $nx_os and not $is_ps4",
+        "noFriendsMessageIgnored": "$education_edition"
+      },
+      "states": {
+        "independent": true,
+        "examples": [
+          "#joinable_realms_panel_visible",
+          "#friends_realms_visible",
+          "#loading_friends_realms_grid_visible",
+          "#get_offline_authcode_message_panel_visible",
+          "#no_friends_realms_visible",
+          "#friends_grid_visible",
+          "#no_friends_grid_message_visible",
+          "#cross_platform_friends_grid_visible",
+          "#no_cross_platform_friends_grid_message_visible",
+          "#general_no_multiplayer_grid_message_visible",
+          "#add_friend_button_visible",
+          "#join_by_code_visible",
+          "#realms_notification_button_visible"
+        ]
+      },
+      "auth": {
+        "button": "button.menu_sign_in_to_view_realms",
+        "offlineCode": "button.get_offline_authcode",
+        "accountSettings": "button.open_account_setting_gamecore / source hyperlink action; host service only"
+      }
+    },
+    "servers": {
+      "layout": {
+        "left": [
+          "50% - 1px",
+          "100%"
+        ],
+        "divider": [
+          3,
+          "100%"
+        ],
+        "dividerImage": [
+          3,
+          "100% - 4px"
+        ],
+        "dividerTexture": "textures/ui/HowToPlayDivider",
+        "right": [
+          "50% - 4px",
+          "100%"
+        ],
+        "childrenScrollSize": [
+          "100%",
+          "100% - 4px"
+        ],
+        "childrenScrollOffset": [
+          0,
+          2
+        ]
+      },
+      "visibility": {
+        "showServers": "(not #feature_server_message_visible)",
+        "message": "#feature_server_message_visible (as authored)",
+        "right": "#is_network_available_and_multiplayer_visible",
+        "featuredDetail": "#is_third_party_server_selected",
+        "additionalDetail": "#is_additional_server_selected",
+        "addDetail": "#add_server_info_visible",
+        "mutualExclusion": "not asserted by source; host snapshot may have independent values"
+      },
+      "collections": {
+        "featured": "third_party_server_network_worlds",
+        "additional": "servers_network_worlds"
+      },
+      "rows": {
+        "featured": {
+          "height": 40
+        },
+        "additional": {
+          "height": 30,
+          "togglePaintHeight": 31,
+          "edit": "network_server_world_edit_button"
+        }
+      },
+      "toggles": {
+        "group": "server_navigation_toggle",
+        "indices": [
+          "#third_party_toggle_index",
+          "#additional_server_toggle_index"
+        ],
+        "onHover": "#toggle_on_hover",
+        "focusPrecedence": "#navigation_tab_focus_precedence",
+        "enabled": [
+          "#cross_platform_enabled",
+          "#is_server_info_available_collection"
+        ],
+        "forcedFocusRight": "right_side (last duplicate property wins; full original raw retained)"
+      },
+      "add": {
+        "height": 20,
+        "index": 100,
+        "visible": "not $ignore_add_servers",
+        "enabled": "#add_server_enabled",
+        "note": "Source toggles to add-server information pane, not immediate OS/server creation."
+      },
+      "details": {
+        "featured": "third_party_server_info_panel: description/screenshots/games/news/offers, caller provider data; no marketplace implementation",
+        "additional": "additional_server_info_panel: explicit selected-server host bindings",
+        "add": "add_server_info_panel: source descriptive content; requests host add-server workflow"
+      },
+      "ignoreFlags": [
+        "$ignore_add_servers",
+        "$ignore_3rd_party_servers"
+      ],
+      "states": [
+        "#loading_servers_progress_visible",
+        "#featured_servers_visible_and_available",
+        "#featured_servers_visible",
+        "#is_network_available",
+        "#multiplayer_blocked_panel_visible",
+        "#internet_connection_text",
+        "#feature_server_message_text"
+      ]
+    },
+    "loadingAndMessages": {
+      "messageMaterial": "dark_label_background = textures/ui/BannersLight; label_background = textures/ui/mainbanners",
+      "information": {
+        "outer": [
+          "100%",
+          "100%cm"
+        ],
+        "inner": [
+          "100%-8px",
+          "100%c + 8px"
+        ],
+        "textShadow": false,
+        "defaultFont": "default; explicit smooth in selected server warnings"
+      },
+      "progress": {
+        "wholeTexture": "textures/ui/loading_bar",
+        "display": [
+          64,
+          8
+        ],
+        "uvSize": [
+          64,
+          8
+        ],
+        "offset": [
+          0,
+          18
+        ],
+        "anchor": "top_middle",
+        "frames": 10,
+        "frameStep": 64,
+        "fps": 10,
+        "reversible": true,
+        "color": "$dark_button_secondary_default_text_color",
+        "visible": "#loading_bars_animation_visible (overridable)"
+      },
+      "loadingLabel": {
+        "max": [
+          "100% - 4px",
+          40
+        ],
+        "offset": [
+          0,
+          6
+        ],
+        "shadow": false
+      },
+      "emptyPlaceholderGridHeight": 29,
+      "roleBoundary": "Use source message/loading parts; generic spinner is not an exact substitute."
+    },
+    "popups": {
+      "inputModal": {
+        "modal": true,
+        "layer": 100,
+        "underlayBlackAlpha": 0.5,
+        "cancel": "$popup_dialog_escape_button_name default popup_dialog.escape",
+        "sourceVsWeb": "showModal/inert/focus-return/backdrop-dismiss policies require explicit Web contract; source only maps controller actions."
+      },
+      "joinByCode": {
+        "size": [
+          200,
+          90
+        ],
+        "background": "realms_common.popup_dialog_bg",
+        "headerHeight": "21%",
+        "upperHeight": "22%",
+        "rowGaps": [
+          1,
+          10
+        ],
+        "fieldWidth": "65%",
+        "fieldMaxLength": 15,
+        "fieldBinding": "#join_by_code_text_edit",
+        "placeholder": "networkWorld.realmsHashPlaceholder",
+        "leftRightMargins": 3,
+        "fieldButtonGap": 1,
+        "action": "button.menu_network_join_by_code_popup_join",
+        "close": "button.menu_network_join_by_code_close",
+        "closeAnchor": "right_middle",
+        "closeOffset": [
+          -1,
+          2
+        ]
+      },
+      "highPing": {
+        "size": [
+          250,
+          170
+        ],
+        "background": "dialog_background_hollow_2",
+        "title": "networkWorld.highPingWarning.title",
+        "bodySize": [
+          "100% - 16px",
+          "100% - 99px"
+        ],
+        "bodyOffset": [
+          0,
+          35
+        ],
+        "buttonsRow": [
+          "100% - 14px",
+          30
+        ],
+        "buttonsOffset": [
+          0,
+          -7
+        ],
+        "buttonsGap": 6,
+        "orderedActions": [
+          "button.join_server_anyway",
+          "button.cancel_join_server"
+        ],
+        "orderedLabels": [
+          "networkWorld.join",
+          "gui.cancel"
+        ]
+      },
+      "helperOffset": [
+        0,
+        31
+      ],
+      "factoryEvents": "Only join_by_code and high_ping_warning are declared by this screen factory; arbitrary additional dialogs must be host-owned."
+    },
+    "fontsAndMaterials": {
+      "sourceDefault": "Use original labels, source role colors and default/smooth font_type declarations. No fonts or native shader/sampling are recovered from UI JSON.",
+      "textRoles": {
+        "worldList": {
+          "shadow": false,
+          "color": "$dark_button_secondary_default_text_color"
+        },
+        "worldName": {},
+        "section": {
+          "height": 10,
+          "offset": [
+            1,
+            0
+          ],
+          "color": "$main_header_text_color"
+        },
+        "tab": "state text/secondary/glyph colors from common_tabs.base_tab and fixed globals",
+        "information": {
+          "shadow": false,
+          "color": "$dark_button_default_text_color"
+        }
+      },
+      "button": {
+        "imageSize": [
+          "100% - 2px",
+          "100% - 2px"
+        ],
+        "contentSize": [
+          "100% - 6px",
+          "100% - 6px"
+        ],
+        "pressedContentOffset": [
+          0,
+          1
+        ],
+        "darkStates": [
+          "button_borderless_dark",
+          "button_borderless_darkhover",
+          "button_borderless_darkpressed",
+          "disabledButtonNoBorder"
+        ],
+        "focusBorder": "separate original whole texture, source layer/color; do not synthesize rounded CSS shadows"
+      },
+      "assetAuthority": "SOURCE-INVENTORY contains all 67 authored texture fields, not an active mandatory asset inventory. Peer asset study establishes finite branch whole-byte/RGBA reuse."
+    }
+  },
+  "currentSourceAmendments": {
+    "serverGeometry": {
+      "wholePaneWidthLoss": 1,
+      "mouseRailReservation": 9,
+      "featuredPitch": 40,
+      "featuredSelectHeight": 38,
+      "featuredSelectTop": 1,
+      "additionalPitch": 30,
+      "additionalPaintHeight": 31,
+      "anchorPolicy": "center-web / resolved-height-web; not native engine recovery"
+    },
+    "readButton": {
+      "chain": [
+        "common_buttons.read_button",
+        "common_buttons.underline_button",
+        "common.single_line_label",
+        "common.underline"
+      ],
+      "font": "smooth",
+      "fontScaleFactor": 0.8,
+      "labelHeight": 8,
+      "labelOffset": [
+        2,
+        1
+      ],
+      "underlineHeight": 1,
+      "underlineAlpha": 0.6,
+      "hoverPressedColor": [
+        0.215,
+        0.839,
+        0.118
+      ],
+      "readButtonHeight": "required positive finite host-resolved value whenever a visible read action is present; sample12 is Web budget only"
+    },
+    "originalBackgrounds": "Complete original2x2 control/White with zero-centre metadata use shared ClassicSkin boundary-texel painter; no sampled replacement solid or modified PNG."
+  },
+  "materials": {
+    "manifest": "docs/play-screen-assets.json",
+    "manifestSHA256": "df736b63a752db34c1921d6e06e58e31220ee9204d7a61fff223e377e2681301",
+    "registryKeys": 71,
+    "newWholePNG": 16,
+    "newMetadataJSON": 8,
+    "generatedModule": "src/play-screen-assets.ts",
+    "license": "Mojang sample license applies; not project MIT",
+    "privateFontsBundled": false,
+    "dynamicScreenshotsAndLogos": "host source URLs and dimensions; no fabricated imagery when absent"
+  },
+  "webPolicies": [
+    "explicit logical viewport and integer display scale, finite resource budgets",
+    "DOM focus/roving/modal ownership/IME/native event veto/ref cleanup",
+    "CSS font metrics, baseline and fixed line boxes remain Web profiles",
+    "read-button intrinsic height and glyph-width resolution are host/Web inputs",
+    "accepted collection snapshots and raw flags are independent",
+    "explicit storageUsage clipPolicy, no reconstructed provider storage algorithm"
+  ],
+  "validation": {
+    "sourceWholeBytes": "14 public JSON files equal fixed archive",
+    "formalSourceBrowser": "browser02:76 PASS (Play60+unified CSS16), related regression110 PASS, Node78 PASS",
+    "packageInstalled": "package02 full actual React18.3.1/19.3.1: each37 Play SSR groups,20 negative types,71 originals/43metadata; installed04 four default Vite dev/production modes PASS",
+    "builtProduction": "built01 user4173 desktop/mobile PASS and site HTML identity",
+    "nativeWholeGUI": "UNQUALIFIED",
+    "materials": "material03 21 full independent source Web planes strict RGBA0; hidden/show and fractional resize actual; not native/wholeGUI",
+    "functionalBrowserTarSHA256": "2cd4dd3138a26569f1c35703f1eaa559dd46cf50cc107150017645a27f092395"
+  },
+  "unknowns": [
+    "Current installed game may route Play to OreUI instead; Classic source profile must be named and limited.",
+    "No current native Play target/capture/whole-frame pixel comparison in this phase.",
+    "Provider values/defaultTab/grid dimensions/collection ordering/locale glyph metrics/clock/texture sources and forcedfocus evaluation are not recovered.",
+    "Safezone and layout engine c/cm/sm/fill/min/max rounding and physical source camera need independent evidence.",
+    "Source platform flags do not supply backend capabilities/permissions; preserve host-controlled snapshots.",
+    "Trial alias declared but not chosen by play_screen_content; do not invent a trial route condition.",
+    "Full Realms/featured-server service data and dynamic images are host inputs, not bundled fake sample assets.",
+    "Realms card/trial/new-offer families remain explicit host-owned externalFamily dependencies, not implemented by a text placeholder.",
+    "Pocket/education/editor/full platform routes are not qualified by this default desktop composition."
+  ]
+}

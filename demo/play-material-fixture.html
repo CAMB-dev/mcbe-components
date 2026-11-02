@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Play original material fixture</title>
+  <style>
+    html,body{margin:0;padding:0;background:#888}
+    #play-material-root{display:flow-root;padding:16px}
+    #play-material-fixtures{display:flex;flex-direction:column;align-items:flex-start;gap:24px}
+    #play-material-fixtures[hidden]{display:none!important}
+    .play-material-host{position:relative;flex:none;isolation:isolate;box-sizing:content-box;padding:0;border:0;opacity:1}
+    /* Fixture-only exclusions preserve the actual source material and boxes. */
+    .play-material-host .mc-play-navigation__flow{visibility:hidden}
+    .play-material-host .mc-play-frame__close-glyph{visibility:hidden}
+    .play-material-host .mc-play-frame__hollow{visibility:hidden}
+    .play-material-host>.mc-play-source-background{opacity:.8}
+  </style>
+</head>
+<body><div id="play-material-root"></div><script type="module" src="./play-material-fixture.tsx"></script></body>
+</html>

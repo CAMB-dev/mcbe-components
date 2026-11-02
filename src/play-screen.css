@@ -1,0 +1,7 @@
+@import './play-screen-frame.css';
+@import './play-worlds.css';
+@import './play-servers.css';
+@import './play-popups.css';
+.mc-play-screen__pane{position:absolute;inset:0;width:100%;height:100%;box-sizing:border-box}
+.mc-play-screen__pane[hidden]{display:none!important}
+.mc-play-screen__input-hint{position:absolute;display:block;pointer-events:none;user-select:none}

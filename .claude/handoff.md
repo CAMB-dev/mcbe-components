@@ -1,3 +1,57 @@
+# Current checkpoint — Classic Play family, 2026-11-02
+
+Full goal ACTIVE/incomplete. Branch codex/play-screen-20261102 from89e9da6.
+Public actual239 components /257 runtime values (239+6data+12functions).
+Final pushed Git and clean status must be read from .cache/play-qa-01/FINAL.json.
+Do not infer a commit from this precommit handoff. Local main is stale; use
+normal git push origin HEAD:main from the codex branch; never force.
+
+New12: PlayScreen/Frame/NavigationTabs/WorldRow/NetworkWorldRow/WorldsContent/
+FriendsContent/ServersContent/ServerRow/ServerDetails/JoinCodeDialog/HighPingDialog.
+Preview route #play-screen. Read docs/PLAY_SCREEN_QA.md, play-screen-source.json,
+play-screen-assets.json. Fixed source v1.26.60.5-full Default Classic desktop;
+source existence does not prove current game route. External Realms card families
+remain explicit typed host render dependencies. No service simulation. Pocket,
+education/editor/trial and native whole GUI remain unqualified.
+
+Actual source bug found visually: originalcontrol2x2/cuts1 zero-centre CSS
+border-image left body centre empty. Frame and measured private backgrounds now
+use existing ClassicSkin with whole originals; inset4/alpha.8 preserved. Modern
+ResizeObserver drives untransformed fractional sizes, hidden/show and cleanup.
+Independent full material21 (1,892,184 pixels) RGBA0; uniform zero-centre colors
+cannot identify native boundary sampler. Native alpha/font metrics not certified.
+Unified consumer CSS fixed NPC arrow anchors, Jigsaw stack gaps, Command fields/
+Cancel and exact dropdown arrow states; fixture imports only styles.css.
+
+Actual final results: Node78 PASS; browser02 Play60+CSS16=76 PASS; related
+NPC/Jigsaw/Command/Furnace110 PASS; material03 21planes PASS plus RO lifecycle;
+full package02 actual18.3.1/19.3.1 each37SSR+20negative Play types,71PNG43metadata;
+fresh installed04 default Vite18/19 x dev/prod4 PASS, 12ref nodes, no sourcealiases;
+built01 actual4173 desktop/mobile2 PASS; all temporary servers closed.
+Functional browser tar SHA256 2cd4dd3138a26569f1c35703f1eaa559dd46cf50cc107150017645a27f092395.
+Final pack proof PACK-IDENTITY.json checks all859 dist/manifest/license members:
+858 exact bytes; index.js.map differs only in two sourcesContent whitespace
+normalizations. Actual JS/declarations/styles/assets and map mappings are exact;
+WHITESPACE-ONLY.json also proves identical esbuild code before/after. Final
+strict source/demo build passed. Preserve pre-normalize all859-byte proof too.
+Raw failing rounds are preserved, not relabelled: browser01 missing readheight;
+package01 andr02 helper fixture/URI issues; material01 missing protocolfield,
+02 transparent-vs-opaque; installed01/02 target/deferred timing,03 wrongfocus.
+Final fullpackage log and data receipts under .cache/play-qa-01.
+
+No Computer Use/native capture started this phase. User4173 preview intentionally
+kept running, last known owner217140; verify live before changing it. Close CU
+immediately after actual use per user preference.
+
+Remaining fullgoal: resource pack collections/diagnostics/tier/pack settings;
+named Create/EditWorld settings profiles; DisconnectScreen; Pocket16/otherG63,
+templates/sleep/calibration and all practical Bedrock GUI still retained. Prior
+full-source audit is baseline219/237: Furnace8 and nowPlay12 added since it,
+so do not redo either. Do not claim old WorldList/ServerList wrappers implement
+the whole Play family. All native fidelity gaps from earlier handoff remain.
+
+--- Historical checkpoints below; newer entries above supersede current counts ---
+
 # Session handoff
 
 ## Current checkpoint — complete Classic Furnace family, 2026-11-02

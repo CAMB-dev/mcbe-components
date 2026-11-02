@@ -1,5 +1,18 @@
 # Third-party notices
 
+The Classic Play bank references 71 whole public Mojang PNG resources from
+Bedrock Samples `v1.26.60.5`, adding 16 unchanged PNG files and eight unchanged
+metadata JSON files. Other resources reuse existing complete files or exact
+embedded originals; identities and raw metadata are recorded in
+`docs/play-screen-assets.json`. The case-sensitive `White` binding reuses an
+existing public `permissions_player_fade_overlay.png` after exact installed
+resource identity verification; it does not copy private game artwork. The
+unchanged upstream notice at `dist/assets/document-viewer/LICENSE.md` applies.
+These resources retain Mojang ownership and upstream Minecraft EULA terms,
+separately from this project's MIT code. Dynamic server/world images, controller
+glyphs and external Realm family renderers remain host-owned; none are generated
+or substituted with captured pixels by this bank.
+
 The Furnace screen bank adds seven unchanged whole PNG files from the fixed
 public Mojang Bedrock Samples `v1.26.60.5` release: four furnace filter states
 and three category icons. Original paths, dimensions, hashes and independent
