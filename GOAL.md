@@ -1,5 +1,7 @@
 # mcbeui
 
+> 当前检查点（2026-11-03）：实际 React 18.3.1／19.3.1 安装包确认 **256 个公共组件、6 个数据值、12 个函数，共 274 个运行时导出**。新增 DisconnectScreen／DisconnectMessage／DisconnectActions，覆盖普通断线、Realms 断线和 Realms 警告三个源分支。16 项纯模型、50 项同批浏览器检查、两 peer 包消费及实际开发／生产四组合通过；完整原版整页像素与剩余 GUI 仍未完成。详见 [断线界面](docs/DISCONNECT_SCREEN.md)。下方较早计数均保留为各阶段历史快照。
+
 > 状态：进行中（2026-11-02）。Chat 三组件已公开；本轮修正文档语义与Start间距，Progress十五路由组合及五个可复用部件已公开。完整原生像素与剩余 GUI 范围仍未完成。暂停检查点 `7480520` 保留。
 
 创建可发布的 React + TypeScript UI 组件库，复刻 Minecraft: Bedrock 的方角、像素字体、双层倒角、绿色交互状态和凹陷式控件。
@@ -9,7 +11,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前205个公共组件、6个数据和12个渲染 / 几何 / 纹理函数，共223个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前256个公共组件、6个数据和12个渲染 / 几何 / 纹理函数，共274个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
@@ -22,7 +24,7 @@
 - 像素级还原是目标；只有固定游戏版本、屏幕、GUI scale、语言、DPR 和原版字体，逐像素对比之后才能声称零偏差。开放字体的字宽差异必须公开记录。
 - npm pack 后在独立消费项目验证导入、类型、CSS 及字体路径。发布到注册表不在本任务范围。
 
-## 当前验收快照（2026-11-02）
+## 历史验收快照（2026-11-02）
 
 - 公共入口及受检功能包为205组件／223运行时值。FileTransmissionScreen／FileTransmissionPanel／FileTransferProgress的精简profile、真实字体展示、两peer安装与默认Vite四组合、生产桌面／Pixel7十项已通过具名检查；完整原生GUI仍未认证，见[FileTransmission验收](docs/FILE_TRANSMISSION_QA.md)。
 - MobEffect正式Node10项通过；34个不同桌面 /移动合同为首轮32通过、两个指针用例按可见宿主尺寸修订后2项通过，不称一次34全绿。六个原背景Web平面201,600个RGBA像素严格零差，只覆盖背景采样。

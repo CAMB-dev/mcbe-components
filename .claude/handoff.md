@@ -1,4 +1,21 @@
-# Current checkpoint — Font sampler cause isolated, 2026-11-03
+# Current checkpoint — Disconnect family, 2026-11-03
+
+## Latest validated scope
+
+Goal ACTIVE/incomplete. Branch codex/disconnect-screen-20261103 based on c156ada3150c6a95d91be1cc951e818ef53becb1. Current stage proof: .cache/disconnect-screen-qa-20261103-01/FINAL.json (commit/push recorded there after sealing). Normal push only; never force. Previous phase checkpoints below remain historical.
+
+- Public exports: 256 components + 6 data + 12 functions = 274. Added DisconnectScreen / DisconnectMessage / DisconnectActions; three actual source aliases, not generic Dialog. Private planners/assets not new runtime exports.
+- Fixed official ZIP/source pinned; original bg32.png / portalBg.png, static full tiled planes, original license. Explicit host size/scale/contentRect/font/hiddenSlots/anchors/tile phase. Source holder/gap semantics preserved, Warning Cancel differs from global Escape. No service effects or browser navigation.
+- Actual model16/16, source browser04 50/50 no skip/retry; 6 whole original background planes 921600RGBA strict0. Not native full GUI.
+- Actual fresh package04 both peers18.3.1/19.3.1: 274 ESM/SSR/declarations/styles/assets/licenses; Disconnect18 groups +12 negative types per peer. Tested package04 tar SHA73adc5cd73cf0c24dc7225cf7bfb231925be7f0969b6e1171687e4ea22c87ef4, immutable package04-tested.tgz.
+- Actual installed four default Vite dev/prod cases PASS; 24 complete frame dev/prod comparisons 1843200RGBA strict0, real inert/nativeDialog/veto/focus/GPU/ref lifecycle; installed01/INSTALLED.json. Root private harness installed-clients.mjs. Servers/browser closed.
+- Retain browser02 narrow-demo failures, package01 stale namespace/package02 dataURL harness failures, native-dialog-red01 and INERT-RED01 real product failures. Corrected actual host width, Vite dataURL strict byte checks, native dialog Escape/controller ownership, React18 native inert (visual background retained). No tolerance changes.
+- Source review .cache/disconnect-root-review-20261103-01/FINAL.json; fixes independently reviewed in AMENDMENT-01. CPU studies/model receipts preserved; no old receipts rewritten.
+- Existing user preview4173 PID217140 must remain. Built preview4/4 PASS. Final Computer Use selection probe found no Minecraft in list_apps/list_windows; independent process query also returned none. No app input or new native screenshot, game or PIX launch; ended session via js_reset. User's earlier main-menu reply is not current native-capture evidence. Use CU only if needed and close after use.
+- Remaining full goal: WorldSettings and other candidate/shared/optional/Pocket ranges; native full pages/fonts/runtime defaults/services unqualified. Do not promote finite Web or count to complete/native parity. Prior SwiftShader38/NVIDIA0 glyph scope and ResourcePacks28/Manifest12 failures below remain unchanged.
+
+
+## Historical checkpoint — Font sampler cause isolated
 
 Full goal ACTIVE/incomplete. Branch codex/font-sampler-diagnosis-20261103,
 based on3076408ebf157561b8f822c1ff3995f40e6eb053. Final proof/commit/push:

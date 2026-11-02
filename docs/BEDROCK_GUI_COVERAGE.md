@@ -1,5 +1,7 @@
 # Bedrock Classic GUI覆盖清单
 
+> 当前实际包（2026-11-03）为 **256 组件／274 运行时值**。Disconnect 三部件已完成有限源／Web、实际两 peer 包和开发／生产四组合检查；仅将 `disconnect_screen.json` 从 C 更新为有限 A。当前此页固定 206 行计数为 **A45／B12／C32／D32／E0／F16／G63／H6**；其余 205 行保持原历史映射。Play／ResourcePacks 等后续族的实现不追溯改写其他历史行，也不代表任一整页原生像素完成。下方 ExternalServer／Furnace 文字保留其历史身份。详见 [断线界面及资格边界](DISCONNECT_SCREEN.md)。
+
 > 当前实际包为227组件／245运行时值，完整熔炼屏幕与配方书的有限Web／包／四组合验证已完成，见[FURNACE_SCREEN_QA.md](FURNACE_SCREEN_QA.md)。12个OreUI部件是另一profile。本页206行保留ExternalServer阶段207／225的范围快照：A44／B12／C33／D32／E0／F16／G63／H6，不据新增数量推广其他GUI或原生像素资格。
 > 历史ExternalServer阶段：207组件／225运行时值；ExternalServer两组件的有限功能／实际包／安装及展示检查通过，仅add_external_server_screen.json由C更新为有限A，得到A44／B12／C33／D32／E0／F16／G63／H6，其余205数据行逐字保持。当前source67项通过含15完整RGBA＋4alpha参数合同，4项partial-alpha像素候选UNQUALIFIED；修后package03／实际安装四组合02／built02均通过，原生整页未认证。
 
@@ -15,9 +17,9 @@ MobEffect增量提供可见name／timer、独立grid、原图行背景、滚动�
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|44|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|45|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|12|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
-|C|`generic_composition_candidate`|33|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
+|C|`generic_composition_candidate`|32|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
 |E|`confirmed_missing_named_family`|0|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
@@ -122,7 +124,7 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 |`death_screen.json`|death|1|A|DeathScreen|
 |`debug_screen.json`|debug_screen|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
 |`dev_console_screen.json`|dev_console|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
-|`disconnect_screen.json`|disconnect|3|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
+|`disconnect_screen.json`|disconnect|3|A|DisconnectScreen、DisconnectMessage、DisconnectActions（有限源／Web，native未认证）|
 |`display_logged_error_screen.json`|display_logged_error|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
 |`edu_discovery_dialog.json`|discovery_dialog|0|G|—|
 |`edu_featured.json`|edu_featured|0|G|—|

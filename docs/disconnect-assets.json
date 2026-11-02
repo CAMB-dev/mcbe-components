@@ -1,0 +1,25 @@
+{
+  "sourceCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "modifications": "None",
+  "assets": [
+    {
+      "source": "resource_pack/textures/ui/bg32.png",
+      "file": "src/assets/disconnect/bg32.png",
+      "bytes": 324,
+      "sha256": "76842acb4488a28062ca494d9150a56db94d1555704d66340ef72cd42066d6bb"
+    },
+    {
+      "source": "resource_pack/textures/ui/portalBg.png",
+      "file": "src/assets/disconnect/portalBg.png",
+      "bytes": 993,
+      "sha256": "1d985d815a28be108c2b550e32c12df8d520dfdbd3ca6515255878917e994a90"
+    },
+    {
+      "source": "LICENSE.md",
+      "file": "src/assets/disconnect/LICENSE.md",
+      "bytes": 222,
+      "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+    }
+  ]
+}

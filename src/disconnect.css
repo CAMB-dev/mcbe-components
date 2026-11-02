@@ -1,0 +1,32 @@
+@import './textures.css';
+.mc-disconnect-screen,.mc-disconnect-message,.mc-disconnect-actions{box-sizing:border-box;position:relative;min-width:0;max-width:none;font-weight:400;text-shadow:none;image-rendering:pixelated}
+.mc-disconnect-screen{isolation:isolate;overflow:hidden;color:#fff}
+.mc-disconnect-screen[hidden],.mc-disconnect-message[hidden],.mc-disconnect-actions[hidden]{display:none!important}
+.mc-disconnect-screen>.mc-disconnect-message,.mc-disconnect-screen>.mc-disconnect-actions{position:absolute;inset:0}
+.mc-disconnect-message,.mc-disconnect-actions{pointer-events:none}
+.mc-disconnect-message__label{box-sizing:border-box;position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;width:max-content;min-width:0;margin:0;padding:0;font:inherit;font-weight:400;color:#fff;white-space:pre-wrap;overflow-wrap:anywhere;overflow:hidden;text-shadow:none}
+.mc-disconnect-background,.mc-disconnect-background__css{position:absolute;inset:0;pointer-events:none}
+.mc-disconnect-background{z-index:-1;overflow:hidden}
+.mc-disconnect-background>.mc-gui-image-layer{position:absolute;left:0;top:0;visibility:hidden}
+@supports selector(:has(*)){.mc-disconnect-background:has(>.mc-gui-image-layer[data-render-state="ready"])>.mc-disconnect-background__css{visibility:hidden}.mc-disconnect-background>.mc-gui-image-layer[data-render-state="ready"]{visibility:visible}}
+.mc-disconnect-button{appearance:none;position:absolute;display:block;box-sizing:border-box;min-width:0;min-height:0;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;outline:none;transform:none;font:inherit;font-weight:400;text-align:center;text-decoration:none;text-shadow:none;color:rgb(30% 30% 30%);cursor:pointer;pointer-events:auto;touch-action:manipulation;isolation:isolate;opacity:1;filter:none}
+.mc-disconnect-button:hover,.mc-disconnect-button:focus-visible,.mc-disconnect-button:active,.mc-disconnect-button:disabled{background:transparent;box-shadow:none;transform:none;filter:none;opacity:1;text-shadow:none}
+.mc-disconnect-button:disabled{color:rgb(30% 30% 30%);cursor:default}
+.mc-disconnect-button__skins{position:absolute;inset:var(--mc-disconnect-u);pointer-events:none;z-index:0}
+.mc-disconnect-button__outline{position:absolute;inset:0;pointer-events:none;filter:brightness(.075);z-index:1}
+.mc-disconnect-button__content{position:absolute;inset:calc(3 * var(--mc-disconnect-u));display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2}
+.mc-disconnect-button__content>span{max-width:100%;max-height:calc(10 * var(--mc-disconnect-u));white-space:pre-wrap;overflow-wrap:anywhere;overflow:hidden;text-shadow:none}
+.mc-disconnect-skin,.mc-disconnect-skin__clip{position:absolute;display:block;overflow:hidden;pointer-events:none}
+.mc-disconnect-skin__patch{display:block;image-rendering:pixelated}
+.mc-disconnect-hover,.mc-disconnect-pressed,.mc-disconnect-locked{display:none}
+.mc-disconnect-button:is(:hover,:focus-visible):not(:disabled){color:#fff}
+.mc-disconnect-button:is(:hover,:focus-visible):not(:disabled) .mc-disconnect-idle{display:none}
+.mc-disconnect-button:is(:hover,:focus-visible):not(:disabled) .mc-disconnect-hover{display:block}
+.mc-disconnect-button:is(:hover,:focus-visible,:active):not(:disabled) .mc-disconnect-button__outline{filter:none}
+.mc-disconnect-button:active:not(:disabled){color:#fff}
+.mc-disconnect-button:active:not(:disabled) .mc-disconnect-idle,.mc-disconnect-button:active:not(:disabled) .mc-disconnect-hover{display:none}
+.mc-disconnect-button:active:not(:disabled) .mc-disconnect-pressed{display:block}
+.mc-disconnect-button:active:not(:disabled) .mc-disconnect-button__content{translate:0 var(--mc-disconnect-u)}
+.mc-disconnect-button:disabled .mc-disconnect-idle{display:none}
+.mc-disconnect-button:disabled .mc-disconnect-locked{display:block}
+@media(forced-colors:active){.mc-disconnect-screen{background:Canvas;color:CanvasText}.mc-disconnect-background,.mc-disconnect-button__skins,.mc-disconnect-button__outline{display:none}.mc-disconnect-message__label{color:CanvasText}.mc-disconnect-button,.mc-disconnect-button:hover,.mc-disconnect-button:active,.mc-disconnect-button:focus-visible{background:ButtonFace;border:1px solid ButtonText;color:ButtonText}.mc-disconnect-button:disabled{color:GrayText;border-color:GrayText}.mc-disconnect-button:focus-visible{outline:2px solid Highlight;outline-offset:2px}}

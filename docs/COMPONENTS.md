@@ -1,5 +1,7 @@
 # Bedrock 组件范围
 
+> 当前实际包（2026-11-03）：**256 组件／274 运行时值**。新增 DisconnectScreen（普通／Realms 两类断线及警告）、DisconnectMessage（正文与标题）、DisconnectActions（独立按钮与源间隔）。使用完整原始 dirt／portal 背景；尺寸、安全区、字体和未恢复的布局默认值由宿主明确提供。三者支持真实 ref、React 18／19 inert、延迟请求否决和嵌套原生 dialog 输入所有权。16 模型、50 浏览器、两 peer 安装包与四个实际 Vite 开发／生产场景通过，完整 native 未认证；见 [DISCONNECT_SCREEN.md](DISCONNECT_SCREEN.md)。下方计数为各历史阶段，不是当前总数。
+
 > 当前实际React18／19包已确认227组件／245运行时值，包含12个新增OreUI部件及8个完整熔炼屏幕／配方书部件。Node49、browser04单批143个项目用例、独立filter材质8平面、实际安装四组合通过；不表示原生整页像素认证。详见[FURNACE_SCREEN_QA.md](FURNACE_SCREEN_QA.md)。Classic206文件表仍为独立历史范围快照，不随组件数量扩充。
 > ExternalServer阶段为207组件／225值；新增ExternalServerForm与ExternalServerField，source browser04完整67／67通过（48交互＋15完整RGBA＋4alpha参数合同），4项alpha像素候选仍UNQUALIFIED；新forced-colors修复后的package03／实际安装四组合02／built02六项与Node25已通过，native未认证。上一受检FileTransmission阶段205组件／223值保留原验收身份，见[FILE_TRANSMISSION_QA.md](FILE_TRANSMISSION_QA.md)。以下历史阶段数字保留各自时间与范围。
 > Credits：受检功能包已确认191组件／209值（191＋6数据＋12函数）；48不同Web合同跨阶段验证、六自编平面108,000RGBA零差；React18／19包及实际开发／生产四组合通过，source展示页9PASS，built首轮8／1保留，观察器URL修正后单项1PASS。最终文档包／Git部署pending；native四行holdout、ó350与logo41,344差异均保留，见[CREDITS_QA.md](CREDITS_QA.md)。

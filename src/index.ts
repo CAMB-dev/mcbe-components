@@ -239,3 +239,8 @@ export type { ManifestValidationIdentity, ManifestValidationIssueIdentity, Manif
 
 export { ManifestValidationScreen } from './manifest-validation-screen';
 export type { ManifestValidationCloseDetail, ManifestValidationViewDetail, ManifestValidationScreenProps } from './manifest-validation-screen';
+
+export { DisconnectScreen, DisconnectMessage, DisconnectActions } from './disconnect';
+export type { DisconnectButtonState, DisconnectVariant, DisconnectButtonKind, DisconnectActionsModel, DisconnectLayout,
+  DisconnectBackgroundProfile, DisconnectAction, DisconnectButtonId, DisconnectActionDetail, DisconnectNativeButtonProps,
+  DisconnectActionsProps, DisconnectMessageProps, DisconnectControllerHandle, DisconnectInputHint, DisconnectScreenProps } from './disconnect-types';

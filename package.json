@@ -139,7 +139,8 @@
     "./resource-pack-items.css": "./dist/resource-pack-items.css",
     "./pack-settings.css": "./dist/pack-settings.css",
     "./manifest-validation-parts.css": "./dist/manifest-validation-parts.css",
-    "./manifest-validation-screen.css": "./dist/manifest-validation-screen.css"
+    "./manifest-validation-screen.css": "./dist/manifest-validation-screen.css",
+    "./disconnect.css": "./dist/disconnect.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",

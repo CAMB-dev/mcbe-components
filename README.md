@@ -2,6 +2,8 @@
 
 React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素字体、硬边倒角、绿色交互状态、原生表单与键盘操作。以 **Bedrock Classic / JSON UI** 为主体，另提供独立的部分 OreUI 组件。
 
+当前提供 **256 个公共组件**，另有 6 个数据导出与 12 个函数。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
+
 > 这是独立粉丝项目，与 Mojang、Microsoft 无关联。开源替代字体和 Web 布局与游戏存在差异；未声称整套 UI 与任何游戏版本零像素偏差。视觉来源与差异见 [FIDELITY.md](docs/FIDELITY.md)。
 
 新增现代 Ore 弹窗原语：`OreModal`、`OreModalHeader`、`OreModalContent`、`OreModalText`、`OreModalActions`，展示入口 `#ore-modals`。标题使用 Seven、正文使用 Noto；内容默认按设置尺寸裁切，显式开启后才使用自定义滚动区。未保存、删除和错误提示可由这些部分组合。浏览器已经完成的关闭通过 `native-close` 通知宿主，不自动重新弹出。[使用与验证说明](docs/ORE_MODAL_QA.md)。
@@ -565,6 +567,10 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 另导出三份可复用数据：`bannerPatternIds` 为这版资源中的 42 个图案 ID，`bannerDyeColors` 为 16 色 Web 预设，`loomPatternIds` 为同版本原生截图观察的 32 个基础图案顺序。染料预设不宣称是原生染色算法，图案顺序不作为所有版本的 engine registry；可以传入自己的 RGB、纹理、网格、相机和光照。
 
 世界、服务器、资源包和玩家卡仅接收内容并发出操作意图；网络连接、世界删除、权限变更、资源包持久化由宿主决定和执行。完整字段由 `.d.ts` 导出，源事实见 [库存](docs/inventory-screens-geometry.json)、[交易 / 坐骑](docs/trading-mounts-geometry.json)、[菜单 / 控制](docs/game-controls-geometry.json)、[列表](docs/game-lists-geometry.json) 与 [系统页面](docs/system-screens-geometry.json)。
+
+## Disconnect
+
+断线与 Realms 提示现有独立 `DisconnectScreen`、`DisconnectMessage` 和 `DisconnectActions`。三种源布局保留独立按钮状态，Escape 与取消加入分开；[预览入口](http://127.0.0.1:4173/#disconnect) · [API 与来源](docs/DISCONNECT_SCREEN.md)。
 
 ## 字体
 

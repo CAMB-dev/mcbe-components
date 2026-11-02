@@ -1,3 +1,4 @@
+import { verifyDisconnectPackage } from './verify-disconnect-package.mjs';
 import { verifyManifestValidationPackage } from './verify-manifest-validation-package.mjs';
 import assert from 'node:assert/strict';
 import { verifyInvitePackage } from './verify-invite-package.mjs';
@@ -101,7 +102,9 @@ for (const file of packed.files) {
 const tarball = packed.filename;
 const tarPath = join(root, tarball);
 for (const major of [18, 19]) {
-  const consumer = join(root, '.cache', `consumer-react${major}`);
+  const verifyRunId = process.env.MCBE_VERIFY_RUN_ID;
+  if (verifyRunId !== undefined) assert(/^[a-zA-Z0-9-]{1,80}$/.test(verifyRunId), 'Verification run id must be a simple path-free label.');
+  const consumer = join(root, '.cache', verifyRunId ? `consumer-${verifyRunId}-react${major}` : `consumer-react${major}`);
   await mkdir(consumer, { recursive: true });
   await writeFile(join(consumer, 'package.json'), JSON.stringify({ name: `mcbeui-consumer-react${major}`, private: true, type: 'module' }));
   npm(['install', '--no-audit', '--no-fund', tarPath, `react@^${major}.3.0`, `react-dom@^${major}.3.0`, `@types/react@^${major}.0.0`, `@types/react-dom@^${major}.0.0`], consumer);
@@ -140,10 +143,11 @@ components.push('FurnaceRecipeBook','FurnaceRecipeBookEntry','FurnaceRecipeCateg
 components.push('PlayScreen','PlayScreenFrame','PlayNavigationTabs','PlayWorldRow','PlayNetworkWorldRow','PlayWorldsContent','PlayFriendsContent','PlayServersContent','PlayServerRow','PlayServerDetails','PlayJoinCodeDialog','PlayHighPingDialog');
 components.push('ResourcePackManager','ResourcePackSection','ResourcePackItem','ResourcePackActions','ResourcePackDiagnostics','PackSettingsScreen','PackSettingsContent','PackContentTier');
 components.push("ManifestValidationButton","ManifestPackSummary","ManifestValidationIssue","ManifestValidationIssues","ManifestValidationContent","ManifestValidationScreen");
-assert.equal(components.length,253);
+components.push('DisconnectScreen','DisconnectMessage','DisconnectActions');
+assert.equal(components.length,256);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,12);
-assert.equal(Object.keys(ui).length,271);
+assert.equal(Object.keys(ui).length,274);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -2094,5 +2098,6 @@ export const demo = <>
   await verifyPlayScreenPackage({ consumer, root, major, evidenceName:'play-screen-contracts-'+Date.now() });
   await verifyResourcePacksPackage({ consumer, root, major, evidenceName:'resource-packs-contracts-'+Date.now() });
   await verifyManifestValidationPackage({ consumer, root, major, evidenceName:'manifest-validation-contracts-'+Date.now() });
+  await verifyDisconnectPackage({ consumer, root, major, evidenceName:'disconnect-contracts-'+Date.now() });
 }
 console.log(`Verified tarball: ${tarPath}`);

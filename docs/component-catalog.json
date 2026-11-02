@@ -29,7 +29,10 @@
     "nativeUnicodeGlyph": "U+6D3B",
     "nvidiaD3D11DifferentPixels": 0,
     "swiftShaderDifferentPixelsRetained": 38,
-    "failedFixed8ExperimentPixels": {"swiftShader": 75, "nvidiaD3D11": 31},
+    "failedFixed8ExperimentPixels": {
+      "swiftShader": 75,
+      "nvidiaD3D11": 31
+    },
     "completeFontOrDefaultLayoutQualified": false,
     "details": "docs/CLASSIC_TEN_FONT_QA.md"
   },
@@ -1777,10 +1780,27 @@
         "fidelity": "source_modern_ore_profile_native_pixels_unqualified",
         "details": "docs/ORE_MODAL_QA.md"
       }
+    ],
+    "disconnect": [
+      {
+        "name": "DisconnectScreen",
+        "status": "implemented",
+        "fidelity": "fixed_source_three_aliases_explicit_web_layout_and_host_intents_native_unverified"
+      },
+      {
+        "name": "DisconnectMessage",
+        "status": "implemented",
+        "fidelity": "fixed_source_three_aliases_explicit_web_layout_and_host_intents_native_unverified"
+      },
+      {
+        "name": "DisconnectActions",
+        "status": "implemented",
+        "fidelity": "fixed_source_three_aliases_explicit_web_layout_and_host_intents_native_unverified"
+      }
     ]
   },
   "publicExports": {
-    "components": 253,
+    "components": 256,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1791,12 +1811,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 271,
+    "runtimeValues": 274,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "manifest_validation_253_271_scoped_web_package_qualified_material_partial_native_unqualified",
+    "publicationState": "disconnect_256_274_scoped_source_web_package_installed_qualified_native_unverified",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
@@ -2025,5 +2045,52 @@
       "completeNativePNG": 4,
       "differentPixels": 0
     }
+  },
+  "disconnectStage": {
+    "status": "SCOPED_SOURCE_WEB_PACKAGE_INSTALLED_QUALIFIED_NATIVE_UNVERIFIED",
+    "components": [
+      "DisconnectScreen",
+      "DisconnectMessage",
+      "DisconnectActions"
+    ],
+    "variants": [
+      "disconnect",
+      "realms-disconnect",
+      "realms-warning"
+    ],
+    "sourceCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sourceFile": "resource_pack/ui/disconnect_screen.json",
+    "sourceSHA256": "9883f0aff478dd446a65cbdec5b09fb49323465ea36928685895513bfe9aff5e",
+    "modelPass": 16,
+    "browserCohortPass": 50,
+    "browserSkip": 0,
+    "browserRetries": 0,
+    "completeOriginalBackgroundPlanes": 6,
+    "backgroundPixels": 921600,
+    "backgroundDifferentPixels": 0,
+    "reactPeers": [
+      "18.3.1",
+      "19.3.1"
+    ],
+    "installedSSRGroupsPerPeer": 18,
+    "negativeTypesPerPeer": 12,
+    "actualInstalledDevProductionCases": 4,
+    "devProductionCompleteFrameComparisons": 24,
+    "devProductionPixels": 1843200,
+    "devProductionDifferentPixels": 0,
+    "nativeFullScreenQualified": false,
+    "fontAndEngineDefaultsRecovered": false,
+    "explicitHostPolicies": [
+      "size",
+      "integer scale",
+      "contentRect",
+      "font metrics",
+      "hidden slots",
+      "row alignment",
+      "URI anchor",
+      "text alignment",
+      "tile phase and rounding"
+    ],
+    "details": "docs/DISCONNECT_SCREEN.md"
   }
 }

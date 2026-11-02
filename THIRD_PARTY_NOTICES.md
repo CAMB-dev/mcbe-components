@@ -1,5 +1,12 @@
 # Third-party notices
 
+Disconnect adds two unchanged 32×32 public Mojang sample backgrounds,
+`bg32.png` and `portalBg.png`, under `dist/assets/disconnect`, with the original
+upstream `LICENSE.md`. Exact archive, source and byte identities are recorded in
+`docs/disconnect-assets.json`. Button skins reuse the existing exact public
+Resource Pack bank. These images retain Mojang ownership and Minecraft EULA
+terms, independently of this project's MIT code license.
+
 The Resource Packs / Pack Settings bank references 59 unchanged whole public
 Mojang PNG resources from the fixed Bedrock Samples `v1.26.60.5-full` archive.
 It adds five complete original PNGs under `dist/assets/resource-pack`; all other
