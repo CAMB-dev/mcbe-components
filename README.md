@@ -2,7 +2,7 @@
 
 React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素字体、硬边倒角、绿色交互状态、原生表单与键盘操作。以 **Bedrock Classic / JSON UI** 为主体，另提供独立的部分 OreUI 组件。
 
-当前提供 **256 个公共组件**，另有 6 个数据导出与 12 个函数。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
+当前提供 **258 个公共组件**，另有 6 个数据导出与 12 个函数。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
 
 > 这是独立粉丝项目，与 Mojang、Microsoft 无关联。开源替代字体和 Web 布局与游戏存在差异；未声称整套 UI 与任何游戏版本零像素偏差。视觉来源与差异见 [FIDELITY.md](docs/FIDELITY.md)。
 
@@ -567,6 +567,10 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 另导出三份可复用数据：`bannerPatternIds` 为这版资源中的 42 个图案 ID，`bannerDyeColors` 为 16 色 Web 预设，`loomPatternIds` 为同版本原生截图观察的 32 个基础图案顺序。染料预设不宣称是原生染色算法，图案顺序不作为所有版本的 engine registry；可以传入自己的 RGB、纹理、网格、相机和光照。
 
 世界、服务器、资源包和玩家卡仅接收内容并发出操作意图；网络连接、世界删除、权限变更、资源包持久化由宿主决定和执行。完整字段由 `.d.ts` 导出，源事实见 [库存](docs/inventory-screens-geometry.json)、[交易 / 坐骑](docs/trading-mounts-geometry.json)、[菜单 / 控制](docs/game-controls-geometry.json)、[列表](docs/game-lists-geometry.json) 与 [系统页面](docs/system-screens-geometry.json)。
+
+## World settings actions
+
+世界设置启动操作提供 `WorldLaunchActions`，支持 Bedrock／Education 与创建／编辑源分支；`WorldSettingsActionButton` 复用真实 light／dark／Realms 皮肤。预览 `#world-settings-actions`，见 [API 与验证](docs/WORLD_SETTINGS_ACTIONS.md)。完整世界设置框架和字段仍在接入。
 
 ## Disconnect
 

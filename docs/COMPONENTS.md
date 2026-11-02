@@ -1,5 +1,7 @@
 # Bedrock 组件范围
 
+> 最新实际包（2026-11-03）：**258 组件／276 运行时值**。WorldLaunchActions 提供原版 35 高的 Bedrock／Education 启动行；WorldSettingsActionButton 提供可复用 light／dark／Realms 操作按钮。62 项 Web 检查、24 原图材质平面、两 peer 实际包、四个 Vite 开发／生产场景及 4 项 built 展示检查通过。完整 WorldSettingsScreen 及原生像素仍未完成；见 [WORLD_SETTINGS_ACTIONS.md](WORLD_SETTINGS_ACTIONS.md)。以下较早数字保留历史阶段身份。
+
 > 当前实际包（2026-11-03）：**256 组件／274 运行时值**。新增 DisconnectScreen（普通／Realms 两类断线及警告）、DisconnectMessage（正文与标题）、DisconnectActions（独立按钮与源间隔）。使用完整原始 dirt／portal 背景；尺寸、安全区、字体和未恢复的布局默认值由宿主明确提供。三者支持真实 ref、React 18／19 inert、延迟请求否决和嵌套原生 dialog 输入所有权。16 模型、50 浏览器、两 peer 安装包与四个实际 Vite 开发／生产场景通过，完整 native 未认证；见 [DISCONNECT_SCREEN.md](DISCONNECT_SCREEN.md)。下方计数为各历史阶段，不是当前总数。
 
 > 当前实际React18／19包已确认227组件／245运行时值，包含12个新增OreUI部件及8个完整熔炼屏幕／配方书部件。Node49、browser04单批143个项目用例、独立filter材质8平面、实际安装四组合通过；不表示原生整页像素认证。详见[FURNACE_SCREEN_QA.md](FURNACE_SCREEN_QA.md)。Classic206文件表仍为独立历史范围快照，不随组件数量扩充。

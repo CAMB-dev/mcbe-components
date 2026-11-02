@@ -140,7 +140,8 @@
     "./pack-settings.css": "./dist/pack-settings.css",
     "./manifest-validation-parts.css": "./dist/manifest-validation-parts.css",
     "./manifest-validation-screen.css": "./dist/manifest-validation-screen.css",
-    "./disconnect.css": "./dist/disconnect.css"
+    "./disconnect.css": "./dist/disconnect.css",
+    "./world-settings-actions.css": "./dist/world-settings-actions.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",

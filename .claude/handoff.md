@@ -1,6 +1,22 @@
-# Current checkpoint — Disconnect family, 2026-11-03
+# Current checkpoint — World settings action parts, 2026-11-03
 
-## Latest validated scope
+## Latest checkpoint — World settings action parts, 2026-11-03
+
+Full goal ACTIVE/incomplete. Branch codex/world-settings-20261103 based on fb426a923ce858dc661636041828b9260632195f. Final proof/commit/remote in .cache/world-settings-actions-qa-20261103-01/FINAL.json after sealing. Never force push.
+
+- Public258 components +6 data +12 functions =276. WorldSettingsActionButton and WorldLaunchActions are actual source parts, NOT full WorldSettingsScreen. Preserve original full goal.
+- Whole-source study .cache/world-settings-source-study-20261103-01/FINAL.json; reuse/field audit .cache/world-settings-reuse-study-20261103-01/FINAL.json. Eleven whole JSON,69 game direct controls/41 field instances; only experimental factory. Frame actual40/60 split,30-row/31-paint nav,empty world headers/footers,source actions without button. prefix. No invented Save footer or slider domains.
+- Six original dark/Realms PNG+raw metadata reused; no new PNG. scripts/prepare-world-settings-assets.py --check passes; license original. Material agent frozen outputs.
+- browser02 62/62,0skip/retry;24 complete original nine-slice planes253440RGBA0. Source button inset1/content3/pressedlabelY1/.3/.7 text, native inert/modal/veto/ref tested.
+- package03 actually both peers18.3.1/19.3.1/276 exports/old family checks +World9SSR/10negative types/6PNG/6metadata/CSS/license PASS. Immutable package03-tested.tgz SHA873a669a3bd646dba24ef3a7019c7b7f429ec51ed9a71c79ea8602d39252c9fc.
+- installed01 four actual default Vite dev/prod clients PASS,48 whole-row pairs436800RGBA0;refs/inert/native modal/source change/document veto. built01 public4/4PASS. CSS-only Web finite source tests, not native.
+- Retain browser01 54P/8F:2 true stale clicks,6 harness2x2-vs4x4 locked texture assumption; one exploratory source ignored mutation. Fixed owner/current identity captured BEFORE host onClick, pregame ignored null/unmount. Package01 generated-worker escape error,helper-preflight02 bad import,preflight03 children type expectations,package02 compatible Omit compile failure retained. package03 is final fresh validation. TS children/dangerous never; actual old/new installed index.js byte-identical.
+- Review .cache/world-settings-actions-review-20261103-01/FINAL.json and AMENDMENT-01/FINAL.json:W1/W2 fixed,0new definite; reviewer ran no tests.
+- Existing4173 PID217140 must remain; own5481/5483/5484 close after tests. No Computer Use/native launch/input/capture in this stage. Prior font/backend/native residuals remain.
+- NEXT full WorldSettings: source frame and actual selector/header/content/footer; independent source gates/draft fields/multiplayer; reuse ResourcePackManager/PermissionLevelSelect/ServerCustomContents only at real mounts. Ordinary world game is NOT nine custom_form fields. Preserve full source/capability/hidden/forcedindex/intrinsic/font/native unknowns. Continue other optional/Pocket/world-template/calibration GUI ranges later; no goal completion from component count.
+
+
+## Historical Disconnect checkpoint
 
 Goal ACTIVE/incomplete. Branch codex/disconnect-screen-20261103 based on c156ada3150c6a95d91be1cc951e818ef53becb1. Current stage proof: .cache/disconnect-screen-qa-20261103-01/FINAL.json (commit/push recorded there after sealing). Normal push only; never force. Previous phase checkpoints below remain historical.
 

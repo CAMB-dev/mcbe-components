@@ -1,5 +1,11 @@
 # Third-party notices
 
+World settings action parts reuse six unchanged whole public Mojang PNGs and
+their original metadata already present in the player-permissions and play-screen
+banks. They add no repainted or duplicate PNGs. Source identities and reuse paths
+are in `docs/world-settings-assets.json`; the unchanged upstream license is also
+retained at `dist/assets/world-settings/LICENSE.md`.
+
 Disconnect adds two unchanged 32×32 public Mojang sample backgrounds,
 `bg32.png` and `portalBg.png`, under `dist/assets/disconnect`, with the original
 upstream `LICENSE.md`. Exact archive, source and byte identities are recorded in

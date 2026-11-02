@@ -1797,10 +1797,24 @@
         "status": "implemented",
         "fidelity": "fixed_source_three_aliases_explicit_web_layout_and_host_intents_native_unverified"
       }
+    ],
+    "world_settings_actions": [
+      {
+        "name": "WorldSettingsActionButton",
+        "status": "implemented",
+        "fidelity": "source_action_button_and_launch_row_only_full_world_settings_not_implemented",
+        "details": "docs/WORLD_SETTINGS_ACTIONS.md"
+      },
+      {
+        "name": "WorldLaunchActions",
+        "status": "implemented",
+        "fidelity": "source_action_button_and_launch_row_only_full_world_settings_not_implemented",
+        "details": "docs/WORLD_SETTINGS_ACTIONS.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 256,
+    "components": 258,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1811,12 +1825,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 274,
+    "runtimeValues": 276,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "disconnect_256_274_scoped_source_web_package_installed_qualified_native_unverified",
+    "publicationState": "world_actions_258_276_scoped_web_package_installed_built_qualified_full_world_settings_incomplete",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
@@ -2092,5 +2106,47 @@
       "tile phase and rounding"
     ],
     "details": "docs/DISCONNECT_SCREEN.md"
+  },
+  "worldSettingsActionsStage": {
+    "status": "SCOPED_ACTION_PARTS_QUALIFIED_FULL_WORLD_SETTINGS_INCOMPLETE",
+    "components": [
+      "WorldSettingsActionButton",
+      "WorldLaunchActions"
+    ],
+    "sourceCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "sourceFiles": [
+      "resource_pack/ui/settings_sections/settings_common.json",
+      "resource_pack/ui/settings_sections/world_section.json",
+      "resource_pack/ui/ui_template_buttons.json"
+    ],
+    "browserPass": 62,
+    "skip": 0,
+    "retry": 0,
+    "wholeMaterialPlanes": 24,
+    "materialPixels": 253440,
+    "differentMaterialPixels": 0,
+    "reactPeers": [
+      "18.3.1",
+      "19.3.1"
+    ],
+    "SSRGroupsPerPeer": 9,
+    "negativeTypesPerPeer": 10,
+    "actualInstalledDevProductionCases": 4,
+    "completeDevProductionFrameComparisons": 48,
+    "devProductionPixels": 436800,
+    "devProductionDifferentPixels": 0,
+    "builtDemoPass": 4,
+    "reusedWholePNGs": 6,
+    "reusedRawMetadata": 6,
+    "newPNGs": 0,
+    "fullWorldSettingsImplemented": false,
+    "nativeFullScreenQualified": false,
+    "remaining": [
+      "source frame and navigation",
+      "Game69 controls and explicit field bindings",
+      "multiplayer and pack mounts",
+      "runtime intrinsics/fonts/native full-frame verification"
+    ],
+    "details": "docs/WORLD_SETTINGS_ACTIONS.md"
   }
 }

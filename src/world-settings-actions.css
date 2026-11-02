@@ -1,0 +1,27 @@
+@import './textures.css';
+.mc-world-launch-actions{position:relative;box-sizing:border-box;min-width:0;text-shadow:none;font-weight:400}
+.mc-world-launch-actions[hidden],.mc-world-settings-action[hidden]{display:none!important}
+.mc-world-settings-action{appearance:none;position:relative;display:block;box-sizing:border-box;min-width:0;min-height:0;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;outline:none;transform:none;font:inherit;font-weight:400;text-align:center;text-decoration:none;text-shadow:none;color:rgb(30% 30% 30%);cursor:pointer;touch-action:manipulation;isolation:isolate;opacity:1;filter:none}
+.mc-world-launch-actions>.mc-world-settings-action{position:absolute;top:0}
+.mc-world-settings-action:is(:hover,:active,:focus-visible,:disabled){background:transparent;box-shadow:none;transform:none;filter:none;opacity:1;text-shadow:none}
+.mc-world-settings-action:disabled{cursor:default;color:rgb(30% 30% 30%)}
+.mc-world-settings-action[data-tone=dark],.mc-world-settings-action[data-tone=realms]{color:#fff}
+.mc-world-settings-action[data-tone=dark]:disabled,.mc-world-settings-action[data-tone=realms]:disabled{color:rgb(70% 70% 70%)}
+.mc-world-settings-action__skins{position:absolute;inset:var(--mc-world-action-u);pointer-events:none;z-index:0}
+.mc-world-settings-action__outline{position:absolute;inset:0;pointer-events:none;filter:brightness(.075);z-index:1}
+.mc-world-settings-action__content{position:absolute;inset:calc(3 * var(--mc-world-action-u));display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2}
+.mc-world-settings-action__content>span{max-width:100%;white-space:nowrap;overflow:hidden;text-shadow:none}
+.mc-world-settings-action-skin,.mc-world-settings-action-skin__clip{position:absolute;display:block;overflow:hidden;pointer-events:none}
+.mc-world-settings-action-skin__patch{display:block;image-rendering:pixelated}
+.mc-world-settings-action-hover,.mc-world-settings-action-pressed,.mc-world-settings-action-locked{display:none}
+.mc-world-settings-action:is(:hover,:focus-visible):not(:disabled){color:#fff}
+.mc-world-settings-action:is(:hover,:focus-visible):not(:disabled) .mc-world-settings-action-idle{display:none}
+.mc-world-settings-action:is(:hover,:focus-visible):not(:disabled) .mc-world-settings-action-hover{display:block}
+.mc-world-settings-action:is(:hover,:focus-visible,:active):not(:disabled) .mc-world-settings-action__outline{filter:none}
+.mc-world-settings-action:active:not(:disabled){color:#fff}
+.mc-world-settings-action:active:not(:disabled) .mc-world-settings-action-idle,.mc-world-settings-action:active:not(:disabled) .mc-world-settings-action-hover{display:none}
+.mc-world-settings-action:active:not(:disabled) .mc-world-settings-action-pressed{display:block}
+.mc-world-settings-action:active:not(:disabled) .mc-world-settings-action__content{translate:0 var(--mc-world-action-u)}
+.mc-world-settings-action:disabled .mc-world-settings-action-idle{display:none}
+.mc-world-settings-action:disabled .mc-world-settings-action-locked{display:block}
+@media(forced-colors:active){.mc-world-settings-action__skins,.mc-world-settings-action__outline{display:none}.mc-world-settings-action,.mc-world-settings-action:is(:hover,:focus-visible,:active){background:ButtonFace;border:1px solid ButtonText;color:ButtonText!important}.mc-world-settings-action:disabled{color:GrayText!important;border-color:GrayText}.mc-world-settings-action:focus-visible{outline:2px solid Highlight;outline-offset:2px}}

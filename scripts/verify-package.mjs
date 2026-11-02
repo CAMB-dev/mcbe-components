@@ -1,4 +1,5 @@
 import { verifyDisconnectPackage } from './verify-disconnect-package.mjs';
+import { verifyWorldSettingsActionsPackage } from './verify-world-settings-actions-package.mjs';
 import { verifyManifestValidationPackage } from './verify-manifest-validation-package.mjs';
 import assert from 'node:assert/strict';
 import { verifyInvitePackage } from './verify-invite-package.mjs';
@@ -144,10 +145,11 @@ components.push('PlayScreen','PlayScreenFrame','PlayNavigationTabs','PlayWorldRo
 components.push('ResourcePackManager','ResourcePackSection','ResourcePackItem','ResourcePackActions','ResourcePackDiagnostics','PackSettingsScreen','PackSettingsContent','PackContentTier');
 components.push("ManifestValidationButton","ManifestPackSummary","ManifestValidationIssue","ManifestValidationIssues","ManifestValidationContent","ManifestValidationScreen");
 components.push('DisconnectScreen','DisconnectMessage','DisconnectActions');
-assert.equal(components.length,256);
+components.push('WorldSettingsActionButton','WorldLaunchActions');
+assert.equal(components.length,258);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,12);
-assert.equal(Object.keys(ui).length,274);
+assert.equal(Object.keys(ui).length,276);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -2099,5 +2101,6 @@ export const demo = <>
   await verifyResourcePacksPackage({ consumer, root, major, evidenceName:'resource-packs-contracts-'+Date.now() });
   await verifyManifestValidationPackage({ consumer, root, major, evidenceName:'manifest-validation-contracts-'+Date.now() });
   await verifyDisconnectPackage({ consumer, root, major, evidenceName:'disconnect-contracts-'+Date.now() });
+  await verifyWorldSettingsActionsPackage({ consumer, root, major, evidenceName:'world-settings-actions-'+Date.now() });
 }
 console.log(`Verified tarball: ${tarPath}`);

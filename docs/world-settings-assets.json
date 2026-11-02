@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "status": "whole-public-source-materials-verified-native-rendering-unqualified",
+  "modifications": "None; no PNG duplicated/repainted/resized and no raw metadata normalized.",
+  "assets": {
+    "dark": {
+      "source": "resource_pack/textures/ui/button_borderless_dark.png",
+      "file": "src/assets/player-permissions/button_borderless_dark.png",
+      "bytes": 137,
+      "sha256": "fc332fee4a0f800491f1e6ad4925e175e556bcfcba5d587678dc1731f1780548",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/button_borderless_dark.json",
+        "file": "src/assets/player-permissions/button_borderless_dark.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "reuse-existing-whole-original-png-and-raw-json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_dark.png"
+    },
+    "darkHover": {
+      "source": "resource_pack/textures/ui/button_borderless_darkhover.png",
+      "file": "src/assets/player-permissions/button_borderless_darkhover.png",
+      "bytes": 151,
+      "sha256": "40c380b48b04c5a9b222b0f9f95ecaa7fb97295d2e776f1094a323886d4f849b",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/button_borderless_darkhover.json",
+        "file": "src/assets/player-permissions/button_borderless_darkhover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "reuse-existing-whole-original-png-and-raw-json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_darkhover.png"
+    },
+    "darkPressed": {
+      "source": "resource_pack/textures/ui/button_borderless_darkpressed.png",
+      "file": "src/assets/player-permissions/button_borderless_darkpressed.png",
+      "bytes": 145,
+      "sha256": "f2037494b69a14f90f008cc0d5f74c8280bac9bc2bfba9f4405ead8c103c9532",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/button_borderless_darkpressed.json",
+        "file": "src/assets/player-permissions/button_borderless_darkpressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "reuse-existing-whole-original-png-and-raw-json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/button_borderless_darkpressed.png"
+    },
+    "realms": {
+      "source": "resource_pack/textures/ui/realmsContent.png",
+      "file": "src/assets/play-screen/realmsContent.png",
+      "bytes": 157,
+      "sha256": "7d27d0ab86682f65d6cec8a8825224aafdce9043d8beca066464a56f76ef2950",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/realmsContent.json",
+        "file": "src/assets/play-screen/realmsContent.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "reuse-existing-whole-original-png-and-raw-json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/realmsContent.png"
+    },
+    "realmsHover": {
+      "source": "resource_pack/textures/ui/realmsContentHover.png",
+      "file": "src/assets/play-screen/realmsContentHover.png",
+      "bytes": 159,
+      "sha256": "276867950cb819f53616056f0bc1ffea0a5349923fbf7fad3fe441baf787e15e",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/realmsContentHover.json",
+        "file": "src/assets/play-screen/realmsContentHover.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "reuse-existing-whole-original-png-and-raw-json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/realmsContentHover.png"
+    },
+    "realmsPressed": {
+      "source": "resource_pack/textures/ui/realmsContentPressed.png",
+      "file": "src/assets/play-screen/realmsContentPressed.png",
+      "bytes": 159,
+      "sha256": "11a087be7187232de7db572afbcf1d6b27c75bfb96ea0e482517c6ec80ed32ea",
+      "dimensions": [
+        4,
+        4
+      ],
+      "metadata": {
+        "source": "resource_pack/textures/ui/realmsContentPressed.json",
+        "file": "src/assets/play-screen/realmsContentPressed.json",
+        "bytes": 60,
+        "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+        "value": {
+          "nineslice_size": 1,
+          "base_size": [
+            4,
+            4
+          ]
+        }
+      },
+      "distribution": "reuse-existing-whole-original-png-and-raw-json",
+      "pinnedUrl": "https://raw.githubusercontent.com/Mojang/bedrock-samples/15701fa9c13923f12662984c32c124327e40e3d3/resource_pack/textures/ui/realmsContentPressed.png"
+    }
+  },
+  "license": {
+    "source": "LICENSE.md",
+    "file": "src/assets/world-settings/LICENSE.md",
+    "bytes": 222,
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+  },
+  "sourceContracts": {
+    "dark": "settings_common.action_button_dark_text -> common_buttons.dark_text_button -> dark_button_assets; button_borderless_dark/default-hover-pressed",
+    "realms": "world_section.play_or_create_stack_bedrock.play_on_realm_button overrides only default/hover/pressed with realmsContent series; locked remains disabledButtonNoBorder"
+  },
+  "scope": "Private six-key material map only. Source image/metadata identity does not prove native GUI, layout, font, alpha or sampling parity."
+}
