@@ -170,3 +170,5 @@ footer按钮按源最小外框102×20、bottom对齐、随unitScale的一逻辑�
 页码与底部按钮新增 layout.labelRaster，可由宿主提供真实分页字形并同层混合原皮肤。固定empty UI target在指定原字体profile/D3D11下整帧RGBA0，mixed正文仍有3614像素差异；见 [Book label raster QA](BOOK_LABEL_RASTER_QA.md)。
 
 后续正文 source painter 已将同一已观察mixed target的静态候选降到RGBA0；采用完整framebuffer以保留插值相位，保留真实textarea编辑。`layout.bodyRaster` 的空闲渲染、原字体准备和单独集成验证见 [Book body raster QA](BOOK_BODY_RASTER_QA.md)。此前3614差异是label阶段的历史结果。
+
+2026-11-02 原生编辑补采观察到了 Book 自身的绿色光标，并用临时替换探针确认了一次非空键盘选区；单次 GPU 捕获返回 `0x80004005`，未取得新帧。这些屏幕观察没有扩大像素验证范围，详见 [Book 原生编辑采集记录](BOOK_EDITING_NATIVE_QA.md)。

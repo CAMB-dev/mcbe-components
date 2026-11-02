@@ -1,5 +1,48 @@
 # Session handoff
 
+## Current continuation — native Book editing acquisition, 2026-11-02
+
+Full goal ACTIVE/incomplete. Parent433200abbd385e33083c8fb7de0719cda7d0972d;
+205components/223runtime unchanged. This continuation changes documentation only,
+not source/fonts/assets/tests or old pixel targets. Root closure:
+`.cache/book-editing-native-01/CLOSURE.json`.
+
+Done: CPU inventory `.cache/book-editing-evidence-study-01/FINAL.json` pins36 old
+metadata/images unchanged; old Book states are empty/mixed/signing-empty, with no
+qualified focused caret/selection/wrap/scroll. Native GPU launch via PIX2610.28
+successfully loaded capturer1.0.2610.28001 in installed Minecraft1.26.6005.0,
+PID208332/startUTC2026-11-02T01:58:34.6140277Z. Current window screenshot2560x1400,
+not old2570x1402 UI RT. Screen-only green Book caret observed after actual focus
+and CtrlHome; select-all keyboard range proven by temporary single-char replace,
+without visible selection background in observed state. Restored visible original
+`Bedrock UI 0123456789 abc XYZ\n像素字体测试`, right empty and unsigned; no internal
+world-data/GPU glyph readback. ASCII-only visual wrapping changed on Han input,
+but no captured counterfactual pair, so no font-route/wrapping algorithm proof.
+
+Actual one-shot SDK capture FAILED: `.cache/book-editing-capture-helper-01/`
+CAPTURE-ATTEMPT/RESULT and EXECUTION-REVIEW.json retain soleTakeGpuCapture,
+requestedPID208332/1/PRESENT, E_FAIL0x80004005, exit1, returnedWpix null and no new
+wpix/capture-counter increment. Do not infer root cause from HRESULT. Helper
+compiled from current retail synchronous API; no Launch/Attach/Detach/input/focus.
+It set connection/target options incl keyNONE; no GetOptions restore API. No retry.
+Frozen12 source/config/binary hashes unchanged. Its PID is now exited; do not reuse
+or delete one-shotclaim. New attempt requires a new reviewed experiment.
+
+Cleanup DONE: writable Book back inventoryrow1col2, hotbar3 enchanting_table,
+selected3; view yaw temporary+90 reversed via `tp @s ~ ~ ~ ~-90 ~`, position still
+23.50/201.00/25.50. Game Save&Quit returned to worldlist, then MC and PIX normally
+closed. Process check zero Minecraft/GameLaunchHelper/WinPix/WinPixServices/
+EngineHost; Computer Use node runtime reset. No browser/server started, user4173
+untouched. Native world time progressed normally; no settings/OS changes claimed.
+
+Pending: first obtain focused Book F-start/F-end same-value captures actually
+containing caret, then selection and no-newline mixed whitespace/longtoken wrap.
+Overflow only after confirming native constrain_to_rect acceptance, not assumed
+scroll. Current newdoc `docs/BOOK_EDITING_NATIVE_QA.md` separates observations,
+failed request and qualification. No source editing painter changes justified.
+No tests rerun for documentation-only continuation. Prior idle/package/browser
+proof remains finite and unchanged; historical completed checkpoint below.
+
 Updated2026-11-02 Asia/Singapore. Full goal ACTIVE/incomplete. Public205components/223runtime and206-filecoverage unchanged. Current checkpoint adds optional Book idle source body rendering; fixed empty and mixed whole UI targets are RGBA0 under explicit original-font/D3D11/DPR1 profiles. Native editing, default-font routing and general game fidelity remain unqualified.
 
 Branch codex/book-body-raster-20261102; parent652914eeaa240eedb61394823cefa960915f1d2b. Authoritative commit/main/clean/package/services: .cache/book-body-final-01/FINAL.json. Prior labels closure .cache/book-label-final-01/FINAL.json.

@@ -172,3 +172,8 @@ a GPU cancellation API. ShadowRoot-specific focus allocation has not been
 qualified. No Minecraft, PIX or Computer Use session was opened for this work;
 the root-owned test browsers/servers close after their runs and user4173 is
 left untouched.
+
+A later native editing acquisition attempt is recorded separately in
+[Book editing native QA](BOOK_EDITING_NATIVE_QA.md). That attempt opened and
+closed Minecraft/PIX/Computer Use, but returned no new GPU capture. It changes
+neither the idle-rendering qualification above nor the editing fallback.
