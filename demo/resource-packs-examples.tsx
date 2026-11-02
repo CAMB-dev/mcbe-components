@@ -8,7 +8,7 @@ import type {ResourcePackManagerActionDetail,ResourcePackProfile,ResourcePackMan
 import {PackSettingsScreen} from '../src/pack-settings';
 import {createResourcePackDemoProps} from './resource-pack-data';
 import {createPackSettingsDemoProps} from './pack-settings-data';
-import {hasGameFont} from 'virtual:mcbeui-game-font';
+import {hasGameFont,hasClassicTenFont} from 'virtual:mcbeui-game-font';
 import '../src/fonts.css';
 
 function mapCollections(collections:ResourcePackManagerProps['collections'],map:(item:ResourcePackManagerRecord)=>ResourcePackManagerRecord):ResourcePackManagerProps['collections']{
@@ -25,7 +25,7 @@ export function ResourcePacksExamples(){
   const [status,setStatus]=useState('本地宿主示例；操作只提交界面请求。');
   const [headerImages,setHeaderImages]=useState(false),[headerExpanded,setHeaderExpanded]=useState(false);
   const settingsRoot=useRef<HTMLDivElement>(null);
-  useEffect(()=>{let active=true;Promise.all([document.fonts.load('18px "MCBE Pixel"'),document.fonts.load('18px "MCBE CJK"'),...(hasGameFont?[document.fonts.load('18px "Mojangles Pixel"')]:[])]).then(()=>document.fonts.ready).then(()=>{if(active)setReady(true);}).catch(()=>{if(active)setReady(true);});return()=>{active=false;};},[]);
+  useEffect(()=>{let active=true;Promise.all([document.fonts.load('18px "MCBE Pixel"'),document.fonts.load('18px "MCBE CJK"'),...(hasGameFont?[document.fonts.load('18px "Mojangles Pixel"')]:[]),...(hasClassicTenFont?[document.fonts.load('18px "MCBE Classic Ten"')]:[])]).then(()=>document.fonts.ready).then(()=>{if(active)setReady(true);}).catch(()=>{if(active)setReady(true);});return()=>{active=false;};},[]);
   useEffect(()=>{if(settings.open)settingsRoot.current?.scrollIntoView({block:'center'});},[settings.open]);
   const chooseProfile=(profile:ResourcePackProfile)=>{setModel(createResourcePackDemoProps(profile));setStatus('已切换宿主配置：'+profile);};
   const request=(detail:ResourcePackManagerActionDetail)=>{
@@ -44,8 +44,9 @@ export function ResourcePacksExamples(){
     actions:item.actions?{...item.actions,diagnostics:{...item.actions.diagnostics,hasErrors:true,hasWarnings:true,hasExpired:true,errorFree:true,reportGenerating:true}}:undefined,
   })):model.collections;
   const font={'--mc-font':hasGameFont?'"Mojangles Pixel","Mojangles","MCBE CJK",monospace':'"MCBE Pixel","MCBE CJK",monospace',
+    ...(hasClassicTenFont?{'--mc-font-ten':'"MCBE Classic Ten",var(--mc-font)'}:{}),
     '--mc-resource-pack-font-size':fontSize+'px','--mc-pack-settings-font-size':fontSize+'px','--mc-font-size':fontSize+'px'} as CSSProperties;
-  return <div data-testid="resource-packs-demo" data-font-ready={ready} style={{display:'grid',gap:16,minWidth:0,...font}}>
+  return <div data-testid="resource-packs-demo" data-font-ready={ready} data-classic-ten-font={hasClassicTenFont} style={{display:'grid',gap:16,minWidth:0,...font}}>
     <p style={{margin:0}}>全局资源、世界资源与附加包三种设置内容。标题计数和条目独立；本地示例不安装、购买或扫描资源包。</p>
     <div style={{display:'flex',flexWrap:'wrap',gap:12,alignItems:'end'}}>
       <Combobox label="资源包配置" value={model.profile} options={[{value:'global',label:'全局资源'},{value:'level',label:'世界资源'},{value:'addon',label:'附加包'}]} onValueChange={value=>chooseProfile(value as ResourcePackProfile)}/>

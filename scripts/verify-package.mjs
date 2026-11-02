@@ -40,6 +40,8 @@ assert(!packed.files.some(file => /^(?:demo|\.cache)\//.test(file.path)), 'Demo-
 // renamed, and decoded inline resources as well as filenames. No private bytes
 // or machine-local paths are stored in this verifier.
 const privateOreResourceHashes = new Set([
+  // Caller-owned Classic UI Ten TTF (distinct from the HBUI Ten OTF below).
+  'fc34c190dbfae5fe2f27adb45a93425f502388191854a6a0c2ac2f7c594a688f',
   "d30675e649aec73785d2c6d1f55ad051bf00877d1f7dbc7b0ee0fb89adaf893a",
   "6a43dff56720fcfb5c06d4c8ed0f7fbb6ce9033326810d4b5aeab3141dd85ba8",
   "4de8cfb38a90f3296237606130503c2648551e1fc9aba28c373c86293b6f910c",

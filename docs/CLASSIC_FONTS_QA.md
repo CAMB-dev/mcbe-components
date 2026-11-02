@@ -1,5 +1,7 @@
 # Classic DOM字体：来源、显式作用域与分阶段验证
 
+Classic 标题另有未经改写的 Minecraft Ten TTF，不能与本文从 bitmap 重建的三 face 或 HBUI Ten v2 混用。准备工具、预览位置及明确硬件下的单字原生对照见 [CLASSIC_TEN_FONT_QA.md](CLASSIC_TEN_FONT_QA.md)。
+
 初始Classic阶段增加从用户原font.brarchive准备有限COLR字体的本机工具，以及可选 `mcbeui/classic-fonts.css`；不将原字体编入公共npm，不自动恢复游戏字体选择 /布局 /Smooth shader。当时首批134列项中133通过 /1旧预期skip，normal-line受影响16项通过，React18 /19实际包经公共payload同字节链关联，生产147辅助检查通过。以下历史批次不自动认证后续字体和编辑布局修订。
 
 ## Book / Sign正文度量修订

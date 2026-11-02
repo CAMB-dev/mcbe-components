@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react';
 import { Select } from '../src';
-import { hasClassicFonts, hasGameFont } from 'virtual:mcbeui-game-font';
+import { hasClassicFonts, hasGameFont, hasClassicTenFont } from 'virtual:mcbeui-game-font';
 import '../src/classic-fonts.css';
 
 export type DemoFontProfile = 'classic' | 'local' | 'open';
@@ -40,5 +40,9 @@ export function ClassicFontExamples({ profile, onProfileChange }: {
         ? 'Mojangles from your game supplies Latin glyphs. Chinese uses the bundled open font.'
         : 'The package includes open fonts for Latin and simplified Chinese. Their designs differ from the original game.'}</p>
     {!hasClassicFonts && <p>Prepare the optional original bitmap fonts with <code>python scripts/prepare-classic-fonts.py</code>, then restart the preview.</p>}
+    {hasClassicTenFont && <div data-classic-ten-preview>
+      <p style={{fontFamily:'"MCBE Classic Ten",var(--mc-font)',fontSize:20,lineHeight:1.5}}>CLASSIC TEN · 0123456789</p>
+      <p>Classic Minecraft Ten TTF from your game. This title face is separate from HBUI Minecraft Ten v2; its original bytes stay outside the package.</p>
+    </div>}
   </div>;
 }

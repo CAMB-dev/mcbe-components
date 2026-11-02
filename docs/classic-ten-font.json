@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "status": "LOCAL_CLASSIC_TEN_SOURCE_PREPARED_FINITE_NATIVE_GLYPH_QUALIFIED_ON_EXPLICIT_HARDWARE_ONLY",
+  "installedPackageVersion": "1.26.6005.0",
+  "classic": {
+    "relativeSource": "data/resource_packs/vanilla/font/minecraft-ten.ttf",
+    "family": "Minecraft Ten",
+    "previewFamily": "MCBE Classic Ten",
+    "version": "2.001",
+    "bytes": 127504,
+    "sha256": "fc34c190dbfae5fe2f27adb45a93425f502388191854a6a0c2ac2f7c594a688f",
+    "unitsPerEm": 1000,
+    "ascent": 990,
+    "descent": -250,
+    "digit015Advances": [590, 450, 590],
+    "browser100pxDigit015Advances": [59, 45, 59],
+    "modifications": "None",
+    "publicBinaryDistributed": false
+  },
+  "separateHBUI": {
+    "family": "Minecraft Ten v2",
+    "version": "2.5",
+    "bytes": 19960,
+    "sha256": "1dd0c122794d0ac5c504e853143e078bd295f24b3a0d6ddd23dba2ca70b6e815",
+    "digit015Advances": [595, 455, 595]
+  },
+  "nativeUnicodeGlyph": {
+    "codePoint": "U+6D3B",
+    "originalPage": "glyph_6D.png",
+    "originalPageSHA256": "3a389719831d9289c06e5f5f77bd7ebd728413c45d37d0232a2a5fbdd95a7f97",
+    "pageSize": 256,
+    "cell": [176, 48, 16, 16],
+    "globalDraw": 83,
+    "frame": [2570, 1402],
+    "guiScale": 5,
+    "explicitHostOrigin": [59.2, 32.4],
+    "explicitFontScale": 0.5,
+    "background": "Complete native-before framebuffer",
+    "nvidiaD3D11DifferentPixels": 0,
+    "swiftShaderDifferentPixels": 38,
+    "swiftShaderMaxChannelDifference": 5,
+    "manualFixed8ExperimentDifferentPixels": {"swiftShader": 75, "nvidiaD3D11": 31},
+    "failedExperimentShipped": false,
+    "allBackendsQualified": false,
+    "nativeDefaultLayoutRecovered": false,
+    "completeFontQualified": false
+  },
+  "componentCount": 253,
+  "runtimeValueCount": 271,
+  "details": "CLASSIC_TEN_FONT_QA.md"
+}

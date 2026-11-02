@@ -1,4 +1,69 @@
-# Current checkpoint — Resource Pack header source-image profile, 2026-11-03
+# Current checkpoint — Classic Ten source and finite native font proof, 2026-11-03
+
+Full goal ACTIVE/incomplete. Branch codex/classic-ten-font-source-20261103,
+based on89a1b5e974d0da885c34e21ff7fa88148b86bc93. Current final commit/push,
+build/preview/package identity: .cache/classic-ten-source-qa-20261103-01/FINAL.json.
+Normal push HEAD:main only. Still253 components/271 runtime values; no src changes.
+
+## Completed this phase
+
+- Added standard-library scripts/use-local-classic-ten.py. Current installed
+  1.26.6005.0 loose vanilla/font/minecraft-ten.ttf is127504B, SHA256
+  fc34c190dbfae5fe2f27adb45a93425f502388191854a6a0c2ac2f7c594a688f.
+  Family Minecraft Ten, version2.001, UPM1000, digits0/1/5 advances590/450/590.
+  HBUI Ten v2 OTF is separate, advances595/455/595; don't substitute it.
+- Cache .cache/local-fonts/classic-ten contains unchanged private TTF +metadata
+  +font-face.css. Alias MCBE Classic Ten; Vite optional source/hash gate. Real
+  valid check-only0, empty placeholder1, HBUI OTF1, prepared bytes unchanged.
+  Old .cache/tooltip-font-research/base/minecraft-ten.ttf is0B, kept unchanged.
+- Local Typography has CLASSIC TEN digit preview; ResourcePacks demo alone
+  overrides --mc-font-ten and waits face load. No fontsize/baseline/shadow or
+  public font default changes. HTTP font SHA/browser advances59/45/59 tested.
+  npm verifier adds private TTF hash; private bytes never enter Git/library.
+- Source related browser01 batch104PASS/0skip/retry (desktop46/mobile46,
+  images7/native3/font2). Added later native-header-cjk1PASS independently.
+  Latest font2 dev/built reruns and typecheck/build recorded current FINAL.
+- Saved WPIX only: fontstudy .cache/resource-pack-header-font-study-20261103-01.
+  Fresh API before/after reads G74R28/R19 andG83R248/R19 actual0. Converted
+  whole raw targets toPNG; R248whole65536texels identical current glyph_6D.
+  G83U+6D3B identifies 活 by normal cell mapping, not contour/captured mesh.
+- AMENDMENT-01 decode-font-once.py shaders/geometry ALREADY EXECUTED0.
+  NEVER RERUN old/new once decoders. Six stage bytes exact originals;
+  PSO509TT/POINT,510MSDF/LINEAR,511BitmapSmooth/LINEAR actual identities.
+  Fourdraws672B VB/CBV; initial4MiB+single61557888B modification+smallPSOs
+  total65781932B below64MiB, no whole decode file. CPU-only independent
+  AMENDMENT-02/FINAL.json SHA0821c15e44b4111daeb9746a2a1b15ea32a17bbc14ed5442115031be0e3a55e5.
+- TT G74/G79/G85 MVPxy isfloat32(image*1.5); G83bitmap image*1. Source1.39
+  is not a CSS font-size factor. All3 font PSOs SRC_ALPHA/INV_SRC_ALPHA RGB;
+  equal RGBA font atlas values must not be unpremultiplied/whitened.
+- Public layoutGuiText/GuiLayer, normal originalUnicodepage/活, explicit host
+  origin[59.2,32.4]/fontScale.5, GUI5, native-before BG: all geometry/16MVP/
+  UV/glyphHeight/halftexel exact. Complete2570x1402 function/live/mounted/DOM
+  NVIDIA D3D11 RGBA0; SwiftShader38pixels/max5 remain strict failures.
+- native-header-cjk.spec.ts pins explicit NVIDIA profile and native oracle;
+  private fixtures absent ->skip, never replacement goldens. Oneglyph/explicit
+  host snapshot doesn't certify spacing/font/default layout/whole GUI.
+- fixed8/PROTOCOL.json ephemeral shader experiment failed: Swift75/max6,
+  NVIDIA31/max5. No product shader/UV/offset/threshold changes shipped. All
+  originals and failures retained. Sampling arithmetic cause not yet proven.
+
+## Remaining and operations
+
+- Native dynamic TrueType1024 atlas/provider layout not supported by current
+  GuiTextFont's128/256cell protocol; do not feed captured mesh as production
+  font input. Need actual provider metrics/advance/baseline/intrinsic recovery.
+- Software bilinear38 residual needs a new evidence-backed hypothesis; fixed8
+  weights alone failed. Never tune UV/offset to match known framebuffer.
+- Full source1.39/fallback selector/normal Settings anchors/100%c evaluation,
+  other font cases/scales/GUI breadth remain open. ResourcePacks28/Manifest12
+  historical strict failures unchanged. Overall goal is not complete.
+- No Computer Use/game/PIX UI opened this phase. User said main menu open;
+  no additional live capture needed for this saved-frame phase. Use CU only
+  when necessary and close it immediately afterward. Keep preview4173 PID217140.
+- Don't overwrite sealed study/decode/native/fixed8 receipts. Current private
+  QA scripts/logs are ignored. Agents frozen/CPU only; no global memory writes.
+
+# Previous checkpoint — Resource Pack header source-image profile, 2026-11-03
 
 Full goal ACTIVE/incomplete. Branch codex/resource-pack-header-image-profile-20261103
 based on1f07d6725ad7a0f52fd83f1f4651e3ab10630870. Final commit/push/clean receipt:

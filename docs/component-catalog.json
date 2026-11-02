@@ -1,6 +1,24 @@
 {
   "scope": "Bedrock-native controls, reusable GUI parts, complete container GUIs and HUD; composition reuses source-backed primitives.",
   "implementationStatusIsNotPixelCertification": true,
+  "classicTenSourceStage": {
+    "status": "UNCHANGED_LOCAL_TTF_PREVIEW_AND_EXPLICIT_HARDWARE_SINGLE_GLYPH_NATIVE_MATCH",
+    "components": 253,
+    "runtimeValues": 271,
+    "libraryRuntimeChanged": false,
+    "previewFamily": "MCBE Classic Ten",
+    "sourceFamily": "Minecraft Ten",
+    "separateFromHBUI": true,
+    "privateFontDistributed": false,
+    "sourceBrowserRegressionPass": 104,
+    "separateNvidiaNativeGlyphRegressionPass": 1,
+    "nativeUnicodeGlyph": "U+6D3B",
+    "nvidiaD3D11DifferentPixels": 0,
+    "swiftShaderDifferentPixelsRetained": 38,
+    "failedFixed8ExperimentPixels": {"swiftShader": 75, "nvidiaD3D11": 31},
+    "completeFontOrDefaultLayoutQualified": false,
+    "details": "docs/CLASSIC_TEN_FONT_QA.md"
+  },
   "sourceModelStage": {
     "status": "scoped_model_atlas_fixed_ui_package_and_production_checks_pass_not_universal_gui_certification",
     "newPureFunctions": [

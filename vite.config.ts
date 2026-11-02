@@ -14,6 +14,8 @@ const localFont = (name: string) => fileURLToPath(new URL(`./.cache/local-fonts/
 const hbuiTenPath = localFont('Minecraft-Ten-v2.otf');
 const hbuiSevenPath = localFont('Minecraft-Seven-v2.otf');
 const hbuiChinesePath = localFont('NotoSansSC-Regular.otf');
+const classicTenPath = fileURLToPath(new URL('./.cache/local-fonts/classic-ten/Minecraft-Ten.ttf', import.meta.url));
+const classicTenMetadataPath = fileURLToPath(new URL('./.cache/local-fonts/classic-ten/font.json', import.meta.url));
 const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loading-indicator.gif', import.meta.url));
 const orePermissionsDirectory = fileURLToPath(new URL('./.cache/local-ore-permissions/', import.meta.url));
 const oreTextFieldDirectory = fileURLToPath(new URL('./.cache/local-ore-text-field/', import.meta.url));
@@ -52,6 +54,17 @@ function hasPreparedClassicFonts(): boolean {
       || createHash('sha256').update(bytes).digest('hex') !== item.sha256) {
       throw new Error('Local Classic font bytes differ from their prepared metadata; rerun scripts/prepare-classic-fonts.py.');
     }
+  }
+  return true;
+}
+
+function hasPreparedClassicTenFont(): boolean {
+  if (!existsSync(classicTenPath) || !existsSync(classicTenMetadataPath)) return false;
+  const bytes = readFileSync(classicTenPath), metadata = JSON.parse(readFileSync(classicTenMetadataPath, 'utf8'));
+  if (metadata.schemaVersion !== 1 || metadata.family !== 'MCBE Classic Ten' || metadata.sourceFamily !== 'Minecraft Ten'
+    || metadata.file !== 'Minecraft-Ten.ttf' || bytes.length < 12 || bytes.length !== metadata.bytes
+    || bytes.subarray(0, 4).toString('hex') !== '00010000' || createHash('sha256').update(bytes).digest('hex') !== metadata.sha256) {
+    throw new Error('Local Classic Ten font differs from its prepared metadata; rerun scripts/use-local-classic-ten.py.');
   }
   return true;
 }
@@ -305,6 +318,7 @@ export default defineConfig({
         { path: hbuiTenPath, family: 'Minecraft Ten v2', format: 'opentype', flag: 'hasHBUITenFont' },
         { path: hbuiSevenPath, family: 'Minecraft Seven v2', format: 'opentype', flag: 'hasHBUISevenFont' },
         { path: hbuiChinesePath, family: 'Noto Sans SC', format: 'opentype', flag: 'hasHBUIChineseFont' },
+        { path: classicTenPath, family: 'MCBE Classic Ten', format: 'truetype', flag: 'hasClassicTenFont', enabled: hasPreparedClassicTenFont() },
         ...classicFontEntries.map(entry => ({ path: resolve(classicFontDirectory, entry.file), family: entry.family,
           format: 'woff2', flag: entry.flag, enabled: classicFontsReady })),
       ];

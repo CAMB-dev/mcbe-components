@@ -568,6 +568,8 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 
 ## 字体
 
+Classic 标题字体现支持从本机原始 `minecraft-ten.ttf` 接入：运行 `python scripts/use-local-classic-ten.py "PATH/TO/minecraft-ten.ttf"` 后重启预览，在 `/#typography` 查看，在资源包标题中使用。它与 HBUI 的 Minecraft Ten v2 字宽不同；原始字体不进 npm。来源、命令与有限原生像素对照见 [Classic Ten 字体](docs/CLASSIC_TEN_FONT_QA.md)。
+
 公开替代字体文件在仓库中，构建和运行不依赖字体CDN；样式与字体分开导出，不导入fonts.css就不请求这些字体。可选的原cell Classic字体须由用户从自己的游戏资源准备，不在npm内。
 
 | 字体 | 版本 | 文件 | 用途 / 差异 |
