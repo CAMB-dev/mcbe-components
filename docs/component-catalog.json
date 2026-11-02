@@ -1011,10 +1011,47 @@
         "fidelity": "source_modern_ore_profile_host_services_and_native_pixels_unqualified",
         "details": "docs/ORE_EXTERNAL_SERVER_QA.md"
       }
+    ],
+    "ore_modals": [
+      {
+        "name": "OreModalContent",
+        "status": "implemented",
+        "validation": "browser03_72_node72_package01_peers_installed03_4_native_unqualified",
+        "fidelity": "source_modern_ore_profile_native_pixels_unqualified",
+        "details": "docs/ORE_MODAL_QA.md"
+      },
+      {
+        "name": "OreModal",
+        "status": "implemented",
+        "validation": "browser03_72_node72_package01_peers_installed03_4_native_unqualified",
+        "fidelity": "source_modern_ore_profile_native_pixels_unqualified",
+        "details": "docs/ORE_MODAL_QA.md"
+      },
+      {
+        "name": "OreModalHeader",
+        "status": "implemented",
+        "validation": "browser03_72_node72_package01_peers_installed03_4_native_unqualified",
+        "fidelity": "source_modern_ore_profile_native_pixels_unqualified",
+        "details": "docs/ORE_MODAL_QA.md"
+      },
+      {
+        "name": "OreModalText",
+        "status": "implemented",
+        "validation": "browser03_72_node72_package01_peers_installed03_4_native_unqualified",
+        "fidelity": "source_modern_ore_profile_native_pixels_unqualified",
+        "details": "docs/ORE_MODAL_QA.md"
+      },
+      {
+        "name": "OreModalActions",
+        "status": "implemented",
+        "validation": "browser03_72_node72_package01_peers_installed03_4_native_unqualified",
+        "fidelity": "source_modern_ore_profile_native_pixels_unqualified",
+        "details": "docs/ORE_MODAL_QA.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 214,
+    "components": 219,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1025,12 +1062,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 232,
+    "runtimeValues": 237,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "tested_ore_external_servers_214_232_web_native_unqualified",
+    "publicationState": "tested_ore_modals_219_237_web_native_unqualified",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"

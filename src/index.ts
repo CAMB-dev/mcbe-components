@@ -201,3 +201,6 @@ export { OreScrollArea } from './ore-scroll-area';
 export type { OreScrollAreaProps } from './ore-scroll-area';
 export { OreExternalServerForm } from './ore-external-server-form';
 export type { OreExternalServerFormProps, OreExternalServerFieldKind, OreExternalServerAction, OreExternalServerValues, OreExternalServerLabels, OreExternalServerValueChangeDetail, OreExternalServerActionDetail, OreExternalServerPortInvalidDetail } from './ore-external-server-form';
+
+export { OreModal, OreModalHeader, OreModalContent, OreModalText, OreModalActions } from './ore-modal';
+export type { OreModalProps, OreModalDismissDetail, OreModalHeaderProps, OreModalContentProps, OreModalTextProps, OreModalActionsProps } from './ore-modal';

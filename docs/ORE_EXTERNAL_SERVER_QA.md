@@ -89,6 +89,17 @@ or controller-focus qualification.
 
 ## Verification scope
 
+The additional PIX 2610.28 packaged GPU launch with **Force D3D11On12 enabled**
+captured the empty Add screen again. It still contains three frame draws:
+the whole UI texture, panorama, and UI composition. The selected UI texture's
+14,443,400 useful RGBA bytes are identical to the earlier normal launch.
+No individual glyph or box paint was exposed in this process/frame. This
+method therefore supplies no new evidence for changing font rasterization,
+alpha rounding, or border coverage. It does not identify the underlying
+painter as CPU rendering or exclude a different process/API. Original captures,
+analysis copies, SDK readbacks and their fingerprints remain private local
+evidence. The existing strict full-page mismatch remains unqualified.
+
 Source browser-03: **93 passed, one expected desktop touch skip, zero failures
 or flaky results** across 94 desktop/Pixel 7 cases. This includes 28 new form/ref/button
 checks, 14 existing modern-input checks and 52 existing permissions checks.

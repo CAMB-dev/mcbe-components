@@ -1,0 +1,120 @@
+{
+  "profile": "Modern Ore $E modal neutral profile, installed 1.26.6005.0 source snapshot",
+  "sourceInputs": [
+    {
+      "file": "index-018f0e6740b840233f22.js",
+      "sha256": "5522c1ce9a4d53702cc3906a7c080f50c78d9c83f1e5207839a03de9b209630c",
+      "bytes": 2463518
+    },
+    {
+      "file": "routes.json",
+      "sha256": "410f13fa3da564e72f029cb17ed3912610b2cd6881163ce515fb50719bfa1a81",
+      "bytes": 10649
+    },
+    {
+      "file": "index.html",
+      "sha256": "e92c03ccd433f175ec1842c7b077c9492f12e4576f9d482c9714122bd1398ced",
+      "bytes": 593
+    },
+    {
+      "file": "editor-menu-0489e7208a37deed7cf4.css",
+      "sha256": "7b65a68caeb30a61f3c945d49b0475e7f952b410c620e67157cfbc02df83e58a",
+      "bytes": 97604
+    },
+    {
+      "file": "editor-project-50f83e6d5ab25e4c2cf0.css",
+      "sha256": "2e79bc9dd0125e6c92cde99f48592adf6a3a2806fd6be1af281179a64cc73ad0",
+      "bytes": 162124
+    },
+    {
+      "file": "gameplay-2778064b6874c712adbb.css",
+      "sha256": "04fb7a7ea41955c53cf51c0e6dc9e0928b29b7a8150fdcd83d04765742528ab5",
+      "bytes": 107521
+    },
+    {
+      "file": "gameplay-react-ea9b6dc9896fd3bad5e7.css",
+      "sha256": "7ab964bb6312d999f4889f98998708644d3e288e52a250ec5188d44611a1ba59",
+      "bytes": 102128
+    },
+    {
+      "file": "gameplay-solid-2bd564ffdc8e53c135ed.css",
+      "sha256": "ef589c96b9acad5a318deda458e9878f728ad1497353faa096ba713f893c03a6",
+      "bytes": 11628
+    },
+    {
+      "file": "gameplay-theme-922e7c15cd35326d4a6a.css",
+      "sha256": "137dda4d1f90e14afeae77b6b9002bdf25615295f7ae1bfb9d3ae6a7bb82cd9c",
+      "bytes": 141445
+    },
+    {
+      "file": "index-aa96eedc6c94fe36a35b.css",
+      "sha256": "97c85e4f1bc270d804123731e089a8960472380305a2277c29e91c0dcb076f31",
+      "bytes": 268228
+    },
+    {
+      "file": "menus-theme-ed1e9065b019d5f4427f.css",
+      "sha256": "c3f86c09969be4abb9797f71b160f5debb4a7cf2753a7e6a78e440f5fddf72f6",
+      "bytes": 63636
+    },
+    {
+      "file": "baseTextField_neutral80-e77c01be83592aa681d2.png",
+      "sha256": "4de8cfb38a90f3296237606130503c2648551e1fc9aba28c373c86293b6f910c",
+      "bytes": 124
+    },
+    {
+      "file": "baseTextField_disabled-00a010b73e9da6b5e060.png",
+      "sha256": "5c3af29f159b5c9f4b85325848549b4f68f112d2cb57d134769a82149d633fb7",
+      "bytes": 118
+    },
+    {
+      "file": "delete-dc0125fecc577e27a106.png",
+      "sha256": "d30675e649aec73785d2c6d1f55ad051bf00877d1f7dbc7b0ee0fb89adaf893a",
+      "bytes": 124
+    },
+    {
+      "file": "save-285144e32caffa7cf437.png",
+      "sha256": "6a43dff56720fcfb5c06d4c8ed0f7fbb6ce9033326810d4b5aeab3141dd85ba8",
+      "bytes": 130
+    }
+  ],
+  "components": {
+    "OreModal": "$E",
+    "OreModalHeader": "$E.Header / qm",
+    "OreModalContent": "$E.Content / qp",
+    "OreModalText": "$E.Text / Qd captionLong",
+    "OreModalActions": "$E.Buttons / gm"
+  },
+  "sourceRules": {
+    "panelMaxWidthRem": 47.6,
+    "panelBorderRem": 0.2,
+    "wrapperVerticalPaddingRem": 1.2,
+    "backdropOpacity": 0.7,
+    "headerSlotsRem": [
+      4,
+      4.8
+    ],
+    "headerTitle": "Seven 1.6 / 2 rem, tracking .04 rem",
+    "caption": "locale Noto 1.4 / 2 rem, tracking .04 rem",
+    "contentBackground": "#313233",
+    "headerAndActionsBackground": "#48494a",
+    "textPaddingRem": 1.6,
+    "actionsPaddingRem": 1.6,
+    "targetRouteActionGapRem": 0.4,
+    "actionDirection": "vertical",
+    "backdropCloses": false,
+    "closeHiddenBy": "lastInputGamepad, not touch"
+  },
+  "webPolicies": [
+    "Native HTML dialog lifecycle, inert background, focus behavior, cancel/Escape and opener restoration are Web policies, not engine focus reconstruction.",
+    "Default content clipping honors explicit product sizing. Source scrollable default true is only available by explicit Content opt-in.",
+    "Shared OreScrollArea native region/drag/key behavior does not implement engine empty-focus aliases or narration delegates.",
+    "Host-owned complete icon nodes and font resources are not bundled or redrawn."
+  ],
+  "qualification": {
+    "nativeModalPixels": "unverified",
+    "modernServerWholePage": "strict comparison remains nonzero",
+    "sourceCaptureUsedAsRendererInput": false,
+    "classicCoveragePromoted": false
+  },
+  "details": "ORE_MODAL_QA.md"
+}

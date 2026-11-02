@@ -1,0 +1,34 @@
+@import './ore-button.css';
+@import './ore-scroll-area.css';
+
+/* Neutral finite source profile. guiScale*5px and native <dialog> ownership
+   are Web policies, not recovered engine providers or captured geometry. */
+.mc-ore-modal{position:fixed;inset:0;box-sizing:border-box;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:calc(1.2 * var(--mc-ore-unit)) 0;border:0;background:transparent;color:#fff;overflow:clip;align-items:center;justify-content:center}
+.mc-ore-modal[open]{display:flex}
+.mc-ore-modal:not([open]){display:none}
+.mc-ore-modal::backdrop{background:rgba(0,0,0,.7)}
+.mc-ore-modal__panel{box-sizing:border-box;display:flex;flex-direction:column;flex:0 1 auto;width:100%;max-width:calc(47.6 * var(--mc-ore-unit));max-height:100%;min-width:0;min-height:0;border:calc(.2 * var(--mc-ore-unit)) solid #1e1e1f;overflow:clip}
+.mc-ore-modal-header{flex:none;min-width:0;background:#48494a;color:#fff;font-family:"Minecraft Seven v2",var(--mc-ore-fallback);font-size:calc(1.6 * var(--mc-ore-unit));font-weight:400;line-height:calc(2 * var(--mc-ore-unit));letter-spacing:calc(.04 * var(--mc-ore-unit));text-shadow:none}
+.mc-ore-modal-header__row{position:relative;display:flex;align-items:center;justify-content:space-between;padding:0 calc(.4 * var(--mc-ore-unit));line-height:calc(1.6 * var(--mc-ore-unit))}
+.mc-ore-modal-header__row::after{content:'';position:absolute;inset:0;pointer-events:none;box-sizing:border-box;border:calc(.2 * var(--mc-ore-unit)) solid;border-top-color:rgba(255,255,255,.2);border-left-color:rgba(255,255,255,.2);border-bottom-color:rgba(255,255,255,.1);border-right-color:rgba(255,255,255,.1)}
+.mc-ore-modal-header__slot{flex:0 0 calc(4 * var(--mc-ore-unit));width:calc(4 * var(--mc-ore-unit));height:calc(4.8 * var(--mc-ore-unit))}
+.mc-ore-modal-header__title{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;line-height:calc(2 * var(--mc-ore-unit))}
+.mc-ore-modal-header__shadow{height:calc(.2 * var(--mc-ore-unit));background:#313233}
+.mc-ore-modal-header__close{appearance:none;box-sizing:border-box;display:flex;align-items:center;justify-content:center;width:calc(4 * var(--mc-ore-unit));height:calc(4 * var(--mc-ore-unit));margin:calc(.4 * var(--mc-ore-unit)) 0;padding:0;border:0;border-radius:0;background:#48494a;color:inherit;cursor:pointer}
+.mc-ore-modal-header__close:hover{background:#58585a}
+.mc-ore-modal-header__close:active{background:#313233}
+.mc-ore-modal-header__close:focus-visible{outline:2px solid Highlight;outline-offset:-2px}
+.mc-ore-modal-header__close:disabled{cursor:default}
+.mc-ore-modal-header__icon{display:flex;align-items:center;justify-content:center;width:calc(1.4 * var(--mc-ore-unit));height:calc(1.4 * var(--mc-ore-unit));pointer-events:none;image-rendering:pixelated}
+.mc-ore-modal-header__icon>*{max-width:100%;max-height:100%}
+.mc-ore-modal-content{display:flex;flex-direction:column;flex:1 1 auto;min-width:0;min-height:0;overflow:clip;background:#313233;color:#fff}
+.mc-ore-modal-content__scroll{flex:1 1 auto;min-height:0}
+.mc-ore-modal-text{box-sizing:border-box;display:flex;align-items:flex-start;flex:none;min-width:0;padding:calc(1.6 * var(--mc-ore-unit));font-family:var(--mc-ore-fallback);font-size:calc(1.4 * var(--mc-ore-unit));line-height:calc(2 * var(--mc-ore-unit));letter-spacing:calc(.04 * var(--mc-ore-unit));font-weight:400;text-shadow:none}
+.mc-ore-modal-text__body{flex:1;min-width:0;overflow-wrap:break-word}
+.mc-ore-modal-text[data-center]{text-align:center}
+.mc-ore-modal-actions{position:relative;box-sizing:border-box;display:flex;flex-direction:column;flex:none;min-width:0;gap:calc(.4 * var(--mc-ore-unit));padding:calc(1.6 * var(--mc-ore-unit));background:#48494a}
+.mc-ore-modal-actions::after{content:'';position:absolute;inset:0;box-sizing:border-box;pointer-events:none;border-style:solid;border-width:calc(.2 * var(--mc-ore-unit)) 0;border-top-color:rgba(255,255,255,.1);border-bottom-color:rgba(0,0,0,.3)}
+.mc-ore-modal-actions[data-horizontal]{flex-direction:row}
+.mc-ore-modal-actions>.mc-ore-button{min-width:0}
+.mc-ore-modal-actions[data-horizontal]>.mc-ore-button{flex:1 0 0}
+@media(forced-colors:active){.mc-ore-modal__panel{border-color:CanvasText}.mc-ore-modal-header,.mc-ore-modal-content,.mc-ore-modal-actions{background:Canvas;color:CanvasText}.mc-ore-modal-header__row::after,.mc-ore-modal-actions::after,.mc-ore-modal-header__shadow{display:none}.mc-ore-modal-header__close{background:ButtonFace;color:ButtonText}.mc-ore-modal-header__close:hover,.mc-ore-modal-header__close:active{outline:1px solid Highlight}.mc-ore-modal-header__close:focus-visible{outline-color:Highlight}}

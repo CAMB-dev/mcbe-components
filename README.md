@@ -4,6 +4,8 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 > 这是独立粉丝项目，与 Mojang、Microsoft 无关联。开源替代字体和 Web 布局与游戏存在差异；未声称整套 UI 与任何游戏版本零像素偏差。视觉来源与差异见 [FIDELITY.md](docs/FIDELITY.md)。
 
+新增现代 Ore 弹窗原语：`OreModal`、`OreModalHeader`、`OreModalContent`、`OreModalText`、`OreModalActions`，展示入口 `#ore-modals`。标题使用 Seven、正文使用 Noto；内容默认按设置尺寸裁切，显式开启后才使用自定义滚动区。未保存、删除和错误提示可由这些部分组合。浏览器已经完成的关闭通过 `native-close` 通知宿主，不自动重新弹出。[使用与验证说明](docs/ORE_MODAL_QA.md)。
+
 ## 本地运行
 
 需要 Node.js 22.12+ 或 24+。
@@ -59,7 +61,9 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
-> 最新有限阶段：214 组件／232 运行时值，新增现代 `OreExternalServerForm`、`OreButton`、`OreActionBar`、`OreScreenFrame`、`OreScrollArea`。默认 Enter 对齐原版只 blur；窄屏操作栏移出滚动区。最终浏览器 93 通过／1 项预期跳过，Node 52、React 18/19 包、四种默认 Vite 安装组合与两项生产展示检查通过。完整原版帧仍有 1,419,830 像素差异，未宣称整页 pixel perfect。入口 `#ore-external-servers`；范围见 [ORE_EXTERNAL_SERVER_QA.md](docs/ORE_EXTERNAL_SERVER_QA.md)。
+> 最新有限阶段：219 组件／237 运行时值。新增 5 个现代 Ore 弹窗原语，按原版源码校准字体、阴影、关闭按钮、正文与操作区。桌面／手机 72 项、Node 72 项、React 18/19 实际包及开发／生产四种安装组合通过。原版整页像素对照仍未达标，组件数量不表示像素认证。入口 `#ore-modals`；范围见 [ORE_MODAL_QA.md](docs/ORE_MODAL_QA.md)。
+
+> 上一有限阶段：214 组件／232 运行时值，新增现代 `OreExternalServerForm`、`OreButton`、`OreActionBar`、`OreScreenFrame`、`OreScrollArea`。默认 Enter 对齐原版只 blur；窄屏操作栏移出滚动区。最终浏览器 93 通过／1 项预期跳过，Node 52、React 18/19 包、四种默认 Vite 安装组合与两项生产展示检查通过。完整原版帧仍有 1,419,830 像素差异，未宣称整页 pixel perfect。入口 `#ore-external-servers`；范围见 [ORE_EXTERNAL_SERVER_QA.md](docs/ORE_EXTERNAL_SERVER_QA.md)。
 
 > 上一阶段：209 组件／227 运行时值，新增 `OreTextField` 与 `OreFieldSection`。现代菜单字段使用宿主完整原图，保留原生输入、ref、选字和 IME；没有混用 Classic 材质。最终浏览器 20/20、Node 16/16、React 18/19 实际包、默认 Vite 四组合与生产展示两项通过。六个完整材质平面 149,760 像素 RGBA 零差；原生整页仍未认证。入口 `#ore-text-fields`，规格与资格见 [ORE_TEXT_FIELD_QA.md](docs/ORE_TEXT_FIELD_QA.md)。本轮已取得原版 OreUI GPU 基准，并在采集后关闭 Minecraft、PIX 和 Computer Use。
 

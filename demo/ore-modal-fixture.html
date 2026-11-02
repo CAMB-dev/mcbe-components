@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Ore modal Web interaction fixture</title>
+  <style>
+    body{margin:0;background:#203040;color:white;font-family:sans-serif}
+    main{padding:12px;box-sizing:border-box;min-width:0}
+    output{display:block;overflow-wrap:anywhere}
+    #pre-inert{position:absolute;left:-10000px}
+  </style>
+</head>
+<body>
+  <main>
+    <button id="ore-modal-before">模态框前的按钮</button>
+    <div id="pre-inert" inert="original-value">保留的宿主惰性节点</div>
+    <div id="ore-modal-root"></div>
+    <button id="ore-modal-after">模态框后的按钮</button>
+  </main>
+  <script type="module" src="./ore-modal-fixture.tsx"></script>
+</body>
+</html>

@@ -1,5 +1,114 @@
 # Session handoff
 
+## Current checkpoint — Ore modal primitives and D3D11On12 capture, 2026-11-02
+
+Full goal ACTIVE/incomplete. Branch `codex/ore-modal-20261102`, parent
+`d3af714475501d02743a92d5313cd1b1f19a87ce`. Public 219 components / 237 runtime
+values (+OreModal/Header/Content/Text/Actions). Root will record final Git/main
+identity in `.cache/ore-modal-qa-01/FINAL.json`. No Classic coverage promoted.
+
+New parts: `src/ore-modal.tsx/.css`; public API/CSS exports and copy pipeline,
+`#ore-modals` main gallery, source manifest, README, package verifier integrated.
+Read `docs/ORE_MODAL_QA.md` and `docs/ore-modal-source.json` before continuing.
+Source frozen `.cache/ore-modal-source-01/FINAL.json` SHA
+5dddd4d646e8e7b48ce0b4e81fe257ec45a932b2ecf42ddbf241d2cdd2a5f214,
+SPEC SHA 7d180b58e3dd003b5adaf2a31c1b5568d7d7fd491d36986e11859aaa79e3fc12:
+15 unchanged inputs, 70 exact UTF-8 intervals, 100 exact CSS rules.
+
+Source neutral modal: border .2u, max47.6u, center vertical padding1.2u,
+black .7 backdrop. Header slots4x4.8u, Seven1.6/line2/tracking.04; flat Close4u
+with .4u vertical margins and host icon1.4u, flow shadow .2u. Body neutral80
+#313233. CaptionLong is locale Noto1.4/line2/tracking.04, not Seven/Ten.
+Actions neutral #48494a, vertical default, pad1.6u/gap.4u, absolute top/bottom
+bevel (no border flow). Source raw order secondary then primary/destructive.
+Close gate is lastInputGamepad, NOT touch; focusInputGamepad and pointerMouse
+are separate source provider fields, not reconstructed. Source icons/fonts
+remain host nodes and ignored existing private resources, no new binary assets.
+
+User sizing policy: Content DEFAULT CLIP, explicit scrollable opt-in uses same
+OreScrollArea family floating=true, never native browser scrollbar. This differs
+from source Content scrollable=true. Header/actions remain outside scrolling.
+Native HTML dialog/showModal/inert/Tab cycling/initial and return focus are Web
+policies. Owned refs and native caller veto preserved. Close/backdrop requests
+defer through existing helper; cancel immediately prevents platform default and
+temporarily observes only that native event's later preventDefault calls, then
+restores exact descriptor before deferred delivery. No global prototype edits.
+
+Important real platform finding: CloseWatcher repeated Escape without intervening
+activation can become non-cancelable. `native-close` is a notification that the
+platform/ref.close/form already closed, not a vetoable request. onClose caller
+runs first, finally releases owner; no auto-showModal. Host must commit false
+then true to reopen. Per-dialog expected-close count handles queued old props
+close events after a same-node reopen. Nested forced closure releases parent
+ownership. Docs cite WHATWG. Do not bypass this platform exit mechanism.
+
+Final source projects browser03 =72 PASS/0 FAIL/0 SKIP/0 flaky: new Modal30
+(2SSR+28 browser), old server28 and fields14. Node final72 PASS, including
+new Modal20. Full build/typecheck/package01 actual React18.3.1/19.3.1 all219/237
+PASS, new family33 SSR/16 negative types each. Source closure176 modules and
+692 original-byte refs (647PNG/39TGA/6JSON), no new original binary refs.
+Installed03 genuinely fresh default Vite dev/prod x both peers, all4 PASS:
+real refs, geometry, clip, explicit scroll, callback/focus, forcedcolors and
+delivered complete host icon bytes; no source aliases or fs.allow override.
+Built main8 PASS. Separate visual01 six original-font rendered screenshots
+and metadata checked; header16px/Seven and body14px/Noto SC at guiScale2.
+
+Functional tar `.cache/ore-modal-installed-03/candidate.tgz` SHA
+a6e8fa500f446094181782b5cd461e2753db777530a914306c90c87489bdd16e.
+Final docs tar `.cache/ore-modal-qa-01/final-doc-01/mcbeui-0.1.0.tgz` SHA
+3a0ccfb94e129a88b453d0e383075714bf2d47bda8f03998673524a5bedc7f39.
+PACK-IDENTITY: all818 runtime/package/assets byte-equal,987 final members;
+only README, modal QA and catalog documentation changed. Final ESM SHA
+1baedc26cb2badb9a87d5f1916d1d330c8ee310bbea252a01285aab10e333975;
+DTS b0c711e027a017ae7a72272ada03efa8506945346799a3e6fbf00a484346acc6;
+modalCSS 4ad2e86711597b573fb3ffb8f9deef8f03b1c927ad913ba9eaf7579292813b5a.
+
+Retain failures: browser01 62P/6F (SSR fixture missing host icon twice;
+real Tab/cancel issues twice each). Fix SSR fixture with hideCloseButton, not
+product constraint removal. Browser02 66P/2F exposed unnotified forced native
+close after late veto fixed; final03 explicitly covers new platform contract.
+Original sources/logs/traces preserved. Independent review source47+Node13
+retains old findings; fix02 has19 helper probes/Node15; fix03 final has5 more
+CPU lifecycle probes/Node20 and reads actual final72 browser results. Final
+review `.cache/ore-modal-review-01/fix-03/FINAL.json` SHA
+dbaa69f08eba504565d3c6fc4739c91dfbb724e0a62e0d2a66e52ed832615213.
+Installed01 HTTP-only image check rejected Vite inlined data URL;02 read deferred
+callback too early (React19dev);03 handles actual data/HTTP bytes and observed
+callback/committed React state. No product/CSS/source change to pass installs.
+Original installed03 server.closed=false flags only inspected exitCode (SIGTERM
+leaves null). SERVICES.json live PID/port checks confirm real cleanup; don't
+infer leaked servers from those original metadata flags.
+
+Native work this turn is a real negative result: Force D3D11On12 checked,
+DRED unchecked, packaged GPU launch, single frame empty AddServer (no submit,
+world or connection). Saved `.cache/ore-external-server-d3d11on12-native-01/`
+original/analysis .wpix 28,930,526B SHA
+2e267a8f87c09eb2ff21a5a2d9183844b5741935d5ea86d0cd686c668ab517e2.
+New capture still201 events (129graphics+72CPU), only3 draws q0 e57/85/113.
+G13 CL910/PSO912 samples whole R9162570x1405 ->R19; G16 R927cube ->R15 MSAA8;
+G19 R19->R15; e120 resolve R15->R14. Do NOT reuse old R13/R15 IDs. R916 all
+14,443,400 useful RGBA bytes equal old R656 and before/after (0). Source already
+composited, no inner glyph/box paints exposed. No inference that painter is CPU
+or all other APIs/processes were observed. New SDK readback only R916, not new
+R19/finalR14. Independent70-input CPU review `.cache/ore-d3d11on12-review-01/`
+FINAL SHA68e9ebb02d8b269b6bd5538dd4eb41688d291c820da372425d6e894d433e5892.
+Normal original capture and strict1,419,830-pixel mismatch remain untouched.
+
+Cleanup: saved capture and closed owned PIX normally; game exited with session.
+Computer Use kernel reset immediately and never reopened. Final live checks show
+no WinPix/Minecraft, no installed03-owned PIDs, no owned5470..5475 listeners.
+Previous user4173 endpoint was offline and not restarted/closed. New managed
+review preview is intentionally running at4173 in exec session48974. Its current
+session and HTTP identity are in PREVIEW.json/FINAL.json. All headless browser
+contexts and the visual helper closed; no Computer Use session was reopened.
+
+Still incomplete: actual precomposition painter/font/AA/rounding/box coverage
+evidence; native modal whole-page qualification; Classic4 partial-alpha native
+candidates; Book/Sign focused caret/selection/wrap; full remaining GUI fidelity
+and completion audit. Do not retry the same ForceD3D11On12 path expecting inner
+paint without new evidence. No sampled alpha/color/edge offset/mask tolerance
+fitting, no native capture as renderer input, no goal closure from finite green.
+
 ## Current checkpoint — modern Ore Add/Edit composition, 2026-11-02
 
 Full goal ACTIVE/incomplete. Branch codex/ore-external-server-20261102, parent
