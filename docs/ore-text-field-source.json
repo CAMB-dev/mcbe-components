@@ -1,0 +1,127 @@
+{
+  "profile": "modern_ore_menus_text_field",
+  "sourceStatus": "installed_private_static_source_metadata_only",
+  "source": {
+    "index": "hbui/index-018f0e6740b840233f22.js",
+    "sha256": "5522c1ce9a4d53702cc3906a7c080f50c78d9c83f1e5207839a03de9b209630c",
+    "hierarchy": "Dde -> wz -> Og -> rg/Zf -> Vf -> fast-input",
+    "route": "/play/servers/add",
+    "theme": "menus",
+    "rawBundleDistributed": false
+  },
+  "images": {
+    "normal": {
+      "source": "assets/baseTextField_neutral80-e77c01be83592aa681d2.png",
+      "bytes": 124,
+      "sha256": "4de8cfb38a90f3296237606130503c2648551e1fc9aba28c373c86293b6f910c",
+      "size": [
+        6,
+        7
+      ]
+    },
+    "disabled": {
+      "source": "assets/baseTextField_disabled-00a010b73e9da6b5e060.png",
+      "bytes": 118,
+      "sha256": "5c3af29f159b5c9f4b85325848549b4f68f112d2cb57d134769a82149d633fb7",
+      "size": [
+        6,
+        7
+      ]
+    }
+  },
+  "imagePolicy": "Whole caller-owned URLs required. No private PNG data shipped. Normal/hover/focus share normal image.",
+  "sliceTRBL": [
+    3,
+    1,
+    1,
+    1
+  ],
+  "borderImageWidthRemTRBL": [
+    0.6,
+    0.2,
+    0.2,
+    0.2
+  ],
+  "imageFill": true,
+  "input": {
+    "fontSizeRem": 1.6,
+    "lineHeightRem": 2.8,
+    "minimumHeightRem": 4.8,
+    "paddingRemTRBL": [
+      1.2,
+      1.2,
+      0.8,
+      1.4
+    ],
+    "text": "#ffffff",
+    "placeholder": "#b1b2b5",
+    "disabled": "#58585a",
+    "caret": "#6cc349",
+    "textShadow": "none"
+  },
+  "section": {
+    "horizontalPaddingRem": 2.4,
+    "topBottomSpacerRem": 1.2,
+    "afterLabelSpacerRem": 0.4,
+    "afterInputSpacerRem": 0.4,
+    "fixedTotalHeight": null,
+    "background": "#48494a",
+    "bevel": {
+      "position": "absolute inset0",
+      "widthRem": 0.2,
+      "topWhiteAlpha": 0.1,
+      "bottomBlackAlpha": 0.3,
+      "left": false,
+      "right": false,
+      "flowBorder": false
+    }
+  },
+  "spacingCorrection": {
+    "sourceTokens": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "resolvedRem": [
+      0.4,
+      0.8,
+      1.2,
+      1.6,
+      2,
+      2.4,
+      3.2,
+      6.4
+    ],
+    "earlierTokenAsRemStudy": "preserved_wrong_private_history_superseded_before_product_implementation"
+  },
+  "webPolicies": [
+    "native HTML text editing and form behavior",
+    "guiScale times5 CSS-pixel unit, engine scale unknown",
+    "generated accessibility IDs",
+    "keyboard focus outline, not recovered native lm decoration",
+    "host invalid message without invented red art",
+    "forced-colors system colors"
+  ],
+  "nativeBaseline": {
+    "captureSha256": "c431e066cb57bef4dd102dd8847ae51c6f35a29f6b5a5f9c0ace466fee661e70",
+    "precomposedSize": [
+      2570,
+      1405
+    ],
+    "uiTargetSize": [
+      2570,
+      1402
+    ],
+    "precomposedUsefulRgbaSha256": "f18303d2aee15da1ba9e42df54ffffaef34ef4c5178505531e3be4796687a35d",
+    "usefulRgbaBytes": 14443400,
+    "staticDecodeVsSdk": "all useful RGBA bytes equal; padded blobs not equal",
+    "productNativePixelCertified": false
+  },
+  "classicAlphaQualification": "unaffected_pending_native_classic_evidence",
+  "goalComplete": false
+}

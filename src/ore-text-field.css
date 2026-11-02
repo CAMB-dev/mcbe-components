@@ -1,0 +1,33 @@
+/* Menus source profile; guiScale*5 is the explicit Web unit convention.
+   Full original host images only. No private image/font or Classic skin default. */
+.mc-ore-text-field,.mc-ore-field-section{box-sizing:border-box;min-width:0;--mc-ore-unit:5px;font-family:var(--mc-ore-seven,"Minecraft Seven v2"),var(--mc-ore-fallback,sans-serif);font-weight:400;font-size:calc(1.6 * var(--mc-ore-unit));letter-spacing:calc(.04 * var(--mc-ore-unit));color:#fff;text-shadow:none}
+.mc-ore-text-field{display:block;position:relative}
+.mc-ore-text-field[hidden],.mc-ore-field-section[hidden],.mc-ore-text-field:has(>.mc-ore-text-field__control>input[hidden]){display:none}
+.mc-ore-text-field__control{display:flex;position:relative;min-width:0;isolation:isolate}
+.mc-ore-text-field__skin{display:block;position:absolute;inset:0;z-index:0;pointer-events:none;border:0 solid transparent;border-image-source:var(--mc-ore-text-field-normal);border-image-slice:3 1 1 1 fill;border-image-width:calc(.6 * var(--mc-ore-unit)) calc(.2 * var(--mc-ore-unit)) calc(.2 * var(--mc-ore-unit)) calc(.2 * var(--mc-ore-unit));border-image-outset:0;image-rendering:pixelated}
+.mc-ore-text-field[data-disabled] .mc-ore-text-field__skin{border-image-source:var(--mc-ore-text-field-disabled)}
+.mc-ore-text-field__input{display:block;position:relative;z-index:1;box-sizing:border-box;min-width:0;width:100%;flex:1 1 0;appearance:none;border:0;border-radius:0;background:transparent;min-height:calc(4.8 * var(--mc-ore-unit));padding:calc(1.2 * var(--mc-ore-unit)) calc(1.2 * var(--mc-ore-unit)) calc(.8 * var(--mc-ore-unit)) calc(1.4 * var(--mc-ore-unit));font:inherit;line-height:calc(2.8 * var(--mc-ore-unit));letter-spacing:inherit;color:#fff;caret-color:#6cc349;text-shadow:none}
+.mc-ore-text-field__input::placeholder{color:#b1b2b5;opacity:1}
+/* Vf.Ne hides a placeholder for nonempty values or focused fast-input. Native
+   value handling plus :focus maps that branch; no controller-selected emulation. */
+.mc-ore-text-field__input:focus::placeholder{color:transparent;opacity:0}
+.mc-ore-text-field__input:disabled{color:#58585a;opacity:1;-webkit-text-fill-color:#58585a}
+/* Explicit accessible Web policy; not the recovered native lm decoration. */
+.mc-ore-text-field__input:focus-visible{outline:2px solid Highlight;outline-offset:2px}
+.mc-ore-text-field__feedback{margin-top:calc(.4 * var(--mc-ore-unit));font-size:calc(1.4 * var(--mc-ore-unit));line-height:calc(2 * var(--mc-ore-unit));overflow-wrap:anywhere}
+/* Strong-source Ud mapping: size3=1.2rem, size1=.4rem. No total row height. */
+.mc-ore-field-section{display:flex;position:relative;flex-direction:column;padding:calc(1.2 * var(--mc-ore-unit)) calc(2.4 * var(--mc-ore-unit));background:var(--mc-ore-field-section-background,#48494a)}
+/* Zf neutral default gm bevel: no left/right or flow border, no thin variant. */
+.mc-ore-field-section::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-top:calc(.2 * var(--mc-ore-unit)) solid rgba(255,255,255,.1);border-bottom:calc(.2 * var(--mc-ore-unit)) solid rgba(0,0,0,.3)}
+.mc-ore-field-section__label{font-size:calc(1.6 * var(--mc-ore-unit));line-height:calc(2 * var(--mc-ore-unit));overflow-wrap:anywhere}
+.mc-ore-field-section__description{font-size:calc(1.4 * var(--mc-ore-unit));line-height:calc(2 * var(--mc-ore-unit));overflow-wrap:anywhere}
+.mc-ore-field-section__spacer{height:calc(.4 * var(--mc-ore-unit));flex:none}
+@media(forced-colors:active){
+ .mc-ore-text-field,.mc-ore-field-section{color:CanvasText;forced-color-adjust:auto}
+ .mc-ore-text-field__skin{display:none}
+ .mc-ore-text-field__input{background:Field;color:FieldText;caret-color:FieldText;border:1px solid ButtonText}
+ .mc-ore-text-field__input::placeholder,.mc-ore-text-field__input:disabled{color:GrayText;-webkit-text-fill-color:GrayText}
+ .mc-ore-text-field__input:focus-visible{outline:2px solid Highlight}
+ .mc-ore-field-section{background:Canvas}
+ .mc-ore-field-section::before{display:none}
+}

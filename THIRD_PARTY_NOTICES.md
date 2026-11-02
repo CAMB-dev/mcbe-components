@@ -48,6 +48,15 @@ No Mojangles font or native game screenshot is bundled in the npm library. The o
 
 The local HBUI preview can also register unchanged Minecraft Ten v2, Minecraft Seven v2 and the installed Noto Sans SC OpenType files from ignored `.cache/local-fonts/hbui`. The optional preparation script does not copy those font binaries into source, public or npm directories. Their identity metadata is recorded in `docs/local-hbui-fonts.json`; original ownership and applicable font licenses remain separate. An enabled local site build can embed them, just as it can embed local Mojangles. The npm package continues to ship only the open WOFF2 fonts documented above.
 
+`OreTextField` additionally requires caller-owned whole normal/disabled image URLs.
+Its two installed modern 6×7 images are not bundled or redrawn. The optional
+`scripts/use-local-ore-text-field-assets.py` keeps unchanged originals in ignored
+local cache for the demo; identity-only metadata is in
+`docs/ore-text-field-source.json`. Optional local site builds may embed them.
+Their installed-private status does not inherit the public sample license or
+this project's MIT code license. Native PIX captures and precomposed UI images
+remain ignored diagnostic evidence and are not distributed renderer inputs.
+
 The optional native HBUI loading indicator GIF also stays in ignored local cache and local preview, outside Git/public/npm. Its source identity is metadata-only in `docs/local-hbui-fonts.json`. The default world-modal LoadingScreen separately embeds the unchanged official sample `title.png` Minecraft branding and original loading-bar images in its texture CSS; this source-derived artwork retains Mojang's upstream ownership and is documented in `docs/system-screens-geometry.json`. The caller can override `branding` or pass `branding={null}`.
 
 ## Source model demo atlas

@@ -120,7 +120,8 @@
     "./progress-cloud.css": "./dist/progress-cloud.css",
     "./file-transmission.css": "./dist/file-transmission.css",
     "./external-server-form.css": "./dist/external-server-form.css",
-    "./external-server-field.css": "./dist/external-server-field.css"
+    "./external-server-field.css": "./dist/external-server-field.css",
+    "./ore-text-field.css": "./dist/ore-text-field.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -143,7 +144,8 @@
     "test:file-transmission:node": "node --test tests/file-transmission.node.test.mjs",
     "verify:file-transmission:browser": "node scripts/qualify-file-transmission-browser.mjs",
     "test:external-server:node": "node --test tests/external-server.node.test.mjs",
-    "verify:external-server:browser": "node scripts/qualify-external-server-browser.mjs"
+    "verify:external-server:browser": "node scripts/qualify-external-server-browser.mjs",
+    "test:ore-text-field:node": "node --test tests/ore-text-field.node.test.mjs"
   },
   "peerDependencies": {
     "react": ">=18.3.0 <20",

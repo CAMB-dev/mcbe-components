@@ -1,5 +1,95 @@
 # Session handoff
 
+## Current checkpoint — Ore text fields and real modern native baseline, 2026-11-02
+
+Full goal ACTIVE/incomplete. New branch codex/ore-text-fields-20261102, parent
+4dcf1b68609d31c5d6c2b02e67093eeda00e2535. Public209 components/227 runtime
+(+OreTextField/+OreFieldSection). No Classic coverage rows promoted or altered.
+Root has completed current finite feature and verification; commit/main identity
+will be in ignored `.cache/ore-external-server-native-01/FINAL.json`.
+
+New source-backed modern menus input with native HTML refs/attrs/events,
+accepted/rejected controlled strings, no inherited maxlength/port filtering,
+native selection/readOnly/disabled/reset and composition forwarding. Explicit
+host-owned skins{normal,disabled}: two complete6x7 URLs, TRBL3/1/1/1 fill widths
+.6/.2/.2/.2 source units. No installed-private PNG/font bundled or redrawn.
+OreFieldSection supplies source neutral#48494a + absolute.2 upperwhite.1/
+lowerblack.3 bevel, natural spacing and label/description context with merged
+ARIA IDs. No outer server-panel border. Invalid=host feedback +ARIA, no guessed
+red/shake; focus outline and forced-colors system styling are explicit Web
+policies. Source-focused placeholder hides. Local source-font/whole-image demo
+bridge optional only ignoredcache; gallery#ore-text-fields includes independent
+fields, actualcontrolledrejection/formreset and mobile layout.
+
+Final browser02 actual20/20PASS0skip/flaky:14interaction desktop/Pixel7 plus
+6complete source material planes=149760pixels allRGBA0. Independent reviewer
+recomputed all6 fromoriginalPNG0. Nodefinal16PASS. Package02 fullbuild and
+actualReact18.3.1/19.3.1 all209/227/declarations/assets/licenses +newfamily
+29SSR/13strictnegative each PASS. Installed defaultVite dev/prod xbothpeers
+run02 all4PASS with actual2wholePNGtransport andforcedcolors; builtmain2PASS.
+Functional tarSHA9e94ee083acf7ba07c028b4fd937a8b9a6f35a6901ab805653d857a87b308039.
+ESMSHAfdb55cd203ca1ea3001397aada69526ebcc8ca16c51042028feaf49ddb3853f7;
+DTSSHA dc541f291a210a5594b26c3cd5345781cc1e8cd57dcc8336531e595da7e8e066;
+CSSSHAa822cd5f046762c59abe5e2b4cbd5338caee6bcead167037b89d2706051a98b3.
+Receipts: `.cache/ore-text-field-qa-01/browser-02.json`, built-01.json;
+`.cache/ore-text-field-installed-02/RESULT.json`; package-02.log/node-final-01.log
+underore-external-server-native-01; actualpeerore-text-field-contracts RESULTs;
+independent`.cache/ore-text-field-review-01/RESULT.json`8c59c5da817c9e554a3b72f87a59d6c8fbd9a716e2e5069043b95b6de42d168e.
+
+Preserved failhistory: initialrootTScheckcaught2possiblyundefinedtestPNGbytes,
+fixednonnullboundedindices beforefinalpackage. Package01 old207countassertion
+failed afternewexports209; corrected207/225->209/227, notproductsuppression.
+Browser01 20PASS predatessectionneutralpaint; browser02 coversfinalsection.
+Installed01 firstmatrixfailedCSSOM normalizes3/1/1/1fill→3/1/1fill; installed02
+expands TRBL mathematically, noCSS/pixels/thresholdchange. Firstcopy-script
+Python defaultGBK decode failed beforeVite; explicitUTF8 fixed, bothlogs kept.
+
+Native actualsuccess thisround: root used existingPIX2610.28 UI packagedGPU
+launch, selectedMinecraft, Play>Servers>AddServer, exactlyoneTakeCapture request.
+Modern OreUI form, name/address empty andport19132; nofieldedit/save/play/server
+connection andnoworldopened. Savedoriginal+analysiscopy whole25903148B equal
+SHA c431e066cb57bef4dd102dd8847ae51c6f35a29f6b5a5f9c0ace466fee661e70.
+Bothunder`.cache/ore-external-server-native-01`; ACQUISITION.json detailedPID/
+starttime/options. Actualnativeframe2570x1402, CUwindow2560x1400 notsame.
+Minecraft/PIXnormalAltF4thenCIMempty; CUjs kernel reset immediatelyafteruse.
+OnlylaterofflinePIXAPI replay, noapp/CUreopen. Userbrowser/4173 untouched.
+
+export-01 fullsavedcaptureC++/resources + api-list-01 actualSDKindices. G13 q0e57
+CL647/PSO649 R656(2570x1405sample1)->R19(2570x1402sample1); G16/e85CL668/PSO670
+cubeR667->R13sample8; G19/e113CL677/PSO679 R19->R13; G22/e120 resolvesR13->R15.
+Allviewport/scissor2570x1402. ActualSDKdraw-q0-e57-textures-01 0errors, R656
+wholebefore/afterusefulRGBA14,443,400B matchesindependentCPU XPRESSdecodeall0,
+SHAf18303d2aee15da1ba9e42df54ffffaef34ef4c5178505531e3be4796687a35d.
+Wholepaddedraw differs156546bytes onlypadding; NEVERclaimwholepaddedblob0.
+Rootalsofoundfirst1402rowsofR656matchactualR19afterallRGBA0,notproductproof.
+UIisprecomposedwholetexture, nocontrollocaldraw/font/caret qualification.
+IndependentstaticstudyFINAL`.cache/ore-external-server-native-study-01/FINAL.json`
+2aaa7f4ba023c8ec9a5aff4cc335fba8612a34b0ecbb0ca6ac6ef56e9e74c8c7.
+Nextnativeifneededminimalactualq0e120afterR15 metadata/wholetarget; don'tread
+25MiBcube/75MiBinitialCB again, allstaticbytesalreadyfinite decoded.
+
+Strongsource study parent`.cache/ore-external-server-source-study-01/FINAL.json`
+be125566...; importantly OLD SPEC/REPORT spacingwrong(usedtokenindexasrem).
+UseONLYspacing-correction-01/CORRECTED-SPEC.json7d2ef5bc91a40927bcf8b542001517c3a1a57f2098ab106350d771630372f541:
+Ud1=.4rem/Ud2=.8/Ud3=1.2; full1..8=[.4,.8,1.2,1.6,2,2.4,3.2,6.4]. Oldmistakes
+retainedunmodified, correctedbeforeproduct. SectionappearanceNEWFINALeef0e99f...
+provesCjvanilla semantic background/bevel/defaultgates separatelyfrommenusinput
+CSS; overridesruntimeunknown. Aliasphasechecks5126PNGnamed/5125real/104same
+dimensionRGBA, fourprivateactualskins+editiconshavebyte0/RGBA0officialaliases;
+one.jpgdisguisedas.pngidentified separately. Noassetscopiedtopublic.
+
+Nextproductwork: independentmodernOreExternalServerForm fromcorrectedDde source,
+compose reusablemodernparts andkeepClassic316x179 asoldprofile; noClassic4flags
+inmodernroute. Nativeport0allowed,ASCIIvaliddigits<=65535 withleadingzeroskept;
+invalidempty/non-digit correction19132 and>max65535+narration/feedback belongs
+hostbusinessadapter, notgenericfield. Dirty/back/delete/onlinewarning/provider
+servicesmustexplicitlyhost. Neednewactionbar/buttons/screen/gridseamswhereuseful,
+nativewholepagecomparison/fonts/caret/selection/inputbridgeunqualified.
+Classic4alpha candidates STILLUNQUALIFIED: modernnativebaselinecannotcertifyold
+Classicpopup. Book/sign focusedcaret/selection/wrap baseline also stillpending;
+neverblindlyreuseoldone-shotfailedSDKhelper/pinnedexitedPID.
+
+
 ## Current checkpoint — External Server source family, 2026-11-02
 
 Full goal ACTIVE/incomplete. Branch codex/external-server-20261102, parent

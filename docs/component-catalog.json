@@ -947,10 +947,37 @@
           "details": "docs/EXTERNAL_SERVER_QA.md"
         }
       }
+    ],
+    "ore_text_fields": [
+      {
+        "name": "OreTextField",
+        "status": "implemented",
+        "validation": "browser02_20_pass_node16_package02_react18_19_installed4_built2_native_unqualified",
+        "fidelity": "modern_menus_source_profile_native_input_web_policy_not_native_pixel_certificate",
+        "api": {
+          "required": "skins:{normal:string,disabled:string}; whole host-owned PNG URLs",
+          "ref": "HTMLInputElement; native input attrs/events/string values; className/style apply to input",
+          "editing": "No inherited Classic maxLength, port filtering or persistence; host invalid/invalidMessage",
+          "appearance": "guiScale/locale inherit OreFieldSection; source menus TRBL3/1/1/1 fill and independent source padding; explicit Web focus outline",
+          "details": "docs/ORE_TEXT_FIELD_QA.md"
+        }
+      },
+      {
+        "name": "OreFieldSection",
+        "status": "implemented",
+        "validation": "browser02_20_pass_node16_package02_react18_19_installed4_built2_native_unqualified",
+        "fidelity": "modern_rg_Zf_source_section_with_native_HTML_accessibility_policy",
+        "api": {
+          "required": "label and children",
+          "description": "Optional description with generated IDs linked to contained OreTextField; user aria IDs merge",
+          "layout": "Natural content height; source spacing tokens1=.4rem,3=1.2rem, horizontal padding2.4rem; no hardcoded full-row height",
+          "details": "docs/ORE_TEXT_FIELD_QA.md"
+        }
+      }
     ]
   },
   "publicExports": {
-    "components": 207,
+    "components": 209,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -961,13 +988,13 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 225,
+    "runtimeValues": 227,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "tested_functional_package_external_server_207_225_native_unverified",
-    "materialProfile": "15RGBA4param_pendingnative",
+    "publicationState": "tested_ore_text_fields_209_227_finite_web_native_unqualified",
+    "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
     ],

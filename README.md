@@ -59,7 +59,9 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
-> 当前源公开207组件／225运行时值，新增ExternalServerForm与ExternalServerField；source browser04完整67／67通过：48交互＋19材质合同（15完整RGBA零差＋4源alpha参数合同）。四个partial-alpha像素候选仍UNQUALIFIED，停止套用旧scalar／perpatch规则；native未认证。先前package02与Vite四组合是forced-colors specificity修复前CSS阶段；当前package03、实际React18／19安装四组合02与built02六项均已通过，Node最终25项通过。此前205／223及具名历史结果保留原受检范围。
+> 最新有限阶段：209 组件／227 运行时值，新增 `OreTextField` 与 `OreFieldSection`。现代菜单字段使用宿主完整原图，保留原生输入、ref、选字和 IME；没有混用 Classic 材质。最终浏览器 20/20、Node 16/16、React 18/19 实际包、默认 Vite 四组合与生产展示两项通过。六个完整材质平面 149,760 像素 RGBA 零差；原生整页仍未认证。入口 `#ore-text-fields`，规格与资格见 [ORE_TEXT_FIELD_QA.md](docs/ORE_TEXT_FIELD_QA.md)。本轮已取得原版 OreUI GPU 基准，并在采集后关闭 Minecraft、PIX 和 Computer Use。
+
+> Classic上一阶段公开207组件／225运行时值，新增ExternalServerForm与ExternalServerField；source browser04完整67／67通过：48交互＋19材质合同（15完整RGBA零差＋4源alpha参数合同）。四个partial-alpha像素候选仍UNQUALIFIED，停止套用旧scalar／perpatch规则；native未认证。先前package02与Vite四组合是forced-colors specificity修复前CSS阶段；当前package03、实际React18／19安装四组合02与built02六项均已通过，Node最终25项通过。此前205／223及具名历史结果保留原受检范围。
 
 各组件的完整类型由包内 `.d.ts` 导出，例如 `ButtonProps`、`DialogProps`、`TabItem`。除 Dialog 和 PixelIcon 外，各组件转发 ref 到主要原生节点。ReactNode 属性支持文本、图标或组合内容。
 
@@ -801,3 +803,20 @@ export function AddServer({ onRequest }: {
 示例binding只是宿主明确允许操作的配置，不替代校验；保存、连接与移除要在onRequest中由宿主处理。`mode="edit"` 左侧为Remove，add为Play；`submitAction`默认Save，可设Play，Enter不会推断Remove。`onClose`分别报告close-button / escape，父层自行关闭；不需要关闭时可不传。
 
 name / address / port始终保留字符串。Field默认maxlength分别16 / 256 / 6，port为text input加numeric键盘提示，既不清洗粘贴内容也不验证范围；可显式覆写maxLength / inputMode。`ExternalServerField`可独立使用并转发HTMLInputElement ref，className / style作用于真实input；Form ref为HTMLFormElement，fieldRefs可分别取得三处输入。受控value更新、原生reset和可取消事件包含在已验有限Web功能范围内。source browser04单批67／67通过、0skip／retry／flaky：交互48项为每个desktop／mobile的19fixture＋3gallery＋2真实状态检查；材质19项中15项完整RGBA零差，另4项仅源alpha参数合同通过，四个像素候选仍UNQUALIFIED。独立99＋66实验不支持把旧scalar opacity规则迁移到group，perpatch也未获资格；不改生产.8／.5或旧expected来追逐通过，旧四项FAIL保留，可由playwright.external-server-candidates.config.ts重现。真实forced-colors测试促成hover specificity下隐藏图层修复，普通模式未改。package02与旧四组合保留为修前CSS历史。修复后package03已完整通过：实际React18.3.1／19.3.1各207组件／225值、58项SSR／类型／12PNG／9metadata／CSS；实际安装四组合02全部通过，四个forced-colors场景逐项确认皮肤与三个close图层隐藏、真实input outline保留，built02为6／6、Node最终25项通过。功能受检快照SHA256为`f66179674712aeb86babf6f0936ae40acb68322b6ed345536ec5239f8004ec83`；后续仅文档重打包另记，不把该SHA冒作最终文档包身份。不能据功能／参数合同通过宣称alpha像素、native输入算法或整页像素相同。最终范围见 [EXTERNAL_SERVER_QA.md](docs/EXTERNAL_SERVER_QA.md)。
+
+
+### Modern OreUI input parts
+
+`OreTextField` 是实际 HTML input，`OreFieldSection` 拆出标签、描述和中性背景／上下阴影。两者与 Classic `ExternalServerField` 分开。
+
+```tsx
+import {OreTextField, OreFieldSection} from "mcbeui";
+import "mcbeui/ore-text-field.css";
+
+<OreFieldSection label="服务器名称" description="为服务器选择一个名称。" guiScale={2} locale="zh_CN">
+  <OreTextField skins={{normal: normalWholeUrl, disabled: disabledWholeUrl}}
+    value={name} onChange={event => setName(event.currentTarget.value)}/>
+</OreFieldSection>
+```
+
+原图和 Seven／Noto 字体由宿主提供；包内不附带私有安装资源。本机预览可运行 `python scripts/use-local-ore-text-field-assets.py` 后重启 Vite，在 `#ore-text-fields` 查看正常、焦点、只读、禁用、invalid、中文、长文本、受控拒绝和原生重置。字段不继承 Classic maxlength 或端口过滤，不执行服务器服务。`invalid` 支持宿主反馈与 ARIA 状态；原版未闭合的焦点装饰／shake 不以猜测红边或动画代替。更多见 [ORE_TEXT_FIELD_QA.md](docs/ORE_TEXT_FIELD_QA.md)。

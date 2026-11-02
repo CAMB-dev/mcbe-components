@@ -16,6 +16,7 @@ const hbuiSevenPath = localFont('Minecraft-Seven-v2.otf');
 const hbuiChinesePath = localFont('NotoSansSC-Regular.otf');
 const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loading-indicator.gif', import.meta.url));
 const orePermissionsDirectory = fileURLToPath(new URL('./.cache/local-ore-permissions/', import.meta.url));
+const oreTextFieldDirectory = fileURLToPath(new URL('./.cache/local-ore-text-field/', import.meta.url));
 const nativeBitmapPath = fileURLToPath(new URL('./.cache/local-fonts/unicode/font.json', import.meta.url));
 const nativeWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/fonts.json', import.meta.url));
 const nativeGuiWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/gui-fonts.json', import.meta.url));
@@ -140,6 +141,32 @@ export default defineConfig({
           + `\nexport const orePermissionAssets = { ${oreAssetKeys.map(key => `${key}: oreAsset${key}`).join(', ')} };`;
       }
       parts.push(oreAssetsModule);
+      const oreTextFieldSpecs = [
+        ['normal', 'baseTextField_neutral80-e77c01be83592aa681d2.png', 124, '4de8cfb38a90f3296237606130503c2648551e1fc9aba28c373c86293b6f910c'],
+        ['disabled', 'baseTextField_disabled-00a010b73e9da6b5e060.png', 118, '5c3af29f159b5c9f4b85325848549b4f68f112d2cb57d134769a82149d633fb7'],
+      ] as const;
+      const oreTextFieldMetadata = resolve(oreTextFieldDirectory, 'provenance.json');
+      let oreTextFieldModule = 'export const oreTextFieldSkins = undefined;';
+      if (existsSync(oreTextFieldMetadata)) {
+        const provenance = JSON.parse(readFileSync(oreTextFieldMetadata, 'utf8')) as {schemaVersion: number; resources: {role: string; file: string; sourceBasename: string; width: number; height: number; bytes: number; sha256: string}[]};
+        for (const [role, basename, length, digest] of oreTextFieldSpecs) {
+          const record = provenance.resources?.find(item => item.role === role);
+          const target = resolve(oreTextFieldDirectory, `${role}.png`), within = relative(oreTextFieldDirectory, target);
+          if (provenance.schemaVersion !== 1 || !record || record.file !== `${role}.png` || record.sourceBasename !== basename
+            || record.width !== 6 || record.height !== 7 || record.bytes !== length || record.sha256 !== digest
+            || isAbsolute(within) || within.startsWith('..') || !existsSync(target)) {
+            throw new Error('Invalid local OreUI text-field metadata; rerun scripts/use-local-ore-text-field-assets.py.');
+          }
+          const bytes = readFileSync(target);
+          if (bytes.length !== length || !bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+            || bytes.readUInt32BE(16) !== 6 || bytes.readUInt32BE(20) !== 7 || createHash('sha256').update(bytes).digest('hex') !== digest) {
+            throw new Error('Local OreUI text-field bytes differ from pinned whole originals; rerun scripts/use-local-ore-text-field-assets.py.');
+          }
+        }
+        oreTextFieldModule = oreTextFieldSpecs.map(([role]) => `import oreTextField${role} from ${JSON.stringify(normalizePath(resolve(oreTextFieldDirectory, `${role}.png`)) + '?url')};`).join('\n')
+          + '\nexport const oreTextFieldSkins = { normal: oreTextFieldnormal, disabled: oreTextFielddisabled };';
+      }
+      parts.push(oreTextFieldModule);
       // Optional measured subset; page bytes remain in ignored local storage.
       // This does not register a global font face or invent missing glyphs.
       let bitmapModule = 'export const nativeBitmapFont = undefined;';
