@@ -27,11 +27,15 @@
 .mc-resource-packs-button__state--default{display:block}
 .mc-resource-packs-button__face{position:absolute;inset:calc(1px * var(--mc-rp-scale))}
 .mc-resource-packs-button__border{position:absolute;inset:0;filter:brightness(.075)}
-.mc-resource-packs-button__content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;min-width:0;pointer-events:none;white-space:nowrap;overflow:hidden}
-.mc-resource-packs-button:disabled{color:rgb(70% 70% 70%);cursor:default}
+/* new_ui_button_panel.button_content supplies the first W/H-6 panel. The
+   nested header heading has its own W-6; its15-high content may overflow the
+   14-high panel, as in the source graph. Labels own their clipping. */
+.mc-resource-packs-button__content{position:absolute;inset:calc(3px * var(--mc-rp-scale));display:flex;align-items:center;justify-content:center;min-width:0;pointer-events:none;white-space:nowrap;overflow:visible}
+.mc-resource-packs-button:disabled{color:rgb(30% 30% 30%);cursor:default}
 .mc-resource-packs-button:disabled>.mc-resource-packs-button__state--default{display:none}
 .mc-resource-packs-button:disabled>.mc-resource-packs-button__state--locked{display:block}
 .mc-resource-packs-button:not(:disabled):is(:hover,:focus-visible,:active){color:#fff}
+.mc-resource-packs-button:not(:disabled):not(.mc-resource-packs-button--indicator):not(.mc-resource-packs-button--underline):active>.mc-resource-packs-button__content{transform:translateY(calc(1px * var(--mc-rp-scale)))}
 .mc-resource-packs-button:not(:disabled):is(:hover,:focus-visible,:active)>.mc-resource-packs-button__state--default{display:none}
 .mc-resource-packs-button:not(:disabled):not(:active):is(:hover,:focus-visible)>.mc-resource-packs-button__state--hover,.mc-resource-packs-button:not(:disabled):active>.mc-resource-packs-button__state--pressed{display:block}
 .mc-resource-packs-button:not(:disabled):is(:hover,:focus-visible,:active) .mc-resource-packs-button__border{filter:none}

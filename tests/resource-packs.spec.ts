@@ -46,6 +46,32 @@ test('manager uses ordered vertical sections and source default row',async({page
   const boxes=await page.locator('.mc-resource-packs-section').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().top));for(let i=1;i<boxes.length;i++)expect(boxes[i]).toBeGreaterThanOrEqual(boxes[i-1]!);
 });
 
+for(const scale of [1,2,3,5])test(`source header content has both six-unit insets and independent button states at scale ${scale}`,async({page})=>{
+  await load(page,{part:'section',kind:'unowned',width:140,scale,managerBindings:{selectedGridVisible:false}});
+  const button=page.locator('.mc-resource-packs-section__header > button[aria-expanded]');
+  const content=button.locator(':scope > .mc-resource-packs-button__content'),heading=button.locator('.mc-resource-packs-section__heading');
+  const snapshot=()=>button.evaluate(node=>{
+    const bounds=node.getBoundingClientRect(),content=node.querySelector('.mc-resource-packs-button__content')!.getBoundingClientRect(),heading=node.querySelector('.mc-resource-packs-section__heading')!.getBoundingClientRect(),title=node.querySelector('.mc-resource-packs-section__title')!;
+    return{content:{x:content.x-bounds.x,y:content.y-bounds.y,width:content.width,height:content.height},heading:{x:heading.x-bounds.x,y:heading.y-bounds.y,width:heading.width,height:heading.height},color:getComputedStyle(title).color};
+  });
+  await page.mouse.move(0,0);
+  const rest=await snapshot();
+  // new_ui_button_panel.button_content is 100%-6 in each axis; the nested
+  // selected_packs_title_content applies its own additional width of 100%-6.
+  expect(rest.content).toEqual({x:3*scale,y:3*scale,width:134*scale,height:14*scale});
+  expect(rest.heading).toEqual({x:6*scale,y:2.5*scale,width:128*scale,height:15*scale});
+  expect(rest.color).toBe('rgb(77, 77, 77)'); // CSS computed value, not native .3 quantization.
+  await button.hover();await expect(heading).toHaveCSS('color','rgb(255, 255, 255)');
+  const hover=await snapshot();expect(hover.content).toEqual(rest.content);expect(hover.heading).toEqual(rest.heading);
+  await page.mouse.down();
+  try{const pressed=await snapshot();expect(pressed.color).toBe('rgb(255, 255, 255)');expect(pressed.content).toEqual({...rest.content,y:rest.content.y+scale});expect(pressed.heading).toEqual({...rest.heading,y:rest.heading.y+scale});}
+  finally{await page.mouse.up();}
+  await configure(page,{disabled:true});await expect(button).toBeDisabled();
+  const locked=await snapshot();expect(locked.content).toEqual(rest.content);expect(locked.heading).toEqual(rest.heading);expect(locked.color).toBe('rgb(77, 77, 77)');
+  await configure(page,{disabled:false,readOnly:true});await expect(button).toBeDisabled();expect((await snapshot()).color).toBe('rgb(77, 77, 77)');
+  await expect(content).toBeVisible();
+});
+
 test('level checkbox is independent from source ancestor enabled state',async({page})=>{
   await load(page,{profile:'level',managerBindings:{forcePackDownloadEnabled:true,forcePackDownloadLocked:true,forceUserAgreement:true,forceUserAgreementEnabled:false}});
   const checkbox=page.locator('.mc-resource-packs input[type=checkbox]');await expect(checkbox).toBeChecked();await expect(checkbox).toBeDisabled();

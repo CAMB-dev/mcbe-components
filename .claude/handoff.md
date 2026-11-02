@@ -1,4 +1,65 @@
-# Current checkpoint — Native Resource Pack header, 2026-11-03
+# Current checkpoint — Resource Pack content and states, 2026-11-03
+
+Full goal ACTIVE/incomplete. Branch codex/resource-pack-header-layout-20261103
+starts from bd8eec9d4fc61a0661ab1ce2fb6f1ffc4cf614fa. Final actual commit/push/clean
+receipt: .cache/resource-pack-header-layout-qa-20261103-01/FINAL.json.
+Normal push origin HEAD:main only. Current253 components/271 runtime values.
+
+## Completed this phase
+
+- Real src/resource-packs.css fix: new_ui_button_panel content inset3 represents
+  its explicit W/H-6; nested title keeps its own W-6. Overflow visible preserves
+ 15-high title inside14-high outer content (labels still own clipping).
+- Ordinary light buttons restore pressed content +1 logical Y. Indicator keeps
+  its explicit source [0,0]; independent underline layout/press excluded.
+- Locked text uses light .3 instead of incorrect dark .7. CSS computed77 is not
+  a native font76 certificate. No image/filter/kernel/UV or source PNG changed.
+- Four scale1/2/3/5 state regressions added to tests/resource-packs.spec.ts;
+  desktop46/mobile46 +existing conditioned native3 =95PASS,0skip/retry.
+  Build and separate strict test/fixture TypeScript checks terminal0.
+- Fresh exact candidate installed into React18.3.1 and19.3.1; actual dev/default
+  Vite production each tested4scales, default/hover/pressed/disabled/readOnly.
+  Four whole-button screenshot states per case; dev/production decoded RGBA
+  exact. Same installed CSS bytes as source. Own5483/5484 processes closed.
+- Candidate .cache/resource-pack-header-layout-qa-20261103-01/candidate.tgz
+  SHA256 b73ef72848375cbb4da8e4f97a9248ab00e1bc65beb0802e5f501f926ef9ed7f.
+  Pack diff confirms870 runtime/manifest/license members: ONLY resource-packs.css
+  changed,869 byte-identical to previous tested tar. JS/types/API/assets unchanged.
+  Private captures excluded. PACK-DIFF.json and INSTALLED.json retain receipts.
+- Independent CPU fixed-ZIP audit7whole files/973784B/40raw nodes/21chain stages:
+  .cache/resource-pack-header-layout-study-20261103-01/FINAL.json
+  SHA256 b91cbd802523b6b62152dc5c56608e80fd1f4679173c6699a12894a18872f9c7.
+  All source pins stable; agent STOP. More-offers light_text_button also uses
+  first W/H-6 and pressed1. Underline entirely separate, not that template.
+
+## Remaining / qualifications
+
+- No absolute native GLOBAL origin recovered. Raw source has TWO independent
+  W-6 panels, but combining B-12 assumes omitted intermediary panels fill parent;
+  centered3 inset is explicit Web policy, not native default-anchor proof.
+- Settings content_area normal60%-8, top_right[-1,21]; alternative80% route is
+  separate. Mouse scroller nominal reservation8; touch is separate. Need actual
+  safezone/dialog route/scroll/provider/intrinsic/default/float semantics before
+  deriving native442.5. Do not fit coordinates from captured quads.
+- Old full-frame CSS known-phase128 (including28 outside50square) and integer
+ 36/plane strict negatives preserved; no generic CSS half-pixel fix claimed.
+- Old ResourcePacks92/120+28unqualified and Manifest6/18+12unqualified remain
+  separate historical material qualifications. No oracle/threshold edits.
+- Native font/intrinsic/default layout and full GUI breadth remain unfinished.
+  Existing GPU native replay is still capture-conditioned (native before and
+  captured host rectangles), not independent whole-page reconstruction.
+
+## Operations
+
+- Keep preview4173 PID217140 running. Build updated site; final receipt records
+  current HTML hash. Do not kill all Node. Own5481/5483/5484 test servers closed.
+- No Computer Use or game/PIX launch this phase. Prior CU reset/game/PIX closure
+  preserved. Root owns browser/GPU/build/package/Git; agents frozen CPU only.
+- Initial baseline test reproduced content0/140x20 rather than3/134x14, then
+  passed after CSS fix. Baseline config/output were reused for the single-case
+  post-fix check; don't treat the overwritten baseline artifact as old failure.
+
+# Previous checkpoint — Native Resource Pack header, 2026-11-03
 
 Full goal ACTIVE/incomplete. Branch codex/native-header-sampling-20261103 based
 on921ac910e1611ed462b44113434c01011758a0a9. Local main is stale. Final actual

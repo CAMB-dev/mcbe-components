@@ -222,5 +222,40 @@
       "path": ".cache/resource-pack-pix-plus-independent-20261103-01/AMENDMENT-05/FINAL.json",
       "sha256": "637a9b44c6f606e96b392e2a497569191df3dcca7ba271e14d66cdbb9aafaf61"
     }
-  ]
+  ],
+  "resourcePackHeaderLayoutStage": {
+    "status": "SOURCE_CONTENT_BOX_AND_STATE_CORRECTED_NATIVE_GLOBAL_LAYOUT_UNQUALIFIED",
+    "componentCountChanged": false,
+    "changes": [
+      "Restore new_ui_button_panel content size W/H-6 independently of the nested heading W-6",
+      "Allow15-high heading to overflow14-high content panel without clipping its image",
+      "Restore pressed content offset [0,1], preserving indicator [0,0] and separate underline behavior",
+      "Use light locked text RGB .3 rather than dark locked .7"
+    ],
+    "webLayoutPolicy": {
+      "intermediateUnspecifiedPanelSize": "parent-fill",
+      "headingWidthForButtonWidthB": "B-12",
+      "nativeDefaultLayoutSemanticsQualified": false
+    },
+    "validation": {
+      "desktopResourcePacksPass": 46,
+      "mobileResourcePacksPass": 46,
+      "existingConditionedNativePass": 3,
+      "skip": 0,
+      "retries": 0,
+      "scales": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "buildPassed": true,
+      "strictTestTypecheckPassed": true
+    },
+    "nativeAbsoluteOriginRecovered": false,
+    "nativeCSSSamplingQualified": false,
+    "oldReferenceImagesChanged": false,
+    "oldStrictFailuresRequalified": false,
+    "details": "docs/RESOURCE_PACK_HEADER_NATIVE_QA.md"
+  }
 }

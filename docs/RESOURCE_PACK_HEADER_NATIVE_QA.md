@@ -1,6 +1,6 @@
 # Resource Pack header: native draw evidence
 
-当前仍为 **253 组件／271 运行时值**。本次没有修改组件、采样内核、原图、旧参考图或误差阈值；补上了真实原版绘制证据和可重复测试。有限结论是：**给定捕获派生的宿主位置及原生 before 图层，现有公开 GPU 接口可以准确重画两颗 plus**。这不是资源包整页布局或字体复刻完成。
+当前仍为 **253 组件／271 运行时值**。GPU 采集阶段（`bd8eec9`）没有修改组件、采样内核、原图、旧参考图或误差阈值；补上了真实原版绘制证据和可重复测试。有限结论是：**给定捕获派生的宿主位置及原生 before 图层，现有公开 GPU 接口可以准确重画两颗 plus**。这不是资源包整页布局或字体复刻完成。
 
 ## 采集与原图身份
 
@@ -53,3 +53,11 @@ npx playwright test tests/resource-pack-header-native.spec.ts --project=pixels -
 测试依赖本机 `.cache/resource-pack-native-gpu-20261103-01` 私有捕获。它们、字图和GPU dump不随库分发；缺少时明确跳过该有限原生profile，不生成替代参考。证据还包括 `.cache/resource-pack-pix-plus-independent-20261103-01/AMENDMENT-01…04`、`native-header-web-20261103-01`、`native-plus-public-replay-20261103-01`、`native-plus-mounted-20261103-01/02`。
 
 此前资源包92／120与28个严格失败、Manifest6／18与12个严格失败仍分别保留。另对冻结的6个普通宿主frame／18个图标plane运行现有GPU路径：软件12／18符合旧理想POINT约定，NVIDIA为6／18；没有对应图标的直接原生draw，故未以较高通过数决定正确采样规则。默认DOM家族整页布局、字体、其他比例／状态／材质及完整Bedrock GUI仍未认证。
+
+## 后续源码布局及状态修正
+
+独立重新读取固定 ZIP 后，发现此前 DOM 实现遗漏了 `new_ui_button_panel.button_content` 的 `[100%-6,100%-6]`，它与 `selected_packs_title_content` 自己的 `[100%-6,15]` 是两层。现在复原外层3单位内边距，标题继续保留内层宽度扣减；15高的标题不被14高的外层面板裁切，文字本身仍负责溢出处理。中间未声明尺寸的 panel 在此 Web 实现中采用填满父层的布局；这尚不是对原生缺省尺寸、anchor、`100%c` 或舍入语义的恢复证明。
+
+同时恢复 light button 的 pressed 内容 offset `[0,1]`，并把 locked 文字从误用的 dark button `.7` 改回 `$light_button_locked_text_color` 的 `.3`。诊断按钮保留源码的 pressed offset `[0,0]`，独立 underline 实现也不套用此位移。`.3` 在 CSS computed style 中为77，前文有限原生图像绘制输出为76；本次不把二者混作原生字体颜色认证。
+
+新增四种缩放（1／2／3／5）的真实按钮测试，分别检查 default、hover、pressed、disabled 和 readOnly 的内容盒、标题盒及颜色。桌面／移动端 Resource Packs 回归92项和既有原生profile3项，实际合计95项通过，无跳过或重试；构建通过。旧参考图、采样阈值及失败记录保持原样。绝对 GLOBAL origin、最终 CSS 取样及整页原生认证仍待完成。
