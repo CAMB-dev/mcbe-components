@@ -1,8 +1,8 @@
 # Bedrock Classic GUI覆盖清单
 
-> 当前205组件／223运行时值；FileTransmission增量仅将file_upload_screen.json由B更新为有限A，得到A43／B12／C34／D32／E0／F16／G63／H6，其余205数据行保持。有限A是命名组合的范围映射，原生整页仍未认证。
+> 当前207组件／225运行时值；ExternalServer两组件的有限功能／实际包／安装及展示检查通过，仅add_external_server_screen.json由C更新为有限A，得到A44／B12／C33／D32／E0／F16／G63／H6，其余205数据行逐字保持。当前source67项通过含15完整RGBA＋4alpha参数合同，4项partial-alpha像素候选UNQUALIFIED；修后package03／实际安装四组合02／built02均通过，原生整页未认证。
 
-这是固定官方源文件与本库205组件的**范围映射**，不是原生像素验收表。205包含基础控件、零件和组合，不等于205个完整游戏GUI；有限A43也不是43个完整原生流程。Credits之前的已验阶段为188组件、A38／E1。
+这是固定官方源文件与本库207组件的**范围映射**，不是原生像素验收表。207包含基础控件、零件和组合，不等于207个完整游戏GUI；有限A44也不是44个完整原生流程。Credits之前的已验阶段为188组件、A38／E1。
 
 固定来源为官方 `v1.26.60.5-full`，commit `15701fa9c13923f12662984c32c124327e40e3d3`。实际 `resource_pack/ui` 有206个JSON文件、合计5,895,077字节；全部解析后发现198个顶层显式或继承的screen root，分布于128文件。root包含base /template /alias，不代表198个独立可访问界面，也不证明运行时注册、平台可用性或活动覆盖。
 
@@ -14,9 +14,9 @@ MobEffect增量提供可见name／timer、独立grid、原图行背景、滚动�
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|43|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|44|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|12|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
-|C|`generic_composition_candidate`|34|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
+|C|`generic_composition_candidate`|33|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
 |E|`confirmed_missing_named_family`|0|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
@@ -25,7 +25,7 @@ MobEffect增量提供可见name／timer、独立grid、原图行背景、滚动�
 
 ## 命名族E0的边界
 
-Credits经有限Web合同、功能包、实际安装与展示页检查后由E→有限A，该固定206行快照的E计数成为0。它只表示这组“确认缺失命名族”已建立有限映射；当前B12部分、C34通用候选、F16 Pocket未认证、G63可选未映射、H6未知，以及所有文件的native状态仍保留。不能据E0宣称Minecraft全部GUI完成。
+Credits经有限Web合同、功能包、实际安装与展示页检查后由E→有限A，该固定206行快照的E计数成为0。它只表示这组“确认缺失命名族”已建立有限映射；当前B12部分、C33通用候选、F16 Pocket未认证、G63可选未映射、H6未知，以及所有文件的native状态仍保留。不能据E0宣称Minecraft全部GUI完成。
 
 CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际内容排版、滚动、独立Skip和高层／受控源快照。48个不同Web合同与六个自编平面不认证原版字体、logo、poem／edu阶段、引擎路由或整屏像素。实际包／安装／source与built展示页资格见具名阶段；详见[CREDITS_QA.md](CREDITS_QA.md)。Credits增量只变动credits_screen.json一行，其余205数据行逐字保持。
 
@@ -66,7 +66,7 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 |`_global_variables.json`|—|0|D|—|
 |`_ui_defs.json`|—|0|D|—|
 |`achievement_screen.json`|achievement|0|B|AchievementToast、Progress、PlayerCard|
-|`add_external_server_screen.json`|add_external_server|3|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
+|`add_external_server_screen.json`|add_external_server|3|A|ExternalServerForm、ExternalServerField；显式模式／独立绑定／真实input，有限Web功能已验，4项alpha像素候选UNQUALIFIED，修后实际包／安装／展示通过，native未认证|
 |`adhoc_inprogess_screen.json`|adhoc_inprogress|1|G|—|
 |`adhoc_screen.json`|adhoc|1|G|—|
 |`anvil_screen.json`|anvil|1|A|Anvil|
@@ -286,3 +286,6 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 Progress 增量提供固定源15路由及独立条件、两个包集合／五factory、云错误／冲突等专门组合与可复用部件。真实React18／19安装消费、默认Vite开发／生产四组合、源与built展示页按具名阶段验证；不从局部材质或计数外推原生整页、字体、shader、内容测量或服务。只有progress_screen.json一行由B→有限A，其他205行不变。详见[PROGRESS_QA.md](PROGRESS_QA.md)。
 
 FileTransmission三组件接入固定源268×95窗口、十个独立显隐与原图经验进度条，source与真实两peer／默认Vite四组合的有限验收见[FILE_TRANSMISSION_QA.md](FILE_TRANSMISSION_QA.md)。仅一行B→有限A；它不认证base_screen引擎工厂、原生字体、自动高度或上传服务。
+
+
+ExternalServer增量新增 `ExternalServerForm` / `ExternalServerField`（207组件／225值），对应固定commit `15701fa9c13923f12662984c32c124327e40e3d3` 的add_external_server族。此前source功能44／44、built展示6／6、package02实际React18／19功能包与默认Vite四组合确认有限命名资格，仅该行C→有限A，状态A44／C33，其余205数据行逐字保留。最新source browser04完整67／67通过：48交互（19fixture＋3gallery＋2真实状态各desktop／mobile）及19材质合同，其中15完整RGBA零差、4源alpha参数合同；四个partial-alpha像素候选仍UNQUALIFIED。独立99＋66实验不支持迁移旧scalar规则，perpatch也未获资格；旧四项FAIL／原expected保留，不继续拟合生产.8／.5。真实forced-colors hover specificity修复不改变普通模式；package02／旧四组合／built6明确属于修前CSS，修后package03实际React18／19各207组件／225值与58项SSR／类型／12PNG／9metadata／CSS完整通过，实际安装四组合02全通过（含四场景forced-colors实测），built02为6／6，Node最终25项通过。不将有限A等同alpha像素全通过、原生整页或真实连接服务完成。上一FileTransmission205／223阶段的A43／C34为历史。宿主模式／绑定／验证与服务边界见 [EXTERNAL_SERVER_QA.md](EXTERNAL_SERVER_QA.md)。

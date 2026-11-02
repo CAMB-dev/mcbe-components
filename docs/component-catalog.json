@@ -907,10 +907,50 @@
         "fidelity": "fixed_source_whole_materials_explicit_host_fonts_measurements_and_web_policies_native_unverified",
         "details": "docs/FILE_TRANSMISSION.md"
       }
+    ],
+    "externalServers": [
+      {
+        "name": "ExternalServerForm",
+        "status": "implemented",
+        "validation": "source_browser04_67_pass_node25_package03_installed_vite4_02_built6_02_verified_alpha4_pixels_unqualified_native_unverified",
+        "fidelity": "fixed_classic_source_finite_web_form_native_unverified",
+        "source": {
+          "file": "resource_pack/ui/add_external_server_screen.json",
+          "commit": "15701fa9c13923f12662984c32c124327e40e3d3"
+        },
+        "api": {
+          "required": "title, mode:add|edit, labels, four independent bindings booleans",
+          "values": "value/defaultValue ExternalServerValues with string name/address/port; onValueChange(value,detail)",
+          "actions": "onAction(play|save|remove,value,detail), onClose(detail); no persistence or connection",
+          "layout": "size default [316,179] logical; scale default2 positive safe integer; clipped overflow",
+          "submitAction": "save default or play; Enter never selects remove",
+          "ref": "HTMLFormElement; optional per-field HTMLInputElement refs",
+          "hostOwnership": "validation, localization, placement, modal lifecycle, persistence and connection",
+          "details": "docs/EXTERNAL_SERVER_QA.md"
+        }
+      },
+      {
+        "name": "ExternalServerField",
+        "status": "implemented",
+        "validation": "source_browser04_67_pass_node25_package03_installed_vite4_02_built6_02_verified_alpha4_pixels_unqualified_native_unverified",
+        "fidelity": "source_text_edit_group_real_input_web_text_policy_native_unverified",
+        "source": {
+          "file": "resource_pack/ui/add_external_server_screen.json",
+          "commit": "15701fa9c13923f12662984c32c124327e40e3d3"
+        },
+        "api": {
+          "required": "kind:name|address|port and label",
+          "values": "string value/defaultValue plus native onChange; HTMLInputElement ref",
+          "layout": "width default295 logical, row38 logical; scale default2",
+          "editing": "type=text; default maxlength16/256/6; port inputMode=numeric only, no filtering/parsing",
+          "overrides": "className/style apply to actual input, not row; maxLength/inputMode may be explicitly supplied",
+          "details": "docs/EXTERNAL_SERVER_QA.md"
+        }
+      }
     ]
   },
   "publicExports": {
-    "components": 205,
+    "components": 207,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -921,12 +961,13 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 223,
+    "runtimeValues": 225,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "tested_functional_package_file_transmission_205_223_native_unverified",
+    "publicationState": "tested_functional_package_external_server_207_225_native_unverified",
+    "materialProfile": "15RGBA4param_pendingnative",
     "pureCreditsFunctions": [
       "layoutCredits"
     ],

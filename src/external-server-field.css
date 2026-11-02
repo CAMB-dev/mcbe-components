@@ -1,0 +1,20 @@
+.mc-external-server-field{position:relative;box-sizing:border-box;flex:none;font-family:var(--mc-font,monospace);font-size:calc(10 * var(--mc-external-server-unit));line-height:calc(10 * var(--mc-external-server-unit));text-shadow:none}
+.mc-external-server-field:has(input[hidden]){display:none}
+.mc-external-server-field__label{position:absolute;left:calc(2 * var(--mc-external-server-unit));top:0;width:100%;height:calc(10 * var(--mc-external-server-unit));margin:0;padding:0;color:#fff;text-align:left;text-shadow:none;white-space:pre}
+.mc-external-server-field__editor{position:absolute;left:0;top:calc(10 * var(--mc-external-server-unit));width:100%;height:calc(25 * var(--mc-external-server-unit));box-sizing:border-box}
+.mc-external-server-field__skin{position:absolute;inset:0;pointer-events:none}
+.mc-external-server-field__skin--hover{display:none}
+.mc-external-server-field__editor:is(:hover,:focus-within,:active):not([data-disabled])>.mc-external-server-field__skin--normal{display:none}
+.mc-external-server-field__editor:is(:hover,:focus-within,:active):not([data-disabled])>.mc-external-server-field__skin--hover{display:block}
+.mc-external-server-field__editor[data-disabled]>.mc-external-server-field__skin--normal{opacity:.5}
+.mc-external-server-field__input-clip{position:absolute;inset:calc(2 * var(--mc-external-server-unit)) calc(3 * var(--mc-external-server-unit));overflow:hidden}
+.mc-external-server-field__input{display:block;box-sizing:border-box;width:100%;height:100%;min-width:0;margin:0;padding:0;border:0;border-radius:0;appearance:none;outline:none;box-shadow:none;font:inherit;letter-spacing:normal;text-align:left;text-indent:0;text-shadow:none;color:#fff;background:transparent;caret-color:currentColor;-webkit-text-fill-color:currentColor}
+.mc-external-server-field__input::placeholder{color:rgb(85.1% 85.1% 85.1%);opacity:1;text-shadow:none}
+.mc-external-server-field__editor:is(:hover,:focus-within,:active):not([data-disabled]) .mc-external-server-field__input::placeholder{color:#fff}
+.mc-external-server-field__input:disabled{opacity:.5;cursor:default}
+.mc-external-server-field__input:disabled::placeholder{color:#fff}
+/* Keyboard focus uses the original hover material's white perimeter. */
+.mc-external-server-skin{position:absolute;inset:0;display:block;background-repeat:no-repeat;image-rendering:pixelated;pointer-events:none}
+.mc-external-server-skin__clip{position:absolute;display:block;overflow:hidden}
+.mc-external-server-skin__patch{display:block;image-rendering:pixelated}
+@media(forced-colors:active){.mc-external-server-field__skin{display:none!important}.mc-external-server-field__editor{background:Field;border:1px solid ButtonText}.mc-external-server-field__label{color:CanvasText}.mc-external-server-field__input{color:FieldText;background:Field;forced-color-adjust:auto}.mc-external-server-field__input::placeholder{color:GrayText}.mc-external-server-field__input:focus-visible{outline:var(--mc-external-server-unit) solid Highlight;outline-offset:calc(-1 * var(--mc-external-server-unit))}.mc-external-server-field__input:disabled{color:GrayText;opacity:1}}

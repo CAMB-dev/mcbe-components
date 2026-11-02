@@ -1,0 +1,150 @@
+{
+  "archive": {
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "bytes": 169569258,
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "scope": "Whole original source/material/metadata/license files, never reencoded or capture-derived",
+  "files": [
+    {
+      "entry": "LICENSE.md",
+      "bytes": 222,
+      "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+    },
+    {
+      "entry": "resource_pack/ui/add_external_server_screen.json",
+      "bytes": 8018,
+      "sha256": "ef6c5219f79af56fe36c8b77eda0da1fe9d9a1c34fce89805ef7f28c19a4778d"
+    },
+    {
+      "entry": "resource_pack/ui/ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    },
+    {
+      "entry": "resource_pack/ui/ui_common_classic.json",
+      "bytes": 3030,
+      "sha256": "d65eb51c5264b7b9eb8611bfe250736bc48eed8207682b6c26f3ede224277783"
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96"
+    },
+    {
+      "entry": "resource_pack/ui/_global_variables.json",
+      "bytes": 20210,
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b"
+    },
+    {
+      "entry": "resource_pack/ui/ui_template_dialogs.json",
+      "bytes": 14238,
+      "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264"
+    },
+    {
+      "entry": "resource_pack/textures/ui/dialog_background_hollow_2.png",
+      "bytes": 314,
+      "sha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f"
+    },
+    {
+      "entry": "resource_pack/textures/ui/dialog_background_hollow_2.json",
+      "bytes": 95,
+      "sha256": "584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40"
+    },
+    {
+      "entry": "resource_pack/textures/ui/control.png",
+      "bytes": 71,
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab"
+    },
+    {
+      "entry": "resource_pack/textures/ui/control.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+    },
+    {
+      "entry": "resource_pack/textures/ui/edit_box_indent.png",
+      "bytes": 126,
+      "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109"
+    },
+    {
+      "entry": "resource_pack/textures/ui/edit_box_indent.json",
+      "bytes": 60,
+      "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6"
+    },
+    {
+      "entry": "resource_pack/textures/ui/edit_box_indent_hover.png",
+      "bytes": 125,
+      "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb"
+    },
+    {
+      "entry": "resource_pack/textures/ui/edit_box_indent_hover.json",
+      "bytes": 60,
+      "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6"
+    },
+    {
+      "entry": "resource_pack/textures/ui/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376"
+    },
+    {
+      "entry": "resource_pack/textures/ui/button_borderless_light.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+    },
+    {
+      "entry": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8"
+    },
+    {
+      "entry": "resource_pack/textures/ui/button_borderless_lighthover.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+    },
+    {
+      "entry": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983"
+    },
+    {
+      "entry": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+      "bytes": 60,
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65"
+    },
+    {
+      "entry": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f"
+    },
+    {
+      "entry": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+      "bytes": 60,
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989"
+    },
+    {
+      "entry": "resource_pack/textures/ui/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8"
+    },
+    {
+      "entry": "resource_pack/textures/ui/focus_border_white.json",
+      "bytes": 60,
+      "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407"
+    },
+    {
+      "entry": "resource_pack/textures/ui/close_button_default.png",
+      "bytes": 163,
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c"
+    },
+    {
+      "entry": "resource_pack/textures/ui/close_button_hover.png",
+      "bytes": 164,
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877"
+    },
+    {
+      "entry": "resource_pack/textures/ui/close_button_pressed.png",
+      "bytes": 1416,
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03"
+    }
+  ]
+}

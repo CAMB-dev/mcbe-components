@@ -1,6 +1,6 @@
 # Bedrock 组件范围
 
-> 当前公开入口为205组件／223值；FileTransmission三组件范围见[FILE_TRANSMISSION_QA.md](FILE_TRANSMISSION_QA.md)。以下历史阶段数字保留各自时间与范围。
+> 当前源公开入口为207组件／225值；新增ExternalServerForm与ExternalServerField，source browser04完整67／67通过（48交互＋15完整RGBA＋4alpha参数合同），4项alpha像素候选仍UNQUALIFIED；新forced-colors修复后的package03／实际安装四组合02／built02六项与Node25已通过，native未认证。上一受检FileTransmission阶段205组件／223值保留原验收身份，见[FILE_TRANSMISSION_QA.md](FILE_TRANSMISSION_QA.md)。以下历史阶段数字保留各自时间与范围。
 > Credits：受检功能包已确认191组件／209值（191＋6数据＋12函数）；48不同Web合同跨阶段验证、六自编平面108,000RGBA零差；React18／19包及实际开发／生产四组合通过，source展示页9PASS，built首轮8／1保留，观察器URL修正后单项1PASS。最终文档包／Git部署pending；native四行holdout、ó350与logo41,344差异均保留，见[CREDITS_QA.md](CREDITS_QA.md)。
 
 Invite阶段的InviteScreen与可独立复用的InvitePersonRow、InviteCategory、InvitePagination、InviteFooter使当时源码为188组件／205运行时值。六组好友、三类身份、选择／party、分页及footer保留独立宿主输入；邀请、账号、头像provider和资料服务由宿主实现。Invite106个不同合同按02批与06批的实际身份验证，200个完整源／Web材质平面共11,473,278像素RGBA零差；4个自然分数栅格测量仍未资格确认。新包的React18.3.1／19.3.1类型、SSR和资源消费通过，实际React18／19开发和生产四组合均通过，公开页17项通过。不是原生字体或整页像素认证。使用见[INVITE_QA.md](INVITE_QA.md)。
@@ -153,3 +153,7 @@ PlayerInventoryScreen 的 needsCraftingTable 默认 false；显式启用时，�
 ## File transmission
 
 `FileTransmissionScreen`、`FileTransmissionPanel`、`FileTransferProgress`提供268×95传输窗口、可复用内容和原图进度条。精简profile仅有本族字体／测量／文案／颜色，十个显隐绑定独立；native字体／布局和服务仍未认证。见[API](FILE_TRANSMISSION.md)和[验收](FILE_TRANSMISSION_QA.md)。
+
+## External servers（功能／参数合同已验，alpha像素未获资格）
+
+`ExternalServerForm` 对应固定commit `15701fa9c13923f12662984c32c124327e40e3d3` 的 `add_external_server_screen.json`，提供316×179逻辑尺寸的内嵌表单；`ExternalServerField` 拆出38高label / editor行，保留真实input与ref。title、add / edit模式、七项labels、四个独立enabled / disabled-overlay绑定均由宿主显式传入；new / edit源alias为空覆盖，不从alias猜模式。值中的name / address / port均为字符串，port只提供numeric键盘提示，不过滤或解析。组件仅发出保存／连接／移除请求；验证、存储、连接及modal生命周期由宿主实现。默认Enter请求Save（可选Play），不会隐式Remove。source browser04单批67／67通过：48交互＝19fixture＋3gallery＋2真实状态各desktop／mobile，材质合同19＝15完整RGBA零差＋4源alpha参数合同。四个partial-alpha像素候选仍UNQUALIFIED；99＋66独立实验不支持旧scalar规则迁移，perpatch亦未获资格，不改.8／.5或旧expected，旧四项FAIL保留。真实forced-colors检查修复hover specificity覆盖隐藏图层，普通模式无改。有限A只表示该命名组合范围；旧package02／安装四组合／built6属于修前CSS，修后package03实际React18／19各207组件／225值、58项SSR／类型／原图／metadata／CSS与安装四组合02均通过，forced-colors四场景实测图层隐藏／真实input outline，built02为6／6、Node25通过；不据功能／发布检查通过称alpha像素或原生整页通过；见 [EXTERNAL_SERVER_QA.md](EXTERNAL_SERVER_QA.md)。

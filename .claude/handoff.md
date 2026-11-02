@@ -1,5 +1,70 @@
 # Session handoff
 
+## Current checkpoint — External Server source family, 2026-11-02
+
+Full goal ACTIVE/incomplete. Branch codex/external-server-20261102, parent
+1b42dd3f9ba5a5a531d92b90c573934e9e50dadf. Public207 components/225 runtime
+(+ExternalServerForm/+ExternalServerField, no new data/function export).
+Coverage only add_external_server_screen.json C→finiteA: A44/B12/C33/D32/E0/
+F16/G63/H6, other205 rows unchanged. This is a named source mapping, not native
+GUI completion or a coverage percentage. Final receipt under
+`.cache/external-server-final-01/FINAL.json`; source provenance public
+`docs/external-server-source.json`, API/scope `docs/EXTERNAL_SERVER_QA.md`.
+
+Done: Form316x179 logical, explicit size/integer scale; field row38=10+25+3,
+native input labels/refs/values, default max16/256/6. Port always string and
+numeric keyboard hint only, not source NumberChars filtering. Explicit mode,
+localized title/labels and four independent enabled/overlay booleans; overlapping
+alternatives keep lower decorative paint and one accessible real button. Accepted
+value snapshots, controlled rejection, native event veto, reset, IME guards,
+readonly/disabled, hidden node retention, close intent and Web Enter Save/Play
+(never Remove). Services/validation/modal routing remain host-owned.
+12whole PNG/9rawmetadata/license retained source bytes; no drawn/privatefont art.
+Default overflow clips, no implicit scrollbar. #external-servers gallery has
+real add/edit, local preview record/actions, independent raw port and measured
+mobile layout. New source/private modules and CSS remain scoped.
+
+Actual final source browser04:67/67PASS0skip/flaky (48interaction across desktop/
+Pixel7 emulation +15strict complete materialRGBA0 +4source-alpha contracts).
+**The4partial-alpha pixels remain UNQUALIFIED; never report19pixel0.** Nodefinal25
+PASS; completeTS passes in package03. Natural keyboard hover/pressed/locked and
+forcedcolors checks found/fixed a real specificity bug hiding hover art under
+system colors. Current package03 bothactualReact18.3.1/19.3.1 all207/225/types/
+fonts/assets/licenses plus58newfamilySSR/9strictnegative/12PNG9metaCSS PASS.
+Immutable functional-candidate-02 tar SHA
+f66179674712aeb86babf6f0936ae40acb68322b6ed345536ec5239f8004ec83.
+Installed defaultVite dev/prod×React18/19 qualification-02 all4PASS, including
+actualfonts/inlineoriginals/refs/rawport/16bindings/readonly/forcedcolors4; built
+gallery02 actual6PASS. Final doc-only tar identity recorded separately in FINAL.
+
+Preserved failures: browser01=33PASS9harnessFAIL (readonlyclick actionability/
+oversizedmobilefixture); browser02=44functionalPASS+15RGBApass/4RGBAFAIL;
+browser03=21PASS2realforcedcolorsFAIL before CSS fix. Package01 helper wrongly
+required camelcase readonly; independent helper followup also fixed JSONboolean
+AST parsing. Actual logs/worker copies retained, not counted as product passes.
+package02/installed01/built01 are before the forcedcolors correction.
+
+Alpha: same33 parameter sets across5contexts, independent cal01=99cells and
+cal02=66cells. Old scalar rule matches wholePNG but fails group; perpatch also
+fails at natural-size corners, not fractional seams (already integer2/12/2).
+No candidate explains all contexts. No alpha/color/expected/threshold/mask hack.
+Old19strict candidate and55frozeninputs remain byte-exact; new default
+external-server-qualification.spec.ts has15strict+4source parameter checks and
+fullUNQUALIFIED actual/candidate scores. Explicit old experiment config:
+playwright.external-server-candidates.config.ts (4knownFAIL in this environment).
+See docs/EXTERNAL_SERVER_ALPHA_QA.md. Do not blindly fit or promote4pixel status;
+next discriminating evidence is genuine native Add/Edit Server UI/RT, not more
+arbitrary scalar candidates. Source alpha is on image nodes; native internal
+slice grouping is not proven by JSON. Cal02 read-only productCSS pins predate
+the forcedcolors-only correction; old actual run remains its own frozen version.
+
+Cleanup: Root never opened CU/Minecraft/PIX this round; no native sample obtained.
+Owned source5450/preview5451/installed5452-5455 and cal ephemeral56590/65292 checked
+no listeners; browser/context finally receipts retained. User4173 not controlled
+(read-only request found it unavailable); no user apps/services killed. Root owns
+future browser/GPU/native operations; close CU immediately after actual use.
+All other pending native GUI/default-font/Book editing work below remains open.
+
 ## Current continuation — native Book editing acquisition, 2026-11-02
 
 Full goal ACTIVE/incomplete. Parent433200abbd385e33083c8fb7de0719cda7d0972d;

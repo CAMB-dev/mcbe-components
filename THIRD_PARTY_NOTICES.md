@@ -177,3 +177,10 @@ The private Invite registry references 58 whole original images and 31 exact met
 Mob Effect Row/Screen reuse eleven complete unchanged Mojang PNG bodies and their raw texture metadata from the fixed public bedrock-samples v1.26.60.5 release, including existing embedded Invite and shared scroll resources. Six new whole PNGs, three deduplicated original JSON files and the original LICENSE.md are retained under src/assets/mob-effect (copied to dist). The existing 33 effect icon PNGs are reused through hud-overlay-textures.css without redrawing or new copies. Source identities are recorded in docs/mob-effect-source.json. These resources retain upstream rights and Minecraft EULA terms separately from the project MIT code; private game fonts and captures are not distributed.
 
 FileTransmission Screen/Panel/Progress reuse ten unchanged complete PNG bodies and nine available raw metadata descriptions from the same fixed Mojang bedrock-samples v1.26.60.5 release through existing banks. No new artwork, cropped replacement atlas or private font is distributed. Whole identities are recorded in docs/file-transmission-assets.json; the retained original src/assets/progress/LICENSE.md notice and upstream Minecraft terms apply separately from the project code MIT license. Source layouts and external base/title providers do not grant native rendering or service certification.
+
+ExternalServerForm and ExternalServerField retain twelve whole unchanged PNGs,
+nine raw metadata files and the original LICENSE.md under src/assets/external-server
+(copied to dist). They come from the fixed Mojang bedrock-samples v1.26.60.5
+archive and retain upstream rights separately from this project's MIT code.
+See docs/external-server-source.json for original paths, sizes and SHA256 hashes.
+No private game font, capture, cropped atlas or redrawn replacement is included.

@@ -1,0 +1,106 @@
+{
+  "planes": 19,
+  "sourceImages": 12,
+  "checks": [
+    {
+      "source": "dialog_background_hollow_2",
+      "binaryAlpha": true,
+      "size": [
+        18,
+        67
+      ]
+    },
+    {
+      "source": "control",
+      "binaryAlpha": true,
+      "size": [
+        2,
+        2
+      ]
+    },
+    {
+      "source": "edit_box_indent",
+      "binaryAlpha": true,
+      "size": [
+        6,
+        6
+      ]
+    },
+    {
+      "source": "edit_box_indent_hover",
+      "binaryAlpha": true,
+      "size": [
+        6,
+        6
+      ]
+    },
+    {
+      "source": "button_borderless_light",
+      "binaryAlpha": true,
+      "size": [
+        4,
+        4
+      ]
+    },
+    {
+      "source": "button_borderless_lighthover",
+      "binaryAlpha": true,
+      "size": [
+        4,
+        4
+      ]
+    },
+    {
+      "source": "button_borderless_lightpressed",
+      "binaryAlpha": true,
+      "size": [
+        4,
+        4
+      ]
+    },
+    {
+      "source": "disabledButtonNoBorder",
+      "binaryAlpha": true,
+      "size": [
+        2,
+        2
+      ]
+    },
+    {
+      "source": "focus_border_white",
+      "binaryAlpha": true,
+      "size": [
+        5,
+        5
+      ]
+    },
+    {
+      "source": "close_button_default",
+      "binaryAlpha": true,
+      "size": [
+        15,
+        15
+      ]
+    },
+    {
+      "source": "close_button_hover",
+      "binaryAlpha": true,
+      "size": [
+        15,
+        15
+      ]
+    },
+    {
+      "source": "close_button_pressed",
+      "binaryAlpha": true,
+      "size": [
+        15,
+        15
+      ]
+    }
+  ],
+  "allOpaqueExpected": true,
+  "productionHelpersImported": false,
+  "nativeOrBrowserInputs": false,
+  "browserExecuted": false
+}

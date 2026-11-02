@@ -27,3 +27,8 @@ tests/fixtures/progress-resource-materials/ORIGINALS/** whitespace=-blank-at-eol
 tests/fixtures/file-transmission-materials/** -text
 tests/fixtures/file-transmission-materials/** whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 tests/fixtures/file-transmission-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+
+# Whole upstream originals and raw metadata retain their exact source bytes.
+src/assets/external-server/** -text
+tests/fixtures/external-server-materials/** -text
+tests/fixtures/external-server-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

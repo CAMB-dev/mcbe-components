@@ -1,0 +1,388 @@
+{
+  "schema": 1,
+  "status": "FROZEN_BEFORE_THIS_FAMILY_BROWSER_MEASUREMENT",
+  "sourceArchive": {
+    "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+    "bytes": 169569258,
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "originalsSHA256": "7e4316a7b0034a7cc38fb0de5b73b04316d856e5f45256aeef923c6b45abc31e",
+  "scope": "19 complete source-derived no-text material planes only; not natural input-state, source font/layout/native screen certification.",
+  "host": {
+    "deviceScaleFactor": 1,
+    "backdrop": [
+      32,
+      48,
+      64,
+      255
+    ],
+    "integerOrigins": true,
+    "fixture": "/demo/external-server-fixture.html?materials=1",
+    "api": "window.externalServerMaterial.setMaterial({kind,state,scale})",
+    "target": "returned original production control selector; entire outer box, including all field padding and close halo"
+  },
+  "sampling": {
+    "policy": "Independent destination pixel-centre rational POINT pull through raw source nine-slice intervals; original PNG pixels are whole and unmodified.",
+    "degenerate": "Uniform original locked2x2 has zero centres: clamped boundary sample; uniform4texels makes this finite result independent of choice.",
+    "opacity": "Prior-qualified Chromium CSS opaque-image UNORM8 profile: A=floor(sourceA*opacity+.5); output=floor(sourceC*(A+1)/256)+floor(backdrop*(256-A)/256). At A255, preserve exact sourceRGB. Not native/linear-space or all-renderer proof.",
+    "brightness": "Original binary-alpha white border times .075 then nearest UNORM8; white255→19 (not a half tie).",
+    "priorOpacityReference": {
+      "path": "tests/fixtures/file-transmission-materials/CALIBRATED-WEB-01/MATERIAL-PROTOCOL.CALIBRATED.json",
+      "sha256": "201b9cb747c3fb614c6f99dec73e52fc699d767918f9a72b4203566439447f37",
+      "scope": "Independent earlier scalar/heldout Web observations only; not from this family or current product output."
+    },
+    "tolerance": 0,
+    "mask": null
+  },
+  "isolation": {
+    "panel": "Only original outer frame and normal underfill .8; title/input/actions/close paint isolated by fixture.",
+    "field": "Entire295x38 group; label/input/placeholder/caret ink hidden, original editor25 and disabledopacity.5 retained.",
+    "button": "Entire150x30 control; labels hidden, exactly one original source state forced via fixture. Original .075 border retained where declared.",
+    "close": "Entire21x21 hitbox; whole15x15 original centred inset3. No parent frame, wash or neighbouring button paint.",
+    "boundary": "Fixture state-forcing isolates materials, not proof of natural hover/pressed/focus routing. No box dimensions are changed by these expected inputs."
+  },
+  "planes": [
+    {
+      "id": "panel-normal-s1",
+      "kind": "panel",
+      "state": "normal",
+      "scale": 1,
+      "logicalSize": [
+        316,
+        179
+      ],
+      "pixelSize": [
+        316,
+        179
+      ],
+      "wholePixels": 56564,
+      "expected": "EXPECTED/panel-normal-s1.png",
+      "pngSHA256": "f4416e64cea67cb0f55ed4e90e37b159df464e839457347acf508b6c29c52807",
+      "rgbaSHA256": "ded451582bace12115fa1449ffeba1d76be014d2c40275f8ddc63ee1e7e4ad24"
+    },
+    {
+      "id": "field-normal-s1",
+      "kind": "field",
+      "state": "normal",
+      "scale": 1,
+      "logicalSize": [
+        295,
+        38
+      ],
+      "pixelSize": [
+        295,
+        38
+      ],
+      "wholePixels": 11210,
+      "expected": "EXPECTED/field-normal-s1.png",
+      "pngSHA256": "474d763c90a89ff88d4dc427063a3a5b64da138972ea75ad43e21646d08ee148",
+      "rgbaSHA256": "7c8e398856a296608267b0fcd9e019bad32bb40b3f2b52dc5a2b435b0fa39615"
+    },
+    {
+      "id": "field-hover-s1",
+      "kind": "field",
+      "state": "hover",
+      "scale": 1,
+      "logicalSize": [
+        295,
+        38
+      ],
+      "pixelSize": [
+        295,
+        38
+      ],
+      "wholePixels": 11210,
+      "expected": "EXPECTED/field-hover-s1.png",
+      "pngSHA256": "b0b72e63f9d0cd3681fe987e4a6d99fe645c1a01425501d2d528b3b4113fab03",
+      "rgbaSHA256": "34b924fb3c8659132b1e34795befc23a6dff24839d86a4f7e31f2d661a548250"
+    },
+    {
+      "id": "field-disabled-s1",
+      "kind": "field",
+      "state": "disabled",
+      "scale": 1,
+      "logicalSize": [
+        295,
+        38
+      ],
+      "pixelSize": [
+        295,
+        38
+      ],
+      "wholePixels": 11210,
+      "expected": "EXPECTED/field-disabled-s1.png",
+      "pngSHA256": "fb99239e8a91154f9af3b0e7e8555e3f63364d2e36f2aa6e7288d0464a79e103",
+      "rgbaSHA256": "e0890b517be06457c181b0a8865abc8f3bdbc2253052fff94ec620109e18dbdd"
+    },
+    {
+      "id": "button-normal-s1",
+      "kind": "button",
+      "state": "normal",
+      "scale": 1,
+      "logicalSize": [
+        150,
+        30
+      ],
+      "pixelSize": [
+        150,
+        30
+      ],
+      "wholePixels": 4500,
+      "expected": "EXPECTED/button-normal-s1.png",
+      "pngSHA256": "efd52f5e2e9923fa27fe83e9b1a91da68c2a70e476d65da7e6e070cf4be266de",
+      "rgbaSHA256": "a2d2d702f185ffc42ea19f0395a613fb2001e37042af23e044d6c9e23625b7b3"
+    },
+    {
+      "id": "button-hover-s1",
+      "kind": "button",
+      "state": "hover",
+      "scale": 1,
+      "logicalSize": [
+        150,
+        30
+      ],
+      "pixelSize": [
+        150,
+        30
+      ],
+      "wholePixels": 4500,
+      "expected": "EXPECTED/button-hover-s1.png",
+      "pngSHA256": "f707b6c310eeedc18c624d28faf7196f954e373055951c99a6bd224841d18730",
+      "rgbaSHA256": "e8dafca061e7d79865bb07a5ab95c5f83a2c38d2a1cb56ea0b94da79430eb609"
+    },
+    {
+      "id": "button-pressed-s1",
+      "kind": "button",
+      "state": "pressed",
+      "scale": 1,
+      "logicalSize": [
+        150,
+        30
+      ],
+      "pixelSize": [
+        150,
+        30
+      ],
+      "wholePixels": 4500,
+      "expected": "EXPECTED/button-pressed-s1.png",
+      "pngSHA256": "577f619c3d33c6c12758972086f1e80c75028529f96ba49c083c686056c1286a",
+      "rgbaSHA256": "d00fac222c893855325add5fd88d4db85205dc4c19774bdfd0c92017e1887df5"
+    },
+    {
+      "id": "button-locked-s1",
+      "kind": "button",
+      "state": "locked",
+      "scale": 1,
+      "logicalSize": [
+        150,
+        30
+      ],
+      "pixelSize": [
+        150,
+        30
+      ],
+      "wholePixels": 4500,
+      "expected": "EXPECTED/button-locked-s1.png",
+      "pngSHA256": "da2694b7e924d64c61fb94037c487fce38da2b379e8447ddf74f6ad08c66c2d5",
+      "rgbaSHA256": "bf2c370cbc7bfc1ef2b3ff0ef864bee0dad9da1079402b83770ee46d0bcaeb6d"
+    },
+    {
+      "id": "panel-normal-s2",
+      "kind": "panel",
+      "state": "normal",
+      "scale": 2,
+      "logicalSize": [
+        316,
+        179
+      ],
+      "pixelSize": [
+        632,
+        358
+      ],
+      "wholePixels": 226256,
+      "expected": "EXPECTED/panel-normal-s2.png",
+      "pngSHA256": "8665ec09793f70ef31131c52a5a5641f2dda8ef4b0d6b2f1bb1f9c8824c5d16d",
+      "rgbaSHA256": "f5df35a9a3cae2e38b961ce82d4ec67c78f29d3f12895f8279abe24af0907a4e"
+    },
+    {
+      "id": "field-normal-s2",
+      "kind": "field",
+      "state": "normal",
+      "scale": 2,
+      "logicalSize": [
+        295,
+        38
+      ],
+      "pixelSize": [
+        590,
+        76
+      ],
+      "wholePixels": 44840,
+      "expected": "EXPECTED/field-normal-s2.png",
+      "pngSHA256": "f185892ac85856af247f6201f57f0bf510eaa68f9d3470e8040f892d2bcaaa3d",
+      "rgbaSHA256": "43a13dfaf6b23248786849fc6cc3d692c1b88cd63c7677d85379ca41099f34c5"
+    },
+    {
+      "id": "field-hover-s2",
+      "kind": "field",
+      "state": "hover",
+      "scale": 2,
+      "logicalSize": [
+        295,
+        38
+      ],
+      "pixelSize": [
+        590,
+        76
+      ],
+      "wholePixels": 44840,
+      "expected": "EXPECTED/field-hover-s2.png",
+      "pngSHA256": "ab3a1ec7320e847cb13321b85f55a7baed2af95452f9b0f1d97ec4016620acc9",
+      "rgbaSHA256": "2df8b39219f3f9ec037625ab148471bb9817f2791aed847d9a0f9ba3cc1a8638"
+    },
+    {
+      "id": "field-disabled-s2",
+      "kind": "field",
+      "state": "disabled",
+      "scale": 2,
+      "logicalSize": [
+        295,
+        38
+      ],
+      "pixelSize": [
+        590,
+        76
+      ],
+      "wholePixels": 44840,
+      "expected": "EXPECTED/field-disabled-s2.png",
+      "pngSHA256": "db55e079fa11e0dffdb33953a9f3b9193aa236ce3ae42724c4aff7a9272ab601",
+      "rgbaSHA256": "b895b72d773dc38eb175d7a181b00ee47b407d816771048bd669317dc8cf1c29"
+    },
+    {
+      "id": "button-normal-s2",
+      "kind": "button",
+      "state": "normal",
+      "scale": 2,
+      "logicalSize": [
+        150,
+        30
+      ],
+      "pixelSize": [
+        300,
+        60
+      ],
+      "wholePixels": 18000,
+      "expected": "EXPECTED/button-normal-s2.png",
+      "pngSHA256": "9f4ca026ddfee09f5dd4cdff4c8408aa0c5a18517245cc542ad88f264ef21e7b",
+      "rgbaSHA256": "8de20b680ce1e82bb7161f5036115d41ed12369a242a8ec74a607dde54463479"
+    },
+    {
+      "id": "button-hover-s2",
+      "kind": "button",
+      "state": "hover",
+      "scale": 2,
+      "logicalSize": [
+        150,
+        30
+      ],
+      "pixelSize": [
+        300,
+        60
+      ],
+      "wholePixels": 18000,
+      "expected": "EXPECTED/button-hover-s2.png",
+      "pngSHA256": "a139473401af4eaf8a2734cf7ba986c2a027977d08f62e27ffb13b069ca84118",
+      "rgbaSHA256": "60a3ced7cff56840fa34ec6a0740310183aa21b07803d158e40c84268bbcedc6"
+    },
+    {
+      "id": "button-pressed-s2",
+      "kind": "button",
+      "state": "pressed",
+      "scale": 2,
+      "logicalSize": [
+        150,
+        30
+      ],
+      "pixelSize": [
+        300,
+        60
+      ],
+      "wholePixels": 18000,
+      "expected": "EXPECTED/button-pressed-s2.png",
+      "pngSHA256": "26b08cbfddd55c3c187d06c452feecc8a553aced16b82276b8f1d4cfa8dc05f5",
+      "rgbaSHA256": "2a96c93f350d4f972aec9642b914cbc23ddaaf984f6a0c3c26b88f5b5cb39643"
+    },
+    {
+      "id": "button-locked-s2",
+      "kind": "button",
+      "state": "locked",
+      "scale": 2,
+      "logicalSize": [
+        150,
+        30
+      ],
+      "pixelSize": [
+        300,
+        60
+      ],
+      "wholePixels": 18000,
+      "expected": "EXPECTED/button-locked-s2.png",
+      "pngSHA256": "fcb1a22839710f7f5038dce27be970a6d9fc8d5b37d79b18c33619a656868fcf",
+      "rgbaSHA256": "34850925cdda815d6094b4ccac7f1a94c1f09de544eb0f9242f421c6ceaef8a4"
+    },
+    {
+      "id": "close-normal-s1",
+      "kind": "close",
+      "state": "normal",
+      "scale": 1,
+      "logicalSize": [
+        21,
+        21
+      ],
+      "pixelSize": [
+        21,
+        21
+      ],
+      "wholePixels": 441,
+      "expected": "EXPECTED/close-normal-s1.png",
+      "pngSHA256": "04d1f1e06a8a7f6188ad9ca92f251422deb4169b26d37d5fb13d3eb1ea834024",
+      "rgbaSHA256": "d4ebbf13e741b4ca62ed154649a721b7025cc4d4e66b8270f5908a6f6c675065"
+    },
+    {
+      "id": "close-hover-s1",
+      "kind": "close",
+      "state": "hover",
+      "scale": 1,
+      "logicalSize": [
+        21,
+        21
+      ],
+      "pixelSize": [
+        21,
+        21
+      ],
+      "wholePixels": 441,
+      "expected": "EXPECTED/close-hover-s1.png",
+      "pngSHA256": "f8a73b6b3cffecbb5b66fe1d6eb64a481f3919b6483d526b41556b861018fbb7",
+      "rgbaSHA256": "ef0165230090a9fe6dbe17d8a63f5e75e65287e231ead129e175e6a3e3bf8b40"
+    },
+    {
+      "id": "close-pressed-s1",
+      "kind": "close",
+      "state": "pressed",
+      "scale": 1,
+      "logicalSize": [
+        21,
+        21
+      ],
+      "pixelSize": [
+        21,
+        21
+      ],
+      "wholePixels": 441,
+      "expected": "EXPECTED/close-pressed-s1.png",
+      "pngSHA256": "500e80c005cdec527048322f1c74d2693c891fedcbae41d165385771b3a8a3de",
+      "rgbaSHA256": "29f48db370a1d3059a8c96caf4adccc34a7eb3593ef2d839c54fd486a00bf3f2"
+    }
+  ]
+}

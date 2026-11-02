@@ -55,6 +55,7 @@ import { MobEffectDemo } from './mob-effect-demo';
 import { ChatDemo } from './chat-demo';
 import { ProgressDemo } from './progress-demo';
 import { FileTransmissionDemo } from './file-transmission-demo';
+import { ExternalServerExamples } from './external-server-examples';
 import { UGCExamples } from './ugc-examples';
 import { ImmersiveReaderExamples } from './immersive-reader-examples';
 import { ScrollArea } from '../src';
@@ -84,6 +85,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'command-block', name: 'Command blocks', icon: 'chevron', count: '03' },
   { id: 'structure-editor', name: 'Structure editor', icon: 'chevron', count: '02' },
   { id: 'server-forms', name: 'Server forms', icon: 'chevron', count: '02' },
+  { id: 'external-servers', name: 'External servers', icon: 'chevron', count: '02' },
   { id: 'npc', name: 'NPC dialogue & editor', icon: 'chevron', count: '05' },
   { id: 'emote-wheel', name: 'Emote wheel', icon: 'chevron', count: '03' },
   { id: 'documents', name: 'How to Play & encyclopedia', icon: 'chevron', count: '03' },
@@ -135,6 +137,7 @@ const snippets: Record<string, string> = {
   scrolling: `<ScrollArea label="Inventory notes" style={{height:180}}>\n  <YourScrollableContent/>\n</ScrollArea>\n// ScrollBar is also available as a controlled primitive.`,
   credits: `import { CreditsScreen, layoutCredits } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<CreditsScreen runKey={sessionId}\n  content={yourOrderedCredits} profile={yourReusableProfile}\n  bindings={{ playerName, showEndPoem: true,\n    showEduIcon: false, scrollFaster: faster }}\n  scale={2} skipLabel="Skip"\n  playback={{ playing: true, initialOffset: 0,\n    hiddenPolicy: 'pause' }}\n  onCloseRequested={() => setOpen(false)} />\n// The profile supplies measured fonts, layout and whole images.\n// CreditsRoll, CreditsSkipButton and pure layoutCredits are reusable.`,
   'file-transmission': "import { FileTransmissionScreen, FileTransmissionPanel, FileTransferProgress } from 'mcbeui';\nimport 'mcbeui/file-transmission.css';\n\n// model uses this family's fonts, measurements, labels and independent bindings.\n<FileTransmissionScreen model={model} open={open} label=\"文件传输\" baseLayer={baseLayer} titleArt={titleArt} controllerRef={controllerRef}/>\n<FileTransmissionPanel model={model}/>\n<FileTransferProgress width={248} scale={2} percentage={0.4} visible imageClipPolicy=\"visible-fraction-web\" label=\"文件传输进度\"/>",
+  'external-servers': "import { ExternalServerForm, ExternalServerField } from 'mcbeui';\nimport 'mcbeui/external-server-form.css';\n\n<ExternalServerForm title=\"添加服务器\" mode=\"add\" labels={labels}\n  bindings={bindings} value={server} onValueChange={setServer}\n  onAction={(action, accepted) => handleServerAction(action, accepted)}/>\n<ExternalServerField kind=\"port\" label=\"端口\" defaultValue=\"19132\"/>",
   'progress-screen': `import { ProgressScreen, ProgressIndicators, ProgressResourceDialog } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<ProgressScreen {...yourControlledModel}\n  profile={yourMeasuredProfile} branding={yourWholeTitle}\n  imageClipPolicy="visible-fraction-web"\n  gradientPolicy="css-linear-top-bottom-web"\n  transition={null} />\n// Fonts, source content measurements and unresolved materials\n// are explicit inputs; onAction requests host operations.`,
   'mob-effects': "import { MobEffectScreen, MobEffectRow } from 'mcbeui';\nimport 'mcbeui/styles.css';\n\n<MobEffectScreen effects={effects} gridDimensions={[1, 12]}\n  availableSize={[420, 260]} scale={1}\n  sourceProfile=\"desktop\" inputMode=\"mouse\"\n  textProfile={yourExplicitTextProfile}\n  iconLayout={{ kind: 'parent-percent-contain-web-policy' }}\n  layoutPolicy=\"source-formulas-parent-percent-web\"\n  closeButtonVisible={true} touchThumbVisible={false}\n  label=\"Active effects\" closeLabel=\"Close effects\" scrollLabel=\"Effect collection\"\n  onCloseRequested={handleClose} />\n// Timer strings, grid, images and navigation are host inputs.\n// MobEffectRow is reusable; the source-aware List/layout remain private.",
   buttons: `import { Button, PixelIcon } from 'mcbeui';\n\n<Button variant="primary"\n  startIcon={<PixelIcon name="plus" />}\n  onClick={() => createWorld()}>\n  Create new world\n</Button>`,
@@ -457,6 +460,7 @@ function App() {
       <Example id="command-block" title="Command blocks" detail="Block modes, expandable command input and previous output using reusable controls."><CommandBlockExamples notify={notify}/></Example>
       <Example id="structure-editor" title="Structure editor" detail="Save, load, corner, data and 3D export forms with reusable XYZ fields and caller-supplied previews."><StructureEditorExamples notify={notify}/></Example>
       <Example id="server-forms" title="Server forms" detail="Schema-driven action and custom forms with caller-owned values, icons and response requests."><ServerFormsExamples notify={notify}/></Example>
+      <Example id="external-servers" title="External servers" detail="添加与编辑服务器，独立字段保留原生输入与原始像素皮肤。"><ExternalServerExamples/></Example>
       <Example id="npc" title="NPC dialogue & editor" detail="Dialogue, appearance and command or URL editing with reusable portrait and action controls."><NpcExamples notify={notify}/></Example>
       <Example id="emote-wheel" title="Emote wheel" detail="Transparent screen, source instruction and action rows, plus the reusable four-slot wheel and previews."><EmoteWheelExamples/></Example>
       <Example id="documents" title="How to Play & encyclopedia" detail="Shared source frame, grouped topic navigation, independent scrolling and reusable article pieces."><DocumentViewerExamples/></Example>

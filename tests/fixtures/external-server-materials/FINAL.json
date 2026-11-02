@@ -1,0 +1,257 @@
+{
+  "status": "CPU_READY_BROWSER_NOT_EXECUTED_STOP",
+  "planes": 19,
+  "wholeOriginalFiles": 28,
+  "sourceImages": 12,
+  "protocolSHA256": "54f62cd321fdbd8e1e47e145266b08dd1c4564bc4a4443818952ad1a737d3970",
+  "strictDemoTypecheck": {
+    "command": "npx tsc -p tsconfig.demo.json --noEmit",
+    "exitCode": 0,
+    "session": 3134
+  },
+  "testDiscovery": {
+    "command": "npx playwright test tests/external-server-materials.spec.ts --project=pixels --list",
+    "exitCode": 0,
+    "tests": 19,
+    "browserLaunched": false
+  },
+  "readOnlyChecks": [
+    {
+      "command": "node tests/fixtures/external-server-materials/generate.mjs --check",
+      "stdout": "{\"planes\":19,\"originals\":28,\"protocolSHA256\":\"54f62cd321fdbd8e1e47e145266b08dd1c4564bc4a4443818952ad1a737d3970\",\"checkOnly\":true,\"browser\":false}",
+      "exitCode": 0
+    },
+    {
+      "command": "python tests/fixtures/external-server-materials/extract.py --check",
+      "stdout": "{\"check\": true, \"originalFiles\": 28, \"writes\": 0}",
+      "exitCode": 0
+    }
+  ],
+  "byteOrMtimeChanges": [],
+  "productionHelpersImportedByGenerator": false,
+  "browser": false,
+  "GPU": false,
+  "native": false,
+  "pins": {
+    "tests/fixtures/external-server-materials/CPU-CHECKS.json": {
+      "sha256": "72acf1094594122c11a5e58dee0546c3352a27cb870aef0be0e50953e96c0b26",
+      "mtimeNs": "1793588371307166900"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/button-hover-s1.png": {
+      "sha256": "f707b6c310eeedc18c624d28faf7196f954e373055951c99a6bd224841d18730",
+      "mtimeNs": "1793588371292204900"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/button-hover-s2.png": {
+      "sha256": "a139473401af4eaf8a2734cf7ba986c2a027977d08f62e27ffb13b069ca84118",
+      "mtimeNs": "1793588371299137900"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/button-locked-s1.png": {
+      "sha256": "da2694b7e924d64c61fb94037c487fce38da2b379e8447ddf74f6ad08c66c2d5",
+      "mtimeNs": "1793588371294789100"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/button-locked-s2.png": {
+      "sha256": "fcb1a22839710f7f5038dce27be970a6d9fc8d5b37d79b18c33619a656868fcf",
+      "mtimeNs": "1793588371301990500"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/button-normal-s1.png": {
+      "sha256": "efd52f5e2e9923fa27fe83e9b1a91da68c2a70e476d65da7e6e070cf4be266de",
+      "mtimeNs": "1793588371291204600"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/button-normal-s2.png": {
+      "sha256": "9f4ca026ddfee09f5dd4cdff4c8408aa0c5a18517245cc542ad88f264ef21e7b",
+      "mtimeNs": "1793588371299137900"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/button-pressed-s1.png": {
+      "sha256": "577f619c3d33c6c12758972086f1e80c75028529f96ba49c083c686056c1286a",
+      "mtimeNs": "1793588371293598600"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/button-pressed-s2.png": {
+      "sha256": "26b08cbfddd55c3c187d06c452feecc8a553aced16b82276b8f1d4cfa8dc05f5",
+      "mtimeNs": "1793588371300980300"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/close-hover-s1.png": {
+      "sha256": "f8a73b6b3cffecbb5b66fe1d6eb64a481f3919b6483d526b41556b861018fbb7",
+      "mtimeNs": "1793588371303421700"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/close-normal-s1.png": {
+      "sha256": "04d1f1e06a8a7f6188ad9ca92f251422deb4169b26d37d5fb13d3eb1ea834024",
+      "mtimeNs": "1793588371303421700"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/close-pressed-s1.png": {
+      "sha256": "500e80c005cdec527048322f1c74d2693c891fedcbae41d165385771b3a8a3de",
+      "mtimeNs": "1793588371304420800"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/field-disabled-s1.png": {
+      "sha256": "fb99239e8a91154f9af3b0e7e8555e3f63364d2e36f2aa6e7288d0464a79e103",
+      "mtimeNs": "1793588371289207100"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/field-disabled-s2.png": {
+      "sha256": "db55e079fa11e0dffdb33953a9f3b9193aa236ce3ae42724c4aff7a9272ab601",
+      "mtimeNs": "1793588371299137900"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/field-hover-s1.png": {
+      "sha256": "b0b72e63f9d0cd3681fe987e4a6d99fe645c1a01425501d2d528b3b4113fab03",
+      "mtimeNs": "1793588371286193200"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/field-hover-s2.png": {
+      "sha256": "ab3a1ec7320e847cb13321b85f55a7baed2af95452f9b0f1d97ec4016620acc9",
+      "mtimeNs": "1793588371297630700"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/field-normal-s1.png": {
+      "sha256": "474d763c90a89ff88d4dc427063a3a5b64da138972ea75ad43e21646d08ee148",
+      "mtimeNs": "1793588371284197200"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/field-normal-s2.png": {
+      "sha256": "f185892ac85856af247f6201f57f0bf510eaa68f9d3470e8040f892d2bcaaa3d",
+      "mtimeNs": "1793588371296124200"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/panel-normal-s1.png": {
+      "sha256": "f4416e64cea67cb0f55ed4e90e37b159df464e839457347acf508b6c29c52807",
+      "mtimeNs": "1793588371281702300"
+    },
+    "tests/fixtures/external-server-materials/EXPECTED/panel-normal-s2.png": {
+      "sha256": "8665ec09793f70ef31131c52a5a5641f2dda8ef4b0d6b2f1bb1f9c8824c5d16d",
+      "mtimeNs": "1793588371294789100"
+    },
+    "tests/fixtures/external-server-materials/extract.py": {
+      "sha256": "e9034156c2b1eb6bfad0e751f4a4ad253aae639589aac88b18c87a8d4d50f42c",
+      "mtimeNs": "1793588369967449100"
+    },
+    "tests/fixtures/external-server-materials/generate.mjs": {
+      "sha256": "f51774300361dc958d13252b55f89687c71c8a10cbc45395a399b6407e7845a6",
+      "mtimeNs": "1793588369969288900"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/LICENSE.md": {
+      "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+      "mtimeNs": "1793588370965879200"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/button_borderless_light.json": {
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "mtimeNs": "1793588370984764500"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/button_borderless_light.png": {
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "mtimeNs": "1793588370983249800"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/button_borderless_lighthover.json": {
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "mtimeNs": "1793588370987298000"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/button_borderless_lighthover.png": {
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "mtimeNs": "1793588370986280800"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/button_borderless_lightpressed.json": {
+      "sha256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "mtimeNs": "1793588370990744200"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/button_borderless_lightpressed.png": {
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "mtimeNs": "1793588370989731800"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/close_button_default.png": {
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "mtimeNs": "1793588370995521900"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/close_button_hover.png": {
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "mtimeNs": "1793588370996519400"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/close_button_pressed.png": {
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "mtimeNs": "1793588370997788900"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/control.json": {
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "mtimeNs": "1793588370978428800"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/control.png": {
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "mtimeNs": "1793588370977428500"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_2.json": {
+      "sha256": "584c51df61b2ee49c96bfe566c555e7c9974708a18c9ab37ce73f88af383db40",
+      "mtimeNs": "1793588370977428500"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/dialog_background_hollow_2.png": {
+      "sha256": "eef0d1cf13c5102332927197ff14417f015480cc76c3a18c598843925ee7479f",
+      "mtimeNs": "1793588370976422100"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/disabledButtonNoBorder.json": {
+      "sha256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "mtimeNs": "1793588370992316600"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/disabledButtonNoBorder.png": {
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "mtimeNs": "1793588370991811400"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/edit_box_indent.json": {
+      "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+      "mtimeNs": "1793588370979860400"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/edit_box_indent.png": {
+      "sha256": "c4968ec9277dcdd363c28c1338a6e202d15f8464c14331fddb9c5014c9eaa109",
+      "mtimeNs": "1793588370978428800"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/edit_box_indent_hover.json": {
+      "sha256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+      "mtimeNs": "1793588370981861000"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/edit_box_indent_hover.png": {
+      "sha256": "7b02fa8f0b08581bd0319d1757578303c160cc77a2a0910ec3231dc642b6e2eb",
+      "mtimeNs": "1793588370980860300"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/focus_border_white.json": {
+      "sha256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+      "mtimeNs": "1793588370994519700"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/textures/ui/focus_border_white.png": {
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "mtimeNs": "1793588370993322500"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/ui/add_external_server_screen.json": {
+      "sha256": "ef6c5219f79af56fe36c8b77eda0da1fe9d9a1c34fce89805ef7f28c19a4778d",
+      "mtimeNs": "1793588370967358700"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/ui/ui_common.json": {
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "mtimeNs": "1793588370967867000"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/ui/ui_common_classic.json": {
+      "sha256": "d65eb51c5264b7b9eb8611bfe250736bc48eed8207682b6c26f3ede224277783",
+      "mtimeNs": "1793588370970006900"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/ui/ui_template_buttons.json": {
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "mtimeNs": "1793588370972004400"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/ui/ui_template_dialogs.json": {
+      "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264",
+      "mtimeNs": "1793588370974238000"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS/resource_pack/ui/_global_variables.json": {
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "mtimeNs": "1793588370973010300"
+    },
+    "tests/fixtures/external-server-materials/ORIGINALS.json": {
+      "sha256": "7e4316a7b0034a7cc38fb0de5b73b04316d856e5f45256aeef923c6b45abc31e",
+      "mtimeNs": "1793588370999294200"
+    },
+    "tests/fixtures/external-server-materials/PROTOCOL.json": {
+      "sha256": "54f62cd321fdbd8e1e47e145266b08dd1c4564bc4a4443818952ad1a737d3970",
+      "mtimeNs": "1793588371305662100"
+    },
+    "tests/fixtures/external-server-materials/PROTOCOL.sha256": {
+      "sha256": "0555bc2d887e86e3f22b286182e37392e1d5b459105938b1901b0c2c4e7ef595",
+      "mtimeNs": "1793588371305662100"
+    },
+    "tests/fixtures/external-server-materials/README.md": {
+      "sha256": "fbe66f7d135297cb8d65b86a87bc73436af5b3cca3b8ec1658d57d9a5ca6dcc9",
+      "mtimeNs": "1793588531978240200"
+    },
+    "tests/external-server-materials.spec.ts": {
+      "sha256": "0469edebf9de8aa3f824468b67f42d4da26f650938af54c3b01d79825b5d0140",
+      "mtimeNs": "1793588531975983800"
+    }
+  }
+}

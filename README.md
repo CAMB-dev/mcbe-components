@@ -59,6 +59,8 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
+> 当前源公开207组件／225运行时值，新增ExternalServerForm与ExternalServerField；source browser04完整67／67通过：48交互＋19材质合同（15完整RGBA零差＋4源alpha参数合同）。四个partial-alpha像素候选仍UNQUALIFIED，停止套用旧scalar／perpatch规则；native未认证。先前package02与Vite四组合是forced-colors specificity修复前CSS阶段；当前package03、实际React18／19安装四组合02与built02六项均已通过，Node最终25项通过。此前205／223及具名历史结果保留原受检范围。
+
 各组件的完整类型由包内 `.d.ts` 导出，例如 `ButtonProps`、`DialogProps`、`TabItem`。除 Dialog 和 PixelIcon 外，各组件转发 ref 到主要原生节点。ReactNode 属性支持文本、图标或组合内容。
 
 | 组件 | 主要属性 | 行为 |
@@ -73,6 +75,8 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `Panel` | `title`、`footer`、`variant`: default / inset | Classic 浅灰九宫格面板 / 灰色凹陷面板；section，标题自动关联 aria-labelledby |
 | `TextField` | **必填** `label`；`description`、`error`；原生 input 属性 | 标签关联、错误与描述自动关联；error 设置 aria-invalid |
 | `TextArea` | **必填** `label`；`description`、`error`；原生 textarea 属性 | 可垂直调整尺寸 |
+| `ExternalServerForm` | **必填** `title`、`mode: add / edit`、`labels`、独立 `bindings`；字符串 `value` / `defaultValue`、`onValueChange`、`onAction`、`onClose`、`submitAction`、`scale`、`size`、`fieldProps` / `fieldRefs` | 内嵌原版316×179逻辑表单；form ref，宿主负责验证／存储／连接和modal；source功能／参数合同已验；4项alpha像素候选UNQUALIFIED；新CSS实际包／安装与展示复验通过 |
+| `ExternalServerField` | **必填** `kind: name / address / port`、`label`；`width`、`scale`、字符串 `value` / `defaultValue`与原生input属性 | 38高源行与真实input ref；默认maxlength为16／256／6，port仅numeric键盘提示，不过滤或解析 |
 | `Checkbox` | **必填** `label`；`description`、`indeterminate`；原生 checkbox 属性 | 原生 checked/defaultChecked、name/value、required、键盘 Space |
 | `Switch` | **必填** `label`；`description`；原生 checkbox 属性 | 原生 checkbox + role=switch，支持表单 |
 | `RadioGroup` | **必填** `label`、`options`；`value` / `defaultValue`；`onValueChange`、`name`、`disabled`、`required`、`orientation` | 原生 fieldset/legend/radio，自动独立 name，原生方向键操作 |
@@ -758,10 +762,42 @@ declare const profile: CreditsPresentationProfile;
 
 ## File transmission
 
-当前公开205组件／223值。`FileTransmissionScreen`、`FileTransmissionPanel`、`FileTransferProgress`使用原版268×95传输结构与完整原图；字体、测量和独立绑定由精简profile提供。见[API](docs/FILE_TRANSMISSION.md)与[有限验收](docs/FILE_TRANSMISSION_QA.md)。原生整页、引擎布局和实际传输服务仍未认证。
+上一FileTransmission受检阶段公开205组件／223值。`FileTransmissionScreen`、`FileTransmissionPanel`、`FileTransferProgress`使用原版268×95传输结构与完整原图；字体、测量和独立绑定由精简profile提供。见[API](docs/FILE_TRANSMISSION.md)与[有限验收](docs/FILE_TRANSMISSION_QA.md)。原生整页、引擎布局和实际传输服务仍未认证。
 
 BookEditor 的 layout.pencilRaster 可显式提供完整目标尺寸与Book逻辑原点，复用源图层绘制编辑铅笔，保留真实按钮和CSS回退。公开 #books 可切换预览；范围与原生残差见 [Book pencil QA](docs/BOOK_PENCIL_RASTER_QA.md)。
 
 Book 的 layout.labelRaster 接受调用者分页位图字体，分别绘制页码与底部按钮，保留真实输入/动作和失败回退。原字页准备脚本及固定Book整帧验证范围见 [Book label raster QA](docs/BOOK_LABEL_RASTER_QA.md)。
 
 Book 的 `layout.bodyRaster` 可在页面空闲时用原字页绘制正文，聚焦、选区、输入法组合和不支持的排版返回真实输入框。准备原字体及验证范围见 [Book body raster QA](docs/BOOK_BODY_RASTER_QA.md)。
+
+
+## 外部服务器表单
+
+`ExternalServerForm` 是可嵌入的Classic表单，默认逻辑尺寸316×179、scale=2；`size`为逻辑尺寸，溢出裁切。它不包含全屏暗幕、modal焦点管理或服务器服务。源base / new / edit定义中的new / edit alias为空覆盖，所以宿主必须显式选择mode，并提供title、labels与四个独立binding；enabled与disabledVisible不能互相取反推导。源引用固定commit `15701fa9c13923f12662984c32c124327e40e3d3` 的 `add_external_server_screen.json`。
+
+```tsx
+import { useState } from 'react';
+import { ExternalServerForm } from 'mcbeui';
+import type { ExternalServerAction, ExternalServerValues } from 'mcbeui';
+import 'mcbeui/external-server-form.css'; // 已包含field样式；styles.css也包含此入口
+import 'mcbeui/fonts.css'; // 可选公开替代字体
+
+export function AddServer({ onRequest }: {
+  onRequest: (action: ExternalServerAction, value: ExternalServerValues) => void;
+}) {
+  const [value, setValue] = useState<ExternalServerValues>({
+    name: '', address: '', port: '19132', // 宿主初值，不是库默认端口
+  });
+  return <ExternalServerForm title="Add Server" mode="add"
+    labels={{ name: 'Server Name', address: 'Server Address', port: 'Port',
+      play: 'Play', save: 'Save', remove: 'Remove', close: 'Close' }}
+    bindings={{ playEnabled: true, playDisabledVisible: false,
+      saveEnabled: true, saveDisabledVisible: false }}
+    value={value} onValueChange={next => setValue(next)}
+    onAction={(action, snapshot) => onRequest(action, snapshot)} />;
+}
+```
+
+示例binding只是宿主明确允许操作的配置，不替代校验；保存、连接与移除要在onRequest中由宿主处理。`mode="edit"` 左侧为Remove，add为Play；`submitAction`默认Save，可设Play，Enter不会推断Remove。`onClose`分别报告close-button / escape，父层自行关闭；不需要关闭时可不传。
+
+name / address / port始终保留字符串。Field默认maxlength分别16 / 256 / 6，port为text input加numeric键盘提示，既不清洗粘贴内容也不验证范围；可显式覆写maxLength / inputMode。`ExternalServerField`可独立使用并转发HTMLInputElement ref，className / style作用于真实input；Form ref为HTMLFormElement，fieldRefs可分别取得三处输入。受控value更新、原生reset和可取消事件包含在已验有限Web功能范围内。source browser04单批67／67通过、0skip／retry／flaky：交互48项为每个desktop／mobile的19fixture＋3gallery＋2真实状态检查；材质19项中15项完整RGBA零差，另4项仅源alpha参数合同通过，四个像素候选仍UNQUALIFIED。独立99＋66实验不支持把旧scalar opacity规则迁移到group，perpatch也未获资格；不改生产.8／.5或旧expected来追逐通过，旧四项FAIL保留，可由playwright.external-server-candidates.config.ts重现。真实forced-colors测试促成hover specificity下隐藏图层修复，普通模式未改。package02与旧四组合保留为修前CSS历史。修复后package03已完整通过：实际React18.3.1／19.3.1各207组件／225值、58项SSR／类型／12PNG／9metadata／CSS；实际安装四组合02全部通过，四个forced-colors场景逐项确认皮肤与三个close图层隐藏、真实input outline保留，built02为6／6、Node最终25项通过。功能受检快照SHA256为`f66179674712aeb86babf6f0936ae40acb68322b6ed345536ec5239f8004ec83`；后续仅文档重打包另记，不把该SHA冒作最终文档包身份。不能据功能／参数合同通过宣称alpha像素、native输入算法或整页像素相同。最终范围见 [EXTERNAL_SERVER_QA.md](docs/EXTERNAL_SERVER_QA.md)。

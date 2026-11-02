@@ -118,7 +118,9 @@
     "./progress-panels.css": "./dist/progress-panels.css",
     "./progress-packs.css": "./dist/progress-packs.css",
     "./progress-cloud.css": "./dist/progress-cloud.css",
-    "./file-transmission.css": "./dist/file-transmission.css"
+    "./file-transmission.css": "./dist/file-transmission.css",
+    "./external-server-form.css": "./dist/external-server-form.css",
+    "./external-server-field.css": "./dist/external-server-field.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -139,7 +141,9 @@
     "test:progress:node": "node --test tests/progress-model.node.test.mjs tests/progress-panels.node.test.mjs tests/progress-indicators.node.test.mjs tests/progress-packs.node.test.mjs tests/progress-cloud.node.test.mjs tests/progress-screen.node.test.mjs tests/progress-public-parts.node.test.mjs tests/progress-react-props.node.test.mjs",
     "verify:progress:browser": "node scripts/qualify-progress-browser.mjs",
     "test:file-transmission:node": "node --test tests/file-transmission.node.test.mjs",
-    "verify:file-transmission:browser": "node scripts/qualify-file-transmission-browser.mjs"
+    "verify:file-transmission:browser": "node scripts/qualify-file-transmission-browser.mjs",
+    "test:external-server:node": "node --test tests/external-server.node.test.mjs",
+    "verify:external-server:browser": "node scripts/qualify-external-server-browser.mjs"
   },
   "peerDependencies": {
     "react": ">=18.3.0 <20",
