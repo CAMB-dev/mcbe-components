@@ -759,3 +759,5 @@ declare const profile: CreditsPresentationProfile;
 ## File transmission
 
 当前公开205组件／223值。`FileTransmissionScreen`、`FileTransmissionPanel`、`FileTransferProgress`使用原版268×95传输结构与完整原图；字体、测量和独立绑定由精简profile提供。见[API](docs/FILE_TRANSMISSION.md)与[有限验收](docs/FILE_TRANSMISSION_QA.md)。原生整页、引擎布局和实际传输服务仍未认证。
+
+BookEditor 的 layout.pencilRaster 可显式提供完整目标尺寸与Book逻辑原点，复用源图层绘制编辑铅笔，保留真实按钮和CSS回退。公开 #books 可切换预览；范围与原生残差见 [Book pencil QA](docs/BOOK_PENCIL_RASTER_QA.md)。

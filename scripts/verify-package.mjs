@@ -130,7 +130,7 @@ assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
 assert(!Object.hasOwn(ui,'workstationImageAssets'),'Internal workstation assets must not become a public export.');
 assert(!Object.hasOwn(ui,'useEnchantingImageLayer'),'Internal workstation image adapter must not become a public export.');
-for (const internal of ['renderPreparedGuiLayer','presentPreparedGuiLayer','presentGuiLayer','CreditsGpuBackground','validateCreditsGpuBackground','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
+for (const internal of ['BookPencilButton','layoutBookPencil','validateBookPencilRaster','renderPreparedGuiLayer','presentPreparedGuiLayer','presentGuiLayer','CreditsGpuBackground','validateCreditsGpuBackground','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
 for (const internal of ['compileGuiEntitySource','layoutGuiEntity','guiEntityVertexShader','npcActorSkins','npcActorSourceFiles']) assert(!Object.hasOwn(ui,internal),'Private entity preparation must not become a public export: '+internal);
 for(const internal of ['createCreditsClock','stepCreditsClock','CREDITS_COVER_MS','CREDITS_SKIP_WAIT_MS','creditsFinite','copyCreditsSurface','copyCreditsSnapshot','creditsSurfaceFrame','parseCreditsSections','parseCreditsContent','tokenizeCreditsText','CreditsSection','CreditsRoleGroup']) assert(!Object.hasOwn(ui,internal),'Private Credits helper must not become a public export: '+internal);
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
@@ -359,6 +359,12 @@ const consumerBookFontRoles = renderToString(element(ui.BookEditor, { defaultPag
 assert(consumerBookFontRoles.includes('data-book-font-mode="latin"') && consumerBookFontRoles.includes('data-book-font-mode="unicode"'));
 const consumerBookCover = renderToString(element(ui.BookEditor, { defaultPages: ['Draft'], defaultMode: 'signing', defaultTitle: 'Consumer title', defaultAuthor: 'Consumer' }));
 assert(consumerBookCover.includes('value="Consumer title"'));
+const consumerPencilProfile = { frameSize: [900,600], origin: [30.25,20.25] };
+const consumerSourcePencils = renderToString(element(ui.BookEditor, { pages: ['',''], onPageAction(){}, pageActions:()=>({edit:true}), layout:{unitScale:2,pencilRaster:consumerPencilProfile} }));
+assert.equal((consumerSourcePencils.match(/class="mc-book__pencil-painters"/g)??[]).length,2);
+assert.equal((consumerSourcePencils.match(/class="mc-gui-layer"/g)??[]).length,6);
+assert(!consumerSourcePencils.includes('data-source-pencil-ready'),'SSR cannot claim ready pencils');
+assert.throws(()=>renderToString(element(ui.BookEditor,{layout:{pencilRaster:{...consumerPencilProfile,origin:[NaN,0]}}})),/GLOBAL source origin/);
 assert(renderToString(element(ui.BookPageTurnButton, { direction: 'previous', available: false })).includes('disabled'));
 const consumerSignSurface = renderToString(element(ui.SignTextSurface, { defaultValue: 'Consumer sign', variant: 'hanging', label: 'Consumer sign input' }));
 assert(consumerSignSurface.includes('<textarea') && consumerSignSurface.includes('Consumer sign'));
@@ -1705,11 +1711,15 @@ const jigsawValue: JigsawValue = { targetPool:'demo:pool', name:'demo:name', tar
 const jigsawProps: JigsawEditorProps = { value:jigsawValue, size:[320,260], inputRefs:{targetPool:createRef<HTMLInputElement>()}, onValueChange:(next,detail)=>next[detail.field], onDone:next=>next.finalBlock, onCancel:(next,detail)=>next.name+detail.reason };
 const jigsawConsumer = <><JigsawEditor {...jigsawProps} ref={createRef<HTMLElement>()}/><JigsawPriorityFields defaultValue={{selectionPriority:'0',placementPriority:'-1'} satisfies JigsawPriorities} ref={createRef<HTMLFieldSetElement>()}/></>;
 import { BookReader, BookEditor, BookPage, BookPageTurnButton } from 'mcbeui';
-import type { BookReaderProps, BookEditorProps, BookDocumentSnapshot, BookLabels, BookFontMode } from 'mcbeui';
+import type { BookReaderProps, BookEditorProps, BookDocumentSnapshot, BookLabels, BookFontMode, BookPencilRasterProfile } from 'mcbeui';
 const consumerBookSnapshot = (snapshot: BookDocumentSnapshot) => snapshot.pages.join('') + snapshot.mode;
 const consumerBookLabels: Partial<BookLabels> = { previous: 'Previous spread', next: 'Next spread' };
 const consumerBookProps: BookReaderProps = { pages: ['One', 'Two'], layout: { unitScale: 2 }, navigation:hostBookNavigation, pageNumberFontMode:pageNumberMode, labels: consumerBookLabels, onFinish: consumerBookSnapshot };
 const consumerBookFontMode: BookFontMode = 'auto';
+const consumerPencilRaster: BookPencilRasterProfile = {frameSize:[900,600],origin:[30.25,20.25],renderKey:1};
+const consumerPencilEditor = <BookEditor layout={{unitScale:2,pencilRaster:consumerPencilRaster}} onPencilRenderError={(error,index)=>console.log(error.message,index)}/>;
+// @ts-expect-error Source projection requires exactly two GLOBAL origin coordinates.
+const badPencilRaster: BookPencilRasterProfile = {frameSize:[900,600],origin:[0]};
 const consumerEditProps: BookEditorProps = { defaultPages: [], defaultTitle: 'A book', defaultAuthor: 'Player', onSign: consumerBookSnapshot, textareaRef: () => createRef<HTMLTextAreaElement>(), fontMode: index => index % 2 ? 'unicode' : consumerBookFontMode };
 const consumerBookElements = <><BookReader {...consumerBookProps} ref={createRef<HTMLElement>()}/><BookEditor {...consumerEditProps} ref={createRef<HTMLElement>()}/><BookPage side="left" text="Page" ref={createRef<HTMLDivElement>()} textareaRef={createRef<HTMLTextAreaElement>()}/><BookPageTurnButton direction="next" ref={createRef<HTMLButtonElement>()}/></>;
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';

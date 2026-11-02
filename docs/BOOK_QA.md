@@ -164,3 +164,5 @@ footer按钮按源最小外框102×20、bottom对齐、随unitScale的一逻辑�
 后续页码颜色 /独立字体角色的完整85项（Book45 /Sign30 /Classic10）与另6导航实际通过，927项root加5 harness前后无变化，见 `.cache/book-counter-font-07-qa/EXECUTED-FINAL.json`。85与历史83保留各自源版本，不累计重复项；其Web角色 /输入合同不改变native07仍有3,752 /7,366残差的结论。
 
 公开ServerForms /Book页码phase02完整64项辅助通过，31.142秒，当前135 /149 stage包两实际消费者的355dist逐字节一致。所测页码autoHan /forcedUnicode实际单face为Unicode，inherit /forcedLatin为Classic，各6glyph；精确父级继承且无inline override、Reader正文不变、原textarea节点 /选区及英语reset也通过。首公开53 /1的family字符串harness误判与未执行后续保留，修正后不累计旧pass；64辅助与85 /6正式回归分开，不增加原生零差范围。来源及资源 /网络边界见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。
+
+编辑铅笔新增可选 GLOBAL source painter；固定两场景的456个控件残差已消除，整页文字残差仍保留。API与分阶段证据见 [BOOK_PENCIL_RASTER_QA.md](BOOK_PENCIL_RASTER_QA.md)。

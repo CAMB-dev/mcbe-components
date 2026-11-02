@@ -34,6 +34,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   const [mode, setMode] = useState<BookMode>('pages');
   const [readOnly, setReadOnly] = useState(false), [disabled, setDisabled] = useState(false);
   const [pencilActions, setPencilActions] = useState(false);
+  const [sourcePencils, setSourcePencils] = useState(false);
   const [hostPageTurns, setHostPageTurns] = useState(false);
   const [pageCounterFont, setPageCounterFont] = useState<BookPageNumberFontMode>('auto'), [chineseCounters, setChineseCounters] = useState(false);
   const [fontMode, setFontMode] = useState<BookFontMode>('auto'), [separatePageFonts, setSeparatePageFonts] = useState(false);
@@ -96,7 +97,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   }
   function reset() {
     setPages([...initialPages]); setSpread(0); setTitle('River journal'); setAuthor('Alex'); setMode('pages');
-    setReadOnly(false); setDisabled(false); setPencilActions(false); setHostPageTurns(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
+    setReadOnly(false); setDisabled(false); setPencilActions(false); setSourcePencils(false); setHostPageTurns(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
     setSignRequest(null); setSignedCopy(null); setLeafTexts([...primitivePages]); setLeafIndex(0);
     setFontMode('auto'); setSeparatePageFonts(false); setPageCounterFont('auto'); setChineseCounters(false); setLeftFont('inherit'); setRightFont('inherit');
     report('Book examples restored.');
@@ -153,6 +154,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
         <Combobox label="Page actions" value={pencilActions ? 'pencil' : 'row'} disabled={!editable}
           options={[{ value: 'row', label: 'Page action row' }, { value: 'pencil', label: 'Edit pencil' }]}
           onValueChange={value => setPencilActions(value === 'pencil')}/>
+        <Switch label="Source pencil rendering" checked={sourcePencils} onChange={event => { setSourcePencils(event.target.checked); if (event.target.checked) setPencilActions(true); }}/>
         <Switch label="Host-managed page turns" checked={hostPageTurns} onChange={event => setHostPageTurns(event.target.checked)}/>
         <Switch label="Read-only editor" checked={readOnly} onChange={event => { setReadOnly(event.target.checked); setSignRequest(null); }}/>
         <Switch label="Disable editor" checked={disabled} onChange={event => setDisabled(event.target.checked)}/>
@@ -185,6 +187,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
       </div>
       <div role="region" aria-label="Book editor preview" tabIndex={0} style={previewStyle}>
         {editorOpen ? <BookEditor aria-label="Example book and quill" pages={pages} spreadIndex={currentSpread}
+          layout={{ unitScale: 2, pencilRaster: sourcePencils ? { frameSize: [640, 480], origin: [0, 0] } : undefined }}
           title={title} author={author} mode={mode} authorEditable readOnly={readOnly} disabled={disabled}
           fontMode={separatePageFonts ? pageFont : fontMode}
           pageNumberLabel={pageNumberLabel} pageNumberFontMode={pageCounterFont}

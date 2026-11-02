@@ -8,6 +8,9 @@ import { bookAssets } from './book-assets';
 import type { BookAsset } from './book-assets';
 import { classicInputFontFamily, resolveClassicInputFont } from './classic-input-font';
 import type { ClassicInputFontMode } from './classic-input-font';
+import { BookPencilButton, validateBookPencilRaster } from './book-pencil';
+import type { BookPencilRasterProfile } from './book-pencil';
+export type { BookPencilRasterProfile } from './book-pencil';
 
 export type BookMode = 'pages' | 'signing';
 export type BookFontMode = ClassicInputFontMode;
@@ -33,6 +36,9 @@ export interface BookLayoutProfile {
   unitScale?: number;
   /** Explicit host-resolved cap in logical units. Omitted means nominal overflow. */
   resolvedMaxSize?: readonly [number, number];
+  /** Opt-in source painter for edit pencils only. Other Book art/text keep their
+   * existing paths. Custom pencil skins must retain the original 18x16 size. */
+  pencilRaster?: BookPencilRasterProfile;
 }
 export interface BookSkinSources {
   background: string;
@@ -90,6 +96,7 @@ export interface BookBaseProps extends Omit<HTMLAttributes<HTMLElement>, 'title'
   readOnly?: boolean;
   disabled?: boolean;
   layout?: BookLayoutProfile;
+  onPencilRenderError?: (error: Error, pageIndex: number) => void;
   skin?: Partial<BookSkinSources>;
   labels?: Partial<BookLabels>;
   /** Caller limits in UTF-16 code units, not recovered engine wrapping rules. */
@@ -214,6 +221,7 @@ function resolveLayout(layout: BookLayoutProfile = {}) {
   const cap = dimensions(layout.resolvedMaxSize, spread);
   const unit = layout.unitScale ?? 2;
   if (!Number.isFinite(unit) || unit <= 0) throw new RangeError('Book unitScale must be positive and finite.');
+  if (layout.pencilRaster !== undefined) validateBookPencilRaster(layout.pencilRaster, unit);
   const width = Math.min(spread[0], cap[0]); const height = Math.min(spread[1], cap[1]);
   const pageWidth = Math.min(page[0], width / 2); const pageHeight = Math.min(page[1], height);
   const coverWidth = Math.min(page[0], cap[0]); const coverHeight = pageHeight;
@@ -370,7 +378,7 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     title: controlledTitle, defaultTitle = '', onTitleChange,
     author: controlledAuthor, defaultAuthor = '', onAuthorChange,
     mode: controlledMode, defaultMode = 'pages', onModeChange, readOnly = !editor, disabled = false,
-    layout, skin: overrides, labels: labelOverrides, maxPageLength, maxTitleLength, onFinish, pageNumberLabel, pageNumberFontMode = 'auto',
+    layout, onPencilRenderError, skin: overrides, labels: labelOverrides, maxPageLength, maxTitleLength, onFinish, pageNumberLabel, pageNumberFontMode = 'auto',
     authorEditable = false, onSign, pageActions, onPageAction, finalizeEnabled = true, fontMode = 'auto',
     textareaProps, textareaRef, titleInputProps = {}, authorInputProps = {}, titleInputRef, authorInputRef,
     className, style, onKeyDown, ...rest } = props;
@@ -501,8 +509,15 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
             data-book-action={name} data-page-index={index} aria-label={labels.actions[name]}
             disabled={composing} style={buttonStyle(skin.pageActions[name]!)} onClick={() => action(name, index)}/>)}
       </div>}
-      {writable && !blank && pencil && <button type="button" data-book-action="edit" data-page-index={index}
+      {writable && !blank && pencil && <BookPencilButton type="button" data-book-action="edit" data-page-index={index}
         className="mc-book__image-button mc-book__edit" aria-label={labels.actions.edit} disabled={composing}
+        raster={mode === 'pages' ? layout?.pencilRaster : undefined} scale={layout?.unitScale ?? 2} textures={skin.pageActions.edit!}
+        paintOrigin={[(layout?.pencilRaster?.origin[0] ?? 0) + (geometry.width - geometry.pageWidth * 2) / 2
+          + (side === 'left' ? 0 : geometry.pageWidth), layout?.pencilRaster?.origin[1] ?? 0]}
+        control={[(layout?.pencilRaster?.origin[0] ?? 0) + (geometry.width - geometry.pageWidth * 2) / 2
+          + (side === 'left' ? 0 : geometry.pageWidth) + geometry.pageWidth / 2 + (side === 'left' ? 5 : -5) - 19 / 2,
+          (layout?.pencilRaster?.origin[1] ?? 0) + geometry.pageHeight - 16 - 18, 19, 18]}
+        onPaintError={error => onPencilRenderError?.(error, index)}
         style={buttonStyle(skin.pageActions.edit!)} onClick={() => action('edit', index)}/>}
     </div>;
   };

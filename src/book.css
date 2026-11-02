@@ -57,6 +57,15 @@
 .mc-book__page-action--move-page-left, .mc-book__page-action--move-page-right { width:calc(var(--mc-book-u) * 23); }
 .mc-book__edit { position:absolute; z-index:5; bottom:calc(var(--mc-book-u) * 16); left:calc(50% + var(--mc-book-content-offset)); transform:translateX(-50%); width:calc(var(--mc-book-u) * 19); height:calc(var(--mc-book-u) * 18); background-size:contain; }
 .mc-book__edit:active:not(:disabled) { transform:translateX(-50%); }
+.mc-book__pencil-painters { position:absolute; inset:0; z-index:5; pointer-events:none; }
+.mc-book__pencil-paint { display:none; }
+.mc-book__edit:has(+ .mc-book__pencil-painters[data-source-pencil-ready]) { background-image:none!important; }
+.mc-book__pencil-painters[data-source-pencil-ready] .mc-book__pencil-paint--0 { display:block; }
+.mc-book__edit:is(:hover,:focus-visible):not(:disabled) + .mc-book__pencil-painters .mc-book__pencil-paint--0 { display:none; }
+.mc-book__edit:is(:hover,:focus-visible):not(:disabled) + .mc-book__pencil-painters[data-source-pencil-ready] .mc-book__pencil-paint--1 { display:block; }
+.mc-book__edit:active:not(:disabled) + .mc-book__pencil-painters .mc-book__pencil-paint--0,
+.mc-book__edit:active:not(:disabled) + .mc-book__pencil-painters .mc-book__pencil-paint--1 { display:none; }
+.mc-book__edit:active:not(:disabled) + .mc-book__pencil-painters[data-source-pencil-ready] .mc-book__pencil-paint--2 { display:block; }
 .mc-book__cover { position:relative; width:var(--mc-book-cover-width,var(--mc-book-page-width)); height:var(--mc-book-cover-height,var(--mc-book-page-height)); margin-inline:auto; color:white; }
 .mc-book__title-label { position:absolute; z-index:2; top:calc(var(--mc-book-u) * 30); left:0; width:100%; text-align:center; }
 .mc-book__title-input { position:absolute; z-index:2; top:calc(var(--mc-book-u) * 46); left:calc(var(--mc-book-u) * 10); width:calc(100% - var(--mc-book-u) * 20); height:calc(var(--mc-book-u) * 14); }
