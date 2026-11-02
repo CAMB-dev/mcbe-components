@@ -166,3 +166,5 @@ footer按钮按源最小外框102×20、bottom对齐、随unitScale的一逻辑�
 公开ServerForms /Book页码phase02完整64项辅助通过，31.142秒，当前135 /149 stage包两实际消费者的355dist逐字节一致。所测页码autoHan /forcedUnicode实际单face为Unicode，inherit /forcedLatin为Classic，各6glyph；精确父级继承且无inline override、Reader正文不变、原textarea节点 /选区及英语reset也通过。首公开53 /1的family字符串harness误判与未执行后续保留，修正后不累计旧pass；64辅助与85 /6正式回归分开，不增加原生零差范围。来源及资源 /网络边界见 [SERVER_FORMS_QA.md](SERVER_FORMS_QA.md)。
 
 编辑铅笔新增可选 GLOBAL source painter；固定两场景的456个控件残差已消除，整页文字残差仍保留。API与分阶段证据见 [BOOK_PENCIL_RASTER_QA.md](BOOK_PENCIL_RASTER_QA.md)。
+
+页码与底部按钮新增 layout.labelRaster，可由宿主提供真实分页字形并同层混合原皮肤。固定empty UI target在指定原字体profile/D3D11下整帧RGBA0，mixed正文仍有3614像素差异；见 [Book label raster QA](BOOK_LABEL_RASTER_QA.md)。

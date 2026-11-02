@@ -2,7 +2,8 @@ import { useId, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { Button, Combobox, Switch, TextField } from '../src';
 import { BookEditor, BookPage, BookPageTurnButton, BookReader } from '../src/book';
-import type { BookDocumentSnapshot, BookFontMode, BookMode, BookPageAction, BookPageNumberFontMode } from '../src/book';
+import type { BookDocumentSnapshot, BookFontMode, BookMode, BookPageAction, BookPageNumberFontMode, BookLabelRasterStyle } from '../src/book';
+import { nativeGuiBookLabels } from 'virtual:mcbeui-game-font';
 import '../src/book.css';
 
 const initialPages = [
@@ -24,6 +25,8 @@ const noteStyle: CSSProperties = { margin: 0, fontSize: 12, overflowWrap: 'anywh
 const codeStyle: CSSProperties = { margin: 0, maxWidth: '100%', overflowX: 'auto', fontSize: 12, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' };
 const lastSpread = (count: number) => Math.max(0, Math.ceil(count / 2) - 1);
 const keepSpread = (index: number, count: number) => Math.max(0, Math.min(index, lastSpread(count)));
+const sourceLabelStyle: BookLabelRasterStyle | undefined = nativeGuiBookLabels ? { font: nativeGuiBookLabels, fontScale: .5,
+  sampling: 'bilinear', shader: 'bitmap-smooth', widthRounding: 'ceil', paintOffset: [0, 1] } : undefined;
 const copyDocument = (snapshot: BookDocumentSnapshot): BookDocumentSnapshot => ({ ...snapshot, pages: [...snapshot.pages] });
 
 /** Plain sample text and ordinary collection edits belong to this demo host. */
@@ -35,6 +38,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   const [readOnly, setReadOnly] = useState(false), [disabled, setDisabled] = useState(false);
   const [pencilActions, setPencilActions] = useState(false);
   const [sourcePencils, setSourcePencils] = useState(false);
+  const [sourceLabels, setSourceLabels] = useState(false);
   const [hostPageTurns, setHostPageTurns] = useState(false);
   const [pageCounterFont, setPageCounterFont] = useState<BookPageNumberFontMode>('auto'), [chineseCounters, setChineseCounters] = useState(false);
   const [fontMode, setFontMode] = useState<BookFontMode>('auto'), [separatePageFonts, setSeparatePageFonts] = useState(false);
@@ -97,7 +101,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
   }
   function reset() {
     setPages([...initialPages]); setSpread(0); setTitle('River journal'); setAuthor('Alex'); setMode('pages');
-    setReadOnly(false); setDisabled(false); setPencilActions(false); setSourcePencils(false); setHostPageTurns(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
+    setReadOnly(false); setDisabled(false); setPencilActions(false); setSourcePencils(false); setSourceLabels(false); setHostPageTurns(false); setEditorOpen(true); setReaderOpen(true); setReaderPreset('three'); setReaderSpread(0);
     setSignRequest(null); setSignedCopy(null); setLeafTexts([...primitivePages]); setLeafIndex(0);
     setFontMode('auto'); setSeparatePageFonts(false); setPageCounterFont('auto'); setChineseCounters(false); setLeftFont('inherit'); setRightFont('inherit');
     report('Book examples restored.');
@@ -155,6 +159,7 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
           options={[{ value: 'row', label: 'Page action row' }, { value: 'pencil', label: 'Edit pencil' }]}
           onValueChange={value => setPencilActions(value === 'pencil')}/>
         <Switch label="Source pencil rendering" checked={sourcePencils} onChange={event => { setSourcePencils(event.target.checked); if (event.target.checked) setPencilActions(true); }}/>
+        <Switch label="Source book labels" checked={sourceLabels} disabled={!sourceLabelStyle} onChange={event => setSourceLabels(event.target.checked)}/>
         <Switch label="Host-managed page turns" checked={hostPageTurns} onChange={event => setHostPageTurns(event.target.checked)}/>
         <Switch label="Read-only editor" checked={readOnly} onChange={event => { setReadOnly(event.target.checked); setSignRequest(null); }}/>
         <Switch label="Disable editor" checked={disabled} onChange={event => setDisabled(event.target.checked)}/>
@@ -187,7 +192,9 @@ export function BookExamples({ notify }: { notify: (message: string) => void }) 
       </div>
       <div role="region" aria-label="Book editor preview" tabIndex={0} style={previewStyle}>
         {editorOpen ? <BookEditor aria-label="Example book and quill" pages={pages} spreadIndex={currentSpread}
-          layout={{ unitScale: 2, pencilRaster: sourcePencils ? { frameSize: [640, 480], origin: [0, 0] } : undefined }}
+          layout={{ unitScale: 2, pencilRaster: sourcePencils ? { frameSize: [640, 480], origin: [0, 0] } : undefined,
+            labelRaster: sourceLabels && sourceLabelStyle ? { frameSize: [640, 480], origin: [0, 0], pageNumber: sourceLabelStyle, footer: sourceLabelStyle } : undefined }}
+          onLabelRenderError={(error, role) => report(`${role}: ${error.message}`)}
           title={title} author={author} mode={mode} authorEditable readOnly={readOnly} disabled={disabled}
           fontMode={separatePageFonts ? pageFont : fontMode}
           pageNumberLabel={pageNumberLabel} pageNumberFontMode={pageCounterFont}

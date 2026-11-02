@@ -22,6 +22,7 @@ const nativeGuiWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/wor
 const nativeGuiGrindstonePath = fileURLToPath(new URL('./.cache/local-fonts/grindstone/gui-font.json', import.meta.url));
 const nativeGuiAnvilPath = (name: string) => fileURLToPath(new URL(`./.cache/local-fonts/anvil/${name}.json`, import.meta.url));
 const nativeGuiCraftingPath = fileURLToPath(new URL('./.cache/local-fonts/crafting-ui/labels.json', import.meta.url));
+const nativeGuiBookLabelsPath = fileURLToPath(new URL('./.cache/local-fonts/book-labels/font.json', import.meta.url));
 const classicFontDirectory = fileURLToPath(new URL('./.cache/local-fonts/classic/', import.meta.url));
 const classicFontEntries = [
   { key: 'classic', file: 'MCBE-Classic.woff2', family: 'MCBE Classic', flag: 'hasClassicFont' },
@@ -227,6 +228,7 @@ export default defineConfig({
       parts.push(optionalGuiFontModule(nativeGuiAnvilPath('ascii'), 'nativeGuiAnvilAscii'));
       parts.push(optionalGuiFontModule(nativeGuiAnvilPath('costs'), 'nativeGuiAnvilCosts'));
       parts.push(optionalGuiFontModule(nativeGuiCraftingPath, 'nativeGuiCraftingLabels', 'null'));
+      parts.push(optionalGuiFontModule(nativeGuiBookLabelsPath, 'nativeGuiBookLabels'));
       parts.push(existsSync(hbuiLoadingPath)
         ? `import hbuiLoadingIndicatorUrl from ${JSON.stringify(normalizePath(hbuiLoadingPath) + '?url')}; export { hbuiLoadingIndicatorUrl };`
         : 'export const hbuiLoadingIndicatorUrl = undefined;');

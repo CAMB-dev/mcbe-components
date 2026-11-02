@@ -761,3 +761,5 @@ declare const profile: CreditsPresentationProfile;
 当前公开205组件／223值。`FileTransmissionScreen`、`FileTransmissionPanel`、`FileTransferProgress`使用原版268×95传输结构与完整原图；字体、测量和独立绑定由精简profile提供。见[API](docs/FILE_TRANSMISSION.md)与[有限验收](docs/FILE_TRANSMISSION_QA.md)。原生整页、引擎布局和实际传输服务仍未认证。
 
 BookEditor 的 layout.pencilRaster 可显式提供完整目标尺寸与Book逻辑原点，复用源图层绘制编辑铅笔，保留真实按钮和CSS回退。公开 #books 可切换预览；范围与原生残差见 [Book pencil QA](docs/BOOK_PENCIL_RASTER_QA.md)。
+
+Book 的 layout.labelRaster 接受调用者分页位图字体，分别绘制页码与底部按钮，保留真实输入/动作和失败回退。原字页准备脚本及固定Book整帧验证范围见 [Book label raster QA](docs/BOOK_LABEL_RASTER_QA.md)。

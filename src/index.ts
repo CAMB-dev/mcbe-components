@@ -88,7 +88,7 @@ export type { InventoryScreenFrameProps, InventoryScreenLayout } from './invento
 export { SurvivalInventoryScreen } from './survival-inventory-screen';
 export type { SurvivalInventoryScreenProps } from './survival-inventory-screen';
 export { BookReader, BookEditor, BookPage, BookPageTurnButton } from './book';
-export type { BookMode, BookFontMode, BookPageNumberFontMode, BookPageAction, BookDocumentSnapshot, BookLayoutProfile, BookPencilRasterProfile, BookSkinSources, BookLabels, BookPagesChangeDetail, BookNavigationDetail, BookNavigationControl, BookBaseProps, BookReaderProps, BookEditorProps, BookPageProps, BookPageTurnButtonProps } from './book';
+export type { BookMode, BookFontMode, BookPageNumberFontMode, BookPageAction, BookDocumentSnapshot, BookLayoutProfile, BookPencilRasterProfile, BookLabelRasterProfile, BookLabelRasterStyle, BookLabelRole, BookSkinSources, BookLabels, BookPagesChangeDetail, BookNavigationDetail, BookNavigationControl, BookBaseProps, BookReaderProps, BookEditorProps, BookPageProps, BookPageTurnButtonProps } from './book';
 export { SignTextSurface, SignEditor } from './sign';
 export type { SignVariant, SignWood, SignFontMode, SignTextureInput, SignSourceGeometry, SignTextSurfaceProps, SignCloseReason, SignCloseDetail, SignExitBehavior, SignEditorProps } from './sign';
 

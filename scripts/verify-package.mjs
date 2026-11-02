@@ -130,7 +130,7 @@ assert(!Object.hasOwn(ui,'ComboboxBase'),'Internal shared combobox base must not
 assert(!Object.hasOwn(ui,'acquireSharedBitmapRenderer'),'Internal bitmap presentation leases must not become a public export.');
 assert(!Object.hasOwn(ui,'workstationImageAssets'),'Internal workstation assets must not become a public export.');
 assert(!Object.hasOwn(ui,'useEnchantingImageLayer'),'Internal workstation image adapter must not become a public export.');
-for (const internal of ['BookPencilButton','layoutBookPencil','validateBookPencilRaster','renderPreparedGuiLayer','presentPreparedGuiLayer','presentGuiLayer','CreditsGpuBackground','validateCreditsGpuBackground','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
+for (const internal of ['BookCounterLayer','BookFooterButton','measureBookFooter','validateBookLabelRaster','BookPencilButton','layoutBookPencil','validateBookPencilRaster','renderPreparedGuiLayer','presentPreparedGuiLayer','presentGuiLayer','CreditsGpuBackground','validateCreditsGpuBackground','layoutSourceGuiLayer','packGuiHalf','packGuiUv','validateGuiTextureAtlasLayout']) assert(!Object.hasOwn(ui,internal),'Private GUI preparation must not become a public export: '+internal);
 for (const internal of ['compileGuiEntitySource','layoutGuiEntity','guiEntityVertexShader','npcActorSkins','npcActorSourceFiles']) assert(!Object.hasOwn(ui,internal),'Private entity preparation must not become a public export: '+internal);
 for(const internal of ['createCreditsClock','stepCreditsClock','CREDITS_COVER_MS','CREDITS_SKIP_WAIT_MS','creditsFinite','copyCreditsSurface','copyCreditsSnapshot','creditsSurfaceFrame','parseCreditsSections','parseCreditsContent','tokenizeCreditsText','CreditsSection','CreditsRoleGroup']) assert(!Object.hasOwn(ui,internal),'Private Credits helper must not become a public export: '+internal);
 assert.deepEqual(Object.keys(ui).sort(), [...components,...dataExports,...rendererFunctions].sort());
@@ -365,6 +365,15 @@ assert.equal((consumerSourcePencils.match(/class="mc-book__pencil-painters"/g)??
 assert.equal((consumerSourcePencils.match(/class="mc-gui-layer"/g)??[]).length,6);
 assert(!consumerSourcePencils.includes('data-source-pencil-ready'),'SSR cannot claim ready pencils');
 assert.throws(()=>renderToString(element(ui.BookEditor,{layout:{pencilRaster:{...consumerPencilProfile,origin:[NaN,0]}}})),/GLOBAL source origin/);
+const consumerBookLabelFont = {pages:['/consumer-book-font.png'],pageSizes:[256],cellHeight:16,lineHeight:20,glyphs:Object.fromEntries(Array.from({length:95},(_,i)=>{
+  const code=i+32;return [String.fromCharCode(code),{page:0,x:code%16*16,y:Math.floor(code/16)*16,width:code===32?0:16,height:code===32?0:16,advance:12}];}))};
+const consumerBookLabelStyle = {font:consumerBookLabelFont,fontScale:.5,sampling:'bilinear',shader:'bitmap-smooth',widthRounding:'ceil',paintOffset:[0,1]};
+const consumerBookLabelProfile = {...consumerPencilProfile,pageNumber:consumerBookLabelStyle,footer:consumerBookLabelStyle};
+const consumerSourceLabels = renderToString(element(ui.BookEditor,{pages:['',''],layout:{unitScale:2,labelRaster:consumerBookLabelProfile}}));
+assert.equal((consumerSourceLabels.match(/class="mc-gui-layer"/g)??[]).length,5);
+assert(!consumerSourceLabels.includes('data-book-label-ready'),'SSR cannot claim ready Book labels');
+assert.equal((renderToString(element(ui.BookEditor,{pages:['',''],mode:'signing',layout:{unitScale:2,labelRaster:consumerBookLabelProfile}})).match(/class="mc-gui-layer"/g)??[]).length,8);
+assert.throws(()=>renderToString(element(ui.BookEditor,{mode:'signing',layout:{labelRaster:{...consumerBookLabelProfile,footer:{...consumerBookLabelStyle,widthRounding:'nearest'}}}})),/width-rounding/);
 assert(renderToString(element(ui.BookPageTurnButton, { direction: 'previous', available: false })).includes('disabled'));
 const consumerSignSurface = renderToString(element(ui.SignTextSurface, { defaultValue: 'Consumer sign', variant: 'hanging', label: 'Consumer sign input' }));
 assert(consumerSignSurface.includes('<textarea') && consumerSignSurface.includes('Consumer sign'));
@@ -1711,7 +1720,7 @@ const jigsawValue: JigsawValue = { targetPool:'demo:pool', name:'demo:name', tar
 const jigsawProps: JigsawEditorProps = { value:jigsawValue, size:[320,260], inputRefs:{targetPool:createRef<HTMLInputElement>()}, onValueChange:(next,detail)=>next[detail.field], onDone:next=>next.finalBlock, onCancel:(next,detail)=>next.name+detail.reason };
 const jigsawConsumer = <><JigsawEditor {...jigsawProps} ref={createRef<HTMLElement>()}/><JigsawPriorityFields defaultValue={{selectionPriority:'0',placementPriority:'-1'} satisfies JigsawPriorities} ref={createRef<HTMLFieldSetElement>()}/></>;
 import { BookReader, BookEditor, BookPage, BookPageTurnButton } from 'mcbeui';
-import type { BookReaderProps, BookEditorProps, BookDocumentSnapshot, BookLabels, BookFontMode, BookPencilRasterProfile } from 'mcbeui';
+import type { BookReaderProps, BookEditorProps, BookDocumentSnapshot, BookLabels, BookFontMode, BookPencilRasterProfile, BookLabelRasterProfile, BookLabelRasterStyle, BookLabelRole } from 'mcbeui';
 const consumerBookSnapshot = (snapshot: BookDocumentSnapshot) => snapshot.pages.join('') + snapshot.mode;
 const consumerBookLabels: Partial<BookLabels> = { previous: 'Previous spread', next: 'Next spread' };
 const consumerBookProps: BookReaderProps = { pages: ['One', 'Two'], layout: { unitScale: 2 }, navigation:hostBookNavigation, pageNumberFontMode:pageNumberMode, labels: consumerBookLabels, onFinish: consumerBookSnapshot };
@@ -1813,6 +1822,12 @@ const imageProps: GuiImageLayerProps = {...imageOptions,images:[guiImage],label:
 const imageRenderProfile: EnchantingTableImageRenderProfile = {frame:{width:2570,height:1402,guiScale:5},origin:[169,57.5],displayScale:2.5};
 const textBytes: GuiTextRgba8 = [127,255,31,255];
 const packedFont: GuiTextFont = {pages:['/caller-packed-font.png'],pageSizes:[128],cellHeight:12,lineHeight:10,glyphs:{'1':{page:0,x:8,y:36,width:8,height:12,advance:6,offsetY:-3}}};
+const consumerBookLabelStyle: BookLabelRasterStyle = {font:packedFont,fontScale:1,sampling:'point',shader:'bitmap-smooth',widthRounding:'none',paintOffset:[0,0]};
+const consumerBookRasterProfile: BookLabelRasterProfile = {frameSize:[900,600],origin:[30.25,20.25],pageNumber:consumerBookLabelStyle,footer:consumerBookLabelStyle};
+const consumerBookLabelRoles: BookLabelRole[] = [];
+const consumerBookLabelElement = <BookEditor layout={{unitScale:2,labelRaster:consumerBookRasterProfile}} onLabelRenderError={(error,role)=>{consumerBookLabelRoles.push(role);console.log(error.message);}}/>;
+// @ts-expect-error Width rounding is a named explicit source policy.
+const badBookLabelStyle: BookLabelRasterStyle = {...consumerBookLabelStyle,widthRounding:'nearest'};
 const sourceText: GuiTextGeometry = {text:'1',font:packedFont,origin:[0,0],fontScale:1,color:textBytes,sampling:'point',shader:'bitmap',shadow:{offset:[1,1],tint:[.25,.25,.25,1]}};
 export const textOptions: GuiTextLayoutOptions = {width:640,height:480,guiScale:2,...sourceText};
 export const textLayout: GuiTextLayout = layoutGuiText(textOptions);

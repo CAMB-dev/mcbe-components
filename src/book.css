@@ -76,7 +76,22 @@
 .mc-book__author label { flex:none; color:#aaa; }
 .mc-book__warning { position:absolute; z-index:2; top:calc(var(--mc-book-u) * 86); left:calc(var(--mc-book-u) * 15); width:calc(100% - var(--mc-book-u) * 30); margin:0; line-height:1; overflow-wrap:break-word; }
 .mc-book[data-mode="signing"] .mc-book__close { right:calc((var(--mc-book-width) - var(--mc-book-cover-width,var(--mc-book-page-width))) / 2 + var(--mc-book-u) * 5); top:calc(var(--mc-book-u) * 5); }
-.mc-book__footer { min-height:calc(var(--mc-book-u) * 24); display:flex; justify-content:center; align-items:flex-end; gap:calc(var(--mc-book-u) * 10); }
+.mc-book__footer { position:relative; min-height:calc(var(--mc-book-u) * 24); display:flex; justify-content:center; align-items:flex-end; gap:calc(var(--mc-book-u) * 10); }
+.mc-book__counter-painter,.mc-book__footer-painter { position:absolute; inset:0; z-index:4; pointer-events:none; }
+.mc-book__label-paint { display:none; }
+.mc-book__counter-painter[data-book-label-ready] .mc-book__label-paint--0,
+.mc-book__footer-painter[data-book-label-ready] .mc-book__label-paint--0 { display:block; }
+.mc-book:has(> .mc-book__counter-painter[data-book-label-ready]) .mc-book__page-number,
+.mc-book__footer .mc-button:has(+ .mc-book__footer-painter[data-book-label-ready]) > .mc-button__label { color:transparent!important; text-shadow:none!important; }
+.mc-book__footer .mc-button:is(:hover,:focus-visible):not(:disabled) + .mc-book__footer-painter .mc-book__label-paint--0 { display:none; }
+.mc-book__footer .mc-button:is(:hover,:focus-visible):not(:disabled) + .mc-book__footer-painter[data-book-label-ready] .mc-book__label-paint--1 { display:block; }
+.mc-book__footer .mc-button:active:not(:disabled) + .mc-book__footer-painter .mc-book__label-paint--0,
+.mc-book__footer .mc-button:active:not(:disabled) + .mc-book__footer-painter .mc-book__label-paint--1 { display:none; }
+.mc-book__footer .mc-button:active:not(:disabled) + .mc-book__footer-painter[data-book-label-ready] .mc-book__label-paint--2 { display:block; }
+@media (hover:hover) {
+  .mc-book__footer .mc-button:active:not(:hover):not(:focus-visible):not(:disabled) + .mc-book__footer-painter .mc-book__label-paint--2 { display:none; }
+  .mc-book__footer .mc-button:active:not(:hover):not(:focus-visible):not(:disabled) + .mc-book__footer-painter[data-book-label-ready] .mc-book__label-paint--3 { display:block; }
+}
 /* Source form-fitting chain: normal label10 + content6 + image2 + focus2.
    The inner image has minimum width100; its outer focus frame is102x20.
    book_buttons_panel is bottom-anchored, independent of the generic Button. */

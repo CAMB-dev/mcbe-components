@@ -16,6 +16,7 @@ declare module 'virtual:mcbeui-game-font' {
   export const nativeGuiAnvilAscii: import('../src/gui-text-geometry').GuiTextFont | undefined;
   export const nativeGuiAnvilCosts: import('../src/gui-text-geometry').GuiTextFont | undefined;
   export const nativeGuiCraftingLabels: import('../src/gui-text-geometry').GuiTextFont | null;
+  export const nativeGuiBookLabels: import('../src/gui-text-geometry').GuiTextFont | undefined;
   export const nativeWorkstationFonts: {
     labels: import('../src/bitmap-text').BitmapFont;
     costs: import('../src/bitmap-text').BitmapFont;

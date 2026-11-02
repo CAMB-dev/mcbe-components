@@ -3,7 +3,6 @@ import type {
   ButtonHTMLAttributes, ChangeEvent, CSSProperties, HTMLAttributes, InputHTMLAttributes,
   Ref, MouseEvent, TextareaHTMLAttributes,
 } from 'react';
-import { Button } from './components';
 import { bookAssets } from './book-assets';
 import type { BookAsset } from './book-assets';
 import { classicInputFontFamily, resolveClassicInputFont } from './classic-input-font';
@@ -11,6 +10,9 @@ import type { ClassicInputFontMode } from './classic-input-font';
 import { BookPencilButton, validateBookPencilRaster } from './book-pencil';
 import type { BookPencilRasterProfile } from './book-pencil';
 export type { BookPencilRasterProfile } from './book-pencil';
+import { BookCounterLayer, BookFooterButton, measureBookFooter, validateBookLabelRaster } from './book-labels';
+import type { BookLabelRasterProfile, BookLabelRole } from './book-labels';
+export type { BookLabelRasterProfile, BookLabelRasterStyle, BookLabelRole } from './book-labels';
 
 export type BookMode = 'pages' | 'signing';
 export type BookFontMode = ClassicInputFontMode;
@@ -39,6 +41,9 @@ export interface BookLayoutProfile {
   /** Opt-in source painter for edit pencils only. Other Book art/text keep their
    * existing paths. Custom pencil skins must retain the original 18x16 size. */
   pencilRaster?: BookPencilRasterProfile;
+  /** Caller-owned paged fonts and explicit label measurement/paint policies.
+   * Source backdrops and labels blend together before DOM composition. */
+  labelRaster?: BookLabelRasterProfile;
 }
 export interface BookSkinSources {
   background: string;
@@ -97,6 +102,7 @@ export interface BookBaseProps extends Omit<HTMLAttributes<HTMLElement>, 'title'
   disabled?: boolean;
   layout?: BookLayoutProfile;
   onPencilRenderError?: (error: Error, pageIndex: number) => void;
+  onLabelRenderError?: (error: Error, role: BookLabelRole) => void;
   skin?: Partial<BookSkinSources>;
   labels?: Partial<BookLabels>;
   /** Caller limits in UTF-16 code units, not recovered engine wrapping rules. */
@@ -222,6 +228,7 @@ function resolveLayout(layout: BookLayoutProfile = {}) {
   const unit = layout.unitScale ?? 2;
   if (!Number.isFinite(unit) || unit <= 0) throw new RangeError('Book unitScale must be positive and finite.');
   if (layout.pencilRaster !== undefined) validateBookPencilRaster(layout.pencilRaster, unit);
+  if (layout.labelRaster !== undefined) validateBookLabelRaster(layout.labelRaster, unit);
   const width = Math.min(spread[0], cap[0]); const height = Math.min(spread[1], cap[1]);
   const pageWidth = Math.min(page[0], width / 2); const pageHeight = Math.min(page[1], height);
   const coverWidth = Math.min(page[0], cap[0]); const coverHeight = pageHeight;
@@ -378,7 +385,7 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     title: controlledTitle, defaultTitle = '', onTitleChange,
     author: controlledAuthor, defaultAuthor = '', onAuthorChange,
     mode: controlledMode, defaultMode = 'pages', onModeChange, readOnly = !editor, disabled = false,
-    layout, onPencilRenderError, skin: overrides, labels: labelOverrides, maxPageLength, maxTitleLength, onFinish, pageNumberLabel, pageNumberFontMode = 'auto',
+    layout, onPencilRenderError, onLabelRenderError, skin: overrides, labels: labelOverrides, maxPageLength, maxTitleLength, onFinish, pageNumberLabel, pageNumberFontMode = 'auto',
     authorEditable = false, onSign, pageActions, onPageAction, finalizeEnabled = true, fontMode = 'auto',
     textareaProps, textareaRef, titleInputProps = {}, authorInputProps = {}, titleInputRef, authorInputRef,
     className, style, onKeyDown, ...rest } = props;
@@ -461,6 +468,17 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
   };
   const finish = (reason: 'close' | 'escape') => { if (!blocked()) onFinish?.(snapshot(), { reason }); };
   const numberLabel = pageNumberLabel ?? labels.page;
+  const counterLabels: (string | undefined)[] = [];
+  const labelFrame = layout?.labelRaster ? { profile: layout.labelRaster, scale: layout.unitScale ?? 2 } : undefined;
+  const footerOrigin = [labelFrame?.profile.origin[0] ?? 0,
+    (labelFrame?.profile.origin[1] ?? 0) + (mode === 'pages' ? geometry.height : geometry.coverHeight)] as const;
+  const footerTexts = mode === 'pages' ? [labels.sign] : [labels.finalize, labels.cancel];
+  const footerWidths = labelFrame?.profile.footer ? footerTexts.map(text => measureBookFooter(labelFrame, text)) : [];
+  const footerControls = footerWidths.length && footerWidths.every((width): width is number => width !== undefined) ? (() => {
+    const total = footerWidths.reduce((sum, width) => sum + width, 0) + (footerWidths.length - 1) * 10;
+    let x = footerOrigin[0] + (geometry.width - total) / 2;
+    return footerWidths.map(width => { const rect = [x, footerOrigin[1] + 4, width, 20] as const; x += width + 10; return rect; });
+  })() : [];
   const action = (name: BookPageAction, index: number) => {
     if (blocked() || !writable) return;
     if (name === 'edit') inputs.current.get(index)?.focus();
@@ -489,10 +507,12 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
     const predicates = pageActions?.(index);
     const allowed = { ...defaults, ...predicates };
     const pencil = !structural ? allowed.edit : predicates?.edit === true;
+    const counter = index < pages.length ? numberLabel(index + 1, pages.length) : undefined;
+    counterLabels[side === 'left' ? 0 : 1] = counter;
     return <div className="mc-book__leaf" key={index} data-side={side}>
       <BookPage side={side} pageIndex={index} text={pages[index] ?? ''} readOnly={pageReadOnly}
         fontMode={!pageReadOnly && !blank ? typeof fontMode === 'function' ? fontMode(index) : fontMode : undefined}
-        blank={blank} pageNumber={index < pages.length ? numberLabel(index + 1, pages.length) : undefined} pageNumberFontMode={pageNumberFontMode}
+        blank={blank} pageNumber={counter} pageNumberFontMode={pageNumberFontMode}
         textareaRef={mergedRef.callback}
         textareaProps={{ ...inputProps, disabled: disabled || inputProps.disabled, maxLength: maxPageLength ?? inputProps.maxLength,
           'aria-label': inputProps['aria-label'] ?? numberLabel(index + 1, Math.max(1, pages.length)),
@@ -567,13 +587,21 @@ function BookSurface({ editor, rootRef, ...props }: BookEditorProps & { editor: 
       <button type="button" className="mc-book__image-button mc-book__close" data-book-action="close"
         aria-label={labels.close} disabled={disabled || composing} style={buttonStyle(skin.close)} onClick={() => finish('close')}/>
       {editor && <div className="mc-book__footer">
-        {mode === 'pages' ? !readOnly && <Button data-book-action="sign-open" disabled={disabled || composing} onClick={event => changeMode('signing', 'sign-open', event.currentTarget)}>{labels.sign}</Button> : <>
-          <Button data-book-action="finalize" disabled={!writable || !finalizeEnabled || composing} onClick={() => {
+        {mode === 'pages' ? !readOnly && <BookFooterButton text={labels.sign} data-book-action="sign-open" disabled={disabled || composing}
+          frame={labelFrame?.profile.footer ? labelFrame : undefined} control={footerControls[0]} footerOrigin={footerOrigin}
+          onPaintError={error => onLabelRenderError?.(error, 'footer')} onClick={event => changeMode('signing', 'sign-open', event.currentTarget)}/> : <>
+          <BookFooterButton text={labels.finalize} data-book-action="finalize" disabled={!writable || !finalizeEnabled || composing}
+            frame={labelFrame?.profile.footer ? labelFrame : undefined} control={footerControls[0]} footerOrigin={footerOrigin}
+            onPaintError={error => onLabelRenderError?.(error, 'footer')} onClick={() => {
             if (!blocked() && writable && finalizeEnabled) onSign?.(snapshot());
-          }}>{labels.finalize}</Button>
-          <Button data-book-action="sign-cancel" disabled={disabled || composing} onClick={event => changeMode('pages', 'sign-cancel', event.currentTarget)}>{labels.cancel}</Button>
+          }}/>
+          <BookFooterButton text={labels.cancel} data-book-action="sign-cancel" disabled={disabled || composing}
+            frame={labelFrame?.profile.footer ? labelFrame : undefined} control={footerControls[1]} footerOrigin={footerOrigin}
+            onPaintError={error => onLabelRenderError?.(error, 'footer')} onClick={event => changeMode('pages', 'sign-cancel', event.currentTarget)}/>
         </>}
       </div>}
+      {mode === 'pages' && labelFrame?.profile.pageNumber && <BookCounterLayer frame={labelFrame} geometry={geometry}
+        skin={skin} labels={counterLabels} onError={error => onLabelRenderError?.(error, 'page-number')}/>}
       <span className="mc-book__status" role="status" aria-live="polite" aria-atomic="true">
         {mode === 'signing' ? labels.title : pages.length ? `${numberLabel(spread * 2 + 1, pages.length)}${spread * 2 + 1 < pages.length ? ` – ${numberLabel(spread * 2 + 2, pages.length)}` : ''}` : labels.empty}
       </span>
