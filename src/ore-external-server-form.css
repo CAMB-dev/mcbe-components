@@ -1,0 +1,21 @@
+@import './ore-text-field.css';
+@import './ore-button.css';
+@import './ore-action-bar.css';
+@import './ore-screen-frame.css';
+@import './ore-scroll-area.css';
+.mc-ore-external-server-form{position:relative;box-sizing:border-box;margin:0;overflow:clip;min-width:0;min-height:0;isolation:isolate}
+.mc-ore-external-server-form[hidden]{display:none!important}
+.mc-ore-external-server-form__frame{position:absolute;inset:0}
+.mc-ore-external-server-form__frame--glass{background:rgba(0,0,0,.5)}
+.mc-ore-external-server-form__scroll{flex:1 1 0;min-width:0;min-height:0;width:100%}
+.mc-ore-external-server-form__grid{box-sizing:border-box;display:flex;position:relative;flex:1;flex-direction:column;align-items:center;min-width:0;min-height:0;max-width:100%;padding-inline:calc(1.6 * var(--mc-ore-unit))}
+/* Web scroll-content adaptation: the source grid fills a flex parent; the HTML
+   scroll-content wrapper has an explicit canvas width instead of fast-div. */
+.mc-ore-external-server-form__grid{width:100%}
+.mc-ore-external-server-form__row{display:flex;position:relative;flex:0 1 auto;flex-direction:row;flex-wrap:wrap;width:100%;max-width:calc(128 * var(--mc-ore-unit));min-width:0;min-height:0;margin-inline:calc(-.4 * var(--mc-ore-unit))}
+.mc-ore-external-server-form__side,.mc-ore-external-server-form__main{box-sizing:border-box;min-width:0;padding-inline:calc(.4 * var(--mc-ore-unit))}
+.mc-ore-external-server-form__side{flex:0 0 calc(100% / 12)}.mc-ore-external-server-form__main{flex:0 0 calc(100% * 10 / 12)}
+.mc-ore-external-server-form__grid--desktop{padding-inline:calc(2.4 * var(--mc-ore-unit))}.mc-ore-external-server-form__grid--desktop>.mc-ore-external-server-form__row{margin-inline:calc(-.8 * var(--mc-ore-unit))}.mc-ore-external-server-form__grid--desktop>.mc-ore-external-server-form__row>div{padding-inline:calc(.8 * var(--mc-ore-unit))}
+.mc-ore-external-server-form__grid--narrow{padding-inline:calc(.8 * var(--mc-ore-unit))}.mc-ore-external-server-form__grid--narrow>.mc-ore-external-server-form__row{margin-inline:calc(-.2 * var(--mc-ore-unit))}.mc-ore-external-server-form__grid--narrow>.mc-ore-external-server-form__row>div{padding-inline:calc(.2 * var(--mc-ore-unit))}.mc-ore-external-server-form__grid--narrow .mc-ore-external-server-form__side{flex-basis:calc(100% / 8)}.mc-ore-external-server-form__grid--narrow .mc-ore-external-server-form__main{flex-basis:75%}
+.mc-ore-external-server-form__section{box-sizing:border-box;margin-top:calc(.8 * var(--mc-ore-unit));border:calc(.2 * var(--mc-ore-unit)) solid #1e1e1f}
+.mc-ore-external-server-form__footer>button{flex:1 0 0;min-width:0}

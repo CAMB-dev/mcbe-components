@@ -193,3 +193,14 @@ nine raw metadata files and the original LICENSE.md under src/assets/external-se
 archive and retain upstream rights separately from this project's MIT code.
 See docs/external-server-source.json for original paths, sizes and SHA256 hashes.
 No private game font, capture, cropped atlas or redrawn replacement is included.
+
+
+## Modern external server host assets
+
+The modern Add/Edit preview can additionally prepare the unchanged installed
+Delete (24×24) and Save (12×12) PNGs into ignored local cache, and reuse the
+existing private Back image. The library accepts caller-owned React icon nodes
+and whole field image URLs; these installed PNGs are not bundled, redrawn,
+cropped or relicensed. Identity metadata is in
+`docs/ore-external-server-source.json`. Optional local site builds can embed
+prepared assets; the npm library and Git source asset directories do not.

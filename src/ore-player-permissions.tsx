@@ -1,5 +1,6 @@
 import { createContext, forwardRef, useCallback, useContext, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { OreScrollArea as OreScroll } from './ore-scroll-area';
 import type { ButtonHTMLAttributes, ChangeEvent, CSSProperties, HTMLAttributes, InputHTMLAttributes, KeyboardEvent, ReactNode, Ref, SyntheticEvent } from 'react';
 import type { PermissionLevel, PlayerPermissionsChangeDetail, PlayerPermissionsValue } from './player-permissions';
 
@@ -164,27 +165,7 @@ export const OrePlayerCard = forwardRef<HTMLButtonElement, OrePlayerCardProps>(f
 
 interface ModalFrame { node: HTMLElement | null; size: readonly [number, number] }
 const ModalFrameContext = createContext<ModalFrame | null>(null);
-function OreScroll({ children, viewportRef, label, className = '', floating = false, guiScale = 1, inputMode = 'mouse', bottomInset = 0 }: { children: ReactNode; viewportRef?: Ref<HTMLDivElement>; label: string; className?: string; floating?: boolean; guiScale?: number; inputMode?: 'mouse' | 'touch'; bottomInset?: number }) {
-  const own = useRef<HTMLDivElement>(null), track = useRef<HTMLDivElement>(null); const merged = useMergedRef(own, viewportRef); const uid = useId();
-  const dragCleanup = useRef<(() => void) | null>(null), activityTimer = useRef<ReturnType<typeof setTimeout> | null>(null); const [active, setActive] = useState(false);
-  if (inputMode !== 'mouse' && inputMode !== 'touch') throw new TypeError('scrollInputMode must be mouse or touch.');
-  useEffect(() => () => { dragCleanup.current?.(); if (activityTimer.current !== null) clearTimeout(activityTimer.current); }, [inputMode]);
-  const [metrics, setMetrics] = useState({ top: 0, height: 0, content: 0 });
-  const update = useCallback(() => { const node = own.current; if (!node) return; const next = { top: node.scrollTop, height: node.clientHeight, content: node.scrollHeight }; setMetrics(old => old.top === next.top && old.height === next.height && old.content === next.content ? old : next); }, []);
-  useClientLayoutEffect(() => { const node = own.current; if (!node) return; update(); const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(update); observer?.observe(node); if (node.firstElementChild) observer?.observe(node.firstElementChild); const mutation = typeof MutationObserver === 'undefined' ? null : new MutationObserver(update); mutation?.observe(node, { childList: true, subtree: true, characterData: true }); return () => { observer?.disconnect(); mutation?.disconnect(); }; }, [update]);
-  const max = Math.max(0, metrics.content - metrics.height), unit = 5 * guiScale, margin = (inputMode === 'mouse' ? .8 : .4) * unit;
-  const area = Math.max(0, metrics.height - bottomInset), extent = Math.max(0, area - 2 * margin);
-  // Source Pp has physical-pixel minima 40/16, not rem values. Degenerate Web extents are explicitly clamped.
-  const thumbSize = Math.min(extent, Math.max(area > 52 ? 40 : 16, metrics.content > 0 ? area * area / metrics.content - 2 * margin : extent));
-  const thumbTop = Math.max(0, (max > 0 ? Math.min(1, metrics.top / max) : 0) * (area - thumbSize - 2 * margin));
-  return <div className={`mc-ore-scroll ${className}`} data-floating={floating} data-input-mode={inputMode} data-overflow={max > 0}>
-    <div id={uid} className="mc-ore-scroll__viewport" ref={merged} role="region" aria-label={label} tabIndex={0} onScroll={() => { update(); if (inputMode === 'touch') { setActive(true); if (activityTimer.current !== null) clearTimeout(activityTimer.current); activityTimer.current = setTimeout(() => setActive(false), 500); } }}><div className="mc-ore-scroll__content">{children}</div></div>
-    {inputMode === 'touch' ? <span className="mc-ore-scroll__touch" aria-hidden="true" hidden={max <= 0} data-active={active} style={{ height: thumbSize, top: thumbTop + margin }} /> : <div ref={track} className="mc-ore-scroll__bar" style={{ marginBottom: margin + bottomInset }} hidden={max <= 0} role="scrollbar" tabIndex={0} aria-label={label} aria-controls={uid} aria-orientation="vertical" aria-valuemin={0} aria-valuemax={max} aria-valuenow={Math.min(max, metrics.top)} onKeyDown={event => { if (forbiddenKey(event)) return; const node = own.current; if (!node) return; const next = event.key === 'End' ? max : event.key === 'Home' ? 0 : event.key === 'PageDown' ? node.scrollTop + node.clientHeight : event.key === 'PageUp' ? node.scrollTop - node.clientHeight : event.key === 'ArrowDown' ? node.scrollTop + 40 : event.key === 'ArrowUp' ? node.scrollTop - 40 : null; if (next === null) return; event.preventDefault(); node.scrollTop = Math.max(0, Math.min(max, next)); update(); }} onPointerDown={event => { if (event.defaultPrevented || event.button !== 0 || !own.current || !track.current) return; dragCleanup.current?.(); event.preventDefault(); const pointerId = event.pointerId; const rect = track.current.getBoundingClientRect(); const thumb = event.currentTarget.querySelector<HTMLElement>('.mc-ore-scroll__thumb'); const thumbHeight = thumb?.getBoundingClientRect().height ?? 0; const isThumb = !!(event.target as Element).closest('.mc-ore-scroll__thumb'); const grab = isThumb && thumb ? event.clientY - thumb.getBoundingClientRect().top : thumbHeight / 2;
-      const move = (e: PointerEvent) => { if (e.pointerId !== pointerId || !own.current) return; const ratio = isThumb ? (e.clientY - rect.top - grab) / Math.max(1, rect.height - thumbHeight) : (e.clientY - rect.top) / Math.max(1, rect.height); own.current.scrollTop = Math.max(0, Math.min(1, ratio)) * max; update(); };
-      move(event.nativeEvent); const doc = event.currentTarget.ownerDocument; const cleanup = () => { doc.removeEventListener('pointermove', move); doc.removeEventListener('pointerup', end); doc.removeEventListener('pointercancel', end); if (dragCleanup.current === cleanup) dragCleanup.current = null; }; const end = (e: PointerEvent) => { if (e.pointerId === pointerId) cleanup(); }; dragCleanup.current = cleanup; doc.addEventListener('pointermove', move); doc.addEventListener('pointerup', end); doc.addEventListener('pointercancel', end);
-    }}><span className="mc-ore-scroll__track" /><span className="mc-ore-scroll__thumb" style={{ height: thumbSize, top: thumbTop }} /></div>}
-  </div>;
-}
+
 
 export const OrePermissionLevelSelect = forwardRef<HTMLDivElement, OrePermissionLevelSelectProps>(function OrePermissionLevelSelect({ value: given, defaultValue = null, onValueChange, viewportSize, availableWidth, scrollInputMode = 'mouse', labels: suppliedLabels, icons, dropdownIcons, disabledLevels = [], disabled, readOnly, triggerRef, optionRefs, guiScale = 1, locale, textLineBox = 'primary', className = '', style, onKeyDown, onKeyDownCapture, onClick, onClickCapture, ...props }, forwardedRef) {
   checkTextLineBox(textLineBox);

@@ -59,7 +59,9 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
-> 最新有限阶段：209 组件／227 运行时值，新增 `OreTextField` 与 `OreFieldSection`。现代菜单字段使用宿主完整原图，保留原生输入、ref、选字和 IME；没有混用 Classic 材质。最终浏览器 20/20、Node 16/16、React 18/19 实际包、默认 Vite 四组合与生产展示两项通过。六个完整材质平面 149,760 像素 RGBA 零差；原生整页仍未认证。入口 `#ore-text-fields`，规格与资格见 [ORE_TEXT_FIELD_QA.md](docs/ORE_TEXT_FIELD_QA.md)。本轮已取得原版 OreUI GPU 基准，并在采集后关闭 Minecraft、PIX 和 Computer Use。
+> 最新有限阶段：214 组件／232 运行时值，新增现代 `OreExternalServerForm`、`OreButton`、`OreActionBar`、`OreScreenFrame`、`OreScrollArea`。默认 Enter 对齐原版只 blur；窄屏操作栏移出滚动区。最终浏览器 93 通过／1 项预期跳过，Node 52、React 18/19 包、四种默认 Vite 安装组合与两项生产展示检查通过。完整原版帧仍有 1,419,830 像素差异，未宣称整页 pixel perfect。入口 `#ore-external-servers`；范围见 [ORE_EXTERNAL_SERVER_QA.md](docs/ORE_EXTERNAL_SERVER_QA.md)。
+
+> 上一阶段：209 组件／227 运行时值，新增 `OreTextField` 与 `OreFieldSection`。现代菜单字段使用宿主完整原图，保留原生输入、ref、选字和 IME；没有混用 Classic 材质。最终浏览器 20/20、Node 16/16、React 18/19 实际包、默认 Vite 四组合与生产展示两项通过。六个完整材质平面 149,760 像素 RGBA 零差；原生整页仍未认证。入口 `#ore-text-fields`，规格与资格见 [ORE_TEXT_FIELD_QA.md](docs/ORE_TEXT_FIELD_QA.md)。本轮已取得原版 OreUI GPU 基准，并在采集后关闭 Minecraft、PIX 和 Computer Use。
 
 > Classic上一阶段公开207组件／225运行时值，新增ExternalServerForm与ExternalServerField；source browser04完整67／67通过：48交互＋19材质合同（15完整RGBA零差＋4源alpha参数合同）。四个partial-alpha像素候选仍UNQUALIFIED，停止套用旧scalar／perpatch规则；native未认证。先前package02与Vite四组合是forced-colors specificity修复前CSS阶段；当前package03、实际React18／19安装四组合02与built02六项均已通过，Node最终25项通过。此前205／223及具名历史结果保留原受检范围。
 
@@ -820,3 +822,25 @@ import "mcbeui/ore-text-field.css";
 ```
 
 原图和 Seven／Noto 字体由宿主提供；包内不附带私有安装资源。本机预览可运行 `python scripts/use-local-ore-text-field-assets.py` 后重启 Vite，在 `#ore-text-fields` 查看正常、焦点、只读、禁用、invalid、中文、长文本、受控拒绝和原生重置。字段不继承 Classic maxlength 或端口过滤，不执行服务器服务。`invalid` 支持宿主反馈与 ARIA 状态；原版未闭合的焦点装饰／shake 不以猜测红边或动画代替。更多见 [ORE_TEXT_FIELD_QA.md](docs/ORE_TEXT_FIELD_QA.md)。
+
+
+### Modern Add/Edit server screen
+
+```tsx
+import {OreExternalServerForm} from 'mcbeui';
+import 'mcbeui/ore-external-server-form.css';
+
+<OreExternalServerForm mode="add" title="添加服务器" backLabel="返回"
+  labels={labels} skins={wholeFieldSkins} backIcon={yourBackIcon}
+  size={[900, 560]} viewportSize={[900, 560]}
+  safeArea={{top: 0, left: 0, right: 0}} guiScale={2}
+  value={server} onValueChange={setServer} onAction={handleHostRequest}/>
+```
+
+默认 Enter 只退出输入并校验端口；传 `submitAction` 才显式启用 Web 表单提交。
+端口允许 0，保留合法前导零；源 blur 校正可通过 `portValidation="host"` 交给宿主。
+保存、连接、删除确认和未保存确认都是宿主请求，组件不调用 Minecraft 服务。
+`OreButton`、`OreActionBar`、`OreScreenFrame` 与 `OreScrollArea` 可独立复用；
+滚动区也被现有权限界面共用，并支持 React 19 callback-ref 清理。
+材质和 Seven/Ten/Noto 字体由宿主提供，不随 npm 分发私有安装文件。
+功能资格与原版像素资格分开记录，详见 [ORE_EXTERNAL_SERVER_QA.md](docs/ORE_EXTERNAL_SERVER_QA.md)。

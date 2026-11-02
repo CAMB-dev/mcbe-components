@@ -1,0 +1,159 @@
+{
+  "profile": "modern_ore_add_edit_external_server",
+  "source": {
+    "bundle": "hbui/index-018f0e6740b840233f22.js",
+    "sha256": "5522c1ce9a4d53702cc3906a7c080f50c78d9c83f1e5207839a03de9b209630c",
+    "route": "Dde",
+    "routeAliases": [
+      "/play/servers/add",
+      "/play/servers/:id/:type/edit"
+    ],
+    "installedPrivateRawSourceDistributed": false
+  },
+  "publicParts": [
+    "OreExternalServerForm",
+    "OreButton",
+    "OreActionBar",
+    "OreScreenFrame",
+    "OreScrollArea"
+  ],
+  "reuses": [
+    "OreTextField",
+    "OreFieldSection",
+    "original permissions scroll interaction core"
+  ],
+  "windowBreakpointsRem": [
+    70,
+    128
+  ],
+  "grid": {
+    "centered": true,
+    "rowWidth": "100%",
+    "rowMaximumWidthRem": 128,
+    "mainColumnsWide": [
+      10,
+      12
+    ],
+    "mainColumnsNarrow": [
+      6,
+      8
+    ],
+    "paddingRemDesktopTabletNarrow": [
+      2.4,
+      1.6,
+      0.8
+    ],
+    "rowNegativeMarginsRemDesktopTabletNarrow": [
+      -0.8,
+      -0.4,
+      -0.2
+    ]
+  },
+  "panel": {
+    "topMarginRem": 0.8,
+    "regularBorderRem": 0.2,
+    "borderColor": "#1e1e1f"
+  },
+  "actionBar": {
+    "background": "#48494a",
+    "paddingRem": 1.6,
+    "gapRem": 0.8,
+    "topBottomBevelRem": 0.2,
+    "upperWhiteAlpha": 0.1,
+    "lowerBlackAlpha": 0.3,
+    "ownRegularBorder": false,
+    "narrowPlacement": "frame footer, outside body scroller"
+  },
+  "button": {
+    "faceHeightRem": 4,
+    "rootBorderRem": 0.2,
+    "baseRem": 0.4,
+    "elevatedTotalFlowRem": 4.8,
+    "pressedMarginTopRem": 0.4,
+    "pressedPaddingBottomRem": 0,
+    "fontRole": "Seven secondaryButton/destructiveButton",
+    "fontSizeRem": 1.6,
+    "lineHeightRem": 2,
+    "trackingRem": 0.04,
+    "iconSizeRem": 2.4,
+    "iconLabelGapRem": 0.8
+  },
+  "screen": {
+    "headerNavRem": 4.4,
+    "headerStripRem": 0.4,
+    "dropShadowRem": 0.2,
+    "backButtonRem": 4,
+    "backGlyphSizeRem": [
+      0.8,
+      1.6
+    ],
+    "backGlyphTopMarginRem": 0.2,
+    "bodyBackground": "transparent",
+    "formGlassPane": "rgba(0,0,0,.5)",
+    "automaticSafeBottomOrGamepadInset": false
+  },
+  "enter": {
+    "default": "source input submit bridge blurs only; no Add/Save/Join",
+    "explicitWebOptIn": "submitAction add|add-and-play for Add, save for Edit; Delete never submits"
+  },
+  "port": {
+    "default": "19132",
+    "allowed": "nonempty ASCII digits <=65535, including zero; leading zeros retained",
+    "aboveMaximumCorrection": "65535",
+    "emptyOrNondigitCorrection": "19132",
+    "persistentInvalidSkin": false,
+    "shakeAndNarration": "host feedback intent; no invented native animation"
+  },
+  "hostServices": [
+    "localized labels",
+    "whole field PNG URLs",
+    "private back/edit images",
+    "Ten/Seven/Noto font registration",
+    "profanity filtering",
+    "backend error modals",
+    "save/join/remove persistence",
+    "dirty/delete confirmation",
+    "online warnings",
+    "navigation"
+  ],
+  "privateEditIcons": [
+    {
+      "role": "delete",
+      "source": "assets/delete-dc0125fecc577e27a106.png",
+      "size": [
+        24,
+        24
+      ],
+      "bytes": 124,
+      "sha256": "d30675e649aec73785d2c6d1f55ad051bf00877d1f7dbc7b0ee0fb89adaf893a"
+    },
+    {
+      "role": "save",
+      "source": "assets/save-285144e32caffa7cf437.png",
+      "size": [
+        12,
+        12
+      ],
+      "bytes": 130,
+      "sha256": "6a43dff56720fcfb5c06d4c8ed0f7fbb6ce9033326810d4b5aeab3141dd85ba8"
+    }
+  ],
+  "nativeCandidate": {
+    "status": "UNQUALIFIED_NONZERO_COMPLETE_TARGET",
+    "captureSha256": "c431e066cb57bef4dd102dd8847ae51c6f35a29f6b5a5f9c0ace466fee661e70",
+    "size": [
+      2570,
+      1402
+    ],
+    "differentPixels": 1419830,
+    "threshold": 0,
+    "mask": 0,
+    "activeEngineScaleAndViewportKnown": false,
+    "alphaRepresentationQualified": false,
+    "finalRepeatedComparison": "candidate02 whole browser PNG byte-identical to candidate01",
+    "alphaDifferentPixels": 1314630,
+    "opaqueRGBDifferentPixels": 105200,
+    "alphaRepresentationStudy": "Six fixed alpha-preserving association models all remain1419830 different pixels; not a format-only explanation"
+  },
+  "goalComplete": false
+}

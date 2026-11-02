@@ -1,0 +1,35 @@
+@import './ore-scroll-area.css';
+/* Finite O_/tO source shell. Border-box is an explicit local Web boundary;
+   source div reset does not establish a universal native box-sizing rule. */
+.mc-ore-screen-frame{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;isolation:isolate;box-sizing:border-box;background:transparent;color:#fff;font-family:var(--mc-ore-seven,"Minecraft Seven v2"),var(--mc-ore-fallback,sans-serif);font-size:calc(1.6 * var(--mc-ore-unit));font-weight:400;letter-spacing:calc(.04 * var(--mc-ore-unit));text-shadow:none}
+.mc-ore-screen-frame[hidden]{display:none}
+.mc-ore-screen-frame__header{position:relative;display:flex;flex-direction:column;flex:none;z-index:3;background:#e6e8eb;color:#1e1e1f}
+.mc-ore-screen-frame__safe-header{position:relative;box-sizing:border-box;padding-top:var(--mc-ore-screen-safe-top);padding-left:var(--mc-ore-screen-safe-left);padding-right:var(--mc-ore-screen-safe-right)}
+.mc-ore-screen-frame__nav{position:relative;display:flex;flex-direction:row;align-items:center;width:100%;min-width:0}
+.mc-ore-screen-frame__center{box-sizing:border-box;display:flex;flex:1;flex-direction:row;align-items:center;justify-content:center;height:calc(4.4 * var(--mc-ore-unit));min-width:0;padding:0 calc(6 * var(--mc-ore-unit));text-align:center}
+.mc-ore-screen-frame__title{margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--mc-ore-ten,"Minecraft Ten v2"),var(--mc-ore-fallback,sans-serif);font-size:calc(2 * var(--mc-ore-unit));line-height:calc(2.4 * var(--mc-ore-unit));font-weight:400;letter-spacing:inherit}
+.mc-ore-screen-frame__left{position:absolute;left:0;z-index:1;display:flex;flex-direction:row;align-items:center;height:calc(4.4 * var(--mc-ore-unit));padding-left:calc(.2 * var(--mc-ore-unit))}
+.mc-ore-screen-frame__back{box-sizing:border-box;display:flex;align-items:center;justify-content:center;flex:none;width:calc(4 * var(--mc-ore-unit));height:calc(4 * var(--mc-ore-unit));margin:calc(.4 * var(--mc-ore-unit)) 0;padding:0;border:0;border-radius:0;appearance:none;background:#e6e8eb;color:inherit;cursor:pointer;font:inherit;letter-spacing:inherit;text-shadow:none}
+.mc-ore-screen-frame__back:hover:not(:disabled){background:#f4f6f9}
+.mc-ore-screen-frame__back:active:not(:disabled){background:#d0d1d4}
+.mc-ore-screen-frame__back:disabled{cursor:default}
+.mc-ore-screen-frame__back:focus-visible{outline:2px solid Highlight;outline-offset:-2px}
+.mc-ore-screen-frame__back-icon{display:flex;align-items:center;justify-content:center;flex:none;width:calc(.8 * var(--mc-ore-unit));height:calc(1.6 * var(--mc-ore-unit));margin-top:calc(.2 * var(--mc-ore-unit));pointer-events:none}
+.mc-ore-screen-frame__back-icon>img,.mc-ore-screen-frame__back-icon>svg{display:block;max-width:100%;max-height:100%}
+/* Host-text fallback only; the installed private arrow is never substituted. */
+.mc-ore-screen-frame__back-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mc-ore-screen-frame__specular{position:absolute;left:0;right:0;bottom:0;height:calc(.2 * var(--mc-ore-unit));background:rgba(255,255,255,.2);pointer-events:none}
+.mc-ore-screen-frame__strip{height:calc(.4 * var(--mc-ore-unit));flex:none;background:#b1b2b5}
+.mc-ore-screen-frame__shadow{position:absolute;left:0;right:0;bottom:calc(-.2 * var(--mc-ore-unit));height:calc(.2 * var(--mc-ore-unit));background:rgba(0,0,0,.3);pointer-events:none}
+.mc-ore-screen-frame__body-space{position:relative;flex:1;min-width:0;min-height:0;overflow:hidden}
+.mc-ore-screen-frame__body{position:absolute;left:var(--mc-ore-screen-safe-left);right:var(--mc-ore-screen-safe-right);top:0;bottom:0;display:flex;flex-direction:row;justify-content:center;min-width:0;min-height:0;overflow:hidden}
+.mc-ore-screen-frame__footer{display:flex;flex-direction:column;position:relative;min-width:0;min-height:0;flex:none}
+.mc-ore-screen-frame__extra{flex:none;min-width:0}
+@media(forced-colors:active){
+ .mc-ore-screen-frame{color:CanvasText}
+ .mc-ore-screen-frame__header,.mc-ore-screen-frame__back,.mc-ore-screen-frame__back:hover:not(:disabled),.mc-ore-screen-frame__back:active:not(:disabled){background:ButtonFace;color:ButtonText}
+ .mc-ore-screen-frame__strip{background:CanvasText}
+ .mc-ore-screen-frame__shadow,.mc-ore-screen-frame__specular{display:none}
+ .mc-ore-screen-frame__back:disabled{color:GrayText}
+ .mc-ore-screen-frame__back:focus-visible{outline:2px solid Highlight}
+}

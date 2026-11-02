@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -17,6 +17,7 @@ const hbuiChinesePath = localFont('NotoSansSC-Regular.otf');
 const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loading-indicator.gif', import.meta.url));
 const orePermissionsDirectory = fileURLToPath(new URL('./.cache/local-ore-permissions/', import.meta.url));
 const oreTextFieldDirectory = fileURLToPath(new URL('./.cache/local-ore-text-field/', import.meta.url));
+const oreExternalServerDirectory = fileURLToPath(new URL('./.cache/local-ore-external-server/', import.meta.url));
 const nativeBitmapPath = fileURLToPath(new URL('./.cache/local-fonts/unicode/font.json', import.meta.url));
 const nativeWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/fonts.json', import.meta.url));
 const nativeGuiWorkstationPath = fileURLToPath(new URL('./.cache/local-fonts/workstation/gui-fonts.json', import.meta.url));
@@ -167,6 +168,42 @@ export default defineConfig({
           + '\nexport const oreTextFieldSkins = { normal: oreTextFieldnormal, disabled: oreTextFielddisabled };';
       }
       parts.push(oreTextFieldModule);
+      const oreServerSpecs = [
+        ['delete', 'delete-dc0125fecc577e27a106.png', 24, 124, 'd30675e649aec73785d2c6d1f55ad051bf00877d1f7dbc7b0ee0fb89adaf893a'],
+        ['save', 'save-285144e32caffa7cf437.png', 12, 130, '6a43dff56720fcfb5c06d4c8ed0f7fbb6ce9033326810d4b5aeab3141dd85ba8'],
+      ] as const;
+      const oreServerMetadata = resolve(oreExternalServerDirectory, 'provenance.json');
+      let oreServerModule = 'export const oreExternalServerIcons = undefined;';
+      if (existsSync(oreServerMetadata)) {
+        const projectRoot = realpathSync(fileURLToPath(new URL('.', import.meta.url)));
+        const safeServerPath = (path: string) => {
+          const actual = realpathSync(path), within = relative(projectRoot, actual);
+          if (isAbsolute(within) || within === '..' || within.startsWith('../') || within.startsWith('..\\')
+            || !normalizePath(within).startsWith('.cache/local-ore-external-server/')) {
+            throw new Error('Local OreUI server resources must stay inside the ignored preview directory.');
+          }
+          return actual;
+        };
+        safeServerPath(oreServerMetadata);
+        const provenance = JSON.parse(readFileSync(oreServerMetadata, 'utf8')) as {schemaVersion: number; resources: {role: string; file: string; sourceBasename: string; width: number; height: number; bytes: number; sha256: string}[]};
+        for (const [role, basename, size, length, digest] of oreServerSpecs) {
+          const record = provenance.resources?.find(item => item.role === role);
+          const target = resolve(oreExternalServerDirectory, `${role}.png`), within = relative(oreExternalServerDirectory, target);
+          if (provenance.schemaVersion !== 1 || !record || record.file !== `${role}.png` || record.sourceBasename !== basename
+            || record.width !== size || record.height !== size || record.bytes !== length || record.sha256 !== digest
+            || isAbsolute(within) || within.startsWith('..') || !existsSync(target)) {
+            throw new Error('Invalid local OreUI server-icon metadata; rerun scripts/use-local-ore-external-server-assets.py.');
+          }
+          const bytes = readFileSync(safeServerPath(target));
+          if (bytes.length !== length || !bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+            || bytes.readUInt32BE(16) !== size || bytes.readUInt32BE(20) !== size || createHash('sha256').update(bytes).digest('hex') !== digest) {
+            throw new Error('Local OreUI server icons differ from pinned whole originals; rerun scripts/use-local-ore-external-server-assets.py.');
+          }
+        }
+        oreServerModule = oreServerSpecs.map(([role]) => `import oreServer${role} from ${JSON.stringify(normalizePath(resolve(oreExternalServerDirectory, `${role}.png`)) + '?url')};`).join('\n')
+          + '\nexport const oreExternalServerIcons = { delete: oreServerdelete, save: oreServersave };';
+      }
+      parts.push(oreServerModule);
       // Optional measured subset; page bytes remain in ignored local storage.
       // This does not register a global font face or invent missing glyphs.
       let bitmapModule = 'export const nativeBitmapFont = undefined;';

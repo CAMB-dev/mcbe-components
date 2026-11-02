@@ -974,10 +974,47 @@
           "details": "docs/ORE_TEXT_FIELD_QA.md"
         }
       }
+    ],
+    "ore_external_servers": [
+      {
+        "name": "OreButton",
+        "status": "implemented",
+        "validation": "source_browser03_93_pass_1_expected_skip_node52_package03_peers_installed03_4_built2_native_unqualified",
+        "fidelity": "source_modern_ore_profile_host_services_and_native_pixels_unqualified",
+        "details": "docs/ORE_EXTERNAL_SERVER_QA.md"
+      },
+      {
+        "name": "OreActionBar",
+        "status": "implemented",
+        "validation": "source_browser03_93_pass_1_expected_skip_node52_package03_peers_installed03_4_built2_native_unqualified",
+        "fidelity": "source_modern_ore_profile_host_services_and_native_pixels_unqualified",
+        "details": "docs/ORE_EXTERNAL_SERVER_QA.md"
+      },
+      {
+        "name": "OreScreenFrame",
+        "status": "implemented",
+        "validation": "source_browser03_93_pass_1_expected_skip_node52_package03_peers_installed03_4_built2_native_unqualified",
+        "fidelity": "source_modern_ore_profile_host_services_and_native_pixels_unqualified",
+        "details": "docs/ORE_EXTERNAL_SERVER_QA.md"
+      },
+      {
+        "name": "OreScrollArea",
+        "status": "implemented",
+        "validation": "source_browser03_93_pass_1_expected_skip_node52_package03_peers_installed03_4_built2_native_unqualified",
+        "fidelity": "source_modern_ore_profile_host_services_and_native_pixels_unqualified",
+        "details": "docs/ORE_EXTERNAL_SERVER_QA.md"
+      },
+      {
+        "name": "OreExternalServerForm",
+        "status": "implemented",
+        "validation": "source_browser03_93_pass_1_expected_skip_node52_package03_peers_installed03_4_built2_native_unqualified",
+        "fidelity": "source_modern_ore_profile_host_services_and_native_pixels_unqualified",
+        "details": "docs/ORE_EXTERNAL_SERVER_QA.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 209,
+    "components": 214,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -988,12 +1025,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 227,
+    "runtimeValues": 232,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "tested_ore_text_fields_209_227_finite_web_native_unqualified",
+    "publicationState": "tested_ore_external_servers_214_232_web_native_unqualified",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"

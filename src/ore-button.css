@@ -1,0 +1,29 @@
+/* Cg->yg overrides the generic ug elevation classes. The three source
+   variants all use Seven secondaryButton/destructiveButton metrics. */
+.mc-ore-button{--mc-ore-unit:5px;--mc-ore-face:#d0d1d4;--mc-ore-face-hover:#b1b2b5;--mc-ore-face-pressed:#b1b2b5;--mc-ore-base:#58585a;--mc-ore-button-text:#1e1e1f;--mc-ore-specular-top:rgba(255,255,255,.6);--mc-ore-specular-bottom:rgba(255,255,255,.4);--mc-ore-specular-hover-top:rgba(255,255,255,.8);--mc-ore-specular-hover-bottom:rgba(255,255,255,.6);box-sizing:border-box;display:inline-flex;flex-direction:column;position:relative;min-width:0;max-width:100%;margin:0;padding:0 0 calc(.4 * var(--mc-ore-unit));border:calc(.2 * var(--mc-ore-unit)) solid #1e1e1f;border-radius:0;appearance:none;vertical-align:top;background:var(--mc-ore-base);color:var(--mc-ore-button-text);font-family:var(--mc-ore-seven,"Minecraft Seven v2"),var(--mc-ore-fallback,sans-serif);font-size:calc(1.6 * var(--mc-ore-unit));font-weight:400;line-height:calc(2 * var(--mc-ore-unit));letter-spacing:calc(.04 * var(--mc-ore-unit));text-align:center;text-shadow:none;cursor:pointer}
+.mc-ore-button[hidden]{display:none}
+.mc-ore-button[data-horizontal]{flex:1 0 0}
+.mc-ore-button[data-variant="primary"]{--mc-ore-face:#3c8527;--mc-ore-face-hover:#2a641c;--mc-ore-face-pressed:#1d4d13;--mc-ore-base:#1d4d13;--mc-ore-button-text:#fff;--mc-ore-specular-top:rgba(255,255,255,.2);--mc-ore-specular-bottom:rgba(255,255,255,.1);--mc-ore-specular-hover-top:rgba(255,255,255,.4);--mc-ore-specular-hover-bottom:rgba(255,255,255,.3)}
+.mc-ore-button[data-variant="destructive"]{--mc-ore-face:#ca3636;--mc-ore-face-hover:#c02d2d;--mc-ore-face-pressed:#ad1d1d;--mc-ore-base:#ad1d1d;--mc-ore-button-text:#fff;--mc-ore-specular-top:rgba(255,255,255,.2);--mc-ore-specular-bottom:rgba(255,255,255,.1);--mc-ore-specular-hover-top:rgba(255,255,255,.5);--mc-ore-specular-hover-bottom:rgba(255,255,255,.4)}
+/* The source elevated ::before is transparent: no invented highlight paint. */
+.mc-ore-button::before{content:"";display:block;position:absolute;left:0;top:0;width:100%;height:calc(.4 * var(--mc-ore-unit))}
+.mc-ore-button__face{display:block;position:relative;box-sizing:border-box;height:calc(4 * var(--mc-ore-unit));max-width:100%;background:var(--mc-ore-face)}
+.mc-ore-button__content{display:flex;position:relative;z-index:1;box-sizing:border-box;align-items:center;justify-content:center;flex-direction:row;height:100%;max-width:100%;min-width:0;padding:0 calc(2 * var(--mc-ore-unit))}
+.mc-ore-button__label{display:block;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mc-ore-button__icon{display:flex;align-items:center;justify-content:center;flex:none;width:calc(2.4 * var(--mc-ore-unit));height:calc(2.4 * var(--mc-ore-unit))}
+.mc-ore-button__icon[data-with-label]{margin-right:calc(.8 * var(--mc-ore-unit))}
+.mc-ore-button__icon>svg,.mc-ore-button__icon>img{max-width:100%;max-height:100%}
+.mc-ore-button__specular{display:block;position:absolute;inset:0;pointer-events:none;box-sizing:border-box;border:calc(.2 * var(--mc-ore-unit)) solid;border-top-color:var(--mc-ore-specular-top);border-left-color:var(--mc-ore-specular-top);border-bottom-color:var(--mc-ore-specular-bottom);border-right-color:var(--mc-ore-specular-bottom)}
+.mc-ore-button:hover:not(:disabled)>.mc-ore-button__face{background:var(--mc-ore-face-hover)}
+.mc-ore-button:hover:not(:disabled) .mc-ore-button__specular{border-top-color:var(--mc-ore-specular-hover-top);border-left-color:var(--mc-ore-specular-hover-top);border-bottom-color:var(--mc-ore-specular-hover-bottom);border-right-color:var(--mc-ore-specular-hover-bottom)}
+/* Hover and pressed remain independent. A hovered pointer press retains hover
+   specular; keyboard press without hover retains default specular. */
+.mc-ore-button:active:not(:disabled){margin-top:calc(.4 * var(--mc-ore-unit));padding-bottom:0}
+.mc-ore-button:active:not(:disabled)::before{top:calc(-.6 * var(--mc-ore-unit))}
+.mc-ore-button:active:not(:disabled)>.mc-ore-button__face{background:var(--mc-ore-face-pressed)}
+.mc-ore-button:disabled{background:#8c8d90;border-color:#58585a;color:#58585a;cursor:not-allowed}
+.mc-ore-button:disabled>.mc-ore-button__face{background:#b1b2b5}
+.mc-ore-button:disabled .mc-ore-button__specular{display:none}
+/* Accessible Web fallback, not a recovered native controller focus layer. */
+.mc-ore-button:focus-visible{outline:2px solid Highlight;outline-offset:2px}
+@media(forced-colors:active){.mc-ore-button{forced-color-adjust:auto;background:ButtonFace;color:ButtonText;border-color:ButtonText}.mc-ore-button>.mc-ore-button__face,.mc-ore-button:hover:not(:disabled)>.mc-ore-button__face,.mc-ore-button:active:not(:disabled)>.mc-ore-button__face{background:ButtonFace}.mc-ore-button .mc-ore-button__specular{display:none}.mc-ore-button:disabled{background:ButtonFace;color:GrayText;border-color:GrayText}.mc-ore-button:disabled>.mc-ore-button__face{background:ButtonFace}}

@@ -6,6 +6,7 @@ import { verifyProgressPackage } from './verify-progress-package.mjs';
 import { verifyFileTransmissionPackage } from './verify-file-transmission-package.mjs';
 import { verifyExternalServerPackage } from './verify-external-server-package.mjs';
 import { verifyOreTextFieldPackage } from './verify-ore-text-field-package.mjs';
+import { verifyOreExternalServerPackage } from './verify-ore-external-server-package.mjs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -34,6 +35,8 @@ assert(!packed.files.some(file => /^(?:demo|\.cache)\//.test(file.path)), 'Demo-
 // renamed, and decoded inline resources as well as filenames. No private bytes
 // or machine-local paths are stored in this verifier.
 const privateOreResourceHashes = new Set([
+  "d30675e649aec73785d2c6d1f55ad051bf00877d1f7dbc7b0ee0fb89adaf893a",
+  "6a43dff56720fcfb5c06d4c8ed0f7fbb6ce9033326810d4b5aeab3141dd85ba8",
   "4de8cfb38a90f3296237606130503c2648551e1fc9aba28c373c86293b6f910c",
   "5c3af29f159b5c9f4b85325848549b4f68f112d2cb57d134769a82149d633fb7",
   "93e0cb5945ef2269b2ccaa8a20f35d16a304fe00abb7b8df1baeedbcc293c5ea",
@@ -124,10 +127,11 @@ components.push('ProgressScreen','ProgressIndicators','ProgressPackGrids','Progr
 components.push('FileTransmissionScreen','FileTransmissionPanel','FileTransferProgress');
 components.push('ExternalServerForm','ExternalServerField');
 components.push('OreTextField','OreFieldSection');
-assert.equal(components.length,209);
+components.push('OreButton','OreActionBar','OreScreenFrame','OreScrollArea','OreExternalServerForm');
+assert.equal(components.length,214);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,12);
-assert.equal(Object.keys(ui).length,227);
+assert.equal(Object.keys(ui).length,232);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -2072,5 +2076,6 @@ export const demo = <>
   await verifyFileTransmissionPackage({ consumer, root, major });
   await verifyExternalServerPackage({ consumer, root, major });
   await verifyOreTextFieldPackage({ consumer, root, major, privateResourceHashes:privateOreResourceHashes });
+  await verifyOreExternalServerPackage({ consumer, root, major, privateResourceHashes:privateOreResourceHashes });
 }
 console.log(`Verified tarball: ${tarPath}`);

@@ -57,6 +57,7 @@ import { ProgressDemo } from './progress-demo';
 import { FileTransmissionDemo } from './file-transmission-demo';
 import { ExternalServerExamples } from './external-server-examples';
 import { OreTextFieldExamples } from './ore-text-field-examples';
+import { OreExternalServerExamples } from './ore-external-server-examples';
 import { UGCExamples } from './ugc-examples';
 import { ImmersiveReaderExamples } from './immersive-reader-examples';
 import { ScrollArea } from '../src';
@@ -88,6 +89,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'server-forms', name: 'Server forms', icon: 'chevron', count: '02' },
   { id: 'external-servers', name: 'External servers', icon: 'chevron', count: '02' },
   { id: 'ore-text-fields', name: 'Inputs · OreUI', icon: 'chevron', count: '02' },
+  { id: 'ore-external-servers', name: 'External servers · OreUI', icon: 'chevron', count: '05' },
   { id: 'npc', name: 'NPC dialogue & editor', icon: 'chevron', count: '05' },
   { id: 'emote-wheel', name: 'Emote wheel', icon: 'chevron', count: '03' },
   { id: 'documents', name: 'How to Play & encyclopedia', icon: 'chevron', count: '03' },
@@ -464,6 +466,7 @@ function App() {
       <Example id="server-forms" title="Server forms" detail="Schema-driven action and custom forms with caller-owned values, icons and response requests."><ServerFormsExamples notify={notify}/></Example>
       <Example id="external-servers" title="External servers · Classic" detail="添加与编辑服务器，独立字段保留原生输入与原始像素皮肤。"><ExternalServerExamples/></Example>
       <Example id="ore-text-fields" title="Inputs · OreUI" detail="现代菜单输入框与独立字段组，支持宿主提供完整原图。"><OreTextFieldExamples/></Example>
+      <Example id="ore-external-servers" title="External servers · OreUI" detail="现代添加与编辑页面，复用按钮、操作栏、屏幕框架与滚动区。"><OreExternalServerExamples/></Example>
       <Example id="npc" title="NPC dialogue & editor" detail="Dialogue, appearance and command or URL editing with reusable portrait and action controls."><NpcExamples notify={notify}/></Example>
       <Example id="emote-wheel" title="Emote wheel" detail="Transparent screen, source instruction and action rows, plus the reusable four-slot wheel and previews."><EmoteWheelExamples/></Example>
       <Example id="documents" title="How to Play & encyclopedia" detail="Shared source frame, grouped topic navigation, independent scrolling and reusable article pieces."><DocumentViewerExamples/></Example>

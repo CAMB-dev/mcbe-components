@@ -1,5 +1,124 @@
 # Session handoff
 
+## Current checkpoint — modern Ore Add/Edit composition, 2026-11-02
+
+Full goal ACTIVE/incomplete. Branch codex/ore-external-server-20261102, parent
+71b98acec480f0fef222196781be643e82234312. Public214 components/232 runtime
+(+OreExternalServerForm/+OreButton/+OreActionBar/+OreScreenFrame/+OreScrollArea).
+No Classic source coverage rows promoted. Final Git/tar/checks receipt will be
+`.cache/ore-external-server-qa-01/FINAL.json`; public scope/API/source is in
+docs/ORE_EXTERNAL_SERVER_QA.md and ore-external-server-source.json.
+
+Done: sourceDde Add/Edit fullUI with reusablemodernparts and source icons as
+host nodes; original6x7fields fromlastphase. ButtonCg/yg elevated4face+.4base+
+.4border=4.8u, correctsourceSeven1.6/line2/tracking.04, independenthover/pressed
+palette/specular andnativebuttonstates. ActionBaronlyneutralbg/topwhite.1/
+bottomblack.3 .2bevel, gap.8/pad1.6; no additionalregularborder. Frame O_/tO
+safeTop+4.8headerflow, back4 (not4.4), glyph.8x1.6+.2topoffset; no bodybg or
+automatic safeBottom/gamepad Space. Explicitphysicalsize/window/guiScale/safe
+margins. ARgridcentered100%/rowwidth100%+max128u/gutters, 10/12 or6/8 columns,
+sourcewidefooterinsidepanel/narrowfooteroutsidebodyscroller butsameformowner.
+Sourceglobaldivreset/fasttagmapping checked; nativeUA/DPR/provideractiveunknown.
+
+Important correctedsourceEnter: DEFAULT ONLYBLUR (inputbridge), noAdd/Save/Join.
+Onlyexplicit submitAction optsintoWeb formsubmit; Delete alwaysbutton/request
+confirmation. Portsourceblur nonemptyASCIIdigits<=65535 incl0/leadingzeros;
+empty/nondigit→19132/>max→65535 +hostnarrationintent, no persistentinvalidflag/
+guessedshake. Acceptedcontrolledsnapshot/nativefield+formeventveto, refs/IME,
+readonlyselection+Back/Escape/disabledall/hiddennodes/resetbaseline. Profanity,
+providererrors, unsaved/delete modals, save/join/remove/onlinewarning/navigation
+arehostservices/requests, notcalledbylibrary. Native noValidate defaulttrue;
+explicit hostfalse retained. Main#ore-external-servers real localrecord/actions/
+hostconfirmation, sourcefonts/whole4skins+icons optionalprivatebridge.
+
+Realreuse: movedoldpermissionsOreScroll core/15CSSrules intoOreScrollArea, no
+restpermissionsASTorunrelatedCSSchange; sourcekeyboard/drag/touch/observer/timer
+coreexact. Parent--mc-ore-unit/minborder overrides preserved viafallbackvars.
+SignedbottomInset and legacyemptystringlabel retained (no newthrow). Independent
+review foundReact19 refcleanupdropped; narrowbinderfix now storesreturnedcleanup,
+ordinarycallbacknull/objectrefs/aliasdedup/refreplacementexactonce. Three new
+CPUtestsfirstredthenall10green. Onlybinderchanged, notscrollcore/CSS/Frame.
+Publiccallbackrefactualmount/unmount desktop/mobile plusinstalledReact18/19 dev/
+prod testedcleanup once. Oldreviewfinding retained; followupresolved12CPUcases.
+
+Actualfinalsourcebrowser03=93PASS/1expecteddesktopTouchSKIP/0FAIL0flaky94total:
+28newform/ref/button,14oldmoderninput,52oldpermissions. Nodefinal52PASS. Full
+TS/build/package03 PASS; actualReact18.3.1/19.3.1 all214/232/declarations/asset/
+licensechecks plusnew68SSR/18strictnegativeeach PASS. Sourceclosure175modules,
+692original-byte refs647PNG39TGA6JSON unchanged. Installed03 trulyfreshdefault
+Vite dev/prod×bothpeers4PASS, actual5hostwholePNGs/fonts/nativeEnter/rawport/
+AddEdit/readonlyBack/disabled/reset/scroll/refcleanup/forcedcolors; builtmain
+desktop/mobile2PASS. Functional tarSHA
+2b032dea9e1640a7e10feb69d1e0907028f95681a09fb123378c6ecc6f6bccb5,
+immutablecopy`.cache/ore-external-server-installed-03/candidate.tgz`.
+ESMSHA6abe00809a208ebe5f12e4cf9034e925d2a87f4fcaf06d71034fa9b57a5a2d10;
+DTSSHA16099195cd4edcf9434c0f38bca3c9c5c968beb69001cef95d7b232149fbf166;
+FormCSSSHAa48d6e41dfb8479178e6bd4b4263ba068dbe2d54dd99d162a0fb7ae014c673a6.
+
+Retainedfailhistory: browser01diag86PASS3FAIL1skip overlappedlastrefactorwrites;
+2Cancelambiguousselectors harnessfixed, actualreadonlyformaria-disabled wrongly
+inheritedbyBack fixedtoonlydisabled. Browser02then89PASS1skip pre-refbinderfix;
+browser03isfinal. FirstTSrootfixtureonActionreturnedpushnumber, fixedvoid.
+Package01 helperwronglyexpectedemptylabel/negativeinsetthrows; package02 helper
+wronglyexpectedgridmax128 insteadRowmax128. Currentstrictpositivecompat/Row
+checks; oldworkers/logsaved andnoproductionchangedtopass. Probe03 actualold
+packedpeeronlyhelperdebug succeeded, notfinalsourcequalification. Installed01
+nestedroot parentnode_modules causedfonts403; installed02freshroots dynamicURL
+concat omittedassetsinproduction; installed03staticURLs/freshinstallsallpass,
+nofsallow/aliases/productassetreplacements. No retries or pixelthresholdhack.
+
+NativefullframeSTRICTFAIL persists. Nativecomparison01 andfinal02 eachfull
+2570x1402=3,603,140pixels:1,419,830nonzeroRGBA/1,314,630alpha/max216, mask0/
+threshold0. CompleteactualbrowserPNGbyte-identicalbetweenphases includingafter
+refbinderfix. NativeGTisR19postG13fromprevioussavedcapturec431e066...; fullraw
+UIbeforepanorama. Inputsphysicalprofile2570x1402/guiScale5/safe0 areexplicitWeb
+candidate, notproofactiveengineDOMwindow/DPR/rem. Sourcegeometry/valuesunfit,
+nocolor/alpha/expected adjustment. Nativeartifact/source/capturestaysignored.
+`.cache/ore-external-server-native-comparison-02/decoded-01` wholeoutputs/report;
+strictreproconfig playwright.ore-external-server-native.config.ts intentionally
+outsidepositiveWebcontractprojects. DoNOTclaimallpixels/nativepassed.
+
+Independentdifference FINAL `.cache/ore-external-server-native-difference-study-01`
+c0ad3e6b48e492ccbdd25ad19cff67f4ee6382d182ce4af2380cbf75a4a222bc:
+PNGstandardunassociated vsnative rawdiagnostic container, sourcePSO ONE/INV_SRC
+alpha+G19directsample isassociatedsource-overcontract, DXGIaloneprovesnoalphaMode.
+But EVERYrawdiff eitheralphaunequal orbothopaqueRGB;6fixedalpha-preserving
+associationmodelsallstill1,419,830, no formatnormalizationcanmakezero. Opaque
+RGB105,200;8,180nativecoloredpartialalphafooter4rows browseropaque suggests
+backgroundcoverage/clipunknown, notuniversalproof. Header5row/17band1bytepaint
+differencesarecompositingquantization, text/AA/defaultlineboxnotcertified. Black/
+gray matte119410isdiscard-alphaDIAGNOSTIC only, NOTstrictqualification.
+NativeR656first1402rows→R19actual14,412,560RGBAbytes0difference; divergence
+exists BEFOREtheprecomposedwhole-texture upload, notG13resampling.
+
+Independentreview original `.cache/ore-external-server-review-01/FINAL.json`
+09bda8b8bcc8624207b3780a9c2601f69d4995212fdabeb6e00b554d48dc7758 retainsref
+findingand25CPUgroups/131072validports17invalid. Followupref resolvednewFINAL
+cd78e9aec3b56f746ae4c2dea2e4e67ea8cf36d7d46e8b64a18c6f7cde61ec26,
+12CPUbinderprobes; sourcesall15pinnedunchanged. Composition sourcefrozenFINAL
+2b92b4eb77b70bdf2f3bf73cffc454fc444a1f4dcbb07cda0c31cddac70ca878;
+FrameSOURCE03eaf7a3aa7d6bd94ddbda1d39738f35a659b876eb1a1b50c2254cb00f256ce1;
+usecorrectedspacertokensfrompreviousphase, notoldwrong1/2/3remstudy.
+
+Next fidelity action: gather actualHBUIpaint BEFOREprecompose. Existingcapture
+hasonlywholeR656 source draw, no per-glyph/box draws. Considerroot-ownednewPIX
+UIlaunch withForceD3D11On12 enabled (notattempted thisround) toexposeCoherent
+D3D11innerdraws; verifyactualresult, do NOTpromiseitworks/reuseoldPIDs orold
+one-shotfailedhelper. UseralreadyallowsPIXlaunch/capture; no installneeded.
+IfCUneededactivatecorrectappfirst/observefreshstate/saveoneframeandquitnormal,
+closeComputerUseimmediatelyafteruse. No worlds/serveractions needed forblank
+Addscreen. Needsource/rendererevidenceforcolorquantization/backgroundclip/
+subpixel/fontAA beforechangingopacity.5, per-edgeoffsets orfonts. Also remaining
+modernsourceerror/dirty/delete modals areUIseams, notimplementedoriginaldialogs
+byhostasidepreview. Fullgoal/allGUI remainsincomplete. Classic4partialalpha,
+Book/Signfocusedcaret/selection/wrap also stillunqualified; don'tusemodernframe
+asClassiccertification. Do notshrinkscopeorclosegoalfromfinitegreencontracts.
+
+Cleanup: thisroundneveropenedCU/Minecraft/PIX; onlyrootheadlessbrowser/GPUWeb
+tests/CPUfiles. Allowned5462..5468servers/contextsclosedaftereachphase, final
+actualqueriesrecordedseparatelyinSERVICES.json. User4173untouched.
+
+
 ## Current checkpoint — Ore text fields and real modern native baseline, 2026-11-02
 
 Full goal ACTIVE/incomplete. New branch codex/ore-text-fields-20261102, parent

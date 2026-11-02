@@ -1,0 +1,22 @@
+/* Shared original Ore permissions scroller. Owned boxes only; caller content is untouched. */
+.mc-ore-scroll,.mc-ore-scroll__viewport,.mc-ore-scroll__content,.mc-ore-scroll__bar,.mc-ore-scroll__track,.mc-ore-scroll__thumb,.mc-ore-scroll__touch{box-sizing:border-box}
+.mc-ore-scroll__bar:focus-visible,.mc-ore-scroll__viewport:focus-visible {
+  outline:var(--mc-ore-min-border,var(--mc-ore-scroll-min-border)) solid #fff;outline-offset:var(--mc-ore-min-border,var(--mc-ore-scroll-min-border));z-index:2;
+}
+.mc-ore-scroll {position:relative;display:flex;flex:1;min-width:0;min-height:0;overflow:hidden}
+.mc-ore-scroll__viewport {flex:1;min-width:0;min-height:0;overflow-x:hidden;overflow-y:scroll;scrollbar-width:none;overscroll-behavior:contain;position:relative}
+.mc-ore-scroll__viewport::-webkit-scrollbar {display:none}
+.mc-ore-scroll__content {min-height:0;min-width:0}
+.mc-ore-scroll__bar {position:relative;flex:none;width:calc(1.2 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));margin:calc(.8 * var(--mc-ore-unit,var(--mc-ore-scroll-unit))) 0 calc(.8 * var(--mc-ore-unit,var(--mc-ore-scroll-unit))) calc(.4 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));background:transparent;touch-action:none;user-select:none}
+.mc-ore-scroll__bar[hidden] {display:none}
+.mc-ore-scroll[data-floating="true"]>.mc-ore-scroll__bar {position:absolute;top:0;right:calc(.4 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));bottom:0;background:transparent}
+.mc-ore-scroll__track {position:absolute;top:0;bottom:0;left:calc(.4 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));width:calc(.4 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));background:#58585a}
+.mc-ore-scroll__thumb {position:absolute;left:0;width:calc(1.2 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));border:max(calc(.2 * var(--mc-ore-unit,var(--mc-ore-scroll-unit))),var(--mc-ore-min-border,var(--mc-ore-scroll-min-border))) solid #1e1e1f;padding-top:calc(.4 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));background:#e6e8eb;box-shadow:inset 0 calc(-.4 * var(--mc-ore-unit,var(--mc-ore-scroll-unit))) #58585a}
+.mc-ore-scroll__thumb::after {content:"";position:absolute;left:calc(-.2 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));right:calc(-.2 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));height:calc(.2 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));bottom:calc(-.4 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));background:rgba(0,0,0,.2)}
+.mc-ore-scroll__touch {position:absolute;pointer-events:none;right:calc(.2 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));width:calc(.8 * var(--mc-ore-unit,var(--mc-ore-scroll-unit)));background:#aaa;opacity:0;transition:opacity 2s linear}
+.mc-ore-scroll__touch[data-active="true"] {opacity:.9;transition:none}
+@media(forced-colors:active) {
+  .mc-ore-scroll__track {background:CanvasText}
+}
+@media(forced-colors:active) {.mc-ore-scroll__thumb {background:ButtonFace;border-color:ButtonText;box-shadow:none}
+}
