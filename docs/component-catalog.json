@@ -49,6 +49,64 @@
     "publicFullReference": "https://github.com/Mojang/bedrock-samples/releases/download/v1.26.60.5/bedrock-samples-v1.26.60.5-full.zip"
   },
   "groups": {
+    "resourcePacks": [
+      {
+        "name": "ResourcePackManager",
+        "status": "implemented",
+        "validation": "node153_browsers244_plus2_then118_current_package18_19_installed4_built2_material92_of120_native_unqualified",
+        "fidelity": "source_named_global_level_addon_and_pack_settings_host_snapshot_native_unqualified",
+        "details": "docs/RESOURCE_PACKS_QA.md"
+      },
+      {
+        "name": "ResourcePackSection",
+        "status": "implemented",
+        "validation": "node153_browsers244_plus2_then118_current_package18_19_installed4_built2_material92_of120_native_unqualified",
+        "fidelity": "source_named_global_level_addon_and_pack_settings_host_snapshot_native_unqualified",
+        "details": "docs/RESOURCE_PACKS_QA.md"
+      },
+      {
+        "name": "ResourcePackItem",
+        "status": "implemented",
+        "validation": "node153_browsers244_plus2_then118_current_package18_19_installed4_built2_material92_of120_native_unqualified",
+        "fidelity": "source_named_global_level_addon_and_pack_settings_host_snapshot_native_unqualified",
+        "details": "docs/RESOURCE_PACKS_QA.md"
+      },
+      {
+        "name": "ResourcePackActions",
+        "status": "implemented",
+        "validation": "node153_browsers244_plus2_then118_current_package18_19_installed4_built2_material92_of120_native_unqualified",
+        "fidelity": "source_named_global_level_addon_and_pack_settings_host_snapshot_native_unqualified",
+        "details": "docs/RESOURCE_PACKS_QA.md"
+      },
+      {
+        "name": "ResourcePackDiagnostics",
+        "status": "implemented",
+        "validation": "node153_browsers244_plus2_then118_current_package18_19_installed4_built2_material92_of120_native_unqualified",
+        "fidelity": "source_named_global_level_addon_and_pack_settings_host_snapshot_native_unqualified",
+        "details": "docs/RESOURCE_PACKS_QA.md"
+      },
+      {
+        "name": "PackSettingsScreen",
+        "status": "implemented",
+        "validation": "node153_browsers244_plus2_then118_current_package18_19_installed4_built2_material92_of120_native_unqualified",
+        "fidelity": "source_named_global_level_addon_and_pack_settings_host_snapshot_native_unqualified",
+        "details": "docs/RESOURCE_PACKS_QA.md"
+      },
+      {
+        "name": "PackSettingsContent",
+        "status": "implemented",
+        "validation": "node153_browsers244_plus2_then118_current_package18_19_installed4_built2_material92_of120_native_unqualified",
+        "fidelity": "source_named_global_level_addon_and_pack_settings_host_snapshot_native_unqualified",
+        "details": "docs/RESOURCE_PACKS_QA.md"
+      },
+      {
+        "name": "PackContentTier",
+        "status": "implemented",
+        "validation": "node153_browsers244_plus2_then118_current_package18_19_installed4_built2_material92_of120_native_unqualified",
+        "fidelity": "source_named_global_level_addon_and_pack_settings_host_snapshot_native_unqualified",
+        "details": "docs/RESOURCE_PACKS_QA.md"
+      }
+    ],
     "playScreen": [
       {
         "name": "PlayScreen",
@@ -835,108 +893,553 @@
       }
     ],
     "npc": [
-      {"name":"NpcPortrait","status":"implemented","fidelity":"source_clip_geometry_host_actor_renderer_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"},
-      {"name":"NpcSkinPicker","status":"implemented","fidelity":"source_skin_grid_host_collection_and_page_state_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"},
-      {"name":"NpcActionEditor","status":"implemented","fidelity":"source_command_and_url_fields_host_draft_and_expansion_contract_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"},
-      {"name":"NpcDialogue","status":"implemented","fidelity":"source_student_and_worldbuilder_dialogue_composition_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"},
-      {"name":"NpcEditor","status":"implemented","fidelity":"source_basic_advanced_and_maximized_host_state_composition_native_validation_pending","source":"resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5","details":"docs/NPC_QA.md"}
+      {
+        "name": "NpcPortrait",
+        "status": "implemented",
+        "fidelity": "source_clip_geometry_host_actor_renderer_native_validation_pending",
+        "source": "resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5",
+        "details": "docs/NPC_QA.md"
+      },
+      {
+        "name": "NpcSkinPicker",
+        "status": "implemented",
+        "fidelity": "source_skin_grid_host_collection_and_page_state_native_validation_pending",
+        "source": "resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5",
+        "details": "docs/NPC_QA.md"
+      },
+      {
+        "name": "NpcActionEditor",
+        "status": "implemented",
+        "fidelity": "source_command_and_url_fields_host_draft_and_expansion_contract_native_validation_pending",
+        "source": "resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5",
+        "details": "docs/NPC_QA.md"
+      },
+      {
+        "name": "NpcDialogue",
+        "status": "implemented",
+        "fidelity": "source_student_and_worldbuilder_dialogue_composition_native_validation_pending",
+        "source": "resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5",
+        "details": "docs/NPC_QA.md"
+      },
+      {
+        "name": "NpcEditor",
+        "status": "implemented",
+        "fidelity": "source_basic_advanced_and_maximized_host_state_composition_native_validation_pending",
+        "source": "resource_pack/ui/npc_interact_screen.json, fixed v1.26.60.5",
+        "details": "docs/NPC_QA.md"
+      }
     ],
     "emote_wheel": [
-      {"name":"EmoteWheelScreen","status":"implemented","fidelity":"source_transparent_screen_stack_instructions_and_change_emotes_host_requests_native_raster_validation_pending","source":"resource_pack/ui/emote_wheel_screen.json, fixed v1.26.60.5","details":"docs/EMOTE_WHEEL_QA.md"},
-      {"name":"EmoteWheel","status":"implemented","fidelity":"source_four_slot_whole_state_textures_web_input_policy_native_screen_validation_pending","source":"resource_pack/ui/persona_common.json and emote_wheel_screen.json, fixed v1.26.60.5","details":"docs/EMOTE_WHEEL_QA.md"},
-      {"name":"EmoteSlotPreview","status":"implemented","fidelity":"source_empty_image_or_text_preview_host_thumbnail_and_validity_native_validation_pending","source":"resource_pack/ui/persona_common.json, fixed v1.26.60.5","details":"docs/EMOTE_WHEEL_QA.md"}
+      {
+        "name": "EmoteWheelScreen",
+        "status": "implemented",
+        "fidelity": "source_transparent_screen_stack_instructions_and_change_emotes_host_requests_native_raster_validation_pending",
+        "source": "resource_pack/ui/emote_wheel_screen.json, fixed v1.26.60.5",
+        "details": "docs/EMOTE_WHEEL_QA.md"
+      },
+      {
+        "name": "EmoteWheel",
+        "status": "implemented",
+        "fidelity": "source_four_slot_whole_state_textures_web_input_policy_native_screen_validation_pending",
+        "source": "resource_pack/ui/persona_common.json and emote_wheel_screen.json, fixed v1.26.60.5",
+        "details": "docs/EMOTE_WHEEL_QA.md"
+      },
+      {
+        "name": "EmoteSlotPreview",
+        "status": "implemented",
+        "fidelity": "source_empty_image_or_text_preview_host_thumbnail_and_validity_native_validation_pending",
+        "source": "resource_pack/ui/persona_common.json, fixed v1.26.60.5",
+        "details": "docs/EMOTE_WHEEL_QA.md"
+      }
     ],
     "ore_player_permissions": [
-      {"name":"OrePlayerPermissions","status":"implemented","validation":"linebox123_120pass_3skip_default_rgba_preserved_native_unverified","fidelity":"installed_oreui_source_composition_host_fonts_images_and_permission_services_native_whole_page_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"},
-      {"name":"OrePermissionLevelSelect","status":"implemented","validation":"linebox123_120pass_3skip_default_rgba_preserved_native_unverified","fidelity":"source_window_and_widget_breakpoints_segmented_or_shared_modal_host_roles_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"},
-      {"name":"OrePermissionToggleRow","status":"implemented","validation":"linebox123_120pass_3skip_default_rgba_preserved_native_unverified","fidelity":"ore_source_title_description_and_native_checkbox_host_permission_drafts_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"},
-      {"name":"OrePlayerCard","status":"implemented","validation":"linebox123_120pass_3skip_default_rgba_preserved_native_unverified","fidelity":"ore_source_player_card_host_avatar_subtitle_role_art_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"},
-      {"name":"OreSwitch","status":"implemented","validation":"stronger_source107_client_overlay_bevel_modal_package_public_pass_native_unverified","fidelity":"ore_source_switch_geometry_host_art_native_checkbox_scoped_web_contract_verified_native_unverified","details":"docs/ORE_PLAYER_PERMISSIONS_QA.md"}
+      {
+        "name": "OrePlayerPermissions",
+        "status": "implemented",
+        "validation": "linebox123_120pass_3skip_default_rgba_preserved_native_unverified",
+        "fidelity": "installed_oreui_source_composition_host_fonts_images_and_permission_services_native_whole_page_unverified",
+        "details": "docs/ORE_PLAYER_PERMISSIONS_QA.md"
+      },
+      {
+        "name": "OrePermissionLevelSelect",
+        "status": "implemented",
+        "validation": "linebox123_120pass_3skip_default_rgba_preserved_native_unverified",
+        "fidelity": "source_window_and_widget_breakpoints_segmented_or_shared_modal_host_roles_native_unverified",
+        "details": "docs/ORE_PLAYER_PERMISSIONS_QA.md"
+      },
+      {
+        "name": "OrePermissionToggleRow",
+        "status": "implemented",
+        "validation": "linebox123_120pass_3skip_default_rgba_preserved_native_unverified",
+        "fidelity": "ore_source_title_description_and_native_checkbox_host_permission_drafts_scoped_web_contract_verified_native_unverified",
+        "details": "docs/ORE_PLAYER_PERMISSIONS_QA.md"
+      },
+      {
+        "name": "OrePlayerCard",
+        "status": "implemented",
+        "validation": "linebox123_120pass_3skip_default_rgba_preserved_native_unverified",
+        "fidelity": "ore_source_player_card_host_avatar_subtitle_role_art_scoped_web_contract_verified_native_unverified",
+        "details": "docs/ORE_PLAYER_PERMISSIONS_QA.md"
+      },
+      {
+        "name": "OreSwitch",
+        "status": "implemented",
+        "validation": "stronger_source107_client_overlay_bevel_modal_package_public_pass_native_unverified",
+        "fidelity": "ore_source_switch_geometry_host_art_native_checkbox_scoped_web_contract_verified_native_unverified",
+        "details": "docs/ORE_PLAYER_PERMISSIONS_QA.md"
+      }
     ],
     "invite": [
-      {"name":"InviteScreen","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"},
-      {"name":"InvitePersonRow","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"},
-      {"name":"InviteCategory","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"},
-      {"name":"InvitePagination","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"},
-      {"name":"InviteFooter","status":"implemented","validation":"finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified","fidelity":"fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers","source":"resource_pack/ui/invite_screen.json, fixed v1.26.60.5","details":"docs/INVITE_QA.md"}
+      {
+        "name": "InviteScreen",
+        "status": "implemented",
+        "validation": "finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified",
+        "fidelity": "fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers",
+        "source": "resource_pack/ui/invite_screen.json, fixed v1.26.60.5",
+        "details": "docs/INVITE_QA.md"
+      },
+      {
+        "name": "InvitePersonRow",
+        "status": "implemented",
+        "validation": "finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified",
+        "fidelity": "fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers",
+        "source": "resource_pack/ui/invite_screen.json, fixed v1.26.60.5",
+        "details": "docs/INVITE_QA.md"
+      },
+      {
+        "name": "InviteCategory",
+        "status": "implemented",
+        "validation": "finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified",
+        "fidelity": "fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers",
+        "source": "resource_pack/ui/invite_screen.json, fixed v1.26.60.5",
+        "details": "docs/INVITE_QA.md"
+      },
+      {
+        "name": "InvitePagination",
+        "status": "implemented",
+        "validation": "finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified",
+        "fidelity": "fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers",
+        "source": "resource_pack/ui/invite_screen.json, fixed v1.26.60.5",
+        "details": "docs/INVITE_QA.md"
+      },
+      {
+        "name": "InviteFooter",
+        "status": "implemented",
+        "validation": "finite_source_web_formal106_actual_package_installed4_public17_verified_native_unverified",
+        "fidelity": "fixed_classic_source_six_scopes_three_identities_whole_originals_explicit_web_layout_and_host_providers",
+        "source": "resource_pack/ui/invite_screen.json, fixed v1.26.60.5",
+        "details": "docs/INVITE_QA.md"
+      }
     ],
     "portfolio": [
-      {"name":"Portfolio","status":"implemented","validation":"source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified","source":"resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5","details":"docs/PORTFOLIO_QA.md"},
-      {"name":"PortfolioPhoto","status":"implemented","validation":"source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified","source":"resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5","details":"docs/PORTFOLIO_QA.md"},
-      {"name":"PortfolioCaptionField","status":"implemented","validation":"source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified","source":"resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5","details":"docs/PORTFOLIO_QA.md"},
-      {"name":"PortfolioPicker","status":"implemented","validation":"source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified","source":"resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5","details":"docs/PORTFOLIO_QA.md"},
-      {"name":"PortfolioPickerItem","status":"implemented","validation":"source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified","source":"resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5","details":"docs/PORTFOLIO_QA.md"},
-      {"name":"PortfolioPageTurnButton","status":"implemented","validation":"source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified","source":"resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5","details":"docs/PORTFOLIO_QA.md"}
+      {
+        "name": "Portfolio",
+        "status": "implemented",
+        "validation": "source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified",
+        "source": "resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5",
+        "details": "docs/PORTFOLIO_QA.md"
+      },
+      {
+        "name": "PortfolioPhoto",
+        "status": "implemented",
+        "validation": "source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified",
+        "source": "resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5",
+        "details": "docs/PORTFOLIO_QA.md"
+      },
+      {
+        "name": "PortfolioCaptionField",
+        "status": "implemented",
+        "validation": "source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified",
+        "source": "resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5",
+        "details": "docs/PORTFOLIO_QA.md"
+      },
+      {
+        "name": "PortfolioPicker",
+        "status": "implemented",
+        "validation": "source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified",
+        "source": "resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5",
+        "details": "docs/PORTFOLIO_QA.md"
+      },
+      {
+        "name": "PortfolioPickerItem",
+        "status": "implemented",
+        "validation": "source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified",
+        "source": "resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5",
+        "details": "docs/PORTFOLIO_QA.md"
+      },
+      {
+        "name": "PortfolioPageTurnButton",
+        "status": "implemented",
+        "validation": "source_web_current62_complete_material_planes_new_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "whole_original_materials_independent_source_bindings_explicit_host_layout_and_missing_art_native_unverified",
+        "source": "resource_pack/ui/portfolio_screen.json, fixed v1.26.60.5",
+        "details": "docs/PORTFOLIO_QA.md"
+      }
     ],
     "ugc_viewer": [
-      {"name":"UGCViewer","status":"implemented","validation":"source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"classic_source_search_grid_explicit_host_material_and_web_grid_mapping_native_unverified","source":"resource_pack/ui/ugc_viewer_screen.json, fixed v1.26.60.5","details":"docs/UGC_VIEWER_QA.md"},
-      {"name":"UGCItemCard","status":"implemented","validation":"source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"classic_source_nested_content_button_host_image_and_intrinsic_web_label_metrics_native_unverified","source":"resource_pack/ui/ugc_viewer_screen.json, fixed v1.26.60.5","details":"docs/UGC_VIEWER_QA.md"}
+      {
+        "name": "UGCViewer",
+        "status": "implemented",
+        "validation": "source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "classic_source_search_grid_explicit_host_material_and_web_grid_mapping_native_unverified",
+        "source": "resource_pack/ui/ugc_viewer_screen.json, fixed v1.26.60.5",
+        "details": "docs/UGC_VIEWER_QA.md"
+      },
+      {
+        "name": "UGCItemCard",
+        "status": "implemented",
+        "validation": "source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "classic_source_nested_content_button_host_image_and_intrinsic_web_label_metrics_native_unverified",
+        "source": "resource_pack/ui/ugc_viewer_screen.json, fixed v1.26.60.5",
+        "details": "docs/UGC_VIEWER_QA.md"
+      }
     ],
     "immersive_reader": [
-      {"name":"ImmersiveReader","status":"implemented","validation":"source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"independent_source_bindings_host_webview_loading_visual_and_explicit_popup_resolution_native_unverified","source":"resource_pack/ui/immersive_reader.json, fixed v1.26.60.5","details":"docs/IMMERSIVE_READER_QA.md"},
-      {"name":"ImmersiveReaderButton","status":"implemented","validation":"source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified","fidelity":"source_content_button_whole_original_glyph_explicit_host_activation_native_unverified","source":"resource_pack/ui/immersive_reader.json, fixed v1.26.60.5","details":"docs/IMMERSIVE_READER_QA.md"}
+      {
+        "name": "ImmersiveReader",
+        "status": "implemented",
+        "validation": "source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "independent_source_bindings_host_webview_loading_visual_and_explicit_popup_resolution_native_unverified",
+        "source": "resource_pack/ui/immersive_reader.json, fixed v1.26.60.5",
+        "details": "docs/IMMERSIVE_READER_QA.md"
+      },
+      {
+        "name": "ImmersiveReaderButton",
+        "status": "implemented",
+        "validation": "source_web_behavior_complete_material_planes_actual_react18_19_package_browser_and_public_verified_native_unverified",
+        "fidelity": "source_content_button_whole_original_glyph_explicit_host_activation_native_unverified",
+        "source": "resource_pack/ui/immersive_reader.json, fixed v1.26.60.5",
+        "details": "docs/IMMERSIVE_READER_QA.md"
+      }
     ],
     "storage_management": [
-      {"name":"StorageManagement","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
-      {"name":"StorageToolbar","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
-      {"name":"StorageCategory","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
-      {"name":"StorageItem","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
-      {"name":"StorageItemActions","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
-      {"name":"StorageSelectionFooter","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
-      {"name":"StorageDependencyDialog","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"},
-      {"name":"StorageSharingProgress","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers","source":"resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5","details":"docs/STORAGE_QA.md"}
+      {
+        "name": "StorageManagement",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers",
+        "source": "resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5",
+        "details": "docs/STORAGE_QA.md"
+      },
+      {
+        "name": "StorageToolbar",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers",
+        "source": "resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5",
+        "details": "docs/STORAGE_QA.md"
+      },
+      {
+        "name": "StorageCategory",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers",
+        "source": "resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5",
+        "details": "docs/STORAGE_QA.md"
+      },
+      {
+        "name": "StorageItem",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers",
+        "source": "resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5",
+        "details": "docs/STORAGE_QA.md"
+      },
+      {
+        "name": "StorageItemActions",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers",
+        "source": "resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5",
+        "details": "docs/STORAGE_QA.md"
+      },
+      {
+        "name": "StorageSelectionFooter",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers",
+        "source": "resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5",
+        "details": "docs/STORAGE_QA.md"
+      },
+      {
+        "name": "StorageDependencyDialog",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers",
+        "source": "resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5",
+        "details": "docs/STORAGE_QA.md"
+      },
+      {
+        "name": "StorageSharingProgress",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_settings_fragments_explicit_host_bindings_and_unknown_native_providers",
+        "source": "resource_pack/ui/storage_management.json + storage_management_popup.json + Settings concrete mounts, fixed v1.26.60.5",
+        "details": "docs/STORAGE_QA.md"
+      }
     ],
     "screenshot_flash": [
-      {"name":"ScreenshotFlash","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"source_overlay_required_host_material_duration_and_explicit_web_clock_native_unverified","source":"resource_pack/ui/screenshot_screen.json, fixed v1.26.60.5","details":"docs/SCREENSHOT_FLASH_QA.md"}
+      {
+        "name": "ScreenshotFlash",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "source_overlay_required_host_material_duration_and_explicit_web_clock_native_unverified",
+        "source": "resource_pack/ui/screenshot_screen.json, fixed v1.26.60.5",
+        "details": "docs/SCREENSHOT_FLASH_QA.md"
+      }
     ],
     "start_menu": [
-      {"name":"StartMenu","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
-      {"name":"StartMenuTitle","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
-      {"name":"StartMenuActionStack","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
-      {"name":"StartMenuAuxiliaryActions","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
-      {"name":"StartMenuProfile","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"},
-      {"name":"StartMenuFooter","status":"implemented","validation":"source_contract_and_installed_web_consumer_validated_native_unverified","fidelity":"classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified","source":"resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5","details":"docs/START_MENU_QA.md"}
+      {
+        "name": "StartMenu",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified",
+        "source": "resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5",
+        "details": "docs/START_MENU_QA.md"
+      },
+      {
+        "name": "StartMenuTitle",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified",
+        "source": "resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5",
+        "details": "docs/START_MENU_QA.md"
+      },
+      {
+        "name": "StartMenuActionStack",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified",
+        "source": "resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5",
+        "details": "docs/START_MENU_QA.md"
+      },
+      {
+        "name": "StartMenuAuxiliaryActions",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified",
+        "source": "resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5",
+        "details": "docs/START_MENU_QA.md"
+      },
+      {
+        "name": "StartMenuProfile",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified",
+        "source": "resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5",
+        "details": "docs/START_MENU_QA.md"
+      },
+      {
+        "name": "StartMenuFooter",
+        "status": "implemented",
+        "validation": "source_contract_and_installed_web_consumer_validated_native_unverified",
+        "fidelity": "classic_source_named_branches_explicit_host_renderers_state_and_services_native_unverified",
+        "source": "resource_pack/ui/start_screen.json and common/common_buttons/common_art inheritance, fixed v1.26.60.5",
+        "details": "docs/START_MENU_QA.md"
+      }
     ],
     "chalkboard": [
-      {"name":"ChalkboardEditor","status":"implemented","validation":"source_client_contract_package_public_pass_native_unverified","fidelity":"classic_source_host_sized_editor_independent_edit_permission_and_lock_no_world_backend_native_unverified","source":"resource_pack/ui/chalkboard_screen.json and common/edu inheritance, fixed v1.26.60.5","details":"docs/CHALKBOARD_QA.md"},
-      {"name":"ChalkboardTextField","status":"implemented","validation":"source_client_contract_package_public_pass_native_unverified","fidelity":"native_textarea_original_six_pixel_nine_slice_common_center_and_clip_geometry_native_unverified","source":"resource_pack/ui/chalkboard_screen.json and common.multiline_text_edit_box, fixed v1.26.60.5","details":"docs/CHALKBOARD_QA.md"},
-      {"name":"ChalkboardLock","status":"implemented","validation":"source_client_contract_package_public_pass_native_unverified","fidelity":"edu_thirty_by_sixteen_toggle_row_original_textures_host_lock_label_native_unverified","source":"resource_pack/ui/chalkboard_screen.json and edu_common.slider_toggle, fixed v1.26.60.5","details":"docs/CHALKBOARD_QA.md"}
+      {
+        "name": "ChalkboardEditor",
+        "status": "implemented",
+        "validation": "source_client_contract_package_public_pass_native_unverified",
+        "fidelity": "classic_source_host_sized_editor_independent_edit_permission_and_lock_no_world_backend_native_unverified",
+        "source": "resource_pack/ui/chalkboard_screen.json and common/edu inheritance, fixed v1.26.60.5",
+        "details": "docs/CHALKBOARD_QA.md"
+      },
+      {
+        "name": "ChalkboardTextField",
+        "status": "implemented",
+        "validation": "source_client_contract_package_public_pass_native_unverified",
+        "fidelity": "native_textarea_original_six_pixel_nine_slice_common_center_and_clip_geometry_native_unverified",
+        "source": "resource_pack/ui/chalkboard_screen.json and common.multiline_text_edit_box, fixed v1.26.60.5",
+        "details": "docs/CHALKBOARD_QA.md"
+      },
+      {
+        "name": "ChalkboardLock",
+        "status": "implemented",
+        "validation": "source_client_contract_package_public_pass_native_unverified",
+        "fidelity": "edu_thirty_by_sixteen_toggle_row_original_textures_host_lock_label_native_unverified",
+        "source": "resource_pack/ui/chalkboard_screen.json and edu_common.slider_toggle, fixed v1.26.60.5",
+        "details": "docs/CHALKBOARD_QA.md"
+      }
     ],
     "player_permissions": [
-      {"name":"PlayerPermissions","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_json_source_composition_host_permission_drafts_not_current_oreui_or_native_certified","source":"resource_pack/ui/permissions_screen.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"},
-      {"name":"PermissionLevelSelect","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_nullable_role_dropdown_independent_of_permission_bits_client_contracts_pass_native_validation_pending","source":"resource_pack/ui/permissions_screen.json and settings_common.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"},
-      {"name":"PermissionToggleRow","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_native_checkbox_source_skin_and_independent_state_label_client_contracts_pass_native_validation_pending","source":"resource_pack/ui/permissions_screen.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"},
-      {"name":"PermissionPlayerRow","status":"implemented","validation":"client_contracts_pass_native_pending","fidelity":"classic_player_row_host_avatar_role_and_inactive_fade_client_contracts_pass_native_validation_pending","source":"resource_pack/ui/permissions_screen.json, fixed v1.26.60.5","details":"docs/PLAYER_PERMISSIONS_QA.md"}
+      {
+        "name": "PlayerPermissions",
+        "status": "implemented",
+        "validation": "client_contracts_pass_native_pending",
+        "fidelity": "classic_json_source_composition_host_permission_drafts_not_current_oreui_or_native_certified",
+        "source": "resource_pack/ui/permissions_screen.json, fixed v1.26.60.5",
+        "details": "docs/PLAYER_PERMISSIONS_QA.md"
+      },
+      {
+        "name": "PermissionLevelSelect",
+        "status": "implemented",
+        "validation": "client_contracts_pass_native_pending",
+        "fidelity": "classic_nullable_role_dropdown_independent_of_permission_bits_client_contracts_pass_native_validation_pending",
+        "source": "resource_pack/ui/permissions_screen.json and settings_common.json, fixed v1.26.60.5",
+        "details": "docs/PLAYER_PERMISSIONS_QA.md"
+      },
+      {
+        "name": "PermissionToggleRow",
+        "status": "implemented",
+        "validation": "client_contracts_pass_native_pending",
+        "fidelity": "classic_native_checkbox_source_skin_and_independent_state_label_client_contracts_pass_native_validation_pending",
+        "source": "resource_pack/ui/permissions_screen.json, fixed v1.26.60.5",
+        "details": "docs/PLAYER_PERMISSIONS_QA.md"
+      },
+      {
+        "name": "PermissionPlayerRow",
+        "status": "implemented",
+        "validation": "client_contracts_pass_native_pending",
+        "fidelity": "classic_player_row_host_avatar_role_and_inactive_fade_client_contracts_pass_native_validation_pending",
+        "source": "resource_pack/ui/permissions_screen.json, fixed v1.26.60.5",
+        "details": "docs/PLAYER_PERMISSIONS_QA.md"
+      }
     ],
     "document_viewer": [
-      {"name":"DocumentViewer","status":"implemented","fidelity":"source_grouped_dual_native_dom_viewports_host_content_and_selection_native_pixel_validation_pending","source":"resource_pack/ui/how_to_play_common.json, how_to_play_screen.json and encyclopedia_screen.json, fixed v1.26.60.5","details":"docs/DOCUMENT_VIEWER_QA.md"},
-      {"name":"DocumentHeading","status":"implemented","fidelity":"source_article_header_whole_banner_semantic_dom_native_raster_validation_pending","source":"resource_pack/ui/how_to_play_common.json, fixed v1.26.60.5","details":"docs/DOCUMENT_VIEWER_QA.md"},
-      {"name":"DocumentParagraph","status":"implemented","fidelity":"source_article_paragraph_width_and_line_padding_host_resolved_text_native_raster_validation_pending","source":"resource_pack/ui/how_to_play_common.json, fixed v1.26.60.5","details":"docs/DOCUMENT_VIEWER_QA.md"}
+      {
+        "name": "DocumentViewer",
+        "status": "implemented",
+        "fidelity": "source_grouped_dual_native_dom_viewports_host_content_and_selection_native_pixel_validation_pending",
+        "source": "resource_pack/ui/how_to_play_common.json, how_to_play_screen.json and encyclopedia_screen.json, fixed v1.26.60.5",
+        "details": "docs/DOCUMENT_VIEWER_QA.md"
+      },
+      {
+        "name": "DocumentHeading",
+        "status": "implemented",
+        "fidelity": "source_article_header_whole_banner_semantic_dom_native_raster_validation_pending",
+        "source": "resource_pack/ui/how_to_play_common.json, fixed v1.26.60.5",
+        "details": "docs/DOCUMENT_VIEWER_QA.md"
+      },
+      {
+        "name": "DocumentParagraph",
+        "status": "implemented",
+        "fidelity": "source_article_paragraph_width_and_line_padding_host_resolved_text_native_raster_validation_pending",
+        "source": "resource_pack/ui/how_to_play_common.json, fixed v1.26.60.5",
+        "details": "docs/DOCUMENT_VIEWER_QA.md"
+      }
     ],
     "server_forms": [
-      {"name":"ServerActionForm","status":"implemented","fidelity":"source_long_form_factory_web_composition_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"},
-      {"name":"ServerCustomForm","status":"implemented","fidelity":"source_custom_form_nine_field_factory_host_typed_state_native_validation_pending","source":"resource_pack/ui/server_form.json, fixed v1.26.60.5","details":"docs/SERVER_FORMS_QA.md"}
+      {
+        "name": "ServerActionForm",
+        "status": "implemented",
+        "fidelity": "source_long_form_factory_web_composition_native_validation_pending",
+        "source": "resource_pack/ui/server_form.json, fixed v1.26.60.5",
+        "details": "docs/SERVER_FORMS_QA.md"
+      },
+      {
+        "name": "ServerCustomForm",
+        "status": "implemented",
+        "fidelity": "source_custom_form_nine_field_factory_host_typed_state_native_validation_pending",
+        "source": "resource_pack/ui/server_form.json, fixed v1.26.60.5",
+        "details": "docs/SERVER_FORMS_QA.md"
+      }
     ],
     "structure_editor": [
-      {"name":"StructureEditor","status":"implemented","fidelity":"source_texture_web_composition_host_preview_native_validation_pending","source":"resource_pack/ui/structure_editor_screen.json, fixed v1.26.60.5","details":"docs/STRUCTURE_EDITOR_QA.md"},
-      {"name":"XYZVectorInput","status":"implemented","fidelity":"source_vertical_xyz_raw_draft_layout_contract","source":"resource_pack/ui/structure_editor_screen.json, fixed v1.26.60.5","details":"docs/STRUCTURE_EDITOR_QA.md"}
+      {
+        "name": "StructureEditor",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition_host_preview_native_validation_pending",
+        "source": "resource_pack/ui/structure_editor_screen.json, fixed v1.26.60.5",
+        "details": "docs/STRUCTURE_EDITOR_QA.md"
+      },
+      {
+        "name": "XYZVectorInput",
+        "status": "implemented",
+        "fidelity": "source_vertical_xyz_raw_draft_layout_contract",
+        "source": "resource_pack/ui/structure_editor_screen.json, fixed v1.26.60.5",
+        "details": "docs/STRUCTURE_EDITOR_QA.md"
+      }
     ],
     "command_blocks": [
-      {"name":"CommandBlockEditor","status":"implemented","fidelity":"source_texture_web_composition_native_page_validation_pending","source":"resource_pack/ui/command_block_screen.json, fixed v1.26.60.5","details":"docs/COMMAND_BLOCK_QA.md"},
-      {"name":"CommandInput","status":"implemented","fidelity":"source_input_layout_single_native_textarea_host_expansion_contract","source":"resource_pack/ui/command_block_screen.json, fixed v1.26.60.5","details":"docs/COMMAND_BLOCK_QA.md"},
-      {"name":"CommandOutputPanel","status":"implemented","fidelity":"source_output_layout_host_history_and_tracking_callbacks","source":"resource_pack/ui/command_block_screen.json, fixed v1.26.60.5","details":"docs/COMMAND_BLOCK_QA.md"}
+      {
+        "name": "CommandBlockEditor",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition_native_page_validation_pending",
+        "source": "resource_pack/ui/command_block_screen.json, fixed v1.26.60.5",
+        "details": "docs/COMMAND_BLOCK_QA.md"
+      },
+      {
+        "name": "CommandInput",
+        "status": "implemented",
+        "fidelity": "source_input_layout_single_native_textarea_host_expansion_contract",
+        "source": "resource_pack/ui/command_block_screen.json, fixed v1.26.60.5",
+        "details": "docs/COMMAND_BLOCK_QA.md"
+      },
+      {
+        "name": "CommandOutputPanel",
+        "status": "implemented",
+        "fidelity": "source_output_layout_host_history_and_tracking_callbacks",
+        "source": "resource_pack/ui/command_block_screen.json, fixed v1.26.60.5",
+        "details": "docs/COMMAND_BLOCK_QA.md"
+      }
     ],
     "jigsaw_editor": [
-      {"name":"JigsawEditor","status":"implemented","fidelity":"source_texture_web_composition_native_page_validation_pending","source":"resource_pack/ui/jigsaw_editor_screen.json, fixed v1.26.60.5","details":"docs/JIGSAW_QA.md"},
-      {"name":"JigsawPriorityFields","status":"implemented","fidelity":"source_field_order_and_raw_draft_contract_host_resolved_priority_height","source":"resource_pack/ui/jigsaw_editor_screen.json, fixed v1.26.60.5","details":"docs/JIGSAW_QA.md"}
+      {
+        "name": "JigsawEditor",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition_native_page_validation_pending",
+        "source": "resource_pack/ui/jigsaw_editor_screen.json, fixed v1.26.60.5",
+        "details": "docs/JIGSAW_QA.md"
+      },
+      {
+        "name": "JigsawPriorityFields",
+        "status": "implemented",
+        "fidelity": "source_field_order_and_raw_draft_contract_host_resolved_priority_height",
+        "source": "resource_pack/ui/jigsaw_editor_screen.json, fixed v1.26.60.5",
+        "details": "docs/JIGSAW_QA.md"
+      }
     ],
     "books_and_writing": [
-      {"name":"BookReader","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
-      {"name":"BookEditor","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
-      {"name":"BookPage","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
-      {"name":"BookPageTurnButton","status":"implemented","fidelity":"source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending","source":"resource_pack/ui/book_screen.json, fixed v1.26.60.5","details":"docs/BOOK_QA.md"},
-      {"name":"SignTextSurface","status":"implemented","fidelity":"source_texture_web_composition_client_verified_native_texture_draw_analysis_whole_ui_pixels_pending","source":"resource_pack/ui/sign_screen.json, fixed v1.26.60.5","details":"docs/SIGN_QA.md"},
-      {"name":"SignEditor","status":"implemented","fidelity":"source_texture_web_composition_client_verified_native_texture_draw_analysis_whole_ui_pixels_pending","source":"resource_pack/ui/sign_screen.json, fixed v1.26.60.5","details":"docs/SIGN_QA.md"}
+      {
+        "name": "BookReader",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending",
+        "source": "resource_pack/ui/book_screen.json, fixed v1.26.60.5",
+        "details": "docs/BOOK_QA.md"
+      },
+      {
+        "name": "BookEditor",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending",
+        "source": "resource_pack/ui/book_screen.json, fixed v1.26.60.5",
+        "details": "docs/BOOK_QA.md"
+      },
+      {
+        "name": "BookPage",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending",
+        "source": "resource_pack/ui/book_screen.json, fixed v1.26.60.5",
+        "details": "docs/BOOK_QA.md"
+      },
+      {
+        "name": "BookPageTurnButton",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition_native_mixed_font_analysis_whole_ui_pixel_validation_pending",
+        "source": "resource_pack/ui/book_screen.json, fixed v1.26.60.5",
+        "details": "docs/BOOK_QA.md"
+      },
+      {
+        "name": "SignTextSurface",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition_client_verified_native_texture_draw_analysis_whole_ui_pixels_pending",
+        "source": "resource_pack/ui/sign_screen.json, fixed v1.26.60.5",
+        "details": "docs/SIGN_QA.md"
+      },
+      {
+        "name": "SignEditor",
+        "status": "implemented",
+        "fidelity": "source_texture_web_composition_client_verified_native_texture_draw_analysis_whole_ui_pixels_pending",
+        "source": "resource_pack/ui/sign_screen.json, fixed v1.26.60.5",
+        "details": "docs/SIGN_QA.md"
+      }
     ],
     "credits": [
       {
@@ -1195,7 +1698,7 @@
     ]
   },
   "publicExports": {
-    "components": 239,
+    "components": 247,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1206,12 +1709,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 257,
+    "runtimeValues": 265,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "play_239_257_package02_web_qualified_native_unqualified",
+    "publicationState": "scoped_resource_packs_247_265_web_verified_material_partial_native_unqualified",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"

@@ -115,7 +115,7 @@ export const PlayNavigationTabs=forwardRef<HTMLDivElement,PlayNavigationTabsProp
     '--mc-play-tab-back':image(playScreenAssets[`textures/ui/TabTopBack${suffix}`]),'--mc-play-tab-back-hover':image(playScreenAssets[`textures/ui/TabTopBack${suffix}Hover`]),
     '--mc-play-tab-front':image(playScreenAssets[`textures/ui/TabTopFront${suffix}`]),'--mc-play-tab-front-hover':image(playScreenAssets[`textures/ui/TabTopFront${suffix}Hover`]),
    } as CSSProperties;
-   return <button {...button} key={name} ref={attachments[name]} type="button" role="tab" id={`${prefix}-tab-${name}`} aria-label={button['aria-labelledby']?undefined:button['aria-label']??`${labels[name]}, ${counts[name]}`} aria-selected={selected} aria-controls={panelIds?.[name]} disabled={disabled||button.disabled} tabIndex={name===stop?0:-1}
+   return <button {...button} key={name} ref={attachments[name]} type="button" role="tab" id={`${prefix}-tab-${name}`} aria-label={button['aria-labelledby']?undefined:button['aria-label']} aria-selected={selected} aria-controls={panelIds?.[name]} disabled={disabled||button.disabled} tabIndex={name===stop?0:-1}
     className={cx('mc-play-navigation__tab',button.className)} data-play-tab={name} data-source-edge={leftmost?'leftmost':'normal'} style={{...button.style,...bgStyle,width:widths[name]*scale,height:30*scale}}
     onFocus={event=>{button.onFocus?.(event);if(!event.defaultPrevented)setFocused(name);}}>
     <span className="mc-play-navigation__tab-skin" aria-hidden="true"/>

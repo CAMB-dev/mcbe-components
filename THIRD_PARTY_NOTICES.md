@@ -1,5 +1,17 @@
 # Third-party notices
 
+The Resource Packs / Pack Settings bank references 59 unchanged whole public
+Mojang PNG resources from the fixed Bedrock Samples `v1.26.60.5-full` archive.
+It adds five complete original PNGs under `dist/assets/resource-pack`; all other
+images reuse existing exact-byte resources. Thirty-one matching raw metadata
+documents and twenty-eight explicit absences are recorded separately in
+`docs/resource-pack-assets.json`; no missing sidecar is invented. The unchanged
+upstream notice is retained at `dist/assets/resource-pack/LICENSE.md`. These
+resources retain Mojang ownership and the upstream Minecraft EULA terms,
+separately from the project MIT code. Dynamic pack icons, provider data and
+generated settings remain host-owned. No captured artwork or private fonts are
+added by this bank, and source identity does not certify native rendering.
+
 The Classic Play bank references 71 whole public Mojang PNG resources from
 Bedrock Samples `v1.26.60.5`, adding 16 unchanged PNG files and eight unchanged
 metadata JSON files. Other resources reuse existing complete files or exact

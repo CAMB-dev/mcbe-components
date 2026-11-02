@@ -33,3 +33,4 @@ src/assets/external-server/** -text
 src/assets/play-screen/** -text
 tests/fixtures/external-server-materials/** -text
 tests/fixtures/external-server-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+src/assets/resource-pack/** -text

@@ -134,7 +134,10 @@
     "./play-screen-frame.css": "./dist/play-screen-frame.css",
     "./play-worlds.css": "./dist/play-worlds.css",
     "./play-servers.css": "./dist/play-servers.css",
-    "./play-popups.css": "./dist/play-popups.css"
+    "./play-popups.css": "./dist/play-popups.css",
+    "./resource-packs.css": "./dist/resource-packs.css",
+    "./resource-pack-items.css": "./dist/resource-pack-items.css",
+    "./pack-settings.css": "./dist/pack-settings.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",

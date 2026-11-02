@@ -61,6 +61,7 @@ import { OreExternalServerExamples } from './ore-external-server-examples';
 import { OreModalExamples } from './ore-modal-examples';
 import { FurnaceScreenExamples } from './furnace-screen-examples';
 import { PlayScreenExamples } from './play-screen-examples';
+import { ResourcePacksExamples } from './resource-packs-examples';
 import { UGCExamples } from './ugc-examples';
 import { ImmersiveReaderExamples } from './immersive-reader-examples';
 import { ScrollArea } from '../src';
@@ -82,6 +83,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'workstations', name: 'Workstation GUIs', icon: 'chevron', count: '04' },
   { id: 'furnace-screens', name: 'Furnace screens', icon: 'chevron', count: '08' },
   { id: 'play-screen', name: 'Play · Classic', icon: 'chevron', count: '12' },
+  { id: 'resource-packs', name: 'Resource packs', icon: 'chevron', count: '08' },
   { id: 'workstation-text', name: 'Workstation text', icon: 'chevron', count: '01' },
   { id: 'gui-layer', name: 'Composed GUI', icon: 'chevron', count: '01' },
   { id: 'grindstone-layer', name: 'Source Grindstone', icon: 'chevron', count: '01' },
@@ -495,6 +497,7 @@ function App() {
 
       <Example id="furnace-screens" title="Furnace screens" detail="熔炉、高炉和烟熏炉完整布局；配方书、分类与筛选可独立复用。"><FurnaceScreenExamples/></Example>
       <Example id="play-screen" title="Play · Classic" detail="世界、好友、服务器、加入代码与高延迟提示；数据与连接操作由宿主提供。"><PlayScreenExamples/></Example>
+      <Example id="resource-packs" title="Resource packs" detail="全局、世界与附加包内容；独立包设置、诊断和质量层级。"><ResourcePacksExamples/></Example>
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>
       </Example>

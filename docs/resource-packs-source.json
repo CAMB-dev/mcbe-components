@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped_web_verified_material_partial_native_unqualified",
+  "currentPublicCounts": {
+    "components": 247,
+    "runtimeValues": 265,
+    "meaning": "Actual installed public namespace verified under React18.3.1 and19.3.1; implementation count is not pixel certification"
+  },
+  "components": [
+    "ResourcePackManager",
+    "ResourcePackSection",
+    "ResourcePackItem",
+    "ResourcePackActions",
+    "ResourcePackDiagnostics",
+    "PackSettingsScreen",
+    "PackSettingsContent",
+    "PackContentTier"
+  ],
+  "forwardedRef": "HTMLDivElement for all eight; actual inputs/buttons have separate named refs",
+  "source": {
+    "repository": "https://github.com/Mojang/bedrock-samples",
+    "releaseLabel": "v1.26.60.5-full",
+    "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+    "wholeSourceFiles": 14,
+    "files": [
+      {
+        "entry": "resource_pack/ui/resource_packs_screen.json",
+        "bytes": 122453,
+        "sha256": "c73819a074d90e63268f9b52e86ce32179f10989288aefdd18a66c6ba394f3ae",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/pack_settings_screen.json",
+        "bytes": 5700,
+        "sha256": "708d6eace8d738b8e36d7e9f3925cb440188f8ef10cc75c7c244957a6f68efb7",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/ui_common.json",
+        "bytes": 243941,
+        "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_dialogs.json",
+        "bytes": 14238,
+        "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_buttons.json",
+        "bytes": 76484,
+        "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/ui_template_toggles.json",
+        "bytes": 47106,
+        "sha256": "efe2bf9fab47aa5e29d7116a2aa705a964a42b0ef86c947c4e46188be9ac2a01",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/settings_sections/settings_common.json",
+        "bytes": 80972,
+        "sha256": "36863803c56e42d31b915aa9df13cf88cc43a528eb40c76cbf26c911ef7b3ecf",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/settings_sections/general_section.json",
+        "bytes": 394128,
+        "sha256": "b3e6d9bd1bcb90c90f3b8404de2217cb73b58d37777317c96635683d4dd1e584",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/settings_sections/world_section.json",
+        "bytes": 121834,
+        "sha256": "775671e146ce34d82ca655271fd679f2a654db9b503918a2c0c398270fd4edb4",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/settings_screen.json",
+        "bytes": 35596,
+        "sha256": "c7b429f87f79a68cf8f8d3eeecf0706a9e410bb73420580500e5b31e56ec9b5c",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/server_form.json",
+        "bytes": 20532,
+        "sha256": "ca718a8626eb0d0496c1e2b3e23695d10f3220211f2d3f1260b7f2123ad48c34",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/_global_variables.json",
+        "bytes": 20210,
+        "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/popup_dialog.json",
+        "bytes": 27268,
+        "sha256": "571ad6ff20301043e0d08afa90b868232d6ef6052a213a7b28897a87cc8421e5",
+        "exactWholeBytes": true
+      },
+      {
+        "entry": "resource_pack/ui/store_common.json",
+        "bytes": 396906,
+        "sha256": "306f9f7e4bf69ebdeb3cccf4a76cc01aa26102d96273623ae5d7f99d81006557",
+        "exactWholeBytes": true
+      }
+    ],
+    "rawNodeSpans": 1661,
+    "primaryDefinitions": {
+      "resourcePacks": 124,
+      "packSettings": 6
+    },
+    "provenance": "Whole public source byte identities against the fixed archive; no private font, capture, native active-route or rendered-RGBA qualification"
+  },
+  "sourceProfiles": {
+    "global": {
+      "route": "settings.section_content_panels/general_and_controls_sections/global_texture_pack_section@general_section.global_texture_pack_section",
+      "packSettingsTarget": "button.pack_settings_global",
+      "moveTarget": "button.move_left_global"
+    },
+    "level": {
+      "route": "settings.section_content_panels/packs_sections/level_texture_pack_section@world_section.level_texture_pack_section",
+      "packSettingsTarget": "button.pack_settings_level",
+      "moveTarget": "button.move_left_level"
+    },
+    "addon": {
+      "route": "settings.section_content_panels/packs_sections/addon_section@world_section.addon_section",
+      "packSettingsTarget": "button.pack_settings_addon",
+      "moveTarget": "button.move_left_addon"
+    }
+  },
+  "manager": {
+    "scope": "Settings content subtree, not an invented fullscreen screen/scroll wrapper",
+    "orderedVerticalNodes": [
+      {
+        "index": 0,
+        "key": "world_template_option_lock_panel"
+      },
+      {
+        "index": 1,
+        "key": "top_panel"
+      },
+      {
+        "index": 2,
+        "key": "offset_0"
+      },
+      {
+        "index": 3,
+        "key": "addon_stacking_warning_panel"
+      },
+      {
+        "index": 4,
+        "key": "offset_1"
+      },
+      {
+        "index": 5,
+        "key": "selected_packs_title_panel"
+      },
+      {
+        "index": 6,
+        "key": "selected_pack_section"
+      },
+      {
+        "index": 7,
+        "key": "offset_2"
+      },
+      {
+        "index": 8,
+        "key": "available_packs_title_panel"
+      },
+      {
+        "index": 9,
+        "key": "available_packs_section"
+      },
+      {
+        "index": 10,
+        "key": "offset_3"
+      },
+      {
+        "index": 11,
+        "key": "realms_packs_title_button@resource_packs.realms_packs_title_button"
+      },
+      {
+        "index": 12,
+        "key": "realms_packs_section"
+      },
+      {
+        "index": 13,
+        "key": "offset_4"
+      },
+      {
+        "index": 14,
+        "key": "unowned_packs_title_button@resource_packs.unowned_packs_title_button"
+      },
+      {
+        "index": 15,
+        "key": "unowned_packs_section"
+      }
+    ],
+    "factories": [
+      "selected",
+      "available",
+      "realms",
+      "unowned",
+      "invalid"
+    ],
+    "collectionContract": "Explicit capacity and raw count string, complete materialized records including hidden entries; no natural-height or empty-state inference from array length",
+    "selectionContract": "selected collection kind and isSelected row binding are independent",
+    "statusContract": "Errors, warnings, errorFree, reportGenerating, expiry, readMore/readLess, ellipses and direction bindings stay independent",
+    "sourceWarningCollectionQuirk": "Action warning wrapper retains its authored selected-collection binding even when reused; explicit selected diagnostic snapshot required",
+    "addRemoveTarget": "Both add and remove map to the profile move_left target; localized caption keys are not targets",
+    "offers": "Declared provider offers do not establish an implemented grid; only recovered controls and host requests are rendered",
+    "dynamicIcons": "Explicit host whole original URL/sourceSize or null; no generated icon or guessed alias",
+    "operations": "Host intent callbacks only; no filesystem, download, marketplace purchase, authentication, service or game-state mutation"
+  },
+  "packSettings": {
+    "source": "pack_settings.screen@common.base_screen",
+    "panel": "Centered min(viewportW-4,370) by viewportH-50 logical units",
+    "title": {
+      "y": 9,
+      "height": 10,
+      "color": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "shadow": false,
+      "nativeEmUnknown": true
+    },
+    "content": "[8,23,panelW-16,panelH-31]",
+    "underfill": {
+      "texture": "textures/ui/control",
+      "inset": 4,
+      "alpha": 1,
+      "renderer": "Existing ClassicSkin POINT/zero-centre Web policy on original PNG"
+    },
+    "dim": {
+      "texture": "textures/ui/screen_background",
+      "alpha": 0.65,
+      "hostUnderlay": "Actual host scene, not generated panorama"
+    },
+    "close": {
+      "target": "button.menu_exit",
+      "hitSize": [
+        21,
+        21
+      ],
+      "glyphSize": [
+        15,
+        15
+      ],
+      "screenMapping": "button.menu_cancel -> button.menu_exit"
+    },
+    "sourceGeometryExample": {
+      "viewport": [
+        420,
+        300
+      ],
+      "frame": [
+        370,
+        250
+      ],
+      "contentWidth": 354,
+      "paneWidth": 350,
+      "paneX": 2,
+      "mouseReserved": 7,
+      "mouseViewportWidth": 343,
+      "mouseStackWidth": 339,
+      "sliderWidth": 321,
+      "touchStackWidth": 346,
+      "extraMinusOne": false,
+      "stackAnchor": "top_left x0"
+    },
+    "generated": "Complete explicit #custom_form_length matching all nine-kind resolved fields, including hidden rows; private ServerCustomContents only, no second frame/title/scroll/submit",
+    "generatedTypes": [
+      "label",
+      "header",
+      "divider",
+      "input",
+      "toggle",
+      "slider",
+      "step_slider",
+      "dropdown",
+      "multiselect"
+    ],
+    "tier": "hasContentTiering controls visibility; supported controls labels/reason and does not disable the slider",
+    "sliderPolicy": "Raw value/steps/ttsText independent of explicit Web value/min/max/step lattice and explicit marker position/progress snapshots; no steps-1 or native normalized-unit inference",
+    "controlledInput": "Accepted Web value restored while semantic request is deferred/rejected; native event cancellation and stale identity guards retained",
+    "readonly": "Blocks editing while Screen Escape/close exit remains available; disabled is a separate explicit host policy",
+    "intrinsicLabels": "Explicit finite host labelHeight/reasonHeight budgets, not recovered native metrics"
+  },
+  "assets": {
+    "ledger": "docs/resource-pack-assets.json",
+    "keys": 59,
+    "metadataPresent": 31,
+    "metadataExplicitlyAbsent": 28,
+    "newWholePNGs": 5,
+    "newJSON": 0,
+    "qualification": "Whole original byte/metadata provenance only; 5 new PNGs is not a component count or RGBA qualification"
+  },
+  "independentAudit": {
+    "status": "FROZEN_INDEPENDENT_FIXED_SOURCE_AUDIT_NO_IMPLEMENTATION_OR_NATIVE_CLAIM",
+    "semanticGroups": 9,
+    "originalWholeFiles": 13,
+    "overlappingWholeFiles": 12,
+    "overlappingNodeValues": 132,
+    "meaning": "Independent bounded source semantic comparison; scope differs from the canonical 14-file inventory and is not native/render evidence"
+  },
+  "fontBoundary": "Source Ten conditional scale1.39/offset-2 versus direct instance scale.8 override precedence remains unqualified; host font tokens and intrinsic heights are explicit Web policies, no private font distribution",
+  "evidence": [
+    {
+      "path": ".cache/resource-packs-source-20261102-01/FINAL.json",
+      "sha256": "514e97913b10294e086985c986ca350d09cf6d25d031273898fed044d73cd872"
+    },
+    {
+      "path": ".cache/resource-packs-source-20261102-01/SPEC.json",
+      "sha256": "cb52a0cbf0749eca3ca2f7b3af4f243840047412ad66c55679738b833f590a79"
+    },
+    {
+      "path": ".cache/resource-packs-source-20261102-01/CONTENT-PROFILES.json",
+      "sha256": "fd803ad772dbd60c50e04c41a1a5ccc68dbd64b64714b9413a85274353e38b85"
+    },
+    {
+      "path": ".cache/resource-packs-source-20261102-01/MANAGER-ORDERED-NODES.json",
+      "sha256": "e50383c42a1153ed6bec43f956b807df6e3a862e6abf631ff0ee3722549574df"
+    },
+    {
+      "path": ".cache/resource-packs-source-20261102-01/PACK-SETTINGS-SPEC.json",
+      "sha256": "7a293ebab0958bc34cb8b03b24b87259f51727ec5864e1a2358ba145d8e4da1b"
+    },
+    {
+      "path": ".cache/resource-packs-source-20261102-01/PACK-SETTINGS-NODES.json",
+      "sha256": "ab730865ae569eb17efaf5d0edc6a6676136d99832eb16c9d79c0ccc3a4efc95"
+    },
+    {
+      "path": ".cache/resource-packs-independent-20261102-01/FINAL.json",
+      "sha256": "0833bf6e1fb7adc1b15343bb42a738c6c8aebbd595c42bc3183e9ab9ec9cadeb"
+    },
+    {
+      "path": ".cache/resource-packs-independent-20261102-01/CONTRACT.json",
+      "sha256": "3656c157c71e3f19e6e9bb238fcebe73c25c85188f733ee045e70c8224449b07"
+    },
+    {
+      "path": "docs/resource-pack-assets.json",
+      "sha256": "4c56f75a7faebf5b16248544e0bfcbb59aca9d850f98bf0522adbdde198174c4"
+    }
+  ],
+  "validation": {
+    "node": {
+      "tests": 153,
+      "status": "PASS",
+      "newFamilyTests": 82,
+      "scope": "PackSettings19, Items17, Manager25, private generated12, Checkbox9, adjacent Play71; actual two React peers in bounded SSR/source contracts"
+    },
+    "sourceBrowser": {
+      "status": "PASS_AFTER_RETAINED_TIMEOUTS",
+      "combinedTests": 246,
+      "combinedPass": 244,
+      "combinedTimeouts": 2,
+      "focusedPaintedContrastPass": 2,
+      "qualification": "Raw combined timeout receipts retained. Focused rerun retains all Axe rules and per-pair original/backing/fill/restored PNGs, with DOM-snapshot duplication disabled and600s bounded budget.",
+      "finalAfterCaptionFix": {
+        "tests": 118,
+        "passed": 118,
+        "report": "browser-final02.json",
+        "scope": "Current resource-pack behavior, whole showcase/modal Axe and adjacent cleanup/IME/control regressions after removing visible selection-caption duplication"
+      },
+      "retainedContrastFailure": {
+        "report": "axe-final02.json",
+        "actualRatio": 3.3704924334188466,
+        "required": 4.5,
+        "fix": "Only gallery host backdrop changed from#203040 to#101010; source red text, materials and component rendering unchanged. Final focused rerun includes both whole-page and modal contrast."
+      }
+    },
+    "independentMaterialRGBA": {
+      "status": "PARTIAL_92_EXACT_28_UNQUALIFIED_STRICT_FAILURE_RETAINED",
+      "actualPlanes": 120,
+      "exactPlanes": 92,
+      "unqualifiedPlanes": 28,
+      "exactPixels": 69440,
+      "strictOracleOverallPass": false,
+      "scope": "Source whole PNG and literal POINT/half-up Web reference; not native quantization/sampler certification. Original tints, PNGs and expected images unchanged."
+    },
+    "actualPackageReact18React19": {
+      "status": "PASS",
+      "versions": [
+        "18.3.1",
+        "19.3.1"
+      ],
+      "components": 247,
+      "runtimeValues": 265,
+      "resourcePackSSRGroupsPerPeer": 26,
+      "negativeTypeContractsPerPeer": 24,
+      "wholeMaterials": 59,
+      "rawMetadata": 31,
+      "absentMetadata": 28
+    },
+    "installedDevelopmentProduction": {
+      "status": "PASS",
+      "freshInstallMatrix": 4,
+      "callbackRefCleanup": "Each actual generated-option attachment released once on real unmount; ordinary props and retained hidden nodes do not detach; no null substitute",
+      "functionalTarSHA256": "e493b47464d6d31790c33cccf1487a9b314cf3875878d1304126ac37a3e08d5b"
+    },
+    "builtUserGallery": {
+      "status": "PASS",
+      "url": "http://127.0.0.1:4173/#resource-packs",
+      "devices": 2,
+      "profiles": [
+        "global",
+        "level",
+        "addon"
+      ],
+      "htmlSHA256": "fa8f937aa362aa45b9ead5079d2cb95d6ec5b79d2315b1f97925a2a96e6820dd"
+    },
+    "nativeActiveRouteAndWholeGUI": "unqualified"
+  },
+  "remaining": [
+    "28 of120 independent material planes remain unqualified: .3/.7 quantization and odd-scale arrow texel-edge ties",
+    "Full manifest_validation family",
+    "Runtime offers/provider families not established by a declared grid",
+    "Pocket and Ore counterparts/current native active route",
+    "Native fonts, override order, intrinsic resolution, parent alpha and whole GUI pixel fidelity",
+    "Broader Minecraft reusable GUI coverage remains unfinished"
+  ]
+}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resource pack actual component material isolation</title>
+  <style>
+    html,body{margin:0;min-width:1280px;min-height:720px;background:#808080;color:#fff;font:12px monospace}
+    #material-parking{position:absolute;left:8px;top:8px;width:108px;height:32px}
+    #material-instructions{position:absolute;left:8px;top:50px;max-width:1150px;white-space:pre-wrap}
+    #material-host{position:absolute;left:128px;top:128px;width:1100px;height:480px;overflow:visible}
+    #material-component{position:relative;margin:32px;width:max-content}
+    /* Isolation only: preserve every component box and native state selector. */
+    #material-host .mc-resource-pack-actions__border,
+    #material-host .mc-resource-pack-actions__middle,
+    #material-host .mc-rp-vertical-divider,
+    #material-host .mc-rp-button__skins,
+    #material-host .mc-rp-button__movement-text,
+    #material-host .mc-pack-content-tier__label-panel,
+    #material-host .mc-pack-content-tier__reason-panel,
+    #material-host .mc-pack-content-tier__bar,
+    #material-host .mc-pack-content-tier__marker,
+    #material-host .mc-pack-content-tier__fade,
+    #material-host .mc-resource-packs-button__state,
+    #material-host .mc-resource-packs-section__title,
+    #material-host .mc-resource-packs-section__count,
+    #material-host .mc-resource-packs-section__heading>.mc-image,
+    #material-host .mc-resource-packs-section__body{visibility:hidden!important}
+    #material-host[data-fixture-id="options-default-layer"] .mc-rp-options>.mc-rp-hover{visibility:hidden!important}
+    #material-host[data-fixture-id="options-hover-border-layer"] .mc-rp-options>.mc-image:not(.mc-rp-hover){visibility:hidden!important}
+  </style>
+</head>
+<body>
+  <button id="material-parking" type="button">Pointer parking</button>
+  <div id="material-instructions">Actual public component leaf isolation. No reference PNG is imported or painted.
+Use window.resourcePackMaterial.configure(...), native pointer state, ready(), align(), then capture targetSelector at DPR1.
+The opaque host alignment changes only outer placement. Native whole-screen fidelity is unqualified.</div>
+  <div id="root"></div>
+  <script type="module" src="./resource-pack-material-fixture.tsx"></script>
+</body>
+</html>

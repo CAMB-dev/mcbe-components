@@ -1,0 +1,2720 @@
+{
+  "status": "WHOLE_SOURCE_BYTES_VERIFIED_NATIVE_ROUTE_AND_RGBA_UNQUALIFIED",
+  "sourceArchive": {
+    "file": ".cache\\references\\bedrock-samples-v1.26.60.5-full.zip",
+    "sha256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf"
+  },
+  "sourceRoots": [
+    {
+      "file": "resource_pack/ui/pack_settings_screen.json",
+      "bytes": 5700,
+      "sha256": "708d6eace8d738b8e36d7e9f3925cb440188f8ef10cc75c7c244957a6f68efb7"
+    },
+    {
+      "file": "resource_pack/ui/resource_packs_screen.json",
+      "bytes": 122453,
+      "sha256": "c73819a074d90e63268f9b52e86ce32179f10989288aefdd18a66c6ba394f3ae"
+    }
+  ],
+  "module": "src/resource-pack-assets.ts",
+  "assetCount": 59,
+  "rootLiteralKeyCount": 22,
+  "inheritedRequiredKeyCount": 37,
+  "groups": {
+    "rootLiteral": [
+      "textures/blocks/grass_side_carried",
+      "textures/items/book_normal",
+      "textures/ui/Black",
+      "textures/ui/Caution",
+      "textures/ui/ErrorGlyph",
+      "textures/ui/ErrorGlyph_small_hover",
+      "textures/ui/Gray",
+      "textures/ui/New_confirm_Hover",
+      "textures/ui/WarningGlyph_small_hover",
+      "textures/ui/White",
+      "textures/ui/confirm",
+      "textures/ui/down_arrow",
+      "textures/ui/icon_setting",
+      "textures/ui/loading_bar",
+      "textures/ui/minus",
+      "textures/ui/online",
+      "textures/ui/packs_border",
+      "textures/ui/packs_middle",
+      "textures/ui/plus",
+      "textures/ui/settings_glyph_2x",
+      "textures/ui/sidebar_icons/csb_sidebar_icon",
+      "textures/ui/up_arrow"
+    ],
+    "slider": [
+      "textures/ui/slider_button_default",
+      "textures/ui/slider_button_hover",
+      "textures/ui/slider_button_locked",
+      "textures/ui/slider_button_indent",
+      "textures/ui/slider_locked_transparent_fade",
+      "textures/ui/slider_background",
+      "textures/ui/slider_background_hover",
+      "textures/ui/slider_progress",
+      "textures/ui/slider_progress_hover",
+      "textures/ui/slider_border",
+      "textures/ui/slider_step_background",
+      "textures/ui/slider_step_background_hover",
+      "textures/ui/slider_step_progress",
+      "textures/ui/slider_step_progress_hover"
+    ],
+    "lightToggleAndContent": [
+      "textures/ui/button_borderless_light",
+      "textures/ui/button_borderless_lightpressednohover",
+      "textures/ui/button_borderless_lighthover",
+      "textures/ui/button_borderless_lightpressed",
+      "textures/ui/disabledButtonNoBorder",
+      "textures/ui/focus_border_white"
+    ],
+    "packSettingsShell": [
+      "textures/ui/dialog_background_hollow_3",
+      "textures/ui/control",
+      "textures/ui/close_button_default",
+      "textures/ui/close_button_hover",
+      "textures/ui/close_button_pressed",
+      "textures/ui/screen_background"
+    ],
+    "readAndDividerAmendment": [
+      "textures/ui/underline",
+      "textures/ui/underline_focus",
+      "textures/ui/divider3"
+    ],
+    "commonCheckboxAmendment": [
+      "textures/ui/checkbox_check",
+      "textures/ui/checkbox_space",
+      "textures/ui/checkbox_checkHover",
+      "textures/ui/checkbox_spaceHover",
+      "textures/ui/checkbox_checkDisabled",
+      "textures/ui/checkbox_spaceDisabled"
+    ],
+    "packSettingsLocalScrollAmendment": [
+      "textures/ui/ScrollRail",
+      "textures/ui/ScrollHandle"
+    ]
+  },
+  "newPNGCount": 5,
+  "newJSONCount": 0,
+  "newFiles": [
+    "src/assets/resource-pack/blocks/grass_side_carried.png",
+    "src/assets/resource-pack/items/book_normal.png",
+    "src/assets/resource-pack/ui/New_confirm_Hover.png",
+    "src/assets/resource-pack/ui/icon_setting.png",
+    "src/assets/resource-pack/ui/sidebar_icons/csb_sidebar_icon.png",
+    "src/assets/resource-pack/LICENSE.md"
+  ],
+  "license": {
+    "sourceFile": "LICENSE.md",
+    "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d",
+    "localFile": "src/assets/resource-pack/LICENSE.md",
+    "rawUTF8": "(c) Mojang AB. All rights reserved.\n\nBy downloading the files in this repository, you agree to the [Minecraft End User License Agreement](https://www.minecraft.net/en-us/eula) and that these files are subject to its terms.",
+    "boundary": "Original archive notice applies; project MIT does not replace the upstream EULA notice."
+  },
+  "stateMaps": {
+    "lightToggle": {
+      "uncheckedDefault": "textures/ui/button_borderless_light",
+      "checkedDefault": "textures/ui/button_borderless_lightpressednohover",
+      "uncheckedHover": "textures/ui/button_borderless_lighthover",
+      "checkedHover": "textures/ui/button_borderless_lightpressed",
+      "allLocked": "textures/ui/disabledButtonNoBorder"
+    },
+    "lightContentButton": {
+      "default": "textures/ui/button_borderless_light",
+      "hover": "textures/ui/button_borderless_lighthover",
+      "pressed": "textures/ui/button_borderless_lightpressed",
+      "locked": "textures/ui/disabledButtonNoBorder"
+    },
+    "sliderBox": {
+      "default": "textures/ui/slider_button_default",
+      "hover": "textures/ui/slider_button_hover",
+      "locked": "textures/ui/slider_button_locked",
+      "indent": "textures/ui/slider_button_indent",
+      "disabledOverlay": "textures/ui/slider_locked_transparent_fade"
+    },
+    "commonCheckbox": {
+      "checkedDefault": "textures/ui/checkbox_check",
+      "uncheckedDefault": "textures/ui/checkbox_space",
+      "checkedHover": "textures/ui/checkbox_checkHover",
+      "uncheckedHover": "textures/ui/checkbox_spaceHover",
+      "checkedLocked": "textures/ui/checkbox_checkDisabled",
+      "uncheckedLocked": "textures/ui/checkbox_spaceDisabled"
+    }
+  },
+  "entries": [
+    {
+      "key": "textures/blocks/grass_side_carried",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/blocks/grass_side_carried.png",
+      "bytes": 408,
+      "sha256": "dedaa0171af63df63a6cf7e3e6c7078d4d5830fd93923f3005302ed0f02104c5",
+      "width": 16,
+      "height": 16,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/resource-pack/blocks/grass_side_carried.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.selected_packs_title_content",
+          "nodeAuthoredKey": "selected_packs_title_content",
+          "path": [
+            "$icon_texture|default"
+          ],
+          "line": 2429,
+          "field": "$icon_texture|default",
+          "value": "textures/blocks/grass_side_carried",
+          "rootAuthored": true
+        },
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.unowned_packs_title_content",
+          "nodeAuthoredKey": "unowned_packs_title_content@resource_packs.selected_packs_title_content",
+          "path": [
+            "$icon_texture"
+          ],
+          "line": 2418,
+          "field": "$icon_texture",
+          "value": "textures/blocks/grass_side_carried",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/items/book_normal",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/items/book_normal.png",
+      "bytes": 241,
+      "sha256": "6e57599ca839805e87bddbfa8a752b175f3b77d0f80ab8b3ff6c171b7820a804",
+      "width": 16,
+      "height": 16,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/resource-pack/items/book_normal.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.available_packs_title_content",
+          "nodeAuthoredKey": "available_packs_title_content@resource_packs.selected_packs_title_content",
+          "path": [
+            "$icon_texture"
+          ],
+          "line": 2396,
+          "field": "$icon_texture",
+          "value": "textures/items/book_normal",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/Black",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/Black.png",
+      "bytes": 84,
+      "sha256": "492d761d357b4fbdd29d0bc7a06a6423b5b0842d47c2d069ca90a9746ff5117e",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/Black.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/emote-wheel/Black.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/popup_dialog.json",
+          "node": "popup_dialog.black_tint_image",
+          "nodeAuthoredKey": "black_tint_image",
+          "path": [
+            "texture"
+          ],
+          "line": 84,
+          "field": "texture",
+          "value": "textures/ui/Black",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.black_image",
+          "nodeAuthoredKey": "black_image",
+          "path": [
+            "texture"
+          ],
+          "line": 10,
+          "field": "texture",
+          "value": "textures/ui/Black",
+          "rootAuthored": true
+        },
+        {
+          "sourceFile": "resource_pack/ui/storage_management.json",
+          "node": "storage_management.common_main_button",
+          "nodeAuthoredKey": "common_main_button",
+          "path": [
+            "controls",
+            1,
+            "border",
+            "variables",
+            0,
+            "$border_texture"
+          ],
+          "line": 731,
+          "field": "$border_texture",
+          "value": "textures/ui/Black",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/Caution",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/Caution.png",
+      "bytes": 152,
+      "sha256": "e5c481628adec8b4e60aff01b26b330dc2433a87e5534454d17a77c5e404afba",
+      "width": 13,
+      "height": 20,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/warning-glyph.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.warning_image",
+          "nodeAuthoredKey": "warning_image",
+          "path": [
+            "texture"
+          ],
+          "line": 228,
+          "field": "texture",
+          "value": "textures/ui/Caution",
+          "rootAuthored": true
+        },
+        {
+          "sourceFile": "resource_pack/ui/storage_management.json",
+          "node": "storage_management.base_glyph",
+          "nodeAuthoredKey": "base_glyph",
+          "path": [
+            "$glyph_texture"
+          ],
+          "line": 755,
+          "field": "$glyph_texture",
+          "value": "textures/ui/Caution",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/ErrorGlyph",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/ErrorGlyph.png",
+      "bytes": 148,
+      "sha256": "1b274eea56592b90fcb3ce90f112d2cea9d4f1a31536fd7eeb8a432c740e1c1e",
+      "width": 13,
+      "height": 20,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/error-glyph.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.error_image",
+          "nodeAuthoredKey": "error_image",
+          "path": [
+            "texture"
+          ],
+          "line": 199,
+          "field": "texture",
+          "value": "textures/ui/ErrorGlyph",
+          "rootAuthored": true
+        },
+        {
+          "sourceFile": "resource_pack/ui/storage_management.json",
+          "node": "storage_management.pack_description_sub_item",
+          "nodeAuthoredKey": "pack_description_sub_item@storage_management.texture_icon_text",
+          "path": [
+            "$text_controls",
+            0,
+            "panel",
+            "controls",
+            1,
+            "glyphs_and_version",
+            "controls",
+            1,
+            "glyph_error@storage_management.base_glyph",
+            "$glyph_texture"
+          ],
+          "line": 1797,
+          "field": "$glyph_texture",
+          "value": "textures/ui/ErrorGlyph",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/ErrorGlyph_small_hover",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/ErrorGlyph_small_hover.png",
+      "bytes": 88,
+      "sha256": "5c866c2f36dc335354469418921d23b5283771421af6e34509f8a977a672d06c",
+      "width": 9,
+      "height": 12,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/error-glyph-small-hover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.error_image_hover",
+          "nodeAuthoredKey": "error_image_hover",
+          "path": [
+            "texture"
+          ],
+          "line": 205,
+          "field": "texture",
+          "value": "textures/ui/ErrorGlyph_small_hover",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/Gray",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/Gray.png",
+      "bytes": 67,
+      "sha256": "e21915e60b32df0c5bd7fa8153571c1d8899a20de2973ee92f8aab8f11c35797",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/Gray.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "file": "src/workstation-image-assets.ts",
+        "line": 32
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.gray_image",
+          "nodeAuthoredKey": "gray_image",
+          "path": [
+            "texture"
+          ],
+          "line": 15,
+          "field": "texture",
+          "value": "textures/ui/Gray",
+          "rootAuthored": true
+        },
+        {
+          "sourceFile": "resource_pack/ui/storage_management.json",
+          "node": "storage_management.common_main_button",
+          "nodeAuthoredKey": "common_main_button",
+          "path": [
+            "$background_texture"
+          ],
+          "line": 708,
+          "field": "$background_texture",
+          "value": "textures/ui/Gray",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/storage_management.json",
+          "node": "storage_management.grey_button",
+          "nodeAuthoredKey": "grey_button@storage_management.common_main_button",
+          "path": [
+            "$background_texture"
+          ],
+          "line": 907,
+          "field": "$background_texture",
+          "value": "textures/ui/Gray",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/New_confirm_Hover",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/New_confirm_Hover.png",
+      "bytes": 173,
+      "sha256": "9259720d169b6cd8890a23520669467545b1a5f395fa68737158046bc0b60051",
+      "width": 16,
+      "height": 14,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/resource-pack/ui/New_confirm_Hover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.no_error_image_hover",
+          "nodeAuthoredKey": "no_error_image_hover",
+          "path": [
+            "texture"
+          ],
+          "line": 263,
+          "field": "texture",
+          "value": "textures/ui/New_confirm_Hover",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/WarningGlyph_small_hover",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/WarningGlyph_small_hover.png",
+      "bytes": 89,
+      "sha256": "d8f2bf1da8e18c5f86eadcb3be2d0b955aacda3897cb92249235526dac25afad",
+      "width": 9,
+      "height": 12,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/warning-glyph-small-hover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.warning_image_hover",
+          "nodeAuthoredKey": "warning_image_hover",
+          "path": [
+            "texture"
+          ],
+          "line": 234,
+          "field": "texture",
+          "value": "textures/ui/WarningGlyph_small_hover",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/White",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/permissions_player_fade_overlay.png",
+      "bytes": 87,
+      "sha256": "5ef05eb8f2100ac885c96aced008715e1225634d327162b88625672be82547e5",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/permissions_player_fade_overlay.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/permissions_player_fade_overlay.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.white_image",
+          "nodeAuthoredKey": "white_image",
+          "path": [
+            "controls",
+            0,
+            "border",
+            "texture"
+          ],
+          "line": 32,
+          "field": "texture",
+          "value": "textures/ui/White",
+          "rootAuthored": true
+        },
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.yellow_image",
+          "nodeAuthoredKey": "yellow_image",
+          "path": [
+            "texture"
+          ],
+          "line": 20,
+          "field": "texture",
+          "value": "textures/ui/White",
+          "rootAuthored": true
+        }
+      ],
+      "authoredLiteralResolution": {
+        "kind": "live-case-preserving-installed-identity-to-public-alias",
+        "evidence": ".cache/play-screen-assets-study-20261102-01/AMENDMENT01/WHITE-ALIAS-BASE-LIVE-READBACK.json",
+        "publicExactWhitePNGExists": false,
+        "installedWholePNGBytesEqual": true,
+        "metadataValuesEqual": true,
+        "privateRuntimeArtCopied": false
+      }
+    },
+    {
+      "key": "textures/ui/confirm",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/confirm.png",
+      "bytes": 415,
+      "sha256": "2ead79a230d0136e654579c22270d7232477db2a50e82bface954e4887350567",
+      "width": 14,
+      "height": 12,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "file": "src/advanced-workstation-textures.css",
+        "line": 26
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.no_error_image",
+          "nodeAuthoredKey": "no_error_image",
+          "path": [
+            "texture"
+          ],
+          "line": 257,
+          "field": "texture",
+          "value": "textures/ui/confirm",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/down_arrow",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/down_arrow.png",
+      "bytes": 179,
+      "sha256": "9b1fac2d525c31eaec23b1ad4167b054010a4254a63d88eccebadb9d4f5c10cb",
+      "width": 12,
+      "height": 12,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/down-arrow.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.down_arrow_image",
+          "nodeAuthoredKey": "down_arrow_image",
+          "path": [
+            "texture"
+          ],
+          "line": 293,
+          "field": "texture",
+          "value": "textures/ui/down_arrow",
+          "rootAuthored": true
+        },
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.down_arrow_image_hover",
+          "nodeAuthoredKey": "down_arrow_image_hover",
+          "path": [
+            "texture"
+          ],
+          "line": 308,
+          "field": "texture",
+          "value": "textures/ui/down_arrow",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/icon_setting",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/icon_setting.png",
+      "bytes": 327,
+      "sha256": "c7b273576c8de3af07b0546ad05df2879a69d0ab19ad63c8732db239eb8b6829",
+      "width": 14,
+      "height": 14,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/resource-pack/ui/icon_setting.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.options_image",
+          "nodeAuthoredKey": "options_image",
+          "path": [
+            "texture"
+          ],
+          "line": 485,
+          "field": "texture",
+          "value": "textures/ui/icon_setting",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/loading_bar",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/loading_bar.png",
+      "bytes": 323,
+      "sha256": "703e02f1e7013d642a81225b98bf08f1bdfc69e003b0b7d4a6132635da747aef",
+      "width": 640,
+      "height": 8,
+      "metadataFile": "resource_pack/textures/ui/loading_bar.json",
+      "metadataSHA256": "38bc67e02f506f01308a16c9be27bbe203ea6da76cd02961571801327ad5f665",
+      "metadataRawUTF8": "{\n  \"base_size\": [\n    640,\n    8\n  ]\n}",
+      "metadata": {
+        "base_size": [
+          640,
+          8
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "file": "src/invite-assets.ts",
+        "line": 54
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/store_common.json",
+          "node": "common_store.progress_loading_bars",
+          "nodeAuthoredKey": "progress_loading_bars",
+          "path": [
+            "texture"
+          ],
+          "line": 1412,
+          "field": "texture",
+          "value": "textures/ui/loading_bar",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.progress_loading_bars",
+          "nodeAuthoredKey": "progress_loading_bars",
+          "path": [
+            "texture"
+          ],
+          "line": 386,
+          "field": "texture",
+          "value": "textures/ui/loading_bar",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/minus",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/minus.png",
+      "bytes": 91,
+      "sha256": "0284676ac3f7d0a653c68c9a3f9547fdde4ad4c3c1356b3c60e939bea2ec8052",
+      "width": 11,
+      "height": 3,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/minus.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.minus_image",
+          "nodeAuthoredKey": "minus_image",
+          "path": [
+            "texture"
+          ],
+          "line": 169,
+          "field": "texture",
+          "value": "textures/ui/minus",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/online",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/online.png",
+      "bytes": 116,
+      "sha256": "e2782521b081320bc3785780e409b64bc8cbd22799207f532bb54398f0f91094",
+      "width": 7,
+      "height": 7,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "file": "src/game-list-textures.css",
+        "line": 12
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.selected_text_panel",
+          "nodeAuthoredKey": "selected_text_panel",
+          "path": [
+            "controls",
+            0,
+            "name_panel",
+            "controls",
+            2,
+            "active_dot_panel",
+            "controls",
+            0,
+            "active_dot",
+            "texture"
+          ],
+          "line": 758,
+          "field": "texture",
+          "value": "textures/ui/online",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/packs_border",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/packs_border.png",
+      "bytes": 82,
+      "sha256": "899475815e6c585c04fb1a3d5ab4c63cdca3f0640f101e66032a2934f692ff7e",
+      "width": 5,
+      "height": 5,
+      "metadataFile": "resource_pack/textures/ui/packs_border.json",
+      "metadataSHA256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    5,\n    5\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "file": "src/game-list-textures.css",
+        "line": 22
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.input_button_panel",
+          "nodeAuthoredKey": "input_button_panel",
+          "path": [
+            "controls",
+            0,
+            "border_image",
+            "texture"
+          ],
+          "line": 1838,
+          "field": "texture",
+          "value": "textures/ui/packs_border",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/packs_middle",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/packs_middle.png",
+      "bytes": 69,
+      "sha256": "ce73fbd188f3ee89fa25ebba3f100dc5f9cfccde523667f9e3c42b6037eb3d4b",
+      "width": 1,
+      "height": 1,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "file": "src/game-list-textures.css",
+        "line": 23
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.input_button_panel",
+          "nodeAuthoredKey": "input_button_panel",
+          "path": [
+            "controls",
+            1,
+            "background",
+            "texture"
+          ],
+          "line": 1899,
+          "field": "texture",
+          "value": "textures/ui/packs_middle",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/plus",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/plus.png",
+      "bytes": 123,
+      "sha256": "965fa4c152e09cdd8d61ead15b5eb2ecefd9e1c78cd49a9b652b84b78bf55f9f",
+      "width": 11,
+      "height": 11,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/plus.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.plus_image",
+          "nodeAuthoredKey": "plus_image",
+          "path": [
+            "texture"
+          ],
+          "line": 175,
+          "field": "texture",
+          "value": "textures/ui/plus",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/settings_glyph_2x",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/settings_glyph_2x.png",
+      "bytes": 216,
+      "sha256": "01a1e3345604e22e098f579e74653dd3670540e63b21f4d66c728f6f4d45b5cb",
+      "width": 45,
+      "height": 45,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/settings-glyph-2x.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.options_image_hover",
+          "nodeAuthoredKey": "options_image_hover",
+          "path": [
+            "texture"
+          ],
+          "line": 491,
+          "field": "texture",
+          "value": "textures/ui/settings_glyph_2x",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/sidebar_icons/csb_sidebar_icon",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/sidebar_icons/csb_sidebar_icon.png",
+      "bytes": 180,
+      "sha256": "b1b7b3e6323f7b39acad79fbaa871e1c3a2c1655047304d1d198d0ea328e3042",
+      "width": 12,
+      "height": 12,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "new-whole-original-file",
+        "file": "src/assets/resource-pack/ui/sidebar_icons/csb_sidebar_icon.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.realms_packs_title_content",
+          "nodeAuthoredKey": "realms_packs_title_content@resource_packs.selected_packs_title_content",
+          "path": [
+            "variables",
+            0,
+            "$icon_texture"
+          ],
+          "line": 2406,
+          "field": "$icon_texture",
+          "value": "textures/ui/sidebar_icons/csb_sidebar_icon",
+          "rootAuthored": true
+        },
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.realms_packs_title_content",
+          "nodeAuthoredKey": "realms_packs_title_content@resource_packs.selected_packs_title_content",
+          "path": [
+            "$icon_texture"
+          ],
+          "line": 2410,
+          "field": "$icon_texture",
+          "value": "textures/ui/sidebar_icons/csb_sidebar_icon",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/up_arrow",
+      "groups": [
+        "rootLiteral"
+      ],
+      "sourceFile": "resource_pack/textures/ui/up_arrow.png",
+      "bytes": 170,
+      "sha256": "22ae6f6ffa12425448df5851df46bf875634058540d4b941f3eb7e1f60dfc374",
+      "width": 12,
+      "height": 12,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/gui-icons/up-arrow.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.up_arrow_image",
+          "nodeAuthoredKey": "up_arrow_image",
+          "path": [
+            "texture"
+          ],
+          "line": 286,
+          "field": "texture",
+          "value": "textures/ui/up_arrow",
+          "rootAuthored": true
+        },
+        {
+          "sourceFile": "resource_pack/ui/resource_packs_screen.json",
+          "node": "resource_packs.up_arrow_image_hover",
+          "nodeAuthoredKey": "up_arrow_image_hover",
+          "path": [
+            "texture"
+          ],
+          "line": 301,
+          "field": "texture",
+          "value": "textures/ui/up_arrow",
+          "rootAuthored": true
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_button_default",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_button_default.png",
+      "bytes": 132,
+      "sha256": "6bb35793c1b8ff4be20d8530f5c2e48971eecab5b6b108fbbe646894dc5ca546",
+      "width": 6,
+      "height": 6,
+      "metadataFile": "resource_pack/textures/ui/slider_button_default.json",
+      "metadataSHA256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 2,\n  \"base_size\": [\n    6,\n    6\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 2,
+        "base_size": [
+          6,
+          6
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_button_default.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_button_layout",
+          "nodeAuthoredKey": "slider_button_layout@common.slider_button_state",
+          "path": [
+            "texture"
+          ],
+          "line": 710,
+          "field": "texture",
+          "value": "textures/ui/slider_button_default",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_button_state",
+          "nodeAuthoredKey": "slider_button_state",
+          "path": [
+            "texture"
+          ],
+          "line": 706,
+          "field": "texture",
+          "value": "textures/ui/slider_button_default",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_button_hover",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_button_hover.png",
+      "bytes": 165,
+      "sha256": "fead483b0ef56c3ff149e8c1092f7324d2de8e30918fc1eb92e3be08d99676cd",
+      "width": 6,
+      "height": 6,
+      "metadataFile": "resource_pack/textures/ui/slider_button_hover.json",
+      "metadataSHA256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 2,\n  \"base_size\": [\n    6,\n    6\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 2,
+        "base_size": [
+          6,
+          6
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_button_hover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_button_hover_layout",
+          "nodeAuthoredKey": "slider_button_hover_layout@common.slider_button_state",
+          "path": [
+            "texture"
+          ],
+          "line": 714,
+          "field": "texture",
+          "value": "textures/ui/slider_button_hover",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_button_locked",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_button_locked.png",
+      "bytes": 88,
+      "sha256": "fdec1a2c4f6266e1e7c47887c2c292033c002b0046bacae670e3474177fa6e97",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_button_locked.json",
+      "metadataSHA256": "134a5c07632c3170963613013dacf31392a0ff0388391760148720c9ecee777d",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 2,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 2,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/start-menu/disabledButton.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_button_locked_layout",
+          "nodeAuthoredKey": "slider_button_locked_layout@common.slider_button_state",
+          "path": [
+            "texture"
+          ],
+          "line": 718,
+          "field": "texture",
+          "value": "textures/ui/slider_button_locked",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_button_indent",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_button_indent.png",
+      "bytes": 164,
+      "sha256": "9b6833cc8c4402e2e4494807b8944b7652c25a8e54d3f52dc5d772b8ee804b2a",
+      "width": 6,
+      "height": 6,
+      "metadataFile": "resource_pack/textures/ui/slider_button_indent.json",
+      "metadataSHA256": "77d81df6c51e2edc8a4fb4ffe6fbf9d00762c4edb21f8fd5ba7e9c02b94102b6",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 2,\n  \"base_size\": [\n    6,\n    6\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 2,
+        "base_size": [
+          6,
+          6
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_button_indent.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_button_indent_layout",
+          "nodeAuthoredKey": "slider_button_indent_layout@common.slider_button_state",
+          "path": [
+            "texture"
+          ],
+          "line": 722,
+          "field": "texture",
+          "value": "textures/ui/slider_button_indent",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_locked_transparent_fade",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_locked_transparent_fade.png",
+      "bytes": 88,
+      "sha256": "b28791d22e7a7b8aa42f50de1ef549a19e4bc3208823b1df991cfcdf47ba0216",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/slider_locked_transparent_fade.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-embedded-data-url",
+        "file": "src/chat-assets.ts",
+        "line": 81
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_bar_default",
+          "nodeAuthoredKey": "slider_bar_default@common.slider_border",
+          "path": [
+            "controls",
+            1,
+            "transparent_grey",
+            "texture"
+          ],
+          "line": 836,
+          "field": "texture",
+          "value": "textures/ui/slider_locked_transparent_fade",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_box",
+          "nodeAuthoredKey": "slider_box",
+          "path": [
+            "controls",
+            3,
+            "locked@$slider_box_locked_layout",
+            "controls",
+            0,
+            "transparent_grey",
+            "texture"
+          ],
+          "line": 758,
+          "field": "texture",
+          "value": "textures/ui/slider_locked_transparent_fade",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_background",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_background.png",
+      "bytes": 80,
+      "sha256": "2b073c092b631fd3ed3fadbf75d63445de04a8d4eb632ab5f931e55ea225736d",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_background.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_background.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_background",
+          "nodeAuthoredKey": "slider_background",
+          "path": [
+            "texture"
+          ],
+          "line": 780,
+          "field": "texture",
+          "value": "textures/ui/slider_background",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_background_hover",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_background_hover.png",
+      "bytes": 125,
+      "sha256": "6c148dd7ad0721b9e4aadabb9ee8d531d92f224a0e120f241a1799c9a3565f47",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_background_hover.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_background_hover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_background_hover",
+          "nodeAuthoredKey": "slider_background_hover",
+          "path": [
+            "texture"
+          ],
+          "line": 785,
+          "field": "texture",
+          "value": "textures/ui/slider_background_hover",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_progress",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_progress.png",
+      "bytes": 80,
+      "sha256": "60f269d75e11ae63cb9a5b32a40f29cb1a6c394d4545bf241a88b05bf85fc8e1",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_progress.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_progress.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_progress",
+          "nodeAuthoredKey": "slider_progress",
+          "path": [
+            "texture"
+          ],
+          "line": 790,
+          "field": "texture",
+          "value": "textures/ui/slider_progress",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_progress_hover",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_progress_hover.png",
+      "bytes": 130,
+      "sha256": "9ce6522e836365a1f65d1019881902564fa58386b3786d2ee4b6c60f5090add7",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_progress_hover.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_progress_hover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_progress_hover",
+          "nodeAuthoredKey": "slider_progress_hover",
+          "path": [
+            "texture"
+          ],
+          "line": 795,
+          "field": "texture",
+          "value": "textures/ui/slider_progress_hover",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_border",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_border.png",
+      "bytes": 87,
+      "sha256": "b8b92f512bb5d824847faddf94f376f52cde9bc4b021a87f508733de6e06b092",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_border.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_border.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_border",
+          "nodeAuthoredKey": "slider_border",
+          "path": [
+            "texture"
+          ],
+          "line": 800,
+          "field": "texture",
+          "value": "textures/ui/slider_border",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_step_background",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_step_background.png",
+      "bytes": 80,
+      "sha256": "2b073c092b631fd3ed3fadbf75d63445de04a8d4eb632ab5f931e55ea225736d",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_step_background.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_background.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_step",
+          "nodeAuthoredKey": "slider_step",
+          "path": [
+            "texture"
+          ],
+          "line": 864,
+          "field": "texture",
+          "value": "textures/ui/slider_step_background",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_step_background_hover",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_step_background_hover.png",
+      "bytes": 125,
+      "sha256": "5ee878024f58c45900c998d95848e5cf45cf8d84d47c3354a282e00d63d5817f",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_step_background_hover.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_step_background_hover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_step_hover",
+          "nodeAuthoredKey": "slider_step_hover@common.slider_step",
+          "path": [
+            "texture"
+          ],
+          "line": 871,
+          "field": "texture",
+          "value": "textures/ui/slider_step_background_hover",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_step_progress",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_step_progress.png",
+      "bytes": 80,
+      "sha256": "60f269d75e11ae63cb9a5b32a40f29cb1a6c394d4545bf241a88b05bf85fc8e1",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_step_progress.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_progress.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_step_progress",
+          "nodeAuthoredKey": "slider_step_progress@common.slider_step",
+          "path": [
+            "texture"
+          ],
+          "line": 875,
+          "field": "texture",
+          "value": "textures/ui/slider_step_progress",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/slider_step_progress_hover",
+      "groups": [
+        "slider"
+      ],
+      "sourceFile": "resource_pack/textures/ui/slider_step_progress_hover.png",
+      "bytes": 125,
+      "sha256": "08885154ab9933815de7de688286467ef3427cbfd5b77aaf31feadf0663b9652",
+      "width": 3,
+      "height": 3,
+      "metadataFile": "resource_pack/textures/ui/slider_step_progress_hover.json",
+      "metadataSHA256": "3a8fa77f457467e4c8bb0abe55dfd6dec20ca900d1edda31b857875bb4619422",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    3,\n    3\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          3,
+          3
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/chat/slider_step_progress_hover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.slider_step_progress_hover",
+          "nodeAuthoredKey": "slider_step_progress_hover@common.slider_step",
+          "path": [
+            "texture"
+          ],
+          "line": 879,
+          "field": "texture",
+          "value": "textures/ui/slider_step_progress_hover",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/button_borderless_light",
+      "groups": [
+        "lightToggleAndContent"
+      ],
+      "sourceFile": "resource_pack/textures/ui/button_borderless_light.png",
+      "bytes": 131,
+      "sha256": "313b607889ba3d224cf599420087876ccb3f4572b304dc1ba6c25825f7d2c376",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_light.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/button_borderless_light.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "node": "common_buttons.light_button_assets",
+          "nodeAuthoredKey": "light_button_assets@common.button",
+          "path": [
+            "$default_button_texture|default"
+          ],
+          "line": 40,
+          "field": "$default_button_texture|default",
+          "value": "textures/ui/button_borderless_light",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_template_toggles.json",
+          "node": "common_toggles.light_template_toggle",
+          "nodeAuthoredKey": "light_template_toggle@common.toggle",
+          "path": [
+            "$default_texture|default"
+          ],
+          "line": 356,
+          "field": "$default_texture|default",
+          "value": "textures/ui/button_borderless_light",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/button_borderless_lightpressednohover",
+      "groups": [
+        "lightToggleAndContent"
+      ],
+      "sourceFile": "resource_pack/textures/ui/button_borderless_lightpressednohover.png",
+      "bytes": 155,
+      "sha256": "c3e928f9c58b6cf42399686ba71f5656de59a2dadcdd6cee9b26111ec5200c52",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_lightpressednohover.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/button_borderless_lightpressednohover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_template_toggles.json",
+          "node": "common_toggles.light_template_toggle",
+          "nodeAuthoredKey": "light_template_toggle@common.toggle",
+          "path": [
+            "$hover_texture|default"
+          ],
+          "line": 357,
+          "field": "$hover_texture|default",
+          "value": "textures/ui/button_borderless_lightpressednohover",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/button_borderless_lighthover",
+      "groups": [
+        "lightToggleAndContent"
+      ],
+      "sourceFile": "resource_pack/textures/ui/button_borderless_lighthover.png",
+      "bytes": 85,
+      "sha256": "e4cdc816ebbfae2bea1e870fbde0c59effd680cdec388ba1e66424645573aea8",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_lighthover.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/button_borderless_lighthover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "node": "common_buttons.light_button_assets",
+          "nodeAuthoredKey": "light_button_assets@common.button",
+          "path": [
+            "$hover_button_texture|default"
+          ],
+          "line": 43,
+          "field": "$hover_button_texture|default",
+          "value": "textures/ui/button_borderless_lighthover",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_template_toggles.json",
+          "node": "common_toggles.light_template_toggle",
+          "nodeAuthoredKey": "light_template_toggle@common.toggle",
+          "path": [
+            "$pressed_texture|default"
+          ],
+          "line": 358,
+          "field": "$pressed_texture|default",
+          "value": "textures/ui/button_borderless_lighthover",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/button_borderless_lightpressed",
+      "groups": [
+        "lightToggleAndContent"
+      ],
+      "sourceFile": "resource_pack/textures/ui/button_borderless_lightpressed.png",
+      "bytes": 84,
+      "sha256": "47f6ed1760ae8e407cdbb6b7207a5ee45b8a0db861f16f0696c5cf61c9961983",
+      "width": 4,
+      "height": 4,
+      "metadataFile": "resource_pack/textures/ui/button_borderless_lightpressed.json",
+      "metadataSHA256": "622158df366964d9ddeac5ed9938a43522da68d02c060335b853c9730103ad65",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    4,\n    4\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          4,
+          4
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/button_borderless_lightpressed.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "node": "common_buttons.light_button_assets",
+          "nodeAuthoredKey": "light_button_assets@common.button",
+          "path": [
+            "$pressed_button_texture|default"
+          ],
+          "line": 44,
+          "field": "$pressed_button_texture|default",
+          "value": "textures/ui/button_borderless_lightpressed",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_template_toggles.json",
+          "node": "common_toggles.light_template_toggle",
+          "nodeAuthoredKey": "light_template_toggle@common.toggle",
+          "path": [
+            "$pressed_no_hover_texture|default"
+          ],
+          "line": 359,
+          "field": "$pressed_no_hover_texture|default",
+          "value": "textures/ui/button_borderless_lightpressed",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/disabledButtonNoBorder",
+      "groups": [
+        "lightToggleAndContent"
+      ],
+      "sourceFile": "resource_pack/textures/ui/disabledButtonNoBorder.png",
+      "bytes": 88,
+      "sha256": "5a04f3b69f14cd1750b6c818310964e91f4962afc38cfe7bef41ad3c0fb4b27f",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/disabledButtonNoBorder.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/disabledButtonNoBorder.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "node": "common_buttons.light_button_assets",
+          "nodeAuthoredKey": "light_button_assets@common.button",
+          "path": [
+            "$locked_button_texture|default"
+          ],
+          "line": 45,
+          "field": "$locked_button_texture|default",
+          "value": "textures/ui/disabledButtonNoBorder",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_template_toggles.json",
+          "node": "common_toggles.light_template_toggle",
+          "nodeAuthoredKey": "light_template_toggle@common.toggle",
+          "path": [
+            "$locked_texture|default"
+          ],
+          "line": 360,
+          "field": "$locked_texture|default",
+          "value": "textures/ui/disabledButtonNoBorder",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/focus_border_white",
+      "groups": [
+        "lightToggleAndContent"
+      ],
+      "sourceFile": "resource_pack/textures/ui/focus_border_white.png",
+      "bytes": 105,
+      "sha256": "bbf995d02bd710bed1ffef07d128e140e57b018d37ed34e050a995f1c500a5d8",
+      "width": 5,
+      "height": 5,
+      "metadataFile": "resource_pack/textures/ui/focus_border_white.json",
+      "metadataSHA256": "d41fce86c98c18b03d8cb349ea5b50e4648c0cbf4b739b2ad7b6d236a83b3407",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    5,\n    5\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          5,
+          5
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/focus_border_white.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.focus_border_white",
+          "nodeAuthoredKey": "focus_border_white",
+          "path": [
+            "texture"
+          ],
+          "line": 1255,
+          "field": "texture",
+          "value": "textures/ui/focus_border_white",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.white_border_slot",
+          "nodeAuthoredKey": "white_border_slot",
+          "path": [
+            "texture"
+          ],
+          "line": 3519,
+          "field": "texture",
+          "value": "textures/ui/focus_border_white",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "node": "common_buttons.focus_border",
+          "nodeAuthoredKey": "focus_border",
+          "path": [
+            "$focus_border_texture|default"
+          ],
+          "line": 66,
+          "field": "$focus_border_texture|default",
+          "value": "textures/ui/focus_border_white",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/gameplay_common.json",
+          "node": "gameplay.bundle_cell_image",
+          "nodeAuthoredKey": "bundle_cell_image",
+          "path": [
+            "controls",
+            1,
+            "highlight_panel",
+            "controls",
+            1,
+            "bundle_selected_item_background_border_white",
+            "texture"
+          ],
+          "line": 207,
+          "field": "texture",
+          "value": "textures/ui/focus_border_white",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/storage_management.json",
+          "node": "storage_management.common_main_button",
+          "nodeAuthoredKey": "common_main_button",
+          "path": [
+            "controls",
+            1,
+            "border",
+            "variables",
+            1,
+            "$border_texture"
+          ],
+          "line": 735,
+          "field": "$border_texture",
+          "value": "textures/ui/focus_border_white",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/dialog_background_hollow_3",
+      "groups": [
+        "packSettingsShell"
+      ],
+      "sourceFile": "resource_pack/textures/ui/dialog_background_hollow_3.png",
+      "bytes": 260,
+      "sha256": "cf16fa7c6598d90d9b3f43b3ce7779de065c07fb29568d860588694ffe596e5b",
+      "width": 18,
+      "height": 33,
+      "metadataFile": "resource_pack/textures/ui/dialog_background_hollow_3.json",
+      "metadataSHA256": "36700ca1326d14a269b2052c27d95115200897bee9c27b4d36e75fe893973415",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": [\n    8,\n    23,\n    8,\n    8\n  ],\n  \"base_size\": [\n    18,\n    33\n  ]\n}",
+      "metadata": {
+        "nineslice_size": [
+          8,
+          23,
+          8,
+          8
+        ],
+        "base_size": [
+          18,
+          33
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/command-block/dialog_background_hollow_3.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.dialog_background_hollow_3",
+          "field": "texture",
+          "value": "textures/ui/dialog_background_hollow_3"
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/control",
+      "groups": [
+        "packSettingsShell"
+      ],
+      "sourceFile": "resource_pack/textures/ui/control.png",
+      "bytes": 71,
+      "sha256": "7997672f3c99b3bb967ad8fb2e3c19290f16a542e49d6a3572e6fd1bc355c4ab",
+      "width": 2,
+      "height": 2,
+      "metadataFile": "resource_pack/textures/ui/control.json",
+      "metadataSHA256": "97fdfacd4bf3d22a981aceec2cbc74876d7f9166f34064b6ecbdf293de1b7989",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    2,\n    2\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          2,
+          2
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/external-server/control.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_template_dialogs.json",
+          "node": "common_dialogs.background_image",
+          "nodeAuthoredKey": "background_image",
+          "path": [
+            "texture"
+          ],
+          "line": 507,
+          "field": "texture",
+          "value": "textures/ui/control",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/close_button_default",
+      "groups": [
+        "packSettingsShell"
+      ],
+      "sourceFile": "resource_pack/textures/ui/close_button_default.png",
+      "bytes": 163,
+      "sha256": "5160569f357e661d38495b3f84c89f84b30cc6fdd87c796b65f457cae529054c",
+      "width": 15,
+      "height": 15,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/book/close_button_default.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.close_button",
+          "nodeAuthoredKey": "close_button",
+          "path": [
+            "$close_button_default_texture|default"
+          ],
+          "line": 3264,
+          "field": "$close_button_default_texture|default",
+          "value": "textures/ui/close_button_default",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/close_button_hover",
+      "groups": [
+        "packSettingsShell"
+      ],
+      "sourceFile": "resource_pack/textures/ui/close_button_hover.png",
+      "bytes": 164,
+      "sha256": "16c89ba672607da0c452dacc79129f8eee995555bd061f51a1cb5bbab57bb877",
+      "width": 15,
+      "height": 15,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/book/close_button_hover.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.close_button",
+          "nodeAuthoredKey": "close_button",
+          "path": [
+            "controls",
+            1,
+            "hover@common.close_button_panel",
+            "$close_button_texture"
+          ],
+          "line": 3319,
+          "field": "$close_button_texture",
+          "value": "textures/ui/close_button_hover",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/close_button_pressed",
+      "groups": [
+        "packSettingsShell"
+      ],
+      "sourceFile": "resource_pack/textures/ui/close_button_pressed.png",
+      "bytes": 1416,
+      "sha256": "9abf4fcaf21fbbfa09ee1aeb8599288d5a781b57b08b3e4b2848b54cb217aa03",
+      "width": 15,
+      "height": 15,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/book/close_button_pressed.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.close_button",
+          "nodeAuthoredKey": "close_button",
+          "path": [
+            "controls",
+            2,
+            "pressed@common.close_button_panel",
+            "$close_button_texture"
+          ],
+          "line": 3324,
+          "field": "$close_button_texture",
+          "value": "textures/ui/close_button_pressed",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/screen_background",
+      "groups": [
+        "packSettingsShell"
+      ],
+      "sourceFile": "resource_pack/textures/ui/screen_background.png",
+      "bytes": 80,
+      "sha256": "e612514247e30fdaf71b8ab025ca2162c2ac18816b648b73c4ac7a1f441d13ab",
+      "width": 1,
+      "height": 1,
+      "metadataFile": "resource_pack/textures/ui/screen_background.json",
+      "metadataSHA256": "0c675190fa587a78c4c1ba6f133668bb487f4ceb8f82c84781cabfafdac02e1c",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 0,\n  \"base_size\": [\n    1,\n    1\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 0,
+        "base_size": [
+          1,
+          1
+        ]
+      },
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/screen_background.png"
+      },
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.screen_background",
+          "nodeAuthoredKey": "screen_background",
+          "path": [
+            "texture"
+          ],
+          "line": 3791,
+          "field": "texture",
+          "value": "textures/ui/screen_background",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/underline",
+      "sourceFile": "resource_pack/textures/ui/underline.png",
+      "bytes": 99,
+      "sha256": "1b577f29e5fe1af2634f952389051a03bdf0a25b8ef9bdfdd716334561c6e48b",
+      "width": 1,
+      "height": 1,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "groups": [
+        "readAndDividerAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/progress/ui/underline.png",
+        "sameWholeBytes": true
+      },
+      "introducedBy": "AMENDMENT01",
+      "sourceUse": "common_buttons.read_button -> common.underline_button -> common.single_line_label underline states",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.underline",
+          "nodeAuthoredKey": "underline",
+          "path": [
+            "$texture|default"
+          ],
+          "line": 2391,
+          "field": "$texture|default",
+          "value": "textures/ui/underline",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/underline_focus",
+      "sourceFile": "resource_pack/textures/ui/underline_focus.png",
+      "bytes": 85,
+      "sha256": "2195dcbf031628c32d97555379c210b3b5a70c463920d44809799c2c4e7790e3",
+      "width": 1,
+      "height": 1,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "groups": [
+        "readAndDividerAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/start-menu/underline_focus.png",
+        "sameWholeBytes": true
+      },
+      "introducedBy": "AMENDMENT01",
+      "sourceUse": "common_buttons.read_button -> common.underline_button -> common.single_line_label underline states",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "node": "common_buttons.underline_button",
+          "nodeAuthoredKey": "underline_button@common.button",
+          "path": [
+            "controls",
+            1,
+            "hover",
+            "controls",
+            0,
+            "label_hover@common.single_line_label",
+            "$underline_control",
+            0,
+            "underline_hover@common.underline",
+            "$texture"
+          ],
+          "line": 567,
+          "field": "$texture",
+          "value": "textures/ui/underline_focus",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+          "node": "common_buttons.underline_button",
+          "nodeAuthoredKey": "underline_button@common.button",
+          "path": [
+            "controls",
+            2,
+            "pressed",
+            "controls",
+            0,
+            "label_hover@common.single_line_label",
+            "$underline_control",
+            0,
+            "underline_hover@common.underline",
+            "$texture"
+          ],
+          "line": 587,
+          "field": "$texture",
+          "value": "textures/ui/underline_focus",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/divider3",
+      "sourceFile": "resource_pack/textures/ui/divider3.png",
+      "bytes": 99,
+      "sha256": "9d3316beada658b7da2a477b9f1c63710e1246e56328ae9e145f81ab5adbb3d9",
+      "width": 1,
+      "height": 1,
+      "metadataFile": "resource_pack/textures/ui/divider3.json",
+      "metadataSHA256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    1,\n    1\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          1,
+          1
+        ]
+      },
+      "groups": [
+        "readAndDividerAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/invite/divider3.png",
+        "sameWholeBytes": true
+      },
+      "introducedBy": "AMENDMENT01",
+      "sourceUse": "common.horizontal_divider and common.vertical_divider original textures/ui/divider3",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.horizontal_divider",
+          "nodeAuthoredKey": "horizontal_divider",
+          "path": [
+            "controls",
+            0,
+            "divider_image",
+            "texture"
+          ],
+          "line": 2362,
+          "field": "texture",
+          "value": "textures/ui/divider3",
+          "rootAuthored": false
+        },
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.vertical_divider",
+          "nodeAuthoredKey": "vertical_divider",
+          "path": [
+            "controls",
+            0,
+            "divider_image",
+            "texture"
+          ],
+          "line": 2380,
+          "field": "texture",
+          "value": "textures/ui/divider3",
+          "rootAuthored": false
+        }
+      ]
+    },
+    {
+      "key": "textures/ui/checkbox_check",
+      "sourceFile": "resource_pack/textures/ui/checkbox_check.png",
+      "bytes": 149,
+      "sha256": "8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062",
+      "width": 10,
+      "height": 10,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "groups": [
+        "commonCheckboxAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/checkbox_check.png"
+      },
+      "introducedBy": "AMENDMENT02",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.checkbox_checked_state",
+          "line": 662,
+          "field": "texture",
+          "value": "textures/ui/checkbox_check"
+        }
+      ],
+      "sourceUse": "common.checkbox -> common.toggle checkbox state controls -> toggle_state_template10x10; sourceholder30x30 is separate geometry"
+    },
+    {
+      "key": "textures/ui/checkbox_space",
+      "sourceFile": "resource_pack/textures/ui/checkbox_space.png",
+      "bytes": 129,
+      "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014",
+      "width": 10,
+      "height": 10,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "groups": [
+        "commonCheckboxAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/checkbox_space.png"
+      },
+      "introducedBy": "AMENDMENT02",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.checkbox_unchecked_state",
+          "line": 666,
+          "field": "texture",
+          "value": "textures/ui/checkbox_space"
+        }
+      ],
+      "sourceUse": "common.checkbox -> common.toggle checkbox state controls -> toggle_state_template10x10; sourceholder30x30 is separate geometry"
+    },
+    {
+      "key": "textures/ui/checkbox_checkHover",
+      "sourceFile": "resource_pack/textures/ui/checkbox_checkHover.png",
+      "bytes": 152,
+      "sha256": "29b33214de8a4621a2b882eaeb5adcce22053e97669cac459bf167a70bdec8c2",
+      "width": 10,
+      "height": 10,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "groups": [
+        "commonCheckboxAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/checkbox_checkHover.png"
+      },
+      "introducedBy": "AMENDMENT02",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.checkbox_checked_hover_state",
+          "line": 670,
+          "field": "texture",
+          "value": "textures/ui/checkbox_checkHover"
+        }
+      ],
+      "sourceUse": "common.checkbox -> common.toggle checkbox state controls -> toggle_state_template10x10; sourceholder30x30 is separate geometry"
+    },
+    {
+      "key": "textures/ui/checkbox_spaceHover",
+      "sourceFile": "resource_pack/textures/ui/checkbox_spaceHover.png",
+      "bytes": 126,
+      "sha256": "bd5babf3900537bda4f887be0cd22abbaea656959d32b88517d3943e5d95c0a6",
+      "width": 10,
+      "height": 10,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "groups": [
+        "commonCheckboxAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/checkbox_spaceHover.png"
+      },
+      "introducedBy": "AMENDMENT02",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.checkbox_unchecked_hover_state",
+          "line": 674,
+          "field": "texture",
+          "value": "textures/ui/checkbox_spaceHover"
+        }
+      ],
+      "sourceUse": "common.checkbox -> common.toggle checkbox state controls -> toggle_state_template10x10; sourceholder30x30 is separate geometry"
+    },
+    {
+      "key": "textures/ui/checkbox_checkDisabled",
+      "sourceFile": "resource_pack/textures/ui/checkbox_checkDisabled.png",
+      "bytes": 149,
+      "sha256": "8c96d1fccfc21f611859cfe71d04f4f98b7aea9753cfbcf2d6e3257b56700062",
+      "width": 10,
+      "height": 10,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "groups": [
+        "commonCheckboxAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/checkbox_checkDisabled.png"
+      },
+      "introducedBy": "AMENDMENT02",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.checkbox_checked_locked_state",
+          "line": 678,
+          "field": "texture",
+          "value": "textures/ui/checkbox_checkDisabled"
+        }
+      ],
+      "sourceUse": "common.checkbox -> common.toggle checkbox state controls -> toggle_state_template10x10; sourceholder30x30 is separate geometry"
+    },
+    {
+      "key": "textures/ui/checkbox_spaceDisabled",
+      "sourceFile": "resource_pack/textures/ui/checkbox_spaceDisabled.png",
+      "bytes": 129,
+      "sha256": "73cd8740b2c5deade8396c855d7c30d80a56186f0aeafd00bdc5a8d330a2e014",
+      "width": 10,
+      "height": 10,
+      "metadataFile": null,
+      "metadataSHA256": null,
+      "metadataRawUTF8": null,
+      "metadata": null,
+      "groups": [
+        "commonCheckboxAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/player-permissions/checkbox_spaceDisabled.png"
+      },
+      "introducedBy": "AMENDMENT02",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.checkbox_unchecked_locked_state",
+          "line": 682,
+          "field": "texture",
+          "value": "textures/ui/checkbox_spaceDisabled"
+        }
+      ],
+      "sourceUse": "common.checkbox -> common.toggle checkbox state controls -> toggle_state_template10x10; sourceholder30x30 is separate geometry"
+    },
+    {
+      "key": "textures/ui/ScrollRail",
+      "sourceFile": "resource_pack/textures/ui/ScrollRail.png",
+      "sha256": "eab268e0814cb9db1e2c8e158cea2d54a9b5f07fe0b7b74f82d5a67fa32cc6be",
+      "bytes": 70,
+      "width": 1,
+      "height": 1,
+      "metadataFile": "resource_pack/textures/ui/ScrollRail.json",
+      "metadataSHA256": "384aa89ff2d02cd552f6d7913fa5d35337570cb4475934b563846bcb2cd7c7f6",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": 1,\n  \"base_size\": [\n    1,\n    1\n  ]\n}",
+      "metadata": {
+        "nineslice_size": 1,
+        "base_size": [
+          1,
+          1
+        ]
+      },
+      "groups": [
+        "packSettingsLocalScrollAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/ScrollRail.png"
+      },
+      "introducedBy": "AMENDMENT03",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.scroll_indent_image",
+          "nodeAuthoredKey": "scroll_indent_image",
+          "path": [
+            "texture"
+          ],
+          "line": 4641,
+          "field": "texture",
+          "value": "textures/ui/ScrollRail",
+          "rootAuthored": false
+        }
+      ],
+      "sourceUse": "PackSettingsContent local common.scroll_track/common.scroll_box wholeoriginal material override; existing global embedded PNGs are RGBA-equal but byte-distinct and remain unchanged"
+    },
+    {
+      "key": "textures/ui/ScrollHandle",
+      "sourceFile": "resource_pack/textures/ui/ScrollHandle.png",
+      "sha256": "f5e26f4b26c2edadd36e8a8bec2018b86558525f9920168d8d2c277bd210f46a",
+      "bytes": 89,
+      "width": 3,
+      "height": 5,
+      "metadataFile": "resource_pack/textures/ui/ScrollHandle.json",
+      "metadataSHA256": "08856911c52b8d9e90c4906df474bf3785813187971a0d2b57b0d3a7e82c4a77",
+      "metadataRawUTF8": "{\n  \"nineslice_size\": [\n    1,\n    2,\n    1,\n    2\n  ],\n  \"base_size\": [\n    3,\n    5\n  ]\n}",
+      "metadata": {
+        "nineslice_size": [
+          1,
+          2,
+          1,
+          2
+        ],
+        "base_size": [
+          3,
+          5
+        ]
+      },
+      "groups": [
+        "packSettingsLocalScrollAmendment"
+      ],
+      "materialOrigin": {
+        "kind": "existing-whole-original-file",
+        "file": "src/assets/document-viewer/ScrollHandle.png"
+      },
+      "introducedBy": "AMENDMENT03",
+      "sourceReferences": [
+        {
+          "sourceFile": "resource_pack/ui/ui_common.json",
+          "node": "common.scrollbar_box_image",
+          "nodeAuthoredKey": "scrollbar_box_image",
+          "path": [
+            "texture"
+          ],
+          "line": 4601,
+          "field": "texture",
+          "value": "textures/ui/ScrollHandle",
+          "rootAuthored": false
+        }
+      ],
+      "sourceUse": "PackSettingsContent local common.scroll_track/common.scroll_box wholeoriginal material override; existing global embedded PNGs are RGBA-equal but byte-distinct and remain unchanged"
+    }
+  ],
+  "boundaries": [
+    "ResourcePacks root is a124-template bank, not a standalone recovered screen route. PackSettings has6defs and a real screen root.",
+    "Only22 authored root literals plus37 finite approved inherited materials; not all124 candidate transitive literals.",
+    "Pack covers are host #icon_path/#icon_zip/#icon_file_system providers; no invented thumbnails or art.",
+    "White is exact case-preserving installed-to-public whole-byte alias proven in existing evidence; uppercase White does not exist in this public ZIP.",
+    "Absent JSON stays null in ledger and absent from asset metadata. Loading bar base_size-only metadata does not imply slicing.",
+    "Original slider_button_locked has3x3 physical/base with cuts2 overlapping; preserve this raw metadata.",
+    "Control extents, alpha, layer, clipping, source fonts and active branch are separate from physical PNG dimensions.",
+    "No browser/GPU/native material or completeGUI qualification in this phase.",
+    "The six checkbox keys retain exact source case. Each whole10x10 PNG lacks companion JSON. Normal and disabled corresponding originals have identical complete source bytes, but distinct semantic source keys remain separate.",
+    "PackSettings local ScrollRail/ScrollHandle originals preserve fixed ZIP wholebytes and raw metadata; shared CSS has visually equal but byte-distinct embedded originals, so no global replacement."
+  ],
+  "amendments": [
+    {
+      "id": "AMENDMENT01",
+      "preservedPriorKeys": 48,
+      "addedKeys": [
+        "textures/ui/underline",
+        "textures/ui/underline_focus",
+        "textures/ui/divider3"
+      ],
+      "newFiles": [],
+      "sourceProof": "Root-approved actual ResourcePackItem/Actions read_button and common dividers dependency closure",
+      "beforeModuleSHA256": "3892513e81f03dc7223ea3a57f370145eac782ed1e8173a8dfd8dc6d44349cad",
+      "beforeLedgerSHA256": "8d3649f3f60604588d02f3f10381e6157b99c979b129ab5fdbe9de86f2619865"
+    },
+    {
+      "id": "AMENDMENT02",
+      "preservedPriorKeys": 51,
+      "addedKeys": [
+        "textures/ui/checkbox_check",
+        "textures/ui/checkbox_space",
+        "textures/ui/checkbox_checkHover",
+        "textures/ui/checkbox_spaceHover",
+        "textures/ui/checkbox_checkDisabled",
+        "textures/ui/checkbox_spaceDisabled"
+      ],
+      "newFiles": [],
+      "sourceProof": "Root-approved Manager common.checkbox six exact camelCase Hover/Disabled source states; no Switch substitute",
+      "beforeModuleSHA256": "5e112ce1948e93abb474854623cf99fc529f3ab25298bda86c61b4ee6e7198ff",
+      "beforeLedgerSHA256": "c4445b228687026b672f435d714d0fb20de19fa2b2b04f1a08845b63a897ed02"
+    },
+    {
+      "id": "AMENDMENT03",
+      "preservedPriorKeys": 57,
+      "addedKeys": [
+        "textures/ui/ScrollRail",
+        "textures/ui/ScrollHandle"
+      ],
+      "newFiles": [],
+      "sourceProof": "Root-approved actual PackSettings common scroll source whole-original material override; do not mutate shared global texture CSS",
+      "beforeModuleSHA256": "72abf7561739cb42e033cac7a05b91a3b34a89b6e97845d1cb16c5fbaf1205fa",
+      "beforeLedgerSHA256": "8fc0c478727ddd02e66992d10bd3b6d65064d53f8eced5d93668d892f5e4e7da"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import {expect, test} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 import type {Locator, Page} from '@playwright/test';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
@@ -11,6 +12,7 @@ import type {PlayFixtureConfiguration} from '../demo/play-screen-fixture';
 const root = (page: Page) => page.locator('#play-fixture-screen');
 const pane = (page: Page, tab: 'worlds' | 'friends' | 'servers') => root(page).locator('[data-play-pane="' + tab + '"]');
 const tab = (page: Page, value: string) => root(page).locator('[data-play-tab="' + value + '"]');
+const localWorldStart = (page: Page) => pane(page,'worlds').locator('[data-world-id="local-1"] .mc-play-world-row__main[data-play-target="button.menu_start_local_world"]');
 const popup = (page: Page, kind: 'join_by_code' | 'high_ping_warning') => root(page).locator('[data-play-popup="' + kind + '"]');
 const configure = (page: Page, value: Partial<PlayFixtureConfiguration>) => page.evaluate(value => window.playScreenFixture.configure(value), value);
 const clear = (page: Page) => page.evaluate(() => window.playScreenFixture.clear());
@@ -68,6 +70,27 @@ test('source three tabs preserve widths, icons and literal counts independent of
   await expect(pane(page, 'worlds').locator('[data-world-id]')).toHaveCount(2);
 });
 
+test('visible tab labels and world metadata remain in native accessible names',async({page})=>{
+  await loaded(page);
+  const expected=createPlayDemoProps();
+  const literal=(value:string)=>new RegExp(value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/\s+/g,'\\s+'));
+  for(const active of ['worlds','friends','servers']as const){
+    await configure(page,{tab:active});await expect(pane(page,active)).toBeVisible();
+    for(const value of ['worlds','friends','servers']as const){
+      const control=tab(page,value);await expect(control).toBeVisible();
+      expect(await control.evaluate(node=>node.hasAttribute('aria-label'))).toBe(false);
+      await expect(control).toHaveAccessibleName(literal(expected.navigation.labels[value]));
+      await expect(control).toHaveAccessibleName(literal(expected.navigation.counts[value]));
+    }
+    const result=await new AxeBuilder({page}).include('#play-fixture-screen').withRules(['label-content-name-mismatch']).analyze();
+    expect(result.violations,`visible ${active} source labels must remain in accessible names`).toEqual([]);
+  }
+  await configure(page,{tab:'worlds'});await expect(pane(page,'worlds')).toBeVisible();
+  const item=expected.worlds.localWorlds.items.find(item=>item.id==='local-1')!;
+  const main=localWorldStart(page);expect(await main.evaluate(node=>node.hasAttribute('aria-label'))).toBe(false);
+  for(const value of [item.name,item.date,item.gameMode,item.fileSize])await expect(main).toHaveAccessibleName(literal(value));
+});
+
 test('tab click and roving arrows change only accepted active pane while retaining DOM nodes', async ({page}) => {
   await loaded(page); const world = await pane(page, 'worlds').elementHandle();
   await tab(page, 'friends').click(); await expect(pane(page, 'friends')).toBeVisible(); await expect(pane(page, 'worlds')).toBeHidden();
@@ -107,7 +130,7 @@ test('world heading flag is label-only and never erases independent source grid'
   await loaded(page); await configure(page, {localLabelVisible: false});
   await expect(pane(page, 'worlds').locator('[data-play-node="worlds_label"]')).toHaveCount(0);
   await expect(pane(page, 'worlds').locator('[data-source-collection="local_worlds"][role="list"] [data-world-id]')).toHaveCount(2);
-  await pane(page, 'worlds').getByRole('button', {name: 'Local meadow', exact: true}).click();
+  await localWorldStart(page).click();
   await expect.poll(async () => (await requests(page)).map(item => item.target)).toContain('button.menu_start_local_world');
 });
 
@@ -212,7 +235,7 @@ test('ancestor popup veto cancels join and Escape without relinquishing its owne
 
 test('queued source actions are discarded when their actual owner unmounts in ancestor bubble', async ({page}) => {
   await loaded(page); await configure(page, {unmountOnClick: true}); await clear(page);
-  await pane(page, 'worlds').getByRole('button', {name: 'Local meadow', exact: true}).click();
+  await localWorldStart(page).click();
   await expect(root(page)).toHaveCount(0); expect(await requests(page)).toEqual([]);
   await configure(page, {mounted: true, unmountOnClick: false, joinOpen: true}); await expect(popup(page, 'join_by_code')).toBeVisible();
   await configure(page, {unmountOnClick: true}); await clear(page); await popup(page, 'join_by_code').getByRole('button', {name: 'Join code', exact: true}).click();
@@ -222,7 +245,7 @@ test('queued source actions are discarded when their actual owner unmounts in an
 test('late native document veto cancels deferred world and root-close semantic actions', async ({page}) => {
   await loaded(page);
   await page.evaluate(() => document.addEventListener('click', event => event.preventDefault(), {once: true}));
-  await pane(page, 'worlds').getByRole('button', {name: 'Local meadow', exact: true}).click();
+  await localWorldStart(page).click();
   expect(await requests(page)).toEqual([]);
   await page.evaluate(() => document.addEventListener('click', event => event.preventDefault(), {once: true}));
   await root(page).getByRole('button', {name: 'Close Play', exact: true}).click(); expect(await requests(page)).toEqual([]);

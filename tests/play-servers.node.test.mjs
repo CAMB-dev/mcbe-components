@@ -49,6 +49,18 @@ test('additional edit and select availability are independent real buttons and n
     assert.ok(html.includes('width:220px;height:62px')); assert.ok(html.includes('width:60px;height:62px'));
   }
 });
+
+test('textual server primary names derive from every visible string while blank loading rows keep their semantic fallback',()=>{
+  for(const kind of['featured','additional'])for(let bits=0;bits<8;bits++){
+    const row={...item(),infoAvailable:!!(bits&1),messageVisible:!!(bits&2),concurrencyVisible:!!(bits&4),pingIcon:picture()},p={kind,item:row,width:140,scale:2,loadingLabel:'Loading source row',loadingFrame:0};
+    const html=render(PlayServerRow,p),button=html.match(/<button[^>]*class="[^"]*mc-play-server-row__select[^"]*"[^>]*>[\s\S]*?<\/button>/)[0],tag=button.match(/^<button[^>]*>/)[0];
+    assert.equal(tag.includes('aria-label="Host server"'),bits===0);assert.equal(tag.includes('aria-label='),bits===0);for(const [visible,value]of[[row.infoAvailable,row.name],[row.messageVisible,row.message],[row.concurrencyVisible,row.playerCount]])if(visible)assert(button.includes(value));assert(!html.includes('labelFromContent'));
+    const overridden=render(PlayServerRow,{...p,buttonProps:{'aria-label':'Host explicit server'}});assert(tags(overridden,'server_navigation_toggle')[0].includes('aria-label="Host explicit server"'));
+    const labelled=render(PlayServerRow,{...p,buttonProps:{'aria-labelledby':'external-server-name'}});assert(tags(labelled,'server_navigation_toggle')[0].includes('aria-labelledby="external-server-name"'));
+  }
+  const empty=render(PlayServerRow,{kind:'additional',item:{...item(),infoAvailable:false,messageVisible:true,message:' ',concurrencyVisible:true,playerCount:'',pingIcon:picture(),editVisible:true},width:140,scale:2,loadingLabel:'Loading source row',loadingFrame:0});
+  assert(tags(empty,'server_navigation_toggle')[0].includes('aria-label="Host server"'));assert(tags(empty,'button.menu_network_server_world_edit')[0].includes('aria-label="Edit host server"'));
+});
 test('all eight detail flag combinations remain independent, co-mounted and use separate join requests', () => {
   for (let bits = 0; bits < 8; bits++) {
     const html = render(PlayServerDetails, { ...detail(), featuredVisible: !!(bits & 1), additionalVisible: !!(bits & 2), addVisible: !!(bits & 4), featured: featured(), add: { title: 'Host add title', description: 'Host add explanation', isConsole: false } });

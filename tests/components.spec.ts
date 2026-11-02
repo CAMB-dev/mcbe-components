@@ -2,6 +2,12 @@ import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { verifyAxeWithPaintedContrast } from './helpers/painted-contrast';
 
+// This file opens the complete gallery. Keep call traces and failure captures;
+// paint probes separately retain all original/backing/fill/restored PNGs.
+// Repeating the full DOM for each probe produced a239MB trace and exhausted
+//240s before reaching all32 pairs. Playwright requires trace options here.
+test.use({trace:{mode:'retain-on-failure',snapshots:false,screenshots:false}});
+
 test.beforeEach(async ({ page }) => { await page.goto('/'); await page.evaluate(() => document.fonts.ready); });
 
 test('loads local Latin and Chinese fonts without runtime errors', async ({ page }) => {
@@ -145,8 +151,9 @@ test('page and modal pass structural Axe and actual image-backed text contrast',
   // Keep every raw Axe rule. Its CSS-background heuristic misses sibling and
   // border-image paint, so verify each reported contrast pair against pixels.
   // Each reported pair requires original, transparent/black/white text-fill
-  // probes and exact restored paint. Keep a bounded allowance for all five.
-  test.setTimeout(240_000);
+  // probes and exact restored paint. The complete gallery currently has32
+  // reported pairs; retain every pair with a bounded ten-minute budget.
+  test.setTimeout(600_000);
   const pageResults = await new AxeBuilder({ page }).analyze();
   await verifyAxeWithPaintedContrast(page, pageResults.violations, info, 'showcase');
   await page.getByRole('button', { name: 'Create new world', exact: true }).click();
@@ -155,6 +162,10 @@ test('page and modal pass structural Axe and actual image-backed text contrast',
 });
 
 test('reflows at 320px and captures visual evidence', async ({ page }, testInfo) => {
+  // Three full-gallery captures include hundreds of GUI examples at the mobile
+  // device's native DPR. Keep the same screenshots and overflow assertion with
+  // a bounded capture budget, rather than the default30s interaction deadline.
+  test.setTimeout(120_000);
   await page.screenshot({ path: `test-results/${testInfo.project.name}-viewport.png` });
   await page.screenshot({ path: `test-results/${testInfo.project.name}-overview.png`, fullPage: true });
   await page.setViewportSize({ width: 320, height: 900 });

@@ -52,13 +52,17 @@ export function PlaySourceBackground({asset,scale}:{asset:ClassicSkinAsset;scale
 
 export interface PlaySourceButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>,'children'|'type'|'dangerouslySetInnerHTML'> {
   readonly label:string;readonly target:string;readonly scale:number;readonly onAction?:PlayActionHandler;readonly children?:ReactNode;
+  /** Private opt-in for textual rows: use the native name from visible content
+   * unless the caller supplies an explicit ARIA naming attribute. */
+  readonly labelFromContent?:boolean;
   readonly selected?:boolean;readonly readOnly?:boolean;readonly collection?:string;readonly index?:number;readonly itemId?:string;readonly payload?:unknown;
   readonly surface?:'dark'|'light'|'outline';
 }
 export const PlaySourceButton=forwardRef<HTMLButtonElement,PlaySourceButtonProps>(function PlaySourceButton({
-  label,target,scale,onAction,children,selected,readOnly,collection,index,itemId,payload,surface='dark',disabled,className,style,onClick,onKeyDown,...native
+  label,target,scale,onAction,children,labelFromContent,selected,readOnly,collection,index,itemId,payload,surface='dark',disabled,className,style,onClick,onKeyDown,...native
 },ref){
   playText(label,'button label');playText(target,'action target');playScale(scale);
+  if(labelFromContent!==undefined&&typeof labelFromContent!=='boolean')throw new TypeError('Play content-derived naming flag must be boolean.');
   if(!['dark','light','outline'].includes(surface))throw new TypeError('Play button surface is invalid.');
   if(index!==undefined&&(!Number.isSafeInteger(index)||index<0))throw new RangeError('Play collection index must be nonnegative.');
   const stem=surface==='light'?'button_borderless_light':'button_borderless_dark';
@@ -70,7 +74,7 @@ export const PlaySourceButton=forwardRef<HTMLButtonElement,PlaySourceButtonProps
   }as CSSProperties;
   const [,attach]=useClassicNodeRef(ref),latest=useRef({disabled,readOnly,target,collection,index,itemId,payload,onAction});
   useClassicLayoutEffect(()=>{latest.current={disabled,readOnly,target,collection,index,itemId,payload,onAction};});
-  return <Button {...native} ref={attach} type="button" disabled={disabled||readOnly} aria-label={native['aria-label']??label} aria-pressed={native['aria-pressed']??selected}
+  return <Button {...native} ref={attach} type="button" disabled={disabled||readOnly} aria-label={native['aria-label']??(labelFromContent?undefined:label)} aria-pressed={native['aria-pressed']??selected}
     data-play-target={target} data-selected={selected||undefined} data-surface={surface}
     className={['mc-play-source-button',className].filter(Boolean).join(' ')} style={playStyle(scale,{...skinVars,...style})}
     onKeyDown={event=>{onKeyDown?.(event);if(!event.defaultPrevented&&(event.nativeEvent.isComposing||event.keyCode===229)&&['Enter',' '].includes(event.key))event.preventDefault();}}

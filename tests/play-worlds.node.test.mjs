@@ -10,10 +10,10 @@ import ts from 'typescript';
 // CPU TypeScript module loading, with no product build, browser, image decode
 // or network. Each actual React peer receives one consistent module graph.
 const require=createRequire(import.meta.url),root=process.cwd();
-function loader(peer){const cache=new Map();return function load(filename){
+function loader(peer,overrides=new Map()){const cache=new Map();return function load(filename){
   filename=path.resolve(root,filename);if(cache.has(filename))return cache.get(filename).exports;
   const module={exports:{}};cache.set(filename,module);
-  const source=readFileSync(filename,'utf8').replaceAll('import.meta.url',JSON.stringify(pathToFileURL(filename).href));
+  const source=(overrides.get(filename)??readFileSync(filename,'utf8')).replaceAll('import.meta.url',JSON.stringify(pathToFileURL(filename).href));
   const js=ts.transpileModule(source,{fileName:filename,compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText;
   const local=id=>{if(!id.startsWith('.'))return peer(id);const stem=path.resolve(path.dirname(filename),id);if(/\.(png|woff2?|ttf|otf)$/.test(stem))return pathToFileURL(stem).href;const target=[stem,stem+'.ts',stem+'.tsx',stem+'.js',stem+'.json'].find(existsSync);if(!target)throw Error('Unresolved CPU module '+stem);return target.endsWith('.json')?peer(target):load(target);};
   vm.runInThisContext('(function(require,module,exports){'+js+'\n})',{filename})(local,module,module.exports);return module.exports;
@@ -52,6 +52,22 @@ for(const peer of peers){
     const html=ssr(el(ui.PlayNetworkWorldRow,{item:network,collection:'friends_network_worlds',index:3,width:253,scale:2,crossPlatformEnabled:false}));
     assert(html.includes('width:506px;height:60px'));assert(html.includes('height:62px'));assert(html.includes('002 / 008'));assert.equal((html.match(/class="mc-play-network-row__online"/g)??[]).length,1);assert.equal((html.match(/class="mc-play-network-row__offline"/g)??[]).length,2);assert(html.includes('mc-play-network-row__tts-border'));assert(html.includes('/host/platform-whole.png'));
     const ignored=ssr(el(ui.PlayNetworkWorldRow,{item:network,collection:'friends_network_worlds',index:0,width:253,scale:2,crossPlatformEnabled:false,ignoreCrossplay:true}));assert(!ignored.includes('mc-play-network-row__tts-border'));
+  });
+  test(`textual row names use all visible content and preserve explicit caller naming (${React.version})`,()=>{
+    const primary=(html,cls)=>{const button=html.match(new RegExp(`<button[^>]*class="[^"]*${cls}[^"]*"[^>]*>[\\s\\S]*?<\\/button>`))[0];return{html:button,tag:button.match(/^<button[^>]*>/)[0]};};
+    const worldProps={item:world,collection:'local_worlds',index:0,width:252,scale:2,labels:{edit:'Edit',delete:'Delete',migrate:'Migrate'}};
+    const networkProps={item:network,collection:'friends_network_worlds',index:0,width:252,scale:2,crossPlatformEnabled:false};
+    for(const [Component,p,cls,overrideProp,visible]of[
+      [ui.PlayWorldRow,worldProps,'mc-play-world-row__main','mainButtonProps',[world.name,world.date,world.gameMode,world.fileSize]],
+      [ui.PlayNetworkWorldRow,networkProps,'mc-play-network-row__main','buttonProps',[network.name,network.details,network.playerCount,network.hardcoreLabel]],
+    ]){
+      const natural=primary(ssr(el(Component,p)),cls);assert(!natural.tag.includes('aria-label='));assert(!natural.tag.includes('aria-labelledby='));for(const value of visible)assert(natural.html.includes(value),value);assert(!natural.html.includes('labelFromContent'));
+      const explicit=primary(ssr(el(Component,{...p,[overrideProp]:{'aria-label':'Host explicit row name'}})),cls);assert(explicit.tag.includes('aria-label="Host explicit row name"'));
+      const labelled=primary(ssr(el(Component,{...p,[overrideProp]:{'aria-labelledby':'external-row-label'}})),cls);assert(labelled.tag.includes('aria-labelledby="external-row-label"'));assert(!labelled.tag.includes('aria-label='));
+    }
+    const action=ssr(el(parts.PlaySourceButton,{label:'Original icon action',target:'host-action',scale:2},el('span',null,'Host glyph')));assert(action.includes('aria-label="Original icon action"'));
+    assert.throws(()=>ssr(el(parts.PlaySourceButton,{label:undefined,labelFromContent:true,target:'host-action',scale:2})),/label/);
+    assert.throws(()=>ssr(el(parts.PlaySourceButton,{label:'Still required',labelFromContent:'true',target:'host-action',scale:2})),/boolean/);
   });
   test(`Worlds owned source order keeps all collections in main stack and storage alone in20 percent (${React.version})`,()=>{
     const p=worldProps();p.flags=flags(worldFlagKeys,true);p.externalFamilies=families(el);p.provider={...p.provider,legacyWorldsShareStorage:true,legacyWorldsSupportsMigration:true};

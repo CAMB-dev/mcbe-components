@@ -1,3 +1,71 @@
+# Current checkpoint — Resource Packs, 2026-11-02
+
+Full goal ACTIVE/incomplete. Branch codex/resource-packs-20261102 based on
+82634770550c0e0602fe632952c6d2615c887531. Local main is stale. Normal push
+origin HEAD:main only; actual final commit and clean/remote status must be read
+from .cache/resource-packs-qa-01/FINAL.json, not inferred from this precommit note.
+
+Actual247 components /265 runtime values (247+6data+12functions).
+New8: ResourcePackManager/Section/Item/Actions/Diagnostics and
+PackSettingsScreen/Content/PackContentTier. Preview #resource-packs.
+Manager is source settings content, not a new fullscreen route. Five vertical
+factories, explicit complete collection snapshots, raw count strings and selected
+row state remain independent. All actions are host intents, no game services.
+PackSettings is its own source screen; nine generated rows reuse private fields
+without another window/scroll/submit. Unsupported tier stays enabled; raw value
+and steps stay independent from explicit Web domain. No extra Play minus-one.
+
+Source pinned14 whole JSON/1661 raw spans from v1.26.60.5-full ZIP.
+59 whole material keys,31 raw metadata,28 explicitly absent; only5 new PNGs.
+Read docs/RESOURCE_PACKS_QA.md, resource-packs-source.json, resource-pack-assets.json.
+fetch-references now reproducibly extracts the14 whole sources after ZIP hash
+validation; wrong caches are rejected/preserved. Node18/19 tests require actual
+peer installation via verify:package first, not guessed local versions.
+
+Actual final scoped checks: Node153 PASS (new/shared82, adjacentPlay71);
+source combined244/246 PASS with2 whole-gallery contrast timeouts retained;
+focused contrast2 PASS after600s bounded budget and removing repeated DOM
+snapshots (239MB old trace); every Axe rule and per-pair raw/original/backing/
+fill/restored PNG retained. React18.3.1/19.3.1 full package PASS, each new family
+26SSR/24negative types/59material checks. Fresh default Vite dev/prod x2React
+installed4 PASS; eight real div refs and exact callback-ref cleanup. Actual
+4173 desktop/mobile x3profiles/settings built PASS. Functional tar SHA256:
+e493b47464d6d31790c33cccf1487a9b314cf3875878d1304126ac37a3e08d5b
+Final docs-only repack must have exact tested runtime/declaration/CSS/assets/
+manifest/license bytes; see PACK-IDENTITY.json. Current receipts/logs live in
+.cache/resource-packs-qa-01 and .cache/resource-packs-installed-02.
+
+Material qualification is PARTIAL:92/120 planes exact,69,440 exact pixels;
+28 remain strict failures, not tolerated. Source .3/.7 quantization and odd-scale
+arrow texel-edge ties unresolved. White-on-white matches do not prove masks.
+Native Book vertices only establish that role's .3->76, not universal .7/CSS
+sampling. No original PNG, tint, expected plane, threshold or palette fitting.
+Current arrow filter already applies directly to image; ancestor hypothesis
+was disproved, no no-op patch. Keep material01 capture failures and material02
+strict failures, source snapshots, CPU independent references and native audit.
+
+Real fixes: native DOM capture for stopped-bubbling IME; React19 callback-ref
+return cleanup and stable ordinary-prop binding in Checkbox; visible accessible
+names for resource headers and Play tabs/rows. Old SSR differences bounded to
+default ARIA attrs only, explicit overrides kept. Earlier rejected React synthetic
+capture-only IME solution and actual old-source red tests remain preserved. Final screenshot review also caught
+selection-hitbox accessible labels painted over real source text. Removed only
+the private fallback child; aria-label and controls stay. CPU red retained;
+current153Node and118browser PASS, new fresh package/installed/built02 cover fix.
+
+Remaining full goal:28 material planes/native fonts/intrinsic/parent alpha/
+whole-GUI and active routes; full manifest_validation/report family, provider/
+marketplace content, broader Create/Edit World settings, Disconnect/templates/
+sleep/calibration and other feasible Bedrock GUI, Pocket/Ore counterparts.
+Source existence is not current native route evidence. No full pixel-perfect or
+whole-library completion claim. Resume from this finite checkpoint.
+
+No Computer Use/native game launched this phase. User4173 preview intentionally
+kept running, owner217140 at verification; close CU promptly if used later.
+All temporary server closure is recorded in final receipts. Agents are stopped.
+
+--- Previous checkpoint ---
+
 # Current checkpoint — Classic Play family, 2026-11-02
 
 Full goal ACTIVE/incomplete. Branch codex/play-screen-20261102 from89e9da6.

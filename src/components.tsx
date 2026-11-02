@@ -1,5 +1,5 @@
 import {
-  forwardRef, useEffect, useId, useRef, useState,
+  forwardRef, useCallback, useEffect, useId, useRef, useState,
 } from 'react';
 import type {
   ButtonHTMLAttributes, CSSProperties, FieldsetHTMLAttributes, HTMLAttributes,
@@ -10,6 +10,7 @@ import { Spinner } from './feedback';
 import { ComboboxBase } from './combobox';
 import { GuiIcon } from './gui-icon';
 import { lockModalScroll as lockScroll } from './modal-scroll-lock';
+import { useClassicLayoutEffect, useClassicNodeRef } from './classic-screen-lifecycle';
 
 function cx(...names: (string | false | undefined)[]) { return names.filter(Boolean).join(' '); }
 function useValue<T>(value: T | undefined, defaultValue: T, onChange?: (value: T) => void) {
@@ -100,17 +101,20 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox({
   label, description, indeterminate = false, className, id: givenId, ...props
 }, forwardedRef) {
-  const autoId = useId(); const id = givenId ?? autoId; const node = useRef<HTMLInputElement | null>(null);
-  useEffect(() => { if (node.current) node.current.indeterminate = indeterminate; }, [indeterminate]);
+  const autoId = useId(); const id = givenId ?? autoId; const [node, bind] = useClassicNodeRef(forwardedRef);
+  // The old inline ref synchronized this property on every commit. Keep that
+  // behavior without detaching a stable caller ref for ordinary prop updates.
+  useClassicLayoutEffect(() => { if (node.current) node.current.indeterminate = indeterminate; });
+  const attach = useCallback((element: HTMLInputElement | null): void => {
+    // Preserve the property-before-caller contract while the shared binder owns
+    // cleanup returns on both peers. Ordinary prop updates retain this callback.
+    if (element) element.indeterminate = indeterminate;
+    bind(element);
+  }, [bind, indeterminate]);
   return <label className={cx('mc-choice', props.disabled && 'mc-is-disabled', className)} htmlFor={id}>
     <input {...props} id={id} type="checkbox" className="mc-choice__input"
       aria-describedby={cx(props['aria-describedby'], !!description && `${id}-description`) || undefined}
-      ref={element => {
-        node.current = element;
-        if (element) element.indeterminate = indeterminate;
-        if (typeof forwardedRef === 'function') forwardedRef(element);
-        else if (forwardedRef) forwardedRef.current = element;
-      }}/>
+      ref={attach}/>
     <span className="mc-checkbox" aria-hidden="true"/>
     <span className="mc-choice__text"><span>{label}</span>{description && <span className="mc-field__description" id={`${id}-description`}>{description}</span>}</span>
   </label>;

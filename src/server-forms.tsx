@@ -10,6 +10,7 @@ import { commandBlockImageAssets } from './command-block-image-assets';
 import { jigsawImageAssets } from './jigsaw-image-assets';
 import { serverFormImageAssets } from './server-form-image-assets';
 import { guiIconAssets } from './gui-icon-assets';
+import { useClassicNodeRef } from './classic-screen-lifecycle';
 
 export interface ServerFormCancelDetail { reason: 'close' | 'escape'; event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLElement> }
 export interface ServerFormOption { value: string; label: string; disabled?: boolean }
@@ -208,12 +209,30 @@ export const ServerActionForm = forwardRef<HTMLElement, ServerActionFormProps>(f
 });
 
 interface LocalValue { type: ServerCustomEditableField['type']; value: ServerCustomValue }
-/** Typed custom fields with one accepted value owner, keyed by stable caller IDs. */
-export const ServerCustomForm = forwardRef<HTMLElement, ServerCustomFormProps>(function ServerCustomForm({ fields, value, defaultValue, onValueChange, onSubmit, onCancel, submitText = 'Submit', submitVisible = true, submitEnabled = true, onExpandedChange, inputProps = {}, inputRefs, dropdownRefs, multiselectRefs, optionRefs, disabled = false, readOnly = false, ...props }, ref) {
-  validateFields(fields); const scope = useScope(ref), uid = useId();
-  const [local, setLocal] = useState<Record<string, LocalValue>>(() => Object.fromEntries(fields.filter(editable).map(field => [field.id, { type: field.type, value: defaultValue && own(defaultValue, field.id) ? validateValue(field, defaultValue[field.id]!) : defaultFor(field) }])));
+type ServerCustomContentsInputs = Pick<ServerCustomFormProps, 'fields' | 'value' | 'defaultValue' | 'onValueChange' | 'onExpandedChange' | 'inputProps' | 'inputRefs' | 'dropdownRefs' | 'multiselectRefs' | 'optionRefs' | 'disabled' | 'readOnly' | 'scale'>;
+/** Private composition contract; intentionally not exported by the public barrel. */
+export interface ServerCustomContentsProps extends ServerCustomContentsInputs, Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'title' | 'defaultValue' | 'onChange' | 'onSubmit'> {
+  [key: `data-${string}`]: string | number | boolean | undefined;
+}
+function initialCustomValues(fields: readonly ServerCustomField[], defaultValue: ServerCustomFormValues | undefined): Record<string, LocalValue> {
+  return Object.fromEntries(fields.filter(editable).map(field => [field.id, { type: field.type, value: defaultValue && own(defaultValue, field.id) ? validateValue(field, defaultValue[field.id]!) : defaultFor(field) }]));
+}
+function acceptedCustomValues(fields: readonly ServerCustomField[], value: ServerCustomFormValues | undefined, local: Record<string, LocalValue>): ServerCustomFormValues {
+  return Object.fromEntries(fields.filter(editable).map(field => [field.id, value && own(value, field.id) ? validateValue(field, value[field.id]!) : value === undefined && own(local, field.id) && local[field.id]!.type === field.type ? validateValue(field, local[field.id]!.value) : defaultFor(field)]));
+}
+/** Private, hook-free initial/admitted data preflight for parent source plans.
+ * It shares the existing field, default and controlled-value rules; factory
+ * collection length/capacity remains the parent's explicit provider binding. */
+export function validateServerCustomContents({ fields, value, defaultValue, scale = 2 }: Pick<ServerCustomContentsProps, 'fields' | 'value' | 'defaultValue' | 'scale'>): void {
+  scaleValue(scale); validateFields(fields);
+  acceptedCustomValues(fields, value, initialCustomValues(fields, defaultValue));
+}
+/** Call directly: a custom hook adds no component/ID boundary to the old form. */
+function useServerCustomContents({ fields, value, defaultValue, onValueChange, onExpandedChange, inputProps = {}, inputRefs, dropdownRefs, multiselectRefs, optionRefs, disabled = false, readOnly = false, ...props }: ServerCustomContentsInputs, scope: Pick<ReturnType<typeof useScope>, 'isComposing'>) {
+  const uid = useId();
+  const [local, setLocal] = useState<Record<string, LocalValue>>(() => initialCustomValues(fields, defaultValue));
   const [open, setOpen] = useState<Record<string, boolean>>({});
-  const accepted: ServerCustomFormValues = Object.fromEntries(fields.filter(editable).map(field => [field.id, value && own(value, field.id) ? validateValue(field, value[field.id]!) : value === undefined && own(local, field.id) && local[field.id]!.type === field.type ? validateValue(field, local[field.id]!.value) : defaultFor(field)]));
+  const accepted: ServerCustomFormValues = acceptedCustomValues(fields, value, local);
   const latest = useRef({ fields, accepted, value, disabled, readOnly, onValueChange }); latest.current = { fields, accepted, value, disabled, readOnly, onValueChange };
   const change = (id: string, type: ServerCustomEditableField['type'], next: ServerCustomValue, event?: ChangeEvent<HTMLInputElement>, optionValue?: string) => {
     const current = latest.current, field = current.fields.find(item => item.id === id);
@@ -250,8 +269,28 @@ export const ServerCustomForm = forwardRef<HTMLElement, ServerCustomFormProps>(f
       </div>)}</div>
     </div>;
   };
+  return { contents: <div className="mc-server-custom-form__fields">{fields.map(field => <div key={field.id} data-server-field-id={field.id} data-server-field-type={field.type} hidden={field.visible === false}>{renderField(field)}</div>)}</div>, latest };
+}
+
+/** Private fields-only server_form.generated_contents seam. No title, frame,
+ * scroll, submit or close policy is mounted. Parent style can resolve the
+ * existing --mc-server-u/--mc-server-popup-width and inherited font profile. */
+export const ServerCustomContents = forwardRef<HTMLDivElement, ServerCustomContentsProps>(function ServerCustomContents({ fields, value, defaultValue, onValueChange, onExpandedChange, inputProps = {}, inputRefs, dropdownRefs, multiselectRefs, optionRefs, disabled = false, readOnly = false, scale = 2, className, style, onCompositionStartCapture, onCompositionEndCapture, ...native }, ref) {
+  scaleValue(scale); validateFields(fields);
+  const [, attach] = useClassicNodeRef(ref), scope = useScope(attach);
+  const { contents } = useServerCustomContents({ fields, value, defaultValue, onValueChange, onExpandedChange, inputProps, inputRefs, dropdownRefs, multiselectRefs, optionRefs, disabled, readOnly, scale }, scope);
+  return cloneElement(contents, { ...native, ref: scope.attach, className: ['mc-server-form', 'mc-server-custom-form__fields', className].filter(Boolean).join(' '),
+    style: { '--mc-server-u': `${scale}px`, '--mc-server-divider': `url(${JSON.stringify(serverFormImageAssets.list_item_divider_line_light.url)})`, ...style } as CSSProperties,
+    onCompositionStartCapture: (event: CompositionEvent<HTMLDivElement>) => { scope.start(event); onCompositionStartCapture?.(event); },
+    onCompositionEndCapture: (event: CompositionEvent<HTMLDivElement>) => { scope.end(event); onCompositionEndCapture?.(event); } }, contents.props.children);
+});
+
+/** Typed custom fields with one accepted value owner, keyed by stable caller IDs. */
+export const ServerCustomForm = forwardRef<HTMLElement, ServerCustomFormProps>(function ServerCustomForm({ fields, value, defaultValue, onValueChange, onSubmit, onCancel, submitText = 'Submit', submitVisible = true, submitEnabled = true, onExpandedChange, inputProps = {}, inputRefs, dropdownRefs, multiselectRefs, optionRefs, disabled = false, readOnly = false, ...props }, ref) {
+  validateFields(fields); const scope = useScope(ref);
+  const { contents, latest } = useServerCustomContents({ fields, value, defaultValue, onValueChange, onExpandedChange, inputProps, inputRefs, dropdownRefs, multiselectRefs, optionRefs, disabled, readOnly, scale: props.scale }, scope);
   return <ServerFormFrame {...props} kind="custom" scope={scope} disabled={disabled} readOnly={readOnly} cancel={detail => onCancel?.(copyRecord(latest.current.accepted), detail)}>
-    <div className="mc-server-custom-form__fields">{fields.map(field => <div key={field.id} data-server-field-id={field.id} data-server-field-type={field.type} hidden={field.visible === false}>{renderField(field)}</div>)}</div>
+    {contents}
     <Button className="mc-server-custom-form__submit" data-server-action="submit" hidden={!submitVisible} disabled={disabled || readOnly || !submitEnabled}
       onClick={event => { if (!event.defaultPrevented && !disabled && !readOnly && submitEnabled && !scope.isComposing()) onSubmit?.(copyRecord(latest.current.accepted), event); }}>{submitText}</Button>
   </ServerFormFrame>;

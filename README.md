@@ -15,6 +15,8 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 完整Classic Play入口为`#play-screen`：新增`PlayScreen`及11个可独立复用的frame／navigation／内容／行／详情／popup部件。Worlds、Friends与Servers保留独立provider快照；服务器先选择详情、再单独请求Join，不执行游戏或网络服务。原版Realms卡片与Pocket等仍有明确外部／未认证范围。见[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。
 
+资源包家族新增 `ResourcePackManager`、`ResourcePackSection`、`ResourcePackItem`、`ResourcePackActions`、`ResourcePackDiagnostics` 与 `PackSettingsScreen`、`PackSettingsContent`、`PackContentTier`。global／level／addon 保留各自源码绑定；内容等级的 raw value／steps 与显式 Web 数值域独立，生成字段复用九种实际表单行。API、来源和待验证范围见 [RESOURCE_PACKS_QA.md](docs/RESOURCE_PACKS_QA.md)。
+
 ## 本地运行
 
 需要 Node.js 22.12+ 或 24+。
@@ -70,7 +72,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
-> 当前源码为239组件／257运行时值，新增12个Classic Play部件；本轮最终source浏览器、实际React18／19包／安装与生产检查由Root进行，尚不据实现计数声明通过，native整页未认证。入口`#play-screen`，API与有限源范围见[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。
+> 当前实际安装包为247组件／265运行时值；React18／19、四种默认安装运行组合及桌面／手机生产展示已验证。独立材质平面92／120一致、28未通过，原生整页像素仍未认证。范围与记录见[RESOURCE_PACKS_QA.md](docs/RESOURCE_PACKS_QA.md)。此前Classic Play阶段为239／257，原有证据保留在[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。
 
 > Furnace已验阶段：227 组件／245 运行时值。新增完整熔炉、高炉、烟熏炉与可复用配方书等8部件；49项Node、browser04单批143个浏览器项目用例、8个独立filter像素平面、React18／19实际包与开发／生产四组合均通过。全库及原生整页像素资格仍未完成。入口 `#furnace-screens`；见 [FURNACE_SCREEN_QA.md](docs/FURNACE_SCREEN_QA.md)。
 

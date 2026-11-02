@@ -225,3 +225,11 @@ export { PlayJoinCodeDialog, PlayHighPingDialog } from './play-popups';
 export type { PlayPopupTextRole, PlayPopupNativeButtonProps, PlayPopupCloseDetail, PlayJoinCodeLabels, PlayJoinCodeBindings, PlayJoinCodeInputProps, PlayJoinCodeChangeDetail, PlayJoinCodeActionDetail, PlayJoinCodeDialogProps, PlayHighPingLabels, PlayHighPingBindings, PlayHighPingActionDetail, PlayHighPingDialogProps } from './play-popups';
 
 export type { PlayActionDetail, PlayActionHandler, PlaySourceImage } from './play-screen-parts';
+
+// Resource pack source profiles. Private source planners and generated fields stay internal.
+export { ResourcePackManager, ResourcePackSection } from './resource-packs';
+export type { ResourcePackProfile, ResourcePackSectionKind, ResourcePackManagerRecord, ResourcePackCollectionData, ResourcePackDefaultItem, ResourcePackHeaderDiagnostics, ResourcePackContentRequest, ResourcePackAgreementRequest, ResourcePackManagerActionDetail, ResourcePackManagerActionHandler, ResourcePackSectionProps, ResourcePackManagerProvider, ResourcePackManagerBindings, ResourcePackManagerLabels, ResourcePackManagerLayout, ResourcePackManagerProps } from './resource-packs';
+export { ResourcePackItem, ResourcePackActions, ResourcePackDiagnostics } from './resource-pack-items';
+export type { ResourcePackKind, ResourcePackIdentity, ResourcePackImage, ResourcePackAction, ResourcePackActionDetail, ResourcePackActionHandler, ResourcePackTargets, ResourcePackLabels, ResourcePackDiagnosticSnapshot, ResourcePackDiagnosticsProps, ResourcePackActionBindings, ResourcePackActionsProps, ResourcePackItemBindings, ResourcePackItemLayout, ResourcePackItemProps } from './resource-pack-items';
+export { PackSettingsScreen, PackSettingsContent, PackContentTier } from './pack-settings';
+export type { PackContentTierWebDomain, PackContentTierChangeDetail, PackContentTierProps, PackSettingsGeneratedContents, PackSettingsContentProps, PackSettingsCloseDetail, PackSettingsScreenProps } from './pack-settings';

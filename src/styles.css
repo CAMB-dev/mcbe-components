@@ -1,3 +1,5 @@
+@import './pack-settings.css';
+@import './resource-packs.css';
 @import './file-transmission.css';
 @import './play-screen.css';
 @import './external-server-form.css';

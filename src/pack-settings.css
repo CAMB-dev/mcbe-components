@@ -1,0 +1,53 @@
+@import './scroll-area.css';
+@import './server-forms.css';
+.mc-pack-settings-screen,.mc-pack-settings-content,.mc-pack-content-tier{--mc-pack-settings-scale:2;position:relative;box-sizing:border-box;min-width:0;font:400 calc(var(--mc-pack-settings-font-size,var(--mc-font-size,18px)) * var(--mc-pack-settings-scale) / 2)/calc(10px * var(--mc-pack-settings-scale)) var(--mc-font,monospace);text-shadow:none;color:rgb(100% 100% 100%);image-rendering:pixelated}
+.mc-pack-settings-screen[hidden],.mc-pack-content-tier[hidden],.mc-pack-settings-content[hidden],.mc-pack-content-tier [hidden]{display:none!important}
+.mc-pack-settings-screen,.mc-pack-settings-content{overflow:clip}
+.mc-pack-settings-skin{position:absolute;left:0;top:0;pointer-events:none;image-rendering:pixelated}
+.mc-pack-settings-skin__clip{position:absolute;display:block;overflow:hidden;pointer-events:none}
+.mc-pack-settings-skin__patch{position:absolute;left:0;top:0;display:block;image-rendering:pixelated;background-repeat:no-repeat}
+.mc-pack-settings-screen__dim{position:absolute;inset:0;opacity:.65;pointer-events:none}
+.mc-pack-settings-screen__panel{position:absolute;isolation:isolate}
+.mc-pack-settings-screen__underfill{position:absolute;left:calc(4px * var(--mc-pack-settings-scale));top:calc(4px * var(--mc-pack-settings-scale));opacity:1;pointer-events:none}
+.mc-pack-settings-screen__title{position:absolute;top:calc(9px * var(--mc-pack-settings-scale));left:50%;transform:translateX(-50%);height:calc(10px * var(--mc-pack-settings-scale));color:rgb(30% 30% 30%);white-space:nowrap;overflow:hidden}
+.mc-pack-settings-screen__close{position:absolute;right:0;top:0;box-sizing:border-box;width:calc(21px * var(--mc-pack-settings-scale));height:calc(21px * var(--mc-pack-settings-scale));border:0;border-radius:0;padding:0;margin:0;appearance:none;background:transparent var(--mc-pack-settings-close) center/calc(15px * var(--mc-pack-settings-scale)) calc(15px * var(--mc-pack-settings-scale)) no-repeat;image-rendering:pixelated;cursor:pointer}
+.mc-pack-settings-screen__close:hover:not(:disabled),.mc-pack-settings-screen__close:focus-visible:not(:disabled){background-image:var(--mc-pack-settings-close-hover)}
+.mc-pack-settings-screen__close:active:not(:disabled){background-image:var(--mc-pack-settings-close-pressed)}
+.mc-pack-settings-screen__close:focus-visible{outline:calc(1px * var(--mc-pack-settings-scale)) solid Highlight;outline-offset:calc(-1px * var(--mc-pack-settings-scale))}
+.mc-pack-settings-screen__close:disabled{cursor:default}
+.mc-pack-settings-screen__content{position:absolute;left:calc(8px * var(--mc-pack-settings-scale));top:calc(23px * var(--mc-pack-settings-scale))}
+.mc-pack-settings-content__scroll{position:absolute;top:0;grid-template-columns:minmax(0,1fr) calc(7px * var(--mc-pack-settings-scale))}
+.mc-pack-settings-content__scroll>.mc-scrollbar[data-orientation=vertical]{box-sizing:border-box;width:calc(7px * var(--mc-pack-settings-scale))!important;height:calc(100% - 4px * var(--mc-pack-settings-scale));align-self:center}
+.mc-pack-settings-content__scroll>.mc-scrollbar[data-orientation=vertical]>.mc-scrollbar__track{left:calc(3px * var(--mc-pack-settings-scale))!important}
+.mc-pack-settings-content__scroll>.mc-scrollbar[data-orientation=vertical]>.mc-scrollbar__thumb{left:calc(2px * var(--mc-pack-settings-scale))!important}
+.mc-pack-settings-content[data-input-mode=touch]>.mc-pack-settings-content__scroll{grid-template-columns:minmax(0,1fr)}
+.mc-pack-settings-content[data-input-mode=touch]>.mc-pack-settings-content__scroll>.mc-scrollbar[data-orientation=vertical]{width:calc(4px * var(--mc-pack-settings-scale))!important;height:100%}
+.mc-pack-settings-content[data-input-mode=touch]>.mc-pack-settings-content__scroll>.mc-scrollbar[data-orientation=vertical]>.mc-scrollbar__thumb{left:0!important}
+.mc-pack-settings-content__stack{position:relative;min-width:0}
+.mc-pack-content-tier__label-panel,.mc-pack-content-tier__reason-panel{position:relative;width:100%}
+.mc-pack-content-tier__label,.mc-pack-content-tier__reason{position:absolute;left:calc(4px * var(--mc-pack-settings-scale));width:calc(100% - 8px * var(--mc-pack-settings-scale));overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere}
+.mc-pack-content-tier__label{top:calc(2px * var(--mc-pack-settings-scale))}
+.mc-pack-content-tier__reason{bottom:calc(2px * var(--mc-pack-settings-scale));color:rgb(100% 0% 0%)}
+.mc-pack-content-tier__slider-panel{position:relative;height:calc(20px * var(--mc-pack-settings-scale))}
+.mc-pack-content-tier__track{position:absolute;left:calc(9px * var(--mc-pack-settings-scale));top:calc(5px * var(--mc-pack-settings-scale));height:calc(10px * var(--mc-pack-settings-scale))}
+.mc-pack-content-tier__bar,.mc-pack-content-tier__progress{position:absolute;inset:0;pointer-events:none}
+.mc-pack-content-tier__bar>.mc-pack-settings-skin{filter:brightness(0)}
+.mc-pack-content-tier__bar--hover>.mc-pack-settings-skin{filter:none}
+.mc-pack-content-tier__inside{position:absolute;inset:calc(1px * var(--mc-pack-settings-scale));pointer-events:none}
+.mc-pack-content-tier__bar--hover,.mc-pack-content-tier__marker-hover{display:none}
+.mc-pack-content-tier__marker{position:absolute;top:calc(2px * var(--mc-pack-settings-scale));width:calc(2px * var(--mc-pack-settings-scale));height:calc(6px * var(--mc-pack-settings-scale));pointer-events:none;z-index:3}
+.mc-pack-content-tier__fade{position:absolute;inset:0;opacity:.5;pointer-events:none;z-index:4}
+.mc-pack-content-tier__thumb{position:absolute;top:calc(-3px * var(--mc-pack-settings-scale));width:calc(10px * var(--mc-pack-settings-scale));height:calc(16px * var(--mc-pack-settings-scale));pointer-events:none;z-index:5}
+.mc-pack-content-tier__thumb>span{position:absolute;inset:0;display:none}
+.mc-pack-content-tier__thumb>.mc-pack-content-tier__thumb-default{display:block}
+.mc-pack-content-tier__input{position:absolute;left:0;top:calc(-3px * var(--mc-pack-settings-scale));width:100%;height:calc(16px * var(--mc-pack-settings-scale));box-sizing:border-box;opacity:0;appearance:none;border:0;margin:0;padding:0;cursor:pointer;z-index:6}
+.mc-pack-content-tier__slider-panel:focus-within .mc-pack-content-tier__bar--normal,.mc-pack-content-tier__slider-panel:focus-within .mc-pack-content-tier__marker-normal{display:none}
+.mc-pack-content-tier__slider-panel:focus-within .mc-pack-content-tier__bar--hover,.mc-pack-content-tier__slider-panel:focus-within .mc-pack-content-tier__marker-hover{display:block}
+.mc-pack-content-tier__slider-panel:focus-within .mc-pack-content-tier__thumb-default{display:none}
+.mc-pack-content-tier__slider-panel:focus-within .mc-pack-content-tier__thumb-hover{display:block}
+.mc-pack-content-tier__slider-panel:active:not([data-locked]) .mc-pack-content-tier__thumb>span{display:none}
+.mc-pack-content-tier__slider-panel:active:not([data-locked]) .mc-pack-content-tier__thumb>.mc-pack-content-tier__thumb-indent{display:block}
+.mc-pack-content-tier__slider-panel[data-locked] .mc-pack-content-tier__thumb>span{display:none}
+.mc-pack-content-tier__slider-panel[data-locked] .mc-pack-content-tier__thumb>.mc-pack-content-tier__thumb-locked{display:block}
+@media(hover:hover){.mc-pack-content-tier__slider-panel:hover:not([data-locked]) .mc-pack-content-tier__bar--normal,.mc-pack-content-tier__slider-panel:hover:not([data-locked]) .mc-pack-content-tier__marker-normal,.mc-pack-content-tier__slider-panel:hover:not([data-locked]):not(:active) .mc-pack-content-tier__thumb-default{display:none}.mc-pack-content-tier__slider-panel:hover:not([data-locked]) .mc-pack-content-tier__bar--hover,.mc-pack-content-tier__slider-panel:hover:not([data-locked]) .mc-pack-content-tier__marker-hover,.mc-pack-content-tier__slider-panel:hover:not([data-locked]):not(:active) .mc-pack-content-tier__thumb-hover{display:block}}
+@media(forced-colors:active){.mc-pack-settings-screen__panel{background:Canvas;color:CanvasText;outline:1px solid CanvasText}.mc-pack-settings-screen__underfill,.mc-pack-settings-screen__hollow{display:none}.mc-pack-content-tier__input{opacity:1;appearance:auto}.mc-pack-content-tier__bar,.mc-pack-content-tier__thumb,.mc-pack-content-tier__marker,.mc-pack-content-tier__fade{display:none}.mc-pack-content-tier__label,.mc-pack-content-tier__reason{color:CanvasText!important}}

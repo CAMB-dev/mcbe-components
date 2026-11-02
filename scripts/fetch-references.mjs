@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { prepareResourcePackReferences } from './prepare-resource-pack-references.mjs';
 const manifest = JSON.parse(await readFile(new URL('../docs/classic-skins.json', import.meta.url), 'utf8'));
 const hudManifest = JSON.parse(await readFile(new URL('../docs/hud-geometry.json', import.meta.url), 'utf8'));
 const hudOverlayManifest = JSON.parse(await readFile(new URL('../docs/hud-overlays-geometry.json', import.meta.url), 'utf8'));
@@ -29,6 +30,7 @@ if (!archiveBytes || createHash('sha256').update(archiveBytes).digest('hex') !==
   await writeFile(archiveTarget, bytes);
 }
 archiveBytes = undefined;
+await prepareResourcePackReferences();
 const references = new Map();
 // Caller-bound recipe backgrounds are exercised by QA, not default production skins.
 const fixtureReferences = [
