@@ -1897,5 +1897,101 @@
     "oldReferenceImagesChanged": false,
     "oldStrictFailuresRequalified": false,
     "details": "docs/RESOURCE_PACK_HEADER_NATIVE_QA.md"
+  },
+  "resourcePackHeaderImageStage": {
+    "status": "EXPLICIT_HOST_IMAGE_PROFILE_INTEGRATED_CONDITIONED_NATIVE_PLUS_AND_MINUS_QUALIFIED",
+    "componentCountChanged": false,
+    "components": 253,
+    "runtimeValues": 271,
+    "publicType": "ResourcePackHeaderImageProfile",
+    "sectionProp": "headerImageProfile",
+    "managerProp": "headerImageProfiles",
+    "details": "docs/RESOURCE_PACK_HEADER_IMAGES.md",
+    "gallery": "/#resource-packs",
+    "nativeSourceLayoutRecovered": false,
+    "nativeFontsReconstructed": false,
+    "nativeWholeGUIQualified": false,
+    "conditionedNative": {
+      "plusDraw": 81,
+      "plusAPIEvent": 515,
+      "plusChangedPixels": 2336,
+      "minusDraw": 87,
+      "minusAPIEvent": 568,
+      "minusSourceResource": 398,
+      "minusChangedPixels": 700,
+      "minusPixelBounds": [
+        2212,
+        188,
+        50,
+        14
+      ],
+      "minusPackedBounds": [
+        442.5,
+        37.59375,
+        452.5,
+        40.40625
+      ],
+      "minusPSConstants": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "nativeWholeSourceTexelsMatched": {
+        "plus": 121,
+        "minus": 33
+      },
+      "publicManagerAndSectionCases": 4,
+      "fullFrameDifferentPixels": 0,
+      "wholeFrame": [
+        2570,
+        1402
+      ],
+      "cropPreservesWholeFrameProjection": true,
+      "background": "Native same-draw before snapshot",
+      "hostCoordinates": "Explicit host snapshots, not recovered Settings layout",
+      "minusPaint": "Explicit prequantized host paintRect; never reuse final captured half vertices as normal inputs"
+    },
+    "retainedCSSNegatives": {
+      "plusPixelated": 128,
+      "plusCrispEdges": 128,
+      "minusContain": 28,
+      "fullFrameComparison": true
+    },
+    "validation": {
+      "familyAndNativeRegressionPass": 102,
+      "skip": 0,
+      "retries": 0,
+      "reactPeers": [
+        "18.3.1",
+        "19.3.1"
+      ],
+      "installedDevAndProductionCases": 4,
+      "installedNewProfileNegativeTypeContractsPerPeer": 3,
+      "contextLossAndRetry": true,
+      "mouseAndKeyboardPress": true,
+      "currentStateAtomicFallback": true,
+      "forcedColorsFallback": true,
+      "denseCoordinateValidation": true,
+      "unsupportedHasUsesOnlyImageFallback": true
+    },
+    "independentMinusReceipt": {
+      "path": ".cache/resource-pack-native-minus-study-20261103-01/FINAL.json",
+      "sha256": "da042ae8a8214124e8dd90eff99e15bb864dac942364c91440284932d072dd38"
+    },
+    "oldOraclesChanged": false,
+    "independentReview": {
+      "initial": ".cache/resource-pack-header-image-review-20261103-01/FINAL.json",
+      "initialSHA256": "4e4096814677737550c3669947d84e3c63cec91881b0ad52af7b15b955ff9650",
+      "currentCohort": ".cache/resource-pack-header-image-review-20261103-01/AMENDMENT-01/FINAL.json",
+      "currentCohortSHA256": "0e395159f8013e1e8abb8004e9b3ec84e943b194291e2a700ff8e5a2b85a932c",
+      "currentSourcePinsNoDrift": true,
+      "completeNativePNG": 4,
+      "differentPixels": 0
+    }
   }
 }

@@ -19,6 +19,8 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 已取得原版资源包标题图标的单帧GPU证据：两颗plus的半像素GLOBAL位置解释了整数对照的36像素差异。已有GPU接口在给定位置及原生背景的条件下通过真实React／两后端对照；默认整页布局和字体仍未认证。见 [原生标题图标验证](docs/RESOURCE_PACK_HEADER_NATIVE_QA.md)。
 
+标题支持可选 `headerImageProfile`／`headerImageProfiles`，保留完整源投影与正确状态回退；展示页资源包区可预览加／减号。减号回退保持11:3比例，源 GPU 绘制使用宿主明确提供的 paint rect。见 [标题图像采样](docs/RESOURCE_PACK_HEADER_IMAGES.md)。
+
 资源包验证报告入口 `#manifest-validation`：新增 `ManifestValidationScreen`、`ManifestValidationContent`、`ManifestPackSummary`、`ManifestValidationIssues`、`ManifestValidationIssue`、`ManifestValidationButton` 六个可复用部件。保留独立全局状态、完整问题集合和原始操作target；复制、刷新、删除仅发出宿主请求。默认报告使用文字刷新／删除，独立预览另外提供图标变体。见 [MANIFEST_VALIDATION_QA.md](docs/MANIFEST_VALIDATION_QA.md)。
 
 ## 本地运行

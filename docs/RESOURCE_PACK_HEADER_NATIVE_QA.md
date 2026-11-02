@@ -1,5 +1,7 @@
 # Resource Pack header: native draw evidence
 
+后续组件集成见 [标题图像采样配置](RESOURCE_PACK_HEADER_IMAGES.md)：真实 Section／Manager 已可使用显式 whole-frame profile，减号原生细条也取得独立 draw 证据。下文保留先前各阶段的限定与失败记录。
+
 当前仍为 **253 组件／271 运行时值**。GPU 采集阶段（`bd8eec9`）没有修改组件、采样内核、原图、旧参考图或误差阈值；补上了真实原版绘制证据和可重复测试。有限结论是：**给定捕获派生的宿主位置及原生 before 图层，现有公开 GPU 接口可以准确重画两颗 plus**。这不是资源包整页布局或字体复刻完成。
 
 ## 采集与原图身份

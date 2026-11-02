@@ -1,4 +1,77 @@
-# Current checkpoint — Resource Pack content and states, 2026-11-03
+# Current checkpoint — Resource Pack header source-image profile, 2026-11-03
+
+Full goal ACTIVE/incomplete. Branch codex/resource-pack-header-image-profile-20261103
+based on1f07d6725ad7a0f52fd83f1f4651e3ab10630870. Final commit/push/clean receipt:
+.cache/resource-pack-header-image-qa-20261103-01/FINAL.json. Normal push HEAD:main,
+never force. Still253 components/271 values; one new public TYPE, no new value.
+
+## Completed
+
+- ResourcePackSection.headerImageProfile / Manager.headerImageProfiles optional
+  per-kind source sampling. Type ResourcePackHeaderImageProfile exported. Whole
+  frame W/H/guiScale +host normal GLOBAL toggleOrigin; optional scissor/renderKey.
+  Expanded requires explicit PREQUANT expandedPaintRect (no square minus guess).
+- New internal resource-pack-header-images.tsx uses existing GuiImageLayer, whole
+  original PNG/full UV, source .3/white/Hud1, source pressed+1. Output bounds use
+  final packed vertices plus1 physical guard and whole-frame MVP. Parent CSS
+  pressed movement is compensated once, not double-applied. Invalid optional
+  profile retains Image. No shader/kernel/source PNG or old oracle changes.
+- Owner/current pseudo-state ready CSS gating: old ready normal cannot cover
+  hovered fallback. Loading/error/contextloss retain Image; renderKey retries;
+  forced colors and unsupported :has use fallback. Review caught sparse expanded
+  origin NaN and unsupported-has double paint; both fixed with source SSR/AST
+  repros retained, dense origin/scissor/renderKey checks and @supports gate.
+- Default minus Image now object-fit contain rather than11x3->10x10 stretch.
+  New source profile separately requires host-resolved minus paint extent.
+- Existing saved fresh PIX frame G87/q0e568/CL506/PSO512/R39811x3 ->R19. Actual
+  whole33texels exact repo, source allopaque white; PS8float all1, VS64 identical
+  to plus. Actual half bounds442.5,37.59375..452.5,40.40625, fullUV. Whole3.6MP
+  before-after only700white pixels at[2212,188,50,14]. Fresh API source+target
+  reads0. New budgeted one61,557,888B RAM decode selected144B only; EXCL guard,
+  no whole decoded file/other blocks. Never rerun old decode/helper or relax pins.
+- Two conditional native draws (G81two plus/G87minus) xSwiftShader/NVIDIA D3D11
+  actual public Manager/Section whole-frame RGBA0. Cropped canvas native proof
+  uses explicit host positions/native before BG, not recovered source layout.
+  Minus normal input example derives prequant extent from explicit contain/
+  physical-ceil policy; NEVER feed final captured half tuple through floor again.
+- Final browser-final03.json102PASS0skip/retry; includes desktop46/mobile46,
+ 7new profile/gallery/SSR tests and3existing conditional native tests. Full
+  fresh package-final.log React18.3.1/19.3.1 all253/271SSR/types/assets/licenses
+  actual0. New profile installed3negative types/peer and SSR pass; four final
+  installed dev/prod GPU state cases in package-final/INSTALLED.json pass.
+- New gallery optional toggle at /#resource-packs, idresource-pack-header-sampling.
+  Actual main font/GPU cold readiness can exceed5s: initial failure retained,
+  test now waits real font flag and actual ready (15s) rather than sleeps.
+- Source CSS filter experiment .cache/native-plus-css-filter-20261103-01 retains
+ 4wholeframe negatives: pixelated/crisp-edges both128diff, not a CSS fix.
+  Minus contain CSS fallback28diff; both negative scopes unchanged/unmasked.
+- Independent source/native-minus/review receipts frozen. Latest CPU review
+  AMENDMENT-01 SHA0e395159f8013e1e8abb8004e9b3ec84e943b194291e2a700ff8e5a2b85a932c
+  independently decoded4final03 fullPNG vsfixed native after:0,7source pins stable.
+
+## Remaining
+
+- Full native GUI/font/Settings safezone/100%c/default anchors/intrinsic/scroll
+  layout not recovered. Source host origins and minus paint are explicit inputs,
+  not new public defaults. Native evidence is finite GUI5/DPR1 opaque image role,
+  not universal .3 quantizer, other scales/partialalpha/whole-frame UI rebuild.
+- Historical ResourcePacks28/Manifest12 strict failures and all old goldens kept.
+  New optional renderer does not retroactively qualify default DOM/full GUI.
+- Font10 actual glyph geometry/host metrics and normal Settings global origin
+  remain meaningful next work, alongside remaining GUI breadth in coverage docs.
+
+## Operations
+
+- No Computer Use/game/PIX UI opened this phase. All new native reads used saved
+  capture only; CU stays closed. Own5481/5483/5484 servers/browser handles closed.
+  Keep preview4173 PID217140. Build updated site; final receipt records HTTP/hash.
+- Tests/receipts/cache native captures remain private and not packed. Final tar
+  docs may differ from tested candidate, but870runtime/manifest/license members
+  must be identical to actual final installed candidate; PACK-IDENTITY.json pins.
+- Agents frozen, CPU only. No global memory writes. Preserve previous failures
+  and originals; new review fixes did not rewrite old evidence.
+
+# Previous checkpoint — Resource Pack content and states, 2026-11-03
 
 Full goal ACTIVE/incomplete. Branch codex/resource-pack-header-layout-20261103
 starts from bd8eec9d4fc61a0661ab1ce2fb6f1ffc4cf614fa. Final actual commit/push/clean

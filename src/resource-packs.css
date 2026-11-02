@@ -17,6 +17,20 @@
 .mc-resource-packs-section__arrow-gap{width:calc(15px * var(--mc-rp-scale));flex:none}
 .mc-resource-packs-section__toggle{position:relative;left:calc(-2px * var(--mc-rp-scale));display:block;width:calc(10px * var(--mc-rp-scale));height:calc(10px * var(--mc-rp-scale));flex:none}
 .mc-resource-packs-section__toggle>.mc-image{filter:brightness(.3)}
+.mc-resource-packs-header-image{position:absolute;display:block;pointer-events:none;visibility:hidden}
+/* Only the CURRENT source state can replace its Image. A ready old canvas
+   cannot cover the synchronous CSS hover/press/locked fallback while a new
+   request is loading. Pressed paint may extend below the normal10x10 box. */
+@supports selector(:has(*)){
+.mc-resource-packs-button:not(:disabled):not(:is(:hover,:focus-visible,:active)) .mc-resource-packs-section__toggle:has(>.mc-resource-packs-header-image[data-button-state=default]>canvas[data-render-state=ready],>.mc-resource-packs-header-image[data-button-state=default][data-image-empty=true])>.mc-image,
+.mc-resource-packs-button:not(:disabled):not(:active):is(:hover,:focus-visible) .mc-resource-packs-section__toggle:has(>.mc-resource-packs-header-image[data-button-state=hover]>canvas[data-render-state=ready],>.mc-resource-packs-header-image[data-button-state=hover][data-image-empty=true])>.mc-image,
+.mc-resource-packs-button:not(:disabled):active .mc-resource-packs-section__toggle:has(>.mc-resource-packs-header-image[data-button-state=pressed]>canvas[data-render-state=ready],>.mc-resource-packs-header-image[data-button-state=pressed][data-image-empty=true])>.mc-image,
+.mc-resource-packs-button:disabled .mc-resource-packs-section__toggle:has(>.mc-resource-packs-header-image[data-button-state=locked]>canvas[data-render-state=ready],>.mc-resource-packs-header-image[data-button-state=locked][data-image-empty=true])>.mc-image{visibility:hidden}
+.mc-resource-packs-button:not(:disabled):not(:is(:hover,:focus-visible,:active)) .mc-resource-packs-header-image[data-button-state=default]>canvas[data-render-state=ready],
+.mc-resource-packs-button:not(:disabled):not(:active):is(:hover,:focus-visible) .mc-resource-packs-header-image[data-button-state=hover]>canvas[data-render-state=ready],
+.mc-resource-packs-button:not(:disabled):active .mc-resource-packs-header-image[data-button-state=pressed]>canvas[data-render-state=ready],
+.mc-resource-packs-button:disabled .mc-resource-packs-header-image[data-button-state=locked]>canvas[data-render-state=ready]{visibility:visible}
+}
 .mc-resource-packs-button:not(:disabled):is(:hover,:focus-visible,:active) .mc-resource-packs-section__toggle>.mc-image{filter:brightness(1)}
 .mc-resource-packs-section__diagnostic-holder{display:grid;place-items:center start;flex:none}
 .mc-resource-packs-section__diagnostic-icons{position:relative;display:block;width:calc(16px * var(--mc-rp-scale));height:calc(14px * var(--mc-rp-scale));font-size:0}
@@ -77,6 +91,8 @@
 .mc-resource-packs-button__underline{position:absolute;left:calc(2px * var(--mc-rp-scale));bottom:0;right:0;height:calc(1px * var(--mc-rp-scale));opacity:.6;background:currentColor;mask:var(--mc-resource-underline) repeat-x left bottom/calc(1px * var(--mc-rp-scale)) 100%;pointer-events:none}
 .mc-resource-packs-button--underline:not(:disabled):is(:hover,:focus-visible,:active)>.mc-resource-packs-button__underline{mask-image:var(--mc-resource-underline-focus)}
 @media(forced-colors:active){
+ .mc-resource-packs-header-image{display:none!important}
+ .mc-resource-packs-section__toggle>.mc-image{visibility:visible!important}
  .mc-resource-packs-button__state,.mc-resource-packs-panel-bg{display:none!important}
  .mc-resource-packs-button{border:1px solid ButtonText;background:ButtonFace;color:ButtonText}
  .mc-resource-packs-button:disabled{color:GrayText}
