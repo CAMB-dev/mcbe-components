@@ -27,7 +27,7 @@ Actual final results: Node78 PASS; browser02 Play60+CSS16=76 PASS; related
 NPC/Jigsaw/Command/Furnace110 PASS; material03 21planes PASS plus RO lifecycle;
 full package02 actual18.3.1/19.3.1 each37SSR+20negative Play types,71PNG43metadata;
 fresh installed04 default Vite18/19 x dev/prod4 PASS, 12ref nodes, no sourcealiases;
-built01 actual4173 desktop/mobile2 PASS; all temporary servers closed.
+built02 actual4173 desktop/mobile2 PASS; all temporary servers closed.
 Functional browser tar SHA256 2cd4dd3138a26569f1c35703f1eaa559dd46cf50cc107150017645a27f092395.
 Final pack proof PACK-IDENTITY.json checks all859 dist/manifest/license members:
 858 exact bytes; index.js.map differs only in two sourcesContent whitespace
@@ -91,7 +91,7 @@ header/input/filter source rect assertions and installed nonsearch filter test.
 Final bookCSS SHA73c1b0ead6ffc9bbdf9cbd757d6d88171c31faaa455354f7f454c567b47382ae.
 Independent initial freeze missed cascade; AMENDMENT-01 preserves and corrects it,
 SHA56c514d239c7dafe794942b3a8bc7cecaa75e8cae46bafb4606b23bd7c3a0db6.
-All pre-fix browser01/02/03, package01/02, installed01 and built01 retained.
+All pre-fix browser01/02/03, package01/02, installed01 and built02 retained.
 Pre-fix tar7d551e65... is NOT final CSS qualification. Initial browser failures
 also include test-role/grid scoping and root catalog edit causing Vite reload.
 Never edit imported catalog/source while a source browser matrix is running.
@@ -470,7 +470,7 @@ oversizedmobilefixture); browser02=44functionalPASS+15RGBApass/4RGBAFAIL;
 browser03=21PASS2realforcedcolorsFAIL before CSS fix. Package01 helper wrongly
 required camelcase readonly; independent helper followup also fixed JSONboolean
 AST parsing. Actual logs/worker copies retained, not counted as product passes.
-package02/installed01/built01 are before the forcedcolors correction.
+package02/installed01/built02 are before the forcedcolors correction.
 
 Alpha: same33 parameter sets across5contexts, independent cal01=99cells and
 cal02=66cells. Old scalar rule matches wholePNG but fails group; perpatch also

@@ -96,7 +96,7 @@ export function PlayExample({worlds, friends, servers}: HostPanes) {
 | 独立原图Web材质 | material03：21个完整材质区域、scale1/2/3、黑白底严格RGBA零差；包括Frame及共享零中心control、White和整数导航状态。另验证隐藏恢复与分数尺寸观察器更新 |
 | 实际React18／19包 | package02全套实际React18.3.1／19.3.1通过；每个peer为37项Play SSR、20条负类型合同、71张原图／43份metadata／CSS闭包与license身份检查 |
 | 默认安装组合 | installed04：实际18.3.1／19.3.1，默认Vite开发及生产四组合通过；12个组件ref、交互、输入、只读及完整卸载验证，无源码别名 |
-| built／生产展示 | built01：用户4173实际构建页、桌面及移动端三页和代码弹窗通过；HTML与site/index.html逐字身份相同 |
+| built／生产展示 | built02：用户4173实际构建页、桌面及移动端三页和代码弹窗通过；HTML与site/index.html逐字身份相同 |
 | 当前native活动路由／整GUI像素 | 未认证 |
 
 Pocket、education／editor／trial的完整路由、平台账户／Realms服务、默认tab／factory数据、focus controller／narration、safezone、engine cm／sm／fill／clip舍入、provider时钟、parent alpha和跨GPU最终Present均不由这一default Classic实现认证。用户要求的完整Bedrock GUI目标继续保留；组件数与原始素材身份不代表该目标已完成。

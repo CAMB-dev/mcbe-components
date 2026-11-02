@@ -936,7 +936,7 @@
     "sourceWholeBytes": "14 public JSON files equal fixed archive",
     "formalSourceBrowser": "browser02:76 PASS (Play60+unified CSS16), related regression110 PASS, Node78 PASS",
     "packageInstalled": "package02 full actual React18.3.1/19.3.1: each37 Play SSR groups,20 negative types,71 originals/43metadata; installed04 four default Vite dev/production modes PASS",
-    "builtProduction": "built01 user4173 desktop/mobile PASS and site HTML identity",
+    "builtProduction": "built02 user4173 desktop/mobile PASS and site HTML identity",
     "nativeWholeGUI": "UNQUALIFIED",
     "materials": "material03 21 full independent source Web planes strict RGBA0; hidden/show and fractional resize actual; not native/wholeGUI",
     "functionalBrowserTarSHA256": "2cd4dd3138a26569f1c35703f1eaa559dd46cf50cc107150017645a27f092395"
