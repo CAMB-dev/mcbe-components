@@ -1,3 +1,16 @@
+# Current delivery close checkpoint - 2026-11-03
+
+Goal ACTIVE / incomplete. Branch codex/magnifier-invariant-position-20261103 based on03237eb55945b7b3934b8a276b81be7c7767d807. Documentation-only delivery; no runtime/default/shader/texture/oracle changes. Normal authorized origin HEAD:main only. Stage .cache/magnifier-invariant-position-20261103-01/FINAL.json seals resulting commit, remote, doc-only package and services.
+
+- CPU rational POINT hypothesis rejected. Same normal physical source rect GUI5[1095,6305/32,85,85], GUI4[1134,298,68,68], complete original16PNG, exact Fraction floor/pixelcenter. Analytically opaque2950/1869 pixels contain32/13 native mismatches. Diagnostic in-memory opaque replacement over actual full frame: GUI5 old5 ->32 (5resolved,32newlywrong); GUI4 old160 ->80 (80resolved,0newlywrong,1bothwrongchanged). All3603140RGBA compared, transparent regions retain actual output, so not a full analytical renderer. No diagnostic image emitted, no pixel replacement production input, no new sampling API. Original residuals remain5/160. Both report01/02 retained;02 adds whole-frame transition counts without changing candidate.
+- New docs DELIVERY_STATUS.md consolidates actual268components+8data+13functions=289, latest functional/package/preview evidence with explicit historical scope, remaining fonts/defaultgeometry/model-fit/otherGUI/Classroom. MAGNIFIER_POINT_DIAGNOSIS.md records failed hypothesis and scope. README has single status link and fixes stale pane residual wording; GOAL primary scope count corrected289.
+- Earlier downloaded three exact ANGLE HLSL/backend source files and ChromiumDEPS recorded in PRIMARY-SOURCES.json. Partial source inspection is NOT proof final linked/machine behavior or invariant semantics; no invariant shader experiment executed. Rejected old VS algebraic and crop/fullviewport trials not rerun.
+- This turn no GPU/browser/server/CU/game/PIX/native capture; user says main menu open, but existing saved frames suffice. Do not claim a new capture. User4173PID217140 retained. No full runtime suite recounted; doc-only tar must match current pane functional SHA120b52b9c0f25422c18344a44648c1bf35e11f94352ca2fd845992d43f8421a3 across891 runtime/package/license members. No registry publish, no global memory writes.
+
+Next: remaining magnifier boundary requires real interpolation/compiler evidence rather than global floor/epsilon. Fonts/defaultwholeGUI/Classroom remain; current library is usable scoped delivery, not completed pixel-perfect goal. Only resume native/CU when genuinely needed and close CU immediately afterward. Do not mark goal complete from current counts/diagnostics.
+
+---
+
 # Current Classic pane calibration checkpoint - 2026-11-03
 
 Goal ACTIVE / incomplete. Branch codex/classic-pane-calibration-20261103 based onf1364e987f36ee319c5d573427931bb02c1be15c. Normal authorized origin HEAD:main only, never force. Stage .cache/classic-pane-calibration-20261103-01/FINAL.json seals commit/remote/services/doc-only package identity.

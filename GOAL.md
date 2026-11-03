@@ -1,4 +1,6 @@
-> 最新检查点（2026-11-03，玻璃板类别校准）：新增只读数据`classicPaneModelCalibration`，两个比例玻璃板均RGBA0，本轮消除2,335个旧误差、无新增。十个配方模型单元均零差，完整建筑页仍有放大镜160／5点残差。两peer包、四种默认Vite消费及源／生产预览验证通过。当前268组件＋8数据＋13函数＝289运行时值；字体、默认布局、通用引擎规则和其他GUI仍未完成。见 [API](docs/CLASSIC_PANE_CALIBRATION.md) 与 [验证](docs/CLASSIC_PANE_CALIBRATION_QA.md)。
+> 收尾检查点（2026-11-03）：交付与未完成范围集中在[阶段状态](docs/DELIVERY_STATUS.md)。本次CPU有理数POINT诊断在GUI5引入32个新错误，未采用为产品规则；现有GUI4／5放大镜160／5残差保持不变。无运行时变更或新原生采集，目标仍进行中。见[诊断](docs/MAGNIFIER_POINT_DIAGNOSIS.md)。
+
+> 最新功能检查点（2026-11-03，玻璃板类别校准）：新增只读数据`classicPaneModelCalibration`，两个比例玻璃板均RGBA0，本轮消除2,335个旧误差、无新增。十个配方模型单元均零差，完整建筑页仍有放大镜160／5点残差。两peer包、四种默认Vite消费及源／生产预览验证通过。当前268组件＋8数据＋13函数＝289运行时值；字体、默认布局、通用引擎规则和其他GUI仍未完成。见 [API](docs/CLASSIC_PANE_CALIBRATION.md) 与 [验证](docs/CLASSIC_PANE_CALIBRATION_QA.md)。
 
 > 前阶段检查点（2026-11-03，共用模型校准）：新增只读数据`classicBlockModelCalibration`，GUI4／GUI5各九个非玻璃板配方单元原生RGBA0，共消除1,016个旧误差且无新增误差；该阶段完整建筑页仍差1,078／1,422点。两peer实包、四种Vite安装消费及6项生产预览通过。交付时268组件＋7数据＋13函数＝288运行时值；完整目标继续进行。见 [API](docs/CLASSIC_MODEL_CALIBRATION.md) 与 [验证](docs/CLASSIC_MODEL_CALIBRATION_QA.md)。
 
@@ -31,7 +33,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前268个公共组件、6个数据和13个渲染 / 几何 / 纹理函数，共287个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前268个公共组件、8个数据和13个渲染 / 几何 / 纹理函数，共289个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。
