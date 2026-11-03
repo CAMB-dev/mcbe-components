@@ -1,3 +1,5 @@
+> 自动保存说明检查点（2026-11-03）：新增 AutoSaveInfoScreen／AutoSaveIcon，保留原版固定200×180面板、hollow5材质、9帧完整图集与确认请求。当前272组件＋8数据＋14函数＝294运行时值；原生默认字体、时钟、安全区与整页像素仍未认证。见[API与范围](docs/AUTO_SAVE_INFO.md)。
+
 # mcbeui
 
 React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素字体、硬边倒角、绿色交互状态、原生表单与键盘操作。以 **Bedrock Classic / JSON UI** 为主体，另提供独立的部分 OreUI 组件。

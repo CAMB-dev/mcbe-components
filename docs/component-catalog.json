@@ -1895,10 +1895,28 @@
         "details": "docs/IN_BED.md",
         "fidelity": "source_topology_host_intrinsic_font_default_anchor_explicit_native_unqualified"
       }
+    ],
+    "auto_save_info": [
+      {
+        "name": "AutoSaveInfoScreen",
+        "status": "implemented",
+        "source": "auto_save_info_screen.json",
+        "validation": "node4_source_browser30_new14_adjacent16_package04_react18_19_installed4_source3_built3_native_unqualified",
+        "details": "docs/AUTO_SAVE_INFO.md",
+        "fidelity": "fixed_source_panel_original_strip_explicit_host_frames_intrinsics_native_unqualified"
+      },
+      {
+        "name": "AutoSaveIcon",
+        "status": "implemented",
+        "source": "auto_save_info_screen.json",
+        "validation": "node4_source_browser30_new14_adjacent16_package04_react18_19_installed4_source3_built3_native_unqualified",
+        "details": "docs/AUTO_SAVE_INFO.md",
+        "fidelity": "fixed_source_panel_original_strip_explicit_host_frames_intrinsics_native_unqualified"
+      }
     ]
   },
   "publicExports": {
-    "components": 270,
+    "components": 272,
     "rendererDataValues": 5,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1909,12 +1927,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 292,
+    "runtimeValues": 294,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "in_bed_270_292_source_package_installed_built_pass_native_unqualified",
+    "publicationState": "auto_save_info_272_294_source_package_installed_built_pass_native_unqualified",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"

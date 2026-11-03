@@ -1,0 +1,30 @@
+.mc-auto-save-screen{position:relative;display:block;box-sizing:border-box;isolation:isolate;overflow:hidden;overscroll-behavior:contain;text-shadow:none;color:rgb(30% 30% 30%);image-rendering:pixelated}
+.mc-auto-save-screen[hidden],.mc-auto-save-icon[hidden]{display:none!important}
+.mc-auto-save-panel{position:absolute;width:calc(200 * var(--mc-autosave-u));height:calc(180 * var(--mc-autosave-u));box-sizing:border-box;isolation:isolate}
+.mc-auto-save-fill,.mc-auto-save-frame{position:absolute;inset:0;pointer-events:none}
+.mc-auto-save-fill{z-index:0}.mc-auto-save-frame{z-index:1}
+.mc-auto-save-title,.mc-auto-save-message{position:absolute;box-sizing:border-box;margin:0;font:inherit;font-weight:400;color:inherit;text-shadow:none;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;pointer-events:none;z-index:2}
+.mc-auto-save-title{text-align:center}.mc-auto-save-message{display:flex;flex-direction:column;color:#fff}
+.mc-auto-save-icon{position:relative;display:inline-block;overflow:hidden;box-sizing:border-box;vertical-align:middle;image-rendering:pixelated;pointer-events:none}
+.mc-auto-save-panel>.mc-auto-save-icon{position:absolute;z-index:31}
+.mc-auto-save-hint{position:absolute;display:flex;justify-content:center;align-items:center;overflow:hidden;pointer-events:none;z-index:2}
+.mc-auto-save-accept{appearance:none;position:absolute;top:0;display:block;box-sizing:border-box;min-width:0;min-height:0;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;outline:none;transform:none;font:inherit;font-weight:400;text-align:left;text-decoration:none;text-shadow:none;color:rgb(30% 30% 30%);cursor:pointer;touch-action:manipulation;isolation:isolate;z-index:2;opacity:1;filter:none}
+.mc-auto-save-accept:is(:hover,:focus-visible,:active,:disabled){background:transparent;box-shadow:none;transform:none;filter:none;opacity:1;text-shadow:none}
+.mc-auto-save-accept:disabled{color:rgb(30% 30% 30%);cursor:default}
+.mc-auto-save-accept__skins{position:absolute;inset:var(--mc-autosave-u);pointer-events:none;z-index:0}
+.mc-auto-save-accept__outline{position:absolute;inset:0;pointer-events:none;filter:brightness(.075);z-index:1}
+.mc-auto-save-accept__label{position:absolute;display:block;white-space:nowrap;overflow:hidden;pointer-events:none;z-index:2}
+.mc-auto-save-skin,.mc-auto-save-skin__clip{position:absolute;display:block;overflow:hidden;pointer-events:none}
+.mc-auto-save-skin__patch{display:block;image-rendering:pixelated}
+.mc-auto-save-hover,.mc-auto-save-pressed,.mc-auto-save-locked{display:none}
+.mc-auto-save-accept:is(:hover,:focus-visible):not(:disabled){color:#fff}
+.mc-auto-save-accept:is(:hover,:focus-visible):not(:disabled) .mc-auto-save-idle{display:none}
+.mc-auto-save-accept:is(:hover,:focus-visible):not(:disabled) .mc-auto-save-hover{display:block}
+.mc-auto-save-accept:is(:hover,:focus-visible,:active):not(:disabled) .mc-auto-save-accept__outline{filter:none}
+.mc-auto-save-accept:active:not(:disabled){color:#fff}
+.mc-auto-save-accept:active:not(:disabled) .mc-auto-save-idle,.mc-auto-save-accept:active:not(:disabled) .mc-auto-save-hover{display:none}
+.mc-auto-save-accept:active:not(:disabled) .mc-auto-save-pressed{display:block}
+.mc-auto-save-accept:active:not(:disabled) .mc-auto-save-accept__label{translate:0 var(--mc-autosave-u)}
+.mc-auto-save-accept:disabled .mc-auto-save-idle{display:none}
+.mc-auto-save-accept:disabled .mc-auto-save-locked{display:block}
+@media(forced-colors:active){.mc-auto-save-screen{color:CanvasText}.mc-auto-save-title,.mc-auto-save-message{color:CanvasText}.mc-auto-save-fill,.mc-auto-save-frame{display:none}.mc-auto-save-panel{background:Canvas;border:1px solid CanvasText}.mc-auto-save-accept__skins,.mc-auto-save-accept__outline{display:none}.mc-auto-save-accept{background:ButtonFace!important;border:1px solid ButtonText;color:ButtonText!important}.mc-auto-save-accept:disabled{color:GrayText!important;border-color:GrayText}.mc-auto-save-accept:focus-visible{outline:2px solid Highlight;outline-offset:2px}}

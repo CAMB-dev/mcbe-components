@@ -1,3 +1,5 @@
+> 自动保存说明检查点（2026-11-03）：新增 AutoSaveInfoScreen／AutoSaveIcon，保留原版固定200×180面板、hollow5材质、9帧完整图集与确认请求。当前272组件＋8数据＋14函数＝294运行时值；原生默认字体、时钟、安全区与整页像素仍未认证。见[API与范围](docs/AUTO_SAVE_INFO.md)。
+
 > 最新睡眠族检查点（2026-11-03）：新增实际InBedScreen／InBedControls，分离整帧背景和安全区内容，保留源128宽按钮行、20间距、49高状态及26高提示；实际输入／会话生命周期与源码比例已验证。现270组件＋8数据＋14函数＝292值。没有新的睡眠原生帧，完整目标继续。见[API与验证范围](docs/IN_BED.md)。
 
 > 最新计数接入检查点（2026-11-03）：原始TrueType路径已接入实际ResourcePackSection／Manager计数，四类独立配置、状态颜色、按下位移、语义回退、强制颜色与资源释放均验证。实际组件单字条件对照NVIDIA完整RGBA0，软件透明叠加21点残差保留；原生默认整页仍未完成，运行时导出仍290。见[计数API](docs/RESOURCE_PACK_HEADER_TEXT.md)。
@@ -43,7 +45,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前270个公共组件、8个数据和14个渲染 / 几何 / 纹理函数，共292个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前272个公共组件、8个数据和14个渲染 / 几何 / 纹理函数，共294个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。

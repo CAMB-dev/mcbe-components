@@ -11,7 +11,7 @@ export async function verifyWorldSettingsActionsPackage({consumer,root,major,evi
 import fs from 'node:fs/promises';import path from 'node:path';import{createHash}from'node:crypto';import{createRequire}from'node:module';import{pathToFileURL}from'node:url';
 const config=JSON.parse(await fs.readFile(process.argv[2],'utf8')),req=createRequire(path.join(config.consumer,'package.json'));
 const React=req('react'),ssr=req('react-dom/server').renderToStaticMarkup,pkg=path.join(config.consumer,'node_modules/mcbeui'),ui=await import(pathToFileURL(path.join(pkg,'dist/index.js')).href);
-assert.equal(Number(React.version.split('.')[0]),config.major);assert.equal(Object.keys(ui).length,292);
+assert.equal(Number(React.version.split('.')[0]),config.major);assert.equal(Object.keys(ui).length,294);
 for(const name of ['WorldSettingsActionButton','WorldLaunchActions'])assert.equal(ui[name].$$typeof,Symbol.for('react.forward_ref'));
 for(const name of ['worldActionAssets','frame','snapshotFont','skinBank'])assert(!Object.hasOwn(ui,name));
 let callbacks=0;const warnings=[],oldError=console.error,oldWarn=console.warn;console.error=(...args)=>warnings.push(args.join(' '));console.warn=console.error;
@@ -37,7 +37,7 @@ for(const [key,asset]of Object.entries(manifest.assets))for(const leaf of [asset
 }
 assert.deepEqual(await fs.readFile(path.join(pkg,'dist/world-settings-actions.css')),await fs.readFile(path.join(config.root,'src/world-settings-actions.css')));
 assert.deepEqual(await fs.readFile(path.join(pkg,'dist/assets/world-settings/LICENSE.md')),await fs.readFile(path.join(config.root,'src/assets/world-settings/LICENSE.md')));
-const report={status:'PASS_INSTALLED_WORLD_ACTIONS_SSR_MATERIALS_TYPES_PENDING',react:React.version,runtimeValues:292,checks,callbacks,warnings,materials};
+const report={status:'PASS_INSTALLED_WORLD_ACTIONS_SSR_MATERIALS_TYPES_PENDING',react:React.version,runtimeValues:294,checks,callbacks,warnings,materials};
 await fs.writeFile(path.join(config.evidence,'RESULT.json'),JSON.stringify(report,null,2)+'\n');
 `);
   const config=path.join(evidence,'config.json');

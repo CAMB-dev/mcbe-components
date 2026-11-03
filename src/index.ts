@@ -278,3 +278,6 @@ export type { WorldSettingsScreenProps, WorldSettingsScreenSnapshot, WorldSettin
 
 export { InBedScreen, InBedControls } from './in-bed';
 export type { InBedFont, InBedButtonLayout, InBedControlsLayout, InBedLayout, InBedLabels, InBedAction, InBedCommand, InBedActionDetail, InBedControllerHandle, InBedNativeButtonProps, InBedControlsProps, InBedScreenProps } from './in-bed-types';
+
+export {AutoSaveInfoScreen,AutoSaveIcon} from './auto-save-info';
+export type {AutoSaveInfoFont,AutoSaveInfoLayout,AutoSaveIconProps,AutoSaveInfoActionDetail,AutoSaveInfoControllerHandle,AutoSaveInfoScreenProps} from './auto-save-info-types';

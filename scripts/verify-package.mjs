@@ -148,14 +148,15 @@ components.push('PlayScreen','PlayScreenFrame','PlayNavigationTabs','PlayWorldRo
 components.push('ResourcePackManager','ResourcePackSection','ResourcePackItem','ResourcePackActions','ResourcePackDiagnostics','PackSettingsScreen','PackSettingsContent','PackContentTier');
 components.push("ManifestValidationButton","ManifestPackSummary","ManifestValidationIssue","ManifestValidationIssues","ManifestValidationContent","ManifestValidationScreen");
 components.push('InBedScreen','InBedControls');
+components.push('AutoSaveInfoScreen','AutoSaveIcon');
 components.push('DisconnectScreen','DisconnectMessage','DisconnectActions');
 components.push('WorldSettingsActionButton','WorldLaunchActions');
 components.push('SettingsFrame','SettingsNavigation','SettingsFields');
 components.push('WorldGameSettings','WorldMultiplayerSettings','WorldSettingsNavigation','WorldCloudSettings','WorldDebugSettings','WorldServerSettings','WorldSettingsScreen');
-assert.equal(components.length,270);
+assert.equal(components.length,272);
 assert.equal(dataExports.length,8);
 assert.equal(rendererFunctions.length,14);
-assert.equal(Object.keys(ui).length,292);
+assert.equal(Object.keys(ui).length,294);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -438,6 +439,12 @@ const bedLayout={size:[320,200],contentRect:[0,0,320,200],scale:2,font:{family:'
 const bedProps={open:true,layout:bedLayout,label:'Sleeping',status:'Sleep status',labels:{wake:'Wake',chat:'Chat'},inputHint:{visible:false}};
 assert.match(renderToString(element(ui.InBedScreen,bedProps)),/bed.wake_up_button_panel/);
 assert.equal(renderToString(element(ui.InBedScreen,{...bedProps,open:false})), '');
+const autosaveProps={open:true,layout:{size:[320,200],panelOrigin:[60,10],scale:2,font:{family:'monospace',size:8,lineHeight:10},titleSize:[100,10],acceptLabelSize:[24,10],messageAlignment:'left',messageVerticalAlignment:'top'},title:'Autosave',message:'Saves automatically',acceptLabel:'OK',messageVariant:'desktop',icon:{visible:true,frame:8},inputHint:{visible:false}};
+assert.match(renderToString(element(ui.AutoSaveInfoScreen,autosaveProps)),/auto_save_info.accept_button/);
+assert.equal(renderToString(element(ui.AutoSaveInfoScreen,{...autosaveProps,open:false})), '');
+assert.throws(()=>renderToString(element(ui.AutoSaveInfoScreen,{...autosaveProps,icon:{visible:true,frame:9}})));
+assert.match(renderToString(element(ui.AutoSaveIcon,{scale:2,frame:0,visible:true,label:'Saving'})),/role="img"/);
+
 assert.throws(()=>renderToString(element(ui.InBedScreen,{...bedProps,layout:{...bedLayout,buttons:Array(2)}})));
 const variableFont={pages:['/caller-variable-atlas.png'],pageSizes:[8],lineHeight:3,glyphs:{A:{page:0,atlasRect:[1,2,3,2],offset:[0,0],size:[3,2],advance:4}}};
 const variableText={kind:'truetype',text:'A',font:variableFont,origin:[2.25,3.25],projectionScale:1.5};
@@ -1918,6 +1925,13 @@ const bedElement=<importBed.InBedScreen open label="Sleeping" status="" labels={
 const badBedLayout:import('mcbeui').InBedLayout={size:[320,200],contentRect:[0,0,320,200],scale:2,font:bedLayout.font,status:bedLayout.status};
 // @ts-expect-error Command names match the source mappings.
 const badBedCommand:import('mcbeui').InBedCommand='button.pause';
+const autosaveLayout:import('mcbeui').AutoSaveInfoLayout={size:[320,200],panelOrigin:[60,10],scale:2,font:bedLayout.font,titleSize:[100,10],acceptLabelSize:[24,10],messageAlignment:'left',messageVerticalAlignment:'top'};
+const autosaveElement=<importBed.AutoSaveInfoScreen open layout={autosaveLayout} title="Save" message="Saves automatically" messageVariant="desktop" acceptLabel="OK" icon={{visible:true,frame:0}} inputHint={{visible:false}} controllerRef={createRef<import('mcbeui').AutoSaveInfoControllerHandle>()}/>;
+// @ts-expect-error A visible platform hint requires host-resolved geometry and content.
+const badAutosaveHint:import('mcbeui').AutoSaveInfoScreenProps['inputHint']={visible:true};
+// @ts-expect-error Accept is the only source-owned logical command.
+const badAutosaveCommand:Parameters<import('mcbeui').AutoSaveInfoControllerHandle['request']>[0]='button.menu_cancel';
+
 void [bedElement,badBedLayout,badBedCommand];
 const variableFont:GuiTrueTypeFont={pages:['/caller-variable-atlas.png'],pageSizes:[8],lineHeight:3,glyphs:{A:{page:0,atlasRect:[1,2,3,2],offset:[0,0],size:[3,2],advance:4}}};
 const variableGeometry:GuiTrueTypeGeometry={text:'A',font:variableFont,origin:[0,0],projectionScale:1.5,originQuantization:'float32'};

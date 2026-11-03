@@ -1,5 +1,13 @@
 # Third-party notices
 
+Auto-save Info adds the unchanged whole Mojang sample
+`dialog_background_hollow_5.png` and matching raw metadata under
+`dist/assets/auto-save-info`, with the original upstream LICENSE.md.
+It reuses the existing complete Progress auto_save strip and shared button/control
+resources. Whole source identities are recorded in `docs/auto-save-info-source.json`.
+These assets retain Mojang ownership and Minecraft EULA terms, independently of
+the MIT library code; no captured art or private font is added.
+
 World settings action parts reuse six unchanged whole public Mojang PNGs and
 their original metadata already present in the player-permissions and play-screen
 banks. They add no repainted or duplicate PNGs. Source identities and reuse paths
