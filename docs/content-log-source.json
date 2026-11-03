@@ -1,0 +1,42 @@
+{
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "nativeCertified": false,
+  "sources": [
+    {
+      "source": "resource_pack/ui/content_log_history_screen.json",
+      "sha256": "0010749c9a769db6278541b506bd66fa0ef9b1bb108c336952ab6a574b685951",
+      "bytes": 6809
+    },
+    {
+      "source": "resource_pack/ui/ui_template_dialogs.json",
+      "sha256": "de7b2ec43530715c797ab7ed2476965f9dc53962b88bc8c39a207582bee97264",
+      "bytes": 14238
+    },
+    {
+      "source": "resource_pack/ui/ui_template_buttons.json",
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96",
+      "bytes": 76484
+    },
+    {
+      "source": "resource_pack/ui/ui_common.json",
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6",
+      "bytes": 243941
+    },
+    {
+      "source": "resource_pack/ui/_global_variables.json",
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+      "bytes": 20210
+    },
+    {
+      "source": "resource_pack/textures/ui/crossout.png",
+      "sha256": "e6495d114d889c557948d19035a3a76ba45b9e7a75d19052eed826ea5f05ff61",
+      "bytes": 168
+    },
+    {
+      "source": "resource_pack/textures/ui/copy.png",
+      "sha256": "dd7b3dcc8c3ab7cc70c755bc25232014ebac3d54ab0bd393ab193b857e09059d",
+      "bytes": 199
+    }
+  ]
+}

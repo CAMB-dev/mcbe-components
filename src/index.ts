@@ -281,3 +281,6 @@ export type { InBedFont, InBedButtonLayout, InBedControlsLayout, InBedLayout, In
 
 export {AutoSaveInfoScreen,AutoSaveIcon} from './auto-save-info';
 export type {AutoSaveInfoFont,AutoSaveInfoLayout,AutoSaveIconProps,AutoSaveInfoActionDetail,AutoSaveInfoControllerHandle,AutoSaveInfoScreenProps} from './auto-save-info-types';
+
+export {ContentLogHistoryScreen,ContentLogMessages,ContentLogActions} from './content-log';
+export type {ContentLogFont,ContentLogShadow,ContentLogMessageRecord,ContentLogTextContext,ContentLogTextRenderer,ContentLogMessagesProps,ContentLogActionMetrics,ContentLogAction,ContentLogCommand,ContentLogActionDetail,ContentLogControllerHandle,ContentLogNativeButtonProps,ContentLogActionsProps,ContentLogHistoryLayout,ContentLogHistoryScreenProps} from './content-log-types';

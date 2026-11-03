@@ -149,7 +149,8 @@
     "./world-settings-screen.css": "./dist/world-settings-screen.css",
     "./world-server-settings.css": "./dist/world-server-settings.css",
     "./in-bed.css": "./dist/in-bed.css",
-    "./auto-save-info.css": "./dist/auto-save-info.css"
+    "./auto-save-info.css": "./dist/auto-save-info.css",
+    "./content-log.css": "./dist/content-log.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",

@@ -1,3 +1,5 @@
+> 内容日志历史检查点（2026-11-03）：新增 ContentLogHistoryScreen／ContentLogMessages／ContentLogActions，保留原版图标、25%操作按钮、能力分支与贴底日志。当前275组件＋8数据＋14函数＝297运行时值；源／包／四组合安装验证通过，原生整页未认证。见[API](docs/CONTENT_LOG.md)与[验证范围](docs/CONTENT_LOG_QA.md)。旧阶段计数保留为历史。
+
 > Slider 校准检查点（2026-11-03）：补齐原版按下／锁定材质与独立灰色覆盖；显示、ARIA与装饰滑块统一跟随实际input值，支持既有服务器表单缩放。110项具名回归、700个Web数值域和16个完整原图平面通过；组件数仍为272。原生整页目标继续，见[验证范围](docs/SLIDER_QA.md)。
 
 > 自动保存说明检查点（2026-11-03）：新增 AutoSaveInfoScreen／AutoSaveIcon，保留原版固定200×180面板、hollow5材质、9帧完整图集与确认请求。当前272组件＋8数据＋14函数＝294运行时值；原生默认字体、时钟、安全区与整页像素仍未认证。见[API与范围](docs/AUTO_SAVE_INFO.md)。
@@ -6,7 +8,7 @@
 
 React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素字体、硬边倒角、绿色交互状态、原生表单与键盘操作。以 **Bedrock Classic / JSON UI** 为主体，另提供独立的部分 OreUI 组件。
 
-当前源码提供 **270 个公共组件**，另有 8 个数据导出与 14 个函数，共 292 个运行时值。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
+当前源码提供 **275 个公共组件**，另有 8 个数据导出与 14 个函数，共 297 个运行时值。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
 
 新增[Classic Ten缓存生成工具](docs/CLASSIC_TRUETYPE_CACHE.md)：从用户自有原始TTF生成1024²图集，全部RGBA与指定原生缓存一致，保留原始字形度量及只读复算。原版字体不随包分发。现已接入独立的`GuiLayer kind:truetype`与`layoutGuiTrueTypeText`，支持可变字形、混排、阴影及资源快照；`#gui-layer`中展开 **Original Classic TrueType atlas** 可预览。见[使用与验证](docs/TRUETYPE_TEXT.md)，完整原生排版仍待验收。
 
@@ -49,7 +51,7 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 资源包验证报告入口 `#manifest-validation`：新增 `ManifestValidationScreen`、`ManifestValidationContent`、`ManifestPackSummary`、`ManifestValidationIssues`、`ManifestValidationIssue`、`ManifestValidationButton` 六个可复用部件。保留独立全局状态、完整问题集合和原始操作target；复制、刷新、删除仅发出宿主请求。默认报告使用文字刷新／删除，独立预览另外提供图标变体。见 [MANIFEST_VALIDATION_QA.md](docs/MANIFEST_VALIDATION_QA.md)。
 
-设置源码基础件入口 `#settings-source` 提供 SettingsFrame／SettingsNavigation／SettingsFields 与纯布局函数 layoutSettingsFrame。`#world-settings` 直接展示公开整页组件、服务器／Debug开关和Cloud独立预览。World 设置组合现提供 `WorldSettingsScreen`、`WorldServerSettings`、`WorldCloudSettings`、`WorldDebugSettings`，覆盖三个源别名、固定内容挂载、九种服务器工厂和独立32高提交、Cloud5及Debug7／150选项。当前源码268组件＋6数据＋13函数＝287运行时值；Classroom原始实现缺失，必须由外部模块接入，原生整页像素仍未完成。见 [整页API](docs/WORLD_SETTINGS_SCREEN.md) 与 [本阶段验证](docs/WORLD_SETTINGS_SCREEN_QA.md)。
+设置源码基础件入口 `#settings-source` 提供 SettingsFrame／SettingsNavigation／SettingsFields 与纯布局函数 layoutSettingsFrame。`#world-settings` 直接展示公开整页组件、服务器／Debug开关和Cloud独立预览。World 设置组合现提供 `WorldSettingsScreen`、`WorldServerSettings`、`WorldCloudSettings`、`WorldDebugSettings`，覆盖三个源别名、固定内容挂载、九种服务器工厂和独立32高提交、Cloud5及Debug7／150选项。该历史阶段为268组件＋6数据＋13函数＝287运行时值；Classroom原始实现缺失，必须由外部模块接入，原生整页像素仍未完成。见 [整页API](docs/WORLD_SETTINGS_SCREEN.md) 与 [本阶段验证](docs/WORLD_SETTINGS_SCREEN_QA.md)。
 
 ## 本地运行
 
@@ -106,7 +108,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
-> World 设置组合现提供 `WorldSettingsScreen`、`WorldServerSettings`、`WorldCloudSettings`、`WorldDebugSettings`，覆盖三个源别名、固定内容挂载、九种服务器工厂和独立32高提交、Cloud5及Debug7／150选项。当前源码268组件＋6数据＋13函数＝287运行时值；Classroom原始实现缺失，必须由外部模块接入，原生整页像素仍未完成。见 [整页API](docs/WORLD_SETTINGS_SCREEN.md) 与 [本阶段验证](docs/WORLD_SETTINGS_SCREEN_QA.md)。 各历史批次单独记录；开发／生产一致性与共享材质引擎零差不等于Minecraft独立原生证据。
+> World 设置组合现提供 `WorldSettingsScreen`、`WorldServerSettings`、`WorldCloudSettings`、`WorldDebugSettings`，覆盖三个源别名、固定内容挂载、九种服务器工厂和独立32高提交、Cloud5及Debug7／150选项。该历史阶段为268组件＋6数据＋13函数＝287运行时值；Classroom原始实现缺失，必须由外部模块接入，原生整页像素仍未完成。见 [整页API](docs/WORLD_SETTINGS_SCREEN.md) 与 [本阶段验证](docs/WORLD_SETTINGS_SCREEN_QA.md)。 各历史批次单独记录；开发／生产一致性与共享材质引擎零差不等于Minecraft独立原生证据。
 
 > 历史Manifest阶段实际安装包为253组件／271运行时值；React18／19、四种默认安装运行组合及桌面／手机生产展示已验证。Manifest图标平面6／18一致、12未通过；此前资源包平面92／120一致、28未通过，两套语料分别保留。原生整页像素仍未认证。范围见[MANIFEST_VALIDATION_QA.md](docs/MANIFEST_VALIDATION_QA.md)与[RESOURCE_PACKS_QA.md](docs/RESOURCE_PACKS_QA.md)。此前Classic Play阶段为239／257，原有证据保留在[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。
 

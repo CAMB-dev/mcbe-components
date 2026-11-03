@@ -1916,10 +1916,36 @@
         "details": "docs/AUTO_SAVE_INFO.md",
         "fidelity": "fixed_source_panel_original_strip_explicit_host_frames_intrinsics_native_unqualified"
       }
+    ],
+    "content_log": [
+      {
+        "name": "ContentLogHistoryScreen",
+        "status": "implemented",
+        "source": "content_log_history_screen.json",
+        "validation": "node8_new5_chat3_browser37_new17_chat20_package03_actual_react18_19_installed4_source3_gallery_receipts_in_QA_native_unqualified",
+        "details": "docs/CONTENT_LOG.md",
+        "fidelity": "source_material_explicit_host_geometry_fonts_native_unqualified"
+      },
+      {
+        "name": "ContentLogMessages",
+        "status": "implemented",
+        "source": "content_log_history_screen.json",
+        "validation": "node8_new5_chat3_browser37_new17_chat20_package03_actual_react18_19_installed4_source3_gallery_receipts_in_QA_native_unqualified",
+        "details": "docs/CONTENT_LOG.md",
+        "fidelity": "source_material_explicit_host_geometry_fonts_native_unqualified"
+      },
+      {
+        "name": "ContentLogActions",
+        "status": "implemented",
+        "source": "content_log_history_screen.json",
+        "validation": "node8_new5_chat3_browser37_new17_chat20_package03_actual_react18_19_installed4_source3_gallery_receipts_in_QA_native_unqualified",
+        "details": "docs/CONTENT_LOG.md",
+        "fidelity": "source_material_explicit_host_geometry_fonts_native_unqualified"
+      }
     ]
   },
   "publicExports": {
-    "components": 272,
+    "components": 275,
     "rendererDataValues": 5,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1930,12 +1956,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 294,
+    "runtimeValues": 297,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "slider_source_272_294_source_package_installed_built_pass_native_unqualified",
+    "publicationState": "content_log_275_297_source_package_installed_pass_native_unqualified",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
@@ -2723,5 +2749,25 @@
     "builtPreviewCases": 3,
     "installedWebDevProdPlanePairs": 6,
     "installedWebDevProdPlanePixels": 1536000
+  },
+  "contentLogStage": {
+    "components": 275,
+    "runtimeValues": 297,
+    "source": "content_log_history_screen.json",
+    "parts": 3,
+    "sourceBrowserContracts": 17,
+    "chatRegressionContracts": 20,
+    "nodeNew": 5,
+    "nodeChat": 3,
+    "actualPeers": [
+      "18.3.1",
+      "19.3.1"
+    ],
+    "defaultViteCases": 4,
+    "sourceDemoSizes": 3,
+    "nativeCertified": false,
+    "details": "docs/CONTENT_LOG_QA.md",
+    "galleryEvidence": "docs/CONTENT_LOG_QA.md",
+    "compatibility": "Chat force-scroll true-to-false preserves reader position; separate source update and force effects"
   }
 }

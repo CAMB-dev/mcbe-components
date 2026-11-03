@@ -1,3 +1,5 @@
+> 内容日志历史增量（2026-11-03）：新增三个可复用组件，当前275组件／297运行时值；仅content_log_history_screen.json由C更新为有限A。206行实际计数A48／B13／C28／D32／E0／F16／G63／H6，native仍未认证。见[API](CONTENT_LOG.md)与[验证](CONTENT_LOG_QA.md)。下方旧阶段计数保留为历史。
+
 > 自动保存说明增量：仅`auto_save_info_screen.json`由通用候选C变为有限A。原版9帧图集与hollow5源材质已接入；不认证原生时钟、默认字体／安全区或整页像素。272组件／294运行时值，详见[AUTO_SAVE_INFO.md](AUTO_SAVE_INFO.md)。
 
 > 新增睡眠族（2026-11-03）：InBedScreen／InBedControls使当前实际组件为270／运行时292；仅in_bed_screen.json从C更新为有限A。固定206行计数现为A46／B13／C30／D32／E0／F16／G63／H6；有限源／Web验证不代表原生整页完成。见[睡眠API与范围](IN_BED.md)。
@@ -27,9 +29,9 @@ MobEffect增量提供可见name／timer、独立grid、原图行背景、滚动�
 
 |代码|机器状态|文件数|含义|
 |---|---|---:|---|
-|A|`implemented_named_family_scoped`|47|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
+|A|`implemented_named_family_scoped`|48|已有命名族，范围限定：已有专门组合；不代表整文件、全部状态、引擎或native像素完成。|
 |B|`partial_existing_parts`|13|已有部分零件：如AchievementToast不等于AchievementScreen，HUD部件不等于所有HUD工厂。|
-|C|`generic_composition_candidate`|29|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
+|C|`generic_composition_candidate`|28|通用组合候选：现有部件可供宿主组合；未提供专门完整GUI，也不要求每个设置页增加wrapper。|
 |D|`shared_dependency_not_screen_requirement`|32|共享依赖：模板、资源或基础模块，不按一文件一组件来计缺口。|
 |E|`confirmed_missing_named_family`|0|缺少命名族：该源族确实存在，但当前组件快照无对应专门公开组合；基础控件可能已有。|
 |F|`pocket_not_certified`|16|Pocket未认证：Classic组件不能认证Pocket布局。|
@@ -38,7 +40,7 @@ MobEffect增量提供可见name／timer、独立grid、原图行背景、滚动�
 
 ## 命名族E0的边界
 
-Credits经有限Web合同、功能包、实际安装与展示页检查后由E→有限A，该固定206行快照的E计数成为0。它只表示这组“确认缺失命名族”已建立有限映射；当前B13部分、C29通用候选、F16 Pocket未认证、G63可选未映射、H6未知，以及所有文件的native状态仍保留。不能据E0宣称Minecraft全部GUI完成。
+Credits经有限Web合同、功能包、实际安装与展示页检查后由E→有限A，该固定206行快照的E计数成为0。它只表示这组“确认缺失命名族”已建立有限映射；当前B13部分、C28通用候选、F16 Pocket未认证、G63可选未映射、H6未知，以及所有文件的native状态仍保留。不能据E0宣称Minecraft全部GUI完成。
 
 CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际内容排版、滚动、独立Skip和高层／受控源快照。48个不同Web合同与六个自编平面不认证原版字体、logo、poem／edu阶段、引擎路由或整屏像素。实际包／安装／source与built展示页资格见具名阶段；详见[CREDITS_QA.md](CREDITS_QA.md)。Credits增量只变动credits_screen.json一行，其余205数据行逐字保持。
 
@@ -110,7 +112,7 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 |`command_block_screen.json`|command_block|1|A|CommandBlockEditor、CommandInput、CommandOutputPanel|
 |`confirm_delete_account_screen.json`|confirm_delete_account|1|G|—|
 |`content_log.json`|content_log|0|H|—|
-|`content_log_history_screen.json`|content_log_history|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
+|`content_log_history_screen.json`|content_log_history|1|A|ContentLogHistoryScreen、ContentLogMessages、ContentLogActions；显式宿主字体／几何／高度策略，源材质与Web合同有限验证，native未认证|
 |`crafter_screen_pocket.json`|crafter_pocket|0|F|—|
 |`create_world_upsell_screen.json`|create_world_upsell|2|G|—|
 |`credits_screen.json`|credits|1|A|CreditsScreen、CreditsRoll、CreditsSkipButton；layoutCredits（函数）|

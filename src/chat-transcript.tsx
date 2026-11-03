@@ -1,3 +1,4 @@
+import {useClassicBottomFollow} from './classic-bottom-follow';
 import { forwardRef, useCallback, useRef } from 'react';
 import type { CSSProperties, Ref } from 'react';
 import { chatAssets } from './chat-assets';
@@ -75,18 +76,8 @@ export const ChatTranscript = forwardRef<HTMLDivElement, ChatTranscriptProps>(fu
     if (!committed.current.visible || !node?.isConnected || !boundary?.contains(node) || boundary.closest('[hidden],[inert]')) return;
     node.scrollTop = node.scrollHeight; report();
   }, [root, viewport, report]);
-  // Source jump_to_bottom_on_update=true, independent of #scroll_chat_to_bottom.
-  useClassicLayoutEffect(() => { jump(); }, [revision, flags.chatVisible, visible, jump]);
-  useClassicLayoutEffect(() => { if (flags.forceScrollToBottom) jump(); }, [flags.forceScrollToBottom, runKey, visible, jump]);
-  useClassicLayoutEffect(() => {
-    const node = viewport.current, body = node?.firstElementChild;
-    const win = node?.ownerDocument.defaultView as (Window & typeof globalThis) | null | undefined;
-    if (!node || !body || !win || !visible) return;
-    const observer = typeof win.ResizeObserver === 'function' ? new win.ResizeObserver(jump) : undefined;
-    observer?.observe(node); observer?.observe(body);
-    body.addEventListener('load', jump, true); win.addEventListener('resize', jump);
-    return () => { observer?.disconnect(); body.removeEventListener('load', jump, true); win.removeEventListener('resize', jump); };
-  }, [visible, runKey, jump, viewport]);
+  // Both source transcript families share the same owner-document lifecycle.
+  useClassicBottomFollow(viewport,visible,runKey,revision,String(flags.chatVisible),jump,flags.forceScrollToBottom);
   const ownedStyle = { ...nativeStyle, '--mc-chat-unit': `${scale}px`, '--mc-chat-font-size': `${font.logicalSize * scale}px`,
     '--mc-chat-line-height': `${font.lineHeight * scale}px`, '--mc-chat-font-family': font.family,
     '--mc-chat-shadow': presentation.messageShadow ? `${scale}px ${scale}px 0 #3f3f3f` : 'none',

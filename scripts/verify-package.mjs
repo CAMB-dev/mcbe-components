@@ -149,14 +149,15 @@ components.push('ResourcePackManager','ResourcePackSection','ResourcePackItem','
 components.push("ManifestValidationButton","ManifestPackSummary","ManifestValidationIssue","ManifestValidationIssues","ManifestValidationContent","ManifestValidationScreen");
 components.push('InBedScreen','InBedControls');
 components.push('AutoSaveInfoScreen','AutoSaveIcon');
+components.push('ContentLogHistoryScreen','ContentLogMessages','ContentLogActions');
 components.push('DisconnectScreen','DisconnectMessage','DisconnectActions');
 components.push('WorldSettingsActionButton','WorldLaunchActions');
 components.push('SettingsFrame','SettingsNavigation','SettingsFields');
 components.push('WorldGameSettings','WorldMultiplayerSettings','WorldSettingsNavigation','WorldCloudSettings','WorldDebugSettings','WorldServerSettings','WorldSettingsScreen');
-assert.equal(components.length,272);
+assert.equal(components.length,275);
 assert.equal(dataExports.length,8);
 assert.equal(rendererFunctions.length,14);
-assert.equal(Object.keys(ui).length,294);
+assert.equal(Object.keys(ui).length,297);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -449,6 +450,14 @@ assert.match(renderToString(element(ui.AutoSaveInfoScreen,autosaveProps)),/auto_
 assert.equal(renderToString(element(ui.AutoSaveInfoScreen,{...autosaveProps,open:false})), '');
 assert.throws(()=>renderToString(element(ui.AutoSaveInfoScreen,{...autosaveProps,icon:{visible:true,frame:9}})));
 assert.match(renderToString(element(ui.AutoSaveIcon,{scale:2,frame:0,visible:true,label:'Saving'})),/role="img"/);
+const contentLogFont={family:'monospace',size:8,lineHeight:10};
+const contentLogProps={open:true,runKey:'log',layout:{size:[320,240],dialogRect:[10,10,300,220],scale:2,titleFont:contentLogFont,bodyFont:contentLogFont,actionFont:contentLogFont,titleWidth:120,bodyShadow:null,actions:{copyLabelSize:[30,10],clearLabelSize:[28,10],copyIconY:4,clearIconY:6,copyLabelY:6,clearLabelY:6}},title:'History',labels:{copy:'Copy',clear:'Clear',close:'Close',messages:'Messages'},messages:[{id:'a',text:'<tag> & literal'}],heightPolicy:'web-intrinsic',supportsClipboardSet:true,closeVisible:true};
+assert.match(renderToString(element(ui.ContentLogHistoryScreen,contentLogProps)),/&lt;tag&gt; &amp; literal/);
+assert.equal(renderToString(element(ui.ContentLogHistoryScreen,{...contentLogProps,open:false})), '');
+assert(!renderToString(element(ui.ContentLogHistoryScreen,{...contentLogProps,supportsClipboardSet:false})).includes('data-content-log-action'));
+assert.throws(()=>renderToString(element(ui.ContentLogHistoryScreen,{...contentLogProps,heightPolicy:'host-resolved'})));
+for(const internal of ['planContentLog','logRows','contentLogClearAsset','useClassicBottomFollow'])assert(!Object.hasOwn(ui,internal));
+
 
 assert.throws(()=>renderToString(element(ui.InBedScreen,{...bedProps,layout:{...bedLayout,buttons:Array(2)}})));
 const variableFont={pages:['/caller-variable-atlas.png'],pageSizes:[8],lineHeight:3,glyphs:{A:{page:0,atlasRect:[1,2,3,2],offset:[0,0],size:[3,2],advance:4}}};
@@ -1932,6 +1941,13 @@ const badBedLayout:import('mcbeui').InBedLayout={size:[320,200],contentRect:[0,0
 const badBedCommand:import('mcbeui').InBedCommand='button.pause';
 const autosaveLayout:import('mcbeui').AutoSaveInfoLayout={size:[320,200],panelOrigin:[60,10],scale:2,font:bedLayout.font,titleSize:[100,10],acceptLabelSize:[24,10],messageAlignment:'left',messageVerticalAlignment:'top'};
 const autosaveElement=<importBed.AutoSaveInfoScreen open layout={autosaveLayout} title="Save" message="Saves automatically" messageVariant="desktop" acceptLabel="OK" icon={{visible:true,frame:0}} inputHint={{visible:false}} controllerRef={createRef<import('mcbeui').AutoSaveInfoControllerHandle>()}/>;
+const contentLogFontTyped={family:'monospace',size:8,lineHeight:10};
+const validContentLog:import('mcbeui').ContentLogMessagesProps={runKey:'log',messages:[{id:'a',text:'x'}],size:[200,100],scale:2,font:contentLogFontTyped,shadow:null,heightPolicy:'web-intrinsic',label:'Messages'};
+
+// @ts-expect-error height policy is explicit
+const badContentLog:import('mcbeui').ContentLogMessagesProps={...validContentLog,heightPolicy:'automatic'};
+// @ts-expect-error content collection owns children
+const badContentLogChildren:import('mcbeui').ContentLogMessagesProps={...validContentLog,children:'custom'};
 // @ts-expect-error A visible platform hint requires host-resolved geometry and content.
 const badAutosaveHint:import('mcbeui').AutoSaveInfoScreenProps['inputHint']={visible:true};
 // @ts-expect-error Accept is the only source-owned logical command.

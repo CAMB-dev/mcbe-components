@@ -1,3 +1,5 @@
+> 当前公开275组件／297运行时值。内容日志族新增 `ContentLogHistoryScreen`、`ContentLogMessages`、`ContentLogActions`；独立入口 `mcbeui/content-log.css`，展示页 `#content-log`。见[API](CONTENT_LOG.md)与[验证范围](CONTENT_LOG_QA.md)。以下旧批次计数为历史。
+
 > Slider 校准检查点（2026-11-03）：补齐原版按下／锁定材质与独立灰色覆盖；显示、ARIA与装饰滑块统一跟随实际input值，支持既有服务器表单缩放。110项具名回归、700个Web数值域和16个完整原图平面通过；组件数仍为272。原生整页目标继续，见[验证范围](SLIDER_QA.md)。
 
 > 自动保存说明检查点（2026-11-03）：新增 AutoSaveInfoScreen／AutoSaveIcon，保留原版固定200×180面板、hollow5材质、9帧完整图集与确认请求。当前272组件＋8数据＋14函数＝294运行时值；原生默认字体、时钟、安全区与整页像素仍未认证。见[API与范围](AUTO_SAVE_INFO.md)。

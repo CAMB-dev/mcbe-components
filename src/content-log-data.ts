@@ -1,0 +1,27 @@
+import type {ContentLogFont,ContentLogShadow,ContentLogMessageRecord,ContentLogActionMetrics,ContentLogHistoryLayout,ContentLogAction,ContentLogActionDetail} from './content-log-types';
+export const logFinite=(v:number,name:string)=>{if(typeof v!=='number'||!Number.isFinite(v)||Math.abs(v)>8192)throw new RangeError(name+' must be finite and bounded.');return v;};
+export function logScale(v:number){if(!Number.isSafeInteger(v)||v<1||v>8)throw new RangeError('Content log scale must be integer1..8.');return v;}
+export function logText(v:string,name:string,empty=false){if(typeof v!=='string'||v.length>1048576||!empty&&!v.trim())throw new TypeError(name+' requires bounded text.');return v;}
+export function logPair(v:readonly number[],name:string,positive=false){if(!Array.isArray(v)||v.length!==2)throw new TypeError(name+' requires a dense pair.');const p=[logFinite(v[0]!,name),logFinite(v[1]!,name)]as const;if(positive&&p.some(n=>n<=0))throw new RangeError(name+' must be positive.');return p;}
+export function logFont(v:ContentLogFont){if(!v)throw new TypeError('Content log requires explicit font metrics.');logText(v.family,'Font family');if(v.family.length>4096)throw new RangeError('Log font family exceeds its CSS budget.');const size=logFinite(v.size,'Font size'),lineHeight=logFinite(v.lineHeight,'Font line height');if(size<=0||size>64||lineHeight<=0||lineHeight>64)throw new RangeError('Log font metrics must be positive and <=64.');return Object.freeze({family:v.family,size,lineHeight});}
+export function logShadow(v:ContentLogShadow):ContentLogShadow {if(v===null)return null;if(!v||typeof v.color!=='string'||!/^#(?:[\da-f]{6}|[\da-f]{8})$/i.test(v.color))throw new TypeError('Log shadow requires explicit hex color/offset or null.');return Object.freeze({color:v.color,offset:Object.freeze(logPair(v.offset,'Shadow offset'))});}
+export function logMetrics(v:ContentLogActionMetrics){if(!v)throw new TypeError('Log action intrinsics are required.');const copyLabelSize=logPair(v.copyLabelSize,'Copy label',true),clearLabelSize=logPair(v.clearLabelSize,'Clear label',true);if(copyLabelSize[1]>22||clearLabelSize[1]>22)throw new RangeError('Log action labels exceed the22-high content wrapper.');return {copyLabelSize,clearLabelSize,copyIconY:logFinite(v.copyIconY,'Copy icon Y'),clearIconY:logFinite(v.clearIconY,'Clear icon Y'),copyLabelY:logFinite(v.copyLabelY,'Copy label Y'),clearLabelY:logFinite(v.clearLabelY,'Clear label Y')};}
+export function logRows(rows:readonly ContentLogMessageRecord[],policy:'web-intrinsic'|'host-resolved'){
+ if(!['web-intrinsic','host-resolved'].includes(policy)||!Array.isArray(rows)||rows.length>10000)throw new TypeError('Log rows require an explicit height policy and finite collection.');
+ const seen=new Set<string>();let total=0;return Array.from(rows,row=>{if(!row)throw new TypeError('Sparse log collections are invalid.');const id=logText(row.id,'Log row ID');if(id.length>256||seen.has(id))throw new TypeError('Log row IDs must be unique and <=256 units.');seen.add(id);const text=logText(row.text,'Log message',true);total+=text.length;if(total>4194304)throw new RangeError('Log collection exceeds the Web text budget.');let height:number|undefined;
+  if(policy==='host-resolved'){height=logFinite(row.height!,'Resolved log height');if(height<0)throw new RangeError('Resolved log height cannot be negative.');}else if(row.height!==undefined)throw new TypeError('Web intrinsic rows do not accept a resolved height.');
+  return {id,text,...height===undefined?{}:{height}};
+ });
+}
+export function planContentLog(v:ContentLogHistoryLayout,clipboard:boolean){
+ if(!v||typeof clipboard!=='boolean')throw new TypeError('Content log requires explicit layout and clipboard capability.');const size=logPair(v.size,'Log frame',true),s=logScale(v.scale),r=v.dialogRect;
+ if(!Array.isArray(r)||r.length!==4||[0,1,2,3].some(i=>typeof r[i]!=='number'||!Number.isFinite(r[i])))throw new TypeError('Log dialog requires a dense resolved rectangle.');
+ const dialogRect=[logFinite(r[0],'Dialog X'),logFinite(r[1],'Dialog Y'),logFinite(r[2],'Dialog width'),logFinite(r[3],'Dialog height')]as const;
+ if(r[0]<0||r[1]<0||r[2]<64||r[3]<=65||r[0]+r[2]>size[0]||r[1]+r[3]>size[1]||size.some(n=>n*s>8192)||size[0]*size[1]*s*s>16777216)throw new RangeError('Log dialog must fit its frame and source insets.');
+ const titleWidth=logFinite(v.titleWidth,'Title width');if(titleWidth<=0||titleWidth>r[2])throw new RangeError('Log title width exceeds its dialog.');const bodyHeight=r[3]-(clipboard?65:31);
+ return {size,scale:s,dialogRect,titleWidth,titleFont:logFont(v.titleFont),bodyFont:logFont(v.bodyFont),actionFont:logFont(v.actionFont),bodyShadow:logShadow(v.bodyShadow),actions:logMetrics(v.actions),
+  title:[(r[2]-titleWidth)/2,9,titleWidth,10]as const,indent:[8,23,r[2]-16,bodyHeight]as const,
+  // The source bottom-left100% scroller preserves its explicit(2,-27) offset.
+  messages:[10,-4,r[2]-16,bodyHeight]as const,buttons:[7,r[3]-37,r[2]-14,30]as const,close:[r[2]-21,0,21,21]as const};
+}
+export function logIntent(runKey:string,action:ContentLogAction,source:ContentLogActionDetail['source'],closeButton=false):Omit<ContentLogActionDetail,'event'>{return {runKey,action,source,buttonId:action==='copy'?'button.copy_to_clipboard':action==='clear'?'button.clear':'button.menu_exit',sourceControl:action==='copy'?'content_log_history.clipboard_button':action==='clear'?'content_log_history.clear_button':closeButton?'common.close_button':'content_log_history.content_log_history_screen'};}

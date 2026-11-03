@@ -41,3 +41,6 @@ scripts/vendor/stb/LICENSE.txt -text whitespace=-blank-at-eol,-blank-at-eof
 
 # Autosave frame, raw metadata and upstream license remain whole original bytes.
 src/assets/auto-save-info/** -text
+
+# Unchanged complete Content Log source images and upstream notice.
+src/assets/content-log/** -text

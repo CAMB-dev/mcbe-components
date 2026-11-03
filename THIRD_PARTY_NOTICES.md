@@ -1,5 +1,12 @@
 # Third-party notices
 
+Content Log History adds the unchanged whole Mojang sample `crossout.png` at
+`dist/assets/content-log`, alongside the original upstream LICENSE.md. The
+existing whole copy icon, dialog/control, button and scrollbar materials are
+reused. Original byte identities: `docs/content-log-source.json`. Mojang ownership
+and Minecraft EULA terms apply independently of the MIT library code. No private
+font or captured artwork is distributed.
+
 Auto-save Info adds the unchanged whole Mojang sample
 `dialog_background_hollow_5.png` and matching raw metadata under
 `dist/assets/auto-save-info`, with the original upstream LICENSE.md.
