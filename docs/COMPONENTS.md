@@ -1,6 +1,6 @@
 # Bedrock 组件范围
 
-> 当前实际包（2026-11-03）：**264组件／283运行时值**，其中6份数据、13个函数不计作组件。WorldGameSettings、WorldMultiplayerSettings、WorldSettingsNavigation提供Game69／Multi8与World17＋Add-ons5子树。package03两peer各14组／24负类型合同、最终Node108、普通交互74、材质14、安装四组合与built展示6项分别通过。完整WorldSettingsScreen与原生像素未完成。见 [API](WORLD_SETTINGS_FIELDS.md) 和 [验证及保留失败](WORLD_SETTINGS_FIELDS_QA.md)。
+> 当前源码（2026-11-03）：**268组件／287运行时值**，6数据和13函数不计组件。新增四组件及固定World整页组合见 [API](WORLD_SETTINGS_SCREEN.md) 与 [验证](WORLD_SETTINGS_SCREEN_QA.md)。Classroom实现依赖外部模块，原生整页仍未验收。
 
 > 上一261组件／280值设置基础件阶段：SettingsFrame、SettingsNavigation、SettingsFields及layoutSettingsFrame的36交互＋24原材质源浏览器检查、React18.3.1／19.3.1实际包、四个Vite安装场景、built展示8项及Node43通过。它们不自动成为本次新增组件或字段内核修订的验收结果。见 [SETTINGS_SOURCE_QA.md](SETTINGS_SOURCE_QA.md)。
 
@@ -70,7 +70,7 @@ NPC新增NpcPortrait /NpcSkinPicker /NpcActionEditor /NpcDialogue /NpcEditor五�
 
 | 分类 | 组件 |
 | --- | --- |
-| Classic设置源码框架与具名页（6） | SettingsFrame、SettingsNavigation、SettingsFields、WorldGameSettings、WorldMultiplayerSettings、WorldSettingsNavigation；另有纯函数layoutSettingsFrame，不计组件。完整公共WorldSettingsScreen未实现 |
+| Classic设置源码框架与具名页（10） | SettingsFrame、SettingsNavigation、SettingsFields、WorldGameSettings、WorldMultiplayerSettings、WorldSettingsNavigation、WorldSettingsScreen、WorldServerSettings、WorldCloudSettings、WorldDebugSettings；另有纯函数layoutSettingsFrame，不计组件。Classroom外部接口及原生边界见WORLD_SETTINGS_SCREEN.md |
 | Credits（有限源族） | CreditsScreen、CreditsRoll、CreditsSkipButton；另有纯函数layoutCredits，不计作组件 |
 | 文字与表面（21） | Text、BitmapText、PixelIcon、GuiIcon、Image、NineSlice、GuiImageLayer、GuiLayer、BlockPreview、BannerPreview、Panel、Separator、Progress、Spinner、Tooltip、Dialog、Alert、Badge、Toast、ScrollArea、ScrollBar |
 | 输入与设置（16） | Button、IconButton、Checkbox、RadioGroup、Switch、Slider、TextField、TextArea、Select、Combobox、ToggleButton、SearchField、Tabs、NavigationList、SettingRow、KeybindingField |
@@ -192,4 +192,4 @@ PlayerInventoryScreen 的 needsCraftingTable 默认 false；显式启用时，�
 
 `SettingsNavigation` 是受控 source radio 导航：section／group／spacer 保留独立 ignored／visible／enabled；业务 `value`、`sourceIndex`、`viewBinding` 与 `sourceDefaultIndex` 分开。30高行与31高状态图、原outline／color glyph复用原素材；居中半像素相位和hover策略明确为Web合同。新增 `WorldSettingsNavigation` 保留17＋5源子树、缩略图／启动行、Switch独有图、pack cycling图与17高边框，server原加载条接受显式0…9帧；provider输入仍由宿主提供，没有库内时钟。Cloud两图及大写White精确缺失须显式解析。可选 `materialRendering` 要求source-image、ceil目标范围及显式均匀solid／transparent背景；省略用CSS，加载／错误保留CSS材质回退。此Web renderer不恢复原生anchor／sampler默认值。
 
-`SettingsFields` 现在接收15种kind，新增真实panel，并保留raw权限checked标记、URI请求元数据和显式RGB颜色码投影。`WorldGameSettings`／`WorldMultiplayerSettings` 按规范69／8直属控件及真实子树生成内容，要求完整bindings／conditions／strings／metrics，含ignored分支；不接受任意rows或children。原值／步骤与Web滑块域独立，变更只发宿主请求。当前package03、Node108、普通交互74、修复后材质14、实际安装四组合和built展示6项各自通过；原生整页仍未验收，详见 [本阶段验证](WORLD_SETTINGS_FIELDS_QA.md)。早期32个CSS平面17通过／15失败保留；独立CPU分类指出半相位、采样边界与8bit量化等有限解释，没有统一native规则，不据此改oracle或阈值。完整API、示例及各CPU批次边界见 [WORLD_SETTINGS_FIELDS.md](WORLD_SETTINGS_FIELDS.md)，基础件见 [SETTINGS_SOURCE.md](SETTINGS_SOURCE.md)。
+`SettingsFields` 现在接收17种kind（新增真实underline-action与image），新增真实panel，并保留raw权限checked标记、URI请求元数据和显式RGB颜色码投影。`WorldGameSettings`／`WorldMultiplayerSettings` 按规范69／8直属控件及真实子树生成内容，要求完整bindings／conditions／strings／metrics，含ignored分支；不接受任意rows或children。原值／步骤与Web滑块域独立，变更只发宿主请求。当前package03、Node108、普通交互74、修复后材质14、实际安装四组合和built展示6项各自通过；原生整页仍未验收，详见 [本阶段验证](WORLD_SETTINGS_FIELDS_QA.md)。早期32个CSS平面17通过／15失败保留；独立CPU分类指出半相位、采样边界与8bit量化等有限解释，没有统一native规则，不据此改oracle或阈值。完整API、示例及各CPU批次边界见 [WORLD_SETTINGS_FIELDS.md](WORLD_SETTINGS_FIELDS.md)，基础件见 [SETTINGS_SOURCE.md](SETTINGS_SOURCE.md)。

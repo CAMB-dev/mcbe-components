@@ -1,0 +1,11 @@
+@import './settings-frame.css';
+@import './world-settings-navigation.css';
+@import './settings-fields.css';
+@import './resource-packs.css';
+@import './world-server-settings.css';
+/* Frame has already applied section_content_panels' W−4, offset2 and H+4.
+   Its two source panel children overlap; each contains its own vertical stack. */
+.mc-world-settings-screen__content{display:grid;grid-template-columns:minmax(0,1fr);align-items:start;position:relative;width:100%;min-width:0}
+.mc-world-settings-screen__group{grid-area:1/1;display:flex;flex-direction:column;align-items:stretch;min-width:0;width:100%}
+.mc-world-settings-screen__mount{position:relative;flex:none;min-width:0;width:100%}
+.mc-world-settings-screen__mount[hidden]{display:none!important}

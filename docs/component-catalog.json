@@ -1851,10 +1851,36 @@
         "fidelity": "source_owned_complete_named_snapshot_fixed_structure_web_host_metrics_native_unqualified",
         "details": "docs/WORLD_SETTINGS_FIELDS.md"
       }
+    ],
+    "world_settings_screen": [
+      {
+        "name": "WorldSettingsScreen",
+        "status": "implemented",
+        "fidelity": "fixed_source_composition_explicit_host_geometry_external_classroom_native_unqualified",
+        "details": "docs/WORLD_SETTINGS_SCREEN.md"
+      },
+      {
+        "name": "WorldServerSettings",
+        "status": "implemented",
+        "fidelity": "fixed_source_composition_explicit_host_geometry_external_classroom_native_unqualified",
+        "details": "docs/WORLD_SETTINGS_SCREEN.md"
+      },
+      {
+        "name": "WorldCloudSettings",
+        "status": "implemented",
+        "fidelity": "fixed_source_composition_explicit_host_geometry_external_classroom_native_unqualified",
+        "details": "docs/WORLD_SETTINGS_SCREEN.md"
+      },
+      {
+        "name": "WorldDebugSettings",
+        "status": "implemented",
+        "fidelity": "fixed_source_composition_explicit_host_geometry_external_classroom_native_unqualified",
+        "details": "docs/WORLD_SETTINGS_SCREEN.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 264,
+    "components": 268,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1865,12 +1891,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 283,
+    "runtimeValues": 287,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "world_named_settings_264_283_source_cpu_prepared_browser_package_pending",
+    "publicationState": "world_settings_composition_268_287_package_installed_built_pass_native_incomplete",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
@@ -2244,5 +2270,59 @@
     "originalCSSCandidatePass": 17,
     "originalCSSCandidateFail": 15,
     "validationDetails": "docs/WORLD_SETTINGS_FIELDS_QA.md"
+  },
+  "worldSettingsScreenStage": {
+    "status": "SOURCE_PACKAGE_INSTALLED_BUILT_PASS_NATIVE_INCOMPLETE",
+    "components": [
+      "WorldSettingsScreen",
+      "WorldServerSettings",
+      "WorldCloudSettings",
+      "WorldDebugSettings"
+    ],
+    "sourceAliases": [
+      "create",
+      "template-create",
+      "edit"
+    ],
+    "worldMountOrder": [
+      "game",
+      "classroom",
+      "server",
+      "multiplayer",
+      "cloud",
+      "debug"
+    ],
+    "packMountOrder": [
+      "level",
+      "addon"
+    ],
+    "sourceHeaderFooterEmpty": true,
+    "rawViewsIndependentFromSelection": true,
+    "cloudDirectControls": 5,
+    "cloudExpandedRecords": 9,
+    "debugDirectControls": 7,
+    "debugRawRadioChoices": 150,
+    "settingsFieldKinds": 17,
+    "serverFactoryTypes": 9,
+    "serverSubmitHeight": 32,
+    "classroomOriginalImplementationAvailable": false,
+    "nativeWholeGUI": false,
+    "nodeTests": 132,
+    "sourceBrowserPassed": 135,
+    "sourceBrowserSkipped": 1,
+    "details": "docs/WORLD_SETTINGS_SCREEN.md",
+    "validationDetails": "docs/WORLD_SETTINGS_SCREEN_QA.md",
+    "finalScreenBrowserPassed": 42,
+    "finalFocusedNodeTests": 22,
+    "SSRGroupsPerPeer": 12,
+    "negativeTypesPerPeer": 17,
+    "installedViteCases": 4,
+    "installedDevProdWholeFrameComparisons": 16,
+    "installedDevProdComparedPixels": 7072000,
+    "builtDemoTests": 9,
+    "stableDeferredNativeEventOwner": true,
+    "scopedServerAxeReports": 0,
+    "scopedCloudAxeReports": 0,
+    "wholePageNativeCertified": false
   }
 }

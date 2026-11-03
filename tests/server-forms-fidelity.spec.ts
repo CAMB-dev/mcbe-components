@@ -47,7 +47,7 @@ test('action source rows retain32 height optional34 icon reservation and source 
 
 test('custom source content and submit widths stay distinct from viewport with native100 input and multiselect30 header17 rows',async({page})=>{
   await open(page,{showAction:false,scale:1});const root=custom(page);near(await rect(root.locator('.mc-server-form__content'),root,1),[12,23,194,(await root.locator('.mc-server-form__content').boundingBox())!.height]);const submit=root.getByRole('button',{name:'Submit form',exact:true});expect([(await submit.boundingBox())!.width,(await submit.boundingBox())!.height]).toEqual([194,32]);await expect(root.getByRole('textbox',{name:'Player name',exact:true})).toHaveAttribute('maxlength','100');
-  const header=root.getByRole('button',{name:'Features',exact:true});expect((await header.boundingBox())!.height).toBe(30);await header.click();for(const row of await root.locator('.mc-server-form__multiselect-option').all())expect((await row.boundingBox())!.height).toBe(17);for(const option of['Alpha','Beta','Gamma']){const checkbox=root.getByRole('checkbox',{name:option,exact:true});expect((await checkbox.locator('..').boundingBox())!.height).toBe(16);}
+  const header=root.getByRole('button',{name:/^Features:/});expect((await header.boundingBox())!.height).toBe(30);await header.click();for(const row of await root.locator('.mc-server-form__multiselect-option').all())expect((await row.boundingBox())!.height).toBe(17);for(const option of['Alpha','Beta','Gamma']){const checkbox=root.getByRole('checkbox',{name:option,exact:true});expect((await checkbox.locator('..').boundingBox())!.height).toBe(16);}
 });
 
 test('source custom controls preserve generic tail spacer dropdown17 rows and readable forced-color fallbacks',async({page})=>{

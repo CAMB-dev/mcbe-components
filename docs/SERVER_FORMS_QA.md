@@ -2,6 +2,8 @@
 
 `ServerActionForm` 对应源LongForm的动作列表，`ServerCustomForm` 对应schema驱动的CustomForm。它们是宿主控制的Web表单，不是ServerList，不连接服务器、发送协议响应或执行服务器动作；本范围不提供第三种MessageForm。
 
+新增World源挂载复用同一generated_contents；真实input／select事件可继续传递，多选按钮默认可访问名称包含显示摘要。相关最终修复和历史SSR差异见 [World整页验收](WORLD_SETTINGS_SCREEN_QA.md)。
+
 ## 使用
 
 ```tsx

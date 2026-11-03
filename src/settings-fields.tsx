@@ -1,6 +1,8 @@
 import {forwardRef,useCallback,useEffect,useId,useRef,useState,version as reactVersion} from 'react';
 import {createPortal} from 'react-dom';
 import type {CSSProperties,RefObject,Ref} from 'react';
+import {Image} from './image';
+import {WorldSettingsCloudUnderlinePaint} from './world-settings-cloud-parts';
 import {ClassicSkin} from './classic-skin';
 import {resourcePackAssets} from './resource-pack-assets';
 import {settingsFieldAssets as assets} from './settings-fields-assets';
@@ -231,6 +233,8 @@ function FieldRow({env,row,width,disabled,x,y}:{env:Environment;row:SettingsFiel
     case 'radio':contents=<Option c={c as RowContext&{row:SettingsRadioRow}}><Radio c={c as RowContext&{row:SettingsRadioRow}}/></Option>;break;
     case 'slider':contents=<Option c={c as RowContext&{row:SettingsSliderRow}}><Slider c={c as RowContext&{row:SettingsSliderRow}}/></Option>;break;
     case 'permissions':contents=<Option c={c as RowContext&{row:SettingsPermissionRow}}><Permissions c={c as RowContext&{row:SettingsPermissionRow}}/></Option>;break;
+    case 'underline-action':{const native=env.props.buttonProps?.[row.id]??{};contents=<NativeButton c={c} keyId={row.id} props={{...native,'data-source-target':row.target,'data-source-profile':'edu_common.underline_button'}} aria-label={defaultName(env,row.label,native)} className={['mc-world-cloud-underline',native.className].filter(Boolean).join(' ')} style={{width:width*s,height:row.height*s}} onActivate={(control,event)=>post(c,control,event.nativeEvent,{kind:'action',target:row.target},()=>event.defaultPrevented)}><WorldSettingsCloudUnderlinePaint row={row} width={width} scale={s} text={displayText(env,row.label)}/></NativeButton>;break;}
+    case 'image':contents=<Image src={row.image.src} sourceSize={row.image.sourceSize} size={[width,row.height]} scale={s} alt="" data-source-texture={row.texture} style={{pointerEvents:'none'}}/>;break;
     case 'action':contents=<SourceAction env={env} {...env.props.buttonProps?.[row.id]} buttonRef={env.props.buttonRefs?.[row.id]} size={[width,row.height]} scale={s} font={env.typography.control} label={row.label} target={row.target} tone={row.tone} labelMaxHeight={row.labelMaxHeight} disabled={c.disabled||env.snap.readOnly}
       onAction={detail=>post(c,detail.control,detail.event.nativeEvent,{kind:'action',target:row.target,...(row.uri?{uri:row.uri}:{})},()=>detail.event.defaultPrevented)}/>;break;
   }

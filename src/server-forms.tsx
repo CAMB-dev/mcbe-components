@@ -54,7 +54,7 @@ export type ServerCustomField =
 export type ServerCustomEditableField = Exclude<ServerCustomField, { type: 'label' | 'header' | 'divider' }>;
 export type ServerCustomValue = string | boolean | number | readonly string[];
 export type ServerCustomFormValues = Readonly<Record<string, ServerCustomValue>>;
-export interface ServerCustomChangeDetail { id: string; type: ServerCustomEditableField['type']; event?: ChangeEvent<HTMLInputElement> }
+export interface ServerCustomChangeDetail { id: string; type: ServerCustomEditableField['type']; event?: ChangeEvent<HTMLInputElement>; sourceEvent?: ChangeEvent<HTMLSelectElement> }
 export type ServerFormInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'type' | 'disabled' | 'readOnly' | 'children'>;
 export interface ServerCustomFormProps extends ServerFormCommonProps {
   fields: readonly ServerCustomField[];
@@ -234,14 +234,14 @@ function useServerCustomContents({ fields, value, defaultValue, onValueChange, o
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const accepted: ServerCustomFormValues = acceptedCustomValues(fields, value, local);
   const latest = useRef({ fields, accepted, value, disabled, readOnly, onValueChange }); latest.current = { fields, accepted, value, disabled, readOnly, onValueChange };
-  const change = (id: string, type: ServerCustomEditableField['type'], next: ServerCustomValue, event?: ChangeEvent<HTMLInputElement>, optionValue?: string) => {
+  const change = (id: string, type: ServerCustomEditableField['type'], next: ServerCustomValue, event?: ChangeEvent<HTMLInputElement>, optionValue?: string, sourceEvent?: ChangeEvent<HTMLSelectElement>) => {
     const current = latest.current, field = current.fields.find(item => item.id === id);
     if (!field || !editable(field) || field.type !== type || current.disabled || current.readOnly || field.disabled) return;
     if ((field.type === 'dropdown' || field.type === 'step_slider') && !field.options.some(option => option.value === next && !option.disabled)) return;
     if (field.type === 'multiselect' && !field.options.some(option => option.value === optionValue && !option.disabled)) return;
     const validated = validateValue(field, next), result = { ...copyRecord(current.accepted), [id]: copyValue(validated) };
     if (current.value === undefined) setLocal(previous => ({ ...previous, [id]: { type, value: copyValue(validated) } }));
-    current.onValueChange?.(result, { id, type, event });
+    current.onValueChange?.(result, { id, type, event, ...(sourceEvent ? {sourceEvent} : {}) });
   };
   const describe = (field: ServerCustomEditableField, child: ReactElement) => <SourceInfoTooltip content={field.tooltip} label={field.label} disabled={field.visible === false} scale={props.scale ?? 2}>{child}</SourceInfoTooltip>;
   const renderField = (field: ServerCustomField) => {
@@ -253,15 +253,17 @@ function useServerCustomContents({ fields, value, defaultValue, onValueChange, o
         className={['mc-server-form__input', attributes.className].filter(Boolean).join(' ')} onChange={event => { attributes.onChange?.(event); if (!event.defaultPrevented) change(field.id, 'input', event.currentTarget.value, event); }}/>);
     }
     if (field.type === 'toggle') return describe(field, <Switch ref={inputRefs?.[field.id]} id={controlId} label={field.label} checked={current as boolean} disabled={locked} readOnly={readOnly} aria-readonly={readOnly || undefined} className="mc-server-form__toggle" onClick={event => { if (readOnly) event.preventDefault(); }} onChange={event => change(field.id, 'toggle', event.currentTarget.checked, event)}/>);
-    if (field.type === 'slider') return describe(field, <Slider ref={inputRefs?.[field.id]} id={controlId} label={field.label} value={current as number} min={field.min} max={field.max} step={field.step} formatValue={field.formatValue} disabled={locked} aria-readonly={readOnly || undefined} onValueChange={next => change(field.id, 'slider', next)}/>);
-    if (field.type === 'step_slider') { const index = Math.max(0, field.options.findIndex(option => option.value === current)); return describe(field, <Slider ref={inputRefs?.[field.id]} id={controlId} label={field.label} value={index} min={0} max={Math.max(0, field.options.length - 1)} step={1} formatValue={() => field.options.find(option => option.value === current)?.label ?? String(current)} disabled={locked || !field.options.length} aria-readonly={readOnly || undefined} onValueChange={next => { const option = field.options[next]; if (option && !option.disabled) change(field.id, 'step_slider', option.value); }}/>); }
-    if (field.type === 'dropdown') return describe(field, <Combobox ref={dropdownRefs?.[field.id]} id={controlId} label={field.label} hidden={field.visible === false} value={current as string} options={field.options} placeholder={field.placeholder} disabled={locked} aria-readonly={readOnly || undefined} onValueChange={next => change(field.id, 'dropdown', next)}/>);
+    if (field.type === 'slider') return describe(field, <Slider ref={inputRefs?.[field.id]} id={controlId} label={field.label} value={current as number} min={field.min} max={field.max} step={field.step} formatValue={field.formatValue} disabled={locked} aria-readonly={readOnly || undefined} onChange={event => change(field.id, 'slider', event.currentTarget.valueAsNumber, event)}/>);
+    if (field.type === 'step_slider') { const index = Math.max(0, field.options.findIndex(option => option.value === current)); return describe(field, <Slider ref={inputRefs?.[field.id]} id={controlId} label={field.label} value={index} min={0} max={Math.max(0, field.options.length - 1)} step={1} formatValue={() => field.options.find(option => option.value === current)?.label ?? String(current)} disabled={locked || !field.options.length} aria-readonly={readOnly || undefined} onChange={event => { const option = field.options[event.currentTarget.valueAsNumber]; if (option && !option.disabled) change(field.id, 'step_slider', option.value, event); }}/>); }
+    if (field.type === 'dropdown') return describe(field, <Combobox ref={dropdownRefs?.[field.id]} id={controlId} label={field.label} hidden={field.visible === false} value={current as string} options={field.options} placeholder={field.placeholder} disabled={locked} aria-readonly={readOnly || undefined} onValueChange={(next,event) => change(field.id, 'dropdown', next, undefined, undefined, event)}/>);
     const expanded = field.expanded ?? (own(open, field.id) ? open[field.id]! : field.defaultExpanded ?? false), selected = current as readonly string[];
+    const summary = field.summary ?? (field.options.filter(option => selected.includes(option.value)).map(option => option.label).join(', ') || field.placeholder || '\u00a0');
+    const accessibleName = !summary.trim() || field.label.includes(summary) ? field.label : `${field.label}: ${summary}`;
     return <div className="mc-server-form__multiselect">
       <label id={`${controlId}-label`}>{field.label}</label>
-      {describe(field, <button ref={multiselectRefs?.[field.id]} type="button" id={controlId} className="mc-combobox-trigger" aria-label={field.label} aria-expanded={expanded} aria-controls={`${controlId}-options`} disabled={disabled || (field.headerDisabled ?? field.disabled)}
+      {describe(field, <button ref={multiselectRefs?.[field.id]} type="button" id={controlId} className="mc-combobox-trigger" aria-label={accessibleName} aria-expanded={expanded} aria-controls={`${controlId}-options`} disabled={disabled || (field.headerDisabled ?? field.disabled)}
         onClick={event => { if (event.defaultPrevented || disabled || (field.headerDisabled ?? field.disabled) || scope.isComposing()) return; if (field.expanded === undefined) setOpen(previous => ({ ...previous, [field.id]: !expanded })); onExpandedChange?.(field.id, !expanded, event); }}>
-        <span className="mc-combobox-value">{field.summary ?? (field.options.filter(option => selected.includes(option.value)).map(option => option.label).join(', ') || field.placeholder || '\u00a0')}</span><span className="mc-combobox-chevron" aria-hidden="true"/>
+        <span className="mc-combobox-value">{summary}</span><span className="mc-combobox-chevron" aria-hidden="true"/>
       </button>)}
       <div id={`${controlId}-options`} className="mc-server-form__multiselect-options" hidden={!expanded} role="group" aria-labelledby={`${controlId}-label`}>{field.options.map(option => <div className="mc-server-form__multiselect-option" key={option.value} data-server-option={option.value}>
         <Checkbox ref={optionRefs?.[field.id]?.[option.value]} label={option.label} checked={selected.includes(option.value)} disabled={locked || option.disabled} readOnly={readOnly} aria-readonly={readOnly || undefined}

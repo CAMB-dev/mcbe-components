@@ -1,0 +1,39 @@
+import{forwardRef,useCallback,useRef,useState,version as reactVersion}from'react';import type{ReactNode}from'react';
+import{SettingsFrame}from'./settings-frame';import{WorldSettingsNavigation}from'./world-settings-navigation';import{WorldGameSettings,WorldMultiplayerSettings,WorldCloudSettings,WorldDebugSettings}from'./world-settings-fields';import{WorldServerSettings}from'./world-server-settings';import{ResourcePackManager}from'./resource-packs';
+import{deferClassicRequest,scheduleClassicTask,useClassicLayoutEffect,useClassicNodeRef}from'./classic-screen-lifecycle';import{planWorldSettingsScreen}from'./world-settings-screen-model';
+import type{WorldSettingsPage,WorldSettingsScreenProps,WorldSettingsScreenRequest}from'./world-settings-screen-model';
+import type{SettingsFieldsRequest}from'./settings-fields-model';
+import{settingsFieldAvailable as available}from'./settings-fields-interaction';
+export type{WorldSettingsScreenProps,WorldSettingsScreenSnapshot,WorldSettingsScreenContext,WorldSettingsScreenViews,WorldSettingsPackSnapshot,WorldSettingsPage,WorldSettingsScreenRequest,WorldSettingsClassroomModule,WorldSettingsClassroomMountProps,WorldSettingsClassroomRequest,WorldSettingsClassroomSnapshot}from'./world-settings-screen-model';
+/** Fixed create/template-create/edit source assembly. Selector choice and the
+ * engine's raw view bindings remain independent, including multiple true views. */
+export const WorldSettingsScreen=forwardRef<HTMLDivElement,WorldSettingsScreenProps>(function WorldSettingsScreen(p,ref){
+ const plan=planWorldSettingsScreen(p),q=plan.snapshot,s=plan.scale,w=plan.width;
+ const{mode,snapshot,value,layout,hiddenSlots,contentLayout,typography,textFormatting,navigation,readOnly=false,onRequest,classroomModule,sectionRefs,fieldOptions,serverOptions,packOptions,popupHostRef,className,...frame}=p;void snapshot;void layout;void contentLayout;
+ const[root,attach]=useClassicNodeRef(ref),[popupHost,setPopupHost]=useState<HTMLDivElement|null>(null),receivePopup=useCallback((node:HTMLDivElement|null)=>{setPopupHost(old=>old===node?old:node);},[]),[,attachPopup]=useClassicNodeRef(popupHostRef,receivePopup);
+ const[,attachClassroom]=useClassicNodeRef(sectionRefs?.classroom);
+ const live=useRef({p,plan});useClassicLayoutEffect(()=>{live.current={p,plan};});
+ const send=(request:WorldSettingsScreenRequest,section?:WorldSettingsPage)=>{const now=live.current,control='control'in request.detail?request.detail.control:root.current;
+  if(now.p!==p||now.plan!==plan||now.p.disabled||now.p.inert||now.p.hidden||!available(root.current)||section&&!now.plan.active[section]||!available(control)||!root.current?.contains(control)||now.p.readOnly&&!['frame','navigation'].includes(request.kind))return;
+  return now.p.onRequest?.(Object.freeze(request));
+ };
+ const wrap=(id:WorldSettingsPage,source:string,child:ReactNode)=>{if(plan.ignored[id])return null;const visible=plan.visible[id],inertProps={inert:!visible||p.inert?Number.parseInt(reactVersion,10)<19?'':true:undefined}as Record<string,string|boolean|undefined>;
+  return<div key={id} {...inertProps} className="mc-world-settings-screen__mount" data-world-settings-mount={id} data-source-control={source} data-source-visible={visible} data-source-ignored="false" hidden={!visible&&hiddenSlots==='collapse'} aria-hidden={!visible||undefined} style={{visibility:visible?undefined:'hidden'}}>{child}</div>;
+ };
+ const field=(id:'game'|'multiplayer'|'cloud'|'debug')=>{const state=q.pages[id];if(!state||plan.ignored[id])return null;const Component={game:WorldGameSettings,multiplayer:WorldMultiplayerSettings,cloud:WorldCloudSettings,debug:WorldDebugSettings}[id];
+  const props={...fieldOptions?.[id],width:w,scale:s,inputMode:p.layout.inputMode,typography,textFormatting,hiddenSlots,disabled:p.disabled,readOnly,inert:p.inert||!plan.active[id],popupHost,ref:sectionRefs?.[id],onRequest:(detail:SettingsFieldsRequest)=>send({kind:'field',section:id,detail},id)};
+  // Each selected constructor has the same source contract except its complete
+  // named snapshot. Preserve the discriminated family at this private seam.
+  return wrap(id,`world_section.${id==='cloud'?'edu_cloud':id}_section`,<Component {...props} snapshot={state as never}/>);
+ };
+ const server=q.pages.server&&!plan.ignored.server?wrap('server','world_section.server_section',<WorldServerSettings {...serverOptions} ref={sectionRefs?.server} width={w} scale={s} font={p.font} snapshot={q.pages.server} hiddenSlots={hiddenSlots} disabled={p.disabled} readOnly={readOnly} inert={p.inert||!plan.active.server} onValueRequest={detail=>send({kind:'server-value',detail},'server')} onSubmitRequest={detail=>send({kind:'server-submit',detail},'server')}/>):null;
+ const classroom=q.pages.classroom&&!plan.ignored.classroom&&classroomModule?wrap('classroom','settings.section_content_panels/classroom_section_panel',<div ref={attachClassroom} data-source-control="classroom_settings.classroom_section" data-source-resolution="external-module" style={{height:q.pages.classroom.height*s}}><classroomModule.Component snapshot={q.pages.classroom.data} width={w} height={q.pages.classroom.height} scale={s} font={p.font} mode={mode} visible={plan.visible.classroom} disabled={!!p.disabled} readOnly={readOnly} inert={!!p.inert||!plan.active.classroom} popupHost={popupHost} onRequest={detail=>{const captured=live.current,good=()=>live.current===captured;if(detail.event)deferClassicRequest(detail.event,detail.control,event=>{if(good())send({kind:'classroom',detail:{...detail,event}},'classroom');},good);else scheduleClassicTask(detail.control,()=>{if(good())send({kind:'classroom',detail},'classroom');});}}/></div>):null;
+ const pack=(id:'level'|'addon')=>{const data=q.pages[id];if(!data||plan.ignored[id])return null;return wrap(id,`world_section.${id==='level'?'level_texture_pack_section':'addon_section'}`,<ResourcePackManager {...data} {...packOptions?.[id]} ref={sectionRefs?.[id]} profile={id} provider={plan.provider} width={w} scale={s} disabled={p.disabled||!plan.active[id]} readOnly={readOnly} onAction={detail=>send({kind:'pack',section:id,detail},id)}/>);};
+ const content=<div className="mc-world-settings-screen__content" data-source-control="settings.section_content_panels" data-source-frame-insets="already-resolved" data-layout-policy="max-allocated-groups">
+  {!plan.ignored.game&&<div className="mc-world-settings-screen__group" data-source-control="settings.section_content_panels/world_sections">{field('game')}{classroom}{server}{field('multiplayer')}{field('cloud')}{field('debug')}</div>}
+  {!plan.ignored.level&&<div className="mc-world-settings-screen__group" data-source-control="settings.section_content_panels/packs_sections">{pack('level')}{pack('addon')}</div>}
+ </div>;
+ const navSnapshot=readOnly?{...plan.navigation,launch:{primary:{...plan.navigation.launch.primary,enabled:false},realms:{...plan.navigation.launch.realms,enabled:false},play:{...plan.navigation.launch.play,enabled:false},host:{...plan.navigation.launch.host,enabled:false}}}:plan.navigation;
+ return<SettingsFrame {...frame} ref={attach} className={['mc-world-settings-screen',className].filter(Boolean).join(' ')} data-source-control={{create:'settings.screen_world_create','template-create':'settings.screen_template_create',edit:'settings.screen_world_edit'}[mode]} data-world-settings-mode={mode}
+  layout={plan.geometry.layout} content={content} popupHostRef={attachPopup} selectorContent={plan.geometry.selector?<WorldSettingsNavigation {...navigation} width={plan.geometry.selector.contentWidth} scale={s} font={p.font} mode={mode} snapshot={navSnapshot} value={value} hiddenSlots={hiddenSlots} disabled={p.disabled} inert={p.inert} onValueChange={(value,detail)=>send({kind:'navigation',value,detail})} onLaunchAction={detail=>send({kind:'launch',detail})}/>:null} onRequest={detail=>send({kind:'frame',detail})}/>;
+});

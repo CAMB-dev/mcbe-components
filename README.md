@@ -2,7 +2,7 @@
 
 React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素字体、硬边倒角、绿色交互状态、原生表单与键盘操作。以 **Bedrock Classic / JSON UI** 为主体，另提供独立的部分 OreUI 组件。
 
-当前源码提供 **264 个公共组件**，另有 6 个数据导出与 13 个函数，共 283 个运行时值。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
+当前源码提供 **268 个公共组件**，另有 6 个数据导出与 13 个函数，共 287 个运行时值。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
 
 > 这是独立粉丝项目，与 Mojang、Microsoft 无关联。开源替代字体和 Web 布局与游戏存在差异；未声称整套 UI 与任何游戏版本零像素偏差。视觉来源与差异见 [FIDELITY.md](docs/FIDELITY.md)。
 
@@ -25,7 +25,7 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 资源包验证报告入口 `#manifest-validation`：新增 `ManifestValidationScreen`、`ManifestValidationContent`、`ManifestPackSummary`、`ManifestValidationIssues`、`ManifestValidationIssue`、`ManifestValidationButton` 六个可复用部件。保留独立全局状态、完整问题集合和原始操作target；复制、刷新、删除仅发出宿主请求。默认报告使用文字刷新／删除，独立预览另外提供图标变体。见 [MANIFEST_VALIDATION_QA.md](docs/MANIFEST_VALIDATION_QA.md)。
 
-设置源码基础件入口 `#settings-source` 提供 `SettingsFrame`、`SettingsNavigation`、`SettingsFields` 与纯布局函数 `layoutSettingsFrame`。`#world-settings` 提供具名Game69／Multiplayer8和World／Add-ons导航，含真实资源包挂载示例；尺寸、字体、状态与provider由宿主明确提供。当前实际 React18.3.1／19.3.1 包为264组件＋6数据＋13函数＝283运行时值。World Game69／Multiplayer8／World导航三部件、15kind共用字段、显式source-image材质路径已提供。Node108、普通交互74、修复后材质14、实际安装开发／生产四组合和生产展示6项各自通过；完整WorldSettingsScreen及原生字体／默认布局／整页像素仍未完成。 见 [API](docs/WORLD_SETTINGS_FIELDS.md) 与 [本阶段验证和保留失败](docs/WORLD_SETTINGS_FIELDS_QA.md)。
+设置源码基础件入口 `#settings-source` 提供 SettingsFrame／SettingsNavigation／SettingsFields 与纯布局函数 layoutSettingsFrame。`#world-settings` 直接展示公开整页组件、服务器／Debug开关和Cloud独立预览。World 设置组合现提供 `WorldSettingsScreen`、`WorldServerSettings`、`WorldCloudSettings`、`WorldDebugSettings`，覆盖三个源别名、固定内容挂载、九种服务器工厂和独立32高提交、Cloud5及Debug7／150选项。当前源码268组件＋6数据＋13函数＝287运行时值；Classroom原始实现缺失，必须由外部模块接入，原生整页像素仍未完成。见 [整页API](docs/WORLD_SETTINGS_SCREEN.md) 与 [本阶段验证](docs/WORLD_SETTINGS_SCREEN_QA.md)。
 
 ## 本地运行
 
@@ -82,7 +82,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 
 ## 组件
 
-> 当前实际 React18.3.1／19.3.1 包为264组件＋6数据＋13函数＝283运行时值。World Game69／Multiplayer8／World导航三部件、15kind共用字段、显式source-image材质路径已提供。Node108、普通交互74、修复后材质14、实际安装开发／生产四组合和生产展示6项各自通过；完整WorldSettingsScreen及原生字体／默认布局／整页像素仍未完成。 各批次不重复累加；旧CSS数学候选32平面的17通过／15失败保留，GPU集成零差不是Minecraft独立原生证据。见 [验证记录](docs/WORLD_SETTINGS_FIELDS_QA.md)。
+> World 设置组合现提供 `WorldSettingsScreen`、`WorldServerSettings`、`WorldCloudSettings`、`WorldDebugSettings`，覆盖三个源别名、固定内容挂载、九种服务器工厂和独立32高提交、Cloud5及Debug7／150选项。当前源码268组件＋6数据＋13函数＝287运行时值；Classroom原始实现缺失，必须由外部模块接入，原生整页像素仍未完成。见 [整页API](docs/WORLD_SETTINGS_SCREEN.md) 与 [本阶段验证](docs/WORLD_SETTINGS_SCREEN_QA.md)。 各历史批次单独记录；开发／生产一致性与共享材质引擎零差不等于Minecraft独立原生证据。
 
 > 历史Manifest阶段实际安装包为253组件／271运行时值；React18／19、四种默认安装运行组合及桌面／手机生产展示已验证。Manifest图标平面6／18一致、12未通过；此前资源包平面92／120一致、28未通过，两套语料分别保留。原生整页像素仍未认证。范围见[MANIFEST_VALIDATION_QA.md](docs/MANIFEST_VALIDATION_QA.md)与[RESOURCE_PACKS_QA.md](docs/RESOURCE_PACKS_QA.md)。此前Classic Play阶段为239／257，原有证据保留在[PLAY_SCREEN_QA.md](docs/PLAY_SCREEN_QA.md)。
 
@@ -104,6 +104,7 @@ React / React DOM 18.3 或 19 为 peer dependencies。库的运行时代码没�
 | `SettingsNavigation` | **必填** `items`、受控 `value`、`width`／`scale`／`font`、`sourceDefaultIndex`、`toggleOnHover`、`hoverPolicy`、`hiddenSlots`；`onValueChange`、`itemRefs` | section／group／spacer；源索引与业务ID分开，不从索引推激活页；30高行／31高状态图；div ref |
 | `SettingsFields` | **必填** `rows`、`width`／`scale`、`typography`、`hiddenSlots`；`onRequest`、`popupHost`、`textFormatting`、原生属性／refs映射 | 15种源字段／容器，含独立panel、raw权限标记及URI intent；可选颜色码由宿主显式给RGB；div ref |
 | `WorldGameSettings`／`WorldMultiplayerSettings` | **必填** 完整 `snapshot`、`inputMode` 和字段视觉预算；`onRequest`、原生属性／refs映射 | 固定69／8直属源控件与实际嵌套结构，不接受rows／children；仅请求宿主接受变更；div ref |
+| `WorldSettingsScreen`／`WorldServerSettings`／`WorldCloudSettings`／`WorldDebugSettings` | 必填固定快照、宿主布局／字体；具名 refs 与请求 | 三别名源挂载、服务器工厂＋submit、Cloud5、Debug7／150选项；Classroom外部接口；[API](docs/WORLD_SETTINGS_SCREEN.md) |
 | `WorldSettingsNavigation` | **必填** `mode`、完整 `snapshot`、受控 `value` 及导航视觉预算；可选 `materialRendering`、回调、item／node refs | 保留17＋5源子树与显式加载帧；默认CSS，可选source-image／ceil及CSS回退，无库内时钟；div ref |
 | `ManifestValidationScreen` | `open`、`viewportSize`、`scale`、`title`、完整 `content`；`onCloseRequest`、可选 `onViewRequest` | 原报告窗口及modal生命周期；退出／翻页为宿主请求，div ref |
 | `ManifestValidationContent` | 显式 `size`、`summary`、`entries`／`capacity`、全局标记与独立状态 | 原滚动区与纵向问题工厂；div／viewport refs |
@@ -579,7 +580,7 @@ HUD 组件采用流布局以便组合，整屏的锚点、显示时机和生命�
 
 ## World settings actions
 
-世界设置启动操作提供 `WorldLaunchActions`，支持 Bedrock／Education 与创建／编辑源分支；`WorldSettingsActionButton` 复用真实 light／dark／Realms 皮肤。预览 `#world-settings-actions`，见 [API 与验证](docs/WORLD_SETTINGS_ACTIONS.md)。新增三基础件的组合、显式布局与字段范围见 [SETTINGS_SOURCE.md](docs/SETTINGS_SOURCE.md)；完整 WorldSettingsScreen 与具名页面快照仍未实现。
+世界设置启动操作提供 `WorldLaunchActions`，支持 Bedrock／Education 与创建／编辑源分支；`WorldSettingsActionButton` 复用真实 light／dark／Realms 皮肤。预览 `#world-settings-actions`，见 [API 与验证](docs/WORLD_SETTINGS_ACTIONS.md)。新增三基础件的组合、显式布局与字段范围见 [SETTINGS_SOURCE.md](docs/SETTINGS_SOURCE.md)；具名页面与固定整页组合现见 [WORLD_SETTINGS_SCREEN.md](docs/WORLD_SETTINGS_SCREEN.md)，Classroom外部模块和原生整页仍有边界。
 
 ## Disconnect
 

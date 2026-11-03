@@ -126,13 +126,23 @@ export interface SettingsActionRow extends SettingsFieldBase {
   /** Host intent metadata only; the library never opens or navigates this URI. */
   readonly uri?:string;
 }
+/** Source edu_common.underline_button; its authored state panel remains10 logical units high. */
+export interface SettingsUnderlineActionRow extends SettingsFieldBase {
+  readonly kind:'underline-action';readonly profile:'education-cloud';readonly label:string;readonly target:string;
+  readonly stateWidth:number;readonly labelPanelSize:readonly[number,number];readonly labelSize:readonly[number,number];
+  readonly defaultAnchor:'top-left'|'center';
+}
+/** Whole original host image for an explicitly unresolved source texture. */
+export interface SettingsImageRow extends SettingsFieldBase {
+  readonly kind:'image';readonly texture:string;readonly image:{readonly src:string;readonly sourceSize:readonly[number,number]};
+}
 export interface SettingsExperimentsRow extends SettingsFieldBase {
   readonly kind:'experiments';readonly collectionName:'experimental_toggles';
   readonly count:number;readonly countBinding:'#experimental_toggle_count';
   /** Complete source collection including ignored/hidden records, ordered by explicit index. */
   readonly rows:readonly SettingsToggleRow[];
 }
-export type SettingsFieldRow=SettingsLabelRow|SettingsInfoRow|SettingsSpacerRow|SettingsDividerRow|SettingsStackRow|SettingsPanelRow|SettingsToggleRow|SettingsTextRow|SettingsTextActionRow|SettingsDropdownRow|SettingsRadioRow|SettingsSliderRow|SettingsPermissionRow|SettingsActionRow|SettingsExperimentsRow;
+export type SettingsFieldRow=SettingsLabelRow|SettingsInfoRow|SettingsSpacerRow|SettingsDividerRow|SettingsStackRow|SettingsPanelRow|SettingsToggleRow|SettingsTextRow|SettingsTextActionRow|SettingsDropdownRow|SettingsRadioRow|SettingsSliderRow|SettingsPermissionRow|SettingsActionRow|SettingsUnderlineActionRow|SettingsImageRow|SettingsExperimentsRow;
 export interface SettingsFieldsRequest {
   readonly kind:'change'|'action';readonly identity:SettingsFieldIdentity;
   /** Exact source binding or button target; never automatically prefixed. */

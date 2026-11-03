@@ -1,0 +1,4 @@
+@import './server-forms.css';
+@import './world-settings-actions.css';
+.mc-world-server-settings[hidden],.mc-world-server-settings [hidden]{display:none!important}
+.mc-world-server-settings__stack{box-sizing:border-box}

@@ -1,8 +1,8 @@
 # World Settings 具名字段与导航
 
-当前源码新增 `WorldGameSettings`、`WorldMultiplayerSettings`、`WorldSettingsNavigation`，合计 **264 个公共组件＋6 个数据导出＋13 个函数＝283 个运行时值**。三者分别提供固定 Game69、Multiplayer8 内容和 World／Add-ons 导航子树。完整公共 `WorldSettingsScreen` 尚未提供；整页命名快照组装、其余上下文分支和原生布局仍是继续目标。
+当前四个具名字段页为 WorldGameSettings／WorldMultiplayerSettings／WorldCloudSettings／WorldDebugSettings；WorldSettingsNavigation保留固定导航。整页组合与服务器已提供，见 [WORLD_SETTINGS_SCREEN.md](WORLD_SETTINGS_SCREEN.md)。下文Game／Multiplayer及材质数据保留原具名字段阶段身份。
 
-展示入口为 `#world-settings`，通用基础件仍在 `#settings-source`。当前实际 React18.3.1／19.3.1 包为264组件＋6数据＋13函数＝283运行时值。World Game69／Multiplayer8／World导航三部件、15kind共用字段、显式source-image材质路径已提供。Node108、普通交互74、修复后材质14、实际安装开发／生产四组合和生产展示6项各自通过；完整WorldSettingsScreen及原生字体／默认布局／整页像素仍未完成。 最新包为package03，每peer新增World14组／24负类型合同通过。详见 [具名验收、像素对照边界与保留失败](WORLD_SETTINGS_FIELDS_QA.md)。
+展示入口为 `#world-settings`，通用基础件仍在 `#settings-source`。原具名字段阶段实际 React18.3.1／19.3.1 包为264组件＋6数据＋13函数＝283运行时值。World Game69／Multiplayer8／World导航三部件、15kind共用字段、显式source-image材质路径已提供。Node108、普通交互74、修复后材质14、实际安装开发／生产四组合和生产展示6项各自通过；完整WorldSettingsScreen及原生字体／默认布局／整页像素仍未完成。 最新包为package03，每peer新增World14组／24负类型合同通过。详见 [具名验收、像素对照边界与保留失败](WORLD_SETTINGS_FIELDS_QA.md)。
 
 ## 来源与完整快照
 
@@ -141,13 +141,13 @@ const materialRendering = {
 
 仓库新增完整具名示例准备数据：Game93个本地化 key 和 Multiplayer9个 key 均显式提供；Game93个可在固定 `zh_CN.lang` 找到，Multiplayer 两个精确 key `options.thirdPartyConsoleVisible`、`options.xboxliveBroadcastSettingsForCrossplatform` 缺失，示例明确使用宿主占位，不宣称来自原文。两个完整原图 `WorldDemoScreen.png`／`missing_pack_icon.png` 仅用于 demo 缩略图／provider 输入，不成为库默认封面。
 
-示例的 metrics、条件求值、滑块数值域、选项接受策略、provider 图像、White 别名和颜色 RGB 都是显式 Web 示例，不是原版默认值或已恢复的原生字体／intrinsic。示例可把 `ResourcePackManager` 的 level／addon 放到真实内容分支；未挂载的 server／Cloud／Classroom／Debug provider 不用通用 rows 伪装完成。
+示例的 metrics、条件求值、滑块数值域、选项接受策略、provider 图像、White 别名和颜色 RGB 都是显式 Web 示例，不是原版默认值或已恢复的原生字体／intrinsic。示例可把 `ResourcePackManager` 的 level／addon 放到真实内容分支；server／Cloud／Debug现已按源挂载；Classroom需要明确外部模块，不用通用rows伪装实现。
 
-当前仍没有公共完整 `WorldSettingsScreen`。真实整页后续还需在 `section_content_panels` 的源挂载点组装固定页面、资源包、服务器自定义内容及上下文服务。特别是 server_form.custom_form_scrolling_content 含 generated_form 与独立 submit_button；仅复用 `ServerCustomContents` 不能遗漏其提交 sibling。World 源 header／footer 是空数组，不能发明 Save footer。
+现有 `WorldSettingsScreen` 已在 `section_content_panels` 的源挂载点组装固定页面、资源包、服务器自定义内容；上下文服务和Classroom依赖由宿主提供。特别是 server_form.custom_form_scrolling_content 含 generated_form 与独立 submit_button；仅复用 `ServerCustomContents` 不能遗漏其提交 sibling。World 源 header／footer 是空数组，不能发明 Save footer。
 
-## 本阶段验证状态
+## 原具名字段阶段验证快照
 
-当前受检功能包为package03：两peer各283值、World14组／24负类型合同通过。最终Node108、普通交互74、修复后材质14、实际安装开发／生产四组合与built展示6项各自通过。材质34完整平面5,109,100RGBA像素差异0仅证明共享GPU引擎的集成；安装开发／生产16对画面7,072,000像素严格相同。
+原具名字段阶段受检功能包为package03：两peer各283值、World14组／24负类型合同通过。最终Node108、普通交互74、修复后材质14、实际安装开发／生产四组合与built展示6项各自通过。材质34完整平面5,109,100RGBA像素差异0仅证明共享GPU引擎的集成；安装开发／生产16对画面7,072,000像素严格相同。
 
 保留旧CSS数学候选17通过／15失败、较早包／源浏览器结果与两处实际安装产品缺陷及修复。初始视口Axe有1个label-title-only报告；Chrome实际名称正确，滚动至该slider后全scope为0报告、2个incomplete，两份raw结果均保留，不称全站WCAG认证。
 

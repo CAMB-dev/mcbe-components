@@ -320,7 +320,8 @@ export const ResourcePackSection = forwardRef<HTMLDivElement, ResourcePackSectio
 
 const bindingKeys = 'worldTemplateLocked forcePackDownloadEnabled forcePackDownloadLocked forceUserAgreement forceUserAgreementEnabled addonStackingWarningVisible selectedGridVisible availableGridVisible realmsVisible realmsGridVisible unownedVisible unownedGridVisible noAvailablePacks noRealmsPacks noUnownedPacks selectedAnyExceptions selectedAnyErrors selectedAnyWarnings invalidHasErrors availableAnyErrors availableAnyWarnings'.split(' ') as (keyof ResourcePackManagerBindings)[];
 const labelKeys = 'selected available realms unowned templateWarning forceDownload addonWarning addonLink noPacks toStore viewMore selectedDiagnostics availableDiagnostics'.split(' ') as (keyof ResourcePackManagerLabels)[];
-function managerPlan(p: ResourcePackManagerProps) {
+/** Private pure source preflight shared by parent Settings composition. */
+export function planResourcePackManager(p: ResourcePackManagerProps) {
   const unsafe = p as unknown as Record<string, unknown>; if (unsafe.children !== undefined || unsafe.dangerouslySetInnerHTML !== undefined) throw new TypeError('Resource-pack Manager owns its complete source content graph.');
   geometry(p.profile, p.width, p.scale);
   if (!p.provider || !p.bindings || !p.labels || !p.collections || !p.layout) throw new TypeError('Resource-pack Manager requires complete provider/bindings/labels/collections/layout snapshots.');
@@ -364,7 +365,7 @@ function Agreement({p}: {p: ResourcePackManagerProps}) {
  * Settings aliases. Parent Settings chrome/scroll, services and native layout
  * remain external. No arbitrary children substitute for the actual branches. */
 export const ResourcePackManager = forwardRef<HTMLDivElement, ResourcePackManagerProps>(function ResourcePackManager(p, forwarded) {
-  const plan = managerPlan(p), {profile, scale, width, bindings: b, provider, labels: l, collections: c, disabled, readOnly, onAction, className, style: givenStyle} = p;
+  const plan = planResourcePackManager(p), {profile, scale, width, bindings: b, provider, labels: l, collections: c, disabled, readOnly, onAction, className, style: givenStyle} = p;
   const [, attach] = useClassicNodeRef(forwarded), native: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(p)) if (key.startsWith('aria-') || key.startsWith('data-') || key.startsWith('on') && key !== 'onAction' || ['id', 'title', 'role', 'hidden', 'inert', 'tabIndex', 'dir', 'lang'].includes(key)) native[key] = value;
   const common = {profile, width, scale, disabled, readOnly, onAction};

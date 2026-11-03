@@ -1,3 +1,5 @@
+> 最新检查点（2026-11-03，World整页组合）：World 设置组合现提供 `WorldSettingsScreen`、`WorldServerSettings`、`WorldCloudSettings`、`WorldDebugSettings`，覆盖三个源别名、固定内容挂载、九种服务器工厂和独立32高提交、Cloud5及Debug7／150选项。当前源码268组件＋6数据＋13函数＝287运行时值；Classroom原始实现缺失，必须由外部模块接入，原生整页像素仍未完成。见 [整页API](docs/WORLD_SETTINGS_SCREEN.md) 与 [本阶段验证](docs/WORLD_SETTINGS_SCREEN_QA.md)。
+
 > 最新检查点（2026-11-03，World具名字段阶段）：当前实际 React18.3.1／19.3.1 包为264组件＋6数据＋13函数＝283运行时值。World Game69／Multiplayer8／World导航三部件、15kind共用字段、显式source-image材质路径已提供。Node108、普通交互74、修复后材质14、实际安装开发／生产四组合和生产展示6项各自通过；完整WorldSettingsScreen及原生字体／默认布局／整页像素仍未完成。 真实安装四组合与16对完整画面零差通过。Computer Use未找到正在运行的游戏，无新native采集并已关闭；完整目标保持进行中。见 [本阶段记录](docs/WORLD_SETTINGS_FIELDS_QA.md)。
 
 # mcbeui
@@ -17,7 +19,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前264个公共组件、6个数据和13个渲染 / 几何 / 纹理函数，共283个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前268个公共组件、6个数据和13个渲染 / 几何 / 纹理函数，共287个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。

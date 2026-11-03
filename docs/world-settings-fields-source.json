@@ -4582,6 +4582,2727 @@
         "text": "#xbl_multiplayer_warning_text",
         "profile": "plain"
       }
+    ],
+    "cloud": [
+      {
+        "key": "world_section.edu_cloud_section/edu_cloud_label",
+        "id": "world_section.edu_cloud_section/edu_cloud_label",
+        "sourceControl": "world_section.edu_cloud_section/edu_cloud_label",
+        "kind": "panel",
+        "sourceType": "panel",
+        "sourceKey": "edu_cloud_label@settings_common.option_group_label",
+        "origins": [
+          "settings_common.option_group_label"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": true
+        },
+        "size": [
+          "100%",
+          "100%c + 9px"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": false,
+        "orientation": "vertical",
+        "children": [
+          {
+            "key": "world_section.edu_cloud_section/edu_cloud_label/text",
+            "id": "world_section.edu_cloud_section/edu_cloud_label/text",
+            "sourceControl": "world_section.edu_cloud_section/edu_cloud_label/text",
+            "kind": "label",
+            "sourceType": "label",
+            "sourceKey": "text",
+            "origins": [],
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            },
+            "size": [
+              "100%",
+              "100%c"
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "anchor": "top_left",
+            "option": false,
+            "color": "#fff",
+            "text": "menu.eduCloudStorage.caps",
+            "profile": "plain"
+          }
+        ]
+      },
+      {
+        "key": "world_section.edu_cloud_section/cloud_file_name",
+        "id": "world_section.edu_cloud_section/cloud_file_name",
+        "sourceControl": "world_section.edu_cloud_section/cloud_file_name",
+        "kind": "text",
+        "sourceType": "panel",
+        "sourceKey": "cloud_file_name@settings_common.option_text_edit",
+        "origins": [
+          "settings_common.option_generic",
+          "settings_common.option_text_edit"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": "#cloud_file_name_enabled"
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": true,
+        "label": "options.cloudFileNameTitle",
+        "showLabel": true,
+        "description": null,
+        "oneLine": false,
+        "labelAlignment": "left",
+        "binding": "#cloud_file_name",
+        "placeholder": "",
+        "textBoxName": "cloud_file_name_text_box",
+        "maxLength": 30,
+        "sourceTextType": "ExtendedASCII",
+        "allowDataBinding": true,
+        "auxiliary": {
+          "tooltipBindingType": "none",
+          "tooltipTextBinding": "",
+          "tooltipVisibleBinding": "#default_visibility",
+          "tooltipIcon": "textures/ui/infobulb"
+        }
+      },
+      {
+        "key": "world_section.edu_cloud_section/cloud_file_last_changed",
+        "id": "world_section.edu_cloud_section/cloud_file_last_changed",
+        "sourceControl": "world_section.edu_cloud_section/cloud_file_last_changed",
+        "kind": "text",
+        "sourceType": "panel",
+        "sourceKey": "cloud_file_last_changed@settings_common.option_text_edit",
+        "origins": [
+          "settings_common.option_generic",
+          "settings_common.option_text_edit"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": "#cloud_file_last_changed_enabled"
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": true,
+        "label": "options.cloudFileLastChangedTitle",
+        "showLabel": true,
+        "description": null,
+        "oneLine": false,
+        "labelAlignment": "left",
+        "binding": "#cloud_file_last_changed",
+        "placeholder": "",
+        "textBoxName": "cloud_file_last_changed_text_box",
+        "maxLength": 30,
+        "sourceTextType": "ExtendedASCII",
+        "allowDataBinding": true,
+        "auxiliary": {
+          "tooltipBindingType": "none",
+          "tooltipTextBinding": "",
+          "tooltipVisibleBinding": "#default_visibility",
+          "tooltipIcon": "textures/ui/infobulb"
+        }
+      },
+      {
+        "key": "world_section.edu_cloud_section/cloud_upload_toggle",
+        "id": "world_section.edu_cloud_section/cloud_upload_toggle",
+        "sourceControl": "world_section.edu_cloud_section/cloud_upload_toggle",
+        "kind": "toggle",
+        "sourceType": "panel",
+        "sourceKey": "cloud_upload_toggle@settings_common.option_toggle",
+        "origins": [
+          "settings_common.option_generic",
+          "settings_common.option_toggle"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": "#edu_cloud_upload_enabled"
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": true,
+        "label": "options.cloudToggleCloudSave",
+        "showLabel": true,
+        "description": null,
+        "oneLine": true,
+        "labelAlignment": "left",
+        "binding": "#edu_cloud_upload",
+        "toggleName": "cloud_upload",
+        "bindingCondition": "once",
+        "auxiliary": {
+          "tooltipBindingType": "none",
+          "tooltipTextBinding": "",
+          "tooltipVisibleBinding": "#default_visibility",
+          "tooltipIcon": "textures/ui/infobulb"
+        }
+      },
+      {
+        "key": "world_section.edu_cloud_section/cloud_help_wrapper_panel",
+        "id": "world_section.edu_cloud_section/cloud_help_wrapper_panel",
+        "sourceControl": "world_section.edu_cloud_section/cloud_help_wrapper_panel",
+        "kind": "stack",
+        "sourceType": "stack_panel",
+        "sourceKey": "cloud_help_wrapper_panel",
+        "origins": [],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": true
+        },
+        "size": [
+          "100%",
+          "100%cm"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": false,
+        "orientation": "horizontal",
+        "children": [
+          {
+            "key": "world_section.edu_cloud_section/cloud_help_wrapper_panel/cloud_help_button",
+            "id": "world_section.edu_cloud_section/cloud_help_wrapper_panel/cloud_help_button",
+            "sourceControl": "world_section.edu_cloud_section/cloud_help_wrapper_panel/cloud_help_button",
+            "kind": "underline-action",
+            "sourceType": "button",
+            "sourceKey": "cloud_help_button@edu_common.underline_button",
+            "origins": [
+              "common.button",
+              "common_buttons.underline_button",
+              "edu_common.underline_button"
+            ],
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            },
+            "size": [
+              "100%c",
+              "100%c"
+            ],
+            "offset": [
+              0,
+              0
+            ],
+            "anchor": null,
+            "option": false,
+            "text": "options.cloudHelpText",
+            "target": "button.cloud_help_button",
+            "profile": "education-cloud"
+          },
+          {
+            "key": "world_section.edu_cloud_section/cloud_help_wrapper_panel/padded_icon",
+            "id": "world_section.edu_cloud_section/cloud_help_wrapper_panel/padded_icon",
+            "sourceControl": "world_section.edu_cloud_section/cloud_help_wrapper_panel/padded_icon",
+            "kind": "panel",
+            "sourceType": "panel",
+            "sourceKey": "padded_icon@common.empty_panel",
+            "origins": [
+              "common.empty_panel"
+            ],
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            },
+            "size": [
+              "100%c",
+              "100%c"
+            ],
+            "offset": [
+              0,
+              0
+            ],
+            "anchor": null,
+            "option": false,
+            "orientation": "vertical",
+            "children": [
+              {
+                "key": "world_section.edu_cloud_section/cloud_help_wrapper_panel/padded_icon/icon",
+                "id": "world_section.edu_cloud_section/cloud_help_wrapper_panel/padded_icon/icon",
+                "sourceControl": "world_section.edu_cloud_section/cloud_help_wrapper_panel/padded_icon/icon",
+                "kind": "image",
+                "sourceType": "image",
+                "sourceKey": "icon",
+                "origins": [],
+                "state": {
+                  "ignored": false,
+                  "visible": true,
+                  "enabled": true
+                },
+                "size": [
+                  9,
+                  9
+                ],
+                "offset": [
+                  5,
+                  0.6
+                ],
+                "anchor": null,
+                "option": false,
+                "texture": "textures/ui/icon_external_link"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "debug": [
+      {
+        "key": "world_section.debug_section/flat_nether_toggle",
+        "id": "world_section.debug_section/flat_nether_toggle",
+        "sourceControl": "world_section.debug_section/flat_nether_toggle",
+        "kind": "toggle",
+        "sourceType": "panel",
+        "sourceKey": "flat_nether_toggle@settings_common.option_toggle",
+        "origins": [
+          "settings_common.option_generic",
+          "settings_common.option_toggle"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": "#flat_nether_enabled"
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": true,
+        "label": {
+          "literal": "Flat Nether"
+        },
+        "showLabel": true,
+        "description": null,
+        "oneLine": true,
+        "labelAlignment": "left",
+        "binding": "#flat_nether",
+        "toggleName": "flat_nether",
+        "bindingCondition": "once",
+        "auxiliary": {
+          "tooltipBindingType": "none",
+          "tooltipTextBinding": "",
+          "tooltipVisibleBinding": "#default_visibility",
+          "tooltipIcon": "textures/ui/infobulb"
+        }
+      },
+      {
+        "key": "world_section.debug_section/game_version_override_toggle",
+        "id": "world_section.debug_section/game_version_override_toggle",
+        "sourceControl": "world_section.debug_section/game_version_override_toggle",
+        "kind": "toggle",
+        "sourceType": "panel",
+        "sourceKey": "game_version_override_toggle@settings_common.option_toggle",
+        "origins": [
+          "settings_common.option_generic",
+          "settings_common.option_toggle"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": "#game_version_override_toggle_enabled"
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": true,
+        "label": {
+          "literal": "Enable Game Version Override"
+        },
+        "showLabel": true,
+        "description": null,
+        "oneLine": true,
+        "labelAlignment": "left",
+        "binding": "#game_version_override_toggle",
+        "toggleName": "game_version_override_toggle",
+        "bindingCondition": "once",
+        "auxiliary": {
+          "tooltipBindingType": "none",
+          "tooltipTextBinding": "",
+          "tooltipVisibleBinding": "#default_visibility",
+          "tooltipIcon": "textures/ui/infobulb"
+        }
+      },
+      {
+        "key": "world_section.debug_section/game_version_override_textbox",
+        "id": "world_section.debug_section/game_version_override_textbox",
+        "sourceControl": "world_section.debug_section/game_version_override_textbox",
+        "kind": "text",
+        "sourceType": "panel",
+        "sourceKey": "game_version_override_textbox@settings_common.option_text_edit",
+        "origins": [
+          "settings_common.option_generic",
+          "settings_common.option_text_edit"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": "#game_version_override_enabled"
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": true,
+        "label": {
+          "literal": "Game Version Override"
+        },
+        "showLabel": true,
+        "description": null,
+        "oneLine": false,
+        "labelAlignment": "left",
+        "binding": "#game_version_override",
+        "placeholder": {
+          "literal": "0.0.0"
+        },
+        "textBoxName": "game_version_override_text_box",
+        "maxLength": 30,
+        "sourceTextType": "ExtendedASCII",
+        "allowDataBinding": true,
+        "auxiliary": {
+          "tooltipBindingType": "none",
+          "tooltipTextBinding": "",
+          "tooltipVisibleBinding": "#default_visibility",
+          "tooltipIcon": "textures/ui/infobulb"
+        }
+      },
+      {
+        "key": "world_section.debug_section/spawn_dimension_dropdown",
+        "id": "world_section.debug_section/spawn_dimension_dropdown",
+        "sourceControl": "world_section.debug_section/spawn_dimension_dropdown",
+        "kind": "dropdown",
+        "sourceType": "panel",
+        "sourceKey": "spawn_dimension_dropdown@settings_common.option_dropdown_no_scroll",
+        "origins": [
+          "settings_common.option_generic",
+          "settings_common.option_dropdown_no_scroll"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": "#debug_spawn_dimension_dropdown_enabled"
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": true,
+        "label": {
+          "literal": "Spawn Dimension"
+        },
+        "showLabel": true,
+        "description": null,
+        "oneLine": false,
+        "labelAlignment": "left",
+        "choices": [
+          {
+            "key": "world_section.debug_section/spawn_dimension_dropdown/$choices/debug_spawn_in_overworld_toggle",
+            "id": "debug_spawn_in_overworld_toggle",
+            "sourceControl": "world_section.debug_section/spawn_dimension_dropdown/$choices/debug_spawn_in_overworld_toggle",
+            "binding": "#debug_spawn_in_overworld",
+            "label": {
+              "literal": "Overworld"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_dimension_dropdown/$choices/debug_spawn_in_nether_toggle",
+            "id": "debug_spawn_in_nether_toggle",
+            "sourceControl": "world_section.debug_section/spawn_dimension_dropdown/$choices/debug_spawn_in_nether_toggle",
+            "binding": "#debug_spawn_in_nether",
+            "label": {
+              "literal": "Nether"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          }
+        ],
+        "dropdownName": "debug_spawn_dimension_dropdown",
+        "faceBinding": "#debug_spawn_dimension_dropdown_toggle_label",
+        "scrolling": false,
+        "highlightOffset": [
+          -2,
+          1
+        ],
+        "highlightExtraSize": [
+          0,
+          1
+        ],
+        "auxiliary": {
+          "tooltipBindingType": "none",
+          "tooltipTextBinding": "",
+          "tooltipVisibleBinding": "#default_visibility",
+          "tooltipIcon": "textures/ui/infobulb"
+        }
+      },
+      {
+        "key": "world_section.debug_section/spawn_biome_dropdown",
+        "id": "world_section.debug_section/spawn_biome_dropdown",
+        "sourceControl": "world_section.debug_section/spawn_biome_dropdown",
+        "kind": "dropdown",
+        "sourceType": "panel",
+        "sourceKey": "spawn_biome_dropdown@settings_common.option_dropdown",
+        "origins": [
+          "settings_common.option_generic",
+          "settings_common.option_dropdown"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": "#debug_spawn_biome_dropdown_enabled"
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": true,
+        "label": {
+          "literal": "Spawn Biome"
+        },
+        "showLabel": true,
+        "description": null,
+        "oneLine": false,
+        "labelAlignment": "left",
+        "choices": [
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[0]",
+            "id": "$slot[0]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[0]",
+            "binding": "#debug_spawn_in_random_biome",
+            "label": {
+              "literal": "random_biome"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[1]",
+            "id": "$slot[1]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[1]",
+            "binding": "#debug_spawn_in_basalt_deltas",
+            "label": {
+              "literal": "basalt_deltas"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[2]",
+            "id": "$slot[2]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[2]",
+            "binding": "#debug_spawn_in_soulsand_valley",
+            "label": {
+              "literal": "soulsand_valley"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[3]",
+            "id": "$slot[3]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[3]",
+            "binding": "#debug_spawn_in_crimson_forest",
+            "label": {
+              "literal": "crimson_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[4]",
+            "id": "$slot[4]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[4]",
+            "binding": "#debug_spawn_in_warped_forest",
+            "label": {
+              "literal": "warped_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[5]",
+            "id": "$slot[5]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[5]",
+            "binding": "#debug_spawn_in_hell",
+            "label": {
+              "literal": "hell"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[6]",
+            "id": "$slot[6]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[6]",
+            "binding": "#debug_spawn_in_desert",
+            "label": {
+              "literal": "desert"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[7]",
+            "id": "$slot[7]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[7]",
+            "binding": "#debug_spawn_in_extreme_hills",
+            "label": {
+              "literal": "extreme_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[8]",
+            "id": "$slot[8]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[8]",
+            "binding": "#debug_spawn_in_forest",
+            "label": {
+              "literal": "forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[9]",
+            "id": "$slot[9]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[9]",
+            "binding": "#debug_spawn_in_taiga",
+            "label": {
+              "literal": "taiga"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[10]",
+            "id": "$slot[10]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[10]",
+            "binding": "#debug_spawn_in_swampland",
+            "label": {
+              "literal": "swampland"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[11]",
+            "id": "$slot[11]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[11]",
+            "binding": "#debug_spawn_in_river",
+            "label": {
+              "literal": "river"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[12]",
+            "id": "$slot[12]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[12]",
+            "binding": "#debug_spawn_in_frozen_river",
+            "label": {
+              "literal": "frozen_river"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[13]",
+            "id": "$slot[13]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[13]",
+            "binding": "#debug_spawn_in_ice_plains",
+            "label": {
+              "literal": "ice_plains"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[14]",
+            "id": "$slot[14]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[14]",
+            "binding": "#debug_spawn_in_ice_mountains",
+            "label": {
+              "literal": "ice_mountains"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[15]",
+            "id": "$slot[15]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[15]",
+            "binding": "#debug_spawn_in_mushroom_island",
+            "label": {
+              "literal": "mushroom_island"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[16]",
+            "id": "$slot[16]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[16]",
+            "binding": "#debug_spawn_in_mushroom_island_shore",
+            "label": {
+              "literal": "mushroom_island_shore"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[17]",
+            "id": "$slot[17]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[17]",
+            "binding": "#debug_spawn_in_beach",
+            "label": {
+              "literal": "beach"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[18]",
+            "id": "$slot[18]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[18]",
+            "binding": "#debug_spawn_in_desert_hills",
+            "label": {
+              "literal": "desert_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[19]",
+            "id": "$slot[19]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[19]",
+            "binding": "#debug_spawn_in_forest_hills",
+            "label": {
+              "literal": "forest_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[20]",
+            "id": "$slot[20]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[20]",
+            "binding": "#debug_spawn_in_taiga_hills",
+            "label": {
+              "literal": "taiga_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[21]",
+            "id": "$slot[21]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[21]",
+            "binding": "#debug_spawn_in_extreme_hills_edge",
+            "label": {
+              "literal": "extreme_hills_edge"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[22]",
+            "id": "$slot[22]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[22]",
+            "binding": "#debug_spawn_in_jungle",
+            "label": {
+              "literal": "jungle"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[23]",
+            "id": "$slot[23]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[23]",
+            "binding": "#debug_spawn_in_jungle_hills",
+            "label": {
+              "literal": "jungle_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[24]",
+            "id": "$slot[24]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[24]",
+            "binding": "#debug_spawn_in_jungle_edge",
+            "label": {
+              "literal": "jungle_edge"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[25]",
+            "id": "$slot[25]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[25]",
+            "binding": "#debug_spawn_in_stone_beach",
+            "label": {
+              "literal": "stone_beach"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[26]",
+            "id": "$slot[26]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[26]",
+            "binding": "#debug_spawn_in_cold_beach",
+            "label": {
+              "literal": "cold_beach"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[27]",
+            "id": "$slot[27]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[27]",
+            "binding": "#debug_spawn_in_birch_forest",
+            "label": {
+              "literal": "birch_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[28]",
+            "id": "$slot[28]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[28]",
+            "binding": "#debug_spawn_in_birch_forest_hills",
+            "label": {
+              "literal": "birch_forest_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[29]",
+            "id": "$slot[29]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[29]",
+            "binding": "#debug_spawn_in_roofed_forest",
+            "label": {
+              "literal": "roofed_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[30]",
+            "id": "$slot[30]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[30]",
+            "binding": "#debug_spawn_in_cold_taiga",
+            "label": {
+              "literal": "cold_taiga"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[31]",
+            "id": "$slot[31]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[31]",
+            "binding": "#debug_spawn_in_cold_taiga_hills",
+            "label": {
+              "literal": "cold_taiga_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[32]",
+            "id": "$slot[32]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[32]",
+            "binding": "#debug_spawn_in_mega_taiga",
+            "label": {
+              "literal": "mega_taiga"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[33]",
+            "id": "$slot[33]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[33]",
+            "binding": "#debug_spawn_in_mega_taiga_hills",
+            "label": {
+              "literal": "mega_taiga_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[34]",
+            "id": "$slot[34]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[34]",
+            "binding": "#debug_spawn_in_extreme_hills_plus_trees",
+            "label": {
+              "literal": "extreme_hills_plus_trees"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[35]",
+            "id": "$slot[35]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[35]",
+            "binding": "#debug_spawn_in_savanna",
+            "label": {
+              "literal": "savanna"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[36]",
+            "id": "$slot[36]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[36]",
+            "binding": "#debug_spawn_in_savanna_plateau",
+            "label": {
+              "literal": "savanna_plateau"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[37]",
+            "id": "$slot[37]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[37]",
+            "binding": "#debug_spawn_in_mesa",
+            "label": {
+              "literal": "mesa"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[38]",
+            "id": "$slot[38]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[38]",
+            "binding": "#debug_spawn_in_mesa_plateau_stone",
+            "label": {
+              "literal": "mesa_plateau_stone"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[39]",
+            "id": "$slot[39]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[39]",
+            "binding": "#debug_spawn_in_mesa_plateau",
+            "label": {
+              "literal": "mesa_plateau"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[40]",
+            "id": "$slot[40]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[40]",
+            "binding": "#debug_spawn_in_ocean",
+            "label": {
+              "literal": "ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[41]",
+            "id": "$slot[41]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[41]",
+            "binding": "#debug_spawn_in_deep_ocean",
+            "label": {
+              "literal": "deep_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[42]",
+            "id": "$slot[42]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[42]",
+            "binding": "#debug_spawn_in_warm_ocean",
+            "label": {
+              "literal": "warm_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[43]",
+            "id": "$slot[43]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[43]",
+            "binding": "#debug_spawn_in_deep_warm_ocean",
+            "label": {
+              "literal": "deep_warm_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[44]",
+            "id": "$slot[44]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[44]",
+            "binding": "#debug_spawn_in_lukewarm_ocean",
+            "label": {
+              "literal": "lukewarm_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[45]",
+            "id": "$slot[45]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[45]",
+            "binding": "#debug_spawn_in_deep_lukewarm_ocean",
+            "label": {
+              "literal": "deep_lukewarm_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[46]",
+            "id": "$slot[46]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[46]",
+            "binding": "#debug_spawn_in_cold_ocean",
+            "label": {
+              "literal": "cold_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[47]",
+            "id": "$slot[47]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[47]",
+            "binding": "#debug_spawn_in_deep_cold_ocean",
+            "label": {
+              "literal": "deep_cold_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[48]",
+            "id": "$slot[48]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[48]",
+            "binding": "#debug_spawn_in_frozen_ocean",
+            "label": {
+              "literal": "frozen_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[49]",
+            "id": "$slot[49]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[49]",
+            "binding": "#debug_spawn_in_deep_frozen_ocean",
+            "label": {
+              "literal": "deep_frozen_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[50]",
+            "id": "$slot[50]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[50]",
+            "binding": "#debug_spawn_in_bamboo_jungle",
+            "label": {
+              "literal": "bamboo_jungle"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[51]",
+            "id": "$slot[51]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[51]",
+            "binding": "#debug_spawn_in_bamboo_jungle_hills",
+            "label": {
+              "literal": "bamboo_jungle_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[52]",
+            "id": "$slot[52]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[52]",
+            "binding": "#debug_spawn_in_sunflower_plains",
+            "label": {
+              "literal": "sunflower_plains"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[53]",
+            "id": "$slot[53]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[53]",
+            "binding": "#debug_spawn_in_swampland_mutated",
+            "label": {
+              "literal": "swampland_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[54]",
+            "id": "$slot[54]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[54]",
+            "binding": "#debug_spawn_in_ice_plains_spikes",
+            "label": {
+              "literal": "ice_plains_spikes"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[55]",
+            "id": "$slot[55]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[55]",
+            "binding": "#debug_spawn_in_cold_taiga_mutated",
+            "label": {
+              "literal": "cold_taiga_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[56]",
+            "id": "$slot[56]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[56]",
+            "binding": "#debug_spawn_in_savanna_mutated",
+            "label": {
+              "literal": "savanna_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[57]",
+            "id": "$slot[57]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[57]",
+            "binding": "#debug_spawn_in_savanna_plateau_mutated",
+            "label": {
+              "literal": "savanna_plateau_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[58]",
+            "id": "$slot[58]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[58]",
+            "binding": "#debug_spawn_in_roofed_forest_mutated",
+            "label": {
+              "literal": "roofed_forest_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[59]",
+            "id": "$slot[59]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[59]",
+            "binding": "#debug_spawn_in_desert_mutated",
+            "label": {
+              "literal": "desert_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[60]",
+            "id": "$slot[60]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[60]",
+            "binding": "#debug_spawn_in_flower_forest",
+            "label": {
+              "literal": "flower_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[61]",
+            "id": "$slot[61]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[61]",
+            "binding": "#debug_spawn_in_taiga_mutated",
+            "label": {
+              "literal": "taiga_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[62]",
+            "id": "$slot[62]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[62]",
+            "binding": "#debug_spawn_in_jungle_mutated",
+            "label": {
+              "literal": "jungle_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[63]",
+            "id": "$slot[63]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[63]",
+            "binding": "#debug_spawn_in_jungle_edge_mutated",
+            "label": {
+              "literal": "jungle_edge_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[64]",
+            "id": "$slot[64]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[64]",
+            "binding": "#debug_spawn_in_mesa_bryce",
+            "label": {
+              "literal": "mesa_bryce"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[65]",
+            "id": "$slot[65]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[65]",
+            "binding": "#debug_spawn_in_mesa_plateau_stone_mutated",
+            "label": {
+              "literal": "mesa_plateau_stone_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[66]",
+            "id": "$slot[66]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[66]",
+            "binding": "#debug_spawn_in_mesa_plateau_mutated",
+            "label": {
+              "literal": "mesa_plateau_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[67]",
+            "id": "$slot[67]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[67]",
+            "binding": "#debug_spawn_in_birch_forest_mutated",
+            "label": {
+              "literal": "birch_forest_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[68]",
+            "id": "$slot[68]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[68]",
+            "binding": "#debug_spawn_in_birch_forest_hills_mutated",
+            "label": {
+              "literal": "birch_forest_hills_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[69]",
+            "id": "$slot[69]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[69]",
+            "binding": "#debug_spawn_in_redwood_taiga_mutated",
+            "label": {
+              "literal": "redwood_taiga_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[70]",
+            "id": "$slot[70]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[70]",
+            "binding": "#debug_spawn_in_extreme_hills_mutated",
+            "label": {
+              "literal": "extreme_hills_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[71]",
+            "id": "$slot[71]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[71]",
+            "binding": "#debug_spawn_in_extreme_hills_plus_trees_mutated",
+            "label": {
+              "literal": "extreme_hills_plus_trees_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[72]",
+            "id": "$slot[72]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[72]",
+            "binding": "#debug_spawn_in_redwood_taiga_hills_mutated",
+            "label": {
+              "literal": "redwood_taiga_hills_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[73]",
+            "id": "$slot[73]",
+            "sourceControl": "world_section.debug_section/spawn_biome_dropdown/$choices/$slot[73]",
+            "binding": "#debug_spawn_in_plains",
+            "label": {
+              "literal": "plains"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          }
+        ],
+        "dropdownName": "debug_spawn_biome_dropdown",
+        "faceBinding": "#debug_spawn_biome_dropdown_toggle_label",
+        "scrolling": true,
+        "highlightOffset": [
+          -2,
+          1
+        ],
+        "highlightExtraSize": [
+          0,
+          1
+        ],
+        "auxiliary": {
+          "tooltipBindingType": "none",
+          "tooltipTextBinding": "",
+          "tooltipVisibleBinding": "#default_visibility",
+          "tooltipIcon": "textures/ui/infobulb"
+        }
+      },
+      {
+        "key": "world_section.debug_section/biome_override_dropdown",
+        "id": "world_section.debug_section/biome_override_dropdown",
+        "sourceControl": "world_section.debug_section/biome_override_dropdown",
+        "kind": "dropdown",
+        "sourceType": "panel",
+        "sourceKey": "biome_override_dropdown@settings_common.option_dropdown",
+        "origins": [
+          "settings_common.option_generic",
+          "settings_common.option_dropdown"
+        ],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": "#debug_biome_override_dropdown_dropdown_enabled"
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": true,
+        "label": {
+          "literal": "Biome override"
+        },
+        "showLabel": true,
+        "description": null,
+        "oneLine": false,
+        "labelAlignment": "left",
+        "choices": [
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[0]",
+            "id": "$slot[0]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[0]",
+            "binding": "#debug_biome_override_random_biome",
+            "label": {
+              "literal": "random_biome"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[1]",
+            "id": "$slot[1]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[1]",
+            "binding": "#debug_biome_override_basalt_deltas",
+            "label": {
+              "literal": "basalt_deltas"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[2]",
+            "id": "$slot[2]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[2]",
+            "binding": "#debug_biome_override_soulsand_valley",
+            "label": {
+              "literal": "soulsand_valley"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[3]",
+            "id": "$slot[3]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[3]",
+            "binding": "#debug_biome_override_crimson_forest",
+            "label": {
+              "literal": "crimson_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[4]",
+            "id": "$slot[4]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[4]",
+            "binding": "#debug_biome_override_warped_forest",
+            "label": {
+              "literal": "warped_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[5]",
+            "id": "$slot[5]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[5]",
+            "binding": "#debug_biome_override_hell",
+            "label": {
+              "literal": "hell"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[6]",
+            "id": "$slot[6]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[6]",
+            "binding": "#debug_biome_override_desert",
+            "label": {
+              "literal": "desert"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[7]",
+            "id": "$slot[7]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[7]",
+            "binding": "#debug_biome_override_extreme_hills",
+            "label": {
+              "literal": "extreme_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[8]",
+            "id": "$slot[8]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[8]",
+            "binding": "#debug_biome_override_forest",
+            "label": {
+              "literal": "forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[9]",
+            "id": "$slot[9]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[9]",
+            "binding": "#debug_biome_override_taiga",
+            "label": {
+              "literal": "taiga"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[10]",
+            "id": "$slot[10]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[10]",
+            "binding": "#debug_biome_override_swampland",
+            "label": {
+              "literal": "swampland"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[11]",
+            "id": "$slot[11]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[11]",
+            "binding": "#debug_biome_override_river",
+            "label": {
+              "literal": "river"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[12]",
+            "id": "$slot[12]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[12]",
+            "binding": "#debug_biome_override_frozen_river",
+            "label": {
+              "literal": "frozen_river"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[13]",
+            "id": "$slot[13]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[13]",
+            "binding": "#debug_biome_override_ice_plains",
+            "label": {
+              "literal": "ice_plains"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[14]",
+            "id": "$slot[14]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[14]",
+            "binding": "#debug_biome_override_ice_mountains",
+            "label": {
+              "literal": "ice_mountains"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[15]",
+            "id": "$slot[15]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[15]",
+            "binding": "#debug_biome_override_mushroom_island",
+            "label": {
+              "literal": "mushroom_island"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[16]",
+            "id": "$slot[16]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[16]",
+            "binding": "#debug_biome_override_mushroom_island_shore",
+            "label": {
+              "literal": "mushroom_island_shore"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[17]",
+            "id": "$slot[17]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[17]",
+            "binding": "#debug_biome_override_beach",
+            "label": {
+              "literal": "beach"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[18]",
+            "id": "$slot[18]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[18]",
+            "binding": "#debug_biome_override_desert_hills",
+            "label": {
+              "literal": "desert_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[19]",
+            "id": "$slot[19]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[19]",
+            "binding": "#debug_biome_override_forest_hills",
+            "label": {
+              "literal": "forest_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[20]",
+            "id": "$slot[20]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[20]",
+            "binding": "#debug_biome_override_taiga_hills",
+            "label": {
+              "literal": "taiga_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[21]",
+            "id": "$slot[21]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[21]",
+            "binding": "#debug_biome_override_extreme_hills_edge",
+            "label": {
+              "literal": "extreme_hills_edge"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[22]",
+            "id": "$slot[22]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[22]",
+            "binding": "#debug_biome_override_jungle",
+            "label": {
+              "literal": "jungle"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[23]",
+            "id": "$slot[23]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[23]",
+            "binding": "#debug_biome_override_jungle_hills",
+            "label": {
+              "literal": "jungle_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[24]",
+            "id": "$slot[24]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[24]",
+            "binding": "#debug_biome_override_jungle_edge",
+            "label": {
+              "literal": "jungle_edge"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[25]",
+            "id": "$slot[25]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[25]",
+            "binding": "#debug_biome_override_stone_beach",
+            "label": {
+              "literal": "stone_beach"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[26]",
+            "id": "$slot[26]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[26]",
+            "binding": "#debug_biome_override_cold_beach",
+            "label": {
+              "literal": "cold_beach"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[27]",
+            "id": "$slot[27]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[27]",
+            "binding": "#debug_biome_override_birch_forest",
+            "label": {
+              "literal": "birch_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[28]",
+            "id": "$slot[28]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[28]",
+            "binding": "#debug_biome_override_birch_forest_hills",
+            "label": {
+              "literal": "birch_forest_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[29]",
+            "id": "$slot[29]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[29]",
+            "binding": "#debug_biome_override_roofed_forest",
+            "label": {
+              "literal": "roofed_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[30]",
+            "id": "$slot[30]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[30]",
+            "binding": "#debug_biome_override_cold_taiga",
+            "label": {
+              "literal": "cold_taiga"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[31]",
+            "id": "$slot[31]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[31]",
+            "binding": "#debug_biome_override_cold_taiga_hills",
+            "label": {
+              "literal": "cold_taiga_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[32]",
+            "id": "$slot[32]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[32]",
+            "binding": "#debug_biome_override_mega_taiga",
+            "label": {
+              "literal": "mega_taiga"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[33]",
+            "id": "$slot[33]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[33]",
+            "binding": "#debug_biome_override_mega_taiga_hills",
+            "label": {
+              "literal": "mega_taiga_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[34]",
+            "id": "$slot[34]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[34]",
+            "binding": "#debug_biome_override_extreme_hills_plus_trees",
+            "label": {
+              "literal": "extreme_hills_plus_trees"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[35]",
+            "id": "$slot[35]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[35]",
+            "binding": "#debug_biome_override_savanna",
+            "label": {
+              "literal": "savanna"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[36]",
+            "id": "$slot[36]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[36]",
+            "binding": "#debug_biome_override_savanna_plateau",
+            "label": {
+              "literal": "savanna_plateau"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[37]",
+            "id": "$slot[37]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[37]",
+            "binding": "#debug_biome_override_mesa",
+            "label": {
+              "literal": "mesa"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[38]",
+            "id": "$slot[38]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[38]",
+            "binding": "#debug_biome_override_mesa_plateau_stone",
+            "label": {
+              "literal": "mesa_plateau_stone"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[39]",
+            "id": "$slot[39]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[39]",
+            "binding": "#debug_biome_override_mesa_plateau",
+            "label": {
+              "literal": "mesa_plateau"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[40]",
+            "id": "$slot[40]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[40]",
+            "binding": "#debug_biome_override_ocean",
+            "label": {
+              "literal": "ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[41]",
+            "id": "$slot[41]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[41]",
+            "binding": "#debug_biome_override_deep_ocean",
+            "label": {
+              "literal": "deep_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[42]",
+            "id": "$slot[42]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[42]",
+            "binding": "#debug_biome_override_warm_ocean",
+            "label": {
+              "literal": "warm_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[43]",
+            "id": "$slot[43]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[43]",
+            "binding": "#debug_biome_override_deep_warm_ocean",
+            "label": {
+              "literal": "deep_warm_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[44]",
+            "id": "$slot[44]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[44]",
+            "binding": "#debug_biome_override_lukewarm_ocean",
+            "label": {
+              "literal": "lukewarm_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[45]",
+            "id": "$slot[45]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[45]",
+            "binding": "#debug_biome_override_deep_lukewarm_ocean",
+            "label": {
+              "literal": "deep_lukewarm_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[46]",
+            "id": "$slot[46]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[46]",
+            "binding": "#debug_biome_override_cold_ocean",
+            "label": {
+              "literal": "cold_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[47]",
+            "id": "$slot[47]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[47]",
+            "binding": "#debug_biome_override_deep_cold_ocean",
+            "label": {
+              "literal": "deep_cold_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[48]",
+            "id": "$slot[48]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[48]",
+            "binding": "#debug_biome_override_frozen_ocean",
+            "label": {
+              "literal": "frozen_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[49]",
+            "id": "$slot[49]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[49]",
+            "binding": "#debug_biome_override_deep_frozen_ocean",
+            "label": {
+              "literal": "deep_frozen_ocean"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[50]",
+            "id": "$slot[50]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[50]",
+            "binding": "#debug_biome_override_bamboo_jungle",
+            "label": {
+              "literal": "bamboo_jungle"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[51]",
+            "id": "$slot[51]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[51]",
+            "binding": "#debug_biome_override_bamboo_jungle_hills",
+            "label": {
+              "literal": "bamboo_jungle_hills"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[52]",
+            "id": "$slot[52]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[52]",
+            "binding": "#debug_biome_override_sunflower_plains",
+            "label": {
+              "literal": "sunflower_plains"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[53]",
+            "id": "$slot[53]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[53]",
+            "binding": "#debug_biome_override_swampland_mutated",
+            "label": {
+              "literal": "swampland_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[54]",
+            "id": "$slot[54]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[54]",
+            "binding": "#debug_biome_override_ice_plains_spikes",
+            "label": {
+              "literal": "ice_plains_spikes"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[55]",
+            "id": "$slot[55]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[55]",
+            "binding": "#debug_biome_override_cold_taiga_mutated",
+            "label": {
+              "literal": "cold_taiga_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[56]",
+            "id": "$slot[56]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[56]",
+            "binding": "#debug_biome_override_savanna_mutated",
+            "label": {
+              "literal": "savanna_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[57]",
+            "id": "$slot[57]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[57]",
+            "binding": "#debug_biome_override_savanna_plateau_mutated",
+            "label": {
+              "literal": "savanna_plateau_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[58]",
+            "id": "$slot[58]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[58]",
+            "binding": "#debug_biome_override_roofed_forest_mutated",
+            "label": {
+              "literal": "roofed_forest_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[59]",
+            "id": "$slot[59]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[59]",
+            "binding": "#debug_biome_override_desert_mutated",
+            "label": {
+              "literal": "desert_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[60]",
+            "id": "$slot[60]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[60]",
+            "binding": "#debug_biome_override_flower_forest",
+            "label": {
+              "literal": "flower_forest"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[61]",
+            "id": "$slot[61]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[61]",
+            "binding": "#debug_biome_override_taiga_mutated",
+            "label": {
+              "literal": "taiga_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[62]",
+            "id": "$slot[62]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[62]",
+            "binding": "#debug_biome_override_jungle_mutated",
+            "label": {
+              "literal": "jungle_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[63]",
+            "id": "$slot[63]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[63]",
+            "binding": "#debug_biome_override_jungle_edge_mutated",
+            "label": {
+              "literal": "jungle_edge_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[64]",
+            "id": "$slot[64]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[64]",
+            "binding": "#debug_biome_override_mesa_bryce",
+            "label": {
+              "literal": "mesa_bryce"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[65]",
+            "id": "$slot[65]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[65]",
+            "binding": "#debug_biome_override_mesa_plateau_stone_mutated",
+            "label": {
+              "literal": "mesa_plateau_stone_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[66]",
+            "id": "$slot[66]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[66]",
+            "binding": "#debug_biome_override_mesa_plateau_mutated",
+            "label": {
+              "literal": "mesa_plateau_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[67]",
+            "id": "$slot[67]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[67]",
+            "binding": "#debug_biome_override_birch_forest_mutated",
+            "label": {
+              "literal": "birch_forest_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[68]",
+            "id": "$slot[68]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[68]",
+            "binding": "#debug_biome_override_birch_forest_hills_mutated",
+            "label": {
+              "literal": "birch_forest_hills_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[69]",
+            "id": "$slot[69]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[69]",
+            "binding": "#debug_biome_override_redwood_taiga_mutated",
+            "label": {
+              "literal": "redwood_taiga_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[70]",
+            "id": "$slot[70]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[70]",
+            "binding": "#debug_biome_override_extreme_hills_mutated",
+            "label": {
+              "literal": "extreme_hills_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[71]",
+            "id": "$slot[71]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[71]",
+            "binding": "#debug_biome_override_extreme_hills_plus_trees_mutated",
+            "label": {
+              "literal": "extreme_hills_plus_trees_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[72]",
+            "id": "$slot[72]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[72]",
+            "binding": "#debug_biome_override_redwood_taiga_hills_mutated",
+            "label": {
+              "literal": "redwood_taiga_hills_mutated"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          },
+          {
+            "key": "world_section.debug_section/biome_override_dropdown/$choices/$slot[73]",
+            "id": "$slot[73]",
+            "sourceControl": "world_section.debug_section/biome_override_dropdown/$choices/$slot[73]",
+            "binding": "#debug_biome_override_plains",
+            "label": {
+              "literal": "plains"
+            },
+            "state": {
+              "ignored": false,
+              "visible": true,
+              "enabled": true
+            }
+          }
+        ],
+        "dropdownName": "debug_biome_override_dropdown",
+        "faceBinding": "#debug_biome_override_dropdown_toggle_label",
+        "scrolling": true,
+        "highlightOffset": [
+          -2,
+          1
+        ],
+        "highlightExtraSize": [
+          0,
+          1
+        ],
+        "auxiliary": {
+          "tooltipBindingType": "none",
+          "tooltipTextBinding": "",
+          "tooltipVisibleBinding": "#default_visibility",
+          "tooltipIcon": "textures/ui/infobulb"
+        }
+      },
+      {
+        "key": "world_section.debug_section/base_game_version_debug_text",
+        "id": "world_section.debug_section/base_game_version_debug_text",
+        "sourceControl": "world_section.debug_section/base_game_version_debug_text",
+        "kind": "label",
+        "sourceType": "label",
+        "sourceKey": "base_game_version_debug_text",
+        "origins": [],
+        "state": {
+          "ignored": false,
+          "visible": true,
+          "enabled": true
+        },
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "anchor": null,
+        "option": false,
+        "color": "#fff",
+        "text": "#base_game_version_debug_text",
+        "profile": "plain"
+      }
     ]
   },
   "bindings": {
@@ -4727,6 +7448,179 @@
       "#xbl_multiplayer_warning_label_visible": "boolean",
       "#xbl_multiplayer_warning_text": "string",
       "#xbl_show_broadcast_dropdown": "boolean"
+    },
+    "cloud": {
+      "#cloud_file_last_changed": "string",
+      "#cloud_file_last_changed_enabled": "boolean",
+      "#cloud_file_name": "string",
+      "#cloud_file_name_enabled": "boolean",
+      "#edu_cloud_upload": "boolean",
+      "#edu_cloud_upload_enabled": "boolean"
+    },
+    "debug": {
+      "#base_game_version_debug_text": "string",
+      "#debug_biome_override_bamboo_jungle": "boolean",
+      "#debug_biome_override_bamboo_jungle_hills": "boolean",
+      "#debug_biome_override_basalt_deltas": "boolean",
+      "#debug_biome_override_beach": "boolean",
+      "#debug_biome_override_birch_forest": "boolean",
+      "#debug_biome_override_birch_forest_hills": "boolean",
+      "#debug_biome_override_birch_forest_hills_mutated": "boolean",
+      "#debug_biome_override_birch_forest_mutated": "boolean",
+      "#debug_biome_override_cold_beach": "boolean",
+      "#debug_biome_override_cold_ocean": "boolean",
+      "#debug_biome_override_cold_taiga": "boolean",
+      "#debug_biome_override_cold_taiga_hills": "boolean",
+      "#debug_biome_override_cold_taiga_mutated": "boolean",
+      "#debug_biome_override_crimson_forest": "boolean",
+      "#debug_biome_override_deep_cold_ocean": "boolean",
+      "#debug_biome_override_deep_frozen_ocean": "boolean",
+      "#debug_biome_override_deep_lukewarm_ocean": "boolean",
+      "#debug_biome_override_deep_ocean": "boolean",
+      "#debug_biome_override_deep_warm_ocean": "boolean",
+      "#debug_biome_override_desert": "boolean",
+      "#debug_biome_override_desert_hills": "boolean",
+      "#debug_biome_override_desert_mutated": "boolean",
+      "#debug_biome_override_dropdown_dropdown_enabled": "boolean",
+      "#debug_biome_override_dropdown_toggle_label": "string",
+      "#debug_biome_override_extreme_hills": "boolean",
+      "#debug_biome_override_extreme_hills_edge": "boolean",
+      "#debug_biome_override_extreme_hills_mutated": "boolean",
+      "#debug_biome_override_extreme_hills_plus_trees": "boolean",
+      "#debug_biome_override_extreme_hills_plus_trees_mutated": "boolean",
+      "#debug_biome_override_flower_forest": "boolean",
+      "#debug_biome_override_forest": "boolean",
+      "#debug_biome_override_forest_hills": "boolean",
+      "#debug_biome_override_frozen_ocean": "boolean",
+      "#debug_biome_override_frozen_river": "boolean",
+      "#debug_biome_override_hell": "boolean",
+      "#debug_biome_override_ice_mountains": "boolean",
+      "#debug_biome_override_ice_plains": "boolean",
+      "#debug_biome_override_ice_plains_spikes": "boolean",
+      "#debug_biome_override_jungle": "boolean",
+      "#debug_biome_override_jungle_edge": "boolean",
+      "#debug_biome_override_jungle_edge_mutated": "boolean",
+      "#debug_biome_override_jungle_hills": "boolean",
+      "#debug_biome_override_jungle_mutated": "boolean",
+      "#debug_biome_override_lukewarm_ocean": "boolean",
+      "#debug_biome_override_mega_taiga": "boolean",
+      "#debug_biome_override_mega_taiga_hills": "boolean",
+      "#debug_biome_override_mesa": "boolean",
+      "#debug_biome_override_mesa_bryce": "boolean",
+      "#debug_biome_override_mesa_plateau": "boolean",
+      "#debug_biome_override_mesa_plateau_mutated": "boolean",
+      "#debug_biome_override_mesa_plateau_stone": "boolean",
+      "#debug_biome_override_mesa_plateau_stone_mutated": "boolean",
+      "#debug_biome_override_mushroom_island": "boolean",
+      "#debug_biome_override_mushroom_island_shore": "boolean",
+      "#debug_biome_override_ocean": "boolean",
+      "#debug_biome_override_plains": "boolean",
+      "#debug_biome_override_random_biome": "boolean",
+      "#debug_biome_override_redwood_taiga_hills_mutated": "boolean",
+      "#debug_biome_override_redwood_taiga_mutated": "boolean",
+      "#debug_biome_override_river": "boolean",
+      "#debug_biome_override_roofed_forest": "boolean",
+      "#debug_biome_override_roofed_forest_mutated": "boolean",
+      "#debug_biome_override_savanna": "boolean",
+      "#debug_biome_override_savanna_mutated": "boolean",
+      "#debug_biome_override_savanna_plateau": "boolean",
+      "#debug_biome_override_savanna_plateau_mutated": "boolean",
+      "#debug_biome_override_soulsand_valley": "boolean",
+      "#debug_biome_override_stone_beach": "boolean",
+      "#debug_biome_override_sunflower_plains": "boolean",
+      "#debug_biome_override_swampland": "boolean",
+      "#debug_biome_override_swampland_mutated": "boolean",
+      "#debug_biome_override_taiga": "boolean",
+      "#debug_biome_override_taiga_hills": "boolean",
+      "#debug_biome_override_taiga_mutated": "boolean",
+      "#debug_biome_override_warm_ocean": "boolean",
+      "#debug_biome_override_warped_forest": "boolean",
+      "#debug_spawn_biome_dropdown_enabled": "boolean",
+      "#debug_spawn_biome_dropdown_toggle_label": "string",
+      "#debug_spawn_dimension_dropdown_enabled": "boolean",
+      "#debug_spawn_dimension_dropdown_toggle_label": "string",
+      "#debug_spawn_in_bamboo_jungle": "boolean",
+      "#debug_spawn_in_bamboo_jungle_hills": "boolean",
+      "#debug_spawn_in_basalt_deltas": "boolean",
+      "#debug_spawn_in_beach": "boolean",
+      "#debug_spawn_in_birch_forest": "boolean",
+      "#debug_spawn_in_birch_forest_hills": "boolean",
+      "#debug_spawn_in_birch_forest_hills_mutated": "boolean",
+      "#debug_spawn_in_birch_forest_mutated": "boolean",
+      "#debug_spawn_in_cold_beach": "boolean",
+      "#debug_spawn_in_cold_ocean": "boolean",
+      "#debug_spawn_in_cold_taiga": "boolean",
+      "#debug_spawn_in_cold_taiga_hills": "boolean",
+      "#debug_spawn_in_cold_taiga_mutated": "boolean",
+      "#debug_spawn_in_crimson_forest": "boolean",
+      "#debug_spawn_in_deep_cold_ocean": "boolean",
+      "#debug_spawn_in_deep_frozen_ocean": "boolean",
+      "#debug_spawn_in_deep_lukewarm_ocean": "boolean",
+      "#debug_spawn_in_deep_ocean": "boolean",
+      "#debug_spawn_in_deep_warm_ocean": "boolean",
+      "#debug_spawn_in_desert": "boolean",
+      "#debug_spawn_in_desert_hills": "boolean",
+      "#debug_spawn_in_desert_mutated": "boolean",
+      "#debug_spawn_in_extreme_hills": "boolean",
+      "#debug_spawn_in_extreme_hills_edge": "boolean",
+      "#debug_spawn_in_extreme_hills_mutated": "boolean",
+      "#debug_spawn_in_extreme_hills_plus_trees": "boolean",
+      "#debug_spawn_in_extreme_hills_plus_trees_mutated": "boolean",
+      "#debug_spawn_in_flower_forest": "boolean",
+      "#debug_spawn_in_forest": "boolean",
+      "#debug_spawn_in_forest_hills": "boolean",
+      "#debug_spawn_in_frozen_ocean": "boolean",
+      "#debug_spawn_in_frozen_river": "boolean",
+      "#debug_spawn_in_hell": "boolean",
+      "#debug_spawn_in_ice_mountains": "boolean",
+      "#debug_spawn_in_ice_plains": "boolean",
+      "#debug_spawn_in_ice_plains_spikes": "boolean",
+      "#debug_spawn_in_jungle": "boolean",
+      "#debug_spawn_in_jungle_edge": "boolean",
+      "#debug_spawn_in_jungle_edge_mutated": "boolean",
+      "#debug_spawn_in_jungle_hills": "boolean",
+      "#debug_spawn_in_jungle_mutated": "boolean",
+      "#debug_spawn_in_lukewarm_ocean": "boolean",
+      "#debug_spawn_in_mega_taiga": "boolean",
+      "#debug_spawn_in_mega_taiga_hills": "boolean",
+      "#debug_spawn_in_mesa": "boolean",
+      "#debug_spawn_in_mesa_bryce": "boolean",
+      "#debug_spawn_in_mesa_plateau": "boolean",
+      "#debug_spawn_in_mesa_plateau_mutated": "boolean",
+      "#debug_spawn_in_mesa_plateau_stone": "boolean",
+      "#debug_spawn_in_mesa_plateau_stone_mutated": "boolean",
+      "#debug_spawn_in_mushroom_island": "boolean",
+      "#debug_spawn_in_mushroom_island_shore": "boolean",
+      "#debug_spawn_in_nether": "boolean",
+      "#debug_spawn_in_ocean": "boolean",
+      "#debug_spawn_in_overworld": "boolean",
+      "#debug_spawn_in_plains": "boolean",
+      "#debug_spawn_in_random_biome": "boolean",
+      "#debug_spawn_in_redwood_taiga_hills_mutated": "boolean",
+      "#debug_spawn_in_redwood_taiga_mutated": "boolean",
+      "#debug_spawn_in_river": "boolean",
+      "#debug_spawn_in_roofed_forest": "boolean",
+      "#debug_spawn_in_roofed_forest_mutated": "boolean",
+      "#debug_spawn_in_savanna": "boolean",
+      "#debug_spawn_in_savanna_mutated": "boolean",
+      "#debug_spawn_in_savanna_plateau": "boolean",
+      "#debug_spawn_in_savanna_plateau_mutated": "boolean",
+      "#debug_spawn_in_soulsand_valley": "boolean",
+      "#debug_spawn_in_stone_beach": "boolean",
+      "#debug_spawn_in_sunflower_plains": "boolean",
+      "#debug_spawn_in_swampland": "boolean",
+      "#debug_spawn_in_swampland_mutated": "boolean",
+      "#debug_spawn_in_taiga": "boolean",
+      "#debug_spawn_in_taiga_hills": "boolean",
+      "#debug_spawn_in_taiga_mutated": "boolean",
+      "#debug_spawn_in_warm_ocean": "boolean",
+      "#debug_spawn_in_warped_forest": "boolean",
+      "#flat_nether": "boolean",
+      "#flat_nether_enabled": "boolean",
+      "#game_version_override": "string",
+      "#game_version_override_enabled": "boolean",
+      "#game_version_override_toggle": "boolean",
+      "#game_version_override_toggle_enabled": "boolean"
     }
   },
   "strings": {
@@ -4835,7 +7729,15 @@
       "options.xboxliveBroadcastSettings",
       "options.xboxliveBroadcastSettingsForCrossplatform",
       "permissions.open.account.help.button"
-    ]
+    ],
+    "cloud": [
+      "menu.eduCloudStorage.caps",
+      "options.cloudFileLastChangedTitle",
+      "options.cloudFileNameTitle",
+      "options.cloudHelpText",
+      "options.cloudToggleCloudSave"
+    ],
+    "debug": []
   },
   "conditions": {
     "game": [
@@ -4869,6 +7771,12 @@
       "($nx_os or $is_ps4)",
       "(not $is_xboxlive_enabled)",
       "(not $nx_os and not $is_ps4)"
+    ],
+    "cloud": [
+      "$desktop_screen"
+    ],
+    "debug": [
+      "$desktop_screen"
     ]
   },
   "metrics": {
@@ -5416,6 +8324,99 @@
         "height": "number",
         "textHeight": "number"
       }
+    },
+    "cloud": {
+      "world_section.edu_cloud_section/edu_cloud_label/text": {
+        "height": "number",
+        "textHeight": "number"
+      },
+      "world_section.edu_cloud_section/edu_cloud_label": {
+        "height": "number"
+      },
+      "world_section.edu_cloud_section/cloud_file_name": {
+        "height": "number",
+        "labelHeight": "number",
+        "descriptionHeight": "number",
+        "controlY": "number"
+      },
+      "world_section.edu_cloud_section/cloud_file_last_changed": {
+        "height": "number",
+        "labelHeight": "number",
+        "descriptionHeight": "number",
+        "controlY": "number"
+      },
+      "world_section.edu_cloud_section/cloud_upload_toggle": {
+        "height": "number",
+        "labelHeight": "number",
+        "descriptionHeight": "number",
+        "controlY": "number"
+      },
+      "world_section.edu_cloud_section/cloud_help_wrapper_panel/cloud_help_button": {
+        "height": "number",
+        "resolvedWidth": "number",
+        "stateWidth": "number",
+        "labelPanelSize": "pair",
+        "labelSize": "pair"
+      },
+      "world_section.edu_cloud_section/cloud_help_wrapper_panel/padded_icon/icon": {},
+      "world_section.edu_cloud_section/cloud_help_wrapper_panel/padded_icon": {
+        "height": "number",
+        "resolvedWidth": "number"
+      },
+      "world_section.edu_cloud_section/cloud_help_wrapper_panel": {
+        "height": "number"
+      }
+    },
+    "debug": {
+      "world_section.debug_section/flat_nether_toggle": {
+        "height": "number",
+        "labelHeight": "number",
+        "descriptionHeight": "number",
+        "controlY": "number"
+      },
+      "world_section.debug_section/game_version_override_toggle": {
+        "height": "number",
+        "labelHeight": "number",
+        "descriptionHeight": "number",
+        "controlY": "number"
+      },
+      "world_section.debug_section/game_version_override_textbox": {
+        "height": "number",
+        "labelHeight": "number",
+        "descriptionHeight": "number",
+        "controlY": "number"
+      },
+      "world_section.debug_section/spawn_dimension_dropdown": {
+        "height": "number",
+        "labelHeight": "number",
+        "descriptionHeight": "number",
+        "controlY": "number",
+        "popupHeight": "number",
+        "popupPlacement": "placement",
+        "popupLabel": "string"
+      },
+      "world_section.debug_section/spawn_biome_dropdown": {
+        "height": "number",
+        "labelHeight": "number",
+        "descriptionHeight": "number",
+        "controlY": "number",
+        "popupHeight": "number",
+        "popupPlacement": "placement",
+        "popupLabel": "string"
+      },
+      "world_section.debug_section/biome_override_dropdown": {
+        "height": "number",
+        "labelHeight": "number",
+        "descriptionHeight": "number",
+        "controlY": "number",
+        "popupHeight": "number",
+        "popupPlacement": "placement",
+        "popupLabel": "string"
+      },
+      "world_section.debug_section/base_game_version_debug_text": {
+        "height": "number",
+        "textHeight": "number"
+      }
     }
   },
   "sources": [
@@ -5448,6 +8449,11 @@
       "sourceFile": "resource_pack/ui/ui_common.json",
       "bytes": 243941,
       "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    },
+    {
+      "sourceFile": "resource_pack/ui/ui_edu_common.json",
+      "bytes": 68229,
+      "sha256": "5d125ff357e7f3fec63e451a2fdb5721c0f18b05e40d59ebc7522ef62b95b210"
     },
     {
       "sourceFile": "resource_pack/ui/ui_template_buttons.json",
@@ -5517,6 +8523,72 @@
       "sourceKey": "empty_panel",
       "value": {
         "type": "panel"
+      }
+    },
+    "common.single_line_label": {
+      "sourceFile": "resource_pack/ui/ui_common.json",
+      "sourceKey": "single_line_label",
+      "value": {
+        "type": "panel",
+        "$size|default": [
+          "100%c",
+          "100%c + 3px"
+        ],
+        "size": "$size",
+        "$single_line_label_offset|default": [
+          2,
+          1
+        ],
+        "$single_label_size|default": [
+          "default",
+          10
+        ],
+        "$underline_control|default": "common.empty_panel",
+        "$single_line_font_scale_factor|default": 1,
+        "$font_type|default": "smooth",
+        "$font_size|default": "normal",
+        "controls": [
+          {
+            "label_panel": {
+              "type": "label",
+              "size": "$single_label_size",
+              "offset": "$single_line_label_offset",
+              "anchor_from": "top_left",
+              "anchor_to": "top_left",
+              "layer": 2,
+              "font_type": "$font_type",
+              "font_size": "$font_size",
+              "font_scale_factor": "$single_line_font_scale_factor",
+              "$single_line_label_color|default": "$body_text_color",
+              "color": "$single_line_label_color",
+              "text_alignment": "left",
+              "$single_line_label_text|default": "",
+              "text": "$single_line_label_text",
+              "controls": "$underline_control",
+              "$label_text_bindings|default": [],
+              "bindings": "$label_text_bindings"
+            }
+          }
+        ]
+      }
+    },
+    "common.underline": {
+      "sourceFile": "resource_pack/ui/ui_common.json",
+      "sourceKey": "underline",
+      "value": {
+        "type": "image",
+        "size": [
+          "100%",
+          1
+        ],
+        "$texture|default": "textures/ui/underline",
+        "$underline_color|default": "$f_color_format",
+        "color": "$underline_color",
+        "texture": "$texture",
+        "alpha": 0.6,
+        "tiled": "x",
+        "anchor_from": "bottom_left",
+        "anchor_to": "bottom_left"
       }
     },
     "common_buttons.hyperlink_button": {
@@ -5633,6 +8705,151 @@
               "$border_layer": 1,
               "$locked_state": true,
               "layer": 1
+            }
+          }
+        ]
+      }
+    },
+    "common_buttons.underline_button": {
+      "sourceFile": "resource_pack/ui/ui_template_buttons.json",
+      "sourceKey": "underline_button@common.button",
+      "value": {
+        "size": [
+          "100%c",
+          "100%c"
+        ],
+        "$underline_button_size|default": [
+          "100%c",
+          "100%c"
+        ],
+        "$single_label_size": [
+          "default",
+          8
+        ],
+        "$single_line_font_scale_factor": 0.8,
+        "$pressed_button_name|default": "",
+        "$mashup_collection_binding_type|default": "global",
+        "$mashup_collection_name|default": "",
+        "$underline_default_color|default": "$generic_button_text_color",
+        "controls": [
+          {
+            "default": {
+              "type": "panel",
+              "size": "$underline_button_size",
+              "controls": [
+                {
+                  "label_default@common.single_line_label": {
+                    "$single_line_label_color": "$dark_button_default_text_color",
+                    "$underline_control": [
+                      {
+                        "underline_default@common.underline": {
+                          "$underline_color": "$underline_default_color"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "hover": {
+              "type": "panel",
+              "size": "$underline_button_size",
+              "controls": [
+                {
+                  "label_hover@common.single_line_label": {
+                    "$single_line_label_color|default": [
+                      0.215,
+                      0.839,
+                      0.118
+                    ],
+                    "$underline_control": [
+                      {
+                        "underline_hover@common.underline": {
+                          "$texture": "textures/ui/underline_focus"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "pressed": {
+              "type": "panel",
+              "size": "$underline_button_size",
+              "controls": [
+                {
+                  "label_hover@common.single_line_label": {
+                    "$single_line_label_color|default": [
+                      0.215,
+                      0.839,
+                      0.118
+                    ],
+                    "$underline_control": [
+                      {
+                        "underline_hover@common.underline": {
+                          "$texture": "textures/ui/underline_focus"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "edu_common.underline_button": {
+      "sourceFile": "resource_pack/ui/ui_edu_common.json",
+      "sourceKey": "underline_button@common_buttons.underline_button",
+      "value": {
+        "pressed_control": "pressed",
+        "controls": [
+          {
+            "default@edu_common.underline_text": {
+              "$text_color": "$dark_button_default_text_color"
+            }
+          },
+          {
+            "hover@edu_common.underline_text": {
+              "$texture": "textures/ui/underline_focus"
+            }
+          },
+          {
+            "pressed@edu_common.underline_text": {
+              "$texture": "textures/ui/underline_focus"
+            }
+          }
+        ]
+      }
+    },
+    "edu_common.underline_text": {
+      "sourceFile": "resource_pack/ui/ui_edu_common.json",
+      "sourceKey": "underline_text",
+      "value": {
+        "type": "panel",
+        "size": [
+          "100%c",
+          10
+        ],
+        "$text_color|default": [
+          0.215,
+          0.839,
+          0.118
+        ],
+        "controls": [
+          {
+            "label_hover@common.single_line_label": {
+              "$single_line_label_color": "$text_color",
+              "$underline_control": [
+                {
+                  "underline_hover@common.underline": {}
+                }
+              ]
             }
           }
         ]
@@ -6388,6 +9605,1048 @@
         "text": ""
       }
     },
+    "world_section.debug_biome_override_dropdown_content": {
+      "sourceFile": "resource_pack/ui/settings_sections/world_section.json",
+      "sourceKey": "debug_biome_override_dropdown_content@settings_common.option_radio_dropdown_group",
+      "value": {
+        "$radio_buttons": [
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_random_biome",
+              "$radio_label_text": "random_biome"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_basalt_deltas",
+              "$radio_label_text": "basalt_deltas"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_soulsand_valley",
+              "$radio_label_text": "soulsand_valley"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_crimson_forest",
+              "$radio_label_text": "crimson_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_warped_forest",
+              "$radio_label_text": "warped_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_hell",
+              "$radio_label_text": "hell"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_desert",
+              "$radio_label_text": "desert"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_extreme_hills",
+              "$radio_label_text": "extreme_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_forest",
+              "$radio_label_text": "forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_taiga",
+              "$radio_label_text": "taiga"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_swampland",
+              "$radio_label_text": "swampland"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_river",
+              "$radio_label_text": "river"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_frozen_river",
+              "$radio_label_text": "frozen_river"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_ice_plains",
+              "$radio_label_text": "ice_plains"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_ice_mountains",
+              "$radio_label_text": "ice_mountains"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mushroom_island",
+              "$radio_label_text": "mushroom_island"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mushroom_island_shore",
+              "$radio_label_text": "mushroom_island_shore"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_beach",
+              "$radio_label_text": "beach"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_desert_hills",
+              "$radio_label_text": "desert_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_forest_hills",
+              "$radio_label_text": "forest_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_taiga_hills",
+              "$radio_label_text": "taiga_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_extreme_hills_edge",
+              "$radio_label_text": "extreme_hills_edge"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_jungle",
+              "$radio_label_text": "jungle"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_jungle_hills",
+              "$radio_label_text": "jungle_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_jungle_edge",
+              "$radio_label_text": "jungle_edge"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_stone_beach",
+              "$radio_label_text": "stone_beach"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_cold_beach",
+              "$radio_label_text": "cold_beach"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_birch_forest",
+              "$radio_label_text": "birch_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_birch_forest_hills",
+              "$radio_label_text": "birch_forest_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_roofed_forest",
+              "$radio_label_text": "roofed_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_cold_taiga",
+              "$radio_label_text": "cold_taiga"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_cold_taiga_hills",
+              "$radio_label_text": "cold_taiga_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mega_taiga",
+              "$radio_label_text": "mega_taiga"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mega_taiga_hills",
+              "$radio_label_text": "mega_taiga_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_extreme_hills_plus_trees",
+              "$radio_label_text": "extreme_hills_plus_trees"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_savanna",
+              "$radio_label_text": "savanna"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_savanna_plateau",
+              "$radio_label_text": "savanna_plateau"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mesa",
+              "$radio_label_text": "mesa"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mesa_plateau_stone",
+              "$radio_label_text": "mesa_plateau_stone"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mesa_plateau",
+              "$radio_label_text": "mesa_plateau"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_ocean",
+              "$radio_label_text": "ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_deep_ocean",
+              "$radio_label_text": "deep_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_warm_ocean",
+              "$radio_label_text": "warm_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_deep_warm_ocean",
+              "$radio_label_text": "deep_warm_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_lukewarm_ocean",
+              "$radio_label_text": "lukewarm_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_deep_lukewarm_ocean",
+              "$radio_label_text": "deep_lukewarm_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_cold_ocean",
+              "$radio_label_text": "cold_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_deep_cold_ocean",
+              "$radio_label_text": "deep_cold_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_frozen_ocean",
+              "$radio_label_text": "frozen_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_deep_frozen_ocean",
+              "$radio_label_text": "deep_frozen_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_bamboo_jungle",
+              "$radio_label_text": "bamboo_jungle"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_bamboo_jungle_hills",
+              "$radio_label_text": "bamboo_jungle_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_sunflower_plains",
+              "$radio_label_text": "sunflower_plains"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_swampland_mutated",
+              "$radio_label_text": "swampland_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_ice_plains_spikes",
+              "$radio_label_text": "ice_plains_spikes"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_cold_taiga_mutated",
+              "$radio_label_text": "cold_taiga_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_savanna_mutated",
+              "$radio_label_text": "savanna_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_savanna_plateau_mutated",
+              "$radio_label_text": "savanna_plateau_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_roofed_forest_mutated",
+              "$radio_label_text": "roofed_forest_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_desert_mutated",
+              "$radio_label_text": "desert_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_flower_forest",
+              "$radio_label_text": "flower_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_taiga_mutated",
+              "$radio_label_text": "taiga_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_jungle_mutated",
+              "$radio_label_text": "jungle_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_jungle_edge_mutated",
+              "$radio_label_text": "jungle_edge_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mesa_bryce",
+              "$radio_label_text": "mesa_bryce"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mesa_plateau_stone_mutated",
+              "$radio_label_text": "mesa_plateau_stone_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_mesa_plateau_mutated",
+              "$radio_label_text": "mesa_plateau_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_birch_forest_mutated",
+              "$radio_label_text": "birch_forest_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_birch_forest_hills_mutated",
+              "$radio_label_text": "birch_forest_hills_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_redwood_taiga_mutated",
+              "$radio_label_text": "redwood_taiga_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_extreme_hills_mutated",
+              "$radio_label_text": "extreme_hills_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_extreme_hills_plus_trees_mutated",
+              "$radio_label_text": "extreme_hills_plus_trees_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_redwood_taiga_hills_mutated",
+              "$radio_label_text": "redwood_taiga_hills_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_biome_override_plains",
+              "$radio_label_text": "plains"
+            }
+          }
+        ]
+      }
+    },
+    "world_section.debug_section": {
+      "sourceFile": "resource_pack/ui/settings_sections/world_section.json",
+      "sourceKey": "debug_section",
+      "value": {
+        "type": "stack_panel",
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "bindings": [
+          {
+            "binding_type": "view",
+            "source_control_name": "world_debug_button_toggle",
+            "source_property_name": "#toggle_state",
+            "target_property_name": "#visible"
+          }
+        ],
+        "controls": [
+          {
+            "flat_nether_toggle@settings_common.option_toggle": {
+              "$option_label": "Flat Nether",
+              "$option_binding_name": "#flat_nether",
+              "$option_enabled_binding_name": "#flat_nether_enabled",
+              "$toggle_name": "flat_nether"
+            }
+          },
+          {
+            "game_version_override_toggle@settings_common.option_toggle": {
+              "$option_label": "Enable Game Version Override",
+              "$option_binding_name": "#game_version_override_toggle",
+              "$option_enabled_binding_name": "#game_version_override_toggle_enabled",
+              "$toggle_name": "game_version_override_toggle"
+            }
+          },
+          {
+            "game_version_override_textbox@settings_common.option_text_edit": {
+              "$option_label": "Game Version Override",
+              "$option_binding_name": "#game_version_override",
+              "$option_place_holder_text": "0.0.0",
+              "$option_enabled_binding_name": "#game_version_override_enabled",
+              "$text_box_name": "game_version_override_text_box"
+            }
+          },
+          {
+            "spawn_dimension_dropdown@settings_common.option_dropdown_no_scroll": {
+              "$option_label": "Spawn Dimension",
+              "$dropdown_content": "world_section.debug_spawn_dimension_dropdown_content",
+              "$dropdown_area": "content_area",
+              "$dropdown_name": "debug_spawn_dimension_dropdown",
+              "$options_dropdown_toggle_label_binding": "#debug_spawn_dimension_dropdown_toggle_label",
+              "$option_enabled_binding_name": "#debug_spawn_dimension_dropdown_enabled",
+              "$selection_highlight_offset": [
+                -2,
+                1
+              ],
+              "$selection_highlight_size": [
+                "100%",
+                "100% + 1px"
+              ],
+              "$focus_override_right": "FOCUS_OVERRIDE_STOP"
+            }
+          },
+          {
+            "spawn_biome_dropdown@settings_common.option_dropdown": {
+              "$option_label": "Spawn Biome",
+              "$dropdown_content": "world_section.debug_spawn_biome_dropdown_content",
+              "$dropdown_area": "content_area",
+              "$dropdown_name": "debug_spawn_biome_dropdown",
+              "$options_dropdown_toggle_label_binding": "#debug_spawn_biome_dropdown_toggle_label",
+              "$option_enabled_binding_name": "#debug_spawn_biome_dropdown_enabled",
+              "$selection_highlight_offset": [
+                -2,
+                1
+              ],
+              "$selection_highlight_size": [
+                "100%",
+                "100% + 1px"
+              ],
+              "$focus_override_right": "FOCUS_OVERRIDE_STOP"
+            }
+          },
+          {
+            "biome_override_dropdown@settings_common.option_dropdown": {
+              "$option_label": "Biome override",
+              "$dropdown_content": "world_section.debug_biome_override_dropdown_content",
+              "$dropdown_area": "content_area",
+              "$dropdown_name": "debug_biome_override_dropdown",
+              "$options_dropdown_toggle_label_binding": "#debug_biome_override_dropdown_toggle_label",
+              "$option_enabled_binding_name": "#debug_biome_override_dropdown_dropdown_enabled",
+              "$selection_highlight_offset": [
+                -2,
+                1
+              ],
+              "$selection_highlight_size": [
+                "100%",
+                "100% + 1px"
+              ],
+              "$focus_override_right": "FOCUS_OVERRIDE_STOP"
+            }
+          },
+          {
+            "base_game_version_debug_text": {
+              "type": "label",
+              "color": "$body_text_color",
+              "text": "#text",
+              "bindings": [
+                {
+                  "binding_name": "#base_game_version_debug_text",
+                  "binding_name_override": "#text"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "world_section.debug_spawn_biome_dropdown_content": {
+      "sourceFile": "resource_pack/ui/settings_sections/world_section.json",
+      "sourceKey": "debug_spawn_biome_dropdown_content@settings_common.option_radio_dropdown_group",
+      "value": {
+        "$radio_buttons": [
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_random_biome",
+              "$radio_label_text": "random_biome"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_basalt_deltas",
+              "$radio_label_text": "basalt_deltas"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_soulsand_valley",
+              "$radio_label_text": "soulsand_valley"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_crimson_forest",
+              "$radio_label_text": "crimson_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_warped_forest",
+              "$radio_label_text": "warped_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_hell",
+              "$radio_label_text": "hell"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_desert",
+              "$radio_label_text": "desert"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_extreme_hills",
+              "$radio_label_text": "extreme_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_forest",
+              "$radio_label_text": "forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_taiga",
+              "$radio_label_text": "taiga"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_swampland",
+              "$radio_label_text": "swampland"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_river",
+              "$radio_label_text": "river"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_frozen_river",
+              "$radio_label_text": "frozen_river"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_ice_plains",
+              "$radio_label_text": "ice_plains"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_ice_mountains",
+              "$radio_label_text": "ice_mountains"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mushroom_island",
+              "$radio_label_text": "mushroom_island"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mushroom_island_shore",
+              "$radio_label_text": "mushroom_island_shore"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_beach",
+              "$radio_label_text": "beach"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_desert_hills",
+              "$radio_label_text": "desert_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_forest_hills",
+              "$radio_label_text": "forest_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_taiga_hills",
+              "$radio_label_text": "taiga_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_extreme_hills_edge",
+              "$radio_label_text": "extreme_hills_edge"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_jungle",
+              "$radio_label_text": "jungle"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_jungle_hills",
+              "$radio_label_text": "jungle_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_jungle_edge",
+              "$radio_label_text": "jungle_edge"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_stone_beach",
+              "$radio_label_text": "stone_beach"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_cold_beach",
+              "$radio_label_text": "cold_beach"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_birch_forest",
+              "$radio_label_text": "birch_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_birch_forest_hills",
+              "$radio_label_text": "birch_forest_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_roofed_forest",
+              "$radio_label_text": "roofed_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_cold_taiga",
+              "$radio_label_text": "cold_taiga"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_cold_taiga_hills",
+              "$radio_label_text": "cold_taiga_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mega_taiga",
+              "$radio_label_text": "mega_taiga"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mega_taiga_hills",
+              "$radio_label_text": "mega_taiga_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_extreme_hills_plus_trees",
+              "$radio_label_text": "extreme_hills_plus_trees"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_savanna",
+              "$radio_label_text": "savanna"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_savanna_plateau",
+              "$radio_label_text": "savanna_plateau"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mesa",
+              "$radio_label_text": "mesa"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mesa_plateau_stone",
+              "$radio_label_text": "mesa_plateau_stone"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mesa_plateau",
+              "$radio_label_text": "mesa_plateau"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_ocean",
+              "$radio_label_text": "ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_deep_ocean",
+              "$radio_label_text": "deep_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_warm_ocean",
+              "$radio_label_text": "warm_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_deep_warm_ocean",
+              "$radio_label_text": "deep_warm_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_lukewarm_ocean",
+              "$radio_label_text": "lukewarm_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_deep_lukewarm_ocean",
+              "$radio_label_text": "deep_lukewarm_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_cold_ocean",
+              "$radio_label_text": "cold_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_deep_cold_ocean",
+              "$radio_label_text": "deep_cold_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_frozen_ocean",
+              "$radio_label_text": "frozen_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_deep_frozen_ocean",
+              "$radio_label_text": "deep_frozen_ocean"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_bamboo_jungle",
+              "$radio_label_text": "bamboo_jungle"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_bamboo_jungle_hills",
+              "$radio_label_text": "bamboo_jungle_hills"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_sunflower_plains",
+              "$radio_label_text": "sunflower_plains"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_swampland_mutated",
+              "$radio_label_text": "swampland_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_ice_plains_spikes",
+              "$radio_label_text": "ice_plains_spikes"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_cold_taiga_mutated",
+              "$radio_label_text": "cold_taiga_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_savanna_mutated",
+              "$radio_label_text": "savanna_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_savanna_plateau_mutated",
+              "$radio_label_text": "savanna_plateau_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_roofed_forest_mutated",
+              "$radio_label_text": "roofed_forest_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_desert_mutated",
+              "$radio_label_text": "desert_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_flower_forest",
+              "$radio_label_text": "flower_forest"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_taiga_mutated",
+              "$radio_label_text": "taiga_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_jungle_mutated",
+              "$radio_label_text": "jungle_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_jungle_edge_mutated",
+              "$radio_label_text": "jungle_edge_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mesa_bryce",
+              "$radio_label_text": "mesa_bryce"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mesa_plateau_stone_mutated",
+              "$radio_label_text": "mesa_plateau_stone_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_mesa_plateau_mutated",
+              "$radio_label_text": "mesa_plateau_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_birch_forest_mutated",
+              "$radio_label_text": "birch_forest_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_birch_forest_hills_mutated",
+              "$radio_label_text": "birch_forest_hills_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_redwood_taiga_mutated",
+              "$radio_label_text": "redwood_taiga_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_extreme_hills_mutated",
+              "$radio_label_text": "extreme_hills_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_extreme_hills_plus_trees_mutated",
+              "$radio_label_text": "extreme_hills_plus_trees_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_redwood_taiga_hills_mutated",
+              "$radio_label_text": "redwood_taiga_hills_mutated"
+            }
+          },
+          {
+            "@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_plains",
+              "$radio_label_text": "plains"
+            }
+          }
+        ]
+      }
+    },
+    "world_section.debug_spawn_dimension_dropdown_content": {
+      "sourceFile": "resource_pack/ui/settings_sections/world_section.json",
+      "sourceKey": "debug_spawn_dimension_dropdown_content@settings_common.option_radio_dropdown_group",
+      "value": {
+        "$radio_buttons": [
+          {
+            "debug_spawn_in_overworld_toggle@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_overworld",
+              "$radio_label_text": "Overworld"
+            }
+          },
+          {
+            "debug_spawn_in_nether_toggle@settings_common.radio_with_label": {
+              "$toggle_state_binding_name": "#debug_spawn_in_nether",
+              "$radio_label_text": "Nether"
+            }
+          }
+        ]
+      }
+    },
     "world_section.delete_world_button": {
       "sourceFile": "resource_pack/ui/settings_sections/world_section.json",
       "sourceKey": "delete_world_button@settings_common.action_button",
@@ -6565,6 +10824,114 @@
                     "anchor_from": "top_left",
                     "anchor_to": "top_left",
                     "$button_text": "createWorldScreen.editor.deleteProject"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "world_section.edu_cloud_section": {
+      "sourceFile": "resource_pack/ui/settings_sections/world_section.json",
+      "sourceKey": "edu_cloud_section",
+      "value": {
+        "type": "stack_panel",
+        "size": [
+          "100%",
+          "100%c"
+        ],
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "bindings": [
+          {
+            "binding_type": "view",
+            "source_control_name": "cloud_button_toggle",
+            "source_property_name": "#toggle_state",
+            "target_property_name": "#visible"
+          }
+        ],
+        "controls": [
+          {
+            "edu_cloud_label@settings_common.option_group_label": {
+              "$text": "menu.eduCloudStorage.caps",
+              "variables": [
+                {
+                  "requires": "$education_edition",
+                  "$font_type": "MinecraftTen",
+                  "$font_scale_factor": 1.2
+                }
+              ]
+            }
+          },
+          {
+            "cloud_file_name@settings_common.option_text_edit": {
+              "$option_label": "options.cloudFileNameTitle",
+              "$option_binding_name": "#cloud_file_name",
+              "$option_enabled_binding_name": "#cloud_file_name_enabled",
+              "$text_box_name": "cloud_file_name_text_box"
+            }
+          },
+          {
+            "cloud_file_last_changed@settings_common.option_text_edit": {
+              "$option_label": "options.cloudFileLastChangedTitle",
+              "$option_binding_name": "#cloud_file_last_changed",
+              "$option_enabled_binding_name": "#cloud_file_last_changed_enabled",
+              "$text_box_name": "cloud_file_last_changed_text_box"
+            }
+          },
+          {
+            "cloud_upload_toggle@settings_common.option_toggle": {
+              "$option_label": "options.cloudToggleCloudSave",
+              "$option_binding_name": "#edu_cloud_upload",
+              "$option_enabled_binding_name": "#edu_cloud_upload_enabled",
+              "$toggle_name": "cloud_upload"
+            }
+          },
+          {
+            "cloud_help_wrapper_panel": {
+              "type": "stack_panel",
+              "orientation": "horizontal",
+              "size": [
+                "100%",
+                "100%cm"
+              ],
+              "controls": [
+                {
+                  "cloud_help_button@edu_common.underline_button": {
+                    "$single_line_font_scale_factor": 1,
+                    "$single_label_size": [
+                      "default",
+                      "default"
+                    ],
+                    "$pressed_button_name": "button.cloud_help_button",
+                    "$single_line_label_text": "options.cloudHelpText",
+                    "$font_type": "smooth",
+                    "$font_size": "normal"
+                  }
+                },
+                {
+                  "padded_icon@common.empty_panel": {
+                    "size": [
+                      "100%c",
+                      "100%c"
+                    ],
+                    "controls": [
+                      {
+                        "icon": {
+                          "type": "image",
+                          "texture": "textures/ui/icon_external_link",
+                          "size": [
+                            9,
+                            9
+                          ],
+                          "offset": [
+                            5,
+                            0.6
+                          ]
+                        }
+                      }
+                    ]
                   }
                 }
               ]
@@ -8131,5 +12498,73 @@
       }
     }
   },
-  "policy": "Canonical identity/order/static variables owned by library. Dynamic source conditions are explicit host-resolved booleans; source precedence/native layout/typography not certified."
+  "policy": "Canonical identity/order/static variables owned by library. Dynamic source conditions are explicit host-resolved booleans; source precedence/native layout/typography not certified.",
+  "cloudMaterials": {
+    "wholeOriginals": [
+      {
+        "texture": "textures/ui/underline",
+        "file": "src/assets/progress/ui/underline.png",
+        "bytes": 99,
+        "sha256": "1b577f29e5fe1af2634f952389051a03bdf0a25b8ef9bdfdd716334561c6e48b",
+        "sourceSize": [
+          1,
+          1
+        ],
+        "metadata": "absent"
+      },
+      {
+        "texture": "textures/ui/underline_focus",
+        "file": "src/assets/start-menu/underline_focus.png",
+        "bytes": 85,
+        "sha256": "2195dcbf031628c32d97555379c210b3b5a70c463920d44809799c2c4e7790e3",
+        "sourceSize": [
+          1,
+          1
+        ],
+        "metadata": "absent"
+      }
+    ],
+    "unresolved": [
+      "textures/ui/icon_external_link"
+    ],
+    "policy": "Missing exact texture requires explicit whole host image. Differently named external_link.png is not an alias."
+  },
+  "cloudLocaleClosure": {
+    "sourceFile": "resource_pack/texts/zh_CN.lang",
+    "sha256": "bb7a3ebfc5d655b4f77c88fff837f7e604d2767c67e7f268c408d5e216d58c89",
+    "missingKeys": [
+      "menu.eduCloudStorage.caps",
+      "options.cloudFileLastChangedTitle",
+      "options.cloudFileNameTitle",
+      "options.cloudHelpText",
+      "options.cloudToggleCloudSave"
+    ],
+    "policy": "Host-resolved Education localization; no invented vanilla translation."
+  },
+  "cloudPaletteRaw": {
+    "sourceFile": "resource_pack/ui/_global_variables.json",
+    "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b",
+    "values": {
+      "$dark_button_default_text_color": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "$f_color_format": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "$body_text_color": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "hoverAndPressed": [
+      0.215,
+      0.839,
+      0.118
+    ]
+  }
 }

@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useId, useImperativeHandle, useRef, useState } from 'react';
-import type { ButtonHTMLAttributes, ForwardedRef, ReactNode, SelectHTMLAttributes, SyntheticEvent } from 'react';
+import type { ButtonHTMLAttributes, ChangeEvent, ForwardedRef, ReactNode, SelectHTMLAttributes, SyntheticEvent } from 'react';
 import { GuiIcon } from './gui-icon';
 
 export interface ComboboxOption { value: string; label: string; disabled?: boolean }
@@ -8,7 +8,8 @@ export interface ComboboxProps extends Omit<ButtonHTMLAttributes<HTMLButtonEleme
   options: readonly ComboboxOption[];
   value?: string;
   defaultValue?: string;
-  onValueChange?: (value: string) => void;
+  /** The optional second argument is the real successful native select change. */
+  onValueChange?: (value: string, event?: ChangeEvent<HTMLSelectElement>) => void;
   placeholder?: string;
   description?: ReactNode;
   error?: ReactNode;
@@ -211,7 +212,7 @@ export const ComboboxBase = forwardRef<HTMLButtonElement, ComboboxBaseProps>(fun
       onChange={event => {
         const next = multiple ? Array.from(event.currentTarget.selectedOptions, option => option.value) : [event.currentTarget.value];
         if (!controlled) setInternal(next);
-        setValidation(''); nativeAdapter?.props.onChange?.(event); onValueChange?.(next[0] ?? '');
+        setValidation(''); nativeAdapter?.props.onChange?.(event); onValueChange?.(next[0] ?? '', event);
       }}
       onFocus={event => {
         nativeAdapter?.props.onFocus?.(event);

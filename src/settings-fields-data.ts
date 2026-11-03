@@ -107,6 +107,13 @@ export function snapshotSettingsFields(p:SettingsFieldsProps):SettingsFieldsSnap
         const popup=row.popup;if(!popup)fail('permission popup profile is required.');number(popup.height,'permission popup height');bool(popup.scrolling,'permission popup scrolling');text(popup.label,'permission popup label',false);if(!['above','below'].includes(popup.placement)||!['mouse','touch'].includes(popup.inputMode))fail('permission popup placement/input mode is required.');pair(popup.highlightOffset,'permission highlight offset');pair(popup.highlightExtraSize,'permission highlight extra size');
         if(row.faceIcon){text(row.faceIcon.src,'permission icon URL',false);pair(row.faceIcon.sourceSize,'permission original size',true);}buttonKey(row.id);break;
       }
+      case 'underline-action':{
+        number(row.height,'underline source button height');if(row.profile!=='education-cloud'||!['top-left','center'].includes(row.defaultAnchor))fail('underline action needs its explicit source profile/anchor policy.');
+        display(row.label,'underline label');text(row.target,'underline target',false);number(row.stateWidth,'underline state width');number(row.stateWidth*p.scale,'physical underline state width');
+        pair(row.labelPanelSize,'underline natural panel',true);pair(row.labelSize,'underline natural label',true);
+        for(const v of [...row.labelPanelSize,...row.labelSize]){number(v,'underline logical natural size');number(v*p.scale,'physical underline natural size');}buttonKey(row.id);break;
+      }
+      case 'image':number(row.height,'image display height');text(row.texture,'source texture',false);text(row.image?.src,'whole image URL',false);if(row.image.src.length>8192||/[\u0000-\u001f\u007f]/.test(row.image.src))fail('whole image URL must be bounded without controls.');pair(row.image.sourceSize,'whole physical image dimensions',true);for(const v of row.image.sourceSize)if(!Number.isSafeInteger(v)||v>8192)fail('whole image dimensions must be integer pixels within8192.');if(row.image.sourceSize[0]*row.image.sourceSize[1]>16777216)fail('whole image physical plane is too large.');break;
       case 'action':if(row.uri!==undefined)text(row.uri,'action URI',false);display(row.label,'action label');text(row.target,'action target',false);if(!['light','dark','realms'].includes(row.tone))fail('unknown action tone.');number(row.labelMaxHeight,'label max height');if(width<=2||row.height<=2)fail('action size must exceed source skin inset.');buttonKey(row.id);break;
       default:fail('unknown row kind.');
     }

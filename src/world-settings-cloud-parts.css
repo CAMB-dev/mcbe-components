@@ -1,0 +1,12 @@
+/* edu_common.underline_text state H10, natural label panel and leaf are explicitly resolved host budgets. */
+.mc-world-cloud-underline{appearance:none;position:relative;display:block;box-sizing:border-box;margin:0;padding:0;border:0;border-radius:0;background:transparent;color:#fff;font:inherit;text-align:left;text-shadow:none;box-shadow:none;cursor:pointer}
+.mc-world-cloud-underline__state,.mc-world-cloud-underline__panel,.mc-world-cloud-underline__label{position:absolute;display:block;pointer-events:none}
+.mc-world-cloud-underline__label{white-space:nowrap}
+.mc-world-cloud-underline__line,.mc-world-cloud-underline__focus-line{position:absolute;left:0;bottom:0;width:100%;display:block;opacity:.6;background-repeat:repeat-x;pointer-events:none;image-rendering:pixelated}
+.mc-world-cloud-underline__focus-line{display:none}
+.mc-world-cloud-underline:is(:hover,:active):not(:disabled){color:rgb(21.5% 83.9% 11.8%)}
+.mc-world-cloud-underline:is(:hover,:active):not(:disabled) .mc-world-cloud-underline__line{display:none}
+.mc-world-cloud-underline:is(:hover,:active):not(:disabled) .mc-world-cloud-underline__focus-line{display:block}
+.mc-world-cloud-underline:disabled{cursor:default}
+/* Explicit Web focus visibility; native focused-vs-hover input resolution is not inferred. */
+.mc-world-cloud-underline:focus-visible{outline:var(--mc-settings-u) solid Highlight;outline-offset:var(--mc-settings-u)}

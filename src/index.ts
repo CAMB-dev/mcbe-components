@@ -257,9 +257,17 @@ export type { SettingsNavigationImage, SettingsNavigationSection, SettingsNaviga
   SettingsNavigationItem, SettingsNavigationDetail, SettingsNavigationProps } from './settings-navigation';
 export { SettingsFields } from './settings-fields';
 export type * from './settings-fields-model';
-export { WorldGameSettings, WorldMultiplayerSettings } from './world-settings-fields';
+export { WorldGameSettings, WorldMultiplayerSettings, WorldCloudSettings, WorldDebugSettings } from './world-settings-fields';
 export type { WorldGameSettingsProps, WorldMultiplayerSettingsProps, WorldGameSettingsSnapshot, WorldMultiplayerSettingsSnapshot,
-  WorldSettingsNamedSnapshot, WorldSettingsFieldMetrics, WorldSettingsExperimentSnapshot } from './world-settings-fields';
+  WorldSettingsNamedSnapshot, WorldSettingsFieldMetrics, WorldSettingsExperimentSnapshot,
+  WorldCloudSettingsProps, WorldDebugSettingsProps, WorldCloudSettingsSnapshot, WorldDebugSettingsSnapshot, WorldCloudSettingsImage } from './world-settings-fields';
 export { WorldSettingsNavigation } from './world-settings-navigation';
 export type { WorldSettingsNavigationProps, WorldSettingsNavigationSnapshot, WorldSettingsNavigationContext,
   WorldSettingsNavigationButtonState, WorldSettingsNavigationImage, WorldSettingsNavigationId, WorldSettingsNavigationMaterialRendering } from './world-settings-navigation';
+export { WorldServerSettings } from './world-server-settings';
+export type { WorldServerSettingsField, WorldServerSettingsSnapshot, WorldServerSettingsProps,
+  WorldServerSettingsChangeDetail, WorldServerSettingsSubmitDetail } from './world-server-settings';
+export { WorldSettingsScreen } from './world-settings-screen';
+export type { WorldSettingsScreenProps, WorldSettingsScreenSnapshot, WorldSettingsScreenContext, WorldSettingsScreenViews,
+  WorldSettingsPackSnapshot, WorldSettingsPage, WorldSettingsScreenRequest, WorldSettingsClassroomModule,
+  WorldSettingsClassroomMountProps, WorldSettingsClassroomRequest, WorldSettingsClassroomSnapshot } from './world-settings-screen';

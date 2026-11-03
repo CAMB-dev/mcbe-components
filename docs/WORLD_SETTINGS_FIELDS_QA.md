@@ -1,6 +1,6 @@
 # World Game／Multiplayer／Navigation 验证
 
-2026-11-03，源基准为官方 Bedrock Samples `v1.26.60.5`、commit `15701fa9c13923f12662984c32c124327e40e3d3`。这是具名页面与 World／Add-ons 导航部件的验收，不是完整 `WorldSettingsScreen` 或原生整页像素认证。[API 与边界](WORLD_SETTINGS_FIELDS.md)。
+2026-11-03，源基准为官方 Bedrock Samples `v1.26.60.5`、commit `15701fa9c13923f12662984c32c124327e40e3d3`。这是具名页面与 World／Add-ons 导航部件的验收，不是完整 `WorldSettingsScreen` 或原生整页像素认证。[API 与边界](WORLD_SETTINGS_FIELDS.md)。 后续完整源组合、Cloud／Debug／Server与外部Classroom接口见 [新版整页验收](WORLD_SETTINGS_SCREEN_QA.md)；下列数字与未实现清单保留本历史阶段身份。
 
 ## 本次实现
 
