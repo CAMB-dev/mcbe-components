@@ -38,3 +38,6 @@ src/assets/resource-pack/** -text
 # Vendored upstream stb sources retain their exact bytes and intentional whitespace.
 scripts/vendor/stb/stb_truetype.h -text whitespace=-blank-at-eol,-blank-at-eof
 scripts/vendor/stb/LICENSE.txt -text whitespace=-blank-at-eol,-blank-at-eof
+
+# Autosave frame, raw metadata and upstream license remain whole original bytes.
+src/assets/auto-save-info/** -text
