@@ -182,6 +182,14 @@ assert.equal(Object.keys(ui.bannerDyeColors).length,16);
 assert.equal(ui.loomPatternIds.length,32);
 assert(ui.loomPatternIds.every(id=>ui.bannerPatternIds.includes(id)));
 const element = React.createElement;
+for(const control of[ui.TextField,ui.TextArea]){
+ const sourceFieldHeightStyle=Object.freeze({height:40});
+ assert(renderToString(element(control,{label:'Authored source height',style:sourceFieldHeightStyle})).includes('min-height:0'));
+ assert.deepEqual(sourceFieldHeightStyle,{height:40});
+ assert(renderToString(element(control,{label:'Explicit minimum',style:{height:40,minHeight:80}})).includes('min-height:80px'));
+}
+assert(!Object.hasOwn(ui,'fieldInputStyle'));
+
 const sliderMarkup=renderToString(element(ui.Slider,{label:'Native-aligned level',value:50,min:0,max:100,step:20}));
 assert(sliderMarkup.includes('>60</output>'));assert.match(sliderMarkup,/aria-valuetext="60"/);assert.match(sliderMarkup,/--mc-range-ratio:0.6/);
 assert(renderToString(element(ui.Slider,{label:'Decimal level',value:.35,min:.1,max:.9,step:.1})).includes('>0.4</output>'));

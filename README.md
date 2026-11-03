@@ -1,3 +1,5 @@
+> 当前交付标准（2026-11-04）：按用户确认，整体接近Bedrock原版、允许不影响观感的小幅不对齐。现275组件／297运行时值；最终状态见[交付记录](docs/DELIVERY_STATUS.md)，本轮[输入修复](docs/INPUT_SURFACE_QA.md)。下方各批像素资格与“进行中”保留历史范围，不表示本次仍要求全游戏零差。
+
 > 原字体覆盖扩展（2026-11-03）：准备工具支持原始Classic Ten的551个映射字符，比基础范围新增370个；七页缓存、缺字拒绝和跨页预览已接入。库运行时／类型和275组件／297值保持不变；新范围不宣称原生布局零差。见[用法与验证](docs/CLASSIC_TRUETYPE_UNICODE_QA.md)。
 
 > 内容日志历史检查点（2026-11-03）：新增 ContentLogHistoryScreen／ContentLogMessages／ContentLogActions，保留原版图标、25%操作按钮、能力分支与贴底日志。当前275组件＋8数据＋14函数＝297运行时值；源／包／四组合安装验证通过，原生整页未认证。见[API](docs/CONTENT_LOG.md)与[验证范围](docs/CONTENT_LOG_QA.md)。旧阶段计数保留为历史。
@@ -18,7 +20,7 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 新增睡眠界面`InBedScreen`与可复用`InBedControls`，包含起床／聊天请求、状态文字、安全区内容定位和模态输入归属。`#in-bed`可预览；该族已有源／Web验证，原生整页仍待对照。见[使用与范围](docs/IN_BED.md)。
 
-当前交付、预览入口与剩余范围集中在[阶段性交付状态](docs/DELIVERY_STATUS.md)。完整原生pixel-perfect目标仍在进行中；较早解析POINT取样假设已排除，本阶段改为验证光栅目标条件。
+当前交付、预览入口、已验证范围与接受的精修项见[交付状态](docs/DELIVERY_STATUS.md)。逐像素研究结果按下方具名条件保留；发布验收允许小幅不对齐。
 
 新增显式完整光栅目标：`imageRender.frame.rasterOrigin: 'top-left'`配合`imageRender.rasterBounds: 'frame'`。指定GUI4／5建筑页及GUI4收起／空搜索页，完整3,603,140个RGBA像素均与原生参考零差；原有165点建筑页残差全部消除，无新增误差。控件与可见窗口不扩大，默认裁切策略不变。`#crafting-layer`可切换两种分配；范围与显存取舍见[合成台光栅目标](docs/CRAFTING_RASTER_TARGET.md)。
 

@@ -46,7 +46,7 @@ GuiIcon 报告 `.cache/gui-icons-independent/FINAL_SUMMARY.json` / report.json�
 
 invalid 报告 `.cache/invalid-state-independent-audit/FINAL.json` / results.json：17/17 PASS、typecheck通过。四类控件的完整 normal / error 表面加外侧6CSSpx halo在默认 / hover状态一致；两类原input / textarea九宫格、四个完整ErrorGlyph与三种crossout原图合成均零差。白色2px键盘焦点、disabled / FormData、required恢复、无效结果可达且操作被守卫已验证。
 
-TextArea 原生 UA resize grip 在生产和独立Web期望中均保留；crossout优化PNG清除了alpha0 RGB，故原始PNG byte pin与实际可见RGBA合成分别核查，不把优化PNG原字节声称等于原图。早期QA中的整数取景、同底图、UA grip及键盘导航fixture问题均修在独立测试中，没有改生产、mask或放宽容差。
+历史该批TextArea在生产和独立Web期望中均保留UA resize grip；2026-11-04改为默认固定尺寸的完整原图表面，独立参考也移除浏览器grip，见[输入收尾](INPUT_SURFACE_QA.md)。crossout优化PNG清除了alpha0 RGB，故原始PNG byte pin与实际可见RGBA合成分别核查，不把优化PNG原字节声称等于原图。早期QA中的整数取景、同底图、UA grip及键盘导航fixture问题均修在独立测试中，没有改生产、mask或放宽容差。
 
 这些结果认证完整原资产及已声明Web表面 / 行为。Error文字主题token是可读性适配，Smithing的可访问原因不等于引擎hover_text renderer，其他UI状态 / native最终光栅 / 整屏 / 跨平台仍不由该测试认证。
 

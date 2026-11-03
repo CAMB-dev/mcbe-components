@@ -1,3 +1,15 @@
+# Completed delivery - 2026-11-04
+
+User explicitly accepts small alignment/raster differences if the overall Bedrock appearance remains close, and authorized completing the goal. This supersedes earlier strict whole-game pixel-perfect completion requirements. Final status: COMPLETE under that visual acceptance; do not resume endless native GPU studies unless requested. User cancelled a proposed shadcn/ui migration; preserve the independent React + TypeScript implementation.
+
+Current stage `.cache/input-source-surface-20261104-01`: explicit TextField/TextArea height removes fallback min only when authored; explicit minima preserved, native types/forms/refs/keyboard retained. Number/search UA widgets hidden; textarea fixed by default, scrollbar hidden but editing/scrolling retained. No public API or material/font changes. Anvil contain is unchanged after consulting actual native evidence; old stretch oracle corrected. regression01 HEAD failure and rejected temporary stretch in regression02 retained; final regression03 is76/76, no skip/flaky.
+
+Functional package01 / actual React18.3.1 and19.3.1 passes full package gates; 275components +8data +14functions=297. Default Vite dev/prod four actual installed cases pass32 complete original PNG planes; source/built gallery each desktop/Pixel7/320 passes3. Final4173 visual screenshots of enchanting/grindstone and fully-visible narrow textarea reviewed. Live Minecraft v26.60 main/accessibility/video settings inspected without editing settings, returned to main; CU reset. Exact native whole-game parity remains unclaimed and documented as future refinement. Original4173PID217140 retained; own5549-5553 closed. No npm publish or global-memory write.
+
+See GOAL.md / docs/DELIVERY_STATUS.md / docs/INPUT_SURFACE_QA.md and stage FINAL.json for current acceptance, package identities, test reports and final normal Git push identity. Earlier checkpoints below are historical and do not define current completion status.
+
+---
+
 # Current Classic Ten Unicode preparation checkpoint - 2026-11-03
 
 Goal ACTIVE/incomplete. Branch codex/classic-truetype-unicode-20261103 based onb2704f10979747c9f01d36a3579efcba2758b593. Stage .cache/classic-truetype-unicode-20261103-01/FINAL.json seals commit/remote/package/services. Authorized normal origin HEAD:main, no force/npm registry publication.

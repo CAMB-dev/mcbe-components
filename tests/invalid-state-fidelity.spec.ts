@@ -72,14 +72,13 @@ for (const kind of ['input', 'textarea']) test(`${kind} invalid default and hove
     const png = `data:image/png;base64,${(await raw(hover ? 'edit_box_indent_hover.png' : 'edit_box_indent.png')).toString('base64')}`;
     // Original metadata: base6x6, slice2; GUI2 gives 4px destination edges.
     // Browser is used only for the independent original-image sampling oracle.
-    await page.evaluate(({ png, width, height, kind }) => {
-      // A Web textarea retains Chromium's resize grip. Include that same UA
-      // primitive in the independent source-image oracle; do not mask its 18
-      // pixels or mislabel the grip as an original Minecraft asset.
-      const reference = document.createElement(kind === 'textarea' ? 'textarea' : 'div'); reference.id = 'invalid-source-reference';
-      reference.style.cssText = `position:fixed;left:0;top:0;width:${width}px;height:${height}px;box-sizing:border-box;border:4px solid transparent;border-image:url("${png}") 2 fill/4px stretch;image-rendering:pixelated;background:#5e5e5e;resize:vertical;z-index:99999`;
+    await page.evaluate(({ png, width, height }) => {
+      // Both controls now expose only the complete source skin. A plain
+      // independent image plane must not inherit Chromium's textarea grip.
+      const reference = document.createElement('div'); reference.id = 'invalid-source-reference';
+      reference.style.cssText = `position:fixed;left:0;top:0;width:${width}px;height:${height}px;box-sizing:border-box;border:4px solid transparent;border-image:url("${png}") 2 fill/4px stretch;image-rendering:pixelated;background:#5e5e5e;z-index:99999`;
       document.body.append(reference);
-    }, { png, width: size.width, height: size.height, kind });
+    }, { png, width: size.width, height: size.height });
     same(actual, await page.locator('#invalid-source-reference').screenshot(), `${kind} original ${hover ? 'hover' : 'default'} PNG`);
     await page.locator('#invalid-source-reference').evaluate(node => node.remove());
   }
@@ -149,16 +148,17 @@ test('error descriptions use the complete original decorative ErrorGlyph without
   }
 });
 
-for (const [kind, width, height] of [['anvil', 36, 24], ['smithing', 36, 24], ['grindstone', 30, 30]] as const) test(`${kind} crossout retains original deliberate aspect and full original source pixels`, async ({ page }) => {
+for (const [kind, width, height] of [['anvil', 36, 24], ['smithing', 36, 24], ['grindstone', 30, 30]] as const) test(`${kind} crossout retains its documented paint geometry and full original source pixels`, async ({ page }) => {
   await open(page); const region = specimen(page, kind), icon = region.locator(`.mc-${kind}__invalid`);
   const box = await icon.boundingBox(); expect([box!.width, box!.height]).toEqual([width, height]);
   // Compare the complete isolated image layer over the same flat underlay.
-  // This verifies original texture/stretch, not native final composed GUI.
+  // Anvil native capture proves a 12x12 paint inside its 18x12 game box.
+  // Smithing keeps its separately documented stretch; do not infer its native fit.
   const original = `data:image/png;base64,${(await raw('crossout.png')).toString('base64')}`;
   await icon.evaluate(node => { const clone = node.cloneNode(true) as HTMLElement, style = getComputedStyle(node); clone.id = 'invalid-actual-layer'; clone.style.cssText = `position:fixed;left:20px;top:20px;width:${style.width};height:${style.height};background:${style.background};image-rendering:pixelated;z-index:99999`; const host = document.createElement('div'); host.id = 'invalid-layer-host'; host.style.cssText = 'position:fixed;left:20px;top:20px;background:#c6c6c6;z-index:99998';host.style.width=style.width;host.style.height=style.height;host.append(clone);document.body.append(host); });
   expect(await page.locator('#invalid-actual-layer').boundingBox()).toEqual({ x: 20, y: 20, width, height });
   const actual = await page.locator('#invalid-layer-host').screenshot();
-  await page.evaluate(async ({ original, width, height }) => { const preload = new Image(); preload.src = original; await preload.decode(); const host = document.getElementById('invalid-layer-host')!; host.replaceChildren(); const image = document.createElement('span'); image.style.cssText = `position:fixed;left:20px;top:20px;z-index:99999;width:${width}px;height:${height}px;image-rendering:pixelated;background:url("${original}") 0 0/${width}px ${height}px no-repeat`;host.append(image); }, { original, width, height });
+  await page.evaluate(async ({ original, width, height, kind }) => { const preload = new Image(); preload.src = original; await preload.decode(); const host = document.getElementById('invalid-layer-host')!; host.replaceChildren(); const image = document.createElement('span'); image.style.cssText = `position:fixed;left:20px;top:20px;z-index:99999;width:${width}px;height:${height}px;image-rendering:pixelated;background:url("${original}") center/${kind === 'anvil' ? '24px 24px' : `${width}px ${height}px`} no-repeat`;host.append(image); }, { original, width, height, kind });
   same(actual, await page.locator('#invalid-layer-host').screenshot(), `${kind} original crossout`);
   await page.locator('#invalid-layer-host').evaluate(node => node.remove());
   const result = region.locator(`.mc-${kind}__result`); await expect(result).toHaveAttribute('aria-disabled', 'true');

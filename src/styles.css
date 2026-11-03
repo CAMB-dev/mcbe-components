@@ -194,7 +194,11 @@
 .mc-input { line-height: 1; text-shadow: var(--mc-text-shadow); }
 .mc-input:hover:not(:disabled), .mc-input:focus-visible:not(:disabled) { border-image-source: var(--mc-skin-input-hover); }
 .mc-input:disabled { color: #cccccc; opacity: .5; cursor: not-allowed; }
-.mc-textarea { min-height: 112px; resize: vertical; line-height: var(--mc-line-height); }
+.mc-input[type="number"] { appearance: textfield; }
+.mc-input[type="number"]::-webkit-inner-spin-button, .mc-input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; appearance: none; margin: 0; }
+.mc-input[type="search"] { appearance: none; }
+.mc-input[type="search"]::-webkit-search-cancel-button, .mc-input[type="search"]::-webkit-search-decoration { display: none; }
+.mc-textarea { min-height: 112px; resize: none; scrollbar-width: none; line-height: var(--mc-line-height); }
 .mc-choice { position: relative; display: flex; align-items: center; gap: 12px; min-height: 40px; cursor: pointer; color: var(--mc-text); }
 .mc-choice__text { display: flex; flex-direction: column; gap: 4px; }
 .mc-choice__input { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; padding: 0; margin: 0; opacity: 0; cursor: inherit; }

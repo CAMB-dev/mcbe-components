@@ -65,6 +65,11 @@ export const Panel = forwardRef<HTMLElement, PanelProps>(function Panel({ title,
 });
 
 interface FieldProps { label: ReactNode; description?: ReactNode; error?: ReactNode; }
+// An authored height owns the box; the default minimum is only a fallback.
+// Explicit caller minima still win, and the caller's style object is untouched.
+function fieldInputStyle(style:CSSProperties|undefined):CSSProperties|undefined {
+  return style?.height==null||style.height===''?style:{...style,minHeight:style.minHeight??0};
+}
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement>, FieldProps {}
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function TextField({
   label, description, error, id: givenId, className, 'aria-describedby': describedBy, ...props
@@ -73,7 +78,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
   const message = error || description;
   return <div className={cx('mc-field', className)}>
     <label className="mc-field__label" htmlFor={id}>{label}</label>
-    <input {...props} ref={ref} id={id} className="mc-input" aria-invalid={error ? true : props['aria-invalid']}
+    <input {...props} ref={ref} id={id} className="mc-input" style={fieldInputStyle(props.style)} aria-invalid={error ? true : props['aria-invalid']}
       aria-describedby={cx(describedBy, !!message && `${id}-message`) || undefined}/>
     {message && <span id={`${id}-message`} className={cx('mc-field__description', !!error && 'mc-field__error')}>
       {error ? <><GuiIcon name="error-glyph" className="mc-field__error-icon" aria-hidden="true"/><span className="mc-field__error-text">{message}</span></> : message}
@@ -88,7 +93,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function 
   const autoId = useId(); const id = givenId ?? autoId; const message = error || description;
   return <div className={cx('mc-field', className)}>
     <label className="mc-field__label" htmlFor={id}>{label}</label>
-    <textarea {...props} ref={ref} id={id} className="mc-input mc-textarea" aria-invalid={error ? true : props['aria-invalid']}
+    <textarea {...props} ref={ref} id={id} className="mc-input mc-textarea" style={fieldInputStyle(props.style)} aria-invalid={error ? true : props['aria-invalid']}
       aria-describedby={cx(describedBy, !!message && `${id}-message`) || undefined}/>
     {message && <span id={`${id}-message`} className={cx('mc-field__description', !!error && 'mc-field__error')}>
       {error ? <><GuiIcon name="error-glyph" className="mc-field__error-icon" aria-hidden="true"/><span className="mc-field__error-text">{message}</span></> : message}

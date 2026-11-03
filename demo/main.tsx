@@ -401,6 +401,8 @@ function App() {
           <TextField label="World name · error" defaultValue="My world" error="This world name is already taken."/>
           <TextField label="World seed · disabled" defaultValue="8675309" disabled/>
           <TextField label="World ID · read only" defaultValue="MC-0420" readOnly description="Select and copy this world ID."/>
+          <TextField label="Compact input · 40px" defaultValue="Bedrock" style={{height:40}}/>
+          <TextArea label="Fixed text area · 80px" defaultValue={'First line\nSecond line'} style={{height:80}}/>
         </div>
       </Example>
 

@@ -1,3 +1,5 @@
+> 当前交付标准（2026-11-04）：按用户确认，整体接近Bedrock原版、允许不影响观感的小幅不对齐。现275组件／297运行时值；最终状态见[交付记录](DELIVERY_STATUS.md)，本轮[输入修复](INPUT_SURFACE_QA.md)。下方各批像素资格与“进行中”保留历史范围，不表示本次仍要求全游戏零差。
+
 > 当前公开275组件／297运行时值。内容日志族新增 `ContentLogHistoryScreen`、`ContentLogMessages`、`ContentLogActions`；独立入口 `mcbeui/content-log.css`，展示页 `#content-log`。见[API](CONTENT_LOG.md)与[验证范围](CONTENT_LOG_QA.md)。以下旧批次计数为历史。
 
 > Slider 校准检查点（2026-11-03）：补齐原版按下／锁定材质与独立灰色覆盖；显示、ARIA与装饰滑块统一跟随实际input值，支持既有服务器表单缩放。110项具名回归、700个Web数值域和16个完整原图平面通过；组件数仍为272。原生整页目标继续，见[验证范围](SLIDER_QA.md)。
