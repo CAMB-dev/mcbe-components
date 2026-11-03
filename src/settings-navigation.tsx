@@ -1,5 +1,7 @@
 import {forwardRef, useRef, useState, version as reactVersion} from 'react';
-import type {CSSProperties, HTMLAttributes, Ref, SyntheticEvent} from 'react';
+import type {CSSProperties, HTMLAttributes, KeyboardEvent, ReactNode, Ref, SyntheticEvent} from 'react';
+import type {SourceSettingsNavigationNode,SourceSettingsNavigationProps,SourceSettingsNavigationPlan,SourceSettingsNavigationPlanEntry} from './settings-navigation-source-model';
+export type {SourceSettingsNavigationNode,SourceSettingsNavigationProps,SourceSettingsNavigationSection,SourceSettingsNavigationStack,SourceSettingsNavigationSlot,SourceSettingsNavigationPlan,SourceSettingsNavigationPlanEntry} from './settings-navigation-source-model';
 import type {WorldSettingsFont} from './world-settings-actions';
 import {ClassicSkin} from './classic-skin';
 import {Image} from './image';
@@ -129,8 +131,8 @@ function available(node: HTMLButtonElement | null): node is HTMLButtonElement {
 function sameIdentity(a: SettingsNavigationSection, b: SettingsNavigationSection) {
   return a.id === b.id && a.sourceControl === b.sourceControl && a.viewBinding === b.viewBinding && a.sourceIndex === b.sourceIndex && a.panelTitle === b.panelTitle;
 }
-interface SectionProps {item: SettingsNavigationSection; model: Snapshot; tabStop: boolean; onFocused: (id: string) => void}
-const Section = forwardRef<HTMLButtonElement, SectionProps>(function Section({item, model, tabStop, onFocused}, ref) {
+interface SectionProps {item: SettingsNavigationSection; model: Snapshot; tabStop: boolean; onFocused: (id: string) => void; glyphContent?:ReactNode; sourceLabelMaxInset?:readonly[number,number]}
+const Section = forwardRef<HTMLButtonElement, SectionProps>(function Section({item, model, tabStop, onFocused, glyphContent, sourceLabelMaxInset}, ref) {
   const [node, attach] = useClassicNodeRef(ref), live = useRef({item, model});
   useClassicLayoutEffect(() => {live.current = {item, model};});
   const s = model.scale, checked = model.value === item.id;
@@ -167,13 +169,32 @@ const Section = forwardRef<HTMLButtonElement, SectionProps>(function Section({it
     </span>
     <span className="mc-settings-navigation-section__content">
       <span className="mc-settings-navigation-section__glyph" aria-hidden="true" style={{width: item.glyph.size[0] * s, height: item.glyph.size[1] * s}}>
+        {glyphContent!==undefined ? glyphContent : <>
         {item.glyph.outline?.visible && <Image className="mc-settings-navigation-section__outline-glyph" src={item.glyph.outline.src} sourceSize={item.glyph.outline.sourceSize} size={item.glyph.size} scale={s} alt=""/>}
         {item.glyph.color?.visible && <Image className="mc-settings-navigation-section__color-glyph" src={item.glyph.color.src} sourceSize={item.glyph.color.sourceSize} size={item.glyph.size} scale={s} alt=""/>}
+        </>}
       </span>
-      <span className="mc-settings-navigation-section__label"><span>{item.label}</span></span>
+      <span className="mc-settings-navigation-section__label" style={sourceLabelMaxInset?{width:`calc(100% - ${sourceLabelMaxInset[0]*s}px)`}:undefined}><span style={sourceLabelMaxInset?{maxHeight:(25-sourceLabelMaxInset[1])*s}:undefined}>{item.label}</span></span>
     </span>
   </button>;
 });
+
+/** Shared keyboard kernel. Public flat behavior stays unchanged; private
+ * trees only handle their actual radio owners, never host slot controls. */
+function navigationKeyDown(event:KeyboardEvent<HTMLDivElement>,onKeyDown:SettingsNavigationProps['onKeyDown'],sourceTree=false){
+  const owner=event.currentTarget,target=event.target as Element;
+  onKeyDown?.(event);
+  if(event.defaultPrevented||event.nativeEvent.defaultPrevented||event.nativeEvent.isComposing||event.keyCode===229||event.altKey||event.ctrlKey||event.metaKey||!owner.contains(target)||owner.closest('[hidden],[inert]'))return;
+  if(!['ArrowUp','ArrowDown','Home','End'].includes(event.key))return;
+  if(sourceTree&&target!==owner){
+    const radio=target.closest('button[data-settings-navigation-id]');
+    if(!radio||radio.closest('.mc-settings-navigation')!==owner||radio.closest('[data-source-settings-slot]')||!available(radio as HTMLButtonElement))return;
+  }
+  const candidates=Array.from(owner.querySelectorAll<HTMLButtonElement>('button[data-settings-navigation-id]')).filter(button=>available(button)&&(!sourceTree||button.closest('.mc-settings-navigation')===owner&&!button.closest('[data-source-settings-slot]'))),at=candidates.findIndex(button=>button===owner.ownerDocument.activeElement);
+  if(!candidates.length)return;
+  const next=event.key==='Home'?0:event.key==='End'?candidates.length-1:at<0?event.key==='ArrowDown'?0:candidates.length-1:(at+(event.key==='ArrowDown'?1:-1)+candidates.length)%candidates.length;
+  event.preventDefault();candidates[next]!.focus();
+}
 
 /** Source30-unit radio rows with31-unit state paint. No source index guesses an
  * accepted value. Roving focus/centered omitted anchors are explicit Web policy.
@@ -181,7 +202,7 @@ const Section = forwardRef<HTMLButtonElement, SectionProps>(function Section({it
 export const SettingsNavigation = forwardRef<HTMLDivElement, SettingsNavigationProps>(function SettingsNavigation(props, ref) {
   const model = snapshot(props), {label, inert, hidden, className, style, onKeyDown, onBlur, itemRefs, ...rest} = props;
   const native = {...rest} as Record<string, unknown>;
-  for (const name of ['width', 'scale', 'font', 'items', 'value', 'sourceDefaultIndex', 'toggleOnHover', 'hoverPolicy', 'hiddenSlots', 'disabled', 'onValueChange', 'children', 'dangerouslySetInnerHTML', 'defaultValue']) delete native[name];
+  for (const name of ['width', 'scale', 'font', 'items', 'value', 'sourceDefaultIndex', 'toggleOnHover', 'hoverPolicy', 'hiddenSlots', 'disabled', 'onValueChange', 'children', 'dangerouslySetInnerHTML', 'defaultValue', 'nodes', 'nodeRefs']) delete native[name];
   const [, attach] = useClassicNodeRef(ref), [focused, setFocused] = useState<string | null>(null);
   const eligible = model.items.filter((item): item is SettingsNavigationSection => item.kind === 'section' && !item.ignored && item.visible && item.enabled && !model.disabled);
   const tabStop = eligible.find(item => item.id === focused)?.id ?? eligible.find(item => item.id === model.value)?.id ?? eligible[0]?.id;
@@ -194,14 +215,7 @@ export const SettingsNavigation = forwardRef<HTMLDivElement, SettingsNavigationP
     data-hover-policy={model.hoverPolicy} data-hidden-slots={model.hiddenSlots} data-native-certified="false" style={{...style, ...frame}}
     onBlur={event => {onBlur?.(event); if (!event.currentTarget.contains(event.relatedTarget)) setFocused(null);}}
     onKeyDown={event => {
-      const owner = event.currentTarget, target = event.target as Element;
-      onKeyDown?.(event);
-      if (event.defaultPrevented || event.nativeEvent.defaultPrevented || event.nativeEvent.isComposing || event.keyCode === 229 || event.altKey || event.ctrlKey || event.metaKey || !owner.contains(target) || owner.closest('[hidden],[inert]')) return;
-      if (!['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
-      const candidates = Array.from(owner.querySelectorAll<HTMLButtonElement>('button[data-settings-navigation-id]')).filter(available), at = candidates.findIndex(button => button === owner.ownerDocument.activeElement);
-      if (!candidates.length) return;
-      const next = event.key === 'Home' ? 0 : event.key === 'End' ? candidates.length - 1 : at < 0 ? event.key === 'ArrowDown' ? 0 : candidates.length - 1 : (at + (event.key === 'ArrowDown' ? 1 : -1) + candidates.length) % candidates.length;
-      event.preventDefault(); candidates[next]!.focus();
+      navigationKeyDown(event,onKeyDown);
     }}>
     {model.items.filter(item => !item.ignored).map(item => {
       if (item.kind === 'section') return <Section key={item.id} item={item} model={model} ref={itemRefs && Object.hasOwn(itemRefs, item.id) ? itemRefs[item.id] : undefined} tabStop={item.id === tabStop} onFocused={setFocused}/>;
@@ -212,4 +226,109 @@ export const SettingsNavigation = forwardRef<HTMLDivElement, SettingsNavigationP
         className={'mc-settings-navigation-' + item.kind} style={itemStyle}>{item.kind === 'group' && <span>{item.label}</span>}</div>;
     })}
   </div>;
+});
+
+
+interface SourceTreeNode {
+  readonly source:SourceSettingsNavigationNode;readonly children:readonly SourceTreeNode[];
+  readonly item:SettingsNavigationItem|null;readonly height:number;
+  readonly visible:boolean;readonly enabled:boolean;readonly ignored:boolean;
+}
+function sourceTree(p:SourceSettingsNavigationProps):{model:Snapshot;nodes:readonly SourceTreeNode[]}{
+  if(p.nodeRefs!==undefined)record(p.nodeRefs,'source nodeRefs');
+  const leaves:SettingsNavigationItem[]=[],ids=new Set<string>();let count=0;
+  const visit=(input:unknown,ancestor:{ignored:boolean;visible:boolean;enabled:boolean},depth:number):SourceTreeNode=>{
+    if(++count>512||depth>24)throw new RangeError('Source settings navigation supports512 nodes and24 levels.');
+    const raw=record(input,'source navigation node');text(raw.id,'source node id',true);text(raw.sourceControl,'source node control',true);
+    if(ids.has(raw.id))throw new TypeError('Source navigation IDs must be unique across wrappers and leaves.');ids.add(raw.id);
+    for(const key of ['ignored','visible','enabled'])flag(raw[key],'source node '+key);
+    const ignored=ancestor.ignored||raw.ignored===true,visible=ancestor.visible&&raw.visible===true,enabled=ancestor.enabled&&raw.enabled===true;
+    const inherited={ignored,visible,enabled},base={id:raw.id,sourceControl:raw.sourceControl,ignored:raw.ignored as boolean,visible:raw.visible as boolean,enabled:raw.enabled as boolean};
+    let source:SourceSettingsNavigationNode,children:readonly SourceTreeNode[]=[],item:SettingsNavigationItem|null=null,height=0;
+    if(raw.kind==='source-stack'){
+      children=visitArray(raw.children,inherited,depth+1);
+      source=Object.freeze({...base,kind:'source-stack',children:Object.freeze(children.map(child=>child.source))});
+      height=children.reduce((total,child)=>total+child.height,0);
+    }else if(raw.kind==='source-slot'){
+      extent(raw.height,'source slot height',true);if(!Object.hasOwn(raw,'content'))throw new TypeError('Source slot needs explicit host content.');
+      source=Object.freeze({...base,kind:'source-slot',height:raw.height,content:raw.content as ReactNode});height=raw.height;
+    }else{
+      // Reuse the public leaf validator; only effective ancestor capability is
+      // flattened. The private tree and its original flags remain independent.
+      const {glyphContent,sourceLabelMaxInset,...leaf}=raw;
+      let labelInset:readonly[number,number]|undefined;
+      if(sourceLabelMaxInset!==undefined){const axes=pair(sourceLabelMaxInset,'source label max inset');for(const axis of axes)extent(axis,'source label max inset',true);if((axes[0]as number)>=p.width-6||(axes[1]as number)>25)throw new RangeError('Source label max insets exceed the finite content box.');labelInset=Object.freeze([...axes])as readonly[number,number];}
+      const checked=snapshot({...p,items:[{...leaf,...inherited}as unknown as SettingsNavigationItem]});
+      item=checked.items[0]!;leaves.push(item);
+      source=Object.freeze({...item,...base,...(item.kind==='section'&&Object.hasOwn(raw,'glyphContent')?{glyphContent:glyphContent as ReactNode}:{}),...(item.kind==='section'&&labelInset?{sourceLabelMaxInset:labelInset}:{})});
+      height=item.kind==='section'?30:item.kind==='group'?item.height:item.size[1];
+    }
+    if(ignored||!visible&&p.hiddenSlots==='collapse')height=0;
+    return Object.freeze({source,children,item,height,visible,enabled,ignored});
+  };
+  const visitArray=(input:unknown,ancestor:{ignored:boolean;visible:boolean;enabled:boolean},depth:number):readonly SourceTreeNode[]=>{
+    if(!Array.isArray(input)||input.length>512)throw new RangeError('Source navigation requires bounded complete node arrays.');
+    const descriptors=Object.getOwnPropertyDescriptors(input);
+    for(const descriptor of Object.values(descriptors))if(!('value'in descriptor))throw new TypeError('Source node arrays must not contain accessors.');
+    return Object.freeze(Array.from({length:input.length},(_,at)=>{if(!Object.hasOwn(input,at))throw new TypeError('Source node arrays must be dense.');return visit(descriptors[String(at)]!.value,ancestor,depth);}));
+  };
+  const nodes=visitArray(p.nodes,{ignored:false,visible:true,enabled:true},0),model=snapshot({...p,items:leaves}),height=nodes.reduce((total,node)=>total+node.height,0);
+  if(height*model.scale>8192||model.width*model.scale*height*model.scale>16777216)throw new RangeError('Source navigation tree exceeds its finite layout budget.');
+  return {model,nodes};
+}
+/** Private, pure geometry view of the same validated sourceTree used by React.
+ * Coordinates remain logical; no DOM/font/paint quantization or child callbacks.
+ * Inactive records are retained with zero allocation rather than invented sizes. */
+export function planSourceSettingsNavigation(props:SourceSettingsNavigationProps):SourceSettingsNavigationPlan {
+  const {model,nodes}=sourceTree(props),entries:SourceSettingsNavigationPlanEntry[]=[];
+  const visit=(siblings:readonly SourceTreeNode[],y:number):number=>{
+    let cursor=y;
+    for(const node of siblings){
+      const item=node.item,width=item?.kind==='spacer'&&item.size[0]!=='100%'?item.size[0]:model.width;
+      entries.push(Object.freeze({id:node.source.id,sourceControl:node.source.sourceControl,kind:node.source.kind,
+        box:Object.freeze([0,cursor,width,node.height])as readonly[number,number,number,number],
+        ignored:node.ignored,visible:node.visible,enabled:node.enabled&&!model.disabled}));
+      if(node.source.kind==='source-stack')visit(node.children,cursor);
+      cursor+=node.height;
+    }
+    return cursor;
+  };
+  const height=visit(nodes,0);
+  return Object.freeze({width:model.width,scale:model.scale,height,entries:Object.freeze(entries)});
+}
+const SourceWrapper=forwardRef<HTMLDivElement,{node:SourceTreeNode;model:Snapshot;children:ReactNode}>(function SourceWrapper({node,model,children},ref){
+  const[,attach]=useClassicNodeRef(ref),s=model.scale;
+  const inert=!node.visible||!node.enabled||!!model.disabled;
+  const inertProps={inert:inert?Number.parseInt(reactVersion,10)<19?'':true:undefined}as Record<string,string|boolean|undefined>;
+  return <div {...inertProps} ref={attach} data-source-control={node.source.sourceControl} data-source-settings-node={node.source.id}
+    data-source-settings-slot={node.source.kind==='source-slot'?'true':undefined} data-source-visible={node.source.visible} data-source-enabled={node.source.enabled}
+    data-effective-visible={node.visible} data-effective-enabled={node.enabled} aria-hidden={!node.visible||undefined} aria-disabled={!node.enabled||model.disabled||undefined}
+    hidden={!node.visible&&model.hiddenSlots==='collapse'} style={{position:'relative',display:'flex',flexDirection:'column',flex:'none',minWidth:0,width:model.width*s,height:node.height*s,visibility:node.visible?undefined:'hidden'}}>{children}</div>;
+});
+
+/** Private source-preserving composition; never added to the public barrel.
+ * Slots are host-owned and must additionally pass explicit current capabilities
+ * into their children. Native inert is not a synthetic-callback security gate. */
+export const SourceSettingsNavigation=forwardRef<HTMLDivElement,SourceSettingsNavigationProps>(function SourceSettingsNavigation(props,ref){
+  const{model,nodes}=sourceTree(props),{label,inert,hidden,className,style,onKeyDown,onBlur,itemRefs,nodeRefs,...rest}=props;
+  const native={...rest}as Record<string,unknown>;
+  for(const key of ['width','scale','font','items','nodes','nodeRefs','value','sourceDefaultIndex','toggleOnHover','hoverPolicy','hiddenSlots','disabled','onValueChange','children','dangerouslySetInnerHTML','defaultValue'])delete native[key];
+  const[,attach]=useClassicNodeRef(ref),[focused,setFocused]=useState<string|null>(null);
+  const eligible=model.items.filter((item):item is SettingsNavigationSection=>item.kind==='section'&&!item.ignored&&item.visible&&item.enabled&&!model.disabled);
+  const tabStop=eligible.find(item=>item.id===focused)?.id??eligible.find(item=>item.id===model.value)?.id??eligible[0]?.id;
+  const inertProps={inert:inert?Number.parseInt(reactVersion,10)<19?'':true:undefined}as Record<string,string|boolean|undefined>;
+  const frame={width:model.width*model.scale,fontFamily:model.font.family,fontSize:model.font.size*model.scale,lineHeight:`${model.font.lineHeight*model.scale}px`,'--mc-settings-navigation-u':`${model.scale}px`}as CSSProperties;
+  const renderNode=(node:SourceTreeNode):ReactNode=>{
+    if(node.ignored)return null;
+    const source=node.source,item=node.item;
+    if(source.kind==='source-stack'||source.kind==='source-slot')return <SourceWrapper key={source.id} node={node} model={model} ref={nodeRefs&&Object.hasOwn(nodeRefs,source.id)?nodeRefs[source.id]:undefined}>{source.kind==='source-slot'?source.content:node.children.map(renderNode)}</SourceWrapper>;
+    if(item?.kind==='section')return <Section key={item.id} item={item} model={model} ref={itemRefs&&Object.hasOwn(itemRefs,item.id)?itemRefs[item.id]:undefined} tabStop={item.id===tabStop} onFocused={setFocused} glyphContent={source.kind==='section'?source.glyphContent:undefined} sourceLabelMaxInset={source.kind==='section'?source.sourceLabelMaxInset:undefined}/>;
+    if(!item)return null;
+    const itemStyle:CSSProperties={visibility:node.visible?undefined:'hidden',height:node.height*model.scale,width:item.kind==='spacer'&&item.size[0]!=='100%'?item.size[0]*model.scale:model.width*model.scale};
+    return <div key={source.id} data-source-control={source.sourceControl} data-source-enabled={source.enabled} data-settings-navigation-id={source.id}
+      hidden={!node.visible&&model.hiddenSlots==='collapse'} aria-hidden={item.kind==='spacer'||!node.visible||undefined} className={'mc-settings-navigation-'+item.kind} style={itemStyle}>{item.kind==='group'&&<span>{item.label}</span>}</div>;
+  };
+  return <div {...native} {...inertProps} ref={attach} hidden={hidden} className={cx('mc-settings-navigation',className)} role={props.role??'radiogroup'} aria-label={props['aria-label']??label} aria-orientation="vertical" aria-disabled={model.disabled||props['aria-disabled']}
+    data-source-group="navigation_tab" data-source-default-index={model.sourceDefaultIndex} data-source-toggle-on-hover={model.toggleOnHover} data-hover-policy={model.hoverPolicy} data-hidden-slots={model.hiddenSlots} data-native-certified="false" data-source-settings-tree="true" style={{...style,...frame}}
+    onBlur={event=>{onBlur?.(event);if(!event.currentTarget.contains(event.relatedTarget))setFocused(null);}} onKeyDown={event=>navigationKeyDown(event,onKeyDown,true)}>{nodes.map(renderNode)}</div>;
 });

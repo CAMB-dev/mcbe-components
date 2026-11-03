@@ -1,0 +1,18 @@
+import{useLayoutEffect,useRef,useState}from'react';
+import{Checkbox}from'../src/components';import{Combobox}from'../src/combobox';
+import type{WorldSettingsMode}from'../src/world-settings-actions';import type{WorldSettingsNavigationId}from'../src/world-settings-navigation-model';
+import{resourcePackAssets}from'../src/resource-pack-assets';import{createWorldNavigationDemoSnapshot}from'./world-settings-navigation-data';import{createWorldSettingsDemoData}from'./world-settings-model-data';import{WorldSettingsPreview,acceptWorldDemoRequest}from'./world-settings-preview';
+export function WorldSettingsExamples(){
+ const host=useRef<HTMLDivElement>(null),[available,setAvailable]=useState(640),[popupHost,setPopupHost]=useState<HTMLDivElement|null>(null),[mode,setMode]=useState<WorldSettingsMode>('create'),[models,setModels]=useState(()=>createWorldSettingsDemoData('create'));
+ const[page,setPage]=useState<WorldSettingsNavigationId|null>('game_button'),[touch,setTouch]=useState(false),[disabled,setDisabled]=useState(false),[status,setStatus]=useState('具名Game69／Multiplayer8；下方数值为宿主示例。');
+ useLayoutEffect(()=>{const element=host.current;if(!element)return;const measure=()=>setAvailable(Math.max(140,Math.floor(element.getBoundingClientRect().width)));measure();const observer=new ResizeObserver(measure);observer.observe(element);return()=>observer.disconnect();},[]);
+ const scale=available>=800?2:1,width=Math.min(520,Math.floor(available/scale));
+ const baseNav=createWorldNavigationDemoSnapshot({white:{src:resourcePackAssets['textures/ui/White'].url,sourceSize:[2,2]},thumbnail:{src:new URL('./assets/world-settings/WorldDemoScreen.png',import.meta.url).href,sourceSize:[160,92]},pack:{src:new URL('./assets/world-settings/missing_pack_icon.png',import.meta.url).href,sourceSize:[64,64]}});
+ const nav={...baseNav,launch:{...baseNav.launch,primary:{...baseNav.launch.primary,label:mode==='edit'?'游玩':'创建'},realms:{...baseNav.launch.realms,label:mode==='edit'?'在Realms上游玩':'在Realms上创建'}}};
+ return<div ref={host} data-testid="world-settings-demo" style={{display:'grid',gap:16,minWidth:0}}>
+  <div style={{display:'flex',flexWrap:'wrap',alignItems:'center',gap:16}}><Combobox label="世界设置场景" value={mode} options={[{value:'create',label:'创建世界'},{value:'template-create',label:'从模板创建'},{value:'edit',label:'编辑世界'}]} onValueChange={value=>{const next=value as WorldSettingsMode;setMode(next);setModels(createWorldSettingsDemoData(next));}}/><Checkbox label="触控布局" checked={touch} onChange={event=>setTouch(event.target.checked)}/><Checkbox label="禁用控件" checked={disabled} onChange={event=>setDisabled(event.target.checked)}/></div>
+  <WorldSettingsPreview width={width} height={340} scale={scale} mode={mode} inputMode={touch?'touch':'mouse'} rail={true} page={page} game={models.game} multiplayer={models.multiplayer} navigation={nav} popupHost={popupHost} popupHostRef={setPopupHost} disabled={disabled} onNavigate={setPage} materialRendering={{profile:'source-image',extentPolicy:'ceil',background:{kind:'solid',color:[49/255,50/255,51/255,1]}}}
+    onField={(family,request)=>{setStatus(`${request.target}${request.proposedValue===undefined?'':` → ${String(request.proposedValue)}`}${request.uri?` · ${request.uri}`:''}`);setModels(previous=>family==='game'?{...previous,game:acceptWorldDemoRequest('game',previous.game,request)}:{...previous,multiplayer:acceptWorldDemoRequest('multiplayer',previous.multiplayer,request)});}} onIntent={setStatus}/>
+  <output aria-live="polite">{status}</output><p style={{margin:0}}>控件顺序、绑定与子结构来自原始GUI；字段数值、条件解析、字体和尺寸预算是显式宿主示例。缩略图来自原始WorldDemoScreen材质。完整WorldSettingsScreen及原生像素对照仍在继续。</p>
+ </div>;
+}

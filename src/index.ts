@@ -257,3 +257,9 @@ export type { SettingsNavigationImage, SettingsNavigationSection, SettingsNaviga
   SettingsNavigationItem, SettingsNavigationDetail, SettingsNavigationProps } from './settings-navigation';
 export { SettingsFields } from './settings-fields';
 export type * from './settings-fields-model';
+export { WorldGameSettings, WorldMultiplayerSettings } from './world-settings-fields';
+export type { WorldGameSettingsProps, WorldMultiplayerSettingsProps, WorldGameSettingsSnapshot, WorldMultiplayerSettingsSnapshot,
+  WorldSettingsNamedSnapshot, WorldSettingsFieldMetrics, WorldSettingsExperimentSnapshot } from './world-settings-fields';
+export { WorldSettingsNavigation } from './world-settings-navigation';
+export type { WorldSettingsNavigationProps, WorldSettingsNavigationSnapshot, WorldSettingsNavigationContext,
+  WorldSettingsNavigationButtonState, WorldSettingsNavigationImage, WorldSettingsNavigationId, WorldSettingsNavigationMaterialRendering } from './world-settings-navigation';

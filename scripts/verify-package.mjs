@@ -1,3 +1,4 @@
+import { verifyWorldSettingsPagesPackage } from './verify-world-settings-pages-package.mjs';
 import { verifySettingsPackage } from './verify-settings-package.mjs';
 import { verifyDisconnectPackage } from './verify-disconnect-package.mjs';
 import { verifyWorldSettingsActionsPackage } from './verify-world-settings-actions-package.mjs';
@@ -148,10 +149,11 @@ components.push("ManifestValidationButton","ManifestPackSummary","ManifestValida
 components.push('DisconnectScreen','DisconnectMessage','DisconnectActions');
 components.push('WorldSettingsActionButton','WorldLaunchActions');
 components.push('SettingsFrame','SettingsNavigation','SettingsFields');
-assert.equal(components.length,261);
+components.push('WorldGameSettings','WorldMultiplayerSettings','WorldSettingsNavigation');
+assert.equal(components.length,264);
 assert.equal(dataExports.length,6);
 assert.equal(rendererFunctions.length,13);
-assert.equal(Object.keys(ui).length,280);
+assert.equal(Object.keys(ui).length,283);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -2105,5 +2107,6 @@ export const demo = <>
   await verifyDisconnectPackage({ consumer, root, major, evidenceName:'disconnect-contracts-'+Date.now() });
   await verifyWorldSettingsActionsPackage({ consumer, root, major, evidenceName:'world-settings-actions-'+Date.now() });
   await verifySettingsPackage({ consumer, root, major, evidenceName:'settings-'+Date.now() });
+  await verifyWorldSettingsPagesPackage({ consumer, root, major, evidenceName:'world-settings-pages-'+Date.now() });
 }
 console.log(`Verified tarball: ${tarPath}`);

@@ -2,6 +2,7 @@ import { ManifestValidationExamples } from './manifest-validation-examples';
 import { DisconnectExamples } from './disconnect-examples';
 import { WorldSettingsActionsExamples } from './world-settings-actions-examples';
 import { SettingsExamples } from './settings-examples';
+import { WorldSettingsExamples } from './world-settings-examples';
 import { StrictMode, useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -91,6 +92,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'disconnect', name: 'Disconnect', icon: 'chevron', count: '03' },
   { id: 'world-settings-actions', name: 'World actions', icon: 'chevron', count: '02' },
   { id: 'settings-source', name: 'Settings parts', icon: 'chevron', count: '03' },
+  { id: 'world-settings', name: 'World settings', icon: 'chevron', count: '03' },
   { id: 'resource-packs', name: 'Resource packs', icon: 'chevron', count: '08' },
   { id: 'workstation-text', name: 'Workstation text', icon: 'chevron', count: '01' },
   { id: 'gui-layer', name: 'Composed GUI', icon: 'chevron', count: '01' },
@@ -512,6 +514,7 @@ function App() {
       <Example id="disconnect" title="Disconnect" detail="普通与 Realms 断线、警告；消息和动作区可独立复用。"><DisconnectExamples/></Example>
       <Example id="world-settings-actions" title="World settings actions" detail="创建、编辑与 Education 启动区；原始按钮可独立复用。"><WorldSettingsActionsExamples/></Example>
       <Example id="settings-source" title="Settings parts" detail="独立框架、导航、原版设置字段；尺寸和绑定由宿主提供。"><SettingsExamples/></Example>
+      <Example id="world-settings" title="World settings" detail="Game69、Multiplayer8具名完整快照；原始导航与资源包挂载。"><WorldSettingsExamples/></Example>
       <Example id="resource-packs" title="Resource packs" detail="全局、世界与附加包内容；独立包设置、诊断和质量层级。"><ResourcePacksExamples/></Example>
       <Example id="processing" title="Crafting & smelting" detail="Shared recipe slots, processing arrows, fuel indicators and player inventory.">
         <ProcessingExamples notify={notify}/>

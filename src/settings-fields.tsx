@@ -1,17 +1,19 @@
 import {forwardRef,useCallback,useEffect,useId,useRef,useState,version as reactVersion} from 'react';
 import {createPortal} from 'react-dom';
-import type {CSSProperties,RefObject} from 'react';
+import type {CSSProperties,RefObject,Ref} from 'react';
 import {ClassicSkin} from './classic-skin';
 import {resourcePackAssets} from './resource-pack-assets';
 import {settingsFieldAssets as assets} from './settings-fields-assets';
-import {WorldSettingsActionButton} from './world-settings-actions';
+import {WorldSettingsActionButton,SourceWorldSettingsActionButton} from './world-settings-actions';
 import {ScrollArea} from './scroll-area';
 import {serverFormImageAssets} from './server-form-image-assets';
 import {useClassicLayoutEffect,useClassicNodeRef} from './classic-screen-lifecycle';
 import {allocatedSettingsRow,snapshotSettingsFields} from './settings-fields-data';
 import {settingsFieldAvailable as available,settingsFieldCanInteract} from './settings-fields-interaction';
+import type {WorldSettingsActionButtonProps} from './world-settings-actions';
+import {parseSettingsFieldText} from './settings-field-text';
 import type {SettingsFieldsSnapshot} from './settings-fields-data';
-import type {SettingsFieldIdentity,SettingsFieldRow,SettingsFieldsProps,SettingsFieldsRequest,SettingsOptionLayout,SettingsInfoRow,SettingsTextRow,SettingsTextActionRow,SettingsDropdownRow,SettingsRadioRow,SettingsToggleRow,SettingsSliderRow,SettingsPermissionRow,SettingsFieldNativeButtonProps} from './settings-fields-model';
+import type {SettingsFieldIdentity,SettingsFieldRow,SettingsFieldsProps,SettingsFieldsRequest,SettingsOptionLayout,SettingsInfoRow,SettingsTextRow,SettingsTextActionRow,SettingsDropdownRow,SettingsRadioRow,SettingsToggleRow,SettingsSliderRow,SettingsPermissionRow,SettingsFieldNativeButtonProps,SettingsPanelRow} from './settings-fields-model';
 export type * from './settings-fields-model';
 
 const inert=(value:boolean)=>({inert:value?(Number.parseInt(reactVersion,10)<19?'':true):undefined}as Record<string,string|boolean|undefined>);
@@ -19,11 +21,21 @@ const font=(f:SettingsFieldsSnapshot['typography']['label'],s:number):CSSPropert
 const identity=(r:SettingsFieldIdentity):SettingsFieldIdentity=>Object.freeze({id:r.id,sourceControl:r.sourceControl,...(r.binding?{binding:r.binding}:{}),...(r.enabledBinding?{enabledBinding:r.enabledBinding}:{}),...(r.collection?{collection:r.collection}:{})});
 interface Environment {snap:SettingsFieldsSnapshot;instanceId:string;typography:SettingsFieldsSnapshot['typography'];props:SettingsFieldsProps;root:RefObject<HTMLDivElement|null>;committed:RefObject<SettingsFieldsSnapshot>;composing:Set<EventTarget>}
 interface RowContext {env:Environment;row:SettingsFieldRow;width:number;disabled:boolean}
+function displayText(env:Environment,text:string){
+  if(!env.snap.textFormatting)return text;
+  return parseSettingsFieldText(text,env.snap.textFormatting).runs.map((run,index)=><span key={index} data-settings-text-run="" style={run.color?{color:`rgb(${run.color.map(v=>v*100+'%').join(' ')})`}:undefined}>{run.text}</span>);
+}
+const visibleText=(env:Environment,text:string)=>parseSettingsFieldText(text,env.snap.textFormatting).text;
+const defaultName=(env:Environment,text:string,native:{'aria-label'?:string;'aria-labelledby'?:string})=>native['aria-label']??(native['aria-labelledby']!==undefined?undefined:visibleText(env,text));
+function SourceAction({env,buttonRef,...props}:WorldSettingsActionButtonProps&{env:Environment;buttonRef?:Ref<HTMLButtonElement>}){
+  return env.snap.textFormatting?<SourceWorldSettingsActionButton {...props} ref={buttonRef} displayLabel={displayText(env,props.label)} aria-label={defaultName(env,props.label,props)}/>:<WorldSettingsActionButton {...props} ref={buttonRef}/>;
+}
+
 const canInteract=(c:RowContext,owner:HTMLElement,disabled=c.disabled)=>!busy(c.env)&&settingsFieldCanInteract(owner,c.env.root.current,{current:c.env.committed.current===c.env.snap,disabled,readOnly:c.env.snap.readOnly,hidden:c.env.snap.hidden,inert:c.env.snap.inert});
 const optionIds=(c:RowContext)=>({label:`${c.env.instanceId}-${encodeURIComponent(c.row.id)}-label`,description:`${c.env.instanceId}-${encodeURIComponent(c.row.id)}-description`});
 function optionAria(c:RowContext,native:{'aria-label'?:string;'aria-labelledby'?:string;'aria-describedby'?:string}){
   if(!('option'in c.row)||!c.row.option)return{};const ids=optionIds(c),o=c.row.option;
-  return {'aria-label':native['aria-label']??(!o.showLabel?o.label:undefined),'aria-labelledby':[native['aria-labelledby'],!native['aria-label']&&o.showLabel?ids.label:undefined].filter(Boolean).join(' ')||undefined,'aria-describedby':[native['aria-describedby'],o.showLabel&&o.description!==null?ids.description:undefined].filter(Boolean).join(' ')||undefined};
+  return {'aria-label':native['aria-label']??(!o.showLabel&&native['aria-labelledby']===undefined?visibleText(c.env,o.label):undefined),'aria-labelledby':native['aria-labelledby']??(native['aria-label']===undefined&&o.showLabel?ids.label:undefined),'aria-describedby':[native['aria-describedby'],o.showLabel&&o.description!==null?ids.description:undefined].filter(Boolean).join(' ')||undefined};
 }
 function busy(env:Environment){for(const target of env.composing)if(!(target as Node).isConnected||!env.root.current?.contains(target as Node))env.composing.delete(target);return env.composing.size>0;}
 function post(c:RowContext,control:HTMLInputElement|HTMLButtonElement,event:Event,payload:Omit<SettingsFieldsRequest,'identity'|'control'|'nativeEvent'>,veto:()=>boolean=()=>false,after?:()=>void,anchor:()=>boolean=()=>true){
@@ -83,9 +95,9 @@ function TextAction({c}:{c:RowContext&{row:SettingsTextActionRow}}){
       <Skin name="edit_box_indent" width={textWidth} height={30} s={s}/><span className="mc-settings-mock__hover"><Skin name="edit_box_indent_hover" width={textWidth} height={30} s={s}/></span><span className="mc-settings-mock__label">{r.value}</span>
     </NativeButton>:<TextInput c={c} width={textWidth}/>}
     <span style={{position:'absolute',left:textWidth*s,top:0,width:actionWidth*s,height:30*s}}>
-      {a.presentation==='text'?<WorldSettingsActionButton {...attributes} ref={env.props.buttonRefs?.[keyId]} size={[actionWidth,30]} scale={s} font={env.typography.control} label={a.label} target={a.target} tone="light" labelMaxHeight={a.labelMaxHeight} disabled={c.disabled||!a.enabled}
+      {a.presentation==='text'?<SourceAction env={env} {...attributes} buttonRef={env.props.buttonRefs?.[keyId]} size={[actionWidth,30]} scale={s} font={env.typography.control} label={a.label} target={a.target} tone="light" labelMaxHeight={a.labelMaxHeight} disabled={c.disabled||!a.enabled}
         onAction={detail=>post(c,detail.control,detail.event.nativeEvent,{kind:'action',target:a.target},()=>detail.event.defaultPrevented)}/>:
-        <NativeButton c={c} keyId={keyId} props={attributes} disabled={c.disabled||!a.enabled} aria-label={a.label} className="mc-settings-arrow-action" style={{width:actionWidth*s,height:30*s}} onActivate={activate}>
+        <NativeButton c={c} keyId={keyId} props={attributes} disabled={c.disabled||!a.enabled} aria-label={defaultName(env,a.label,attributes)} className="mc-settings-arrow-action" style={{width:actionWidth*s,height:30*s}} onActivate={activate}>
           <ButtonPaint width={actionWidth} height={30} s={s}/><img className="mc-settings-arrow-action__glyph" src={assets.arrowRight.url} alt="" width={8*s} height={8*s}/>
         </NativeButton>}
     </span>
@@ -117,9 +129,9 @@ function Dropdown({c,permission}:{c:RowContext&{row:SettingsDropdownRow};permiss
   },[open,r,c.disabled,s,env.props.popupHost]);
   const native=env.props.buttonProps?.[r.id]??{};
   const aria=optionAria(c,native),faceId=`${id}-value`;
-  if(!native['aria-label']&&!native['aria-labelledby']){
+  if(native['aria-label']===undefined&&native['aria-labelledby']===undefined){
     if(r.option.showLabel)aria['aria-labelledby']=[aria['aria-labelledby'],faceId].filter(Boolean).join(' ');
-    else aria['aria-label']=[r.option.label,r.faceLabel].filter(Boolean).join(' ');
+    else aria['aria-label']=[visibleText(env,r.option.label),visibleText(env,r.faceLabel)].filter(Boolean).join(' ');
   }
   const toggle=(event:React.MouseEvent<HTMLButtonElement>)=>{const owner=event.currentTarget;native.onClick?.(event);if(!event.defaultPrevented&&!event.nativeEvent.defaultPrevented&&canInteract(c,owner))setOpen(!open);};
   const list=<div ref={popup} id={id} className="mc-settings-dropdown-popup" role="dialog" aria-label={r.popup.label} data-source-layer="42" data-popup-owner={r.id} style={{position:'absolute',left:position.x,top:position.y,width:c.width*s,height:r.popup.height*s,...font(env.typography.control,s),'--mc-settings-u':`${s}px`,'--mc-skin-scroll-track':`url(${JSON.stringify(resourcePackAssets['textures/ui/ScrollRail'].url)})`,'--mc-skin-scroll-thumb':`url(${JSON.stringify(resourcePackAssets['textures/ui/ScrollHandle'].url)})`}as CSSProperties}
@@ -132,7 +144,7 @@ function Dropdown({c,permission}:{c:RowContext&{row:SettingsDropdownRow};permiss
   return <><button {...native} {...aria} ref={attachTrigger} type="button" className="mc-settings-dropdown" disabled={c.disabled} aria-haspopup="dialog" aria-expanded={open} aria-controls={open?id:undefined} aria-readonly={env.snap.readOnly||undefined} style={{...native.style,width:c.width*s,height:30*s}} data-expanded={open}
     onClick={toggle} onKeyDown={event=>{const owner=event.currentTarget;native.onKeyDown?.(event);if(event.defaultPrevented||event.nativeEvent.defaultPrevented||event.nativeEvent.isComposing||event.keyCode===229||!canInteract(c,owner))return;if(event.key==='Escape'&&open){event.preventDefault();event.stopPropagation();setOpen(false);}else if(['ArrowDown','ArrowUp'].includes(event.key)){event.preventDefault();setOpen(true);}}}>
     <ButtonPaint width={c.width} height={30} s={s} checked={open}/>{permission?.faceIcon&&<img src={permission.faceIcon.src} className="mc-settings-permission-face-icon" alt="" width={15*s} height={15*s}/>}
-    <span id={faceId} className="mc-settings-dropdown__label" style={permission?{left:33*s}:undefined}>{r.faceLabel}</span><img className="mc-settings-dropdown__arrow" src={assets.dropdown_chevron.url} alt="" width={8*s} height={8*s}/><img className="mc-settings-dropdown__arrow-hover" src={assets.chevron_white_down.url} alt="" width={8*s} height={8*s}/>
+    <span id={faceId} className="mc-settings-dropdown__label" style={permission?{left:33*s}:undefined}>{displayText(env,r.faceLabel)}</span><img className="mc-settings-dropdown__arrow" src={assets.dropdown_chevron.url} alt="" width={8*s} height={8*s}/><img className="mc-settings-dropdown__arrow-hover" src={assets.chevron_white_down.url} alt="" width={8*s} height={8*s}/>
   </button>{open&&trigger.current&&(env.props.popupHost?createPortal(list,env.props.popupHost):list)}</>;
 }
 function Choice({c,index,width,nodes,close,trigger,permission}:{c:RowContext&{row:SettingsDropdownRow};index:number;width:number;nodes:RefObject<(HTMLButtonElement|null)[]>;trigger:RefObject<HTMLButtonElement|null>;close:()=>void;permission?:SettingsPermissionRow}){
@@ -141,11 +153,11 @@ function Choice({c,index,width,nodes,close,trigger,permission}:{c:RowContext&{ro
   const role=choice.id as 'visitor'|'member'|'operator',height=permission?permission.choiceHeights[role]:17;
   return <button {...native} ref={attach} type="button" role="radio" aria-checked={choice.checked} disabled={c.disabled||!choice.enabled} tabIndex={choice.checked?0:-1} className={`mc-settings-choice${permission?' mc-settings-choice--permission':''}`} style={{...native.style,width:width*s,height:height*s,visibility:choice.visible?undefined:'hidden'}}
     onClick={event=>{const owner=event.currentTarget;event.persist();native.onClick?.(event);if(event.defaultPrevented||event.nativeEvent.defaultPrevented)return;
-      const rowContext={...c,row:{...c.row,...identity(choice),id:c.row.id}},anchor=trigger.current;post(rowContext,owner,event.nativeEvent,{kind:'change',target:choice.binding,previousValue:permission?permission.value:choice.checked,proposedValue:permission?role:true},()=>event.defaultPrevented,close,()=>!!anchor&&trigger.current===anchor&&available(anchor)&&!anchor.disabled);}}>
+      const rowContext={...c,row:{...c.row,...identity(choice),id:c.row.id}},anchor=trigger.current;post(rowContext,owner,event.nativeEvent,{kind:'change',target:choice.binding,previousValue:permission&&!permission.checked?permission.value:choice.checked,proposedValue:permission&&!permission.checked?role:true},()=>event.defaultPrevented,close,()=>!!anchor&&trigger.current===anchor&&available(anchor)&&!anchor.disabled);}}>
     {!permission&&choice.checked&&<img className="mc-settings-choice__selected" src={assets.dropDownSelectBG.url} alt="" style={{left:c.row.popup.highlightOffset[0]*s,top:c.row.popup.highlightOffset[1]*s,width:(width+c.row.popup.highlightExtraSize[0])*s,height:(16+c.row.popup.highlightExtraSize[1])*s}}/>}
     {!permission&&<img className="mc-settings-choice__hover" src={assets.dropDownHoverBG.url} alt="" style={{left:c.row.popup.highlightOffset[0]*s,top:c.row.popup.highlightOffset[1]*s,width:(width+c.row.popup.highlightExtraSize[0])*s,height:(16+c.row.popup.highlightExtraSize[1])*s}}/>}
     {permission?<PermissionChoicePaint role={role} label={choice.label} description={permission.labels[`${role}Description`]} width={width} height={height} descriptionHeight={permission.descriptionHeights[role]} env={c.env}/>:
-      <><img className="mc-settings-choice__radio" src={assets[choice.checked?'radio_on':'radio_off'].url} alt="" width={10*s} height={10*s}/><img className="mc-settings-choice__radio-hover" src={assets[choice.checked?'radio_on_hover':'radio_off_hover'].url} alt="" width={10*s} height={10*s}/><span>{choice.label}</span></>}
+      <><img className="mc-settings-choice__radio" src={assets[choice.checked?'radio_on':'radio_off'].url} alt="" width={10*s} height={10*s}/><img className="mc-settings-choice__radio-hover" src={assets[choice.checked?'radio_on_hover':'radio_off_hover'].url} alt="" width={10*s} height={10*s}/><span>{displayText(c.env,choice.label)}</span></>}
   </button>;
 }
 function Choices({c,width,nodes,close,trigger,permission}:{c:RowContext&{row:SettingsDropdownRow};width:number;nodes:RefObject<(HTMLButtonElement|null)[]>;trigger:RefObject<HTMLButtonElement|null>;close:()=>void;permission?:SettingsPermissionRow}){
@@ -159,7 +171,7 @@ function Slider({c}:{c:RowContext&{row:SettingsSliderRow}}){
     {r.web.markers.map((marker,index)=><span key={index} className="mc-settings-slider__marker" style={{left:marker.offset*s}}><span className="mc-settings-slider__marker-normal">{skin(marker.progress?'slider_step_progress':'slider_step_background',2,6)}</span><span className="mc-settings-slider__marker-hover">{skin(marker.progress?'slider_step_progress_hover':'slider_step_background_hover',2,6)}</span></span>)}
     {c.disabled&&<span className="mc-settings-slider__fade">{skin('slider_locked_transparent_fade',w,10)}</span>}
     <span className="mc-settings-slider__thumb" style={{left:ratio*(w-10)*s}}>{(['default','hover','indent','locked']as const).map(state=><span key={state} className={`mc-settings-slider__thumb-${state}`}>{skin(`slider_button_${state}`,10,16)}{state==='locked'&&skin('slider_locked_transparent_fade',10,16)}</span>)}</span>
-    <input {...attributes} {...optionAria(c,attributes)} ref={attach} type="range" min={r.web.min} max={r.web.max} step={r.web.step} value={r.web.value} disabled={c.disabled} aria-valuetext={r.textValue} aria-readonly={env.snap.readOnly||undefined}
+    <input {...attributes} {...optionAria(c,attributes)} ref={attach} type="range" min={r.web.min} max={r.web.max} step={r.web.step} value={r.web.value} disabled={c.disabled} aria-valuetext={attributes['aria-valuetext']??visibleText(env,r.textValue)} aria-readonly={env.snap.readOnly||undefined}
       onPointerDown={event=>{attributes.onPointerDown?.(event);if(env.snap.readOnly)event.preventDefault();}}
       onKeyDown={event=>{attributes.onKeyDown?.(event);if((env.snap.readOnly||event.nativeEvent.isComposing||event.keyCode===229)&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End','PageUp','PageDown'].includes(event.key))event.preventDefault();}}
       onChange={event=>{const owner=event.currentTarget,next=owner.valueAsNumber;event.persist();attributes.onChange?.(event);owner.value=String(r.web.value);if(!Number.isFinite(next)||next<r.web.min||next>r.web.max||Math.abs((next-r.web.min)/r.web.step-Math.round((next-r.web.min)/r.web.step))>1e-7)return;
@@ -168,36 +180,36 @@ function Slider({c}:{c:RowContext&{row:SettingsSliderRow}}){
 }
 function RadioChoice({c,index,width}:{c:RowContext&{row:SettingsRadioRow};index:number;width:number}){
   const r=c.row,choice=r.choices[index]!,visual=r.visuals[index]!,s=c.env.snap.scale,key=`${r.id}:${choice.id}`,native=c.env.props.buttonProps?.[key]??{},[,attach]=useClassicNodeRef(c.env.props.buttonRefs?.[key]);
-  return <button {...native} ref={attach} type="button" role="radio" aria-checked={choice.checked} disabled={c.disabled||!choice.enabled} aria-label={choice.label} className="mc-settings-inline-radio" data-checked={choice.checked}
+  return <button {...native} ref={attach} type="button" role="radio" aria-checked={choice.checked} disabled={c.disabled||!choice.enabled} aria-label={defaultName(c.env,choice.label,native)} className="mc-settings-inline-radio" data-checked={choice.checked}
     style={{...native.style,width:width*s,height:17*s,visibility:choice.visible?undefined:'hidden'}}
     onClick={event=>{const owner=event.currentTarget;event.persist();native.onClick?.(event);const rowContext={...c,row:{...r,...identity(choice),id:r.id}};post(rowContext,owner,event.nativeEvent,{kind:'change',target:choice.binding,previousValue:choice.checked,proposedValue:true},()=>event.defaultPrevented);}}
     onKeyDown={event=>{native.onKeyDown?.(event);if((event.nativeEvent.isComposing||event.keyCode===229||c.env.snap.readOnly)&&['Enter',' '].includes(event.key))event.preventDefault();}}>
     <span className="mc-settings-inline-radio__paint" style={{left:2*s,top:visual.y*s,width:(width-4)*s,height:visual.height*s,backgroundImage:`url(${JSON.stringify(resourcePackAssets['textures/ui/White'].url)})`}}/>
     <img className="mc-settings-inline-radio__normal" src={assets[choice.checked?'radio_on':'radio_off'].url} alt="" width={10*s} height={10*s}/><img className="mc-settings-inline-radio__hover" src={assets[choice.checked?'radio_on_hover':'radio_off_hover'].url} alt="" width={10*s} height={10*s}/>
-    <span className="mc-settings-inline-radio__label" style={{left:20*s,top:visual.y*s,height:visual.labelHeight*s,textShadow:`${r.labelShadow.offset[0]*s}px ${r.labelShadow.offset[1]*s}px 0 ${r.labelShadow.color}`}}>{choice.label}</span>
+    <span className="mc-settings-inline-radio__label" style={{left:20*s,top:visual.y*s,height:visual.labelHeight*s,textShadow:`${r.labelShadow.offset[0]*s}px ${r.labelShadow.offset[1]*s}px 0 ${r.labelShadow.color}`}}>{displayText(c.env,choice.label)}</span>
   </button>;
 }
 function Radio({c}:{c:RowContext&{row:SettingsRadioRow}}){
   const r=c.row,s=c.env.snap.scale,count=r.choices.filter(choice=>!choice.ignored&&(choice.visible||c.env.snap.hiddenSlots==='reserve')).length,width=count?(c.width-4)/count:0;let descriptionY=18;
   return <div className="mc-settings-radio-control" role="radiogroup" {...optionAria(c,{})} style={{width:c.width*s}}>
     <div className="mc-settings-radio-control__choices" style={{height:17*s}}>{!r.choices[0].ignored&&(r.choices[0].visible||c.env.snap.hiddenSlots==='reserve')&&<RadioChoice c={c} index={0} width={width}/>}<span aria-hidden="true" style={{display:'block',flex:'none',width:4*s,height:17*s}}/>{!r.choices[1].ignored&&(r.choices[1].visible||c.env.snap.hiddenSlots==='reserve')&&<RadioChoice c={c} index={1} width={width}/>}</div>
-    {r.descriptions.map((description,index)=>{const choice=r.choices[index]!,allocated=choice.checked||c.env.snap.hiddenSlots==='reserve';if(!allocated)return null;const y=descriptionY+2;descriptionY+=description.height;return <div key={choice.id} className="mc-settings-radio-control__description" data-source-visible-binding={choice.binding} style={{left:4*s,top:y*s,width:(c.width-10)*s,height:description.height*s,visibility:choice.checked?undefined:'hidden',...font(c.env.typography.description,s)}}>{description.text}</div>;})}
+    {r.descriptions.map((description,index)=>{const choice=r.choices[index]!,allocated=choice.checked||c.env.snap.hiddenSlots==='reserve';if(!allocated)return null;const y=descriptionY+2;descriptionY+=description.height;return <div key={choice.id} className="mc-settings-radio-control__description" data-source-visible-binding={choice.binding} style={{left:4*s,top:y*s,width:(c.width-10)*s,height:description.height*s,visibility:choice.checked?undefined:'hidden',...font(c.env.typography.description,s)}}>{displayText(c.env,description.text)}</div>;})}
   </div>;
 }
 function Permissions({c}:{c:RowContext&{row:SettingsPermissionRow}}){
-  const r=c.row,row:SettingsDropdownRow={...r,kind:'dropdown',dropdownName:'player_permissions_dropdown',faceLabelBinding:r.binding,popup:r.popup,choices:(['visitor','member','operator']as const).map(role=>({id:role,sourceControl:`permissions.permission_level_radio_${role}_settings`,binding:r.choiceBindings[role],label:r.labels[role],checked:r.value===role,ignored:false,visible:true,enabled:true}))};
+  const r=c.row,row:SettingsDropdownRow={...r,kind:'dropdown',dropdownName:'player_permissions_dropdown',faceLabelBinding:r.binding,popup:r.popup,choices:(['visitor','member','operator']as const).map(role=>({id:role,sourceControl:`permissions.permission_level_radio_${role}_settings`,binding:r.choiceBindings[role],label:r.labels[role],checked:r.checked?.[role]??r.value===role,ignored:false,visible:true,enabled:true}))};
   return <Dropdown c={{...c,row}} permission={r}/>;
 }
 function PermissionChoicePaint({role,label,description,width,height,descriptionHeight,env}:{role:'visitor'|'member'|'operator';label:string;description:string;width:number;height:number;descriptionHeight:number;env:Environment}){
   const s=env.snap.scale,stem=role==='visitor'?'permissions_visitor_hand':role==='member'?'permissions_member_star':'permissions_op_crown';
   return <><span className="mc-settings-permission-choice-focus" style={{left:-2*s,width:(width-4)*s,height:height*s}}><ClassicSkin asset={resourcePackAssets['textures/ui/focus_border_white']} width={width-4} height={height} scale={s} baseClass="mc-settings-field-skin"/></span>
     <img className="mc-settings-choice__radio" src={assets[stem].url} alt="" style={{left:5*s,top:3*s,transform:'none'}} width={10*s} height={10*s}/><img className="mc-settings-choice__radio-hover" src={assets[`${stem}_hover`].url} alt="" style={{left:5*s,top:3*s,transform:'none'}} width={10*s} height={10*s}/>
-    <span className="mc-settings-permission-choice-title" style={{left:21*s,top:.5*s,height:16*s}}>{label}</span><div className="mc-settings-permission-choice-description" style={{left:5*s,top:16*s,width:(width-12)*s,height:descriptionHeight*s,...font(env.typography.description,s)}}>{description}</div></>;
+    <span className="mc-settings-permission-choice-title" style={{left:21*s,top:.5*s,height:16*s}}>{displayText(env,label)}</span><div className="mc-settings-permission-choice-description" style={{left:5*s,top:16*s,width:(width-12)*s,height:descriptionHeight*s,...font(env.typography.description,s)}}>{displayText(env,description)}</div></>;
 }
 function Option({c,children}:{c:RowContext&{row:SettingsFieldRow&{option:SettingsOptionLayout}};children:React.ReactNode}){
   const o=c.row.option,s=c.env.snap.scale,one=o.mode==='one-line',ids=optionIds(c);
-  return <><div id={ids.label} className="mc-settings-option__label" style={{left:(one?34:0)*s,top:(one?3:0)*s,width:(c.width-(one?34:0))*s,height:o.labelHeight*s,textAlign:o.labelAlignment,visibility:o.showLabel?undefined:'hidden',...font(c.env.typography.label,s),opacity:c.disabled?.5:1}}>{o.label}</div>
-    {o.description!==null&&<div id={ids.description} className="mc-settings-option__description" style={{left:(one?34:0)*s,top:(one?c.row.height-4-o.descriptionHeight+3:o.labelHeight+(o.showLabel?1:0))*s,width:(c.width-(one?34:0))*s,height:o.descriptionHeight*s,visibility:o.showLabel?undefined:'hidden',...font(c.env.typography.description,s),opacity:c.disabled?.5:1}}>{o.description}</div>}
+  return <><div id={ids.label} className="mc-settings-option__label" style={{left:(one?34:0)*s,top:(one?3:0)*s,width:(c.width-(one?34:0))*s,height:o.labelHeight*s,textAlign:o.labelAlignment,visibility:o.showLabel?undefined:'hidden',...font(c.env.typography.label,s),opacity:c.disabled?.5:1}}>{displayText(c.env,o.label)}</div>
+    {o.description!==null&&<div id={ids.description} className="mc-settings-option__description" style={{left:(one?34:0)*s,top:(one?c.row.height-4-o.descriptionHeight+3:o.labelHeight+(o.showLabel?1:0))*s,width:(c.width-(one?34:0))*s,height:o.descriptionHeight*s,visibility:o.showLabel?undefined:'hidden',...font(c.env.typography.description,s),opacity:c.disabled?.5:1}}>{displayText(c.env,o.description)}</div>}
     <div className="mc-settings-option__control" style={{top:o.controlY*s,width:c.width*s,...font(c.env.typography.control,s)}}>{children}</div>
   </>;
 }
@@ -205,10 +217,11 @@ function FieldRow({env,row,width,disabled,x,y}:{env:Environment;row:SettingsFiel
   env=row.typography?{...env,typography:{label:row.typography.label??env.typography.label,description:row.typography.description??env.typography.description,control:row.typography.control??env.typography.control}}:env;
   const[,attach]=useClassicNodeRef(env.props.rowRefs?.[row.id]),s=env.snap.scale,c={env,row,width,disabled:disabled||!row.enabled};let contents:React.ReactNode;
   switch(row.kind){
+    case 'panel':{const children=<>{row.rows.filter(child=>allocatedSettingsRow(child,env.snap.hiddenSlots)).map(child=><FieldRow key={child.id} env={env} row={child} width={child.width??width} disabled={c.disabled} x={0} y={0}/>)}</>;contents=row.option?<Option c={c as RowContext&{row:SettingsPanelRow&{option:SettingsOptionLayout}}}>{children}</Option>:children;break;}
     case 'stack':contents=<Rows env={env} rows={row.rows} width={width} disabled={c.disabled} orientation={row.orientation}/>;break;
     case 'experiments':contents=<Rows env={env} rows={row.rows} width={width} disabled={c.disabled} orientation="vertical"/>;break;
-    case 'label':contents=<div className="mc-settings-static-label" style={{height:row.textHeight*s,top:row.profile==='plain'?0:4*s,...font(env.typography.label,s),opacity:c.disabled?.5:1}}>{row.text}</div>;break;
-    case 'info':{const panel=<><Skin name="text_label_box" width={width} height={row.panelHeight??row.height} s={s}/><div className="mc-settings-info-text" style={{left:4*s,top:3*s,width:(width-8)*s,height:row.textHeight*s,...font(env.typography.label,s)}}>{row.text}</div></>;contents=row.option?<Option c={c as RowContext&{row:SettingsInfoRow&{option:SettingsOptionLayout}}}>{panel}</Option>:panel;break;}
+    case 'label':contents=<div className="mc-settings-static-label" style={{height:row.textHeight*s,top:row.profile==='plain'?0:4*s,...font(env.typography.label,s),color:row.color,opacity:c.disabled?.5:1}}>{displayText(env,row.text)}</div>;break;
+    case 'info':{const panel=<><Skin name="text_label_box" width={width} height={row.panelHeight??row.height} s={s}/><div className="mc-settings-info-text" style={{left:4*s,top:3*s,width:(width-8)*s,height:row.textHeight*s,...font(env.typography.label,s)}}>{displayText(env,row.text)}</div></>;contents=row.option?<Option c={c as RowContext&{row:SettingsInfoRow&{option:SettingsOptionLayout}}}>{panel}</Option>:panel;break;}
     case 'spacer':contents=null;break;
     case 'divider':contents=<img className="mc-settings-divider" src={serverFormImageAssets.list_item_divider_line_light.url} alt="" style={{left:row.inset*s,top:(row.height-1)*s/2,width:(width-2*row.inset)*s,height:s}}/>;break;
     case 'toggle':contents=<Option c={c as RowContext&{row:SettingsToggleRow}}><Toggle c={c as RowContext&{row:SettingsToggleRow}}/></Option>;break;
@@ -218,8 +231,8 @@ function FieldRow({env,row,width,disabled,x,y}:{env:Environment;row:SettingsFiel
     case 'radio':contents=<Option c={c as RowContext&{row:SettingsRadioRow}}><Radio c={c as RowContext&{row:SettingsRadioRow}}/></Option>;break;
     case 'slider':contents=<Option c={c as RowContext&{row:SettingsSliderRow}}><Slider c={c as RowContext&{row:SettingsSliderRow}}/></Option>;break;
     case 'permissions':contents=<Option c={c as RowContext&{row:SettingsPermissionRow}}><Permissions c={c as RowContext&{row:SettingsPermissionRow}}/></Option>;break;
-    case 'action':contents=<WorldSettingsActionButton {...env.props.buttonProps?.[row.id]} ref={env.props.buttonRefs?.[row.id]} size={[width,row.height]} scale={s} font={env.typography.control} label={row.label} target={row.target} tone={row.tone} labelMaxHeight={row.labelMaxHeight} disabled={c.disabled||env.snap.readOnly}
-      onAction={detail=>post(c,detail.control,detail.event.nativeEvent,{kind:'action',target:row.target},()=>detail.event.defaultPrevented)}/>;break;
+    case 'action':contents=<SourceAction env={env} {...env.props.buttonProps?.[row.id]} buttonRef={env.props.buttonRefs?.[row.id]} size={[width,row.height]} scale={s} font={env.typography.control} label={row.label} target={row.target} tone={row.tone} labelMaxHeight={row.labelMaxHeight} disabled={c.disabled||env.snap.readOnly}
+      onAction={detail=>post(c,detail.control,detail.event.nativeEvent,{kind:'action',target:row.target,...(row.uri?{uri:row.uri}:{})},()=>detail.event.defaultPrevented)}/>;break;
   }
   return <div ref={attach} className="mc-settings-field-row" data-source-control={row.sourceControl} data-field-id={row.id} data-field-kind={row.kind} data-binding={row.binding} data-collection={row.collection?.name} data-index={row.collection?.index} data-enabled={row.enabled} aria-hidden={!row.visible||undefined}
     {...inert(!row.visible)} style={{left:(x+(row.offset?.[0]??0))*s,top:(y+(row.offset?.[1]??0))*s,width:width*s,height:row.height*s,visibility:row.visible?undefined:'hidden'}}>{contents}</div>;
@@ -236,8 +249,8 @@ export const SettingsFields=forwardRef<HTMLDivElement,SettingsFieldsProps>(funct
     const start=(event:CompositionEvent)=>{if(node.contains(event.target as Node))composing.current.add(event.target!);},end=(event:CompositionEvent)=>{composing.current.delete(event.target!);};
     doc.addEventListener('compositionstart',start,true);doc.addEventListener('compositionend',end,true);return()=>{doc.removeEventListener('compositionstart',start,true);doc.removeEventListener('compositionend',end,true);composing.current.clear();};
   },[root]);
-  const{width:_width,scale:_scale,typography:_typography,rows:_rows,hiddenSlots:_hiddenSlots,disabled:_disabled,readOnly:_readOnly,inert:_inert,onRequest:_onRequest,inputProps:_inputProps,buttonProps:_buttonProps,inputRefs:_inputRefs,buttonRefs:_buttonRefs,rowRefs:_rowRefs,popupViewportRefs:_popupViewportRefs,popupHost:_popupHost,children:_children,dangerouslySetInnerHTML:_dangerous,className,style,...native}=props;
-  void[_width,_scale,_typography,_rows,_hiddenSlots,_disabled,_readOnly,_inert,_onRequest,_inputProps,_buttonProps,_inputRefs,_buttonRefs,_rowRefs,_popupViewportRefs,_popupHost,_children,_dangerous];
+  const{width:_width,scale:_scale,typography:_typography,textFormatting:_textFormatting,rows:_rows,hiddenSlots:_hiddenSlots,disabled:_disabled,readOnly:_readOnly,inert:_inert,onRequest:_onRequest,inputProps:_inputProps,buttonProps:_buttonProps,inputRefs:_inputRefs,buttonRefs:_buttonRefs,rowRefs:_rowRefs,popupViewportRefs:_popupViewportRefs,popupHost:_popupHost,children:_children,dangerouslySetInnerHTML:_dangerous,className,style,...native}=props;
+  void[_width,_scale,_typography,_textFormatting,_rows,_hiddenSlots,_disabled,_readOnly,_inert,_onRequest,_inputProps,_buttonProps,_inputRefs,_buttonRefs,_rowRefs,_popupViewportRefs,_popupHost,_children,_dangerous];
   const height=snap.rows.reduce((sum,row)=>sum+(allocatedSettingsRow(row,snap.hiddenSlots)?row.height:0),0),env={snap,instanceId,typography:snap.typography,props,root,committed,composing:composing.current};
   return <div {...native} {...inert(snap.inert)} ref={attach} className={['mc-settings-fields',className].filter(Boolean).join(' ')} data-layout-policy="host-resolved-source-intrinsics" data-readonly={snap.readOnly} style={{...style,width:snap.width*snap.scale,height:height*snap.scale,'--mc-settings-u':`${snap.scale}px`,...font(snap.typography.control,snap.scale)}as CSSProperties}>
     <Rows env={env} rows={snap.rows} width={snap.width} disabled={snap.disabled} orientation="vertical"/>

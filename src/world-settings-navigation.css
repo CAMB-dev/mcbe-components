@@ -1,0 +1,22 @@
+@import './settings-navigation.css';
+@import './world-settings-actions.css';
+.mc-world-navigation__thumbnail{position:absolute;overflow:visible}
+.mc-world-navigation__thumbnail>.mc-image{display:block;max-width:none;max-height:none;position:absolute;inset:0;z-index:2}
+.mc-world-navigation__thumbnail-border{position:absolute;z-index:1;pointer-events:none}
+.mc-world-navigation-skin,.mc-world-navigation-skin__clip{display:block;position:absolute;overflow:hidden;pointer-events:none}
+.mc-world-navigation-skin__patch{display:block;image-rendering:pixelated}
+.mc-world-navigation__server-glyph{position:absolute;inset:0;pointer-events:none}
+.mc-world-navigation__server-glyph>.mc-image,.mc-world-navigation__cycling>.mc-image{display:block;position:absolute;inset:0;max-width:none;max-height:none;image-rendering:pixelated}
+.mc-world-navigation__server-outline{z-index:3;filter:brightness(var(--mc-settings-navigation-glyph))}
+.mc-world-navigation__server-color{z-index:4}
+.mc-world-navigation__loading{display:block;position:absolute;inset:0;z-index:5;overflow:hidden;filter:brightness(var(--mc-settings-navigation-glyph));pointer-events:none}
+.mc-world-navigation__loading>.mc-image{display:block;max-width:none;max-height:none;image-rendering:pixelated}
+.mc-world-navigation__pack-border{position:absolute;inset:0;z-index:1;filter:brightness(var(--mc-settings-navigation-glyph))}
+.mc-world-navigation__cycling{display:block;position:absolute;width:calc(15 * var(--mc-world-navigation-u));height:calc(15 * var(--mc-world-navigation-u));z-index:3;pointer-events:none}
+.mc-world-navigation__material-plane{z-index:0;max-width:none;max-height:none}
+.mc-world-navigation--material-ready .mc-settings-navigation-section__paint,
+.mc-world-navigation--material-ready .mc-settings-navigation-section__glyph,
+.mc-world-navigation--material-ready .mc-world-settings-action__skins,
+.mc-world-navigation--material-ready .mc-world-settings-action__outline,
+.mc-world-navigation--material-ready .mc-world-navigation__thumbnail-border{visibility:hidden}
+@media(forced-colors:active){.mc-world-navigation__material-plane{display:none!important}}

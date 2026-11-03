@@ -144,7 +144,8 @@
     "./world-settings-actions.css": "./dist/world-settings-actions.css",
     "./settings-frame.css": "./dist/settings-frame.css",
     "./settings-navigation.css": "./dist/settings-navigation.css",
-    "./settings-fields.css": "./dist/settings-fields.css"
+    "./settings-fields.css": "./dist/settings-fields.css",
+    "./world-settings-navigation.css": "./dist/world-settings-navigation.css"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",

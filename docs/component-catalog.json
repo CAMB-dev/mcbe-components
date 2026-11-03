@@ -1831,10 +1831,30 @@
         "fidelity": "explicit_source_parts_host_snapshot_fonts_and_intrinsics_full_world_settings_incomplete",
         "details": "docs/SETTINGS_SOURCE.md"
       }
+    ],
+    "world_settings_fields": [
+      {
+        "name": "WorldGameSettings",
+        "status": "implemented",
+        "fidelity": "source_owned_complete_named_snapshot_fixed_structure_web_host_metrics_native_unqualified",
+        "details": "docs/WORLD_SETTINGS_FIELDS.md"
+      },
+      {
+        "name": "WorldMultiplayerSettings",
+        "status": "implemented",
+        "fidelity": "source_owned_complete_named_snapshot_fixed_structure_web_host_metrics_native_unqualified",
+        "details": "docs/WORLD_SETTINGS_FIELDS.md"
+      },
+      {
+        "name": "WorldSettingsNavigation",
+        "status": "implemented",
+        "fidelity": "source_owned_complete_named_snapshot_fixed_structure_web_host_metrics_native_unqualified",
+        "details": "docs/WORLD_SETTINGS_FIELDS.md"
+      }
     ]
   },
   "publicExports": {
-    "components": 261,
+    "components": 264,
     "rendererDataValues": 3,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1845,12 +1865,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 280,
+    "runtimeValues": 283,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "settings_parts_261_280_scoped_web_package_installed_built_qualified_full_world_settings_incomplete",
+    "publicationState": "world_named_settings_264_283_source_cpu_prepared_browser_package_pending",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
@@ -2192,5 +2212,37 @@
     "scopedAxeViolations": 0,
     "scopedAxeIncomplete": 1,
     "validationDetails": "docs/SETTINGS_SOURCE_QA.md"
+  },
+  "worldSettingsFieldsStage": {
+    "status": "SOURCE_WEB_PACKAGE_INSTALLED_BUILT_PASS_NATIVE_INCOMPLETE",
+    "components": [
+      "WorldGameSettings",
+      "WorldMultiplayerSettings",
+      "WorldSettingsNavigation"
+    ],
+    "gameDirectControls": 69,
+    "multiplayerDirectControls": 8,
+    "fullWorldSettingsScreenImplemented": false,
+    "nativeWholeGUI": false,
+    "details": "docs/WORLD_SETTINGS_FIELDS.md",
+    "nodeTests": 108,
+    "sourceBehaviorTests": 74,
+    "sourceImageProfileTests": 14,
+    "sourceImagePlanes": 34,
+    "sourceImagePixels": 5109100,
+    "sourceImageDifferentPixels": 0,
+    "sharedRendererReferenceIsNotNativeOracle": true,
+    "SSRGroupsPerPeer": 14,
+    "negativeTypesPerPeer": 24,
+    "installedViteCases": 4,
+    "installedDevProdWholeFrameComparisons": 16,
+    "installedDevProdComparedPixels": 7072000,
+    "builtDemoTests": 6,
+    "initialScopedAxeReports": 1,
+    "scrolledScopedAxeReports": 0,
+    "scrolledScopedAxeIncomplete": 2,
+    "originalCSSCandidatePass": 17,
+    "originalCSSCandidateFail": 15,
+    "validationDetails": "docs/WORLD_SETTINGS_FIELDS_QA.md"
   }
 }

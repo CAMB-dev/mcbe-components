@@ -42,6 +42,7 @@ interface OptionRow extends SettingsFieldBase {readonly option:SettingsOptionLay
 export interface SettingsLabelRow extends SettingsFieldBase {
   readonly kind:'label';readonly text:string;
   readonly profile:'plain'|'group'|'header';readonly textHeight:number;
+  readonly color?:string;
 }
 export interface SettingsInfoRow extends SettingsFieldBase {
   readonly kind:'info';readonly text:string;readonly textHeight:number;
@@ -54,6 +55,13 @@ export interface SettingsSpacerRow extends SettingsFieldBase {readonly kind:'spa
 export interface SettingsDividerRow extends SettingsFieldBase {readonly kind:'divider';readonly inset:number}
 export interface SettingsStackRow extends SettingsFieldBase {
   readonly kind:'stack';readonly orientation:'vertical'|'horizontal';readonly rows:readonly SettingsFieldRow[];
+}
+/** Source panel children use explicit offsets, not stack cursor flow. */
+export interface SettingsPanelRow extends SettingsFieldBase {
+  readonly kind:'panel';readonly rows:readonly SettingsFieldRow[];
+  readonly option?:SettingsOptionLayout;
+  /** Resolved inner control height when this panel retains option_generic. */
+  readonly panelHeight?:number;
 }
 export interface SettingsToggleRow extends OptionRow {
   readonly kind:'toggle';readonly binding:string;readonly checked:boolean;readonly toggleName:string;
@@ -106,6 +114,8 @@ export interface SettingsPermissionRow extends OptionRow {
   readonly labels:PermissionLevelLabels;readonly faceLabel:string;
   readonly faceIcon:{readonly src:string;readonly sourceSize:readonly[number,number]}|null;
   readonly choiceBindings:Readonly<Record<'visitor'|'member'|'operator',string>>;
+  /** Raw source radio flags may co-exist; omission preserves the original enum adapter. */
+  readonly checked?:Readonly<Record<'visitor'|'member'|'operator',boolean>>;
   readonly popup:SettingsDropdownRow['popup'];
   readonly choiceHeights:Readonly<Record<'visitor'|'member'|'operator',number>>;
   readonly descriptionHeights:Readonly<Record<'visitor'|'member'|'operator',number>>;
@@ -113,6 +123,8 @@ export interface SettingsPermissionRow extends OptionRow {
 export interface SettingsActionRow extends SettingsFieldBase {
   readonly kind:'action';readonly label:string;readonly target:string;
   readonly tone:'light'|'dark'|'realms';readonly labelMaxHeight:number;
+  /** Host intent metadata only; the library never opens or navigates this URI. */
+  readonly uri?:string;
 }
 export interface SettingsExperimentsRow extends SettingsFieldBase {
   readonly kind:'experiments';readonly collectionName:'experimental_toggles';
@@ -120,11 +132,12 @@ export interface SettingsExperimentsRow extends SettingsFieldBase {
   /** Complete source collection including ignored/hidden records, ordered by explicit index. */
   readonly rows:readonly SettingsToggleRow[];
 }
-export type SettingsFieldRow=SettingsLabelRow|SettingsInfoRow|SettingsSpacerRow|SettingsDividerRow|SettingsStackRow|SettingsToggleRow|SettingsTextRow|SettingsTextActionRow|SettingsDropdownRow|SettingsRadioRow|SettingsSliderRow|SettingsPermissionRow|SettingsActionRow|SettingsExperimentsRow;
+export type SettingsFieldRow=SettingsLabelRow|SettingsInfoRow|SettingsSpacerRow|SettingsDividerRow|SettingsStackRow|SettingsPanelRow|SettingsToggleRow|SettingsTextRow|SettingsTextActionRow|SettingsDropdownRow|SettingsRadioRow|SettingsSliderRow|SettingsPermissionRow|SettingsActionRow|SettingsExperimentsRow;
 export interface SettingsFieldsRequest {
   readonly kind:'change'|'action';readonly identity:SettingsFieldIdentity;
   /** Exact source binding or button target; never automatically prefixed. */
   readonly target:string;
+  readonly uri?:string;
   readonly previousValue?:string|boolean|number|null;
   readonly proposedValue?:string|boolean|number|null;
   readonly sourceValue?:number;readonly sourceSteps?:number;
@@ -136,9 +149,15 @@ export interface SettingsFieldsRequest {
 type DataAttributes={[key:`data-${string}`]:string|number|boolean|undefined};
 export type SettingsFieldNativeInputProps=Omit<InputHTMLAttributes<HTMLInputElement>,'children'|'dangerouslySetInnerHTML'|'type'|'value'|'defaultValue'|'checked'|'defaultChecked'|'min'|'max'|'step'|'maxLength'|'disabled'|'readOnly'|'hidden'>&DataAttributes;
 export type SettingsFieldNativeButtonProps=Omit<ButtonHTMLAttributes<HTMLButtonElement>,'children'|'dangerouslySetInnerHTML'|'type'|'value'|'defaultValue'|'disabled'|'hidden'>&DataAttributes;
+/** Explicit color-code Web projection; no implicit Minecraft palette. */
+export interface SettingsFieldsTextFormatting {
+  readonly colors:Readonly<Record<string,readonly[number,number,number]>>;
+  readonly resetCode:string|null;
+}
 export interface SettingsFieldsProps extends Omit<HTMLAttributes<HTMLDivElement>,'children'|'dangerouslySetInnerHTML'|'onChange'>,DataAttributes {
   readonly children?:never;readonly dangerouslySetInnerHTML?:never;
   readonly width:number;readonly scale:number;readonly typography:SettingsFieldsTypography;
+  readonly textFormatting?:SettingsFieldsTextFormatting;
   readonly rows:readonly SettingsFieldRow[];
   /** Explicit same-document content_area overlay. Omission/null uses an inline Web popup, never body. */
   readonly popupHost?:HTMLElement|null;

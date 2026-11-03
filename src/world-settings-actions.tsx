@@ -1,5 +1,5 @@
 import {forwardRef, useRef, version as reactVersion} from 'react';
-import type {ButtonHTMLAttributes, CSSProperties, HTMLAttributes, MouseEvent, Ref} from 'react';
+import type {ButtonHTMLAttributes, CSSProperties, HTMLAttributes, MouseEvent, Ref,ForwardedRef,ReactNode} from 'react';
 import {ClassicSkin} from './classic-skin';
 import type {ClassicSkinAsset} from './classic-skin';
 import {resourcePackAssets} from './resource-pack-assets';
@@ -84,9 +84,8 @@ function skinBank(tone:WorldSettingsActionButtonProps['tone']):readonly ClassicS
 }
 
 /** Actual settings_common.action_button material graph, with explicit host metrics. */
-export const WorldSettingsActionButton=forwardRef<HTMLButtonElement,WorldSettingsActionButtonProps>(function WorldSettingsActionButton(
-  {size,scale,font,label,target,tone,labelMaxHeight,onAction,inert,disabled=false,hidden,className,style,onClick,onKeyDown,...native},ref,
-){
+function useSourceWorldSettingsActionButton(props:WorldSettingsActionButtonProps,ref:ForwardedRef<HTMLButtonElement>,displayLabel:ReactNode){
+  const {size,scale,font,label,target,tone,labelMaxHeight,onAction,inert,disabled=false,hidden,className,style,onClick,onKeyDown,...native}=props;
   if(!Array.isArray(size)||size.length!==2)throw new TypeError('World settings action size requires two axes.');
   const geometry=frame(size[0],size[1],scale,font),bank=skinBank(tone);
   if(typeof label!=='string'||typeof target!=='string'||!target.trim()||target.length>4096)throw new TypeError('World settings actions need host label and source target text.');
@@ -104,8 +103,18 @@ export const WorldSettingsActionButton=forwardRef<HTMLButtonElement,WorldSetting
     }}>
     <span className="mc-world-settings-action__skins" aria-hidden="true">{bank.map((asset,index)=><ClassicSkin key={index} asset={asset} width={size[0]-2} height={size[1]-2} scale={scale} baseClass="mc-world-settings-action-skin" className={`mc-world-settings-action-${['idle','hover','pressed','locked'][index]}`}/>)}</span>
     <span className="mc-world-settings-action__outline" aria-hidden="true"><ClassicSkin asset={resourcePackAssets['textures/ui/focus_border_white']} width={size[0]} height={size[1]} scale={scale} baseClass="mc-world-settings-action-skin"/></span>
-    <span className="mc-world-settings-action__content"><span style={{maxHeight:labelMaxHeight*scale}}>{label}</span></span>
+    <span className="mc-world-settings-action__content"><span style={{maxHeight:labelMaxHeight*scale}}>{displayLabel}</span></span>
   </button>;
+ }
+/** Public source action keeps its original string-only label and exact DOM. */
+export const WorldSettingsActionButton=forwardRef<HTMLButtonElement,WorldSettingsActionButtonProps>(function WorldSettingsActionButton(props,ref){
+  const {displayLabel:_unsupported,...sourceProps}=props as WorldSettingsActionButtonProps&{displayLabel?:unknown};void _unsupported;
+  return useSourceWorldSettingsActionButton(sourceProps,ref,props.label);
+});
+/** Private shared source kernel; not exported from the package barrel. */
+export interface SourceWorldSettingsActionButtonProps extends WorldSettingsActionButtonProps {readonly displayLabel:ReactNode}
+export const SourceWorldSettingsActionButton=forwardRef<HTMLButtonElement,SourceWorldSettingsActionButtonProps>(function SourceWorldSettingsActionButton({displayLabel,...props},ref){
+  return useSourceWorldSettingsActionButton(props,ref,displayLabel);
 });
 
 /** Exact 35-unit Bedrock/EDU launch row; no world creation or account service. */
