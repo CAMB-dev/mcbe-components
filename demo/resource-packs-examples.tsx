@@ -1,3 +1,4 @@
+import {classicTenGuiFont} from 'virtual:mcbeui-game-font';
 import {useEffect,useRef,useState} from 'react';
 import type {CSSProperties} from 'react';
 import {Button,Switch} from '../src/components';
@@ -23,7 +24,7 @@ export function ResourcePacksExamples(){
   const [accept,setAccept]=useState(true),[readOnly,setReadOnly]=useState(false),[disabled,setDisabled]=useState(false);
   const [allDiagnostics,setAllDiagnostics]=useState(false),[touch,setTouch]=useState(false),[ready,setReady]=useState(false);
   const [status,setStatus]=useState('本地宿主示例；操作只提交界面请求。');
-  const [headerImages,setHeaderImages]=useState(false),[headerExpanded,setHeaderExpanded]=useState(false);
+  const [headerText,setHeaderText]=useState(false),[headerImages,setHeaderImages]=useState(false),[headerExpanded,setHeaderExpanded]=useState(false);
   const settingsRoot=useRef<HTMLDivElement>(null);
   useEffect(()=>{let active=true;Promise.all([document.fonts.load('18px "MCBE Pixel"'),document.fonts.load('18px "MCBE CJK"'),...(hasGameFont?[document.fonts.load('18px "Mojangles Pixel"')]:[]),...(hasClassicTenFont?[document.fonts.load('18px "MCBE Classic Ten"')]:[])]).then(()=>document.fonts.ready).then(()=>{if(active)setReady(true);}).catch(()=>{if(active)setReady(true);});return()=>{active=false;};},[]);
   useEffect(()=>{if(settings.open)settingsRoot.current?.scrollIntoView({block:'center'});},[settings.open]);
@@ -64,9 +65,11 @@ export function ResourcePacksExamples(){
       </ScrollArea></div>
     </div>
     <div id="resource-pack-header-sampling" data-testid="resource-pack-header-sampling" style={{display:'grid',gap:12,justifyItems:'start',maxWidth:'100%'}}>
+      <Switch label="启用原版标题计数" checked={headerText && !!classicTenGuiFont} disabled={!classicTenGuiFont} onChange={event=>setHeaderText(event.currentTarget.checked)}/>
       <Switch label="启用标题图标采样" checked={headerImages} onChange={event=>setHeaderImages(event.currentTarget.checked)}/>
       <ResourcePackSection kind="unowned" profile="global" width={140} scale={2} title="图标采样" titleVisible expanded={headerExpanded}
         collection={{capacity:0,count:'0',items:[]}} noPacks viewMoreLabel="更多" disabled={disabled} readOnly={readOnly}
+        headerTextProfile={headerText && classicTenGuiFont ? {frame:{width:1200,height:900,guiScale:2},font:classicTenGuiFont,origin:[160.25,60],projectionScale:1.5,paintOffset:[0,-2]}:undefined}
         headerImageProfile={headerImages?{frame:{width:1200,height:900,guiScale:2},toggleOrigin:[180.25,60],expandedPaintRect:[180.25,63.5,10,3]}:undefined}
         onAction={detail=>{if(accept&&detail.action==='expand-unowned')setHeaderExpanded(value=>!value);return accept?undefined:false;}}/>
       <p style={{margin:0}}>切换图标采样，再展开标题可预览加号与细条减号。此独立示例不代表原版整页布局已完成。</p>

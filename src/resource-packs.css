@@ -101,3 +101,16 @@
  .mc-resource-packs-agreement__state{display:none!important}
  .mc-resource-packs-button--underline:not(:disabled):is(:hover,:focus-visible,:active){color:LinkText}
 }
+
+/* Ready count paint is decorative; opacity keeps the literal accessible. */
+.mc-resource-packs-header-text{position:relative}
+.mc-resource-packs-header-text__paint{position:absolute;display:block;pointer-events:none;visibility:hidden}
+.mc-resource-packs-button:not(:disabled):not(:is(:hover,:focus-visible,:active)) .mc-resource-packs-header-text[data-button-state=default]:has(>.mc-resource-packs-header-text__paint>canvas[data-render-state=ready],>.mc-resource-packs-header-text__paint[data-image-empty=true])>.mc-resource-packs-header-text__fallback{opacity:0}
+.mc-resource-packs-button:not(:disabled):not(:is(:hover,:focus-visible,:active)) .mc-resource-packs-header-text[data-button-state=default]>.mc-resource-packs-header-text__paint>canvas[data-render-state=ready]{visibility:visible}
+.mc-resource-packs-button:not(:disabled):not(:active):is(:hover,:focus-visible) .mc-resource-packs-header-text[data-button-state=hover]:has(>.mc-resource-packs-header-text__paint>canvas[data-render-state=ready],>.mc-resource-packs-header-text__paint[data-image-empty=true])>.mc-resource-packs-header-text__fallback{opacity:0}
+.mc-resource-packs-button:not(:disabled):not(:active):is(:hover,:focus-visible) .mc-resource-packs-header-text[data-button-state=hover]>.mc-resource-packs-header-text__paint>canvas[data-render-state=ready]{visibility:visible}
+.mc-resource-packs-button:not(:disabled):active .mc-resource-packs-header-text[data-button-state=pressed]:has(>.mc-resource-packs-header-text__paint>canvas[data-render-state=ready],>.mc-resource-packs-header-text__paint[data-image-empty=true])>.mc-resource-packs-header-text__fallback{opacity:0}
+.mc-resource-packs-button:not(:disabled):active .mc-resource-packs-header-text[data-button-state=pressed]>.mc-resource-packs-header-text__paint>canvas[data-render-state=ready]{visibility:visible}
+.mc-resource-packs-button:disabled .mc-resource-packs-header-text[data-button-state=locked]:has(>.mc-resource-packs-header-text__paint>canvas[data-render-state=ready],>.mc-resource-packs-header-text__paint[data-image-empty=true])>.mc-resource-packs-header-text__fallback{opacity:0}
+.mc-resource-packs-button:disabled .mc-resource-packs-header-text[data-button-state=locked]>.mc-resource-packs-header-text__paint>canvas[data-render-state=ready]{visibility:visible}
+@media(forced-colors:active){.mc-resource-packs-header-text__paint{display:none!important}.mc-resource-packs-header-text__fallback{opacity:1!important}}

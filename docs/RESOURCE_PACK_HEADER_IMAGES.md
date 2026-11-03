@@ -1,3 +1,5 @@
+> 原始TrueType计数现有独立`headerTextProfile`与Manager映射，可与本文图标路径同时使用。见[计数接入与验证](RESOURCE_PACK_HEADER_TEXT.md)；本文图标范围不扩张为整页字体认证。
+
 # Resource Pack header image sampling
 
 `ResourcePackSection.headerImageProfile` 和 `ResourcePackManager.headerImageProfiles` 让标题加／减号复用公开的 `GuiImageLayer`。原 PNG、全图 UV、源 Tint／Hud 和整个 framebuffer 的投影保持独立；内部只输出图标附近的整数裁窗。它不替代标题字体、按钮皮肤、集合布局或 Settings 的整页布局。

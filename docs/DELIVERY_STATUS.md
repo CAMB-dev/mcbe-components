@@ -18,6 +18,8 @@
 
 本地展示入口为[组件预览](http://127.0.0.1:4173/)。`#gui-layer`中可展开原始模型、共用方块校准及玻璃板校准示例；展开“Original Classic TrueType atlas”可预览本地原始字体并编辑、切换比例与阴影。
 
+资源包标题计数进一步接入实际Section／Manager的原始TrueType路径；58项源行为／像素回归及源／生产各三尺寸预览通过。具名原版单字的条件化实际组件对照仍为NVIDIA RGBA0，软件透明合成保留21点灰度差。它不改变全部GUI默认字体或宣布整页完成，见[计数接入](RESOURCE_PACK_HEADER_TEXT.md)。
+
 ## 尚未完成
 
 1. 跨后端及其他版本的光栅一致性：指定原生场景在完整目标／top-left模式已零差，默认裁切模式保留旧行为。解析POINT反例仍有效，见[旧诊断](MAGNIFIER_POINT_DIAGNOSIS.md)与[新光栅验证](CRAFTING_RASTER_TARGET.md)。

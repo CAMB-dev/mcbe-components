@@ -6,6 +6,8 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 新增[Classic Ten缓存生成工具](docs/CLASSIC_TRUETYPE_CACHE.md)：从用户自有原始TTF生成1024²图集，全部RGBA与指定原生缓存一致，保留原始字形度量及只读复算。原版字体不随包分发。现已接入独立的`GuiLayer kind:truetype`与`layoutGuiTrueTypeText`，支持可变字形、混排、阴影及资源快照；`#gui-layer`中展开 **Original Classic TrueType atlas** 可预览。见[使用与验证](docs/TRUETYPE_TEXT.md)，完整原生排版仍待验收。
 
+资源包标题计数现可通过`headerTextProfile`／`headerTextProfiles`使用原始TrueType图集，支持真实按钮状态、计数更新和失败回退。`#resource-packs`打开“启用原版标题计数”预览；原生单字条件对照NVIDIA零差，软件透明叠加仍差21点。见[接入与验证](docs/RESOURCE_PACK_HEADER_TEXT.md)。
+
 当前交付、预览入口与剩余范围集中在[阶段性交付状态](docs/DELIVERY_STATUS.md)。完整原生pixel-perfect目标仍在进行中；较早解析POINT取样假设已排除，本阶段改为验证光栅目标条件。
 
 新增显式完整光栅目标：`imageRender.frame.rasterOrigin: 'top-left'`配合`imageRender.rasterBounds: 'frame'`。指定GUI4／5建筑页及GUI4收起／空搜索页，完整3,603,140个RGBA像素均与原生参考零差；原有165点建筑页残差全部消除，无新增误差。控件与可见窗口不扩大，默认裁切策略不变。`#crafting-layer`可切换两种分配；范围与显存取舍见[合成台光栅目标](docs/CRAFTING_RASTER_TARGET.md)。

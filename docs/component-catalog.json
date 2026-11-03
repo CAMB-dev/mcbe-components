@@ -2642,5 +2642,29 @@
     "sourcePreviewCases": 3,
     "builtPreviewCases": 3,
     "preparedCacheOptionalGuiFont": true
+  },
+  "resourcePackHeaderTextStage": {
+    "status": "PUBLIC_SECTION_MANAGER_TRUETYPE_COUNT_PACKAGE_BROWSER_PASS",
+    "components": 268,
+    "runtimeValues": 290,
+    "newRuntimeExports": 0,
+    "newType": "ResourcePackHeaderTextProfile",
+    "sourceBrowserCases": 58,
+    "sourcePreviewCases": 3,
+    "builtPreviewCases": 3,
+    "nativeCountPixels": 3603140,
+    "nativeCountRgbaDifferentPixels": 0,
+    "nativeBeforeBackdrop": true,
+    "conditionedHostRegistration": true,
+    "softwareTransparentCompositionRgbaDifferentPixels": 21,
+    "softwareOpaqueCompositionRgbaDifferentPixels": 2,
+    "fullNativeLayoutCertified": false,
+    "originalFontDistributed": false,
+    "details": "docs/RESOURCE_PACK_HEADER_TEXT.md",
+    "installedDefaultViteCases": 4,
+    "installedVerifiedGuiScale": 2,
+    "installedDevProdPairs": 8,
+    "installedDevProdRgbaPixels": 1566,
+    "sourceGuardBeforeIo": true
   }
 }

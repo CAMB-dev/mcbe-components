@@ -1897,6 +1897,14 @@ const badBookBodyFont: BookBodyRasterProfile = {frameSize:[900,600],origin:[0,0]
 const sourceText: GuiTextGeometry = {text:'1',font:packedFont,origin:[0,0],fontScale:1,color:textBytes,sampling:'point',shader:'bitmap',shadow:{offset:[1,1],tint:[.25,.25,.25,1]}};
 export const textOptions: GuiTextLayoutOptions = {width:640,height:480,guiScale:2,...sourceText};
 export const textLayout: GuiTextLayout = layoutGuiText(textOptions);
+const headerFontProfile:import('mcbeui').ResourcePackHeaderTextProfile={frame:{width:640,height:480,guiScale:2},font:variableHeaderFont(),origin:[10,10],paintOffset:[0,-2],projectionScale:1.5};
+function variableHeaderFont():GuiTrueTypeFont{return {pages:['/count.png'],pageSizes:[8],lineHeight:3,glyphs:{A:{page:0,atlasRect:[0,0,3,2],offset:[0,0],size:[3,2],advance:4}}};}
+const headerTextProfiles:NonNullable<import('mcbeui').ResourcePackManagerProps['headerTextProfiles']>={selected:headerFontProfile};
+// @ts-expect-error Original variable glyph font is required.
+const badHeaderFont:import('mcbeui').ResourcePackHeaderTextProfile={frame:{width:640,height:480,guiScale:2},origin:[0,0],paintOffset:[0,0]};
+// @ts-expect-error Unknown collection cannot inject another header.
+const badHeaderMap:NonNullable<import('mcbeui').ResourcePackManagerProps['headerTextProfiles']>={invalid:headerFontProfile};
+void [headerFontProfile,headerTextProfiles,badHeaderFont,badHeaderMap];
 const variableFont:GuiTrueTypeFont={pages:['/caller-variable-atlas.png'],pageSizes:[8],lineHeight:3,glyphs:{A:{page:0,atlasRect:[1,2,3,2],offset:[0,0],size:[3,2],advance:4}}};
 const variableGeometry:GuiTrueTypeGeometry={text:'A',font:variableFont,origin:[0,0],projectionScale:1.5,originQuantization:'float32'};
 const variableOptions:GuiTrueTypeLayoutOptions={width:32,height:32,guiScale:1,...variableGeometry};

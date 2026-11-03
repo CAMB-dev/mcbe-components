@@ -10,6 +10,9 @@ import {deferClassicRequest, useClassicLayoutEffect, useClassicNodeRef} from './
 import {ResourcePackHeaderToggle} from './resource-pack-header-images';
 import type {ResourcePackHeaderImageProfile} from './resource-pack-header-images';
 export type {ResourcePackHeaderImageProfile} from './resource-pack-header-images';
+import {ResourcePackHeaderCount} from './resource-pack-header-text';
+import type {ResourcePackHeaderTextProfile} from './resource-pack-header-text';
+export type {ResourcePackHeaderTextProfile} from './resource-pack-header-text';
 
 export type ResourcePackProfile = 'global' | 'level' | 'addon';
 export type ResourcePackSectionKind = Exclude<ResourcePackKind, 'invalid'>;
@@ -49,6 +52,8 @@ interface SectionBase extends NativeDiv {
   readonly collection: ResourcePackCollectionData;
   /** Optional whole-frame source sampling for the toggle image only. */
   readonly headerImageProfile?: ResourcePackHeaderImageProfile;
+  /** Optional original TrueType count, with explicit source paint coordinates. */
+  readonly headerTextProfile?: ResourcePackHeaderTextProfile;
   readonly disabled?: boolean; readonly readOnly?: boolean; readonly onAction?: ResourcePackManagerActionHandler;
 }
 export type ResourcePackSectionProps = SectionBase & (
@@ -92,6 +97,7 @@ export interface ResourcePackManagerProps extends NativeDiv {
   readonly defaultItem: ResourcePackDefaultItem; readonly layout: ResourcePackManagerLayout;
   /** Each host-resolved toggle origin is independent of source section height. */
   readonly headerImageProfiles?: Readonly<Partial<Record<ResourcePackSectionKind, ResourcePackHeaderImageProfile>>>;
+  readonly headerTextProfiles?: Readonly<Partial<Record<ResourcePackSectionKind, ResourcePackHeaderTextProfile>>>;
   readonly disabled?: boolean; readonly readOnly?: boolean; readonly onAction?: ResourcePackManagerActionHandler;
 }
 
@@ -301,7 +307,7 @@ export const ResourcePackSection = forwardRef<HTMLDivElement, ResourcePackSectio
   return <div {...native} ref={attach} className={cx('mc-resource-packs-section', className)} data-source-section={kind} data-expanded={expanded} style={style(scale, {...givenStyle, width: width * scale})}>
     <div className="mc-resource-packs-section__header" data-source-control={kind === 'selected' || kind === 'available' ? kind + '_packs_title_panel' : kind + '_packs_title_button'} hidden={!titleVisible} style={{height: 20 * scale}}>
       <SourceButton width={width - (diagnostics?.visible ? 25 : 0)} height={20} scale={scale} readOnly={readOnly} disabled={disabled} onAction={onAction} aria-expanded={expanded} request={{action: ('expand-' + kind) as ResourcePackContentRequest['action'], target: source.expand[kind], profile, sourceControl: kind + '_packs_title_button', collection: source.collections[kind]}}>
-        <span className="mc-resource-packs-section__heading"><span className="mc-resource-packs-section__title">{title}</span><span className="mc-resource-packs-section__fill"/><Glyph name={kind === 'available' ? 'textures/items/book_normal' : kind === 'realms' ? 'textures/ui/sidebar_icons/csb_sidebar_icon' : 'textures/blocks/grass_side_carried'} width={9} height={9} scale={scale}/><span className="mc-resource-packs-section__gap"/><span className="mc-resource-packs-section__count">{data.count}</span><span className="mc-resource-packs-section__arrow-gap"/><ResourcePackHeaderToggle expanded={expanded} profile={p.headerImageProfile} scale={scale} disabled={!!(disabled || readOnly)} texture={asset(expanded ? 'textures/ui/minus' : 'textures/ui/plus').url}><Glyph name={expanded ? 'textures/ui/minus' : 'textures/ui/plus'} width={10} height={10} scale={scale} contain={expanded}/></ResourcePackHeaderToggle></span>
+        <span className="mc-resource-packs-section__heading"><span className="mc-resource-packs-section__title">{title}</span><span className="mc-resource-packs-section__fill"/><Glyph name={kind === 'available' ? 'textures/items/book_normal' : kind === 'realms' ? 'textures/ui/sidebar_icons/csb_sidebar_icon' : 'textures/blocks/grass_side_carried'} width={9} height={9} scale={scale}/><span className="mc-resource-packs-section__gap"/><ResourcePackHeaderCount text={data.count} profile={titleVisible ? p.headerTextProfile : undefined} scale={scale} disabled={!!(disabled || readOnly)}/><span className="mc-resource-packs-section__arrow-gap"/><ResourcePackHeaderToggle expanded={expanded} profile={p.headerImageProfile} scale={scale} disabled={!!(disabled || readOnly)} texture={asset(expanded ? 'textures/ui/minus' : 'textures/ui/plus').url}><Glyph name={expanded ? 'textures/ui/minus' : 'textures/ui/plus'} width={10} height={10} scale={scale} contain={expanded}/></ResourcePackHeaderToggle></span>
       </SourceButton>
       {diagnostics?.visible && <div className="mc-resource-packs-section__diagnostic-holder" style={{width: 25 * scale, height: 20 * scale}}><SourceButton indicator width={20} height={20} scale={scale} readOnly={readOnly} disabled={disabled} aria-label={diagnostics.label} onAction={onAction} request={{action: 'ignore', target: 'button.ignore_me', profile, sourceControl: 'tooltip.button', collection: source.collections[kind]}}><span className="mc-resource-packs-section__diagnostic-icons">{diagnostics.anyErrors && <Glyph name="textures/ui/ErrorGlyph" width={9} height={14} scale={scale}/>} {diagnostics.anyWarnings && <Glyph name="textures/ui/Caution" width={9} height={14} scale={scale}/>}</span></SourceButton></div>}
     </div>
@@ -379,12 +385,12 @@ export const ResourcePackManager = forwardRef<HTMLDivElement, ResourcePackManage
       <SourceButton underline width={p.layout.addonLinkSize![0]} height={p.layout.addonLinkSize![1]} scale={scale} readOnly={readOnly} disabled={disabled} onAction={onAction} style={{top: scale}} request={{action: 'addon-link', target: 'button.addonLink', sourceControl: 'addon_link_button', profile}}>{l.addonLink}</SourceButton>
     </div>}
     <Spacer height={2} scale={scale} name="offset_1"/>
-    <ResourcePackSection {...common} kind="selected" headerImageProfile={p.headerImageProfiles?.selected} title={l.selected} titleVisible expanded={b.selectedGridVisible} collection={c.selected} defaultItem={p.defaultItem} diagnostics={{visible: b.selectedAnyExceptions, anyErrors: b.selectedAnyErrors, anyWarnings: b.selectedAnyWarnings, label: l.selectedDiagnostics}}/>
+    <ResourcePackSection {...common} kind="selected" headerImageProfile={p.headerImageProfiles?.selected} headerTextProfile={p.headerTextProfiles?.selected} title={l.selected} titleVisible expanded={b.selectedGridVisible} collection={c.selected} defaultItem={p.defaultItem} diagnostics={{visible: b.selectedAnyExceptions, anyErrors: b.selectedAnyErrors, anyWarnings: b.selectedAnyWarnings, label: l.selectedDiagnostics}}/>
     <Spacer height={6} scale={scale} name="offset_2"/>
-    <ResourcePackSection {...common} kind="available" headerImageProfile={p.headerImageProfiles?.available} title={l.available} titleVisible expanded={b.availableGridVisible} collection={c.available} invalidCollection={c.invalid} noPacks={b.noAvailablePacks} educationEdition={provider.educationEdition} unownedVisible={b.unownedVisible} noPacksText={l.noPacks} toStoreLabel={l.toStore} diagnostics={{visible: b.invalidHasErrors, anyErrors: b.availableAnyErrors, anyWarnings: b.availableAnyWarnings, label: l.availableDiagnostics}}/>
+    <ResourcePackSection {...common} kind="available" headerImageProfile={p.headerImageProfiles?.available} headerTextProfile={p.headerTextProfiles?.available} title={l.available} titleVisible expanded={b.availableGridVisible} collection={c.available} invalidCollection={c.invalid} noPacks={b.noAvailablePacks} educationEdition={provider.educationEdition} unownedVisible={b.unownedVisible} noPacksText={l.noPacks} toStoreLabel={l.toStore} diagnostics={{visible: b.invalidHasErrors, anyErrors: b.availableAnyErrors, anyWarnings: b.availableAnyWarnings, label: l.availableDiagnostics}}/>
     <Spacer height={6} scale={scale} name="offset_3"/>
-    <ResourcePackSection {...common} kind="realms" headerImageProfile={p.headerImageProfiles?.realms} title={l.realms} titleVisible={b.realmsVisible} expanded={b.realmsGridVisible} collection={c.realms} noPacks={b.noRealmsPacks}/>
+    <ResourcePackSection {...common} kind="realms" headerImageProfile={p.headerImageProfiles?.realms} headerTextProfile={p.headerTextProfiles?.realms} title={l.realms} titleVisible={b.realmsVisible} expanded={b.realmsGridVisible} collection={c.realms} noPacks={b.noRealmsPacks}/>
     {b.realmsVisible && <Spacer height={6} scale={scale} name="offset_4"/>}
-    {!provider.educationEdition && <ResourcePackSection {...common} kind="unowned" headerImageProfile={p.headerImageProfiles?.unowned} title={l.unowned} titleVisible={b.unownedVisible} expanded={b.unownedGridVisible} collection={c.unowned} noPacks={b.noUnownedPacks} viewMoreLabel={l.viewMore}/>}
+    {!provider.educationEdition && <ResourcePackSection {...common} kind="unowned" headerImageProfile={p.headerImageProfiles?.unowned} headerTextProfile={p.headerTextProfiles?.unowned} title={l.unowned} titleVisible={b.unownedVisible} expanded={b.unownedGridVisible} collection={c.unowned} noPacks={b.noUnownedPacks} viewMoreLabel={l.viewMore}/>}
   </div>;
 });

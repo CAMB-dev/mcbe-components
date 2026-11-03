@@ -1,3 +1,5 @@
+> 最新计数接入检查点（2026-11-03）：原始TrueType路径已接入实际ResourcePackSection／Manager计数，四类独立配置、状态颜色、按下位移、语义回退、强制颜色与资源释放均验证。实际组件单字条件对照NVIDIA完整RGBA0，软件透明叠加21点残差保留；原生默认整页仍未完成，运行时导出仍290。见[计数API](docs/RESOURCE_PACK_HEADER_TEXT.md)。
+
 > 最新字体接口检查点（2026-11-03）：独立TrueType可变字形路径已通过公开GuiLayer混排／阴影／更新／卸载、两peer安装包、四种默认Vite消费以及源／生产各三尺寸预览。指定原版单字完整画面NVIDIA RGBA0、SwiftShader2；三字形本地XY／UV一致，HOST矩阵仍差1ULP。现268组件＋8数据＋14函数＝290运行时值，完整目标继续进行。见[API与验证](docs/TRUETYPE_TEXT.md)。
 
 > 前阶段字体缓存检查点（2026-11-03）：从原始Classic Ten TTF与固定stb64px／2×2配置生成完整1024²原生缓存，全部RGBA零差；三个数字本地half顶点／UV一致。已提供源码准备工具及只读复算，原版字体不入包。私有单字绘制探针NVIDIA0／SwiftShader2，专用TrueType接口与正常排版仍未接入，目标保持进行中。见[生成工具](docs/CLASSIC_TRUETYPE_CACHE.md)。

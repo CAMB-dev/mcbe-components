@@ -49,10 +49,10 @@ test('gallery exposes the optional image sampler and controlled expanded symbol'
   await expect(page.getByTestId('resource-packs-demo')).toHaveAttribute('data-font-ready','true',{timeout:30000});
   // The full gallery also initializes other source renderers. Wait for this
   // actual request's readiness through cold shader/driver work, not a sleep.
-  await demo.locator('input[type=checkbox]').check();const canvas=demo.locator('.mc-resource-packs-header-image canvas');await expect(canvas).toHaveAttribute('data-render-state','ready',{timeout:15000});
+  await demo.getByRole('switch',{name:'启用标题图标采样'}).check();const canvas=demo.locator('.mc-resource-packs-header-image canvas');await expect(canvas).toHaveAttribute('data-render-state','ready',{timeout:15000});
   const button=demo.locator('.mc-resource-packs-section__header>button');await expect(button).toHaveAttribute('aria-expanded','false');await button.click();await expect(button).toHaveAttribute('aria-expanded','true');await expect(canvas).toHaveAttribute('data-render-state','ready');
   await expect(demo.locator('.mc-resource-packs-section__toggle>.mc-image')).toHaveAttribute('src',/minus/);
-  await demo.locator('input[type=checkbox]').uncheck();await expect(canvas).toHaveCount(0);await expect(demo.locator('.mc-resource-packs-section__toggle>.mc-image')).toHaveCSS('visibility','visible');
+  await demo.getByRole('switch',{name:'启用标题图标采样'}).uncheck();await expect(canvas).toHaveCount(0);await expect(demo.locator('.mc-resource-packs-section__toggle>.mc-image')).toHaveCSS('visibility','visible');
 });
 
 const minusBase=new URL('../.cache/resource-pack-native-minus-study-20261103-01/',import.meta.url);
