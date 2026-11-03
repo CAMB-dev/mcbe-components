@@ -2769,5 +2769,17 @@
     "details": "docs/CONTENT_LOG_QA.md",
     "galleryEvidence": "docs/CONTENT_LOG_QA.md",
     "compatibility": "Chat force-scroll true-to-false preserves reader position; separate source update and force effects"
+  },
+  "classicTrueTypeUnicodeStage": {
+    "libraryRuntimeChanged": false,
+    "components": 275,
+    "runtimeValues": 297,
+    "mappedCharacters": 551,
+    "baseMappedCharacters": 181,
+    "additionalCharacters": 370,
+    "pages": 7,
+    "baseThreeFilesByteIdentical": true,
+    "nativeExtensionCertified": false,
+    "details": "docs/CLASSIC_TRUETYPE_UNICODE_QA.md"
   }
 }

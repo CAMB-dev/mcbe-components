@@ -1,4 +1,6 @@
 declare module 'virtual:mcbeui-game-font' {
+  export const classicTenUnicodeGuiFont: import('../src/gui-truetype-geometry').GuiTrueTypeFont | undefined;
+  export const classicTenUnicodeInfo: {glyphs:number;pages:number;additionalGlyphs:number;nativeExtensionCertified:false} | undefined;
   export const hasGameFont: boolean;
   export const hasClassicTenFont: boolean;
   export const classicTenGuiFont: import('../src/gui-truetype-geometry').GuiTrueTypeFont | undefined;

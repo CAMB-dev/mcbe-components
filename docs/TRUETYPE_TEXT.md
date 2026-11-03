@@ -53,3 +53,7 @@ Classic生成配置将原始packed offsets／advance按8转换，baseline为6.5�
 源展示与生产展示分别在桌面、Pixel7和320px各3／3通过，使用实际准备好的原始缓存，覆盖编辑、不支持字符提示、比例与阴影切换和关闭释放。首轮包检查因示例误写不存在的Input导出失败，第二轮因清单仍写289失败；修正后第三轮完整检查通过。源码准备工具保留原默认三个文件字节不变，`--gui-font --check-only`复算第四个配置也完全一致。原字体、生成图集、编译器与捕获未进入npm。
 
 证据：`.cache/truetype-text-layer-20261103-01/`中的`browser02/03/04.json`、`package01/02/03.log`、`installed01/RESULT.json`、`demo-source01.json`及`demo-built01.json`。原shader源码前缀LF SHA256仍为`e4b5552469d18349d9e4ddc420a66f13b1a66c503b1cfc7af4ba95ef23573238`。本阶段使用保存的原版帧，没有打开Computer Use、Minecraft或PIX。
+
+## 扩展原字库的字符覆盖
+
+准备工具现可用`--all-supported`或`--characters`／`--text-file`生成多页`GuiTrueTypeFont`，无需更换本节的公共API或shader。固定Classic Ten原字体551个实际字符映射均可生成，较基础缓存新增370字符，包含原字体已有的Latin扩展、希腊／西里尔字符和部分标点／货币符号。扩展描述省略缺字占位；其他字体／CJK／emoji仍需宿主提供合适的字库，不会自动伪造或替换。默认256记录的旧缓存继续保持字节。用法、宿主页分组及原生边界见[准备工具](CLASSIC_TRUETYPE_CACHE.md#原字体的其他字符)和[验证](CLASSIC_TRUETYPE_UNICODE_QA.md)。

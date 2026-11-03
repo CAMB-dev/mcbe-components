@@ -59,3 +59,31 @@ python -m unittest discover -s tests -p classic_truetype_preparation_test.py
 后续独立TrueType接口已完成度量／顶点／shader接入及公开混排验证，见[新阶段](TRUETYPE_TEXT.md)。普通宿主排版、其他缓存范围／版本及跨后端灰度验证仍未完成。既有Unicode位图SwiftShader38点残差属于另一采样路径，不能借此宣布解决。
 
 证据位于`.cache/classic-truetype-raster-20261103-01/`。本阶段没有打开Computer Use、游戏、PIX或采集新原生帧；沿用保存的参考。静态程序导入／字符串检查不能证明实际引擎使用哪个库，此处只宣称这个固定实现的完整产物等价。
+
+## 原字体的其他字符
+
+可选Unicode扩展保持前三个基础文件逐字节不变，不改变原256记录／原生R28基础图集的资格。固定原字体实际映射551个字符：基础范围内181个，新增370个。`--all-supported`生成七张完整1024²图集和551条GUI字形记录；字符映射数量包含字体自身的别名／空白，不代表551种不同可见轮廓。
+
+```powershell
+python scripts/prepare-classic-truetype.py "PATH/TO/minecraft-ten.ttf" --compiler "PATH/TO/tcc.exe" --all-supported --output .cache/local-fonts/classic-ten-unicode64
+python scripts/prepare-classic-truetype.py "PATH/TO/minecraft-ten.ttf" --compiler "PATH/TO/tcc.exe" --all-supported --output .cache/local-fonts/classic-ten-unicode64 --check-only
+
+# 只加入实际需要且原字体确实映射的字符；自动生成gui-font.json。
+python scripts/prepare-classic-truetype.py "PATH/TO/minecraft-ten.ttf" --compiler "PATH/TO/tcc.exe" --characters "ĀΩЖ€" --output .cache/local-fonts/my-ten-subset
+python scripts/prepare-classic-truetype.py "PATH/TO/minecraft-ten.ttf" --compiler "PATH/TO/tcc.exe" --text-file ./my-ui-copy.txt --output .cache/local-fonts/my-ten-text
+```
+
+`--characters`和`--text-file`可重复，字符去重并按码点排序；不进行Unicode归一化或字体替代。CR/LF作为排版分隔符，其他控制符／孤立surrogate拒绝。每个UTF-8文件最多1MiB，累计输入最多1,048,576个码点、最多4096种字符。显式要求原字体没有的汉字、emoji等会失败，不创建输出目录。该字体不是完整CJK字体。
+
+扩展模式的`gui-font.json`只保留实际映射的字符，省略旧基础表中75个缺字占位；默认旧模式仍保留原256记录及stb共享.notdef行为。`--all-supported`没有为不存在的字符伪造字形，也没有恢复游戏的自动fallback路由。
+
+新文件包括`atlas-unicode-0001.png`等完整图集、`packed-unicode.json`和`unicode-cache.json`。清单链接全部新PNG、原始packed记录和GUI描述的SHA。基础`atlas.png`、`packed-chars.json`、`font-cache.json`不变。新页按排序后的64字符组使用同一未改动stb、64px／2×2／padding1生成，保留覆盖值到RGBA四通道；页顺序和分组是显式宿主策略，**不是已恢复的原生Unicode缓存布局**。名义行距8和baseline6.5沿用既有有限profile，尚未恢复所有语言的leading、kerning、整形或原生fallback。
+
+准备默认扩展目录后重启Vite或重建，`#gui-layer`的“Original Classic TrueType atlas”里可切换“Extended original glyphs”。只准备新缓存时会直接使用它；本地未准备时开关不可用。缓存／TTF／生成图集仍仅在忽略目录和本地预览中，均不进入Git或npm。库运行时／公共类型／275组件与297值保持不变。详见[Unicode扩展验证](CLASSIC_TRUETYPE_UNICODE_QA.md)。
+
+```powershell
+python -m unittest discover -s tests -p 'classic_truetype_*test.py'
+node --test tests/classic-truetype-demo-cache.node.test.mjs
+```
+
+原字体与编译器不可用时，Python源集成检查会明确skip；它们不会用替代字体冒充原始资格。本阶段实际原字体／编译器运行的结果另见验证记录。

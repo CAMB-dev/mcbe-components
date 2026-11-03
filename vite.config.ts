@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, normalizePath } from 'vite';
+import {classicTenUnicodeModule} from './scripts/classic-truetype-demo-cache';
 
 // An optional font from the user's own game install. Never part of the npm library.
 const rawFontPath = fileURLToPath(new URL('./.cache/local-fonts/Mojangles.ttf', import.meta.url));
@@ -119,6 +120,7 @@ export default defineConfig({
         ? `import runeUrl from ${JSON.stringify(normalizePath(runePath) + '?url')}; export const runeAtlasUrl = runeUrl;`
         : 'export const runeAtlasUrl = undefined;';
       const parts = [runeModule];
+      parts.push(classicTenUnicodeModule(fileURLToPath(new URL('./.cache/local-fonts/classic-ten-unicode64/',import.meta.url))));
       // Optional source-generated cache is demo-only, with whole-file identity.
       const tenGuiFiles = {
         'atlas.png': '9402a188af40fd8a5521790d11e664656717ea0f655b79fb5b958c050b5d469b',
