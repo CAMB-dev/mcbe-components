@@ -1,3 +1,5 @@
+> 最新像素校准（2026-11-03，合成台组合候选）：当前A整帧逐字节重现旧D；E的完整RGBA残差由3,548降到2,097，含1,453个解决和2个新增误差，默认模型未改。独立标准库PNG复算和六项工具检查通过。仍为268组件／287运行时值，完整原生目标继续进行。见 [组合校准](docs/CRAFTING_MODEL_COMPOSITION_QA.md)。
+
 > 最新检查点（2026-11-03，World整页组合）：World 设置组合现提供 `WorldSettingsScreen`、`WorldServerSettings`、`WorldCloudSettings`、`WorldDebugSettings`，覆盖三个源别名、固定内容挂载、九种服务器工厂和独立32高提交、Cloud5及Debug7／150选项。当前源码268组件＋6数据＋13函数＝287运行时值；Classroom原始实现缺失，必须由外部模块接入，原生整页像素仍未完成。见 [整页API](docs/WORLD_SETTINGS_SCREEN.md) 与 [本阶段验证](docs/WORLD_SETTINGS_SCREEN_QA.md)。
 
 > 最新检查点（2026-11-03，World具名字段阶段）：当前实际 React18.3.1／19.3.1 包为264组件＋6数据＋13函数＝283运行时值。World Game69／Multiplayer8／World导航三部件、15kind共用字段、显式source-image材质路径已提供。Node108、普通交互74、修复后材质14、实际安装开发／生产四组合和生产展示6项各自通过；完整WorldSettingsScreen及原生字体／默认布局／整页像素仍未完成。 真实安装四组合与16对完整画面零差通过。Computer Use未找到正在运行的游戏，无新native采集并已关闭；完整目标保持进行中。见 [本阶段记录](docs/WORLD_SETTINGS_FIELDS_QA.md)。

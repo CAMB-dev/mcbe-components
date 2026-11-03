@@ -1,3 +1,18 @@
+# Current Crafting combination calibration checkpoint — 2026-11-03
+
+Goal ACTIVE / incomplete. Branch codex/crafting-source-composition-20261103 based onb3b38c297cc739fd6b9e0c30f7ce6df4d2ada2fe. Normal authorized origin HEAD:main only, never force. Current stage .cache/crafting-model-combined-20261103-01/FINAL.json sealscommit/remote/servicesafterpush.
+
+- No src/demo/package manifest/runtime/default model changes; still268components/287runtime. Two frozen ordinary-input arms: A=current replay of historicalD (14whole-original atlas+threecompletecuboid stairs), E=onlyoldPaneB thinZbox+facebinding input. Bothfrozen beforeGPU; fifthdeltafaceMaterials plusfourboxcoordinates. Privatefixtures source copiedwithsame normalAPI; no captureVB/IB/MVP/texturecrop production.
+- 14historicalsourcepins drifted afteroldD; recordretained, current1174source/resource/harnesspins frozen. AactualwholeRGBA exactlyoldDsha a09c800449f075fb84e58723f47e97372d9e415ec2b8b4b4e7df95993386727a,3548diff, beforeEexecutes. Esha46754c2d45e0428278a1c56493073df637ccc90aeb6adc7b526dabb8eca931d3,2097diff. ActualNVIDIA RTX3050/ANGLE D3D11/DPR1; bothnativecopycontrols0; runtimeerrors0; before/afterpinsunchanged. SourceOwnerbrowser/server5495finallyclosed, user4173PID217140preserved. NoComputerUse/nativegame/PIX opened.
+- IndependentstdlibPNG CRC/deflate/all5rowfilters CPUredecode02 agreesfull3,603,140each. A→E2188pixelschanged:1453resolved,2newlywrong,733bothwrongchanged; pane2868→1417; whole3,595,040pixelcomplement A/E byte-identical butstill680native residuals. Enotuniformimprovement/notexact/defaultpromotion. HistoricalPaneB1416separatefromE1417, nofalseadditivity. No pixelmask/tolerance/UV/golden edits.
+- New scripts/compare-crafting-candidates.py audit existing frozenprivatecapture study, noPIL/numpy/deps/browser needed. SixPython testsPASS, fivePNGjsfrozenencoding variants +CRC/truncation/format/budget/scoringguards. ActualprivatefixtureTSC0. No runtime/package browser checks re-counted asnewexecution; source/main packageunchangedfromb3.
+- Firstexecutor synchronouschild blockedVite eventloop andtimedout; failurekept, execute02 async reruns samefrozeninputs. Both oldD/PaneB evidence untouched. Docs CRAFTING_MODEL_COMPOSITION_QA.md /CRAFTING_IMAGE_QA.md /README /catalog /GOALupdated. Finaldoc-onlypackage runtime/licenseidentity sealedseparately, no registry publish.
+- Bookstatuscorrection: Book label-stage mixed3614isNOTlateststaticidleprofile. Read .cache/book-body-final-01/RESULT.json: empty/source0,mixed/source0 andbaseline3614, namedoriginalfont/NVIDIA/idleprofile. Thisturn onlyreviewed oldproof, no freshBookcertification; editing/defaultfonts/otherstates stillunqualified.
+
+Next: qualify remaining model/projection/UV/texture/lighting rules and held-out GUI4/native states independently; Ehas1417pane+680otherpixelsremaining. Existing magnifierGUI4/5 andfont SW38/nativeNVIDIA single-glyph0 boundaries remain. Do not fit1.2scale/offset/UV to onecaptured mesh orpromoteobservedatlasplacements into enginedefaults withoutindependent normal-source/holdout evidence. WorldClassroom originals/provider and whole-native/defaultlayout/font stillmissing. Goalnotcomplete fromcounts ordiagnosticimprovement.
+
+---
+
 # Current World settings composition checkpoint — 2026-11-03
 
 Goal ACTIVE / incomplete. Branch codex/world-settings-composition-20261103 based on3f160347f421f8e87e1c827e7d417558c18df905. Normal authorized origin HEAD:main push only, never force. Final commit/push, documentation tar identity and service closure sealed in .cache/world-settings-screen-qa-20261103-01/FINAL.json.

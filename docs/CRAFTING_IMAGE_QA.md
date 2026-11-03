@@ -139,6 +139,8 @@ v03至v05 已实际比较两种完整2570×1402画面，每种均计入3,603,140
 
 v03完整结果保存在 `.cache/crafting-native-comparison-01/production-close-actual-01/`，v04在 `.cache/crafting-native-comparison-02/FINAL.json`，v05在 `.cache/crafting-native-comparison-03/FINAL.json`，首轮残差与原图不删除。v04修正嵌套缩放采样和工具条透明边框；v05修正选中分类层级和原JSON大写White对应的平色材质。该材质是正常2×2全白RGBA常量，不是新增原PNG或捕获贴图。剩余5个放大镜像素、4个标题像素全部保留，不以容差删除。固定的原裁剪 / 偶数原点 / 整帧字体对照保留相同4点，因此未采用裁剪对齐作为修复；image VS的两种同义表达式也保留相同5／4点，未据此修改内核。旧 [CRAFTING_SCREEN_QA.md](CRAFTING_SCREEN_QA.md) 的23项属于历史 CSS / 局部原PNG合同。
 
+后续组合实验已实际执行：当前完整A重现旧D的3,548残差，加入原PaneB后E为2,097；有1,453旧误差变精确、2个新增误差，其他单元A/E逐字节不变。该组合仍未成为默认或零差认证，见 [模型组合校准](CRAFTING_MODEL_COMPOSITION_QA.md)。上文“未组合”保留各历史实验当时的身份。
+
 ### GUI4 的有限原生对照
 
 四个新GUI4 capture已分别确认实际UI RT及八次完整pre/post读取，raw→PNG逐行字节与原件身份独立复验，pre全透明、post alpha为102/255。这是来源认证；其中只有下面两个状态执行了产品A/B比较。compact是在创造模式采集，不能称为生存模式保留场景；filter-empty为生存模式。

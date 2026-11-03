@@ -2324,5 +2324,28 @@
     "scopedServerAxeReports": 0,
     "scopedCloudAxeReports": 0,
     "wholePageNativeCertified": false
+  },
+  "craftingModelCompositionStage": {
+    "status": "FROZEN_COMBINATION_EXECUTED_NOT_EXACT",
+    "componentCountChanged": false,
+    "libraryRuntimeChanged": false,
+    "defaultModelsChanged": false,
+    "components": 268,
+    "runtimeValues": 287,
+    "framePixels": 3603140,
+    "currentBaselineHistoricalDByteExact": true,
+    "AChangedRGBAPixels": 3548,
+    "EChangedRGBAPixels": 2097,
+    "alphaDifferentPixels": 0,
+    "resolvedPixels": 1453,
+    "newlyDifferentPixels": 2,
+    "bothWrongChangedPixels": 733,
+    "outsidePaneAtoEChangedPixels": 0,
+    "sourcePins": 1174,
+    "actualBackend": "NVIDIA RTX3050 ANGLE D3D11 DPR1",
+    "independentStdlibPNGRecompute": true,
+    "auditUnitTests": 6,
+    "nativeWholeGUI": false,
+    "details": "docs/CRAFTING_MODEL_COMPOSITION_QA.md"
   }
 }

@@ -834,6 +834,8 @@ Book 的 layout.labelRaster 接受调用者分页位图字体，分别绘制页�
 
 Book 的 `layout.bodyRaster` 可在页面空闲时用原字页绘制正文，聚焦、选区、输入法组合和不支持的排版返回真实输入框。准备原字体及验证范围见 [Book body raster QA](docs/BOOK_BODY_RASTER_QA.md)。
 
+合成台模型组合候选已做完整原生目标校准：相对旧D基线，差异由3,548降到2,097像素，同时保留2个新增误差。新增标准库离线复算工具，不修改默认渲染或宣称整页零差；见 [组合实验及范围](docs/CRAFTING_MODEL_COMPOSITION_QA.md)。
+
 
 ## 外部服务器表单
 
