@@ -176,7 +176,7 @@ function ServerFormFrame({ kind, title, size = [225, 200], scale = 2, disabled =
   const titleId = useId();
   return <section {...props} ref={scope.attach} className={['mc-server-form', `mc-server-${kind}-form`, className].filter(Boolean).join(' ')} data-server-form={kind} data-disabled={disabled} data-readonly={readOnly}
     aria-labelledby={props['aria-label'] ? undefined : props['aria-labelledby'] ?? titleId}
-    style={{ '--mc-server-u': `${scale}px`, width: size[0] * scale, height: size[1] * scale,
+    style={{ '--mc-server-u': `${scale}px`, '--mc-range-scale':scale, width: size[0] * scale, height: size[1] * scale,
       '--mc-server-frame': `url(${JSON.stringify(commandBlockImageAssets.dialog_background_hollow_3.url)})`, '--mc-server-control': `url(${JSON.stringify(jigsawImageAssets.control.url)})`,
       '--mc-server-close': `url(${JSON.stringify(bookAssets.close_button_default.url)})`, '--mc-server-close-hover': `url(${JSON.stringify(bookAssets.close_button_hover.url)})`, '--mc-server-close-pressed': `url(${JSON.stringify(bookAssets.close_button_pressed.url)})`,
       '--mc-server-divider': `url(${JSON.stringify(serverFormImageAssets.list_item_divider_line_light.url)})`, '--mc-server-popup-width': `${Math.max(0, size[0] - 31) * scale}px`, ...style } as CSSProperties}

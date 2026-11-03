@@ -1,5 +1,5 @@
 import {
-  forwardRef, useCallback, useEffect, useId, useRef, useState,
+  forwardRef, useCallback, useEffect, useId, useMemo, useRef, useState,
 } from 'react';
 import type {
   ButtonHTMLAttributes, CSSProperties, FieldsetHTMLAttributes, HTMLAttributes,
@@ -11,6 +11,9 @@ import { ComboboxBase } from './combobox';
 import { GuiIcon } from './gui-icon';
 import { lockModalScroll as lockScroll } from './modal-scroll-lock';
 import { useClassicLayoutEffect, useClassicNodeRef } from './classic-screen-lifecycle';
+import {ClassicSkin} from './classic-skin';
+import {resourcePackAssets} from './resource-pack-assets';
+import {sliderRatio,sliderValue} from './slider-value';
 
 function cx(...names: (string | false | undefined)[]) { return names.filter(Boolean).join(' '); }
 function useValue<T>(value: T | undefined, defaultValue: T, onChange?: (value: T) => void) {
@@ -172,16 +175,27 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
 }, ref) {
   const autoId = useId(); const id = givenId ?? autoId;
   const [current, setCurrent] = useValue(value, defaultValue ?? min, onValueChange);
-  const safeMax = Math.max(min, max); const bounded = Math.min(safeMax, Math.max(min, current));
-  const percentage = safeMax > min ? ((bounded - min) / (safeMax - min)) * 100 : 0;
+  const plan=useMemo(()=>sliderValue(current,min,max,props.step),[current,min,max,props.step]);
+  const[input,attach]=useClassicNodeRef<HTMLInputElement>(ref);
+  const[observed,setObserved]=useState<{plan:typeof plan;value:number}|null>(null);
+  const bounded=observed?.plan===plan?observed.value:plan.value,safeMax=plan.max,ratio=sliderRatio(bounded,min,safeMax);
+  // Browser sanitization/serialization can differ at extreme precision. Read
+  // the real range after every commit, before paint; never emulate an engine
+  // with special values or replace its native interaction/form behavior.
+  useClassicLayoutEffect(()=>{const value=input.current?.valueAsNumber;if(value!==undefined&&Number.isFinite(value)&&(observed?.plan!==plan||observed.value!==value))setObserved({plan,value});});
+  const percentage=ratio*100,formatted=formatValue(bounded);
   return <div className={cx('mc-field', 'mc-slider', className)}>
-    <div className="mc-slider__heading"><label htmlFor={id}>{label}</label><output htmlFor={id}>{formatValue(bounded)}</output></div>
+    <div className="mc-slider__heading"><label htmlFor={id}>{label}</label><output htmlFor={id}>{formatted}</output></div>
     <div className="mc-range-shell" data-disabled={props.disabled || undefined}
-      style={{ '--mc-range-fill': `${percentage}%`, '--mc-range-ratio': percentage / 100 } as CSSProperties}>
+      style={{ '--mc-range-fill': `${percentage}%`, '--mc-range-ratio': ratio,
+        '--mc-range-fade':`url(${JSON.stringify(resourcePackAssets['textures/ui/slider_locked_transparent_fade'].url)})` } as CSSProperties}>
       <span className="mc-range-track" aria-hidden="true"><span className="mc-range-rail"/><span className="mc-range-fill"/></span>
-      <span className="mc-range-thumb" aria-hidden="true"/>
-      <input {...props} ref={ref} type="range" id={id} min={min} max={safeMax} value={bounded} className="mc-range"
-        aria-valuetext={formatValue(bounded)} style={style}
+      <span className="mc-range-thumb" aria-hidden="true">
+        <span className="mc-range-thumb__indent"><ClassicSkin asset={resourcePackAssets['textures/ui/slider_button_indent']} width={10} height={16} scale={1} baseClass="mc-range-skin"/></span>
+        <span className="mc-range-thumb__locked"><ClassicSkin asset={resourcePackAssets['textures/ui/slider_button_locked']} width={10} height={16} scale={1} baseClass="mc-range-skin"/><span className="mc-range-thumb__fade"/></span>
+      </span>
+      <input {...props} ref={attach} type="range" id={id} min={min} max={safeMax} value={plan.raw} className="mc-range"
+        aria-valuetext={formatted} style={style}
         onChange={event => { setCurrent(event.currentTarget.valueAsNumber); onChange?.(event); }}/>
     </div>
   </div>;

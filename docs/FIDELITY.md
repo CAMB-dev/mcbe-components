@@ -2,6 +2,10 @@
 
 主要基准为 Minecraft: Bedrock Classic / JSON UI；当前死亡页另按安装版实际使用的 HTML UI 分支实现，显式保留旧 Classic 配置。当前已有可独立复验的控件表面和字体像素证据，整页游戏画面对照仍在进行中。
 
+## 当前检查点：共享Slider
+
+原版按下／锁定材质、灰色覆盖及多尺度组合已接入。当前110项具名回归、16个完整原图Web平面和700个挂载数值域已验证；普通状态和字体阴影策略不变，原生完整游戏界面仍未认证。详见[SLIDER_QA.md](SLIDER_QA.md)。
+
 ## 当前检查点：Anvil普通DOM失焦名称
 
 产品04采用源clipper /右锚min100% label、浏览器条件normal子行与unsafe center；不按font名 /字符offset拟合，真input继续处理focus /selection /IME，React name值独占失焦装饰文本。三font短值原型pair0与ClassicLong改善不等于产品完整native通过，LocalLong scroll方案A反而优于C的实测也保留。
@@ -127,7 +131,7 @@ UI 原始对照图缓存于忽略目录 `.cache`。97 个重建皮肤的来源�
 | Tabs | 常态选中为灰色凹陷；hover / focus 才变绿；选中标签下移 2px |
 | Combobox | 30 游戏像素高触发器、原始箭头；未选中 #6e6e6e、已选中 #4a4a4a、活动项 #1e7a00；活动与已提交选择独立；方形 radio；展开层越过裁剪 |
 | ItemSlot | 改用 common.container_item 的 cell_image，36×36 槽位、32×32 物品区。该 PNG 为 10×10，但逻辑 base_size 为 5×5；源 slice=2、显示边宽=2px。选中用蓝色 recipe_book_touch_cell_selected；悬停用 80% highlight_slot，位于物品图下；键盘焦点用 focus_border_white。0 为空、1 隐藏角标，数量采用硬边阴影 |
-| Slider | 原始灰色 / 绿色拇指表面；整个 track 和 fill 组合布局尚未独立逐像素验收 |
+| Slider | 原始默认／悬停／按下／锁定表面与独立50%灰色覆盖；16张完整轨道／填充／拇指Web平面105,696 RGBA像素零差，700个挂载数值域保持input／文字／ARIA同步。原生布局、状态绑定与完整游戏画面未认证，见[验证范围](SLIDER_QA.md) |
 | Panel | common.dialog_background_opaque 16×16、slice=4；8px 九宫格、浅灰底与阶梯倒角；inset 采用 edit_box_indent；文字按浅灰底使用 #4c4c4c |
 | Dialog | common.dialog_background_hollow_3 18×33，九宫格 [left=8, top=23, right=8, bottom=8]；GUI 2 的标题区域 46px、侧边 16px；#090909 内部，50% 黑色遮罩；标题采用原始 [9,9] 游戏像素偏移；关闭命中区 42×42、图像 30×30，default / hover / pressed 使用原始三张皮肤 |
 | Progress | common.progress_bar 的 5 游戏像素高灰色纹理；GUI 2 高 10px。完整宽度的填充纹理按进度裁切，不把填充纹理缩到百分比宽度；Web 实现按 2 CSS px 向下取整裁切边界。空、半满、全满、小数和窄屏均有独立原图合成对照 |

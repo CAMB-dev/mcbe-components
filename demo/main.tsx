@@ -388,6 +388,8 @@ function App() {
             <Separator/><Checkbox label="Show coordinates" checked={coordinates} onChange={event => setCoordinates(event.target.checked)}/>
             <RadioGroup label="Default game mode" name="gamemode" orientation="horizontal" defaultValue="survival" options={[{ value: 'survival', label: 'Survival' }, { value: 'creative', label: 'Creative' }]}/>
             <Slider label="Render distance" min={4} max={32} value={renderDistance} onValueChange={setRenderDistance} formatValue={value => `${value} chunks`}/>
+            <Slider label="Volume · 20% increments" min={0} max={100} step={20} defaultValue={50} formatValue={value => `${value}%`}/>
+            <Slider label="Simulation distance · locked" min={4} max={32} defaultValue={12} disabled formatValue={value => `${value} chunks`}/>
           </div>
         </Example>
       </div>

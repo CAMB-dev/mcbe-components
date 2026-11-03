@@ -517,7 +517,10 @@
       },
       {
         "name": "Slider",
-        "status": "implemented"
+        "status": "implemented",
+        "validation": "source_regression110_new20_matrix700_png16_package_react18_19_default_vite4_source12_built12_native_unqualified",
+        "details": "docs/SLIDER_QA.md",
+        "fidelity": "source_material_states_web_planes_exact_mounted_native_input_aligned_engine_providers_unqualified"
       },
       {
         "name": "TextField",
@@ -1932,7 +1935,7 @@
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "auto_save_info_272_294_source_package_installed_built_pass_native_unqualified",
+    "publicationState": "slider_source_272_294_source_package_installed_built_pass_native_unqualified",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
