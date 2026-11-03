@@ -1891,12 +1891,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 289,
+    "runtimeValues": 290,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "classic_pane_calibration_268_289_package_installed_built_pass_native_incomplete",
+    "publicationState": "truetype_text_268_290_package_installed_built_pass_native_incomplete",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
@@ -1919,7 +1919,8 @@
       "layoutGuiText",
       "layoutGuiModel",
       "createGuiCuboidModel",
-      "layoutSettingsFrame"
+      "layoutSettingsFrame",
+      "layoutGuiTrueTypeText"
     ],
     "calibratedModelProjectionData": [
       "classicBlockModelCalibration",
@@ -2618,5 +2619,28 @@
     "pythonGuardTests": 6,
     "allFontsOrLayoutsCertified": false,
     "details": "docs/CLASSIC_TRUETYPE_CACHE.md"
+  },
+  "trueTypeTextStage": {
+    "status": "PUBLIC_TRUETYPE_ROUTE_PACKAGE_INSTALLED_PREVIEWS_PASS_NATIVE_INCOMPLETE",
+    "components": 268,
+    "runtimeValues": 290,
+    "publicFunction": "layoutGuiTrueTypeText",
+    "commandKind": "truetype",
+    "sourceLocalGlyphsCompared": 3,
+    "localXYUVDifferentFields": 0,
+    "hostMvpDifferentFields": 1,
+    "nativeSingleGlyphRgbaDifferentPixels": 0,
+    "softwareSingleGlyphRgbaDifferentPixels": 2,
+    "nativeBeforeBackdrop": true,
+    "originalFontDistributed": false,
+    "allFontsOrLayoutsCertified": false,
+    "details": "docs/TRUETYPE_TEXT.md",
+    "sourceBrowserCases": 4,
+    "geometryGuardTests": 5,
+    "pythonPreparationGuardTests": 7,
+    "installedDefaultViteCases": 4,
+    "sourcePreviewCases": 3,
+    "builtPreviewCases": 3,
+    "preparedCacheOptionalGuiFont": true
   }
 }

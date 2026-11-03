@@ -8,6 +8,7 @@ import type { GuiImageBackground, GuiImageTexture } from './gui-image-webgl';
 import { layoutSourceGuiLayer, renderGuiLayer } from './gui-layer';
 import type { GuiLayerDraw, GuiLayerGeometryCommand, GuiLayerLayout, GuiLayerLayoutOptions, GuiLayerRenderOptions, GuiSpriteGeometry } from './gui-layer';
 import type { GuiTextGeometry } from './gui-text-geometry';
+import type { GuiTrueTypeGeometry } from './gui-truetype-geometry';
 import type { GuiModelGeometry } from './gui-model-geometry';
 import type { GuiEntityGeometry, GuiEntitySource } from './gui-entity-geometry';
 import { validateGuiTextureAtlasLayout } from './gui-texture-atlas';
@@ -20,7 +21,8 @@ export type GuiLayerCommand =
   | ({ kind: 'sprite'; texture: Source } & GuiSpriteGeometry)
   | ({ kind: 'model'; textures: Readonly<Record<string, Source>> } & GuiModelGeometry)
   | ({ kind: 'entity'; texture: LeafSource } & GuiEntityGeometry)
-  | ({ kind: 'text'; pages?: ReadonlyMap<number, LeafSource> } & GuiTextGeometry);
+  | ({ kind: 'text'; pages?: ReadonlyMap<number, LeafSource> } & GuiTextGeometry)
+  | ({ kind: 'truetype'; pages?: ReadonlyMap<number, LeafSource> } & GuiTrueTypeGeometry);
 export interface GuiLayerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, 'children' | 'width' | 'height' | 'onError'>, Omit<GuiLayerLayoutOptions, 'commands'> {
   commands: readonly GuiLayerCommand[];
   background?: GuiImageBackground;
@@ -38,7 +40,7 @@ interface SourceUse { source: Source; size?: readonly [number, number]; upload: 
 type Binding = { kind: 'image' | 'sprite'; source: number }
   | { kind: 'entity'; source?: number }
   | { kind: 'model'; textures: readonly (readonly [string, number])[] }
-  | { kind: 'text'; pages: readonly (readonly [number, number])[] };
+  | { kind: 'text' | 'truetype'; pages: readonly (readonly [number, number])[] };
 interface Request {
   key: number;
   descriptor: string;
@@ -187,14 +189,21 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
         }
         bindings.push({ kind: 'model', textures });
       } else {
-        const { text, font, origin, fontScale, sampling, shader, color, tint, hudOpacity, shadow, scissor } = command;
-        const glyphs: typeof font.glyphs = Object.fromEntries([...new Set([...text.replace(/\r\n?/g, '\n')].filter(character => character !== '\n'))].map(character => {
-          const g = font.glyphs[character]!;
-          return [character, { page: g.page, x: g.x, y: g.y, width: g.width, height: g.height, advance: g.advance, offsetX: g.offsetX, offsetY: g.offsetY }];
-        }));
-        shapes.push({ kind: 'text', text, font: { pages: [...font.pages], pageSizes: [...font.pageSizes], cellHeight: font.cellHeight, lineHeight: font.lineHeight, glyphs }, origin, fontScale, sampling, shader, color, tint, hudOpacity, shadow, scissor });
+        const { text, font, origin, sampling, color, tint, hudOpacity, shadow, scissor } = command;
+        const used = [...new Set([...text.replace(/\r\n?/g, '\n')].filter(character => character !== '\n'))];
+        if (command.kind === 'truetype') {
+          const glyphs = Object.fromEntries(used.map(char => { const g = command.font.glyphs[char]!;
+            return [char, { page: g.page, atlasRect: [...g.atlasRect] as typeof g.atlasRect, offset: [...g.offset] as typeof g.offset, size: [...g.size] as typeof g.size, advance: g.advance }]; }));
+          shapes.push({ kind: 'truetype', text, font: { pages: [...font.pages], pageSizes: [...font.pageSizes], lineHeight: font.lineHeight, glyphs },
+            origin, projectionScale: command.projectionScale, originQuantization: command.originQuantization, sampling, color, tint, hudOpacity, shadow, scissor });
+        } else {
+          const glyphs = Object.fromEntries(used.map(char => { const g = command.font.glyphs[char]!;
+            return [char, { page: g.page, x: g.x, y: g.y, width: g.width, height: g.height, advance: g.advance, offsetX: g.offsetX, offsetY: g.offsetY }]; }));
+          shapes.push({ kind: 'text', text, font: { pages: [...command.font.pages], pageSizes: [...command.font.pageSizes], cellHeight: command.font.cellHeight, lineHeight: font.lineHeight, glyphs }, origin,
+            fontScale: command.fontScale, sampling: command.sampling, shader: command.shader, color, tint, hudOpacity, shadow, scissor });
+        }
         const entry = layout.commands[index]!;
-        if (entry.kind !== 'text') throw new Error('GUI source layout order mismatch.');
+        if ((entry.kind !== 'text' && entry.kind !== 'truetype') || entry.kind !== command.kind) throw new Error('GUI source layout order mismatch.');
         if (command.pages) {
           if (typeof command.pages.get !== 'function' || typeof command.pages.has !== 'function' || typeof command.pages.entries !== 'function'
             || !Number.isSafeInteger(command.pages.size) || command.pages.size > 256) throw new RangeError('Font page overrides require a bounded ReadonlyMap.');
@@ -208,7 +217,7 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
           const source = command.pages?.has(page) ? command.pages.get(page)! : font.pages[page]!;
           pages.push([page, uses.length]); uses.push({ source, size: [font.pageSizes[page]!, font.pageSizes[page]!], upload: true, leafOnly: true });
         }
-        bindings.push({ kind: 'text', pages });
+        bindings.push({ kind: command.kind, pages });
       }
     }
     const background = options.background;
@@ -232,6 +241,7 @@ function prepare(previous: Request | undefined, options: GuiLayerProps): Request
         ? (options.commands[index] as Extract<GuiLayerCommand, { kind: 'entity' }>).texture : snapshots[binding.source]!.source as LeafSource };
       if (shape.kind === 'model' && binding.kind === 'model') return { ...shape, textures: Object.fromEntries(binding.textures.map(([key, source]) => [key, snapshots[source]!.source])) };
       if (shape.kind === 'text' && binding.kind === 'text') return { ...shape, pages: new Map(binding.pages.map(([page, source]) => [page, snapshots[source]!.source as LeafSource])) };
+      if (shape.kind === 'truetype' && binding.kind === 'truetype') return { ...shape, pages: new Map(binding.pages.map(([page, source]) => [page, snapshots[source]!.source as LeafSource])) };
       throw new Error('GUI snapshot order mismatch.');
     });
     const clear = background?.kind === 'texture' ? { ...background, texture: snapshots[snapshots.length - 1]!.source as PixelTexture }

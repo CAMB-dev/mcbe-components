@@ -68,5 +68,18 @@ class ClassicTrueTypePreparation(unittest.TestCase):
         self.assertEqual(hashlib.sha256((ROOT/'scripts/vendor/stb/stb_truetype.h').read_bytes()).hexdigest(),prepare.HEADER_SHA)
         self.assertIn('Permission is hereby granted',(ROOT/'scripts/vendor/stb/LICENSE.txt').read_text(encoding='utf-8'))
 
+    def test_optional_gui_metrics_keep_default_three_files_byte_identical(self):
+        alpha=bytes(1024*1024);rows=self.records()
+        rows[48].update(rect=[769,1,821,75],offset=[2.25,-36.75],offset2=[28.25,0.25],advance=31.5)
+        with patch.object(prepare,'ALPHA_SHA',hashlib.sha256(alpha).hexdigest()):
+            base=prepare.make_files(alpha,rows);extended=prepare.make_files(alpha,rows,True)
+        self.assertEqual(set(extended),set(base)|{'gui-font.json'})
+        for name in base:self.assertEqual(base[name],extended[name])
+        font=json.loads(extended['gui-font.json'])
+        self.assertEqual(font['glyphs']['0'],{'page':0,'atlasRect':[769,1,52,74],
+            'offset':[.28125,1.90625],'size':[3.25,4.625],'advance':3.9375})
+        self.assertEqual((font['pageSizes'],font['lineHeight']),([1024],8))
+        self.assertEqual(len(font['glyphs']),256)
+
 
 if __name__=='__main__':unittest.main()

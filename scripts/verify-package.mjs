@@ -123,7 +123,7 @@ import * as ui from 'mcbeui';
 const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
 const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames','npcSkinNames','npcAppearanceOptions','classicBlockModelCalibration','classicPaneModelCalibration'];
 components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage','BookPageTurnButton','SignTextSurface','SignEditor','JigsawEditor','JigsawPriorityFields','CommandBlockEditor','CommandInput','CommandOutputPanel','StructureEditor','XYZVectorInput','ServerActionForm','ServerCustomForm','NpcPortrait','NpcSkinPicker','NpcActionEditor','NpcDialogue','NpcEditor');
-const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity','layoutCredits','layoutSettingsFrame'];
+const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','layoutGuiTrueTypeText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity','layoutCredits','layoutSettingsFrame'];
 components.push('EmoteWheel','EmoteSlotPreview','EmoteWheelScreen');
 components.push('DocumentViewer','DocumentHeading','DocumentParagraph');
 components.push('PlayerPermissions','PermissionLevelSelect','PermissionToggleRow','PermissionPlayerRow');
@@ -153,8 +153,8 @@ components.push('SettingsFrame','SettingsNavigation','SettingsFields');
 components.push('WorldGameSettings','WorldMultiplayerSettings','WorldSettingsNavigation','WorldCloudSettings','WorldDebugSettings','WorldServerSettings','WorldSettingsScreen');
 assert.equal(components.length,268);
 assert.equal(dataExports.length,8);
-assert.equal(rendererFunctions.length,13);
-assert.equal(Object.keys(ui).length,289);
+assert.equal(rendererFunctions.length,14);
+assert.equal(Object.keys(ui).length,290);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -433,6 +433,16 @@ const packedFont = {pages:['/caller-packed-font.png'],pageSizes:[128],cellHeight
 const packedText = {kind:'text',text:'1',font:packedFont,origin:[.3,.2],fontScale:1,sampling:'point',shader:'bitmap',color:[127,255,31,255],shadow:{offset:[1,1],tint:[.25,.25,.25,1]}};
 const packedLayout = ui.layoutGuiText({width:17,height:11,guiScale:2,...packedText});
 assert.equal(packedLayout.logicalWidth,6);
+const variableFont={pages:['/caller-variable-atlas.png'],pageSizes:[8],lineHeight:3,glyphs:{A:{page:0,atlasRect:[1,2,3,2],offset:[0,0],size:[3,2],advance:4}}};
+const variableText={kind:'truetype',text:'A',font:variableFont,origin:[2.25,3.25],projectionScale:1.5};
+const variableLayout=ui.layoutGuiTrueTypeText({width:17,height:11,guiScale:2,...variableText});
+assert.equal(variableLayout.logicalWidth,6);
+assert.deepEqual(variableLayout.runs[0].paintOrigin,[2.25,3.25]);
+assert.deepEqual(variableLayout.runs[0].vertices[0],{position:[0,2,0],uvRaw:[8192,32768],rgba:[255,255,255,255]});
+assert.throws(()=>ui.layoutGuiText({width:17,height:11,guiScale:2,text:'A',font:{...variableFont,cellHeight:2},origin:[0,0]}));
+assert.throws(()=>ui.layoutGuiTrueTypeText({width:17,height:11,guiScale:2,...variableText,projectionScale:0}),RangeError);
+assert.match(renderToString(element(ui.GuiLayer,{width:17,height:11,guiScale:2,commands:[variableText],label:'Variable glyphs'})),/data-render-state="loading"/);
+
 assert.deepEqual(packedLayout.runs.map(run=>run.pass),['shadow','main']);
 assert.deepEqual(packedLayout.runs[1].paintOrigin,[0,0]);
 assert.deepEqual(packedLayout.runs[1].vertices[0],{position:[0,9,0],uvRaw:[4096,18432],rgba:[127,255,31,255]});
@@ -1781,9 +1791,10 @@ const consumerBookElements = <><BookReader {...consumerBookProps} ref={createRef
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState, WorkstationTextContext, WorkstationTextRenderer } from 'mcbeui';
 import { BitmapText, renderBitmapGlyphs, GuiIcon, guiIconNames, GuiImageLayer, layoutGuiImages, renderGuiImages } from 'mcbeui';
-import { GuiLayer, layoutGuiText, renderGuiLayer, layoutGuiModel, createGuiCuboidModel, assembleGuiTextureAtlas, classicBlockModelCalibration, classicPaneModelCalibration } from 'mcbeui';
+import { GuiLayer, layoutGuiText, layoutGuiTrueTypeText, renderGuiLayer, layoutGuiModel, createGuiCuboidModel, assembleGuiTextureAtlas, classicBlockModelCalibration, classicPaneModelCalibration } from 'mcbeui';
 import type { GuiTextureAtlasSource, GuiTextureAtlas, GuiLayerTextureSource, GuiLayerTexture } from 'mcbeui';
 import type { GuiModelFace, GuiModelMesh, GuiModelProjection, GuiModelGeometry, GuiModelLayoutOptions, GuiModelRun, GuiModelLayout, GuiModelItem, GuiCuboidFace, GuiCuboidModelOptions } from 'mcbeui';
+import type { GuiTrueTypeFont, GuiTrueTypeGeometry, GuiTrueTypeLayoutOptions, GuiTrueTypeLayout, GuiTrueTypeRun, GuiTrueTypeGlyph, GuiTrueTypeVertex } from 'mcbeui';
 import type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout, GuiSpriteGeometry, GuiLayerCommand, GuiLayerProps, GuiLayerGeometryCommand, GuiLayerLayoutOptions, GuiLayerLayoutCommand, GuiLayerLayout, GuiLayerDraw, GuiLayerRenderOptions, GuiLayerRenderResult, EnchantingTableTextRenderStyle, EnchantingTableTextRenderProfile } from 'mcbeui';
 import type { GuiImage, GuiImageLayerProps, GuiImageLayerState, GuiImageRect, GuiImageRgba, GuiImageNineSlice, GuiImageGeometry, GuiImageLayoutOptions, GuiImageVertex, GuiImageMesh, GuiImageLayout, GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderOptions, GuiImageRenderResult, EnchantingTableImageRenderProfile } from 'mcbeui';
 import type { GrindstoneImageRenderProfile, GrindstoneTextRenderProfile, GrindstoneTextRenderStyle } from 'mcbeui';
@@ -1886,6 +1897,23 @@ const badBookBodyFont: BookBodyRasterProfile = {frameSize:[900,600],origin:[0,0]
 const sourceText: GuiTextGeometry = {text:'1',font:packedFont,origin:[0,0],fontScale:1,color:textBytes,sampling:'point',shader:'bitmap',shadow:{offset:[1,1],tint:[.25,.25,.25,1]}};
 export const textOptions: GuiTextLayoutOptions = {width:640,height:480,guiScale:2,...sourceText};
 export const textLayout: GuiTextLayout = layoutGuiText(textOptions);
+const variableFont:GuiTrueTypeFont={pages:['/caller-variable-atlas.png'],pageSizes:[8],lineHeight:3,glyphs:{A:{page:0,atlasRect:[1,2,3,2],offset:[0,0],size:[3,2],advance:4}}};
+const variableGeometry:GuiTrueTypeGeometry={text:'A',font:variableFont,origin:[0,0],projectionScale:1.5,originQuantization:'float32'};
+const variableOptions:GuiTrueTypeLayoutOptions={width:32,height:32,guiScale:1,...variableGeometry};
+const variableLayout:GuiTrueTypeLayout=layoutGuiTrueTypeText(variableOptions);
+const variableRun:GuiTrueTypeRun=variableLayout.runs[0]!;
+const variableVertex:GuiTrueTypeVertex=variableRun.vertices[0]!;
+const variableGlyph:GuiTrueTypeGlyph=variableFont.glyphs.A!;
+const variableCommand:GuiLayerCommand={kind:'truetype',...variableGeometry,pages:new Map([[0,'/caller-variable-atlas.png']])};
+const variableElement=<GuiLayer width={32} height={32} guiScale={1} commands={[variableCommand]}/>;
+// @ts-expect-error TrueType uses a named origin policy.
+const badVariableOrigin:GuiTrueTypeGeometry={...variableGeometry,originQuantization:'nearest'};
+// @ts-expect-error Variable glyph geometry cannot request a packed-cell shader.
+const badVariableShader:GuiTrueTypeGeometry={...variableGeometry,shader:'bitmap-smooth'};
+// @ts-expect-error Variable glyphs require independent local draw dimensions.
+const badVariableGlyph:GuiTrueTypeGlyph={page:0,atlasRect:[0,0,1,1],offset:[0,0],advance:1};
+void [variableVertex,variableGlyph,variableElement,badVariableOrigin,badVariableShader,badVariableGlyph];
+
 export const textRun: GuiTextRun = textLayout.runs[0]!;
 const layerSource: GuiLayerGeometryCommand = {kind:'text',...sourceText};
 const layerCommand: GuiLayerCommand = {...layerSource,pages:new Map([[0,'/caller-packed-font.png']])};

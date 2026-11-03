@@ -135,7 +135,7 @@ export function layoutWorkstationWindow(profile: WorkstationImageProfile, origin
         maxX = Math.max(maxX, x1); maxY = Math.max(maxY, y1);
       }
     }
-    else if (command.kind !== 'text') bounds(layout.mvp, command.mesh.vertices);
+    else if (command.kind !== 'text' && command.kind !== 'truetype') bounds(layout.mvp, command.mesh.vertices);
     else for (const run of command.layout.runs) bounds(run.mvp, run.vertices, run.scissor);
   }
   else for (const mesh of layout.meshes) bounds(layout.mvp, mesh.vertices);

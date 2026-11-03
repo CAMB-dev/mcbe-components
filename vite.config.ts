@@ -16,6 +16,7 @@ const hbuiSevenPath = localFont('Minecraft-Seven-v2.otf');
 const hbuiChinesePath = localFont('NotoSansSC-Regular.otf');
 const classicTenPath = fileURLToPath(new URL('./.cache/local-fonts/classic-ten/Minecraft-Ten.ttf', import.meta.url));
 const classicTenMetadataPath = fileURLToPath(new URL('./.cache/local-fonts/classic-ten/font.json', import.meta.url));
+const classicTenGuiDirectory = fileURLToPath(new URL('./.cache/local-fonts/classic-ten-gui64/', import.meta.url));
 const hbuiLoadingPath = fileURLToPath(new URL('./.cache/local-hbui-assets/loading-indicator.gif', import.meta.url));
 const orePermissionsDirectory = fileURLToPath(new URL('./.cache/local-ore-permissions/', import.meta.url));
 const oreTextFieldDirectory = fileURLToPath(new URL('./.cache/local-ore-text-field/', import.meta.url));
@@ -118,6 +119,20 @@ export default defineConfig({
         ? `import runeUrl from ${JSON.stringify(normalizePath(runePath) + '?url')}; export const runeAtlasUrl = runeUrl;`
         : 'export const runeAtlasUrl = undefined;';
       const parts = [runeModule];
+      // Optional source-generated cache is demo-only, with whole-file identity.
+      const tenGuiFiles = {
+        'atlas.png': '9402a188af40fd8a5521790d11e664656717ea0f655b79fb5b958c050b5d469b',
+        'gui-font.json': '3c90cdb61d0a12a392a8cef69cc8264cabb5b9821d1c04567d0d07f298e0b5c1',
+        'font-cache.json': '38aaa0f890ed49c59455e27e337f4b561d3944b63a67e7a7bb0ed78ed755dee9',
+      };
+      if (Object.keys(tenGuiFiles).every(name => existsSync(resolve(classicTenGuiDirectory, name)))) {
+        for (const [name, hash] of Object.entries(tenGuiFiles)) {
+          if (createHash('sha256').update(readFileSync(resolve(classicTenGuiDirectory, name))).digest('hex') !== hash) throw new Error('Classic TrueType cache changed; prepare a fresh directory with --gui-font.');
+        }
+        const font = JSON.parse(readFileSync(resolve(classicTenGuiDirectory, 'gui-font.json'), 'utf8'));
+        parts.push(`import classicTenGuiAtlas from ${JSON.stringify(normalizePath(resolve(classicTenGuiDirectory, 'atlas.png')) + '?url')};`);
+        parts.push(`export const classicTenGuiFont = {...${JSON.stringify(font)}, pages:[classicTenGuiAtlas]};`);
+      } else parts.push('export const classicTenGuiFont = undefined;');
       // Optional original OreUI art stays in ignored local storage and the demo.
       // Library components receive URLs from their host and import none of it.
       const oreRoles = ['visitor', 'member', 'operator', 'custom'] as const;

@@ -1,3 +1,5 @@
+> 2026-11-03：新增独立`kind:truetype`与`layoutGuiTrueTypeText`，可变字形／覆盖通道／资源边界使用新的合同。当前验证见[TrueType接口](TRUETYPE_TEXT.md)；下文原位图阶段的计数与包身份作为历史保留。
+
 # GuiLayer 图文合成验证
 
 2026-11-02：可选离屏 `rasterOrigin` 及 Credits 捕获背景的指定D3D11后端整平面验证见 [GUI_LAYER_RASTER_ORIGIN_QA.md](GUI_LAYER_RASTER_ORIGIN_QA.md)。这是新的有限范围，原阶段记录保留。

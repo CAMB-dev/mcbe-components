@@ -1,6 +1,8 @@
 import type { PixelTexture } from './item-renderer-engine';
 import type { BitmapUnicodeRun } from './bitmap-text-webgl';
 import type { GuiTextRgba8 } from './gui-text-geometry';
+import type { GuiTrueTypeRun } from './gui-truetype-geometry';
+import { GUI_TRUETYPE_VERTEX_SHADER, GUI_TRUETYPE_FRAGMENT_SHADER } from './gui-layer-kernels';
 import type { GuiImageMesh, GuiImageRect, GuiImageRgba } from './gui-image-geometry';
 import type { GuiImageBackground, GuiImageTexture } from './gui-image-webgl';
 import { validateGuiTextureAtlasLayout } from './gui-texture-atlas';
@@ -22,6 +24,11 @@ export interface GuiLayerPreparedTextCommand {
   run: Omit<BitmapUnicodeRun, 'profile' | 'page' | 'mvp'> & { mvp: Float32Array };
   texture: GuiImageTexture;
 }
+export interface GuiLayerPreparedTrueTypeCommand {
+  kind: 'truetype';
+  run: GuiTrueTypeRun & { cull?: 'none' | 'front' | 'back'; frontFace?: 'cw' | 'ccw'; viewport?: GuiImageRect };
+  texture: GuiImageTexture;
+}
 export interface GuiLayerPreparedSpriteCommand extends Omit<GuiLayerPreparedImageCommand, 'kind'> {
   kind: 'sprite';
   color: GuiTextRgba8;
@@ -31,7 +38,7 @@ export interface GuiLayerPreparedEntityCommand {
   texture: GuiImageTexture;
   layout: GuiEntityLayout;
 }
-export type GuiLayerPreparedCommand = GuiLayerPreparedImageCommand | GuiLayerPreparedSpriteCommand | GuiLayerPreparedTextCommand | GuiLayerPreparedEntityCommand;
+export type GuiLayerPreparedCommand = GuiLayerPreparedImageCommand | GuiLayerPreparedSpriteCommand | GuiLayerPreparedTextCommand | GuiLayerPreparedTrueTypeCommand | GuiLayerPreparedEntityCommand;
 export interface GuiLayerPreparedOptions {
   /** Whole physical framebuffer. Crop never changes the declared projection. */
   width: number;
@@ -157,16 +164,21 @@ function validate(options: GuiLayerPreparedOptions): GuiImageRect {
       }
       for (const index of mesh.indices) integer(index, 0, mesh.vertices.length - 1, 'image.index');
       vertexCount += mesh.vertices.length; indexCount += mesh.indices.length;
-    } else if (command.kind === 'text') {
+    } else if (command.kind === 'text' || command.kind === 'truetype') {
       if (isAtlas(command.texture)) throw new RangeError('Packed-cell text requires a leaf page, not an atlas assembly.');
       const run = command.run;
       if (!run) throw new RangeError('A prepared text run is missing.');
       matrix(run.mvp, 'text.mvp');
-      if (!['point', 'bilinear'].includes(run.sampling) || !['bitmap', 'bitmap-smooth'].includes(run.shader)) throw new RangeError('Explicit packed-cell sampling and shader are required.');
-      if (command.texture.width !== command.texture.height || ![128, 256].includes(command.texture.width)) throw new RangeError('Packed-cell text requires a complete 128 or 256 square page.');
+      if (!['point', 'bilinear'].includes(run.sampling)) throw new RangeError('Explicit font sampling is required.');
+      if (command.texture.width !== command.texture.height) throw new RangeError('Font text requires a complete square page.');
+      if (command.kind === 'text') {
+        const bitmap = command.run;
+        if (!['bitmap', 'bitmap-smooth'].includes(bitmap.shader)) throw new RangeError('Explicit packed-cell sampling and shader are required.');
+        if (![128, 256].includes(command.texture.width)) throw new RangeError('Packed-cell text requires a complete 128 or 256 square page.');
+        unit(bitmap.glyphHeight, 'text.glyphHeight'); unit(bitmap.halfTexelOffset, 'text.halfTexelOffset');
+        if (!bitmap.glyphHeight || bitmap.halfTexelOffset > Math.min(1 / 32, bitmap.glyphHeight / 2)) throw new RangeError('Packed-cell clamp bounds are inverted.');
+      }
       color(run.tint ?? WHITE, 'text.tint'); unit(run.hudOpacity ?? 1, 'text.hudOpacity');
-      unit(run.glyphHeight, 'text.glyphHeight'); unit(run.halfTexelOffset, 'text.halfTexelOffset');
-      if (!run.glyphHeight || run.halfTexelOffset > Math.min(1 / 32, run.glyphHeight / 2)) throw new RangeError('Packed-cell clamp bounds are inverted.');
       if (run.cull !== undefined && !['none', 'front', 'back'].includes(run.cull)) throw new RangeError('Unsupported text cull state.');
       if (run.frontFace !== undefined && !['cw', 'ccw'].includes(run.frontFace)) throw new RangeError('Unsupported text front face.');
       if (run.viewport && (run.viewport.length !== 4 || run.viewport[0] !== 0 || run.viewport[1] !== 0 || run.viewport[2] !== options.width || run.viewport[3] !== options.height)) throw new RangeError('Prepared text viewport must equal the declared whole framebuffer.');
@@ -174,7 +186,7 @@ function validate(options: GuiLayerPreparedOptions): GuiImageRect {
       if (!Array.isArray(run.vertices) || run.vertices.length > 65536 || !run.indices || run.indices.length > 196608 || run.indices.length % 3) throw new RangeError('Malformed bounded packed-cell text geometry.');
       for (const vertex of run.vertices) {
         if (!vertex || !vertex.position || vertex.position.length !== 3 || !vertex.uvRaw || vertex.uvRaw.length !== 2 || !vertex.rgba || vertex.rgba.length !== 4) throw new RangeError('Malformed packed-cell text vertex.');
-        finite(vertex.position[0], 'text.x'); finite(vertex.position[1], 'text.y'); integer(vertex.position[2], 0, 3, 'text.corner');
+        finite(vertex.position[0], 'text.x'); finite(vertex.position[1], 'text.y'); integer(vertex.position[2], 0, command.kind === 'truetype' ? 0 : 3, 'text.corner');
         for (const value of vertex.uvRaw) integer(value, 0, 65535, 'text.uvRaw');
         for (const value of vertex.rgba) integer(value, 0, 255, 'text.rgba');
       }
@@ -295,12 +307,12 @@ function drawPreparedGuiLayer(options: GuiLayerPreparedOptions, readback: boolea
     gl.viewport(-cropX, topFirst ? -cropY : cropY + height - options.height, options.width, options.height);
     const positionBuffer = buffer(), uvBuffer = buffer(), colorBuffer = buffer(), indexBuffer = buffer();
     const normalBuffer = entityCommands.length ? buffer() : undefined, boneBuffer = entityCommands.length ? buffer() : undefined;
-    const sourceTextures = new Map<GuiLayerTexture, WebGLTexture>(), shaderPrograms = new Map<'image' | 'sprite' | 'text' | 'entity', WebGLProgram>();
+    const sourceTextures = new Map<GuiLayerTexture, WebGLTexture>(), shaderPrograms = new Map<GuiLayerPreparedCommand['kind'], WebGLProgram>();
     const full: GuiImageRect = [0, 0, options.width, options.height], globalScissor = options.scissor ?? full;
     const maxAttributes = gl.getParameter(gl.MAX_VERTEX_ATTRIBS) as number;
     let entityState = false;
     for (const command of options.commands) {
-      const state = command.kind === 'entity' ? command.layout : command.kind !== 'text' ? command.mesh : command.run;
+      const state = command.kind === 'entity' ? command.layout : command.kind === 'text' || command.kind === 'truetype' ? command.run : command.mesh;
       const scissor = state.scissor ?? full;
       const x = Math.max(cropX, globalScissor[0], scissor[0]), y = Math.max(cropY, globalScissor[1], scissor[1]);
       const w = Math.max(0, Math.min(cropX + width, globalScissor[0] + globalScissor[2], scissor[0] + scissor[2]) - x);
@@ -321,13 +333,14 @@ function drawPreparedGuiLayer(options: GuiLayerPreparedOptions, readback: boolea
         sourceTextures.set(command.texture, uploaded);
       }
       gl.bindTexture(gl.TEXTURE_2D, uploaded);
-      const filter = command.kind === 'text' && command.run.sampling === 'bilinear' ? gl.LINEAR : gl.NEAREST;
+      const filter = (command.kind === 'text' || command.kind === 'truetype') && command.run.sampling === 'bilinear' ? gl.LINEAR : gl.NEAREST;
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
       let active = shaderPrograms.get(command.kind);
       if (!active) {
         active = command.kind === 'image' ? program(GUI_IMAGE_VERTEX_SHADER, GUI_IMAGE_FRAGMENT_SHADER)
           : command.kind === 'sprite' ? program(GUI_SPRITE_VERTEX_SHADER, GUI_SPRITE_FRAGMENT_SHADER)
-            : command.kind === 'entity' ? program(guiEntityVertexShader(boneCapacity), GUI_ENTITY_FRAGMENT_SHADER) : program(GUI_BITMAP_CELL_VERTEX_SHADER, GUI_BITMAP_FRAGMENT_SHADER);
+            : command.kind === 'entity' ? program(guiEntityVertexShader(boneCapacity), GUI_ENTITY_FRAGMENT_SHADER)
+              : command.kind === 'truetype' ? program(GUI_TRUETYPE_VERTEX_SHADER, GUI_TRUETYPE_FRAGMENT_SHADER) : program(GUI_BITMAP_CELL_VERTEX_SHADER, GUI_BITMAP_FRAGMENT_SHADER);
         shaderPrograms.set(command.kind, active);
       }
       gl.useProgram(active); for (let index = 0; index < maxAttributes; index++) gl.disableVertexAttribArray(index);
@@ -337,7 +350,7 @@ function drawPreparedGuiLayer(options: GuiLayerPreparedOptions, readback: boolea
           gl.enable(gl.BLEND); gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD); gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
           gl.viewport(-cropX, topFirst ? -cropY : cropY + height - options.height, options.width, options.height); entityState = false;
         }
-        const ordinary = command.kind === 'text' ? command.run : command.mesh;
+        const ordinary = command.kind === 'text' || command.kind === 'truetype' ? command.run : command.mesh;
         gl.uniform4fv(gl.getUniformLocation(active, 'tint'), new Float32Array(ordinary.tint ?? WHITE)); gl.uniform1f(gl.getUniformLocation(active, 'hudOpacity'), ordinary.hudOpacity ?? 1);
       }
       let indices: Uint16Array;
@@ -355,7 +368,7 @@ function drawPreparedGuiLayer(options: GuiLayerPreparedOptions, readback: boolea
         attribute(active, 'normal', normalBuffer!, mesh.normals, 4, gl.BYTE, true);
         if (boneCapacity > 1) attribute(active, 'boneIndex', boneBuffer!, mesh.boneIndices, 1, gl.UNSIGNED_SHORT);
         indices = mesh.indices;
-      } else if (command.kind !== 'text') {
+      } else if (command.kind !== 'text' && command.kind !== 'truetype') {
         const mesh = command.mesh;
         gl.enable(gl.CULL_FACE); gl.frontFace(topFirst ? gl.CCW : gl.CW); gl.cullFace(gl.FRONT);
         gl.uniformMatrix4fv(gl.getUniformLocation(active, 'mvp'), false, command.mvp); gl.uniform1i(gl.getUniformLocation(active, 'source'), 0);
@@ -368,8 +381,10 @@ function drawPreparedGuiLayer(options: GuiLayerPreparedOptions, readback: boolea
         gl.frontFace((run.frontFace === 'cw') !== topFirst ? gl.CW : gl.CCW);
         if (!run.cull || run.cull === 'none') gl.disable(gl.CULL_FACE); else { gl.enable(gl.CULL_FACE); gl.cullFace(run.cull === 'front' ? gl.FRONT : gl.BACK); }
         gl.uniformMatrix4fv(gl.getUniformLocation(active, 'mvp'), false, run.mvp); gl.uniform1i(gl.getUniformLocation(active, 'atlas'), 0);
-        gl.uniform1i(gl.getUniformLocation(active, 'smoothBitmap'), run.shader === 'bitmap-smooth' ? 1 : 0);
-        gl.uniform1f(gl.getUniformLocation(active, 'glyphHeight'), run.glyphHeight); gl.uniform1f(gl.getUniformLocation(active, 'halfTexel'), run.halfTexelOffset);
+        if (command.kind === 'text') {
+          gl.uniform1i(gl.getUniformLocation(active, 'smoothBitmap'), command.run.shader === 'bitmap-smooth' ? 1 : 0);
+          gl.uniform1f(gl.getUniformLocation(active, 'glyphHeight'), command.run.glyphHeight); gl.uniform1f(gl.getUniformLocation(active, 'halfTexel'), command.run.halfTexelOffset);
+        }
         attribute(active, 'position', positionBuffer, new Float32Array(run.vertices.flatMap(vertex => [...vertex.position])), 3, gl.FLOAT);
         attribute(active, 'packedUv', uvBuffer, new Uint16Array(run.vertices.flatMap(vertex => [...vertex.uvRaw])), 2, gl.UNSIGNED_SHORT, true);
         attribute(active, 'color', colorBuffer, new Uint8Array(run.vertices.flatMap(vertex => [...vertex.rgba])), 4, gl.UNSIGNED_BYTE, true);

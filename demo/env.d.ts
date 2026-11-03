@@ -1,6 +1,7 @@
 declare module 'virtual:mcbeui-game-font' {
   export const hasGameFont: boolean;
   export const hasClassicTenFont: boolean;
+  export const classicTenGuiFont: import('../src/gui-truetype-geometry').GuiTrueTypeFont | undefined;
   export const hasClassicFonts: boolean;
   export const runeAtlasUrl: string | undefined;
   export const hasHBUITenFont: boolean;

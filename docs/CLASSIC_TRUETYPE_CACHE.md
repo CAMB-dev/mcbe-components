@@ -2,7 +2,7 @@
 
 新增源码工具`prepare-classic-truetype.py`，只用调用方持有的原始Minecraft Ten 2.001 TTF，生成固定的64像素字高、2×2过采样、1024²缓存。输出整幅1,048,576个RGBA像素与保存的原生R28图集完全一致；三个已解码数字的图集矩形也由打包器自动得到，没有输入捕获坐标或像素。
 
-这解决了一个具名字体缓存的生成来源。它还不是专用TrueType文字组件、完整排版或跨后端字体认证；现有`GuiTextFont`只支持固定字格，不应强行接收此动态图集。
+这解决了一个具名字体缓存的生成来源。现在可用可选`--gui-font`生成[独立TrueType图层](TRUETYPE_TEXT.md)的配置；现有`GuiTextFont`仍只支持固定字格。完整排版与跨后端字体认证尚未完成。
 
 ## 使用
 
@@ -11,6 +11,9 @@
 ```powershell
 python scripts/prepare-classic-truetype.py "PATH/TO/vanilla/font/minecraft-ten.ttf" --compiler "PATH/TO/tcc.exe"
 python scripts/prepare-classic-truetype.py "PATH/TO/vanilla/font/minecraft-ten.ttf" --compiler "PATH/TO/tcc.exe" --check-only
+
+# New directory; preserves the default three files and adds gui-font.json.
+python scripts/prepare-classic-truetype.py "PATH/TO/vanilla/font/minecraft-ten.ttf" --compiler "PATH/TO/tcc.exe" --gui-font --output .cache/local-fonts/classic-ten-gui64
 
 python -m unittest discover -s tests -p classic_truetype_preparation_test.py
 ```
@@ -24,6 +27,7 @@ python -m unittest discover -s tests -p classic_truetype_preparation_test.py
 | `atlas.png` | 原始覆盖值复制到RGBA四通道；不转成白RGB加alpha，也不反预乘 |
 | `packed-chars.json` | 0…255共256条原始`stbtt_packedchar`矩形、offset、advance、offset2及源字形存在标记 |
 | `font-cache.json` | 格式版本、源TTF与stb身份、参数、相对文件名及两个产物的SHA256 |
+| `gui-font.json`（可选） | `GuiTrueTypeFont`的局部字形矩形／offset／size／advance；名义行距8，页URL相对该JSON |
 
 256条记录中181条对应源字体存在的字形；75条缺失记录按上游默认复用同一个`.notdef`。空格的打包单元可能有透明滤波边缘，不应按其矩形大小推导可见宽度。原始offset／advance保留stb像素单位；工具没有伪造`GuiTextFont`的完整字格或原生Unicode fallback。
 
@@ -52,6 +56,6 @@ python -m unittest discover -s tests -p classic_truetype_preparation_test.py
 
 两次探针完整输出SHA相同；最终后端从实际绘制context读取。探针暂时复用私有prepared图像边界，Tint等价于当前全1全局tint下的76字节颜色，并使用原生before作为背景；实际新增绘制只有一个数字，不把复制的背景算作字体或整页重建。它不是公开TrueType文字接口的验收。
 
-下一步仍是专用字体度量／顶点／shader接入、普通宿主排版与混排、其他缓存范围／版本及跨后端灰度验证。既有Unicode位图SwiftShader38点残差属于另一采样路径，不能借此宣布解决。
+后续独立TrueType接口已完成度量／顶点／shader接入及公开混排验证，见[新阶段](TRUETYPE_TEXT.md)。普通宿主排版、其他缓存范围／版本及跨后端灰度验证仍未完成。既有Unicode位图SwiftShader38点残差属于另一采样路径，不能借此宣布解决。
 
 证据位于`.cache/classic-truetype-raster-20261103-01/`。本阶段没有打开Computer Use、游戏、PIX或采集新原生帧；沿用保存的参考。静态程序导入／字符串检查不能证明实际引擎使用哪个库，此处只宣称这个固定实现的完整产物等价。

@@ -5,6 +5,7 @@ import { gameItemTextures } from './materials';
 import { sampleGuiBlockItems } from './gui-model-items';
 import { ModelSourceExamples } from './model-source-examples';
 import { PaneCalibrationExample } from './pane-calibration-example';
+import { TrueTypeExample } from './truetype-example';
 
 const runeTexts = ['elder light', 'bless creature', 'enchant scroll'];
 
@@ -51,5 +52,6 @@ export function GuiLayerExamples() {
       : 'Original glyphs are optional. Prepare them with scripts/use-local-workstation-fonts.py and restart the preview to enable this switch.'}</p>
     <ModelSourceExamples/>
     <PaneCalibrationExample/>
+    <TrueTypeExample/>
   </section>;
 }

@@ -67,7 +67,21 @@ def rgba_png(alpha):
     return b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', 1024, 1024, 8, 6, 0, 0, 0)) + chunk(b'IDAT', zlib.compress(rows, 9)) + chunk(b'IEND', b'')
 
 
-def make_files(alpha, chars):
+def gui_font(chars):
+    # Named 64px cache profile: source metric units / 8, ascent baseline 6.5.
+    # Eight is the nominal authored line height, not recovered native leading.
+    return {'pages': ['atlas.png'], 'pageSizes': [1024], 'lineHeight': 8,
+            'glyphs': {chr(row['codepoint']): {
+                'page': 0,
+                'atlasRect': [row['rect'][0], row['rect'][1],
+                              row['rect'][2] - row['rect'][0], row['rect'][3] - row['rect'][1]],
+                'offset': [row['offset'][0] / 8, 6.5 + row['offset'][1] / 8],
+                'size': [(row['offset2'][0] - row['offset'][0]) / 8,
+                         (row['offset2'][1] - row['offset'][1]) / 8],
+                'advance': row['advance'] / 8} for row in chars}}
+
+
+def make_files(alpha, chars, include_gui_font=False):
     validate_result(alpha, chars)
     atlas = rgba_png(alpha)
     packed = (json.dumps(chars, ensure_ascii=False, indent=2, allow_nan=False) + '\n').encode()
@@ -80,11 +94,14 @@ def make_files(alpha, chars):
                             'alphaSHA256': ALPHA_SHA, 'pngSHA256': digest(atlas)},
                   'packedCharacters': {'url': 'packed-chars.json', 'sha256': digest(packed), 'count': 256},
                   'metrics': 'Unmodified stbtt_packedchar pixel units, offsets and advance; missing entries reuse .notdef.'}
-    return {'atlas.png': atlas, 'packed-chars.json': packed,
-            'font-cache.json': (json.dumps(descriptor, ensure_ascii=False, indent=2) + '\n').encode()}
+    files = {'atlas.png': atlas, 'packed-chars.json': packed,
+             'font-cache.json': (json.dumps(descriptor, ensure_ascii=False, indent=2) + '\n').encode()}
+    if include_gui_font:
+        files['gui-font.json'] = (json.dumps(gui_font(chars), ensure_ascii=True, indent=2, allow_nan=False) + '\n').encode()
+    return files
 
 
-def prepare(font, output, compiler, check_only=False):
+def prepare(font, output, compiler, check_only=False, include_gui_font=False):
     original = font.read_bytes()
     validate_source(original)
     if digest((ROOT / 'scripts/vendor/stb/stb_truetype.h').read_bytes()) != HEADER_SHA:
@@ -120,7 +137,7 @@ def prepare(font, output, compiler, check_only=False):
             chars = json.loads(generated.stderr)
         except (ValueError, UnicodeError) as error:
             raise ValueError('Invalid generated character records.') from error
-        files = make_files(generated.stdout, chars)
+        files = make_files(generated.stdout, chars, include_gui_font)
     if check_only:
         for name, data in files.items():
             if not (output / name).is_file() or (output / name).read_bytes() != data:
@@ -141,9 +158,10 @@ def main():
     parser.add_argument('--compiler', default='cc')
     parser.add_argument('--output', type=Path, default=ROOT / '.cache/local-fonts/classic-ten-cache64')
     parser.add_argument('--check-only', action='store_true')
+    parser.add_argument('--gui-font', action='store_true', help='Also emit gui-font.json for GuiLayer kind=truetype. Select a new output directory.')
     args = parser.parse_args()
     try:
-        result = prepare(args.font, args.output, args.compiler, args.check_only)
+        result = prepare(args.font, args.output, args.compiler, args.check_only, args.gui_font)
     except (OSError, ValueError, subprocess.SubprocessError) as error:
         print(json.dumps({'status': 'FAILED', 'error': str(error)}), file=sys.stderr)
         return 1

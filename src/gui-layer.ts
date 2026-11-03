@@ -3,6 +3,8 @@ import type { GuiImageGeometry, GuiImageLayout, GuiImageLayoutOptions, GuiImageM
 import type { GuiImageBackground, GuiImageDraw, GuiImageTexture } from './gui-image-webgl';
 import { layoutGuiText } from './gui-text-geometry';
 import type { GuiTextGeometry, GuiTextLayout, GuiTextRgba8 } from './gui-text-geometry';
+import { layoutGuiTrueTypeText } from './gui-truetype-geometry';
+import type { GuiTrueTypeGeometry, GuiTrueTypeLayout } from './gui-truetype-geometry';
 import { renderPreparedGuiLayer, presentPreparedGuiLayer } from './gui-layer-webgl';
 import type { GuiLayerPreparedCommand, GuiLayerPreparedResult, GuiLayerPreparedPresentationResult } from './gui-layer-webgl';
 import { layoutGuiModel } from './gui-model-geometry';
@@ -21,7 +23,8 @@ export type GuiLayerGeometryCommand =
   | ({ kind: 'sprite' } & GuiSpriteGeometry)
   | ({ kind: 'model' } & GuiModelGeometry)
   | ({ kind: 'entity' } & GuiEntityGeometry)
-  | ({ kind: 'text' } & GuiTextGeometry);
+  | ({ kind: 'text' } & GuiTextGeometry)
+  | ({ kind: 'truetype' } & GuiTrueTypeGeometry);
 export interface GuiLayerLayoutOptions extends Omit<GuiImageLayoutOptions, 'images'> {
   commands: readonly GuiLayerGeometryCommand[];
 }
@@ -30,7 +33,8 @@ export type GuiLayerLayoutCommand =
   | { kind: 'sprite'; mesh: GuiImageMesh; color: GuiTextRgba8 }
   | { kind: 'model'; layout: GuiModelLayout }
   | { kind: 'entity'; layout: GuiEntityLayout }
-  | { kind: 'text'; layout: GuiTextLayout };
+  | { kind: 'text'; layout: GuiTextLayout }
+  | { kind: 'truetype'; layout: GuiTrueTypeLayout };
 export interface GuiLayerLayout extends Omit<GuiImageLayout, 'meshes'> {
   /** Ordered source commands. Each text layout owns its separate paint-origin MVP. */
   commands: readonly GuiLayerLayoutCommand[];
@@ -40,7 +44,8 @@ export type GuiLayerDraw =
   | ({ kind: 'sprite'; texture: GuiLayerTexture } & GuiSpriteGeometry)
   | ({ kind: 'model'; textures: Readonly<Record<string, GuiLayerTexture>> } & GuiModelGeometry)
   | ({ kind: 'entity'; texture: GuiImageTexture } & GuiEntityGeometry)
-  | ({ kind: 'text'; pages: ReadonlyMap<number, GuiImageTexture> } & GuiTextGeometry);
+  | ({ kind: 'text'; pages: ReadonlyMap<number, GuiImageTexture> } & GuiTextGeometry)
+  | ({ kind: 'truetype'; pages: ReadonlyMap<number, GuiImageTexture> } & GuiTrueTypeGeometry);
 export interface GuiLayerRenderOptions extends Omit<GuiLayerLayoutOptions, 'commands'> {
   commands: readonly GuiLayerDraw[];
   background?: GuiImageBackground;
@@ -56,7 +61,7 @@ export interface GuiLayerRenderResult extends GuiLayerPreparedResult {
 /** Internal source adapter, also used for SSR/loading preparation. It performs no IO or GPU work. */
 export function layoutSourceGuiLayer(options: GuiLayerLayoutOptions): GuiLayerLayout {
   if (!Array.isArray(options.commands) || options.commands.length > 4096) throw new RangeError('A bounded GUI command array is required.');
-  for (const command of options.commands) if (!command || (command.kind !== 'image' && command.kind !== 'sprite' && command.kind !== 'model' && command.kind !== 'entity' && command.kind !== 'text')) throw new RangeError('Unsupported GUI layer command.');
+  for (const command of options.commands) if (!command || (command.kind !== 'image' && command.kind !== 'sprite' && command.kind !== 'model' && command.kind !== 'entity' && command.kind !== 'text' && command.kind !== 'truetype')) throw new RangeError('Unsupported GUI layer command.');
   const imageCommands = options.commands.filter((command): command is Extract<GuiLayerGeometryCommand, { kind: 'image' | 'sprite' }> => command.kind === 'image' || command.kind === 'sprite');
   const { meshes, ...frame } = layoutGuiImages({ ...options, images: imageCommands });
   const commands: GuiLayerLayoutCommand[] = [];
@@ -84,6 +89,11 @@ export function layoutSourceGuiLayer(options: GuiLayerLayoutOptions): GuiLayerLa
         outputRect: options.outputRect, scissor: intersect(options.scissor, command.scissor, options.width, options.height) }, mesh);
       commands.push({ kind: 'entity', layout });
       vertices += layout.mesh.positions.length / 3; indices += layout.mesh.indices.length; runs++;
+    } else if (command.kind === 'truetype') {
+      const layout = layoutGuiTrueTypeText({ ...command, width: options.width, height: options.height, guiScale: options.guiScale,
+        outputRect: options.outputRect, scissor: intersect(options.scissor, command.scissor, options.width, options.height) });
+      commands.push({ kind: 'truetype', layout });
+      for (const run of layout.runs) { vertices += run.vertices.length; indices += run.indices.length; runs++; }
     } else {
       const layout = layoutGuiText({ ...command, width: options.width, height: options.height, guiScale: options.guiScale,
         outputRect: options.outputRect, scissor: intersect(options.scissor, command.scissor, options.width, options.height) });
@@ -128,6 +138,14 @@ function prepareGuiLayer(options: GuiLayerRenderOptions) {
         const size = command.textureSizes[run.texture]!;
         if (!texture || texture.width !== size[0] || texture.height !== size[1]) throw new RangeError('Decoded model texture dimensions must match their declared source size.');
         commands.push({ kind: 'sprite', mesh: run.mesh, mvp: entry.layout.mvp, texture, color: run.color });
+      }
+    }
+    else if (command.kind === 'truetype' && entry.kind === 'truetype') {
+      if (!command.pages || typeof command.pages.get !== 'function') throw new RangeError('TrueType text requires explicit decoded font pages.');
+      for (const run of entry.layout.runs) {
+        const page = command.pages.get(run.page), size = command.font.pageSizes[run.page];
+        if (!page || page.width !== size || page.height !== size) throw new RangeError('Decoded TrueType page dimensions must match their declaration.');
+        commands.push({ kind: 'truetype', texture: page, run: { ...run, cull: 'front', frontFace: 'cw' } });
       }
     }
     else if (command.kind === 'text' && entry.kind === 'text') {

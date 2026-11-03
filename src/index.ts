@@ -19,6 +19,8 @@ export type { GuiImageRect, GuiImageRgba, GuiImageNineSlice, GuiImageGeometry, G
 export { renderGuiImages } from './gui-image-webgl';
 export type { GuiImageTexture, GuiImageDraw, GuiImageBackground, GuiImageRenderOptions, GuiImageRenderResult } from './gui-image-webgl';
 export { layoutGuiText } from './gui-text-geometry';
+export { layoutGuiTrueTypeText } from './gui-truetype-geometry';
+export type { GuiTrueTypeGlyph, GuiTrueTypeFont, GuiTrueTypeGeometry, GuiTrueTypeLayoutOptions, GuiTrueTypeVertex, GuiTrueTypeRun, GuiTrueTypeLayout } from './gui-truetype-geometry';
 export type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout } from './gui-text-geometry';
 export { layoutGuiModel, createGuiCuboidModel } from './gui-model-geometry';
 export type { GuiEntityCube, GuiEntityBone, GuiEntitySource, GuiNpcPortraitMaterial, GuiEntityGeometry, GuiEntityMesh, GuiEntityLayoutOptions, GuiEntityLayout } from './gui-entity-geometry';

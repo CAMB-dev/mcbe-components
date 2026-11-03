@@ -1,4 +1,6 @@
-> 最新字体缓存检查点（2026-11-03）：从原始Classic Ten TTF与固定stb64px／2×2配置生成完整1024²原生缓存，全部RGBA零差；三个数字本地half顶点／UV一致。已提供源码准备工具及只读复算，原版字体不入包。私有单字绘制探针NVIDIA0／SwiftShader2，专用TrueType接口与正常排版仍未接入，目标保持进行中。见[生成工具](docs/CLASSIC_TRUETYPE_CACHE.md)。
+> 最新字体接口检查点（2026-11-03）：独立TrueType可变字形路径已通过公开GuiLayer混排／阴影／更新／卸载、两peer安装包、四种默认Vite消费以及源／生产各三尺寸预览。指定原版单字完整画面NVIDIA RGBA0、SwiftShader2；三字形本地XY／UV一致，HOST矩阵仍差1ULP。现268组件＋8数据＋14函数＝290运行时值，完整目标继续进行。见[API与验证](docs/TRUETYPE_TEXT.md)。
+
+> 前阶段字体缓存检查点（2026-11-03）：从原始Classic Ten TTF与固定stb64px／2×2配置生成完整1024²原生缓存，全部RGBA零差；三个数字本地half顶点／UV一致。已提供源码准备工具及只读复算，原版字体不入包。私有单字绘制探针NVIDIA0／SwiftShader2，专用TrueType接口与正常排版仍未接入，目标保持进行中。见[生成工具](docs/CLASSIC_TRUETYPE_CACHE.md)。
 
 > 最新光栅检查点（2026-11-03）：新增显式完整目标分配与顶部原点配置，GUI4／5建筑页及GUI4收起／空搜索页完整3,603,140RGBA均零差。默认基线160／5逐字节重现后，165点全部修正且无新增误差；普通控件与绘制窗口布局不变。两peer新包、23项交互、四种安装消费通过。完整目标仍进行中，见[光栅目标](docs/CRAFTING_RASTER_TARGET.md)。
 
@@ -37,7 +39,7 @@
 - 以 Bedrock Classic / JSON UI 为首版视觉基准，不把 Java Edition、Ore UI 与经典界面的细节混为一种规范。
 - 类型完整、支持受控/非受控表单、转发 ref、原生表单提交、键盘操作、SSR 导入安全。
 - Button、IconButton、Panel、Text、TextField、TextArea、Checkbox、RadioGroup、Switch、Slider、Combobox、Select、Tabs、Dialog、Badge、Progress、Alert、Separator、ItemSlot、PixelIcon。
-- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前268个公共组件、8个数据和13个渲染 / 几何 / 纹理函数，共289个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
+- 用户明确“所有组件”以 Bedrock 实际已有控件 / GUI 为边界，可复用的都下拆。当前268个公共组件、8个数据和14个渲染 / 几何 / 纹理函数，共290个运行时导出。docs/component-catalog.json记录具体边界；实际React18 /19包消费按具名阶段验证，implemented仍不代表原生像素验收通过。
 - 用户指定附魔台、砂轮等游戏已有 GUI，需要逐个从原版 JSON / 纹理提取依据，以组件形式提供。ItemSlot 重做为共用容器槽位，保留物品、数量、耐久、选中、聚焦、提示和操作事件。
 - 设计令牌、独立 CSS、可选自托管字体、可交互展示页、API 文档、ESM 和声明文件。
 - 查找并实际接入字体：MCBE Pixel 基于 Monocraft 用于英文，MCBE CJK 基于 Fusion Pixel 12px 用于中文；保留原版 Mojangles 自定义接入及原始开源字体。

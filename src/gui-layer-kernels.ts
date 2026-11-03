@@ -99,3 +99,30 @@ void main() {
   gl_FragColor = value * ink * tint;
   gl_FragColor.a *= hudOpacity;
 }`;
+
+/** TrueType AlphaOff: arbitrary glyph UVs, ordinary vertex color, no cell clamp. */
+export const GUI_TRUETYPE_VERTEX_SHADER = `
+attribute vec3 position;
+attribute vec2 packedUv;
+attribute vec4 color;
+uniform mat4 mvp;
+varying highp vec2 uv;
+varying highp vec4 ink;
+void main() {
+  vec4 clip = position.x * mvp[0] + position.y * mvp[1] + mvp[3];
+  gl_Position = vec4(clip.xy, 0.0, clip.w);
+  uv = packedUv;
+  ink = color;
+}`;
+
+export const GUI_TRUETYPE_FRAGMENT_SHADER = `
+precision highp float;
+uniform sampler2D atlas;
+uniform vec4 tint;
+uniform float hudOpacity;
+varying highp vec2 uv;
+varying highp vec4 ink;
+void main() {
+  gl_FragColor = texture2D(atlas, uv) * ink * tint;
+  gl_FragColor.a *= hudOpacity;
+}`;
