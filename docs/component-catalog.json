@@ -2563,5 +2563,34 @@
     "originalLibraryRefs": 853,
     "nativeWholeGui": false,
     "details": "docs/CLASSIC_PANE_CALIBRATION_QA.md"
+  },
+  "classicRasterTargetStage": {
+    "status": "EXPLICIT_FULL_TARGET_TOP_LEFT_FINITE_NATIVE_COMPLETE_RGBA_EXACT",
+    "components": 268,
+    "runtimeValues": 289,
+    "defaultBehaviorChanged": false,
+    "sourceInteractionTests": 23,
+    "nativeBackend": "Chromium156 NVIDIA RTX3050 ANGLE D3D11 DPR1",
+    "completePixelsPerArm": 3603140,
+    "nativeWholeArms": 6,
+    "constructionGui4Gui5Before": [
+      160,
+      5
+    ],
+    "constructionGui4Gui5After": [
+      0,
+      0
+    ],
+    "gui4CompactAfter": 0,
+    "gui4FilterEmptyAfter": 0,
+    "newlyWrongPixels": 0,
+    "semanticPaintWindowUnchanged": true,
+    "installedViteCases": 4,
+    "devProdPairs": 6,
+    "devProdComparedPixels": 2880000,
+    "devProdDifferentPixels": 0,
+    "installedBackend": "Chromium156 SwiftShader",
+    "completeFontOrAllGuiCertified": false,
+    "details": "docs/CRAFTING_RASTER_TARGET.md"
   }
 }

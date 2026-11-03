@@ -1,5 +1,7 @@
 # 放大镜POINT边界诊断（2026-11-03）
 
+后续阶段使用完整渲染目标与`top-left`原点，已令指定两建筑页完整RGBA零差，见[新光栅验证](CRAFTING_RASTER_TARGET.md)。下面保留原始解析POINT反例；它不因新策略有效而成为正确取样规则。
+
 指定GUI5／GUI4完整建筑页已有5／160点RGBA残差。已有记录确认两者使用相同的完整原始16×16`magnifyingGlass.png`、POINT／CLAMP采样；普通源布局与原生packed XY、UV及相关MVP字段一致。纹理不需要重绘或替换。
 
 本次只读取已保存的完整产品与原生PNG，使用标准库解码和`Fraction`精确有理数计算，检查如下假设：

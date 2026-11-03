@@ -3,7 +3,7 @@ import type { CSSProperties, RefObject } from 'react';
 import type { GuiImage } from './gui-image';
 import type { GuiImageLayout, GuiImageNineSlice, GuiImageRect, GuiImageRgba } from './gui-image-geometry';
 import { layoutGuiImages } from './gui-image-geometry';
-import type { GuiLayerLayout } from './gui-layer';
+import type { GuiLayerLayout, GuiLayerRenderOptions } from './gui-layer';
 import { layoutSourceGuiLayer } from './gui-layer';
 import type { GuiLayerCommand } from './gui-layer-component';
 import type { GuiTextFont, GuiTextGeometry, GuiTextRgba8 } from './gui-text-geometry';
@@ -12,9 +12,11 @@ import { workstationImageAssets as assets } from './workstation-image-assets';
 
 /** Private common source-workstation contracts; no renderer state is inferred from DOM geometry. */
 export interface WorkstationImageProfile {
-  frame: { width: number; height: number; guiScale: number };
+  frame: { width: number; height: number; guiScale: number; rasterOrigin?: GuiLayerRenderOptions['rasterOrigin'] };
   origin?: readonly [number, number];
   displayScale?: number;
+  /** Allocate the complete physical target without enlarging the semantic or paint window. Default: window. */
+  rasterBounds?: 'window' | 'frame';
 }
 export interface WorkstationPresentation { scale: number; left: number; top: number; right: number; bottom: number }
 // undefined isolates unrelated/nested workstations; null keeps the stable CSS plane.
@@ -39,7 +41,12 @@ interface WorkstationVisualState { slots: WorkstationControlState[]; close: Work
 export interface WorkstationItemProfile { itemImages?: boolean; itemModels?: boolean }
 export interface WorkstationImageAsset { url: string; nineSlice?: GuiImageNineSlice }
 
+function validateWorkstationRaster(profile: WorkstationImageProfile): void {
+  if (profile.rasterBounds !== undefined && profile.rasterBounds !== 'window' && profile.rasterBounds !== 'frame') throw new RangeError('Unsupported workstation raster bounds.');
+  if (profile.frame.rasterOrigin !== undefined && profile.frame.rasterOrigin !== 'webgl' && profile.frame.rasterOrigin !== 'top-left') throw new RangeError('Unsupported workstation raster origin.');
+}
 export function resolveWorkstationFrame(profile: WorkstationImageProfile, size: readonly [number, number] = [176, 166]) {
+  validateWorkstationRaster(profile);
   const { width, height, guiScale } = profile.frame, scale = profile.displayScale ?? 1;
   if (!Number.isFinite(scale) || scale <= 0 || scale > 32) throw new RangeError('Image displayScale must be positive and at most32.');
   const origin = profile.origin ?? [(Math.ceil(width / guiScale) - size[0]) / 2, (Math.ceil(height / guiScale) - size[1]) / 2] as const;
@@ -95,6 +102,7 @@ export function sourceItemCommands(profile: WorkstationItemProfile, rects: reado
 
 export function layoutWorkstationWindow(profile: WorkstationImageProfile, origin: readonly [number, number],
   input: readonly GuiLayerCommand[] | GuiImageLayout | GuiLayerLayout, size: readonly [number, number] = [352, 332]) {
+  validateWorkstationRaster(profile);
   const { width, height, guiScale } = profile.frame, scale = profile.displayScale ?? 1;
   const layout: GuiImageLayout | GuiLayerLayout = Array.isArray(input)
     ? layoutSourceGuiLayer({ width, height, guiScale, commands: input }) : input as GuiImageLayout | GuiLayerLayout;
@@ -138,7 +146,11 @@ export function layoutWorkstationWindow(profile: WorkstationImageProfile, origin
   const tx = x * k - 2 * origin[0], ty = y * k - 2 * origin[1];
   const left = Math.floor(tx) - 1, top = Math.floor(ty) - 1;
   const windowRight = Math.ceil(tx + outputRect[2] * k) + 1, windowBottom = Math.ceil(ty + outputRect[3] * k) + 1;
-  return { outputRect, origin, left, top, width: windowRight - left, height: windowBottom - top, translateX: tx - left, translateY: ty - top,
+  const rasterRect: GuiImageRect = profile.rasterBounds === 'frame' ? [0, 0, width, height] : outputRect;
+  // Allocation can affect hardware interpolation. Keep the normal paint bounds
+  // and semantic placement; position the larger canvas inside that same clip.
+  return { outputRect: rasterRect, origin, left, top, width: windowRight - left, height: windowBottom - top,
+    translateX: tx - left + (rasterRect[0] - x) * k, translateY: ty - top + (rasterRect[1] - y) * k,
     presentation: { scale, left: Math.max(6, -left), top: Math.max(6, -top), right: Math.max(6, windowRight - size[0]), bottom: Math.max(6, windowBottom - size[1]) } };
 }
 export function workstationCanvasStyle(guiScale: number, value: { outputRect: GuiImageRect; translateX: number; translateY: number }): CSSProperties {

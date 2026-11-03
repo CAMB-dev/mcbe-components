@@ -1,3 +1,5 @@
+> 最新光栅检查点（2026-11-03）：新增显式完整目标分配与顶部原点配置，GUI4／5建筑页及GUI4收起／空搜索页完整3,603,140RGBA均零差。默认基线160／5逐字节重现后，165点全部修正且无新增误差；普通控件与绘制窗口布局不变。两peer新包、23项交互、四种安装消费通过。完整目标仍进行中，见[光栅目标](docs/CRAFTING_RASTER_TARGET.md)。
+
 > 收尾检查点（2026-11-03）：交付与未完成范围集中在[阶段状态](docs/DELIVERY_STATUS.md)。本次CPU有理数POINT诊断在GUI5引入32个新错误，未采用为产品规则；现有GUI4／5放大镜160／5残差保持不变。无运行时变更或新原生采集，目标仍进行中。见[诊断](docs/MAGNIFIER_POINT_DIAGNOSIS.md)。
 
 > 最新功能检查点（2026-11-03，玻璃板类别校准）：新增只读数据`classicPaneModelCalibration`，两个比例玻璃板均RGBA0，本轮消除2,335个旧误差、无新增。十个配方模型单元均零差，完整建筑页仍有放大镜160／5点残差。两peer包、四种默认Vite消费及源／生产预览验证通过。当前268组件＋8数据＋13函数＝289运行时值；字体、默认布局、通用引擎规则和其他GUI仍未完成。见 [API](docs/CLASSIC_PANE_CALIBRATION.md) 与 [验证](docs/CLASSIC_PANE_CALIBRATION_QA.md)。

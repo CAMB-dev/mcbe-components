@@ -1957,6 +1957,12 @@ const craftingInputText: CraftingScreenInputTextStyle = {...craftingTextStyle,cl
 const craftingImageProfile: CraftingScreenImageRenderProfile = {...imageRenderProfile,origin:[94,57.5],imagePhysicalPrecision:'float32',itemImages:true,itemModels:true,
   text:{crafting:craftingTextStyle,inventory:craftingTextStyle,recipeTitle:craftingTextStyle,query:craftingInputText,
     placeholder:{...craftingInputText,clipQuantization:'floor-min-ceil-max'},inventoryCount:craftingTextStyle,recipeCount:craftingTextStyle}};
+const craftingFullFrame: CraftingScreenImageRenderProfile = {...craftingImageProfile,frame:{...craftingImageProfile.frame,rasterOrigin:'top-left'},rasterBounds:'frame'};
+const craftingWindow: CraftingScreenImageRenderProfile = {...craftingFullFrame,frame:{...craftingFullFrame.frame,rasterOrigin:'webgl'},rasterBounds:'window'};
+// @ts-expect-error only the declared raster allocation bounds are supported
+const badCraftingRasterBounds: CraftingScreenImageRenderProfile = {...craftingImageProfile,rasterBounds:'unknown'};
+// @ts-expect-error only the declared renderer origins are supported
+const badCraftingRasterOrigin: CraftingScreenImageRenderProfile = {...craftingImageProfile,frame:{...craftingImageProfile.frame,rasterOrigin:'bottom'}};
 const glintUniforms: ItemGlintUniforms = {uvOffset:[0,0],uvScale:[1,1],uvRotation:[0,0],glintColor:[.25,.25,.25],tintColor:[1,1,1,1],hudOpacity:1};
 const glintSampler: ItemGlintSampler = 'point-repeat', glintBlend: ItemGlintBlend = {source:'source-alpha',destination:'one-minus-source-alpha'};
 const glintOptions: ItemGlintRenderOptions = {uniforms:glintUniforms,glintSampler,blend:glintBlend,width:1,height:1};

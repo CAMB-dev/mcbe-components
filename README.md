@@ -4,9 +4,11 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 当前源码提供 **268 个公共组件**，另有 8 个数据导出与 13 个函数，共 289 个运行时值。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
 
-当前交付、预览入口与剩余范围集中在[阶段性交付状态](docs/DELIVERY_STATUS.md)。本轮收尾排除了直接使用解析像素中心POINT取样的假设，保留现有渲染；完整原生pixel-perfect目标仍未完成。
+当前交付、预览入口与剩余范围集中在[阶段性交付状态](docs/DELIVERY_STATUS.md)。完整原生pixel-perfect目标仍在进行中；较早解析POINT取样假设已排除，本阶段改为验证光栅目标条件。
 
-新增`classicPaneModelCalibration`，保留完整原玻璃材质和透明度；指定GUI4／5参考中，玻璃板与其余九个配方模型单元均RGBA零差。两个建筑页只剩放大镜160／5点差异。`#gui-layer`展开 **Calibrated glass pane** 可预览；这是显式类别校准，尚未恢复通用引擎fit-to-frame。见 [API](docs/CLASSIC_PANE_CALIBRATION.md) 与 [验证](docs/CLASSIC_PANE_CALIBRATION_QA.md)。
+新增显式完整光栅目标：`imageRender.frame.rasterOrigin: 'top-left'`配合`imageRender.rasterBounds: 'frame'`。指定GUI4／5建筑页及GUI4收起／空搜索页，完整3,603,140个RGBA像素均与原生参考零差；原有165点建筑页残差全部消除，无新增误差。控件与可见窗口不扩大，默认裁切策略不变。`#crafting-layer`可切换两种分配；范围与显存取舍见[合成台光栅目标](docs/CRAFTING_RASTER_TARGET.md)。
+
+新增`classicPaneModelCalibration`，保留完整原玻璃材质和透明度；指定GUI4／5参考中，玻璃板与其余九个配方模型单元均RGBA零差。该阶段默认裁切的两个建筑页仍有放大镜160／5点差异，上述完整目标模式已解决指定参考中的残差。`#gui-layer`展开 **Calibrated glass pane** 可预览；这是显式类别校准，尚未恢复通用引擎fit-to-frame。见 [API](docs/CLASSIC_PANE_CALIBRATION.md) 与 [验证](docs/CLASSIC_PANE_CALIBRATION_QA.md)。
 
 新增显式只读投影 `classicBlockModelCalibration`：GUI4／GUI5的九个非玻璃板配方模型单元已与指定原生参考RGBA零差，共修正1,016个旧误差、未新增误差。组合附魔台示例也使用这份配置；该阶段的玻璃板残差已由上面的独立类别校准解决，放大镜残差及原版通用相机规则仍待查明。见 [接入及范围](docs/CLASSIC_MODEL_CALIBRATION.md) 与 [验证](docs/CLASSIC_MODEL_CALIBRATION_QA.md)。
 

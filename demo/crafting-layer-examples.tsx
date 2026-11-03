@@ -47,6 +47,7 @@ const observedSlots = () => ({ inputs: Array<InventoryItem | null>(9).fill(null)
 export function CraftingLayerExamples() {
   const [source, setSource] = useState(true), [images, setImages] = useState(true), [models, setModels] = useState(true), [original, setOriginal] = useState(true);
   const [scale, setScale] = useState('2'), [display, setDisplay] = useState('browse');
+  const [raster, setRaster] = useState('frame');
   const [layout, setLayout] = useState<CraftingLayout>('recipe-book'), [category, setCategory] = useState('construction');
   const [query, setQuery] = useState(''), [craftable, setCraftable] = useState(false), [expanded, setExpanded] = useState(false);
   const [collection, setCollection] = useState('sample'), [selected, setSelected] = useState('');
@@ -67,7 +68,8 @@ export function CraftingLayerExamples() {
     font: labels, fontScale: .5, sampling: guiScale === 4 ? 'point' : 'bilinear', shader: 'bitmap-smooth', metrics: { lineHeight: 8, paintOffset: [0, 0] },
   } : undefined;
   const imageRender: CraftingScreenImageRenderProfile | undefined = source ? {
-    frame: scale === '2' ? { width: 1280, height: 720, guiScale } : { width: 2570, height: 1402, guiScale },
+    frame: { ...(scale === '2' ? { width: 1280, height: 720, guiScale } : { width: 2570, height: 1402, guiScale }), rasterOrigin: raster === 'frame' ? 'top-left' : 'webgl' },
+    rasterBounds: raster === 'frame' ? 'frame' : 'window',
     displayScale, imagePhysicalPrecision: 'float32', itemImages: images, itemModels: models,
     text: labelStyle ? { crafting: labelStyle, inventory: labelStyle, recipeTitle: labelStyle } : undefined,
   } : undefined;
@@ -105,6 +107,9 @@ export function CraftingLayerExamples() {
       ]}/>
       <Combobox label="Crafting display size" value={display} onValueChange={setDisplay} options={[
         { value: 'browse', label: 'Library size · display scale 1' }, { value: 'native', label: '1:1 pixels · display scale GUI / 2' },
+      ]}/>
+      <Combobox label="Crafting raster allocation" value={raster} onValueChange={setRaster} options={[
+        { value: 'frame', label: 'Full frame · top-left' }, { value: 'window', label: 'Window · WebGL' },
       ]}/>
       <Combobox label="Crafting layout" value={layout} onValueChange={value => setLayout(value === 'survival' ? 'survival' : 'recipe-book')}
         options={[{ value: 'recipe-book', label: 'Wide · recipe book' }, { value: 'survival', label: 'Compact · right pane' }]}/>

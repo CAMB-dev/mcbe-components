@@ -1,6 +1,7 @@
 // Synthetic client contracts only. These tests do not certify native pixel parity.
 import { expect, test } from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
+import type { CraftingScreenImageRenderProfile } from '../src';
 import { readFile } from 'node:fs/promises';
 import { craftingClientProfile, craftingContractPage } from '../demo/crafting-contract-font';
 import type { CraftingImageOptions, CraftingImageState } from '../demo/crafting-image-fixture';
@@ -25,6 +26,30 @@ async function box(locator:Locator){const r=await locator.boundingBox();if(!r)th
 async function localRect(locator:Locator,root:Locator,expected:readonly number[]){const a=await box(locator),b=await box(root);expect([a.x-b.x,a.y-b.y,a.width,a.height]).toEqual(expected.map(x=>x*2));}
 function profile(){return craftingClientProfile();}
 function fontGate(url:string){const p=profile();p.text.crafting.font.pages=[url];return p;}
+
+test('full-frame raster allocation repaints without replacing semantic controls and returns to cropped allocation',async({page})=>{
+ const cropped=profile();await open(page,{source:true,profile:cropped,count:10,category:'search'});await ready(page);
+ const canvas=source(page);const original=await canvas.evaluate(node=>[(node as HTMLCanvasElement).width,(node as HTMLCanvasElement).height]);
+ expect(original[0]).toBeLessThan(cropped.frame.width);
+ const rootBox=await box(page.locator('.mc-crafting-screen')),paintBox=await box(page.locator('.mc-crafting-image-window'));
+ await save(page,'.mc-crafting-screen','raster-root');await save(page,'.mc-recipe-book__search input','raster-input');
+ const full:CraftingScreenImageRenderProfile={...cropped,rasterBounds:'frame',frame:{...cropped.frame,rasterOrigin:'top-left'}};
+ await patch(page,{profile:full});
+ await expect.poll(()=>source(page).evaluate(node=>[(node as HTMLCanvasElement).width,(node as HTMLCanvasElement).height])).toEqual([1280,720]);
+ await ready(page);await expect(page.locator('.mc-crafting-image-window')).toHaveAttribute('data-output-rect','0,0,1280,720');
+ expect(await box(page.locator('.mc-crafting-screen'))).toEqual(rootBox);expect(await box(page.locator('.mc-crafting-image-window'))).toEqual(paintBox);
+ expect(await same(page,'.mc-crafting-screen','raster-root')).toBe(true);expect(await same(page,'.mc-recipe-book__search input','raster-input')).toBe(true);
+ await patch(page,{profile:cropped});await expect.poll(()=>source(page).evaluate(node=>[(node as HTMLCanvasElement).width,(node as HTMLCanvasElement).height])).toEqual(original);
+ await ready(page);expect(await same(page,'.mc-recipe-book__search input','raster-input')).toBe(true);
+ await page.evaluate(()=>window.craftingImageQA.unmount());await expect(page.locator('.mc-crafting-image-layer')).toHaveCount(0);
+});
+
+test('invalid raster bounds fail back to semantic controls instead of allocating a target',async({page})=>{
+ const invalid={...profile(),rasterBounds:'unknown'} as unknown as CraftingScreenImageRenderProfile;
+ await open(page,{source:true,profile:invalid,count:10,category:'search'});const error=page.locator('.mc-crafting-image-error');await expect(error).toHaveAttribute('data-render-state','error');
+ await expect(error).toHaveAttribute('data-render-error',/raster bounds/i);
+ await expect(page.locator('.mc-recipe-book__search input')).toBeVisible();await expect(page.locator('.mc-crafting-image-layer')).toHaveCount(0);
+});
 
 test('wide full326 body preserves independent book/fold/right/tabs/toolbar source declarations',async({page})=>{
  await open(page,{source:true,profile:profile(),count:14});await ready(page);const root=page.locator('.mc-crafting-screen');
