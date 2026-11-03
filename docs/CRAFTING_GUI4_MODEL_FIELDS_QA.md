@@ -27,3 +27,5 @@
 固定旧角度／比例后，新约束仍给出一个非零宽度的可行区间，并非唯一相机；它不能证明正常引擎变换、原点计算或运算顺序。下一步需要独立的变换来源，不能将捕获坐标转成每个物品的补偿表。
 
 原始C++、resources.bin、已选字节范围与来源、39面字段、独立半精度／float32负控制保留在`.cache/crafting-gui4-model-fields-20261103-01/`。没有新浏览器、服务、游戏或Computer Use操作。库／demo／包配置及组件计数不变；上轮GPU与包检查不重计为本轮执行，完整pixel-perfect目标仍未完成。
+
+后续已加入显式的共用参考校准：两比例九个非玻璃板配方单元零差，地毯273点旧误差消除；它不是原版相机算法恢复，也没有改half舍入。见 [校准API](CLASSIC_MODEL_CALIBRATION.md) 与 [新验证](CLASSIC_MODEL_CALIBRATION_QA.md)。

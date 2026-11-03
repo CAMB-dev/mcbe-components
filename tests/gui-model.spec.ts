@@ -7,10 +7,10 @@ import { inflateRawSync } from 'node:zlib';
 import { PNG } from 'pngjs';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { GuiLayer, renderGuiLayer } from '../src';
+import { GuiLayer, renderGuiLayer, classicBlockModelCalibration } from '../src';
 import type { GuiLayerProps } from '../src';
 import { layoutGuiModel, createGuiCuboidModel } from '../src/gui-model-geometry';
-import type { GuiModelGeometry } from '../src/gui-model-geometry';
+import type { GuiModelGeometry, GuiModelProjection } from '../src/gui-model-geometry';
 import { assembleGuiTextureAtlas } from '../src/gui-texture-atlas';
 
 const sha = (value: Uint8Array) => createHash('sha256').update(value).digest('hex');
@@ -181,7 +181,7 @@ function independentFaces(height:number,table:boolean):any[] {
 }
 function half(value:number){const data=new DataView(new ArrayBuffer(2));(data as any).setFloat16(0,value,true);return (data as any).getFloat16(0,true) as number;}
 function halfBytes(points:number[][]){const value=Buffer.alloc(points.length*4),view=new DataView(value.buffer,value.byteOffset,value.byteLength);points.forEach(([x,y],i)=>{(view as any).setFloat16(i*4,x,true);(view as any).setFloat16(i*4+2,y,true);});return value;}
-async function nativeModels(scale:number,route:'atlas'|'original'|'assembled-originals') {
+async function nativeModels(scale:number,route:'atlas'|'original'|'assembled-originals',calibrated?:Readonly<GuiModelProjection>) {
  const archive=await originalZip(),common=jsonc(archive('resource_pack/ui/ui_common.json')),blocks=jsonc(archive('resource_pack/blocks.json'));
  expect(common.root_panel.size).toEqual([176,166]);expect(common.container_item.size).toEqual([18,18]);expect(common.container_item['$item_renderer_size|default']).toEqual([16,16]);
  const hotbar=common.hotbar_grid_template;expect(hotbar.size).toEqual([162,18]);expect(hotbar.grid_dimensions).toEqual([9,1]);expect(hotbar.offset).toEqual([0,-5]);expect(hotbar.anchor_from).toBe('bottom_middle');expect(hotbar.anchor_to).toBe('bottom_middle');
@@ -196,7 +196,7 @@ async function nativeModels(scale:number,route:'atlas'|'original'|'assembled-ori
  expect(found.end_rod).toEqual([864,112,16,16]);
  const assembled={kind:'atlas',width:1024,height:512,tiles:Object.entries(found).map(([name,tile])=>({origin:tile.slice(0,2),size:[16,16],texture:texture(originals[name]!)}))};
  const root=[(Math.ceil(2570/scale)-176)/2,(Math.ceil(1402/scale)-166)/2];
- const projection={yaw:45,pitch:30,scale:.625,offset:[1+10/Math.sqrt(2),8.9375],originQuantization:'physical-floor'};
+ const projection=calibrated??{yaw:45,pitch:30,scale:.625,offset:[1+10/Math.sqrt(2),8.9375],originQuantization:'physical-floor'};
  const origins=Array.from({length:3},(_,i)=>[root[0]!+(176-162)/2+i*18+1,root[1]!+166-18-5+1]);
  const commands=origins.map((origin,index)=>{
   const table=index===2,h=table?12:8,colors=table?{}:{east:[127,127,127,255] as const,south:[186,186,186,255] as const};
@@ -210,11 +210,11 @@ async function nativeModels(scale:number,route:'atlas'|'original'|'assembled-ori
  return{commands,origins,projection,draw,found,atlasSha256:sha(atlas.data),sourceTileHashes:Object.fromEntries(Object.entries(originals).map(([k,p])=>[k,sha(p.data)])),sourceAssembly:route==='assembled-originals'?{size:[1024,512],tiles:Object.entries(found).map(([name,tile])=>({name,origin:tile.slice(0,2),size:[16,16],originalRgbaSha256:sha(originals[name]!.data)})),otherTexels:'transparent zero',nativeAtlasPixelsAsInput:false}:undefined};
 }
 const nativeRoutes=process.env.GUI_MODEL_STANDALONE_DIAGNOSTIC==='1'?['original'] as const:['atlas','assembled-originals'] as const;
-for(const scale of [4,5])for(const route of nativeRoutes)test(`OPTIONAL PRIVATE GUI${scale} source ${route} cuboids equal the full native G57 target${route==='assembled-originals'?' with four complete original PNG tiles':''}`,async({page},info)=>{
+for(const scale of [4,5])for(const route of nativeRoutes)for(const calibrated of [false,true])test(`OPTIONAL PRIVATE GUI${scale} source ${route} ${calibrated?'calibrated':'legacy'} cuboids equal the full native G57 target${route==='assembled-originals'?' with four complete original PNG tiles':''}`,async({page},info)=>{
  const oraclePath=new URL('../.cache/gui-block-oracles-01/FINAL.json',import.meta.url);test.skip(!existsSync(oraclePath),'Private saved-capture block targets are optional and not distributed');
  const manifest=JSON.parse(await readFile(oraclePath,'utf8'));expect(manifest.allExitCodesZero).toBe(true);expect(manifest.allReadbackErrorsZero).toBe(true);const entry=manifest.cases.find((c:any)=>c.guiScale===scale);
  const load=async(value:any,hash:string)=>{const p=PNG.sync.read(await readFile(new URL('../'+value.path,import.meta.url)));expect([p.width,p.height]).toEqual([2570,1402]);expect(sha(p.data)).toBe(hash);return p;};
- const before=await load(entry.before,entry.beforeRGBAsha256),after=await load(entry.after,entry.afterRGBAsha256),scene=await nativeModels(scale,route);await open(page);await page.setViewportSize({width:2570,height:1402});
+ const before=await load(entry.before,entry.beforeRGBAsha256),after=await load(entry.after,entry.afterRGBAsha256),scene=await nativeModels(scale,route,calibrated?classicBlockModelCalibration:undefined);await open(page);await page.setViewportSize({width:2570,height:1402});
  const options={width:2570,height:1402,guiScale:scale,commands:scene.commands,background:{kind:'texture',texture:texture(before),encoding:'framebuffer'}};
  const actual=await render(page,options);await prove(info,`gui${scale}-${route}-native-fbo`,actual.data,after.data,{frame:[2570,1402],renderer:actual.renderer,projection:scene.projection,origins:scene.origins,independentTiles:scene.found,atlasSha256:scene.atlasSha256,sourceTileHashes:scene.sourceTileHashes,sourceAssembly:scene.sourceAssembly,scope:'Finite-observation explicit host projection, not unique native CPU centering; matching native-before comparison background only'});await prove(info,`gui${scale}-${route}-native-live`,actual.live,after.data);
  await mount(page,{...options,label:`GUI${scale} source cuboids`});const view=await raw(page);expect(view.renderer).toMatch(/NVIDIA.*Direct3D11/);expect(view.error).toBe(0);await prove(info,`gui${scale}-${route}-native-react`,view.data,after.data,{renderer:view.renderer,attributes:view.attributes});

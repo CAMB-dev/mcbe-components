@@ -1881,7 +1881,7 @@
   },
   "publicExports": {
     "components": 268,
-    "rendererDataValues": 3,
+    "rendererDataValues": 4,
     "pureGlintFunctions": [
       "shadeItemGlint",
       "renderItemGlint"
@@ -1891,17 +1891,17 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 287,
+    "runtimeValues": 288,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "world_settings_composition_268_287_package_installed_built_pass_native_incomplete",
+    "publicationState": "classic_model_calibration_268_288_package_installed_built_pass_native_incomplete",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
     ],
-    "dataValues": 6,
+    "dataValues": 7,
     "npcDataValues": 2,
     "npcRegistries": [
       "npcSkinNames",
@@ -1920,6 +1920,9 @@
       "layoutGuiModel",
       "createGuiCuboidModel",
       "layoutSettingsFrame"
+    ],
+    "calibratedModelProjectionData": [
+      "classicBlockModelCalibration"
     ]
   },
   "progressStage": {
@@ -2456,5 +2459,59 @@
     "defaultCameraRecovered": false,
     "newPixelRepair": false,
     "details": "docs/CRAFTING_GUI4_MODEL_FIELDS_QA.md"
+  },
+  "classicModelCalibrationStage": {
+    "status": "SHARED_EXPLICIT_REFERENCE_CALIBRATION_LIMITED_NATIVE_MODELS_VERIFIED",
+    "components": 268,
+    "dataValues": 7,
+    "runtimeValues": 288,
+    "publicData": "classicBlockModelCalibration",
+    "newDefaultProjection": false,
+    "engineCameraRecovered": false,
+    "selectedCommonOffsetY": 8.945084636506264,
+    "calibrationInputs": "Three previously recorded fixed-angle/scale quantized intervals; midpoint frozen before new GPU scores",
+    "nativeBackend": "NVIDIA RTX3050 ANGLE D3D11 DPR1",
+    "frame": [
+      2570,
+      1402
+    ],
+    "gpuArms": 6,
+    "gui5BeforeAfter": [
+      2097,
+      1422
+    ],
+    "gui4BeforeAfter": [
+      1419,
+      1078
+    ],
+    "resolvedPixels": [
+      675,
+      341
+    ],
+    "newlyDifferentPixels": 0,
+    "nonPaneRecipeCellsZeroEachScale": 9,
+    "compactDifferentPixels": 0,
+    "filterEmptyDifferentPixels": 160,
+    "nativeWholeGUI": false,
+    "nativeG57LegacyAndCalibrationChecks": 8,
+    "sourceBrowserFirstPass": 26,
+    "sourceBrowserFirstFail": 3,
+    "sourceDemoCorrectedPass": 3,
+    "nodePass": 5,
+    "legacyOutputControls": 12,
+    "packageReactVersions": [
+      "18.3.1",
+      "19.3.1"
+    ],
+    "packageFunctionalSHA256": "bc51d4eef76f4069a0fa73acc47a4d0ec3a5399ae6e271cfac2d56e62a033bfb",
+    "installedDefaultViteCases": 4,
+    "devProdPairs": 16,
+    "devProdRgbaPixels": 262144,
+    "devProdDifferentPixels": 0,
+    "installedBackend": "Chromium156 SwiftShader",
+    "builtPreviewPass": 6,
+    "sourceModules": 227,
+    "originalAssetRefs": 853,
+    "details": "docs/CLASSIC_MODEL_CALIBRATION_QA.md"
   }
 }

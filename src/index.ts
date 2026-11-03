@@ -257,6 +257,7 @@ export type { SettingsNavigationImage, SettingsNavigationSection, SettingsNaviga
   SettingsNavigationItem, SettingsNavigationDetail, SettingsNavigationProps } from './settings-navigation';
 export { SettingsFields } from './settings-fields';
 export type * from './settings-fields-model';
+export { classicBlockModelCalibration } from './classic-model-calibration';
 export { WorldGameSettings, WorldMultiplayerSettings, WorldCloudSettings, WorldDebugSettings } from './world-settings-fields';
 export type { WorldGameSettingsProps, WorldMultiplayerSettingsProps, WorldGameSettingsSnapshot, WorldMultiplayerSettingsSnapshot,
   WorldSettingsNamedSnapshot, WorldSettingsFieldMetrics, WorldSettingsExperimentSnapshot,

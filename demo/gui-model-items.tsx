@@ -1,12 +1,8 @@
-import { BlockPreview, createGuiCuboidModel } from '../src';
+import { BlockPreview, createGuiCuboidModel, classicBlockModelCalibration } from '../src';
 import type { GuiModelItem, GuiModelMesh, GuiModelProjection, GuiTextureAtlasSource, InventoryItem } from '../src';
 
-// One explicit observed profile, not an authoritative native CPU/default camera.
-// Several Y offsets reproduce the same two captured half-precision submissions.
-export const observedCuboidProjection: GuiModelProjection = {
-  yaw: 45, pitch: 30, scale: .625, offset: [1 + 10 / Math.sqrt(2), 8.9375],
-  originQuantization: 'physical-floor',
-};
+// Explicit shared reference calibration; geometry/atlas/lighting remain separate.
+export const observedCuboidProjection: Readonly<GuiModelProjection> = classicBlockModelCalibration;
 const texture = (name: string) => new URL(`../src/assets/item-renderers/${name}.png`, import.meta.url).href;
 const stone = texture('stone');
 // Explicit observed packing metadata; every tile remains an original source PNG.

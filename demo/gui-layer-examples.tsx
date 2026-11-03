@@ -45,7 +45,7 @@ export function GuiLayerExamples() {
     <Button onClick={() => setInputs(value => !value)}>{inputs ? 'Clear composed GUI inputs' : 'Restore composed GUI inputs'}</Button>
     <output aria-label="Combined GUI actions" style={{ fontSize: 12, overflowWrap: 'anywhere' }}>{receipt}</output>
     <p style={{ margin: 0, fontSize: 12 }}>Toggle the original text and item sprites to compare their appearance. Buttons, inventory actions and the book stay interactive.</p>
-    <p style={{ margin: 0, fontSize: 12 }}>The block example uses an explicit observed projection. Native CPU centering, other camera settings and other block shapes are still being verified.</p>
+    <p style={{ margin: 0, fontSize: 12 }}>The block example uses the shared Classic block calibration for GUI 4 and 5. Other shapes and the native camera rules are still being verified.</p>
     <p style={{ margin: 0, fontSize: 12 }}>{fonts ? 'Original glyph pages are prepared locally and stay outside the library. These are explicit GUI 4 and GUI 5 profiles; the text switch applies only to this example.'
       : 'Original glyphs are optional. Prepare them with scripts/use-local-workstation-fonts.py and restart the preview to enable this switch.'}</p>
     <ModelSourceExamples/>
