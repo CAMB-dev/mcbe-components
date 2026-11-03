@@ -275,3 +275,6 @@ export { WorldSettingsScreen } from './world-settings-screen';
 export type { WorldSettingsScreenProps, WorldSettingsScreenSnapshot, WorldSettingsScreenContext, WorldSettingsScreenViews,
   WorldSettingsPackSnapshot, WorldSettingsPage, WorldSettingsScreenRequest, WorldSettingsClassroomModule,
   WorldSettingsClassroomMountProps, WorldSettingsClassroomRequest, WorldSettingsClassroomSnapshot } from './world-settings-screen';
+
+export { InBedScreen, InBedControls } from './in-bed';
+export type { InBedFont, InBedButtonLayout, InBedControlsLayout, InBedLayout, InBedLabels, InBedAction, InBedCommand, InBedActionDetail, InBedControllerHandle, InBedNativeButtonProps, InBedControlsProps, InBedScreenProps } from './in-bed-types';

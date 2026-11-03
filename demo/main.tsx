@@ -1,3 +1,4 @@
+import { InBedExamples } from './in-bed-examples';
 import { ManifestValidationExamples } from './manifest-validation-examples';
 import { DisconnectExamples } from './disconnect-examples';
 import { WorldSettingsActionsExamples } from './world-settings-actions-examples';
@@ -90,6 +91,7 @@ const navigation: { id: string; name: string; icon: PixelIconName; count?: strin
   { id: 'play-screen', name: 'Play · Classic', icon: 'chevron', count: '12' },
   { id: 'manifest-validation', name: 'Pack validation', icon: 'chevron', count: '06' },
   { id: 'disconnect', name: 'Disconnect', icon: 'chevron', count: '03' },
+  { id: 'in-bed', name: 'In bed', icon: 'chevron', count: '03' },
   { id: 'world-settings-actions', name: 'World actions', icon: 'chevron', count: '02' },
   { id: 'settings-source', name: 'Settings parts', icon: 'chevron', count: '03' },
   { id: 'world-settings', name: 'World settings', icon: 'chevron', count: '03' },
@@ -512,6 +514,7 @@ function App() {
       <Example id="play-screen" title="Play · Classic" detail="世界、好友、服务器、加入代码与高延迟提示；数据与连接操作由宿主提供。"><PlayScreenExamples/></Example>
       <Example id="manifest-validation" title="Pack validation" detail="资源包信息、问题列表和复制／刷新／删除请求；原版验证报告的可复用部件。"><ManifestValidationExamples/></Example>
       <Example id="disconnect" title="Disconnect" detail="普通与 Realms 断线、警告；消息和动作区可独立复用。"><DisconnectExamples/></Example>
+      <Example id="in-bed" title="In bed" detail="睡眠状态、起床与聊天；两按钮操作区可独立复用。"><InBedExamples/></Example>
       <Example id="world-settings-actions" title="World settings actions" detail="创建、编辑与 Education 启动区；原始按钮可独立复用。"><WorldSettingsActionsExamples/></Example>
       <Example id="settings-source" title="Settings parts" detail="独立框架、导航、原版设置字段；尺寸和绑定由宿主提供。"><SettingsExamples/></Example>
       <Example id="world-settings" title="World settings" detail="Game69、Multiplayer8具名完整快照；原始导航与资源包挂载。"><WorldSettingsExamples/></Example>

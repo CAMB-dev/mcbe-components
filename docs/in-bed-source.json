@@ -1,0 +1,46 @@
+{
+  "officialRelease": "v1.26.60.5-full",
+  "commit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "files": [
+    {
+      "file": "in_bed_screen.json",
+      "bytes": 3288,
+      "sha256": "50328e1c646592c82262968468e384059c6b733dd1a88f37619f6285b6e6d22f"
+    },
+    {
+      "file": "ui_template_buttons.json",
+      "bytes": 76484,
+      "sha256": "3e250faef134965386ced074d73c998d2a363c79fed14ec928668cb7ff70ea96"
+    },
+    {
+      "file": "death_screen.json",
+      "bytes": 5327,
+      "sha256": "36e410160611c9b73f3eb5026858988f82e7821e6e3546df3a026d64825ebf33"
+    },
+    {
+      "file": "_global_variables.json",
+      "bytes": 20210,
+      "sha256": "ea39206de2c7b6f157def5cdf1662767c0ccd9560dfafb1378c3c364b236f69b"
+    },
+    {
+      "file": "ui_common.json",
+      "bytes": 243941,
+      "sha256": "0aae480d123b2c8667463776f8b0eabad665bc0378b287acd0babcf41d8083a6"
+    }
+  ],
+  "sourceCountChanged": false,
+  "nativeFrameCaptured": false,
+  "scope": "Named source/Web family; native whole-frame certification absent.",
+  "components": 270,
+  "runtimeValues": 292,
+  "controls": [
+    "InBedScreen",
+    "InBedControls"
+  ],
+  "nativeWholeGuiCertified": false,
+  "safeZoneResolution": "caller-explicit-contentRect",
+  "fontAndIntrinsicResolution": "caller-explicit",
+  "backgroundPolicy": "css-solid-web-black50percent",
+  "newOriginalArtFiles": 0
+}

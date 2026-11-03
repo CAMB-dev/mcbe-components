@@ -1,3 +1,5 @@
+> 新增睡眠族（2026-11-03）：当前270个公共组件＋8数据＋14函数＝292运行时值。InBedScreen及InBedControls提供实际睡眠状态／起床／聊天与可复用按钮行，安全区与字体intrinsic显式。见[API与有限验证](IN_BED.md)；历史清单计数与阶段身份继续保留。
+
 # Bedrock 组件范围
 
 > 当前源码（2026-11-03）：**268组件／289运行时值**，8数据和13函数不计组件。只读`classicBlockModelCalibration`及`classicPaneModelCalibration`用于显式参考校准，见 [方块](CLASSIC_MODEL_CALIBRATION.md) 与 [玻璃板](CLASSIC_PANE_CALIBRATION.md)。World整页组合见 [API](WORLD_SETTINGS_SCREEN.md) 与 [验证](WORLD_SETTINGS_SCREEN_QA.md)。Classroom实现依赖外部模块，原生整页仍未验收。

@@ -1,3 +1,5 @@
+> 新增睡眠族（2026-11-03）：InBedScreen／InBedControls使当前实际组件为270／运行时292；仅in_bed_screen.json从C更新为有限A。固定206行计数现为A46／B13／C30／D32／E0／F16／G63／H6；有限源／Web验证不代表原生整页完成。见[睡眠API与范围](IN_BED.md)。
+
 > World具名字段阶段（2026-11-03）：实际264组件／283值，新增WorldGameSettings、WorldMultiplayerSettings和WorldSettingsNavigation；Game69／Multi8具名内容与World／Add-ons导航已提供，完整WorldSettingsScreen仍未实现。两相关源文件继续为部分B，206行计数不变。见 [验收与剩余范围](WORLD_SETTINGS_FIELDS_QA.md)。
 
 # Bedrock Classic GUI覆盖清单
@@ -160,7 +162,7 @@ CreditsScreen／CreditsRoll／CreditsSkipButton与纯layoutCredits提供实际�
 |`hud_crosshair_overlay.json`|hud_crosshair|1|B|Crosshair|
 |`hud_screen.json`|hud|1|B|Hotbar、HealthBar、HungerBar、ArmorBar、AirBar、ExperienceBar、BossBar、Crosshair、ActionBar、TitleOverlay、TouchControls、HeldItemTooltip、PlayerList|
 |`immersive_reader.json`|im_reader|1|A|ImmersiveReader /ImmersiveReaderButton；独立绑定与显式宿主renderer /loading /popup尺寸，native未认证|
-|`in_bed_screen.json`|bed|1|C|Dialog、Panel、SettingRow、TextField、Button、ScrollArea|
+|`in_bed_screen.json`|bed|1|A|InBedScreen、InBedControls；显式安全区／字体／intrinsic，有限源码与Web交互验证，native整页未认证|
 |`inventory_screen.json`|crafting|3|A|CraftingScreen、SurvivalInventoryScreen、PlayerInventoryScreen、CreativeInventory、RecipeBook|
 |`inventory_screen_pocket.json`|crafting_pocket|3|F|—|
 |`invite_screen.json`|invite|1|A|InviteScreen、InvitePersonRow、InviteCategory、InvitePagination、InviteFooter（有限Classic源组合，原生整页未认证）|

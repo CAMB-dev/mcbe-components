@@ -1877,10 +1877,28 @@
         "fidelity": "fixed_source_composition_explicit_host_geometry_external_classroom_native_unqualified",
         "details": "docs/WORLD_SETTINGS_SCREEN.md"
       }
+    ],
+    "in_bed": [
+      {
+        "name": "InBedScreen",
+        "status": "implemented",
+        "source": "in_bed_screen.json",
+        "validation": "node5_source_browser45_inbed16_adjacent29_package18_19_functional02_installed4_source3_built3_native_unqualified",
+        "details": "docs/IN_BED.md",
+        "fidelity": "source_topology_host_intrinsic_font_default_anchor_explicit_native_unqualified"
+      },
+      {
+        "name": "InBedControls",
+        "status": "implemented",
+        "source": "in_bed_screen.json",
+        "validation": "node5_source_browser45_inbed16_adjacent29_package18_19_functional02_installed4_source3_built3_native_unqualified",
+        "details": "docs/IN_BED.md",
+        "fidelity": "source_topology_host_intrinsic_font_default_anchor_explicit_native_unqualified"
+      }
     ]
   },
   "publicExports": {
-    "components": 268,
+    "components": 270,
     "rendererDataValues": 5,
     "pureGlintFunctions": [
       "shadeItemGlint",
@@ -1891,12 +1909,12 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 290,
+    "runtimeValues": 292,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "truetype_text_268_290_package_installed_built_pass_native_incomplete",
+    "publicationState": "in_bed_270_292_source_package_installed_built_pass_native_unqualified",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
@@ -2666,5 +2684,23 @@
     "installedDevProdPairs": 8,
     "installedDevProdRgbaPixels": 1566,
     "sourceGuardBeforeIo": true
+  },
+  "inBedStage": {
+    "status": "SOURCE_NAMED_IN_BED_FAMILY_BROWSER_PACKAGE_VALIDATED_NATIVE_UNQUALIFIED",
+    "components": 270,
+    "runtimeValues": 292,
+    "source": "in_bed_screen.json",
+    "sourceBrowserCases": 45,
+    "newSourceBrowserCases": 16,
+    "nodeCases": 5,
+    "sourcePreviewCases": 3,
+    "safeZoneRectExplicit": true,
+    "nativeFramesCaptured": 0,
+    "nativeWholeGuiCertified": false,
+    "details": "docs/IN_BED.md",
+    "installedDefaultViteCases": 4,
+    "builtPreviewCases": 3,
+    "installedWebDevProdPlanePairs": 6,
+    "installedWebDevProdPlanePixels": 1536000
   }
 }

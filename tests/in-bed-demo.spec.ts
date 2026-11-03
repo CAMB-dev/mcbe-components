@@ -1,0 +1,12 @@
+import{test,expect}from'@playwright/test';
+test('sleeping preview and reusable controls use the real controlled source actions without page scrollbars',async({page},info)=>{
+ test.setTimeout(120000);const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/#in-bed');
+ const demo=page.getByTestId('in-bed-demo'),opener=demo.getByRole('button',{name:'预览睡眠界面'});await opener.scrollIntoViewIfNeeded();await expect(opener).toBeEnabled({timeout:60000});
+ await expect(demo.getByRole('group',{name:'In-bed actions'})).toBeVisible();await demo.getByRole('button',{name:'起床',exact:true}).click();await expect(demo.getByLabel('睡眠操作请求')).toHaveText('请求起床');
+ const baseline=await page.evaluate(()=>document.documentElement.scrollWidth),before=await page.evaluate(()=>({innerWidth,innerHeight,clientWidth:document.documentElement.clientWidth,clientHeight:document.documentElement.clientHeight,scrollWidth:document.documentElement.scrollWidth,visualWidth:visualViewport?.width,visualHeight:visualViewport?.height}));await opener.click();const screen=page.getByRole('dialog',{name:'睡眠',exact:true});await expect(screen).toBeVisible();
+ await info.attach('viewport-host.json',{body:Buffer.from(JSON.stringify({before,after:await page.evaluate(()=>({innerWidth,innerHeight,clientWidth:document.documentElement.clientWidth,clientHeight:document.documentElement.clientHeight,scrollWidth:document.documentElement.scrollWidth,visualWidth:visualViewport?.width,visualHeight:visualViewport?.height})),frame:await screen.boundingBox()})),contentType:'application/json'});
+ const size=page.viewportSize()!,box=await screen.boundingBox();expect(box!.x).toBe(0);expect(box!.y).toBe(0);expect(box!.width).toBeGreaterThanOrEqual(size.width);expect(box!.width).toBeLessThan(size.width+2);expect(box!.height).toBeGreaterThanOrEqual(size.height);expect(box!.height).toBeLessThan(size.height+2);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(baseline);await info.attach('in-bed-preview.png',{body:await page.screenshot(),contentType:'image/png'});
+ await screen.getByRole('button',{name:'打开聊天窗口'}).click();await expect(screen).toHaveCount(0);await expect(opener).toBeFocused();await expect(demo.getByLabel('睡眠操作请求')).toHaveText('请求打开聊天窗口');
+ await opener.click();await page.keyboard.press('Escape');await expect(screen).toHaveCount(0);await expect(demo.getByLabel('睡眠操作请求')).toHaveText('请求起床');expect(errors).toEqual([]);
+});

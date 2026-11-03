@@ -147,14 +147,15 @@ components.push('FurnaceRecipeBook','FurnaceRecipeBookEntry','FurnaceRecipeCateg
 components.push('PlayScreen','PlayScreenFrame','PlayNavigationTabs','PlayWorldRow','PlayNetworkWorldRow','PlayWorldsContent','PlayFriendsContent','PlayServersContent','PlayServerRow','PlayServerDetails','PlayJoinCodeDialog','PlayHighPingDialog');
 components.push('ResourcePackManager','ResourcePackSection','ResourcePackItem','ResourcePackActions','ResourcePackDiagnostics','PackSettingsScreen','PackSettingsContent','PackContentTier');
 components.push("ManifestValidationButton","ManifestPackSummary","ManifestValidationIssue","ManifestValidationIssues","ManifestValidationContent","ManifestValidationScreen");
+components.push('InBedScreen','InBedControls');
 components.push('DisconnectScreen','DisconnectMessage','DisconnectActions');
 components.push('WorldSettingsActionButton','WorldLaunchActions');
 components.push('SettingsFrame','SettingsNavigation','SettingsFields');
 components.push('WorldGameSettings','WorldMultiplayerSettings','WorldSettingsNavigation','WorldCloudSettings','WorldDebugSettings','WorldServerSettings','WorldSettingsScreen');
-assert.equal(components.length,268);
+assert.equal(components.length,270);
 assert.equal(dataExports.length,8);
 assert.equal(rendererFunctions.length,14);
-assert.equal(Object.keys(ui).length,290);
+assert.equal(Object.keys(ui).length,292);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -433,6 +434,11 @@ const packedFont = {pages:['/caller-packed-font.png'],pageSizes:[128],cellHeight
 const packedText = {kind:'text',text:'1',font:packedFont,origin:[.3,.2],fontScale:1,sampling:'point',shader:'bitmap',color:[127,255,31,255],shadow:{offset:[1,1],tint:[.25,.25,.25,1]}};
 const packedLayout = ui.layoutGuiText({width:17,height:11,guiScale:2,...packedText});
 assert.equal(packedLayout.logicalWidth,6);
+const bedLayout={size:[320,200],contentRect:[0,0,320,200],scale:2,font:{family:'monospace',size:8,lineHeight:10},buttons:[{size:[64,20],labelSize:[54,10]},{size:[64,20],labelSize:[54,10]}],status:{origin:[50,105],width:220,alignment:'center',verticalAlignment:'center'}};
+const bedProps={open:true,layout:bedLayout,label:'Sleeping',status:'Sleep status',labels:{wake:'Wake',chat:'Chat'},inputHint:{visible:false}};
+assert.match(renderToString(element(ui.InBedScreen,bedProps)),/bed.wake_up_button_panel/);
+assert.equal(renderToString(element(ui.InBedScreen,{...bedProps,open:false})), '');
+assert.throws(()=>renderToString(element(ui.InBedScreen,{...bedProps,layout:{...bedLayout,buttons:Array(2)}})));
 const variableFont={pages:['/caller-variable-atlas.png'],pageSizes:[8],lineHeight:3,glyphs:{A:{page:0,atlasRect:[1,2,3,2],offset:[0,0],size:[3,2],advance:4}}};
 const variableText={kind:'truetype',text:'A',font:variableFont,origin:[2.25,3.25],projectionScale:1.5};
 const variableLayout=ui.layoutGuiTrueTypeText({width:17,height:11,guiScale:2,...variableText});
@@ -1791,6 +1797,7 @@ const consumerBookElements = <><BookReader {...consumerBookProps} ref={createRef
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState, WorkstationTextContext, WorkstationTextRenderer } from 'mcbeui';
 import { BitmapText, renderBitmapGlyphs, GuiIcon, guiIconNames, GuiImageLayer, layoutGuiImages, renderGuiImages } from 'mcbeui';
+import * as importBed from 'mcbeui';
 import { GuiLayer, layoutGuiText, layoutGuiTrueTypeText, renderGuiLayer, layoutGuiModel, createGuiCuboidModel, assembleGuiTextureAtlas, classicBlockModelCalibration, classicPaneModelCalibration } from 'mcbeui';
 import type { GuiTextureAtlasSource, GuiTextureAtlas, GuiLayerTextureSource, GuiLayerTexture } from 'mcbeui';
 import type { GuiModelFace, GuiModelMesh, GuiModelProjection, GuiModelGeometry, GuiModelLayoutOptions, GuiModelRun, GuiModelLayout, GuiModelItem, GuiCuboidFace, GuiCuboidModelOptions } from 'mcbeui';
@@ -1905,6 +1912,13 @@ const badHeaderFont:import('mcbeui').ResourcePackHeaderTextProfile={frame:{width
 // @ts-expect-error Unknown collection cannot inject another header.
 const badHeaderMap:NonNullable<import('mcbeui').ResourcePackManagerProps['headerTextProfiles']>={invalid:headerFontProfile};
 void [headerFontProfile,headerTextProfiles,badHeaderFont,badHeaderMap];
+const bedLayout:import('mcbeui').InBedLayout={size:[320,200],contentRect:[0,0,320,200],scale:2,font:{family:'monospace',size:8,lineHeight:10},buttons:[{size:[64,20],labelSize:[54,10]},{size:[64,20],labelSize:[54,10]}],status:{origin:[50,105],width:220,alignment:'center',verticalAlignment:'center'}};
+const bedElement=<importBed.InBedScreen open label="Sleeping" status="" labels={{wake:'Wake',chat:'Chat'}} layout={bedLayout} inputHint={{visible:false}} controllerRef={createRef<import('mcbeui').InBedControllerHandle>()}/>;
+// @ts-expect-error Full intrinsic button and label dimensions are explicit.
+const badBedLayout:import('mcbeui').InBedLayout={size:[320,200],contentRect:[0,0,320,200],scale:2,font:bedLayout.font,status:bedLayout.status};
+// @ts-expect-error Command names match the source mappings.
+const badBedCommand:import('mcbeui').InBedCommand='button.pause';
+void [bedElement,badBedLayout,badBedCommand];
 const variableFont:GuiTrueTypeFont={pages:['/caller-variable-atlas.png'],pageSizes:[8],lineHeight:3,glyphs:{A:{page:0,atlasRect:[1,2,3,2],offset:[0,0],size:[3,2],advance:4}}};
 const variableGeometry:GuiTrueTypeGeometry={text:'A',font:variableFont,origin:[0,0],projectionScale:1.5,originQuantization:'float32'};
 const variableOptions:GuiTrueTypeLayoutOptions={width:32,height:32,guiScale:1,...variableGeometry};

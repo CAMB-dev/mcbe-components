@@ -2,11 +2,13 @@
 
 React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素字体、硬边倒角、绿色交互状态、原生表单与键盘操作。以 **Bedrock Classic / JSON UI** 为主体，另提供独立的部分 OreUI 组件。
 
-当前源码提供 **268 个公共组件**，另有 8 个数据导出与 14 个函数，共 290 个运行时值。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
+当前源码提供 **270 个公共组件**，另有 8 个数据导出与 14 个函数，共 292 个运行时值。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
 
 新增[Classic Ten缓存生成工具](docs/CLASSIC_TRUETYPE_CACHE.md)：从用户自有原始TTF生成1024²图集，全部RGBA与指定原生缓存一致，保留原始字形度量及只读复算。原版字体不随包分发。现已接入独立的`GuiLayer kind:truetype`与`layoutGuiTrueTypeText`，支持可变字形、混排、阴影及资源快照；`#gui-layer`中展开 **Original Classic TrueType atlas** 可预览。见[使用与验证](docs/TRUETYPE_TEXT.md)，完整原生排版仍待验收。
 
 资源包标题计数现可通过`headerTextProfile`／`headerTextProfiles`使用原始TrueType图集，支持真实按钮状态、计数更新和失败回退。`#resource-packs`打开“启用原版标题计数”预览；原生单字条件对照NVIDIA零差，软件透明叠加仍差21点。见[接入与验证](docs/RESOURCE_PACK_HEADER_TEXT.md)。
+
+新增睡眠界面`InBedScreen`与可复用`InBedControls`，包含起床／聊天请求、状态文字、安全区内容定位和模态输入归属。`#in-bed`可预览；该族已有源／Web验证，原生整页仍待对照。见[使用与范围](docs/IN_BED.md)。
 
 当前交付、预览入口与剩余范围集中在[阶段性交付状态](docs/DELIVERY_STATUS.md)。完整原生pixel-perfect目标仍在进行中；较早解析POINT取样假设已排除，本阶段改为验证光栅目标条件。
 

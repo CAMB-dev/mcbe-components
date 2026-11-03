@@ -1,0 +1,26 @@
+.mc-in-bed-screen{position:relative;display:block;box-sizing:border-box;isolation:isolate;overflow:hidden;overscroll-behavior:contain;background:rgb(0 0 0/.5);color:#fff;text-shadow:none;image-rendering:pixelated}
+.mc-in-bed-screen[hidden],.mc-in-bed-controls[hidden]{display:none!important}
+.mc-in-bed-status{position:absolute;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;margin:0;color:#fff;text-shadow:none;pointer-events:none}
+.mc-in-bed-controls{position:relative;display:block;box-sizing:border-box;overflow:visible;text-shadow:none}
+.mc-in-bed-screen>.mc-in-bed-controls{position:absolute}
+.mc-in-bed-hint{position:absolute;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box;pointer-events:none}
+.mc-in-bed-button{appearance:none;position:absolute;top:0;display:block;box-sizing:border-box;min-width:0;min-height:0;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;outline:none;transform:none;font:inherit;font-weight:400;text-align:left;text-decoration:none;text-shadow:none;color:rgb(30% 30% 30%);cursor:pointer;touch-action:manipulation;isolation:isolate;opacity:1;filter:none}
+.mc-in-bed-button:is(:hover,:focus-visible,:active,:disabled){background:transparent;box-shadow:none;transform:none;filter:none;opacity:1;text-shadow:none}
+.mc-in-bed-button:disabled{color:rgb(30% 30% 30%);cursor:default}
+.mc-in-bed-button__skins{position:absolute;inset:var(--mc-bed-u);pointer-events:none;z-index:0}
+.mc-in-bed-button__outline{position:absolute;inset:0;pointer-events:none;filter:brightness(.075);z-index:1}
+.mc-in-bed-button__label{position:absolute;left:calc(5 * var(--mc-bed-u));top:calc(5 * var(--mc-bed-u));display:block;max-width:calc(120 * var(--mc-bed-u));max-height:calc(10 * var(--mc-bed-u));white-space:nowrap;overflow:hidden;pointer-events:none;z-index:2}
+.mc-in-bed-skin,.mc-in-bed-skin__clip{position:absolute;display:block;overflow:hidden;pointer-events:none}
+.mc-in-bed-skin__patch{display:block;image-rendering:pixelated}
+.mc-in-bed-hover,.mc-in-bed-pressed,.mc-in-bed-locked{display:none}
+.mc-in-bed-button:is(:hover,:focus-visible):not(:disabled){color:#fff}
+.mc-in-bed-button:is(:hover,:focus-visible):not(:disabled) .mc-in-bed-idle{display:none}
+.mc-in-bed-button:is(:hover,:focus-visible):not(:disabled) .mc-in-bed-hover{display:block}
+.mc-in-bed-button:is(:hover,:focus-visible,:active):not(:disabled) .mc-in-bed-button__outline{filter:none}
+.mc-in-bed-button:active:not(:disabled){color:#fff}
+.mc-in-bed-button:active:not(:disabled) .mc-in-bed-idle,.mc-in-bed-button:active:not(:disabled) .mc-in-bed-hover{display:none}
+.mc-in-bed-button:active:not(:disabled) .mc-in-bed-pressed{display:block}
+.mc-in-bed-button:active:not(:disabled) .mc-in-bed-button__label{translate:0 var(--mc-bed-u)}
+.mc-in-bed-button:disabled .mc-in-bed-idle{display:none}
+.mc-in-bed-button:disabled .mc-in-bed-locked{display:block}
+@media(forced-colors:active){.mc-in-bed-screen{background:Canvas;color:CanvasText}.mc-in-bed-status{color:CanvasText}.mc-in-bed-button__skins,.mc-in-bed-button__outline{display:none}.mc-in-bed-button{background:ButtonFace!important;border:1px solid ButtonText;color:ButtonText!important}.mc-in-bed-button:disabled{color:GrayText!important;border-color:GrayText}.mc-in-bed-button:focus-visible{outline:2px solid Highlight;outline-offset:2px}}
