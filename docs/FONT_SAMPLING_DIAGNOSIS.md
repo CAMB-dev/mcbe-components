@@ -1,5 +1,7 @@
 # 原生字形残差：采样路径诊断
 
+后续TrueType缓存已从原始TTF完整重建，见[缓存生成工具](CLASSIC_TRUETYPE_CACHE.md)。这是另一条POINT字体路径，不解决下面Unicode BitmapSmooth的SwiftShader38点差异；原反例与采样结论保持原范围。
+
 2026-11-03 在上一阶段的 U+6D3B“活”字案例上继续排查。现有公共 `renderGuiLayer`、原字页、2570×1402 完整目标、GUI5、明确宿主 origin 和原生 before 背景保持不变。没有改默认 shader、UV、字体、字宽、基线、阴影或容差。
 
 ## 当前结论

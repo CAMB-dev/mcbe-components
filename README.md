@@ -4,6 +4,8 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 当前源码提供 **268 个公共组件**，另有 8 个数据导出与 13 个函数，共 289 个运行时值。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
 
+新增[Classic Ten缓存生成工具](docs/CLASSIC_TRUETYPE_CACHE.md)：从用户自有原始TTF生成1024²图集，全部RGBA与指定原生缓存一致，保留原始字形度量及只读复算。原版字体不随包分发；专用TrueType文字接口和正常排版仍待接入。
+
 当前交付、预览入口与剩余范围集中在[阶段性交付状态](docs/DELIVERY_STATUS.md)。完整原生pixel-perfect目标仍在进行中；较早解析POINT取样假设已排除，本阶段改为验证光栅目标条件。
 
 新增显式完整光栅目标：`imageRender.frame.rasterOrigin: 'top-left'`配合`imageRender.rasterBounds: 'frame'`。指定GUI4／5建筑页及GUI4收起／空搜索页，完整3,603,140个RGBA像素均与原生参考零差；原有165点建筑页残差全部消除，无新增误差。控件与可见窗口不扩大，默认裁切策略不变。`#crafting-layer`可切换两种分配；范围与显存取舍见[合成台光栅目标](docs/CRAFTING_RASTER_TARGET.md)。

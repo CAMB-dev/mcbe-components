@@ -1,5 +1,7 @@
 # Classic Minecraft Ten：本机接入与有限原生对照
 
+后续已用原始TTF和固定stb64px／2×2配置重建完整原生1024²缓存，见[缓存生成工具与范围](CLASSIC_TRUETYPE_CACHE.md)。下文保留当时的provider未知与失败历史；完整TrueType文字接口／正常排版仍未完成。
+
 Classic 的 Minecraft Ten 与 HBUI 的 Minecraft Ten v2 是两份字体。2026-11-03 从本机 Bedrock 1.26.6005.0 只读核验后，展示页支持独立的 `MCBE Classic Ten` family。该接入不更改组件库默认字体、字号、基线、阴影或 GPU shader；公开包仍只附带原有开放字体。
 
 ## 准备与预览

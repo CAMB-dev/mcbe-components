@@ -2592,5 +2592,31 @@
     "installedBackend": "Chromium156 SwiftShader",
     "completeFontOrAllGuiCertified": false,
     "details": "docs/CRAFTING_RASTER_TARGET.md"
+  },
+  "classicTrueTypeCacheStage": {
+    "status": "SOURCE_TTF_TO_FULL_NATIVE_CACHE_EXACT_PUBLIC_PREPARATION_TOOL",
+    "components": 268,
+    "runtimeValues": 289,
+    "libraryRuntimeChanged": false,
+    "originalFontDistributed": false,
+    "nativeCaptureGeneratorInput": false,
+    "sourceFontSHA256": "fc34c190dbfae5fe2f27adb45a93425f502388191854a6a0c2ac2f7c594a688f",
+    "fullAtlasPixels": 1048576,
+    "fullAtlasRgbaDifferentPixels": 0,
+    "packedCharacterRecords": 256,
+    "sourcePresentRecords": 181,
+    "missingFallbackRecords": 75,
+    "localGlyphGeometryCompared": 3,
+    "localXYUVDifferentFields": 0,
+    "hostMvpDifferentFields": 1,
+    "nativeSingleGlyphProbeDifferentPixels": 0,
+    "softwareSingleGlyphProbeDifferentPixels": 2,
+    "probeUsesPrivatePreparedBoundary": true,
+    "probeNativeBeforeBackground": true,
+    "publicTrueTypeTextInterfaceIntegrated": false,
+    "compilerQualified": "Windows x64 TinyCC0.9.27",
+    "pythonGuardTests": 6,
+    "allFontsOrLayoutsCertified": false,
+    "details": "docs/CLASSIC_TRUETYPE_CACHE.md"
   }
 }

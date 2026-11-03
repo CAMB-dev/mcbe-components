@@ -265,3 +265,17 @@ alternatives are listed separately. Existing upstream rights and licenses,
 including `src/assets/resource-pack/LICENSE.md` (copied to dist), continue to
 apply independently of this project's MIT code license. Private game fonts and
 native capture data remain outside the package.
+
+## stb_truetype source preparation tool
+
+`scripts/vendor/stb/stb_truetype.h` is the unmodified v1.26 header from
+[nothings/stb](https://github.com/nothings/stb), commit
+`d14d46f6b44456eb88beac58cba833a4135d4c89`. It is authored by Sean Barrett and
+contributors and offered under MIT or public domain terms. The complete dual
+license is in `scripts/vendor/stb/LICENSE.txt`.
+
+It is used only by the source-repository Classic Ten cache preparation tool;
+the header and compiler are not part of the React/npm runtime. The caller's
+original Minecraft Ten TTF and generated private glyph cache are not included
+in the published library. The tool does not grant redistribution rights to
+that font.

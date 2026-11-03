@@ -34,3 +34,7 @@ src/assets/play-screen/** -text
 tests/fixtures/external-server-materials/** -text
 tests/fixtures/external-server-materials/ORIGINALS/** whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 src/assets/resource-pack/** -text
+
+# Vendored upstream stb sources retain their exact bytes and intentional whitespace.
+scripts/vendor/stb/stb_truetype.h -text whitespace=-blank-at-eol,-blank-at-eof
+scripts/vendor/stb/LICENSE.txt -text whitespace=-blank-at-eol,-blank-at-eof
