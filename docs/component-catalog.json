@@ -2413,5 +2413,48 @@
     "nativeWholeGUI": false,
     "defaultModelChanged": false,
     "details": "docs/CRAFTING_GUI4_HOLDOUT_QA.md"
+  },
+  "gui4ModelFieldsStage": {
+    "status": "PRE_SHADER_GEOMETRY_MISMATCH_ISOLATED_NOT_FIXED",
+    "components": 268,
+    "runtimeValues": 287,
+    "libraryRuntimeChanged": false,
+    "newGpuOrBrowserRun": false,
+    "selectedGlobalDraw": 94,
+    "selectedQuads": 39,
+    "selectedBufferBytes": 3476,
+    "cpuDecompressedBytes": 36577280,
+    "perModelXYDifferentComponents": [
+      1,
+      1,
+      1,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      4
+    ],
+    "perModelUVDifferentComponents": [
+      0,
+      0,
+      0,
+      8,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "colorDifferentFaces": 0,
+    "triangleDifferentFaces": 0,
+    "independentIEEEHalfComparedVertices": 144,
+    "independentHalfVersusProductDifferentVertices": 0,
+    "float32RewriteStillDifferentY": 7,
+    "defaultCameraRecovered": false,
+    "newPixelRepair": false,
+    "details": "docs/CRAFTING_GUI4_MODEL_FIELDS_QA.md"
   }
 }

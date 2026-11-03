@@ -29,3 +29,5 @@ GUI4参考是独立资源130的完整2570×1402 UI RT。重新核对原capture�
 证据在`.cache/crafting-gui4-holdout-20261103-01/`，包括运行前FROZEN02、实际EXECUTION02、完整图、CELL-GEOMETRY、独立CPU-REDECODE与阶段FINAL。初次准备器误读路径差异结构，重试又误将自身输入放进pin列表，门禁在浏览器启动前拒绝；原失败均保留，新目录修正工具后使用相同视觉输入执行。未改写旧组合实验。
 
 本轮未变更库、demo、包配置或资源，不重计上轮React18／19安装矩阵和展示检查。未发现当前运行的Minecraft窗口／进程，Computer Use只检查窗口后立即关闭；没有新游戏／PIX采帧。自建5499服务已关闭，用户4173预览保留。完整目标继续进行。
+
+后续CPU字段诊断已确认地毯四处Y差异、UV及颜色一致；独立IEEE half编码与当前公共输出相同，简单float32改写仍失败。该证据将问题定位到原生变换规则，而非直接修改纹理或half舍入，见 [模型字段诊断](CRAFTING_GUI4_MODEL_FIELDS_QA.md)。

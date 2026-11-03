@@ -1,3 +1,17 @@
+# Current GUI4 model fields checkpoint - 2026-11-03
+
+Goal ACTIVE / incomplete. Branch codex/gui4-model-fields-20261103 based on7d9995265cc53f4b54db3cfb1ccb771f0bd0449d. Normal authorized origin HEAD:main only, never force. Stage .cache/crafting-gui4-model-fields-20261103-01/FINAL.json seals commit/remote/doc-only package identity.
+
+- CPU-only reconstruction of existing GUI4 C++/XPRESS export; no API, replay, browser/GPU or CU. Selected recipe-scissored G94 PSO832 CL830 resource7 POINT/CLAMP,234indices/39quads, stride16 position-half/UV-unorm16/RGBA8. Resolves heap resource/VB29/IB13, prior queue copies, sparse upload pages; selected3476B (VB2496+IB468+CB512), decompressed36577280B due block compression. Read only selected VB/IB/CB payload, no texture/world/font payload. decoded/DRAW-EXTRACTION.json retains byte spans/provenance. Native CASE-RESULT matches prior FINAL hash. Current54source/export pins explicitly recorded after extraction, not falsely pre-frozen.
+- Actual same normalInputs and public layout against native: stairs each1XY/0UVdiff, pane24XY/8UV, slabs/cubes0XY/0UV, carpet4Y/0UV. All39face colors/indices/vertex order same. Carpet two shared top corners product144.375 native144.5 (delta-.125game/.5physicalGUI4) repeated in side faces. This proves a pre-shader geometry mismatch; does NOT causally explain all273pixel differences without a GPU counterfactual.
+- Independent Python IEEE-half reproduces all144nonpane product vertices exactly; naive stagedfloat32 still7Ydiff. All three previously frozen offset representatives fail carpet4Y. Fixed-angle/scale constraints still nonunique. No new offset selected or GPU-executed this stage, no default/texture/shader/UV/epsilon patch. Old whole1419/alpha0 result remains last stage, not new execution.
+- No src/demo/package changes; still268components/287runtime. Docs CRAFTING_GUI4_MODEL_FIELDS_QA plus README/catalog/GOAL updated. No peer matrix or tool tests rerun without relevant code change. Final doc-only tar must retain same891 runtime/package/license members as functional package02 SHA22751ea2d44a08a96281203f3e3b078daf29e42c484efceea0039f25d7171899. No npm registry publish.
+- User4173PID217140 retained. No new services, CU, game or PIX. No global memory writes.
+
+Next: reference-based calibration is part of the user's objective. A SINGLE common, explicitly opt-in calibrated projection profile can be studied against multiple heights/scales and separately held-out scenes, provided it is labelled finite reference calibration rather than recovered/universal engine constants. The prior ban on promoting fitted values to native defaults should not be misread as a user ban on all explicit reference calibration. Do not introduce per-item/per-vertex compensation or captured coordinates into production. Current diagnosed offset8.9375 fails seven Y fields, so blindly preserving it is not fidelity progress. Existing older72vertices bound +GUI5full +GUI4 heldout can establish a calibration interval, with independent whole-page checks mandatory before offering an opt-in normal profile. True original camera algorithm and fonts/default whole-GUI/Classroom remain unfinished.
+
+---
+
 # Current GUI4 construction holdout checkpoint - 2026-11-03
 
 Goal ACTIVE / incomplete. Branch codex/crafting-gui4-holdout-20261103 based on536011594cb56980044d4aa043bf61543c38b075. Normal authorized origin HEAD:main only, never force. Current stage .cache/crafting-gui4-holdout-20261103-01/FINAL.json seals commit/remote/services and doc-only package identity.
