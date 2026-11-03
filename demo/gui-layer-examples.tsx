@@ -4,6 +4,7 @@ import { nativeGuiWorkstationFonts, runeAtlasUrl } from 'virtual:mcbeui-game-fon
 import { gameItemTextures } from './materials';
 import { sampleGuiBlockItems } from './gui-model-items';
 import { ModelSourceExamples } from './model-source-examples';
+import { PaneCalibrationExample } from './pane-calibration-example';
 
 const runeTexts = ['elder light', 'bless creature', 'enchant scroll'];
 
@@ -49,5 +50,6 @@ export function GuiLayerExamples() {
     <p style={{ margin: 0, fontSize: 12 }}>{fonts ? 'Original glyph pages are prepared locally and stay outside the library. These are explicit GUI 4 and GUI 5 profiles; the text switch applies only to this example.'
       : 'Original glyphs are optional. Prepare them with scripts/use-local-workstation-fonts.py and restart the preview to enable this switch.'}</p>
     <ModelSourceExamples/>
+    <PaneCalibrationExample/>
   </section>;
 }

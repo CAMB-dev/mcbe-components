@@ -121,7 +121,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import * as ui from 'mcbeui';
 const components = ['GuiIcon','InventoryScreenFrame','SurvivalInventoryScreen','RecipeBook','RecipeBookEntry','CraftingScreen','RecipeFilterToggle','BitmapText','ItemGlint','InventoryToolbar','PlayerInventoryScreen','CreativeInventory','ArmorSlot','RecipeSearch','RecipeCategoryTabs','TradeOffer','TradingScreen','MountInventory','PlayerList','TouchControls','PauseMenu','DeathScreen','SettingsPanel','LoadingScreen','AchievementToast','WorldList','ServerList','PlayerCard','PackList','PackCard','BlockPreview','BannerPreview','ActionBar','Beacon','BeaconEffect','BossBar','ChatMessage','ChatPanel','Crafter','CrafterSlot','HeldItemTooltip','KeybindingField','Loom','NavigationList','RecipeSelectionGrid','Scoreboard','SearchField','SettingRow','Spinner','StatusEffect','Stonecutter','TitleOverlay','Toast','ToggleButton','Tooltip','AirBar','Alert','Anvil','ArmorBar','Badge','BlastFurnace','BrewingIndicator','BrewingStand','Button','CartographyTable','Checkbox','Chest','Combobox','ContainerFrame','CraftingTable','Crosshair','Dialog','Dispenser','Dropper','DurabilityBar','EnchantingBook','EnchantingRunes','EnchantingTable','EnchantmentOption','ExperienceBar','FuelIndicator','Furnace','Grindstone','HealthBar','Hopper','Hotbar','HungerBar','IconButton','Image','InventoryGrid','ItemCount','ItemImage','ItemSlot','ItemTooltip','NineSlice','Panel','PixelIcon','PlayerInventory','ProcessingArrow','Progress','RadioGroup','RecipeGrid','ResultSlot','ScrollArea','ScrollBar','Select','Separator','ShulkerBox','Slider','SlotPlaceholder','SmithingTable','Smoker','Switch','Tabs','Text','TextArea','TextField','WorkstationFrame'];
-const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames','npcSkinNames','npcAppearanceOptions','classicBlockModelCalibration'];
+const dataExports = ['bannerPatternIds','bannerDyeColors','loomPatternIds','guiIconNames','npcSkinNames','npcAppearanceOptions','classicBlockModelCalibration','classicPaneModelCalibration'];
 components.push('GuiImageLayer','GuiLayer','BookReader','BookEditor','BookPage','BookPageTurnButton','SignTextSurface','SignEditor','JigsawEditor','JigsawPriorityFields','CommandBlockEditor','CommandInput','CommandOutputPanel','StructureEditor','XYZVectorInput','ServerActionForm','ServerCustomForm','NpcPortrait','NpcSkinPicker','NpcActionEditor','NpcDialogue','NpcEditor');
 const rendererFunctions = ['shadeItemGlint','renderItemGlint','renderBitmapGlyphs','layoutGuiImages','renderGuiImages','layoutGuiText','renderGuiLayer','layoutGuiModel','createGuiCuboidModel','assembleGuiTextureAtlas','createNpcEntity','layoutCredits','layoutSettingsFrame'];
 components.push('EmoteWheel','EmoteSlotPreview','EmoteWheelScreen');
@@ -152,9 +152,9 @@ components.push('WorldSettingsActionButton','WorldLaunchActions');
 components.push('SettingsFrame','SettingsNavigation','SettingsFields');
 components.push('WorldGameSettings','WorldMultiplayerSettings','WorldSettingsNavigation','WorldCloudSettings','WorldDebugSettings','WorldServerSettings','WorldSettingsScreen');
 assert.equal(components.length,268);
-assert.equal(dataExports.length,7);
+assert.equal(dataExports.length,8);
 assert.equal(rendererFunctions.length,13);
-assert.equal(Object.keys(ui).length,288);
+assert.equal(Object.keys(ui).length,289);
 for (const internal of ['externalServerAssets','ExternalServerFormCore','ExternalServerFieldCore','validateExternalServerProfile']) assert(!Object.hasOwn(ui,internal),'Private ExternalServer helper must not become a public export: '+internal);
 for (const internal of ['planFileTransmission','snapshotFileTransmission','classicModalOwnsInput']) assert(!Object.hasOwn(ui,internal),'Private file transmission helper must not become a public export: '+internal);
 for (const internal of ['ChatComposerCore','ChatCompletionList','ChatCoordinatesToolbar','ChatSettingsPanel','ChatHostOptionsPanel','ChatHeader','ChatNewMessages','ChatToast','chatAssets','createChatRevision','snapshotChatScreen']) assert(!Object.hasOwn(ui,internal),'Private Chat helper must not become a public export: '+internal);
@@ -457,6 +457,8 @@ assert.deepEqual(modelLayout.runs[1].color,[127,127,127,255]);
 assert.throws(()=>ui.createGuiCuboidModel([0,0,0],[17,8,16]),RangeError);
 assert(Object.isFrozen(ui.classicBlockModelCalibration));assert(Object.isFrozen(ui.classicBlockModelCalibration.offset));
 assert.equal(ui.classicBlockModelCalibration.originQuantization,'physical-floor');
+assert(Object.isFrozen(ui.classicPaneModelCalibration));assert(Object.isFrozen(ui.classicPaneModelCalibration.options.uvs.up[0]));assert(Object.isFrozen(ui.classicPaneModelCalibration.projection.offset));
+assert.equal(ui.createGuiCuboidModel(ui.classicPaneModelCalibration.min,ui.classicPaneModelCalibration.max,ui.classicPaneModelCalibration.options).faces.length,6);
 const explicitModelUV=[[0,0],[0,16],[16,16],[16,0]];
 const sourcePlane=ui.createGuiCuboidModel([-8,.125,-11],[8,.125,-8],{coordinateSpace:'model',faces:['up','down'],uvs:{up:explicitModelUV,down:explicitModelUV},textures:{up:'all',down:'all'}});
 assert.equal(sourcePlane.faces.length,2);assert.deepEqual(sourcePlane.faces[0].uv,explicitModelUV);assert.equal(sourcePlane.faces[0].vertices[0][2],-11);
@@ -1779,7 +1781,7 @@ const consumerBookElements = <><BookReader {...consumerBookProps} ref={createRef
 import { Anvil, BlastFurnace, Button, Checkbox, Chest, Combobox, ContainerFrame, CraftingTable, Dialog, Dispenser, Dropper, DurabilityBar, EnchantingBook, EnchantingRunes, EnchantingTable, EnchantmentOption, FuelIndicator, Furnace, Grindstone, Hopper, Image, InventoryGrid, ItemCount, ItemImage, ItemSlot, ItemTooltip, NineSlice, ProcessingArrow, RadioGroup, RecipeGrid, ResultSlot, ShulkerBox, Slider, SlotPlaceholder, Smoker, Tabs, Text, TextField } from 'mcbeui';
 import type { ButtonProps, TabItem, EnchantmentOption as EnchantmentData, InventoryItem, ItemTooltipTextRenderer, EnchantingBookRendererState, WorkstationTextContext, WorkstationTextRenderer } from 'mcbeui';
 import { BitmapText, renderBitmapGlyphs, GuiIcon, guiIconNames, GuiImageLayer, layoutGuiImages, renderGuiImages } from 'mcbeui';
-import { GuiLayer, layoutGuiText, renderGuiLayer, layoutGuiModel, createGuiCuboidModel, assembleGuiTextureAtlas, classicBlockModelCalibration } from 'mcbeui';
+import { GuiLayer, layoutGuiText, renderGuiLayer, layoutGuiModel, createGuiCuboidModel, assembleGuiTextureAtlas, classicBlockModelCalibration, classicPaneModelCalibration } from 'mcbeui';
 import type { GuiTextureAtlasSource, GuiTextureAtlas, GuiLayerTextureSource, GuiLayerTexture } from 'mcbeui';
 import type { GuiModelFace, GuiModelMesh, GuiModelProjection, GuiModelGeometry, GuiModelLayoutOptions, GuiModelRun, GuiModelLayout, GuiModelItem, GuiCuboidFace, GuiCuboidModelOptions } from 'mcbeui';
 import type { GuiTextRgba8, GuiTextFont, GuiTextGeometry, GuiTextLayoutOptions, GuiTextRun, GuiTextLayout, GuiSpriteGeometry, GuiLayerCommand, GuiLayerProps, GuiLayerGeometryCommand, GuiLayerLayoutOptions, GuiLayerLayoutCommand, GuiLayerLayout, GuiLayerDraw, GuiLayerRenderOptions, GuiLayerRenderResult, EnchantingTableTextRenderStyle, EnchantingTableTextRenderProfile } from 'mcbeui';
@@ -1889,6 +1891,14 @@ const layerSource: GuiLayerGeometryCommand = {kind:'text',...sourceText};
 const layerCommand: GuiLayerCommand = {...layerSource,pages:new Map([[0,'/caller-packed-font.png']])};
 const sourceSprite: GuiSpriteGeometry = {rect:[1,2,16,16],color:[128,64,255,0],tint:[.5,1,.25,1]};
 const spriteCommand: GuiLayerCommand = {kind:'sprite',...sourceSprite,texture:'/caller-sprite.png'};
+const paneMesh:GuiModelMesh=createGuiCuboidModel(classicPaneModelCalibration.min,classicPaneModelCalibration.max,classicPaneModelCalibration.options);void paneMesh;
+const paneProjection:GuiModelProjection=classicPaneModelCalibration.projection;void paneProjection;
+// @ts-expect-error calibrated face UVs are deeply immutable
+classicPaneModelCalibration.options.uvs.up[0][0]=1;
+// @ts-expect-error calibrated projection is immutable
+classicPaneModelCalibration.projection.scale=1;
+// @ts-expect-error reference packing metadata is immutable
+classicPaneModelCalibration.referenceAtlas.origins.body[0]=0;
 const calibratedProjection:GuiModelProjection=classicBlockModelCalibration;void calibratedProjection;
 // @ts-expect-error public reference calibration is immutable
 classicBlockModelCalibration.yaw=20;

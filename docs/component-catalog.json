@@ -1881,7 +1881,7 @@
   },
   "publicExports": {
     "components": 268,
-    "rendererDataValues": 4,
+    "rendererDataValues": 5,
     "pureGlintFunctions": [
       "shadeItemGlint",
       "renderItemGlint"
@@ -1891,17 +1891,17 @@
       "renderGuiImages",
       "renderGuiLayer"
     ],
-    "runtimeValues": 288,
+    "runtimeValues": 289,
     "pureTextureFunctions": [
       "assembleGuiTextureAtlas"
     ],
     "countsAreNotPixelCertification": true,
-    "publicationState": "classic_model_calibration_268_288_package_installed_built_pass_native_incomplete",
+    "publicationState": "classic_pane_calibration_268_289_package_installed_built_pass_native_incomplete",
     "materialProfile": "Classic15RGBA4param_pendingnative; Ore6wholematerialRGBA0_nativeunqualified",
     "pureCreditsFunctions": [
       "layoutCredits"
     ],
-    "dataValues": 7,
+    "dataValues": 8,
     "npcDataValues": 2,
     "npcRegistries": [
       "npcSkinNames",
@@ -1922,7 +1922,8 @@
       "layoutSettingsFrame"
     ],
     "calibratedModelProjectionData": [
-      "classicBlockModelCalibration"
+      "classicBlockModelCalibration",
+      "classicPaneModelCalibration"
     ]
   },
   "progressStage": {
@@ -2513,5 +2514,54 @@
     "sourceModules": 227,
     "originalAssetRefs": 853,
     "details": "docs/CLASSIC_MODEL_CALIBRATION_QA.md"
+  },
+  "classicPaneCalibrationStage": {
+    "status": "EXPLICIT_PANE_CLASS_REFERENCE_CALIBRATION_VERIFIED",
+    "components": 268,
+    "dataValues": 8,
+    "runtimeValues": 289,
+    "publicData": "classicPaneModelCalibration",
+    "defaultBehaviorChanged": false,
+    "engineFitOrCameraRecovered": false,
+    "frame": [
+      2570,
+      1402
+    ],
+    "nativeBackend": "NVIDIA RTX3050 ANGLE D3D11 DPR1",
+    "nativeArms": 4,
+    "gui5BeforeAfter": [
+      1422,
+      5
+    ],
+    "gui4BeforeAfter": [
+      1078,
+      160
+    ],
+    "paneDifferentPixelsEachScale": 0,
+    "allTenRecipeModelCellsZeroEachScale": true,
+    "resolvedPixels": [
+      1417,
+      918
+    ],
+    "newlyDifferentPixels": 0,
+    "sourcePreviewFinalPass": 3,
+    "builtFirstPass": 2,
+    "builtFirstFail": 1,
+    "builtFinalPass": 3,
+    "packageReactVersions": [
+      "18.3.1",
+      "19.3.1"
+    ],
+    "functionalTarSHA256": "120b52b9c0f25422c18344a44648c1bf35e11f94352ca2fd845992d43f8421a3",
+    "installedViteCases": 4,
+    "devProdPairs": 4,
+    "devProdComparedPixels": 65536,
+    "devProdDifferentPixels": 0,
+    "installedBackend": "Chromium156 SwiftShader",
+    "originalDemoAssets": 3,
+    "sourceModules": 228,
+    "originalLibraryRefs": 853,
+    "nativeWholeGui": false,
+    "details": "docs/CLASSIC_PANE_CALIBRATION_QA.md"
   }
 }

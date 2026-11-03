@@ -1,6 +1,6 @@
 # Bedrock 组件范围
 
-> 当前源码（2026-11-03）：**268组件／288运行时值**，7数据和13函数不计组件。新增只读数据`classicBlockModelCalibration`用于显式参考校准，见 [接入及范围](CLASSIC_MODEL_CALIBRATION.md)。World整页组合见 [API](WORLD_SETTINGS_SCREEN.md) 与 [验证](WORLD_SETTINGS_SCREEN_QA.md)。Classroom实现依赖外部模块，原生整页仍未验收。
+> 当前源码（2026-11-03）：**268组件／289运行时值**，8数据和13函数不计组件。只读`classicBlockModelCalibration`及`classicPaneModelCalibration`用于显式参考校准，见 [方块](CLASSIC_MODEL_CALIBRATION.md) 与 [玻璃板](CLASSIC_PANE_CALIBRATION.md)。World整页组合见 [API](WORLD_SETTINGS_SCREEN.md) 与 [验证](WORLD_SETTINGS_SCREEN_QA.md)。Classroom实现依赖外部模块，原生整页仍未验收。
 
 > 上一261组件／280值设置基础件阶段：SettingsFrame、SettingsNavigation、SettingsFields及layoutSettingsFrame的36交互＋24原材质源浏览器检查、React18.3.1／19.3.1实际包、四个Vite安装场景、built展示8项及Node43通过。它们不自动成为本次新增组件或字段内核修订的验收结果。见 [SETTINGS_SOURCE_QA.md](SETTINGS_SOURCE_QA.md)。
 
