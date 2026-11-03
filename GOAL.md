@@ -1,4 +1,6 @@
-> 最新像素校准（2026-11-03，合成台组合候选）：当前A整帧逐字节重现旧D；E的完整RGBA残差由3,548降到2,097，含1,453个解决和2个新增误差，默认模型未改。独立标准库PNG复算和六项工具检查通过。仍为268组件／287运行时值，完整原生目标继续进行。见 [组合校准](docs/CRAFTING_MODEL_COMPOSITION_QA.md)。
+> 最新检查点（2026-11-03，原始模型基础能力）：`createGuiCuboidModel` 新增可选模型坐标、逐面UV和薄平面，保留旧方块默认输出；展示页可预览三份完整官方模型／纹理。React18／19实际包、四种Vite消费场景及桌面／手机生产预览通过。原版自动缩放及完整原生像素目标仍未完成，当前仍为268组件／287运行时值。见 [模型能力与验证](docs/MODEL_SPACE_CUBOIDS.md)。
+
+> 前阶段像素校准（2026-11-03，合成台组合候选）：当前A整帧逐字节重现旧D；E的完整RGBA残差由3,548降到2,097，含1,453个解决和2个新增误差，默认模型未改。独立标准库PNG复算和六项工具检查通过。仍为268组件／287运行时值，完整原生目标继续进行。见 [组合校准](docs/CRAFTING_MODEL_COMPOSITION_QA.md)。
 
 > 最新检查点（2026-11-03，World整页组合）：World 设置组合现提供 `WorldSettingsScreen`、`WorldServerSettings`、`WorldCloudSettings`、`WorldDebugSettings`，覆盖三个源别名、固定内容挂载、九种服务器工厂和独立32高提交、Cloud5及Debug7／150选项。当前源码268组件＋6数据＋13函数＝287运行时值；Classroom原始实现缺失，必须由外部模块接入，原生整页像素仍未完成。见 [整页API](docs/WORLD_SETTINGS_SCREEN.md) 与 [本阶段验证](docs/WORLD_SETTINGS_SCREEN_QA.md)。
 

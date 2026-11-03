@@ -4,6 +4,8 @@ React + TypeScript 的 Minecraft: Bedrock 风格 UI 组件库。方角、像素�
 
 当前源码提供 **268 个公共组件**，另有 6 个数据导出与 13 个函数，共 287 个运行时值。完整列表见 [组件清单](docs/COMPONENTS.md)；各族的有限验证范围与原生像素差异分别记录。
 
+`createGuiCuboidModel` 新增可选模型坐标、逐面UV和薄平面，旧方块默认输出保持不变。`#gui-layer` 展开 **Original geometry models** 可预览三份完整官方模型／纹理。React18／19实际包与四种Vite消费场景通过；原版自动缩放及整套原生像素仍未认证。见 [模型能力与验证](docs/MODEL_SPACE_CUBOIDS.md)。
+
 > 这是独立粉丝项目，与 Mojang、Microsoft 无关联。开源替代字体和 Web 布局与游戏存在差异；未声称整套 UI 与任何游戏版本零像素偏差。视觉来源与差异见 [FIDELITY.md](docs/FIDELITY.md)。
 
 新增现代 Ore 弹窗原语：`OreModal`、`OreModalHeader`、`OreModalContent`、`OreModalText`、`OreModalActions`，展示入口 `#ore-modals`。标题使用 Seven、正文使用 Noto；内容默认按设置尺寸裁切，显式开启后才使用自定义滚动区。未保存、删除和错误提示可由这些部分组合。浏览器已经完成的关闭通过 `native-close` 通知宿主，不自动重新弹出。[使用与验证说明](docs/ORE_MODAL_QA.md)。

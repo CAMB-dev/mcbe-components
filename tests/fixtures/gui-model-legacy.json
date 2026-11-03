@@ -1,0 +1,67 @@
+{
+  "sourceCommit": "5e950fc85e0b1ac48c5496a52087ebfb996fa9c2",
+  "sourceSHA256": "e9118d5afe001ce68b75bb6ff86e51cfa973c1e469fc8fa7f71427d78ce1190b",
+  "scope": "Frozen pre-extension cuboid and packed layout outputs, not Minecraft pixel references",
+  "records": [
+    {
+      "height": 1,
+      "scale": 1,
+      "sha256": "ae1c9f081a0778f9d0899bff7d97acbbc1291b81e10034367d4d69b4f4342e5e"
+    },
+    {
+      "height": 1,
+      "scale": 4,
+      "sha256": "7a871af1d34a84deed1af3af25859ca918ee46342d92e45fae97a213b5bb188c"
+    },
+    {
+      "height": 1,
+      "scale": 5,
+      "sha256": "7daf8cd25d0d6252451a635d128cffce4321d2e24dffe948eb1c98d4adc1d707"
+    },
+    {
+      "height": 8,
+      "scale": 1,
+      "sha256": "b2e20fe957b36957597f1dc24f8e47261302d55a33c52c285de21008d0d7396c"
+    },
+    {
+      "height": 8,
+      "scale": 4,
+      "sha256": "576664d2a33d79b92261cf7572fa480e1718fa7f791ef4c18fd5789326822af0"
+    },
+    {
+      "height": 8,
+      "scale": 5,
+      "sha256": "0cb6b033173cd42efb16926294ae255f2364da075fea67125902da575fd1d633"
+    },
+    {
+      "height": 12,
+      "scale": 1,
+      "sha256": "168a27748010a6a5f221cf3bebb045976dee7371664d27c5803c22d84740da6b"
+    },
+    {
+      "height": 12,
+      "scale": 4,
+      "sha256": "3ef8dbc0a48493e4aadfe017fe0fe9ff8e228cc0b81a9bafce27dcf111029f9d"
+    },
+    {
+      "height": 12,
+      "scale": 5,
+      "sha256": "516d505ae47f39e20a2e901e6e71fdfe69dafe3678618ccc9a9cc1210d0399c5"
+    },
+    {
+      "height": 16,
+      "scale": 1,
+      "sha256": "62a8a4ec19f5a5fc2a19431afe7829802b7c3db3670c4e091f17aa0fd26de2e4"
+    },
+    {
+      "height": 16,
+      "scale": 4,
+      "sha256": "6fd175c82f6f8dbbd6c3f303df314654acc06a232bb75c943ad22a3a53c2f972"
+    },
+    {
+      "height": 16,
+      "scale": 5,
+      "sha256": "b7bd0338db2b728f6603572d4811bd3478608bf8ad314b30bf4b4e69d7410ad6"
+    }
+  ]
+}

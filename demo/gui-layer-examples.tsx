@@ -3,6 +3,7 @@ import { Button, Combobox, EnchantingBook, EnchantingRunes, EnchantingTable, Swi
 import { nativeGuiWorkstationFonts, runeAtlasUrl } from 'virtual:mcbeui-game-font';
 import { gameItemTextures } from './materials';
 import { sampleGuiBlockItems } from './gui-model-items';
+import { ModelSourceExamples } from './model-source-examples';
 
 const runeTexts = ['elder light', 'bless creature', 'enchant scroll'];
 
@@ -47,5 +48,6 @@ export function GuiLayerExamples() {
     <p style={{ margin: 0, fontSize: 12 }}>The block example uses an explicit observed projection. Native CPU centering, other camera settings and other block shapes are still being verified.</p>
     <p style={{ margin: 0, fontSize: 12 }}>{fonts ? 'Original glyph pages are prepared locally and stay outside the library. These are explicit GUI 4 and GUI 5 profiles; the text switch applies only to this example.'
       : 'Original glyphs are optional. Prepare them with scripts/use-local-workstation-fonts.py and restart the preview to enable this switch.'}</p>
+    <ModelSourceExamples/>
   </section>;
 }

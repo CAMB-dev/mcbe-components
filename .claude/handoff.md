@@ -1,3 +1,18 @@
+# Current model-space cuboids checkpoint - 2026-11-03
+
+Goal ACTIVE / incomplete. Branch codex/model-space-cuboids-20261103 based on5e950fc85e0b1ac48c5496a52087ebfb996fa9c2. Normal authorized origin HEAD:main only, never force. Current stage .cache/model-space-qa-20261103-01/FINAL.json seals commit/remote/services and doc-only tar identity after push.
+
+- Existing createGuiCuboidModel gains optional coordinateSpace:model, canonical face subset and explicit four-corner UVs. Negative/>16 positions and one collapsed axis allowed; planes only emit perpendicular faces. Every model-space emitted face needs explicit UVs; invalid inactive UVs rejected. Default block behavior unchanged in twelve independently frozen pre-extension mesh/layout controls. No new public values:268 components/287 runtime.
+- Three complete original sample models, three whole PNGs and original license, fixed v1.26.60.5 ZIP, demo-only. Eight cubes/35faces; missing faces, negative uv_size, source UV180, double-sided zero-height planes. Explicit limited adapter uses pinned Blockbench coordinate conventions; not a general Bedrock geometry/animation parser. Original item_display_transforms retained as data, not evaluated. No screenshot-derived pane1.2 default or atlas fitting introduced.
+- Node fivePASS; source browser final22PASS0skip including four existing NVIDIA D3D11 finite native model profiles, not new model/fullGUI certification. React18.3.1/19.3.1 actual canonical package02 passed; immutable package02-tested.tgz SHA22751ea2d44a08a96281203f3e3b078daf29e42c484efceea0039f25d7171899. Original runtime asset closure226modules/853refs unchanged. Final doc-only pack must match this functional tar dist/package/licenses, not older world tar.
+- Actual installed four defaultVite dev/prod cases pass; eight whole frame pairs147840RGBA0, SwiftShader explicitly. Actual decode Blob proof checks all three whole PNG bytes/SHA in every case. HTTP observations alone were insufficient; no extra GET or image replacement. Source synthetic plane has independent full RGBA expectation. Built4173 desktop/Pixel7/320 threePASS, aspect preserved, lazy canvas closes/releases.
+- Retain package01 test canvas type error, browser01 backend guard/transparent screenshot failures, installed01 HTTP-only observation failure, built01 hashed URL assertion failure. Corrections did not change native oracles, thresholds, shaders or textures. Latest tests registered in default desktop/mobile/pixels configuration. No npm registry publish.
+- No Computer Use/game/PIX used this stage; user confirmed game main menu available. Root owns all Git/build/browser work. Own5496 source server closed during finalization; four-case5497/5498 closed. User4173PID217140 retained.
+
+Next: vanilla pane auto-fit/projection and remaining680 non-pane residuals remain unqualified. Old combined E still2097native differences, not promoted to defaults; old1174 source pins are historical and now drift in geometry implementation. Fonts/default layouts/whole-game native GUI and actual Classroom provider/source still unfinished. Book latest historical bodyRaster idle empty/mixed0 is distinct from old baseline3614; no new Book certification this stage. Goal is not complete from component counts, same-renderer comparisons or three source previews.
+
+---
+
 # Current Crafting combination calibration checkpoint — 2026-11-03
 
 Goal ACTIVE / incomplete. Branch codex/crafting-source-composition-20261103 based onb3b38c297cc739fd6b9e0c30f7ce6df4d2ada2fe. Normal authorized origin HEAD:main only, never force. Current stage .cache/crafting-model-combined-20261103-01/FINAL.json sealscommit/remote/servicesafterpush.

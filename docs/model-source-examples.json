@@ -1,0 +1,96 @@
+{
+  "sourceRelease": "v1.26.60.5",
+  "sourceCommit": "15701fa9c13923f12662984c32c124327e40e3d3",
+  "archiveSHA256": "d93dea9aa1fb241a3184cc9f9a074a2ff34bd1b3c00d859b09c24b4b9e4e9adf",
+  "resources": [
+    {
+      "entry": "resource_pack/models/blocks/shelf_mushroom_small.geo.json",
+      "destination": "demo/assets/model-source/shelf_mushroom_small.geo.json",
+      "bytes": 7155,
+      "sha256": "3fddf2178ee6d283cf6bf4876433fddc4caad2c86df79aad175e73fec08a1a0d"
+    },
+    {
+      "entry": "resource_pack/textures/blocks/shelf_mushroom_small.png",
+      "destination": "demo/assets/model-source/shelf_mushroom_small.png",
+      "bytes": 276,
+      "sha256": "aed4f32c60822a61928c1fbb3320b524e945c16ed285a8c1ed23020c7cfe1357"
+    },
+    {
+      "entry": "resource_pack/models/blocks/shelf_mushroom_large.geo.json",
+      "destination": "demo/assets/model-source/shelf_mushroom_large.geo.json",
+      "bytes": 7132,
+      "sha256": "c8d6d3b0d2440e7612c6e93f7b271d9894c40905fd80d79c647b9293485912bb"
+    },
+    {
+      "entry": "resource_pack/textures/blocks/shelf_mushroom_large.png",
+      "destination": "demo/assets/model-source/shelf_mushroom_large.png",
+      "bytes": 372,
+      "sha256": "a7b6d01241a4002a9f85d289d3e0c35403f2bde4c8f24a08c7af05482129b1f1"
+    },
+    {
+      "entry": "resource_pack/models/blocks/straw_bed_foot.geo.json",
+      "destination": "demo/assets/model-source/straw_bed_foot.geo.json",
+      "bytes": 8067,
+      "sha256": "d1a97658b06113a93d0043d03ae9c3214ed11b52ba54debe8eb08f3cf0ec25a2"
+    },
+    {
+      "entry": "resource_pack/textures/blocks/straw_bed.png",
+      "destination": "demo/assets/model-source/straw_bed.png",
+      "bytes": 1556,
+      "sha256": "7ec3f672f1f07a420a3527880105bdc993f3e53638d75aca07c8bdc55e00c782"
+    },
+    {
+      "entry": "LICENSE.md",
+      "destination": "demo/assets/model-source/Minecraft-Sample-LICENSE.md",
+      "bytes": 222,
+      "sha256": "ca18c0dede68ce24ea1cd6f9df0813579b6f9f979787983a50baec99345f975d"
+    }
+  ],
+  "models": [
+    {
+      "id": "shelf_mushroom_small",
+      "cubes": 2,
+      "faces": 12,
+      "physicalTextureSize": [
+        32,
+        32
+      ],
+      "geometryUVSize": [
+        16,
+        16
+      ],
+      "itemDisplayTransformsApplied": false
+    },
+    {
+      "id": "shelf_mushroom_large",
+      "cubes": 2,
+      "faces": 12,
+      "physicalTextureSize": [
+        32,
+        32
+      ],
+      "geometryUVSize": [
+        16,
+        16
+      ],
+      "itemDisplayTransformsApplied": false
+    },
+    {
+      "id": "straw_bed_foot",
+      "cubes": 4,
+      "faces": 11,
+      "physicalTextureSize": [
+        64,
+        64
+      ],
+      "geometryUVSize": [
+        16,
+        16
+      ],
+      "itemDisplayTransformsApplied": false
+    }
+  ],
+  "adapterScope": "Axis-aligned eight original cubes only. Mirrored X and explicit per-face UV corners follow Blockbench local convention; texture coordinates scale from declared UV size to original physical PNG size. No animation, bone/cube rotation, item display transforms or fit-to-frame evaluation.",
+  "editorSource": "https://github.com/JannisX11/blockbench/tree/ec0b2827104d0799c153bfb5f867579c0c44652f/js",
+  "nativeCertified": false
+}

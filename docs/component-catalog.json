@@ -2347,5 +2347,39 @@
     "auditUnitTests": 6,
     "nativeWholeGUI": false,
     "details": "docs/CRAFTING_MODEL_COMPOSITION_QA.md"
+  },
+  "modelSpaceCuboidsStage": {
+    "status": "OPTIONAL_SOURCE_GEOMETRY_EXTENSION_NOT_NATIVE_AUTO_FIT_CERTIFICATION",
+    "components": 268,
+    "runtimeValues": 287,
+    "libraryRuntimeChanged": true,
+    "newRuntimeExports": 0,
+    "options": [
+      "coordinateSpace",
+      "faces",
+      "uvs"
+    ],
+    "originalExamples": 3,
+    "originalCubes": 8,
+    "originalFaces": 35,
+    "wholeOriginalAssets": 7,
+    "legacyFrozenControls": 12,
+    "nodePass": 5,
+    "sourceBrowserPass": 22,
+    "sourceBrowserSkipped": 0,
+    "existingLimitedNativeProfilesRerun": 4,
+    "installedReactVersions": [
+      "18.3.1",
+      "19.3.1"
+    ],
+    "actualInstalledViteCases": 4,
+    "devProdWholeFramePairs": 8,
+    "devProdRgbaPixels": 147840,
+    "devProdDifferentPixels": 0,
+    "builtViewportPass": 3,
+    "newOriginalExamplesNativeCertified": false,
+    "vanillaPaneAutoFitRecovered": false,
+    "functionalTarSHA256": "22751ea2d44a08a96281203f3e3b078daf29e42c484efceea0039f25d7171899",
+    "details": "docs/MODEL_SPACE_CUBOIDS.md"
   }
 }

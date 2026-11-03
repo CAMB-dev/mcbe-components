@@ -1,0 +1,8 @@
+import{test,expect}from'@playwright/test';import{createGuiCuboidModel}from'../src/gui-model-geometry';
+import{PNG}from'pngjs';
+test('negative-coordinate source plane uses explicit flipped UV in complete function/live/mounted targets',async({page})=>{
+ await page.goto('/demo/gui-model-fixture.html');await page.waitForFunction(()=>!!window.guiModelQA);
+ const mesh=createGuiCuboidModel([-4,0,0],[4,4,0],{coordinateSpace:'model',faces:['south'],textures:{south:'all'},uvs:{south:[[0,0],[2,0],[2,2],[0,2]]}}),options={width:16,height:12,guiScale:1,commands:[{kind:'model',model:mesh,origin:[6,6],projection:{yaw:0,pitch:0,scale:1,offset:[0,0],originQuantization:'none'},textureSizes:{all:[2,2]},textures:{all:{width:2,height:2,rgba:[255,0,0,255,0,255,0,255,0,0,255,255,255,255,0,255]}}}]};
+ const expected=Buffer.alloc(16*12*4);for(let y=2;y<6;y++)for(let x=2;x<10;x++){const color=y<4?x<6?[0,255,0,255]:[255,0,0,255]:x<6?[255,255,0,255]:[0,0,255,255];expected.set(color,(y*16+x)*4);}
+ const result=await page.evaluate(o=>window.guiModelQA.render(o),options);expect(Buffer.from(result.rgba,'base64')).toEqual(expected);expect(Buffer.from(result.liveRgba,'base64')).toEqual(expected);await page.evaluate(o=>window.guiModelQA.mount(o),options);await expect(page.locator('.mc-gui-layer')).toHaveAttribute('data-render-state','ready');const mounted=await page.evaluate(()=>window.guiModelQA.rawCanvas());expect(Buffer.from(mounted.rgba,'base64')).toEqual(expected);const shot=PNG.sync.read(await page.locator('.mc-gui-layer').screenshot({omitBackground:true}));expect(shot.data).toEqual(expected);await page.evaluate(()=>window.guiModelQA.unmount());await expect(page.locator('canvas')).toHaveCount(0);
+});

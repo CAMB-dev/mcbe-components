@@ -47,6 +47,12 @@ export type GuiCuboidFace = 'up' | 'east' | 'south' | 'down' | 'west' | 'north';
 export interface GuiCuboidModelOptions {
   textures?: Partial<Record<GuiCuboidFace, string>>;
   colors?: Partial<Record<GuiCuboidFace, GuiTextRgba8>>;
+  /** Omitted keeps the original 0..16 block contract. Model space permits negative coordinates and one collapsed axis, with explicit UVs. */
+  coordinateSpace?: 'block' | 'model';
+  /** Source faces to emit, in the existing canonical order. Omitted emits all six. */
+  faces?: readonly GuiCuboidFace[];
+  /** Four explicit source-pixel UV corners in each emitted face's vertex order. */
+  uvs?: Partial<Record<GuiCuboidFace, GuiModelFace['uv']>>;
 }
 
 const own = (value: object, key: string) => Object.prototype.hasOwnProperty.call(value, key);
@@ -143,13 +149,16 @@ export function layoutGuiModel(options: GuiModelLayoutOptions): GuiModelLayout {
 
 /**
  * A source cuboid in the standard 0..16 block/texture coordinate convention.
- * Bounds must stay inside that reference cube. Custom models may instead supply
- * arbitrary local positions and explicit in-texture UVs through GuiModelMesh.
+ * Omitted coordinateSpace retains the reference cube. Model space accepts
+ * arbitrary finite source bounds; explicit face UVs remain independent of XYZ.
  */
 export function createGuiCuboidModel(min: Vec3, max: Vec3, options: GuiCuboidModelOptions = {}): GuiModelMesh {
   vector(min, 3, 'cuboid minimum'); vector(max, 3, 'cuboid maximum');
-  if (min.some((part, index) => part < 0 || max[index]! > 16 || part >= max[index]!)) throw new RangeError('Cuboid bounds require 0 <= min < max <= 16 on every axis.');
   if (!options || typeof options !== 'object' || Array.isArray(options)) throw new RangeError('Cuboid options must be an object.');
+  const space = options.coordinateSpace ?? 'block';
+  if (options.coordinateSpace !== undefined && options.coordinateSpace !== 'block' && options.coordinateSpace !== 'model') throw new RangeError('Cuboid coordinateSpace must be block or model.');
+  if (space === 'block' && min.some((part, index) => part < 0 || max[index]! > 16 || part >= max[index]!)) throw new RangeError('Cuboid bounds require 0 <= min < max <= 16 on every axis.');
+  if (space === 'model' && (min.some((part, index) => part > max[index]!) || min.filter((part, index) => part < max[index]!).length < 2)) throw new RangeError('Model-space cuboid bounds require min <= max and at least two positive extents.');
   for (const value of [options.textures, options.colors]) if (value !== undefined && (!value || typeof value !== 'object' || Array.isArray(value))) throw new RangeError('Cuboid face options must be records.');
   const [x0, y0, z0] = min, [x1, y1, z1] = max;
   const definitions: readonly { name: GuiCuboidFace; normal: Vec3; vertices: GuiModelFace['vertices']; texture: string }[] = [
@@ -160,11 +169,35 @@ export function createGuiCuboidModel(min: Vec3, max: Vec3, options: GuiCuboidMod
     { name: 'west', normal: [-1, 0, 0], texture: 'side', vertices: [[x0,y1,z1],[x0,y1,z0],[x0,y0,z0],[x0,y0,z1]] },
     { name: 'north', normal: [0, 0, -1], texture: 'side', vertices: [[x0,y1,z0],[x1,y1,z0],[x1,y0,z0],[x0,y0,z0]] },
   ];
-  return { faces: definitions.map(({ name, normal, vertices, texture }) => {
+  const names = new Set<string>(definitions.map(face => face.name));
+  if (options.faces !== undefined && (!Array.isArray(options.faces) || options.faces.length > 6)) throw new RangeError('Cuboid faces require at most six distinct source face names.');
+  const selected = new Set<GuiCuboidFace>();
+  for (const name of options.faces ?? names) {
+    if (!names.has(name) || selected.has(name as GuiCuboidFace)) throw new RangeError('Cuboid faces require distinct known source face names.');
+    selected.add(name as GuiCuboidFace);
+  }
+  if (options.uvs !== undefined) {
+    if (!options.uvs || typeof options.uvs !== 'object' || Array.isArray(options.uvs)) throw new RangeError('Cuboid uvs must be a source face record.');
+    for (const name of Object.getOwnPropertyNames(options.uvs)) {
+      if (!names.has(name)) throw new RangeError('Cuboid uvs require known source face names.');
+      const uv = options.uvs[name as GuiCuboidFace];
+      if (!Array.isArray(uv) || uv.length !== 4) throw new RangeError('Cuboid face UV requires four source corners.');
+      for (const point of uv) { vector(point, 2, 'cuboid face UV'); if (point.some((value: number) => value < 0)) throw new RangeError('Cuboid source UV must be nonnegative.'); }
+    }
+  }
+  if (space === 'model') for (const name of selected) {
+    if (!options.uvs || !own(options.uvs, name)) throw new RangeError('Model-space cuboids require explicit UV corners for every emitted face.');
+  }
+  const collapsedAxis = min.findIndex((part, index) => part === max[index]);
+  if (space === 'model' && collapsedAxis !== -1) for (const face of definitions) {
+    if (selected.has(face.name) && face.normal[collapsedAxis] === 0) throw new RangeError('Planar model cuboids can only emit faces perpendicular to the collapsed axis.');
+  }
+  return { faces: definitions.filter(face => selected.has(face.name)).map(({ name, normal, vertices, texture }) => {
     const chosen = options.textures && own(options.textures, name) ? options.textures[name] : undefined;
     const color = options.colors && own(options.colors, name) ? options.colors[name] : undefined;
     return { vertices, normal, texture: chosen === undefined ? texture : textureKey(chosen, 'cuboid texture'),
-      uv: vertices.map(([x, y, z]) => name === 'up' || name === 'down' ? [16 - z, x]
+      uv: options.uvs && own(options.uvs, name) ? options.uvs[name]!.map(([u, v]) => [u, v]) as unknown as GuiModelFace['uv']
+        : vertices.map(([x, y, z]) => name === 'up' || name === 'down' ? [16 - z, x]
         : name === 'east' || name === 'west' ? [16 - z, 16 - y] : [x, 16 - y]) as unknown as GuiModelFace['uv'],
       ...(color === undefined ? {} : { color: colorBytes(color, 'cuboid face color') }) };
   }) };

@@ -455,6 +455,10 @@ assert.deepEqual(modelLayout.paintOrigin,[0,0]);
 assert.equal(modelLayout.runs.length,3);
 assert.deepEqual(modelLayout.runs[1].color,[127,127,127,255]);
 assert.throws(()=>ui.createGuiCuboidModel([0,0,0],[17,8,16]),RangeError);
+const explicitModelUV=[[0,0],[0,16],[16,16],[16,0]];
+const sourcePlane=ui.createGuiCuboidModel([-8,.125,-11],[8,.125,-8],{coordinateSpace:'model',faces:['up','down'],uvs:{up:explicitModelUV,down:explicitModelUV},textures:{up:'all',down:'all'}});
+assert.equal(sourcePlane.faces.length,2);assert.deepEqual(sourcePlane.faces[0].uv,explicitModelUV);assert.equal(sourcePlane.faces[0].vertices[0][2],-11);
+assert.throws(()=>ui.createGuiCuboidModel([-8,0,-8],[8,0,8],{coordinateSpace:'model',faces:['up']}),/explicit UV/);
 const modelMarkup=renderToString(element(ui.GuiLayer,{width:640,height:480,guiScale:2,commands:[sourceModel],label:'Caller source model'}));
 assert.match(modelMarkup,/data-render-state="loading"/);
 assert.match(modelMarkup,/Caller source model/);
@@ -1885,6 +1889,14 @@ const sourceSprite: GuiSpriteGeometry = {rect:[1,2,16,16],color:[128,64,255,0],t
 const spriteCommand: GuiLayerCommand = {kind:'sprite',...sourceSprite,texture:'/caller-sprite.png'};
 const cuboidColors: GuiCuboidModelOptions = {colors:{up:[255,255,255,255],east:[127,127,127,255]}};
 const cuboid: GuiModelMesh = createGuiCuboidModel([0,0,0],[16,8,16],cuboidColors);
+const modelSpaceOptions:GuiCuboidModelOptions={coordinateSpace:'model',faces:['up','down'],uvs:{up:[[0,0],[0,16],[16,16],[16,0]],down:[[0,0],[16,0],[16,16],[0,16]]}};
+const sourcePlaneTyped:GuiModelMesh=createGuiCuboidModel([-8,.125,-11],[8,.125,-8],modelSpaceOptions);void sourcePlaneTyped;
+// @ts-expect-error only named coordinate spaces
+const invalidModelSpace:GuiCuboidModelOptions={coordinateSpace:'world'};void invalidModelSpace;
+// @ts-expect-error only known source faces
+const invalidModelFace:GuiCuboidModelOptions={faces:['front']};void invalidModelFace;
+// @ts-expect-error exactly four UV corners are required
+const invalidModelUV:GuiCuboidModelOptions={uvs:{up:[[0,0],[1,1],[2,2]]}};void invalidModelUV;
 export const cuboidDirection: GuiCuboidFace = 'east';
 export const cuboidFace: GuiModelFace = cuboid.faces[0]!;
 const modelProjection: GuiModelProjection = {yaw:45,pitch:30,scale:.625,offset:[8,9],originQuantization:'physical-floor'};
