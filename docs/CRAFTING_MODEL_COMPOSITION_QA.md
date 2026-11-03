@@ -44,3 +44,5 @@ python scripts/compare-crafting-candidates.py --study .cache/crafting-model-comb
 旧交接中的mixed3614属于Book label阶段。已有 `layout.bodyRaster` 阶段记录，指定原字体、idle策略、NVIDIA D3D11和该固定目标时，空白与混合正文均为完整RGBA0；见 [Book body raster](BOOK_BODY_RASTER_QA.md)。本轮只复核原记录，没有重跑该Book profile，也不扩展到编辑焦点、caret、选区、IME、默认字体或其他平台。
 
 完整pixel-perfect目标仍进行中。下一步应验证其他已采集GUI比例／状态及未恢复的模型、采样和布局来源；不能从这个候选推导全游戏完成率。
+
+随后已执行GUI4建筑保留场景：当前源码先完整重现E，再使用冻结的跨比例输入比较整帧。GUI4仍差1,419像素，其中地毯273点未能跨比例保持零差；没有提升为默认规则。见 [跨比例验证](CRAFTING_GUI4_HOLDOUT_QA.md)。

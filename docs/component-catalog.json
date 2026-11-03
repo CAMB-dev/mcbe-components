@@ -2381,5 +2381,37 @@
     "vanillaPaneAutoFitRecovered": false,
     "functionalTarSHA256": "22751ea2d44a08a96281203f3e3b078daf29e42c484efceea0039f25d7171899",
     "details": "docs/MODEL_SPACE_CUBOIDS.md"
+  },
+  "craftingGui4HoldoutStage": {
+    "status": "HELD_OUT_GUI4_CONSTRUCTION_EXECUTED_NOT_EXACT",
+    "components": 268,
+    "runtimeValues": 287,
+    "libraryRuntimeChanged": false,
+    "gui5BaselineDifferentPixels": 2097,
+    "gui5BaselineExactOldE": true,
+    "gui4DifferentPixels": 1419,
+    "gui4DifferentBytes": 4124,
+    "gui4AlphaDifferentPixels": 0,
+    "gui4PerRecipeCellDifferentPixels": [
+      22,
+      23,
+      23,
+      918,
+      0,
+      0,
+      0,
+      0,
+      0,
+      273
+    ],
+    "gui4OutsideRecipeCells": 160,
+    "fullPixelsPerTarget": 3603140,
+    "actualBackend": "NVIDIA RTX3050 ANGLE D3D11 DPR1",
+    "simpleCopyControlDifferentPixels": 0,
+    "newFrameComparatorTests": 5,
+    "existingDecoderTests": 6,
+    "nativeWholeGUI": false,
+    "defaultModelChanged": false,
+    "details": "docs/CRAFTING_GUI4_HOLDOUT_QA.md"
   }
 }

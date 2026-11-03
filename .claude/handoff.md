@@ -1,3 +1,18 @@
+# Current GUI4 construction holdout checkpoint - 2026-11-03
+
+Goal ACTIVE / incomplete. Branch codex/crafting-gui4-holdout-20261103 based on536011594cb56980044d4aa043bf61543c38b075. Normal authorized origin HEAD:main only, never force. Current stage .cache/crafting-gui4-holdout-20261103-01/FINAL.json seals commit/remote/services and doc-only package identity.
+
+- No src/demo/package/default model changes, still268 components/287 runtime. Current GUI5 E completeRGBA reproduces46754c2d45e0428278a1c56493073df637ccc90aeb6adc7b526dabb8eca931d3 /2097differences before held-out GUI4 execution. One historical source pin gui-model-geometry changed by prior modelspace stage; recorded, twelve legacy controls already passed. No historical proof rewritten.
+- GUI4 construction previously native-qualified but product-unscored. Same ten normal models/whole14original atlas/face bindings/camera/state/font pages. Only frame4/display2, prior GUI4 point label styles and default existing center instead of explicit GUI5origin; seven field paths frozen before GPU. No new camera/UV/scale fitting. Native source130 reverified original/copy SHA, artifacts and all raw rowPitch bytes to PNG, pre transparent.
+- Actual NVIDIA RTX3050 ANGLE D3D11 DPR1, full3603140RGBA perarm. GUI4 different1419pixels/4124bytes/alpha0; cells22,23,23,918,0,0,0,0,0,273; outside160magnifier [1134,306,1193,357]. GUI5 cells68,87,88,1417,0,0,0,213,219,0; outside5. Different native targets, NOT2097-to1419repair improvement. Carpet0GUI5 versus273GUI4 refutes whole-profile transfer. Both independent native-copy controls0; allmarkers/currentpins/runtime clean. Source public layout supplies classification cells, never masks primary score.
+- New scripts/compare-gui-frame.py reuses independent stdlib PNG decoder for whole RGBA, perimage PNG/RGBA SHA, exact0/difference1/error2 exits, dimension mismatch rejection, transparent RGB counted, no overwrites/input rewrites. Five independent tests PASS, olddecoder sixPASS. Full CPU re-decodes agree with both actual PNGjs reports. CLI checks include real native-copy0 and product1. Generic tool explicitly does NOT verify native provenance.
+- First prepare misread delta list strings; retry accidentally self-pinned already-written input files, rejected before browser. Both preserved; new run02/FROZEN02 and executor02 fix only bookkeeping, same visual fields. No src change or new peer/browser matrix counts. Final doc-only pack must match functional package02 SHA22751ea2d44a08a96281203f3e3b078daf29e42c484efceea0039f25d7171899.
+- CU skill read; list_windows found noMinecraft, process inventory also empty; no app launch/input/PIX/native acquisition. CU kernel reset immediately. Own5499 server/browsers closed; user4173PID217140 preserved. No global memory writes or registry publish.
+
+Next: source-backed cross-scale model projection/sampling, especially carpet273 and pane918; cannot promote old camera/observed atlas packing as engine defaults. GUI4 search-all still product-unqualified, its36items need full normal source inputs. Original font/default layout/whole native GUI/Classroom remain unfinished. Goal not complete from counts, finite cells or tool tests.
+
+---
+
 # Current model-space cuboids checkpoint - 2026-11-03
 
 Goal ACTIVE / incomplete. Branch codex/model-space-cuboids-20261103 based on5e950fc85e0b1ac48c5496a52087ebfb996fa9c2. Normal authorized origin HEAD:main only, never force. Current stage .cache/model-space-qa-20261103-01/FINAL.json seals commit/remote/services and doc-only tar identity after push.
